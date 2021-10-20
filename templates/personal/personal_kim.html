@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Title</title>
+</head>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/sankey.js"></script>
+<script src="https://code.highcharts.com/modules/organization.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+  <div id="container"></div>
+</figure>
+<script th:inline="javascript">
+  Highcharts.chart('container', {
+    chart: {
+      height: 600,
+      inverted: true
+    },
+    credits: {
+      enabled: false
+    },
+    title: {
+      text: 'Персонал относящийся к оборудованию'
+    },
+
+    accessibility: {
+      point: {
+        descriptionFormatter: function (point) {
+          var nodeName = point.toNode.name,
+                  nodeId = point.toNode.id,
+                  nodeDesc = nodeName === nodeId ? nodeName : nodeName + ', ' + nodeId,
+                  parentDesc = point.fromNode.id;
+          return point.index + '. ' + nodeDesc + ', reports to ' + parentDesc + '.';
+        }
+      }
+    },
+
+    series: [{
+      type: 'organization',
+      name: 'Сеспель',
+      keys: ['from', 'to'],
+      data: [
+        ['CEO', 'CTO'],
+        ['CEO', 'master'],
+        ['CEO', 'ssp'],
+        ['master', 'otk1'],
+        ['master', 'otk2'],
+        ['master', 'otk3'],
+
+      ],
+      levels: [ {
+        level: 0,
+        color: '#980104'
+      }, {
+        level: 4,
+        color: '#359154'
+      }],
+      nodes: [{
+        id: 'CEO',
+        title: 'КИМ Crystal Apex',
+        name: 'КИМ',
+        image: "/images/crystal_apex.jpg"
+      },
+        {
+          id: 'CTO',
+          title: 'Система мониторинга' +'<br/>' + 'Контакт: -',
+          name: 'Васильев Алексей Владимирович',
+          image: 'https://cdn-ru.bitrix24.ru/b122591/resize_cache/2343701/23365dd92c1f65a6eb81283cfddb6812/main/3ac/3ac19c973311b5586fc63bef816f31c9/Vasilev+Aleksey+Vladimirovich.JPG'
+        }, {
+          id: 'master',
+          title: 'Начальник ОТК' +'<br/>' + 'Контакт: -',
+          name: 'Галкин Сергей Александрович',
+          image: 'https://cdn-ru.bitrix24.ru/b122591/resize_cache/323415/23365dd92c1f65a6eb81283cfddb6812/main/b66/b669c818b4c1f2cdf1ff37e367a182e7/Galkin+Sergey+Aleksandrovich.jpg'
+        }, {
+          id: 'ssp',
+          title: 'ССП' +'<br/>' + 'Контакт: -',
+          name: 'Устинов Илья Валерьевич',
+          image: 'https://bitrix2.cdnvideo.ru/b122591/resize_cache/6899496/23365dd92c1f65a6eb81283cfddb6812/main/c09/c09da2513c66e6100af3d624b8c4ee89/IMG_20190702_114355.jpg'
+        },{
+          id: 'otk1',
+          title: 'Инженер ОТК' +'<br/>' + 'Контакт: -',
+          name: 'Васюков Евгений Геннадьевич',
+          image: 'https://bitrix2.cdnvideo.ru/b122591/resize_cache/6982434/23365dd92c1f65a6eb81283cfddb6812/main/c60/c60bfcd04cc511fa6307a7f2423997c3/avatar.png?h=sespel-auto.bitrix24.ru'
+        },{
+          id: 'otk2',
+          title: 'Инженер ОТК' +'<br/>' + 'Контакт: -',
+          name: 'Егоров Алексей Николаевич',
+          image: 'https://bitrix2.cdnvideo.ru/b122591/resize_cache/8877852/23365dd92c1f65a6eb81283cfddb6812/main/dcb/dcbc6a9b5bb6635f1c71fa639ee09c6e/IMG20210419130728.png?h=sespel-auto.bitrix24.ru'
+        },{
+          id: 'otk3',
+          title: 'Инженер ОТК' +'<br/>' + 'Контакт: -',
+          name: 'Сорокин Павел Игоревич',
+          image: 'https://bitrix2.cdnvideo.ru/b122591/resize_cache/7197308/23365dd92c1f65a6eb81283cfddb6812/main/cf0/cf0900608c4351ae213a680a9863316a/avatar.png?h=sespel-auto.bitrix24.ru'
+        },
+
+
+        {
+          id: 'Product',
+          name: 'Product developers'
+        }, {
+          id: 'Web',
+          name: 'Web devs, sys admin'
+        }, {
+          id: 'Sales',
+          name: 'Sales team'
+        }, {
+          id: 'Market',
+          name: 'Marketing team',
+          column: 5
+        }],
+      colorByPoint: false,
+      color: '#007ad0',
+      dataLabels: {
+        color: 'white'
+      },
+      borderColor: 'white',
+      nodeWidth: 90
+    }],
+    tooltip: {
+      outside: true
+    },
+    exporting: {
+      allowHTML: true,
+      sourceWidth: 800,
+      sourceHeight: 600
+    }
+
+  });
+</script>
+
+</html>

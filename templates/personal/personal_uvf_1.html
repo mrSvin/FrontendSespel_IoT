@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/sankey.js"></script>
+<script src="https://code.highcharts.com/modules/organization.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+</figure>
+<script th:inline="javascript">
+    Highcharts.chart('container', {
+        chart: {
+            height: 600,
+            inverted: true
+        },
+        credits: {
+            enabled: false
+        },
+        title: {
+            text: 'Персонал относящийся к оборудованию'
+        },
+
+        accessibility: {
+            point: {
+                descriptionFormatter: function (point) {
+                    var nodeName = point.toNode.name,
+                        nodeId = point.toNode.id,
+                        nodeDesc = nodeName === nodeId ? nodeName : nodeName + ', ' + nodeId,
+                        parentDesc = point.fromNode.id;
+                    return point.index + '. ' + nodeDesc + ', reports to ' + parentDesc + '.';
+                }
+            }
+        },
+
+        series: [{
+            type: 'organization',
+            name: 'Сеспель',
+            keys: ['from', 'to'],
+            data: [
+                ['CEO', 'CTO'],
+                ['CEO', 'ssp'],
+
+            ],
+            levels: [ {
+                level: 0,
+                color: '#980104'
+            }, {
+                level: 4,
+                color: '#359154'
+            }],
+            nodes: [{
+                id: 'CEO',
+                title: 'УВФ #1',
+                name: 'Фрезерноый станок',
+                image: "/images/uvf_1_2.png"
+            },
+                {
+                    id: 'CTO',
+                    title: 'Система мониторинга' +'<br/>' + 'Контакт: -',
+                    name: 'Васильев Алексей Владимирович',
+                    image: 'https://cdn-ru.bitrix24.ru/b122591/resize_cache/2343701/23365dd92c1f65a6eb81283cfddb6812/main/3ac/3ac19c973311b5586fc63bef816f31c9/Vasilev+Aleksey+Vladimirovich.JPG'
+                }, {
+                    id: 'ssp',
+                    title: 'ССП' +'<br/>' + 'Контакт: -',
+                    name: 'Устинов Илья Валерьевич',
+                    image: 'https://bitrix2.cdnvideo.ru/b122591/resize_cache/6899496/23365dd92c1f65a6eb81283cfddb6812/main/c09/c09da2513c66e6100af3d624b8c4ee89/IMG_20190702_114355.jpg'
+                },
+
+
+                {
+                    id: 'Product',
+                    name: 'Product developers'
+                }, {
+                    id: 'Web',
+                    name: 'Web devs, sys admin'
+                }, {
+                    id: 'Sales',
+                    name: 'Sales team'
+                }, {
+                    id: 'Market',
+                    name: 'Marketing team',
+                    column: 5
+                }],
+            colorByPoint: false,
+            color: '#007ad0',
+            dataLabels: {
+                color: 'white'
+            },
+            borderColor: 'white',
+            nodeWidth: 90
+        }],
+        tooltip: {
+            outside: true
+        },
+        exporting: {
+            allowHTML: true,
+            sourceWidth: 800,
+            sourceHeight: 600
+        }
+
+    });
+</script>
+
+</html>

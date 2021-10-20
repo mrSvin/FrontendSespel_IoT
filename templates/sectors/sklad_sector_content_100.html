@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Содержание ячейки</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <style>
+        li {
+            list-style-type: none; /* Убираем маркеры */
+        }
+
+        ul.hr {
+            margin: 0; /* Обнуляем значение отступов */
+            padding: 4px; /* Значение полей */
+            background-color: rgb(36, 97, 219);
+        }
+        ul.hr li {
+            display: inline; /* Отображать как строчный элемент */
+            margin-right: 5px; /* Отступ слева */
+        }
+
+        /* Таблица с текущими параметрами */
+        body {
+            margin: 0;
+            background: #ffffff;
+
+        }
+        table {
+            border-collapse: collapse;
+            line-height: 1.1;
+            background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+            color: #0C213B;
+
+        }
+        caption {
+
+            font-weight: bold;
+            text-align: center;
+        }
+
+        th {
+            padding: 10px;
+            border: 1px solid #A9E2CC;
+            text-align: center;
+        }
+        td {
+            font-size: 1em;
+            padding: 5px 7px;
+            border: 1px solid #A9E2CC;
+            text-align: center;
+        }
+        .first {
+            padding: 5px 35px;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+    <style>
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            background-color: #ffffff;
+            display: none;
+            position: absolute;
+            right: 0;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 5px; /* Уголки */
+            margin: 8%;
+        }
+
+
+        .dropdown-content a {
+            color: black;
+            padding: 40px 20px;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1;}
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .avatar {
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 3%;
+        }
+
+
+    </style>
+</head>
+
+<header>
+
+    <ul class="hr">
+        <a href="../home"><img style="margin: 0.1%" src="../images/logo_black.png" /></a>
+
+        <div class="dropdown" style="float: right" >
+
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+            <div class="dropdown-content" style="float: right; text-align: center">
+                <p><img th:src="@{${image_user}}" width="100" height="100"/></p>
+                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
+                <p>sespel@sespel.com </p>
+                <li id="button_quit" >
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Выход" />
+                    </form>
+                </li>
+
+            </div>
+        </div>
+
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center" th:text="'Добро пожаловать, '  + ${user_name} + '!   '" />
+
+    </ul>       <!--Шапка html-->
+
+</header>       <!--Шапка html-->
+<a href="../sklad"><img style="margin: 0.5%" src="../images/back_button.jpg" /></a>
+
+<h1 style="color:#0C213B; margin: 1%; font-size: 250%; text-align: left">Полка #100</h1>
+<body>
+<li style="font-weight: 600; font-size: 150%; margin: 1%" th:text="'Содержание : '  + ${greeting.content}"></li>
+
+<form action="#" th:action="@{/sectors/sklad_sector_content_100}" th:object="${greeting}" method="post">
+    <p style="margin: 1%"> Редактирование: <textarea style=" width:100%" type="text" th:field="*{content}"></textarea></p>
+    <p style="margin: 1%"><input type="submit" value="Редактировать" /> <input type="reset" value="Сброс" /></p>
+</form>
+
+<li style=" font-size: 100%; margin: 1%" th:text="'Последнее изменение : '  + ${last_time_change} + ' пользователем, ' + ${last_user_change}"></li>
+
+</body>
+
+<style>
+    .button {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: #f4511e;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 24px;
+        padding: 20px;
+        width: 300px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 30px;
+    }
+
+    .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+    .button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+
+    .button:hover span {
+        padding-right: 25px;
+    }
+
+    .button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+</style>
+<a href="../sector_history_change/history_change_sector_100"><button class="button" style="vertical-align:middle"><span>История изменений </span></button></a>
+
+</html>

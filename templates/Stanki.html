@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Станки</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/styles_stanki.css"/>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+    <link rel="stylesheet" type="text/css" href="/css/menu_buttons.css"/> <!-- Меню -->
+
+    <style>
+        .btn_change {
+            position: relative;
+            display: inline-block;
+            padding: 15px 70px;
+            border: 3px solid #6793d6;
+            color: #6793d6;
+            background: #ffffff;
+            font-size: 30px;
+            font-family: arial;
+            background-image: linear-gradient(#6793d6, #6793d6);
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+            transition: background-size .5s, color .5s;
+        }
+
+        .btn_change:hover {
+            background-size: 100% 100%;
+            color: #ffffff;
+        }
+    </style> <!--Кнопки выбора отчета-->
+    <style>
+
+        .icon_mesto_uf5220 {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_uf5220:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_uf5220 {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_uf5220:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_uf5220 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_uf5220 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_progress {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_progress:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_progress {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_progress:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_progress {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_progress {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_ntx1000 {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_ntx1000:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_ntx1000 {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_ntx1000:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_ntx1000 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_ntx1000 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+    </style> <!--Кнопки Персонал и Местоположение-->
+    <style>
+        .preloader {
+            /*фиксированное позиционирование*/
+            position: fixed;
+            /* координаты положения */
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /* фоновый цвет элемента */
+            background: #e0e0e0;
+            /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+            z-index: 1001;
+        }
+
+        .preloader__row {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            width: 70px;
+            height: 70px;
+            margin-top: -35px;
+            margin-left: -35px;
+            text-align: center;
+            animation: preloader-rotate 2s infinite linear;
+        }
+
+        .preloader__item {
+            position: absolute;
+            display: inline-block;
+            top: 0;
+            background-color: #337ab7;
+            border-radius: 100%;
+            width: 35px;
+            height: 35px;
+            animation: preloader-bounce 2s infinite ease-in-out;
+        }
+
+        .preloader__item:last-child {
+            top: auto;
+            bottom: 0;
+            animation-delay: -1s;
+        }
+
+        @keyframes preloader-rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes preloader-bounce {
+
+            0%,
+            100% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .loaded_hiding .preloader {
+            transition: 0.3s opacity;
+            opacity: 0;
+        }
+
+        .loaded .preloader {
+            display: none;
+        }
+    </style>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/xrange.js"></script>
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap-3.3.0.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+            $('#button_obnovit').on("click", function () {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+                var day = datas.getDate();
+                var mes = datas.getMonth() + 1;
+                var year = datas.getFullYear();
+
+                name_data = year + "-" + mes + "-" + day;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
+
+    <!--Календарь -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <!--Календарь Русский язык-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
+
+
+    <!-- Загрузка страницы -->
+    <script>
+        window.onload = function () {
+            document.body.classList.add('loaded_hiding');
+            window.setTimeout(function () {
+                document.body.classList.add('loaded');
+                document.body.classList.remove('loaded_hiding');
+            }, 500);
+        }
+    </script>
+
+</head>
+<header>
+
+    <ul class="hr">
+        <a href="home"><img style="margin: 0.1%" src="images/logo_black.png"/></a>
+
+        <div method="post" class="dropdown" style="float: right">
+
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+            <div class="dropdown-content" style="float: right; text-align: center">
+                <p><img th:src="@{${image_user}}" width="100"/></p>
+                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
+                <p th:text="${user_mail}"></p>
+
+                <form th:action="@{/logout}" method="post">
+                    <button class="follow" type="submit">
+                        Выход
+                    </button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
+
+    </ul>       <!--Шапка html-->
+
+</header>       <!--Шапка html-->
+
+<div>
+    <ul id="menu_ul">
+        <li id="menu_li"><a id="menu_a" href="displayStanki">Мех.уч.II пл.</a></li>
+        <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
+        <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
+        <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.I пл.</a></li>
+        <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
+        <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
+        <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
+        <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
+    </ul>
+</div>  <!-- Меню -->
+<!-- Загрузка страницы -->
+<div class="preloader">
+    <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+    </div>
+</div>
+
+<body>
+
+<div style="clear: both">
+    <form>
+        <button formaction="displayStanki" class="btn_change" style="width:40%">Суточный отчет</button>
+        <button formaction="displayStankiMonth" class="btn_change" style="width:40%">Месячный отчет</button>
+    </form>
+</div>  <!--Кнопки суточный и месячный отчеты html-->
+
+<div class="container">
+    <div style="width: 220px; float: left">
+        <h2>Выберите дату:</h2>
+    </div>
+
+    <form action="#" th:action="@{/displayStanki}" th:object="${calendar_date}" method="post">
+
+        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+            <input type='text' class="form-control" th:field="*{content_date}"/>
+            <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit"
+                    class="follow"
+                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
+            </button>
+        </div>
+    </form>
+
+</div>      <!--Календарь html-->
+
+<div style="display: flex">
+
+    <div id="container_sum_zagruzka" style="min-height: 400px; width: 600px"></div>
+    <!--Общая загрузка html-->
+
+    <div id="container_kol_operations" style="height: 400px; width: 800px"></div>
+    <!--Количество операций html-->
+</div>  <!--Общая загрузка и количество операций html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div id="img" style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/UVF_5220.png" width="100%"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">УФ5220
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_uf5220"
+                           href="mesto/mesto_uf5220"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto_uf5220'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_uf5220"
+                           href="personal/personal_uf5220"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal_uf5220'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--УФ 5220 html-->
+    <form method="post" style="margin: 1%;">
+        <center>
+            <table width="98%">
+
+                <text class="first">Текущие параметры комплекса</text>
+                <tr>
+                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
+                    <th colspan="2" style="text-align:center">Технология</th>
+                    <th colspan="2" style="text-align:center">Координаты</th>
+                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
+                </tr>
+                <tr>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Номер инструмента</td>
+                    <td>
+                        <li th:text="${nomer_inst}"></li>
+                    </td>
+                    <td>Имя УП</td>
+                    <td><small th:text="${name_program}"></small></td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${pos_x}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${nagr_x}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор подачи</td>
+                    <td>
+                        <li th:text="${kor_podach}"></li>
+                    </td>
+                    <td>Номер кадра</td>
+                    <td>
+                        <li th:text="${nomer_kadr}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${pos_y}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${nagr_y}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор скорости</td>
+                    <td>
+                        <li th:text="${kor_speed}"></li>
+                    </td>
+                    <td>Статус программы</td>
+                    <td>
+                        <li th:text="${status_work}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${pos_z}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${nagr_z}"></li>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
+</div> <!--УФ 5220 html-->
+
+<div style="border: 1px solid #333;">   <!--Прогресс html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div id="img2" style="float: left; min-height: 100px; min-width: 100px; width: 15%">
+                <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/progress.png" width="100%"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Прогресс
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_progress"
+                           href="mesto/mesto_progress"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto_progress'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_progress"
+                           href="personal/personal_progress"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal_progress'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work2" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container2" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Прогресс html-->
+    <form method="post" style="margin: 1%;">
+        <center>
+            <table width="98%">
+
+                <text class="first">Текущие параметры комплекса</text>
+                <tr>
+                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
+                    <th colspan="2" style="text-align:center">Технология</th>
+                    <th colspan="2" style="text-align:center">Координаты</th>
+                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
+                </tr>
+                <tr>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Номер инструмента</td>
+                    <td>
+                        <li th:text="${progress_nomer_inst}"></li>
+                    </td>
+                    <td>Имя УП</td>
+                    <td><small th:text="${progress_name_program}"></small></td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${progress_pos_x}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${progress_nagr_x}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор подачи</td>
+                    <td>
+                        <li th:text="${progress_kor_podach}"></li>
+                    </td>
+                    <td>Номер кадра</td>
+                    <td>
+                        <li th:text="${progress_nomer_kadr}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${progress_pos_y}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${progress_nagr_y}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор скорости</td>
+                    <td>
+                        <li th:text="${progress_kor_speed}"></li>
+                    </td>
+                    <td>Статус программы</td>
+                    <td>
+                        <li th:text="${progress_status_work}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${progress_pos_z}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${progress_nagr_z}"></li>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
+</div> <!--Прогресс html-->
+
+<div style="border: 1px solid #333;">   <!--NTX1000 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div id="img3" style="float: left; min-height: 100px; min-width: 100px; width: 15%">
+                <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/ntx1000.png" width="100%"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">NTX1000
+                    </figcaption>
+                </div>
+                <div>
+                    <a style="text-decoration: none; float: left" class="icon_mesto_ntx1000" href="mesto/mesto_ntx1000"
+                       onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                        <div class='label_mesto_ntx1000'>Место</div>
+                    </a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_ntx1000"
+                       href="personal/personal_ntx1000"
+                       onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                        <div class='label_personal_ntx1000'>Персонал</div>
+                    </a>
+                </div>
+            </div>
+            <div id="container_work3" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container3" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--NTX1000 html-->
+    <form method="post" style="margin: 1%;">
+        <center>
+            <table width="98%">
+
+                <text class="first">Текущие параметры комплекса</text>
+                <tr>
+                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
+                    <th colspan="2" style="text-align:center">Технология</th>
+                    <th colspan="2" style="text-align:center">Координаты</th>
+                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
+                </tr>
+                <tr>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Номер инструмента</td>
+                    <td>
+                        <li th:text="${ntx1000_nomer_inst}"></li>
+                    </td>
+                    <td>Имя УП</td>
+                    <td>
+                        <li th:text="${ntx1000_name_program}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${ntx1000_pos_x}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${ntx1000_nagr_x}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор подачи</td>
+                    <td>
+                        <li th:text="${ntx1000_kor_podach}"></li>
+                    </td>
+                    <td>Номер кадра</td>
+                    <td>
+                        <li th:text="${ntx1000_nomer_kadr}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${ntx1000_pos_y}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${ntx1000_nagr_y}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор скорости</td>
+                    <td>
+                        <li th:text="${ntx1000_kor_speed}"></li>
+                    </td>
+                    <td>Статус программы</td>
+                    <td>
+                        <li th:text="${ntx1000_status_work}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${ntx1000_pos_z}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${ntx1000_nagr_z}"></li>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
+</div> <!--NTX1000 html-->
+
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000'];
+
+    var work_uf5220 = [[${work}]];
+    var work_progress = [[${progress_work}]];
+    var work_ntx1000 = [[${ntx1000_work}]];
+
+    var pause_uf5220 = [[${pass}]];
+    var pause_progress = [[${progress_pass}]];
+    var pause_ntx1000 = [[${ntx1000_pass}]];
+
+    var off_uf5220 = [[${fail}]];
+    var off_progress = [[${progress_fail}]];
+    var off_ntx1000 = [[${ntx1000_fail}]];
+
+    var avar_ntx1000 = [[${ntx1000_avar}]];
+    var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors: colors,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['УФ5220', 'Прогресс', 'NTX1000']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [work_uf5220, work_progress, work_ntx1000]
+        }, {
+            name: 'Под нагрузкой',
+            data: [0, 0, nagruzka_ntx1000]
+        }, {
+            name: 'Ожидание',
+            data: [pause_uf5220, pause_progress, pause_ntx1000]
+        }, {
+            name: 'Авария',
+            data: [0, 0, avar_ntx1000]
+        }, {
+            name: 'Выключен',
+            data: [off_uf5220, off_progress, off_ntx1000]
+        }]
+    });
+
+</script>   <!--js Общая загрузка-->
+<script th:inline="javascript">
+
+    var uf5220_kol_op = [[${uf5220_kol_op}]];
+    var progress_kol_op = [[${progress_kol_op}]];
+    var ntx1000_kol_op = [[${ntx1000_kol_op}]];
+    var kol_long_operations_uf5220 = [[${kol_long_operations_uf5220}]];
+    var kol_long_operations_progress = [[${kol_long_operations_progress}]];
+    var kol_long_operations_ntx1000 = [[${kol_long_operations_ntx1000}]];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_kol_operations', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Количество операций'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['УФ5220', 'Прогресс', 'NTX1000'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: [uf5220_kol_op, progress_kol_op, ntx1000_kol_op]
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: [kol_long_operations_uf5220, kol_long_operations_progress, kol_long_operations_ntx1000]
+        }]
+    });
+</script>   <!--js количество операций-->
+
+<script th:inline="javascript">
+
+    var uf5220_array_rabota = [
+        [[${array_rabota0}]],[[${array_rabota1}]],[[${array_rabota2}]],[[${array_rabota3}]],[[${array_rabota4}]],[[${array_rabota5}]],[[${array_rabota6}]],[[${array_rabota7}]],[[${array_rabota8}]],[[${array_rabota9}]],[[${array_rabota10}]],
+        [[${array_rabota11}]],[[${array_rabota12}]],[[${array_rabota13}]],[[${array_rabota14}]],[[${array_rabota15}]],[[${array_rabota16}]],[[${array_rabota17}]],[[${array_rabota18}]],[[${array_rabota19}]],[[${array_rabota20}]],
+        [[${array_rabota21}]],[[${array_rabota22}]],[[${array_rabota23}]],[[${array_rabota24}]],[[${array_rabota25}]],[[${array_rabota26}]],[[${array_rabota27}]],[[${array_rabota28}]],[[${array_rabota29}]],[[${array_rabota30}]],
+        [[${array_rabota31}]],[[${array_rabota32}]],[[${array_rabota33}]],[[${array_rabota34}]],[[${array_rabota35}]],[[${array_rabota36}]],[[${array_rabota37}]],[[${array_rabota38}]],[[${array_rabota39}]],[[${array_rabota40}]],
+        [[${array_rabota41}]],[[${array_rabota42}]],[[${array_rabota43}]],[[${array_rabota44}]],[[${array_rabota45}]],[[${array_rabota46}]],[[${array_rabota47}]],[[${array_rabota48}]],[[${array_rabota49}]],[[${array_rabota50}]],
+        [[${array_rabota51}]],[[${array_rabota52}]],[[${array_rabota53}]],[[${array_rabota54}]],[[${array_rabota55}]],[[${array_rabota56}]],[[${array_rabota57}]],[[${array_rabota58}]],[[${array_rabota59}]],[[${array_rabota60}]],
+        [[${array_rabota61}]],[[${array_rabota62}]],[[${array_rabota63}]],[[${array_rabota64}]],[[${array_rabota65}]],[[${array_rabota66}]],[[${array_rabota67}]],[[${array_rabota68}]],[[${array_rabota69}]],[[${array_rabota70}]],
+        [[${array_rabota71}]],[[${array_rabota72}]],[[${array_rabota73}]],[[${array_rabota74}]],[[${array_rabota75}]],[[${array_rabota76}]],[[${array_rabota77}]],[[${array_rabota78}]],[[${array_rabota79}]],[[${array_rabota80}]],
+        [[${array_rabota81}]],[[${array_rabota82}]],[[${array_rabota83}]],[[${array_rabota84}]],[[${array_rabota85}]],[[${array_rabota86}]],[[${array_rabota87}]],[[${array_rabota88}]],[[${array_rabota89}]],[[${array_rabota90}]],
+        [[${array_rabota91}]],[[${array_rabota92}]],[[${array_rabota93}]],[[${array_rabota94}]],[[${array_rabota95}]],[[${array_rabota96}]],[[${array_rabota97}]],[[${array_rabota98}]],[[${array_rabota99}]],[[${array_rabota100}]],
+        [[${array_rabota101}]],[[${array_rabota102}]],[[${array_rabota103}]],[[${array_rabota104}]],[[${array_rabota105}]],[[${array_rabota106}]],[[${array_rabota107}]],[[${array_rabota108}]],[[${array_rabota109}]],[[${array_rabota110}]],
+        [[${array_rabota111}]],[[${array_rabota112}]],[[${array_rabota113}]],[[${array_rabota114}]],[[${array_rabota115}]],[[${array_rabota116}]],[[${array_rabota117}]],[[${array_rabota118}]],[[${array_rabota119}]],[[${array_rabota120}]],
+        [[${array_rabota121}]],[[${array_rabota122}]],[[${array_rabota123}]],[[${array_rabota124}]],[[${array_rabota125}]],[[${array_rabota126}]],[[${array_rabota127}]],[[${array_rabota128}]],[[${array_rabota129}]],[[${array_rabota130}]],
+        [[${array_rabota131}]],[[${array_rabota132}]],[[${array_rabota133}]],[[${array_rabota134}]],[[${array_rabota135}]],[[${array_rabota136}]],[[${array_rabota137}]],[[${array_rabota138}]],[[${array_rabota139}]],[[${array_rabota140}]],
+        [[${array_rabota141}]],[[${array_rabota142}]],[[${array_rabota143}]],[[${array_rabota144}]],[[${array_rabota145}]],[[${array_rabota146}]],[[${array_rabota147}]],[[${array_rabota148}]],[[${array_rabota149}]],[[${array_rabota150}]],
+        [[${array_rabota151}]],[[${array_rabota152}]],[[${array_rabota153}]],[[${array_rabota154}]],[[${array_rabota155}]],[[${array_rabota156}]],[[${array_rabota157}]],[[${array_rabota158}]],[[${array_rabota159}]],[[${array_rabota160}]],
+        [[${array_rabota161}]],[[${array_rabota162}]],[[${array_rabota163}]],[[${array_rabota164}]],[[${array_rabota165}]],[[${array_rabota166}]],[[${array_rabota167}]],[[${array_rabota168}]],[[${array_rabota169}]],[[${array_rabota170}]],
+        [[${array_rabota171}]],[[${array_rabota172}]],[[${array_rabota173}]],[[${array_rabota174}]],[[${array_rabota175}]],[[${array_rabota176}]],[[${array_rabota177}]],[[${array_rabota178}]],[[${array_rabota179}]],[[${array_rabota180}]],
+        [[${array_rabota181}]],[[${array_rabota182}]],[[${array_rabota183}]],[[${array_rabota184}]],[[${array_rabota185}]],[[${array_rabota186}]],[[${array_rabota187}]],[[${array_rabota188}]],[[${array_rabota189}]],[[${array_rabota190}]],
+        [[${array_rabota191}]],[[${array_rabota192}]],[[${array_rabota193}]],[[${array_rabota194}]],[[${array_rabota195}]],[[${array_rabota196}]],[[${array_rabota197}]],[[${array_rabota198}]],[[${array_rabota199}]],[[${array_rabota200}]],
+        [[${array_rabota201}]],[[${array_rabota202}]],[[${array_rabota203}]],[[${array_rabota204}]],[[${array_rabota205}]],[[${array_rabota206}]],[[${array_rabota207}]],[[${array_rabota208}]],[[${array_rabota209}]],[[${array_rabota210}]],
+        [[${array_rabota211}]],[[${array_rabota212}]],[[${array_rabota213}]],[[${array_rabota214}]],[[${array_rabota215}]],[[${array_rabota216}]],[[${array_rabota217}]],[[${array_rabota218}]],[[${array_rabota219}]],[[${array_rabota220}]],
+        [[${array_rabota221}]],[[${array_rabota222}]],[[${array_rabota223}]],[[${array_rabota224}]],[[${array_rabota225}]],[[${array_rabota226}]],[[${array_rabota227}]],[[${array_rabota228}]],[[${array_rabota229}]],[[${array_rabota230}]],
+        [[${array_rabota231}]],[[${array_rabota232}]],[[${array_rabota233}]],[[${array_rabota234}]],[[${array_rabota235}]],[[${array_rabota236}]],[[${array_rabota237}]],[[${array_rabota238}]],[[${array_rabota239}]],[[${array_rabota240}]],
+        [[${array_rabota241}]],[[${array_rabota242}]],[[${array_rabota243}]],[[${array_rabota244}]],[[${array_rabota245}]],[[${array_rabota246}]],[[${array_rabota247}]],[[${array_rabota248}]],[[${array_rabota249}]],[[${array_rabota250}]],
+        [[${array_rabota251}]],[[${array_rabota252}]],[[${array_rabota253}]],[[${array_rabota254}]],[[${array_rabota255}]],[[${array_rabota256}]],[[${array_rabota257}]],[[${array_rabota258}]],[[${array_rabota259}]],[[${array_rabota260}]],
+        [[${array_rabota261}]],[[${array_rabota262}]],[[${array_rabota263}]],[[${array_rabota264}]],[[${array_rabota265}]],[[${array_rabota266}]],[[${array_rabota267}]],[[${array_rabota268}]],[[${array_rabota269}]],[[${array_rabota270}]],
+        [[${array_rabota271}]],[[${array_rabota272}]],[[${array_rabota273}]],[[${array_rabota274}]],[[${array_rabota275}]],[[${array_rabota276}]],[[${array_rabota277}]],[[${array_rabota278}]],[[${array_rabota279}]],[[${array_rabota280}]],
+        [[${array_rabota281}]],[[${array_rabota282}]],[[${array_rabota283}]],[[${array_rabota284}]],[[${array_rabota285}]],[[${array_rabota286}]],[[${array_rabota287}]],[[${array_rabota288}]],[[${array_rabota289}]],[[${array_rabota290}]],
+        [[${array_rabota291}]],[[${array_rabota292}]],[[${array_rabota293}]],[[${array_rabota294}]],[[${array_rabota295}]],[[${array_rabota296}]],[[${array_rabota297}]],[[${array_rabota298}]],[[${array_rabota299}]],[[${array_rabota300}]],
+
+    ];
+    var uf5220_array_pause = [
+        [[${array_pause0}]],[[${array_pause1}]],[[${array_pause2}]],[[${array_pause3}]],[[${array_pause4}]],[[${array_pause5}]],[[${array_pause6}]],[[${array_pause7}]],[[${array_pause8}]],[[${array_pause9}]],[[${array_pause10}]],
+        [[${array_pause11}]],[[${array_pause12}]],[[${array_pause13}]],[[${array_pause14}]],[[${array_pause15}]],[[${array_pause16}]],[[${array_pause17}]],[[${array_pause18}]],[[${array_pause19}]],[[${array_pause20}]],
+        [[${array_pause21}]],[[${array_pause22}]],[[${array_pause23}]],[[${array_pause24}]],[[${array_pause25}]],[[${array_pause26}]],[[${array_pause27}]],[[${array_pause28}]],[[${array_pause29}]],[[${array_pause30}]],
+        [[${array_pause31}]],[[${array_pause32}]],[[${array_pause33}]],[[${array_pause34}]],[[${array_pause35}]],[[${array_pause36}]],[[${array_pause37}]],[[${array_pause38}]],[[${array_pause39}]],[[${array_pause40}]],
+        [[${array_pause41}]],[[${array_pause42}]],[[${array_pause43}]],[[${array_pause44}]],[[${array_pause45}]],[[${array_pause46}]],[[${array_pause47}]],[[${array_pause48}]],[[${array_pause49}]],[[${array_pause50}]],
+        [[${array_pause51}]],[[${array_pause52}]],[[${array_pause53}]],[[${array_pause54}]],[[${array_pause55}]],[[${array_pause56}]],[[${array_pause57}]],[[${array_pause58}]],[[${array_pause59}]],[[${array_pause60}]],
+        [[${array_pause61}]],[[${array_pause62}]],[[${array_pause63}]],[[${array_pause64}]],[[${array_pause65}]],[[${array_pause66}]],[[${array_pause67}]],[[${array_pause68}]],[[${array_pause69}]],[[${array_pause70}]],
+        [[${array_pause71}]],[[${array_pause72}]],[[${array_pause73}]],[[${array_pause74}]],[[${array_pause75}]],[[${array_pause76}]],[[${array_pause77}]],[[${array_pause78}]],[[${array_pause79}]],[[${array_pause80}]],
+        [[${array_pause81}]],[[${array_pause82}]],[[${array_pause83}]],[[${array_pause84}]],[[${array_pause85}]],[[${array_pause86}]],[[${array_pause87}]],[[${array_pause88}]],[[${array_pause89}]],[[${array_pause90}]],
+        [[${array_pause91}]],[[${array_pause92}]],[[${array_pause93}]],[[${array_pause94}]],[[${array_pause95}]],[[${array_pause96}]],[[${array_pause97}]],[[${array_pause98}]],[[${array_pause99}]],[[${array_pause100}]],
+        [[${array_pause101}]],[[${array_pause102}]],[[${array_pause103}]],[[${array_pause104}]],[[${array_pause105}]],[[${array_pause106}]],[[${array_pause107}]],[[${array_pause108}]],[[${array_pause109}]],[[${array_pause110}]],
+        [[${array_pause111}]],[[${array_pause112}]],[[${array_pause113}]],[[${array_pause114}]],[[${array_pause115}]],[[${array_pause116}]],[[${array_pause117}]],[[${array_pause118}]],[[${array_pause119}]],[[${array_pause120}]],
+        [[${array_pause121}]],[[${array_pause122}]],[[${array_pause123}]],[[${array_pause124}]],[[${array_pause125}]],[[${array_pause126}]],[[${array_pause127}]],[[${array_pause128}]],[[${array_pause129}]],[[${array_pause130}]],
+        [[${array_pause131}]],[[${array_pause132}]],[[${array_pause133}]],[[${array_pause134}]],[[${array_pause135}]],[[${array_pause136}]],[[${array_pause137}]],[[${array_pause138}]],[[${array_pause129}]],[[${array_pause120}]],
+        [[${array_pause141}]],[[${array_pause142}]],[[${array_pause143}]],[[${array_pause144}]],[[${array_pause145}]],[[${array_pause146}]],[[${array_pause147}]],[[${array_pause148}]],[[${array_pause129}]],[[${array_pause120}]],
+        [[${array_pause151}]],[[${array_pause152}]],[[${array_pause153}]],[[${array_pause154}]],[[${array_pause155}]],[[${array_pause156}]],[[${array_pause157}]],[[${array_pause158}]],[[${array_pause129}]],[[${array_pause120}]],
+        [[${array_pause161}]],[[${array_pause162}]],[[${array_pause163}]],[[${array_pause164}]],[[${array_pause165}]],[[${array_pause166}]],[[${array_pause167}]],[[${array_pause168}]],[[${array_pause169}]],[[${array_pause170}]],
+        [[${array_pause171}]],[[${array_pause172}]],[[${array_pause173}]],[[${array_pause174}]],[[${array_pause175}]],[[${array_pause176}]],[[${array_pause177}]],[[${array_pause178}]],[[${array_pause179}]],[[${array_pause180}]],
+        [[${array_pause181}]],[[${array_pause182}]],[[${array_pause183}]],[[${array_pause184}]],[[${array_pause185}]],[[${array_pause186}]],[[${array_pause187}]],[[${array_pause188}]],[[${array_pause189}]],[[${array_pause190}]],
+        [[${array_pause191}]],[[${array_pause192}]],[[${array_pause193}]],[[${array_pause194}]],[[${array_pause195}]],[[${array_pause196}]],[[${array_pause197}]],[[${array_pause198}]],[[${array_pause199}]],[[${array_pause200}]],
+        [[${array_pause201}]],[[${array_pause202}]],[[${array_pause203}]],[[${array_pause204}]],[[${array_pause205}]],[[${array_pause206}]],[[${array_pause207}]],[[${array_pause208}]],[[${array_pause209}]],[[${array_pause210}]],
+        [[${array_pause211}]],[[${array_pause212}]],[[${array_pause213}]],[[${array_pause214}]],[[${array_pause215}]],[[${array_pause216}]],[[${array_pause217}]],[[${array_pause218}]],[[${array_pause219}]],[[${array_pause220}]],
+        [[${array_pause221}]],[[${array_pause222}]],[[${array_pause223}]],[[${array_pause224}]],[[${array_pause225}]],[[${array_pause226}]],[[${array_pause227}]],[[${array_pause228}]],[[${array_pause229}]],[[${array_pause230}]],
+
+
+    ];
+    var uf5220_array_off = [
+        [[${array_off0}]],[[${array_off1}]],[[${array_off2}]],[[${array_off3}]],[[${array_off4}]],[[${array_off5}]],[[${array_off6}]],[[${array_off7}]],[[${array_off8}]],[[${array_off9}]],[[${array_off10}]],
+        [[${array_off11}]],[[${array_off12}]],[[${array_off13}]],[[${array_off14}]],[[${array_off15}]],[[${array_off16}]],[[${array_off17}]],[[${array_off18}]],[[${array_off19}]],[[${array_off20}]],
+        [[${array_off21}]],[[${array_off22}]],[[${array_off23}]],[[${array_off24}]],[[${array_off25}]],[[${array_off26}]],[[${array_off27}]],[[${array_off28}]],[[${array_off29}]],[[${array_off30}]],
+        [[${array_off31}]],[[${array_off32}]],[[${array_off33}]],[[${array_off34}]],[[${array_off35}]],[[${array_off36}]],[[${array_off37}]],[[${array_off38}]],[[${array_off39}]]
+    ];
+    var uf5220_array_name = [
+        [[${array_programname0}]],[[${array_programname1}]],[[${array_programname2}]],[[${array_programname3}]],[[${array_programname4}]],[[${array_programname5}]],[[${array_programname6}]],[[${array_programname7}]],[[${array_programname8}]],[[${array_programname9}]],[[${array_programname10}]],
+        [[${array_programname11}]],[[${array_programname12}]],[[${array_programname13}]],[[${array_programname14}]],[[${array_programname15}]],[[${array_programname16}]],[[${array_programname17}]],[[${array_programname18}]],[[${array_programname19}]],[[${array_programname20}]],
+        [[${array_programname21}]],[[${array_programname22}]],[[${array_programname23}]],[[${array_programname24}]],[[${array_programname25}]],[[${array_programname26}]],[[${array_programname27}]],[[${array_programname28}]],[[${array_programname29}]],[[${array_programname30}]],
+        [[${array_programname31}]],[[${array_programname32}]],[[${array_programname33}]],[[${array_programname34}]],[[${array_programname35}]],[[${array_programname36}]],[[${array_programname37}]],[[${array_programname38}]],[[${array_programname39}]],[[${array_programname40}]],
+        [[${array_programname41}]],[[${array_programname42}]],[[${array_programname43}]],[[${array_programname44}]],[[${array_programname45}]],[[${array_programname46}]],[[${array_programname47}]],[[${array_programname48}]],[[${array_programname49}]],[[${array_programname50}]],
+        [[${array_programname51}]],[[${array_programname52}]],[[${array_programname53}]],[[${array_programname54}]],[[${array_programname55}]],[[${array_programname56}]],[[${array_programname57}]],[[${array_programname58}]],[[${array_programname59}]],[[${array_programname60}]],
+        [[${array_programname61}]],[[${array_programname62}]],[[${array_programname63}]],[[${array_programname64}]],[[${array_programname65}]],[[${array_programname66}]],[[${array_programname67}]],[[${array_programname68}]],[[${array_programname69}]],[[${array_programname70}]],
+        [[${array_programname71}]],[[${array_programname72}]],[[${array_programname73}]],[[${array_programname74}]],[[${array_programname75}]],[[${array_programname76}]],[[${array_programname77}]],[[${array_programname78}]],[[${array_programname79}]],
+        [[${array_programname81}]],[[${array_programname82}]],[[${array_programname83}]],[[${array_programname84}]],[[${array_programname85}]],[[${array_programname86}]],[[${array_programname87}]],[[${array_programname88}]],[[${array_programname89}]],[[${array_programname90}]],
+        [[${array_programname91}]],[[${array_programname92}]],[[${array_programname93}]],[[${array_programname94}]],[[${array_programname95}]],[[${array_programname96}]],[[${array_programname97}]],[[${array_programname98}]],[[${array_programname99}]],[[${array_programname100}]],
+        [[${array_programname101}]],[[${array_programname102}]],[[${array_programname103}]],[[${array_programname104}]],[[${array_programname105}]],[[${array_programname106}]],[[${array_programname107}]],[[${array_programname108}]],[[${array_programname109}]],[[${array_programname110}]],
+        [[${array_programname111}]],[[${array_programname112}]],[[${array_programname113}]],[[${array_programname114}]],[[${array_programname115}]],[[${array_programname116}]],[[${array_programname117}]],[[${array_programname118}]],[[${array_programname119}]],[[${array_programname120}]],
+        [[${array_programname121}]],[[${array_programname122}]],[[${array_programname123}]],[[${array_programname124}]],[[${array_programname125}]],[[${array_programname126}]],[[${array_programname127}]],[[${array_programname128}]],[[${array_programname129}]],[[${array_programname130}]],
+        [[${array_programname131}]],[[${array_programname132}]],[[${array_programname133}]],[[${array_programname134}]],[[${array_programname135}]],[[${array_programname136}]],[[${array_programname137}]],[[${array_programname138}]],[[${array_programname129}]],[[${array_programname120}]],
+        [[${array_programname141}]],[[${array_programname142}]],[[${array_programname143}]],[[${array_programname144}]],[[${array_programname145}]],[[${array_programname146}]],[[${array_programname147}]],[[${array_programname148}]],[[${array_programname129}]],[[${array_programname120}]],
+
+    ]
+
+</script>   <!--УФ 5220 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var uf5220_work = [[${work}]];
+    var uf5220_pass = [[${pass}]];
+    var uf5220_fail = [[${fail}]];
+    var uf5220_avar = [[${avar}]];
+
+</script>   <!--УФ 5220 js круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_uf5220.js"></script>
+
+<script th:inline="javascript">
+
+    var progress_array_rabota = [
+        [[${progress_array_rabota0}]],[[${progress_array_rabota1}]],[[${progress_array_rabota2}]],[[${progress_array_rabota3}]],[[${progress_array_rabota4}]],[[${progress_array_rabota5}]],[[${progress_array_rabota6}]],[[${progress_array_rabota7}]],[[${progress_array_rabota8}]],[[${progress_array_rabota9}]],[[${progress_array_rabota10}]],
+        [[${progress_array_rabota11}]],[[${progress_array_rabota12}]],[[${progress_array_rabota13}]],[[${progress_array_rabota14}]],[[${progress_array_rabota15}]],[[${progress_array_rabota16}]],[[${progress_array_rabota17}]],[[${progress_array_rabota18}]],[[${progress_array_rabota19}]],[[${progress_array_rabota20}]],
+        [[${progress_array_rabota21}]],[[${progress_array_rabota22}]],[[${progress_array_rabota23}]],[[${progress_array_rabota24}]],[[${progress_array_rabota25}]],[[${progress_array_rabota26}]],[[${progress_array_rabota27}]],[[${progress_array_rabota28}]],[[${progress_array_rabota29}]],[[${progress_array_rabota30}]],
+        [[${progress_array_rabota31}]],[[${progress_array_rabota32}]],[[${progress_array_rabota33}]],[[${progress_array_rabota34}]],[[${progress_array_rabota35}]],[[${progress_array_rabota36}]],[[${progress_array_rabota37}]],[[${progress_array_rabota38}]],[[${progress_array_rabota39}]],[[${progress_array_rabota40}]],
+        [[${progress_array_rabota41}]],[[${progress_array_rabota42}]],[[${progress_array_rabota43}]],[[${progress_array_rabota44}]],[[${progress_array_rabota45}]],[[${progress_array_rabota46}]],[[${progress_array_rabota47}]],[[${progress_array_rabota48}]],[[${progress_array_rabota49}]],[[${progress_array_rabota50}]],
+        [[${progress_array_rabota51}]],[[${progress_array_rabota52}]],[[${progress_array_rabota53}]],[[${progress_array_rabota54}]],[[${progress_array_rabota55}]],[[${progress_array_rabota56}]],[[${progress_array_rabota57}]],[[${progress_array_rabota58}]],[[${progress_array_rabota59}]],[[${progress_array_rabota60}]],
+        [[${progress_array_rabota61}]],[[${progress_array_rabota62}]],[[${progress_array_rabota63}]],[[${progress_array_rabota64}]],[[${progress_array_rabota65}]],[[${progress_array_rabota66}]],[[${progress_array_rabota67}]],[[${progress_array_rabota68}]],[[${progress_array_rabota69}]],[[${progress_array_rabota70}]],
+        [[${progress_array_rabota71}]],[[${progress_array_rabota72}]],[[${progress_array_rabota73}]],[[${progress_array_rabota74}]],[[${progress_array_rabota75}]],[[${progress_array_rabota76}]],[[${progress_array_rabota77}]],[[${progress_array_rabota78}]],[[${progress_array_rabota79}]],[[${progress_array_rabota80}]],
+        [[${progress_array_rabota81}]],[[${progress_array_rabota82}]],[[${progress_array_rabota83}]],[[${progress_array_rabota84}]],[[${progress_array_rabota85}]],[[${progress_array_rabota86}]],[[${progress_array_rabota87}]],[[${progress_array_rabota88}]],[[${progress_array_rabota89}]],[[${progress_array_rabota90}]],
+        [[${progress_array_rabota91}]],[[${progress_array_rabota92}]],[[${progress_array_rabota93}]],[[${progress_array_rabota94}]],[[${progress_array_rabota95}]],[[${progress_array_rabota96}]],[[${progress_array_rabota97}]],[[${progress_array_rabota98}]],[[${progress_array_rabota99}]],[[${progress_array_rabota100}]],
+        [[${progress_array_rabota101}]],[[${progress_array_rabota102}]],[[${progress_array_rabota103}]],[[${progress_array_rabota104}]],[[${progress_array_rabota105}]],[[${progress_array_rabota106}]],[[${progress_array_rabota107}]],[[${progress_array_rabota108}]],[[${progress_array_rabota109}]],[[${progress_array_rabota110}]],
+        [[${progress_array_rabota111}]],[[${progress_array_rabota112}]],[[${progress_array_rabota113}]],[[${progress_array_rabota114}]],[[${progress_array_rabota115}]],[[${progress_array_rabota116}]],[[${progress_array_rabota117}]],[[${progress_array_rabota118}]],[[${progress_array_rabota119}]],[[${progress_array_rabota120}]],
+        [[${progress_array_rabota121}]],[[${progress_array_rabota122}]],[[${progress_array_rabota123}]],[[${progress_array_rabota124}]],[[${progress_array_rabota125}]],[[${progress_array_rabota126}]],[[${progress_array_rabota127}]],[[${progress_array_rabota128}]],[[${progress_array_rabota129}]],[[${progress_array_rabota130}]],
+        [[${progress_array_rabota131}]],[[${progress_array_rabota132}]],[[${progress_array_rabota133}]],[[${progress_array_rabota134}]],[[${progress_array_rabota135}]],[[${progress_array_rabota136}]],[[${progress_array_rabota137}]],[[${progress_array_rabota138}]],[[${progress_array_rabota139}]],[[${progress_array_rabota140}]],
+        [[${progress_array_rabota141}]],[[${progress_array_rabota142}]],[[${progress_array_rabota143}]],[[${progress_array_rabota144}]],[[${progress_array_rabota145}]],[[${progress_array_rabota146}]],[[${progress_array_rabota147}]],[[${progress_array_rabota148}]],[[${progress_array_rabota149}]],[[${progress_array_rabota150}]],
+        [[${progress_array_rabota151}]],[[${progress_array_rabota152}]],[[${progress_array_rabota153}]],[[${progress_array_rabota154}]],[[${progress_array_rabota155}]],[[${progress_array_rabota156}]],[[${progress_array_rabota157}]],[[${progress_array_rabota158}]],[[${progress_array_rabota159}]],[[${progress_array_rabota160}]],
+        [[${progress_array_rabota161}]],[[${progress_array_rabota162}]],[[${progress_array_rabota163}]],[[${progress_array_rabota164}]],[[${progress_array_rabota165}]],[[${progress_array_rabota166}]],[[${progress_array_rabota167}]],[[${progress_array_rabota168}]],[[${progress_array_rabota169}]],[[${progress_array_rabota170}]],
+        [[${progress_array_rabota171}]],[[${progress_array_rabota172}]],[[${progress_array_rabota173}]],[[${progress_array_rabota174}]],[[${progress_array_rabota175}]],[[${progress_array_rabota176}]],[[${progress_array_rabota177}]],[[${progress_array_rabota178}]],[[${progress_array_rabota179}]],[[${progress_array_rabota180}]],
+        [[${progress_array_rabota181}]],[[${progress_array_rabota182}]],[[${progress_array_rabota183}]],[[${progress_array_rabota184}]],[[${progress_array_rabota185}]],[[${progress_array_rabota186}]],[[${progress_array_rabota187}]],[[${progress_array_rabota188}]],[[${progress_array_rabota189}]],[[${progress_array_rabota190}]],
+        [[${progress_array_rabota191}]],[[${progress_array_rabota192}]],[[${progress_array_rabota193}]],[[${progress_array_rabota194}]],[[${progress_array_rabota195}]],[[${progress_array_rabota196}]],[[${progress_array_rabota197}]],[[${progress_array_rabota198}]],[[${progress_array_rabota199}]],[[${progress_array_rabota200}]],
+        [[${progress_array_rabota201}]],[[${progress_array_rabota202}]],[[${progress_array_rabota203}]],[[${progress_array_rabota204}]],[[${progress_array_rabota205}]],[[${progress_array_rabota206}]],[[${progress_array_rabota207}]],[[${progress_array_rabota208}]],[[${progress_array_rabota209}]],[[${progress_array_rabota210}]],
+        [[${progress_array_rabota211}]],[[${progress_array_rabota212}]],[[${progress_array_rabota213}]],[[${progress_array_rabota214}]],[[${progress_array_rabota215}]],[[${progress_array_rabota216}]],[[${progress_array_rabota217}]],[[${progress_array_rabota218}]],[[${progress_array_rabota219}]],[[${progress_array_rabota220}]],
+        [[${progress_array_rabota221}]],[[${progress_array_rabota222}]],[[${progress_array_rabota223}]],[[${progress_array_rabota224}]],[[${progress_array_rabota225}]],[[${progress_array_rabota226}]],[[${progress_array_rabota227}]],[[${progress_array_rabota228}]],[[${progress_array_rabota229}]],[[${progress_array_rabota230}]],
+        [[${progress_array_rabota231}]],[[${progress_array_rabota232}]],[[${progress_array_rabota233}]],[[${progress_array_rabota234}]],[[${progress_array_rabota235}]],[[${progress_array_rabota236}]],[[${progress_array_rabota237}]],[[${progress_array_rabota238}]],[[${progress_array_rabota239}]],[[${progress_array_rabota240}]],
+        [[${progress_array_rabota241}]],[[${progress_array_rabota242}]],[[${progress_array_rabota243}]],[[${progress_array_rabota244}]],[[${progress_array_rabota245}]],[[${progress_array_rabota246}]],[[${progress_array_rabota247}]],[[${progress_array_rabota248}]],[[${progress_array_rabota249}]],[[${progress_array_rabota250}]],
+        [[${progress_array_rabota251}]],[[${progress_array_rabota252}]],[[${progress_array_rabota253}]],[[${progress_array_rabota254}]],[[${progress_array_rabota255}]],[[${progress_array_rabota256}]],[[${progress_array_rabota257}]],[[${progress_array_rabota258}]],[[${progress_array_rabota259}]],[[${progress_array_rabota260}]],
+        [[${progress_array_rabota261}]],[[${progress_array_rabota262}]],[[${progress_array_rabota263}]],[[${progress_array_rabota264}]],[[${progress_array_rabota265}]],[[${progress_array_rabota266}]],[[${progress_array_rabota267}]],[[${progress_array_rabota268}]],[[${progress_array_rabota269}]],[[${progress_array_rabota270}]],
+        [[${progress_array_rabota271}]],[[${progress_array_rabota272}]],[[${progress_array_rabota273}]],[[${progress_array_rabota274}]],[[${progress_array_rabota275}]],[[${progress_array_rabota276}]],[[${progress_array_rabota277}]],[[${progress_array_rabota278}]],[[${progress_array_rabota279}]],[[${progress_array_rabota280}]],
+        [[${progress_array_rabota281}]],[[${progress_array_rabota282}]],[[${progress_array_rabota283}]],[[${progress_array_rabota284}]],[[${progress_array_rabota285}]],[[${progress_array_rabota286}]],[[${progress_array_rabota287}]],[[${progress_array_rabota288}]],[[${progress_array_rabota289}]],[[${progress_array_rabota290}]],
+        [[${progress_array_rabota291}]],[[${progress_array_rabota292}]],[[${progress_array_rabota293}]],[[${progress_array_rabota294}]],[[${progress_array_rabota295}]],[[${progress_array_rabota296}]],[[${progress_array_rabota297}]],[[${progress_array_rabota298}]],[[${progress_array_rabota299}]],[[${progress_array_rabota300}]],
+
+    ];
+    var progress_array_pause = [
+        [[${progress_array_pause0}]],[[${progress_array_pause1}]],[[${progress_array_pause2}]],[[${progress_array_pause3}]],[[${progress_array_pause4}]],[[${progress_array_pause5}]],[[${progress_array_pause6}]],[[${progress_array_pause7}]],[[${progress_array_pause8}]],[[${progress_array_pause9}]],[[${progress_array_pause10}]],
+        [[${progress_array_pause11}]],[[${progress_array_pause12}]],[[${progress_array_pause13}]],[[${progress_array_pause14}]],[[${progress_array_pause15}]],[[${progress_array_pause16}]],[[${progress_array_pause17}]],[[${progress_array_pause18}]],[[${progress_array_pause19}]],[[${progress_array_pause20}]],
+        [[${progress_array_pause21}]],[[${progress_array_pause22}]],[[${progress_array_pause23}]],[[${progress_array_pause24}]],[[${progress_array_pause25}]],[[${progress_array_pause26}]],[[${progress_array_pause27}]],[[${progress_array_pause28}]],[[${progress_array_pause29}]],[[${progress_array_pause30}]],
+        [[${progress_array_pause31}]],[[${progress_array_pause32}]],[[${progress_array_pause33}]],[[${progress_array_pause34}]],[[${progress_array_pause35}]],[[${progress_array_pause36}]],[[${progress_array_pause37}]],[[${progress_array_pause38}]],[[${progress_array_pause39}]],[[${progress_array_pause40}]],
+        [[${progress_array_pause41}]],[[${progress_array_pause42}]],[[${progress_array_pause43}]],[[${progress_array_pause44}]],[[${progress_array_pause45}]],[[${progress_array_pause46}]],[[${progress_array_pause47}]],[[${progress_array_pause48}]],[[${progress_array_pause49}]],[[${progress_array_pause50}]],
+        [[${progress_array_pause51}]],[[${progress_array_pause52}]],[[${progress_array_pause53}]],[[${progress_array_pause54}]],[[${progress_array_pause55}]],[[${progress_array_pause56}]],[[${progress_array_pause57}]],[[${progress_array_pause58}]],[[${progress_array_pause59}]],[[${progress_array_pause60}]],
+        [[${progress_array_pause61}]],[[${progress_array_pause62}]],[[${progress_array_pause63}]],[[${progress_array_pause64}]],[[${progress_array_pause65}]],[[${progress_array_pause66}]],[[${progress_array_pause67}]],[[${progress_array_pause68}]],[[${progress_array_pause69}]],[[${progress_array_pause70}]],
+        [[${progress_array_pause71}]],[[${progress_array_pause72}]],[[${progress_array_pause73}]],[[${progress_array_pause74}]],[[${progress_array_pause75}]],[[${progress_array_pause76}]],[[${progress_array_pause77}]],[[${progress_array_pause78}]],[[${progress_array_pause79}]],[[${progress_array_pause80}]],
+        [[${progress_array_pause81}]],[[${progress_array_pause82}]],[[${progress_array_pause83}]],[[${progress_array_pause84}]],[[${progress_array_pause85}]],[[${progress_array_pause86}]],[[${progress_array_pause87}]],[[${progress_array_pause88}]],[[${progress_array_pause89}]],[[${progress_array_pause90}]],
+        [[${progress_array_pause91}]],[[${progress_array_pause92}]],[[${progress_array_pause93}]],[[${progress_array_pause94}]],[[${progress_array_pause95}]],[[${progress_array_pause96}]],[[${progress_array_pause97}]],[[${progress_array_pause98}]],[[${progress_array_pause99}]],[[${progress_array_pause100}]],
+        [[${progress_array_pause101}]],[[${progress_array_pause102}]],[[${progress_array_pause103}]],[[${progress_array_pause104}]],[[${progress_array_pause105}]],[[${progress_array_pause106}]],[[${progress_array_pause107}]],[[${progress_array_pause108}]],[[${progress_array_pause109}]],[[${progress_array_pause110}]],
+        [[${progress_array_pause111}]],[[${progress_array_pause112}]],[[${progress_array_pause113}]],[[${progress_array_pause114}]],[[${progress_array_pause115}]],[[${progress_array_pause116}]],[[${progress_array_pause117}]],[[${progress_array_pause118}]],[[${progress_array_pause119}]],[[${progress_array_pause120}]],
+        [[${progress_array_pause121}]],[[${progress_array_pause122}]],[[${progress_array_pause123}]],[[${progress_array_pause124}]],[[${progress_array_pause125}]],[[${progress_array_pause126}]],[[${progress_array_pause127}]],[[${progress_array_pause128}]],[[${progress_array_pause129}]],[[${progress_array_pause130}]],
+        [[${progress_array_pause131}]],[[${progress_array_pause132}]],[[${progress_array_pause133}]],[[${progress_array_pause134}]],[[${progress_array_pause135}]],[[${progress_array_pause136}]],[[${progress_array_pause137}]],[[${progress_array_pause138}]],[[${progress_array_pause129}]],[[${progress_array_pause120}]],
+        [[${progress_array_pause141}]],[[${progress_array_pause142}]],[[${progress_array_pause143}]],[[${progress_array_pause144}]],[[${progress_array_pause145}]],[[${progress_array_pause146}]],[[${progress_array_pause147}]],[[${progress_array_pause148}]],[[${progress_array_pause129}]],[[${progress_array_pause120}]],
+        [[${progress_array_pause151}]],[[${progress_array_pause152}]],[[${progress_array_pause153}]],[[${progress_array_pause154}]],[[${progress_array_pause155}]],[[${progress_array_pause156}]],[[${progress_array_pause157}]],[[${progress_array_pause158}]],[[${progress_array_pause129}]],[[${progress_array_pause120}]],
+        [[${progress_array_pause161}]],[[${progress_array_pause162}]],[[${progress_array_pause163}]],[[${progress_array_pause164}]],[[${progress_array_pause165}]],[[${progress_array_pause166}]],[[${progress_array_pause167}]],[[${progress_array_pause168}]],[[${progress_array_pause169}]],[[${progress_array_pause170}]],
+        [[${progress_array_pause171}]],[[${progress_array_pause172}]],[[${progress_array_pause173}]],[[${progress_array_pause174}]],[[${progress_array_pause175}]],[[${progress_array_pause176}]],[[${progress_array_pause177}]],[[${progress_array_pause178}]],[[${progress_array_pause179}]],[[${progress_array_pause180}]],
+        [[${progress_array_pause181}]],[[${progress_array_pause182}]],[[${progress_array_pause183}]],[[${progress_array_pause184}]],[[${progress_array_pause185}]],[[${progress_array_pause186}]],[[${progress_array_pause187}]],[[${progress_array_pause188}]],[[${progress_array_pause189}]],[[${progress_array_pause190}]],
+        [[${progress_array_pause191}]],[[${progress_array_pause192}]],[[${progress_array_pause193}]],[[${progress_array_pause194}]],[[${progress_array_pause195}]],[[${progress_array_pause196}]],[[${progress_array_pause197}]],[[${progress_array_pause198}]],[[${progress_array_pause199}]],[[${progress_array_pause200}]],
+        [[${progress_array_pause201}]],[[${progress_array_pause202}]],[[${progress_array_pause203}]],[[${progress_array_pause204}]],[[${progress_array_pause205}]],[[${progress_array_pause206}]],[[${progress_array_pause207}]],[[${progress_array_pause208}]],[[${progress_array_pause209}]],[[${progress_array_pause210}]],
+        [[${progress_array_pause211}]],[[${progress_array_pause212}]],[[${progress_array_pause213}]],[[${progress_array_pause214}]],[[${progress_array_pause215}]],[[${progress_array_pause216}]],[[${progress_array_pause217}]],[[${progress_array_pause218}]],[[${progress_array_pause219}]],[[${progress_array_pause220}]],
+        [[${progress_array_pause221}]],[[${progress_array_pause222}]],[[${progress_array_pause223}]],[[${progress_array_pause224}]],[[${progress_array_pause225}]],[[${progress_array_pause226}]],[[${progress_array_pause227}]],[[${progress_array_pause228}]],[[${progress_array_pause229}]],[[${progress_array_pause230}]],
+
+
+    ];
+    var progress_array_off = [
+        [[${progress_array_off0}]],[[${progress_array_off1}]],[[${progress_array_off2}]],[[${progress_array_off3}]],[[${progress_array_off4}]],[[${progress_array_off5}]],[[${progress_array_off6}]],[[${progress_array_off7}]],[[${progress_array_off8}]],[[${progress_array_off9}]],[[${progress_array_off10}]],
+        [[${progress_array_off11}]],[[${progress_array_off12}]],[[${progress_array_off13}]],[[${progress_array_off14}]],[[${progress_array_off15}]],[[${progress_array_off16}]],[[${progress_array_off17}]],[[${progress_array_off18}]],[[${progress_array_off19}]],[[${progress_array_off20}]],
+        [[${progress_array_off21}]],[[${progress_array_off22}]],[[${progress_array_off23}]],[[${progress_array_off24}]],[[${progress_array_off25}]],[[${progress_array_off26}]],[[${progress_array_off27}]],[[${progress_array_off28}]],[[${progress_array_off29}]],[[${progress_array_off30}]],
+        [[${progress_array_off31}]],[[${progress_array_off32}]],[[${progress_array_off33}]],[[${progress_array_off34}]],[[${progress_array_off35}]],[[${progress_array_off36}]],[[${progress_array_off37}]],[[${progress_array_off38}]],[[${progress_array_off39}]]
+    ];
+    var progress_array_name = [
+        [[${progress_array_programname0}]],[[${progress_array_programname1}]],[[${progress_array_programname2}]],[[${progress_array_programname3}]],[[${progress_array_programname4}]],[[${progress_array_programname5}]],[[${progress_array_programname6}]],[[${progress_array_programname7}]],[[${progress_array_programname8}]],[[${progress_array_programname9}]],[[${progress_array_programname10}]],
+        [[${progress_array_programname11}]],[[${progress_array_programname12}]],[[${progress_array_programname13}]],[[${progress_array_programname14}]],[[${progress_array_programname15}]],[[${progress_array_programname16}]],[[${progress_array_programname17}]],[[${progress_array_programname18}]],[[${progress_array_programname19}]],[[${progress_array_programname20}]],
+        [[${progress_array_programname21}]],[[${progress_array_programname22}]],[[${progress_array_programname23}]],[[${progress_array_programname24}]],[[${progress_array_programname25}]],[[${progress_array_programname26}]],[[${progress_array_programname27}]],[[${progress_array_programname28}]],[[${progress_array_programname29}]],[[${progress_array_programname30}]],
+        [[${progress_array_programname31}]],[[${progress_array_programname32}]],[[${progress_array_programname33}]],[[${progress_array_programname34}]],[[${progress_array_programname35}]],[[${progress_array_programname36}]],[[${progress_array_programname37}]],[[${progress_array_programname38}]],[[${progress_array_programname39}]],[[${progress_array_programname40}]],
+        [[${progress_array_programname41}]],[[${progress_array_programname42}]],[[${progress_array_programname43}]],[[${progress_array_programname44}]],[[${progress_array_programname45}]],[[${progress_array_programname46}]],[[${progress_array_programname47}]],[[${progress_array_programname48}]],[[${progress_array_programname49}]],[[${progress_array_programname50}]],
+        [[${progress_array_programname51}]],[[${progress_array_programname52}]],[[${progress_array_programname53}]],[[${progress_array_programname54}]],[[${progress_array_programname55}]],[[${progress_array_programname56}]],[[${progress_array_programname57}]],[[${progress_array_programname58}]],[[${progress_array_programname59}]],[[${progress_array_programname60}]],
+        [[${progress_array_programname61}]],[[${progress_array_programname62}]],[[${progress_array_programname63}]],[[${progress_array_programname64}]],[[${progress_array_programname65}]],[[${progress_array_programname66}]],[[${progress_array_programname67}]],[[${progress_array_programname68}]],[[${progress_array_programname69}]],[[${progress_array_programname70}]],
+        [[${progress_array_programname71}]],[[${progress_array_programname72}]],[[${progress_array_programname73}]],[[${progress_array_programname74}]],[[${progress_array_programname75}]],[[${progress_array_programname76}]],[[${progress_array_programname77}]],[[${progress_array_programname78}]],[[${progress_array_programname79}]],
+        [[${progress_array_programname81}]],[[${progress_array_programname82}]],[[${progress_array_programname83}]],[[${progress_array_programname84}]],[[${progress_array_programname85}]],[[${progress_array_programname86}]],[[${progress_array_programname87}]],[[${progress_array_programname88}]],[[${progress_array_programname89}]],[[${progress_array_programname90}]],
+        [[${progress_array_programname91}]],[[${progress_array_programname92}]],[[${progress_array_programname93}]],[[${progress_array_programname94}]],[[${progress_array_programname95}]],[[${progress_array_programname96}]],[[${progress_array_programname97}]],[[${progress_array_programname98}]],[[${progress_array_programname99}]],[[${progress_array_programname100}]],
+        [[${progress_array_programname101}]],[[${progress_array_programname102}]],[[${progress_array_programname103}]],[[${progress_array_programname104}]],[[${progress_array_programname105}]],[[${progress_array_programname106}]],[[${progress_array_programname107}]],[[${progress_array_programname108}]],[[${progress_array_programname109}]],[[${progress_array_programname110}]],
+        [[${progress_array_programname111}]],[[${progress_array_programname112}]],[[${progress_array_programname113}]],[[${progress_array_programname114}]],[[${progress_array_programname115}]],[[${progress_array_programname116}]],[[${progress_array_programname117}]],[[${progress_array_programname118}]],[[${progress_array_programname119}]],[[${progress_array_programname120}]],
+        [[${progress_array_programname121}]],[[${progress_array_programname122}]],[[${progress_array_programname123}]],[[${progress_array_programname124}]],[[${progress_array_programname125}]],[[${progress_array_programname126}]],[[${progress_array_programname127}]],[[${progress_array_programname128}]],[[${progress_array_programname129}]],[[${progress_array_programname130}]],
+        [[${progress_array_programname131}]],[[${progress_array_programname132}]],[[${progress_array_programname133}]],[[${progress_array_programname134}]],[[${progress_array_programname135}]],[[${progress_array_programname136}]],[[${progress_array_programname137}]],[[${progress_array_programname138}]],[[${progress_array_programname129}]],[[${progress_array_programname120}]],
+        [[${progress_array_programname141}]],[[${progress_array_programname142}]],[[${progress_array_programname143}]],[[${progress_array_programname144}]],[[${progress_array_programname145}]],[[${progress_array_programname146}]],[[${progress_array_programname147}]],[[${progress_array_programname148}]],[[${progress_array_programname129}]],[[${progress_array_programname120}]],
+
+    ]
+
+
+
+</script>   <!--Прогресс js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var progress_work = [[${progress_work}]];
+    var progress_pass = [[${progress_pass}]];
+    var progress_fail = [[${progress_fail}]];
+    var progress_avar = [[${progress_avar}]];
+    var progress_nagruzka = [[${progress_nagruzka}]];
+</script>   <!--Прогресс круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_progress.js"></script>
+
+<script th:inline="javascript">
+
+    var ntx1000_array_rabota = [
+        [[${ntx1000_array_rabota0}]],[[${ntx1000_array_rabota1}]],[[${ntx1000_array_rabota2}]],[[${ntx1000_array_rabota3}]],[[${ntx1000_array_rabota4}]],[[${ntx1000_array_rabota5}]],[[${ntx1000_array_rabota6}]],[[${ntx1000_array_rabota7}]],[[${ntx1000_array_rabota8}]],[[${ntx1000_array_rabota9}]],[[${ntx1000_array_rabota10}]],
+        [[${ntx1000_array_rabota11}]],[[${ntx1000_array_rabota12}]],[[${ntx1000_array_rabota13}]],[[${ntx1000_array_rabota14}]],[[${ntx1000_array_rabota15}]],[[${ntx1000_array_rabota16}]],[[${ntx1000_array_rabota17}]],[[${ntx1000_array_rabota18}]],[[${ntx1000_array_rabota19}]],[[${ntx1000_array_rabota20}]],
+        [[${ntx1000_array_rabota21}]],[[${ntx1000_array_rabota22}]],[[${ntx1000_array_rabota23}]],[[${ntx1000_array_rabota24}]],[[${ntx1000_array_rabota25}]],[[${ntx1000_array_rabota26}]],[[${ntx1000_array_rabota27}]],[[${ntx1000_array_rabota28}]],[[${ntx1000_array_rabota29}]],[[${ntx1000_array_rabota30}]],
+        [[${ntx1000_array_rabota31}]],[[${ntx1000_array_rabota32}]],[[${ntx1000_array_rabota33}]],[[${ntx1000_array_rabota34}]],[[${ntx1000_array_rabota35}]],[[${ntx1000_array_rabota36}]],[[${ntx1000_array_rabota37}]],[[${ntx1000_array_rabota38}]],[[${ntx1000_array_rabota39}]],[[${ntx1000_array_rabota40}]],
+        [[${ntx1000_array_rabota41}]],[[${ntx1000_array_rabota42}]],[[${ntx1000_array_rabota43}]],[[${ntx1000_array_rabota44}]],[[${ntx1000_array_rabota45}]],[[${ntx1000_array_rabota46}]],[[${ntx1000_array_rabota47}]],[[${ntx1000_array_rabota48}]],[[${ntx1000_array_rabota49}]],[[${ntx1000_array_rabota50}]],
+        [[${ntx1000_array_rabota51}]],[[${ntx1000_array_rabota52}]],[[${ntx1000_array_rabota53}]],[[${ntx1000_array_rabota54}]],[[${ntx1000_array_rabota55}]],[[${ntx1000_array_rabota56}]],[[${ntx1000_array_rabota57}]],[[${ntx1000_array_rabota58}]],[[${ntx1000_array_rabota59}]],[[${ntx1000_array_rabota60}]],
+        [[${ntx1000_array_rabota61}]],[[${ntx1000_array_rabota62}]],[[${ntx1000_array_rabota63}]],[[${ntx1000_array_rabota64}]],[[${ntx1000_array_rabota65}]],[[${ntx1000_array_rabota66}]],[[${ntx1000_array_rabota67}]],[[${ntx1000_array_rabota68}]],[[${ntx1000_array_rabota69}]],[[${ntx1000_array_rabota70}]],
+        [[${ntx1000_array_rabota71}]],[[${ntx1000_array_rabota72}]],[[${ntx1000_array_rabota73}]],[[${ntx1000_array_rabota74}]],[[${ntx1000_array_rabota75}]],[[${ntx1000_array_rabota76}]],[[${ntx1000_array_rabota77}]],[[${ntx1000_array_rabota78}]],[[${ntx1000_array_rabota79}]],[[${ntx1000_array_rabota80}]],
+        [[${ntx1000_array_rabota81}]],[[${ntx1000_array_rabota82}]],[[${ntx1000_array_rabota83}]],[[${ntx1000_array_rabota84}]],[[${ntx1000_array_rabota85}]],[[${ntx1000_array_rabota86}]],[[${ntx1000_array_rabota87}]],[[${ntx1000_array_rabota88}]],[[${ntx1000_array_rabota89}]],[[${ntx1000_array_rabota90}]],
+        [[${ntx1000_array_rabota91}]],[[${ntx1000_array_rabota92}]],[[${ntx1000_array_rabota93}]],[[${ntx1000_array_rabota94}]],[[${ntx1000_array_rabota95}]],[[${ntx1000_array_rabota96}]],[[${ntx1000_array_rabota97}]],[[${ntx1000_array_rabota98}]],[[${ntx1000_array_rabota99}]],[[${ntx1000_array_rabota100}]],
+        [[${ntx1000_array_rabota101}]],[[${ntx1000_array_rabota102}]],[[${ntx1000_array_rabota103}]],[[${ntx1000_array_rabota104}]],[[${ntx1000_array_rabota105}]],[[${ntx1000_array_rabota106}]],[[${ntx1000_array_rabota107}]],[[${ntx1000_array_rabota108}]],[[${ntx1000_array_rabota109}]],[[${ntx1000_array_rabota110}]],
+        [[${ntx1000_array_rabota111}]],[[${ntx1000_array_rabota112}]],[[${ntx1000_array_rabota113}]],[[${ntx1000_array_rabota114}]],[[${ntx1000_array_rabota115}]],[[${ntx1000_array_rabota116}]],[[${ntx1000_array_rabota117}]],[[${ntx1000_array_rabota118}]],[[${ntx1000_array_rabota119}]],[[${ntx1000_array_rabota120}]],
+        [[${ntx1000_array_rabota121}]],[[${ntx1000_array_rabota122}]],[[${ntx1000_array_rabota123}]],[[${ntx1000_array_rabota124}]],[[${ntx1000_array_rabota125}]],[[${ntx1000_array_rabota126}]],[[${ntx1000_array_rabota127}]],[[${ntx1000_array_rabota128}]],[[${ntx1000_array_rabota129}]],[[${ntx1000_array_rabota130}]],
+        [[${ntx1000_array_rabota131}]],[[${ntx1000_array_rabota132}]],[[${ntx1000_array_rabota133}]],[[${ntx1000_array_rabota134}]],[[${ntx1000_array_rabota135}]],[[${ntx1000_array_rabota136}]],[[${ntx1000_array_rabota137}]],[[${ntx1000_array_rabota138}]],[[${ntx1000_array_rabota139}]],[[${ntx1000_array_rabota140}]],
+        [[${ntx1000_array_rabota141}]],[[${ntx1000_array_rabota142}]],[[${ntx1000_array_rabota143}]],[[${ntx1000_array_rabota144}]],[[${ntx1000_array_rabota145}]],[[${ntx1000_array_rabota146}]],[[${ntx1000_array_rabota147}]],[[${ntx1000_array_rabota148}]],[[${ntx1000_array_rabota149}]],[[${ntx1000_array_rabota150}]],
+        [[${ntx1000_array_rabota151}]],[[${ntx1000_array_rabota152}]],[[${ntx1000_array_rabota153}]],[[${ntx1000_array_rabota154}]],[[${ntx1000_array_rabota155}]],[[${ntx1000_array_rabota156}]],[[${ntx1000_array_rabota157}]],[[${ntx1000_array_rabota158}]],[[${ntx1000_array_rabota159}]],[[${ntx1000_array_rabota160}]],
+        [[${ntx1000_array_rabota161}]],[[${ntx1000_array_rabota162}]],[[${ntx1000_array_rabota163}]],[[${ntx1000_array_rabota164}]],[[${ntx1000_array_rabota165}]],[[${ntx1000_array_rabota166}]],[[${ntx1000_array_rabota167}]],[[${ntx1000_array_rabota168}]],[[${ntx1000_array_rabota169}]],[[${ntx1000_array_rabota170}]],
+        [[${ntx1000_array_rabota171}]],[[${ntx1000_array_rabota172}]],[[${ntx1000_array_rabota173}]],[[${ntx1000_array_rabota174}]],[[${ntx1000_array_rabota175}]],[[${ntx1000_array_rabota176}]],[[${ntx1000_array_rabota177}]],[[${ntx1000_array_rabota178}]],[[${ntx1000_array_rabota179}]],[[${ntx1000_array_rabota180}]],
+        [[${ntx1000_array_rabota181}]],[[${ntx1000_array_rabota182}]],[[${ntx1000_array_rabota183}]],[[${ntx1000_array_rabota184}]],[[${ntx1000_array_rabota185}]],[[${ntx1000_array_rabota186}]],[[${ntx1000_array_rabota187}]],[[${ntx1000_array_rabota188}]],[[${ntx1000_array_rabota189}]],[[${ntx1000_array_rabota190}]],
+        [[${ntx1000_array_rabota191}]],[[${ntx1000_array_rabota192}]],[[${ntx1000_array_rabota193}]],[[${ntx1000_array_rabota194}]],[[${ntx1000_array_rabota195}]],[[${ntx1000_array_rabota196}]],[[${ntx1000_array_rabota197}]],[[${ntx1000_array_rabota198}]],[[${ntx1000_array_rabota199}]],[[${ntx1000_array_rabota200}]],
+        [[${ntx1000_array_rabota201}]],[[${ntx1000_array_rabota202}]],[[${ntx1000_array_rabota203}]],[[${ntx1000_array_rabota204}]],[[${ntx1000_array_rabota205}]],[[${ntx1000_array_rabota206}]],[[${ntx1000_array_rabota207}]],[[${ntx1000_array_rabota208}]],[[${ntx1000_array_rabota209}]],[[${ntx1000_array_rabota210}]],
+        [[${ntx1000_array_rabota211}]],[[${ntx1000_array_rabota212}]],[[${ntx1000_array_rabota213}]],[[${ntx1000_array_rabota214}]],[[${ntx1000_array_rabota215}]],[[${ntx1000_array_rabota216}]],[[${ntx1000_array_rabota217}]],[[${ntx1000_array_rabota218}]],[[${ntx1000_array_rabota219}]],[[${ntx1000_array_rabota220}]],
+        [[${ntx1000_array_rabota221}]],[[${ntx1000_array_rabota222}]],[[${ntx1000_array_rabota223}]],[[${ntx1000_array_rabota224}]],[[${ntx1000_array_rabota225}]],[[${ntx1000_array_rabota226}]],[[${ntx1000_array_rabota227}]],[[${ntx1000_array_rabota228}]],[[${ntx1000_array_rabota229}]],[[${ntx1000_array_rabota230}]],
+        [[${ntx1000_array_rabota231}]],[[${ntx1000_array_rabota232}]],[[${ntx1000_array_rabota233}]],[[${ntx1000_array_rabota234}]],[[${ntx1000_array_rabota235}]],[[${ntx1000_array_rabota236}]],[[${ntx1000_array_rabota237}]],[[${ntx1000_array_rabota238}]],[[${ntx1000_array_rabota239}]],[[${ntx1000_array_rabota240}]],
+        [[${ntx1000_array_rabota241}]],[[${ntx1000_array_rabota242}]],[[${ntx1000_array_rabota243}]],[[${ntx1000_array_rabota244}]],[[${ntx1000_array_rabota245}]],[[${ntx1000_array_rabota246}]],[[${ntx1000_array_rabota247}]],[[${ntx1000_array_rabota248}]],[[${ntx1000_array_rabota249}]],[[${ntx1000_array_rabota250}]],
+        [[${ntx1000_array_rabota251}]],[[${ntx1000_array_rabota252}]],[[${ntx1000_array_rabota253}]],[[${ntx1000_array_rabota254}]],[[${ntx1000_array_rabota255}]],[[${ntx1000_array_rabota256}]],[[${ntx1000_array_rabota257}]],[[${ntx1000_array_rabota258}]],[[${ntx1000_array_rabota259}]],[[${ntx1000_array_rabota260}]],
+        [[${ntx1000_array_rabota261}]],[[${ntx1000_array_rabota262}]],[[${ntx1000_array_rabota263}]],[[${ntx1000_array_rabota264}]],[[${ntx1000_array_rabota265}]],[[${ntx1000_array_rabota266}]],[[${ntx1000_array_rabota267}]],[[${ntx1000_array_rabota268}]],[[${ntx1000_array_rabota269}]],[[${ntx1000_array_rabota270}]],
+        [[${ntx1000_array_rabota271}]],[[${ntx1000_array_rabota272}]],[[${ntx1000_array_rabota273}]],[[${ntx1000_array_rabota274}]],[[${ntx1000_array_rabota275}]],[[${ntx1000_array_rabota276}]],[[${ntx1000_array_rabota277}]],[[${ntx1000_array_rabota278}]],[[${ntx1000_array_rabota279}]],[[${ntx1000_array_rabota280}]],
+        [[${ntx1000_array_rabota281}]],[[${ntx1000_array_rabota282}]],[[${ntx1000_array_rabota283}]],[[${ntx1000_array_rabota284}]],[[${ntx1000_array_rabota285}]],[[${ntx1000_array_rabota286}]],[[${ntx1000_array_rabota287}]],[[${ntx1000_array_rabota288}]],[[${ntx1000_array_rabota289}]],[[${ntx1000_array_rabota290}]],
+        [[${ntx1000_array_rabota291}]],[[${ntx1000_array_rabota292}]],[[${ntx1000_array_rabota293}]],[[${ntx1000_array_rabota294}]],[[${ntx1000_array_rabota295}]],[[${ntx1000_array_rabota296}]],[[${ntx1000_array_rabota297}]],[[${ntx1000_array_rabota298}]],[[${ntx1000_array_rabota299}]],[[${ntx1000_array_rabota300}]],
+
+    ];
+    var ntx1000_array_pause = [
+        [[${ntx1000_array_pause0}]],[[${ntx1000_array_pause1}]],[[${ntx1000_array_pause2}]],[[${ntx1000_array_pause3}]],[[${ntx1000_array_pause4}]],[[${ntx1000_array_pause5}]],[[${ntx1000_array_pause6}]],[[${ntx1000_array_pause7}]],[[${ntx1000_array_pause8}]],[[${ntx1000_array_pause9}]],[[${ntx1000_array_pause10}]],
+        [[${ntx1000_array_pause11}]],[[${ntx1000_array_pause12}]],[[${ntx1000_array_pause13}]],[[${ntx1000_array_pause14}]],[[${ntx1000_array_pause15}]],[[${ntx1000_array_pause16}]],[[${ntx1000_array_pause17}]],[[${ntx1000_array_pause18}]],[[${ntx1000_array_pause19}]],[[${ntx1000_array_pause20}]],
+        [[${ntx1000_array_pause21}]],[[${ntx1000_array_pause22}]],[[${ntx1000_array_pause23}]],[[${ntx1000_array_pause24}]],[[${ntx1000_array_pause25}]],[[${ntx1000_array_pause26}]],[[${ntx1000_array_pause27}]],[[${ntx1000_array_pause28}]],[[${ntx1000_array_pause29}]],[[${ntx1000_array_pause30}]],
+        [[${ntx1000_array_pause31}]],[[${ntx1000_array_pause32}]],[[${ntx1000_array_pause33}]],[[${ntx1000_array_pause34}]],[[${ntx1000_array_pause35}]],[[${ntx1000_array_pause36}]],[[${ntx1000_array_pause37}]],[[${ntx1000_array_pause38}]],[[${ntx1000_array_pause39}]],[[${ntx1000_array_pause40}]],
+        [[${ntx1000_array_pause41}]],[[${ntx1000_array_pause42}]],[[${ntx1000_array_pause43}]],[[${ntx1000_array_pause44}]],[[${ntx1000_array_pause45}]],[[${ntx1000_array_pause46}]],[[${ntx1000_array_pause47}]],[[${ntx1000_array_pause48}]],[[${ntx1000_array_pause49}]],[[${ntx1000_array_pause50}]],
+        [[${ntx1000_array_pause51}]],[[${ntx1000_array_pause52}]],[[${ntx1000_array_pause53}]],[[${ntx1000_array_pause54}]],[[${ntx1000_array_pause55}]],[[${ntx1000_array_pause56}]],[[${ntx1000_array_pause57}]],[[${ntx1000_array_pause58}]],[[${ntx1000_array_pause59}]],[[${ntx1000_array_pause60}]],
+        [[${ntx1000_array_pause61}]],[[${ntx1000_array_pause62}]],[[${ntx1000_array_pause63}]],[[${ntx1000_array_pause64}]],[[${ntx1000_array_pause65}]],[[${ntx1000_array_pause66}]],[[${ntx1000_array_pause67}]],[[${ntx1000_array_pause68}]],[[${ntx1000_array_pause69}]],[[${ntx1000_array_pause70}]],
+        [[${ntx1000_array_pause71}]],[[${ntx1000_array_pause72}]],[[${ntx1000_array_pause73}]],[[${ntx1000_array_pause74}]],[[${ntx1000_array_pause75}]],[[${ntx1000_array_pause76}]],[[${ntx1000_array_pause77}]],[[${ntx1000_array_pause78}]],[[${ntx1000_array_pause79}]],[[${ntx1000_array_pause80}]],
+        [[${ntx1000_array_pause81}]],[[${ntx1000_array_pause82}]],[[${ntx1000_array_pause83}]],[[${ntx1000_array_pause84}]],[[${ntx1000_array_pause85}]],[[${ntx1000_array_pause86}]],[[${ntx1000_array_pause87}]],[[${ntx1000_array_pause88}]],[[${ntx1000_array_pause89}]],[[${ntx1000_array_pause90}]],
+        [[${ntx1000_array_pause91}]],[[${ntx1000_array_pause92}]],[[${ntx1000_array_pause93}]],[[${ntx1000_array_pause94}]],[[${ntx1000_array_pause95}]],[[${ntx1000_array_pause96}]],[[${ntx1000_array_pause97}]],[[${ntx1000_array_pause98}]],[[${ntx1000_array_pause99}]],[[${ntx1000_array_pause100}]],
+        [[${ntx1000_array_pause101}]],[[${ntx1000_array_pause102}]],[[${ntx1000_array_pause103}]],[[${ntx1000_array_pause104}]],[[${ntx1000_array_pause105}]],[[${ntx1000_array_pause106}]],[[${ntx1000_array_pause107}]],[[${ntx1000_array_pause108}]],[[${ntx1000_array_pause109}]],[[${ntx1000_array_pause110}]],
+        [[${ntx1000_array_pause111}]],[[${ntx1000_array_pause112}]],[[${ntx1000_array_pause113}]],[[${ntx1000_array_pause114}]],[[${ntx1000_array_pause115}]],[[${ntx1000_array_pause116}]],[[${ntx1000_array_pause117}]],[[${ntx1000_array_pause118}]],[[${ntx1000_array_pause119}]],[[${ntx1000_array_pause120}]],
+        [[${ntx1000_array_pause121}]],[[${ntx1000_array_pause122}]],[[${ntx1000_array_pause123}]],[[${ntx1000_array_pause124}]],[[${ntx1000_array_pause125}]],[[${ntx1000_array_pause126}]],[[${ntx1000_array_pause127}]],[[${ntx1000_array_pause128}]],[[${ntx1000_array_pause129}]],[[${ntx1000_array_pause130}]],
+        [[${ntx1000_array_pause131}]],[[${ntx1000_array_pause132}]],[[${ntx1000_array_pause133}]],[[${ntx1000_array_pause134}]],[[${ntx1000_array_pause135}]],[[${ntx1000_array_pause136}]],[[${ntx1000_array_pause137}]],[[${ntx1000_array_pause138}]],[[${ntx1000_array_pause129}]],[[${ntx1000_array_pause120}]],
+        [[${ntx1000_array_pause141}]],[[${ntx1000_array_pause142}]],[[${ntx1000_array_pause143}]],[[${ntx1000_array_pause144}]],[[${ntx1000_array_pause145}]],[[${ntx1000_array_pause146}]],[[${ntx1000_array_pause147}]],[[${ntx1000_array_pause148}]],[[${ntx1000_array_pause129}]],[[${ntx1000_array_pause120}]],
+        [[${ntx1000_array_pause151}]],[[${ntx1000_array_pause152}]],[[${ntx1000_array_pause153}]],[[${ntx1000_array_pause154}]],[[${ntx1000_array_pause155}]],[[${ntx1000_array_pause156}]],[[${ntx1000_array_pause157}]],[[${ntx1000_array_pause158}]],[[${ntx1000_array_pause129}]],[[${ntx1000_array_pause120}]],
+        [[${ntx1000_array_pause161}]],[[${ntx1000_array_pause162}]],[[${ntx1000_array_pause163}]],[[${ntx1000_array_pause164}]],[[${ntx1000_array_pause165}]],[[${ntx1000_array_pause166}]],[[${ntx1000_array_pause167}]],[[${ntx1000_array_pause168}]],[[${ntx1000_array_pause169}]],[[${ntx1000_array_pause170}]],
+        [[${ntx1000_array_pause171}]],[[${ntx1000_array_pause172}]],[[${ntx1000_array_pause173}]],[[${ntx1000_array_pause174}]],[[${ntx1000_array_pause175}]],[[${ntx1000_array_pause176}]],[[${ntx1000_array_pause177}]],[[${ntx1000_array_pause178}]],[[${ntx1000_array_pause179}]],[[${ntx1000_array_pause180}]],
+        [[${ntx1000_array_pause181}]],[[${ntx1000_array_pause182}]],[[${ntx1000_array_pause183}]],[[${ntx1000_array_pause184}]],[[${ntx1000_array_pause185}]],[[${ntx1000_array_pause186}]],[[${ntx1000_array_pause187}]],[[${ntx1000_array_pause188}]],[[${ntx1000_array_pause189}]],[[${ntx1000_array_pause190}]],
+        [[${ntx1000_array_pause191}]],[[${ntx1000_array_pause192}]],[[${ntx1000_array_pause193}]],[[${ntx1000_array_pause194}]],[[${ntx1000_array_pause195}]],[[${ntx1000_array_pause196}]],[[${ntx1000_array_pause197}]],[[${ntx1000_array_pause198}]],[[${ntx1000_array_pause199}]],[[${ntx1000_array_pause200}]],
+        [[${ntx1000_array_pause201}]],[[${ntx1000_array_pause202}]],[[${ntx1000_array_pause203}]],[[${ntx1000_array_pause204}]],[[${ntx1000_array_pause205}]],[[${ntx1000_array_pause206}]],[[${ntx1000_array_pause207}]],[[${ntx1000_array_pause208}]],[[${ntx1000_array_pause209}]],[[${ntx1000_array_pause210}]],
+        [[${ntx1000_array_pause211}]],[[${ntx1000_array_pause212}]],[[${ntx1000_array_pause213}]],[[${ntx1000_array_pause214}]],[[${ntx1000_array_pause215}]],[[${ntx1000_array_pause216}]],[[${ntx1000_array_pause217}]],[[${ntx1000_array_pause218}]],[[${ntx1000_array_pause219}]],[[${ntx1000_array_pause220}]],
+        [[${ntx1000_array_pause221}]],[[${ntx1000_array_pause222}]],[[${ntx1000_array_pause223}]],[[${ntx1000_array_pause224}]],[[${ntx1000_array_pause225}]],[[${ntx1000_array_pause226}]],[[${ntx1000_array_pause227}]],[[${ntx1000_array_pause228}]],[[${ntx1000_array_pause229}]],[[${ntx1000_array_pause230}]],
+        [[${ntx1000_array_pause231}]],[[${ntx1000_array_pause232}]],[[${ntx1000_array_pause233}]],[[${ntx1000_array_pause234}]],[[${ntx1000_array_pause235}]],[[${ntx1000_array_pause236}]],[[${ntx1000_array_pause237}]],[[${ntx1000_array_pause238}]],[[${ntx1000_array_pause239}]],[[${ntx1000_array_pause240}]],
+        [[${ntx1000_array_pause241}]],[[${ntx1000_array_pause242}]],[[${ntx1000_array_pause243}]],[[${ntx1000_array_pause244}]],[[${ntx1000_array_pause245}]],[[${ntx1000_array_pause246}]],[[${ntx1000_array_pause247}]],[[${ntx1000_array_pause248}]],[[${ntx1000_array_pause249}]],[[${ntx1000_array_pause250}]],
+        [[${ntx1000_array_pause261}]],[[${ntx1000_array_pause262}]],[[${ntx1000_array_pause263}]],[[${ntx1000_array_pause264}]],[[${ntx1000_array_pause265}]],[[${ntx1000_array_pause266}]],[[${ntx1000_array_pause267}]],[[${ntx1000_array_pause268}]],[[${ntx1000_array_pause269}]],[[${ntx1000_array_pause270}]],
+        [[${ntx1000_array_pause281}]],[[${ntx1000_array_pause282}]],[[${ntx1000_array_pause283}]],[[${ntx1000_array_pause284}]],[[${ntx1000_array_pause285}]],[[${ntx1000_array_pause286}]],[[${ntx1000_array_pause287}]],[[${ntx1000_array_pause288}]],[[${ntx1000_array_pause289}]],[[${ntx1000_array_pause290}]],
+        [[${ntx1000_array_pause291}]],[[${ntx1000_array_pause292}]],[[${ntx1000_array_pause293}]],[[${ntx1000_array_pause294}]],[[${ntx1000_array_pause295}]],[[${ntx1000_array_pause296}]],[[${ntx1000_array_pause297}]],[[${ntx1000_array_pause298}]],[[${ntx1000_array_pause299}]],[[${ntx1000_array_pause300}]],
+
+    ];
+    var ntx1000_array_off = [
+        [[${ntx1000_array_off0}]],[[${ntx1000_array_off1}]],[[${ntx1000_array_off2}]],[[${ntx1000_array_off3}]],[[${ntx1000_array_off4}]],[[${ntx1000_array_off5}]],[[${ntx1000_array_off6}]],[[${ntx1000_array_off7}]],[[${ntx1000_array_off8}]],[[${ntx1000_array_off9}]],[[${ntx1000_array_off10}]],
+        [[${ntx1000_array_off11}]],[[${ntx1000_array_off12}]],[[${ntx1000_array_off13}]],[[${ntx1000_array_off14}]],[[${ntx1000_array_off15}]],[[${ntx1000_array_off16}]],[[${ntx1000_array_off17}]],[[${ntx1000_array_off18}]],[[${ntx1000_array_off19}]],[[${ntx1000_array_off20}]],
+        [[${ntx1000_array_off21}]],[[${ntx1000_array_off22}]],[[${ntx1000_array_off23}]],[[${ntx1000_array_off24}]],[[${ntx1000_array_off25}]],[[${ntx1000_array_off26}]],[[${ntx1000_array_off27}]],[[${ntx1000_array_off28}]],[[${ntx1000_array_off29}]],[[${ntx1000_array_off30}]],
+        [[${ntx1000_array_off31}]],[[${ntx1000_array_off32}]],[[${ntx1000_array_off33}]],[[${ntx1000_array_off34}]],[[${ntx1000_array_off35}]],[[${ntx1000_array_off36}]],[[${ntx1000_array_off37}]],[[${ntx1000_array_off38}]],[[${ntx1000_array_off39}]]
+    ];
+
+    var ntx1000_array_avar = [
+        [[${ntx1000_array_avar0}]],[[${ntx1000_array_avar1}]],[[${ntx1000_array_avar2}]],[[${ntx1000_array_avar3}]],[[${ntx1000_array_avar4}]],[[${ntx1000_array_avar5}]],[[${ntx1000_array_avar6}]],[[${ntx1000_array_avar7}]],[[${ntx1000_array_avar8}]],[[${ntx1000_array_avar9}]],[[${ntx1000_array_avar10}]],
+        [[${ntx1000_array_avar11}]],[[${ntx1000_array_avar12}]],[[${ntx1000_array_avar13}]],[[${ntx1000_array_avar14}]],[[${ntx1000_array_avar15}]],[[${ntx1000_array_avar16}]],[[${ntx1000_array_avar17}]],[[${ntx1000_array_avar18}]],[[${ntx1000_array_avar19}]],[[${ntx1000_array_avar20}]],
+        [[${ntx1000_array_avar21}]],[[${ntx1000_array_avar22}]],[[${ntx1000_array_avar23}]],[[${ntx1000_array_avar24}]],[[${ntx1000_array_avar25}]],[[${ntx1000_array_avar26}]],[[${ntx1000_array_avar27}]],[[${ntx1000_array_avar28}]],[[${ntx1000_array_avar29}]],[[${ntx1000_array_avar30}]],
+        [[${ntx1000_array_avar31}]],[[${ntx1000_array_avar32}]],[[${ntx1000_array_avar33}]],[[${ntx1000_array_avar34}]],[[${ntx1000_array_avar35}]],[[${ntx1000_array_avar36}]],[[${ntx1000_array_avar37}]],[[${ntx1000_array_avar38}]],[[${ntx1000_array_avar39}]],[[${ntx1000_array_avar40}]],
+        [[${ntx1000_array_avar41}]],[[${ntx1000_array_avar42}]],[[${ntx1000_array_avar43}]],[[${ntx1000_array_avar44}]],[[${ntx1000_array_avar45}]],[[${ntx1000_array_avar46}]],[[${ntx1000_array_avar47}]],[[${ntx1000_array_avar48}]],[[${ntx1000_array_avar49}]],[[${ntx1000_array_avar50}]],
+        [[${ntx1000_array_avar51}]],[[${ntx1000_array_avar52}]],[[${ntx1000_array_avar53}]]
+    ];
+
+    var ntx1000_array_nagruzka = [
+        [[${ntx1000_array_nagruzka0}]],[[${ntx1000_array_nagruzka1}]],[[${ntx1000_array_nagruzka2}]],[[${ntx1000_array_nagruzka3}]],[[${ntx1000_array_nagruzka4}]],[[${ntx1000_array_nagruzka5}]],[[${ntx1000_array_nagruzka6}]],[[${ntx1000_array_nagruzka7}]],[[${ntx1000_array_nagruzka8}]],[[${ntx1000_array_nagruzka9}]],[[${ntx1000_array_nagruzka10}]],
+        [[${ntx1000_array_nagruzka11}]],[[${ntx1000_array_nagruzka12}]],[[${ntx1000_array_nagruzka13}]],[[${ntx1000_array_nagruzka14}]],[[${ntx1000_array_nagruzka15}]],[[${ntx1000_array_nagruzka16}]],[[${ntx1000_array_nagruzka17}]],[[${ntx1000_array_nagruzka18}]],[[${ntx1000_array_nagruzka19}]],[[${ntx1000_array_nagruzka20}]],
+        [[${ntx1000_array_nagruzka21}]],[[${ntx1000_array_nagruzka22}]],[[${ntx1000_array_nagruzka23}]],[[${ntx1000_array_nagruzka24}]],[[${ntx1000_array_nagruzka25}]],[[${ntx1000_array_nagruzka26}]],[[${ntx1000_array_nagruzka27}]],[[${ntx1000_array_nagruzka28}]],[[${ntx1000_array_nagruzka29}]],[[${ntx1000_array_nagruzka30}]],
+        [[${ntx1000_array_nagruzka31}]],[[${ntx1000_array_nagruzka32}]],[[${ntx1000_array_nagruzka33}]],[[${ntx1000_array_nagruzka34}]],[[${ntx1000_array_nagruzka35}]],[[${ntx1000_array_nagruzka36}]],[[${ntx1000_array_nagruzka37}]],[[${ntx1000_array_nagruzka38}]],[[${ntx1000_array_nagruzka39}]],[[${ntx1000_array_nagruzka40}]],
+        [[${ntx1000_array_nagruzka41}]],[[${ntx1000_array_nagruzka42}]],[[${ntx1000_array_nagruzka43}]],[[${ntx1000_array_nagruzka44}]],[[${ntx1000_array_nagruzka45}]],[[${ntx1000_array_nagruzka46}]],[[${ntx1000_array_nagruzka47}]],[[${ntx1000_array_nagruzka48}]],[[${ntx1000_array_nagruzka49}]],[[${ntx1000_array_nagruzka50}]],
+        [[${ntx1000_array_nagruzka51}]],[[${ntx1000_array_nagruzka52}]],[[${ntx1000_array_nagruzka53}]],[[${ntx1000_array_nagruzka54}]],[[${ntx1000_array_nagruzka55}]],[[${ntx1000_array_nagruzka56}]],[[${ntx1000_array_nagruzka57}]],[[${ntx1000_array_nagruzka58}]],[[${ntx1000_array_nagruzka59}]],[[${ntx1000_array_nagruzka60}]],
+        [[${ntx1000_array_nagruzka61}]],[[${ntx1000_array_nagruzka62}]],[[${ntx1000_array_nagruzka63}]],[[${ntx1000_array_nagruzka64}]],[[${ntx1000_array_nagruzka65}]],[[${ntx1000_array_nagruzka66}]],[[${ntx1000_array_nagruzka67}]],[[${ntx1000_array_nagruzka68}]],[[${ntx1000_array_nagruzka69}]],[[${ntx1000_array_nagruzka70}]],
+        [[${ntx1000_array_nagruzka71}]],[[${ntx1000_array_nagruzka72}]],[[${ntx1000_array_nagruzka73}]],[[${ntx1000_array_nagruzka74}]],[[${ntx1000_array_nagruzka75}]],[[${ntx1000_array_nagruzka76}]],[[${ntx1000_array_nagruzka77}]],[[${ntx1000_array_nagruzka78}]],[[${ntx1000_array_nagruzka79}]],[[${ntx1000_array_nagruzka80}]],
+        [[${ntx1000_array_nagruzka81}]],[[${ntx1000_array_nagruzka82}]],[[${ntx1000_array_nagruzka83}]],[[${ntx1000_array_nagruzka84}]],[[${ntx1000_array_nagruzka85}]],[[${ntx1000_array_nagruzka86}]],[[${ntx1000_array_nagruzka87}]],[[${ntx1000_array_nagruzka88}]],[[${ntx1000_array_nagruzka89}]],[[${ntx1000_array_nagruzka90}]],
+        [[${ntx1000_array_nagruzka91}]],[[${ntx1000_array_nagruzka92}]],[[${ntx1000_array_nagruzka93}]],[[${ntx1000_array_nagruzka94}]],[[${ntx1000_array_nagruzka95}]],[[${ntx1000_array_nagruzka96}]],[[${ntx1000_array_nagruzka97}]],[[${ntx1000_array_nagruzka98}]],[[${ntx1000_array_nagruzka99}]],[[${ntx1000_array_nagruzka100}]],
+        [[${ntx1000_array_nagruzka101}]],[[${ntx1000_array_nagruzka102}]],[[${ntx1000_array_nagruzka103}]],[[${ntx1000_array_nagruzka104}]],[[${ntx1000_array_nagruzka105}]],[[${ntx1000_array_nagruzka106}]],[[${ntx1000_array_nagruzka107}]],[[${ntx1000_array_nagruzka108}]],[[${ntx1000_array_nagruzka109}]],[[${ntx1000_array_nagruzka110}]],
+        [[${ntx1000_array_nagruzka111}]],[[${ntx1000_array_nagruzka112}]],[[${ntx1000_array_nagruzka113}]],[[${ntx1000_array_nagruzka114}]],[[${ntx1000_array_nagruzka115}]],[[${ntx1000_array_nagruzka116}]],[[${ntx1000_array_nagruzka117}]],[[${ntx1000_array_nagruzka118}]],[[${ntx1000_array_nagruzka119}]],[[${ntx1000_array_nagruzka120}]],
+        [[${ntx1000_array_nagruzka121}]],[[${ntx1000_array_nagruzka122}]],[[${ntx1000_array_nagruzka123}]],[[${ntx1000_array_nagruzka124}]],[[${ntx1000_array_nagruzka125}]],[[${ntx1000_array_nagruzka126}]],[[${ntx1000_array_nagruzka127}]],[[${ntx1000_array_nagruzka128}]],[[${ntx1000_array_nagruzka129}]],[[${ntx1000_array_nagruzka130}]],
+        [[${ntx1000_array_nagruzka131}]],[[${ntx1000_array_nagruzka132}]],[[${ntx1000_array_nagruzka133}]],[[${ntx1000_array_nagruzka134}]],[[${ntx1000_array_nagruzka135}]],[[${ntx1000_array_nagruzka136}]],[[${ntx1000_array_nagruzka137}]],[[${ntx1000_array_nagruzka138}]],[[${ntx1000_array_nagruzka129}]],[[${ntx1000_array_nagruzka120}]],
+        [[${ntx1000_array_nagruzka141}]],[[${ntx1000_array_nagruzka142}]],[[${ntx1000_array_nagruzka143}]],[[${ntx1000_array_nagruzka144}]],[[${ntx1000_array_nagruzka145}]],[[${ntx1000_array_nagruzka146}]],[[${ntx1000_array_nagruzka147}]],[[${ntx1000_array_nagruzka148}]],[[${ntx1000_array_nagruzka129}]],[[${ntx1000_array_nagruzka120}]],
+        [[${ntx1000_array_nagruzka151}]],[[${ntx1000_array_nagruzka152}]],[[${ntx1000_array_nagruzka153}]],[[${ntx1000_array_nagruzka154}]],[[${ntx1000_array_nagruzka155}]],[[${ntx1000_array_nagruzka156}]],[[${ntx1000_array_nagruzka157}]],[[${ntx1000_array_nagruzka158}]],[[${ntx1000_array_nagruzka159}]],[[${ntx1000_array_nagruzka160}]],
+        [[${ntx1000_array_nagruzka161}]],[[${ntx1000_array_nagruzka162}]],[[${ntx1000_array_nagruzka163}]],[[${ntx1000_array_nagruzka164}]],[[${ntx1000_array_nagruzka165}]],[[${ntx1000_array_nagruzka166}]],[[${ntx1000_array_nagruzka167}]],[[${ntx1000_array_nagruzka168}]],[[${ntx1000_array_nagruzka169}]],[[${ntx1000_array_nagruzka170}]],
+        [[${ntx1000_array_nagruzka171}]],[[${ntx1000_array_nagruzka172}]],[[${ntx1000_array_nagruzka173}]],[[${ntx1000_array_nagruzka174}]],[[${ntx1000_array_nagruzka175}]],[[${ntx1000_array_nagruzka176}]],[[${ntx1000_array_nagruzka177}]],[[${ntx1000_array_nagruzka178}]],[[${ntx1000_array_nagruzka179}]],[[${ntx1000_array_nagruzka180}]],
+        [[${ntx1000_array_nagruzka181}]],[[${ntx1000_array_nagruzka182}]],[[${ntx1000_array_nagruzka183}]],[[${ntx1000_array_nagruzka184}]],[[${ntx1000_array_nagruzka185}]],[[${ntx1000_array_nagruzka186}]],[[${ntx1000_array_nagruzka187}]],[[${ntx1000_array_nagruzka188}]],[[${ntx1000_array_nagruzka189}]],[[${ntx1000_array_nagruzka190}]],
+        [[${ntx1000_array_nagruzka191}]],[[${ntx1000_array_nagruzka192}]],[[${ntx1000_array_nagruzka193}]],[[${ntx1000_array_nagruzka194}]],[[${ntx1000_array_nagruzka195}]],[[${ntx1000_array_nagruzka196}]],[[${ntx1000_array_nagruzka197}]],[[${ntx1000_array_nagruzka198}]],[[${ntx1000_array_nagruzka199}]],[[${ntx1000_array_nagruzka200}]],
+        [[${ntx1000_array_nagruzka201}]],[[${ntx1000_array_nagruzka202}]],[[${ntx1000_array_nagruzka203}]],[[${ntx1000_array_nagruzka204}]],[[${ntx1000_array_nagruzka205}]],[[${ntx1000_array_nagruzka206}]],[[${ntx1000_array_nagruzka207}]],[[${ntx1000_array_nagruzka208}]],[[${ntx1000_array_nagruzka209}]],[[${ntx1000_array_nagruzka210}]],
+        [[${ntx1000_array_nagruzka211}]],[[${ntx1000_array_nagruzka212}]],[[${ntx1000_array_nagruzka213}]],[[${ntx1000_array_nagruzka214}]],[[${ntx1000_array_nagruzka215}]],[[${ntx1000_array_nagruzka216}]],[[${ntx1000_array_nagruzka217}]],[[${ntx1000_array_nagruzka218}]],[[${ntx1000_array_nagruzka219}]],[[${ntx1000_array_nagruzka220}]],
+        [[${ntx1000_array_nagruzka221}]],[[${ntx1000_array_nagruzka222}]],[[${ntx1000_array_nagruzka223}]],[[${ntx1000_array_nagruzka224}]],[[${ntx1000_array_nagruzka225}]],[[${ntx1000_array_nagruzka226}]],[[${ntx1000_array_nagruzka227}]],[[${ntx1000_array_nagruzka228}]],[[${ntx1000_array_nagruzka229}]],[[${ntx1000_array_nagruzka230}]],
+        [[${ntx1000_array_nagruzka231}]],[[${ntx1000_array_nagruzka232}]],[[${ntx1000_array_nagruzka233}]],[[${ntx1000_array_nagruzka234}]],[[${ntx1000_array_nagruzka235}]],[[${ntx1000_array_nagruzka236}]],[[${ntx1000_array_nagruzka237}]],[[${ntx1000_array_nagruzka238}]],[[${ntx1000_array_nagruzka239}]],[[${ntx1000_array_nagruzka240}]],
+        [[${ntx1000_array_nagruzka241}]],[[${ntx1000_array_nagruzka242}]],[[${ntx1000_array_nagruzka243}]],[[${ntx1000_array_nagruzka244}]],[[${ntx1000_array_nagruzka245}]],[[${ntx1000_array_nagruzka246}]],[[${ntx1000_array_nagruzka247}]],[[${ntx1000_array_nagruzka248}]],[[${ntx1000_array_nagruzka249}]],[[${ntx1000_array_nagruzka250}]],
+        [[${ntx1000_array_nagruzka251}]],[[${ntx1000_array_nagruzka252}]],[[${ntx1000_array_nagruzka253}]],[[${ntx1000_array_nagruzka254}]],[[${ntx1000_array_nagruzka255}]],[[${ntx1000_array_nagruzka256}]],[[${ntx1000_array_nagruzka257}]],[[${ntx1000_array_nagruzka258}]],[[${ntx1000_array_nagruzka259}]],[[${ntx1000_array_nagruzka260}]],
+        [[${ntx1000_array_nagruzka261}]],[[${ntx1000_array_nagruzka262}]],[[${ntx1000_array_nagruzka263}]],[[${ntx1000_array_nagruzka264}]],[[${ntx1000_array_nagruzka265}]],[[${ntx1000_array_nagruzka266}]],[[${ntx1000_array_nagruzka267}]],[[${ntx1000_array_nagruzka268}]],[[${ntx1000_array_nagruzka269}]],[[${ntx1000_array_nagruzka270}]],
+        [[${ntx1000_array_nagruzka271}]],[[${ntx1000_array_nagruzka272}]],[[${ntx1000_array_nagruzka273}]],[[${ntx1000_array_nagruzka274}]],[[${ntx1000_array_nagruzka275}]],[[${ntx1000_array_nagruzka276}]],[[${ntx1000_array_nagruzka277}]],[[${ntx1000_array_nagruzka278}]],[[${ntx1000_array_nagruzka279}]],[[${ntx1000_array_nagruzka280}]],
+        [[${ntx1000_array_nagruzka281}]],[[${ntx1000_array_nagruzka282}]],[[${ntx1000_array_nagruzka283}]],[[${ntx1000_array_nagruzka284}]],[[${ntx1000_array_nagruzka285}]],[[${ntx1000_array_nagruzka286}]],[[${ntx1000_array_nagruzka287}]],[[${ntx1000_array_nagruzka288}]],[[${ntx1000_array_nagruzka289}]],[[${ntx1000_array_nagruzka290}]],
+        [[${ntx1000_array_nagruzka291}]],[[${ntx1000_array_nagruzka292}]],[[${ntx1000_array_nagruzka293}]],[[${ntx1000_array_nagruzka294}]],[[${ntx1000_array_nagruzka295}]],[[${ntx1000_array_nagruzka296}]],[[${ntx1000_array_nagruzka297}]],[[${ntx1000_array_nagruzka298}]],[[${ntx1000_array_nagruzka299}]],[[${ntx1000_array_nagruzka300}]],
+
+    ];
+    var ntx1000_array_name = [
+        [[${ntx1000_array_programname0}]],[[${ntx1000_array_programname1}]],[[${ntx1000_array_programname2}]],[[${ntx1000_array_programname3}]],[[${ntx1000_array_programname4}]],[[${ntx1000_array_programname5}]],[[${ntx1000_array_programname6}]],[[${ntx1000_array_programname7}]],[[${ntx1000_array_programname8}]],[[${ntx1000_array_programname9}]],[[${ntx1000_array_programname10}]],
+        [[${ntx1000_array_programname11}]],[[${ntx1000_array_programname12}]],[[${ntx1000_array_programname13}]],[[${ntx1000_array_programname14}]],[[${ntx1000_array_programname15}]],[[${ntx1000_array_programname16}]],[[${ntx1000_array_programname17}]],[[${ntx1000_array_programname18}]],[[${ntx1000_array_programname19}]],[[${ntx1000_array_programname20}]],
+        [[${ntx1000_array_programname21}]],[[${ntx1000_array_programname22}]],[[${ntx1000_array_programname23}]],[[${ntx1000_array_programname24}]],[[${ntx1000_array_programname25}]],[[${ntx1000_array_programname26}]],[[${ntx1000_array_programname27}]],[[${ntx1000_array_programname28}]],[[${ntx1000_array_programname29}]],[[${ntx1000_array_programname30}]],
+        [[${ntx1000_array_programname31}]],[[${ntx1000_array_programname32}]],[[${ntx1000_array_programname33}]],[[${ntx1000_array_programname34}]],[[${ntx1000_array_programname35}]],[[${ntx1000_array_programname36}]],[[${ntx1000_array_programname37}]],[[${ntx1000_array_programname38}]],[[${ntx1000_array_programname39}]],[[${ntx1000_array_programname40}]],
+        [[${ntx1000_array_programname41}]],[[${ntx1000_array_programname42}]],[[${ntx1000_array_programname43}]],[[${ntx1000_array_programname44}]],[[${ntx1000_array_programname45}]],[[${ntx1000_array_programname46}]],[[${ntx1000_array_programname47}]],[[${ntx1000_array_programname48}]],[[${ntx1000_array_programname49}]],[[${ntx1000_array_programname50}]],
+        [[${ntx1000_array_programname51}]],[[${ntx1000_array_programname52}]],[[${ntx1000_array_programname53}]],[[${ntx1000_array_programname54}]],[[${ntx1000_array_programname55}]],[[${ntx1000_array_programname56}]],[[${ntx1000_array_programname57}]],[[${ntx1000_array_programname58}]],[[${ntx1000_array_programname59}]],[[${ntx1000_array_programname60}]],
+        [[${ntx1000_array_programname61}]],[[${ntx1000_array_programname62}]],[[${ntx1000_array_programname63}]],[[${ntx1000_array_programname64}]],[[${ntx1000_array_programname65}]],[[${ntx1000_array_programname66}]],[[${ntx1000_array_programname67}]],[[${ntx1000_array_programname68}]],[[${ntx1000_array_programname69}]],[[${ntx1000_array_programname70}]],
+        [[${ntx1000_array_programname71}]],[[${ntx1000_array_programname72}]],[[${ntx1000_array_programname73}]],[[${ntx1000_array_programname74}]],[[${ntx1000_array_programname75}]],[[${ntx1000_array_programname76}]],[[${ntx1000_array_programname77}]],[[${ntx1000_array_programname78}]],[[${ntx1000_array_programname79}]],
+        [[${ntx1000_array_programname81}]],[[${ntx1000_array_programname82}]],[[${ntx1000_array_programname83}]],[[${ntx1000_array_programname84}]],[[${ntx1000_array_programname85}]],[[${ntx1000_array_programname86}]],[[${ntx1000_array_programname87}]],[[${ntx1000_array_programname88}]],[[${ntx1000_array_programname89}]],[[${ntx1000_array_programname90}]],
+        [[${ntx1000_array_programname91}]],[[${ntx1000_array_programname92}]],[[${ntx1000_array_programname93}]],[[${ntx1000_array_programname94}]],[[${ntx1000_array_programname95}]],[[${ntx1000_array_programname96}]],[[${ntx1000_array_programname97}]],[[${ntx1000_array_programname98}]],[[${ntx1000_array_programname99}]],[[${ntx1000_array_programname100}]],
+        [[${ntx1000_array_programname101}]],[[${ntx1000_array_programname102}]],[[${ntx1000_array_programname103}]],[[${ntx1000_array_programname104}]],[[${ntx1000_array_programname105}]],[[${ntx1000_array_programname106}]],[[${ntx1000_array_programname107}]],[[${ntx1000_array_programname108}]],[[${ntx1000_array_programname109}]],[[${ntx1000_array_programname110}]],
+        [[${ntx1000_array_programname111}]],[[${ntx1000_array_programname112}]],[[${ntx1000_array_programname113}]],[[${ntx1000_array_programname114}]],[[${ntx1000_array_programname115}]],[[${ntx1000_array_programname116}]],[[${ntx1000_array_programname117}]],[[${ntx1000_array_programname118}]],[[${ntx1000_array_programname119}]],[[${ntx1000_array_programname120}]],
+        [[${ntx1000_array_programname121}]],[[${ntx1000_array_programname122}]],[[${ntx1000_array_programname123}]],[[${ntx1000_array_programname124}]],[[${ntx1000_array_programname125}]],[[${ntx1000_array_programname126}]],[[${ntx1000_array_programname127}]],[[${ntx1000_array_programname128}]],[[${ntx1000_array_programname129}]],[[${ntx1000_array_programname130}]],
+        [[${ntx1000_array_programname131}]],[[${ntx1000_array_programname132}]],[[${ntx1000_array_programname133}]],[[${ntx1000_array_programname134}]],[[${ntx1000_array_programname135}]],[[${ntx1000_array_programname136}]],[[${ntx1000_array_programname137}]],[[${ntx1000_array_programname138}]],[[${ntx1000_array_programname129}]],[[${ntx1000_array_programname120}]],
+        [[${ntx1000_array_programname141}]],[[${ntx1000_array_programname142}]],[[${ntx1000_array_programname143}]],[[${ntx1000_array_programname144}]],[[${ntx1000_array_programname145}]],[[${ntx1000_array_programname146}]],[[${ntx1000_array_programname147}]],[[${ntx1000_array_programname148}]],[[${ntx1000_array_programname129}]],[[${ntx1000_array_programname120}]],
+
+    ]
+
+
+</script>   <!--NTX1000 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var ntx1000_work = [[${ntx1000_work}]];
+    var ntx1000_pass = [[${ntx1000_pass}]];
+    var ntx1000_fail = [[${ntx1000_fail}]];
+    var ntx1000_avar = [[${ntx1000_avar}]];
+    var ntx1000_nagruzka = [[${ntx1000_nagruzka}]];
+</script>   <!--NTX1000 круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_ntx1000.js"></script>
+
+<script th:inline="javascript">
+    $('.icon_personal_uf5220').hover(
+        function () {
+            $('.label_personal_uf5220').css('color', '#000000');
+            $('.label_personal_uf5220').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_personal_uf5220').css('color', '#756e6e');
+            $('.label_personal_uf5220').css('margin-top', '65px');
+        }
+    );
+    $('.icon_mesto_uf5220').hover(
+        function () {
+            $('.label_mesto_uf5220').css('color', '#000000');
+            $('.label_mesto_uf5220').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_mesto_uf5220').css('color', '#756e6e');
+            $('.label_mesto_uf5220').css('margin-top', '65px');
+        }
+    );
+
+    $('.icon_personal_progress').hover(
+        function () {
+            $('.label_personal_progress').css('color', '#000000');
+            $('.label_personal_progress').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_personal_progress').css('color', '#756e6e');
+            $('.label_personal_progress').css('margin-top', '65px');
+        }
+    );
+    $('.icon_mesto_progress').hover(
+        function () {
+            $('.label_mesto_progress').css('color', '#000000');
+            $('.label_mesto_progress').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_mesto_progress').css('color', '#756e6e');
+            $('.label_mesto_progress').css('margin-top', '65px');
+        }
+    );
+
+    $('.icon_personal_ntx1000').hover(
+        function () {
+            $('.label_personal_ntx1000').css('color', '#000000');
+            $('.label_personal_ntx1000').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_personal_ntx1000').css('color', '#756e6e');
+            $('.label_personal_ntx1000').css('margin-top', '65px');
+        }
+    );
+    $('.icon_mesto_ntx1000').hover(
+        function () {
+            $('.label_mesto_ntx1000').css('color', '#000000');
+            $('.label_mesto_ntx1000').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_mesto_ntx1000').css('color', '#756e6e');
+            $('.label_mesto_ntx1000').css('margin-top', '65px');
+        }
+    );
+
+</script> <!--Кнопки Персонал и Место-->
+</body>
+</html>

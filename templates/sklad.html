@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Склад</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <style>
+        li {
+            list-style-type: none; /* Убираем маркеры */
+        }
+
+        ul.hr {
+            margin: 0; /* Обнуляем значение отступов */
+            padding: 4px; /* Значение полей */
+            background-color: rgb(36, 97, 219);
+        }
+        ul.hr li {
+            display: inline; /* Отображать как строчный элемент */
+            margin-right: 5px; /* Отступ слева */
+        }
+
+        /* Таблица с текущими параметрами */
+        body {
+            margin: 0;
+            background: #ffffff;
+
+        }
+        table {
+            border-collapse: collapse;
+            line-height: 1.1;
+            background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+            color: #0C213B;
+
+        }
+        caption {
+
+            font-weight: bold;
+            text-align: center;
+        }
+
+        th {
+            padding: 10px;
+            border: 1px solid #A9E2CC;
+            text-align: center;
+        }
+        td {
+            font-size: 1em;
+            padding: 5px 7px;
+            border: 1px solid #A9E2CC;
+            text-align: center;
+        }
+        .first {
+            padding: 5px 35px;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+    <style>
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            background-color: #ffffff;
+            display: none;
+            position: absolute;
+            right: 0;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 5px; /* Уголки */
+            margin: 8%;
+        }
+
+
+        .dropdown-content a {
+            color: black;
+            padding: 40px 20px;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1;}
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .avatar {
+            vertical-align: middle;
+            width: 100%;
+            height: 50px;
+            border-radius: 50%;
+            margin: 3%;
+        }
+
+
+    </style>
+
+</head>
+
+<header>
+
+    <ul class="hr">
+        <a href="home"><img style="margin: 0.1%" src="images/logo_black.png"/></a>
+
+        <div method="post" class="dropdown" style="float: right">
+
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+            <div class="dropdown-content" style="float: right; text-align: center">
+                <p><img th:src="@{${image_user}}" width="100"/></p>
+                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
+                <p th:text="${user_mail}"></p>
+
+                <form th:action="@{/logout}" method="post">
+                    <button class="follow" type="submit">
+                        Выход
+                    </button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
+
+    </ul>       <!--Шапка html-->
+
+</header>       <!--Шапка html-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<style>
+    .btn_change {
+        position: relative;
+        display: inline-block;
+        padding: 15px 70px;
+        border: 3px solid #6793d6;
+        color: #6793d6;
+        background: #ffffff;
+        font-size: 30px;
+        font-family: arial;
+        background-image: linear-gradient(#6793d6, #6793d6);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: 0% 100%;
+        transition: background-size .5s, color .5s;
+    }
+    .btn_change:hover {
+        background-size: 100% 100%;
+        color: #ffffff;
+    }
+</style> <!--Кнопки выбора отчета-->
+<style>
+
+    .icon_mesto_uf5220{
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+        background-size: 60px 60px;
+        margin-top: 10px;
+        margin-left: 30px;
+    }
+    .icon_mesto_uf5220:hover {
+        -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+    }
+    .icon_personal_uf5220{
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+        background-size: 60px 60px;
+        margin-top: 10px;
+        margin-left: 120px;
+    }
+    .icon_personal_uf5220:hover {
+        -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, 0.9);
+    }
+
+    .label_mesto_uf5220{
+        color: #756e6e;
+        margin-top: 65px;
+        margin-left: 8px;
+    }
+    .label_personal_uf5220{
+        color: #756e6e;
+        margin-top: 65px;
+        margin-left: -5px;
+    }
+
+</style> <!--Кнопки Персонал и Местоположение-->
+
+<body>
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
+
+<style>
+
+    .main-container {
+        max-width: 1100px;
+        padding-right: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 10px 1px 10px 1px;
+    }
+
+    .container {
+        margin: 1px auto;
+
+    }
+
+    .icon-container {
+        margin: 3px 3px;
+        width: 100px;
+        height: 100px;
+        border-radius: 20%;
+
+        justify-content: center;
+        align-items: flex-end;
+        background-color: #c7d8e5;
+        position: relative;
+    }
+    .icon-container:hover {
+        background-color: #9092a0;
+    }
+
+
+    .bar {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-size: 200px 200px;
+        font-size: 500px;
+    }
+
+
+    h1,
+    h2 {
+        color: white;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        font-weight: 300;
+    }
+
+    .envelope {
+        position: absolute;
+        width: 100px;
+        height: 150px;
+        margin-bottom: 5px;
+
+        background-size: 100px 150px;
+    }
+
+    .wialon {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 50px;
+        background-size: 100px 100px;
+    }
+    .label {
+        text-align: center;
+        color: blue;
+        font-size: 200%;
+    }
+    .label_ves {
+        text-align: center;
+        color: blue;
+
+    }
+
+    @-webkit-keyframes display {
+        0%, 20% {
+            opacity: 0;
+            top: 160px;
+        }
+        20%, 50% {
+            opacity: 0;
+        }
+        55%, 100% {
+            opacity: 1;
+            top: 90px;
+        }
+    }
+
+    @keyframes display {
+        0%, 20% {
+            opacity: 0;
+            top: 160px;
+        }
+        20%, 50% {
+            opacity: 0;
+        }
+        55%, 100% {
+            opacity: 1;
+            top: 90px;
+        }
+    }
+
+    @-webkit-keyframes flip {
+        0%, 60% {
+            transform: rotate3d(1, 0, 0, 180deg);
+        }
+        60%, 100% {
+            transform: rotate3d(1, 0, 0, 0deg);
+        }
+    }
+
+    @keyframes flip {
+        0%, 60% {
+            transform: rotate3d(1, 0, 0, 180deg);
+        }
+        60%, 100% {
+            transform: rotate3d(1, 0, 0, 0deg);
+        }
+    }
+
+    @-webkit-keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style> <!--Ячейки-->
+
+<style>
+    [data-tooltip] {
+        position: relative; /* Относительное позиционирование */
+    }
+    [data-tooltip]::after {
+        content: attr(data-tooltip); /* Выводим текст */
+        position: absolute; /* Абсолютное позиционирование */
+        width: 300px; /* Ширина подсказки */
+        left: 0; top: 0; /* Положение подсказки */
+        background: #3989c9; /* Синий цвет фона */
+        color: #fff; /* Цвет текста */
+        padding: 0.5em; /* Поля вокруг текста */
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Параметры тени */
+        pointer-events: none; /* Подсказка */
+        opacity: 0; /* Подсказка невидима */
+        transition: 1s; /* Время появления подсказки */
+        z-index: 3;
+    }
+    [data-tooltip]:hover::after {
+        opacity: 1; /* Показываем подсказку */
+        top: 2em; /* Положение подсказки */
+        z-index: 3;
+    }
+</style>
+
+
+    <div style="overflow: hidden;"> <!--Склад html-->
+        <div style="width: 100%;   margin: 2%;">
+            <div id="img" style="float: left; height: 400px; width: 250px"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img style="margin-left: 50px" src="images/sklad.png" width="150" height="250" border="0"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Склад Мех. цеха</figcaption>
+                </div>
+                <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_uf5220" href="mesto/mesto_sklad" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_uf5220'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_uf5220" href="personal/personal_sklad_meh" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_uf5220'>Персонал</div></a>
+                </div>
+            </div>
+
+            <h1 style="color:#0C213B; font-size: 350%; float: left; text-align: left">Содержание полок склада</h1>
+
+            <div class="main-container" style="float: left">
+                <div class="container">
+
+                    <div class="icon-container_1" th:attr="data-tooltip=${content_1}">
+
+                        <a href="sectors/sklad_sector_content_1" class="bar"></a>
+                        <div class='label'>1</div>
+                        <p class='label_ves' th:text="${ves_1}"></p>
+                    </div>
+
+                </div>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_2">
+                        <div class="envelope">
+                            <div class='label'>2</div>
+                            <p class='label_ves' th:text="${ves_2}"></p>
+                        </div>
+                    </div>
+
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_3">
+                        <div class="wialon">
+                            <div class='label'>3</div>
+                            <p class='label_ves' th:text="${ves_3}"></p>
+                        </div>
+                    </div>
+
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_4">
+                        <div class="wialon">
+                            <div class='label'>4</div>
+                            <p class='label_ves' th:text="${ves_4}"></p>
+                        </div>
+                    </div>
+
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_5">
+                        <div class="wialon">
+                            <div class='label'>5</div>
+                            <p class='label_ves' th:text="${ves_5}"></p>
+                        </div>
+                    </div>
+
+                </a>
+                <a href="sectors/sklad_sector_content_6" class="container" style="text-decoration: none">
+                    <div class="icon-container_6" th:attr="data-tooltip=${content_6}">
+                        <div class="wialon">
+                            <div class='label'>6</div>
+                            <p class='label_ves' th:text="${ves_6}"></p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_7">
+                        <div class="wialon">
+                            <div class='label'>7</div>
+                            <p class='label_ves' th:text="${ves_7}"></p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_8">
+                        <div class="wialon">
+                            <div class='label'>8</div>
+                            <p class='label_ves' th:text="${ves_8}"></p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_9">
+                        <div class="wialon">
+                            <div class='label'>9</div>
+                            <p class='label_ves' th:text="${ves_9}"></p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_10">
+                        <div class="wialon">
+                            <div class='label'>10</div>
+                            <p class='label_ves' th:text="${ves_10}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_11" class="container" style="text-decoration: none">
+                    <div class="icon-container_11" th:attr="data-tooltip=${content_11}">
+                        <div class="wialon">
+                            <div class='label'>11</div>
+                            <p class='label_ves' th:text="${ves_11}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_12">
+                        <div class="wialon">
+                            <div class='label'>12</div>
+                            <p class='label_ves' th:text="${ves_12}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_13">
+                        <div class="wialon">
+                            <div class='label'>13</div>
+                            <p class='label_ves' th:text="${ves_13}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_14">
+                        <div class="wialon">
+                            <div class='label'>14</div>
+                            <p class='label_ves' th:text="${ves_14}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_15">
+                        <div class="wialon">
+                            <div class='label'>15</div>
+                            <p class='label_ves' th:text="${ves_15}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_16" class="container" style="text-decoration: none">
+                    <div class="icon-container_16" th:attr="data-tooltip=${content_16}">
+                        <div class="wialon">
+                            <div class='label'>16</div>
+                            <p class='label_ves' th:text="${ves_16}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_17">
+                        <div class="wialon">
+                            <div class='label'>17</div>
+                            <p class='label_ves' th:text="${ves_17}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_18">
+                        <div class="wialon">
+                            <div class='label'>18</div>
+                            <p class='label_ves' th:text="${ves_18}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_19">
+                        <div class="wialon">
+                            <div class='label'>19</div>
+                            <p class='label_ves' th:text="${ves_19}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_20">
+                        <div class="wialon">
+                            <div class='label'>20</div>
+                            <p class='label_ves' th:text="${ves_20}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_21" class="container" style="text-decoration: none">
+                    <div class="icon-container_21" th:attr="data-tooltip=${content_21}">
+                        <div class="wialon">
+                            <div class='label'>21</div>
+                            <p class='label_ves' th:text="${ves_21}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_22">
+                        <div class="wialon">
+                            <div class='label'>22</div>
+                            <p class='label_ves' th:text="${ves_22}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_23">
+                        <div class="wialon">
+                            <div class='label'>23</div>
+                            <p class='label_ves' th:text="${ves_23}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_24">
+                        <div class="wialon">
+                            <div class='label'>24</div>
+                            <p class='label_ves' th:text="${ves_24}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_25">
+                        <div class="wialon">
+                            <div class='label'>25</div>
+                            <p class='label_ves' th:text="${ves_25}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_26" class="container" style="text-decoration: none">
+                    <div class="icon-container_26" th:attr="data-tooltip=${content_26}">
+                        <div class="wialon">
+                            <div class='label'>26</div>
+                            <p class='label_ves' th:text="${ves_26}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_27">
+                        <div class="wialon">
+                            <div class='label'>27</div>
+                            <p class='label_ves' th:text="${ves_27}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_28">
+                        <div class="wialon">
+                            <div class='label'>28</div>
+                            <p class='label_ves' th:text="${ves_28}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_29">
+                        <div class="wialon">
+                            <div class='label'>29</div>
+                            <p class='label_ves' th:text="${ves_29}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_30">
+                        <div class="wialon">
+                            <div class='label'>30</div>
+                            <p class='label_ves' th:text="${ves_30}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_31" class="container" style="text-decoration: none">
+                    <div class="icon-container_31" th:attr="data-tooltip=${content_31}">
+                        <div class="wialon">
+                            <div class='label'>31</div>
+                            <p class='label_ves' th:text="${ves_31}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_32">
+                        <div class="wialon">
+                            <div class='label'>32</div>
+                            <p class='label_ves' th:text="${ves_32}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_33">
+                        <div class="wialon">
+                            <div class='label'>33</div>
+                            <p class='label_ves' th:text="${ves_33}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_34">
+                        <div class="wialon">
+                            <div class='label'>34</div>
+                            <p class='label_ves' th:text="${ves_34}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_35">
+                        <div class="wialon">
+                            <div class='label'>35</div>
+                            <p class='label_ves' th:text="${ves_35}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_36" class="container" style="text-decoration: none">
+                    <div class="icon-container_36" th:attr="data-tooltip=${content_36}">
+                        <div class="wialon">
+                            <div class='label'>36</div>
+                            <p class='label_ves' th:text="${ves_36}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_37">
+                        <div class="wialon">
+                            <div class='label'>37</div>
+                            <p class='label_ves' th:text="${ves_37}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_38">
+                        <div class="wialon">
+                            <div class='label'>38</div>
+                            <p class='label_ves' th:text="${ves_38}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_39">
+                        <div class="wialon">
+                            <div class='label'>39</div>
+                            <p class='label_ves' th:text="${ves_39}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_40">
+                        <div class="wialon">
+                            <div class='label'>40</div>
+                            <p class='label_ves' th:text="${ves_40}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_41" class="container" style="text-decoration: none">
+                    <div class="icon-container_41" th:attr="data-tooltip=${content_41}">
+                        <div class="wialon">
+                            <div class='label'>41</div>
+                            <p class='label_ves' th:text="${ves_41}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_42">
+                        <div class="wialon">
+                            <div class='label'>42</div>
+                            <p class='label_ves' th:text="${ves_42}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_43">
+                        <div class="wialon">
+                            <div class='label'>43</div>
+                            <p class='label_ves' th:text="${ves_43}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_44">
+                        <div class="wialon">
+                            <div class='label'>44</div>
+                            <p class='label_ves' th:text="${ves_44}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_45">
+                        <div class="wialon">
+                            <div class='label'>45</div>
+                            <p class='label_ves' th:text="${ves_45}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_46" class="container" style="text-decoration: none">
+                    <div class="icon-container_46" th:attr="data-tooltip=${content_46}">
+                        <div class="wialon">
+                            <div class='label'>46</div>
+                            <p class='label_ves' th:text="${ves_46}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_47">
+                        <div class="wialon">
+                            <div class='label'>47</div>
+                            <p class='label_ves' th:text="${ves_47}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_48">
+                        <div class="wialon">
+                            <div class='label'>48</div>
+                            <p class='label_ves' th:text="${ves_48}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_49">
+                        <div class="wialon">
+                            <div class='label'>49</div>
+                            <p class='label_ves' th:text="${ves_49}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_50">
+                        <div class="wialon">
+                            <div class='label'>50</div>
+                            <p class='label_ves' th:text="${ves_50}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_51" class="container" style="text-decoration: none">
+                    <div class="icon-container_51" th:attr="data-tooltip=${content_51}">
+                        <div class="wialon">
+                            <div class='label'>51</div>
+                            <p class='label_ves' th:text="${ves_51}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_52">
+                        <div class="wialon">
+                            <div class='label'>52</div>
+                            <p class='label_ves' th:text="${ves_52}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_53">
+                        <div class="wialon">
+                            <div class='label'>53</div>
+                            <p class='label_ves' th:text="${ves_53}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_54">
+                        <div class="wialon">
+                            <div class='label'>54</div>
+                            <p class='label_ves' th:text="${ves_54}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_55">
+                        <div class="wialon">
+                            <div class='label'>55</div>
+                            <p class='label_ves' th:text="${ves_55}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_56" class="container" style="text-decoration: none">
+                    <div class="icon-container_56" th:attr="data-tooltip=${content_56}">
+                        <div class="wialon">
+                            <div class='label'>56</div>
+                            <p class='label_ves' th:text="${ves_56}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_57">
+                        <div class="wialon">
+                            <div class='label'>57</div>
+                            <p class='label_ves' th:text="${ves_57}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_58">
+                        <div class="wialon">
+                            <div class='label'>58</div>
+                            <p class='label_ves' th:text="${ves_58}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_59">
+                        <div class="wialon">
+                            <div class='label'>59</div>
+                            <p class='label_ves' th:text="${ves_59}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_60">
+                        <div class="wialon">
+                            <div class='label'>60</div>
+                            <p class='label_ves' th:text="${ves_60}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_61" class="container" style="text-decoration: none" >
+                    <div class="icon-container_61">
+                        <div class="wialon">
+                            <div class='label'>61</div>
+                            <p class='label_ves' th:text="${ves_61}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_62">
+                        <div class="wialon">
+                            <div class='label'>62</div>
+                            <p class='label_ves' th:text="${ves_62}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_63">
+                        <div class="wialon">
+                            <div class='label'>63</div>
+                            <p class='label_ves' th:text="${ves_63}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_64">
+                        <div class="wialon">
+                            <div class='label'>64</div>
+                            <p class='label_ves' th:text="${ves_64}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_65">
+                        <div class="wialon">
+                            <div class='label'>65</div>
+                            <p class='label_ves' th:text="${ves_65}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_66">
+                        <div class="wialon">
+                            <div class='label'>66</div>
+                            <p class='label_ves' th:text="${ves_66}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_67">
+                        <div class="wialon">
+                            <div class='label'>67</div>
+                            <p class='label_ves' th:text="${ves_67}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_68">
+                        <div class="wialon">
+                            <div class='label'>68</div>
+                            <p class='label_ves' th:text="${ves_68}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_69">
+                        <div class="wialon">
+                            <div class='label'>69</div>
+                            <p class='label_ves' th:text="${ves_69}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_70" class="container" style="text-decoration: none">
+                    <div class="icon-container_70" th:attr="data-tooltip=${content_70}">
+                        <div class="wialon">
+                            <div class='label'>70</div>
+                            <p class='label_ves' th:text="${ves_70}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_71">
+                        <div class="wialon">
+                            <div class='label'>71</div>
+                            <p class='label_ves' th:text="${ves_71}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_72">
+                        <div class="wialon">
+                            <div class='label'>72</div>
+                            <p class='label_ves' th:text="${ves_72}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_73">
+                        <div class="wialon">
+                            <div class='label'>73</div>
+                            <p class='label_ves' th:text="${ves_73}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_74">
+                        <div class="wialon">
+                            <div class='label'>74</div>
+                            <p class='label_ves' th:text="${ves_74}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_75" class="container" style="text-decoration: none">
+                    <div class="icon-container_75" th:attr="data-tooltip=${content_75}">
+                        <div class="wialon">
+                            <div class='label'>75</div>
+                            <p class='label_ves' th:text="${ves_75}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_76">
+                        <div class="wialon">
+                            <div class='label'>76</div>
+                            <p class='label_ves' th:text="${ves_76}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_77">
+                        <div class="wialon">
+                            <div class='label'>77</div>
+                            <p class='label_ves' th:text="${ves_77}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_78">
+                        <div class="wialon">
+                            <div class='label'>78</div>
+                            <p class='label_ves' th:text="${ves_78}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_79">
+                        <div class="wialon">
+                            <div class='label'>79</div>
+                            <p class='label_ves' th:text="${ves_79}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_80" class="container" style="text-decoration: none">
+                    <div class="icon-container_80" th:attr="data-tooltip=${content_80}">
+                        <div class="wialon">
+                            <div class='label'>80</div>
+                            <p class='label_ves' th:text="${ves_80}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_81">
+                        <div class="wialon">
+                            <div class='label'>81</div>
+                            <p class='label_ves' th:text="${ves_81}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_82">
+                        <div class="wialon">
+                            <div class='label'>82</div>
+                            <p class='label_ves' th:text="${ves_82}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_83">
+                        <div class="wialon">
+                            <div class='label'>83</div>
+                            <p class='label_ves' th:text="${ves_83}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_84">
+                        <div class="wialon">
+                            <div class='label'>84</div>
+                            <p class='label_ves' th:text="${ves_84}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_85" class="container" style="text-decoration: none">
+                    <div class="icon-container_85" th:attr="data-tooltip=${content_85}">
+                        <div class="wialon">
+                            <div class='label'>85</div>
+                            <p class='label_ves' th:text="${ves_85}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_86">
+                        <div class="wialon">
+                            <div class='label'>86</div>
+                            <p class='label_ves' th:text="${ves_86}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_87">
+                        <div class="wialon">
+                            <div class='label'>87</div>
+                            <p class='label_ves' th:text="${ves_87}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_88">
+                        <div class="wialon">
+                            <div class='label'>88</div>
+                            <p class='label_ves' th:text="${ves_88}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_89">
+                        <div class="wialon">
+                            <div class='label'>89</div>
+                            <p class='label_ves' th:text="${ves_89}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_90" class="container" style="text-decoration: none">
+                    <div class="icon-container_90" th:attr="data-tooltip=${content_95}">
+                        <div class="wialon">
+                            <div class='label'>90</div>
+                            <p class='label_ves' th:text="${ves_90}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_91">
+                        <div class="wialon">
+                            <div class='label'>91</div>
+                            <p class='label_ves' th:text="${ves_91}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_92">
+                        <div class="wialon">
+                            <div class='label'>92</div>
+                            <p class='label_ves' th:text="${ves_92}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_93">
+                        <div class="wialon">
+                            <div class='label'>93</div>
+                            <p class='label_ves' th:text="${ves_93}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_94">
+                        <div class="wialon">
+                            <div class='label'>94</div>
+                            <p class='label_ves' th:text="${ves_94}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_95" class="container" style="text-decoration: none">
+                    <div class="icon-container_95" th:attr="data-tooltip=${content_95}">
+                        <div class="wialon">
+                            <div class='label'>95</div>
+                            <p class='label_ves' th:text="${ves_95}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_96">
+                        <div class="wialon">
+                            <div class='label'>96</div>
+                            <p class='label_ves' th:text="${ves_96}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_97">
+                        <div class="wialon">
+                            <div class='label'>97</div>
+                            <p class='label_ves' th:text="${ves_97}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_98">
+                        <div class="wialon">
+                            <div class='label'>98</div>
+                            <p class='label_ves' th:text="${ves_98}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_99">
+                        <div class="wialon">
+                            <div class='label'>99</div>
+                            <p class='label_ves' th:text="${ves_99}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_100" class="container" style="text-decoration: none">
+                    <div class="icon-container_100" th:attr="data-tooltip=${content_100}">
+                        <div class="wialon">
+                            <div class='label'>100</div>
+                            <p class='label_ves' th:text="${ves_100}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_101">
+                        <div class="wialon">
+                            <div class='label'>101</div>
+                            <p class='label_ves' th:text="${ves_101}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_102">
+                        <div class="wialon">
+                            <div class='label'>102</div>
+                            <p class='label_ves' th:text="${ves_102}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_103">
+                        <div class="wialon">
+                            <div class='label'>103</div>
+                            <p class='label_ves' th:text="${ves_103}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_104">
+                        <div class="wialon">
+                            <div class='label'>104</div>
+                            <p class='label_ves' th:text="${ves_104}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_105" class="container" style="text-decoration: none">
+                    <div class="icon-container_105" th:attr="data-tooltip=${content_105}">
+                        <div class="wialon">
+                            <div class='label'>105</div>
+                            <p class='label_ves' th:text="${ves_105}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_106">
+                        <div class="wialon">
+                            <div class='label'>106</div>
+                            <p class='label_ves' th:text="${ves_106}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_107">
+                        <div class="wialon">
+                            <div class='label'>107</div>
+                            <p class='label_ves' th:text="${ves_107}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_108">
+                        <div class="wialon">
+                            <div class='label'>108</div>
+                            <p class='label_ves' th:text="${ves_108}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_109">
+                        <div class="wialon">
+                            <div class='label'>109</div>
+                            <p class='label_ves' th:text="${ves_109}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_110" class="container" style="text-decoration: none">
+                    <div class="icon-container_110" th:attr="data-tooltip=${content_110}">
+                        <div class="wialon">
+                            <div class='label'>110</div>
+                            <p class='label_ves' th:text="${ves_110}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_111">
+                        <div class="wialon">
+                            <div class='label'>111</div>
+                            <p class='label_ves' th:text="${ves_111}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_112">
+                        <div class="wialon">
+                            <div class='label'>112</div>
+                            <p class='label_ves' th:text="${ves_112}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_113">
+                        <div class="wialon">
+                            <div class='label'>113</div>
+                            <p class='label_ves' th:text="${ves_113}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_114">
+                        <div class="wialon">
+                            <div class='label'>114</div>
+                            <p class='label_ves' th:text="${ves_114}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sectors/sklad_sector_content_115" class="container" style="text-decoration: none">
+                    <div class="icon-container_115" th:attr="data-tooltip=${content_115}">
+                        <div class="wialon">
+                            <div class='label'>115</div>
+                            <p class='label_ves' th:text="${ves_115}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_116">
+                        <div class="wialon">
+                            <div class='label'>116</div>
+                            <p class='label_ves' th:text="${ves_116}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_117">
+                        <div class="wialon">
+                            <div class='label'>117</div>
+                            <p class='label_ves' th:text="${ves_117}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_118">
+                        <div class="wialon">
+                            <div class='label'>118</div>
+                            <p class='label_ves' th:text="${ves_118}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container_119">
+                        <div class="wialon">
+                            <div class='label'>119</div>
+                            <p class='label_ves' th:text="${ves_119}"></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="sklad" class="container" style="text-decoration: none">
+                    <div class="icon-container">
+                        <div class="wialon">
+                            <div class='label'>120</div>
+                            <p class='label_ves' th:text="${ves_120}"></p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>  <!--Ячейки Вес, высплывающая информация-->
+
+        </div>
+    </div>  <!--Склад html-->
+
+    <h1 style="color:#0C213B; font-size: 250%; text-align: center" th:text="'Суммарный загруженный веc: '  +  ${sum_ves} + ' кг'"></h1>
+
+
+
+
+<script th:inline="javascript">
+
+    $('.icon_personal_uf5220').hover(
+        function(){
+            $('.label_personal_uf5220').css('color','#000000');
+            $('.label_personal_uf5220').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_uf5220').css('color','#756e6e');
+            $('.label_personal_uf5220').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_uf5220').hover(
+        function(){
+            $('.label_mesto_uf5220').css('color','#000000');
+            $('.label_mesto_uf5220').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_uf5220').css('color','#756e6e');
+            $('.label_mesto_uf5220').css('margin-top','65px');
+        }
+    );
+
+</script> <!--Кнопки Персонал и Место-->
+
+<script th:inline="javascript">
+
+    var array_color = [0,[[${colorsector_1}]],[[${colorsector_2}]],[[${colorsector_3}]],[[${colorsector_4}]],[[${colorsector_5}]],[[${colorsector_6}]],[[${colorsector_7}]],[[${colorsector_8}]],[[${colorsector_9}]],[[${colorsector_10}]],
+        [[${colorsector_11}]],[[${colorsector_12}]],[[${colorsector_13}]],[[${colorsector_14}]],[[${colorsector_15}]],[[${colorsector_16}]],[[${colorsector_17}]],[[${colorsector_18}]],[[${colorsector_19}]],[[${colorsector_20}]],
+        [[${colorsector_21}]],[[${colorsector_22}]],[[${colorsector_23}]],[[${colorsector_24}]],[[${colorsector_25}]],[[${colorsector_26}]],[[${colorsector_27}]],[[${colorsector_28}]],[[${colorsector_29}]],[[${colorsector_30}]],
+        [[${colorsector_31}]],[[${colorsector_32}]],[[${colorsector_33}]],[[${colorsector_34}]],[[${colorsector_35}]],[[${colorsector_36}]],[[${colorsector_37}]],[[${colorsector_38}]],[[${colorsector_39}]],[[${colorsector_40}]],
+        [[${colorsector_41}]],[[${colorsector_42}]],[[${colorsector_43}]],[[${colorsector_44}]],[[${colorsector_45}]],[[${colorsector_46}]],[[${colorsector_47}]],[[${colorsector_48}]],[[${colorsector_49}]],[[${colorsector_50}]],
+        [[${colorsector_51}]],[[${colorsector_52}]],[[${colorsector_53}]],[[${colorsector_54}]],[[${colorsector_55}]],[[${colorsector_56}]],[[${colorsector_57}]],[[${colorsector_58}]],[[${colorsector_59}]],[[${colorsector_60}]],
+        [[${colorsector_61}]],[[${colorsector_62}]],[[${colorsector_63}]],[[${colorsector_64}]],[[${colorsector_65}]],[[${colorsector_66}]],[[${colorsector_67}]],[[${colorsector_68}]],[[${colorsector_69}]],[[${colorsector_70}]],
+        [[${colorsector_71}]],[[${colorsector_72}]],[[${colorsector_73}]],[[${colorsector_74}]],[[${colorsector_75}]],[[${colorsector_76}]],[[${colorsector_77}]],[[${colorsector_78}]],[[${colorsector_79}]],[[${colorsector_80}]],
+        [[${colorsector_81}]],[[${colorsector_82}]],[[${colorsector_83}]],[[${colorsector_84}]],[[${colorsector_85}]],[[${colorsector_86}]],[[${colorsector_87}]],[[${colorsector_88}]],[[${colorsector_89}]],[[${colorsector_90}]],
+        [[${colorsector_91}]],[[${colorsector_92}]],[[${colorsector_93}]],[[${colorsector_94}]],[[${colorsector_95}]],[[${colorsector_96}]],[[${colorsector_97}]],[[${colorsector_98}]],[[${colorsector_99}]],[[${colorsector_100}]],
+        [[${colorsector_101}]],[[${colorsector_102}]],[[${colorsector_103}]],[[${colorsector_104}]],[[${colorsector_105}]],[[${colorsector_106}]],[[${colorsector_107}]],[[${colorsector_108}]],[[${colorsector_109}]],[[${colorsector_110}]],
+        [[${colorsector_111}]],[[${colorsector_112}]],[[${colorsector_113}]],[[${colorsector_114}]],[[${colorsector_115}]],[[${colorsector_116}]],[[${colorsector_117}]],[[${colorsector_118}]],[[${colorsector_119}]],[[${colorsector_120}]],
+
+    ];
+    var array_icon_container = ['.icon-container_0','.icon-container_1','.icon-container_2','.icon-container_3','.icon-container_4','.icon-container_5','.icon-container_6','.icon-container_7','.icon-container_8','.icon-container_9','.icon-container_10',
+        '.icon-container_11','.icon-container_12','.icon-container_13','.icon-container_14','.icon-container_15','.icon-container_16','.icon-container_17','.icon-container_18','.icon-container_19','.icon-container_20',
+        '.icon-container_21','.icon-container_22','.icon-container_23','.icon-container_24','.icon-container_25','.icon-container_26','.icon-container_27','.icon-container_28','.icon-container_29','.icon-container_30',
+        '.icon-container_31','.icon-container_32','.icon-container_33','.icon-container_34','.icon-container_35','.icon-container_36','.icon-container_37','.icon-container_38','.icon-container_39','.icon-container_40',
+        '.icon-container_41','.icon-container_42','.icon-container_43','.icon-container_44','.icon-container_45','.icon-container_46','.icon-container_47','.icon-container_48','.icon-container_49','.icon-container_50',
+        '.icon-container_51','.icon-container_52','.icon-container_53','.icon-container_54','.icon-container_55','.icon-container_56','.icon-container_57','.icon-container_58','.icon-container_59','.icon-container_60',
+        '.icon-container_61','.icon-container_62','.icon-container_63','.icon-container_64','.icon-container_65','.icon-container_66','.icon-container_67','.icon-container_68','.icon-container_69','.icon-container_70',
+        '.icon-container_71','.icon-container_72','.icon-container_73','.icon-container_74','.icon-container_75','.icon-container_76','.icon-container_77','.icon-container_78','.icon-container_79','.icon-container_80',
+        '.icon-container_81','.icon-container_82','.icon-container_83','.icon-container_84','.icon-container_85','.icon-container_86','.icon-container_87','.icon-container_88','.icon-container_89','.icon-container_90',
+        '.icon-container_91','.icon-container_92','.icon-container_93','.icon-container_94','.icon-container_95','.icon-container_96','.icon-container_97','.icon-container_98','.icon-container_99','.icon-container_100',
+        '.icon-container_101','.icon-container_102','.icon-container_103','.icon-container_104','.icon-container_105','.icon-container_106','.icon-container_107','.icon-container_108','.icon-container_109','.icon-container_110',
+        '.icon-container_111','.icon-container_112','.icon-container_113','.icon-container_114','.icon-container_115','.icon-container_116','.icon-container_117','.icon-container_118','.icon-container_119','.icon-container_120',
+    ];
+
+    $.each( array_icon_container, function( index ){
+
+        $(array_icon_container[index]).css('background-color', array_color[index]);
+        $(array_icon_container[index]).css('margin', '3px 3px');
+        $(array_icon_container[index]).css('width', '100px');
+        $(array_icon_container[index]).css('height', '100px');
+        $(array_icon_container[index]).css('border-radius', '20%');
+        $(array_icon_container[index]).css('justify-content', 'center');
+        $(array_icon_container[index]).css('align-items', 'flex-end');
+        $(array_icon_container[index]).css('position', 'relative');
+
+        $(array_icon_container[index]).hover(
+            function () {
+                $(array_icon_container[index]).css('background-color', '#575a5f');
+
+            },
+            function () {
+                $(array_icon_container[index]).css('background-color', array_color[index]);
+
+            }
+        );
+    });
+
+</script> <!--Закрашивание ячеек-->
+
+</body>
+</html>

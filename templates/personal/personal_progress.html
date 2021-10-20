@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/sankey.js"></script>
+<script src="https://code.highcharts.com/modules/organization.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+</figure>
+<script th:inline="javascript">
+    Highcharts.chart('container', {
+        chart: {
+            height: 600,
+            inverted: true
+        },
+
+        title: {
+            text: 'Персонал относящийся к оборудованию'
+        },
+        credits: {
+            enabled: false
+        },
+        accessibility: {
+            point: {
+                descriptionFormatter: function (point) {
+                    var nodeName = point.toNode.name,
+                        nodeId = point.toNode.id,
+                        nodeDesc = nodeName === nodeId ? nodeName : nodeName + ', ' + nodeId,
+                        parentDesc = point.fromNode.id;
+                    return point.index + '. ' + nodeDesc + ', reports to ' + parentDesc + '.';
+                }
+            }
+        },
+
+        series: [{
+            type: 'organization',
+            name: 'Сеспель',
+            keys: ['from', 'to'],
+            data: [
+                ['CEO', 'CTO'],
+                ['CEO', 'master'],
+                ['CEO', 'tehnolog1'],
+                ['CEO', 'tehnolog2'],
+                ['CEO', 'ssp'],
+                ['master', 'operator1'],
+                ['master', 'operator2'],
+                ['master', 'operator3'],
+                ['master', 'operator4'],
+
+            ],
+            levels: [ {
+                level: 0,
+                color: '#980104'
+            }, {
+                level: 4,
+                color: '#359154'
+            }],
+            nodes: [{
+                id: 'CEO',
+                title: 'Cтанок СТП',
+                name: 'Прогресс',
+                image: "/images/progress.png"
+            }, {
+                id: 'tehnolog2',
+                title: 'Технолог' +'<br/>' + 'Контакт: -',
+                name: 'Кириллов Роман Витальевич',
+                color: '#007ad0',
+                image: 'https://cdn-ru.bitrix24.ru/b122591/resize_cache/6617430/23365dd92c1f65a6eb81283cfddb6812/main/fee/feea44e49d6b4a3c8f800dbe499d4fd3/Kirillov+Roman+Vitalevich.jpg'
+            },
+                {
+                    id: 'CTO',
+                    title: 'Система мониторинга' +'<br/>' + 'Контакт: -',
+                    name: 'Васильев Алексей Владимирович',
+                    image: 'https://cdn-ru.bitrix24.ru/b122591/resize_cache/2343701/23365dd92c1f65a6eb81283cfddb6812/main/3ac/3ac19c973311b5586fc63bef816f31c9/Vasilev+Aleksey+Vladimirovich.JPG'
+                }, {
+                    id: 'master',
+                    title: 'Мастер' +'<br/>' + 'Контакт: -',
+                    name: 'Терентьев Дмитрий Викторович',
+                    image: 'https://cdn-ru.bitrix24.ru/b122591/resize_cache/8303712/23365dd92c1f65a6eb81283cfddb6812/main/fdb/fdbfc2e2015484d94d8e80eed70a1ecd/Terentev+Dmitriy+Viktorovich.jpg'
+                }, {
+                    id: 'tehnolog1',
+                    title: 'Технолог' +'<br/>' + 'Контакт: -',
+                    name: 'Максимов Сергей Владимировчи',
+                    image: 'https://bitrix2.cdnvideo.ru/b122591/resize_cache/5901778/23365dd92c1f65a6eb81283cfddb6812/main/277/277536360d497076321604cfec964bab/sema.jpg'
+                }, {
+                    id: 'ssp',
+                    title: 'ССП' +'<br/>' + 'Контакт: -',
+                    name: 'Устинов Илья Валерьевич',
+                    image: 'https://bitrix2.cdnvideo.ru/b122591/resize_cache/6899496/23365dd92c1f65a6eb81283cfddb6812/main/c09/c09da2513c66e6100af3d624b8c4ee89/IMG_20190702_114355.jpg'
+                }, {
+                    id: 'operator1',
+                    title: 'оператор ЧПУ',
+                    name: 'Кочетков Денис Юрьевич',
+                    color: '#2ea5ff',
+                    image: 'http://monitor.sespel.corp/images/employee/photo_1942.jpg'
+                }, {
+                    id: 'operator2',
+                    title: 'оператор ЧПУ',
+                    name: 'Иваков Александр Петрович',
+                    image: 'http://monitor.sespel.corp/images/employee/photo_1890.jpg',
+                    color: '#2ea5ff',
+                },
+                {
+                    id: 'operator3',
+                    title: 'оператор ЧПУ',
+                    name: 'Иванов Д.',
+                    color: '#2ea5ff',
+                },
+                {
+                    id: 'operator4',
+                    title: 'оператор ЧПУ',
+                    name: 'Миронов Е.',
+                    color: '#2ea5ff',
+                },
+                {
+                    id: 'Product',
+                    name: 'Product developers'
+                }, {
+                    id: 'Web',
+                    name: 'Web devs, sys admin'
+                }, {
+                    id: 'Sales',
+                    name: 'Sales team'
+                }, {
+                    id: 'Market',
+                    name: 'Marketing team',
+                    column: 5
+                }],
+            colorByPoint: false,
+            color: '#007ad0',
+            dataLabels: {
+                color: 'white'
+            },
+            borderColor: 'white',
+            nodeWidth: 90
+        }],
+        tooltip: {
+            outside: true
+        },
+        exporting: {
+            allowHTML: true,
+            sourceWidth: 800,
+            sourceHeight: 600
+        }
+
+    });
+</script>
+
+</html>

@@ -1,0 +1,20 @@
+.follow {
+    font-family: "Open Sans", sans-serif;
+    color: #ffffff;
+    background: #4f759b;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    border: none;
+    border-radius: 15px;
+    min-height: 35px;
+    width: 115px;
+    margin-bottom: 25px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.follow:hover {
+    width: 130px;
+    background: #4f759be0;
+}

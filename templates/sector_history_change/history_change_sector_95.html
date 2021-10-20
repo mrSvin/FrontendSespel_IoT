@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Склад</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <style>
+        li {
+            list-style-type: none; /* Убираем маркеры */
+        }
+
+        ul.hr {
+            margin: 0; /* Обнуляем значение отступов */
+            padding: 4px; /* Значение полей */
+            background-color: rgb(36, 97, 219);
+        }
+        ul.hr li {
+            display: inline; /* Отображать как строчный элемент */
+            margin-right: 5px; /* Отступ слева */
+        }
+
+        /* Таблица с текущими параметрами */
+        body {
+            margin: 0;
+            background: #ffffff;
+
+        }
+        table {
+            border-collapse: collapse;
+            line-height: 1.1;
+            background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+            color: #0C213B;
+
+        }
+        caption {
+
+            font-weight: bold;
+            text-align: center;
+        }
+
+        th {
+            padding: 10px;
+            border: 1px solid #A9E2CC;
+            text-align: center;
+        }
+        td {
+            font-size: 1em;
+            padding: 5px 7px;
+            border: 1px solid #A9E2CC;
+            text-align: center;
+        }
+        .first {
+            padding: 5px 35px;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+    <style>
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            background-color: #ffffff;
+            display: none;
+            position: absolute;
+            right: 0;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 5px; /* Уголки */
+            margin: 8%;
+        }
+
+
+        .dropdown-content a {
+            color: black;
+            padding: 40px 20px;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1;}
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .avatar {
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 3%;
+        }
+
+
+    </style>
+
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<header>
+
+    <ul class="hr">
+        <a href="../home"><img style="margin: 0.1%" src="../images/logo_black.png" /></a>
+
+        <div class="dropdown" style="float: right" >
+
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+            <div class="dropdown-content" style="float: right; text-align: center">
+                <p><img th:src="@{${image_user}}"  width="100" height="100"/></p>
+                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
+                <p>sespel@sespel.com </p>
+                <li id="button_quit" >
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Выход" />
+                    </form>
+                </li>
+
+            </div>
+        </div>
+
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center" th:text="'Добро пожаловать, '  + ${user_name} + '!   '" />
+
+    </ul>       <!--Шапка html-->
+
+</header>       <!--Шапка html-->
+<a href="../sectors/sklad_sector_content_95"><img style="margin: 0.5%; float: left" src="../images/back_button.jpg" /></a>
+
+<h1 style="color:#0C213B; font-size: 250%; text-align: center">История изменений Полки #95</h1>
+
+<style>
+    body_table {
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        line-height: 1.4;
+        color: #333;
+        background-color: #fff;
+        padding: 0 5vw;
+    }
+
+    /* Standard Tables */
+
+    table {
+        margin: 1em 0;
+        border-collapse: collapse;
+        border: 0.1em solid #d6d6d6;
+    }
+
+    caption {
+        text-align: left;
+        font-style: italic;
+        padding: 0.25em 0.5em 0.5em 0.5em;
+    }
+
+    th,
+    td {
+        padding: 0.25em 0.5em 0.25em 1em;
+        vertical-align: text-top;
+        text-align: left;
+        text-indent: -0.5em;
+    }
+
+    th {
+        vertical-align: bottom;
+        background-color: #666;
+        color: #fff;
+    }
+
+    tr:nth-child(even) th[scope=row] {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(odd) th[scope=row] {
+        background-color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    tr:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    td:nth-of-type(2) {
+        font-style: italic;
+    }
+
+    th:nth-of-type(3),
+    td:nth-of-type(3) {
+        text-align: right;
+    }
+
+    /* Fixed Headers */
+
+    thead {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    /* th[scope=row] {
+      position: -webkit-sticky;
+      position: sticky;
+      left: 0;
+      z-index: 1;
+    } */
+
+    th[scope=row] {
+        vertical-align: top;
+        color: inherit;
+        background-color: inherit;
+        background: linear-gradient(90deg, transparent 0%, transparent calc(100% - .05em), #d6d6d6 calc(100% - .05em), #d6d6d6 100%);
+    }
+
+    table:nth-of-type(2) th:not([scope=row]):first-child {
+        left: 0;
+        z-index: 3;
+        background: linear-gradient(90deg, #666 0%, #666 calc(100% - .05em), #ccc calc(100% - .05em), #ccc 100%);
+    }
+
+    /* Strictly for making the scrolling happen. */
+
+
+    body {
+        padding-bottom: 90vh;
+    }
+
+</style>
+
+<table id="myTable" style="margin-left: auto; margin-right: auto;">
+    <thead>
+    <tr>
+        <th>Содержимое</th>
+        <th>Время</th>
+        <th>Пользователь</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>    <!--Таблица изменений-->
+
+<script th:inline="javascript">
+
+
+    var users = [];
+    if ([[${sql_users[0]}]] !== 'null') {
+    users.push([[${sql_users[0]}]]);
+    }
+    if ([[${sql_users[1]}]] !== 'null') {
+    users.push([[${sql_users[1]}]]);
+    }
+    if ([[${sql_users[2]}]] !== 'null') {
+    users.push([[${sql_users[2]}]]);
+    }
+    if ([[${sql_users[3]}]] !== 'null') {
+    users.push([[${sql_users[3]}]]);
+    }
+    if ([[${sql_users[4]}]] !== 'null') {
+        users.push([[${sql_users[4]}]]);
+    }
+    if ([[${sql_users[5]}]] !== 'null') {
+        users.push([[${sql_users[5]}]]);
+    }
+    if ([[${sql_users[6]}]] !== 'null') {
+        users.push([[${sql_users[6]}]]);
+    }
+    if ([[${sql_users[7]}]] !== 'null') {
+        users.push([[${sql_users[7]}]]);
+    }
+    if ([[${sql_users[8]}]] !== 'null') {
+        users.push([[${sql_users[8]}]]);
+    }
+    if ([[${sql_users[9]}]] !== 'null') {
+        users.push([[${sql_users[9]}]]);
+    }
+    if ([[${sql_users[10]}]] !== 'null') {
+        users.push([[${sql_users[10]}]]);
+    }
+
+    var time = [];
+    if ([[${sql_time[0]}]] !== 'null') {
+        time.push([[${sql_time[0]}]]);
+    }
+    if ([[${sql_time[1]}]] !== 'null') {
+        time.push([[${sql_time[1]}]]);
+    }
+    if ([[${sql_time[2]}]] !== 'null') {
+        time.push([[${sql_time[2]}]]);
+    }
+    if ([[${sql_time[3]}]] !== 'null') {
+        time.push([[${sql_time[3]}]]);
+    }
+    if ([[${sql_time[4]}]] !== 'null') {
+        time.push([[${sql_time[4]}]]);
+    }
+    if ([[${sql_time[5]}]] !== 'null') {
+        time.push([[${sql_time[5]}]]);
+    }
+    if ([[${sql_time[6]}]] !== 'null') {
+        time.push([[${sql_time[6]}]]);
+    }
+    if ([[${sql_time[7]}]] !== 'null') {
+        time.push([[${sql_time[7]}]]);
+    }
+    if ([[${sql_time[8]}]] !== 'null') {
+        time.push([[${sql_time[8]}]]);
+    }
+    if ([[${sql_time[9]}]] !== 'null') {
+        time.push([[${sql_time[9]}]]);
+    }
+    if ([[${sql_time[10]}]] !== 'null') {
+        time.push([[${sql_time[10]}]]);
+    }
+
+    var content = [];
+    if ([[${sql_content[0]}]] !== 'null') {
+        content.push([[${sql_content[0]}]]);
+    }
+    if ([[${sql_content[1]}]] !== 'null') {
+        content.push([[${sql_content[1]}]]);
+    }
+    if ([[${sql_content[2]}]] !== 'null') {
+        content.push([[${sql_content[2]}]]);
+    }
+    if ([[${sql_content[3]}]] !== 'null') {
+        content.push([[${sql_content[3]}]]);
+    }
+    if ([[${sql_content[4]}]] !== 'null') {
+        content.push([[${sql_content[4]}]]);
+    }
+    if ([[${sql_content[5]}]] !== 'null') {
+        content.push([[${sql_content[5]}]]);
+    }
+    if ([[${sql_content[6]}]] !== 'null') {
+        content.push([[${sql_content[6]}]]);
+    }
+    if ([[${sql_content[7]}]] !== 'null') {
+        content.push([[${sql_content[7]}]]);
+    }
+    if ([[${sql_content[8]}]] !== 'null') {
+        content.push([[${sql_content[8]}]]);
+    }
+    if ([[${sql_content[9]}]] !== 'null') {
+        content.push([[${sql_content[9]}]]);
+    }
+    if ([[${sql_content[10]}]] !== 'null') {
+        content.push([[${sql_content[10]}]]);
+    }
+
+    $.each( users, function( index ){
+        $("#myTable > tbody").append("<tr><td>" + content[index] + "</td><td>"+ time[index] + "</td><td>"+ users[index] + "</td></tr>");
+    });
+</script> <!--JS таблица-->
+
+</html>

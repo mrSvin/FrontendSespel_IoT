@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Склады</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <style>
+        li {
+            list-style-type: none; /* Убираем маркеры */
+        }
+
+        ul.hr {
+            margin: 0; /* Обнуляем значение отступов */
+            padding: 4px; /* Значение полей */
+            background-color: rgb(36, 97, 219);
+        }
+        ul.hr li {
+            display: inline; /* Отображать как строчный элемент */
+            margin-right: 5px; /* Отступ слева */
+        }
+
+        /* Таблица с текущими параметрами */
+        body {
+            margin: 0;
+            background: #F4F1F8;
+
+        }
+        table {
+            border-collapse: collapse;
+            line-height: 1.1;
+            background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+            color: #0C213B;
+
+        }
+        caption {
+
+            font-weight: bold;
+            text-align: center;
+        }
+
+        th {
+            padding: 10px;
+            border: 1px solid #A9E2CC;
+            text-align: center;
+        }
+        td {
+            font-size: 1em;
+            padding: 5px 7px;
+            border: 1px solid #A9E2CC;
+            text-align: center;
+        }
+        .first {
+            padding: 5px 35px;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+    <style>
+
+        .dropdown {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .dropdown-content {
+            background-color: #ffffff;
+            display: none;
+            position: absolute;
+            right: 0;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 5px; /* Уголки */
+            margin: 8%;
+        }
+
+
+        .dropdown-content a {
+            color: black;
+            padding: 40px 20px;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1;}
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .avatar {
+            vertical-align: middle;
+            width: 100%;
+            height: 50px;
+            border-radius: 50%;
+            margin: 3%;
+        }
+
+
+    </style>  <!-- Всплывающее окно аватара -->
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" type="text/css" href="/css/styles_classes.css"/>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css" />
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/xrange.js"></script>
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap-3.3.0.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/menu_buttons.css"/> <!-- Меню -->
+
+    <script >
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "yyyy-mm",
+                language: 'ru',
+                viewMode: "months",
+                minViewMode: "months",
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+
+            $('#button_obnovit').on("click", function() {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+
+                var mes = datas.getMonth()+1;
+                var year = datas.getFullYear();
+
+                name_data = mes+"-" + year;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
+
+    <style>
+        .preloader {
+            /*фиксированное позиционирование*/
+            position: fixed;
+            /* координаты положения */
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /* фоновый цвет элемента */
+            background: #e0e0e0;
+            /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+            z-index: 1001;
+        }
+
+        .preloader__row {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            width: 70px;
+            height: 70px;
+            margin-top: -35px;
+            margin-left: -35px;
+            text-align: center;
+            animation: preloader-rotate 2s infinite linear;
+        }
+
+        .preloader__item {
+            position: absolute;
+            display: inline-block;
+            top: 0;
+            background-color: #337ab7;
+            border-radius: 100%;
+            width: 35px;
+            height: 35px;
+            animation: preloader-bounce 2s infinite ease-in-out;
+        }
+
+        .preloader__item:last-child {
+            top: auto;
+            bottom: 0;
+            animation-delay: -1s;
+        }
+
+        @keyframes preloader-rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes preloader-bounce {
+
+            0%,
+            100% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .loaded_hiding .preloader {
+            transition: 0.3s opacity;
+            opacity: 0;
+        }
+
+        .loaded .preloader {
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            document.body.classList.add('loaded_hiding');
+            window.setTimeout(function () {
+                document.body.classList.add('loaded');
+                document.body.classList.remove('loaded_hiding');
+            }, 500);
+        }
+    </script>
+
+    <style>
+        .btn_change {
+            position: relative;
+            display: inline-block;
+            padding: 15px 70px;
+            border: 3px solid #6793d6;
+            color: #6793d6;
+            background: #ffffff;
+            font-size: 30px;
+            font-family: arial;
+            background-image: linear-gradient(#6793d6, #6793d6);
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+            transition: background-size .5s, color .5s;
+        }
+        .btn_change:hover {
+            background-size: 100% 100%;
+            color: #ffffff;
+        }
+    </style>    <!--Кноки выбора отчета-->
+    <style>
+
+        .icon_mesto_sclad_meh {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_sclad_meh:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_sclad_meh {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_sclad_meh:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_sclad_meh {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_sclad_meh {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_epp {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_epp:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_epp {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_epp:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_epp {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_epp {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+    </style> <!--Кнопки Персонал и Местоположение-->
+
+</head>
+
+<header>
+
+    <ul class="hr">
+        <a href="home"><img style="margin: 0.1%" src="images/logo_black.png"/></a>
+
+        <div method="post" class="dropdown" style="float: right">
+
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+            <div class="dropdown-content" style="float: right; text-align: center">
+                <p><img th:src="@{${image_user}}" width="100"/></p>
+                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
+                <p th:text="${user_mail}"></p>
+
+                <form th:action="@{/logout}" method="post">
+                    <button class="follow" type="submit">
+                        Выход
+                    </button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
+
+    </ul>       <!--Шапка html-->
+
+</header>       <!--Шапка html-->
+
+<div>
+    <ul id="menu_ul">
+        <li id="menu_li"><a id="menu_a" href="displayStanki">Мех.уч.II пл.</a></li>
+        <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
+        <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
+        <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.I пл.</a></li>
+        <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
+        <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
+        <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
+        <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
+    </ul>
+</div>  <!-- Меню -->
+
+<!-- Загрузка страницы -->
+<div class="preloader">
+    <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+    </div>
+</div>
+
+<body>
+
+<div style="clear: both">
+    <form>
+        <button formaction="sclads" class="btn_change" style="width:40%">Суточный отчет</button>
+        <button formaction="sclads_month" class="btn_change" style="width:40%">Месячный отчет</button>
+    </form>
+</div>  <!--Кнопки суточный и месячный отчеты html-->
+
+<div class="container">
+    <div style="width: 250px; float: left">
+        <h2>Выберите месяц:</h2>
+    </div>
+
+
+    <form  action="#" th:action="@{/sclads_month}" th:object="${calendar_month}" method="post" >
+
+        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+            <input type='text' class="form-control" th:field="*{content_month}"/>
+            <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+        </div>
+
+        <div class="form-actions" >
+            <button type="submit"
+                    class="follow"
+                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
+            </button>
+        </div>
+    </form>
+
+
+
+
+</div>      <!--Календарь html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div id="img" style="float: left;  min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/sklad.png" width="50%" style="margin-left: auto; margin-right: auto; display: block"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Склад Мех. цеха</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_sclad_meh" href="mesto/mesto_sklad" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_sclad_meh'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_sclad_meh" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_sclad_meh'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Склад Мех html-->
+</div> <!--Склад Мех html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    {
+        var sclad_meh_rabota_day1 = [[${sclad_meh_rabota_day0}]];
+        var sclad_meh_rabota_day2 = [[${sclad_meh_rabota_day1}]];
+        var sclad_meh_rabota_day3 = [[${sclad_meh_rabota_day2}]];
+        var sclad_meh_rabota_day4 = [[${sclad_meh_rabota_day3}]];
+        var sclad_meh_rabota_day5 = [[${sclad_meh_rabota_day4}]];
+        var sclad_meh_rabota_day6 = [[${sclad_meh_rabota_day5}]];
+        var sclad_meh_rabota_day7 = [[${sclad_meh_rabota_day6}]];
+        var sclad_meh_rabota_day8 = [[${sclad_meh_rabota_day7}]];
+        var sclad_meh_rabota_day9 = [[${sclad_meh_rabota_day8}]];
+        var sclad_meh_rabota_day10 = [[${sclad_meh_rabota_day9}]];
+        var sclad_meh_rabota_day11 = [[${sclad_meh_rabota_day10}]];
+        var sclad_meh_rabota_day12 = [[${sclad_meh_rabota_day11}]];
+        var sclad_meh_rabota_day13 = [[${sclad_meh_rabota_day12}]];
+        var sclad_meh_rabota_day14 = [[${sclad_meh_rabota_day13}]];
+        var sclad_meh_rabota_day15 = [[${sclad_meh_rabota_day14}]];
+        var sclad_meh_rabota_day16 = [[${sclad_meh_rabota_day15}]];
+        var sclad_meh_rabota_day17 = [[${sclad_meh_rabota_day16}]];
+        var sclad_meh_rabota_day18 = [[${sclad_meh_rabota_day17}]];
+        var sclad_meh_rabota_day19 = [[${sclad_meh_rabota_day18}]];
+        var sclad_meh_rabota_day20 = [[${sclad_meh_rabota_day19}]];
+        var sclad_meh_rabota_day21 = [[${sclad_meh_rabota_day20}]];
+        var sclad_meh_rabota_day22 = [[${sclad_meh_rabota_day21}]];
+        var sclad_meh_rabota_day23 = [[${sclad_meh_rabota_day22}]];
+        var sclad_meh_rabota_day24 = [[${sclad_meh_rabota_day23}]];
+        var sclad_meh_rabota_day25 = [[${sclad_meh_rabota_day24}]];
+        var sclad_meh_rabota_day26 = [[${sclad_meh_rabota_day25}]];
+        var sclad_meh_rabota_day27 = [[${sclad_meh_rabota_day26}]];
+        var sclad_meh_rabota_day28 = [[${sclad_meh_rabota_day27}]];
+        var sclad_meh_rabota_day29 = [[${sclad_meh_rabota_day28}]];
+        var sclad_meh_rabota_day30 = [[${sclad_meh_rabota_day29}]];
+        var sclad_meh_rabota_day31 = [[${sclad_meh_rabota_day30}]];
+
+        var sclad_meh_pause_day1 = [[${sclad_meh_pause_day0}]];
+        var sclad_meh_pause_day2 = [[${sclad_meh_pause_day1}]];
+        var sclad_meh_pause_day3 = [[${sclad_meh_pause_day2}]];
+        var sclad_meh_pause_day4 = [[${sclad_meh_pause_day3}]];
+        var sclad_meh_pause_day5 = [[${sclad_meh_pause_day4}]];
+        var sclad_meh_pause_day6 = [[${sclad_meh_pause_day5}]];
+        var sclad_meh_pause_day7 = [[${sclad_meh_pause_day6}]];
+        var sclad_meh_pause_day8 = [[${sclad_meh_pause_day7}]];
+        var sclad_meh_pause_day9 = [[${sclad_meh_pause_day8}]];
+        var sclad_meh_pause_day10 = [[${sclad_meh_pause_day9}]];
+        var sclad_meh_pause_day11 = [[${sclad_meh_pause_day10}]];
+        var sclad_meh_pause_day12 = [[${sclad_meh_pause_day11}]];
+        var sclad_meh_pause_day13 = [[${sclad_meh_pause_day12}]];
+        var sclad_meh_pause_day14 = [[${sclad_meh_pause_day13}]];
+        var sclad_meh_pause_day15 = [[${sclad_meh_pause_day14}]];
+        var sclad_meh_pause_day16 = [[${sclad_meh_pause_day15}]];
+        var sclad_meh_pause_day17 = [[${sclad_meh_pause_day16}]];
+        var sclad_meh_pause_day18 = [[${sclad_meh_pause_day17}]];
+        var sclad_meh_pause_day19 = [[${sclad_meh_pause_day18}]];
+        var sclad_meh_pause_day20 = [[${sclad_meh_pause_day19}]];
+        var sclad_meh_pause_day21 = [[${sclad_meh_pause_day20}]];
+        var sclad_meh_pause_day22 = [[${sclad_meh_pause_day21}]];
+        var sclad_meh_pause_day23 = [[${sclad_meh_pause_day22}]];
+        var sclad_meh_pause_day24 = [[${sclad_meh_pause_day23}]];
+        var sclad_meh_pause_day25 = [[${sclad_meh_pause_day24}]];
+        var sclad_meh_pause_day26 = [[${sclad_meh_pause_day25}]];
+        var sclad_meh_pause_day27 = [[${sclad_meh_pause_day26}]];
+        var sclad_meh_pause_day28 = [[${sclad_meh_pause_day27}]];
+        var sclad_meh_pause_day29 = [[${sclad_meh_pause_day28}]];
+        var sclad_meh_pause_day30 = [[${sclad_meh_pause_day29}]];
+        var sclad_meh_pause_day31 = [[${sclad_meh_pause_day30}]];
+
+        var sclad_meh_off_day1 = [[${sclad_meh_off_day0}]];
+        var sclad_meh_off_day2 = [[${sclad_meh_off_day1}]];
+        var sclad_meh_off_day3 = [[${sclad_meh_off_day2}]];
+        var sclad_meh_off_day4 = [[${sclad_meh_off_day3}]];
+        var sclad_meh_off_day5 = [[${sclad_meh_off_day4}]];
+        var sclad_meh_off_day6 = [[${sclad_meh_off_day5}]];
+        var sclad_meh_off_day7 = [[${sclad_meh_off_day6}]];
+        var sclad_meh_off_day8 = [[${sclad_meh_off_day7}]];
+        var sclad_meh_off_day9 = [[${sclad_meh_off_day8}]];
+        var sclad_meh_off_day10 = [[${sclad_meh_off_day9}]];
+        var sclad_meh_off_day11 = [[${sclad_meh_off_day10}]];
+        var sclad_meh_off_day12 = [[${sclad_meh_off_day11}]];
+        var sclad_meh_off_day13 = [[${sclad_meh_off_day12}]];
+        var sclad_meh_off_day14 = [[${sclad_meh_off_day13}]];
+        var sclad_meh_off_day15 = [[${sclad_meh_off_day14}]];
+        var sclad_meh_off_day16 = [[${sclad_meh_off_day15}]];
+        var sclad_meh_off_day17 = [[${sclad_meh_off_day16}]];
+        var sclad_meh_off_day18 = [[${sclad_meh_off_day17}]];
+        var sclad_meh_off_day19 = [[${sclad_meh_off_day18}]];
+        var sclad_meh_off_day20 = [[${sclad_meh_off_day19}]];
+        var sclad_meh_off_day21 = [[${sclad_meh_off_day20}]];
+        var sclad_meh_off_day22 = [[${sclad_meh_off_day21}]];
+        var sclad_meh_off_day23 = [[${sclad_meh_off_day22}]];
+        var sclad_meh_off_day24 = [[${sclad_meh_off_day23}]];
+        var sclad_meh_off_day25 = [[${sclad_meh_off_day24}]];
+        var sclad_meh_off_day26 = [[${sclad_meh_off_day25}]];
+        var sclad_meh_off_day27 = [[${sclad_meh_off_day26}]];
+        var sclad_meh_off_day28 = [[${sclad_meh_off_day27}]];
+        var sclad_meh_off_day29 = [[${sclad_meh_off_day28}]];
+        var sclad_meh_off_day30 = [[${sclad_meh_off_day29}]];
+        var sclad_meh_off_day31 = [[${sclad_meh_off_day30}]];
+
+        var sclad_meh_avar_day1 = [[${sclad_meh_avar_day0}]];
+        var sclad_meh_avar_day2 = [[${sclad_meh_avar_day1}]];
+        var sclad_meh_avar_day3 = [[${sclad_meh_avar_day2}]];
+        var sclad_meh_avar_day4 = [[${sclad_meh_avar_day3}]];
+        var sclad_meh_avar_day5 = [[${sclad_meh_avar_day4}]];
+        var sclad_meh_avar_day6 = [[${sclad_meh_avar_day5}]];
+        var sclad_meh_avar_day7 = [[${sclad_meh_avar_day6}]];
+        var sclad_meh_avar_day8 = [[${sclad_meh_avar_day7}]];
+        var sclad_meh_avar_day9 = [[${sclad_meh_avar_day8}]];
+        var sclad_meh_avar_day10 = [[${sclad_meh_avar_day9}]];
+        var sclad_meh_avar_day11 = [[${sclad_meh_avar_day10}]];
+        var sclad_meh_avar_day12 = [[${sclad_meh_avar_day11}]];
+        var sclad_meh_avar_day13 = [[${sclad_meh_avar_day12}]];
+        var sclad_meh_avar_day14 = [[${sclad_meh_avar_day13}]];
+        var sclad_meh_avar_day15 = [[${sclad_meh_avar_day14}]];
+        var sclad_meh_avar_day16 = [[${sclad_meh_avar_day15}]];
+        var sclad_meh_avar_day17 = [[${sclad_meh_avar_day16}]];
+        var sclad_meh_avar_day18 = [[${sclad_meh_avar_day17}]];
+        var sclad_meh_avar_day19 = [[${sclad_meh_avar_day18}]];
+        var sclad_meh_avar_day20 = [[${sclad_meh_avar_day19}]];
+        var sclad_meh_avar_day21 = [[${sclad_meh_avar_day20}]];
+        var sclad_meh_avar_day22 = [[${sclad_meh_avar_day21}]];
+        var sclad_meh_avar_day23 = [[${sclad_meh_avar_day22}]];
+        var sclad_meh_avar_day24 = [[${sclad_meh_avar_day23}]];
+        var sclad_meh_avar_day25 = [[${sclad_meh_avar_day24}]];
+        var sclad_meh_avar_day26 = [[${sclad_meh_avar_day25}]];
+        var sclad_meh_avar_day27 = [[${sclad_meh_avar_day26}]];
+        var sclad_meh_avar_day28 = [[${sclad_meh_avar_day27}]];
+        var sclad_meh_avar_day29 = [[${sclad_meh_avar_day28}]];
+        var sclad_meh_avar_day30 = [[${sclad_meh_avar_day29}]];
+        var sclad_meh_avar_day31 = [[${sclad_meh_avar_day30}]];
+
+        var sclad_meh_nagruzka_day1 = [[${sclad_meh_nagruzka_day0}]];
+        var sclad_meh_nagruzka_day2 = [[${sclad_meh_nagruzka_day1}]];
+        var sclad_meh_nagruzka_day3 = [[${sclad_meh_nagruzka_day2}]];
+        var sclad_meh_nagruzka_day4 = [[${sclad_meh_nagruzka_day3}]];
+        var sclad_meh_nagruzka_day5 = [[${sclad_meh_nagruzka_day4}]];
+        var sclad_meh_nagruzka_day6 = [[${sclad_meh_nagruzka_day5}]];
+        var sclad_meh_nagruzka_day7 = [[${sclad_meh_nagruzka_day6}]];
+        var sclad_meh_nagruzka_day8 = [[${sclad_meh_nagruzka_day7}]];
+        var sclad_meh_nagruzka_day9 = [[${sclad_meh_nagruzka_day8}]];
+        var sclad_meh_nagruzka_day10 = [[${sclad_meh_nagruzka_day9}]];
+        var sclad_meh_nagruzka_day11 = [[${sclad_meh_nagruzka_day10}]];
+        var sclad_meh_nagruzka_day12 = [[${sclad_meh_nagruzka_day11}]];
+        var sclad_meh_nagruzka_day13 = [[${sclad_meh_nagruzka_day12}]];
+        var sclad_meh_nagruzka_day14 = [[${sclad_meh_nagruzka_day13}]];
+        var sclad_meh_nagruzka_day15 = [[${sclad_meh_nagruzka_day14}]];
+        var sclad_meh_nagruzka_day16 = [[${sclad_meh_nagruzka_day15}]];
+        var sclad_meh_nagruzka_day17 = [[${sclad_meh_nagruzka_day16}]];
+        var sclad_meh_nagruzka_day18 = [[${sclad_meh_nagruzka_day17}]];
+        var sclad_meh_nagruzka_day19 = [[${sclad_meh_nagruzka_day18}]];
+        var sclad_meh_nagruzka_day20 = [[${sclad_meh_nagruzka_day19}]];
+        var sclad_meh_nagruzka_day21 = [[${sclad_meh_nagruzka_day20}]];
+        var sclad_meh_nagruzka_day22 = [[${sclad_meh_nagruzka_day21}]];
+        var sclad_meh_nagruzka_day23 = [[${sclad_meh_nagruzka_day22}]];
+        var sclad_meh_nagruzka_day24 = [[${sclad_meh_nagruzka_day23}]];
+        var sclad_meh_nagruzka_day25 = [[${sclad_meh_nagruzka_day24}]];
+        var sclad_meh_nagruzka_day26 = [[${sclad_meh_nagruzka_day25}]];
+        var sclad_meh_nagruzka_day27 = [[${sclad_meh_nagruzka_day26}]];
+        var sclad_meh_nagruzka_day28 = [[${sclad_meh_nagruzka_day27}]];
+        var sclad_meh_nagruzka_day29 = [[${sclad_meh_nagruzka_day28}]];
+        var sclad_meh_nagruzka_day30 = [[${sclad_meh_nagruzka_day29}]];
+        var sclad_meh_nagruzka_day31 = [[${sclad_meh_nagruzka_day30}]];
+
+    } <!--Переменные для sclad_meh-->
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_days1', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Загрузка оборудования по дням'
+        },
+        xAxis: {
+            title: {
+                text: 'Дни месяца',
+                align: 'high'
+            },
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа без нагрузки',
+            data: [sclad_meh_rabota_day1, sclad_meh_rabota_day2, sclad_meh_rabota_day3,sclad_meh_rabota_day4,sclad_meh_rabota_day5,sclad_meh_rabota_day6,sclad_meh_rabota_day7,sclad_meh_rabota_day8,sclad_meh_rabota_day9,sclad_meh_rabota_day10,sclad_meh_rabota_day11,sclad_meh_rabota_day12,sclad_meh_rabota_day13,sclad_meh_rabota_day14,sclad_meh_rabota_day15,sclad_meh_rabota_day16,sclad_meh_rabota_day17,sclad_meh_rabota_day18,sclad_meh_rabota_day19,sclad_meh_rabota_day20,sclad_meh_rabota_day21,sclad_meh_rabota_day22,sclad_meh_rabota_day23,sclad_meh_rabota_day24,sclad_meh_rabota_day25,sclad_meh_rabota_day26,sclad_meh_rabota_day27,sclad_meh_rabota_day28,sclad_meh_rabota_day29,sclad_meh_rabota_day30,sclad_meh_rabota_day31]
+        }, {
+            name: 'Ожидание',
+            data: [sclad_meh_pause_day1, sclad_meh_pause_day2, sclad_meh_pause_day3,sclad_meh_pause_day4,sclad_meh_pause_day5,sclad_meh_pause_day6,sclad_meh_pause_day7,sclad_meh_pause_day8,sclad_meh_pause_day9,sclad_meh_pause_day10,sclad_meh_pause_day11,sclad_meh_pause_day12,sclad_meh_pause_day13,sclad_meh_pause_day14,sclad_meh_pause_day15,sclad_meh_pause_day16,sclad_meh_pause_day17,sclad_meh_pause_day18,sclad_meh_pause_day19,sclad_meh_pause_day20,sclad_meh_pause_day21,sclad_meh_pause_day22,sclad_meh_pause_day23,sclad_meh_pause_day24,sclad_meh_pause_day25,sclad_meh_pause_day26,sclad_meh_pause_day27,sclad_meh_pause_day28,sclad_meh_pause_day29,sclad_meh_pause_day30,sclad_meh_pause_day31]
+        }, {
+            name: 'Выключен',
+            data: [sclad_meh_off_day1, sclad_meh_off_day2, sclad_meh_off_day3,sclad_meh_off_day4,sclad_meh_off_day5,sclad_meh_off_day6,sclad_meh_off_day7,sclad_meh_off_day8,sclad_meh_off_day9,sclad_meh_off_day10,sclad_meh_off_day11,sclad_meh_off_day12,sclad_meh_off_day13,sclad_meh_off_day14,sclad_meh_off_day15,sclad_meh_off_day16,sclad_meh_off_day17,sclad_meh_off_day18,sclad_meh_off_day19,sclad_meh_off_day20,sclad_meh_off_day21,sclad_meh_off_day22,sclad_meh_off_day23,sclad_meh_off_day24,sclad_meh_off_day25,sclad_meh_off_day26,sclad_meh_off_day27,sclad_meh_off_day28,sclad_meh_off_day29,sclad_meh_off_day30,sclad_meh_off_day31]
+        }, {
+            name: 'Авария',
+            data: [sclad_meh_avar_day1, sclad_meh_avar_day2, sclad_meh_avar_day3,sclad_meh_avar_day4,sclad_meh_avar_day5,sclad_meh_avar_day6,sclad_meh_avar_day7,sclad_meh_avar_day8,sclad_meh_avar_day9,sclad_meh_avar_day10,sclad_meh_avar_day11,sclad_meh_avar_day12,sclad_meh_avar_day13,sclad_meh_avar_day14,sclad_meh_avar_day15,sclad_meh_avar_day16,sclad_meh_avar_day17,sclad_meh_avar_day18,sclad_meh_avar_day19,sclad_meh_avar_day20,sclad_meh_avar_day21,sclad_meh_avar_day22,sclad_meh_avar_day23,sclad_meh_avar_day24,sclad_meh_avar_day25,sclad_meh_avar_day26,sclad_meh_avar_day27,sclad_meh_avar_day28,sclad_meh_avar_day29,sclad_meh_avar_day30,sclad_meh_avar_day31]
+        }, {
+            name: 'Работа с нагрузкой',
+            data: [sclad_meh_nagruzka_day1, sclad_meh_nagruzka_day2, sclad_meh_nagruzka_day3,sclad_meh_nagruzka_day4,sclad_meh_nagruzka_day5,sclad_meh_nagruzka_day6,sclad_meh_nagruzka_day7,sclad_meh_nagruzka_day8,sclad_meh_nagruzka_day9,sclad_meh_nagruzka_day10,sclad_meh_nagruzka_day11,sclad_meh_nagruzka_day12,sclad_meh_nagruzka_day13,sclad_meh_nagruzka_day14,sclad_meh_nagruzka_day15,sclad_meh_nagruzka_day16,sclad_meh_nagruzka_day17,sclad_meh_nagruzka_day18,sclad_meh_nagruzka_day19,sclad_meh_nagruzka_day20,sclad_meh_nagruzka_day21,sclad_meh_nagruzka_day22,sclad_meh_nagruzka_day23,sclad_meh_nagruzka_day24,sclad_meh_nagruzka_day25,sclad_meh_nagruzka_day26,sclad_meh_nagruzka_day27,sclad_meh_nagruzka_day28,sclad_meh_nagruzka_day29,sclad_meh_nagruzka_day30,sclad_meh_nagruzka_day31]
+        }]
+    });
+
+
+</script>   <!--Скалад мех js диагрмма загрузки оборудования по дням-->
+<script th:inline="javascript">
+    var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'Работа с нагрузкой', [[${sclad_meh_nagruzka}]] ], [ 'Работа без нагрузки', [[${sclad_meh_work}]] ], [ 'Включен', [[${sclad_meh_pass}]] ], [ 'Выключен', [[${sclad_meh_fail}]] ],  [ 'В аварии', [[${sclad_meh_avar}]] ] ]
+        }]
+    });
+</script>   <!--Скалад мех js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
+
+    $('.icon_personal_sclad_meh').hover(
+        function () {
+            $('.label_personal_sclad_meh').css('color', '#000000');
+            $('.label_personal_sclad_meh').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_personal_sclad_meh').css('color', '#756e6e');
+            $('.label_personal_sclad_meh').css('margin-top', '65px');
+        }
+    );
+    $('.icon_mesto_sclad_meh').hover(
+        function () {
+            $('.label_mesto_sclad_meh').css('color', '#000000');
+            $('.label_mesto_sclad_meh').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_mesto_sclad_meh').css('color', '#756e6e');
+            $('.label_mesto_sclad_meh').css('margin-top', '65px');
+        }
+    );
+
+
+</script> <!--Кнопки Персонал и Место-->
+
+</body>
+</html>

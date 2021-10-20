@@ -1,0 +1,68 @@
+#menu_ul {
+    list-style: none; /*убираем маркеры списка*/
+    margin: 0; /*убираем отступы*/
+    padding-left: 0; /*убираем отступы*/
+    margin-top: 0px; /*делаем отступ сверху*/
+    background: rgb(36, 97, 219); /*добавляем фон всему меню*/
+    height: 50px; /*задаем высоту*/
+}
+
+#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7 {
+    text-decoration: none; /*убираем подчеркивание текста ссылок*/
+    background: rgb(58, 111, 219); /*добавляем фон к пункту меню*/
+    color: #fff; /*меняем цвет ссылок*/
+    padding: 0px 15px; /*добавляем отступ*/
+    font-family: MONTSERRAT; /*меняем шрифт*/
+    font-size: 250%;
+    line-height: 50px; /*ровняем меню по вертикали*/
+    display: block;
+    border-right: 1px solid #F36262; /*добавляем бордюр справа*/
+    -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+    -o-transition: all 0.3s 0.01s ease;
+    -webkit-transition: all 0.3s 0.01s ease;
+
+}
+
+#menu_a:hover {
+    font-family: MONTSERRAT;
+    background: #D43737; /*добавляем эффект при наведении*/
+}
+
+#menu_a1:hover {
+    font-family: MONTSERRAT;
+    background: #D43737; /*добавляем эффект при наведении*/
+}
+
+#menu_a2:hover {
+    font-family: MONTSERRAT;
+    background: #D43737; /*добавляем эффект при наведении*/
+}
+
+#menu_a3:hover {
+    font-family: MONTSERRAT;
+    background: #D43737; /*добавляем эффект при наведении*/
+}
+
+#menu_a4:hover {
+    font-family: MONTSERRAT;
+    background: #D43737; /*добавляем эффект при наведении*/
+}
+
+#menu_a5:hover {
+    font-family: MONTSERRAT;
+    background: #D43737; /*добавляем эффект при наведении*/
+}
+
+#menu_a6:hover {
+    font-family: MONTSERRAT;
+    background: #D43737; /*добавляем эффект при наведении*/
+}
+
+#menu_a7:hover {
+    font-family: MONTSERRAT;
+    background: #D43737; /*добавляем эффект при наведении*/
+}
+
+#menu_li, #menu_li1, #menu_li2, #menu_li3, #menu_li4, #menu_li5, #menu_li6, #menu_li7 {
+    float: left; /*Размещаем список горизонтально для реализации меню*/
+}

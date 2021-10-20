@@ -1,0 +1,55 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Авторизация</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/styles_login.css"/>
+
+</head>     <!--Стили-->
+
+
+<div align="center">
+
+    <div align="center" style="float: inherit; margin: 1.5%;  font-size: 150%; text-align: inherit">
+        <img src="images/logo_black.png"/>
+    </div>  <!--Лого-->
+
+    <form action="#" method="post" name="f" style="float: inherit; margin: 1.5%;  font-size: 150%; text-align: inherit"
+          th:action="@{/login}">
+        <legend align="center">Авторизуйтесь для начала работы.
+        </legend>
+        <div th:if="${param.error}" class="alert alert-error">
+            Некорректная авторизация.
+
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+            Вы вышли из системы.
+        </div>
+    </form>      <!--Форма авторизации-->
+
+</div>  <!--Форма авторизации-->
+
+
+<div class="login-box">
+    <h2>Авторизация</h2>
+    <form action="#" method="post">
+        <div class="user-box">
+            <input type="text" th:name="username" required=""/>
+            <label>Имя пользователя</label>
+        </div>
+        <div class="user-box">
+            <input type="password" id="password" name="password" required=""/>
+            <label>Пароль</label>
+        </div>
+        <button type="submit" class="button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Войти
+        </button>
+    </form>
+</div>
+
+
+</html>
+

@@ -1,0 +1,3195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Роботы</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <style>
+        li {
+            list-style-type: none; /* Убираем маркеры */
+        }
+
+        ul.hr {
+            margin: 0; /* Обнуляем значение отступов */
+            padding: 4px; /* Значение полей */
+            background-color: rgb(36, 97, 219);
+        }
+        ul.hr li {
+            display: inline; /* Отображать как строчный элемент */
+            margin-right: 5px; /* Отступ слева */
+        }
+
+        /* Таблица с текущими параметрами */
+        body {
+            margin: 0;
+            background: #F4F1F8;
+
+        }
+        table {
+            border-collapse: collapse;
+            line-height: 1.1;
+            background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+            color: #0C213B;
+
+        }
+        caption {
+
+            font-weight: bold;
+            text-align: center;
+        }
+
+        th {
+            padding: 10px;
+            border: 1px solid #A9E2CC;
+            text-align: center;
+        }
+        td {
+            font-size: 1em;
+            padding: 5px 7px;
+            border: 1px solid #A9E2CC;
+            text-align: center;
+        }
+        .first {
+            padding: 5px 35px;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+    <style>
+
+        .dropdown {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .dropdown-content {
+            background-color: #ffffff;
+            display: none;
+            position: absolute;
+            right: 0;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 5px; /* Уголки */
+            margin: 8%;
+        }
+
+
+        .dropdown-content a {
+            color: black;
+            padding: 40px 20px;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1;}
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .avatar {
+            vertical-align: middle;
+            width: 100%;
+            height: 50px;
+            border-radius: 50%;
+            margin: 3%;
+        }
+
+
+    </style>  <!-- Всплывающее окно аватара -->
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" type="text/css" href="/css/styles_classes.css"/>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css" />
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/xrange.js"></script>
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap-3.3.0.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/menu_buttons.css"/> <!-- Меню -->
+
+    <script >
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "yyyy-mm",
+                language: 'ru',
+                viewMode: "months",
+                minViewMode: "months",
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+
+            $('#button_obnovit').on("click", function() {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+
+                var mes = datas.getMonth()+1;
+                var year = datas.getFullYear();
+
+                name_data = mes+"-" + year;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
+
+    <style>
+        .preloader {
+            /*фиксированное позиционирование*/
+            position: fixed;
+            /* координаты положения */
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /* фоновый цвет элемента */
+            background: #e0e0e0;
+            /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+            z-index: 1001;
+        }
+
+        .preloader__row {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            width: 70px;
+            height: 70px;
+            margin-top: -35px;
+            margin-left: -35px;
+            text-align: center;
+            animation: preloader-rotate 2s infinite linear;
+        }
+
+        .preloader__item {
+            position: absolute;
+            display: inline-block;
+            top: 0;
+            background-color: #337ab7;
+            border-radius: 100%;
+            width: 35px;
+            height: 35px;
+            animation: preloader-bounce 2s infinite ease-in-out;
+        }
+
+        .preloader__item:last-child {
+            top: auto;
+            bottom: 0;
+            animation-delay: -1s;
+        }
+
+        @keyframes preloader-rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes preloader-bounce {
+
+            0%,
+            100% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .loaded_hiding .preloader {
+            transition: 0.3s opacity;
+            opacity: 0;
+        }
+
+        .loaded .preloader {
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            document.body.classList.add('loaded_hiding');
+            window.setTimeout(function () {
+                document.body.classList.add('loaded');
+                document.body.classList.remove('loaded_hiding');
+            }, 500);
+        }
+    </script>
+
+    <style>
+        .btn_change {
+            position: relative;
+            display: inline-block;
+            padding: 15px 70px;
+            border: 3px solid #6793d6;
+            color: #6793d6;
+            background: #ffffff;
+            font-size: 30px;
+            font-family: arial;
+            background-image: linear-gradient(#6793d6, #6793d6);
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+            transition: background-size .5s, color .5s;
+        }
+        .btn_change:hover {
+            background-size: 100% 100%;
+            color: #ffffff;
+        }
+    </style>    <!--Кноки выбора отчета-->
+    <style>
+        .icon_mesto_maks_1{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_maks_1:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_maks_1{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_maks_1:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_maks_1{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_maks_1{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_maks_2{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_maks_2:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_maks_2{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_maks_2:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_maks_2{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_maks_2{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_m710{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_m710:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_m710{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_m710:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_m710{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_m710{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_rtc12c{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_rtc12c:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_rtc12c{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_rtc12c:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_rtc12c{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_rtc12c{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_p250{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_p250:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_p250{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_p250:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_p250{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_p250{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_krot{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_krot:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_krot{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_krot:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_krot{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_krot{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_prans{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_prans:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_prans{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_prans:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_prans{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_prans{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+
+    </style> <!--Кнопки Персонал и Местоположение-->
+
+</head>
+
+<header>
+
+    <ul class="hr">
+        <a href="home"><img style="margin: 0.1%" src="images/logo_black.png"/></a>
+
+        <div method="post" class="dropdown" style="float: right">
+
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+            <div class="dropdown-content" style="float: right; text-align: center">
+                <p><img th:src="@{${image_user}}" width="100"/></p>
+                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
+                <p th:text="${user_mail}"></p>
+
+                <form th:action="@{/logout}" method="post">
+                    <button class="follow" type="submit">
+                        Выход
+                    </button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
+
+    </ul>       <!--Шапка html-->
+
+</header>       <!--Шапка html-->
+
+<div>
+    <ul id="menu_ul">
+        <li id="menu_li"><a id="menu_a" href="displayStanki">Мех.уч.II пл.</a></li>
+        <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
+        <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
+        <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.I пл.</a></li>
+        <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
+        <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
+        <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
+        <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
+    </ul>
+</div>  <!-- Меню -->
+
+<!-- Загрузка страницы -->
+<div class="preloader">
+    <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+    </div>
+</div>
+
+<body>
+
+<div style="clear: both">
+    <form>
+        <button formaction="robots" class="btn_change" style="width:40%">Суточный отчет</button>
+        <button formaction="robots_month" class="btn_change" style="width:40%">Месячный отчет</button>
+    </form>
+</div>  <!--Кнопки суточный и месячный отчеты html-->
+
+<div class="container">
+    <div style="width: 250px; float: left">
+        <h2>Выберите месяц:</h2>
+    </div>
+
+
+    <form  action="#" th:action="@{/robots_month}" th:object="${calendar_month}" method="post" >
+
+        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+            <input type='text' class="form-control" th:field="*{content_month}"/>
+            <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+        </div>
+
+        <div class="form-actions" >
+            <button type="submit"
+                    class="follow"
+                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
+            </button>
+        </div>
+    </form>
+
+
+
+
+</div>      <!--Календарь html-->
+
+<div style="display: flex">
+    <figure class="highcharts-figure">
+        <div id="container_sum_zagruzka" style="height: 400px; width: 800px"></div>
+    </figure>   <!--Общая загрузка html-->
+</div>  <!--Общая загрузка  html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
+
+    var work_maks_1 = [[${maks_1_work}]];
+    var pause_maks_1 = [[${maks_1_pass}]];
+    var off_maks_1 = [[${maks_1_fail}]];
+    var avar_maks_1 = [[${maks_1_avar}]];
+    var nagruzka_maks_1 = [[${maks_1_nagruzka}]];
+
+    var work_maks_2 = [[${maks_2_work}]];
+    var pause_maks_2 = [[${maks_2_pass}]];
+    var off_maks_2 = [[${maks_2_fail}]];
+    var avar_maks_2 = [[${maks_2_avar}]];
+    var nagruzka_maks_2 = [[${maks_2_nagruzka}]];
+
+    var work_m710 = [[${m710_work}]];
+    var pause_m710 = [[${m710_pass}]];
+    var off_m710 = [[${m710_fail}]];
+    var avar_m710 = [[${m710_avar}]];
+    var nagruzka_m710 = [[${m710_nagruzka}]];
+
+    var work_rtc12c = [[${rtk12c_work}]];
+    var pause_rtc12c = [[${rtk12c_pass}]];
+    var off_rtc12c = [[${rtk12c_fail}]];
+    var avar_rtc12c = [[${rtk2c_avar}]];
+    var nagruzka_rtc12c = [[${rtk12c_nagruzka}]];
+
+    var work_p250 = [[${p250_work}]];
+    var pause_p250 = [[${p250_pass}]];
+    var off_p250 = [[${p250_fail}]];
+    var avar_p250 = [[${p250_avar}]];
+    var nagruzka_p250 = [[${p250_nagruzka}]];
+
+    var work_krot = [[${krot_work}]];
+    var pause_krot = [[${krot_pass}]];
+    var off_krot = [[${krot_fail}]];
+    var avar_krot = [[${krot_avar}]];
+    var nagruzka_krot = [[${krot_nagruzka}]];
+
+    var work_prans = [[${prans_work}]];
+    var pause_prans = [[${prans_pass}]];
+    var off_prans = [[${prans_fail}]];
+    var avar_prans = [[${prans_avar}]];
+    var nagruzka_prans = [[${prans_nagruzka}]];
+
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['МАКС #1', 'МАКС #2', 'М710', 'РТК12С', 'Р250', 'КРОТ', 'ПРАНС']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [work_maks_1, work_maks_2, work_m710, work_rtc12c, work_p250, work_krot, work_prans]
+        }, {
+            name: 'Под нагрузкой',
+            data: [nagruzka_maks_1, nagruzka_maks_2, nagruzka_m710, nagruzka_rtc12c, nagruzka_p250, nagruzka_krot, nagruzka_prans]
+        }, {
+            name: 'Ожидание',
+            data: [pause_maks_1, pause_maks_2, pause_m710, pause_rtc12c, pause_p250, pause_krot, pause_prans]
+        }, {
+            name: 'Авария',
+            data: [avar_maks_1, avar_maks_2, avar_m710, avar_rtc12c, avar_p250, avar_krot, avar_prans]
+        }, {
+            name: 'Выключен',
+            data: [off_maks_1, off_maks_2, off_m710, off_rtc12c, off_p250, off_krot, off_prans]
+        }]
+    });
+
+</script>   <!--js Общая загрузка-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div id="img" style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/robot.jpg" width="100%"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">МАКС #1</figcaption>
+                </div>
+                <div>
+                    <a style="text-decoration: none; float: left" class="icon_mesto_maks_1" href="mesto/mesto_maks_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto_maks_1'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_maks_1" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_maks_1'>Персонал</div></a>
+                </div>
+            </div>
+            <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!-- html-->
+
+</div> <!--html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+    {
+        var maks_1_rabota_day1 = [[${maks_1_rabota_day0}]];
+        var maks_1_rabota_day2 = [[${maks_1_rabota_day1}]];
+        var maks_1_rabota_day3 = [[${maks_1_rabota_day2}]];
+        var maks_1_rabota_day4 = [[${maks_1_rabota_day3}]];
+        var maks_1_rabota_day5 = [[${maks_1_rabota_day4}]];
+        var maks_1_rabota_day6 = [[${maks_1_rabota_day5}]];
+        var maks_1_rabota_day7 = [[${maks_1_rabota_day6}]];
+        var maks_1_rabota_day8 = [[${maks_1_rabota_day7}]];
+        var maks_1_rabota_day9 = [[${maks_1_rabota_day8}]];
+        var maks_1_rabota_day10 = [[${maks_1_rabota_day9}]];
+        var maks_1_rabota_day11 = [[${maks_1_rabota_day10}]];
+        var maks_1_rabota_day12 = [[${maks_1_rabota_day11}]];
+        var maks_1_rabota_day13 = [[${maks_1_rabota_day12}]];
+        var maks_1_rabota_day14 = [[${maks_1_rabota_day13}]];
+        var maks_1_rabota_day15 = [[${maks_1_rabota_day14}]];
+        var maks_1_rabota_day16 = [[${maks_1_rabota_day15}]];
+        var maks_1_rabota_day17 = [[${maks_1_rabota_day16}]];
+        var maks_1_rabota_day18 = [[${maks_1_rabota_day17}]];
+        var maks_1_rabota_day19 = [[${maks_1_rabota_day18}]];
+        var maks_1_rabota_day20 = [[${maks_1_rabota_day19}]];
+        var maks_1_rabota_day21 = [[${maks_1_rabota_day20}]];
+        var maks_1_rabota_day22 = [[${maks_1_rabota_day21}]];
+        var maks_1_rabota_day23 = [[${maks_1_rabota_day22}]];
+        var maks_1_rabota_day24 = [[${maks_1_rabota_day23}]];
+        var maks_1_rabota_day25 = [[${maks_1_rabota_day24}]];
+        var maks_1_rabota_day26 = [[${maks_1_rabota_day25}]];
+        var maks_1_rabota_day27 = [[${maks_1_rabota_day26}]];
+        var maks_1_rabota_day28 = [[${maks_1_rabota_day27}]];
+        var maks_1_rabota_day29 = [[${maks_1_rabota_day28}]];
+        var maks_1_rabota_day30 = [[${maks_1_rabota_day29}]];
+        var maks_1_rabota_day31 = [[${maks_1_rabota_day30}]];
+
+        var maks_1_pause_day1 = [[${maks_1_pause_day0}]];
+        var maks_1_pause_day2 = [[${maks_1_pause_day1}]];
+        var maks_1_pause_day3 = [[${maks_1_pause_day2}]];
+        var maks_1_pause_day4 = [[${maks_1_pause_day3}]];
+        var maks_1_pause_day5 = [[${maks_1_pause_day4}]];
+        var maks_1_pause_day6 = [[${maks_1_pause_day5}]];
+        var maks_1_pause_day7 = [[${maks_1_pause_day6}]];
+        var maks_1_pause_day8 = [[${maks_1_pause_day7}]];
+        var maks_1_pause_day9 = [[${maks_1_pause_day8}]];
+        var maks_1_pause_day10 = [[${maks_1_pause_day9}]];
+        var maks_1_pause_day11 = [[${maks_1_pause_day10}]];
+        var maks_1_pause_day12 = [[${maks_1_pause_day11}]];
+        var maks_1_pause_day13 = [[${maks_1_pause_day12}]];
+        var maks_1_pause_day14 = [[${maks_1_pause_day13}]];
+        var maks_1_pause_day15 = [[${maks_1_pause_day14}]];
+        var maks_1_pause_day16 = [[${maks_1_pause_day15}]];
+        var maks_1_pause_day17 = [[${maks_1_pause_day16}]];
+        var maks_1_pause_day18 = [[${maks_1_pause_day17}]];
+        var maks_1_pause_day19 = [[${maks_1_pause_day18}]];
+        var maks_1_pause_day20 = [[${maks_1_pause_day19}]];
+        var maks_1_pause_day21 = [[${maks_1_pause_day20}]];
+        var maks_1_pause_day22 = [[${maks_1_pause_day21}]];
+        var maks_1_pause_day23 = [[${maks_1_pause_day22}]];
+        var maks_1_pause_day24 = [[${maks_1_pause_day23}]];
+        var maks_1_pause_day25 = [[${maks_1_pause_day24}]];
+        var maks_1_pause_day26 = [[${maks_1_pause_day25}]];
+        var maks_1_pause_day27 = [[${maks_1_pause_day26}]];
+        var maks_1_pause_day28 = [[${maks_1_pause_day27}]];
+        var maks_1_pause_day29 = [[${maks_1_pause_day28}]];
+        var maks_1_pause_day30 = [[${maks_1_pause_day29}]];
+        var maks_1_pause_day31 = [[${maks_1_pause_day30}]];
+
+        var maks_1_off_day1 = [[${maks_1_off_day0}]];
+        var maks_1_off_day2 = [[${maks_1_off_day1}]];
+        var maks_1_off_day3 = [[${maks_1_off_day2}]];
+        var maks_1_off_day4 = [[${maks_1_off_day3}]];
+        var maks_1_off_day5 = [[${maks_1_off_day4}]];
+        var maks_1_off_day6 = [[${maks_1_off_day5}]];
+        var maks_1_off_day7 = [[${maks_1_off_day6}]];
+        var maks_1_off_day8 = [[${maks_1_off_day7}]];
+        var maks_1_off_day9 = [[${maks_1_off_day8}]];
+        var maks_1_off_day10 = [[${maks_1_off_day9}]];
+        var maks_1_off_day11 = [[${maks_1_off_day10}]];
+        var maks_1_off_day12 = [[${maks_1_off_day11}]];
+        var maks_1_off_day13 = [[${maks_1_off_day12}]];
+        var maks_1_off_day14 = [[${maks_1_off_day13}]];
+        var maks_1_off_day15 = [[${maks_1_off_day14}]];
+        var maks_1_off_day16 = [[${maks_1_off_day15}]];
+        var maks_1_off_day17 = [[${maks_1_off_day16}]];
+        var maks_1_off_day18 = [[${maks_1_off_day17}]];
+        var maks_1_off_day19 = [[${maks_1_off_day18}]];
+        var maks_1_off_day20 = [[${maks_1_off_day19}]];
+        var maks_1_off_day21 = [[${maks_1_off_day20}]];
+        var maks_1_off_day22 = [[${maks_1_off_day21}]];
+        var maks_1_off_day23 = [[${maks_1_off_day22}]];
+        var maks_1_off_day24 = [[${maks_1_off_day23}]];
+        var maks_1_off_day25 = [[${maks_1_off_day24}]];
+        var maks_1_off_day26 = [[${maks_1_off_day25}]];
+        var maks_1_off_day27 = [[${maks_1_off_day26}]];
+        var maks_1_off_day28 = [[${maks_1_off_day27}]];
+        var maks_1_off_day29 = [[${maks_1_off_day28}]];
+        var maks_1_off_day30 = [[${maks_1_off_day29}]];
+        var maks_1_off_day31 = [[${maks_1_off_day30}]];
+
+        var maks_1_avar_day1 = [[${maks_1_avar_day0}]];
+        var maks_1_avar_day2 = [[${maks_1_avar_day1}]];
+        var maks_1_avar_day3 = [[${maks_1_avar_day2}]];
+        var maks_1_avar_day4 = [[${maks_1_avar_day3}]];
+        var maks_1_avar_day5 = [[${maks_1_avar_day4}]];
+        var maks_1_avar_day6 = [[${maks_1_avar_day5}]];
+        var maks_1_avar_day7 = [[${maks_1_avar_day6}]];
+        var maks_1_avar_day8 = [[${maks_1_avar_day7}]];
+        var maks_1_avar_day9 = [[${maks_1_avar_day8}]];
+        var maks_1_avar_day10 = [[${maks_1_avar_day9}]];
+        var maks_1_avar_day11 = [[${maks_1_avar_day10}]];
+        var maks_1_avar_day12 = [[${maks_1_avar_day11}]];
+        var maks_1_avar_day13 = [[${maks_1_avar_day12}]];
+        var maks_1_avar_day14 = [[${maks_1_avar_day13}]];
+        var maks_1_avar_day15 = [[${maks_1_avar_day14}]];
+        var maks_1_avar_day16 = [[${maks_1_avar_day15}]];
+        var maks_1_avar_day17 = [[${maks_1_avar_day16}]];
+        var maks_1_avar_day18 = [[${maks_1_avar_day17}]];
+        var maks_1_avar_day19 = [[${maks_1_avar_day18}]];
+        var maks_1_avar_day20 = [[${maks_1_avar_day19}]];
+        var maks_1_avar_day21 = [[${maks_1_avar_day20}]];
+        var maks_1_avar_day22 = [[${maks_1_avar_day21}]];
+        var maks_1_avar_day23 = [[${maks_1_avar_day22}]];
+        var maks_1_avar_day24 = [[${maks_1_avar_day23}]];
+        var maks_1_avar_day25 = [[${maks_1_avar_day24}]];
+        var maks_1_avar_day26 = [[${maks_1_avar_day25}]];
+        var maks_1_avar_day27 = [[${maks_1_avar_day26}]];
+        var maks_1_avar_day28 = [[${maks_1_avar_day27}]];
+        var maks_1_avar_day29 = [[${maks_1_avar_day28}]];
+        var maks_1_avar_day30 = [[${maks_1_avar_day29}]];
+        var maks_1_avar_day31 = [[${maks_1_avar_day30}]];
+
+        var maks_1_nagruzka_day1 = [[${maks_1_nagruzka_day0}]];
+        var maks_1_nagruzka_day2 = [[${maks_1_nagruzka_day1}]];
+        var maks_1_nagruzka_day3 = [[${maks_1_nagruzka_day2}]];
+        var maks_1_nagruzka_day4 = [[${maks_1_nagruzka_day3}]];
+        var maks_1_nagruzka_day5 = [[${maks_1_nagruzka_day4}]];
+        var maks_1_nagruzka_day6 = [[${maks_1_nagruzka_day5}]];
+        var maks_1_nagruzka_day7 = [[${maks_1_nagruzka_day6}]];
+        var maks_1_nagruzka_day8 = [[${maks_1_nagruzka_day7}]];
+        var maks_1_nagruzka_day9 = [[${maks_1_nagruzka_day8}]];
+        var maks_1_nagruzka_day10 = [[${maks_1_nagruzka_day9}]];
+        var maks_1_nagruzka_day11 = [[${maks_1_nagruzka_day10}]];
+        var maks_1_nagruzka_day12 = [[${maks_1_nagruzka_day11}]];
+        var maks_1_nagruzka_day13 = [[${maks_1_nagruzka_day12}]];
+        var maks_1_nagruzka_day14 = [[${maks_1_nagruzka_day13}]];
+        var maks_1_nagruzka_day15 = [[${maks_1_nagruzka_day14}]];
+        var maks_1_nagruzka_day16 = [[${maks_1_nagruzka_day15}]];
+        var maks_1_nagruzka_day17 = [[${maks_1_nagruzka_day16}]];
+        var maks_1_nagruzka_day18 = [[${maks_1_nagruzka_day17}]];
+        var maks_1_nagruzka_day19 = [[${maks_1_nagruzka_day18}]];
+        var maks_1_nagruzka_day20 = [[${maks_1_nagruzka_day19}]];
+        var maks_1_nagruzka_day21 = [[${maks_1_nagruzka_day20}]];
+        var maks_1_nagruzka_day22 = [[${maks_1_nagruzka_day21}]];
+        var maks_1_nagruzka_day23 = [[${maks_1_nagruzka_day22}]];
+        var maks_1_nagruzka_day24 = [[${maks_1_nagruzka_day23}]];
+        var maks_1_nagruzka_day25 = [[${maks_1_nagruzka_day24}]];
+        var maks_1_nagruzka_day26 = [[${maks_1_nagruzka_day25}]];
+        var maks_1_nagruzka_day27 = [[${maks_1_nagruzka_day26}]];
+        var maks_1_nagruzka_day28 = [[${maks_1_nagruzka_day27}]];
+        var maks_1_nagruzka_day29 = [[${maks_1_nagruzka_day28}]];
+        var maks_1_nagruzka_day30 = [[${maks_1_nagruzka_day29}]];
+        var maks_1_nagruzka_day31 = [[${maks_1_nagruzka_day30}]];
+
+    } <!--Переменные для maks_1-->
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_days1', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Загрузка оборудования по дням'
+        },
+        xAxis: {
+            title: {
+                text: 'Дни месяца',
+                align: 'high'
+            },
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [maks_1_rabota_day1, maks_1_rabota_day2, maks_1_rabota_day3,maks_1_rabota_day4,maks_1_rabota_day5,maks_1_rabota_day6,maks_1_rabota_day7,maks_1_rabota_day8,maks_1_rabota_day9,maks_1_rabota_day10,maks_1_rabota_day11,maks_1_rabota_day12,maks_1_rabota_day13,maks_1_rabota_day14,maks_1_rabota_day15,maks_1_rabota_day16,maks_1_rabota_day17,maks_1_rabota_day18,maks_1_rabota_day19,maks_1_rabota_day20,maks_1_rabota_day21,maks_1_rabota_day22,maks_1_rabota_day23,maks_1_rabota_day24,maks_1_rabota_day25,maks_1_rabota_day26,maks_1_rabota_day27,maks_1_rabota_day28,maks_1_rabota_day29,maks_1_rabota_day30,maks_1_rabota_day31]
+        }, {
+            name: 'Ожидание',
+            data: [maks_1_pause_day1, maks_1_pause_day2, maks_1_pause_day3,maks_1_pause_day4,maks_1_pause_day5,maks_1_pause_day6,maks_1_pause_day7,maks_1_pause_day8,maks_1_pause_day9,maks_1_pause_day10,maks_1_pause_day11,maks_1_pause_day12,maks_1_pause_day13,maks_1_pause_day14,maks_1_pause_day15,maks_1_pause_day16,maks_1_pause_day17,maks_1_pause_day18,maks_1_pause_day19,maks_1_pause_day20,maks_1_pause_day21,maks_1_pause_day22,maks_1_pause_day23,maks_1_pause_day24,maks_1_pause_day25,maks_1_pause_day26,maks_1_pause_day27,maks_1_pause_day28,maks_1_pause_day29,maks_1_pause_day30,maks_1_pause_day31]
+        }, {
+            name: 'Выключен',
+            data: [maks_1_off_day1, maks_1_off_day2, maks_1_off_day3,maks_1_off_day4,maks_1_off_day5,maks_1_off_day6,maks_1_off_day7,maks_1_off_day8,maks_1_off_day9,maks_1_off_day10,maks_1_off_day11,maks_1_off_day12,maks_1_off_day13,maks_1_off_day14,maks_1_off_day15,maks_1_off_day16,maks_1_off_day17,maks_1_off_day18,maks_1_off_day19,maks_1_off_day20,maks_1_off_day21,maks_1_off_day22,maks_1_off_day23,maks_1_off_day24,maks_1_off_day25,maks_1_off_day26,maks_1_off_day27,maks_1_off_day28,maks_1_off_day29,maks_1_off_day30,maks_1_off_day31]
+        }, {
+            name: 'Авария',
+            data: [maks_1_avar_day1, maks_1_avar_day2, maks_1_avar_day3,maks_1_avar_day4,maks_1_avar_day5,maks_1_avar_day6,maks_1_avar_day7,maks_1_avar_day8,maks_1_avar_day9,maks_1_avar_day10,maks_1_avar_day11,maks_1_avar_day12,maks_1_avar_day13,maks_1_avar_day14,maks_1_avar_day15,maks_1_avar_day16,maks_1_avar_day17,maks_1_avar_day18,maks_1_avar_day19,maks_1_avar_day20,maks_1_avar_day21,maks_1_avar_day22,maks_1_avar_day23,maks_1_avar_day24,maks_1_avar_day25,maks_1_avar_day26,maks_1_avar_day27,maks_1_avar_day28,maks_1_avar_day29,maks_1_avar_day30,maks_1_avar_day31]
+        }, {
+            name: 'Нагрузка',
+            data: [maks_1_nagruzka_day1, maks_1_nagruzka_day2, maks_1_nagruzka_day3,maks_1_nagruzka_day4,maks_1_nagruzka_day5,maks_1_nagruzka_day6,maks_1_nagruzka_day7,maks_1_nagruzka_day8,maks_1_nagruzka_day9,maks_1_nagruzka_day10,maks_1_nagruzka_day11,maks_1_nagruzka_day12,maks_1_nagruzka_day13,maks_1_nagruzka_day14,maks_1_nagruzka_day15,maks_1_nagruzka_day16,maks_1_nagruzka_day17,maks_1_nagruzka_day18,maks_1_nagruzka_day19,maks_1_nagruzka_day20,maks_1_nagruzka_day21,maks_1_nagruzka_day22,maks_1_nagruzka_day23,maks_1_nagruzka_day24,maks_1_nagruzka_day25,maks_1_nagruzka_day26,maks_1_nagruzka_day27,maks_1_nagruzka_day28,maks_1_nagruzka_day29,maks_1_nagruzka_day30,maks_1_nagruzka_day31]
+        }]
+    });
+
+
+</script>   <!--макс_1 js диагрмма загрузки оборудования по дням-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', [[${maks_1_work}]] ], [ 'Включен', [[${maks_1_pass}]] ], [ 'Выключен', [[${maks_1_fail}]] ],  [ 'В аварии', [[${maks_1_avar}]] ],  [ 'Нагрузка', [[${maks_1_nagruzka}]] ]  ]
+        }]
+    });
+</script>   <!--макс_1 js круговая диагрмма загрузки оборудования-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/robot.jpg" width="100%"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">МАКС #2</figcaption>
+                </div>
+                <div>
+                    <a style="text-decoration: none; float: left" class="icon_mesto_maks_2" href="mesto/mesto_maks_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto_maks_2'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_maks_2" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_maks_2'>Персонал</div></a>
+                </div>
+            </div>
+            <div id="container_days2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!-- html-->
+
+</div> <!--html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+    {
+        var maks_2_rabota_day1 = [[${maks_2_rabota_day0}]];
+        var maks_2_rabota_day2 = [[${maks_2_rabota_day1}]];
+        var maks_2_rabota_day3 = [[${maks_2_rabota_day2}]];
+        var maks_2_rabota_day4 = [[${maks_2_rabota_day3}]];
+        var maks_2_rabota_day5 = [[${maks_2_rabota_day4}]];
+        var maks_2_rabota_day6 = [[${maks_2_rabota_day5}]];
+        var maks_2_rabota_day7 = [[${maks_2_rabota_day6}]];
+        var maks_2_rabota_day8 = [[${maks_2_rabota_day7}]];
+        var maks_2_rabota_day9 = [[${maks_2_rabota_day8}]];
+        var maks_2_rabota_day10 = [[${maks_2_rabota_day9}]];
+        var maks_2_rabota_day11 = [[${maks_2_rabota_day10}]];
+        var maks_2_rabota_day12 = [[${maks_2_rabota_day11}]];
+        var maks_2_rabota_day13 = [[${maks_2_rabota_day12}]];
+        var maks_2_rabota_day14 = [[${maks_2_rabota_day13}]];
+        var maks_2_rabota_day15 = [[${maks_2_rabota_day14}]];
+        var maks_2_rabota_day16 = [[${maks_2_rabota_day15}]];
+        var maks_2_rabota_day17 = [[${maks_2_rabota_day16}]];
+        var maks_2_rabota_day18 = [[${maks_2_rabota_day17}]];
+        var maks_2_rabota_day19 = [[${maks_2_rabota_day18}]];
+        var maks_2_rabota_day20 = [[${maks_2_rabota_day19}]];
+        var maks_2_rabota_day21 = [[${maks_2_rabota_day20}]];
+        var maks_2_rabota_day22 = [[${maks_2_rabota_day21}]];
+        var maks_2_rabota_day23 = [[${maks_2_rabota_day22}]];
+        var maks_2_rabota_day24 = [[${maks_2_rabota_day23}]];
+        var maks_2_rabota_day25 = [[${maks_2_rabota_day24}]];
+        var maks_2_rabota_day26 = [[${maks_2_rabota_day25}]];
+        var maks_2_rabota_day27 = [[${maks_2_rabota_day26}]];
+        var maks_2_rabota_day28 = [[${maks_2_rabota_day27}]];
+        var maks_2_rabota_day29 = [[${maks_2_rabota_day28}]];
+        var maks_2_rabota_day30 = [[${maks_2_rabota_day29}]];
+        var maks_2_rabota_day31 = [[${maks_2_rabota_day30}]];
+
+        var maks_2_pause_day1 = [[${maks_2_pause_day0}]];
+        var maks_2_pause_day2 = [[${maks_2_pause_day1}]];
+        var maks_2_pause_day3 = [[${maks_2_pause_day2}]];
+        var maks_2_pause_day4 = [[${maks_2_pause_day3}]];
+        var maks_2_pause_day5 = [[${maks_2_pause_day4}]];
+        var maks_2_pause_day6 = [[${maks_2_pause_day5}]];
+        var maks_2_pause_day7 = [[${maks_2_pause_day6}]];
+        var maks_2_pause_day8 = [[${maks_2_pause_day7}]];
+        var maks_2_pause_day9 = [[${maks_2_pause_day8}]];
+        var maks_2_pause_day10 = [[${maks_2_pause_day9}]];
+        var maks_2_pause_day11 = [[${maks_2_pause_day10}]];
+        var maks_2_pause_day12 = [[${maks_2_pause_day11}]];
+        var maks_2_pause_day13 = [[${maks_2_pause_day12}]];
+        var maks_2_pause_day14 = [[${maks_2_pause_day13}]];
+        var maks_2_pause_day15 = [[${maks_2_pause_day14}]];
+        var maks_2_pause_day16 = [[${maks_2_pause_day15}]];
+        var maks_2_pause_day17 = [[${maks_2_pause_day16}]];
+        var maks_2_pause_day18 = [[${maks_2_pause_day17}]];
+        var maks_2_pause_day19 = [[${maks_2_pause_day18}]];
+        var maks_2_pause_day20 = [[${maks_2_pause_day19}]];
+        var maks_2_pause_day21 = [[${maks_2_pause_day20}]];
+        var maks_2_pause_day22 = [[${maks_2_pause_day21}]];
+        var maks_2_pause_day23 = [[${maks_2_pause_day22}]];
+        var maks_2_pause_day24 = [[${maks_2_pause_day23}]];
+        var maks_2_pause_day25 = [[${maks_2_pause_day24}]];
+        var maks_2_pause_day26 = [[${maks_2_pause_day25}]];
+        var maks_2_pause_day27 = [[${maks_2_pause_day26}]];
+        var maks_2_pause_day28 = [[${maks_2_pause_day27}]];
+        var maks_2_pause_day29 = [[${maks_2_pause_day28}]];
+        var maks_2_pause_day30 = [[${maks_2_pause_day29}]];
+        var maks_2_pause_day31 = [[${maks_2_pause_day30}]];
+
+        var maks_2_off_day1 = [[${maks_2_off_day0}]];
+        var maks_2_off_day2 = [[${maks_2_off_day1}]];
+        var maks_2_off_day3 = [[${maks_2_off_day2}]];
+        var maks_2_off_day4 = [[${maks_2_off_day3}]];
+        var maks_2_off_day5 = [[${maks_2_off_day4}]];
+        var maks_2_off_day6 = [[${maks_2_off_day5}]];
+        var maks_2_off_day7 = [[${maks_2_off_day6}]];
+        var maks_2_off_day8 = [[${maks_2_off_day7}]];
+        var maks_2_off_day9 = [[${maks_2_off_day8}]];
+        var maks_2_off_day10 = [[${maks_2_off_day9}]];
+        var maks_2_off_day11 = [[${maks_2_off_day10}]];
+        var maks_2_off_day12 = [[${maks_2_off_day11}]];
+        var maks_2_off_day13 = [[${maks_2_off_day12}]];
+        var maks_2_off_day14 = [[${maks_2_off_day13}]];
+        var maks_2_off_day15 = [[${maks_2_off_day14}]];
+        var maks_2_off_day16 = [[${maks_2_off_day15}]];
+        var maks_2_off_day17 = [[${maks_2_off_day16}]];
+        var maks_2_off_day18 = [[${maks_2_off_day17}]];
+        var maks_2_off_day19 = [[${maks_2_off_day18}]];
+        var maks_2_off_day20 = [[${maks_2_off_day19}]];
+        var maks_2_off_day21 = [[${maks_2_off_day20}]];
+        var maks_2_off_day22 = [[${maks_2_off_day21}]];
+        var maks_2_off_day23 = [[${maks_2_off_day22}]];
+        var maks_2_off_day24 = [[${maks_2_off_day23}]];
+        var maks_2_off_day25 = [[${maks_2_off_day24}]];
+        var maks_2_off_day26 = [[${maks_2_off_day25}]];
+        var maks_2_off_day27 = [[${maks_2_off_day26}]];
+        var maks_2_off_day28 = [[${maks_2_off_day27}]];
+        var maks_2_off_day29 = [[${maks_2_off_day28}]];
+        var maks_2_off_day30 = [[${maks_2_off_day29}]];
+        var maks_2_off_day31 = [[${maks_2_off_day30}]];
+
+        var maks_2_avar_day1 = [[${maks_2_avar_day0}]];
+        var maks_2_avar_day2 = [[${maks_2_avar_day1}]];
+        var maks_2_avar_day3 = [[${maks_2_avar_day2}]];
+        var maks_2_avar_day4 = [[${maks_2_avar_day3}]];
+        var maks_2_avar_day5 = [[${maks_2_avar_day4}]];
+        var maks_2_avar_day6 = [[${maks_2_avar_day5}]];
+        var maks_2_avar_day7 = [[${maks_2_avar_day6}]];
+        var maks_2_avar_day8 = [[${maks_2_avar_day7}]];
+        var maks_2_avar_day9 = [[${maks_2_avar_day8}]];
+        var maks_2_avar_day10 = [[${maks_2_avar_day9}]];
+        var maks_2_avar_day11 = [[${maks_2_avar_day10}]];
+        var maks_2_avar_day12 = [[${maks_2_avar_day11}]];
+        var maks_2_avar_day13 = [[${maks_2_avar_day12}]];
+        var maks_2_avar_day14 = [[${maks_2_avar_day13}]];
+        var maks_2_avar_day15 = [[${maks_2_avar_day14}]];
+        var maks_2_avar_day16 = [[${maks_2_avar_day15}]];
+        var maks_2_avar_day17 = [[${maks_2_avar_day16}]];
+        var maks_2_avar_day18 = [[${maks_2_avar_day17}]];
+        var maks_2_avar_day19 = [[${maks_2_avar_day18}]];
+        var maks_2_avar_day20 = [[${maks_2_avar_day19}]];
+        var maks_2_avar_day21 = [[${maks_2_avar_day20}]];
+        var maks_2_avar_day22 = [[${maks_2_avar_day21}]];
+        var maks_2_avar_day23 = [[${maks_2_avar_day22}]];
+        var maks_2_avar_day24 = [[${maks_2_avar_day23}]];
+        var maks_2_avar_day25 = [[${maks_2_avar_day24}]];
+        var maks_2_avar_day26 = [[${maks_2_avar_day25}]];
+        var maks_2_avar_day27 = [[${maks_2_avar_day26}]];
+        var maks_2_avar_day28 = [[${maks_2_avar_day27}]];
+        var maks_2_avar_day29 = [[${maks_2_avar_day28}]];
+        var maks_2_avar_day30 = [[${maks_2_avar_day29}]];
+        var maks_2_avar_day31 = [[${maks_2_avar_day30}]];
+
+        var maks_2_nagruzka_day1 = [[${maks_2_nagruzka_day0}]];
+        var maks_2_nagruzka_day2 = [[${maks_2_nagruzka_day1}]];
+        var maks_2_nagruzka_day3 = [[${maks_2_nagruzka_day2}]];
+        var maks_2_nagruzka_day4 = [[${maks_2_nagruzka_day3}]];
+        var maks_2_nagruzka_day5 = [[${maks_2_nagruzka_day4}]];
+        var maks_2_nagruzka_day6 = [[${maks_2_nagruzka_day5}]];
+        var maks_2_nagruzka_day7 = [[${maks_2_nagruzka_day6}]];
+        var maks_2_nagruzka_day8 = [[${maks_2_nagruzka_day7}]];
+        var maks_2_nagruzka_day9 = [[${maks_2_nagruzka_day8}]];
+        var maks_2_nagruzka_day10 = [[${maks_2_nagruzka_day9}]];
+        var maks_2_nagruzka_day11 = [[${maks_2_nagruzka_day10}]];
+        var maks_2_nagruzka_day12 = [[${maks_2_nagruzka_day11}]];
+        var maks_2_nagruzka_day13 = [[${maks_2_nagruzka_day12}]];
+        var maks_2_nagruzka_day14 = [[${maks_2_nagruzka_day13}]];
+        var maks_2_nagruzka_day15 = [[${maks_2_nagruzka_day14}]];
+        var maks_2_nagruzka_day16 = [[${maks_2_nagruzka_day15}]];
+        var maks_2_nagruzka_day17 = [[${maks_2_nagruzka_day16}]];
+        var maks_2_nagruzka_day18 = [[${maks_2_nagruzka_day17}]];
+        var maks_2_nagruzka_day19 = [[${maks_2_nagruzka_day18}]];
+        var maks_2_nagruzka_day20 = [[${maks_2_nagruzka_day19}]];
+        var maks_2_nagruzka_day21 = [[${maks_2_nagruzka_day20}]];
+        var maks_2_nagruzka_day22 = [[${maks_2_nagruzka_day21}]];
+        var maks_2_nagruzka_day23 = [[${maks_2_nagruzka_day22}]];
+        var maks_2_nagruzka_day24 = [[${maks_2_nagruzka_day23}]];
+        var maks_2_nagruzka_day25 = [[${maks_2_nagruzka_day24}]];
+        var maks_2_nagruzka_day26 = [[${maks_2_nagruzka_day25}]];
+        var maks_2_nagruzka_day27 = [[${maks_2_nagruzka_day26}]];
+        var maks_2_nagruzka_day28 = [[${maks_2_nagruzka_day27}]];
+        var maks_2_nagruzka_day29 = [[${maks_2_nagruzka_day28}]];
+        var maks_2_nagruzka_day30 = [[${maks_2_nagruzka_day29}]];
+        var maks_2_nagruzka_day31 = [[${maks_2_nagruzka_day30}]];
+
+    } <!--Переменные для maks_2-->
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_days2', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Загрузка оборудования по дням'
+        },
+        xAxis: {
+            title: {
+                text: 'Дни месяца',
+                align: 'high'
+            },
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [maks_2_rabota_day1, maks_2_rabota_day2, maks_2_rabota_day3,maks_2_rabota_day4,maks_2_rabota_day5,maks_2_rabota_day6,maks_2_rabota_day7,maks_2_rabota_day8,maks_2_rabota_day9,maks_2_rabota_day10,maks_2_rabota_day11,maks_2_rabota_day12,maks_2_rabota_day13,maks_2_rabota_day14,maks_2_rabota_day15,maks_2_rabota_day16,maks_2_rabota_day17,maks_2_rabota_day18,maks_2_rabota_day19,maks_2_rabota_day20,maks_2_rabota_day21,maks_2_rabota_day22,maks_2_rabota_day23,maks_2_rabota_day24,maks_2_rabota_day25,maks_2_rabota_day26,maks_2_rabota_day27,maks_2_rabota_day28,maks_2_rabota_day29,maks_2_rabota_day30,maks_2_rabota_day31]
+        }, {
+            name: 'Ожидание',
+            data: [maks_2_pause_day1, maks_2_pause_day2, maks_2_pause_day3,maks_2_pause_day4,maks_2_pause_day5,maks_2_pause_day6,maks_2_pause_day7,maks_2_pause_day8,maks_2_pause_day9,maks_2_pause_day10,maks_2_pause_day11,maks_2_pause_day12,maks_2_pause_day13,maks_2_pause_day14,maks_2_pause_day15,maks_2_pause_day16,maks_2_pause_day17,maks_2_pause_day18,maks_2_pause_day19,maks_2_pause_day20,maks_2_pause_day21,maks_2_pause_day22,maks_2_pause_day23,maks_2_pause_day24,maks_2_pause_day25,maks_2_pause_day26,maks_2_pause_day27,maks_2_pause_day28,maks_2_pause_day29,maks_2_pause_day30,maks_2_pause_day31]
+        }, {
+            name: 'Выключен',
+            data: [maks_2_off_day1, maks_2_off_day2, maks_2_off_day3,maks_2_off_day4,maks_2_off_day5,maks_2_off_day6,maks_2_off_day7,maks_2_off_day8,maks_2_off_day9,maks_2_off_day10,maks_2_off_day11,maks_2_off_day12,maks_2_off_day13,maks_2_off_day14,maks_2_off_day15,maks_2_off_day16,maks_2_off_day17,maks_2_off_day18,maks_2_off_day19,maks_2_off_day20,maks_2_off_day21,maks_2_off_day22,maks_2_off_day23,maks_2_off_day24,maks_2_off_day25,maks_2_off_day26,maks_2_off_day27,maks_2_off_day28,maks_2_off_day29,maks_2_off_day30,maks_2_off_day31]
+        }, {
+            name: 'Авария',
+            data: [maks_2_avar_day1, maks_2_avar_day2, maks_2_avar_day3,maks_2_avar_day4,maks_2_avar_day5,maks_2_avar_day6,maks_2_avar_day7,maks_2_avar_day8,maks_2_avar_day9,maks_2_avar_day10,maks_2_avar_day11,maks_2_avar_day12,maks_2_avar_day13,maks_2_avar_day14,maks_2_avar_day15,maks_2_avar_day16,maks_2_avar_day17,maks_2_avar_day18,maks_2_avar_day19,maks_2_avar_day20,maks_2_avar_day21,maks_2_avar_day22,maks_2_avar_day23,maks_2_avar_day24,maks_2_avar_day25,maks_2_avar_day26,maks_2_avar_day27,maks_2_avar_day28,maks_2_avar_day29,maks_2_avar_day30,maks_2_avar_day31]
+        }, {
+            name: 'Нагрузка',
+            data: [maks_2_nagruzka_day1, maks_2_nagruzka_day2, maks_2_nagruzka_day3,maks_2_nagruzka_day4,maks_2_nagruzka_day5,maks_2_nagruzka_day6,maks_2_nagruzka_day7,maks_2_nagruzka_day8,maks_2_nagruzka_day9,maks_2_nagruzka_day10,maks_2_nagruzka_day11,maks_2_nagruzka_day12,maks_2_nagruzka_day13,maks_2_nagruzka_day14,maks_2_nagruzka_day15,maks_2_nagruzka_day16,maks_2_nagruzka_day17,maks_2_nagruzka_day18,maks_2_nagruzka_day19,maks_2_nagruzka_day20,maks_2_nagruzka_day21,maks_2_nagruzka_day22,maks_2_nagruzka_day23,maks_2_nagruzka_day24,maks_2_nagruzka_day25,maks_2_nagruzka_day26,maks_2_nagruzka_day27,maks_2_nagruzka_day28,maks_2_nagruzka_day29,maks_2_nagruzka_day30,maks_2_nagruzka_day31]
+        }]
+    });
+
+
+</script>   <!--макс_2 js диагрмма загрузки оборудования по дням-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container2', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', [[${maks_2_work}]] ], [ 'Включен', [[${maks_2_pass}]] ], [ 'Выключен', [[${maks_2_fail}]] ],  [ 'В аварии', [[${maks_2_avar}]] ],  [ 'Нагрузка', [[${maks_2_nagruzka}]] ]  ]
+        }]
+    });
+</script>   <!--макс_2 js круговая диагрмма загрузки оборудования-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/robot.jpg" width="100%"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">М710</figcaption>
+                </div>
+                <div>
+                    <a style="text-decoration: none; float: left" class="icon_mesto_m710" href="mesto/mesto_m710" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto_m710'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_m710" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_m710'>Персонал</div></a>
+                </div>
+            </div>
+            <div id="container_days3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!-- html-->
+
+</div> <!--html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+    {
+        var m710_rabota_day1 = [[${m710_rabota_day0}]];
+        var m710_rabota_day2 = [[${m710_rabota_day1}]];
+        var m710_rabota_day3 = [[${m710_rabota_day2}]];
+        var m710_rabota_day4 = [[${m710_rabota_day3}]];
+        var m710_rabota_day5 = [[${m710_rabota_day4}]];
+        var m710_rabota_day6 = [[${m710_rabota_day5}]];
+        var m710_rabota_day7 = [[${m710_rabota_day6}]];
+        var m710_rabota_day8 = [[${m710_rabota_day7}]];
+        var m710_rabota_day9 = [[${m710_rabota_day8}]];
+        var m710_rabota_day10 = [[${m710_rabota_day9}]];
+        var m710_rabota_day11 = [[${m710_rabota_day10}]];
+        var m710_rabota_day12 = [[${m710_rabota_day11}]];
+        var m710_rabota_day13 = [[${m710_rabota_day12}]];
+        var m710_rabota_day14 = [[${m710_rabota_day13}]];
+        var m710_rabota_day15 = [[${m710_rabota_day14}]];
+        var m710_rabota_day16 = [[${m710_rabota_day15}]];
+        var m710_rabota_day17 = [[${m710_rabota_day16}]];
+        var m710_rabota_day18 = [[${m710_rabota_day17}]];
+        var m710_rabota_day19 = [[${m710_rabota_day18}]];
+        var m710_rabota_day20 = [[${m710_rabota_day19}]];
+        var m710_rabota_day21 = [[${m710_rabota_day20}]];
+        var m710_rabota_day22 = [[${m710_rabota_day21}]];
+        var m710_rabota_day23 = [[${m710_rabota_day22}]];
+        var m710_rabota_day24 = [[${m710_rabota_day23}]];
+        var m710_rabota_day25 = [[${m710_rabota_day24}]];
+        var m710_rabota_day26 = [[${m710_rabota_day25}]];
+        var m710_rabota_day27 = [[${m710_rabota_day26}]];
+        var m710_rabota_day28 = [[${m710_rabota_day27}]];
+        var m710_rabota_day29 = [[${m710_rabota_day28}]];
+        var m710_rabota_day30 = [[${m710_rabota_day29}]];
+        var m710_rabota_day31 = [[${m710_rabota_day30}]];
+
+        var m710_pause_day1 = [[${m710_pause_day0}]];
+        var m710_pause_day2 = [[${m710_pause_day1}]];
+        var m710_pause_day3 = [[${m710_pause_day2}]];
+        var m710_pause_day4 = [[${m710_pause_day3}]];
+        var m710_pause_day5 = [[${m710_pause_day4}]];
+        var m710_pause_day6 = [[${m710_pause_day5}]];
+        var m710_pause_day7 = [[${m710_pause_day6}]];
+        var m710_pause_day8 = [[${m710_pause_day7}]];
+        var m710_pause_day9 = [[${m710_pause_day8}]];
+        var m710_pause_day10 = [[${m710_pause_day9}]];
+        var m710_pause_day11 = [[${m710_pause_day10}]];
+        var m710_pause_day12 = [[${m710_pause_day11}]];
+        var m710_pause_day13 = [[${m710_pause_day12}]];
+        var m710_pause_day14 = [[${m710_pause_day13}]];
+        var m710_pause_day15 = [[${m710_pause_day14}]];
+        var m710_pause_day16 = [[${m710_pause_day15}]];
+        var m710_pause_day17 = [[${m710_pause_day16}]];
+        var m710_pause_day18 = [[${m710_pause_day17}]];
+        var m710_pause_day19 = [[${m710_pause_day18}]];
+        var m710_pause_day20 = [[${m710_pause_day19}]];
+        var m710_pause_day21 = [[${m710_pause_day20}]];
+        var m710_pause_day22 = [[${m710_pause_day21}]];
+        var m710_pause_day23 = [[${m710_pause_day22}]];
+        var m710_pause_day24 = [[${m710_pause_day23}]];
+        var m710_pause_day25 = [[${m710_pause_day24}]];
+        var m710_pause_day26 = [[${m710_pause_day25}]];
+        var m710_pause_day27 = [[${m710_pause_day26}]];
+        var m710_pause_day28 = [[${m710_pause_day27}]];
+        var m710_pause_day29 = [[${m710_pause_day28}]];
+        var m710_pause_day30 = [[${m710_pause_day29}]];
+        var m710_pause_day31 = [[${m710_pause_day30}]];
+
+        var m710_off_day1 = [[${m710_off_day0}]];
+        var m710_off_day2 = [[${m710_off_day1}]];
+        var m710_off_day3 = [[${m710_off_day2}]];
+        var m710_off_day4 = [[${m710_off_day3}]];
+        var m710_off_day5 = [[${m710_off_day4}]];
+        var m710_off_day6 = [[${m710_off_day5}]];
+        var m710_off_day7 = [[${m710_off_day6}]];
+        var m710_off_day8 = [[${m710_off_day7}]];
+        var m710_off_day9 = [[${m710_off_day8}]];
+        var m710_off_day10 = [[${m710_off_day9}]];
+        var m710_off_day11 = [[${m710_off_day10}]];
+        var m710_off_day12 = [[${m710_off_day11}]];
+        var m710_off_day13 = [[${m710_off_day12}]];
+        var m710_off_day14 = [[${m710_off_day13}]];
+        var m710_off_day15 = [[${m710_off_day14}]];
+        var m710_off_day16 = [[${m710_off_day15}]];
+        var m710_off_day17 = [[${m710_off_day16}]];
+        var m710_off_day18 = [[${m710_off_day17}]];
+        var m710_off_day19 = [[${m710_off_day18}]];
+        var m710_off_day20 = [[${m710_off_day19}]];
+        var m710_off_day21 = [[${m710_off_day20}]];
+        var m710_off_day22 = [[${m710_off_day21}]];
+        var m710_off_day23 = [[${m710_off_day22}]];
+        var m710_off_day24 = [[${m710_off_day23}]];
+        var m710_off_day25 = [[${m710_off_day24}]];
+        var m710_off_day26 = [[${m710_off_day25}]];
+        var m710_off_day27 = [[${m710_off_day26}]];
+        var m710_off_day28 = [[${m710_off_day27}]];
+        var m710_off_day29 = [[${m710_off_day28}]];
+        var m710_off_day30 = [[${m710_off_day29}]];
+        var m710_off_day31 = [[${m710_off_day30}]];
+
+        var m710_avar_day1 = [[${m710_avar_day0}]];
+        var m710_avar_day2 = [[${m710_avar_day1}]];
+        var m710_avar_day3 = [[${m710_avar_day2}]];
+        var m710_avar_day4 = [[${m710_avar_day3}]];
+        var m710_avar_day5 = [[${m710_avar_day4}]];
+        var m710_avar_day6 = [[${m710_avar_day5}]];
+        var m710_avar_day7 = [[${m710_avar_day6}]];
+        var m710_avar_day8 = [[${m710_avar_day7}]];
+        var m710_avar_day9 = [[${m710_avar_day8}]];
+        var m710_avar_day10 = [[${m710_avar_day9}]];
+        var m710_avar_day11 = [[${m710_avar_day10}]];
+        var m710_avar_day12 = [[${m710_avar_day11}]];
+        var m710_avar_day13 = [[${m710_avar_day12}]];
+        var m710_avar_day14 = [[${m710_avar_day13}]];
+        var m710_avar_day15 = [[${m710_avar_day14}]];
+        var m710_avar_day16 = [[${m710_avar_day15}]];
+        var m710_avar_day17 = [[${m710_avar_day16}]];
+        var m710_avar_day18 = [[${m710_avar_day17}]];
+        var m710_avar_day19 = [[${m710_avar_day18}]];
+        var m710_avar_day20 = [[${m710_avar_day19}]];
+        var m710_avar_day21 = [[${m710_avar_day20}]];
+        var m710_avar_day22 = [[${m710_avar_day21}]];
+        var m710_avar_day23 = [[${m710_avar_day22}]];
+        var m710_avar_day24 = [[${m710_avar_day23}]];
+        var m710_avar_day25 = [[${m710_avar_day24}]];
+        var m710_avar_day26 = [[${m710_avar_day25}]];
+        var m710_avar_day27 = [[${m710_avar_day26}]];
+        var m710_avar_day28 = [[${m710_avar_day27}]];
+        var m710_avar_day29 = [[${m710_avar_day28}]];
+        var m710_avar_day30 = [[${m710_avar_day29}]];
+        var m710_avar_day31 = [[${m710_avar_day30}]];
+
+        var m710_nagruzka_day1 = [[${m710_nagruzka_day0}]];
+        var m710_nagruzka_day2 = [[${m710_nagruzka_day1}]];
+        var m710_nagruzka_day3 = [[${m710_nagruzka_day2}]];
+        var m710_nagruzka_day4 = [[${m710_nagruzka_day3}]];
+        var m710_nagruzka_day5 = [[${m710_nagruzka_day4}]];
+        var m710_nagruzka_day6 = [[${m710_nagruzka_day5}]];
+        var m710_nagruzka_day7 = [[${m710_nagruzka_day6}]];
+        var m710_nagruzka_day8 = [[${m710_nagruzka_day7}]];
+        var m710_nagruzka_day9 = [[${m710_nagruzka_day8}]];
+        var m710_nagruzka_day10 = [[${m710_nagruzka_day9}]];
+        var m710_nagruzka_day11 = [[${m710_nagruzka_day10}]];
+        var m710_nagruzka_day12 = [[${m710_nagruzka_day11}]];
+        var m710_nagruzka_day13 = [[${m710_nagruzka_day12}]];
+        var m710_nagruzka_day14 = [[${m710_nagruzka_day13}]];
+        var m710_nagruzka_day15 = [[${m710_nagruzka_day14}]];
+        var m710_nagruzka_day16 = [[${m710_nagruzka_day15}]];
+        var m710_nagruzka_day17 = [[${m710_nagruzka_day16}]];
+        var m710_nagruzka_day18 = [[${m710_nagruzka_day17}]];
+        var m710_nagruzka_day19 = [[${m710_nagruzka_day18}]];
+        var m710_nagruzka_day20 = [[${m710_nagruzka_day19}]];
+        var m710_nagruzka_day21 = [[${m710_nagruzka_day20}]];
+        var m710_nagruzka_day22 = [[${m710_nagruzka_day21}]];
+        var m710_nagruzka_day23 = [[${m710_nagruzka_day22}]];
+        var m710_nagruzka_day24 = [[${m710_nagruzka_day23}]];
+        var m710_nagruzka_day25 = [[${m710_nagruzka_day24}]];
+        var m710_nagruzka_day26 = [[${m710_nagruzka_day25}]];
+        var m710_nagruzka_day27 = [[${m710_nagruzka_day26}]];
+        var m710_nagruzka_day28 = [[${m710_nagruzka_day27}]];
+        var m710_nagruzka_day29 = [[${m710_nagruzka_day28}]];
+        var m710_nagruzka_day30 = [[${m710_nagruzka_day29}]];
+        var m710_nagruzka_day31 = [[${m710_nagruzka_day30}]];
+
+    } <!--Переменные для m710-->
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_days3', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Загрузка оборудования по дням'
+        },
+        xAxis: {
+            title: {
+                text: 'Дни месяца',
+                align: 'high'
+            },
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [m710_rabota_day1, m710_rabota_day2, m710_rabota_day3,m710_rabota_day4,m710_rabota_day5,m710_rabota_day6,m710_rabota_day7,m710_rabota_day8,m710_rabota_day9,m710_rabota_day10,m710_rabota_day11,m710_rabota_day12,m710_rabota_day13,m710_rabota_day14,m710_rabota_day15,m710_rabota_day16,m710_rabota_day17,m710_rabota_day18,m710_rabota_day19,m710_rabota_day20,m710_rabota_day21,m710_rabota_day22,m710_rabota_day23,m710_rabota_day24,m710_rabota_day25,m710_rabota_day26,m710_rabota_day27,m710_rabota_day28,m710_rabota_day29,m710_rabota_day30,m710_rabota_day31]
+        }, {
+            name: 'Ожидание',
+            data: [m710_pause_day1, m710_pause_day2, m710_pause_day3,m710_pause_day4,m710_pause_day5,m710_pause_day6,m710_pause_day7,m710_pause_day8,m710_pause_day9,m710_pause_day10,m710_pause_day11,m710_pause_day12,m710_pause_day13,m710_pause_day14,m710_pause_day15,m710_pause_day16,m710_pause_day17,m710_pause_day18,m710_pause_day19,m710_pause_day20,m710_pause_day21,m710_pause_day22,m710_pause_day23,m710_pause_day24,m710_pause_day25,m710_pause_day26,m710_pause_day27,m710_pause_day28,m710_pause_day29,m710_pause_day30,m710_pause_day31]
+        }, {
+            name: 'Выключен',
+            data: [m710_off_day1, m710_off_day2, m710_off_day3,m710_off_day4,m710_off_day5,m710_off_day6,m710_off_day7,m710_off_day8,m710_off_day9,m710_off_day10,m710_off_day11,m710_off_day12,m710_off_day13,m710_off_day14,m710_off_day15,m710_off_day16,m710_off_day17,m710_off_day18,m710_off_day19,m710_off_day20,m710_off_day21,m710_off_day22,m710_off_day23,m710_off_day24,m710_off_day25,m710_off_day26,m710_off_day27,m710_off_day28,m710_off_day29,m710_off_day30,m710_off_day31]
+        }, {
+            name: 'Авария',
+            data: [m710_avar_day1, m710_avar_day2, m710_avar_day3,m710_avar_day4,m710_avar_day5,m710_avar_day6,m710_avar_day7,m710_avar_day8,m710_avar_day9,m710_avar_day10,m710_avar_day11,m710_avar_day12,m710_avar_day13,m710_avar_day14,m710_avar_day15,m710_avar_day16,m710_avar_day17,m710_avar_day18,m710_avar_day19,m710_avar_day20,m710_avar_day21,m710_avar_day22,m710_avar_day23,m710_avar_day24,m710_avar_day25,m710_avar_day26,m710_avar_day27,m710_avar_day28,m710_avar_day29,m710_avar_day30,m710_avar_day31]
+        }, {
+            name: 'Нагрузка',
+            data: [m710_nagruzka_day1, m710_nagruzka_day2, m710_nagruzka_day3,m710_nagruzka_day4,m710_nagruzka_day5,m710_nagruzka_day6,m710_nagruzka_day7,m710_nagruzka_day8,m710_nagruzka_day9,m710_nagruzka_day10,m710_nagruzka_day11,m710_nagruzka_day12,m710_nagruzka_day13,m710_nagruzka_day14,m710_nagruzka_day15,m710_nagruzka_day16,m710_nagruzka_day17,m710_nagruzka_day18,m710_nagruzka_day19,m710_nagruzka_day20,m710_nagruzka_day21,m710_nagruzka_day22,m710_nagruzka_day23,m710_nagruzka_day24,m710_nagruzka_day25,m710_nagruzka_day26,m710_nagruzka_day27,m710_nagruzka_day28,m710_nagruzka_day29,m710_nagruzka_day30,m710_nagruzka_day31]
+        }]
+    });
+
+
+</script>   <!--М710 js диагрмма загрузки оборудования по дням-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container3', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', [[${m710_work}]] ], [ 'Включен', [[${m710_pass}]] ], [ 'Выключен', [[${m710_fail}]] ],  [ 'В аварии', [[${m710_avar}]] ],  [ 'Нагрузка', [[${m710_nagruzka}]] ]  ]
+        }]
+    });
+</script>   <!--М710 js круговая диагрмма загрузки оборудования-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/robot.jpg" width="100%"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">РТК12С</figcaption>
+                </div>
+                <div>
+                    <a style="text-decoration: none; float: left" class="icon_mesto_rtc12c" href="mesto/mesto_rtk12c" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto_rtc12c'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_rtc12c" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_rtc12c'>Персонал</div></a>
+                </div>
+            </div>
+            <div id="container_days4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!-- html-->
+
+</div> <!--html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+    {
+        var rtk12c_rabota_day1 = [[${rtk12c_rabota_day0}]];
+        var rtk12c_rabota_day2 = [[${rtk12c_rabota_day1}]];
+        var rtk12c_rabota_day3 = [[${rtk12c_rabota_day2}]];
+        var rtk12c_rabota_day4 = [[${rtk12c_rabota_day3}]];
+        var rtk12c_rabota_day5 = [[${rtk12c_rabota_day4}]];
+        var rtk12c_rabota_day6 = [[${rtk12c_rabota_day5}]];
+        var rtk12c_rabota_day7 = [[${rtk12c_rabota_day6}]];
+        var rtk12c_rabota_day8 = [[${rtk12c_rabota_day7}]];
+        var rtk12c_rabota_day9 = [[${rtk12c_rabota_day8}]];
+        var rtk12c_rabota_day10 = [[${rtk12c_rabota_day9}]];
+        var rtk12c_rabota_day11 = [[${rtk12c_rabota_day10}]];
+        var rtk12c_rabota_day12 = [[${rtk12c_rabota_day11}]];
+        var rtk12c_rabota_day13 = [[${rtk12c_rabota_day12}]];
+        var rtk12c_rabota_day14 = [[${rtk12c_rabota_day13}]];
+        var rtk12c_rabota_day15 = [[${rtk12c_rabota_day14}]];
+        var rtk12c_rabota_day16 = [[${rtk12c_rabota_day15}]];
+        var rtk12c_rabota_day17 = [[${rtk12c_rabota_day16}]];
+        var rtk12c_rabota_day18 = [[${rtk12c_rabota_day17}]];
+        var rtk12c_rabota_day19 = [[${rtk12c_rabota_day18}]];
+        var rtk12c_rabota_day20 = [[${rtk12c_rabota_day19}]];
+        var rtk12c_rabota_day21 = [[${rtk12c_rabota_day20}]];
+        var rtk12c_rabota_day22 = [[${rtk12c_rabota_day21}]];
+        var rtk12c_rabota_day23 = [[${rtk12c_rabota_day22}]];
+        var rtk12c_rabota_day24 = [[${rtk12c_rabota_day23}]];
+        var rtk12c_rabota_day25 = [[${rtk12c_rabota_day24}]];
+        var rtk12c_rabota_day26 = [[${rtk12c_rabota_day25}]];
+        var rtk12c_rabota_day27 = [[${rtk12c_rabota_day26}]];
+        var rtk12c_rabota_day28 = [[${rtk12c_rabota_day27}]];
+        var rtk12c_rabota_day29 = [[${rtk12c_rabota_day28}]];
+        var rtk12c_rabota_day30 = [[${rtk12c_rabota_day29}]];
+        var rtk12c_rabota_day31 = [[${rtk12c_rabota_day30}]];
+
+        var rtk12c_pause_day1 = [[${rtk12c_pause_day0}]];
+        var rtk12c_pause_day2 = [[${rtk12c_pause_day1}]];
+        var rtk12c_pause_day3 = [[${rtk12c_pause_day2}]];
+        var rtk12c_pause_day4 = [[${rtk12c_pause_day3}]];
+        var rtk12c_pause_day5 = [[${rtk12c_pause_day4}]];
+        var rtk12c_pause_day6 = [[${rtk12c_pause_day5}]];
+        var rtk12c_pause_day7 = [[${rtk12c_pause_day6}]];
+        var rtk12c_pause_day8 = [[${rtk12c_pause_day7}]];
+        var rtk12c_pause_day9 = [[${rtk12c_pause_day8}]];
+        var rtk12c_pause_day10 = [[${rtk12c_pause_day9}]];
+        var rtk12c_pause_day11 = [[${rtk12c_pause_day10}]];
+        var rtk12c_pause_day12 = [[${rtk12c_pause_day11}]];
+        var rtk12c_pause_day13 = [[${rtk12c_pause_day12}]];
+        var rtk12c_pause_day14 = [[${rtk12c_pause_day13}]];
+        var rtk12c_pause_day15 = [[${rtk12c_pause_day14}]];
+        var rtk12c_pause_day16 = [[${rtk12c_pause_day15}]];
+        var rtk12c_pause_day17 = [[${rtk12c_pause_day16}]];
+        var rtk12c_pause_day18 = [[${rtk12c_pause_day17}]];
+        var rtk12c_pause_day19 = [[${rtk12c_pause_day18}]];
+        var rtk12c_pause_day20 = [[${rtk12c_pause_day19}]];
+        var rtk12c_pause_day21 = [[${rtk12c_pause_day20}]];
+        var rtk12c_pause_day22 = [[${rtk12c_pause_day21}]];
+        var rtk12c_pause_day23 = [[${rtk12c_pause_day22}]];
+        var rtk12c_pause_day24 = [[${rtk12c_pause_day23}]];
+        var rtk12c_pause_day25 = [[${rtk12c_pause_day24}]];
+        var rtk12c_pause_day26 = [[${rtk12c_pause_day25}]];
+        var rtk12c_pause_day27 = [[${rtk12c_pause_day26}]];
+        var rtk12c_pause_day28 = [[${rtk12c_pause_day27}]];
+        var rtk12c_pause_day29 = [[${rtk12c_pause_day28}]];
+        var rtk12c_pause_day30 = [[${rtk12c_pause_day29}]];
+        var rtk12c_pause_day31 = [[${rtk12c_pause_day30}]];
+
+        var rtk12c_off_day1 = [[${rtk12c_off_day0}]];
+        var rtk12c_off_day2 = [[${rtk12c_off_day1}]];
+        var rtk12c_off_day3 = [[${rtk12c_off_day2}]];
+        var rtk12c_off_day4 = [[${rtk12c_off_day3}]];
+        var rtk12c_off_day5 = [[${rtk12c_off_day4}]];
+        var rtk12c_off_day6 = [[${rtk12c_off_day5}]];
+        var rtk12c_off_day7 = [[${rtk12c_off_day6}]];
+        var rtk12c_off_day8 = [[${rtk12c_off_day7}]];
+        var rtk12c_off_day9 = [[${rtk12c_off_day8}]];
+        var rtk12c_off_day10 = [[${rtk12c_off_day9}]];
+        var rtk12c_off_day11 = [[${rtk12c_off_day10}]];
+        var rtk12c_off_day12 = [[${rtk12c_off_day11}]];
+        var rtk12c_off_day13 = [[${rtk12c_off_day12}]];
+        var rtk12c_off_day14 = [[${rtk12c_off_day13}]];
+        var rtk12c_off_day15 = [[${rtk12c_off_day14}]];
+        var rtk12c_off_day16 = [[${rtk12c_off_day15}]];
+        var rtk12c_off_day17 = [[${rtk12c_off_day16}]];
+        var rtk12c_off_day18 = [[${rtk12c_off_day17}]];
+        var rtk12c_off_day19 = [[${rtk12c_off_day18}]];
+        var rtk12c_off_day20 = [[${rtk12c_off_day19}]];
+        var rtk12c_off_day21 = [[${rtk12c_off_day20}]];
+        var rtk12c_off_day22 = [[${rtk12c_off_day21}]];
+        var rtk12c_off_day23 = [[${rtk12c_off_day22}]];
+        var rtk12c_off_day24 = [[${rtk12c_off_day23}]];
+        var rtk12c_off_day25 = [[${rtk12c_off_day24}]];
+        var rtk12c_off_day26 = [[${rtk12c_off_day25}]];
+        var rtk12c_off_day27 = [[${rtk12c_off_day26}]];
+        var rtk12c_off_day28 = [[${rtk12c_off_day27}]];
+        var rtk12c_off_day29 = [[${rtk12c_off_day28}]];
+        var rtk12c_off_day30 = [[${rtk12c_off_day29}]];
+        var rtk12c_off_day31 = [[${rtk12c_off_day30}]];
+
+        var rtk12c_avar_day1 = [[${rtk12c_avar_day0}]];
+        var rtk12c_avar_day2 = [[${rtk12c_avar_day1}]];
+        var rtk12c_avar_day3 = [[${rtk12c_avar_day2}]];
+        var rtk12c_avar_day4 = [[${rtk12c_avar_day3}]];
+        var rtk12c_avar_day5 = [[${rtk12c_avar_day4}]];
+        var rtk12c_avar_day6 = [[${rtk12c_avar_day5}]];
+        var rtk12c_avar_day7 = [[${rtk12c_avar_day6}]];
+        var rtk12c_avar_day8 = [[${rtk12c_avar_day7}]];
+        var rtk12c_avar_day9 = [[${rtk12c_avar_day8}]];
+        var rtk12c_avar_day10 = [[${rtk12c_avar_day9}]];
+        var rtk12c_avar_day11 = [[${rtk12c_avar_day10}]];
+        var rtk12c_avar_day12 = [[${rtk12c_avar_day11}]];
+        var rtk12c_avar_day13 = [[${rtk12c_avar_day12}]];
+        var rtk12c_avar_day14 = [[${rtk12c_avar_day13}]];
+        var rtk12c_avar_day15 = [[${rtk12c_avar_day14}]];
+        var rtk12c_avar_day16 = [[${rtk12c_avar_day15}]];
+        var rtk12c_avar_day17 = [[${rtk12c_avar_day16}]];
+        var rtk12c_avar_day18 = [[${rtk12c_avar_day17}]];
+        var rtk12c_avar_day19 = [[${rtk12c_avar_day18}]];
+        var rtk12c_avar_day20 = [[${rtk12c_avar_day19}]];
+        var rtk12c_avar_day21 = [[${rtk12c_avar_day20}]];
+        var rtk12c_avar_day22 = [[${rtk12c_avar_day21}]];
+        var rtk12c_avar_day23 = [[${rtk12c_avar_day22}]];
+        var rtk12c_avar_day24 = [[${rtk12c_avar_day23}]];
+        var rtk12c_avar_day25 = [[${rtk12c_avar_day24}]];
+        var rtk12c_avar_day26 = [[${rtk12c_avar_day25}]];
+        var rtk12c_avar_day27 = [[${rtk12c_avar_day26}]];
+        var rtk12c_avar_day28 = [[${rtk12c_avar_day27}]];
+        var rtk12c_avar_day29 = [[${rtk12c_avar_day28}]];
+        var rtk12c_avar_day30 = [[${rtk12c_avar_day29}]];
+        var rtk12c_avar_day31 = [[${rtk12c_avar_day30}]];
+
+        var rtk12c_nagruzka_day1 = [[${rtk12c_nagruzka_day0}]];
+        var rtk12c_nagruzka_day2 = [[${rtk12c_nagruzka_day1}]];
+        var rtk12c_nagruzka_day3 = [[${rtk12c_nagruzka_day2}]];
+        var rtk12c_nagruzka_day4 = [[${rtk12c_nagruzka_day3}]];
+        var rtk12c_nagruzka_day5 = [[${rtk12c_nagruzka_day4}]];
+        var rtk12c_nagruzka_day6 = [[${rtk12c_nagruzka_day5}]];
+        var rtk12c_nagruzka_day7 = [[${rtk12c_nagruzka_day6}]];
+        var rtk12c_nagruzka_day8 = [[${rtk12c_nagruzka_day7}]];
+        var rtk12c_nagruzka_day9 = [[${rtk12c_nagruzka_day8}]];
+        var rtk12c_nagruzka_day10 = [[${rtk12c_nagruzka_day9}]];
+        var rtk12c_nagruzka_day11 = [[${rtk12c_nagruzka_day10}]];
+        var rtk12c_nagruzka_day12 = [[${rtk12c_nagruzka_day11}]];
+        var rtk12c_nagruzka_day13 = [[${rtk12c_nagruzka_day12}]];
+        var rtk12c_nagruzka_day14 = [[${rtk12c_nagruzka_day13}]];
+        var rtk12c_nagruzka_day15 = [[${rtk12c_nagruzka_day14}]];
+        var rtk12c_nagruzka_day16 = [[${rtk12c_nagruzka_day15}]];
+        var rtk12c_nagruzka_day17 = [[${rtk12c_nagruzka_day16}]];
+        var rtk12c_nagruzka_day18 = [[${rtk12c_nagruzka_day17}]];
+        var rtk12c_nagruzka_day19 = [[${rtk12c_nagruzka_day18}]];
+        var rtk12c_nagruzka_day20 = [[${rtk12c_nagruzka_day19}]];
+        var rtk12c_nagruzka_day21 = [[${rtk12c_nagruzka_day20}]];
+        var rtk12c_nagruzka_day22 = [[${rtk12c_nagruzka_day21}]];
+        var rtk12c_nagruzka_day23 = [[${rtk12c_nagruzka_day22}]];
+        var rtk12c_nagruzka_day24 = [[${rtk12c_nagruzka_day23}]];
+        var rtk12c_nagruzka_day25 = [[${rtk12c_nagruzka_day24}]];
+        var rtk12c_nagruzka_day26 = [[${rtk12c_nagruzka_day25}]];
+        var rtk12c_nagruzka_day27 = [[${rtk12c_nagruzka_day26}]];
+        var rtk12c_nagruzka_day28 = [[${rtk12c_nagruzka_day27}]];
+        var rtk12c_nagruzka_day29 = [[${rtk12c_nagruzka_day28}]];
+        var rtk12c_nagruzka_day30 = [[${rtk12c_nagruzka_day29}]];
+        var rtk12c_nagruzka_day31 = [[${rtk12c_nagruzka_day30}]];
+
+    } <!--Переменные для rtk12c-->
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_days4', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Загрузка оборудования по дням'
+        },
+        xAxis: {
+            title: {
+                text: 'Дни месяца',
+                align: 'high'
+            },
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [rtk12c_rabota_day1, rtk12c_rabota_day2, rtk12c_rabota_day3,rtk12c_rabota_day4,rtk12c_rabota_day5,rtk12c_rabota_day6,rtk12c_rabota_day7,rtk12c_rabota_day8,rtk12c_rabota_day9,rtk12c_rabota_day10,rtk12c_rabota_day11,rtk12c_rabota_day12,rtk12c_rabota_day13,rtk12c_rabota_day14,rtk12c_rabota_day15,rtk12c_rabota_day16,rtk12c_rabota_day17,rtk12c_rabota_day18,rtk12c_rabota_day19,rtk12c_rabota_day20,rtk12c_rabota_day21,rtk12c_rabota_day22,rtk12c_rabota_day23,rtk12c_rabota_day24,rtk12c_rabota_day25,rtk12c_rabota_day26,rtk12c_rabota_day27,rtk12c_rabota_day28,rtk12c_rabota_day29,rtk12c_rabota_day30,rtk12c_rabota_day31]
+        }, {
+            name: 'Ожидание',
+            data: [rtk12c_pause_day1, rtk12c_pause_day2, rtk12c_pause_day3,rtk12c_pause_day4,rtk12c_pause_day5,rtk12c_pause_day6,rtk12c_pause_day7,rtk12c_pause_day8,rtk12c_pause_day9,rtk12c_pause_day10,rtk12c_pause_day11,rtk12c_pause_day12,rtk12c_pause_day13,rtk12c_pause_day14,rtk12c_pause_day15,rtk12c_pause_day16,rtk12c_pause_day17,rtk12c_pause_day18,rtk12c_pause_day19,rtk12c_pause_day20,rtk12c_pause_day21,rtk12c_pause_day22,rtk12c_pause_day23,rtk12c_pause_day24,rtk12c_pause_day25,rtk12c_pause_day26,rtk12c_pause_day27,rtk12c_pause_day28,rtk12c_pause_day29,rtk12c_pause_day30,rtk12c_pause_day31]
+        }, {
+            name: 'Выключен',
+            data: [rtk12c_off_day1, rtk12c_off_day2, rtk12c_off_day3,rtk12c_off_day4,rtk12c_off_day5,rtk12c_off_day6,rtk12c_off_day7,rtk12c_off_day8,rtk12c_off_day9,rtk12c_off_day10,rtk12c_off_day11,rtk12c_off_day12,rtk12c_off_day13,rtk12c_off_day14,rtk12c_off_day15,rtk12c_off_day16,rtk12c_off_day17,rtk12c_off_day18,rtk12c_off_day19,rtk12c_off_day20,rtk12c_off_day21,rtk12c_off_day22,rtk12c_off_day23,rtk12c_off_day24,rtk12c_off_day25,rtk12c_off_day26,rtk12c_off_day27,rtk12c_off_day28,rtk12c_off_day29,rtk12c_off_day30,rtk12c_off_day31]
+        }, {
+            name: 'Авария',
+            data: [rtk12c_avar_day1, rtk12c_avar_day2, rtk12c_avar_day3,rtk12c_avar_day4,rtk12c_avar_day5,rtk12c_avar_day6,rtk12c_avar_day7,rtk12c_avar_day8,rtk12c_avar_day9,rtk12c_avar_day10,rtk12c_avar_day11,rtk12c_avar_day12,rtk12c_avar_day13,rtk12c_avar_day14,rtk12c_avar_day15,rtk12c_avar_day16,rtk12c_avar_day17,rtk12c_avar_day18,rtk12c_avar_day19,rtk12c_avar_day20,rtk12c_avar_day21,rtk12c_avar_day22,rtk12c_avar_day23,rtk12c_avar_day24,rtk12c_avar_day25,rtk12c_avar_day26,rtk12c_avar_day27,rtk12c_avar_day28,rtk12c_avar_day29,rtk12c_avar_day30,rtk12c_avar_day31]
+        }, {
+            name: 'Нагрузка',
+            data: [rtk12c_nagruzka_day1, rtk12c_nagruzka_day2, rtk12c_nagruzka_day3,rtk12c_nagruzka_day4,rtk12c_nagruzka_day5,rtk12c_nagruzka_day6,rtk12c_nagruzka_day7,rtk12c_nagruzka_day8,rtk12c_nagruzka_day9,rtk12c_nagruzka_day10,rtk12c_nagruzka_day11,rtk12c_nagruzka_day12,rtk12c_nagruzka_day13,rtk12c_nagruzka_day14,rtk12c_nagruzka_day15,rtk12c_nagruzka_day16,rtk12c_nagruzka_day17,rtk12c_nagruzka_day18,rtk12c_nagruzka_day19,rtk12c_nagruzka_day20,rtk12c_nagruzka_day21,rtk12c_nagruzka_day22,rtk12c_nagruzka_day23,rtk12c_nagruzka_day24,rtk12c_nagruzka_day25,rtk12c_nagruzka_day26,rtk12c_nagruzka_day27,rtk12c_nagruzka_day28,rtk12c_nagruzka_day29,rtk12c_nagruzka_day30,rtk12c_nagruzka_day31]
+        }]
+    });
+
+
+</script>   <!--РТК12С js диагрмма загрузки оборудования по дням-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container4', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', [[${rtk12c_work}]] ], [ 'Включен', [[${rtk12c_pass}]] ], [ 'Выключен', [[${rtk12c_fail}]] ],  [ 'В аварии', [[${rtk12c_avar}]] ],  [ 'Нагрузка', [[${rtk12c_nagruzka}]] ]  ]
+        }]
+    });
+</script>   <!--РТК12С js круговая диагрмма загрузки оборудования-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/robot_p250.jpg" width="100%"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">p250</figcaption>
+                </div>
+                <div>
+                    <a style="text-decoration: none; float: left" class="icon_mesto_p250" href="mesto/mesto_p250" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(895, screen.availHeight)+',width='+Math.min(1020, screen.availWidth)); return false;"><div class='label_mesto_p250'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_p250" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_p250'>Персонал</div></a>
+                </div>
+            </div>
+            <div id="container_days5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!-- html-->
+
+</div> <!--html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+    {
+        var p250_rabota_day1 = [[${p250_rabota_day0}]];
+        var p250_rabota_day2 = [[${p250_rabota_day1}]];
+        var p250_rabota_day3 = [[${p250_rabota_day2}]];
+        var p250_rabota_day4 = [[${p250_rabota_day3}]];
+        var p250_rabota_day5 = [[${p250_rabota_day4}]];
+        var p250_rabota_day6 = [[${p250_rabota_day5}]];
+        var p250_rabota_day7 = [[${p250_rabota_day6}]];
+        var p250_rabota_day8 = [[${p250_rabota_day7}]];
+        var p250_rabota_day9 = [[${p250_rabota_day8}]];
+        var p250_rabota_day10 = [[${p250_rabota_day9}]];
+        var p250_rabota_day11 = [[${p250_rabota_day10}]];
+        var p250_rabota_day12 = [[${p250_rabota_day11}]];
+        var p250_rabota_day13 = [[${p250_rabota_day12}]];
+        var p250_rabota_day14 = [[${p250_rabota_day13}]];
+        var p250_rabota_day15 = [[${p250_rabota_day14}]];
+        var p250_rabota_day16 = [[${p250_rabota_day15}]];
+        var p250_rabota_day17 = [[${p250_rabota_day16}]];
+        var p250_rabota_day18 = [[${p250_rabota_day17}]];
+        var p250_rabota_day19 = [[${p250_rabota_day18}]];
+        var p250_rabota_day20 = [[${p250_rabota_day19}]];
+        var p250_rabota_day21 = [[${p250_rabota_day20}]];
+        var p250_rabota_day22 = [[${p250_rabota_day21}]];
+        var p250_rabota_day23 = [[${p250_rabota_day22}]];
+        var p250_rabota_day24 = [[${p250_rabota_day23}]];
+        var p250_rabota_day25 = [[${p250_rabota_day24}]];
+        var p250_rabota_day26 = [[${p250_rabota_day25}]];
+        var p250_rabota_day27 = [[${p250_rabota_day26}]];
+        var p250_rabota_day28 = [[${p250_rabota_day27}]];
+        var p250_rabota_day29 = [[${p250_rabota_day28}]];
+        var p250_rabota_day30 = [[${p250_rabota_day29}]];
+        var p250_rabota_day31 = [[${p250_rabota_day30}]];
+
+        var p250_pause_day1 = [[${p250_pause_day0}]];
+        var p250_pause_day2 = [[${p250_pause_day1}]];
+        var p250_pause_day3 = [[${p250_pause_day2}]];
+        var p250_pause_day4 = [[${p250_pause_day3}]];
+        var p250_pause_day5 = [[${p250_pause_day4}]];
+        var p250_pause_day6 = [[${p250_pause_day5}]];
+        var p250_pause_day7 = [[${p250_pause_day6}]];
+        var p250_pause_day8 = [[${p250_pause_day7}]];
+        var p250_pause_day9 = [[${p250_pause_day8}]];
+        var p250_pause_day10 = [[${p250_pause_day9}]];
+        var p250_pause_day11 = [[${p250_pause_day10}]];
+        var p250_pause_day12 = [[${p250_pause_day11}]];
+        var p250_pause_day13 = [[${p250_pause_day12}]];
+        var p250_pause_day14 = [[${p250_pause_day13}]];
+        var p250_pause_day15 = [[${p250_pause_day14}]];
+        var p250_pause_day16 = [[${p250_pause_day15}]];
+        var p250_pause_day17 = [[${p250_pause_day16}]];
+        var p250_pause_day18 = [[${p250_pause_day17}]];
+        var p250_pause_day19 = [[${p250_pause_day18}]];
+        var p250_pause_day20 = [[${p250_pause_day19}]];
+        var p250_pause_day21 = [[${p250_pause_day20}]];
+        var p250_pause_day22 = [[${p250_pause_day21}]];
+        var p250_pause_day23 = [[${p250_pause_day22}]];
+        var p250_pause_day24 = [[${p250_pause_day23}]];
+        var p250_pause_day25 = [[${p250_pause_day24}]];
+        var p250_pause_day26 = [[${p250_pause_day25}]];
+        var p250_pause_day27 = [[${p250_pause_day26}]];
+        var p250_pause_day28 = [[${p250_pause_day27}]];
+        var p250_pause_day29 = [[${p250_pause_day28}]];
+        var p250_pause_day30 = [[${p250_pause_day29}]];
+        var p250_pause_day31 = [[${p250_pause_day30}]];
+
+        var p250_off_day1 = [[${p250_off_day0}]];
+        var p250_off_day2 = [[${p250_off_day1}]];
+        var p250_off_day3 = [[${p250_off_day2}]];
+        var p250_off_day4 = [[${p250_off_day3}]];
+        var p250_off_day5 = [[${p250_off_day4}]];
+        var p250_off_day6 = [[${p250_off_day5}]];
+        var p250_off_day7 = [[${p250_off_day6}]];
+        var p250_off_day8 = [[${p250_off_day7}]];
+        var p250_off_day9 = [[${p250_off_day8}]];
+        var p250_off_day10 = [[${p250_off_day9}]];
+        var p250_off_day11 = [[${p250_off_day10}]];
+        var p250_off_day12 = [[${p250_off_day11}]];
+        var p250_off_day13 = [[${p250_off_day12}]];
+        var p250_off_day14 = [[${p250_off_day13}]];
+        var p250_off_day15 = [[${p250_off_day14}]];
+        var p250_off_day16 = [[${p250_off_day15}]];
+        var p250_off_day17 = [[${p250_off_day16}]];
+        var p250_off_day18 = [[${p250_off_day17}]];
+        var p250_off_day19 = [[${p250_off_day18}]];
+        var p250_off_day20 = [[${p250_off_day19}]];
+        var p250_off_day21 = [[${p250_off_day20}]];
+        var p250_off_day22 = [[${p250_off_day21}]];
+        var p250_off_day23 = [[${p250_off_day22}]];
+        var p250_off_day24 = [[${p250_off_day23}]];
+        var p250_off_day25 = [[${p250_off_day24}]];
+        var p250_off_day26 = [[${p250_off_day25}]];
+        var p250_off_day27 = [[${p250_off_day26}]];
+        var p250_off_day28 = [[${p250_off_day27}]];
+        var p250_off_day29 = [[${p250_off_day28}]];
+        var p250_off_day30 = [[${p250_off_day29}]];
+        var p250_off_day31 = [[${p250_off_day30}]];
+
+        var p250_avar_day1 = [[${p250_avar_day0}]];
+        var p250_avar_day2 = [[${p250_avar_day1}]];
+        var p250_avar_day3 = [[${p250_avar_day2}]];
+        var p250_avar_day4 = [[${p250_avar_day3}]];
+        var p250_avar_day5 = [[${p250_avar_day4}]];
+        var p250_avar_day6 = [[${p250_avar_day5}]];
+        var p250_avar_day7 = [[${p250_avar_day6}]];
+        var p250_avar_day8 = [[${p250_avar_day7}]];
+        var p250_avar_day9 = [[${p250_avar_day8}]];
+        var p250_avar_day10 = [[${p250_avar_day9}]];
+        var p250_avar_day11 = [[${p250_avar_day10}]];
+        var p250_avar_day12 = [[${p250_avar_day11}]];
+        var p250_avar_day13 = [[${p250_avar_day12}]];
+        var p250_avar_day14 = [[${p250_avar_day13}]];
+        var p250_avar_day15 = [[${p250_avar_day14}]];
+        var p250_avar_day16 = [[${p250_avar_day15}]];
+        var p250_avar_day17 = [[${p250_avar_day16}]];
+        var p250_avar_day18 = [[${p250_avar_day17}]];
+        var p250_avar_day19 = [[${p250_avar_day18}]];
+        var p250_avar_day20 = [[${p250_avar_day19}]];
+        var p250_avar_day21 = [[${p250_avar_day20}]];
+        var p250_avar_day22 = [[${p250_avar_day21}]];
+        var p250_avar_day23 = [[${p250_avar_day22}]];
+        var p250_avar_day24 = [[${p250_avar_day23}]];
+        var p250_avar_day25 = [[${p250_avar_day24}]];
+        var p250_avar_day26 = [[${p250_avar_day25}]];
+        var p250_avar_day27 = [[${p250_avar_day26}]];
+        var p250_avar_day28 = [[${p250_avar_day27}]];
+        var p250_avar_day29 = [[${p250_avar_day28}]];
+        var p250_avar_day30 = [[${p250_avar_day29}]];
+        var p250_avar_day31 = [[${p250_avar_day30}]];
+
+        var p250_nagruzka_day1 = [[${p250_nagruzka_day0}]];
+        var p250_nagruzka_day2 = [[${p250_nagruzka_day1}]];
+        var p250_nagruzka_day3 = [[${p250_nagruzka_day2}]];
+        var p250_nagruzka_day4 = [[${p250_nagruzka_day3}]];
+        var p250_nagruzka_day5 = [[${p250_nagruzka_day4}]];
+        var p250_nagruzka_day6 = [[${p250_nagruzka_day5}]];
+        var p250_nagruzka_day7 = [[${p250_nagruzka_day6}]];
+        var p250_nagruzka_day8 = [[${p250_nagruzka_day7}]];
+        var p250_nagruzka_day9 = [[${p250_nagruzka_day8}]];
+        var p250_nagruzka_day10 = [[${p250_nagruzka_day9}]];
+        var p250_nagruzka_day11 = [[${p250_nagruzka_day10}]];
+        var p250_nagruzka_day12 = [[${p250_nagruzka_day11}]];
+        var p250_nagruzka_day13 = [[${p250_nagruzka_day12}]];
+        var p250_nagruzka_day14 = [[${p250_nagruzka_day13}]];
+        var p250_nagruzka_day15 = [[${p250_nagruzka_day14}]];
+        var p250_nagruzka_day16 = [[${p250_nagruzka_day15}]];
+        var p250_nagruzka_day17 = [[${p250_nagruzka_day16}]];
+        var p250_nagruzka_day18 = [[${p250_nagruzka_day17}]];
+        var p250_nagruzka_day19 = [[${p250_nagruzka_day18}]];
+        var p250_nagruzka_day20 = [[${p250_nagruzka_day19}]];
+        var p250_nagruzka_day21 = [[${p250_nagruzka_day20}]];
+        var p250_nagruzka_day22 = [[${p250_nagruzka_day21}]];
+        var p250_nagruzka_day23 = [[${p250_nagruzka_day22}]];
+        var p250_nagruzka_day24 = [[${p250_nagruzka_day23}]];
+        var p250_nagruzka_day25 = [[${p250_nagruzka_day24}]];
+        var p250_nagruzka_day26 = [[${p250_nagruzka_day25}]];
+        var p250_nagruzka_day27 = [[${p250_nagruzka_day26}]];
+        var p250_nagruzka_day28 = [[${p250_nagruzka_day27}]];
+        var p250_nagruzka_day29 = [[${p250_nagruzka_day28}]];
+        var p250_nagruzka_day30 = [[${p250_nagruzka_day29}]];
+        var p250_nagruzka_day31 = [[${p250_nagruzka_day30}]];
+
+    } <!--Переменные для p250-->
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_days5', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Загрузка оборудования по дням'
+        },
+        xAxis: {
+            title: {
+                text: 'Дни месяца',
+                align: 'high'
+            },
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [p250_rabota_day1, p250_rabota_day2, p250_rabota_day3,p250_rabota_day4,p250_rabota_day5,p250_rabota_day6,p250_rabota_day7,p250_rabota_day8,p250_rabota_day9,p250_rabota_day10,p250_rabota_day11,p250_rabota_day12,p250_rabota_day13,p250_rabota_day14,p250_rabota_day15,p250_rabota_day16,p250_rabota_day17,p250_rabota_day18,p250_rabota_day19,p250_rabota_day20,p250_rabota_day21,p250_rabota_day22,p250_rabota_day23,p250_rabota_day24,p250_rabota_day25,p250_rabota_day26,p250_rabota_day27,p250_rabota_day28,p250_rabota_day29,p250_rabota_day30,p250_rabota_day31]
+        }, {
+            name: 'Ожидание',
+            data: [p250_pause_day1, p250_pause_day2, p250_pause_day3,p250_pause_day4,p250_pause_day5,p250_pause_day6,p250_pause_day7,p250_pause_day8,p250_pause_day9,p250_pause_day10,p250_pause_day11,p250_pause_day12,p250_pause_day13,p250_pause_day14,p250_pause_day15,p250_pause_day16,p250_pause_day17,p250_pause_day18,p250_pause_day19,p250_pause_day20,p250_pause_day21,p250_pause_day22,p250_pause_day23,p250_pause_day24,p250_pause_day25,p250_pause_day26,p250_pause_day27,p250_pause_day28,p250_pause_day29,p250_pause_day30,p250_pause_day31]
+        }, {
+            name: 'Выключен',
+            data: [p250_off_day1, p250_off_day2, p250_off_day3,p250_off_day4,p250_off_day5,p250_off_day6,p250_off_day7,p250_off_day8,p250_off_day9,p250_off_day10,p250_off_day11,p250_off_day12,p250_off_day13,p250_off_day14,p250_off_day15,p250_off_day16,p250_off_day17,p250_off_day18,p250_off_day19,p250_off_day20,p250_off_day21,p250_off_day22,p250_off_day23,p250_off_day24,p250_off_day25,p250_off_day26,p250_off_day27,p250_off_day28,p250_off_day29,p250_off_day30,p250_off_day31]
+        }, {
+            name: 'Авария',
+            data: [p250_avar_day1, p250_avar_day2, p250_avar_day3,p250_avar_day4,p250_avar_day5,p250_avar_day6,p250_avar_day7,p250_avar_day8,p250_avar_day9,p250_avar_day10,p250_avar_day11,p250_avar_day12,p250_avar_day13,p250_avar_day14,p250_avar_day15,p250_avar_day16,p250_avar_day17,p250_avar_day18,p250_avar_day19,p250_avar_day20,p250_avar_day21,p250_avar_day22,p250_avar_day23,p250_avar_day24,p250_avar_day25,p250_avar_day26,p250_avar_day27,p250_avar_day28,p250_avar_day29,p250_avar_day30,p250_avar_day31]
+        }, {
+            name: 'Нагрузка',
+            data: [p250_nagruzka_day1, p250_nagruzka_day2, p250_nagruzka_day3,p250_nagruzka_day4,p250_nagruzka_day5,p250_nagruzka_day6,p250_nagruzka_day7,p250_nagruzka_day8,p250_nagruzka_day9,p250_nagruzka_day10,p250_nagruzka_day11,p250_nagruzka_day12,p250_nagruzka_day13,p250_nagruzka_day14,p250_nagruzka_day15,p250_nagruzka_day16,p250_nagruzka_day17,p250_nagruzka_day18,p250_nagruzka_day19,p250_nagruzka_day20,p250_nagruzka_day21,p250_nagruzka_day22,p250_nagruzka_day23,p250_nagruzka_day24,p250_nagruzka_day25,p250_nagruzka_day26,p250_nagruzka_day27,p250_nagruzka_day28,p250_nagruzka_day29,p250_nagruzka_day30,p250_nagruzka_day31]
+        }]
+    });
+
+
+</script>   <!--P250 js диагрмма загрузки оборудования по дням-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container5', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', [[${p250_work}]] ], [ 'Включен', [[${p250_pass}]] ], [ 'Выключен', [[${p250_fail}]] ],  [ 'В аварии', [[${p250_avar}]] ],  [ 'Нагрузка', [[${p250_nagruzka}]] ]  ]
+        }]
+    });
+</script>   <!--P250 js круговая диагрмма загрузки оборудования-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/robot.jpg" width="100%"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">КРОТ</figcaption>
+                </div>
+                <div>
+                    <a style="text-decoration: none; float: left" class="icon_mesto_krot" href="mesto/mesto_krot" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(895, screen.availHeight)+',width='+Math.min(1020, screen.availWidth)); return false;"><div class='label_mesto_krot'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_krot" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_krot'>Персонал</div></a>
+                </div>
+            </div>
+            <div id="container_days_krot" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_krot" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!-- html-->
+
+</div> <!--html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+    {
+        var krot_rabota_day1 = [[${krot_rabota_day0}]];
+        var krot_rabota_day2 = [[${krot_rabota_day1}]];
+        var krot_rabota_day3 = [[${krot_rabota_day2}]];
+        var krot_rabota_day4 = [[${krot_rabota_day3}]];
+        var krot_rabota_day5 = [[${krot_rabota_day4}]];
+        var krot_rabota_day6 = [[${krot_rabota_day5}]];
+        var krot_rabota_day7 = [[${krot_rabota_day6}]];
+        var krot_rabota_day8 = [[${krot_rabota_day7}]];
+        var krot_rabota_day9 = [[${krot_rabota_day8}]];
+        var krot_rabota_day10 = [[${krot_rabota_day9}]];
+        var krot_rabota_day11 = [[${krot_rabota_day10}]];
+        var krot_rabota_day12 = [[${krot_rabota_day11}]];
+        var krot_rabota_day13 = [[${krot_rabota_day12}]];
+        var krot_rabota_day14 = [[${krot_rabota_day13}]];
+        var krot_rabota_day15 = [[${krot_rabota_day14}]];
+        var krot_rabota_day16 = [[${krot_rabota_day15}]];
+        var krot_rabota_day17 = [[${krot_rabota_day16}]];
+        var krot_rabota_day18 = [[${krot_rabota_day17}]];
+        var krot_rabota_day19 = [[${krot_rabota_day18}]];
+        var krot_rabota_day20 = [[${krot_rabota_day19}]];
+        var krot_rabota_day21 = [[${krot_rabota_day20}]];
+        var krot_rabota_day22 = [[${krot_rabota_day21}]];
+        var krot_rabota_day23 = [[${krot_rabota_day22}]];
+        var krot_rabota_day24 = [[${krot_rabota_day23}]];
+        var krot_rabota_day25 = [[${krot_rabota_day24}]];
+        var krot_rabota_day26 = [[${krot_rabota_day25}]];
+        var krot_rabota_day27 = [[${krot_rabota_day26}]];
+        var krot_rabota_day28 = [[${krot_rabota_day27}]];
+        var krot_rabota_day29 = [[${krot_rabota_day28}]];
+        var krot_rabota_day30 = [[${krot_rabota_day29}]];
+        var krot_rabota_day31 = [[${krot_rabota_day30}]];
+
+        var krot_pause_day1 = [[${krot_pause_day0}]];
+        var krot_pause_day2 = [[${krot_pause_day1}]];
+        var krot_pause_day3 = [[${krot_pause_day2}]];
+        var krot_pause_day4 = [[${krot_pause_day3}]];
+        var krot_pause_day5 = [[${krot_pause_day4}]];
+        var krot_pause_day6 = [[${krot_pause_day5}]];
+        var krot_pause_day7 = [[${krot_pause_day6}]];
+        var krot_pause_day8 = [[${krot_pause_day7}]];
+        var krot_pause_day9 = [[${krot_pause_day8}]];
+        var krot_pause_day10 = [[${krot_pause_day9}]];
+        var krot_pause_day11 = [[${krot_pause_day10}]];
+        var krot_pause_day12 = [[${krot_pause_day11}]];
+        var krot_pause_day13 = [[${krot_pause_day12}]];
+        var krot_pause_day14 = [[${krot_pause_day13}]];
+        var krot_pause_day15 = [[${krot_pause_day14}]];
+        var krot_pause_day16 = [[${krot_pause_day15}]];
+        var krot_pause_day17 = [[${krot_pause_day16}]];
+        var krot_pause_day18 = [[${krot_pause_day17}]];
+        var krot_pause_day19 = [[${krot_pause_day18}]];
+        var krot_pause_day20 = [[${krot_pause_day19}]];
+        var krot_pause_day21 = [[${krot_pause_day20}]];
+        var krot_pause_day22 = [[${krot_pause_day21}]];
+        var krot_pause_day23 = [[${krot_pause_day22}]];
+        var krot_pause_day24 = [[${krot_pause_day23}]];
+        var krot_pause_day25 = [[${krot_pause_day24}]];
+        var krot_pause_day26 = [[${krot_pause_day25}]];
+        var krot_pause_day27 = [[${krot_pause_day26}]];
+        var krot_pause_day28 = [[${krot_pause_day27}]];
+        var krot_pause_day29 = [[${krot_pause_day28}]];
+        var krot_pause_day30 = [[${krot_pause_day29}]];
+        var krot_pause_day31 = [[${krot_pause_day30}]];
+
+        var krot_off_day1 = [[${krot_off_day0}]];
+        var krot_off_day2 = [[${krot_off_day1}]];
+        var krot_off_day3 = [[${krot_off_day2}]];
+        var krot_off_day4 = [[${krot_off_day3}]];
+        var krot_off_day5 = [[${krot_off_day4}]];
+        var krot_off_day6 = [[${krot_off_day5}]];
+        var krot_off_day7 = [[${krot_off_day6}]];
+        var krot_off_day8 = [[${krot_off_day7}]];
+        var krot_off_day9 = [[${krot_off_day8}]];
+        var krot_off_day10 = [[${krot_off_day9}]];
+        var krot_off_day11 = [[${krot_off_day10}]];
+        var krot_off_day12 = [[${krot_off_day11}]];
+        var krot_off_day13 = [[${krot_off_day12}]];
+        var krot_off_day14 = [[${krot_off_day13}]];
+        var krot_off_day15 = [[${krot_off_day14}]];
+        var krot_off_day16 = [[${krot_off_day15}]];
+        var krot_off_day17 = [[${krot_off_day16}]];
+        var krot_off_day18 = [[${krot_off_day17}]];
+        var krot_off_day19 = [[${krot_off_day18}]];
+        var krot_off_day20 = [[${krot_off_day19}]];
+        var krot_off_day21 = [[${krot_off_day20}]];
+        var krot_off_day22 = [[${krot_off_day21}]];
+        var krot_off_day23 = [[${krot_off_day22}]];
+        var krot_off_day24 = [[${krot_off_day23}]];
+        var krot_off_day25 = [[${krot_off_day24}]];
+        var krot_off_day26 = [[${krot_off_day25}]];
+        var krot_off_day27 = [[${krot_off_day26}]];
+        var krot_off_day28 = [[${krot_off_day27}]];
+        var krot_off_day29 = [[${krot_off_day28}]];
+        var krot_off_day30 = [[${krot_off_day29}]];
+        var krot_off_day31 = [[${krot_off_day30}]];
+
+        var krot_avar_day1 = [[${krot_avar_day0}]];
+        var krot_avar_day2 = [[${krot_avar_day1}]];
+        var krot_avar_day3 = [[${krot_avar_day2}]];
+        var krot_avar_day4 = [[${krot_avar_day3}]];
+        var krot_avar_day5 = [[${krot_avar_day4}]];
+        var krot_avar_day6 = [[${krot_avar_day5}]];
+        var krot_avar_day7 = [[${krot_avar_day6}]];
+        var krot_avar_day8 = [[${krot_avar_day7}]];
+        var krot_avar_day9 = [[${krot_avar_day8}]];
+        var krot_avar_day10 = [[${krot_avar_day9}]];
+        var krot_avar_day11 = [[${krot_avar_day10}]];
+        var krot_avar_day12 = [[${krot_avar_day11}]];
+        var krot_avar_day13 = [[${krot_avar_day12}]];
+        var krot_avar_day14 = [[${krot_avar_day13}]];
+        var krot_avar_day15 = [[${krot_avar_day14}]];
+        var krot_avar_day16 = [[${krot_avar_day15}]];
+        var krot_avar_day17 = [[${krot_avar_day16}]];
+        var krot_avar_day18 = [[${krot_avar_day17}]];
+        var krot_avar_day19 = [[${krot_avar_day18}]];
+        var krot_avar_day20 = [[${krot_avar_day19}]];
+        var krot_avar_day21 = [[${krot_avar_day20}]];
+        var krot_avar_day22 = [[${krot_avar_day21}]];
+        var krot_avar_day23 = [[${krot_avar_day22}]];
+        var krot_avar_day24 = [[${krot_avar_day23}]];
+        var krot_avar_day25 = [[${krot_avar_day24}]];
+        var krot_avar_day26 = [[${krot_avar_day25}]];
+        var krot_avar_day27 = [[${krot_avar_day26}]];
+        var krot_avar_day28 = [[${krot_avar_day27}]];
+        var krot_avar_day29 = [[${krot_avar_day28}]];
+        var krot_avar_day30 = [[${krot_avar_day29}]];
+        var krot_avar_day31 = [[${krot_avar_day30}]];
+
+        var krot_nagruzka_day1 = [[${krot_nagruzka_day0}]];
+        var krot_nagruzka_day2 = [[${krot_nagruzka_day1}]];
+        var krot_nagruzka_day3 = [[${krot_nagruzka_day2}]];
+        var krot_nagruzka_day4 = [[${krot_nagruzka_day3}]];
+        var krot_nagruzka_day5 = [[${krot_nagruzka_day4}]];
+        var krot_nagruzka_day6 = [[${krot_nagruzka_day5}]];
+        var krot_nagruzka_day7 = [[${krot_nagruzka_day6}]];
+        var krot_nagruzka_day8 = [[${krot_nagruzka_day7}]];
+        var krot_nagruzka_day9 = [[${krot_nagruzka_day8}]];
+        var krot_nagruzka_day10 = [[${krot_nagruzka_day9}]];
+        var krot_nagruzka_day11 = [[${krot_nagruzka_day10}]];
+        var krot_nagruzka_day12 = [[${krot_nagruzka_day11}]];
+        var krot_nagruzka_day13 = [[${krot_nagruzka_day12}]];
+        var krot_nagruzka_day14 = [[${krot_nagruzka_day13}]];
+        var krot_nagruzka_day15 = [[${krot_nagruzka_day14}]];
+        var krot_nagruzka_day16 = [[${krot_nagruzka_day15}]];
+        var krot_nagruzka_day17 = [[${krot_nagruzka_day16}]];
+        var krot_nagruzka_day18 = [[${krot_nagruzka_day17}]];
+        var krot_nagruzka_day19 = [[${krot_nagruzka_day18}]];
+        var krot_nagruzka_day20 = [[${krot_nagruzka_day19}]];
+        var krot_nagruzka_day21 = [[${krot_nagruzka_day20}]];
+        var krot_nagruzka_day22 = [[${krot_nagruzka_day21}]];
+        var krot_nagruzka_day23 = [[${krot_nagruzka_day22}]];
+        var krot_nagruzka_day24 = [[${krot_nagruzka_day23}]];
+        var krot_nagruzka_day25 = [[${krot_nagruzka_day24}]];
+        var krot_nagruzka_day26 = [[${krot_nagruzka_day25}]];
+        var krot_nagruzka_day27 = [[${krot_nagruzka_day26}]];
+        var krot_nagruzka_day28 = [[${krot_nagruzka_day27}]];
+        var krot_nagruzka_day29 = [[${krot_nagruzka_day28}]];
+        var krot_nagruzka_day30 = [[${krot_nagruzka_day29}]];
+        var krot_nagruzka_day31 = [[${krot_nagruzka_day30}]];
+
+    } <!--Переменные для krot-->
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_days_krot', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Загрузка оборудования по дням'
+        },
+        xAxis: {
+            title: {
+                text: 'Дни месяца',
+                align: 'high'
+            },
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [krot_rabota_day1, krot_rabota_day2, krot_rabota_day3,krot_rabota_day4,krot_rabota_day5,krot_rabota_day6,krot_rabota_day7,krot_rabota_day8,krot_rabota_day9,krot_rabota_day10,krot_rabota_day11,krot_rabota_day12,krot_rabota_day13,krot_rabota_day14,krot_rabota_day15,krot_rabota_day16,krot_rabota_day17,krot_rabota_day18,krot_rabota_day19,krot_rabota_day20,krot_rabota_day21,krot_rabota_day22,krot_rabota_day23,krot_rabota_day24,krot_rabota_day25,krot_rabota_day26,krot_rabota_day27,krot_rabota_day28,krot_rabota_day29,krot_rabota_day30,krot_rabota_day31]
+        }, {
+            name: 'Ожидание',
+            data: [krot_pause_day1, krot_pause_day2, krot_pause_day3,krot_pause_day4,krot_pause_day5,krot_pause_day6,krot_pause_day7,krot_pause_day8,krot_pause_day9,krot_pause_day10,krot_pause_day11,krot_pause_day12,krot_pause_day13,krot_pause_day14,krot_pause_day15,krot_pause_day16,krot_pause_day17,krot_pause_day18,krot_pause_day19,krot_pause_day20,krot_pause_day21,krot_pause_day22,krot_pause_day23,krot_pause_day24,krot_pause_day25,krot_pause_day26,krot_pause_day27,krot_pause_day28,krot_pause_day29,krot_pause_day30,krot_pause_day31]
+        }, {
+            name: 'Выключен',
+            data: [krot_off_day1, krot_off_day2, krot_off_day3,krot_off_day4,krot_off_day5,krot_off_day6,krot_off_day7,krot_off_day8,krot_off_day9,krot_off_day10,krot_off_day11,krot_off_day12,krot_off_day13,krot_off_day14,krot_off_day15,krot_off_day16,krot_off_day17,krot_off_day18,krot_off_day19,krot_off_day20,krot_off_day21,krot_off_day22,krot_off_day23,krot_off_day24,krot_off_day25,krot_off_day26,krot_off_day27,krot_off_day28,krot_off_day29,krot_off_day30,krot_off_day31]
+        }, {
+            name: 'Авария',
+            data: [krot_avar_day1, krot_avar_day2, krot_avar_day3,krot_avar_day4,krot_avar_day5,krot_avar_day6,krot_avar_day7,krot_avar_day8,krot_avar_day9,krot_avar_day10,krot_avar_day11,krot_avar_day12,krot_avar_day13,krot_avar_day14,krot_avar_day15,krot_avar_day16,krot_avar_day17,krot_avar_day18,krot_avar_day19,krot_avar_day20,krot_avar_day21,krot_avar_day22,krot_avar_day23,krot_avar_day24,krot_avar_day25,krot_avar_day26,krot_avar_day27,krot_avar_day28,krot_avar_day29,krot_avar_day30,krot_avar_day31]
+        }, {
+            name: 'Нагрузка',
+            data: [krot_nagruzka_day1, krot_nagruzka_day2, krot_nagruzka_day3,krot_nagruzka_day4,krot_nagruzka_day5,krot_nagruzka_day6,krot_nagruzka_day7,krot_nagruzka_day8,krot_nagruzka_day9,krot_nagruzka_day10,krot_nagruzka_day11,krot_nagruzka_day12,krot_nagruzka_day13,krot_nagruzka_day14,krot_nagruzka_day15,krot_nagruzka_day16,krot_nagruzka_day17,krot_nagruzka_day18,krot_nagruzka_day19,krot_nagruzka_day20,krot_nagruzka_day21,krot_nagruzka_day22,krot_nagruzka_day23,krot_nagruzka_day24,krot_nagruzka_day25,krot_nagruzka_day26,krot_nagruzka_day27,krot_nagruzka_day28,krot_nagruzka_day29,krot_nagruzka_day30,krot_nagruzka_day31]
+        }]
+    });
+
+
+</script>   <!--krot js диагрмма загрузки оборудования по дням-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_krot', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', [[${krot_work}]] ], [ 'Включен', [[${krot_pass}]] ], [ 'Выключен', [[${krot_fail}]] ],  [ 'В аварии', [[${krot_avar}]] ],  [ 'Нагрузка', [[${krot_nagruzka}]] ]  ]
+        }]
+    });
+</script>   <!--krot js круговая диагрмма загрузки оборудования-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/robot.jpg" width="100%"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ПРАНС</figcaption>
+                </div>
+                <div>
+                    <a style="text-decoration: none; float: left" class="icon_mesto_prans" href="mesto/mesto_prans" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(895, screen.availHeight)+',width='+Math.min(1020, screen.availWidth)); return false;"><div class='label_mesto_prans'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_prans" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_prans'>Персонал</div></a>
+                </div>
+            </div>
+            <div id="container_days_prans" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_prans" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!-- html-->
+
+</div> <!--html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+    {
+        var prans_rabota_day1 = [[${prans_rabota_day0}]];
+        var prans_rabota_day2 = [[${prans_rabota_day1}]];
+        var prans_rabota_day3 = [[${prans_rabota_day2}]];
+        var prans_rabota_day4 = [[${prans_rabota_day3}]];
+        var prans_rabota_day5 = [[${prans_rabota_day4}]];
+        var prans_rabota_day6 = [[${prans_rabota_day5}]];
+        var prans_rabota_day7 = [[${prans_rabota_day6}]];
+        var prans_rabota_day8 = [[${prans_rabota_day7}]];
+        var prans_rabota_day9 = [[${prans_rabota_day8}]];
+        var prans_rabota_day10 = [[${prans_rabota_day9}]];
+        var prans_rabota_day11 = [[${prans_rabota_day10}]];
+        var prans_rabota_day12 = [[${prans_rabota_day11}]];
+        var prans_rabota_day13 = [[${prans_rabota_day12}]];
+        var prans_rabota_day14 = [[${prans_rabota_day13}]];
+        var prans_rabota_day15 = [[${prans_rabota_day14}]];
+        var prans_rabota_day16 = [[${prans_rabota_day15}]];
+        var prans_rabota_day17 = [[${prans_rabota_day16}]];
+        var prans_rabota_day18 = [[${prans_rabota_day17}]];
+        var prans_rabota_day19 = [[${prans_rabota_day18}]];
+        var prans_rabota_day20 = [[${prans_rabota_day19}]];
+        var prans_rabota_day21 = [[${prans_rabota_day20}]];
+        var prans_rabota_day22 = [[${prans_rabota_day21}]];
+        var prans_rabota_day23 = [[${prans_rabota_day22}]];
+        var prans_rabota_day24 = [[${prans_rabota_day23}]];
+        var prans_rabota_day25 = [[${prans_rabota_day24}]];
+        var prans_rabota_day26 = [[${prans_rabota_day25}]];
+        var prans_rabota_day27 = [[${prans_rabota_day26}]];
+        var prans_rabota_day28 = [[${prans_rabota_day27}]];
+        var prans_rabota_day29 = [[${prans_rabota_day28}]];
+        var prans_rabota_day30 = [[${prans_rabota_day29}]];
+        var prans_rabota_day31 = [[${prans_rabota_day30}]];
+
+        var prans_pause_day1 = [[${prans_pause_day0}]];
+        var prans_pause_day2 = [[${prans_pause_day1}]];
+        var prans_pause_day3 = [[${prans_pause_day2}]];
+        var prans_pause_day4 = [[${prans_pause_day3}]];
+        var prans_pause_day5 = [[${prans_pause_day4}]];
+        var prans_pause_day6 = [[${prans_pause_day5}]];
+        var prans_pause_day7 = [[${prans_pause_day6}]];
+        var prans_pause_day8 = [[${prans_pause_day7}]];
+        var prans_pause_day9 = [[${prans_pause_day8}]];
+        var prans_pause_day10 = [[${prans_pause_day9}]];
+        var prans_pause_day11 = [[${prans_pause_day10}]];
+        var prans_pause_day12 = [[${prans_pause_day11}]];
+        var prans_pause_day13 = [[${prans_pause_day12}]];
+        var prans_pause_day14 = [[${prans_pause_day13}]];
+        var prans_pause_day15 = [[${prans_pause_day14}]];
+        var prans_pause_day16 = [[${prans_pause_day15}]];
+        var prans_pause_day17 = [[${prans_pause_day16}]];
+        var prans_pause_day18 = [[${prans_pause_day17}]];
+        var prans_pause_day19 = [[${prans_pause_day18}]];
+        var prans_pause_day20 = [[${prans_pause_day19}]];
+        var prans_pause_day21 = [[${prans_pause_day20}]];
+        var prans_pause_day22 = [[${prans_pause_day21}]];
+        var prans_pause_day23 = [[${prans_pause_day22}]];
+        var prans_pause_day24 = [[${prans_pause_day23}]];
+        var prans_pause_day25 = [[${prans_pause_day24}]];
+        var prans_pause_day26 = [[${prans_pause_day25}]];
+        var prans_pause_day27 = [[${prans_pause_day26}]];
+        var prans_pause_day28 = [[${prans_pause_day27}]];
+        var prans_pause_day29 = [[${prans_pause_day28}]];
+        var prans_pause_day30 = [[${prans_pause_day29}]];
+        var prans_pause_day31 = [[${prans_pause_day30}]];
+
+        var prans_off_day1 = [[${prans_off_day0}]];
+        var prans_off_day2 = [[${prans_off_day1}]];
+        var prans_off_day3 = [[${prans_off_day2}]];
+        var prans_off_day4 = [[${prans_off_day3}]];
+        var prans_off_day5 = [[${prans_off_day4}]];
+        var prans_off_day6 = [[${prans_off_day5}]];
+        var prans_off_day7 = [[${prans_off_day6}]];
+        var prans_off_day8 = [[${prans_off_day7}]];
+        var prans_off_day9 = [[${prans_off_day8}]];
+        var prans_off_day10 = [[${prans_off_day9}]];
+        var prans_off_day11 = [[${prans_off_day10}]];
+        var prans_off_day12 = [[${prans_off_day11}]];
+        var prans_off_day13 = [[${prans_off_day12}]];
+        var prans_off_day14 = [[${prans_off_day13}]];
+        var prans_off_day15 = [[${prans_off_day14}]];
+        var prans_off_day16 = [[${prans_off_day15}]];
+        var prans_off_day17 = [[${prans_off_day16}]];
+        var prans_off_day18 = [[${prans_off_day17}]];
+        var prans_off_day19 = [[${prans_off_day18}]];
+        var prans_off_day20 = [[${prans_off_day19}]];
+        var prans_off_day21 = [[${prans_off_day20}]];
+        var prans_off_day22 = [[${prans_off_day21}]];
+        var prans_off_day23 = [[${prans_off_day22}]];
+        var prans_off_day24 = [[${prans_off_day23}]];
+        var prans_off_day25 = [[${prans_off_day24}]];
+        var prans_off_day26 = [[${prans_off_day25}]];
+        var prans_off_day27 = [[${prans_off_day26}]];
+        var prans_off_day28 = [[${prans_off_day27}]];
+        var prans_off_day29 = [[${prans_off_day28}]];
+        var prans_off_day30 = [[${prans_off_day29}]];
+        var prans_off_day31 = [[${prans_off_day30}]];
+
+        var prans_avar_day1 = [[${prans_avar_day0}]];
+        var prans_avar_day2 = [[${prans_avar_day1}]];
+        var prans_avar_day3 = [[${prans_avar_day2}]];
+        var prans_avar_day4 = [[${prans_avar_day3}]];
+        var prans_avar_day5 = [[${prans_avar_day4}]];
+        var prans_avar_day6 = [[${prans_avar_day5}]];
+        var prans_avar_day7 = [[${prans_avar_day6}]];
+        var prans_avar_day8 = [[${prans_avar_day7}]];
+        var prans_avar_day9 = [[${prans_avar_day8}]];
+        var prans_avar_day10 = [[${prans_avar_day9}]];
+        var prans_avar_day11 = [[${prans_avar_day10}]];
+        var prans_avar_day12 = [[${prans_avar_day11}]];
+        var prans_avar_day13 = [[${prans_avar_day12}]];
+        var prans_avar_day14 = [[${prans_avar_day13}]];
+        var prans_avar_day15 = [[${prans_avar_day14}]];
+        var prans_avar_day16 = [[${prans_avar_day15}]];
+        var prans_avar_day17 = [[${prans_avar_day16}]];
+        var prans_avar_day18 = [[${prans_avar_day17}]];
+        var prans_avar_day19 = [[${prans_avar_day18}]];
+        var prans_avar_day20 = [[${prans_avar_day19}]];
+        var prans_avar_day21 = [[${prans_avar_day20}]];
+        var prans_avar_day22 = [[${prans_avar_day21}]];
+        var prans_avar_day23 = [[${prans_avar_day22}]];
+        var prans_avar_day24 = [[${prans_avar_day23}]];
+        var prans_avar_day25 = [[${prans_avar_day24}]];
+        var prans_avar_day26 = [[${prans_avar_day25}]];
+        var prans_avar_day27 = [[${prans_avar_day26}]];
+        var prans_avar_day28 = [[${prans_avar_day27}]];
+        var prans_avar_day29 = [[${prans_avar_day28}]];
+        var prans_avar_day30 = [[${prans_avar_day29}]];
+        var prans_avar_day31 = [[${prans_avar_day30}]];
+
+        var prans_nagruzka_day1 = [[${prans_nagruzka_day0}]];
+        var prans_nagruzka_day2 = [[${prans_nagruzka_day1}]];
+        var prans_nagruzka_day3 = [[${prans_nagruzka_day2}]];
+        var prans_nagruzka_day4 = [[${prans_nagruzka_day3}]];
+        var prans_nagruzka_day5 = [[${prans_nagruzka_day4}]];
+        var prans_nagruzka_day6 = [[${prans_nagruzka_day5}]];
+        var prans_nagruzka_day7 = [[${prans_nagruzka_day6}]];
+        var prans_nagruzka_day8 = [[${prans_nagruzka_day7}]];
+        var prans_nagruzka_day9 = [[${prans_nagruzka_day8}]];
+        var prans_nagruzka_day10 = [[${prans_nagruzka_day9}]];
+        var prans_nagruzka_day11 = [[${prans_nagruzka_day10}]];
+        var prans_nagruzka_day12 = [[${prans_nagruzka_day11}]];
+        var prans_nagruzka_day13 = [[${prans_nagruzka_day12}]];
+        var prans_nagruzka_day14 = [[${prans_nagruzka_day13}]];
+        var prans_nagruzka_day15 = [[${prans_nagruzka_day14}]];
+        var prans_nagruzka_day16 = [[${prans_nagruzka_day15}]];
+        var prans_nagruzka_day17 = [[${prans_nagruzka_day16}]];
+        var prans_nagruzka_day18 = [[${prans_nagruzka_day17}]];
+        var prans_nagruzka_day19 = [[${prans_nagruzka_day18}]];
+        var prans_nagruzka_day20 = [[${prans_nagruzka_day19}]];
+        var prans_nagruzka_day21 = [[${prans_nagruzka_day20}]];
+        var prans_nagruzka_day22 = [[${prans_nagruzka_day21}]];
+        var prans_nagruzka_day23 = [[${prans_nagruzka_day22}]];
+        var prans_nagruzka_day24 = [[${prans_nagruzka_day23}]];
+        var prans_nagruzka_day25 = [[${prans_nagruzka_day24}]];
+        var prans_nagruzka_day26 = [[${prans_nagruzka_day25}]];
+        var prans_nagruzka_day27 = [[${prans_nagruzka_day26}]];
+        var prans_nagruzka_day28 = [[${prans_nagruzka_day27}]];
+        var prans_nagruzka_day29 = [[${prans_nagruzka_day28}]];
+        var prans_nagruzka_day30 = [[${prans_nagruzka_day29}]];
+        var prans_nagruzka_day31 = [[${prans_nagruzka_day30}]];
+
+    } <!--Переменные для prans-->
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_days_prans', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Загрузка оборудования по дням'
+        },
+        xAxis: {
+            title: {
+                text: 'Дни месяца',
+                align: 'high'
+            },
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [prans_rabota_day1, prans_rabota_day2, prans_rabota_day3,prans_rabota_day4,prans_rabota_day5,prans_rabota_day6,prans_rabota_day7,prans_rabota_day8,prans_rabota_day9,prans_rabota_day10,prans_rabota_day11,prans_rabota_day12,prans_rabota_day13,prans_rabota_day14,prans_rabota_day15,prans_rabota_day16,prans_rabota_day17,prans_rabota_day18,prans_rabota_day19,prans_rabota_day20,prans_rabota_day21,prans_rabota_day22,prans_rabota_day23,prans_rabota_day24,prans_rabota_day25,prans_rabota_day26,prans_rabota_day27,prans_rabota_day28,prans_rabota_day29,prans_rabota_day30,prans_rabota_day31]
+        }, {
+            name: 'Ожидание',
+            data: [prans_pause_day1, prans_pause_day2, prans_pause_day3,prans_pause_day4,prans_pause_day5,prans_pause_day6,prans_pause_day7,prans_pause_day8,prans_pause_day9,prans_pause_day10,prans_pause_day11,prans_pause_day12,prans_pause_day13,prans_pause_day14,prans_pause_day15,prans_pause_day16,prans_pause_day17,prans_pause_day18,prans_pause_day19,prans_pause_day20,prans_pause_day21,prans_pause_day22,prans_pause_day23,prans_pause_day24,prans_pause_day25,prans_pause_day26,prans_pause_day27,prans_pause_day28,prans_pause_day29,prans_pause_day30,prans_pause_day31]
+        }, {
+            name: 'Выключен',
+            data: [prans_off_day1, prans_off_day2, prans_off_day3,prans_off_day4,prans_off_day5,prans_off_day6,prans_off_day7,prans_off_day8,prans_off_day9,prans_off_day10,prans_off_day11,prans_off_day12,prans_off_day13,prans_off_day14,prans_off_day15,prans_off_day16,prans_off_day17,prans_off_day18,prans_off_day19,prans_off_day20,prans_off_day21,prans_off_day22,prans_off_day23,prans_off_day24,prans_off_day25,prans_off_day26,prans_off_day27,prans_off_day28,prans_off_day29,prans_off_day30,prans_off_day31]
+        }, {
+            name: 'Авария',
+            data: [prans_avar_day1, prans_avar_day2, prans_avar_day3,prans_avar_day4,prans_avar_day5,prans_avar_day6,prans_avar_day7,prans_avar_day8,prans_avar_day9,prans_avar_day10,prans_avar_day11,prans_avar_day12,prans_avar_day13,prans_avar_day14,prans_avar_day15,prans_avar_day16,prans_avar_day17,prans_avar_day18,prans_avar_day19,prans_avar_day20,prans_avar_day21,prans_avar_day22,prans_avar_day23,prans_avar_day24,prans_avar_day25,prans_avar_day26,prans_avar_day27,prans_avar_day28,prans_avar_day29,prans_avar_day30,prans_avar_day31]
+        }, {
+            name: 'Нагрузка',
+            data: [prans_nagruzka_day1, prans_nagruzka_day2, prans_nagruzka_day3,prans_nagruzka_day4,prans_nagruzka_day5,prans_nagruzka_day6,prans_nagruzka_day7,prans_nagruzka_day8,prans_nagruzka_day9,prans_nagruzka_day10,prans_nagruzka_day11,prans_nagruzka_day12,prans_nagruzka_day13,prans_nagruzka_day14,prans_nagruzka_day15,prans_nagruzka_day16,prans_nagruzka_day17,prans_nagruzka_day18,prans_nagruzka_day19,prans_nagruzka_day20,prans_nagruzka_day21,prans_nagruzka_day22,prans_nagruzka_day23,prans_nagruzka_day24,prans_nagruzka_day25,prans_nagruzka_day26,prans_nagruzka_day27,prans_nagruzka_day28,prans_nagruzka_day29,prans_nagruzka_day30,prans_nagruzka_day31]
+        }]
+    });
+
+
+</script>   <!--prans js диагрмма загрузки оборудования по дням-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_prans', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', [[${prans_work}]] ], [ 'Включен', [[${prans_pass}]] ], [ 'Выключен', [[${prans_fail}]] ],  [ 'В аварии', [[${prans_avar}]] ],  [ 'Нагрузка', [[${prans_nagruzka}]] ]  ]
+        }]
+    });
+</script>   <!--prans js круговая диагрмма загрузки оборудования-->
+
+
+<script th:inline="javascript">
+    $('.icon_personal_maks_1').hover(
+        function(){
+            $('.label_personal_maks_1').css('color','#000000');
+            $('.label_personal_maks_1').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_maks_1').css('color','#756e6e');
+            $('.label_personal_maks_1').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_maks_1').hover(
+        function(){
+            $('.label_mesto_maks_1').css('color','#000000');
+            $('.label_mesto_maks_1').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_maks_1').css('color','#756e6e');
+            $('.label_mesto_maks_1').css('margin-top','65px');
+        }
+    );
+
+    $('.icon_personal_maks_2').hover(
+        function(){
+            $('.label_personal_maks_2').css('color','#000000');
+            $('.label_personal_maks_2').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_maks_2').css('color','#756e6e');
+            $('.label_personal_maks_2').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_maks_2').hover(
+        function(){
+            $('.label_mesto_maks_2').css('color','#000000');
+            $('.label_mesto_maks_2').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_maks_2').css('color','#756e6e');
+            $('.label_mesto_maks_2').css('margin-top','65px');
+        }
+    );
+
+    $('.icon_personal_m710').hover(
+        function(){
+            $('.label_personal_m710').css('color','#000000');
+            $('.label_personal_m710').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_m710').css('color','#756e6e');
+            $('.label_personal_m710').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_m710').hover(
+        function(){
+            $('.label_mesto_m710').css('color','#000000');
+            $('.label_mesto_m710').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_m710').css('color','#756e6e');
+            $('.label_mesto_m710').css('margin-top','65px');
+        }
+    );
+
+    $('.icon_personal_rtc12c').hover(
+        function(){
+            $('.label_personal_rtc12c').css('color','#000000');
+            $('.label_personal_rtc12c').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_rtc12c').css('color','#756e6e');
+            $('.label_personal_rtc12c').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_rtc12c').hover(
+        function(){
+            $('.label_mesto_rtc12c').css('color','#000000');
+            $('.label_mesto_rtc12c').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_rtc12c').css('color','#756e6e');
+            $('.label_mesto_rtc12c').css('margin-top','65px');
+        }
+    );
+
+    $('.icon_personal_p250').hover(
+        function(){
+            $('.label_personal_p250').css('color','#000000');
+            $('.label_personal_p250').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_p250').css('color','#756e6e');
+            $('.label_personal_p250').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_p250').hover(
+        function(){
+            $('.label_mesto_p250').css('color','#000000');
+            $('.label_mesto_p250').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_p250').css('color','#756e6e');
+            $('.label_mesto_p250').css('margin-top','65px');
+        }
+    );
+
+    $('.icon_personal_krot').hover(
+        function(){
+            $('.label_personal_krot').css('color','#000000');
+            $('.label_personal_krot').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_krot').css('color','#756e6e');
+            $('.label_personal_krot').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_krot').hover(
+        function(){
+            $('.label_mesto_krot').css('color','#000000');
+            $('.label_mesto_krot').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_krot').css('color','#756e6e');
+            $('.label_mesto_krot').css('margin-top','65px');
+        }
+    );
+
+    $('.icon_personal_prans').hover(
+        function(){
+            $('.label_personal_prans').css('color','#000000');
+            $('.label_personal_prans').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_prans').css('color','#756e6e');
+            $('.label_personal_prans').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_prans').hover(
+        function(){
+            $('.label_mesto_prans').css('color','#000000');
+            $('.label_mesto_prans').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_prans').css('color','#756e6e');
+            $('.label_mesto_prans').css('margin-top','65px');
+        }
+    );
+
+</script> <!--Кнопки Персонал и Место-->
+
+</body>
+</html>

@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Резка</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/styles_stanki.css"/>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+    <link rel="stylesheet" type="text/css" href="/css/menu_buttons.css"/> <!-- Меню -->
+
+    <style>
+        .btn_change {
+            position: relative;
+            display: inline-block;
+            padding: 15px 70px;
+            border: 3px solid #6793d6;
+            color: #6793d6;
+            background: #ffffff;
+            font-size: 30px;
+            font-family: arial;
+            background-image: linear-gradient(#6793d6, #6793d6);
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+            transition: background-size .5s, color .5s;
+        }
+
+        .btn_change:hover {
+            background-size: 100% 100%;
+            color: #ffffff;
+        }
+    </style> <!--Кнопки выбора отчета-->
+    <style>
+
+        .icon_mesto_navigator_1{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_navigator_1:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_navigator_1{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_navigator_1:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_navigator_1{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_navigator_1{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_navigator_2{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_navigator_2:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_navigator_2{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_navigator_2:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_navigator_2{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_navigator_2{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_navigator_3{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_navigator_3:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_navigator_3{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_navigator_3:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_navigator_3{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_navigator_3{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+    </style> <!--Кнопки Персонал и Местоположение-->
+    <style>
+        .preloader {
+            /*фиксированное позиционирование*/
+            position: fixed;
+            /* координаты положения */
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /* фоновый цвет элемента */
+            background: #e0e0e0;
+            /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+            z-index: 1001;
+        }
+
+        .preloader__row {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            width: 70px;
+            height: 70px;
+            margin-top: -35px;
+            margin-left: -35px;
+            text-align: center;
+            animation: preloader-rotate 2s infinite linear;
+        }
+
+        .preloader__item {
+            position: absolute;
+            display: inline-block;
+            top: 0;
+            background-color: #337ab7;
+            border-radius: 100%;
+            width: 35px;
+            height: 35px;
+            animation: preloader-bounce 2s infinite ease-in-out;
+        }
+
+        .preloader__item:last-child {
+            top: auto;
+            bottom: 0;
+            animation-delay: -1s;
+        }
+
+        @keyframes preloader-rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes preloader-bounce {
+
+            0%,
+            100% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .loaded_hiding .preloader {
+            transition: 0.3s opacity;
+            opacity: 0;
+        }
+
+        .loaded .preloader {
+            display: none;
+        }
+    </style>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/xrange.js"></script>
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap-3.3.0.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+            $('#button_obnovit').on("click", function () {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+                var day = datas.getDate();
+                var mes = datas.getMonth() + 1;
+                var year = datas.getFullYear();
+
+                name_data = year + "-" + mes + "-" + day;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
+
+    <!--Календарь -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <!--Календарь Русский язык-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
+
+
+    <!-- Загрузка страницы -->
+    <script>
+        window.onload = function () {
+            document.body.classList.add('loaded_hiding');
+            window.setTimeout(function () {
+                document.body.classList.add('loaded');
+                document.body.classList.remove('loaded_hiding');
+            }, 500);
+        }
+    </script>
+
+</head>
+
+<header>
+
+    <ul class="hr">
+        <a href="home"><img style="margin: 0.1%" src="images/logo_black.png"/></a>
+
+        <div method="post" class="dropdown" style="float: right">
+
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+            <div class="dropdown-content" style="float: right; text-align: center">
+                <p><img th:src="@{${image_user}}" width="100"/></p>
+                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
+                <p th:text="${user_mail}"></p>
+
+                <form th:action="@{/logout}" method="post">
+                    <button class="follow" type="submit">
+                        Выход
+                    </button>
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
+
+    </ul>       <!--Шапка html-->
+
+</header>       <!--Шапка html-->
+
+<div>
+    <ul id="menu_ul">
+        <li id="menu_li"><a id="menu_a" href="displayStanki">Мех.уч.II пл.</a></li>
+        <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
+        <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
+        <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.I пл.</a></li>
+        <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
+        <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
+        <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
+        <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
+    </ul>
+</div>  <!-- Меню -->
+
+<!-- Загрузка страницы -->
+<div class="preloader">
+    <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+    </div>
+</div>
+
+<body>
+<!--Шапка html-->
+
+<div style="clear: both">
+    <form>
+        <button formaction="navigators" class="btn_change" style="width:40%">Суточный отчет</button>
+        <button formaction="navigators_month" class="btn_change" style="width:40%">Месячный отчет</button>
+    </form>
+</div>  <!--Кнопки суточный и месячный отчеты html-->
+
+<div class="container">
+    <div style="width: 220px; float: left">
+        <h2>Выберите дату:</h2>
+    </div>
+
+    <form  action="#" th:action="@{/navigators}" th:object="${calendar_date}" method="post" >
+
+        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+            <input type='text' class="form-control" th:field="*{content_date}"/>
+            <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+        </div>
+
+        <div class="form-actions" >
+            <button type="submit"
+                    class="follow"
+                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
+            </button>
+        </div>
+    </form>
+
+</div>      <!--Календарь html-->
+
+<script >
+    $(function () {
+        $('#datepicker').datepicker({
+            format: "dd/mm/yyyy",
+            language: 'ru',
+            autoclose: true,
+            todayHighlight: true,
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            orientation: "button"
+        });
+        <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+
+        $('#button_obnovit').on("click", function() {
+            var datas = $('#datepicker').data().datepicker.viewDate;
+            var day = datas.getDate();
+            var mes = datas.getMonth()+1;
+            var year = datas.getFullYear();
+
+            name_data = year+"-" +mes+"-" +day;
+            <!--console.log(name_data);-->
+        });
+
+
+    });
+
+</script>   <!--Календарь js-->
+
+
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/navigator.png" width="100%"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Навигатор #1</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_navigator_1" href="mesto/mesto_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto_navigator_1'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_navigator_1" href="personal/personal_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_navigator_1'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Навигатор_1 html-->
+</div> <!--Навигатор_1 html-->
+
+<div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/navigator.png" width="100%"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Навигатор #2</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_navigator_2" href="mesto/mesto_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto_navigator_2'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_navigator_2" href="personal/personal_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_navigator_2'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work_2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Навигатор_2_голова_1 html-->
+
+<div style="overflow: hidden;">
+    <div style="width: 100%;   margin: 2%;">
+        <div style="float: left;  min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+
+        </div>
+        <div id="container_work_3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container_3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+    </div>
+</div>  <!--Навигатор_2_голова_2 html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
+                <div>
+                    <img src="images/navigator.png" width="100%"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Навигатор #3</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_navigator_3" href="mesto/mesto_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto_navigator_3'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_navigator_3" href="personal/personal_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_navigator_3'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work_4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Навигатор_3 html-->
+</div> <!--Навигатор_3 html-->
+
+<script th:inline="javascript">
+
+    var array_rabota = [
+        [[${array_rabota0}]],[[${array_rabota1}]],[[${array_rabota2}]],[[${array_rabota3}]],[[${array_rabota4}]],[[${array_rabota5}]],[[${array_rabota6}]],[[${array_rabota7}]],[[${array_rabota8}]],[[${array_rabota9}]],[[${array_rabota10}]],
+        [[${array_rabota11}]],[[${array_rabota12}]],[[${array_rabota13}]],[[${array_rabota14}]],[[${array_rabota15}]],[[${array_rabota16}]],[[${array_rabota17}]],[[${array_rabota18}]],[[${array_rabota19}]],[[${array_rabota20}]],
+        [[${array_rabota21}]],[[${array_rabota22}]],[[${array_rabota23}]],[[${array_rabota24}]],[[${array_rabota25}]],[[${array_rabota26}]],[[${array_rabota27}]],[[${array_rabota28}]],[[${array_rabota29}]],[[${array_rabota30}]],
+        [[${array_rabota31}]],[[${array_rabota32}]],[[${array_rabota33}]],[[${array_rabota34}]],[[${array_rabota35}]],[[${array_rabota36}]],[[${array_rabota37}]],[[${array_rabota38}]],[[${array_rabota39}]],[[${array_rabota40}]],
+        [[${array_rabota41}]],[[${array_rabota42}]],[[${array_rabota43}]],[[${array_rabota44}]],[[${array_rabota45}]],[[${array_rabota46}]],[[${array_rabota47}]],[[${array_rabota48}]],[[${array_rabota49}]],[[${array_rabota50}]],
+        [[${array_rabota51}]],[[${array_rabota52}]],[[${array_rabota53}]],[[${array_rabota54}]],[[${array_rabota55}]],[[${array_rabota56}]],[[${array_rabota57}]],[[${array_rabota58}]],[[${array_rabota59}]],[[${array_rabota60}]],
+        [[${array_rabota61}]],[[${array_rabota62}]],[[${array_rabota63}]],[[${array_rabota64}]],[[${array_rabota65}]],[[${array_rabota66}]],[[${array_rabota67}]],[[${array_rabota68}]],[[${array_rabota69}]],[[${array_rabota70}]],
+        [[${array_rabota71}]],[[${array_rabota72}]],[[${array_rabota73}]],[[${array_rabota74}]],[[${array_rabota75}]],[[${array_rabota76}]],[[${array_rabota77}]],[[${array_rabota78}]],[[${array_rabota79}]],[[${array_rabota80}]],
+        [[${array_rabota81}]],[[${array_rabota82}]],[[${array_rabota83}]],[[${array_rabota84}]],[[${array_rabota85}]],[[${array_rabota86}]],[[${array_rabota87}]],[[${array_rabota88}]],[[${array_rabota89}]],[[${array_rabota90}]],
+        [[${array_rabota91}]],[[${array_rabota92}]],[[${array_rabota93}]],[[${array_rabota94}]],[[${array_rabota95}]],[[${array_rabota96}]],[[${array_rabota97}]],[[${array_rabota98}]],[[${array_rabota99}]],[[${array_rabota100}]],
+        [[${array_rabota101}]],[[${array_rabota102}]],[[${array_rabota103}]],[[${array_rabota104}]],[[${array_rabota105}]],[[${array_rabota106}]],[[${array_rabota107}]],[[${array_rabota108}]],[[${array_rabota109}]],[[${array_rabota110}]],
+        [[${array_rabota111}]],[[${array_rabota112}]],[[${array_rabota113}]],[[${array_rabota114}]],[[${array_rabota115}]],[[${array_rabota116}]],[[${array_rabota117}]],[[${array_rabota118}]],[[${array_rabota119}]],[[${array_rabota120}]],
+        [[${array_rabota121}]],[[${array_rabota122}]],[[${array_rabota123}]],[[${array_rabota124}]],[[${array_rabota125}]],[[${array_rabota126}]],[[${array_rabota127}]],[[${array_rabota128}]],[[${array_rabota129}]],[[${array_rabota130}]],
+        [[${array_rabota131}]],[[${array_rabota132}]],[[${array_rabota133}]],[[${array_rabota134}]],[[${array_rabota135}]],[[${array_rabota136}]],[[${array_rabota137}]],[[${array_rabota138}]],[[${array_rabota139}]],[[${array_rabota140}]],
+        [[${array_rabota141}]],[[${array_rabota142}]],[[${array_rabota143}]],[[${array_rabota144}]],[[${array_rabota145}]],[[${array_rabota146}]],[[${array_rabota147}]],[[${array_rabota148}]],[[${array_rabota149}]],[[${array_rabota150}]],
+        [[${array_rabota151}]],[[${array_rabota152}]],[[${array_rabota153}]],[[${array_rabota154}]],[[${array_rabota155}]],[[${array_rabota156}]],[[${array_rabota157}]],[[${array_rabota158}]],[[${array_rabota159}]],[[${array_rabota160}]],
+        [[${array_rabota161}]],[[${array_rabota162}]],[[${array_rabota163}]],[[${array_rabota164}]],[[${array_rabota165}]],[[${array_rabota166}]],[[${array_rabota167}]],[[${array_rabota168}]],[[${array_rabota169}]],[[${array_rabota170}]],
+        [[${array_rabota171}]],[[${array_rabota172}]],[[${array_rabota173}]],[[${array_rabota174}]],[[${array_rabota175}]],[[${array_rabota176}]],[[${array_rabota177}]],[[${array_rabota178}]],[[${array_rabota179}]],[[${array_rabota180}]],
+        [[${array_rabota181}]],[[${array_rabota182}]],[[${array_rabota183}]],[[${array_rabota184}]],[[${array_rabota185}]],[[${array_rabota186}]],[[${array_rabota187}]],[[${array_rabota188}]],[[${array_rabota189}]],[[${array_rabota190}]],
+        [[${array_rabota191}]],[[${array_rabota192}]],[[${array_rabota193}]],[[${array_rabota194}]],[[${array_rabota195}]],[[${array_rabota196}]],[[${array_rabota197}]],[[${array_rabota198}]],[[${array_rabota199}]],[[${array_rabota200}]],
+        [[${array_rabota201}]],[[${array_rabota202}]],[[${array_rabota203}]],[[${array_rabota204}]],[[${array_rabota205}]],[[${array_rabota206}]],[[${array_rabota207}]],[[${array_rabota208}]],[[${array_rabota209}]],[[${array_rabota210}]],
+        [[${array_rabota211}]],[[${array_rabota212}]],[[${array_rabota213}]],[[${array_rabota214}]],[[${array_rabota215}]],[[${array_rabota216}]],[[${array_rabota217}]],[[${array_rabota218}]],[[${array_rabota219}]],[[${array_rabota220}]],
+        [[${array_rabota221}]],[[${array_rabota222}]],[[${array_rabota223}]],[[${array_rabota224}]],[[${array_rabota225}]],[[${array_rabota226}]],[[${array_rabota227}]],[[${array_rabota228}]],[[${array_rabota229}]],[[${array_rabota230}]],
+        [[${array_rabota231}]],[[${array_rabota232}]],[[${array_rabota233}]],[[${array_rabota234}]],[[${array_rabota235}]],[[${array_rabota236}]],[[${array_rabota237}]],[[${array_rabota238}]],[[${array_rabota239}]],[[${array_rabota240}]],
+        [[${array_rabota241}]],[[${array_rabota242}]],[[${array_rabota243}]],[[${array_rabota244}]],[[${array_rabota245}]],[[${array_rabota246}]],[[${array_rabota247}]],[[${array_rabota248}]],[[${array_rabota249}]],[[${array_rabota250}]],
+        [[${array_rabota251}]],[[${array_rabota252}]],[[${array_rabota253}]],[[${array_rabota254}]],[[${array_rabota255}]],[[${array_rabota256}]],[[${array_rabota257}]],[[${array_rabota258}]],[[${array_rabota259}]],[[${array_rabota260}]],
+        [[${array_rabota261}]],[[${array_rabota262}]],[[${array_rabota263}]],[[${array_rabota264}]],[[${array_rabota265}]],[[${array_rabota266}]],[[${array_rabota267}]],[[${array_rabota268}]],[[${array_rabota269}]],[[${array_rabota270}]],
+        [[${array_rabota271}]],[[${array_rabota272}]],[[${array_rabota273}]],[[${array_rabota274}]],[[${array_rabota275}]],[[${array_rabota276}]],[[${array_rabota277}]],[[${array_rabota278}]],[[${array_rabota279}]],[[${array_rabota280}]],
+        [[${array_rabota281}]],[[${array_rabota282}]],[[${array_rabota283}]],[[${array_rabota284}]],[[${array_rabota285}]],[[${array_rabota286}]],[[${array_rabota287}]],[[${array_rabota288}]],[[${array_rabota289}]],[[${array_rabota290}]],
+        [[${array_rabota291}]],[[${array_rabota292}]],[[${array_rabota293}]],[[${array_rabota294}]],[[${array_rabota295}]],[[${array_rabota296}]],[[${array_rabota297}]],[[${array_rabota298}]],[[${array_rabota299}]],[[${array_rabota300}]],
+
+    ];
+    var array_pause = [
+        [[${array_pause0}]],[[${array_pause1}]],[[${array_pause2}]],[[${array_pause3}]],[[${array_pause4}]],[[${array_pause5}]],[[${array_pause6}]],[[${array_pause7}]],[[${array_pause8}]],[[${array_pause9}]],[[${array_pause10}]],
+        [[${array_pause11}]],[[${array_pause12}]],[[${array_pause13}]],[[${array_pause14}]],[[${array_pause15}]],[[${array_pause16}]],[[${array_pause17}]],[[${array_pause18}]],[[${array_pause19}]],[[${array_pause20}]],
+        [[${array_pause21}]],[[${array_pause22}]],[[${array_pause23}]],[[${array_pause24}]],[[${array_pause25}]],[[${array_pause26}]],[[${array_pause27}]],[[${array_pause28}]],[[${array_pause29}]],[[${array_pause30}]],
+        [[${array_pause31}]],[[${array_pause32}]],[[${array_pause33}]],[[${array_pause34}]],[[${array_pause35}]],[[${array_pause36}]],[[${array_pause37}]],[[${array_pause38}]],[[${array_pause39}]],[[${array_pause40}]],
+        [[${array_pause41}]],[[${array_pause42}]],[[${array_pause43}]],[[${array_pause44}]],[[${array_pause45}]],[[${array_pause46}]],[[${array_pause47}]],[[${array_pause48}]],[[${array_pause49}]],[[${array_pause50}]],
+        [[${array_pause51}]],[[${array_pause52}]],[[${array_pause53}]],[[${array_pause54}]],[[${array_pause55}]],[[${array_pause56}]],[[${array_pause57}]],[[${array_pause58}]],[[${array_pause59}]],[[${array_pause60}]],
+        [[${array_pause61}]],[[${array_pause62}]],[[${array_pause63}]],[[${array_pause64}]],[[${array_pause65}]],[[${array_pause66}]],[[${array_pause67}]],[[${array_pause68}]],[[${array_pause69}]],[[${array_pause70}]],
+        [[${array_pause71}]],[[${array_pause72}]],[[${array_pause73}]],[[${array_pause74}]],[[${array_pause75}]],[[${array_pause76}]],[[${array_pause77}]],[[${array_pause78}]],[[${array_pause79}]],[[${array_pause80}]],
+        [[${array_pause81}]],[[${array_pause82}]],[[${array_pause83}]],[[${array_pause84}]],[[${array_pause85}]],[[${array_pause86}]],[[${array_pause87}]],[[${array_pause88}]],[[${array_pause89}]],[[${array_pause90}]],
+        [[${array_pause91}]],[[${array_pause92}]],[[${array_pause93}]],[[${array_pause94}]],[[${array_pause95}]],[[${array_pause96}]],[[${array_pause97}]],[[${array_pause98}]],[[${array_pause99}]],[[${array_pause100}]],
+        [[${array_pause101}]],[[${array_pause102}]],[[${array_pause103}]],[[${array_pause104}]],[[${array_pause105}]],[[${array_pause106}]],[[${array_pause107}]],[[${array_pause108}]],[[${array_pause109}]],[[${array_pause110}]],
+        [[${array_pause111}]],[[${array_pause112}]],[[${array_pause113}]],[[${array_pause114}]],[[${array_pause115}]],[[${array_pause116}]],[[${array_pause117}]],[[${array_pause118}]],[[${array_pause119}]],[[${array_pause120}]],
+        [[${array_pause121}]],[[${array_pause122}]],[[${array_pause123}]],[[${array_pause124}]],[[${array_pause125}]],[[${array_pause126}]],[[${array_pause127}]],[[${array_pause128}]],[[${array_pause129}]],[[${array_pause130}]],
+        [[${array_pause131}]],[[${array_pause132}]],[[${array_pause133}]],[[${array_pause134}]],[[${array_pause135}]],[[${array_pause136}]],[[${array_pause137}]],[[${array_pause138}]],[[${array_pause129}]],[[${array_pause120}]],
+        [[${array_pause141}]],[[${array_pause142}]],[[${array_pause143}]],[[${array_pause144}]],[[${array_pause145}]],[[${array_pause146}]],[[${array_pause147}]],[[${array_pause148}]],[[${array_pause129}]],[[${array_pause120}]],
+        [[${array_pause151}]],[[${array_pause152}]],[[${array_pause153}]],[[${array_pause154}]],[[${array_pause155}]],[[${array_pause156}]],[[${array_pause157}]],[[${array_pause158}]],[[${array_pause129}]],[[${array_pause120}]],
+        [[${array_pause161}]],[[${array_pause162}]],[[${array_pause163}]],[[${array_pause164}]],[[${array_pause165}]],[[${array_pause166}]],[[${array_pause167}]],[[${array_pause168}]],[[${array_pause169}]],[[${array_pause170}]],
+        [[${array_pause171}]],[[${array_pause172}]],[[${array_pause173}]],[[${array_pause174}]],[[${array_pause175}]],[[${array_pause176}]],[[${array_pause177}]],[[${array_pause178}]],[[${array_pause179}]],[[${array_pause180}]],
+        [[${array_pause181}]],[[${array_pause182}]],[[${array_pause183}]],[[${array_pause184}]],[[${array_pause185}]],[[${array_pause186}]],[[${array_pause187}]],[[${array_pause188}]],[[${array_pause189}]],[[${array_pause190}]],
+        [[${array_pause191}]],[[${array_pause192}]],[[${array_pause193}]],[[${array_pause194}]],[[${array_pause195}]],[[${array_pause196}]],[[${array_pause197}]],[[${array_pause198}]],[[${array_pause199}]],[[${array_pause200}]],
+        [[${array_pause201}]],[[${array_pause202}]],[[${array_pause203}]],[[${array_pause204}]],[[${array_pause205}]],[[${array_pause206}]],[[${array_pause207}]],[[${array_pause208}]],[[${array_pause209}]],[[${array_pause210}]],
+        [[${array_pause211}]],[[${array_pause212}]],[[${array_pause213}]],[[${array_pause214}]],[[${array_pause215}]],[[${array_pause216}]],[[${array_pause217}]],[[${array_pause218}]],[[${array_pause219}]],[[${array_pause220}]],
+        [[${array_pause221}]],[[${array_pause222}]],[[${array_pause223}]],[[${array_pause224}]],[[${array_pause225}]],[[${array_pause226}]],[[${array_pause227}]],[[${array_pause228}]],[[${array_pause229}]],[[${array_pause230}]],
+        [[${array_pause231}]],[[${array_pause232}]],[[${array_pause233}]],[[${array_pause234}]],[[${array_pause235}]],[[${array_pause236}]],[[${array_pause237}]],[[${array_pause238}]],[[${array_pause239}]],[[${array_pause240}]],
+        [[${array_pause241}]],[[${array_pause242}]],[[${array_pause243}]],[[${array_pause244}]],[[${array_pause245}]],[[${array_pause246}]],[[${array_pause247}]],[[${array_pause248}]],[[${array_pause249}]],[[${array_pause250}]],
+        [[${array_pause261}]],[[${array_pause262}]],[[${array_pause263}]],[[${array_pause264}]],[[${array_pause265}]],[[${array_pause266}]],[[${array_pause267}]],[[${array_pause268}]],[[${array_pause269}]],[[${array_pause270}]],
+        [[${array_pause281}]],[[${array_pause282}]],[[${array_pause283}]],[[${array_pause284}]],[[${array_pause285}]],[[${array_pause286}]],[[${array_pause287}]],[[${array_pause288}]],[[${array_pause289}]],[[${array_pause290}]],
+        [[${array_pause291}]],[[${array_pause292}]],[[${array_pause293}]],[[${array_pause294}]],[[${array_pause295}]],[[${array_pause296}]],[[${array_pause297}]],
+
+    ];
+    var array_off = [
+        [[${array_off0}]],[[${array_off1}]],[[${array_off2}]],[[${array_off3}]],[[${array_off4}]],[[${array_off5}]],[[${array_off6}]],[[${array_off7}]],[[${array_off8}]],[[${array_off9}]],[[${array_off10}]],
+        [[${array_off11}]],[[${array_off12}]],[[${array_off13}]],[[${array_off14}]],[[${array_off15}]],[[${array_off16}]],[[${array_off17}]],[[${array_off18}]],[[${array_off19}]],[[${array_off20}]],
+        [[${array_off21}]],[[${array_off22}]],[[${array_off23}]],[[${array_off24}]],[[${array_off25}]],[[${array_off26}]],[[${array_off27}]],[[${array_off28}]],[[${array_off29}]],[[${array_off30}]],
+        [[${array_off31}]],[[${array_off32}]],[[${array_off33}]],[[${array_off34}]],[[${array_off35}]],[[${array_off36}]],[[${array_off37}]],[[${array_off38}]],[[${array_off39}]]
+    ];
+    var array_avar = [
+        [[${array_avar0}]],[[${array_avar1}]],[[${array_avar2}]],[[${array_avar3}]],[[${array_avar4}]],[[${array_avar5}]],[[${array_avar6}]],[[${array_avar7}]],[[${array_avar8}]],[[${array_avar9}]],[[${array_avar10}]],
+        [[${array_avar11}]],[[${array_avar12}]],[[${array_avar13}]],[[${array_avar14}]],[[${array_avar15}]],[[${array_avar16}]],[[${array_avar17}]],[[${array_avar18}]],[[${array_avar19}]],[[${array_avar20}]],
+        [[${array_avar21}]],[[${array_avar22}]],[[${array_avar23}]],[[${array_avar24}]],[[${array_avar25}]],[[${array_avar26}]],[[${array_avar27}]],[[${array_avar28}]],[[${array_avar29}]],[[${array_avar30}]],
+        [[${array_avar31}]],[[${array_avar32}]],[[${array_avar33}]],[[${array_avar34}]],[[${array_avar35}]],[[${array_avar36}]],[[${array_avar37}]],[[${array_avar38}]],[[${array_avar39}]],[[${array_avar40}]],
+        [[${array_avar41}]],[[${array_avar42}]],[[${array_avar43}]],[[${array_avar44}]],[[${array_avar45}]],[[${array_avar46}]],[[${array_avar47}]],[[${array_avar48}]],[[${array_avar49}]],[[${array_avar50}]],
+    ];
+    var array_nagruzka = [
+        [[${array_nagruzka0}]],[[${array_nagruzka1}]],[[${array_nagruzka2}]],[[${array_nagruzka3}]],[[${array_nagruzka4}]],[[${array_nagruzka5}]],[[${array_nagruzka6}]],[[${array_nagruzka7}]],[[${array_nagruzka8}]],[[${array_nagruzka9}]],[[${array_nagruzka10}]],
+        [[${array_nagruzka11}]],[[${array_nagruzka12}]],[[${array_nagruzka13}]],[[${array_nagruzka14}]],[[${array_nagruzka15}]],[[${array_nagruzka16}]],[[${array_nagruzka17}]],[[${array_nagruzka18}]],[[${array_nagruzka19}]],[[${array_nagruzka20}]],
+        [[${array_nagruzka21}]],[[${array_nagruzka22}]],[[${array_nagruzka23}]],[[${array_nagruzka24}]],[[${array_nagruzka25}]],[[${array_nagruzka26}]],[[${array_nagruzka27}]],[[${array_nagruzka28}]],[[${array_nagruzka29}]],[[${array_nagruzka30}]],
+        [[${array_nagruzka31}]],[[${array_nagruzka32}]],[[${array_nagruzka33}]],[[${array_nagruzka34}]],[[${array_nagruzka35}]],[[${array_nagruzka36}]],[[${array_nagruzka37}]],[[${array_nagruzka38}]],[[${array_nagruzka39}]],[[${array_nagruzka40}]],
+        [[${array_nagruzka41}]],[[${array_nagruzka42}]],[[${array_nagruzka43}]],[[${array_nagruzka44}]],[[${array_nagruzka45}]],[[${array_nagruzka46}]],[[${array_nagruzka47}]],[[${array_nagruzka48}]],[[${array_nagruzka49}]],[[${array_nagruzka50}]],
+        [[${array_nagruzka51}]],[[${array_nagruzka52}]],[[${array_nagruzka53}]],[[${array_nagruzka54}]],[[${array_nagruzka55}]],[[${array_nagruzka56}]],[[${array_nagruzka57}]],[[${array_nagruzka58}]],[[${array_nagruzka59}]],[[${array_nagruzka60}]],
+        [[${array_nagruzka61}]],[[${array_nagruzka62}]],[[${array_nagruzka63}]],[[${array_nagruzka64}]],[[${array_nagruzka65}]],[[${array_nagruzka66}]],[[${array_nagruzka67}]],[[${array_nagruzka68}]],[[${array_nagruzka69}]],[[${array_nagruzka70}]],
+        [[${array_nagruzka71}]],[[${array_nagruzka72}]],[[${array_nagruzka73}]],[[${array_nagruzka74}]],[[${array_nagruzka75}]],[[${array_nagruzka76}]],[[${array_nagruzka77}]],[[${array_nagruzka78}]],[[${array_nagruzka79}]],[[${array_nagruzka80}]],
+        [[${array_nagruzka81}]],[[${array_nagruzka82}]],[[${array_nagruzka83}]],[[${array_nagruzka84}]],[[${array_nagruzka85}]],[[${array_nagruzka86}]],[[${array_nagruzka87}]],[[${array_nagruzka88}]],[[${array_nagruzka89}]],[[${array_nagruzka90}]],
+        [[${array_nagruzka91}]],[[${array_nagruzka92}]],[[${array_nagruzka93}]],[[${array_nagruzka94}]],[[${array_nagruzka95}]],[[${array_nagruzka96}]],[[${array_nagruzka97}]],[[${array_nagruzka98}]],[[${array_nagruzka99}]],[[${array_nagruzka100}]],
+        [[${array_nagruzka101}]],[[${array_nagruzka102}]],[[${array_nagruzka103}]],[[${array_nagruzka104}]],[[${array_nagruzka105}]],[[${array_nagruzka106}]],[[${array_nagruzka107}]],[[${array_nagruzka108}]],[[${array_nagruzka109}]],[[${array_nagruzka110}]],
+        [[${array_nagruzka111}]],[[${array_nagruzka112}]],[[${array_nagruzka113}]],[[${array_nagruzka114}]],[[${array_nagruzka115}]],[[${array_nagruzka116}]],[[${array_nagruzka117}]],[[${array_nagruzka118}]],[[${array_nagruzka119}]],[[${array_nagruzka120}]],
+        [[${array_nagruzka121}]],[[${array_nagruzka122}]],[[${array_nagruzka123}]],[[${array_nagruzka124}]],[[${array_nagruzka125}]],[[${array_nagruzka126}]],[[${array_nagruzka127}]],[[${array_nagruzka128}]],[[${array_nagruzka129}]],[[${array_nagruzka130}]],
+        [[${array_nagruzka131}]],[[${array_nagruzka132}]],[[${array_nagruzka133}]],[[${array_nagruzka134}]],[[${array_nagruzka135}]],[[${array_nagruzka136}]],[[${array_nagruzka137}]],[[${array_nagruzka138}]],[[${array_nagruzka139}]],[[${array_nagruzka140}]],
+        [[${array_nagruzka141}]],[[${array_nagruzka142}]],[[${array_nagruzka143}]],[[${array_nagruzka144}]],[[${array_nagruzka145}]],[[${array_nagruzka146}]],[[${array_nagruzka147}]],[[${array_nagruzka148}]],[[${array_nagruzka149}]],[[${array_nagruzka150}]],
+        [[${array_nagruzka151}]],[[${array_nagruzka152}]],[[${array_nagruzka153}]],[[${array_nagruzka154}]],[[${array_nagruzka155}]],[[${array_nagruzka156}]],[[${array_nagruzka157}]],[[${array_nagruzka158}]],[[${array_nagruzka159}]],[[${array_nagruzka160}]],
+        [[${array_nagruzka161}]],[[${array_nagruzka162}]],[[${array_nagruzka163}]],[[${array_nagruzka164}]],[[${array_nagruzka165}]],[[${array_nagruzka166}]],[[${array_nagruzka167}]],[[${array_nagruzka168}]],[[${array_nagruzka169}]],[[${array_nagruzka170}]],
+        [[${array_nagruzka171}]],[[${array_nagruzka172}]],[[${array_nagruzka173}]],[[${array_nagruzka174}]],[[${array_nagruzka175}]],[[${array_nagruzka176}]],[[${array_nagruzka177}]],[[${array_nagruzka178}]],[[${array_nagruzka179}]],[[${array_nagruzka180}]],
+        [[${array_nagruzka181}]],[[${array_nagruzka182}]],[[${array_nagruzka183}]],[[${array_nagruzka184}]],[[${array_nagruzka185}]],[[${array_nagruzka186}]],[[${array_nagruzka187}]],[[${array_nagruzka188}]],[[${array_nagruzka189}]],[[${array_nagruzka190}]],
+        [[${array_nagruzka191}]],[[${array_nagruzka192}]],[[${array_nagruzka193}]],[[${array_nagruzka194}]],[[${array_nagruzka195}]],[[${array_nagruzka196}]],[[${array_nagruzka197}]],[[${array_nagruzka198}]],[[${array_nagruzka199}]],[[${array_nagruzka200}]],
+        [[${array_nagruzka201}]],[[${array_nagruzka202}]],[[${array_nagruzka203}]],[[${array_nagruzka204}]],[[${array_nagruzka205}]],[[${array_nagruzka206}]],[[${array_nagruzka207}]],[[${array_nagruzka208}]],[[${array_nagruzka209}]],[[${array_nagruzka210}]],
+        [[${array_nagruzka211}]],[[${array_nagruzka212}]],[[${array_nagruzka213}]],[[${array_nagruzka214}]],[[${array_nagruzka215}]],[[${array_nagruzka216}]],[[${array_nagruzka217}]],[[${array_nagruzka218}]],[[${array_nagruzka219}]],[[${array_nagruzka220}]],
+        [[${array_nagruzka221}]],[[${array_nagruzka222}]],[[${array_nagruzka223}]],[[${array_nagruzka224}]],[[${array_nagruzka225}]],[[${array_nagruzka226}]],[[${array_nagruzka227}]],[[${array_nagruzka228}]],[[${array_nagruzka229}]],[[${array_nagruzka230}]],
+        [[${array_nagruzka231}]],[[${array_nagruzka232}]],[[${array_nagruzka233}]],[[${array_nagruzka234}]],[[${array_nagruzka235}]],[[${array_nagruzka236}]],[[${array_nagruzka237}]],[[${array_nagruzka238}]],[[${array_nagruzka239}]],[[${array_nagruzka240}]],
+        [[${array_nagruzka241}]],[[${array_nagruzka242}]],[[${array_nagruzka243}]],[[${array_nagruzka244}]],[[${array_nagruzka245}]],[[${array_nagruzka246}]],[[${array_nagruzka247}]],[[${array_nagruzka248}]],[[${array_nagruzka249}]],[[${array_nagruzka250}]],
+        [[${array_nagruzka251}]],[[${array_nagruzka252}]],[[${array_nagruzka253}]],[[${array_nagruzka254}]],[[${array_nagruzka255}]],[[${array_nagruzka256}]],[[${array_nagruzka257}]],[[${array_nagruzka258}]],[[${array_nagruzka259}]],[[${array_nagruzka260}]],
+        [[${array_nagruzka261}]],[[${array_nagruzka262}]],[[${array_nagruzka263}]],[[${array_nagruzka264}]],[[${array_nagruzka265}]],[[${array_nagruzka266}]],[[${array_nagruzka267}]],[[${array_nagruzka268}]],[[${array_nagruzka269}]],[[${array_nagruzka270}]],
+        [[${array_nagruzka271}]],[[${array_nagruzka272}]],[[${array_nagruzka273}]],[[${array_nagruzka274}]],[[${array_nagruzka275}]],[[${array_nagruzka276}]],[[${array_nagruzka277}]],[[${array_nagruzka278}]],[[${array_nagruzka279}]],[[${array_nagruzka280}]],
+        [[${array_nagruzka281}]],[[${array_nagruzka282}]],[[${array_nagruzka283}]],[[${array_nagruzka284}]],[[${array_nagruzka285}]],[[${array_nagruzka286}]],[[${array_nagruzka287}]],[[${array_nagruzka288}]],[[${array_nagruzka289}]],[[${array_nagruzka290}]],
+        [[${array_nagruzka291}]],[[${array_nagruzka292}]],[[${array_nagruzka293}]],[[${array_nagruzka294}]],[[${array_nagruzka295}]],[[${array_nagruzka296}]],[[${array_nagruzka297}]],[[${array_nagruzka298}]],[[${array_nagruzka299}]],[[${array_nagruzka300}]],
+
+    ];
+
+</script>   <!--Навигатор_1 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var navigator_1_work = [[${work}]];
+    var navigator_1_pass = [[${pass}]];
+    var navigator_1_fail = [[${fail}]];
+    var navigator_1_avar = [[${avar}]];
+    var navigator_1_nagruzka = [[${nagruzka}]];
+
+</script>   <!--Навигатор_1 js круговая диагрмма загрузки оборудования-->
+<script src="/js/navigators/navigator_1.js"></script>
+
+<script th:inline="javascript">
+    var array_rabota_2_golova_1 = [
+        [[${array_rabota_2_golova_1_0}]],[[${array_rabota_2_golova_1_1}]],[[${array_rabota_2_golova_1_2}]],[[${array_rabota_2_golova_1_3}]],[[${array_rabota_2_golova_1_4}]],[[${array_rabota_2_golova_1_5}]],[[${array_rabota_2_golova_1_6}]],[[${array_rabota_2_golova_1_7}]],[[${array_rabota_2_golova_1_8}]],[[${array_rabota_2_golova_1_9}]],[[${array_rabota_2_golova_1_10}]],
+        [[${array_rabota_2_golova_1_11}]],[[${array_rabota_2_golova_1_12}]],[[${array_rabota_2_golova_1_13}]],[[${array_rabota_2_golova_1_14}]],[[${array_rabota_2_golova_1_15}]],[[${array_rabota_2_golova_1_16}]],[[${array_rabota_2_golova_1_17}]],[[${array_rabota_2_golova_1_18}]],[[${array_rabota_2_golova_1_19}]],[[${array_rabota_2_golova_1_20}]],
+        [[${array_rabota_2_golova_1_21}]],[[${array_rabota_2_golova_1_22}]],[[${array_rabota_2_golova_1_23}]],[[${array_rabota_2_golova_1_24}]],[[${array_rabota_2_golova_1_25}]],[[${array_rabota_2_golova_1_26}]],[[${array_rabota_2_golova_1_27}]],[[${array_rabota_2_golova_1_28}]],[[${array_rabota_2_golova_1_29}]],[[${array_rabota_2_golova_1_30}]],
+        [[${array_rabota_2_golova_1_31}]],[[${array_rabota_2_golova_1_32}]],[[${array_rabota_2_golova_1_33}]],[[${array_rabota_2_golova_1_34}]],[[${array_rabota_2_golova_1_35}]],[[${array_rabota_2_golova_1_36}]],[[${array_rabota_2_golova_1_37}]],[[${array_rabota_2_golova_1_38}]],[[${array_rabota_2_golova_1_39}]],[[${array_rabota_2_golova_1_40}]],
+        [[${array_rabota_2_golova_1_41}]],[[${array_rabota_2_golova_1_42}]],[[${array_rabota_2_golova_1_43}]],[[${array_rabota_2_golova_1_44}]],[[${array_rabota_2_golova_1_45}]],[[${array_rabota_2_golova_1_46}]],[[${array_rabota_2_golova_1_47}]],[[${array_rabota_2_golova_1_48}]],[[${array_rabota_2_golova_1_49}]],[[${array_rabota_2_golova_1_50}]],
+        [[${array_rabota_2_golova_1_51}]],[[${array_rabota_2_golova_1_52}]],[[${array_rabota_2_golova_1_53}]],[[${array_rabota_2_golova_1_54}]],[[${array_rabota_2_golova_1_55}]],[[${array_rabota_2_golova_1_56}]],[[${array_rabota_2_golova_1_57}]],[[${array_rabota_2_golova_1_58}]],[[${array_rabota_2_golova_1_59}]],[[${array_rabota_2_golova_1_60}]],
+        [[${array_rabota_2_golova_1_61}]],[[${array_rabota_2_golova_1_62}]],[[${array_rabota_2_golova_1_63}]],[[${array_rabota_2_golova_1_64}]],[[${array_rabota_2_golova_1_65}]],[[${array_rabota_2_golova_1_66}]],[[${array_rabota_2_golova_1_67}]],[[${array_rabota_2_golova_1_68}]],[[${array_rabota_2_golova_1_69}]],[[${array_rabota_2_golova_1_70}]],
+        [[${array_rabota_2_golova_1_71}]],[[${array_rabota_2_golova_1_72}]],[[${array_rabota_2_golova_1_73}]],[[${array_rabota_2_golova_1_74}]],[[${array_rabota_2_golova_1_75}]],[[${array_rabota_2_golova_1_76}]],[[${array_rabota_2_golova_1_77}]],[[${array_rabota_2_golova_1_78}]],[[${array_rabota_2_golova_1_79}]],[[${array_rabota_2_golova_1_80}]],
+        [[${array_rabota_2_golova_1_81}]],[[${array_rabota_2_golova_1_82}]],[[${array_rabota_2_golova_1_83}]],[[${array_rabota_2_golova_1_84}]],[[${array_rabota_2_golova_1_85}]],[[${array_rabota_2_golova_1_86}]],[[${array_rabota_2_golova_1_87}]],[[${array_rabota_2_golova_1_88}]],[[${array_rabota_2_golova_1_89}]],[[${array_rabota_2_golova_1_90}]],
+        [[${array_rabota_2_golova_1_91}]],[[${array_rabota_2_golova_1_92}]],[[${array_rabota_2_golova_1_93}]],[[${array_rabota_2_golova_1_94}]],[[${array_rabota_2_golova_1_95}]],[[${array_rabota_2_golova_1_96}]],[[${array_rabota_2_golova_1_97}]],[[${array_rabota_2_golova_1_98}]],[[${array_rabota_2_golova_1_99}]],[[${array_rabota_2_golova_1_100}]],
+        [[${array_rabota_2_golova_1_101}]],[[${array_rabota_2_golova_1_102}]],[[${array_rabota_2_golova_1_103}]],[[${array_rabota_2_golova_1_104}]],[[${array_rabota_2_golova_1_105}]],[[${array_rabota_2_golova_1_106}]],[[${array_rabota_2_golova_1_107}]],[[${array_rabota_2_golova_1_108}]],[[${array_rabota_2_golova_1_109}]],[[${array_rabota_2_golova_1_110}]],
+        [[${array_rabota_2_golova_1_111}]],[[${array_rabota_2_golova_1_112}]],[[${array_rabota_2_golova_1_113}]],[[${array_rabota_2_golova_1_114}]],[[${array_rabota_2_golova_1_115}]],[[${array_rabota_2_golova_1_116}]],[[${array_rabota_2_golova_1_117}]],[[${array_rabota_2_golova_1_118}]],[[${array_rabota_2_golova_1_119}]],[[${array_rabota_2_golova_1_120}]],
+        [[${array_rabota_2_golova_1_121}]],[[${array_rabota_2_golova_1_122}]],[[${array_rabota_2_golova_1_123}]],[[${array_rabota_2_golova_1_124}]],[[${array_rabota_2_golova_1_125}]],[[${array_rabota_2_golova_1_126}]],[[${array_rabota_2_golova_1_127}]],[[${array_rabota_2_golova_1_128}]],[[${array_rabota_2_golova_1_129}]],[[${array_rabota_2_golova_1_130}]],
+        [[${array_rabota_2_golova_1_131}]],[[${array_rabota_2_golova_1_132}]],[[${array_rabota_2_golova_1_133}]],[[${array_rabota_2_golova_1_134}]],[[${array_rabota_2_golova_1_135}]],[[${array_rabota_2_golova_1_136}]],[[${array_rabota_2_golova_1_137}]],[[${array_rabota_2_golova_1_138}]],[[${array_rabota_2_golova_1_139}]],[[${array_rabota_2_golova_1_140}]],
+        [[${array_rabota_2_golova_1_141}]],[[${array_rabota_2_golova_1_142}]],[[${array_rabota_2_golova_1_143}]],[[${array_rabota_2_golova_1_144}]],[[${array_rabota_2_golova_1_145}]],[[${array_rabota_2_golova_1_146}]],[[${array_rabota_2_golova_1_147}]],[[${array_rabota_2_golova_1_148}]],[[${array_rabota_2_golova_1_149}]],[[${array_rabota_2_golova_1_150}]],
+        [[${array_rabota_2_golova_1_151}]],[[${array_rabota_2_golova_1_152}]],[[${array_rabota_2_golova_1_153}]],[[${array_rabota_2_golova_1_154}]],[[${array_rabota_2_golova_1_155}]],[[${array_rabota_2_golova_1_156}]],[[${array_rabota_2_golova_1_157}]],[[${array_rabota_2_golova_1_158}]],[[${array_rabota_2_golova_1_159}]],[[${array_rabota_2_golova_1_160}]],
+        [[${array_rabota_2_golova_1_161}]],[[${array_rabota_2_golova_1_162}]],[[${array_rabota_2_golova_1_163}]],[[${array_rabota_2_golova_1_164}]],[[${array_rabota_2_golova_1_165}]],[[${array_rabota_2_golova_1_166}]],[[${array_rabota_2_golova_1_167}]],[[${array_rabota_2_golova_1_168}]],[[${array_rabota_2_golova_1_169}]],[[${array_rabota_2_golova_1_170}]],
+        [[${array_rabota_2_golova_1_171}]],[[${array_rabota_2_golova_1_172}]],[[${array_rabota_2_golova_1_173}]],[[${array_rabota_2_golova_1_174}]],[[${array_rabota_2_golova_1_175}]],[[${array_rabota_2_golova_1_176}]],[[${array_rabota_2_golova_1_177}]],[[${array_rabota_2_golova_1_178}]],[[${array_rabota_2_golova_1_179}]],[[${array_rabota_2_golova_1_180}]],
+        [[${array_rabota_2_golova_1_181}]],[[${array_rabota_2_golova_1_182}]],[[${array_rabota_2_golova_1_183}]],[[${array_rabota_2_golova_1_184}]],[[${array_rabota_2_golova_1_185}]],[[${array_rabota_2_golova_1_186}]],[[${array_rabota_2_golova_1_187}]],[[${array_rabota_2_golova_1_188}]],[[${array_rabota_2_golova_1_189}]],[[${array_rabota_2_golova_1_190}]],
+        [[${array_rabota_2_golova_1_191}]],[[${array_rabota_2_golova_1_192}]],[[${array_rabota_2_golova_1_193}]],[[${array_rabota_2_golova_1_194}]],[[${array_rabota_2_golova_1_195}]],[[${array_rabota_2_golova_1_196}]],[[${array_rabota_2_golova_1_197}]],[[${array_rabota_2_golova_1_198}]],[[${array_rabota_2_golova_1_199}]],[[${array_rabota_2_golova_1_200}]],
+        [[${array_rabota_2_golova_1_201}]],[[${array_rabota_2_golova_1_202}]],[[${array_rabota_2_golova_1_203}]],[[${array_rabota_2_golova_1_204}]],[[${array_rabota_2_golova_1_205}]],[[${array_rabota_2_golova_1_206}]],[[${array_rabota_2_golova_1_207}]],[[${array_rabota_2_golova_1_208}]],[[${array_rabota_2_golova_1_209}]],[[${array_rabota_2_golova_1_210}]],
+        [[${array_rabota_2_golova_1_211}]],[[${array_rabota_2_golova_1_212}]],[[${array_rabota_2_golova_1_213}]],[[${array_rabota_2_golova_1_214}]],[[${array_rabota_2_golova_1_215}]],[[${array_rabota_2_golova_1_216}]],[[${array_rabota_2_golova_1_217}]],[[${array_rabota_2_golova_1_218}]],[[${array_rabota_2_golova_1_219}]],[[${array_rabota_2_golova_1_220}]],
+        [[${array_rabota_2_golova_1_221}]],[[${array_rabota_2_golova_1_222}]],[[${array_rabota_2_golova_1_223}]],[[${array_rabota_2_golova_1_224}]],[[${array_rabota_2_golova_1_225}]],[[${array_rabota_2_golova_1_226}]],[[${array_rabota_2_golova_1_227}]],[[${array_rabota_2_golova_1_228}]],[[${array_rabota_2_golova_1_229}]],[[${array_rabota_2_golova_1_230}]],
+        [[${array_rabota_2_golova_1_231}]],[[${array_rabota_2_golova_1_232}]],[[${array_rabota_2_golova_1_233}]],[[${array_rabota_2_golova_1_234}]],[[${array_rabota_2_golova_1_235}]],[[${array_rabota_2_golova_1_236}]],[[${array_rabota_2_golova_1_237}]],[[${array_rabota_2_golova_1_238}]],[[${array_rabota_2_golova_1_239}]],[[${array_rabota_2_golova_1_240}]],
+        [[${array_rabota_2_golova_1_241}]],[[${array_rabota_2_golova_1_242}]],[[${array_rabota_2_golova_1_243}]],[[${array_rabota_2_golova_1_244}]],[[${array_rabota_2_golova_1_245}]],[[${array_rabota_2_golova_1_246}]],[[${array_rabota_2_golova_1_247}]],[[${array_rabota_2_golova_1_248}]],[[${array_rabota_2_golova_1_249}]],[[${array_rabota_2_golova_1_250}]],
+        [[${array_rabota_2_golova_1_251}]],[[${array_rabota_2_golova_1_252}]],[[${array_rabota_2_golova_1_253}]],[[${array_rabota_2_golova_1_254}]],[[${array_rabota_2_golova_1_255}]],[[${array_rabota_2_golova_1_256}]],[[${array_rabota_2_golova_1_257}]],[[${array_rabota_2_golova_1_258}]],[[${array_rabota_2_golova_1_259}]],[[${array_rabota_2_golova_1_260}]],
+        [[${array_rabota_2_golova_1_261}]],[[${array_rabota_2_golova_1_262}]],[[${array_rabota_2_golova_1_263}]],[[${array_rabota_2_golova_1_264}]],[[${array_rabota_2_golova_1_265}]],[[${array_rabota_2_golova_1_266}]],[[${array_rabota_2_golova_1_267}]],[[${array_rabota_2_golova_1_268}]],[[${array_rabota_2_golova_1_269}]],[[${array_rabota_2_golova_1_270}]],
+        [[${array_rabota_2_golova_1_271}]],[[${array_rabota_2_golova_1_272}]],[[${array_rabota_2_golova_1_273}]],[[${array_rabota_2_golova_1_274}]],[[${array_rabota_2_golova_1_275}]],[[${array_rabota_2_golova_1_276}]],[[${array_rabota_2_golova_1_277}]],[[${array_rabota_2_golova_1_278}]],[[${array_rabota_2_golova_1_279}]],[[${array_rabota_2_golova_1_280}]],
+        [[${array_rabota_2_golova_1_281}]],[[${array_rabota_2_golova_1_282}]],[[${array_rabota_2_golova_1_283}]],[[${array_rabota_2_golova_1_284}]],[[${array_rabota_2_golova_1_285}]],[[${array_rabota_2_golova_1_286}]],[[${array_rabota_2_golova_1_287}]],[[${array_rabota_2_golova_1_288}]],[[${array_rabota_2_golova_1_289}]],[[${array_rabota_2_golova_1_290}]],
+        [[${array_rabota_2_golova_1_291}]],[[${array_rabota_2_golova_1_292}]],[[${array_rabota_2_golova_1_293}]],[[${array_rabota_2_golova_1_294}]],[[${array_rabota_2_golova_1_295}]],[[${array_rabota_2_golova_1_296}]],[[${array_rabota_2_golova_1_297}]],[[${array_rabota_2_golova_1_298}]],[[${array_rabota_2_golova_1_299}]],[[${array_rabota_2_golova_1_300}]],
+
+    ];
+    var array_pause_2_golova_1 = [
+        [[${array_pause_2_golova_1_0}]],[[${array_pause_2_golova_1_1}]],[[${array_pause_2_golova_1_2}]],[[${array_pause_2_golova_1_3}]],[[${array_pause_2_golova_1_4}]],[[${array_pause_2_golova_1_5}]],[[${array_pause_2_golova_1_6}]],[[${array_pause_2_golova_1_7}]],[[${array_pause_2_golova_1_8}]],[[${array_pause_2_golova_1_9}]],[[${array_pause_2_golova_1_10}]],
+        [[${array_pause_2_golova_1_11}]],[[${array_pause_2_golova_1_12}]],[[${array_pause_2_golova_1_13}]],[[${array_pause_2_golova_1_14}]],[[${array_pause_2_golova_1_15}]],[[${array_pause_2_golova_1_16}]],[[${array_pause_2_golova_1_17}]],[[${array_pause_2_golova_1_18}]],[[${array_pause_2_golova_1_19}]],[[${array_pause_2_golova_1_20}]],
+        [[${array_pause_2_golova_1_21}]],[[${array_pause_2_golova_1_22}]],[[${array_pause_2_golova_1_23}]],[[${array_pause_2_golova_1_24}]],[[${array_pause_2_golova_1_25}]],[[${array_pause_2_golova_1_26}]],[[${array_pause_2_golova_1_27}]],[[${array_pause_2_golova_1_28}]],[[${array_pause_2_golova_1_29}]],[[${array_pause_2_golova_1_30}]],
+        [[${array_pause_2_golova_1_31}]],[[${array_pause_2_golova_1_32}]],[[${array_pause_2_golova_1_33}]],[[${array_pause_2_golova_1_34}]],[[${array_pause_2_golova_1_35}]],[[${array_pause_2_golova_1_36}]],[[${array_pause_2_golova_1_37}]],[[${array_pause_2_golova_1_38}]],[[${array_pause_2_golova_1_39}]],[[${array_pause_2_golova_1_40}]],
+        [[${array_pause_2_golova_1_41}]],[[${array_pause_2_golova_1_42}]],[[${array_pause_2_golova_1_43}]],[[${array_pause_2_golova_1_44}]],[[${array_pause_2_golova_1_45}]],[[${array_pause_2_golova_1_46}]],[[${array_pause_2_golova_1_47}]],[[${array_pause_2_golova_1_48}]],[[${array_pause_2_golova_1_49}]],[[${array_pause_2_golova_1_50}]],
+        [[${array_pause_2_golova_1_51}]],[[${array_pause_2_golova_1_52}]],[[${array_pause_2_golova_1_53}]],[[${array_pause_2_golova_1_54}]],[[${array_pause_2_golova_1_55}]],[[${array_pause_2_golova_1_56}]],[[${array_pause_2_golova_1_57}]],[[${array_pause_2_golova_1_58}]],[[${array_pause_2_golova_1_59}]],[[${array_pause_2_golova_1_60}]],
+        [[${array_pause_2_golova_1_61}]],[[${array_pause_2_golova_1_62}]],[[${array_pause_2_golova_1_63}]],[[${array_pause_2_golova_1_64}]],[[${array_pause_2_golova_1_65}]],[[${array_pause_2_golova_1_66}]],[[${array_pause_2_golova_1_67}]],[[${array_pause_2_golova_1_68}]],[[${array_pause_2_golova_1_69}]],[[${array_pause_2_golova_1_70}]],
+        [[${array_pause_2_golova_1_71}]],[[${array_pause_2_golova_1_72}]],[[${array_pause_2_golova_1_73}]],[[${array_pause_2_golova_1_74}]],[[${array_pause_2_golova_1_75}]],[[${array_pause_2_golova_1_76}]],[[${array_pause_2_golova_1_77}]],[[${array_pause_2_golova_1_78}]],[[${array_pause_2_golova_1_79}]],[[${array_pause_2_golova_1_80}]],
+        [[${array_pause_2_golova_1_81}]],[[${array_pause_2_golova_1_82}]],[[${array_pause_2_golova_1_83}]],[[${array_pause_2_golova_1_84}]],[[${array_pause_2_golova_1_85}]],[[${array_pause_2_golova_1_86}]],[[${array_pause_2_golova_1_87}]],[[${array_pause_2_golova_1_88}]],[[${array_pause_2_golova_1_89}]],[[${array_pause_2_golova_1_90}]],
+        [[${array_pause_2_golova_1_91}]],[[${array_pause_2_golova_1_92}]],[[${array_pause_2_golova_1_93}]],[[${array_pause_2_golova_1_94}]],[[${array_pause_2_golova_1_95}]],[[${array_pause_2_golova_1_96}]],[[${array_pause_2_golova_1_97}]],[[${array_pause_2_golova_1_98}]],[[${array_pause_2_golova_1_99}]],[[${array_pause_2_golova_1_100}]],
+        [[${array_pause_2_golova_1_101}]],[[${array_pause_2_golova_1_102}]],[[${array_pause_2_golova_1_103}]],[[${array_pause_2_golova_1_104}]],[[${array_pause_2_golova_1_105}]],[[${array_pause_2_golova_1_106}]],[[${array_pause_2_golova_1_107}]],[[${array_pause_2_golova_1_108}]],[[${array_pause_2_golova_1_109}]],[[${array_pause_2_golova_1_110}]],
+        [[${array_pause_2_golova_1_111}]],[[${array_pause_2_golova_1_112}]],[[${array_pause_2_golova_1_113}]],[[${array_pause_2_golova_1_114}]],[[${array_pause_2_golova_1_115}]],[[${array_pause_2_golova_1_116}]],[[${array_pause_2_golova_1_117}]],[[${array_pause_2_golova_1_118}]],[[${array_pause_2_golova_1_119}]],[[${array_pause_2_golova_1_120}]],
+        [[${array_pause_2_golova_1_121}]],[[${array_pause_2_golova_1_122}]],[[${array_pause_2_golova_1_123}]],[[${array_pause_2_golova_1_124}]],[[${array_pause_2_golova_1_125}]],[[${array_pause_2_golova_1_126}]],[[${array_pause_2_golova_1_127}]],[[${array_pause_2_golova_1_128}]],[[${array_pause_2_golova_1_129}]],[[${array_pause_2_golova_1_130}]],
+        [[${array_pause_2_golova_1_131}]],[[${array_pause_2_golova_1_132}]],[[${array_pause_2_golova_1_133}]],[[${array_pause_2_golova_1_134}]],[[${array_pause_2_golova_1_135}]],[[${array_pause_2_golova_1_136}]],[[${array_pause_2_golova_1_137}]],[[${array_pause_2_golova_1_138}]],[[${array_pause_2_golova_1_129}]],[[${array_pause_2_golova_1_120}]],
+        [[${array_pause_2_golova_1_141}]],[[${array_pause_2_golova_1_142}]],[[${array_pause_2_golova_1_143}]],[[${array_pause_2_golova_1_144}]],[[${array_pause_2_golova_1_145}]],[[${array_pause_2_golova_1_146}]],[[${array_pause_2_golova_1_147}]],[[${array_pause_2_golova_1_148}]],[[${array_pause_2_golova_1_129}]],[[${array_pause_2_golova_1_120}]],
+        [[${array_pause_2_golova_1_151}]],[[${array_pause_2_golova_1_152}]],[[${array_pause_2_golova_1_153}]],[[${array_pause_2_golova_1_154}]],[[${array_pause_2_golova_1_155}]],[[${array_pause_2_golova_1_156}]],[[${array_pause_2_golova_1_157}]],[[${array_pause_2_golova_1_158}]],[[${array_pause_2_golova_1_129}]],[[${array_pause_2_golova_1_120}]],
+        [[${array_pause_2_golova_1_161}]],[[${array_pause_2_golova_1_162}]],[[${array_pause_2_golova_1_163}]],[[${array_pause_2_golova_1_164}]],[[${array_pause_2_golova_1_165}]],[[${array_pause_2_golova_1_166}]],[[${array_pause_2_golova_1_167}]],[[${array_pause_2_golova_1_168}]],[[${array_pause_2_golova_1_169}]],[[${array_pause_2_golova_1_170}]],
+        [[${array_pause_2_golova_1_171}]],[[${array_pause_2_golova_1_172}]],[[${array_pause_2_golova_1_173}]],[[${array_pause_2_golova_1_174}]],[[${array_pause_2_golova_1_175}]],[[${array_pause_2_golova_1_176}]],[[${array_pause_2_golova_1_177}]],[[${array_pause_2_golova_1_178}]],[[${array_pause_2_golova_1_179}]],[[${array_pause_2_golova_1_180}]],
+        [[${array_pause_2_golova_1_181}]],[[${array_pause_2_golova_1_182}]],[[${array_pause_2_golova_1_183}]],[[${array_pause_2_golova_1_184}]],[[${array_pause_2_golova_1_185}]],[[${array_pause_2_golova_1_186}]],[[${array_pause_2_golova_1_187}]],[[${array_pause_2_golova_1_188}]],[[${array_pause_2_golova_1_189}]],[[${array_pause_2_golova_1_190}]],
+        [[${array_pause_2_golova_1_191}]],[[${array_pause_2_golova_1_192}]],[[${array_pause_2_golova_1_193}]],[[${array_pause_2_golova_1_194}]],[[${array_pause_2_golova_1_195}]],[[${array_pause_2_golova_1_196}]],[[${array_pause_2_golova_1_197}]],[[${array_pause_2_golova_1_198}]],[[${array_pause_2_golova_1_199}]],[[${array_pause_2_golova_1_200}]],
+        [[${array_pause_2_golova_1_201}]],[[${array_pause_2_golova_1_202}]],[[${array_pause_2_golova_1_203}]],[[${array_pause_2_golova_1_204}]],[[${array_pause_2_golova_1_205}]],[[${array_pause_2_golova_1_206}]],[[${array_pause_2_golova_1_207}]],[[${array_pause_2_golova_1_208}]],[[${array_pause_2_golova_1_209}]],[[${array_pause_2_golova_1_210}]],
+        [[${array_pause_2_golova_1_211}]],[[${array_pause_2_golova_1_212}]],[[${array_pause_2_golova_1_213}]],[[${array_pause_2_golova_1_214}]],[[${array_pause_2_golova_1_215}]],[[${array_pause_2_golova_1_216}]],[[${array_pause_2_golova_1_217}]],[[${array_pause_2_golova_1_218}]],[[${array_pause_2_golova_1_219}]],[[${array_pause_2_golova_1_220}]],
+        [[${array_pause_2_golova_1_221}]],[[${array_pause_2_golova_1_222}]],[[${array_pause_2_golova_1_223}]],[[${array_pause_2_golova_1_224}]],[[${array_pause_2_golova_1_225}]],[[${array_pause_2_golova_1_226}]],[[${array_pause_2_golova_1_227}]],[[${array_pause_2_golova_1_228}]],[[${array_pause_2_golova_1_229}]],[[${array_pause_2_golova_1_230}]],
+        [[${array_pause_2_golova_1_231}]],[[${array_pause_2_golova_1_232}]],[[${array_pause_2_golova_1_233}]],[[${array_pause_2_golova_1_234}]],[[${array_pause_2_golova_1_235}]],[[${array_pause_2_golova_1_236}]],[[${array_pause_2_golova_1_237}]],[[${array_pause_2_golova_1_238}]],[[${array_pause_2_golova_1_239}]],[[${array_pause_2_golova_1_240}]],
+        [[${array_pause_2_golova_1_241}]],[[${array_pause_2_golova_1_242}]],[[${array_pause_2_golova_1_243}]],[[${array_pause_2_golova_1_244}]],[[${array_pause_2_golova_1_245}]],[[${array_pause_2_golova_1_246}]],[[${array_pause_2_golova_1_247}]],[[${array_pause_2_golova_1_248}]],[[${array_pause_2_golova_1_249}]],[[${array_pause_2_golova_1_250}]],
+        [[${array_pause_2_golova_1_261}]],[[${array_pause_2_golova_1_262}]],[[${array_pause_2_golova_1_263}]],[[${array_pause_2_golova_1_264}]],[[${array_pause_2_golova_1_265}]],[[${array_pause_2_golova_1_266}]],[[${array_pause_2_golova_1_267}]],[[${array_pause_2_golova_1_268}]],[[${array_pause_2_golova_1_269}]],[[${array_pause_2_golova_1_270}]],
+        [[${array_pause_2_golova_1_281}]],[[${array_pause_2_golova_1_282}]],[[${array_pause_2_golova_1_283}]],[[${array_pause_2_golova_1_284}]],[[${array_pause_2_golova_1_285}]],[[${array_pause_2_golova_1_286}]],[[${array_pause_2_golova_1_287}]],[[${array_pause_2_golova_1_288}]],[[${array_pause_2_golova_1_289}]],[[${array_pause_2_golova_1_290}]],
+        [[${array_pause_2_golova_1_291}]],[[${array_pause_2_golova_1_292}]],[[${array_pause_2_golova_1_293}]],[[${array_pause_2_golova_1_294}]],[[${array_pause_2_golova_1_295}]],[[${array_pause_2_golova_1_296}]],[[${array_pause_2_golova_1_297}]],
+
+    ];
+    var array_off_2_golova_1 = [
+        [[${array_off_2_golova_1_0}]],[[${array_off_2_golova_1_1}]],[[${array_off_2_golova_1_2}]],[[${array_off_2_golova_1_3}]],[[${array_off_2_golova_1_4}]],[[${array_off_2_golova_1_5}]],[[${array_off_2_golova_1_6}]],[[${array_off_2_golova_1_7}]],[[${array_off_2_golova_1_8}]],[[${array_off_2_golova_1_9}]],[[${array_off_2_golova_1_10}]],
+        [[${array_off_2_golova_1_11}]],[[${array_off_2_golova_1_12}]],[[${array_off_2_golova_1_13}]],[[${array_off_2_golova_1_14}]],[[${array_off_2_golova_1_15}]],[[${array_off_2_golova_1_16}]],[[${array_off_2_golova_1_17}]],[[${array_off_2_golova_1_18}]],[[${array_off_2_golova_1_19}]],[[${array_off_2_golova_1_20}]],
+        [[${array_off_2_golova_1_21}]],[[${array_off_2_golova_1_22}]],[[${array_off_2_golova_1_23}]],[[${array_off_2_golova_1_24}]],[[${array_off_2_golova_1_25}]],[[${array_off_2_golova_1_26}]],[[${array_off_2_golova_1_27}]],[[${array_off_2_golova_1_28}]],[[${array_off_2_golova_1_29}]],[[${array_off_2_golova_1_30}]],
+        [[${array_off_2_golova_1_31}]],[[${array_off_2_golova_1_32}]],[[${array_off_2_golova_1_33}]],[[${array_off_2_golova_1_34}]],[[${array_off_2_golova_1_35}]],[[${array_off_2_golova_1_36}]],[[${array_off_2_golova_1_37}]],[[${array_off_2_golova_1_38}]],[[${array_off_2_golova_1_39}]]
+    ];
+    var array_avar_2_golova_1 = [
+        [[${array_avar_2_golova_1_0}]],[[${array_avar_2_golova_1_1}]],[[${array_avar_2_golova_1_2}]],[[${array_avar_2_golova_1_3}]],[[${array_avar_2_golova_1_4}]],[[${array_avar_2_golova_1_5}]],[[${array_avar_2_golova_1_6}]],[[${array_avar_2_golova_1_7}]],[[${array_avar_2_golova_1_8}]],[[${array_avar_2_golova_1_9}]],[[${array_avar_2_golova_1_10}]],
+        [[${array_avar_2_golova_1_11}]],[[${array_avar_2_golova_1_12}]],[[${array_avar_2_golova_1_13}]],[[${array_avar_2_golova_1_14}]],[[${array_avar_2_golova_1_15}]],[[${array_avar_2_golova_1_16}]],[[${array_avar_2_golova_1_17}]],[[${array_avar_2_golova_1_18}]],[[${array_avar_2_golova_1_19}]],[[${array_avar_2_golova_1_20}]],
+        [[${array_avar_2_golova_1_21}]],[[${array_avar_2_golova_1_22}]],[[${array_avar_2_golova_1_23}]],[[${array_avar_2_golova_1_24}]],[[${array_avar_2_golova_1_25}]],[[${array_avar_2_golova_1_26}]],[[${array_avar_2_golova_1_27}]],[[${array_avar_2_golova_1_28}]],[[${array_avar_2_golova_1_29}]],[[${array_avar_2_golova_1_30}]],
+        [[${array_avar_2_golova_1_31}]],[[${array_avar_2_golova_1_32}]],[[${array_avar_2_golova_1_33}]],[[${array_avar_2_golova_1_34}]],[[${array_avar_2_golova_1_35}]],[[${array_avar_2_golova_1_36}]],[[${array_avar_2_golova_1_37}]],[[${array_avar_2_golova_1_38}]],[[${array_avar_2_golova_1_39}]],[[${array_avar_2_golova_1_40}]],
+        [[${array_avar_2_golova_1_41}]],[[${array_avar_2_golova_1_42}]],[[${array_avar_2_golova_1_43}]],[[${array_avar_2_golova_1_44}]],[[${array_avar_2_golova_1_45}]],[[${array_avar_2_golova_1_46}]],[[${array_avar_2_golova_1_47}]],[[${array_avar_2_golova_1_48}]],[[${array_avar_2_golova_1_49}]],[[${array_avar_2_golova_1_50}]],
+    ];
+    var array_nagruzka_2_golova_1 = [
+        [[${array_nagruzka_2_golova_1_0}]],[[${array_nagruzka_2_golova_1_1}]],[[${array_nagruzka_2_golova_1_2}]],[[${array_nagruzka_2_golova_1_3}]],[[${array_nagruzka_2_golova_1_4}]],[[${array_nagruzka_2_golova_1_5}]],[[${array_nagruzka_2_golova_1_6}]],[[${array_nagruzka_2_golova_1_7}]],[[${array_nagruzka_2_golova_1_8}]],[[${array_nagruzka_2_golova_1_9}]],[[${array_nagruzka_2_golova_1_10}]],
+        [[${array_nagruzka_2_golova_1_11}]],[[${array_nagruzka_2_golova_1_12}]],[[${array_nagruzka_2_golova_1_13}]],[[${array_nagruzka_2_golova_1_14}]],[[${array_nagruzka_2_golova_1_15}]],[[${array_nagruzka_2_golova_1_16}]],[[${array_nagruzka_2_golova_1_17}]],[[${array_nagruzka_2_golova_1_18}]],[[${array_nagruzka_2_golova_1_19}]],[[${array_nagruzka_2_golova_1_20}]],
+        [[${array_nagruzka_2_golova_1_21}]],[[${array_nagruzka_2_golova_1_22}]],[[${array_nagruzka_2_golova_1_23}]],[[${array_nagruzka_2_golova_1_24}]],[[${array_nagruzka_2_golova_1_25}]],[[${array_nagruzka_2_golova_1_26}]],[[${array_nagruzka_2_golova_1_27}]],[[${array_nagruzka_2_golova_1_28}]],[[${array_nagruzka_2_golova_1_29}]],[[${array_nagruzka_2_golova_1_30}]],
+        [[${array_nagruzka_2_golova_1_31}]],[[${array_nagruzka_2_golova_1_32}]],[[${array_nagruzka_2_golova_1_33}]],[[${array_nagruzka_2_golova_1_34}]],[[${array_nagruzka_2_golova_1_35}]],[[${array_nagruzka_2_golova_1_36}]],[[${array_nagruzka_2_golova_1_37}]],[[${array_nagruzka_2_golova_1_38}]],[[${array_nagruzka_2_golova_1_39}]],[[${array_nagruzka_2_golova_1_40}]],
+        [[${array_nagruzka_2_golova_1_41}]],[[${array_nagruzka_2_golova_1_42}]],[[${array_nagruzka_2_golova_1_43}]],[[${array_nagruzka_2_golova_1_44}]],[[${array_nagruzka_2_golova_1_45}]],[[${array_nagruzka_2_golova_1_46}]],[[${array_nagruzka_2_golova_1_47}]],[[${array_nagruzka_2_golova_1_48}]],[[${array_nagruzka_2_golova_1_49}]],[[${array_nagruzka_2_golova_1_50}]],
+        [[${array_nagruzka_2_golova_1_51}]],[[${array_nagruzka_2_golova_1_52}]],[[${array_nagruzka_2_golova_1_53}]],[[${array_nagruzka_2_golova_1_54}]],[[${array_nagruzka_2_golova_1_55}]],[[${array_nagruzka_2_golova_1_56}]],[[${array_nagruzka_2_golova_1_57}]],[[${array_nagruzka_2_golova_1_58}]],[[${array_nagruzka_2_golova_1_59}]],[[${array_nagruzka_2_golova_1_60}]],
+        [[${array_nagruzka_2_golova_1_61}]],[[${array_nagruzka_2_golova_1_62}]],[[${array_nagruzka_2_golova_1_63}]],[[${array_nagruzka_2_golova_1_64}]],[[${array_nagruzka_2_golova_1_65}]],[[${array_nagruzka_2_golova_1_66}]],[[${array_nagruzka_2_golova_1_67}]],[[${array_nagruzka_2_golova_1_68}]],[[${array_nagruzka_2_golova_1_69}]],[[${array_nagruzka_2_golova_1_70}]],
+        [[${array_nagruzka_2_golova_1_71}]],[[${array_nagruzka_2_golova_1_72}]],[[${array_nagruzka_2_golova_1_73}]],[[${array_nagruzka_2_golova_1_74}]],[[${array_nagruzka_2_golova_1_75}]],[[${array_nagruzka_2_golova_1_76}]],[[${array_nagruzka_2_golova_1_77}]],[[${array_nagruzka_2_golova_1_78}]],[[${array_nagruzka_2_golova_1_79}]],[[${array_nagruzka_2_golova_1_80}]],
+        [[${array_nagruzka_2_golova_1_81}]],[[${array_nagruzka_2_golova_1_82}]],[[${array_nagruzka_2_golova_1_83}]],[[${array_nagruzka_2_golova_1_84}]],[[${array_nagruzka_2_golova_1_85}]],[[${array_nagruzka_2_golova_1_86}]],[[${array_nagruzka_2_golova_1_87}]],[[${array_nagruzka_2_golova_1_88}]],[[${array_nagruzka_2_golova_1_89}]],[[${array_nagruzka_2_golova_1_90}]],
+        [[${array_nagruzka_2_golova_1_91}]],[[${array_nagruzka_2_golova_1_92}]],[[${array_nagruzka_2_golova_1_93}]],[[${array_nagruzka_2_golova_1_94}]],[[${array_nagruzka_2_golova_1_95}]],[[${array_nagruzka_2_golova_1_96}]],[[${array_nagruzka_2_golova_1_97}]],[[${array_nagruzka_2_golova_1_98}]],[[${array_nagruzka_2_golova_1_99}]],[[${array_nagruzka_2_golova_1_100}]],
+        [[${array_nagruzka_2_golova_1_101}]],[[${array_nagruzka_2_golova_1_102}]],[[${array_nagruzka_2_golova_1_103}]],[[${array_nagruzka_2_golova_1_104}]],[[${array_nagruzka_2_golova_1_105}]],[[${array_nagruzka_2_golova_1_106}]],[[${array_nagruzka_2_golova_1_107}]],[[${array_nagruzka_2_golova_1_108}]],[[${array_nagruzka_2_golova_1_109}]],[[${array_nagruzka_2_golova_1_110}]],
+        [[${array_nagruzka_2_golova_1_111}]],[[${array_nagruzka_2_golova_1_112}]],[[${array_nagruzka_2_golova_1_113}]],[[${array_nagruzka_2_golova_1_114}]],[[${array_nagruzka_2_golova_1_115}]],[[${array_nagruzka_2_golova_1_116}]],[[${array_nagruzka_2_golova_1_117}]],[[${array_nagruzka_2_golova_1_118}]],[[${array_nagruzka_2_golova_1_119}]],[[${array_nagruzka_2_golova_1_120}]],
+        [[${array_nagruzka_2_golova_1_121}]],[[${array_nagruzka_2_golova_1_122}]],[[${array_nagruzka_2_golova_1_123}]],[[${array_nagruzka_2_golova_1_124}]],[[${array_nagruzka_2_golova_1_125}]],[[${array_nagruzka_2_golova_1_126}]],[[${array_nagruzka_2_golova_1_127}]],[[${array_nagruzka_2_golova_1_128}]],[[${array_nagruzka_2_golova_1_129}]],[[${array_nagruzka_2_golova_1_130}]],
+        [[${array_nagruzka_2_golova_1_131}]],[[${array_nagruzka_2_golova_1_132}]],[[${array_nagruzka_2_golova_1_133}]],[[${array_nagruzka_2_golova_1_134}]],[[${array_nagruzka_2_golova_1_135}]],[[${array_nagruzka_2_golova_1_136}]],[[${array_nagruzka_2_golova_1_137}]],[[${array_nagruzka_2_golova_1_138}]],[[${array_nagruzka_2_golova_1_139}]],[[${array_nagruzka_2_golova_1_140}]],
+        [[${array_nagruzka_2_golova_1_141}]],[[${array_nagruzka_2_golova_1_142}]],[[${array_nagruzka_2_golova_1_143}]],[[${array_nagruzka_2_golova_1_144}]],[[${array_nagruzka_2_golova_1_145}]],[[${array_nagruzka_2_golova_1_146}]],[[${array_nagruzka_2_golova_1_147}]],[[${array_nagruzka_2_golova_1_148}]],[[${array_nagruzka_2_golova_1_149}]],[[${array_nagruzka_2_golova_1_150}]],
+        [[${array_nagruzka_2_golova_1_151}]],[[${array_nagruzka_2_golova_1_152}]],[[${array_nagruzka_2_golova_1_153}]],[[${array_nagruzka_2_golova_1_154}]],[[${array_nagruzka_2_golova_1_155}]],[[${array_nagruzka_2_golova_1_156}]],[[${array_nagruzka_2_golova_1_157}]],[[${array_nagruzka_2_golova_1_158}]],[[${array_nagruzka_2_golova_1_159}]],[[${array_nagruzka_2_golova_1_160}]],
+        [[${array_nagruzka_2_golova_1_161}]],[[${array_nagruzka_2_golova_1_162}]],[[${array_nagruzka_2_golova_1_163}]],[[${array_nagruzka_2_golova_1_164}]],[[${array_nagruzka_2_golova_1_165}]],[[${array_nagruzka_2_golova_1_166}]],[[${array_nagruzka_2_golova_1_167}]],[[${array_nagruzka_2_golova_1_168}]],[[${array_nagruzka_2_golova_1_169}]],[[${array_nagruzka_2_golova_1_170}]],
+        [[${array_nagruzka_2_golova_1_171}]],[[${array_nagruzka_2_golova_1_172}]],[[${array_nagruzka_2_golova_1_173}]],[[${array_nagruzka_2_golova_1_174}]],[[${array_nagruzka_2_golova_1_175}]],[[${array_nagruzka_2_golova_1_176}]],[[${array_nagruzka_2_golova_1_177}]],[[${array_nagruzka_2_golova_1_178}]],[[${array_nagruzka_2_golova_1_179}]],[[${array_nagruzka_2_golova_1_180}]],
+        [[${array_nagruzka_2_golova_1_181}]],[[${array_nagruzka_2_golova_1_182}]],[[${array_nagruzka_2_golova_1_183}]],[[${array_nagruzka_2_golova_1_184}]],[[${array_nagruzka_2_golova_1_185}]],[[${array_nagruzka_2_golova_1_186}]],[[${array_nagruzka_2_golova_1_187}]],[[${array_nagruzka_2_golova_1_188}]],[[${array_nagruzka_2_golova_1_189}]],[[${array_nagruzka_2_golova_1_190}]],
+        [[${array_nagruzka_2_golova_1_191}]],[[${array_nagruzka_2_golova_1_192}]],[[${array_nagruzka_2_golova_1_193}]],[[${array_nagruzka_2_golova_1_194}]],[[${array_nagruzka_2_golova_1_195}]],[[${array_nagruzka_2_golova_1_196}]],[[${array_nagruzka_2_golova_1_197}]],[[${array_nagruzka_2_golova_1_198}]],[[${array_nagruzka_2_golova_1_199}]],[[${array_nagruzka_2_golova_1_200}]],
+        [[${array_nagruzka_2_golova_1_201}]],[[${array_nagruzka_2_golova_1_202}]],[[${array_nagruzka_2_golova_1_203}]],[[${array_nagruzka_2_golova_1_204}]],[[${array_nagruzka_2_golova_1_205}]],[[${array_nagruzka_2_golova_1_206}]],[[${array_nagruzka_2_golova_1_207}]],[[${array_nagruzka_2_golova_1_208}]],[[${array_nagruzka_2_golova_1_209}]],[[${array_nagruzka_2_golova_1_210}]],
+        [[${array_nagruzka_2_golova_1_211}]],[[${array_nagruzka_2_golova_1_212}]],[[${array_nagruzka_2_golova_1_213}]],[[${array_nagruzka_2_golova_1_214}]],[[${array_nagruzka_2_golova_1_215}]],[[${array_nagruzka_2_golova_1_216}]],[[${array_nagruzka_2_golova_1_217}]],[[${array_nagruzka_2_golova_1_218}]],[[${array_nagruzka_2_golova_1_219}]],[[${array_nagruzka_2_golova_1_220}]],
+        [[${array_nagruzka_2_golova_1_221}]],[[${array_nagruzka_2_golova_1_222}]],[[${array_nagruzka_2_golova_1_223}]],[[${array_nagruzka_2_golova_1_224}]],[[${array_nagruzka_2_golova_1_225}]],[[${array_nagruzka_2_golova_1_226}]],[[${array_nagruzka_2_golova_1_227}]],[[${array_nagruzka_2_golova_1_228}]],[[${array_nagruzka_2_golova_1_229}]],[[${array_nagruzka_2_golova_1_230}]],
+        [[${array_nagruzka_2_golova_1_231}]],[[${array_nagruzka_2_golova_1_232}]],[[${array_nagruzka_2_golova_1_233}]],[[${array_nagruzka_2_golova_1_234}]],[[${array_nagruzka_2_golova_1_235}]],[[${array_nagruzka_2_golova_1_236}]],[[${array_nagruzka_2_golova_1_237}]],[[${array_nagruzka_2_golova_1_238}]],[[${array_nagruzka_2_golova_1_239}]],[[${array_nagruzka_2_golova_1_240}]],
+        [[${array_nagruzka_2_golova_1_241}]],[[${array_nagruzka_2_golova_1_242}]],[[${array_nagruzka_2_golova_1_243}]],[[${array_nagruzka_2_golova_1_244}]],[[${array_nagruzka_2_golova_1_245}]],[[${array_nagruzka_2_golova_1_246}]],[[${array_nagruzka_2_golova_1_247}]],[[${array_nagruzka_2_golova_1_248}]],[[${array_nagruzka_2_golova_1_249}]],[[${array_nagruzka_2_golova_1_250}]],
+        [[${array_nagruzka_2_golova_1_251}]],[[${array_nagruzka_2_golova_1_252}]],[[${array_nagruzka_2_golova_1_253}]],[[${array_nagruzka_2_golova_1_254}]],[[${array_nagruzka_2_golova_1_255}]],[[${array_nagruzka_2_golova_1_256}]],[[${array_nagruzka_2_golova_1_257}]],[[${array_nagruzka_2_golova_1_258}]],[[${array_nagruzka_2_golova_1_259}]],[[${array_nagruzka_2_golova_1_260}]],
+        [[${array_nagruzka_2_golova_1_261}]],[[${array_nagruzka_2_golova_1_262}]],[[${array_nagruzka_2_golova_1_263}]],[[${array_nagruzka_2_golova_1_264}]],[[${array_nagruzka_2_golova_1_265}]],[[${array_nagruzka_2_golova_1_266}]],[[${array_nagruzka_2_golova_1_267}]],[[${array_nagruzka_2_golova_1_268}]],[[${array_nagruzka_2_golova_1_269}]],[[${array_nagruzka_2_golova_1_270}]],
+        [[${array_nagruzka_2_golova_1_271}]],[[${array_nagruzka_2_golova_1_272}]],[[${array_nagruzka_2_golova_1_273}]],[[${array_nagruzka_2_golova_1_274}]],[[${array_nagruzka_2_golova_1_275}]],[[${array_nagruzka_2_golova_1_276}]],[[${array_nagruzka_2_golova_1_277}]],[[${array_nagruzka_2_golova_1_278}]],[[${array_nagruzka_2_golova_1_279}]],[[${array_nagruzka_2_golova_1_280}]],
+        [[${array_nagruzka_2_golova_1_281}]],[[${array_nagruzka_2_golova_1_282}]],[[${array_nagruzka_2_golova_1_283}]],[[${array_nagruzka_2_golova_1_284}]],[[${array_nagruzka_2_golova_1_285}]],[[${array_nagruzka_2_golova_1_286}]],[[${array_nagruzka_2_golova_1_287}]],[[${array_nagruzka_2_golova_1_288}]],[[${array_nagruzka_2_golova_1_289}]],[[${array_nagruzka_2_golova_1_290}]],
+        [[${array_nagruzka_2_golova_1_291}]],[[${array_nagruzka_2_golova_1_292}]],[[${array_nagruzka_2_golova_1_293}]],[[${array_nagruzka_2_golova_1_294}]],[[${array_nagruzka_2_golova_1_295}]],[[${array_nagruzka_2_golova_1_296}]],[[${array_nagruzka_2_golova_1_297}]],[[${array_nagruzka_2_golova_1_298}]],[[${array_nagruzka_2_golova_1_299}]],[[${array_nagruzka_2_golova_1_300}]],
+
+    ];
+
+</script>   <!--Навигатор_2_голова_1 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var work_2_golova_1 = [[${work_2_golova_1}]];
+    var pass_2_golova_1 = [[${pass_2_golova_1}]];
+    var fail_2_golova_1 = [[${fail_2_golova_1}]];
+    var avar_2_golova_1 = [[${avar_2_golova_1}]];
+    var nagruzka_2_golova_1 = [[${nagruzka_2_golova_1}]];
+
+</script>   <!--Навигатор_2_голова_1 js круговая диагрмма загрузки оборудования-->
+<script src="/js/navigators/navigator_2_golova_1.js"></script>
+
+<script th:inline="javascript">
+
+    var array_rabota_2_golova_2 = [
+        [[${array_rabota_2_golova_2_0}]],[[${array_rabota_2_golova_2_1}]],[[${array_rabota_2_golova_2_2}]],[[${array_rabota_2_golova_2_3}]],[[${array_rabota_2_golova_2_4}]],[[${array_rabota_2_golova_2_5}]],[[${array_rabota_2_golova_2_6}]],[[${array_rabota_2_golova_2_7}]],[[${array_rabota_2_golova_2_8}]],[[${array_rabota_2_golova_2_9}]],[[${array_rabota_2_golova_2_10}]],
+        [[${array_rabota_2_golova_2_11}]],[[${array_rabota_2_golova_2_12}]],[[${array_rabota_2_golova_2_13}]],[[${array_rabota_2_golova_2_14}]],[[${array_rabota_2_golova_2_15}]],[[${array_rabota_2_golova_2_16}]],[[${array_rabota_2_golova_2_17}]],[[${array_rabota_2_golova_2_18}]],[[${array_rabota_2_golova_2_19}]],[[${array_rabota_2_golova_2_20}]],
+        [[${array_rabota_2_golova_2_21}]],[[${array_rabota_2_golova_2_22}]],[[${array_rabota_2_golova_2_23}]],[[${array_rabota_2_golova_2_24}]],[[${array_rabota_2_golova_2_25}]],[[${array_rabota_2_golova_2_26}]],[[${array_rabota_2_golova_2_27}]],[[${array_rabota_2_golova_2_28}]],[[${array_rabota_2_golova_2_29}]],[[${array_rabota_2_golova_2_30}]],
+        [[${array_rabota_2_golova_2_31}]],[[${array_rabota_2_golova_2_32}]],[[${array_rabota_2_golova_2_33}]],[[${array_rabota_2_golova_2_34}]],[[${array_rabota_2_golova_2_35}]],[[${array_rabota_2_golova_2_36}]],[[${array_rabota_2_golova_2_37}]],[[${array_rabota_2_golova_2_38}]],[[${array_rabota_2_golova_2_39}]],[[${array_rabota_2_golova_2_40}]],
+        [[${array_rabota_2_golova_2_41}]],[[${array_rabota_2_golova_2_42}]],[[${array_rabota_2_golova_2_43}]],[[${array_rabota_2_golova_2_44}]],[[${array_rabota_2_golova_2_45}]],[[${array_rabota_2_golova_2_46}]],[[${array_rabota_2_golova_2_47}]],[[${array_rabota_2_golova_2_48}]],[[${array_rabota_2_golova_2_49}]],[[${array_rabota_2_golova_2_50}]],
+        [[${array_rabota_2_golova_2_51}]],[[${array_rabota_2_golova_2_52}]],[[${array_rabota_2_golova_2_53}]],[[${array_rabota_2_golova_2_54}]],[[${array_rabota_2_golova_2_55}]],[[${array_rabota_2_golova_2_56}]],[[${array_rabota_2_golova_2_57}]],[[${array_rabota_2_golova_2_58}]],[[${array_rabota_2_golova_2_59}]],[[${array_rabota_2_golova_2_60}]],
+        [[${array_rabota_2_golova_2_61}]],[[${array_rabota_2_golova_2_62}]],[[${array_rabota_2_golova_2_63}]],[[${array_rabota_2_golova_2_64}]],[[${array_rabota_2_golova_2_65}]],[[${array_rabota_2_golova_2_66}]],[[${array_rabota_2_golova_2_67}]],[[${array_rabota_2_golova_2_68}]],[[${array_rabota_2_golova_2_69}]],[[${array_rabota_2_golova_2_70}]],
+        [[${array_rabota_2_golova_2_71}]],[[${array_rabota_2_golova_2_72}]],[[${array_rabota_2_golova_2_73}]],[[${array_rabota_2_golova_2_74}]],[[${array_rabota_2_golova_2_75}]],[[${array_rabota_2_golova_2_76}]],[[${array_rabota_2_golova_2_77}]],[[${array_rabota_2_golova_2_78}]],[[${array_rabota_2_golova_2_79}]],[[${array_rabota_2_golova_2_80}]],
+        [[${array_rabota_2_golova_2_81}]],[[${array_rabota_2_golova_2_82}]],[[${array_rabota_2_golova_2_83}]],[[${array_rabota_2_golova_2_84}]],[[${array_rabota_2_golova_2_85}]],[[${array_rabota_2_golova_2_86}]],[[${array_rabota_2_golova_2_87}]],[[${array_rabota_2_golova_2_88}]],[[${array_rabota_2_golova_2_89}]],[[${array_rabota_2_golova_2_90}]],
+        [[${array_rabota_2_golova_2_91}]],[[${array_rabota_2_golova_2_92}]],[[${array_rabota_2_golova_2_93}]],[[${array_rabota_2_golova_2_94}]],[[${array_rabota_2_golova_2_95}]],[[${array_rabota_2_golova_2_96}]],[[${array_rabota_2_golova_2_97}]],[[${array_rabota_2_golova_2_98}]],[[${array_rabota_2_golova_2_99}]],[[${array_rabota_2_golova_2_100}]],
+        [[${array_rabota_2_golova_2_101}]],[[${array_rabota_2_golova_2_102}]],[[${array_rabota_2_golova_2_103}]],[[${array_rabota_2_golova_2_104}]],[[${array_rabota_2_golova_2_105}]],[[${array_rabota_2_golova_2_106}]],[[${array_rabota_2_golova_2_107}]],[[${array_rabota_2_golova_2_108}]],[[${array_rabota_2_golova_2_109}]],[[${array_rabota_2_golova_2_110}]],
+        [[${array_rabota_2_golova_2_111}]],[[${array_rabota_2_golova_2_112}]],[[${array_rabota_2_golova_2_113}]],[[${array_rabota_2_golova_2_114}]],[[${array_rabota_2_golova_2_115}]],[[${array_rabota_2_golova_2_116}]],[[${array_rabota_2_golova_2_117}]],[[${array_rabota_2_golova_2_118}]],[[${array_rabota_2_golova_2_119}]],[[${array_rabota_2_golova_2_120}]],
+        [[${array_rabota_2_golova_2_121}]],[[${array_rabota_2_golova_2_122}]],[[${array_rabota_2_golova_2_123}]],[[${array_rabota_2_golova_2_124}]],[[${array_rabota_2_golova_2_125}]],[[${array_rabota_2_golova_2_126}]],[[${array_rabota_2_golova_2_127}]],[[${array_rabota_2_golova_2_128}]],[[${array_rabota_2_golova_2_129}]],[[${array_rabota_2_golova_2_130}]],
+        [[${array_rabota_2_golova_2_131}]],[[${array_rabota_2_golova_2_132}]],[[${array_rabota_2_golova_2_133}]],[[${array_rabota_2_golova_2_134}]],[[${array_rabota_2_golova_2_135}]],[[${array_rabota_2_golova_2_136}]],[[${array_rabota_2_golova_2_137}]],[[${array_rabota_2_golova_2_138}]],[[${array_rabota_2_golova_2_139}]],[[${array_rabota_2_golova_2_140}]],
+        [[${array_rabota_2_golova_2_141}]],[[${array_rabota_2_golova_2_142}]],[[${array_rabota_2_golova_2_143}]],[[${array_rabota_2_golova_2_144}]],[[${array_rabota_2_golova_2_145}]],[[${array_rabota_2_golova_2_146}]],[[${array_rabota_2_golova_2_147}]],[[${array_rabota_2_golova_2_148}]],[[${array_rabota_2_golova_2_149}]],[[${array_rabota_2_golova_2_150}]],
+        [[${array_rabota_2_golova_2_151}]],[[${array_rabota_2_golova_2_152}]],[[${array_rabota_2_golova_2_153}]],[[${array_rabota_2_golova_2_154}]],[[${array_rabota_2_golova_2_155}]],[[${array_rabota_2_golova_2_156}]],[[${array_rabota_2_golova_2_157}]],[[${array_rabota_2_golova_2_158}]],[[${array_rabota_2_golova_2_159}]],[[${array_rabota_2_golova_2_160}]],
+        [[${array_rabota_2_golova_2_161}]],[[${array_rabota_2_golova_2_162}]],[[${array_rabota_2_golova_2_163}]],[[${array_rabota_2_golova_2_164}]],[[${array_rabota_2_golova_2_165}]],[[${array_rabota_2_golova_2_166}]],[[${array_rabota_2_golova_2_167}]],[[${array_rabota_2_golova_2_168}]],[[${array_rabota_2_golova_2_169}]],[[${array_rabota_2_golova_2_170}]],
+        [[${array_rabota_2_golova_2_171}]],[[${array_rabota_2_golova_2_172}]],[[${array_rabota_2_golova_2_173}]],[[${array_rabota_2_golova_2_174}]],[[${array_rabota_2_golova_2_175}]],[[${array_rabota_2_golova_2_176}]],[[${array_rabota_2_golova_2_177}]],[[${array_rabota_2_golova_2_178}]],[[${array_rabota_2_golova_2_179}]],[[${array_rabota_2_golova_2_180}]],
+        [[${array_rabota_2_golova_2_181}]],[[${array_rabota_2_golova_2_182}]],[[${array_rabota_2_golova_2_183}]],[[${array_rabota_2_golova_2_184}]],[[${array_rabota_2_golova_2_185}]],[[${array_rabota_2_golova_2_186}]],[[${array_rabota_2_golova_2_187}]],[[${array_rabota_2_golova_2_188}]],[[${array_rabota_2_golova_2_189}]],[[${array_rabota_2_golova_2_190}]],
+        [[${array_rabota_2_golova_2_191}]],[[${array_rabota_2_golova_2_192}]],[[${array_rabota_2_golova_2_193}]],[[${array_rabota_2_golova_2_194}]],[[${array_rabota_2_golova_2_195}]],[[${array_rabota_2_golova_2_196}]],[[${array_rabota_2_golova_2_197}]],[[${array_rabota_2_golova_2_198}]],[[${array_rabota_2_golova_2_199}]],[[${array_rabota_2_golova_2_200}]],
+        [[${array_rabota_2_golova_2_201}]],[[${array_rabota_2_golova_2_202}]],[[${array_rabota_2_golova_2_203}]],[[${array_rabota_2_golova_2_204}]],[[${array_rabota_2_golova_2_205}]],[[${array_rabota_2_golova_2_206}]],[[${array_rabota_2_golova_2_207}]],[[${array_rabota_2_golova_2_208}]],[[${array_rabota_2_golova_2_209}]],[[${array_rabota_2_golova_2_210}]],
+        [[${array_rabota_2_golova_2_211}]],[[${array_rabota_2_golova_2_212}]],[[${array_rabota_2_golova_2_213}]],[[${array_rabota_2_golova_2_214}]],[[${array_rabota_2_golova_2_215}]],[[${array_rabota_2_golova_2_216}]],[[${array_rabota_2_golova_2_217}]],[[${array_rabota_2_golova_2_218}]],[[${array_rabota_2_golova_2_219}]],[[${array_rabota_2_golova_2_220}]],
+        [[${array_rabota_2_golova_2_221}]],[[${array_rabota_2_golova_2_222}]],[[${array_rabota_2_golova_2_223}]],[[${array_rabota_2_golova_2_224}]],[[${array_rabota_2_golova_2_225}]],[[${array_rabota_2_golova_2_226}]],[[${array_rabota_2_golova_2_227}]],[[${array_rabota_2_golova_2_228}]],[[${array_rabota_2_golova_2_229}]],[[${array_rabota_2_golova_2_230}]],
+        [[${array_rabota_2_golova_2_231}]],[[${array_rabota_2_golova_2_232}]],[[${array_rabota_2_golova_2_233}]],[[${array_rabota_2_golova_2_234}]],[[${array_rabota_2_golova_2_235}]],[[${array_rabota_2_golova_2_236}]],[[${array_rabota_2_golova_2_237}]],[[${array_rabota_2_golova_2_238}]],[[${array_rabota_2_golova_2_239}]],[[${array_rabota_2_golova_2_240}]],
+        [[${array_rabota_2_golova_2_241}]],[[${array_rabota_2_golova_2_242}]],[[${array_rabota_2_golova_2_243}]],[[${array_rabota_2_golova_2_244}]],[[${array_rabota_2_golova_2_245}]],[[${array_rabota_2_golova_2_246}]],[[${array_rabota_2_golova_2_247}]],[[${array_rabota_2_golova_2_248}]],[[${array_rabota_2_golova_2_249}]],[[${array_rabota_2_golova_2_250}]],
+        [[${array_rabota_2_golova_2_251}]],[[${array_rabota_2_golova_2_252}]],[[${array_rabota_2_golova_2_253}]],[[${array_rabota_2_golova_2_254}]],[[${array_rabota_2_golova_2_255}]],[[${array_rabota_2_golova_2_256}]],[[${array_rabota_2_golova_2_257}]],[[${array_rabota_2_golova_2_258}]],[[${array_rabota_2_golova_2_259}]],[[${array_rabota_2_golova_2_260}]],
+        [[${array_rabota_2_golova_2_261}]],[[${array_rabota_2_golova_2_262}]],[[${array_rabota_2_golova_2_263}]],[[${array_rabota_2_golova_2_264}]],[[${array_rabota_2_golova_2_265}]],[[${array_rabota_2_golova_2_266}]],[[${array_rabota_2_golova_2_267}]],[[${array_rabota_2_golova_2_268}]],[[${array_rabota_2_golova_2_269}]],[[${array_rabota_2_golova_2_270}]],
+        [[${array_rabota_2_golova_2_271}]],[[${array_rabota_2_golova_2_272}]],[[${array_rabota_2_golova_2_273}]],[[${array_rabota_2_golova_2_274}]],[[${array_rabota_2_golova_2_275}]],[[${array_rabota_2_golova_2_276}]],[[${array_rabota_2_golova_2_277}]],[[${array_rabota_2_golova_2_278}]],[[${array_rabota_2_golova_2_279}]],[[${array_rabota_2_golova_2_280}]],
+        [[${array_rabota_2_golova_2_281}]],[[${array_rabota_2_golova_2_282}]],[[${array_rabota_2_golova_2_283}]],[[${array_rabota_2_golova_2_284}]],[[${array_rabota_2_golova_2_285}]],[[${array_rabota_2_golova_2_286}]],[[${array_rabota_2_golova_2_287}]],[[${array_rabota_2_golova_2_288}]],[[${array_rabota_2_golova_2_289}]],[[${array_rabota_2_golova_2_290}]],
+        [[${array_rabota_2_golova_2_291}]],[[${array_rabota_2_golova_2_292}]],[[${array_rabota_2_golova_2_293}]],[[${array_rabota_2_golova_2_294}]],[[${array_rabota_2_golova_2_295}]],[[${array_rabota_2_golova_2_296}]],[[${array_rabota_2_golova_2_297}]],[[${array_rabota_2_golova_2_298}]],[[${array_rabota_2_golova_2_299}]],[[${array_rabota_2_golova_2_300}]],
+
+    ];
+    var array_pause_2_golova_2 = [
+        [[${array_pause_2_golova_2_0}]],[[${array_pause_2_golova_2_1}]],[[${array_pause_2_golova_2_2}]],[[${array_pause_2_golova_2_3}]],[[${array_pause_2_golova_2_4}]],[[${array_pause_2_golova_2_5}]],[[${array_pause_2_golova_2_6}]],[[${array_pause_2_golova_2_7}]],[[${array_pause_2_golova_2_8}]],[[${array_pause_2_golova_2_9}]],[[${array_pause_2_golova_2_10}]],
+        [[${array_pause_2_golova_2_11}]],[[${array_pause_2_golova_2_12}]],[[${array_pause_2_golova_2_13}]],[[${array_pause_2_golova_2_14}]],[[${array_pause_2_golova_2_15}]],[[${array_pause_2_golova_2_16}]],[[${array_pause_2_golova_2_17}]],[[${array_pause_2_golova_2_18}]],[[${array_pause_2_golova_2_19}]],[[${array_pause_2_golova_2_20}]],
+        [[${array_pause_2_golova_2_21}]],[[${array_pause_2_golova_2_22}]],[[${array_pause_2_golova_2_23}]],[[${array_pause_2_golova_2_24}]],[[${array_pause_2_golova_2_25}]],[[${array_pause_2_golova_2_26}]],[[${array_pause_2_golova_2_27}]],[[${array_pause_2_golova_2_28}]],[[${array_pause_2_golova_2_29}]],[[${array_pause_2_golova_2_30}]],
+        [[${array_pause_2_golova_2_31}]],[[${array_pause_2_golova_2_32}]],[[${array_pause_2_golova_2_33}]],[[${array_pause_2_golova_2_34}]],[[${array_pause_2_golova_2_35}]],[[${array_pause_2_golova_2_36}]],[[${array_pause_2_golova_2_37}]],[[${array_pause_2_golova_2_38}]],[[${array_pause_2_golova_2_39}]],[[${array_pause_2_golova_2_40}]],
+        [[${array_pause_2_golova_2_41}]],[[${array_pause_2_golova_2_42}]],[[${array_pause_2_golova_2_43}]],[[${array_pause_2_golova_2_44}]],[[${array_pause_2_golova_2_45}]],[[${array_pause_2_golova_2_46}]],[[${array_pause_2_golova_2_47}]],[[${array_pause_2_golova_2_48}]],[[${array_pause_2_golova_2_49}]],[[${array_pause_2_golova_2_50}]],
+        [[${array_pause_2_golova_2_51}]],[[${array_pause_2_golova_2_52}]],[[${array_pause_2_golova_2_53}]],[[${array_pause_2_golova_2_54}]],[[${array_pause_2_golova_2_55}]],[[${array_pause_2_golova_2_56}]],[[${array_pause_2_golova_2_57}]],[[${array_pause_2_golova_2_58}]],[[${array_pause_2_golova_2_59}]],[[${array_pause_2_golova_2_60}]],
+        [[${array_pause_2_golova_2_61}]],[[${array_pause_2_golova_2_62}]],[[${array_pause_2_golova_2_63}]],[[${array_pause_2_golova_2_64}]],[[${array_pause_2_golova_2_65}]],[[${array_pause_2_golova_2_66}]],[[${array_pause_2_golova_2_67}]],[[${array_pause_2_golova_2_68}]],[[${array_pause_2_golova_2_69}]],[[${array_pause_2_golova_2_70}]],
+        [[${array_pause_2_golova_2_71}]],[[${array_pause_2_golova_2_72}]],[[${array_pause_2_golova_2_73}]],[[${array_pause_2_golova_2_74}]],[[${array_pause_2_golova_2_75}]],[[${array_pause_2_golova_2_76}]],[[${array_pause_2_golova_2_77}]],[[${array_pause_2_golova_2_78}]],[[${array_pause_2_golova_2_79}]],[[${array_pause_2_golova_2_80}]],
+        [[${array_pause_2_golova_2_81}]],[[${array_pause_2_golova_2_82}]],[[${array_pause_2_golova_2_83}]],[[${array_pause_2_golova_2_84}]],[[${array_pause_2_golova_2_85}]],[[${array_pause_2_golova_2_86}]],[[${array_pause_2_golova_2_87}]],[[${array_pause_2_golova_2_88}]],[[${array_pause_2_golova_2_89}]],[[${array_pause_2_golova_2_90}]],
+        [[${array_pause_2_golova_2_91}]],[[${array_pause_2_golova_2_92}]],[[${array_pause_2_golova_2_93}]],[[${array_pause_2_golova_2_94}]],[[${array_pause_2_golova_2_95}]],[[${array_pause_2_golova_2_96}]],[[${array_pause_2_golova_2_97}]],[[${array_pause_2_golova_2_98}]],[[${array_pause_2_golova_2_99}]],[[${array_pause_2_golova_2_100}]],
+        [[${array_pause_2_golova_2_101}]],[[${array_pause_2_golova_2_102}]],[[${array_pause_2_golova_2_103}]],[[${array_pause_2_golova_2_104}]],[[${array_pause_2_golova_2_105}]],[[${array_pause_2_golova_2_106}]],[[${array_pause_2_golova_2_107}]],[[${array_pause_2_golova_2_108}]],[[${array_pause_2_golova_2_109}]],[[${array_pause_2_golova_2_110}]],
+        [[${array_pause_2_golova_2_111}]],[[${array_pause_2_golova_2_112}]],[[${array_pause_2_golova_2_113}]],[[${array_pause_2_golova_2_114}]],[[${array_pause_2_golova_2_115}]],[[${array_pause_2_golova_2_116}]],[[${array_pause_2_golova_2_117}]],[[${array_pause_2_golova_2_118}]],[[${array_pause_2_golova_2_119}]],[[${array_pause_2_golova_2_120}]],
+        [[${array_pause_2_golova_2_121}]],[[${array_pause_2_golova_2_122}]],[[${array_pause_2_golova_2_123}]],[[${array_pause_2_golova_2_124}]],[[${array_pause_2_golova_2_125}]],[[${array_pause_2_golova_2_126}]],[[${array_pause_2_golova_2_127}]],[[${array_pause_2_golova_2_128}]],[[${array_pause_2_golova_2_129}]],[[${array_pause_2_golova_2_130}]],
+        [[${array_pause_2_golova_2_131}]],[[${array_pause_2_golova_2_132}]],[[${array_pause_2_golova_2_133}]],[[${array_pause_2_golova_2_134}]],[[${array_pause_2_golova_2_135}]],[[${array_pause_2_golova_2_136}]],[[${array_pause_2_golova_2_137}]],[[${array_pause_2_golova_2_138}]],[[${array_pause_2_golova_2_129}]],[[${array_pause_2_golova_2_120}]],
+        [[${array_pause_2_golova_2_141}]],[[${array_pause_2_golova_2_142}]],[[${array_pause_2_golova_2_143}]],[[${array_pause_2_golova_2_144}]],[[${array_pause_2_golova_2_145}]],[[${array_pause_2_golova_2_146}]],[[${array_pause_2_golova_2_147}]],[[${array_pause_2_golova_2_148}]],[[${array_pause_2_golova_2_129}]],[[${array_pause_2_golova_2_120}]],
+        [[${array_pause_2_golova_2_151}]],[[${array_pause_2_golova_2_152}]],[[${array_pause_2_golova_2_153}]],[[${array_pause_2_golova_2_154}]],[[${array_pause_2_golova_2_155}]],[[${array_pause_2_golova_2_156}]],[[${array_pause_2_golova_2_157}]],[[${array_pause_2_golova_2_158}]],[[${array_pause_2_golova_2_129}]],[[${array_pause_2_golova_2_120}]],
+        [[${array_pause_2_golova_2_161}]],[[${array_pause_2_golova_2_162}]],[[${array_pause_2_golova_2_163}]],[[${array_pause_2_golova_2_164}]],[[${array_pause_2_golova_2_165}]],[[${array_pause_2_golova_2_166}]],[[${array_pause_2_golova_2_167}]],[[${array_pause_2_golova_2_168}]],[[${array_pause_2_golova_2_169}]],[[${array_pause_2_golova_2_170}]],
+        [[${array_pause_2_golova_2_171}]],[[${array_pause_2_golova_2_172}]],[[${array_pause_2_golova_2_173}]],[[${array_pause_2_golova_2_174}]],[[${array_pause_2_golova_2_175}]],[[${array_pause_2_golova_2_176}]],[[${array_pause_2_golova_2_177}]],[[${array_pause_2_golova_2_178}]],[[${array_pause_2_golova_2_179}]],[[${array_pause_2_golova_2_180}]],
+        [[${array_pause_2_golova_2_181}]],[[${array_pause_2_golova_2_182}]],[[${array_pause_2_golova_2_183}]],[[${array_pause_2_golova_2_184}]],[[${array_pause_2_golova_2_185}]],[[${array_pause_2_golova_2_186}]],[[${array_pause_2_golova_2_187}]],[[${array_pause_2_golova_2_188}]],[[${array_pause_2_golova_2_189}]],[[${array_pause_2_golova_2_190}]],
+        [[${array_pause_2_golova_2_191}]],[[${array_pause_2_golova_2_192}]],[[${array_pause_2_golova_2_193}]],[[${array_pause_2_golova_2_194}]],[[${array_pause_2_golova_2_195}]],[[${array_pause_2_golova_2_196}]],[[${array_pause_2_golova_2_197}]],[[${array_pause_2_golova_2_198}]],[[${array_pause_2_golova_2_199}]],[[${array_pause_2_golova_2_200}]],
+        [[${array_pause_2_golova_2_201}]],[[${array_pause_2_golova_2_202}]],[[${array_pause_2_golova_2_203}]],[[${array_pause_2_golova_2_204}]],[[${array_pause_2_golova_2_205}]],[[${array_pause_2_golova_2_206}]],[[${array_pause_2_golova_2_207}]],[[${array_pause_2_golova_2_208}]],[[${array_pause_2_golova_2_209}]],[[${array_pause_2_golova_2_210}]],
+        [[${array_pause_2_golova_2_211}]],[[${array_pause_2_golova_2_212}]],[[${array_pause_2_golova_2_213}]],[[${array_pause_2_golova_2_214}]],[[${array_pause_2_golova_2_215}]],[[${array_pause_2_golova_2_216}]],[[${array_pause_2_golova_2_217}]],[[${array_pause_2_golova_2_218}]],[[${array_pause_2_golova_2_219}]],[[${array_pause_2_golova_2_220}]],
+        [[${array_pause_2_golova_2_221}]],[[${array_pause_2_golova_2_222}]],[[${array_pause_2_golova_2_223}]],[[${array_pause_2_golova_2_224}]],[[${array_pause_2_golova_2_225}]],[[${array_pause_2_golova_2_226}]],[[${array_pause_2_golova_2_227}]],[[${array_pause_2_golova_2_228}]],[[${array_pause_2_golova_2_229}]],[[${array_pause_2_golova_2_230}]],
+        [[${array_pause_2_golova_2_231}]],[[${array_pause_2_golova_2_232}]],[[${array_pause_2_golova_2_233}]],[[${array_pause_2_golova_2_234}]],[[${array_pause_2_golova_2_235}]],[[${array_pause_2_golova_2_236}]],[[${array_pause_2_golova_2_237}]],[[${array_pause_2_golova_2_238}]],[[${array_pause_2_golova_2_239}]],[[${array_pause_2_golova_2_240}]],
+        [[${array_pause_2_golova_2_241}]],[[${array_pause_2_golova_2_242}]],[[${array_pause_2_golova_2_243}]],[[${array_pause_2_golova_2_244}]],[[${array_pause_2_golova_2_245}]],[[${array_pause_2_golova_2_246}]],[[${array_pause_2_golova_2_247}]],[[${array_pause_2_golova_2_248}]],[[${array_pause_2_golova_2_249}]],[[${array_pause_2_golova_2_250}]],
+        [[${array_pause_2_golova_2_261}]],[[${array_pause_2_golova_2_262}]],[[${array_pause_2_golova_2_263}]],[[${array_pause_2_golova_2_264}]],[[${array_pause_2_golova_2_265}]],[[${array_pause_2_golova_2_266}]],[[${array_pause_2_golova_2_267}]],[[${array_pause_2_golova_2_268}]],[[${array_pause_2_golova_2_269}]],[[${array_pause_2_golova_2_270}]],
+        [[${array_pause_2_golova_2_281}]],[[${array_pause_2_golova_2_282}]],[[${array_pause_2_golova_2_283}]],[[${array_pause_2_golova_2_284}]],[[${array_pause_2_golova_2_285}]],[[${array_pause_2_golova_2_286}]],[[${array_pause_2_golova_2_287}]],[[${array_pause_2_golova_2_288}]],[[${array_pause_2_golova_2_289}]],[[${array_pause_2_golova_2_290}]],
+        [[${array_pause_2_golova_2_291}]],[[${array_pause_2_golova_2_292}]],[[${array_pause_2_golova_2_293}]],[[${array_pause_2_golova_2_294}]],[[${array_pause_2_golova_2_295}]],[[${array_pause_2_golova_2_296}]],[[${array_pause_2_golova_2_297}]],
+
+    ];
+    var array_off_2_golova_2 = [
+        [[${array_off_2_golova_2_0}]],[[${array_off_2_golova_2_1}]],[[${array_off_2_golova_2_2}]],[[${array_off_2_golova_2_3}]],[[${array_off_2_golova_2_4}]],[[${array_off_2_golova_2_5}]],[[${array_off_2_golova_2_6}]],[[${array_off_2_golova_2_7}]],[[${array_off_2_golova_2_8}]],[[${array_off_2_golova_2_9}]],[[${array_off_2_golova_2_10}]],
+        [[${array_off_2_golova_2_11}]],[[${array_off_2_golova_2_12}]],[[${array_off_2_golova_2_13}]],[[${array_off_2_golova_2_14}]],[[${array_off_2_golova_2_15}]],[[${array_off_2_golova_2_16}]],[[${array_off_2_golova_2_17}]],[[${array_off_2_golova_2_18}]],[[${array_off_2_golova_2_19}]],[[${array_off_2_golova_2_20}]],
+        [[${array_off_2_golova_2_21}]],[[${array_off_2_golova_2_22}]],[[${array_off_2_golova_2_23}]],[[${array_off_2_golova_2_24}]],[[${array_off_2_golova_2_25}]],[[${array_off_2_golova_2_26}]],[[${array_off_2_golova_2_27}]],[[${array_off_2_golova_2_28}]],[[${array_off_2_golova_2_29}]],[[${array_off_2_golova_2_30}]],
+        [[${array_off_2_golova_2_31}]],[[${array_off_2_golova_2_32}]],[[${array_off_2_golova_2_33}]],[[${array_off_2_golova_2_34}]],[[${array_off_2_golova_2_35}]],[[${array_off_2_golova_2_36}]],[[${array_off_2_golova_2_37}]],[[${array_off_2_golova_2_38}]],[[${array_off_2_golova_2_39}]]
+    ];
+    var array_avar_2_golova_2 = [
+        [[${array_avar_2_golova_2_0}]],[[${array_avar_2_golova_2_1}]],[[${array_avar_2_golova_2_2}]],[[${array_avar_2_golova_2_3}]],[[${array_avar_2_golova_2_4}]],[[${array_avar_2_golova_2_5}]],[[${array_avar_2_golova_2_6}]],[[${array_avar_2_golova_2_7}]],[[${array_avar_2_golova_2_8}]],[[${array_avar_2_golova_2_9}]],[[${array_avar_2_golova_2_10}]],
+        [[${array_avar_2_golova_2_11}]],[[${array_avar_2_golova_2_12}]],[[${array_avar_2_golova_2_13}]],[[${array_avar_2_golova_2_14}]],[[${array_avar_2_golova_2_15}]],[[${array_avar_2_golova_2_16}]],[[${array_avar_2_golova_2_17}]],[[${array_avar_2_golova_2_18}]],[[${array_avar_2_golova_2_19}]],[[${array_avar_2_golova_2_20}]],
+        [[${array_avar_2_golova_2_21}]],[[${array_avar_2_golova_2_22}]],[[${array_avar_2_golova_2_23}]],[[${array_avar_2_golova_2_24}]],[[${array_avar_2_golova_2_25}]],[[${array_avar_2_golova_2_26}]],[[${array_avar_2_golova_2_27}]],[[${array_avar_2_golova_2_28}]],[[${array_avar_2_golova_2_29}]],[[${array_avar_2_golova_2_30}]],
+        [[${array_avar_2_golova_2_31}]],[[${array_avar_2_golova_2_32}]],[[${array_avar_2_golova_2_33}]],[[${array_avar_2_golova_2_34}]],[[${array_avar_2_golova_2_35}]],[[${array_avar_2_golova_2_36}]],[[${array_avar_2_golova_2_37}]],[[${array_avar_2_golova_2_38}]],[[${array_avar_2_golova_2_39}]],[[${array_avar_2_golova_2_40}]],
+        [[${array_avar_2_golova_2_41}]],[[${array_avar_2_golova_2_42}]],[[${array_avar_2_golova_2_43}]],[[${array_avar_2_golova_2_44}]],[[${array_avar_2_golova_2_45}]],[[${array_avar_2_golova_2_46}]],[[${array_avar_2_golova_2_47}]],[[${array_avar_2_golova_2_48}]],[[${array_avar_2_golova_2_49}]],[[${array_avar_2_golova_2_50}]],
+    ];
+    var array_nagruzka_2_golova_2 = [
+        [[${array_nagruzka_2_golova_2_0}]],[[${array_nagruzka_2_golova_2_1}]],[[${array_nagruzka_2_golova_2_2}]],[[${array_nagruzka_2_golova_2_3}]],[[${array_nagruzka_2_golova_2_4}]],[[${array_nagruzka_2_golova_2_5}]],[[${array_nagruzka_2_golova_2_6}]],[[${array_nagruzka_2_golova_2_7}]],[[${array_nagruzka_2_golova_2_8}]],[[${array_nagruzka_2_golova_2_9}]],[[${array_nagruzka_2_golova_2_10}]],
+        [[${array_nagruzka_2_golova_2_11}]],[[${array_nagruzka_2_golova_2_12}]],[[${array_nagruzka_2_golova_2_13}]],[[${array_nagruzka_2_golova_2_14}]],[[${array_nagruzka_2_golova_2_15}]],[[${array_nagruzka_2_golova_2_16}]],[[${array_nagruzka_2_golova_2_17}]],[[${array_nagruzka_2_golova_2_18}]],[[${array_nagruzka_2_golova_2_19}]],[[${array_nagruzka_2_golova_2_20}]],
+        [[${array_nagruzka_2_golova_2_21}]],[[${array_nagruzka_2_golova_2_22}]],[[${array_nagruzka_2_golova_2_23}]],[[${array_nagruzka_2_golova_2_24}]],[[${array_nagruzka_2_golova_2_25}]],[[${array_nagruzka_2_golova_2_26}]],[[${array_nagruzka_2_golova_2_27}]],[[${array_nagruzka_2_golova_2_28}]],[[${array_nagruzka_2_golova_2_29}]],[[${array_nagruzka_2_golova_2_30}]],
+        [[${array_nagruzka_2_golova_2_31}]],[[${array_nagruzka_2_golova_2_32}]],[[${array_nagruzka_2_golova_2_33}]],[[${array_nagruzka_2_golova_2_34}]],[[${array_nagruzka_2_golova_2_35}]],[[${array_nagruzka_2_golova_2_36}]],[[${array_nagruzka_2_golova_2_37}]],[[${array_nagruzka_2_golova_2_38}]],[[${array_nagruzka_2_golova_2_39}]],[[${array_nagruzka_2_golova_2_40}]],
+        [[${array_nagruzka_2_golova_2_41}]],[[${array_nagruzka_2_golova_2_42}]],[[${array_nagruzka_2_golova_2_43}]],[[${array_nagruzka_2_golova_2_44}]],[[${array_nagruzka_2_golova_2_45}]],[[${array_nagruzka_2_golova_2_46}]],[[${array_nagruzka_2_golova_2_47}]],[[${array_nagruzka_2_golova_2_48}]],[[${array_nagruzka_2_golova_2_49}]],[[${array_nagruzka_2_golova_2_50}]],
+        [[${array_nagruzka_2_golova_2_51}]],[[${array_nagruzka_2_golova_2_52}]],[[${array_nagruzka_2_golova_2_53}]],[[${array_nagruzka_2_golova_2_54}]],[[${array_nagruzka_2_golova_2_55}]],[[${array_nagruzka_2_golova_2_56}]],[[${array_nagruzka_2_golova_2_57}]],[[${array_nagruzka_2_golova_2_58}]],[[${array_nagruzka_2_golova_2_59}]],[[${array_nagruzka_2_golova_2_60}]],
+        [[${array_nagruzka_2_golova_2_61}]],[[${array_nagruzka_2_golova_2_62}]],[[${array_nagruzka_2_golova_2_63}]],[[${array_nagruzka_2_golova_2_64}]],[[${array_nagruzka_2_golova_2_65}]],[[${array_nagruzka_2_golova_2_66}]],[[${array_nagruzka_2_golova_2_67}]],[[${array_nagruzka_2_golova_2_68}]],[[${array_nagruzka_2_golova_2_69}]],[[${array_nagruzka_2_golova_2_70}]],
+        [[${array_nagruzka_2_golova_2_71}]],[[${array_nagruzka_2_golova_2_72}]],[[${array_nagruzka_2_golova_2_73}]],[[${array_nagruzka_2_golova_2_74}]],[[${array_nagruzka_2_golova_2_75}]],[[${array_nagruzka_2_golova_2_76}]],[[${array_nagruzka_2_golova_2_77}]],[[${array_nagruzka_2_golova_2_78}]],[[${array_nagruzka_2_golova_2_79}]],[[${array_nagruzka_2_golova_2_80}]],
+        [[${array_nagruzka_2_golova_2_81}]],[[${array_nagruzka_2_golova_2_82}]],[[${array_nagruzka_2_golova_2_83}]],[[${array_nagruzka_2_golova_2_84}]],[[${array_nagruzka_2_golova_2_85}]],[[${array_nagruzka_2_golova_2_86}]],[[${array_nagruzka_2_golova_2_87}]],[[${array_nagruzka_2_golova_2_88}]],[[${array_nagruzka_2_golova_2_89}]],[[${array_nagruzka_2_golova_2_90}]],
+        [[${array_nagruzka_2_golova_2_91}]],[[${array_nagruzka_2_golova_2_92}]],[[${array_nagruzka_2_golova_2_93}]],[[${array_nagruzka_2_golova_2_94}]],[[${array_nagruzka_2_golova_2_95}]],[[${array_nagruzka_2_golova_2_96}]],[[${array_nagruzka_2_golova_2_97}]],[[${array_nagruzka_2_golova_2_98}]],[[${array_nagruzka_2_golova_2_99}]],[[${array_nagruzka_2_golova_2_100}]],
+        [[${array_nagruzka_2_golova_2_101}]],[[${array_nagruzka_2_golova_2_102}]],[[${array_nagruzka_2_golova_2_103}]],[[${array_nagruzka_2_golova_2_104}]],[[${array_nagruzka_2_golova_2_105}]],[[${array_nagruzka_2_golova_2_106}]],[[${array_nagruzka_2_golova_2_107}]],[[${array_nagruzka_2_golova_2_108}]],[[${array_nagruzka_2_golova_2_109}]],[[${array_nagruzka_2_golova_2_110}]],
+        [[${array_nagruzka_2_golova_2_111}]],[[${array_nagruzka_2_golova_2_112}]],[[${array_nagruzka_2_golova_2_113}]],[[${array_nagruzka_2_golova_2_114}]],[[${array_nagruzka_2_golova_2_115}]],[[${array_nagruzka_2_golova_2_116}]],[[${array_nagruzka_2_golova_2_117}]],[[${array_nagruzka_2_golova_2_118}]],[[${array_nagruzka_2_golova_2_119}]],[[${array_nagruzka_2_golova_2_120}]],
+        [[${array_nagruzka_2_golova_2_121}]],[[${array_nagruzka_2_golova_2_122}]],[[${array_nagruzka_2_golova_2_123}]],[[${array_nagruzka_2_golova_2_124}]],[[${array_nagruzka_2_golova_2_125}]],[[${array_nagruzka_2_golova_2_126}]],[[${array_nagruzka_2_golova_2_127}]],[[${array_nagruzka_2_golova_2_128}]],[[${array_nagruzka_2_golova_2_129}]],[[${array_nagruzka_2_golova_2_130}]],
+        [[${array_nagruzka_2_golova_2_131}]],[[${array_nagruzka_2_golova_2_132}]],[[${array_nagruzka_2_golova_2_133}]],[[${array_nagruzka_2_golova_2_134}]],[[${array_nagruzka_2_golova_2_135}]],[[${array_nagruzka_2_golova_2_136}]],[[${array_nagruzka_2_golova_2_137}]],[[${array_nagruzka_2_golova_2_138}]],[[${array_nagruzka_2_golova_2_139}]],[[${array_nagruzka_2_golova_2_140}]],
+        [[${array_nagruzka_2_golova_2_141}]],[[${array_nagruzka_2_golova_2_142}]],[[${array_nagruzka_2_golova_2_143}]],[[${array_nagruzka_2_golova_2_144}]],[[${array_nagruzka_2_golova_2_145}]],[[${array_nagruzka_2_golova_2_146}]],[[${array_nagruzka_2_golova_2_147}]],[[${array_nagruzka_2_golova_2_148}]],[[${array_nagruzka_2_golova_2_149}]],[[${array_nagruzka_2_golova_2_150}]],
+        [[${array_nagruzka_2_golova_2_151}]],[[${array_nagruzka_2_golova_2_152}]],[[${array_nagruzka_2_golova_2_153}]],[[${array_nagruzka_2_golova_2_154}]],[[${array_nagruzka_2_golova_2_155}]],[[${array_nagruzka_2_golova_2_156}]],[[${array_nagruzka_2_golova_2_157}]],[[${array_nagruzka_2_golova_2_158}]],[[${array_nagruzka_2_golova_2_159}]],[[${array_nagruzka_2_golova_2_160}]],
+        [[${array_nagruzka_2_golova_2_161}]],[[${array_nagruzka_2_golova_2_162}]],[[${array_nagruzka_2_golova_2_163}]],[[${array_nagruzka_2_golova_2_164}]],[[${array_nagruzka_2_golova_2_165}]],[[${array_nagruzka_2_golova_2_166}]],[[${array_nagruzka_2_golova_2_167}]],[[${array_nagruzka_2_golova_2_168}]],[[${array_nagruzka_2_golova_2_169}]],[[${array_nagruzka_2_golova_2_170}]],
+        [[${array_nagruzka_2_golova_2_171}]],[[${array_nagruzka_2_golova_2_172}]],[[${array_nagruzka_2_golova_2_173}]],[[${array_nagruzka_2_golova_2_174}]],[[${array_nagruzka_2_golova_2_175}]],[[${array_nagruzka_2_golova_2_176}]],[[${array_nagruzka_2_golova_2_177}]],[[${array_nagruzka_2_golova_2_178}]],[[${array_nagruzka_2_golova_2_179}]],[[${array_nagruzka_2_golova_2_180}]],
+        [[${array_nagruzka_2_golova_2_181}]],[[${array_nagruzka_2_golova_2_182}]],[[${array_nagruzka_2_golova_2_183}]],[[${array_nagruzka_2_golova_2_184}]],[[${array_nagruzka_2_golova_2_185}]],[[${array_nagruzka_2_golova_2_186}]],[[${array_nagruzka_2_golova_2_187}]],[[${array_nagruzka_2_golova_2_188}]],[[${array_nagruzka_2_golova_2_189}]],[[${array_nagruzka_2_golova_2_190}]],
+        [[${array_nagruzka_2_golova_2_191}]],[[${array_nagruzka_2_golova_2_192}]],[[${array_nagruzka_2_golova_2_193}]],[[${array_nagruzka_2_golova_2_194}]],[[${array_nagruzka_2_golova_2_195}]],[[${array_nagruzka_2_golova_2_196}]],[[${array_nagruzka_2_golova_2_197}]],[[${array_nagruzka_2_golova_2_198}]],[[${array_nagruzka_2_golova_2_199}]],[[${array_nagruzka_2_golova_2_200}]],
+        [[${array_nagruzka_2_golova_2_201}]],[[${array_nagruzka_2_golova_2_202}]],[[${array_nagruzka_2_golova_2_203}]],[[${array_nagruzka_2_golova_2_204}]],[[${array_nagruzka_2_golova_2_205}]],[[${array_nagruzka_2_golova_2_206}]],[[${array_nagruzka_2_golova_2_207}]],[[${array_nagruzka_2_golova_2_208}]],[[${array_nagruzka_2_golova_2_209}]],[[${array_nagruzka_2_golova_2_210}]],
+        [[${array_nagruzka_2_golova_2_211}]],[[${array_nagruzka_2_golova_2_212}]],[[${array_nagruzka_2_golova_2_213}]],[[${array_nagruzka_2_golova_2_214}]],[[${array_nagruzka_2_golova_2_215}]],[[${array_nagruzka_2_golova_2_216}]],[[${array_nagruzka_2_golova_2_217}]],[[${array_nagruzka_2_golova_2_218}]],[[${array_nagruzka_2_golova_2_219}]],[[${array_nagruzka_2_golova_2_220}]],
+        [[${array_nagruzka_2_golova_2_221}]],[[${array_nagruzka_2_golova_2_222}]],[[${array_nagruzka_2_golova_2_223}]],[[${array_nagruzka_2_golova_2_224}]],[[${array_nagruzka_2_golova_2_225}]],[[${array_nagruzka_2_golova_2_226}]],[[${array_nagruzka_2_golova_2_227}]],[[${array_nagruzka_2_golova_2_228}]],[[${array_nagruzka_2_golova_2_229}]],[[${array_nagruzka_2_golova_2_230}]],
+        [[${array_nagruzka_2_golova_2_231}]],[[${array_nagruzka_2_golova_2_232}]],[[${array_nagruzka_2_golova_2_233}]],[[${array_nagruzka_2_golova_2_234}]],[[${array_nagruzka_2_golova_2_235}]],[[${array_nagruzka_2_golova_2_236}]],[[${array_nagruzka_2_golova_2_237}]],[[${array_nagruzka_2_golova_2_238}]],[[${array_nagruzka_2_golova_2_239}]],[[${array_nagruzka_2_golova_2_240}]],
+        [[${array_nagruzka_2_golova_2_241}]],[[${array_nagruzka_2_golova_2_242}]],[[${array_nagruzka_2_golova_2_243}]],[[${array_nagruzka_2_golova_2_244}]],[[${array_nagruzka_2_golova_2_245}]],[[${array_nagruzka_2_golova_2_246}]],[[${array_nagruzka_2_golova_2_247}]],[[${array_nagruzka_2_golova_2_248}]],[[${array_nagruzka_2_golova_2_249}]],[[${array_nagruzka_2_golova_2_250}]],
+        [[${array_nagruzka_2_golova_2_251}]],[[${array_nagruzka_2_golova_2_252}]],[[${array_nagruzka_2_golova_2_253}]],[[${array_nagruzka_2_golova_2_254}]],[[${array_nagruzka_2_golova_2_255}]],[[${array_nagruzka_2_golova_2_256}]],[[${array_nagruzka_2_golova_2_257}]],[[${array_nagruzka_2_golova_2_258}]],[[${array_nagruzka_2_golova_2_259}]],[[${array_nagruzka_2_golova_2_260}]],
+        [[${array_nagruzka_2_golova_2_261}]],[[${array_nagruzka_2_golova_2_262}]],[[${array_nagruzka_2_golova_2_263}]],[[${array_nagruzka_2_golova_2_264}]],[[${array_nagruzka_2_golova_2_265}]],[[${array_nagruzka_2_golova_2_266}]],[[${array_nagruzka_2_golova_2_267}]],[[${array_nagruzka_2_golova_2_268}]],[[${array_nagruzka_2_golova_2_269}]],[[${array_nagruzka_2_golova_2_270}]],
+        [[${array_nagruzka_2_golova_2_271}]],[[${array_nagruzka_2_golova_2_272}]],[[${array_nagruzka_2_golova_2_273}]],[[${array_nagruzka_2_golova_2_274}]],[[${array_nagruzka_2_golova_2_275}]],[[${array_nagruzka_2_golova_2_276}]],[[${array_nagruzka_2_golova_2_277}]],[[${array_nagruzka_2_golova_2_278}]],[[${array_nagruzka_2_golova_2_279}]],[[${array_nagruzka_2_golova_2_280}]],
+        [[${array_nagruzka_2_golova_2_281}]],[[${array_nagruzka_2_golova_2_282}]],[[${array_nagruzka_2_golova_2_283}]],[[${array_nagruzka_2_golova_2_284}]],[[${array_nagruzka_2_golova_2_285}]],[[${array_nagruzka_2_golova_2_286}]],[[${array_nagruzka_2_golova_2_287}]],[[${array_nagruzka_2_golova_2_288}]],[[${array_nagruzka_2_golova_2_289}]],[[${array_nagruzka_2_golova_2_290}]],
+        [[${array_nagruzka_2_golova_2_291}]],[[${array_nagruzka_2_golova_2_292}]],[[${array_nagruzka_2_golova_2_293}]],[[${array_nagruzka_2_golova_2_294}]],[[${array_nagruzka_2_golova_2_295}]],[[${array_nagruzka_2_golova_2_296}]],[[${array_nagruzka_2_golova_2_297}]],[[${array_nagruzka_2_golova_2_298}]],[[${array_nagruzka_2_golova_2_299}]],[[${array_nagruzka_2_golova_2_300}]],
+
+    ];
+
+</script>   <!--Навигатор_2_голова_2 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+
+    var work_2_golova_2 = [[${work_2_golova_2}]];
+    var pass_2_golova_2 = [[${pass_2_golova_2}]];
+    var fail_2_golova_2 = [[${fail_2_golova_2}]];
+    var avar_2_golova_2 = [[${avar_2_golova_2}]];
+    var nagruzka_2_golova_2 = [[${nagruzka_2_golova_2}]];
+
+</script>   <!--Навигатор_2_голова_2 js круговая диагрмма загрузки оборудования-->
+<script src="/js/navigators/navigator_2_golova_2.js"></script>
+
+<script th:inline="javascript">
+
+    var array_rabota_3 = [
+        [[${array_rabota_3_0}]],[[${array_rabota_3_1}]],[[${array_rabota_3_2}]],[[${array_rabota_3_3}]],[[${array_rabota_3_4}]],[[${array_rabota_3_5}]],[[${array_rabota_3_6}]],[[${array_rabota_3_7}]],[[${array_rabota_3_8}]],[[${array_rabota_3_9}]],[[${array_rabota_3_10}]],
+        [[${array_rabota_3_11}]],[[${array_rabota_3_12}]],[[${array_rabota_3_13}]],[[${array_rabota_3_14}]],[[${array_rabota_3_15}]],[[${array_rabota_3_16}]],[[${array_rabota_3_17}]],[[${array_rabota_3_18}]],[[${array_rabota_3_19}]],[[${array_rabota_3_20}]],
+        [[${array_rabota_3_21}]],[[${array_rabota_3_22}]],[[${array_rabota_3_23}]],[[${array_rabota_3_24}]],[[${array_rabota_3_25}]],[[${array_rabota_3_26}]],[[${array_rabota_3_27}]],[[${array_rabota_3_28}]],[[${array_rabota_3_29}]],[[${array_rabota_3_30}]],
+        [[${array_rabota_3_31}]],[[${array_rabota_3_32}]],[[${array_rabota_3_33}]],[[${array_rabota_3_34}]],[[${array_rabota_3_35}]],[[${array_rabota_3_36}]],[[${array_rabota_3_37}]],[[${array_rabota_3_38}]],[[${array_rabota_3_39}]],[[${array_rabota_3_40}]],
+        [[${array_rabota_3_41}]],[[${array_rabota_3_42}]],[[${array_rabota_3_43}]],[[${array_rabota_3_44}]],[[${array_rabota_3_45}]],[[${array_rabota_3_46}]],[[${array_rabota_3_47}]],[[${array_rabota_3_48}]],[[${array_rabota_3_49}]],[[${array_rabota_3_50}]],
+        [[${array_rabota_3_51}]],[[${array_rabota_3_52}]],[[${array_rabota_3_53}]],[[${array_rabota_3_54}]],[[${array_rabota_3_55}]],[[${array_rabota_3_56}]],[[${array_rabota_3_57}]],[[${array_rabota_3_58}]],[[${array_rabota_3_59}]],[[${array_rabota_3_60}]],
+        [[${array_rabota_3_61}]],[[${array_rabota_3_62}]],[[${array_rabota_3_63}]],[[${array_rabota_3_64}]],[[${array_rabota_3_65}]],[[${array_rabota_3_66}]],[[${array_rabota_3_67}]],[[${array_rabota_3_68}]],[[${array_rabota_3_69}]],[[${array_rabota_3_70}]],
+        [[${array_rabota_3_71}]],[[${array_rabota_3_72}]],[[${array_rabota_3_73}]],[[${array_rabota_3_74}]],[[${array_rabota_3_75}]],[[${array_rabota_3_76}]],[[${array_rabota_3_77}]],[[${array_rabota_3_78}]],[[${array_rabota_3_79}]],[[${array_rabota_3_80}]],
+        [[${array_rabota_3_81}]],[[${array_rabota_3_82}]],[[${array_rabota_3_83}]],[[${array_rabota_3_84}]],[[${array_rabota_3_85}]],[[${array_rabota_3_86}]],[[${array_rabota_3_87}]],[[${array_rabota_3_88}]],[[${array_rabota_3_89}]],[[${array_rabota_3_90}]],
+        [[${array_rabota_3_91}]],[[${array_rabota_3_92}]],[[${array_rabota_3_93}]],[[${array_rabota_3_94}]],[[${array_rabota_3_95}]],[[${array_rabota_3_96}]],[[${array_rabota_3_97}]],[[${array_rabota_3_98}]],[[${array_rabota_3_99}]],[[${array_rabota_3_100}]],
+        [[${array_rabota_3_101}]],[[${array_rabota_3_102}]],[[${array_rabota_3_103}]],[[${array_rabota_3_104}]],[[${array_rabota_3_105}]],[[${array_rabota_3_106}]],[[${array_rabota_3_107}]],[[${array_rabota_3_108}]],[[${array_rabota_3_109}]],[[${array_rabota_3_110}]],
+        [[${array_rabota_3_111}]],[[${array_rabota_3_112}]],[[${array_rabota_3_113}]],[[${array_rabota_3_114}]],[[${array_rabota_3_115}]],[[${array_rabota_3_116}]],[[${array_rabota_3_117}]],[[${array_rabota_3_118}]],[[${array_rabota_3_119}]],[[${array_rabota_3_120}]],
+        [[${array_rabota_3_121}]],[[${array_rabota_3_122}]],[[${array_rabota_3_123}]],[[${array_rabota_3_124}]],[[${array_rabota_3_125}]],[[${array_rabota_3_126}]],[[${array_rabota_3_127}]],[[${array_rabota_3_128}]],[[${array_rabota_3_129}]],[[${array_rabota_3_130}]],
+        [[${array_rabota_3_131}]],[[${array_rabota_3_132}]],[[${array_rabota_3_133}]],[[${array_rabota_3_134}]],[[${array_rabota_3_135}]],[[${array_rabota_3_136}]],[[${array_rabota_3_137}]],[[${array_rabota_3_138}]],[[${array_rabota_3_139}]],[[${array_rabota_3_140}]],
+        [[${array_rabota_3_141}]],[[${array_rabota_3_142}]],[[${array_rabota_3_143}]],[[${array_rabota_3_144}]],[[${array_rabota_3_145}]],[[${array_rabota_3_146}]],[[${array_rabota_3_147}]],[[${array_rabota_3_148}]],[[${array_rabota_3_149}]],[[${array_rabota_3_150}]],
+        [[${array_rabota_3_151}]],[[${array_rabota_3_152}]],[[${array_rabota_3_153}]],[[${array_rabota_3_154}]],[[${array_rabota_3_155}]],[[${array_rabota_3_156}]],[[${array_rabota_3_157}]],[[${array_rabota_3_158}]],[[${array_rabota_3_159}]],[[${array_rabota_3_160}]],
+        [[${array_rabota_3_161}]],[[${array_rabota_3_162}]],[[${array_rabota_3_163}]],[[${array_rabota_3_164}]],[[${array_rabota_3_165}]],[[${array_rabota_3_166}]],[[${array_rabota_3_167}]],[[${array_rabota_3_168}]],[[${array_rabota_3_169}]],[[${array_rabota_3_170}]],
+        [[${array_rabota_3_171}]],[[${array_rabota_3_172}]],[[${array_rabota_3_173}]],[[${array_rabota_3_174}]],[[${array_rabota_3_175}]],[[${array_rabota_3_176}]],[[${array_rabota_3_177}]],[[${array_rabota_3_178}]],[[${array_rabota_3_179}]],[[${array_rabota_3_180}]],
+        [[${array_rabota_3_181}]],[[${array_rabota_3_182}]],[[${array_rabota_3_183}]],[[${array_rabota_3_184}]],[[${array_rabota_3_185}]],[[${array_rabota_3_186}]],[[${array_rabota_3_187}]],[[${array_rabota_3_188}]],[[${array_rabota_3_189}]],[[${array_rabota_3_190}]],
+        [[${array_rabota_3_191}]],[[${array_rabota_3_192}]],[[${array_rabota_3_193}]],[[${array_rabota_3_194}]],[[${array_rabota_3_195}]],[[${array_rabota_3_196}]],[[${array_rabota_3_197}]],[[${array_rabota_3_198}]],[[${array_rabota_3_199}]],[[${array_rabota_3_200}]],
+        [[${array_rabota_3_201}]],[[${array_rabota_3_202}]],[[${array_rabota_3_203}]],[[${array_rabota_3_204}]],[[${array_rabota_3_205}]],[[${array_rabota_3_206}]],[[${array_rabota_3_207}]],[[${array_rabota_3_208}]],[[${array_rabota_3_209}]],[[${array_rabota_3_210}]],
+        [[${array_rabota_3_211}]],[[${array_rabota_3_212}]],[[${array_rabota_3_213}]],[[${array_rabota_3_214}]],[[${array_rabota_3_215}]],[[${array_rabota_3_216}]],[[${array_rabota_3_217}]],[[${array_rabota_3_218}]],[[${array_rabota_3_219}]],[[${array_rabota_3_220}]],
+        [[${array_rabota_3_221}]],[[${array_rabota_3_222}]],[[${array_rabota_3_223}]],[[${array_rabota_3_224}]],[[${array_rabota_3_225}]],[[${array_rabota_3_226}]],[[${array_rabota_3_227}]],[[${array_rabota_3_228}]],[[${array_rabota_3_229}]],[[${array_rabota_3_230}]],
+        [[${array_rabota_3_231}]],[[${array_rabota_3_232}]],[[${array_rabota_3_233}]],[[${array_rabota_3_234}]],[[${array_rabota_3_235}]],[[${array_rabota_3_236}]],[[${array_rabota_3_237}]],[[${array_rabota_3_238}]],[[${array_rabota_3_239}]],[[${array_rabota_3_240}]],
+        [[${array_rabota_3_241}]],[[${array_rabota_3_242}]],[[${array_rabota_3_243}]],[[${array_rabota_3_244}]],[[${array_rabota_3_245}]],[[${array_rabota_3_246}]],[[${array_rabota_3_247}]],[[${array_rabota_3_248}]],[[${array_rabota_3_249}]],[[${array_rabota_3_250}]],
+        [[${array_rabota_3_251}]],[[${array_rabota_3_252}]],[[${array_rabota_3_253}]],[[${array_rabota_3_254}]],[[${array_rabota_3_255}]],[[${array_rabota_3_256}]],[[${array_rabota_3_257}]],[[${array_rabota_3_258}]],[[${array_rabota_3_259}]],[[${array_rabota_3_260}]],
+        [[${array_rabota_3_261}]],[[${array_rabota_3_262}]],[[${array_rabota_3_263}]],[[${array_rabota_3_264}]],[[${array_rabota_3_265}]],[[${array_rabota_3_266}]],[[${array_rabota_3_267}]],[[${array_rabota_3_268}]],[[${array_rabota_3_269}]],[[${array_rabota_3_270}]],
+        [[${array_rabota_3_271}]],[[${array_rabota_3_272}]],[[${array_rabota_3_273}]],[[${array_rabota_3_274}]],[[${array_rabota_3_275}]],[[${array_rabota_3_276}]],[[${array_rabota_3_277}]],[[${array_rabota_3_278}]],[[${array_rabota_3_279}]],[[${array_rabota_3_280}]],
+        [[${array_rabota_3_281}]],[[${array_rabota_3_282}]],[[${array_rabota_3_283}]],[[${array_rabota_3_284}]],[[${array_rabota_3_285}]],[[${array_rabota_3_286}]],[[${array_rabota_3_287}]],[[${array_rabota_3_288}]],[[${array_rabota_3_289}]],[[${array_rabota_3_290}]],
+        [[${array_rabota_3_291}]],[[${array_rabota_3_292}]],[[${array_rabota_3_293}]],[[${array_rabota_3_294}]],[[${array_rabota_3_295}]],[[${array_rabota_3_296}]],[[${array_rabota_3_297}]],[[${array_rabota_3_298}]],[[${array_rabota_3_299}]],[[${array_rabota_3_300}]],
+
+    ];
+    var array_pause_3 = [
+        [[${array_pause_3_0}]],[[${array_pause_3_1}]],[[${array_pause_3_2}]],[[${array_pause_3_3}]],[[${array_pause_3_4}]],[[${array_pause_3_5}]],[[${array_pause_3_6}]],[[${array_pause_3_7}]],[[${array_pause_3_8}]],[[${array_pause_3_9}]],[[${array_pause_3_10}]],
+        [[${array_pause_3_11}]],[[${array_pause_3_12}]],[[${array_pause_3_13}]],[[${array_pause_3_14}]],[[${array_pause_3_15}]],[[${array_pause_3_16}]],[[${array_pause_3_17}]],[[${array_pause_3_18}]],[[${array_pause_3_19}]],[[${array_pause_3_20}]],
+        [[${array_pause_3_21}]],[[${array_pause_3_22}]],[[${array_pause_3_23}]],[[${array_pause_3_24}]],[[${array_pause_3_25}]],[[${array_pause_3_26}]],[[${array_pause_3_27}]],[[${array_pause_3_28}]],[[${array_pause_3_29}]],[[${array_pause_3_30}]],
+        [[${array_pause_3_31}]],[[${array_pause_3_32}]],[[${array_pause_3_33}]],[[${array_pause_3_34}]],[[${array_pause_3_35}]],[[${array_pause_3_36}]],[[${array_pause_3_37}]],[[${array_pause_3_38}]],[[${array_pause_3_39}]],[[${array_pause_3_40}]],
+        [[${array_pause_3_41}]],[[${array_pause_3_42}]],[[${array_pause_3_43}]],[[${array_pause_3_44}]],[[${array_pause_3_45}]],[[${array_pause_3_46}]],[[${array_pause_3_47}]],[[${array_pause_3_48}]],[[${array_pause_3_49}]],[[${array_pause_3_50}]],
+        [[${array_pause_3_51}]],[[${array_pause_3_52}]],[[${array_pause_3_53}]],[[${array_pause_3_54}]],[[${array_pause_3_55}]],[[${array_pause_3_56}]],[[${array_pause_3_57}]],[[${array_pause_3_58}]],[[${array_pause_3_59}]],[[${array_pause_3_60}]],
+        [[${array_pause_3_61}]],[[${array_pause_3_62}]],[[${array_pause_3_63}]],[[${array_pause_3_64}]],[[${array_pause_3_65}]],[[${array_pause_3_66}]],[[${array_pause_3_67}]],[[${array_pause_3_68}]],[[${array_pause_3_69}]],[[${array_pause_3_70}]],
+        [[${array_pause_3_71}]],[[${array_pause_3_72}]],[[${array_pause_3_73}]],[[${array_pause_3_74}]],[[${array_pause_3_75}]],[[${array_pause_3_76}]],[[${array_pause_3_77}]],[[${array_pause_3_78}]],[[${array_pause_3_79}]],[[${array_pause_3_80}]],
+        [[${array_pause_3_81}]],[[${array_pause_3_82}]],[[${array_pause_3_83}]],[[${array_pause_3_84}]],[[${array_pause_3_85}]],[[${array_pause_3_86}]],[[${array_pause_3_87}]],[[${array_pause_3_88}]],[[${array_pause_3_89}]],[[${array_pause_3_90}]],
+        [[${array_pause_3_91}]],[[${array_pause_3_92}]],[[${array_pause_3_93}]],[[${array_pause_3_94}]],[[${array_pause_3_95}]],[[${array_pause_3_96}]],[[${array_pause_3_97}]],[[${array_pause_3_98}]],[[${array_pause_3_99}]],[[${array_pause_3_100}]],
+        [[${array_pause_3_101}]],[[${array_pause_3_102}]],[[${array_pause_3_103}]],[[${array_pause_3_104}]],[[${array_pause_3_105}]],[[${array_pause_3_106}]],[[${array_pause_3_107}]],[[${array_pause_3_108}]],[[${array_pause_3_109}]],[[${array_pause_3_110}]],
+        [[${array_pause_3_111}]],[[${array_pause_3_112}]],[[${array_pause_3_113}]],[[${array_pause_3_114}]],[[${array_pause_3_115}]],[[${array_pause_3_116}]],[[${array_pause_3_117}]],[[${array_pause_3_118}]],[[${array_pause_3_119}]],[[${array_pause_3_120}]],
+        [[${array_pause_3_121}]],[[${array_pause_3_122}]],[[${array_pause_3_123}]],[[${array_pause_3_124}]],[[${array_pause_3_125}]],[[${array_pause_3_126}]],[[${array_pause_3_127}]],[[${array_pause_3_128}]],[[${array_pause_3_129}]],[[${array_pause_3_130}]],
+        [[${array_pause_3_131}]],[[${array_pause_3_132}]],[[${array_pause_3_133}]],[[${array_pause_3_134}]],[[${array_pause_3_135}]],[[${array_pause_3_136}]],[[${array_pause_3_137}]],[[${array_pause_3_138}]],[[${array_pause_3_129}]],[[${array_pause_3_120}]],
+        [[${array_pause_3_141}]],[[${array_pause_3_142}]],[[${array_pause_3_143}]],[[${array_pause_3_144}]],[[${array_pause_3_145}]],[[${array_pause_3_146}]],[[${array_pause_3_147}]],[[${array_pause_3_148}]],[[${array_pause_3_129}]],[[${array_pause_3_120}]],
+        [[${array_pause_3_151}]],[[${array_pause_3_152}]],[[${array_pause_3_153}]],[[${array_pause_3_154}]],[[${array_pause_3_155}]],[[${array_pause_3_156}]],[[${array_pause_3_157}]],[[${array_pause_3_158}]],[[${array_pause_3_129}]],[[${array_pause_3_120}]],
+        [[${array_pause_3_161}]],[[${array_pause_3_162}]],[[${array_pause_3_163}]],[[${array_pause_3_164}]],[[${array_pause_3_165}]],[[${array_pause_3_166}]],[[${array_pause_3_167}]],[[${array_pause_3_168}]],[[${array_pause_3_169}]],[[${array_pause_3_170}]],
+        [[${array_pause_3_171}]],[[${array_pause_3_172}]],[[${array_pause_3_173}]],[[${array_pause_3_174}]],[[${array_pause_3_175}]],[[${array_pause_3_176}]],[[${array_pause_3_177}]],[[${array_pause_3_178}]],[[${array_pause_3_179}]],[[${array_pause_3_180}]],
+        [[${array_pause_3_181}]],[[${array_pause_3_182}]],[[${array_pause_3_183}]],[[${array_pause_3_184}]],[[${array_pause_3_185}]],[[${array_pause_3_186}]],[[${array_pause_3_187}]],[[${array_pause_3_188}]],[[${array_pause_3_189}]],[[${array_pause_3_190}]],
+        [[${array_pause_3_191}]],[[${array_pause_3_192}]],[[${array_pause_3_193}]],[[${array_pause_3_194}]],[[${array_pause_3_195}]],[[${array_pause_3_196}]],[[${array_pause_3_197}]],[[${array_pause_3_198}]],[[${array_pause_3_199}]],[[${array_pause_3_200}]],
+        [[${array_pause_3_201}]],[[${array_pause_3_202}]],[[${array_pause_3_203}]],[[${array_pause_3_204}]],[[${array_pause_3_205}]],[[${array_pause_3_206}]],[[${array_pause_3_207}]],[[${array_pause_3_208}]],[[${array_pause_3_209}]],[[${array_pause_3_210}]],
+        [[${array_pause_3_211}]],[[${array_pause_3_212}]],[[${array_pause_3_213}]],[[${array_pause_3_214}]],[[${array_pause_3_215}]],[[${array_pause_3_216}]],[[${array_pause_3_217}]],[[${array_pause_3_218}]],[[${array_pause_3_219}]],[[${array_pause_3_220}]],
+        [[${array_pause_3_221}]],[[${array_pause_3_222}]],[[${array_pause_3_223}]],[[${array_pause_3_224}]],[[${array_pause_3_225}]],[[${array_pause_3_226}]],[[${array_pause_3_227}]],[[${array_pause_3_228}]],[[${array_pause_3_229}]],[[${array_pause_3_230}]],
+        [[${array_pause_3_231}]],[[${array_pause_3_232}]],[[${array_pause_3_233}]],[[${array_pause_3_234}]],[[${array_pause_3_235}]],[[${array_pause_3_236}]],[[${array_pause_3_237}]],[[${array_pause_3_238}]],[[${array_pause_3_239}]],[[${array_pause_3_240}]],
+        [[${array_pause_3_241}]],[[${array_pause_3_242}]],[[${array_pause_3_243}]],[[${array_pause_3_244}]],[[${array_pause_3_245}]],[[${array_pause_3_246}]],[[${array_pause_3_247}]],[[${array_pause_3_248}]],[[${array_pause_3_249}]],[[${array_pause_3_250}]],
+        [[${array_pause_3_261}]],[[${array_pause_3_262}]],[[${array_pause_3_263}]],[[${array_pause_3_264}]],[[${array_pause_3_265}]],[[${array_pause_3_266}]],[[${array_pause_3_267}]],[[${array_pause_3_268}]],[[${array_pause_3_269}]],[[${array_pause_3_270}]],
+        [[${array_pause_3_281}]],[[${array_pause_3_282}]],[[${array_pause_3_283}]],[[${array_pause_3_284}]],[[${array_pause_3_285}]],[[${array_pause_3_286}]],[[${array_pause_3_287}]],[[${array_pause_3_288}]],[[${array_pause_3_289}]],[[${array_pause_3_290}]],
+        [[${array_pause_3_291}]],[[${array_pause_3_292}]],[[${array_pause_3_293}]],[[${array_pause_3_294}]],[[${array_pause_3_295}]],[[${array_pause_3_296}]],[[${array_pause_3_297}]],
+
+    ];
+    var array_off_3 = [
+        [[${array_off_3_0}]],[[${array_off_3_1}]],[[${array_off_3_2}]],[[${array_off_3_3}]],[[${array_off_3_4}]],[[${array_off_3_5}]],[[${array_off_3_6}]],[[${array_off_3_7}]],[[${array_off_3_8}]],[[${array_off_3_9}]],[[${array_off_3_10}]],
+        [[${array_off_3_11}]],[[${array_off_3_12}]],[[${array_off_3_13}]],[[${array_off_3_14}]],[[${array_off_3_15}]],[[${array_off_3_16}]],[[${array_off_3_17}]],[[${array_off_3_18}]],[[${array_off_3_19}]],[[${array_off_3_20}]],
+        [[${array_off_3_21}]],[[${array_off_3_22}]],[[${array_off_3_23}]],[[${array_off_3_24}]],[[${array_off_3_25}]],[[${array_off_3_26}]],[[${array_off_3_27}]],[[${array_off_3_28}]],[[${array_off_3_29}]],[[${array_off_3_30}]],
+        [[${array_off_3_31}]],[[${array_off_3_32}]],[[${array_off_3_33}]],[[${array_off_3_34}]],[[${array_off_3_35}]],[[${array_off_3_36}]],[[${array_off_3_37}]],[[${array_off_3_38}]],[[${array_off_3_39}]]
+    ];
+    var array_avar_3 = [
+        [[${array_avar_3_0}]],[[${array_avar_3_1}]],[[${array_avar_3_2}]],[[${array_avar_3_3}]],[[${array_avar_3_4}]],[[${array_avar_3_5}]],[[${array_avar_3_6}]],[[${array_avar_3_7}]],[[${array_avar_3_8}]],[[${array_avar_3_9}]],[[${array_avar_3_10}]],
+        [[${array_avar_3_11}]],[[${array_avar_3_12}]],[[${array_avar_3_13}]],[[${array_avar_3_14}]],[[${array_avar_3_15}]],[[${array_avar_3_16}]],[[${array_avar_3_17}]],[[${array_avar_3_18}]],[[${array_avar_3_19}]],[[${array_avar_3_20}]],
+        [[${array_avar_3_21}]],[[${array_avar_3_22}]],[[${array_avar_3_23}]],[[${array_avar_3_24}]],[[${array_avar_3_25}]],[[${array_avar_3_26}]],[[${array_avar_3_27}]],[[${array_avar_3_28}]],[[${array_avar_3_29}]],[[${array_avar_3_30}]],
+        [[${array_avar_3_31}]],[[${array_avar_3_32}]],[[${array_avar_3_33}]],[[${array_avar_3_34}]],[[${array_avar_3_35}]],[[${array_avar_3_36}]],[[${array_avar_3_37}]],[[${array_avar_3_38}]],[[${array_avar_3_39}]],[[${array_avar_3_40}]],
+        [[${array_avar_3_41}]],[[${array_avar_3_42}]],[[${array_avar_3_43}]],[[${array_avar_3_44}]],[[${array_avar_3_45}]],[[${array_avar_3_46}]],[[${array_avar_3_47}]],[[${array_avar_3_48}]],[[${array_avar_3_49}]],[[${array_avar_3_50}]],
+    ];
+    var array_nagruzka_3 = [
+        [[${array_nagruzka_3_0}]],[[${array_nagruzka_3_1}]],[[${array_nagruzka_3_2}]],[[${array_nagruzka_3_3}]],[[${array_nagruzka_3_4}]],[[${array_nagruzka_3_5}]],[[${array_nagruzka_3_6}]],[[${array_nagruzka_3_7}]],[[${array_nagruzka_3_8}]],[[${array_nagruzka_3_9}]],[[${array_nagruzka_3_10}]],
+        [[${array_nagruzka_3_11}]],[[${array_nagruzka_3_12}]],[[${array_nagruzka_3_13}]],[[${array_nagruzka_3_14}]],[[${array_nagruzka_3_15}]],[[${array_nagruzka_3_16}]],[[${array_nagruzka_3_17}]],[[${array_nagruzka_3_18}]],[[${array_nagruzka_3_19}]],[[${array_nagruzka_3_20}]],
+        [[${array_nagruzka_3_21}]],[[${array_nagruzka_3_22}]],[[${array_nagruzka_3_23}]],[[${array_nagruzka_3_24}]],[[${array_nagruzka_3_25}]],[[${array_nagruzka_3_26}]],[[${array_nagruzka_3_27}]],[[${array_nagruzka_3_28}]],[[${array_nagruzka_3_29}]],[[${array_nagruzka_3_30}]],
+        [[${array_nagruzka_3_31}]],[[${array_nagruzka_3_32}]],[[${array_nagruzka_3_33}]],[[${array_nagruzka_3_34}]],[[${array_nagruzka_3_35}]],[[${array_nagruzka_3_36}]],[[${array_nagruzka_3_37}]],[[${array_nagruzka_3_38}]],[[${array_nagruzka_3_39}]],[[${array_nagruzka_3_40}]],
+        [[${array_nagruzka_3_41}]],[[${array_nagruzka_3_42}]],[[${array_nagruzka_3_43}]],[[${array_nagruzka_3_44}]],[[${array_nagruzka_3_45}]],[[${array_nagruzka_3_46}]],[[${array_nagruzka_3_47}]],[[${array_nagruzka_3_48}]],[[${array_nagruzka_3_49}]],[[${array_nagruzka_3_50}]],
+        [[${array_nagruzka_3_51}]],[[${array_nagruzka_3_52}]],[[${array_nagruzka_3_53}]],[[${array_nagruzka_3_54}]],[[${array_nagruzka_3_55}]],[[${array_nagruzka_3_56}]],[[${array_nagruzka_3_57}]],[[${array_nagruzka_3_58}]],[[${array_nagruzka_3_59}]],[[${array_nagruzka_3_60}]],
+        [[${array_nagruzka_3_61}]],[[${array_nagruzka_3_62}]],[[${array_nagruzka_3_63}]],[[${array_nagruzka_3_64}]],[[${array_nagruzka_3_65}]],[[${array_nagruzka_3_66}]],[[${array_nagruzka_3_67}]],[[${array_nagruzka_3_68}]],[[${array_nagruzka_3_69}]],[[${array_nagruzka_3_70}]],
+        [[${array_nagruzka_3_71}]],[[${array_nagruzka_3_72}]],[[${array_nagruzka_3_73}]],[[${array_nagruzka_3_74}]],[[${array_nagruzka_3_75}]],[[${array_nagruzka_3_76}]],[[${array_nagruzka_3_77}]],[[${array_nagruzka_3_78}]],[[${array_nagruzka_3_79}]],[[${array_nagruzka_3_80}]],
+        [[${array_nagruzka_3_81}]],[[${array_nagruzka_3_82}]],[[${array_nagruzka_3_83}]],[[${array_nagruzka_3_84}]],[[${array_nagruzka_3_85}]],[[${array_nagruzka_3_86}]],[[${array_nagruzka_3_87}]],[[${array_nagruzka_3_88}]],[[${array_nagruzka_3_89}]],[[${array_nagruzka_3_90}]],
+        [[${array_nagruzka_3_91}]],[[${array_nagruzka_3_92}]],[[${array_nagruzka_3_93}]],[[${array_nagruzka_3_94}]],[[${array_nagruzka_3_95}]],[[${array_nagruzka_3_96}]],[[${array_nagruzka_3_97}]],[[${array_nagruzka_3_98}]],[[${array_nagruzka_3_99}]],[[${array_nagruzka_3_100}]],
+        [[${array_nagruzka_3_101}]],[[${array_nagruzka_3_102}]],[[${array_nagruzka_3_103}]],[[${array_nagruzka_3_104}]],[[${array_nagruzka_3_105}]],[[${array_nagruzka_3_106}]],[[${array_nagruzka_3_107}]],[[${array_nagruzka_3_108}]],[[${array_nagruzka_3_109}]],[[${array_nagruzka_3_110}]],
+        [[${array_nagruzka_3_111}]],[[${array_nagruzka_3_112}]],[[${array_nagruzka_3_113}]],[[${array_nagruzka_3_114}]],[[${array_nagruzka_3_115}]],[[${array_nagruzka_3_116}]],[[${array_nagruzka_3_117}]],[[${array_nagruzka_3_118}]],[[${array_nagruzka_3_119}]],[[${array_nagruzka_3_120}]],
+        [[${array_nagruzka_3_121}]],[[${array_nagruzka_3_122}]],[[${array_nagruzka_3_123}]],[[${array_nagruzka_3_124}]],[[${array_nagruzka_3_125}]],[[${array_nagruzka_3_126}]],[[${array_nagruzka_3_127}]],[[${array_nagruzka_3_128}]],[[${array_nagruzka_3_129}]],[[${array_nagruzka_3_130}]],
+        [[${array_nagruzka_3_131}]],[[${array_nagruzka_3_132}]],[[${array_nagruzka_3_133}]],[[${array_nagruzka_3_134}]],[[${array_nagruzka_3_135}]],[[${array_nagruzka_3_136}]],[[${array_nagruzka_3_137}]],[[${array_nagruzka_3_138}]],[[${array_nagruzka_3_139}]],[[${array_nagruzka_3_140}]],
+        [[${array_nagruzka_3_141}]],[[${array_nagruzka_3_142}]],[[${array_nagruzka_3_143}]],[[${array_nagruzka_3_144}]],[[${array_nagruzka_3_145}]],[[${array_nagruzka_3_146}]],[[${array_nagruzka_3_147}]],[[${array_nagruzka_3_148}]],[[${array_nagruzka_3_149}]],[[${array_nagruzka_3_150}]],
+        [[${array_nagruzka_3_151}]],[[${array_nagruzka_3_152}]],[[${array_nagruzka_3_153}]],[[${array_nagruzka_3_154}]],[[${array_nagruzka_3_155}]],[[${array_nagruzka_3_156}]],[[${array_nagruzka_3_157}]],[[${array_nagruzka_3_158}]],[[${array_nagruzka_3_159}]],[[${array_nagruzka_3_160}]],
+        [[${array_nagruzka_3_161}]],[[${array_nagruzka_3_162}]],[[${array_nagruzka_3_163}]],[[${array_nagruzka_3_164}]],[[${array_nagruzka_3_165}]],[[${array_nagruzka_3_166}]],[[${array_nagruzka_3_167}]],[[${array_nagruzka_3_168}]],[[${array_nagruzka_3_169}]],[[${array_nagruzka_3_170}]],
+        [[${array_nagruzka_3_171}]],[[${array_nagruzka_3_172}]],[[${array_nagruzka_3_173}]],[[${array_nagruzka_3_174}]],[[${array_nagruzka_3_175}]],[[${array_nagruzka_3_176}]],[[${array_nagruzka_3_177}]],[[${array_nagruzka_3_178}]],[[${array_nagruzka_3_179}]],[[${array_nagruzka_3_180}]],
+        [[${array_nagruzka_3_181}]],[[${array_nagruzka_3_182}]],[[${array_nagruzka_3_183}]],[[${array_nagruzka_3_184}]],[[${array_nagruzka_3_185}]],[[${array_nagruzka_3_186}]],[[${array_nagruzka_3_187}]],[[${array_nagruzka_3_188}]],[[${array_nagruzka_3_189}]],[[${array_nagruzka_3_190}]],
+        [[${array_nagruzka_3_191}]],[[${array_nagruzka_3_192}]],[[${array_nagruzka_3_193}]],[[${array_nagruzka_3_194}]],[[${array_nagruzka_3_195}]],[[${array_nagruzka_3_196}]],[[${array_nagruzka_3_197}]],[[${array_nagruzka_3_198}]],[[${array_nagruzka_3_199}]],[[${array_nagruzka_3_200}]],
+        [[${array_nagruzka_3_201}]],[[${array_nagruzka_3_202}]],[[${array_nagruzka_3_203}]],[[${array_nagruzka_3_204}]],[[${array_nagruzka_3_205}]],[[${array_nagruzka_3_206}]],[[${array_nagruzka_3_207}]],[[${array_nagruzka_3_208}]],[[${array_nagruzka_3_209}]],[[${array_nagruzka_3_210}]],
+        [[${array_nagruzka_3_211}]],[[${array_nagruzka_3_212}]],[[${array_nagruzka_3_213}]],[[${array_nagruzka_3_214}]],[[${array_nagruzka_3_215}]],[[${array_nagruzka_3_216}]],[[${array_nagruzka_3_217}]],[[${array_nagruzka_3_218}]],[[${array_nagruzka_3_219}]],[[${array_nagruzka_3_220}]],
+        [[${array_nagruzka_3_221}]],[[${array_nagruzka_3_222}]],[[${array_nagruzka_3_223}]],[[${array_nagruzka_3_224}]],[[${array_nagruzka_3_225}]],[[${array_nagruzka_3_226}]],[[${array_nagruzka_3_227}]],[[${array_nagruzka_3_228}]],[[${array_nagruzka_3_229}]],[[${array_nagruzka_3_230}]],
+        [[${array_nagruzka_3_231}]],[[${array_nagruzka_3_232}]],[[${array_nagruzka_3_233}]],[[${array_nagruzka_3_234}]],[[${array_nagruzka_3_235}]],[[${array_nagruzka_3_236}]],[[${array_nagruzka_3_237}]],[[${array_nagruzka_3_238}]],[[${array_nagruzka_3_239}]],[[${array_nagruzka_3_240}]],
+        [[${array_nagruzka_3_241}]],[[${array_nagruzka_3_242}]],[[${array_nagruzka_3_243}]],[[${array_nagruzka_3_244}]],[[${array_nagruzka_3_245}]],[[${array_nagruzka_3_246}]],[[${array_nagruzka_3_247}]],[[${array_nagruzka_3_248}]],[[${array_nagruzka_3_249}]],[[${array_nagruzka_3_250}]],
+        [[${array_nagruzka_3_251}]],[[${array_nagruzka_3_252}]],[[${array_nagruzka_3_253}]],[[${array_nagruzka_3_254}]],[[${array_nagruzka_3_255}]],[[${array_nagruzka_3_256}]],[[${array_nagruzka_3_257}]],[[${array_nagruzka_3_258}]],[[${array_nagruzka_3_259}]],[[${array_nagruzka_3_260}]],
+        [[${array_nagruzka_3_261}]],[[${array_nagruzka_3_262}]],[[${array_nagruzka_3_263}]],[[${array_nagruzka_3_264}]],[[${array_nagruzka_3_265}]],[[${array_nagruzka_3_266}]],[[${array_nagruzka_3_267}]],[[${array_nagruzka_3_268}]],[[${array_nagruzka_3_269}]],[[${array_nagruzka_3_270}]],
+        [[${array_nagruzka_3_271}]],[[${array_nagruzka_3_272}]],[[${array_nagruzka_3_273}]],[[${array_nagruzka_3_274}]],[[${array_nagruzka_3_275}]],[[${array_nagruzka_3_276}]],[[${array_nagruzka_3_277}]],[[${array_nagruzka_3_278}]],[[${array_nagruzka_3_279}]],[[${array_nagruzka_3_280}]],
+        [[${array_nagruzka_3_281}]],[[${array_nagruzka_3_282}]],[[${array_nagruzka_3_283}]],[[${array_nagruzka_3_284}]],[[${array_nagruzka_3_285}]],[[${array_nagruzka_3_286}]],[[${array_nagruzka_3_287}]],[[${array_nagruzka_3_288}]],[[${array_nagruzka_3_289}]],[[${array_nagruzka_3_290}]],
+        [[${array_nagruzka_3_291}]],[[${array_nagruzka_3_292}]],[[${array_nagruzka_3_293}]],[[${array_nagruzka_3_294}]],[[${array_nagruzka_3_295}]],[[${array_nagruzka_3_296}]],[[${array_nagruzka_3_297}]],[[${array_nagruzka_3_298}]],[[${array_nagruzka_3_299}]],[[${array_nagruzka_3_300}]],
+
+    ];
+
+
+
+</script>   <!--Навигатор_3 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var navigator_3_work = [[${work_3}]];
+    var navigator_3_pass = [[${pass_3}]];
+    var navigator_3_fail = [[${fail_3}]];
+    var navigator_3_avar = [[${avar_3}]];
+    var navigator_3_nagruzka = [[${nagruzka_3}]];
+
+</script>   <!--Навигатор_3 js круговая диагрмма загрузки оборудования-->
+<script src="/js/navigators/navigator_3.js"></script>
+
+<script th:inline="javascript">
+
+    $('.icon_personal_navigator_1').hover(
+        function(){
+            $('.label_personal_navigator_1').css('color','#000000');
+            $('.label_personal_navigator_1').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_navigator_1').css('color','#756e6e');
+            $('.label_personal_navigator_1').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_navigator_1').hover(
+        function(){
+            $('.label_mesto_navigator_1').css('color','#000000');
+            $('.label_mesto_navigator_1').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_navigator_1').css('color','#756e6e');
+            $('.label_mesto_navigator_1').css('margin-top','65px');
+        }
+    );
+
+    $('.icon_personal_navigator_2').hover(
+        function(){
+            $('.label_personal_navigator_2').css('color','#000000');
+            $('.label_personal_navigator_2').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_navigator_2').css('color','#756e6e');
+            $('.label_personal_navigator_2').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_navigator_2').hover(
+        function(){
+            $('.label_mesto_navigator_2').css('color','#000000');
+            $('.label_mesto_navigator_2').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_navigator_2').css('color','#756e6e');
+            $('.label_mesto_navigator_2').css('margin-top','65px');
+        }
+    );
+
+    $('.icon_personal_navigator_3').hover(
+        function(){
+            $('.label_personal_navigator_3').css('color','#000000');
+            $('.label_personal_navigator_3').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_navigator_3').css('color','#756e6e');
+            $('.label_personal_navigator_3').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_navigator_3').hover(
+        function(){
+            $('.label_mesto_navigator_3').css('color','#000000');
+            $('.label_mesto_navigator_3').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_navigator_3').css('color','#756e6e');
+            $('.label_mesto_navigator_3').css('margin-top','65px');
+        }
+    );
+
+</script> <!--Кнопки Персонал и Место-->
+</body>
+
+
+</html>
