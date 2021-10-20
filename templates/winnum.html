@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <title>winnum</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
 
     <style>
         li {
@@ -114,7 +115,7 @@
 
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center">
-                <p><img th:src="@{${image_user}}" width="100"/></p>
+                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; "/></p>
                 <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
                 <form th:action="@{/logout}" method="post">

@@ -5,6 +5,7 @@
 
     <title>dmg messenger</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
 
     <style>
         li {
@@ -101,30 +102,25 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 
 <header>
-
     <ul class="hr">
-        <a href="home"><img style="margin: 0.1%" src="images/logo_black.png" /></a>
+        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png"/> </a>
+        <div method="post" class="dropdown" style="float: right">
 
-        <div class="dropdown" style="float: right" >
-
-            <input type="image" src="images/logo2.png" alt="Avatar" class="avatar"/>
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center">
-                <p><img src="images/logo2.png"  width="100" height="100"/></p>
+                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; "/></p>
                 <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
-                <p>sespel@sespel.com </p>
-                <li id="button_quit" >
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" value="Выход" />
-                    </form>
-                </li>
-
+                <p th:text="${user_mail}"></p>
+                <form th:action="@{/logout}" method="post">
+                    <button class="follow" type="submit">
+                        Выход
+                    </button>
+                </form>
             </div>
         </div>
-
-        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center" th:text="'Добро пожаловать, '  + ${user_name} + '!   '" />
-
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
     </ul>       <!--Шапка html-->
-
 </header>       <!--Шапка html-->
 
 <body>

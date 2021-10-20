@@ -5,6 +5,7 @@
     <title>Home</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" href="css/styles_home.css"/>
+    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
     <script>
         window.onload = function () {
             document.body.classList.add('loaded_hiding');
@@ -15,6 +16,7 @@
         }
     </script>
 </head>
+<body>
 <header>
     <ul class="hr">
         <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png"/> </a>
@@ -36,9 +38,6 @@
             th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
     </ul>       <!--Шапка html-->
 </header>       <!--Шапка html-->
-
-<body>
-
 
 <div class="preloader">
     <div class="preloader__row">

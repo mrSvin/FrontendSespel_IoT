@@ -10,6 +10,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
     <link rel="stylesheet" type="text/css" href="/css/menu_buttons.css"/> <!-- Меню -->
+    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
 
     <style>
         .btn_change {
@@ -297,34 +298,25 @@
 </head>
 
 <header>
-
     <ul class="hr">
-        <a href="home"><img style="margin: 0.1%" src="images/logo_black.png"/></a>
-
+        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png"/> </a>
         <div method="post" class="dropdown" style="float: right">
 
-            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center">
-                <p><img th:src="@{${image_user}}" width="100"/></p>
+                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; "/></p>
                 <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
-
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
                         Выход
                     </button>
                 </form>
-
             </div>
-
-
         </div>
-
         <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
             th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
-
     </ul>       <!--Шапка html-->
-
 </header>       <!--Шапка html-->
 
 <div>
