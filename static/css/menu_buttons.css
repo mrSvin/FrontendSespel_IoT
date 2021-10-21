@@ -1,3 +1,4 @@
+
 #menu_ul {
     list-style: none; /*убираем маркеры списка*/
     margin: 0; /*убираем отступы*/
@@ -5,6 +6,7 @@
     margin-top: 0px; /*делаем отступ сверху*/
     background: rgb(36, 97, 219); /*добавляем фон всему меню*/
     height: 50px; /*задаем высоту*/
+    text-shadow: 2px 0 2px black;
 }
 
 #menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7 {

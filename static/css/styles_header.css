@@ -14,7 +14,7 @@ ul.hr {
 }
 
 .icon-logo:hover {
-    background-color: #f4511e;
+    background: #D43737;
     border-radius: 10px 33px 33px;
     transform: scale(1.01);
 }
@@ -114,4 +114,7 @@ td {
 .follow:hover {
     width: 130px;
     background: #4f759be0;
+}
+.menu-color {
+    background: #D43737!important;
 }
