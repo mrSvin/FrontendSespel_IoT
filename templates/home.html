@@ -16,12 +16,10 @@
         }
     </script>
 </head>
-<body>
 <header>
     <ul class="hr">
         <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png"/> </a>
         <div method="post" class="dropdown" style="float: right">
-
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center">
                 <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; "/></p>
@@ -38,6 +36,7 @@
             th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
     </ul>       <!--Шапка html-->
 </header>       <!--Шапка html-->
+<body>
 
 <div class="preloader">
     <div class="preloader__row">

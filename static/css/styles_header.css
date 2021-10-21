@@ -13,7 +13,7 @@ ul.hr {
     transition: 1s;
 }
 
-.hr img:hover {
+.icon-logo:hover {
     background-color: #f4511e;
     border-radius: 10px 33px 33px;
     transform: scale(1.01);
