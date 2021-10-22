@@ -6,40 +6,11 @@
     <title>Мех.уч.I пл.</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
-
-    <style>
-
-        /* Таблица с текущими параметрами */
-        body {
-            margin: 0;
-            background: #F4F1F8;
-
-        }
-        table {
-            border-collapse: collapse;
-            line-height: 1.1;
-            background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
-            color: #0C213B;
-
-        }
-        caption {
-
-            font-weight: bold;
-            text-align: center;
-        }
-
-         .first {
-            padding: 5px 35px;
-            font-size: 1em;
-            font-weight: bold;
-            text-align: center;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/>
+    <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
 
 
     <!-- Optional theme -->
-    <link rel="stylesheet" type="text/css" href="/css/styles_classes.css"/>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css" />
@@ -56,72 +27,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
 
-    <style>
-        #menu_ul {
-            list-style: none; /*убираем маркеры списка*/
-            margin: 0; /*убираем отступы*/
-            padding-left: 0; /*убираем отступы*/
-            margin-top: 0px; /*делаем отступ сверху*/
-            background: rgb(36, 97, 219); /*добавляем фон всему меню*/
-            height: 50px; /*задаем высоту*/
-        }
-
-        #menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6 {
-            text-decoration: none; /*убираем подчеркивание текста ссылок*/
-            background: rgb(58, 111, 219); /*добавляем фон к пункту меню*/
-            color: #fff; /*меняем цвет ссылок*/
-            padding: 0px 15px; /*добавляем отступ*/
-            font-family: MONTSERRAT; /*меняем шрифт*/
-            font-size: 250%;
-            line-height: 50px; /*ровняем меню по вертикали*/
-            display: block;
-            border-right: 1px solid #F36262; /*добавляем бордюр справа*/
-            -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
-            -o-transition: all 0.3s 0.01s ease;
-            -webkit-transition: all 0.3s 0.01s ease;
-
-        }
-
-        #menu_a:hover {
-            font-family: MONTSERRAT;
-            background: #D43737; /*добавляем эффект при наведении*/
-        }
-
-        #menu_a1:hover {
-            font-family: MONTSERRAT;
-            background: #D43737; /*добавляем эффект при наведении*/
-        }
-
-        #menu_a2:hover {
-            font-family: MONTSERRAT;
-            background: #D43737; /*добавляем эффект при наведении*/
-        }
-
-        #menu_a3:hover {
-            font-family: MONTSERRAT;
-            background: #D43737; /*добавляем эффект при наведении*/
-        }
-
-        #menu_a4:hover {
-            font-family: MONTSERRAT;
-            background: #D43737; /*добавляем эффект при наведении*/
-        }
-
-        #menu_a5:hover {
-            font-family: MONTSERRAT;
-            background: #D43737; /*добавляем эффект при наведении*/
-        }
-
-        #menu_a6:hover {
-            font-family: MONTSERRAT;
-            background: #D43737; /*добавляем эффект при наведении*/
-        }
-
-        #menu_li, #menu_li1, #menu_li2, #menu_li3, #menu_li4, #menu_li5, #menu_li6 {
-            float: left; /*Размещаем список горизонтально для реализации меню*/
-        }
-
-    </style>  <!-- Меню -->
 
     <script >
         $(function () {
@@ -239,27 +144,6 @@
         }
     </script>
 
-    <style>
-        .btn_change {
-            position: relative;
-            display: inline-block;
-            padding: 15px 70px;
-            border: 3px solid #6793d6;
-            color: #6793d6;
-            background: #ffffff;
-            font-size: 30px;
-            font-family: arial;
-            background-image: linear-gradient(#6793d6, #6793d6);
-            background-position: 50% 50%;
-            background-repeat: no-repeat;
-            background-size: 0% 100%;
-            transition: background-size .5s, color .5s;
-        }
-        .btn_change:hover {
-            background-size: 100% 100%;
-            color: #ffffff;
-        }
-    </style>    <!--Кноки выбора отчета-->
     <style>
         .icon_mesto_uvf_1_1{
 
@@ -439,7 +323,7 @@
 <div style="clear: both">
     <form>
         <button formaction="stanki_meh" class="btn_change" style="width:40%">Суточный отчет</button>
-        <button formaction="stanki_meh_month" class="btn_change" style="width:40%">Месячный отчет</button>
+        <button formaction="stanki_meh_month" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF; ">Месячный отчет</button>
     </form>
 </div>  <!--Кнопки суточный и месячный отчеты html-->
 

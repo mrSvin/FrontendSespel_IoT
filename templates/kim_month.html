@@ -4,39 +4,10 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>ОТК</title>
   <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+  <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
   <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
+  <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/>
 
-  <style>
-    /* Таблица с текущими параметрами */
-    body {
-      margin: 0;
-      background: #F4F1F8;
-
-    }
-    table {
-      border-collapse: collapse;
-      line-height: 1.1;
-      background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
-      color: #0C213B;
-
-    }
-    caption {
-
-      font-weight: bold;
-      text-align: center;
-    }
-
-    .first {
-      padding: 5px 35px;
-      font-size: 1em;
-      font-weight: bold;
-      text-align: center;
-    }
-
-  </style>
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" type="text/css" href="/css/styles_classes.css"/>
 
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css" />
@@ -53,7 +24,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="/css/menu_buttons.css"/> <!-- Меню -->
+
 
   <script >
     $(function () {
@@ -171,27 +142,6 @@
     }
   </script>
 
-  <style>
-    .btn_change {
-      position: relative;
-      display: inline-block;
-      padding: 15px 70px;
-      border: 3px solid #6793d6;
-      color: #6793d6;
-      background: #ffffff;
-      font-size: 30px;
-      font-family: arial;
-      background-image: linear-gradient(#6793d6, #6793d6);
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      background-size: 0% 100%;
-      transition: background-size .5s, color .5s;
-    }
-    .btn_change:hover {
-      background-size: 100% 100%;
-      color: #ffffff;
-    }
-  </style>    <!--Кноки выбора отчета-->
   <style>
 
     .icon_mesto_uf5220{
@@ -339,7 +289,7 @@
 <div style="clear: both">
   <form>
     <button formaction="kim" class="btn_change" style="width:40%">Суточный отчет</button>
-    <button formaction="kim_month" class="btn_change" style="width:40%">Месячный отчет</button>
+    <button formaction="kim_month" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF;">Месячный отчет</button>
   </form>
 </div>  <!--Кнопки суточный и месячный отчеты html-->
 
