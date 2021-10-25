@@ -28,15 +28,16 @@ caption {
 .parent_image{
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-bottom: 15px;
     width: 250px;
-    height: 250px;
-
+    height: 270px;
 }
 
-.stanok_img {
-    width: 100%;
-    max-height: 95%;
+.stanok_img{
+    max-height: 250px;
+    width: auto;
+    max-width: 100%;
 }
 
 

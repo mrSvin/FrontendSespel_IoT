@@ -279,12 +279,12 @@
 
 <header>
     <ul class="hr">
-        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
+        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"> </a>
         <div method="post" class="dropdown" style="float: right">
 
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center">
-                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; "/></p>
+                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; "></p>
                 <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
                 <form th:action="@{/logout}" method="post">
@@ -359,9 +359,9 @@
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
-            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
-                <div>
-                    <img src="images/uvf_1_2.png" class="stanok_img"/>
+            <div style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/uvf_1_2.png" class="stanok_img">
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">УВФ-1 #1</figcaption>
                 </div>
                 <div>
@@ -379,9 +379,9 @@
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
-            <div style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
-                <div>
-                    <img src="images/uvf_1_2.png" class="stanok_img"/>
+            <div style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/uvf_1_2.png" class="stanok_img">
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">УВФ-1 #2</figcaption>
                 </div>
                 <div>
@@ -399,9 +399,9 @@
 <div style="border: 1px solid #333;">   <!--NTX1000 html-->
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
-            <div id="img3" style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
-                <div>
-                    <img src="images/ntx1000.png" class="stanok_img"/>
+            <div id="img3" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/ntx1000.png" class="stanok_img">
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">NTX1000</figcaption>
                 </div>
                 <div>
@@ -419,9 +419,9 @@
 <div style="border: 1px solid #333;">   <!--nlx3000 html-->
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
-            <div id="img4" style="float: left; min-height: 100px; width: 15%"> <!--Вставляем изображение станка 1-->
-                <div>
-                    <img src="images/NLX3000.png" class="stanok_img"/>
+            <div id="img4" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/NLX3000.png" class="stanok_img">
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">nlx3000</figcaption>
                 </div>
                 <div>
