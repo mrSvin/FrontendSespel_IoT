@@ -78,7 +78,7 @@ td {
 .avatar:active  .dropdown-content,
 .dropdown-content:hover
 {
-    /*top: 50px;*/
+    top: 90px;
     right: 10px;
     background-color: white;
     opacity: 1;
