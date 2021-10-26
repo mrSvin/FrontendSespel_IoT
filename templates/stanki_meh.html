@@ -143,6 +143,70 @@
             margin-left: -5px;
         }
 
+        .icon_mesto_dmg_gamma2000{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_dmg_gamma2000:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_dmg_gamma2000{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_dmg_gamma2000:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_dmg_gamma2000{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_dmg_gamma2000{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_dmg_ctx650{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_dmg_ctx650:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_dmg_ctx650{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_dmg_ctx650:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_dmg_ctx650{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_dmg_ctx650{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
     </style> <!--Кнопки Персонал и Местоположение-->
     <style>
         .preloader {
@@ -472,8 +536,8 @@
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">GAMMA2000</figcaption>
                 </div>
                 <div>
-                    <a style="text-decoration: none; float: left" class="icon_mesto_uvf_1_1" href="mesto/mesto_dmg_gamma2000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_uvf_1_1'>Место</div></a>
-                    <a style="text-decoration: none; float: left" class="icon_personal_uvf_1_1" href="personal/personal_dmg_gamma2000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_uvf_1_1'>Персонал</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_mesto_dmg_gamma2000" href="mesto/mesto_dmg_gamma2000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_dmg_gamma2000'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_dmg_gamma2000" href="personal/personal_dmg_gamma2000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_dmg_gamma2000'>Персонал</div></a>
                 </div>
             </div>
             <div id="container_work5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
@@ -481,6 +545,26 @@
         </div>
     </div>  <!--GAMMA2000 html-->
 </div> <!--GAMMA2000 html-->
+
+<div style="border: 1px solid #333;">   <!--CTX650 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div id="img6" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx650.png" class="stanok_img" alt="no image"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX650</figcaption>
+                </div>
+                <div>
+                    <a style="text-decoration: none; float: left" class="icon_mesto_dmg_ctx650" href="mesto/mesto_dmg_ctx650" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_dmg_ctx650'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_dmg_ctx650" href="personal/personal_dmg_ctx650" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_dmg_ctx650'>Персонал</div></a>
+                </div>
+            </div>
+            <div id="container_work6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--CTX650 html-->
+</div> <!--CTX650 html-->
+
 
 <script th:inline="javascript">
 
@@ -3272,6 +3356,689 @@
 </script>   <!--GAMMA2000 js круговая диагрмма загрузки оборудования-->
 
 <script th:inline="javascript">
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+    Highcharts.chart('container_work6', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            borderColor: 'gray',
+            type: 'xrange'
+        },
+        title: {
+            text: 'Работа оборудования'
+        },
+        colors:colors,
+
+
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            categories: ['Нагрузка','Работа', 'Ожидание', 'Выключен', 'В аварии'],
+            reversed: true
+        },
+        credits: {
+            enabled: false
+        },
+
+        series: [
+            {
+                name: 'Под нагрузкой',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#24621d',
+                data:   [
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_0}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_1}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_2}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_3}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_4}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_5}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_6}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_7}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_8}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_9}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_10}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_11}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_12}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_13}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_14}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_15}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_16}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_17}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_18}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_19}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_20}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_21}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_22}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_23}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_24}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_25}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_26}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_27}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_28}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_29}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_30}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_31}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_32}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_33}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_34}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_35}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_36}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_37}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_38}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_39}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_40}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_41}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_42}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_43}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_44}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_45}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_46}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_47}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_48}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_49}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_50}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_51}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_52}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_53}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_54}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_55}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_56}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_57}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_58}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_59}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_60}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_61}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_62}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_63}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_64}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_65}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_66}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_67}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_68}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_69}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_70}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_71}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_72}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_73}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_74}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_75}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_76}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_77}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_78}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_79}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_80}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_81}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_82}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_83}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_84}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_85}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_86}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_87}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_88}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_89}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_90}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_91}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_92}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_93}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_94}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_95}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_96}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_97}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_98}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_99}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_100}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_101}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_102}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_103}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_104}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_105}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_106}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_107}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_108}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_109}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_110}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_111}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_112}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_113}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_114}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_115}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_116}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_117}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_118}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_119}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_120}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_121}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_122}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_123}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_124}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_125}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_126}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_127}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_128}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_129}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_130}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_131}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_132}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_133}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_134}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_135}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_136}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_137}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_138}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_139}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_140}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_141}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_142}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_143}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_144}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_145}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_146}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_147}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_148}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_149}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_150}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_151}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_152}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_153}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_154}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_155}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_156}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_157}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_158}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_159}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_160}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_161}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_162}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_163}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_164}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_165}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_166}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_167}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_168}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_169}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_170}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_171}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_172}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_173}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_174}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_175}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_176}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_177}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_178}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_179}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_180}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_181}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_182}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_183}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_184}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_185}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_186}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_187}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_188}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_189}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_190}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_191}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_192}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_193}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_194}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_195}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_196}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_197}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_198}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_199}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_200}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_201}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_202}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_203}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_204}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_205}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_206}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_207}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_208}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_209}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_210}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_211}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_212}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_213}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_214}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_215}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_216}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_217}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_218}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_219}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_220}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_221}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_222}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_223}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_224}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_225}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_226}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_227}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_228}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_229}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_230}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_231}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_232}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_233}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_234}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_235}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_236}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_237}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_238}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_239}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_240}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_241}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_242}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_243}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_244}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_245}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_246}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_247}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_248}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_249}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_250}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_251}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_252}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_253}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_254}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_255}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_256}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_257}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_258}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_259}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_260}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_261}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_262}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_263}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_264}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_265}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_266}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_267}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_268}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_269}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_270}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_271}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_272}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_273}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_274}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_275}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_276}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_277}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_278}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_279}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_280}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_281}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_282}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_283}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_284}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_285}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_286}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_287}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_288}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_289}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_290}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_291}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_292}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_293}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_294}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_295}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_ctx650_296}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_ctx650_297}]])).getTime(), y: 0,},
+
+                ],
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
+                name: 'Работа',
+                borderColor: 'gray',
+                pointWidth: 30,
+                tooltip: {
+                    pointFormat: '<b>Программа: {point.programname}</b>'
+                },
+                colorByPoint: false,
+                color: '#38e817',
+                data:   [
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_0}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_1}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_0}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_2}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_3}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_1}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_4}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_5}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_2}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_6}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_7}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_3}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_8}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_9}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_4}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_10}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_11}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_5}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_12}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_13}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_6}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_14}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_15}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_7}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_16}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_17}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_8}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_18}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_19}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_9}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_20}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_21}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_10}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_22}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_23}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_11}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_24}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_25}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_12}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_26}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_27}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_13}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_28}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_29}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_14}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_30}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_31}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_15}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_32}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_33}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_16}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_34}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_35}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_17}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_36}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_37}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_18}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_38}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_39}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_19}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_40}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_41}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_20}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_42}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_43}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_21}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_44}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_45}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_22}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_46}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_47}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_23}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_48}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_49}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_24}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_50}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_51}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_25}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_52}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_53}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_26}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_54}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_55}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_27}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_56}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_57}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_28}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_58}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_59}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_29}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_60}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_61}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_30}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_62}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_63}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_31}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_64}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_65}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_32}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_66}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_67}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_33}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_68}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_69}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_34}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_70}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_71}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_35}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_72}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_73}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_36}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_74}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_75}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_37}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_76}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_77}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_38}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_78}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_79}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_39}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_80}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_81}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_40}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_82}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_83}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_41}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_84}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_85}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_42}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_86}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_87}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_43}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_88}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_89}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_44}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_90}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_91}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_45}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_92}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_93}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_46}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_94}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_95}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_47}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_96}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_97}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_48}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_98}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_99}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_49}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_100}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_101}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_50}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_102}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_103}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_51}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_104}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_105}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_52}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_106}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_107}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_53}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_108}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_109}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_54}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_110}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_111}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_55}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_112}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_113}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_56}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_114}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_115}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_57}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_116}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_117}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_58}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_118}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_119}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_59}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_120}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_121}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_60}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_122}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_123}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_61}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_124}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_125}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_62}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_126}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_127}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_63}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_128}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_129}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_64}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_130}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_131}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_65}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_132}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_133}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_66}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_134}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_135}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_67}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_136}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_137}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_68}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_138}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_139}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_69}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_140}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_141}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_70}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_142}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_143}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_71}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_144}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_145}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_72}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_146}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_147}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_73}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_148}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_149}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_74}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_150}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_151}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_75}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_152}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_153}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_76}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_154}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_155}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_77}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_156}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_157}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_78}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_158}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_159}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_79}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_160}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_161}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_80}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_162}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_163}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_81}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_164}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_165}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_82}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_166}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_167}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_83}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_168}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_169}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_84}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_170}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_171}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_85}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_172}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_173}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_86}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_174}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_175}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_87}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_176}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_177}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_88}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_178}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_179}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_89}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_180}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_181}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_90}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_182}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_183}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_91}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_184}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_185}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_92}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_186}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_187}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_93}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_188}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_189}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_94}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_190}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_191}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_95}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_192}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_193}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_96}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_194}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_195}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_97}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_196}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_197}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_98}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_198}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_199}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_99}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_200}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_201}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_100}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_202}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_203}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_101}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_204}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_205}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_102}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_206}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_207}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_103}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_208}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_209}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_104}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_210}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_211}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_105}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_212}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_213}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_106}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_214}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_215}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_107}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_216}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_217}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_108}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_218}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_219}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_109}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_220}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_221}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_110}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_222}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_223}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_111}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_224}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_225}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_112}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_226}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_227}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_113}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_228}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_229}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_114}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_230}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_231}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_115}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_232}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_233}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_116}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_234}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_235}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_117}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_236}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_237}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_118}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_238}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_239}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_119}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_240}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_241}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_120}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_242}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_243}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_121}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_244}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_245}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_122}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_246}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_247}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_123}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_248}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_249}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_124}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_250}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_251}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_125}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_252}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_253}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_126}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_254}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_255}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_127}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_256}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_257}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_128}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_258}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_259}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_129}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_260}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_261}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_130}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_262}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_263}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_131}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_264}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_265}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_132}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_266}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_267}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_133}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_268}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_269}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_134}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_270}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_271}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_135}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_272}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_273}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_136}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_274}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_275}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_137}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_276}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_277}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_138}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_278}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_279}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_139}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_280}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_281}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_140}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_282}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_283}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_141}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_284}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_285}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_142}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_286}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_287}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_143}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_288}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_289}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_144}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_290}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_291}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_145}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_292}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_293}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_146}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_294}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_295}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_147}]]},
+                    {x:  (new Date([[${array_rabota_dmg_ctx650_296}]])).getTime(), x2: (new Date([[${array_rabota_dmg_ctx650_297}]])).getTime(), y: 1, programname: [[${array_programname_dmg_ctx650_148}]]},
+
+                ],
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
+                name: 'Ожидание',
+                pointWidth: 30,
+                borderColor: 'gray',
+                tooltip: {
+                    pointFormat: ''
+                },
+                data:   [
+                    {x:  (new Date([[${array_pause_dmg_ctx650_0}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_1}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_2}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_3}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_4}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_5}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_6}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_7}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_8}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_9}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_10}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_11}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_12}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_13}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_14}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_15}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_16}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_17}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_18}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_19}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_20}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_21}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_22}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_23}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_24}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_25}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_26}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_27}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_28}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_29}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_30}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_31}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_32}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_33}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_34}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_35}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_36}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_37}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_38}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_39}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_40}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_41}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_42}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_43}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_44}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_45}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_46}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_47}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_48}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_49}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_50}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_51}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_52}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_53}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_54}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_55}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_56}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_57}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_58}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_59}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_60}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_61}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_62}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_63}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_64}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_65}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_66}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_67}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_68}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_69}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_70}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_71}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_72}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_73}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_74}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_75}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_76}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_77}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_78}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_79}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_80}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_81}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_82}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_83}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_84}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_85}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_86}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_87}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_88}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_89}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_90}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_91}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_92}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_93}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_94}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_95}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_96}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_97}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_98}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_99}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_100}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_101}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_102}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_103}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_104}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_105}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_106}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_107}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_108}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_109}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_110}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_111}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_112}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_113}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_114}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_115}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_116}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_117}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_118}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_119}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_120}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_121}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_122}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_123}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_124}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_125}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_126}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_127}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_128}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_129}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_130}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_131}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_132}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_133}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_134}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_135}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_136}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_137}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_138}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_139}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_140}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_141}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_142}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_143}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_144}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_145}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_146}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_147}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_148}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_149}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_150}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_151}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_152}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_153}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_154}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_155}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_156}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_157}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_158}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_159}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_160}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_161}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_162}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_163}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_164}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_165}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_166}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_167}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_168}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_169}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_170}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_171}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_172}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_173}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_174}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_175}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_176}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_177}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_178}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_179}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_180}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_181}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_182}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_183}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_184}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_185}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_186}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_187}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_188}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_189}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_190}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_191}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_192}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_193}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_194}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_195}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_196}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_197}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_198}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_199}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_200}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_201}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_202}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_203}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_204}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_205}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_206}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_207}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_208}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_209}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_210}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_211}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_212}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_213}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_214}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_215}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_216}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_217}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_218}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_219}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_220}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_221}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_222}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_223}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_224}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_225}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_226}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_227}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_228}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_229}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_230}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_231}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_232}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_233}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_234}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_235}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_236}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_237}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_238}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_239}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_240}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_241}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_242}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_243}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_244}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_245}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_246}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_247}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_248}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_249}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_250}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_251}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_252}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_253}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_254}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_255}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_256}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_257}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_258}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_259}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_260}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_261}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_262}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_263}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_264}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_265}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_266}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_267}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_268}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_269}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_270}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_271}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_272}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_273}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_274}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_275}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_276}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_277}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_278}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_279}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_280}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_281}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_282}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_283}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_284}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_285}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_286}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_287}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_288}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_289}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_290}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_291}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_292}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_293}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_294}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_295}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_ctx650_296}]])).getTime(), x2: (new Date([[${array_pause_dmg_ctx650_297}]])).getTime(), y: 2,},
+
+                ],
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
+                name: 'Выключен',
+
+                pointWidth: 20,
+                data:   [{x:  (new Date([[${array_off_dmg_ctx650_0}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_1}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_2}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_3}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_4}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_5}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_6}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_7}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_8}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_9}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_10}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_11}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_12}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_13}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_14}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_15}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_16}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_17}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_18}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_19}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_20}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_21}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_22}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_23}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_24}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_25}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_26}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_27}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_28}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_29}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_30}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_31}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_32}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_33}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_34}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_35}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_36}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_37}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_ctx650_38}]])).getTime(), x2: (new Date([[${array_off_dmg_ctx650_39}]])).getTime(), y: 3},
+                ],
+                dataLabels: {
+                    enabled: true,
+                }
+            },
+            {
+                name: 'В аварии',
+                pointWidth: 20,
+                data: [
+                    {x:  (new Date([[${array_avar_dmg_ctx650_0}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_1}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_2}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_3}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_4}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_5}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_6}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_7}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_8}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_9}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_10}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_11}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_12}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_13}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_14}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_15}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_16}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_17}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_18}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_19}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_20}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_21}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_22}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_23}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_24}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_25}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_26}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_27}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_28}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_29}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_30}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_31}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_32}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_33}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_34}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_35}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_36}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_37}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_38}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_39}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_40}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_41}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_42}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_43}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_44}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_45}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_46}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_47}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_48}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_49}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_50}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_51}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_52}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_53}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_54}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_55}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_56}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_57}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_58}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_59}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_60}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_61}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_62}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_63}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_64}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_65}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_66}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_67}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_68}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_69}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_70}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_71}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_72}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_73}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_74}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_75}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_76}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_77}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_78}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_79}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_80}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_81}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_82}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_83}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_84}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_85}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_86}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_87}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_88}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_89}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_90}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_91}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_92}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_93}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_94}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_95}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_ctx650_96}]])).getTime(), x2: (new Date([[${array_avar_dmg_ctx650_97}]])).getTime(), y: 4},
+                ],
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        ]
+
+
+    });
+
+</script>   <!--CTX650 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    Highcharts.chart('container6', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе без нагрузки', [[${work_dmg_ctx650}]] ], [ 'Включен', [[${pass_dmg_ctx650}]] ], [ 'Выключен', [[${fail_dmg_ctx650}]] ],  [ 'В аварии', [[${avar_dmg_ctx650}]]],  [ 'Нагрузка', [[${nagruzka_dmg_ctx650}]]],   ]
+        }]
+    });
+</script>   <!--CTX650 js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
     $('.icon_personal_uvf_1_1').hover(
         function(){
             $('.label_personal_uvf_1_1').css('color','#000000');
@@ -3356,28 +4123,6 @@
         }
     );
 
-    $('.icon_personal_nlx3000').hover(
-        function(){
-            $('.label_personal_nlx3000').css('color','#000000');
-            $('.label_personal_nlx3000').css('margin-top','70px');
-        },
-        function(){
-            $('.label_personal_nlx3000').css('color','#756e6e');
-            $('.label_personal_nlx3000').css('margin-top','65px');
-        }
-    );
-    $('.icon_mesto_nlx3000').hover(
-        function(){
-            $('.label_mesto_nlx3000').css('color','#000000');
-            $('.label_mesto_nlx3000').css('margin-top','70px');
-        },
-        function(){
-            $('.label_mesto_nlx3000').css('color','#756e6e');
-            $('.label_mesto_nlx3000').css('margin-top','65px');
-        }
-
-    );
-
     $('.icon_personal_dmg_gamma2000').hover(
         function(){
             $('.label_personal_dmg_gamma2000').css('color','#000000');
@@ -3399,24 +4144,24 @@
         }
     );
 
-    $('.icon_personal_dmg_gamma2000').hover(
+    $('.icon_personal_dmg_ctx650').hover(
         function(){
-            $('.label_personal_dmg_gamma2000').css('color','#000000');
-            $('.label_personal_dmg_gamma2000').css('margin-top','70px');
+            $('.label_personal_dmg_ctx650').css('color','#000000');
+            $('.label_personal_dmg_ctx650').css('margin-top','70px');
         },
         function(){
-            $('.label_personal_dmg_gamma2000').css('color','#756e6e');
-            $('.label_personal_dmg_gamma2000').css('margin-top','65px');
+            $('.label_personal_dmg_ctx650').css('color','#756e6e');
+            $('.label_personal_dmg_ctx650').css('margin-top','65px');
         }
     );
-    $('.icon_mesto_dmg_gamma2000').hover(
+    $('.icon_mesto_dmg_ctx650').hover(
         function(){
-            $('.label_mesto_dmg_gamma2000').css('color','#000000');
-            $('.label_mesto_dmg_gamma2000').css('margin-top','70px');
+            $('.label_mesto_dmg_ctx650').css('color','#000000');
+            $('.label_mesto_dmg_ctx650').css('margin-top','70px');
         },
         function(){
-            $('.label_mesto_dmg_gamma2000').css('color','#756e6e');
-            $('.label_mesto_dmg_gamma2000').css('margin-top','65px');
+            $('.label_mesto_dmg_ctx650').css('color','#756e6e');
+            $('.label_mesto_dmg_ctx650').css('margin-top','65px');
         }
     );
 
