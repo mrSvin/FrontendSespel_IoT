@@ -301,7 +301,7 @@
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
-            <div id="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
                     <img src="images/press.jpg" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Пресс ЧПУ для ступиц</figcaption>
@@ -314,9 +314,10 @@
             <div id="container_work" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
             <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
+        <div style="display: flex; height: 400px; width: 55%;" id="container_press_davlenie"></div>
     </div>  <!--Пресс html-->
-    <div style="display: flex; height: 400px; width: 55%; margin-left: 400px" id="container_press_davlenie"></div>
 </div> <!--Пресс html-->
+
 <script th:inline="javascript">
 
     const timezone = new Date().getTimezoneOffset()
@@ -1079,11 +1080,10 @@
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
-            <div style="float: left; "> <!--Вставляем изображение станка 1-->
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
                     <img src="images/epp.png" class="stanok_img"/>
-                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ЭПП
-                    </figcaption>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ЭПП</figcaption>
                     <div>
                         <a style="text-decoration: none; float: left" class="icon_mesto_epp" href="mesto/mesto_epp"
                            onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;">
@@ -1097,14 +1097,14 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_epp" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container_epp" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work_epp" style="float: left; height: 400px; width: 55%"></div><!--Вставляем линейную гистограмму работы-->
+            <div id="container_epp" style="float: left; height: 400px; width: 25%"></div><!--Вставляем круговую диаграмму загрузки-->
         </div>
+        <div style="display: flex; height: 400px; width: 55%;" id="container_epp_tok"></div>
     </div>  <!--ЭПП html-->
-    <div style="display: flex; height: 400px; width: 55%; margin-left: 400px" id="container_epp_tok"></div>
 </div> <!--ЭПП html-->
+
+
 <script th:inline="javascript">
 
     Highcharts.setOptions({

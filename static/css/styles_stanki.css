@@ -26,8 +26,9 @@ caption {
 }
 
 .img {
-    width: 20%;
+    width: 18%;
     max-width: 300px;
+    min-height: 500px;
     }
 
 .parent_image{
@@ -36,7 +37,7 @@ caption {
     align-items: center;
     margin-bottom: 15px;
     width: 100%;
-    max-height: 300px;
+    /*max-height: 400px;*/
 }
 
 .stanok_img{
