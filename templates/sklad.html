@@ -36,38 +36,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <style>
+    body {
+        background-color: white;
+    }
+    .icon_mesto_navigator_1{
 
-    .icon_mesto_uf5220{
-        position: absolute;
         width: 60px;
         height: 60px;
         background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
         background-size: 60px 60px;
         margin-top: 10px;
+        margin-bottom: 20px;
         margin-left: 30px;
     }
-    .icon_mesto_uf5220:hover {
+    .icon_mesto_navigator_1:hover {
         -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
     }
-    .icon_personal_uf5220{
-        position: absolute;
-        width: 60px;
-        height: 60px;
+    .icon_personal_navigator_1{
         background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
         background-size: 60px 60px;
         margin-top: 10px;
-        margin-left: 120px;
+        margin-left: 30px;
     }
-    .icon_personal_uf5220:hover {
-        -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, 0.9);
+    .icon_personal_navigator_1:hover {
+        -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
     }
-
-    .label_mesto_uf5220{
+    .label_mesto_navigator_1{
         color: #756e6e;
         margin-top: 65px;
         margin-left: 8px;
     }
-    .label_personal_uf5220{
+    .label_personal_navigator_1{
         color: #756e6e;
         margin-top: 65px;
         margin-left: -5px;
@@ -251,20 +250,18 @@
 
     <div style="overflow: hidden;"> <!--Склад html-->
         <div style="width: 100%;   margin: 2%;">
-            <div id="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
                     <img src="images/sklad.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Склад Мех. цеха</figcaption>
-                </div>
-                <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_uf5220" href="mesto/mesto_sklad" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_uf5220'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_uf5220" href="personal/personal_sklad_meh" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_uf5220'>Персонал</div></a>
+                    <div>
+                            <a style="text-decoration: none; float: left" class="icon_mesto_navigator_1" href="mesto/mesto_sklad" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_navigator_1'>Место</div></a>
+                            <a style="text-decoration: none; float: left" class="icon_personal_navigator_1" href="personal/personal_sklad_meh" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_navigator_1'>Персонал</div></a>
+                    </div>
                 </div>
             </div>
-
             <h1 style="color:#0C213B; font-size: 350%; float: left; text-align: left">Содержание полок склада</h1>
-
-            <div class="main-container" style="float: left">
+            <div class="main-container" style="float: left;">
                 <div class="container">
 
                     <div class="icon-container_1" th:attr="data-tooltip=${content_1}">
@@ -1237,35 +1234,31 @@
                 </a>
 
             </div>  <!--Ячейки Вес, высплывающая информация-->
-
         </div>
     </div>  <!--Склад html-->
 
     <h1 style="color:#0C213B; font-size: 250%; text-align: center" th:text="'Суммарный загруженный веc: '  +  ${sum_ves} + ' кг'"></h1>
 
-
-
-
 <script th:inline="javascript">
 
-    $('.icon_personal_uf5220').hover(
+    $('.icon_personal_navigator_1').hover(
         function(){
-            $('.label_personal_uf5220').css('color','#000000');
-            $('.label_personal_uf5220').css('margin-top','70px');
+            $('.label_personal_navigator_1').css('color','#000000');
+            $('.label_personal_navigator_1').css('margin-top','70px');
         },
         function(){
-            $('.label_personal_uf5220').css('color','#756e6e');
-            $('.label_personal_uf5220').css('margin-top','65px');
+            $('.label_personal_navigator_1').css('color','#756e6e');
+            $('.label_personal_navigator_1').css('margin-top','65px');
         }
     );
-    $('.icon_mesto_uf5220').hover(
+    $('.icon_mesto_navigator_1').hover(
         function(){
-            $('.label_mesto_uf5220').css('color','#000000');
-            $('.label_mesto_uf5220').css('margin-top','70px');
+            $('.label_mesto_navigator_1').css('color','#000000');
+            $('.label_mesto_navigator_1').css('margin-top','70px');
         },
         function(){
-            $('.label_mesto_uf5220').css('color','#756e6e');
-            $('.label_mesto_uf5220').css('margin-top','65px');
+            $('.label_mesto_navigator_1').css('color','#756e6e');
+            $('.label_mesto_navigator_1').css('margin-top','65px');
         }
     );
 
