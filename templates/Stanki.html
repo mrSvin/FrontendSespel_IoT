@@ -127,6 +127,44 @@
             margin-left: -5px;
         }
 
+        .icon_mesto_sk50 {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_sk50:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_sk50 {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_sk50:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_sk50 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_sk50 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+
     </style> <!--Кнопки Персонал и Местоположение-->
     <style>
         .preloader {
@@ -667,6 +705,115 @@
     </form><!--Таблица Текущие параметры комплекса УФ 5220-->
 </div> <!--NTX1000 html-->
 
+<div style="border: 1px solid #333;">   <!--sk50 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;">
+                <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/sk50.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">SK50
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_sk50" href="mesto/mesto_sk50"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto_sk50'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_sk50"
+                           href="personal/personal_sk50"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal_sk50'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work4" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container4" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--sk50 html-->
+    <form method="post" style="margin: 1%;">
+        <center>
+            <table width="98%">
+
+                <text class="first">Текущие параметры комплекса</text>
+                <tr>
+                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
+                    <th colspan="2" style="text-align:center">Технология</th>
+                    <th colspan="2" style="text-align:center">Координаты</th>
+                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
+                </tr>
+                <tr>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Номер инструмента</td>
+                    <td>
+                        <li th:text="${sk50_nomer_inst}"></li>
+                    </td>
+                    <td>Имя УП</td>
+                    <td>
+                        <li th:text="${sk50_name_program}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${sk50_pos_x}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${sk50_nagr_x}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор подачи</td>
+                    <td>
+                        <li th:text="${sk50_kor_podach}"></li>
+                    </td>
+                    <td>Номер кадра</td>
+                    <td>
+                        <li th:text="${sk50_nomer_kadr}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${sk50_pos_y}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${sk50_nagr_y}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор скорости</td>
+                    <td>
+                        <li th:text="${sk50_kor_speed}"></li>
+                    </td>
+                    <td>Статус программы</td>
+                    <td>
+                        <li th:text="${sk50_status_work}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${sk50_pos_z}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${sk50_nagr_z}"></li>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
+</div> <!--sk50 html-->
+
 <script th:inline="javascript">
 
     var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000'];
@@ -1199,6 +1346,151 @@
 <script src="/js/stanki/data_ntx1000.js"></script>
 
 <script th:inline="javascript">
+
+    var sk50_array_rabota = [
+        [[${sk50_array_rabota0}]],[[${sk50_array_rabota1}]],[[${sk50_array_rabota2}]],[[${sk50_array_rabota3}]],[[${sk50_array_rabota4}]],[[${sk50_array_rabota5}]],[[${sk50_array_rabota6}]],[[${sk50_array_rabota7}]],[[${sk50_array_rabota8}]],[[${sk50_array_rabota9}]],[[${sk50_array_rabota10}]],
+        [[${sk50_array_rabota11}]],[[${sk50_array_rabota12}]],[[${sk50_array_rabota13}]],[[${sk50_array_rabota14}]],[[${sk50_array_rabota15}]],[[${sk50_array_rabota16}]],[[${sk50_array_rabota17}]],[[${sk50_array_rabota18}]],[[${sk50_array_rabota19}]],[[${sk50_array_rabota20}]],
+        [[${sk50_array_rabota21}]],[[${sk50_array_rabota22}]],[[${sk50_array_rabota23}]],[[${sk50_array_rabota24}]],[[${sk50_array_rabota25}]],[[${sk50_array_rabota26}]],[[${sk50_array_rabota27}]],[[${sk50_array_rabota28}]],[[${sk50_array_rabota29}]],[[${sk50_array_rabota30}]],
+        [[${sk50_array_rabota31}]],[[${sk50_array_rabota32}]],[[${sk50_array_rabota33}]],[[${sk50_array_rabota34}]],[[${sk50_array_rabota35}]],[[${sk50_array_rabota36}]],[[${sk50_array_rabota37}]],[[${sk50_array_rabota38}]],[[${sk50_array_rabota39}]],[[${sk50_array_rabota40}]],
+        [[${sk50_array_rabota41}]],[[${sk50_array_rabota42}]],[[${sk50_array_rabota43}]],[[${sk50_array_rabota44}]],[[${sk50_array_rabota45}]],[[${sk50_array_rabota46}]],[[${sk50_array_rabota47}]],[[${sk50_array_rabota48}]],[[${sk50_array_rabota49}]],[[${sk50_array_rabota50}]],
+        [[${sk50_array_rabota51}]],[[${sk50_array_rabota52}]],[[${sk50_array_rabota53}]],[[${sk50_array_rabota54}]],[[${sk50_array_rabota55}]],[[${sk50_array_rabota56}]],[[${sk50_array_rabota57}]],[[${sk50_array_rabota58}]],[[${sk50_array_rabota59}]],[[${sk50_array_rabota60}]],
+        [[${sk50_array_rabota61}]],[[${sk50_array_rabota62}]],[[${sk50_array_rabota63}]],[[${sk50_array_rabota64}]],[[${sk50_array_rabota65}]],[[${sk50_array_rabota66}]],[[${sk50_array_rabota67}]],[[${sk50_array_rabota68}]],[[${sk50_array_rabota69}]],[[${sk50_array_rabota70}]],
+        [[${sk50_array_rabota71}]],[[${sk50_array_rabota72}]],[[${sk50_array_rabota73}]],[[${sk50_array_rabota74}]],[[${sk50_array_rabota75}]],[[${sk50_array_rabota76}]],[[${sk50_array_rabota77}]],[[${sk50_array_rabota78}]],[[${sk50_array_rabota79}]],[[${sk50_array_rabota80}]],
+        [[${sk50_array_rabota81}]],[[${sk50_array_rabota82}]],[[${sk50_array_rabota83}]],[[${sk50_array_rabota84}]],[[${sk50_array_rabota85}]],[[${sk50_array_rabota86}]],[[${sk50_array_rabota87}]],[[${sk50_array_rabota88}]],[[${sk50_array_rabota89}]],[[${sk50_array_rabota90}]],
+        [[${sk50_array_rabota91}]],[[${sk50_array_rabota92}]],[[${sk50_array_rabota93}]],[[${sk50_array_rabota94}]],[[${sk50_array_rabota95}]],[[${sk50_array_rabota96}]],[[${sk50_array_rabota97}]],[[${sk50_array_rabota98}]],[[${sk50_array_rabota99}]],[[${sk50_array_rabota100}]],
+        [[${sk50_array_rabota101}]],[[${sk50_array_rabota102}]],[[${sk50_array_rabota103}]],[[${sk50_array_rabota104}]],[[${sk50_array_rabota105}]],[[${sk50_array_rabota106}]],[[${sk50_array_rabota107}]],[[${sk50_array_rabota108}]],[[${sk50_array_rabota109}]],[[${sk50_array_rabota110}]],
+        [[${sk50_array_rabota111}]],[[${sk50_array_rabota112}]],[[${sk50_array_rabota113}]],[[${sk50_array_rabota114}]],[[${sk50_array_rabota115}]],[[${sk50_array_rabota116}]],[[${sk50_array_rabota117}]],[[${sk50_array_rabota118}]],[[${sk50_array_rabota119}]],[[${sk50_array_rabota120}]],
+        [[${sk50_array_rabota121}]],[[${sk50_array_rabota122}]],[[${sk50_array_rabota123}]],[[${sk50_array_rabota124}]],[[${sk50_array_rabota125}]],[[${sk50_array_rabota126}]],[[${sk50_array_rabota127}]],[[${sk50_array_rabota128}]],[[${sk50_array_rabota129}]],[[${sk50_array_rabota130}]],
+        [[${sk50_array_rabota131}]],[[${sk50_array_rabota132}]],[[${sk50_array_rabota133}]],[[${sk50_array_rabota134}]],[[${sk50_array_rabota135}]],[[${sk50_array_rabota136}]],[[${sk50_array_rabota137}]],[[${sk50_array_rabota138}]],[[${sk50_array_rabota139}]],[[${sk50_array_rabota140}]],
+        [[${sk50_array_rabota141}]],[[${sk50_array_rabota142}]],[[${sk50_array_rabota143}]],[[${sk50_array_rabota144}]],[[${sk50_array_rabota145}]],[[${sk50_array_rabota146}]],[[${sk50_array_rabota147}]],[[${sk50_array_rabota148}]],[[${sk50_array_rabota149}]],[[${sk50_array_rabota150}]],
+        [[${sk50_array_rabota151}]],[[${sk50_array_rabota152}]],[[${sk50_array_rabota153}]],[[${sk50_array_rabota154}]],[[${sk50_array_rabota155}]],[[${sk50_array_rabota156}]],[[${sk50_array_rabota157}]],[[${sk50_array_rabota158}]],[[${sk50_array_rabota159}]],[[${sk50_array_rabota160}]],
+        [[${sk50_array_rabota161}]],[[${sk50_array_rabota162}]],[[${sk50_array_rabota163}]],[[${sk50_array_rabota164}]],[[${sk50_array_rabota165}]],[[${sk50_array_rabota166}]],[[${sk50_array_rabota167}]],[[${sk50_array_rabota168}]],[[${sk50_array_rabota169}]],[[${sk50_array_rabota170}]],
+        [[${sk50_array_rabota171}]],[[${sk50_array_rabota172}]],[[${sk50_array_rabota173}]],[[${sk50_array_rabota174}]],[[${sk50_array_rabota175}]],[[${sk50_array_rabota176}]],[[${sk50_array_rabota177}]],[[${sk50_array_rabota178}]],[[${sk50_array_rabota179}]],[[${sk50_array_rabota180}]],
+        [[${sk50_array_rabota181}]],[[${sk50_array_rabota182}]],[[${sk50_array_rabota183}]],[[${sk50_array_rabota184}]],[[${sk50_array_rabota185}]],[[${sk50_array_rabota186}]],[[${sk50_array_rabota187}]],[[${sk50_array_rabota188}]],[[${sk50_array_rabota189}]],[[${sk50_array_rabota190}]],
+        [[${sk50_array_rabota191}]],[[${sk50_array_rabota192}]],[[${sk50_array_rabota193}]],[[${sk50_array_rabota194}]],[[${sk50_array_rabota195}]],[[${sk50_array_rabota196}]],[[${sk50_array_rabota197}]],[[${sk50_array_rabota198}]],[[${sk50_array_rabota199}]],[[${sk50_array_rabota200}]],
+        [[${sk50_array_rabota201}]],[[${sk50_array_rabota202}]],[[${sk50_array_rabota203}]],[[${sk50_array_rabota204}]],[[${sk50_array_rabota205}]],[[${sk50_array_rabota206}]],[[${sk50_array_rabota207}]],[[${sk50_array_rabota208}]],[[${sk50_array_rabota209}]],[[${sk50_array_rabota210}]],
+        [[${sk50_array_rabota211}]],[[${sk50_array_rabota212}]],[[${sk50_array_rabota213}]],[[${sk50_array_rabota214}]],[[${sk50_array_rabota215}]],[[${sk50_array_rabota216}]],[[${sk50_array_rabota217}]],[[${sk50_array_rabota218}]],[[${sk50_array_rabota219}]],[[${sk50_array_rabota220}]],
+        [[${sk50_array_rabota221}]],[[${sk50_array_rabota222}]],[[${sk50_array_rabota223}]],[[${sk50_array_rabota224}]],[[${sk50_array_rabota225}]],[[${sk50_array_rabota226}]],[[${sk50_array_rabota227}]],[[${sk50_array_rabota228}]],[[${sk50_array_rabota229}]],[[${sk50_array_rabota230}]],
+        [[${sk50_array_rabota231}]],[[${sk50_array_rabota232}]],[[${sk50_array_rabota233}]],[[${sk50_array_rabota234}]],[[${sk50_array_rabota235}]],[[${sk50_array_rabota236}]],[[${sk50_array_rabota237}]],[[${sk50_array_rabota238}]],[[${sk50_array_rabota239}]],[[${sk50_array_rabota240}]],
+        [[${sk50_array_rabota241}]],[[${sk50_array_rabota242}]],[[${sk50_array_rabota243}]],[[${sk50_array_rabota244}]],[[${sk50_array_rabota245}]],[[${sk50_array_rabota246}]],[[${sk50_array_rabota247}]],[[${sk50_array_rabota248}]],[[${sk50_array_rabota249}]],[[${sk50_array_rabota250}]],
+        [[${sk50_array_rabota251}]],[[${sk50_array_rabota252}]],[[${sk50_array_rabota253}]],[[${sk50_array_rabota254}]],[[${sk50_array_rabota255}]],[[${sk50_array_rabota256}]],[[${sk50_array_rabota257}]],[[${sk50_array_rabota258}]],[[${sk50_array_rabota259}]],[[${sk50_array_rabota260}]],
+        [[${sk50_array_rabota261}]],[[${sk50_array_rabota262}]],[[${sk50_array_rabota263}]],[[${sk50_array_rabota264}]],[[${sk50_array_rabota265}]],[[${sk50_array_rabota266}]],[[${sk50_array_rabota267}]],[[${sk50_array_rabota268}]],[[${sk50_array_rabota269}]],[[${sk50_array_rabota270}]],
+        [[${sk50_array_rabota271}]],[[${sk50_array_rabota272}]],[[${sk50_array_rabota273}]],[[${sk50_array_rabota274}]],[[${sk50_array_rabota275}]],[[${sk50_array_rabota276}]],[[${sk50_array_rabota277}]],[[${sk50_array_rabota278}]],[[${sk50_array_rabota279}]],[[${sk50_array_rabota280}]],
+        [[${sk50_array_rabota281}]],[[${sk50_array_rabota282}]],[[${sk50_array_rabota283}]],[[${sk50_array_rabota284}]],[[${sk50_array_rabota285}]],[[${sk50_array_rabota286}]],[[${sk50_array_rabota287}]],[[${sk50_array_rabota288}]],[[${sk50_array_rabota289}]],[[${sk50_array_rabota290}]],
+        [[${sk50_array_rabota291}]],[[${sk50_array_rabota292}]],[[${sk50_array_rabota293}]],[[${sk50_array_rabota294}]],[[${sk50_array_rabota295}]],[[${sk50_array_rabota296}]],[[${sk50_array_rabota297}]],[[${sk50_array_rabota298}]],[[${sk50_array_rabota299}]],[[${sk50_array_rabota300}]],
+
+    ];
+    var sk50_array_pause = [
+        [[${sk50_array_pause0}]],[[${sk50_array_pause1}]],[[${sk50_array_pause2}]],[[${sk50_array_pause3}]],[[${sk50_array_pause4}]],[[${sk50_array_pause5}]],[[${sk50_array_pause6}]],[[${sk50_array_pause7}]],[[${sk50_array_pause8}]],[[${sk50_array_pause9}]],[[${sk50_array_pause10}]],
+        [[${sk50_array_pause11}]],[[${sk50_array_pause12}]],[[${sk50_array_pause13}]],[[${sk50_array_pause14}]],[[${sk50_array_pause15}]],[[${sk50_array_pause16}]],[[${sk50_array_pause17}]],[[${sk50_array_pause18}]],[[${sk50_array_pause19}]],[[${sk50_array_pause20}]],
+        [[${sk50_array_pause21}]],[[${sk50_array_pause22}]],[[${sk50_array_pause23}]],[[${sk50_array_pause24}]],[[${sk50_array_pause25}]],[[${sk50_array_pause26}]],[[${sk50_array_pause27}]],[[${sk50_array_pause28}]],[[${sk50_array_pause29}]],[[${sk50_array_pause30}]],
+        [[${sk50_array_pause31}]],[[${sk50_array_pause32}]],[[${sk50_array_pause33}]],[[${sk50_array_pause34}]],[[${sk50_array_pause35}]],[[${sk50_array_pause36}]],[[${sk50_array_pause37}]],[[${sk50_array_pause38}]],[[${sk50_array_pause39}]],[[${sk50_array_pause40}]],
+        [[${sk50_array_pause41}]],[[${sk50_array_pause42}]],[[${sk50_array_pause43}]],[[${sk50_array_pause44}]],[[${sk50_array_pause45}]],[[${sk50_array_pause46}]],[[${sk50_array_pause47}]],[[${sk50_array_pause48}]],[[${sk50_array_pause49}]],[[${sk50_array_pause50}]],
+        [[${sk50_array_pause51}]],[[${sk50_array_pause52}]],[[${sk50_array_pause53}]],[[${sk50_array_pause54}]],[[${sk50_array_pause55}]],[[${sk50_array_pause56}]],[[${sk50_array_pause57}]],[[${sk50_array_pause58}]],[[${sk50_array_pause59}]],[[${sk50_array_pause60}]],
+        [[${sk50_array_pause61}]],[[${sk50_array_pause62}]],[[${sk50_array_pause63}]],[[${sk50_array_pause64}]],[[${sk50_array_pause65}]],[[${sk50_array_pause66}]],[[${sk50_array_pause67}]],[[${sk50_array_pause68}]],[[${sk50_array_pause69}]],[[${sk50_array_pause70}]],
+        [[${sk50_array_pause71}]],[[${sk50_array_pause72}]],[[${sk50_array_pause73}]],[[${sk50_array_pause74}]],[[${sk50_array_pause75}]],[[${sk50_array_pause76}]],[[${sk50_array_pause77}]],[[${sk50_array_pause78}]],[[${sk50_array_pause79}]],[[${sk50_array_pause80}]],
+        [[${sk50_array_pause81}]],[[${sk50_array_pause82}]],[[${sk50_array_pause83}]],[[${sk50_array_pause84}]],[[${sk50_array_pause85}]],[[${sk50_array_pause86}]],[[${sk50_array_pause87}]],[[${sk50_array_pause88}]],[[${sk50_array_pause89}]],[[${sk50_array_pause90}]],
+        [[${sk50_array_pause91}]],[[${sk50_array_pause92}]],[[${sk50_array_pause93}]],[[${sk50_array_pause94}]],[[${sk50_array_pause95}]],[[${sk50_array_pause96}]],[[${sk50_array_pause97}]],[[${sk50_array_pause98}]],[[${sk50_array_pause99}]],[[${sk50_array_pause100}]],
+        [[${sk50_array_pause101}]],[[${sk50_array_pause102}]],[[${sk50_array_pause103}]],[[${sk50_array_pause104}]],[[${sk50_array_pause105}]],[[${sk50_array_pause106}]],[[${sk50_array_pause107}]],[[${sk50_array_pause108}]],[[${sk50_array_pause109}]],[[${sk50_array_pause110}]],
+        [[${sk50_array_pause111}]],[[${sk50_array_pause112}]],[[${sk50_array_pause113}]],[[${sk50_array_pause114}]],[[${sk50_array_pause115}]],[[${sk50_array_pause116}]],[[${sk50_array_pause117}]],[[${sk50_array_pause118}]],[[${sk50_array_pause119}]],[[${sk50_array_pause120}]],
+        [[${sk50_array_pause121}]],[[${sk50_array_pause122}]],[[${sk50_array_pause123}]],[[${sk50_array_pause124}]],[[${sk50_array_pause125}]],[[${sk50_array_pause126}]],[[${sk50_array_pause127}]],[[${sk50_array_pause128}]],[[${sk50_array_pause129}]],[[${sk50_array_pause130}]],
+        [[${sk50_array_pause131}]],[[${sk50_array_pause132}]],[[${sk50_array_pause133}]],[[${sk50_array_pause134}]],[[${sk50_array_pause135}]],[[${sk50_array_pause136}]],[[${sk50_array_pause137}]],[[${sk50_array_pause138}]],[[${sk50_array_pause129}]],[[${sk50_array_pause120}]],
+        [[${sk50_array_pause141}]],[[${sk50_array_pause142}]],[[${sk50_array_pause143}]],[[${sk50_array_pause144}]],[[${sk50_array_pause145}]],[[${sk50_array_pause146}]],[[${sk50_array_pause147}]],[[${sk50_array_pause148}]],[[${sk50_array_pause129}]],[[${sk50_array_pause120}]],
+        [[${sk50_array_pause151}]],[[${sk50_array_pause152}]],[[${sk50_array_pause153}]],[[${sk50_array_pause154}]],[[${sk50_array_pause155}]],[[${sk50_array_pause156}]],[[${sk50_array_pause157}]],[[${sk50_array_pause158}]],[[${sk50_array_pause129}]],[[${sk50_array_pause120}]],
+        [[${sk50_array_pause161}]],[[${sk50_array_pause162}]],[[${sk50_array_pause163}]],[[${sk50_array_pause164}]],[[${sk50_array_pause165}]],[[${sk50_array_pause166}]],[[${sk50_array_pause167}]],[[${sk50_array_pause168}]],[[${sk50_array_pause169}]],[[${sk50_array_pause170}]],
+        [[${sk50_array_pause171}]],[[${sk50_array_pause172}]],[[${sk50_array_pause173}]],[[${sk50_array_pause174}]],[[${sk50_array_pause175}]],[[${sk50_array_pause176}]],[[${sk50_array_pause177}]],[[${sk50_array_pause178}]],[[${sk50_array_pause179}]],[[${sk50_array_pause180}]],
+        [[${sk50_array_pause181}]],[[${sk50_array_pause182}]],[[${sk50_array_pause183}]],[[${sk50_array_pause184}]],[[${sk50_array_pause185}]],[[${sk50_array_pause186}]],[[${sk50_array_pause187}]],[[${sk50_array_pause188}]],[[${sk50_array_pause189}]],[[${sk50_array_pause190}]],
+        [[${sk50_array_pause191}]],[[${sk50_array_pause192}]],[[${sk50_array_pause193}]],[[${sk50_array_pause194}]],[[${sk50_array_pause195}]],[[${sk50_array_pause196}]],[[${sk50_array_pause197}]],[[${sk50_array_pause198}]],[[${sk50_array_pause199}]],[[${sk50_array_pause200}]],
+        [[${sk50_array_pause201}]],[[${sk50_array_pause202}]],[[${sk50_array_pause203}]],[[${sk50_array_pause204}]],[[${sk50_array_pause205}]],[[${sk50_array_pause206}]],[[${sk50_array_pause207}]],[[${sk50_array_pause208}]],[[${sk50_array_pause209}]],[[${sk50_array_pause210}]],
+        [[${sk50_array_pause211}]],[[${sk50_array_pause212}]],[[${sk50_array_pause213}]],[[${sk50_array_pause214}]],[[${sk50_array_pause215}]],[[${sk50_array_pause216}]],[[${sk50_array_pause217}]],[[${sk50_array_pause218}]],[[${sk50_array_pause219}]],[[${sk50_array_pause220}]],
+        [[${sk50_array_pause221}]],[[${sk50_array_pause222}]],[[${sk50_array_pause223}]],[[${sk50_array_pause224}]],[[${sk50_array_pause225}]],[[${sk50_array_pause226}]],[[${sk50_array_pause227}]],[[${sk50_array_pause228}]],[[${sk50_array_pause229}]],[[${sk50_array_pause230}]],
+        [[${sk50_array_pause231}]],[[${sk50_array_pause232}]],[[${sk50_array_pause233}]],[[${sk50_array_pause234}]],[[${sk50_array_pause235}]],[[${sk50_array_pause236}]],[[${sk50_array_pause237}]],[[${sk50_array_pause238}]],[[${sk50_array_pause239}]],[[${sk50_array_pause240}]],
+        [[${sk50_array_pause241}]],[[${sk50_array_pause242}]],[[${sk50_array_pause243}]],[[${sk50_array_pause244}]],[[${sk50_array_pause245}]],[[${sk50_array_pause246}]],[[${sk50_array_pause247}]],[[${sk50_array_pause248}]],[[${sk50_array_pause249}]],[[${sk50_array_pause250}]],
+        [[${sk50_array_pause261}]],[[${sk50_array_pause262}]],[[${sk50_array_pause263}]],[[${sk50_array_pause264}]],[[${sk50_array_pause265}]],[[${sk50_array_pause266}]],[[${sk50_array_pause267}]],[[${sk50_array_pause268}]],[[${sk50_array_pause269}]],[[${sk50_array_pause270}]],
+        [[${sk50_array_pause281}]],[[${sk50_array_pause282}]],[[${sk50_array_pause283}]],[[${sk50_array_pause284}]],[[${sk50_array_pause285}]],[[${sk50_array_pause286}]],[[${sk50_array_pause287}]],[[${sk50_array_pause288}]],[[${sk50_array_pause289}]],[[${sk50_array_pause290}]],
+        [[${sk50_array_pause291}]],[[${sk50_array_pause292}]],[[${sk50_array_pause293}]],[[${sk50_array_pause294}]],[[${sk50_array_pause295}]],[[${sk50_array_pause296}]],[[${sk50_array_pause297}]],[[${sk50_array_pause298}]],[[${sk50_array_pause299}]],[[${sk50_array_pause300}]],
+
+    ];
+    var sk50_array_off = [
+        [[${sk50_array_off0}]],[[${sk50_array_off1}]],[[${sk50_array_off2}]],[[${sk50_array_off3}]],[[${sk50_array_off4}]],[[${sk50_array_off5}]],[[${sk50_array_off6}]],[[${sk50_array_off7}]],[[${sk50_array_off8}]],[[${sk50_array_off9}]],[[${sk50_array_off10}]],
+        [[${sk50_array_off11}]],[[${sk50_array_off12}]],[[${sk50_array_off13}]],[[${sk50_array_off14}]],[[${sk50_array_off15}]],[[${sk50_array_off16}]],[[${sk50_array_off17}]],[[${sk50_array_off18}]],[[${sk50_array_off19}]],[[${sk50_array_off20}]],
+        [[${sk50_array_off21}]],[[${sk50_array_off22}]],[[${sk50_array_off23}]],[[${sk50_array_off24}]],[[${sk50_array_off25}]],[[${sk50_array_off26}]],[[${sk50_array_off27}]],[[${sk50_array_off28}]],[[${sk50_array_off29}]],[[${sk50_array_off30}]],
+        [[${sk50_array_off31}]],[[${sk50_array_off32}]],[[${sk50_array_off33}]],[[${sk50_array_off34}]],[[${sk50_array_off35}]],[[${sk50_array_off36}]],[[${sk50_array_off37}]],[[${sk50_array_off38}]],[[${sk50_array_off39}]]
+    ];
+
+    var sk50_array_avar = [
+        [[${sk50_array_avar0}]],[[${sk50_array_avar1}]],[[${sk50_array_avar2}]],[[${sk50_array_avar3}]],[[${sk50_array_avar4}]],[[${sk50_array_avar5}]],[[${sk50_array_avar6}]],[[${sk50_array_avar7}]],[[${sk50_array_avar8}]],[[${sk50_array_avar9}]],[[${sk50_array_avar10}]],
+        [[${sk50_array_avar11}]],[[${sk50_array_avar12}]],[[${sk50_array_avar13}]],[[${sk50_array_avar14}]],[[${sk50_array_avar15}]],[[${sk50_array_avar16}]],[[${sk50_array_avar17}]],[[${sk50_array_avar18}]],[[${sk50_array_avar19}]],[[${sk50_array_avar20}]],
+        [[${sk50_array_avar21}]],[[${sk50_array_avar22}]],[[${sk50_array_avar23}]],[[${sk50_array_avar24}]],[[${sk50_array_avar25}]],[[${sk50_array_avar26}]],[[${sk50_array_avar27}]],[[${sk50_array_avar28}]],[[${sk50_array_avar29}]],[[${sk50_array_avar30}]],
+        [[${sk50_array_avar31}]],[[${sk50_array_avar32}]],[[${sk50_array_avar33}]],[[${sk50_array_avar34}]],[[${sk50_array_avar35}]],[[${sk50_array_avar36}]],[[${sk50_array_avar37}]],[[${sk50_array_avar38}]],[[${sk50_array_avar39}]],[[${sk50_array_avar40}]],
+        [[${sk50_array_avar41}]],[[${sk50_array_avar42}]],[[${sk50_array_avar43}]],[[${sk50_array_avar44}]],[[${sk50_array_avar45}]],[[${sk50_array_avar46}]],[[${sk50_array_avar47}]],[[${sk50_array_avar48}]],[[${sk50_array_avar49}]],[[${sk50_array_avar50}]],
+        [[${sk50_array_avar51}]],[[${sk50_array_avar52}]],[[${sk50_array_avar53}]]
+    ];
+
+    var sk50_array_nagruzka = [
+        [[${sk50_array_nagruzka0}]],[[${sk50_array_nagruzka1}]],[[${sk50_array_nagruzka2}]],[[${sk50_array_nagruzka3}]],[[${sk50_array_nagruzka4}]],[[${sk50_array_nagruzka5}]],[[${sk50_array_nagruzka6}]],[[${sk50_array_nagruzka7}]],[[${sk50_array_nagruzka8}]],[[${sk50_array_nagruzka9}]],[[${sk50_array_nagruzka10}]],
+        [[${sk50_array_nagruzka11}]],[[${sk50_array_nagruzka12}]],[[${sk50_array_nagruzka13}]],[[${sk50_array_nagruzka14}]],[[${sk50_array_nagruzka15}]],[[${sk50_array_nagruzka16}]],[[${sk50_array_nagruzka17}]],[[${sk50_array_nagruzka18}]],[[${sk50_array_nagruzka19}]],[[${sk50_array_nagruzka20}]],
+        [[${sk50_array_nagruzka21}]],[[${sk50_array_nagruzka22}]],[[${sk50_array_nagruzka23}]],[[${sk50_array_nagruzka24}]],[[${sk50_array_nagruzka25}]],[[${sk50_array_nagruzka26}]],[[${sk50_array_nagruzka27}]],[[${sk50_array_nagruzka28}]],[[${sk50_array_nagruzka29}]],[[${sk50_array_nagruzka30}]],
+        [[${sk50_array_nagruzka31}]],[[${sk50_array_nagruzka32}]],[[${sk50_array_nagruzka33}]],[[${sk50_array_nagruzka34}]],[[${sk50_array_nagruzka35}]],[[${sk50_array_nagruzka36}]],[[${sk50_array_nagruzka37}]],[[${sk50_array_nagruzka38}]],[[${sk50_array_nagruzka39}]],[[${sk50_array_nagruzka40}]],
+        [[${sk50_array_nagruzka41}]],[[${sk50_array_nagruzka42}]],[[${sk50_array_nagruzka43}]],[[${sk50_array_nagruzka44}]],[[${sk50_array_nagruzka45}]],[[${sk50_array_nagruzka46}]],[[${sk50_array_nagruzka47}]],[[${sk50_array_nagruzka48}]],[[${sk50_array_nagruzka49}]],[[${sk50_array_nagruzka50}]],
+        [[${sk50_array_nagruzka51}]],[[${sk50_array_nagruzka52}]],[[${sk50_array_nagruzka53}]],[[${sk50_array_nagruzka54}]],[[${sk50_array_nagruzka55}]],[[${sk50_array_nagruzka56}]],[[${sk50_array_nagruzka57}]],[[${sk50_array_nagruzka58}]],[[${sk50_array_nagruzka59}]],[[${sk50_array_nagruzka60}]],
+        [[${sk50_array_nagruzka61}]],[[${sk50_array_nagruzka62}]],[[${sk50_array_nagruzka63}]],[[${sk50_array_nagruzka64}]],[[${sk50_array_nagruzka65}]],[[${sk50_array_nagruzka66}]],[[${sk50_array_nagruzka67}]],[[${sk50_array_nagruzka68}]],[[${sk50_array_nagruzka69}]],[[${sk50_array_nagruzka70}]],
+        [[${sk50_array_nagruzka71}]],[[${sk50_array_nagruzka72}]],[[${sk50_array_nagruzka73}]],[[${sk50_array_nagruzka74}]],[[${sk50_array_nagruzka75}]],[[${sk50_array_nagruzka76}]],[[${sk50_array_nagruzka77}]],[[${sk50_array_nagruzka78}]],[[${sk50_array_nagruzka79}]],[[${sk50_array_nagruzka80}]],
+        [[${sk50_array_nagruzka81}]],[[${sk50_array_nagruzka82}]],[[${sk50_array_nagruzka83}]],[[${sk50_array_nagruzka84}]],[[${sk50_array_nagruzka85}]],[[${sk50_array_nagruzka86}]],[[${sk50_array_nagruzka87}]],[[${sk50_array_nagruzka88}]],[[${sk50_array_nagruzka89}]],[[${sk50_array_nagruzka90}]],
+        [[${sk50_array_nagruzka91}]],[[${sk50_array_nagruzka92}]],[[${sk50_array_nagruzka93}]],[[${sk50_array_nagruzka94}]],[[${sk50_array_nagruzka95}]],[[${sk50_array_nagruzka96}]],[[${sk50_array_nagruzka97}]],[[${sk50_array_nagruzka98}]],[[${sk50_array_nagruzka99}]],[[${sk50_array_nagruzka100}]],
+        [[${sk50_array_nagruzka101}]],[[${sk50_array_nagruzka102}]],[[${sk50_array_nagruzka103}]],[[${sk50_array_nagruzka104}]],[[${sk50_array_nagruzka105}]],[[${sk50_array_nagruzka106}]],[[${sk50_array_nagruzka107}]],[[${sk50_array_nagruzka108}]],[[${sk50_array_nagruzka109}]],[[${sk50_array_nagruzka110}]],
+        [[${sk50_array_nagruzka111}]],[[${sk50_array_nagruzka112}]],[[${sk50_array_nagruzka113}]],[[${sk50_array_nagruzka114}]],[[${sk50_array_nagruzka115}]],[[${sk50_array_nagruzka116}]],[[${sk50_array_nagruzka117}]],[[${sk50_array_nagruzka118}]],[[${sk50_array_nagruzka119}]],[[${sk50_array_nagruzka120}]],
+        [[${sk50_array_nagruzka121}]],[[${sk50_array_nagruzka122}]],[[${sk50_array_nagruzka123}]],[[${sk50_array_nagruzka124}]],[[${sk50_array_nagruzka125}]],[[${sk50_array_nagruzka126}]],[[${sk50_array_nagruzka127}]],[[${sk50_array_nagruzka128}]],[[${sk50_array_nagruzka129}]],[[${sk50_array_nagruzka130}]],
+        [[${sk50_array_nagruzka131}]],[[${sk50_array_nagruzka132}]],[[${sk50_array_nagruzka133}]],[[${sk50_array_nagruzka134}]],[[${sk50_array_nagruzka135}]],[[${sk50_array_nagruzka136}]],[[${sk50_array_nagruzka137}]],[[${sk50_array_nagruzka138}]],[[${sk50_array_nagruzka139}]],[[${sk50_array_nagruzka140}]],
+        [[${sk50_array_nagruzka141}]],[[${sk50_array_nagruzka142}]],[[${sk50_array_nagruzka143}]],[[${sk50_array_nagruzka144}]],[[${sk50_array_nagruzka145}]],[[${sk50_array_nagruzka146}]],[[${sk50_array_nagruzka147}]],[[${sk50_array_nagruzka148}]],[[${sk50_array_nagruzka149}]],[[${sk50_array_nagruzka150}]],
+        [[${sk50_array_nagruzka151}]],[[${sk50_array_nagruzka152}]],[[${sk50_array_nagruzka153}]],[[${sk50_array_nagruzka154}]],[[${sk50_array_nagruzka155}]],[[${sk50_array_nagruzka156}]],[[${sk50_array_nagruzka157}]],[[${sk50_array_nagruzka158}]],[[${sk50_array_nagruzka159}]],[[${sk50_array_nagruzka160}]],
+        [[${sk50_array_nagruzka161}]],[[${sk50_array_nagruzka162}]],[[${sk50_array_nagruzka163}]],[[${sk50_array_nagruzka164}]],[[${sk50_array_nagruzka165}]],[[${sk50_array_nagruzka166}]],[[${sk50_array_nagruzka167}]],[[${sk50_array_nagruzka168}]],[[${sk50_array_nagruzka169}]],[[${sk50_array_nagruzka170}]],
+        [[${sk50_array_nagruzka171}]],[[${sk50_array_nagruzka172}]],[[${sk50_array_nagruzka173}]],[[${sk50_array_nagruzka174}]],[[${sk50_array_nagruzka175}]],[[${sk50_array_nagruzka176}]],[[${sk50_array_nagruzka177}]],[[${sk50_array_nagruzka178}]],[[${sk50_array_nagruzka179}]],[[${sk50_array_nagruzka180}]],
+        [[${sk50_array_nagruzka181}]],[[${sk50_array_nagruzka182}]],[[${sk50_array_nagruzka183}]],[[${sk50_array_nagruzka184}]],[[${sk50_array_nagruzka185}]],[[${sk50_array_nagruzka186}]],[[${sk50_array_nagruzka187}]],[[${sk50_array_nagruzka188}]],[[${sk50_array_nagruzka189}]],[[${sk50_array_nagruzka190}]],
+        [[${sk50_array_nagruzka191}]],[[${sk50_array_nagruzka192}]],[[${sk50_array_nagruzka193}]],[[${sk50_array_nagruzka194}]],[[${sk50_array_nagruzka195}]],[[${sk50_array_nagruzka196}]],[[${sk50_array_nagruzka197}]],[[${sk50_array_nagruzka198}]],[[${sk50_array_nagruzka199}]],[[${sk50_array_nagruzka200}]],
+        [[${sk50_array_nagruzka201}]],[[${sk50_array_nagruzka202}]],[[${sk50_array_nagruzka203}]],[[${sk50_array_nagruzka204}]],[[${sk50_array_nagruzka205}]],[[${sk50_array_nagruzka206}]],[[${sk50_array_nagruzka207}]],[[${sk50_array_nagruzka208}]],[[${sk50_array_nagruzka209}]],[[${sk50_array_nagruzka210}]],
+        [[${sk50_array_nagruzka211}]],[[${sk50_array_nagruzka212}]],[[${sk50_array_nagruzka213}]],[[${sk50_array_nagruzka214}]],[[${sk50_array_nagruzka215}]],[[${sk50_array_nagruzka216}]],[[${sk50_array_nagruzka217}]],[[${sk50_array_nagruzka218}]],[[${sk50_array_nagruzka219}]],[[${sk50_array_nagruzka220}]],
+        [[${sk50_array_nagruzka221}]],[[${sk50_array_nagruzka222}]],[[${sk50_array_nagruzka223}]],[[${sk50_array_nagruzka224}]],[[${sk50_array_nagruzka225}]],[[${sk50_array_nagruzka226}]],[[${sk50_array_nagruzka227}]],[[${sk50_array_nagruzka228}]],[[${sk50_array_nagruzka229}]],[[${sk50_array_nagruzka230}]],
+        [[${sk50_array_nagruzka231}]],[[${sk50_array_nagruzka232}]],[[${sk50_array_nagruzka233}]],[[${sk50_array_nagruzka234}]],[[${sk50_array_nagruzka235}]],[[${sk50_array_nagruzka236}]],[[${sk50_array_nagruzka237}]],[[${sk50_array_nagruzka238}]],[[${sk50_array_nagruzka239}]],[[${sk50_array_nagruzka240}]],
+        [[${sk50_array_nagruzka241}]],[[${sk50_array_nagruzka242}]],[[${sk50_array_nagruzka243}]],[[${sk50_array_nagruzka244}]],[[${sk50_array_nagruzka245}]],[[${sk50_array_nagruzka246}]],[[${sk50_array_nagruzka247}]],[[${sk50_array_nagruzka248}]],[[${sk50_array_nagruzka249}]],[[${sk50_array_nagruzka250}]],
+        [[${sk50_array_nagruzka251}]],[[${sk50_array_nagruzka252}]],[[${sk50_array_nagruzka253}]],[[${sk50_array_nagruzka254}]],[[${sk50_array_nagruzka255}]],[[${sk50_array_nagruzka256}]],[[${sk50_array_nagruzka257}]],[[${sk50_array_nagruzka258}]],[[${sk50_array_nagruzka259}]],[[${sk50_array_nagruzka260}]],
+        [[${sk50_array_nagruzka261}]],[[${sk50_array_nagruzka262}]],[[${sk50_array_nagruzka263}]],[[${sk50_array_nagruzka264}]],[[${sk50_array_nagruzka265}]],[[${sk50_array_nagruzka266}]],[[${sk50_array_nagruzka267}]],[[${sk50_array_nagruzka268}]],[[${sk50_array_nagruzka269}]],[[${sk50_array_nagruzka270}]],
+        [[${sk50_array_nagruzka271}]],[[${sk50_array_nagruzka272}]],[[${sk50_array_nagruzka273}]],[[${sk50_array_nagruzka274}]],[[${sk50_array_nagruzka275}]],[[${sk50_array_nagruzka276}]],[[${sk50_array_nagruzka277}]],[[${sk50_array_nagruzka278}]],[[${sk50_array_nagruzka279}]],[[${sk50_array_nagruzka280}]],
+        [[${sk50_array_nagruzka281}]],[[${sk50_array_nagruzka282}]],[[${sk50_array_nagruzka283}]],[[${sk50_array_nagruzka284}]],[[${sk50_array_nagruzka285}]],[[${sk50_array_nagruzka286}]],[[${sk50_array_nagruzka287}]],[[${sk50_array_nagruzka288}]],[[${sk50_array_nagruzka289}]],[[${sk50_array_nagruzka290}]],
+        [[${sk50_array_nagruzka291}]],[[${sk50_array_nagruzka292}]],[[${sk50_array_nagruzka293}]],[[${sk50_array_nagruzka294}]],[[${sk50_array_nagruzka295}]],[[${sk50_array_nagruzka296}]],[[${sk50_array_nagruzka297}]],[[${sk50_array_nagruzka298}]],[[${sk50_array_nagruzka299}]],[[${sk50_array_nagruzka300}]],
+
+    ];
+    var sk50_array_name = [
+        [[${sk50_array_programname0}]],[[${sk50_array_programname1}]],[[${sk50_array_programname2}]],[[${sk50_array_programname3}]],[[${sk50_array_programname4}]],[[${sk50_array_programname5}]],[[${sk50_array_programname6}]],[[${sk50_array_programname7}]],[[${sk50_array_programname8}]],[[${sk50_array_programname9}]],[[${sk50_array_programname10}]],
+        [[${sk50_array_programname11}]],[[${sk50_array_programname12}]],[[${sk50_array_programname13}]],[[${sk50_array_programname14}]],[[${sk50_array_programname15}]],[[${sk50_array_programname16}]],[[${sk50_array_programname17}]],[[${sk50_array_programname18}]],[[${sk50_array_programname19}]],[[${sk50_array_programname20}]],
+        [[${sk50_array_programname21}]],[[${sk50_array_programname22}]],[[${sk50_array_programname23}]],[[${sk50_array_programname24}]],[[${sk50_array_programname25}]],[[${sk50_array_programname26}]],[[${sk50_array_programname27}]],[[${sk50_array_programname28}]],[[${sk50_array_programname29}]],[[${sk50_array_programname30}]],
+        [[${sk50_array_programname31}]],[[${sk50_array_programname32}]],[[${sk50_array_programname33}]],[[${sk50_array_programname34}]],[[${sk50_array_programname35}]],[[${sk50_array_programname36}]],[[${sk50_array_programname37}]],[[${sk50_array_programname38}]],[[${sk50_array_programname39}]],[[${sk50_array_programname40}]],
+        [[${sk50_array_programname41}]],[[${sk50_array_programname42}]],[[${sk50_array_programname43}]],[[${sk50_array_programname44}]],[[${sk50_array_programname45}]],[[${sk50_array_programname46}]],[[${sk50_array_programname47}]],[[${sk50_array_programname48}]],[[${sk50_array_programname49}]],[[${sk50_array_programname50}]],
+        [[${sk50_array_programname51}]],[[${sk50_array_programname52}]],[[${sk50_array_programname53}]],[[${sk50_array_programname54}]],[[${sk50_array_programname55}]],[[${sk50_array_programname56}]],[[${sk50_array_programname57}]],[[${sk50_array_programname58}]],[[${sk50_array_programname59}]],[[${sk50_array_programname60}]],
+        [[${sk50_array_programname61}]],[[${sk50_array_programname62}]],[[${sk50_array_programname63}]],[[${sk50_array_programname64}]],[[${sk50_array_programname65}]],[[${sk50_array_programname66}]],[[${sk50_array_programname67}]],[[${sk50_array_programname68}]],[[${sk50_array_programname69}]],[[${sk50_array_programname70}]],
+        [[${sk50_array_programname71}]],[[${sk50_array_programname72}]],[[${sk50_array_programname73}]],[[${sk50_array_programname74}]],[[${sk50_array_programname75}]],[[${sk50_array_programname76}]],[[${sk50_array_programname77}]],[[${sk50_array_programname78}]],[[${sk50_array_programname79}]],
+        [[${sk50_array_programname81}]],[[${sk50_array_programname82}]],[[${sk50_array_programname83}]],[[${sk50_array_programname84}]],[[${sk50_array_programname85}]],[[${sk50_array_programname86}]],[[${sk50_array_programname87}]],[[${sk50_array_programname88}]],[[${sk50_array_programname89}]],[[${sk50_array_programname90}]],
+        [[${sk50_array_programname91}]],[[${sk50_array_programname92}]],[[${sk50_array_programname93}]],[[${sk50_array_programname94}]],[[${sk50_array_programname95}]],[[${sk50_array_programname96}]],[[${sk50_array_programname97}]],[[${sk50_array_programname98}]],[[${sk50_array_programname99}]],[[${sk50_array_programname100}]],
+        [[${sk50_array_programname101}]],[[${sk50_array_programname102}]],[[${sk50_array_programname103}]],[[${sk50_array_programname104}]],[[${sk50_array_programname105}]],[[${sk50_array_programname106}]],[[${sk50_array_programname107}]],[[${sk50_array_programname108}]],[[${sk50_array_programname109}]],[[${sk50_array_programname110}]],
+        [[${sk50_array_programname111}]],[[${sk50_array_programname112}]],[[${sk50_array_programname113}]],[[${sk50_array_programname114}]],[[${sk50_array_programname115}]],[[${sk50_array_programname116}]],[[${sk50_array_programname117}]],[[${sk50_array_programname118}]],[[${sk50_array_programname119}]],[[${sk50_array_programname120}]],
+        [[${sk50_array_programname121}]],[[${sk50_array_programname122}]],[[${sk50_array_programname123}]],[[${sk50_array_programname124}]],[[${sk50_array_programname125}]],[[${sk50_array_programname126}]],[[${sk50_array_programname127}]],[[${sk50_array_programname128}]],[[${sk50_array_programname129}]],[[${sk50_array_programname130}]],
+        [[${sk50_array_programname131}]],[[${sk50_array_programname132}]],[[${sk50_array_programname133}]],[[${sk50_array_programname134}]],[[${sk50_array_programname135}]],[[${sk50_array_programname136}]],[[${sk50_array_programname137}]],[[${sk50_array_programname138}]],[[${sk50_array_programname129}]],[[${sk50_array_programname120}]],
+        [[${sk50_array_programname141}]],[[${sk50_array_programname142}]],[[${sk50_array_programname143}]],[[${sk50_array_programname144}]],[[${sk50_array_programname145}]],[[${sk50_array_programname146}]],[[${sk50_array_programname147}]],[[${sk50_array_programname148}]],[[${sk50_array_programname129}]],[[${sk50_array_programname120}]],
+
+    ]
+
+
+</script>   <!--sk50 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var sk50_work = [[${sk50_work}]];
+    var sk50_pass = [[${sk50_pass}]];
+    var sk50_fail = [[${sk50_fail}]];
+    var sk50_avar = [[${sk50_avar}]];
+    var sk50_nagruzka = [[${sk50_nagruzka}]];
+</script>   <!--sk50 круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_sk50.js"></script>
+
+<script th:inline="javascript">
     $('.icon_personal_uf5220').hover(
         function () {
             $('.label_personal_uf5220').css('color', '#000000');
@@ -1262,6 +1554,41 @@
         }
     );
 
+    $('.icon_personal_sk50').hover(
+        function () {
+            $('.label_personal_sk50').css('color', '#000000');
+            $('.label_personal_sk50').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_personal_sk50').css('color', '#756e6e');
+            $('.label_personal_sk50').css('margin-top', '65px');
+        }
+    );
+    $('.icon_mesto_sk50').hover(
+        function () {
+            $('.label_mesto_sk50').css('color', '#000000');
+            $('.label_mesto_sk50').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_mesto_sk50').css('color', '#756e6e');
+            $('.label_mesto_sk50').css('margin-top', '65px');
+        }
+    );
 </script> <!--Кнопки Персонал и Место-->
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
