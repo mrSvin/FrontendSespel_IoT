@@ -127,7 +127,7 @@
             margin-left: -5px;
         }
 
-        .icon_mesto_dmg_sk50 {
+        .icon_mesto_sk50 {
 
             width: 60px;
             height: 60px;
@@ -137,28 +137,28 @@
             margin-left: 30px;
         }
 
-        .icon_mesto_dmg_sk50:hover {
+        .icon_mesto_sk50:hover {
             -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
         }
 
-        .icon_personal_dmg_sk50 {
+        .icon_personal_sk50 {
             background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
             background-size: 60px 60px;
             margin-top: 10px;
             margin-left: 30px;
         }
 
-        .icon_personal_dmg_sk50:hover {
+        .icon_personal_sk50:hover {
             -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
         }
 
-        .label_mesto_dmg_sk50 {
+        .label_mesto_sk50 {
             color: #756e6e;
             margin-top: 65px;
             margin-left: 8px;
         }
 
-        .label_personal_dmg_sk50 {
+        .label_personal_sk50 {
             color: #756e6e;
             margin-top: 65px;
             margin-left: -5px;
@@ -705,24 +705,24 @@
     </form><!--Таблица Текущие параметры комплекса УФ 5220-->
 </div> <!--NTX1000 html-->
 
-<div style="border: 1px solid #333;">   <!--dmg_sk50 html-->
+<div style="border: 1px solid #333;">   <!--sk50 html-->
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
             <div class="img" style="float: left;">
                 <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
-                    <img src="images/dmg_sk50.png" class="stanok_img"/>
+                    <img src="images/sk50.png" class="stanok_img"/>
                     <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">SK50
                     </figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_dmg_sk50" href="mesto/mesto_dmg_sk50"
+                        <a style="text-decoration: none; float: left" class="icon_mesto_sk50" href="mesto/mesto_sk50"
                            onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
-                            <div class='label_mesto_dmg_sk50'>Место</div>
+                            <div class='label_mesto_sk50'>Место</div>
                         </a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_dmg_sk50"
-                           href="personal/personal_dmg_sk50"
+                        <a style="text-decoration: none; float: left" class="icon_personal_sk50"
+                           href="personal/personal_sk50"
                            onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div class='label_personal_dmg_sk50'>Персонал</div>
+                            <div class='label_personal_sk50'>Персонал</div>
                         </a>
                     </div>
                 </div>
@@ -732,7 +732,7 @@
             <div id="container4" style="float: left; height: 400px; width: 25%"></div>
             <!--Вставляем круговую диаграмму загрузки-->
         </div>
-    </div>  <!--dmg_sk50 html-->
+    </div>  <!--sk50 html-->
     <form method="post" style="margin: 1%;">
         <center>
             <table width="98%">
@@ -757,62 +757,62 @@
                 <tr>
                     <td style="padding:5px 5px;">Номер инструмента</td>
                     <td>
-                        <li th:text="${dmg_sk50_nomer_inst}"></li>
+                        <li th:text="${sk50_nomer_inst}"></li>
                     </td>
                     <td>Имя УП</td>
                     <td>
-                        <li th:text="${dmg_sk50_name_program}"></li>
+                        <li th:text="${sk50_name_program}"></li>
                     </td>
                     <td>X</td>
                     <td>
-                        <li th:text="${dmg_sk50_pos_x}"></li>
+                        <li th:text="${sk50_pos_x}"></li>
                     </td>
                     <td>X</td>
                     <td>
-                        <li th:text="${dmg_sk50_nagr_x}"></li>
+                        <li th:text="${sk50_nagr_x}"></li>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding:5px 5px;">Корректор подачи</td>
                     <td>
-                        <li th:text="${dmg_sk50_kor_podach}"></li>
+                        <li th:text="${sk50_kor_podach}"></li>
                     </td>
                     <td>Номер кадра</td>
                     <td>
-                        <li th:text="${dmg_sk50_nomer_kadr}"></li>
+                        <li th:text="${sk50_nomer_kadr}"></li>
                     </td>
                     <td>Y</td>
                     <td>
-                        <li th:text="${dmg_sk50_pos_y}"></li>
+                        <li th:text="${sk50_pos_y}"></li>
                     </td>
                     <td>Y</td>
                     <td>
-                        <li th:text="${dmg_sk50_nagr_y}"></li>
+                        <li th:text="${sk50_nagr_y}"></li>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding:5px 5px;">Корректор скорости</td>
                     <td>
-                        <li th:text="${dmg_sk50_kor_speed}"></li>
+                        <li th:text="${sk50_kor_speed}"></li>
                     </td>
                     <td>Статус программы</td>
                     <td>
-                        <li th:text="${dmg_sk50_status_work}"></li>
+                        <li th:text="${sk50_status_work}"></li>
                     </td>
                     <td>Z</td>
                     <td>
-                        <li th:text="${dmg_sk50_pos_z}"></li>
+                        <li th:text="${sk50_pos_z}"></li>
                     </td>
                     <td>Z</td>
                     <td>
-                        <li th:text="${dmg_sk50_nagr_z}"></li>
+                        <li th:text="${sk50_nagr_z}"></li>
                     </td>
                 </tr>
 
             </table>
         </center>
     </form><!--Таблица Текущие параметры комплекса УФ 5220-->
-</div> <!--dmg_sk50 html-->
+</div> <!--sk50 html-->
 
 <script th:inline="javascript">
 
@@ -1347,148 +1347,148 @@
 
 <script th:inline="javascript">
 
-    var dmg_sk50_array_rabota = [
-        [[${dmg_sk50_array_rabota0}]],[[${dmg_sk50_array_rabota1}]],[[${dmg_sk50_array_rabota2}]],[[${dmg_sk50_array_rabota3}]],[[${dmg_sk50_array_rabota4}]],[[${dmg_sk50_array_rabota5}]],[[${dmg_sk50_array_rabota6}]],[[${dmg_sk50_array_rabota7}]],[[${dmg_sk50_array_rabota8}]],[[${dmg_sk50_array_rabota9}]],[[${dmg_sk50_array_rabota10}]],
-        [[${dmg_sk50_array_rabota11}]],[[${dmg_sk50_array_rabota12}]],[[${dmg_sk50_array_rabota13}]],[[${dmg_sk50_array_rabota14}]],[[${dmg_sk50_array_rabota15}]],[[${dmg_sk50_array_rabota16}]],[[${dmg_sk50_array_rabota17}]],[[${dmg_sk50_array_rabota18}]],[[${dmg_sk50_array_rabota19}]],[[${dmg_sk50_array_rabota20}]],
-        [[${dmg_sk50_array_rabota21}]],[[${dmg_sk50_array_rabota22}]],[[${dmg_sk50_array_rabota23}]],[[${dmg_sk50_array_rabota24}]],[[${dmg_sk50_array_rabota25}]],[[${dmg_sk50_array_rabota26}]],[[${dmg_sk50_array_rabota27}]],[[${dmg_sk50_array_rabota28}]],[[${dmg_sk50_array_rabota29}]],[[${dmg_sk50_array_rabota30}]],
-        [[${dmg_sk50_array_rabota31}]],[[${dmg_sk50_array_rabota32}]],[[${dmg_sk50_array_rabota33}]],[[${dmg_sk50_array_rabota34}]],[[${dmg_sk50_array_rabota35}]],[[${dmg_sk50_array_rabota36}]],[[${dmg_sk50_array_rabota37}]],[[${dmg_sk50_array_rabota38}]],[[${dmg_sk50_array_rabota39}]],[[${dmg_sk50_array_rabota40}]],
-        [[${dmg_sk50_array_rabota41}]],[[${dmg_sk50_array_rabota42}]],[[${dmg_sk50_array_rabota43}]],[[${dmg_sk50_array_rabota44}]],[[${dmg_sk50_array_rabota45}]],[[${dmg_sk50_array_rabota46}]],[[${dmg_sk50_array_rabota47}]],[[${dmg_sk50_array_rabota48}]],[[${dmg_sk50_array_rabota49}]],[[${dmg_sk50_array_rabota50}]],
-        [[${dmg_sk50_array_rabota51}]],[[${dmg_sk50_array_rabota52}]],[[${dmg_sk50_array_rabota53}]],[[${dmg_sk50_array_rabota54}]],[[${dmg_sk50_array_rabota55}]],[[${dmg_sk50_array_rabota56}]],[[${dmg_sk50_array_rabota57}]],[[${dmg_sk50_array_rabota58}]],[[${dmg_sk50_array_rabota59}]],[[${dmg_sk50_array_rabota60}]],
-        [[${dmg_sk50_array_rabota61}]],[[${dmg_sk50_array_rabota62}]],[[${dmg_sk50_array_rabota63}]],[[${dmg_sk50_array_rabota64}]],[[${dmg_sk50_array_rabota65}]],[[${dmg_sk50_array_rabota66}]],[[${dmg_sk50_array_rabota67}]],[[${dmg_sk50_array_rabota68}]],[[${dmg_sk50_array_rabota69}]],[[${dmg_sk50_array_rabota70}]],
-        [[${dmg_sk50_array_rabota71}]],[[${dmg_sk50_array_rabota72}]],[[${dmg_sk50_array_rabota73}]],[[${dmg_sk50_array_rabota74}]],[[${dmg_sk50_array_rabota75}]],[[${dmg_sk50_array_rabota76}]],[[${dmg_sk50_array_rabota77}]],[[${dmg_sk50_array_rabota78}]],[[${dmg_sk50_array_rabota79}]],[[${dmg_sk50_array_rabota80}]],
-        [[${dmg_sk50_array_rabota81}]],[[${dmg_sk50_array_rabota82}]],[[${dmg_sk50_array_rabota83}]],[[${dmg_sk50_array_rabota84}]],[[${dmg_sk50_array_rabota85}]],[[${dmg_sk50_array_rabota86}]],[[${dmg_sk50_array_rabota87}]],[[${dmg_sk50_array_rabota88}]],[[${dmg_sk50_array_rabota89}]],[[${dmg_sk50_array_rabota90}]],
-        [[${dmg_sk50_array_rabota91}]],[[${dmg_sk50_array_rabota92}]],[[${dmg_sk50_array_rabota93}]],[[${dmg_sk50_array_rabota94}]],[[${dmg_sk50_array_rabota95}]],[[${dmg_sk50_array_rabota96}]],[[${dmg_sk50_array_rabota97}]],[[${dmg_sk50_array_rabota98}]],[[${dmg_sk50_array_rabota99}]],[[${dmg_sk50_array_rabota100}]],
-        [[${dmg_sk50_array_rabota101}]],[[${dmg_sk50_array_rabota102}]],[[${dmg_sk50_array_rabota103}]],[[${dmg_sk50_array_rabota104}]],[[${dmg_sk50_array_rabota105}]],[[${dmg_sk50_array_rabota106}]],[[${dmg_sk50_array_rabota107}]],[[${dmg_sk50_array_rabota108}]],[[${dmg_sk50_array_rabota109}]],[[${dmg_sk50_array_rabota110}]],
-        [[${dmg_sk50_array_rabota111}]],[[${dmg_sk50_array_rabota112}]],[[${dmg_sk50_array_rabota113}]],[[${dmg_sk50_array_rabota114}]],[[${dmg_sk50_array_rabota115}]],[[${dmg_sk50_array_rabota116}]],[[${dmg_sk50_array_rabota117}]],[[${dmg_sk50_array_rabota118}]],[[${dmg_sk50_array_rabota119}]],[[${dmg_sk50_array_rabota120}]],
-        [[${dmg_sk50_array_rabota121}]],[[${dmg_sk50_array_rabota122}]],[[${dmg_sk50_array_rabota123}]],[[${dmg_sk50_array_rabota124}]],[[${dmg_sk50_array_rabota125}]],[[${dmg_sk50_array_rabota126}]],[[${dmg_sk50_array_rabota127}]],[[${dmg_sk50_array_rabota128}]],[[${dmg_sk50_array_rabota129}]],[[${dmg_sk50_array_rabota130}]],
-        [[${dmg_sk50_array_rabota131}]],[[${dmg_sk50_array_rabota132}]],[[${dmg_sk50_array_rabota133}]],[[${dmg_sk50_array_rabota134}]],[[${dmg_sk50_array_rabota135}]],[[${dmg_sk50_array_rabota136}]],[[${dmg_sk50_array_rabota137}]],[[${dmg_sk50_array_rabota138}]],[[${dmg_sk50_array_rabota139}]],[[${dmg_sk50_array_rabota140}]],
-        [[${dmg_sk50_array_rabota141}]],[[${dmg_sk50_array_rabota142}]],[[${dmg_sk50_array_rabota143}]],[[${dmg_sk50_array_rabota144}]],[[${dmg_sk50_array_rabota145}]],[[${dmg_sk50_array_rabota146}]],[[${dmg_sk50_array_rabota147}]],[[${dmg_sk50_array_rabota148}]],[[${dmg_sk50_array_rabota149}]],[[${dmg_sk50_array_rabota150}]],
-        [[${dmg_sk50_array_rabota151}]],[[${dmg_sk50_array_rabota152}]],[[${dmg_sk50_array_rabota153}]],[[${dmg_sk50_array_rabota154}]],[[${dmg_sk50_array_rabota155}]],[[${dmg_sk50_array_rabota156}]],[[${dmg_sk50_array_rabota157}]],[[${dmg_sk50_array_rabota158}]],[[${dmg_sk50_array_rabota159}]],[[${dmg_sk50_array_rabota160}]],
-        [[${dmg_sk50_array_rabota161}]],[[${dmg_sk50_array_rabota162}]],[[${dmg_sk50_array_rabota163}]],[[${dmg_sk50_array_rabota164}]],[[${dmg_sk50_array_rabota165}]],[[${dmg_sk50_array_rabota166}]],[[${dmg_sk50_array_rabota167}]],[[${dmg_sk50_array_rabota168}]],[[${dmg_sk50_array_rabota169}]],[[${dmg_sk50_array_rabota170}]],
-        [[${dmg_sk50_array_rabota171}]],[[${dmg_sk50_array_rabota172}]],[[${dmg_sk50_array_rabota173}]],[[${dmg_sk50_array_rabota174}]],[[${dmg_sk50_array_rabota175}]],[[${dmg_sk50_array_rabota176}]],[[${dmg_sk50_array_rabota177}]],[[${dmg_sk50_array_rabota178}]],[[${dmg_sk50_array_rabota179}]],[[${dmg_sk50_array_rabota180}]],
-        [[${dmg_sk50_array_rabota181}]],[[${dmg_sk50_array_rabota182}]],[[${dmg_sk50_array_rabota183}]],[[${dmg_sk50_array_rabota184}]],[[${dmg_sk50_array_rabota185}]],[[${dmg_sk50_array_rabota186}]],[[${dmg_sk50_array_rabota187}]],[[${dmg_sk50_array_rabota188}]],[[${dmg_sk50_array_rabota189}]],[[${dmg_sk50_array_rabota190}]],
-        [[${dmg_sk50_array_rabota191}]],[[${dmg_sk50_array_rabota192}]],[[${dmg_sk50_array_rabota193}]],[[${dmg_sk50_array_rabota194}]],[[${dmg_sk50_array_rabota195}]],[[${dmg_sk50_array_rabota196}]],[[${dmg_sk50_array_rabota197}]],[[${dmg_sk50_array_rabota198}]],[[${dmg_sk50_array_rabota199}]],[[${dmg_sk50_array_rabota200}]],
-        [[${dmg_sk50_array_rabota201}]],[[${dmg_sk50_array_rabota202}]],[[${dmg_sk50_array_rabota203}]],[[${dmg_sk50_array_rabota204}]],[[${dmg_sk50_array_rabota205}]],[[${dmg_sk50_array_rabota206}]],[[${dmg_sk50_array_rabota207}]],[[${dmg_sk50_array_rabota208}]],[[${dmg_sk50_array_rabota209}]],[[${dmg_sk50_array_rabota210}]],
-        [[${dmg_sk50_array_rabota211}]],[[${dmg_sk50_array_rabota212}]],[[${dmg_sk50_array_rabota213}]],[[${dmg_sk50_array_rabota214}]],[[${dmg_sk50_array_rabota215}]],[[${dmg_sk50_array_rabota216}]],[[${dmg_sk50_array_rabota217}]],[[${dmg_sk50_array_rabota218}]],[[${dmg_sk50_array_rabota219}]],[[${dmg_sk50_array_rabota220}]],
-        [[${dmg_sk50_array_rabota221}]],[[${dmg_sk50_array_rabota222}]],[[${dmg_sk50_array_rabota223}]],[[${dmg_sk50_array_rabota224}]],[[${dmg_sk50_array_rabota225}]],[[${dmg_sk50_array_rabota226}]],[[${dmg_sk50_array_rabota227}]],[[${dmg_sk50_array_rabota228}]],[[${dmg_sk50_array_rabota229}]],[[${dmg_sk50_array_rabota230}]],
-        [[${dmg_sk50_array_rabota231}]],[[${dmg_sk50_array_rabota232}]],[[${dmg_sk50_array_rabota233}]],[[${dmg_sk50_array_rabota234}]],[[${dmg_sk50_array_rabota235}]],[[${dmg_sk50_array_rabota236}]],[[${dmg_sk50_array_rabota237}]],[[${dmg_sk50_array_rabota238}]],[[${dmg_sk50_array_rabota239}]],[[${dmg_sk50_array_rabota240}]],
-        [[${dmg_sk50_array_rabota241}]],[[${dmg_sk50_array_rabota242}]],[[${dmg_sk50_array_rabota243}]],[[${dmg_sk50_array_rabota244}]],[[${dmg_sk50_array_rabota245}]],[[${dmg_sk50_array_rabota246}]],[[${dmg_sk50_array_rabota247}]],[[${dmg_sk50_array_rabota248}]],[[${dmg_sk50_array_rabota249}]],[[${dmg_sk50_array_rabota250}]],
-        [[${dmg_sk50_array_rabota251}]],[[${dmg_sk50_array_rabota252}]],[[${dmg_sk50_array_rabota253}]],[[${dmg_sk50_array_rabota254}]],[[${dmg_sk50_array_rabota255}]],[[${dmg_sk50_array_rabota256}]],[[${dmg_sk50_array_rabota257}]],[[${dmg_sk50_array_rabota258}]],[[${dmg_sk50_array_rabota259}]],[[${dmg_sk50_array_rabota260}]],
-        [[${dmg_sk50_array_rabota261}]],[[${dmg_sk50_array_rabota262}]],[[${dmg_sk50_array_rabota263}]],[[${dmg_sk50_array_rabota264}]],[[${dmg_sk50_array_rabota265}]],[[${dmg_sk50_array_rabota266}]],[[${dmg_sk50_array_rabota267}]],[[${dmg_sk50_array_rabota268}]],[[${dmg_sk50_array_rabota269}]],[[${dmg_sk50_array_rabota270}]],
-        [[${dmg_sk50_array_rabota271}]],[[${dmg_sk50_array_rabota272}]],[[${dmg_sk50_array_rabota273}]],[[${dmg_sk50_array_rabota274}]],[[${dmg_sk50_array_rabota275}]],[[${dmg_sk50_array_rabota276}]],[[${dmg_sk50_array_rabota277}]],[[${dmg_sk50_array_rabota278}]],[[${dmg_sk50_array_rabota279}]],[[${dmg_sk50_array_rabota280}]],
-        [[${dmg_sk50_array_rabota281}]],[[${dmg_sk50_array_rabota282}]],[[${dmg_sk50_array_rabota283}]],[[${dmg_sk50_array_rabota284}]],[[${dmg_sk50_array_rabota285}]],[[${dmg_sk50_array_rabota286}]],[[${dmg_sk50_array_rabota287}]],[[${dmg_sk50_array_rabota288}]],[[${dmg_sk50_array_rabota289}]],[[${dmg_sk50_array_rabota290}]],
-        [[${dmg_sk50_array_rabota291}]],[[${dmg_sk50_array_rabota292}]],[[${dmg_sk50_array_rabota293}]],[[${dmg_sk50_array_rabota294}]],[[${dmg_sk50_array_rabota295}]],[[${dmg_sk50_array_rabota296}]],[[${dmg_sk50_array_rabota297}]],[[${dmg_sk50_array_rabota298}]],[[${dmg_sk50_array_rabota299}]],[[${dmg_sk50_array_rabota300}]],
+    var sk50_array_rabota = [
+        [[${sk50_array_rabota0}]],[[${sk50_array_rabota1}]],[[${sk50_array_rabota2}]],[[${sk50_array_rabota3}]],[[${sk50_array_rabota4}]],[[${sk50_array_rabota5}]],[[${sk50_array_rabota6}]],[[${sk50_array_rabota7}]],[[${sk50_array_rabota8}]],[[${sk50_array_rabota9}]],[[${sk50_array_rabota10}]],
+        [[${sk50_array_rabota11}]],[[${sk50_array_rabota12}]],[[${sk50_array_rabota13}]],[[${sk50_array_rabota14}]],[[${sk50_array_rabota15}]],[[${sk50_array_rabota16}]],[[${sk50_array_rabota17}]],[[${sk50_array_rabota18}]],[[${sk50_array_rabota19}]],[[${sk50_array_rabota20}]],
+        [[${sk50_array_rabota21}]],[[${sk50_array_rabota22}]],[[${sk50_array_rabota23}]],[[${sk50_array_rabota24}]],[[${sk50_array_rabota25}]],[[${sk50_array_rabota26}]],[[${sk50_array_rabota27}]],[[${sk50_array_rabota28}]],[[${sk50_array_rabota29}]],[[${sk50_array_rabota30}]],
+        [[${sk50_array_rabota31}]],[[${sk50_array_rabota32}]],[[${sk50_array_rabota33}]],[[${sk50_array_rabota34}]],[[${sk50_array_rabota35}]],[[${sk50_array_rabota36}]],[[${sk50_array_rabota37}]],[[${sk50_array_rabota38}]],[[${sk50_array_rabota39}]],[[${sk50_array_rabota40}]],
+        [[${sk50_array_rabota41}]],[[${sk50_array_rabota42}]],[[${sk50_array_rabota43}]],[[${sk50_array_rabota44}]],[[${sk50_array_rabota45}]],[[${sk50_array_rabota46}]],[[${sk50_array_rabota47}]],[[${sk50_array_rabota48}]],[[${sk50_array_rabota49}]],[[${sk50_array_rabota50}]],
+        [[${sk50_array_rabota51}]],[[${sk50_array_rabota52}]],[[${sk50_array_rabota53}]],[[${sk50_array_rabota54}]],[[${sk50_array_rabota55}]],[[${sk50_array_rabota56}]],[[${sk50_array_rabota57}]],[[${sk50_array_rabota58}]],[[${sk50_array_rabota59}]],[[${sk50_array_rabota60}]],
+        [[${sk50_array_rabota61}]],[[${sk50_array_rabota62}]],[[${sk50_array_rabota63}]],[[${sk50_array_rabota64}]],[[${sk50_array_rabota65}]],[[${sk50_array_rabota66}]],[[${sk50_array_rabota67}]],[[${sk50_array_rabota68}]],[[${sk50_array_rabota69}]],[[${sk50_array_rabota70}]],
+        [[${sk50_array_rabota71}]],[[${sk50_array_rabota72}]],[[${sk50_array_rabota73}]],[[${sk50_array_rabota74}]],[[${sk50_array_rabota75}]],[[${sk50_array_rabota76}]],[[${sk50_array_rabota77}]],[[${sk50_array_rabota78}]],[[${sk50_array_rabota79}]],[[${sk50_array_rabota80}]],
+        [[${sk50_array_rabota81}]],[[${sk50_array_rabota82}]],[[${sk50_array_rabota83}]],[[${sk50_array_rabota84}]],[[${sk50_array_rabota85}]],[[${sk50_array_rabota86}]],[[${sk50_array_rabota87}]],[[${sk50_array_rabota88}]],[[${sk50_array_rabota89}]],[[${sk50_array_rabota90}]],
+        [[${sk50_array_rabota91}]],[[${sk50_array_rabota92}]],[[${sk50_array_rabota93}]],[[${sk50_array_rabota94}]],[[${sk50_array_rabota95}]],[[${sk50_array_rabota96}]],[[${sk50_array_rabota97}]],[[${sk50_array_rabota98}]],[[${sk50_array_rabota99}]],[[${sk50_array_rabota100}]],
+        [[${sk50_array_rabota101}]],[[${sk50_array_rabota102}]],[[${sk50_array_rabota103}]],[[${sk50_array_rabota104}]],[[${sk50_array_rabota105}]],[[${sk50_array_rabota106}]],[[${sk50_array_rabota107}]],[[${sk50_array_rabota108}]],[[${sk50_array_rabota109}]],[[${sk50_array_rabota110}]],
+        [[${sk50_array_rabota111}]],[[${sk50_array_rabota112}]],[[${sk50_array_rabota113}]],[[${sk50_array_rabota114}]],[[${sk50_array_rabota115}]],[[${sk50_array_rabota116}]],[[${sk50_array_rabota117}]],[[${sk50_array_rabota118}]],[[${sk50_array_rabota119}]],[[${sk50_array_rabota120}]],
+        [[${sk50_array_rabota121}]],[[${sk50_array_rabota122}]],[[${sk50_array_rabota123}]],[[${sk50_array_rabota124}]],[[${sk50_array_rabota125}]],[[${sk50_array_rabota126}]],[[${sk50_array_rabota127}]],[[${sk50_array_rabota128}]],[[${sk50_array_rabota129}]],[[${sk50_array_rabota130}]],
+        [[${sk50_array_rabota131}]],[[${sk50_array_rabota132}]],[[${sk50_array_rabota133}]],[[${sk50_array_rabota134}]],[[${sk50_array_rabota135}]],[[${sk50_array_rabota136}]],[[${sk50_array_rabota137}]],[[${sk50_array_rabota138}]],[[${sk50_array_rabota139}]],[[${sk50_array_rabota140}]],
+        [[${sk50_array_rabota141}]],[[${sk50_array_rabota142}]],[[${sk50_array_rabota143}]],[[${sk50_array_rabota144}]],[[${sk50_array_rabota145}]],[[${sk50_array_rabota146}]],[[${sk50_array_rabota147}]],[[${sk50_array_rabota148}]],[[${sk50_array_rabota149}]],[[${sk50_array_rabota150}]],
+        [[${sk50_array_rabota151}]],[[${sk50_array_rabota152}]],[[${sk50_array_rabota153}]],[[${sk50_array_rabota154}]],[[${sk50_array_rabota155}]],[[${sk50_array_rabota156}]],[[${sk50_array_rabota157}]],[[${sk50_array_rabota158}]],[[${sk50_array_rabota159}]],[[${sk50_array_rabota160}]],
+        [[${sk50_array_rabota161}]],[[${sk50_array_rabota162}]],[[${sk50_array_rabota163}]],[[${sk50_array_rabota164}]],[[${sk50_array_rabota165}]],[[${sk50_array_rabota166}]],[[${sk50_array_rabota167}]],[[${sk50_array_rabota168}]],[[${sk50_array_rabota169}]],[[${sk50_array_rabota170}]],
+        [[${sk50_array_rabota171}]],[[${sk50_array_rabota172}]],[[${sk50_array_rabota173}]],[[${sk50_array_rabota174}]],[[${sk50_array_rabota175}]],[[${sk50_array_rabota176}]],[[${sk50_array_rabota177}]],[[${sk50_array_rabota178}]],[[${sk50_array_rabota179}]],[[${sk50_array_rabota180}]],
+        [[${sk50_array_rabota181}]],[[${sk50_array_rabota182}]],[[${sk50_array_rabota183}]],[[${sk50_array_rabota184}]],[[${sk50_array_rabota185}]],[[${sk50_array_rabota186}]],[[${sk50_array_rabota187}]],[[${sk50_array_rabota188}]],[[${sk50_array_rabota189}]],[[${sk50_array_rabota190}]],
+        [[${sk50_array_rabota191}]],[[${sk50_array_rabota192}]],[[${sk50_array_rabota193}]],[[${sk50_array_rabota194}]],[[${sk50_array_rabota195}]],[[${sk50_array_rabota196}]],[[${sk50_array_rabota197}]],[[${sk50_array_rabota198}]],[[${sk50_array_rabota199}]],[[${sk50_array_rabota200}]],
+        [[${sk50_array_rabota201}]],[[${sk50_array_rabota202}]],[[${sk50_array_rabota203}]],[[${sk50_array_rabota204}]],[[${sk50_array_rabota205}]],[[${sk50_array_rabota206}]],[[${sk50_array_rabota207}]],[[${sk50_array_rabota208}]],[[${sk50_array_rabota209}]],[[${sk50_array_rabota210}]],
+        [[${sk50_array_rabota211}]],[[${sk50_array_rabota212}]],[[${sk50_array_rabota213}]],[[${sk50_array_rabota214}]],[[${sk50_array_rabota215}]],[[${sk50_array_rabota216}]],[[${sk50_array_rabota217}]],[[${sk50_array_rabota218}]],[[${sk50_array_rabota219}]],[[${sk50_array_rabota220}]],
+        [[${sk50_array_rabota221}]],[[${sk50_array_rabota222}]],[[${sk50_array_rabota223}]],[[${sk50_array_rabota224}]],[[${sk50_array_rabota225}]],[[${sk50_array_rabota226}]],[[${sk50_array_rabota227}]],[[${sk50_array_rabota228}]],[[${sk50_array_rabota229}]],[[${sk50_array_rabota230}]],
+        [[${sk50_array_rabota231}]],[[${sk50_array_rabota232}]],[[${sk50_array_rabota233}]],[[${sk50_array_rabota234}]],[[${sk50_array_rabota235}]],[[${sk50_array_rabota236}]],[[${sk50_array_rabota237}]],[[${sk50_array_rabota238}]],[[${sk50_array_rabota239}]],[[${sk50_array_rabota240}]],
+        [[${sk50_array_rabota241}]],[[${sk50_array_rabota242}]],[[${sk50_array_rabota243}]],[[${sk50_array_rabota244}]],[[${sk50_array_rabota245}]],[[${sk50_array_rabota246}]],[[${sk50_array_rabota247}]],[[${sk50_array_rabota248}]],[[${sk50_array_rabota249}]],[[${sk50_array_rabota250}]],
+        [[${sk50_array_rabota251}]],[[${sk50_array_rabota252}]],[[${sk50_array_rabota253}]],[[${sk50_array_rabota254}]],[[${sk50_array_rabota255}]],[[${sk50_array_rabota256}]],[[${sk50_array_rabota257}]],[[${sk50_array_rabota258}]],[[${sk50_array_rabota259}]],[[${sk50_array_rabota260}]],
+        [[${sk50_array_rabota261}]],[[${sk50_array_rabota262}]],[[${sk50_array_rabota263}]],[[${sk50_array_rabota264}]],[[${sk50_array_rabota265}]],[[${sk50_array_rabota266}]],[[${sk50_array_rabota267}]],[[${sk50_array_rabota268}]],[[${sk50_array_rabota269}]],[[${sk50_array_rabota270}]],
+        [[${sk50_array_rabota271}]],[[${sk50_array_rabota272}]],[[${sk50_array_rabota273}]],[[${sk50_array_rabota274}]],[[${sk50_array_rabota275}]],[[${sk50_array_rabota276}]],[[${sk50_array_rabota277}]],[[${sk50_array_rabota278}]],[[${sk50_array_rabota279}]],[[${sk50_array_rabota280}]],
+        [[${sk50_array_rabota281}]],[[${sk50_array_rabota282}]],[[${sk50_array_rabota283}]],[[${sk50_array_rabota284}]],[[${sk50_array_rabota285}]],[[${sk50_array_rabota286}]],[[${sk50_array_rabota287}]],[[${sk50_array_rabota288}]],[[${sk50_array_rabota289}]],[[${sk50_array_rabota290}]],
+        [[${sk50_array_rabota291}]],[[${sk50_array_rabota292}]],[[${sk50_array_rabota293}]],[[${sk50_array_rabota294}]],[[${sk50_array_rabota295}]],[[${sk50_array_rabota296}]],[[${sk50_array_rabota297}]],[[${sk50_array_rabota298}]],[[${sk50_array_rabota299}]],[[${sk50_array_rabota300}]],
 
     ];
-    var dmg_sk50_array_pause = [
-        [[${dmg_sk50_array_pause0}]],[[${dmg_sk50_array_pause1}]],[[${dmg_sk50_array_pause2}]],[[${dmg_sk50_array_pause3}]],[[${dmg_sk50_array_pause4}]],[[${dmg_sk50_array_pause5}]],[[${dmg_sk50_array_pause6}]],[[${dmg_sk50_array_pause7}]],[[${dmg_sk50_array_pause8}]],[[${dmg_sk50_array_pause9}]],[[${dmg_sk50_array_pause10}]],
-        [[${dmg_sk50_array_pause11}]],[[${dmg_sk50_array_pause12}]],[[${dmg_sk50_array_pause13}]],[[${dmg_sk50_array_pause14}]],[[${dmg_sk50_array_pause15}]],[[${dmg_sk50_array_pause16}]],[[${dmg_sk50_array_pause17}]],[[${dmg_sk50_array_pause18}]],[[${dmg_sk50_array_pause19}]],[[${dmg_sk50_array_pause20}]],
-        [[${dmg_sk50_array_pause21}]],[[${dmg_sk50_array_pause22}]],[[${dmg_sk50_array_pause23}]],[[${dmg_sk50_array_pause24}]],[[${dmg_sk50_array_pause25}]],[[${dmg_sk50_array_pause26}]],[[${dmg_sk50_array_pause27}]],[[${dmg_sk50_array_pause28}]],[[${dmg_sk50_array_pause29}]],[[${dmg_sk50_array_pause30}]],
-        [[${dmg_sk50_array_pause31}]],[[${dmg_sk50_array_pause32}]],[[${dmg_sk50_array_pause33}]],[[${dmg_sk50_array_pause34}]],[[${dmg_sk50_array_pause35}]],[[${dmg_sk50_array_pause36}]],[[${dmg_sk50_array_pause37}]],[[${dmg_sk50_array_pause38}]],[[${dmg_sk50_array_pause39}]],[[${dmg_sk50_array_pause40}]],
-        [[${dmg_sk50_array_pause41}]],[[${dmg_sk50_array_pause42}]],[[${dmg_sk50_array_pause43}]],[[${dmg_sk50_array_pause44}]],[[${dmg_sk50_array_pause45}]],[[${dmg_sk50_array_pause46}]],[[${dmg_sk50_array_pause47}]],[[${dmg_sk50_array_pause48}]],[[${dmg_sk50_array_pause49}]],[[${dmg_sk50_array_pause50}]],
-        [[${dmg_sk50_array_pause51}]],[[${dmg_sk50_array_pause52}]],[[${dmg_sk50_array_pause53}]],[[${dmg_sk50_array_pause54}]],[[${dmg_sk50_array_pause55}]],[[${dmg_sk50_array_pause56}]],[[${dmg_sk50_array_pause57}]],[[${dmg_sk50_array_pause58}]],[[${dmg_sk50_array_pause59}]],[[${dmg_sk50_array_pause60}]],
-        [[${dmg_sk50_array_pause61}]],[[${dmg_sk50_array_pause62}]],[[${dmg_sk50_array_pause63}]],[[${dmg_sk50_array_pause64}]],[[${dmg_sk50_array_pause65}]],[[${dmg_sk50_array_pause66}]],[[${dmg_sk50_array_pause67}]],[[${dmg_sk50_array_pause68}]],[[${dmg_sk50_array_pause69}]],[[${dmg_sk50_array_pause70}]],
-        [[${dmg_sk50_array_pause71}]],[[${dmg_sk50_array_pause72}]],[[${dmg_sk50_array_pause73}]],[[${dmg_sk50_array_pause74}]],[[${dmg_sk50_array_pause75}]],[[${dmg_sk50_array_pause76}]],[[${dmg_sk50_array_pause77}]],[[${dmg_sk50_array_pause78}]],[[${dmg_sk50_array_pause79}]],[[${dmg_sk50_array_pause80}]],
-        [[${dmg_sk50_array_pause81}]],[[${dmg_sk50_array_pause82}]],[[${dmg_sk50_array_pause83}]],[[${dmg_sk50_array_pause84}]],[[${dmg_sk50_array_pause85}]],[[${dmg_sk50_array_pause86}]],[[${dmg_sk50_array_pause87}]],[[${dmg_sk50_array_pause88}]],[[${dmg_sk50_array_pause89}]],[[${dmg_sk50_array_pause90}]],
-        [[${dmg_sk50_array_pause91}]],[[${dmg_sk50_array_pause92}]],[[${dmg_sk50_array_pause93}]],[[${dmg_sk50_array_pause94}]],[[${dmg_sk50_array_pause95}]],[[${dmg_sk50_array_pause96}]],[[${dmg_sk50_array_pause97}]],[[${dmg_sk50_array_pause98}]],[[${dmg_sk50_array_pause99}]],[[${dmg_sk50_array_pause100}]],
-        [[${dmg_sk50_array_pause101}]],[[${dmg_sk50_array_pause102}]],[[${dmg_sk50_array_pause103}]],[[${dmg_sk50_array_pause104}]],[[${dmg_sk50_array_pause105}]],[[${dmg_sk50_array_pause106}]],[[${dmg_sk50_array_pause107}]],[[${dmg_sk50_array_pause108}]],[[${dmg_sk50_array_pause109}]],[[${dmg_sk50_array_pause110}]],
-        [[${dmg_sk50_array_pause111}]],[[${dmg_sk50_array_pause112}]],[[${dmg_sk50_array_pause113}]],[[${dmg_sk50_array_pause114}]],[[${dmg_sk50_array_pause115}]],[[${dmg_sk50_array_pause116}]],[[${dmg_sk50_array_pause117}]],[[${dmg_sk50_array_pause118}]],[[${dmg_sk50_array_pause119}]],[[${dmg_sk50_array_pause120}]],
-        [[${dmg_sk50_array_pause121}]],[[${dmg_sk50_array_pause122}]],[[${dmg_sk50_array_pause123}]],[[${dmg_sk50_array_pause124}]],[[${dmg_sk50_array_pause125}]],[[${dmg_sk50_array_pause126}]],[[${dmg_sk50_array_pause127}]],[[${dmg_sk50_array_pause128}]],[[${dmg_sk50_array_pause129}]],[[${dmg_sk50_array_pause130}]],
-        [[${dmg_sk50_array_pause131}]],[[${dmg_sk50_array_pause132}]],[[${dmg_sk50_array_pause133}]],[[${dmg_sk50_array_pause134}]],[[${dmg_sk50_array_pause135}]],[[${dmg_sk50_array_pause136}]],[[${dmg_sk50_array_pause137}]],[[${dmg_sk50_array_pause138}]],[[${dmg_sk50_array_pause129}]],[[${dmg_sk50_array_pause120}]],
-        [[${dmg_sk50_array_pause141}]],[[${dmg_sk50_array_pause142}]],[[${dmg_sk50_array_pause143}]],[[${dmg_sk50_array_pause144}]],[[${dmg_sk50_array_pause145}]],[[${dmg_sk50_array_pause146}]],[[${dmg_sk50_array_pause147}]],[[${dmg_sk50_array_pause148}]],[[${dmg_sk50_array_pause129}]],[[${dmg_sk50_array_pause120}]],
-        [[${dmg_sk50_array_pause151}]],[[${dmg_sk50_array_pause152}]],[[${dmg_sk50_array_pause153}]],[[${dmg_sk50_array_pause154}]],[[${dmg_sk50_array_pause155}]],[[${dmg_sk50_array_pause156}]],[[${dmg_sk50_array_pause157}]],[[${dmg_sk50_array_pause158}]],[[${dmg_sk50_array_pause129}]],[[${dmg_sk50_array_pause120}]],
-        [[${dmg_sk50_array_pause161}]],[[${dmg_sk50_array_pause162}]],[[${dmg_sk50_array_pause163}]],[[${dmg_sk50_array_pause164}]],[[${dmg_sk50_array_pause165}]],[[${dmg_sk50_array_pause166}]],[[${dmg_sk50_array_pause167}]],[[${dmg_sk50_array_pause168}]],[[${dmg_sk50_array_pause169}]],[[${dmg_sk50_array_pause170}]],
-        [[${dmg_sk50_array_pause171}]],[[${dmg_sk50_array_pause172}]],[[${dmg_sk50_array_pause173}]],[[${dmg_sk50_array_pause174}]],[[${dmg_sk50_array_pause175}]],[[${dmg_sk50_array_pause176}]],[[${dmg_sk50_array_pause177}]],[[${dmg_sk50_array_pause178}]],[[${dmg_sk50_array_pause179}]],[[${dmg_sk50_array_pause180}]],
-        [[${dmg_sk50_array_pause181}]],[[${dmg_sk50_array_pause182}]],[[${dmg_sk50_array_pause183}]],[[${dmg_sk50_array_pause184}]],[[${dmg_sk50_array_pause185}]],[[${dmg_sk50_array_pause186}]],[[${dmg_sk50_array_pause187}]],[[${dmg_sk50_array_pause188}]],[[${dmg_sk50_array_pause189}]],[[${dmg_sk50_array_pause190}]],
-        [[${dmg_sk50_array_pause191}]],[[${dmg_sk50_array_pause192}]],[[${dmg_sk50_array_pause193}]],[[${dmg_sk50_array_pause194}]],[[${dmg_sk50_array_pause195}]],[[${dmg_sk50_array_pause196}]],[[${dmg_sk50_array_pause197}]],[[${dmg_sk50_array_pause198}]],[[${dmg_sk50_array_pause199}]],[[${dmg_sk50_array_pause200}]],
-        [[${dmg_sk50_array_pause201}]],[[${dmg_sk50_array_pause202}]],[[${dmg_sk50_array_pause203}]],[[${dmg_sk50_array_pause204}]],[[${dmg_sk50_array_pause205}]],[[${dmg_sk50_array_pause206}]],[[${dmg_sk50_array_pause207}]],[[${dmg_sk50_array_pause208}]],[[${dmg_sk50_array_pause209}]],[[${dmg_sk50_array_pause210}]],
-        [[${dmg_sk50_array_pause211}]],[[${dmg_sk50_array_pause212}]],[[${dmg_sk50_array_pause213}]],[[${dmg_sk50_array_pause214}]],[[${dmg_sk50_array_pause215}]],[[${dmg_sk50_array_pause216}]],[[${dmg_sk50_array_pause217}]],[[${dmg_sk50_array_pause218}]],[[${dmg_sk50_array_pause219}]],[[${dmg_sk50_array_pause220}]],
-        [[${dmg_sk50_array_pause221}]],[[${dmg_sk50_array_pause222}]],[[${dmg_sk50_array_pause223}]],[[${dmg_sk50_array_pause224}]],[[${dmg_sk50_array_pause225}]],[[${dmg_sk50_array_pause226}]],[[${dmg_sk50_array_pause227}]],[[${dmg_sk50_array_pause228}]],[[${dmg_sk50_array_pause229}]],[[${dmg_sk50_array_pause230}]],
-        [[${dmg_sk50_array_pause231}]],[[${dmg_sk50_array_pause232}]],[[${dmg_sk50_array_pause233}]],[[${dmg_sk50_array_pause234}]],[[${dmg_sk50_array_pause235}]],[[${dmg_sk50_array_pause236}]],[[${dmg_sk50_array_pause237}]],[[${dmg_sk50_array_pause238}]],[[${dmg_sk50_array_pause239}]],[[${dmg_sk50_array_pause240}]],
-        [[${dmg_sk50_array_pause241}]],[[${dmg_sk50_array_pause242}]],[[${dmg_sk50_array_pause243}]],[[${dmg_sk50_array_pause244}]],[[${dmg_sk50_array_pause245}]],[[${dmg_sk50_array_pause246}]],[[${dmg_sk50_array_pause247}]],[[${dmg_sk50_array_pause248}]],[[${dmg_sk50_array_pause249}]],[[${dmg_sk50_array_pause250}]],
-        [[${dmg_sk50_array_pause261}]],[[${dmg_sk50_array_pause262}]],[[${dmg_sk50_array_pause263}]],[[${dmg_sk50_array_pause264}]],[[${dmg_sk50_array_pause265}]],[[${dmg_sk50_array_pause266}]],[[${dmg_sk50_array_pause267}]],[[${dmg_sk50_array_pause268}]],[[${dmg_sk50_array_pause269}]],[[${dmg_sk50_array_pause270}]],
-        [[${dmg_sk50_array_pause281}]],[[${dmg_sk50_array_pause282}]],[[${dmg_sk50_array_pause283}]],[[${dmg_sk50_array_pause284}]],[[${dmg_sk50_array_pause285}]],[[${dmg_sk50_array_pause286}]],[[${dmg_sk50_array_pause287}]],[[${dmg_sk50_array_pause288}]],[[${dmg_sk50_array_pause289}]],[[${dmg_sk50_array_pause290}]],
-        [[${dmg_sk50_array_pause291}]],[[${dmg_sk50_array_pause292}]],[[${dmg_sk50_array_pause293}]],[[${dmg_sk50_array_pause294}]],[[${dmg_sk50_array_pause295}]],[[${dmg_sk50_array_pause296}]],[[${dmg_sk50_array_pause297}]],[[${dmg_sk50_array_pause298}]],[[${dmg_sk50_array_pause299}]],[[${dmg_sk50_array_pause300}]],
+    var sk50_array_pause = [
+        [[${sk50_array_pause0}]],[[${sk50_array_pause1}]],[[${sk50_array_pause2}]],[[${sk50_array_pause3}]],[[${sk50_array_pause4}]],[[${sk50_array_pause5}]],[[${sk50_array_pause6}]],[[${sk50_array_pause7}]],[[${sk50_array_pause8}]],[[${sk50_array_pause9}]],[[${sk50_array_pause10}]],
+        [[${sk50_array_pause11}]],[[${sk50_array_pause12}]],[[${sk50_array_pause13}]],[[${sk50_array_pause14}]],[[${sk50_array_pause15}]],[[${sk50_array_pause16}]],[[${sk50_array_pause17}]],[[${sk50_array_pause18}]],[[${sk50_array_pause19}]],[[${sk50_array_pause20}]],
+        [[${sk50_array_pause21}]],[[${sk50_array_pause22}]],[[${sk50_array_pause23}]],[[${sk50_array_pause24}]],[[${sk50_array_pause25}]],[[${sk50_array_pause26}]],[[${sk50_array_pause27}]],[[${sk50_array_pause28}]],[[${sk50_array_pause29}]],[[${sk50_array_pause30}]],
+        [[${sk50_array_pause31}]],[[${sk50_array_pause32}]],[[${sk50_array_pause33}]],[[${sk50_array_pause34}]],[[${sk50_array_pause35}]],[[${sk50_array_pause36}]],[[${sk50_array_pause37}]],[[${sk50_array_pause38}]],[[${sk50_array_pause39}]],[[${sk50_array_pause40}]],
+        [[${sk50_array_pause41}]],[[${sk50_array_pause42}]],[[${sk50_array_pause43}]],[[${sk50_array_pause44}]],[[${sk50_array_pause45}]],[[${sk50_array_pause46}]],[[${sk50_array_pause47}]],[[${sk50_array_pause48}]],[[${sk50_array_pause49}]],[[${sk50_array_pause50}]],
+        [[${sk50_array_pause51}]],[[${sk50_array_pause52}]],[[${sk50_array_pause53}]],[[${sk50_array_pause54}]],[[${sk50_array_pause55}]],[[${sk50_array_pause56}]],[[${sk50_array_pause57}]],[[${sk50_array_pause58}]],[[${sk50_array_pause59}]],[[${sk50_array_pause60}]],
+        [[${sk50_array_pause61}]],[[${sk50_array_pause62}]],[[${sk50_array_pause63}]],[[${sk50_array_pause64}]],[[${sk50_array_pause65}]],[[${sk50_array_pause66}]],[[${sk50_array_pause67}]],[[${sk50_array_pause68}]],[[${sk50_array_pause69}]],[[${sk50_array_pause70}]],
+        [[${sk50_array_pause71}]],[[${sk50_array_pause72}]],[[${sk50_array_pause73}]],[[${sk50_array_pause74}]],[[${sk50_array_pause75}]],[[${sk50_array_pause76}]],[[${sk50_array_pause77}]],[[${sk50_array_pause78}]],[[${sk50_array_pause79}]],[[${sk50_array_pause80}]],
+        [[${sk50_array_pause81}]],[[${sk50_array_pause82}]],[[${sk50_array_pause83}]],[[${sk50_array_pause84}]],[[${sk50_array_pause85}]],[[${sk50_array_pause86}]],[[${sk50_array_pause87}]],[[${sk50_array_pause88}]],[[${sk50_array_pause89}]],[[${sk50_array_pause90}]],
+        [[${sk50_array_pause91}]],[[${sk50_array_pause92}]],[[${sk50_array_pause93}]],[[${sk50_array_pause94}]],[[${sk50_array_pause95}]],[[${sk50_array_pause96}]],[[${sk50_array_pause97}]],[[${sk50_array_pause98}]],[[${sk50_array_pause99}]],[[${sk50_array_pause100}]],
+        [[${sk50_array_pause101}]],[[${sk50_array_pause102}]],[[${sk50_array_pause103}]],[[${sk50_array_pause104}]],[[${sk50_array_pause105}]],[[${sk50_array_pause106}]],[[${sk50_array_pause107}]],[[${sk50_array_pause108}]],[[${sk50_array_pause109}]],[[${sk50_array_pause110}]],
+        [[${sk50_array_pause111}]],[[${sk50_array_pause112}]],[[${sk50_array_pause113}]],[[${sk50_array_pause114}]],[[${sk50_array_pause115}]],[[${sk50_array_pause116}]],[[${sk50_array_pause117}]],[[${sk50_array_pause118}]],[[${sk50_array_pause119}]],[[${sk50_array_pause120}]],
+        [[${sk50_array_pause121}]],[[${sk50_array_pause122}]],[[${sk50_array_pause123}]],[[${sk50_array_pause124}]],[[${sk50_array_pause125}]],[[${sk50_array_pause126}]],[[${sk50_array_pause127}]],[[${sk50_array_pause128}]],[[${sk50_array_pause129}]],[[${sk50_array_pause130}]],
+        [[${sk50_array_pause131}]],[[${sk50_array_pause132}]],[[${sk50_array_pause133}]],[[${sk50_array_pause134}]],[[${sk50_array_pause135}]],[[${sk50_array_pause136}]],[[${sk50_array_pause137}]],[[${sk50_array_pause138}]],[[${sk50_array_pause129}]],[[${sk50_array_pause120}]],
+        [[${sk50_array_pause141}]],[[${sk50_array_pause142}]],[[${sk50_array_pause143}]],[[${sk50_array_pause144}]],[[${sk50_array_pause145}]],[[${sk50_array_pause146}]],[[${sk50_array_pause147}]],[[${sk50_array_pause148}]],[[${sk50_array_pause129}]],[[${sk50_array_pause120}]],
+        [[${sk50_array_pause151}]],[[${sk50_array_pause152}]],[[${sk50_array_pause153}]],[[${sk50_array_pause154}]],[[${sk50_array_pause155}]],[[${sk50_array_pause156}]],[[${sk50_array_pause157}]],[[${sk50_array_pause158}]],[[${sk50_array_pause129}]],[[${sk50_array_pause120}]],
+        [[${sk50_array_pause161}]],[[${sk50_array_pause162}]],[[${sk50_array_pause163}]],[[${sk50_array_pause164}]],[[${sk50_array_pause165}]],[[${sk50_array_pause166}]],[[${sk50_array_pause167}]],[[${sk50_array_pause168}]],[[${sk50_array_pause169}]],[[${sk50_array_pause170}]],
+        [[${sk50_array_pause171}]],[[${sk50_array_pause172}]],[[${sk50_array_pause173}]],[[${sk50_array_pause174}]],[[${sk50_array_pause175}]],[[${sk50_array_pause176}]],[[${sk50_array_pause177}]],[[${sk50_array_pause178}]],[[${sk50_array_pause179}]],[[${sk50_array_pause180}]],
+        [[${sk50_array_pause181}]],[[${sk50_array_pause182}]],[[${sk50_array_pause183}]],[[${sk50_array_pause184}]],[[${sk50_array_pause185}]],[[${sk50_array_pause186}]],[[${sk50_array_pause187}]],[[${sk50_array_pause188}]],[[${sk50_array_pause189}]],[[${sk50_array_pause190}]],
+        [[${sk50_array_pause191}]],[[${sk50_array_pause192}]],[[${sk50_array_pause193}]],[[${sk50_array_pause194}]],[[${sk50_array_pause195}]],[[${sk50_array_pause196}]],[[${sk50_array_pause197}]],[[${sk50_array_pause198}]],[[${sk50_array_pause199}]],[[${sk50_array_pause200}]],
+        [[${sk50_array_pause201}]],[[${sk50_array_pause202}]],[[${sk50_array_pause203}]],[[${sk50_array_pause204}]],[[${sk50_array_pause205}]],[[${sk50_array_pause206}]],[[${sk50_array_pause207}]],[[${sk50_array_pause208}]],[[${sk50_array_pause209}]],[[${sk50_array_pause210}]],
+        [[${sk50_array_pause211}]],[[${sk50_array_pause212}]],[[${sk50_array_pause213}]],[[${sk50_array_pause214}]],[[${sk50_array_pause215}]],[[${sk50_array_pause216}]],[[${sk50_array_pause217}]],[[${sk50_array_pause218}]],[[${sk50_array_pause219}]],[[${sk50_array_pause220}]],
+        [[${sk50_array_pause221}]],[[${sk50_array_pause222}]],[[${sk50_array_pause223}]],[[${sk50_array_pause224}]],[[${sk50_array_pause225}]],[[${sk50_array_pause226}]],[[${sk50_array_pause227}]],[[${sk50_array_pause228}]],[[${sk50_array_pause229}]],[[${sk50_array_pause230}]],
+        [[${sk50_array_pause231}]],[[${sk50_array_pause232}]],[[${sk50_array_pause233}]],[[${sk50_array_pause234}]],[[${sk50_array_pause235}]],[[${sk50_array_pause236}]],[[${sk50_array_pause237}]],[[${sk50_array_pause238}]],[[${sk50_array_pause239}]],[[${sk50_array_pause240}]],
+        [[${sk50_array_pause241}]],[[${sk50_array_pause242}]],[[${sk50_array_pause243}]],[[${sk50_array_pause244}]],[[${sk50_array_pause245}]],[[${sk50_array_pause246}]],[[${sk50_array_pause247}]],[[${sk50_array_pause248}]],[[${sk50_array_pause249}]],[[${sk50_array_pause250}]],
+        [[${sk50_array_pause261}]],[[${sk50_array_pause262}]],[[${sk50_array_pause263}]],[[${sk50_array_pause264}]],[[${sk50_array_pause265}]],[[${sk50_array_pause266}]],[[${sk50_array_pause267}]],[[${sk50_array_pause268}]],[[${sk50_array_pause269}]],[[${sk50_array_pause270}]],
+        [[${sk50_array_pause281}]],[[${sk50_array_pause282}]],[[${sk50_array_pause283}]],[[${sk50_array_pause284}]],[[${sk50_array_pause285}]],[[${sk50_array_pause286}]],[[${sk50_array_pause287}]],[[${sk50_array_pause288}]],[[${sk50_array_pause289}]],[[${sk50_array_pause290}]],
+        [[${sk50_array_pause291}]],[[${sk50_array_pause292}]],[[${sk50_array_pause293}]],[[${sk50_array_pause294}]],[[${sk50_array_pause295}]],[[${sk50_array_pause296}]],[[${sk50_array_pause297}]],[[${sk50_array_pause298}]],[[${sk50_array_pause299}]],[[${sk50_array_pause300}]],
 
     ];
-    var dmg_sk50_array_off = [
-        [[${dmg_sk50_array_off0}]],[[${dmg_sk50_array_off1}]],[[${dmg_sk50_array_off2}]],[[${dmg_sk50_array_off3}]],[[${dmg_sk50_array_off4}]],[[${dmg_sk50_array_off5}]],[[${dmg_sk50_array_off6}]],[[${dmg_sk50_array_off7}]],[[${dmg_sk50_array_off8}]],[[${dmg_sk50_array_off9}]],[[${dmg_sk50_array_off10}]],
-        [[${dmg_sk50_array_off11}]],[[${dmg_sk50_array_off12}]],[[${dmg_sk50_array_off13}]],[[${dmg_sk50_array_off14}]],[[${dmg_sk50_array_off15}]],[[${dmg_sk50_array_off16}]],[[${dmg_sk50_array_off17}]],[[${dmg_sk50_array_off18}]],[[${dmg_sk50_array_off19}]],[[${dmg_sk50_array_off20}]],
-        [[${dmg_sk50_array_off21}]],[[${dmg_sk50_array_off22}]],[[${dmg_sk50_array_off23}]],[[${dmg_sk50_array_off24}]],[[${dmg_sk50_array_off25}]],[[${dmg_sk50_array_off26}]],[[${dmg_sk50_array_off27}]],[[${dmg_sk50_array_off28}]],[[${dmg_sk50_array_off29}]],[[${dmg_sk50_array_off30}]],
-        [[${dmg_sk50_array_off31}]],[[${dmg_sk50_array_off32}]],[[${dmg_sk50_array_off33}]],[[${dmg_sk50_array_off34}]],[[${dmg_sk50_array_off35}]],[[${dmg_sk50_array_off36}]],[[${dmg_sk50_array_off37}]],[[${dmg_sk50_array_off38}]],[[${dmg_sk50_array_off39}]]
+    var sk50_array_off = [
+        [[${sk50_array_off0}]],[[${sk50_array_off1}]],[[${sk50_array_off2}]],[[${sk50_array_off3}]],[[${sk50_array_off4}]],[[${sk50_array_off5}]],[[${sk50_array_off6}]],[[${sk50_array_off7}]],[[${sk50_array_off8}]],[[${sk50_array_off9}]],[[${sk50_array_off10}]],
+        [[${sk50_array_off11}]],[[${sk50_array_off12}]],[[${sk50_array_off13}]],[[${sk50_array_off14}]],[[${sk50_array_off15}]],[[${sk50_array_off16}]],[[${sk50_array_off17}]],[[${sk50_array_off18}]],[[${sk50_array_off19}]],[[${sk50_array_off20}]],
+        [[${sk50_array_off21}]],[[${sk50_array_off22}]],[[${sk50_array_off23}]],[[${sk50_array_off24}]],[[${sk50_array_off25}]],[[${sk50_array_off26}]],[[${sk50_array_off27}]],[[${sk50_array_off28}]],[[${sk50_array_off29}]],[[${sk50_array_off30}]],
+        [[${sk50_array_off31}]],[[${sk50_array_off32}]],[[${sk50_array_off33}]],[[${sk50_array_off34}]],[[${sk50_array_off35}]],[[${sk50_array_off36}]],[[${sk50_array_off37}]],[[${sk50_array_off38}]],[[${sk50_array_off39}]]
     ];
 
-    var dmg_sk50_array_avar = [
-        [[${dmg_sk50_array_avar0}]],[[${dmg_sk50_array_avar1}]],[[${dmg_sk50_array_avar2}]],[[${dmg_sk50_array_avar3}]],[[${dmg_sk50_array_avar4}]],[[${dmg_sk50_array_avar5}]],[[${dmg_sk50_array_avar6}]],[[${dmg_sk50_array_avar7}]],[[${dmg_sk50_array_avar8}]],[[${dmg_sk50_array_avar9}]],[[${dmg_sk50_array_avar10}]],
-        [[${dmg_sk50_array_avar11}]],[[${dmg_sk50_array_avar12}]],[[${dmg_sk50_array_avar13}]],[[${dmg_sk50_array_avar14}]],[[${dmg_sk50_array_avar15}]],[[${dmg_sk50_array_avar16}]],[[${dmg_sk50_array_avar17}]],[[${dmg_sk50_array_avar18}]],[[${dmg_sk50_array_avar19}]],[[${dmg_sk50_array_avar20}]],
-        [[${dmg_sk50_array_avar21}]],[[${dmg_sk50_array_avar22}]],[[${dmg_sk50_array_avar23}]],[[${dmg_sk50_array_avar24}]],[[${dmg_sk50_array_avar25}]],[[${dmg_sk50_array_avar26}]],[[${dmg_sk50_array_avar27}]],[[${dmg_sk50_array_avar28}]],[[${dmg_sk50_array_avar29}]],[[${dmg_sk50_array_avar30}]],
-        [[${dmg_sk50_array_avar31}]],[[${dmg_sk50_array_avar32}]],[[${dmg_sk50_array_avar33}]],[[${dmg_sk50_array_avar34}]],[[${dmg_sk50_array_avar35}]],[[${dmg_sk50_array_avar36}]],[[${dmg_sk50_array_avar37}]],[[${dmg_sk50_array_avar38}]],[[${dmg_sk50_array_avar39}]],[[${dmg_sk50_array_avar40}]],
-        [[${dmg_sk50_array_avar41}]],[[${dmg_sk50_array_avar42}]],[[${dmg_sk50_array_avar43}]],[[${dmg_sk50_array_avar44}]],[[${dmg_sk50_array_avar45}]],[[${dmg_sk50_array_avar46}]],[[${dmg_sk50_array_avar47}]],[[${dmg_sk50_array_avar48}]],[[${dmg_sk50_array_avar49}]],[[${dmg_sk50_array_avar50}]],
-        [[${dmg_sk50_array_avar51}]],[[${dmg_sk50_array_avar52}]],[[${dmg_sk50_array_avar53}]]
+    var sk50_array_avar = [
+        [[${sk50_array_avar0}]],[[${sk50_array_avar1}]],[[${sk50_array_avar2}]],[[${sk50_array_avar3}]],[[${sk50_array_avar4}]],[[${sk50_array_avar5}]],[[${sk50_array_avar6}]],[[${sk50_array_avar7}]],[[${sk50_array_avar8}]],[[${sk50_array_avar9}]],[[${sk50_array_avar10}]],
+        [[${sk50_array_avar11}]],[[${sk50_array_avar12}]],[[${sk50_array_avar13}]],[[${sk50_array_avar14}]],[[${sk50_array_avar15}]],[[${sk50_array_avar16}]],[[${sk50_array_avar17}]],[[${sk50_array_avar18}]],[[${sk50_array_avar19}]],[[${sk50_array_avar20}]],
+        [[${sk50_array_avar21}]],[[${sk50_array_avar22}]],[[${sk50_array_avar23}]],[[${sk50_array_avar24}]],[[${sk50_array_avar25}]],[[${sk50_array_avar26}]],[[${sk50_array_avar27}]],[[${sk50_array_avar28}]],[[${sk50_array_avar29}]],[[${sk50_array_avar30}]],
+        [[${sk50_array_avar31}]],[[${sk50_array_avar32}]],[[${sk50_array_avar33}]],[[${sk50_array_avar34}]],[[${sk50_array_avar35}]],[[${sk50_array_avar36}]],[[${sk50_array_avar37}]],[[${sk50_array_avar38}]],[[${sk50_array_avar39}]],[[${sk50_array_avar40}]],
+        [[${sk50_array_avar41}]],[[${sk50_array_avar42}]],[[${sk50_array_avar43}]],[[${sk50_array_avar44}]],[[${sk50_array_avar45}]],[[${sk50_array_avar46}]],[[${sk50_array_avar47}]],[[${sk50_array_avar48}]],[[${sk50_array_avar49}]],[[${sk50_array_avar50}]],
+        [[${sk50_array_avar51}]],[[${sk50_array_avar52}]],[[${sk50_array_avar53}]]
     ];
 
-    var dmg_sk50_array_nagruzka = [
-        [[${dmg_sk50_array_nagruzka0}]],[[${dmg_sk50_array_nagruzka1}]],[[${dmg_sk50_array_nagruzka2}]],[[${dmg_sk50_array_nagruzka3}]],[[${dmg_sk50_array_nagruzka4}]],[[${dmg_sk50_array_nagruzka5}]],[[${dmg_sk50_array_nagruzka6}]],[[${dmg_sk50_array_nagruzka7}]],[[${dmg_sk50_array_nagruzka8}]],[[${dmg_sk50_array_nagruzka9}]],[[${dmg_sk50_array_nagruzka10}]],
-        [[${dmg_sk50_array_nagruzka11}]],[[${dmg_sk50_array_nagruzka12}]],[[${dmg_sk50_array_nagruzka13}]],[[${dmg_sk50_array_nagruzka14}]],[[${dmg_sk50_array_nagruzka15}]],[[${dmg_sk50_array_nagruzka16}]],[[${dmg_sk50_array_nagruzka17}]],[[${dmg_sk50_array_nagruzka18}]],[[${dmg_sk50_array_nagruzka19}]],[[${dmg_sk50_array_nagruzka20}]],
-        [[${dmg_sk50_array_nagruzka21}]],[[${dmg_sk50_array_nagruzka22}]],[[${dmg_sk50_array_nagruzka23}]],[[${dmg_sk50_array_nagruzka24}]],[[${dmg_sk50_array_nagruzka25}]],[[${dmg_sk50_array_nagruzka26}]],[[${dmg_sk50_array_nagruzka27}]],[[${dmg_sk50_array_nagruzka28}]],[[${dmg_sk50_array_nagruzka29}]],[[${dmg_sk50_array_nagruzka30}]],
-        [[${dmg_sk50_array_nagruzka31}]],[[${dmg_sk50_array_nagruzka32}]],[[${dmg_sk50_array_nagruzka33}]],[[${dmg_sk50_array_nagruzka34}]],[[${dmg_sk50_array_nagruzka35}]],[[${dmg_sk50_array_nagruzka36}]],[[${dmg_sk50_array_nagruzka37}]],[[${dmg_sk50_array_nagruzka38}]],[[${dmg_sk50_array_nagruzka39}]],[[${dmg_sk50_array_nagruzka40}]],
-        [[${dmg_sk50_array_nagruzka41}]],[[${dmg_sk50_array_nagruzka42}]],[[${dmg_sk50_array_nagruzka43}]],[[${dmg_sk50_array_nagruzka44}]],[[${dmg_sk50_array_nagruzka45}]],[[${dmg_sk50_array_nagruzka46}]],[[${dmg_sk50_array_nagruzka47}]],[[${dmg_sk50_array_nagruzka48}]],[[${dmg_sk50_array_nagruzka49}]],[[${dmg_sk50_array_nagruzka50}]],
-        [[${dmg_sk50_array_nagruzka51}]],[[${dmg_sk50_array_nagruzka52}]],[[${dmg_sk50_array_nagruzka53}]],[[${dmg_sk50_array_nagruzka54}]],[[${dmg_sk50_array_nagruzka55}]],[[${dmg_sk50_array_nagruzka56}]],[[${dmg_sk50_array_nagruzka57}]],[[${dmg_sk50_array_nagruzka58}]],[[${dmg_sk50_array_nagruzka59}]],[[${dmg_sk50_array_nagruzka60}]],
-        [[${dmg_sk50_array_nagruzka61}]],[[${dmg_sk50_array_nagruzka62}]],[[${dmg_sk50_array_nagruzka63}]],[[${dmg_sk50_array_nagruzka64}]],[[${dmg_sk50_array_nagruzka65}]],[[${dmg_sk50_array_nagruzka66}]],[[${dmg_sk50_array_nagruzka67}]],[[${dmg_sk50_array_nagruzka68}]],[[${dmg_sk50_array_nagruzka69}]],[[${dmg_sk50_array_nagruzka70}]],
-        [[${dmg_sk50_array_nagruzka71}]],[[${dmg_sk50_array_nagruzka72}]],[[${dmg_sk50_array_nagruzka73}]],[[${dmg_sk50_array_nagruzka74}]],[[${dmg_sk50_array_nagruzka75}]],[[${dmg_sk50_array_nagruzka76}]],[[${dmg_sk50_array_nagruzka77}]],[[${dmg_sk50_array_nagruzka78}]],[[${dmg_sk50_array_nagruzka79}]],[[${dmg_sk50_array_nagruzka80}]],
-        [[${dmg_sk50_array_nagruzka81}]],[[${dmg_sk50_array_nagruzka82}]],[[${dmg_sk50_array_nagruzka83}]],[[${dmg_sk50_array_nagruzka84}]],[[${dmg_sk50_array_nagruzka85}]],[[${dmg_sk50_array_nagruzka86}]],[[${dmg_sk50_array_nagruzka87}]],[[${dmg_sk50_array_nagruzka88}]],[[${dmg_sk50_array_nagruzka89}]],[[${dmg_sk50_array_nagruzka90}]],
-        [[${dmg_sk50_array_nagruzka91}]],[[${dmg_sk50_array_nagruzka92}]],[[${dmg_sk50_array_nagruzka93}]],[[${dmg_sk50_array_nagruzka94}]],[[${dmg_sk50_array_nagruzka95}]],[[${dmg_sk50_array_nagruzka96}]],[[${dmg_sk50_array_nagruzka97}]],[[${dmg_sk50_array_nagruzka98}]],[[${dmg_sk50_array_nagruzka99}]],[[${dmg_sk50_array_nagruzka100}]],
-        [[${dmg_sk50_array_nagruzka101}]],[[${dmg_sk50_array_nagruzka102}]],[[${dmg_sk50_array_nagruzka103}]],[[${dmg_sk50_array_nagruzka104}]],[[${dmg_sk50_array_nagruzka105}]],[[${dmg_sk50_array_nagruzka106}]],[[${dmg_sk50_array_nagruzka107}]],[[${dmg_sk50_array_nagruzka108}]],[[${dmg_sk50_array_nagruzka109}]],[[${dmg_sk50_array_nagruzka110}]],
-        [[${dmg_sk50_array_nagruzka111}]],[[${dmg_sk50_array_nagruzka112}]],[[${dmg_sk50_array_nagruzka113}]],[[${dmg_sk50_array_nagruzka114}]],[[${dmg_sk50_array_nagruzka115}]],[[${dmg_sk50_array_nagruzka116}]],[[${dmg_sk50_array_nagruzka117}]],[[${dmg_sk50_array_nagruzka118}]],[[${dmg_sk50_array_nagruzka119}]],[[${dmg_sk50_array_nagruzka120}]],
-        [[${dmg_sk50_array_nagruzka121}]],[[${dmg_sk50_array_nagruzka122}]],[[${dmg_sk50_array_nagruzka123}]],[[${dmg_sk50_array_nagruzka124}]],[[${dmg_sk50_array_nagruzka125}]],[[${dmg_sk50_array_nagruzka126}]],[[${dmg_sk50_array_nagruzka127}]],[[${dmg_sk50_array_nagruzka128}]],[[${dmg_sk50_array_nagruzka129}]],[[${dmg_sk50_array_nagruzka130}]],
-        [[${dmg_sk50_array_nagruzka131}]],[[${dmg_sk50_array_nagruzka132}]],[[${dmg_sk50_array_nagruzka133}]],[[${dmg_sk50_array_nagruzka134}]],[[${dmg_sk50_array_nagruzka135}]],[[${dmg_sk50_array_nagruzka136}]],[[${dmg_sk50_array_nagruzka137}]],[[${dmg_sk50_array_nagruzka138}]],[[${dmg_sk50_array_nagruzka139}]],[[${dmg_sk50_array_nagruzka140}]],
-        [[${dmg_sk50_array_nagruzka141}]],[[${dmg_sk50_array_nagruzka142}]],[[${dmg_sk50_array_nagruzka143}]],[[${dmg_sk50_array_nagruzka144}]],[[${dmg_sk50_array_nagruzka145}]],[[${dmg_sk50_array_nagruzka146}]],[[${dmg_sk50_array_nagruzka147}]],[[${dmg_sk50_array_nagruzka148}]],[[${dmg_sk50_array_nagruzka149}]],[[${dmg_sk50_array_nagruzka150}]],
-        [[${dmg_sk50_array_nagruzka151}]],[[${dmg_sk50_array_nagruzka152}]],[[${dmg_sk50_array_nagruzka153}]],[[${dmg_sk50_array_nagruzka154}]],[[${dmg_sk50_array_nagruzka155}]],[[${dmg_sk50_array_nagruzka156}]],[[${dmg_sk50_array_nagruzka157}]],[[${dmg_sk50_array_nagruzka158}]],[[${dmg_sk50_array_nagruzka159}]],[[${dmg_sk50_array_nagruzka160}]],
-        [[${dmg_sk50_array_nagruzka161}]],[[${dmg_sk50_array_nagruzka162}]],[[${dmg_sk50_array_nagruzka163}]],[[${dmg_sk50_array_nagruzka164}]],[[${dmg_sk50_array_nagruzka165}]],[[${dmg_sk50_array_nagruzka166}]],[[${dmg_sk50_array_nagruzka167}]],[[${dmg_sk50_array_nagruzka168}]],[[${dmg_sk50_array_nagruzka169}]],[[${dmg_sk50_array_nagruzka170}]],
-        [[${dmg_sk50_array_nagruzka171}]],[[${dmg_sk50_array_nagruzka172}]],[[${dmg_sk50_array_nagruzka173}]],[[${dmg_sk50_array_nagruzka174}]],[[${dmg_sk50_array_nagruzka175}]],[[${dmg_sk50_array_nagruzka176}]],[[${dmg_sk50_array_nagruzka177}]],[[${dmg_sk50_array_nagruzka178}]],[[${dmg_sk50_array_nagruzka179}]],[[${dmg_sk50_array_nagruzka180}]],
-        [[${dmg_sk50_array_nagruzka181}]],[[${dmg_sk50_array_nagruzka182}]],[[${dmg_sk50_array_nagruzka183}]],[[${dmg_sk50_array_nagruzka184}]],[[${dmg_sk50_array_nagruzka185}]],[[${dmg_sk50_array_nagruzka186}]],[[${dmg_sk50_array_nagruzka187}]],[[${dmg_sk50_array_nagruzka188}]],[[${dmg_sk50_array_nagruzka189}]],[[${dmg_sk50_array_nagruzka190}]],
-        [[${dmg_sk50_array_nagruzka191}]],[[${dmg_sk50_array_nagruzka192}]],[[${dmg_sk50_array_nagruzka193}]],[[${dmg_sk50_array_nagruzka194}]],[[${dmg_sk50_array_nagruzka195}]],[[${dmg_sk50_array_nagruzka196}]],[[${dmg_sk50_array_nagruzka197}]],[[${dmg_sk50_array_nagruzka198}]],[[${dmg_sk50_array_nagruzka199}]],[[${dmg_sk50_array_nagruzka200}]],
-        [[${dmg_sk50_array_nagruzka201}]],[[${dmg_sk50_array_nagruzka202}]],[[${dmg_sk50_array_nagruzka203}]],[[${dmg_sk50_array_nagruzka204}]],[[${dmg_sk50_array_nagruzka205}]],[[${dmg_sk50_array_nagruzka206}]],[[${dmg_sk50_array_nagruzka207}]],[[${dmg_sk50_array_nagruzka208}]],[[${dmg_sk50_array_nagruzka209}]],[[${dmg_sk50_array_nagruzka210}]],
-        [[${dmg_sk50_array_nagruzka211}]],[[${dmg_sk50_array_nagruzka212}]],[[${dmg_sk50_array_nagruzka213}]],[[${dmg_sk50_array_nagruzka214}]],[[${dmg_sk50_array_nagruzka215}]],[[${dmg_sk50_array_nagruzka216}]],[[${dmg_sk50_array_nagruzka217}]],[[${dmg_sk50_array_nagruzka218}]],[[${dmg_sk50_array_nagruzka219}]],[[${dmg_sk50_array_nagruzka220}]],
-        [[${dmg_sk50_array_nagruzka221}]],[[${dmg_sk50_array_nagruzka222}]],[[${dmg_sk50_array_nagruzka223}]],[[${dmg_sk50_array_nagruzka224}]],[[${dmg_sk50_array_nagruzka225}]],[[${dmg_sk50_array_nagruzka226}]],[[${dmg_sk50_array_nagruzka227}]],[[${dmg_sk50_array_nagruzka228}]],[[${dmg_sk50_array_nagruzka229}]],[[${dmg_sk50_array_nagruzka230}]],
-        [[${dmg_sk50_array_nagruzka231}]],[[${dmg_sk50_array_nagruzka232}]],[[${dmg_sk50_array_nagruzka233}]],[[${dmg_sk50_array_nagruzka234}]],[[${dmg_sk50_array_nagruzka235}]],[[${dmg_sk50_array_nagruzka236}]],[[${dmg_sk50_array_nagruzka237}]],[[${dmg_sk50_array_nagruzka238}]],[[${dmg_sk50_array_nagruzka239}]],[[${dmg_sk50_array_nagruzka240}]],
-        [[${dmg_sk50_array_nagruzka241}]],[[${dmg_sk50_array_nagruzka242}]],[[${dmg_sk50_array_nagruzka243}]],[[${dmg_sk50_array_nagruzka244}]],[[${dmg_sk50_array_nagruzka245}]],[[${dmg_sk50_array_nagruzka246}]],[[${dmg_sk50_array_nagruzka247}]],[[${dmg_sk50_array_nagruzka248}]],[[${dmg_sk50_array_nagruzka249}]],[[${dmg_sk50_array_nagruzka250}]],
-        [[${dmg_sk50_array_nagruzka251}]],[[${dmg_sk50_array_nagruzka252}]],[[${dmg_sk50_array_nagruzka253}]],[[${dmg_sk50_array_nagruzka254}]],[[${dmg_sk50_array_nagruzka255}]],[[${dmg_sk50_array_nagruzka256}]],[[${dmg_sk50_array_nagruzka257}]],[[${dmg_sk50_array_nagruzka258}]],[[${dmg_sk50_array_nagruzka259}]],[[${dmg_sk50_array_nagruzka260}]],
-        [[${dmg_sk50_array_nagruzka261}]],[[${dmg_sk50_array_nagruzka262}]],[[${dmg_sk50_array_nagruzka263}]],[[${dmg_sk50_array_nagruzka264}]],[[${dmg_sk50_array_nagruzka265}]],[[${dmg_sk50_array_nagruzka266}]],[[${dmg_sk50_array_nagruzka267}]],[[${dmg_sk50_array_nagruzka268}]],[[${dmg_sk50_array_nagruzka269}]],[[${dmg_sk50_array_nagruzka270}]],
-        [[${dmg_sk50_array_nagruzka271}]],[[${dmg_sk50_array_nagruzka272}]],[[${dmg_sk50_array_nagruzka273}]],[[${dmg_sk50_array_nagruzka274}]],[[${dmg_sk50_array_nagruzka275}]],[[${dmg_sk50_array_nagruzka276}]],[[${dmg_sk50_array_nagruzka277}]],[[${dmg_sk50_array_nagruzka278}]],[[${dmg_sk50_array_nagruzka279}]],[[${dmg_sk50_array_nagruzka280}]],
-        [[${dmg_sk50_array_nagruzka281}]],[[${dmg_sk50_array_nagruzka282}]],[[${dmg_sk50_array_nagruzka283}]],[[${dmg_sk50_array_nagruzka284}]],[[${dmg_sk50_array_nagruzka285}]],[[${dmg_sk50_array_nagruzka286}]],[[${dmg_sk50_array_nagruzka287}]],[[${dmg_sk50_array_nagruzka288}]],[[${dmg_sk50_array_nagruzka289}]],[[${dmg_sk50_array_nagruzka290}]],
-        [[${dmg_sk50_array_nagruzka291}]],[[${dmg_sk50_array_nagruzka292}]],[[${dmg_sk50_array_nagruzka293}]],[[${dmg_sk50_array_nagruzka294}]],[[${dmg_sk50_array_nagruzka295}]],[[${dmg_sk50_array_nagruzka296}]],[[${dmg_sk50_array_nagruzka297}]],[[${dmg_sk50_array_nagruzka298}]],[[${dmg_sk50_array_nagruzka299}]],[[${dmg_sk50_array_nagruzka300}]],
+    var sk50_array_nagruzka = [
+        [[${sk50_array_nagruzka0}]],[[${sk50_array_nagruzka1}]],[[${sk50_array_nagruzka2}]],[[${sk50_array_nagruzka3}]],[[${sk50_array_nagruzka4}]],[[${sk50_array_nagruzka5}]],[[${sk50_array_nagruzka6}]],[[${sk50_array_nagruzka7}]],[[${sk50_array_nagruzka8}]],[[${sk50_array_nagruzka9}]],[[${sk50_array_nagruzka10}]],
+        [[${sk50_array_nagruzka11}]],[[${sk50_array_nagruzka12}]],[[${sk50_array_nagruzka13}]],[[${sk50_array_nagruzka14}]],[[${sk50_array_nagruzka15}]],[[${sk50_array_nagruzka16}]],[[${sk50_array_nagruzka17}]],[[${sk50_array_nagruzka18}]],[[${sk50_array_nagruzka19}]],[[${sk50_array_nagruzka20}]],
+        [[${sk50_array_nagruzka21}]],[[${sk50_array_nagruzka22}]],[[${sk50_array_nagruzka23}]],[[${sk50_array_nagruzka24}]],[[${sk50_array_nagruzka25}]],[[${sk50_array_nagruzka26}]],[[${sk50_array_nagruzka27}]],[[${sk50_array_nagruzka28}]],[[${sk50_array_nagruzka29}]],[[${sk50_array_nagruzka30}]],
+        [[${sk50_array_nagruzka31}]],[[${sk50_array_nagruzka32}]],[[${sk50_array_nagruzka33}]],[[${sk50_array_nagruzka34}]],[[${sk50_array_nagruzka35}]],[[${sk50_array_nagruzka36}]],[[${sk50_array_nagruzka37}]],[[${sk50_array_nagruzka38}]],[[${sk50_array_nagruzka39}]],[[${sk50_array_nagruzka40}]],
+        [[${sk50_array_nagruzka41}]],[[${sk50_array_nagruzka42}]],[[${sk50_array_nagruzka43}]],[[${sk50_array_nagruzka44}]],[[${sk50_array_nagruzka45}]],[[${sk50_array_nagruzka46}]],[[${sk50_array_nagruzka47}]],[[${sk50_array_nagruzka48}]],[[${sk50_array_nagruzka49}]],[[${sk50_array_nagruzka50}]],
+        [[${sk50_array_nagruzka51}]],[[${sk50_array_nagruzka52}]],[[${sk50_array_nagruzka53}]],[[${sk50_array_nagruzka54}]],[[${sk50_array_nagruzka55}]],[[${sk50_array_nagruzka56}]],[[${sk50_array_nagruzka57}]],[[${sk50_array_nagruzka58}]],[[${sk50_array_nagruzka59}]],[[${sk50_array_nagruzka60}]],
+        [[${sk50_array_nagruzka61}]],[[${sk50_array_nagruzka62}]],[[${sk50_array_nagruzka63}]],[[${sk50_array_nagruzka64}]],[[${sk50_array_nagruzka65}]],[[${sk50_array_nagruzka66}]],[[${sk50_array_nagruzka67}]],[[${sk50_array_nagruzka68}]],[[${sk50_array_nagruzka69}]],[[${sk50_array_nagruzka70}]],
+        [[${sk50_array_nagruzka71}]],[[${sk50_array_nagruzka72}]],[[${sk50_array_nagruzka73}]],[[${sk50_array_nagruzka74}]],[[${sk50_array_nagruzka75}]],[[${sk50_array_nagruzka76}]],[[${sk50_array_nagruzka77}]],[[${sk50_array_nagruzka78}]],[[${sk50_array_nagruzka79}]],[[${sk50_array_nagruzka80}]],
+        [[${sk50_array_nagruzka81}]],[[${sk50_array_nagruzka82}]],[[${sk50_array_nagruzka83}]],[[${sk50_array_nagruzka84}]],[[${sk50_array_nagruzka85}]],[[${sk50_array_nagruzka86}]],[[${sk50_array_nagruzka87}]],[[${sk50_array_nagruzka88}]],[[${sk50_array_nagruzka89}]],[[${sk50_array_nagruzka90}]],
+        [[${sk50_array_nagruzka91}]],[[${sk50_array_nagruzka92}]],[[${sk50_array_nagruzka93}]],[[${sk50_array_nagruzka94}]],[[${sk50_array_nagruzka95}]],[[${sk50_array_nagruzka96}]],[[${sk50_array_nagruzka97}]],[[${sk50_array_nagruzka98}]],[[${sk50_array_nagruzka99}]],[[${sk50_array_nagruzka100}]],
+        [[${sk50_array_nagruzka101}]],[[${sk50_array_nagruzka102}]],[[${sk50_array_nagruzka103}]],[[${sk50_array_nagruzka104}]],[[${sk50_array_nagruzka105}]],[[${sk50_array_nagruzka106}]],[[${sk50_array_nagruzka107}]],[[${sk50_array_nagruzka108}]],[[${sk50_array_nagruzka109}]],[[${sk50_array_nagruzka110}]],
+        [[${sk50_array_nagruzka111}]],[[${sk50_array_nagruzka112}]],[[${sk50_array_nagruzka113}]],[[${sk50_array_nagruzka114}]],[[${sk50_array_nagruzka115}]],[[${sk50_array_nagruzka116}]],[[${sk50_array_nagruzka117}]],[[${sk50_array_nagruzka118}]],[[${sk50_array_nagruzka119}]],[[${sk50_array_nagruzka120}]],
+        [[${sk50_array_nagruzka121}]],[[${sk50_array_nagruzka122}]],[[${sk50_array_nagruzka123}]],[[${sk50_array_nagruzka124}]],[[${sk50_array_nagruzka125}]],[[${sk50_array_nagruzka126}]],[[${sk50_array_nagruzka127}]],[[${sk50_array_nagruzka128}]],[[${sk50_array_nagruzka129}]],[[${sk50_array_nagruzka130}]],
+        [[${sk50_array_nagruzka131}]],[[${sk50_array_nagruzka132}]],[[${sk50_array_nagruzka133}]],[[${sk50_array_nagruzka134}]],[[${sk50_array_nagruzka135}]],[[${sk50_array_nagruzka136}]],[[${sk50_array_nagruzka137}]],[[${sk50_array_nagruzka138}]],[[${sk50_array_nagruzka139}]],[[${sk50_array_nagruzka140}]],
+        [[${sk50_array_nagruzka141}]],[[${sk50_array_nagruzka142}]],[[${sk50_array_nagruzka143}]],[[${sk50_array_nagruzka144}]],[[${sk50_array_nagruzka145}]],[[${sk50_array_nagruzka146}]],[[${sk50_array_nagruzka147}]],[[${sk50_array_nagruzka148}]],[[${sk50_array_nagruzka149}]],[[${sk50_array_nagruzka150}]],
+        [[${sk50_array_nagruzka151}]],[[${sk50_array_nagruzka152}]],[[${sk50_array_nagruzka153}]],[[${sk50_array_nagruzka154}]],[[${sk50_array_nagruzka155}]],[[${sk50_array_nagruzka156}]],[[${sk50_array_nagruzka157}]],[[${sk50_array_nagruzka158}]],[[${sk50_array_nagruzka159}]],[[${sk50_array_nagruzka160}]],
+        [[${sk50_array_nagruzka161}]],[[${sk50_array_nagruzka162}]],[[${sk50_array_nagruzka163}]],[[${sk50_array_nagruzka164}]],[[${sk50_array_nagruzka165}]],[[${sk50_array_nagruzka166}]],[[${sk50_array_nagruzka167}]],[[${sk50_array_nagruzka168}]],[[${sk50_array_nagruzka169}]],[[${sk50_array_nagruzka170}]],
+        [[${sk50_array_nagruzka171}]],[[${sk50_array_nagruzka172}]],[[${sk50_array_nagruzka173}]],[[${sk50_array_nagruzka174}]],[[${sk50_array_nagruzka175}]],[[${sk50_array_nagruzka176}]],[[${sk50_array_nagruzka177}]],[[${sk50_array_nagruzka178}]],[[${sk50_array_nagruzka179}]],[[${sk50_array_nagruzka180}]],
+        [[${sk50_array_nagruzka181}]],[[${sk50_array_nagruzka182}]],[[${sk50_array_nagruzka183}]],[[${sk50_array_nagruzka184}]],[[${sk50_array_nagruzka185}]],[[${sk50_array_nagruzka186}]],[[${sk50_array_nagruzka187}]],[[${sk50_array_nagruzka188}]],[[${sk50_array_nagruzka189}]],[[${sk50_array_nagruzka190}]],
+        [[${sk50_array_nagruzka191}]],[[${sk50_array_nagruzka192}]],[[${sk50_array_nagruzka193}]],[[${sk50_array_nagruzka194}]],[[${sk50_array_nagruzka195}]],[[${sk50_array_nagruzka196}]],[[${sk50_array_nagruzka197}]],[[${sk50_array_nagruzka198}]],[[${sk50_array_nagruzka199}]],[[${sk50_array_nagruzka200}]],
+        [[${sk50_array_nagruzka201}]],[[${sk50_array_nagruzka202}]],[[${sk50_array_nagruzka203}]],[[${sk50_array_nagruzka204}]],[[${sk50_array_nagruzka205}]],[[${sk50_array_nagruzka206}]],[[${sk50_array_nagruzka207}]],[[${sk50_array_nagruzka208}]],[[${sk50_array_nagruzka209}]],[[${sk50_array_nagruzka210}]],
+        [[${sk50_array_nagruzka211}]],[[${sk50_array_nagruzka212}]],[[${sk50_array_nagruzka213}]],[[${sk50_array_nagruzka214}]],[[${sk50_array_nagruzka215}]],[[${sk50_array_nagruzka216}]],[[${sk50_array_nagruzka217}]],[[${sk50_array_nagruzka218}]],[[${sk50_array_nagruzka219}]],[[${sk50_array_nagruzka220}]],
+        [[${sk50_array_nagruzka221}]],[[${sk50_array_nagruzka222}]],[[${sk50_array_nagruzka223}]],[[${sk50_array_nagruzka224}]],[[${sk50_array_nagruzka225}]],[[${sk50_array_nagruzka226}]],[[${sk50_array_nagruzka227}]],[[${sk50_array_nagruzka228}]],[[${sk50_array_nagruzka229}]],[[${sk50_array_nagruzka230}]],
+        [[${sk50_array_nagruzka231}]],[[${sk50_array_nagruzka232}]],[[${sk50_array_nagruzka233}]],[[${sk50_array_nagruzka234}]],[[${sk50_array_nagruzka235}]],[[${sk50_array_nagruzka236}]],[[${sk50_array_nagruzka237}]],[[${sk50_array_nagruzka238}]],[[${sk50_array_nagruzka239}]],[[${sk50_array_nagruzka240}]],
+        [[${sk50_array_nagruzka241}]],[[${sk50_array_nagruzka242}]],[[${sk50_array_nagruzka243}]],[[${sk50_array_nagruzka244}]],[[${sk50_array_nagruzka245}]],[[${sk50_array_nagruzka246}]],[[${sk50_array_nagruzka247}]],[[${sk50_array_nagruzka248}]],[[${sk50_array_nagruzka249}]],[[${sk50_array_nagruzka250}]],
+        [[${sk50_array_nagruzka251}]],[[${sk50_array_nagruzka252}]],[[${sk50_array_nagruzka253}]],[[${sk50_array_nagruzka254}]],[[${sk50_array_nagruzka255}]],[[${sk50_array_nagruzka256}]],[[${sk50_array_nagruzka257}]],[[${sk50_array_nagruzka258}]],[[${sk50_array_nagruzka259}]],[[${sk50_array_nagruzka260}]],
+        [[${sk50_array_nagruzka261}]],[[${sk50_array_nagruzka262}]],[[${sk50_array_nagruzka263}]],[[${sk50_array_nagruzka264}]],[[${sk50_array_nagruzka265}]],[[${sk50_array_nagruzka266}]],[[${sk50_array_nagruzka267}]],[[${sk50_array_nagruzka268}]],[[${sk50_array_nagruzka269}]],[[${sk50_array_nagruzka270}]],
+        [[${sk50_array_nagruzka271}]],[[${sk50_array_nagruzka272}]],[[${sk50_array_nagruzka273}]],[[${sk50_array_nagruzka274}]],[[${sk50_array_nagruzka275}]],[[${sk50_array_nagruzka276}]],[[${sk50_array_nagruzka277}]],[[${sk50_array_nagruzka278}]],[[${sk50_array_nagruzka279}]],[[${sk50_array_nagruzka280}]],
+        [[${sk50_array_nagruzka281}]],[[${sk50_array_nagruzka282}]],[[${sk50_array_nagruzka283}]],[[${sk50_array_nagruzka284}]],[[${sk50_array_nagruzka285}]],[[${sk50_array_nagruzka286}]],[[${sk50_array_nagruzka287}]],[[${sk50_array_nagruzka288}]],[[${sk50_array_nagruzka289}]],[[${sk50_array_nagruzka290}]],
+        [[${sk50_array_nagruzka291}]],[[${sk50_array_nagruzka292}]],[[${sk50_array_nagruzka293}]],[[${sk50_array_nagruzka294}]],[[${sk50_array_nagruzka295}]],[[${sk50_array_nagruzka296}]],[[${sk50_array_nagruzka297}]],[[${sk50_array_nagruzka298}]],[[${sk50_array_nagruzka299}]],[[${sk50_array_nagruzka300}]],
 
     ];
-    var dmg_sk50_array_name = [
-        [[${dmg_sk50_array_programname0}]],[[${dmg_sk50_array_programname1}]],[[${dmg_sk50_array_programname2}]],[[${dmg_sk50_array_programname3}]],[[${dmg_sk50_array_programname4}]],[[${dmg_sk50_array_programname5}]],[[${dmg_sk50_array_programname6}]],[[${dmg_sk50_array_programname7}]],[[${dmg_sk50_array_programname8}]],[[${dmg_sk50_array_programname9}]],[[${dmg_sk50_array_programname10}]],
-        [[${dmg_sk50_array_programname11}]],[[${dmg_sk50_array_programname12}]],[[${dmg_sk50_array_programname13}]],[[${dmg_sk50_array_programname14}]],[[${dmg_sk50_array_programname15}]],[[${dmg_sk50_array_programname16}]],[[${dmg_sk50_array_programname17}]],[[${dmg_sk50_array_programname18}]],[[${dmg_sk50_array_programname19}]],[[${dmg_sk50_array_programname20}]],
-        [[${dmg_sk50_array_programname21}]],[[${dmg_sk50_array_programname22}]],[[${dmg_sk50_array_programname23}]],[[${dmg_sk50_array_programname24}]],[[${dmg_sk50_array_programname25}]],[[${dmg_sk50_array_programname26}]],[[${dmg_sk50_array_programname27}]],[[${dmg_sk50_array_programname28}]],[[${dmg_sk50_array_programname29}]],[[${dmg_sk50_array_programname30}]],
-        [[${dmg_sk50_array_programname31}]],[[${dmg_sk50_array_programname32}]],[[${dmg_sk50_array_programname33}]],[[${dmg_sk50_array_programname34}]],[[${dmg_sk50_array_programname35}]],[[${dmg_sk50_array_programname36}]],[[${dmg_sk50_array_programname37}]],[[${dmg_sk50_array_programname38}]],[[${dmg_sk50_array_programname39}]],[[${dmg_sk50_array_programname40}]],
-        [[${dmg_sk50_array_programname41}]],[[${dmg_sk50_array_programname42}]],[[${dmg_sk50_array_programname43}]],[[${dmg_sk50_array_programname44}]],[[${dmg_sk50_array_programname45}]],[[${dmg_sk50_array_programname46}]],[[${dmg_sk50_array_programname47}]],[[${dmg_sk50_array_programname48}]],[[${dmg_sk50_array_programname49}]],[[${dmg_sk50_array_programname50}]],
-        [[${dmg_sk50_array_programname51}]],[[${dmg_sk50_array_programname52}]],[[${dmg_sk50_array_programname53}]],[[${dmg_sk50_array_programname54}]],[[${dmg_sk50_array_programname55}]],[[${dmg_sk50_array_programname56}]],[[${dmg_sk50_array_programname57}]],[[${dmg_sk50_array_programname58}]],[[${dmg_sk50_array_programname59}]],[[${dmg_sk50_array_programname60}]],
-        [[${dmg_sk50_array_programname61}]],[[${dmg_sk50_array_programname62}]],[[${dmg_sk50_array_programname63}]],[[${dmg_sk50_array_programname64}]],[[${dmg_sk50_array_programname65}]],[[${dmg_sk50_array_programname66}]],[[${dmg_sk50_array_programname67}]],[[${dmg_sk50_array_programname68}]],[[${dmg_sk50_array_programname69}]],[[${dmg_sk50_array_programname70}]],
-        [[${dmg_sk50_array_programname71}]],[[${dmg_sk50_array_programname72}]],[[${dmg_sk50_array_programname73}]],[[${dmg_sk50_array_programname74}]],[[${dmg_sk50_array_programname75}]],[[${dmg_sk50_array_programname76}]],[[${dmg_sk50_array_programname77}]],[[${dmg_sk50_array_programname78}]],[[${dmg_sk50_array_programname79}]],
-        [[${dmg_sk50_array_programname81}]],[[${dmg_sk50_array_programname82}]],[[${dmg_sk50_array_programname83}]],[[${dmg_sk50_array_programname84}]],[[${dmg_sk50_array_programname85}]],[[${dmg_sk50_array_programname86}]],[[${dmg_sk50_array_programname87}]],[[${dmg_sk50_array_programname88}]],[[${dmg_sk50_array_programname89}]],[[${dmg_sk50_array_programname90}]],
-        [[${dmg_sk50_array_programname91}]],[[${dmg_sk50_array_programname92}]],[[${dmg_sk50_array_programname93}]],[[${dmg_sk50_array_programname94}]],[[${dmg_sk50_array_programname95}]],[[${dmg_sk50_array_programname96}]],[[${dmg_sk50_array_programname97}]],[[${dmg_sk50_array_programname98}]],[[${dmg_sk50_array_programname99}]],[[${dmg_sk50_array_programname100}]],
-        [[${dmg_sk50_array_programname101}]],[[${dmg_sk50_array_programname102}]],[[${dmg_sk50_array_programname103}]],[[${dmg_sk50_array_programname104}]],[[${dmg_sk50_array_programname105}]],[[${dmg_sk50_array_programname106}]],[[${dmg_sk50_array_programname107}]],[[${dmg_sk50_array_programname108}]],[[${dmg_sk50_array_programname109}]],[[${dmg_sk50_array_programname110}]],
-        [[${dmg_sk50_array_programname111}]],[[${dmg_sk50_array_programname112}]],[[${dmg_sk50_array_programname113}]],[[${dmg_sk50_array_programname114}]],[[${dmg_sk50_array_programname115}]],[[${dmg_sk50_array_programname116}]],[[${dmg_sk50_array_programname117}]],[[${dmg_sk50_array_programname118}]],[[${dmg_sk50_array_programname119}]],[[${dmg_sk50_array_programname120}]],
-        [[${dmg_sk50_array_programname121}]],[[${dmg_sk50_array_programname122}]],[[${dmg_sk50_array_programname123}]],[[${dmg_sk50_array_programname124}]],[[${dmg_sk50_array_programname125}]],[[${dmg_sk50_array_programname126}]],[[${dmg_sk50_array_programname127}]],[[${dmg_sk50_array_programname128}]],[[${dmg_sk50_array_programname129}]],[[${dmg_sk50_array_programname130}]],
-        [[${dmg_sk50_array_programname131}]],[[${dmg_sk50_array_programname132}]],[[${dmg_sk50_array_programname133}]],[[${dmg_sk50_array_programname134}]],[[${dmg_sk50_array_programname135}]],[[${dmg_sk50_array_programname136}]],[[${dmg_sk50_array_programname137}]],[[${dmg_sk50_array_programname138}]],[[${dmg_sk50_array_programname129}]],[[${dmg_sk50_array_programname120}]],
-        [[${dmg_sk50_array_programname141}]],[[${dmg_sk50_array_programname142}]],[[${dmg_sk50_array_programname143}]],[[${dmg_sk50_array_programname144}]],[[${dmg_sk50_array_programname145}]],[[${dmg_sk50_array_programname146}]],[[${dmg_sk50_array_programname147}]],[[${dmg_sk50_array_programname148}]],[[${dmg_sk50_array_programname129}]],[[${dmg_sk50_array_programname120}]],
+    var sk50_array_name = [
+        [[${sk50_array_programname0}]],[[${sk50_array_programname1}]],[[${sk50_array_programname2}]],[[${sk50_array_programname3}]],[[${sk50_array_programname4}]],[[${sk50_array_programname5}]],[[${sk50_array_programname6}]],[[${sk50_array_programname7}]],[[${sk50_array_programname8}]],[[${sk50_array_programname9}]],[[${sk50_array_programname10}]],
+        [[${sk50_array_programname11}]],[[${sk50_array_programname12}]],[[${sk50_array_programname13}]],[[${sk50_array_programname14}]],[[${sk50_array_programname15}]],[[${sk50_array_programname16}]],[[${sk50_array_programname17}]],[[${sk50_array_programname18}]],[[${sk50_array_programname19}]],[[${sk50_array_programname20}]],
+        [[${sk50_array_programname21}]],[[${sk50_array_programname22}]],[[${sk50_array_programname23}]],[[${sk50_array_programname24}]],[[${sk50_array_programname25}]],[[${sk50_array_programname26}]],[[${sk50_array_programname27}]],[[${sk50_array_programname28}]],[[${sk50_array_programname29}]],[[${sk50_array_programname30}]],
+        [[${sk50_array_programname31}]],[[${sk50_array_programname32}]],[[${sk50_array_programname33}]],[[${sk50_array_programname34}]],[[${sk50_array_programname35}]],[[${sk50_array_programname36}]],[[${sk50_array_programname37}]],[[${sk50_array_programname38}]],[[${sk50_array_programname39}]],[[${sk50_array_programname40}]],
+        [[${sk50_array_programname41}]],[[${sk50_array_programname42}]],[[${sk50_array_programname43}]],[[${sk50_array_programname44}]],[[${sk50_array_programname45}]],[[${sk50_array_programname46}]],[[${sk50_array_programname47}]],[[${sk50_array_programname48}]],[[${sk50_array_programname49}]],[[${sk50_array_programname50}]],
+        [[${sk50_array_programname51}]],[[${sk50_array_programname52}]],[[${sk50_array_programname53}]],[[${sk50_array_programname54}]],[[${sk50_array_programname55}]],[[${sk50_array_programname56}]],[[${sk50_array_programname57}]],[[${sk50_array_programname58}]],[[${sk50_array_programname59}]],[[${sk50_array_programname60}]],
+        [[${sk50_array_programname61}]],[[${sk50_array_programname62}]],[[${sk50_array_programname63}]],[[${sk50_array_programname64}]],[[${sk50_array_programname65}]],[[${sk50_array_programname66}]],[[${sk50_array_programname67}]],[[${sk50_array_programname68}]],[[${sk50_array_programname69}]],[[${sk50_array_programname70}]],
+        [[${sk50_array_programname71}]],[[${sk50_array_programname72}]],[[${sk50_array_programname73}]],[[${sk50_array_programname74}]],[[${sk50_array_programname75}]],[[${sk50_array_programname76}]],[[${sk50_array_programname77}]],[[${sk50_array_programname78}]],[[${sk50_array_programname79}]],
+        [[${sk50_array_programname81}]],[[${sk50_array_programname82}]],[[${sk50_array_programname83}]],[[${sk50_array_programname84}]],[[${sk50_array_programname85}]],[[${sk50_array_programname86}]],[[${sk50_array_programname87}]],[[${sk50_array_programname88}]],[[${sk50_array_programname89}]],[[${sk50_array_programname90}]],
+        [[${sk50_array_programname91}]],[[${sk50_array_programname92}]],[[${sk50_array_programname93}]],[[${sk50_array_programname94}]],[[${sk50_array_programname95}]],[[${sk50_array_programname96}]],[[${sk50_array_programname97}]],[[${sk50_array_programname98}]],[[${sk50_array_programname99}]],[[${sk50_array_programname100}]],
+        [[${sk50_array_programname101}]],[[${sk50_array_programname102}]],[[${sk50_array_programname103}]],[[${sk50_array_programname104}]],[[${sk50_array_programname105}]],[[${sk50_array_programname106}]],[[${sk50_array_programname107}]],[[${sk50_array_programname108}]],[[${sk50_array_programname109}]],[[${sk50_array_programname110}]],
+        [[${sk50_array_programname111}]],[[${sk50_array_programname112}]],[[${sk50_array_programname113}]],[[${sk50_array_programname114}]],[[${sk50_array_programname115}]],[[${sk50_array_programname116}]],[[${sk50_array_programname117}]],[[${sk50_array_programname118}]],[[${sk50_array_programname119}]],[[${sk50_array_programname120}]],
+        [[${sk50_array_programname121}]],[[${sk50_array_programname122}]],[[${sk50_array_programname123}]],[[${sk50_array_programname124}]],[[${sk50_array_programname125}]],[[${sk50_array_programname126}]],[[${sk50_array_programname127}]],[[${sk50_array_programname128}]],[[${sk50_array_programname129}]],[[${sk50_array_programname130}]],
+        [[${sk50_array_programname131}]],[[${sk50_array_programname132}]],[[${sk50_array_programname133}]],[[${sk50_array_programname134}]],[[${sk50_array_programname135}]],[[${sk50_array_programname136}]],[[${sk50_array_programname137}]],[[${sk50_array_programname138}]],[[${sk50_array_programname129}]],[[${sk50_array_programname120}]],
+        [[${sk50_array_programname141}]],[[${sk50_array_programname142}]],[[${sk50_array_programname143}]],[[${sk50_array_programname144}]],[[${sk50_array_programname145}]],[[${sk50_array_programname146}]],[[${sk50_array_programname147}]],[[${sk50_array_programname148}]],[[${sk50_array_programname129}]],[[${sk50_array_programname120}]],
 
     ]
 
 
-</script>   <!--dmg_sk50 js линейная диагрмма работы оборудования-->
+</script>   <!--sk50 js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
-    var dmg_sk50_work = [[${dmg_sk50_work}]];
-    var dmg_sk50_pass = [[${dmg_sk50_pass}]];
-    var dmg_sk50_fail = [[${dmg_sk50_fail}]];
-    var dmg_sk50_avar = [[${dmg_sk50_avar}]];
-    var dmg_sk50_nagruzka = [[${dmg_sk50_nagruzka}]];
-</script>   <!--dmg_sk50 круговая диагрмма загрузки оборудования-->
-<script src="/js/stanki/data_dmg_sk50.js"></script>
+    var sk50_work = [[${sk50_work}]];
+    var sk50_pass = [[${sk50_pass}]];
+    var sk50_fail = [[${sk50_fail}]];
+    var sk50_avar = [[${sk50_avar}]];
+    var sk50_nagruzka = [[${sk50_nagruzka}]];
+</script>   <!--sk50 круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_sk50.js"></script>
 
 <script th:inline="javascript">
     $('.icon_personal_uf5220').hover(
@@ -1554,24 +1554,24 @@
         }
     );
 
-    $('.icon_personal_dmg_sk50').hover(
+    $('.icon_personal_sk50').hover(
         function () {
-            $('.label_personal_dmg_sk50').css('color', '#000000');
-            $('.label_personal_dmg_sk50').css('margin-top', '70px');
+            $('.label_personal_sk50').css('color', '#000000');
+            $('.label_personal_sk50').css('margin-top', '70px');
         },
         function () {
-            $('.label_personal_dmg_sk50').css('color', '#756e6e');
-            $('.label_personal_dmg_sk50').css('margin-top', '65px');
+            $('.label_personal_sk50').css('color', '#756e6e');
+            $('.label_personal_sk50').css('margin-top', '65px');
         }
     );
-    $('.icon_mesto_dmg_sk50').hover(
+    $('.icon_mesto_sk50').hover(
         function () {
-            $('.label_mesto_dmg_sk50').css('color', '#000000');
-            $('.label_mesto_dmg_sk50').css('margin-top', '70px');
+            $('.label_mesto_sk50').css('color', '#000000');
+            $('.label_mesto_sk50').css('margin-top', '70px');
         },
         function () {
-            $('.label_mesto_dmg_sk50').css('color', '#756e6e');
-            $('.label_mesto_dmg_sk50').css('margin-top', '65px');
+            $('.label_mesto_sk50').css('color', '#756e6e');
+            $('.label_mesto_sk50').css('margin-top', '65px');
         }
     );
 </script> <!--Кнопки Персонал и Место-->
