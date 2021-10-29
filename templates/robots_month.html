@@ -378,7 +378,7 @@
 
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center">
-                <p><../static/ th:src="@{${image_user}}" width="100" style="border-radius: 360px; "/></p>
+                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; "/></p>
                 <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
                 <form th:action="@{/logout}" method="post">
@@ -589,7 +589,7 @@
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">МАКС #1</figcaption>
                     <div>
                         <a style="text-decoration: none; float: left" class="icon_mesto_maks_1" href="mesto/mesto_maks_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto_maks_1'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_maks_1" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_maks_1'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_maks_1" href="personal/personal_maks_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_maks_1'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -924,7 +924,7 @@
                 </div>
                 <div>
                     <a style="text-decoration: none; float: left" class="icon_mesto_maks_2" href="mesto/mesto_maks_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto_maks_2'>Место</div></a>
-                    <a style="text-decoration: none; float: left" class="icon_personal_maks_2" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_maks_2'>Персонал</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_maks_2" href="personal/personal_maks_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_maks_2'>Персонал</div></a>
                 </div>
             </div>
             <div id="container_days2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
@@ -1258,7 +1258,7 @@
                 </div>
                 <div>
                     <a style="text-decoration: none; float: left" class="icon_mesto_m710" href="mesto/mesto_m710" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto_m710'>Место</div></a>
-                    <a style="text-decoration: none; float: left" class="icon_personal_m710" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_m710'>Персонал</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal_m710" href="personal/personal_m710" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_m710'>Персонал</div></a>
                 </div>
             </div>
             <div id="container_days3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
@@ -1591,7 +1591,7 @@
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">РТК12С</figcaption>
                     <div>
                         <a style="text-decoration: none; float: left" class="icon_mesto_rtc12c" href="mesto/mesto_rtk12c" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto_rtc12c'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_rtc12c" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_rtc12c'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_rtc12c" href="personal/personal_rtk12c" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_rtc12c'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -1925,7 +1925,7 @@
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">p250</figcaption>
                     <div>
                         <a style="text-decoration: none; float: left" class="icon_mesto_p250" href="mesto/mesto_p250" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(895, screen.availHeight)+',width='+Math.min(1020, screen.availWidth)); return false;"><div class='label_mesto_p250'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_p250" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_p250'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_p250" href="personal/personal_p250" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_p250'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -2259,7 +2259,7 @@
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">КРОТ</figcaption>
                     <div>
                         <a style="text-decoration: none; float: left" class="icon_mesto_krot" href="mesto/mesto_krot" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(895, screen.availHeight)+',width='+Math.min(1020, screen.availWidth)); return false;"><div class='label_mesto_krot'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_krot" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_krot'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_krot" href="personal/personal_krot" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_krot'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -2593,7 +2593,7 @@
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ПРАНС</figcaption>
                     <div>
                         <a style="text-decoration: none; float: left" class="icon_mesto_prans" href="mesto/mesto_prans" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(895, screen.availHeight)+',width='+Math.min(1020, screen.availWidth)); return false;"><div class='label_mesto_prans'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_prans" href="personal/personal_uvf_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_prans'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_prans" href="personal/personal_prans" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_prans'>Персонал</div></a>
                     </div>
                 </div>
             </div>
