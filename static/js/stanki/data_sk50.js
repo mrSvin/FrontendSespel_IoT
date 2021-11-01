@@ -209,7 +209,6 @@ Highcharts.chart('container_work4', {
                 {x:  (new Date(sk50_array_rabota[292])).getTime(), x2: (new Date(sk50_array_rabota[293])).getTime(), y: 1, programname: sk50_array_name[148]},
                 {x:  (new Date(sk50_array_rabota[294])).getTime(), x2: (new Date(sk50_array_rabota[295])).getTime(), y: 1, programname: sk50_array_name[149]},
                 {x:  (new Date(sk50_array_rabota[296])).getTime(), x2: (new Date(sk50_array_rabota[297])).getTime(), y: 1, programname: sk50_array_name[150]},
-                {x:  (new Date(sk50_array_rabota[298])).getTime(), x2: (new Date(sk50_array_rabota[299])).getTime(), y: 1, programname: sk50_array_name[151]},
 
             ],
 
@@ -525,7 +524,6 @@ Highcharts.chart('container_work4', {
                 {x:  (new Date(sk50_array_nagruzka[292])).getTime(), x2: (new Date(sk50_array_nagruzka[293])).getTime(), y: 0},
                 {x:  (new Date(sk50_array_nagruzka[294])).getTime(), x2: (new Date(sk50_array_nagruzka[295])).getTime(), y: 0},
                 {x:  (new Date(sk50_array_nagruzka[296])).getTime(), x2: (new Date(sk50_array_nagruzka[297])).getTime(), y: 0},
-                {x:  (new Date(sk50_array_nagruzka[298])).getTime(), x2: (new Date(sk50_array_nagruzka[299])).getTime(), y: 0},
 
             ],
             dataLabels: {
