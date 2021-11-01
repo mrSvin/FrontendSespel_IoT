@@ -483,6 +483,15 @@
 
 </script>   <!--Календарь js-->
 
+<div style="display: flex">
+
+    <div id="container_sum_zagruzka" style="min-height: 400px; width: 600px"></div>
+    <!--Общая загрузка html-->
+
+    <div id="container_kol_operations" style="height: 400px; width: 800px"></div>
+    <!--Количество операций html-->
+</div>  <!--Общая загрузка и количество операций html-->
+
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
@@ -615,6 +624,231 @@
         </div>
     </div>  <!--dmf260 html-->
 </div> <!--dmf260 html-->
+
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000'];
+
+    var work_uvf_1_1 = [[${work}]];
+    var work_uvf_1_2 = [[${work_2}]];
+    var work_ntx1000 = [[${work_3}]];
+    var work_nlx3000 = [[${work_nlx3000}]];
+    var work_gamma2000 = [[${work_dmg_gamma2000}]];
+    var work_ctx650 = [[${work_dmg_ctx650}]];
+    var work_dmf260 = [[${work_dmg_dmf260}]];
+
+    var pause_uvf_1_1 = [[${pass}]];
+    var pause_uvf_1_2 = [[${pass_2}]];
+    var pause_ntx1000 = [[${pass_3}]];
+    var pause_nlx3000 = [[${pass_nlx3000}]];
+    var pause_gamma2000 = [[${pass_dmg_gamma2000}]];
+    var pause_ctx650 = [[${pass_dmg_ctx650}]];
+    var pause_dmf260 = [[${pass_dmg_dmf260}]];
+
+    var off_uvf_1_1 = [[${fail}]];
+    var off_uvf_1_2 = [[${fail_2}]];
+    var off_ntx1000 = [[${fail_3}]];
+    var off_nlx3000 = [[${fail_nlx3000}]];
+    var off_gamma2000 = [[${fail_dmg_gamma2000}]];
+    var off_ctx650 = [[${fail_dmg_ctx650}]];
+    var off_dmf260 = [[${fail_dmg_dmf260}]];
+
+    var avar_uvf_1_1 = [[${avar}]];
+    var avar_uvf_1_2 = [[${avar_2__2}]];
+    var avar_ntx1000 = [[${avar_3}]];
+    var avar_nlx3000 = [[${avar_nlx3000}]];
+    var avar_gamma2000 = [[${avar_dmg_gamma2000}]];
+    var avar_ctx650 = [[${avar_dmg_ctx650}]];
+    var avar_dmf260 = [[${avar_dmg_dmf260}]];
+
+
+    var nagruzka_uvf_1_1 = [[${nagruzka}]];
+    var nagruzka_uvf_1_2 = [[${nagruzka_2__2}]];
+    var nagruzka_ntx1000 = [[${nagruzka_3}]];
+    var nagruzka_nlx3000 = [[${nagruzka_nlx3000}]];
+    var nagruzka_gamma2000 = [[${nagruzka_dmg_gamma2000}]];
+    var nagruzka_ctx650 = [[${nagruzka_dmg_ctx650}]];
+    var nagruzka_dmf260 = [[${nagruzka_dmg_dmf260}]];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors: colors,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['УВФ-1 #1', 'УВФ-1 #2', 'NTX1000', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [work_uvf_1_1, work_uvf_1_2, work_ntx1000, work_nlx3000, work_gamma2000, work_ctx650, work_dmf260 ]
+        }, {
+            name: 'Под нагрузкой',
+            data: [nagruzka_uvf_1_1, nagruzka_uvf_1_2, nagruzka_ntx1000, nagruzka_nlx3000, nagruzka_gamma2000, nagruzka_ctx650, nagruzka_dmf260]
+        }, {
+            name: 'Ожидание',
+            data: [pause_uvf_1_1, pause_uvf_1_2, pause_ntx1000, pause_nlx3000, pause_gamma2000, pause_ctx650, pause_dmf260]
+        }, {
+            name: 'Авария',
+            data: [avar_uvf_1_1, avar_uvf_1_2, avar_ntx1000, avar_nlx3000, avar_gamma2000, avar_ctx650, avar_dmf260]
+        }, {
+            name: 'Выключен',
+            data: [off_uvf_1_1, off_uvf_1_2, off_ntx1000, off_nlx3000, off_gamma2000, off_ctx650, off_dmf260]
+        }]
+    });
+
+</script>   <!--js Общая загрузка-->
+<script th:inline="javascript">
+
+    var uvf_1_1_kol_op = [[${uvf_1_1_kol_op}]];
+    var uvf_1_2_kol_op = [[${uvf_1_2_kol_op}]];
+    var ntx1000_kol_op = [[${ntx1000_kol_op}]];
+    var nlx3000_kol_op = [[${nlx3000_kol_op}]];
+    var gamma2000_kol_op = [[${gamma2000_kol_op}]];
+    var ctx650_kol_op = [[${ctx650_kol_op}]];
+    var dmf260_kol_op = [[${dmf260_kol_op}]];
+
+    var kol_long_operations_uvf_1_1 = [[${kol_long_operations_uvf_1_1}]];
+    var kol_long_operations_uvf_1_2 = [[${kol_long_operations_uvf_1_2}]];
+    var kol_long_operations_ntx1000 = [[${kol_long_operations_ntx1000}]];
+    var kol_long_operations_nlx3000 = [[${kol_long_operations_nlx3000}]];
+    var kol_long_operations_gamma2000 = [[${kol_long_operations_gamma2000}]];
+    var kol_long_operations_ctx650 = [[${kol_long_operations_ctx650}]];
+    var kol_long_operations_dmf260 = [[${kol_long_operations_dmf260}]];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_kol_operations', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Количество операций'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['УВФ-1', 'УВФ-2', 'NTX1000', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: [uvf_1_1_kol_op, uvf_1_2_kol_op, ntx1000_kol_op, nlx3000_kol_op, gamma2000_kol_op, ctx650_kol_op, dmf260_kol_op]
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: [kol_long_operations_uvf_1_1, kol_long_operations_uvf_1_2, kol_long_operations_ntx1000, kol_long_operations_nlx3000, kol_long_operations_gamma2000, kol_long_operations_ctx650, kol_long_operations_dmf260]
+        }]
+    });
+</script>   <!--js количество операций-->
 
 <script th:inline="javascript">
 
