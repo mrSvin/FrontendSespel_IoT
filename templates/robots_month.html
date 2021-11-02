@@ -141,23 +141,6 @@
 <!--        }-->
 <!--    </script>-->
 
-    <script>
-
-        if (document.readyState == 'loading') {
-            document.body.classList.remove('loaded');
-        }
-
-        window.onunload = function () {
-            document.body.classList.remove('loaded');
-        }
-        window.onload = function () {
-            window.setTimeout(() => {
-                document.body.classList.add('loaded');
-                document.body.classList.remove('loaded_hiding');
-            }, 500);}
-
-    </script>
-
     <style>
         .icon_mesto_maks_1{
 
@@ -3085,6 +3068,35 @@
     );
 
 </script> <!--Кнопки Персонал и Место-->
+
+<script>
+
+    window.onload = function () {
+        window.setTimeout(() => {
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
+            // alert('Страница загружена:' + document.readyState);
+        }, 500);
+    }
+
+    window.onunload = function() {
+        document.body.classList.remove('loaded');
+        document.body.classList.add('loaded_hiding');
+        // alert('Покидание страницы:' + document.readyState);
+    }
+
+    // if (document.readyState == 'loading') {
+    //     document.body.classList.remove('loaded');
+    //     document.body.classList.add('loaded_hiding');
+    //     // alert('Покидание страницы:' + document.readyState);
+    // } else {
+    //     document.body.classList.add('loaded');
+    //     document.body.classList.remove('loaded_hiding');
+    //     alert('Страница загружена:' + document.readyState);
+    // }
+
+
+</script>
 
 </body>
 </html>
