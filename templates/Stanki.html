@@ -742,17 +742,23 @@
     var work_uf5220 = [[${work}]];
     var work_progress = [[${progress_work}]];
     var work_ntx1000 = [[${ntx1000_work}]];
+    var work_sk50 = [[${sk50_work}]];
 
     var pause_uf5220 = [[${pass}]];
     var pause_progress = [[${progress_pass}]];
     var pause_ntx1000 = [[${ntx1000_pass}]];
+    var pause_sk50 = [[${sk50_pass}]];
 
     var off_uf5220 = [[${fail}]];
     var off_progress = [[${progress_fail}]];
     var off_ntx1000 = [[${ntx1000_fail}]];
+    var off_sk50 = [[${sk50_fail}]];
 
     var avar_ntx1000 = [[${ntx1000_avar}]];
+    var avar_sk50 = [[${sk50_avar}]];
+
     var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
+    var nagruzka_sk50 = [[${sk50_nagruzka}]];
 
     Highcharts.setOptions({
         lang: {
@@ -791,7 +797,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000']
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50']
         },
         credits: {
             enabled: false
@@ -813,19 +819,19 @@
         },
         series: [{
             name: 'Работа',
-            data: [work_uf5220, work_progress, work_ntx1000]
+            data: [work_uf5220, work_progress, work_ntx1000, work_sk50]
         }, {
             name: 'Под нагрузкой',
-            data: [0, 0, nagruzka_ntx1000]
+            data: [0, 0, nagruzka_ntx1000,nagruzka_sk50]
         }, {
             name: 'Ожидание',
-            data: [pause_uf5220, pause_progress, pause_ntx1000]
+            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50]
         }, {
             name: 'Авария',
-            data: [0, 0, avar_ntx1000]
+            data: [0, 0, avar_ntx1000, avar_sk50]
         }, {
             name: 'Выключен',
-            data: [off_uf5220, off_progress, off_ntx1000]
+            data: [off_uf5220, off_progress, off_ntx1000, off_sk50]
         }]
     });
 
@@ -835,9 +841,12 @@
     var uf5220_kol_op = [[${uf5220_kol_op}]];
     var progress_kol_op = [[${progress_kol_op}]];
     var ntx1000_kol_op = [[${ntx1000_kol_op}]];
+    var sk50_kol_op = [[${sk50_kol_op}]];
+
     var kol_long_operations_uf5220 = [[${kol_long_operations_uf5220}]];
     var kol_long_operations_progress = [[${kol_long_operations_progress}]];
     var kol_long_operations_ntx1000 = [[${kol_long_operations_ntx1000}]];
+    var kol_long_operations_sk50 = [[${kol_long_operations_ntx1000}]];
 
     Highcharts.setOptions({
         lang: {
@@ -875,7 +884,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000'],
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50'],
             title: {
                 text: null
             }
@@ -917,10 +926,10 @@
         },
         series: [{
             name: 'Общее количество операций',
-            data: [uf5220_kol_op, progress_kol_op, ntx1000_kol_op]
+            data: [uf5220_kol_op, progress_kol_op, ntx1000_kol_op, sk50_kol_op]
         }, {
             name: 'Количество операций более 3 минут',
-            data: [kol_long_operations_uf5220, kol_long_operations_progress, kol_long_operations_ntx1000]
+            data: [kol_long_operations_uf5220, kol_long_operations_progress, kol_long_operations_ntx1000, kol_long_operations_sk50]
         }]
     });
 </script>   <!--js количество операций-->
