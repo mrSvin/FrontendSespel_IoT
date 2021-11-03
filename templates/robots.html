@@ -12,7 +12,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-     <style>
+    <style>
 
         .icon_mesto_maks_1{
 
@@ -359,17 +359,15 @@
 
 
     <!-- Загрузка страницы -->
-<!--    <script>-->
-<!--        window.onload = function () {-->
-<!--            document.body.classList.add('loaded_hiding');-->
-<!--            window.setTimeout(function () {-->
-<!--                document.body.classList.add('loaded');-->
-<!--                document.body.classList.remove('loaded_hiding');-->
-<!--            }, 500);-->
-<!--        }-->
-<!--    </script>-->
-
-
+    <script>
+        window.onload = function () {
+            document.body.classList.add('loaded_hiding');
+            window.setTimeout(function () {
+                document.body.classList.add('loaded');
+                document.body.classList.remove('loaded_hiding');
+            }, 500);
+        }
+    </script>
 
 </head>
 
@@ -631,8 +629,10 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div class="lazyload">
+<!--                <div id="container_work" style="float: left; height: 400px; width: 55%"></div> &lt;!&ndash;Вставляем линейную гистограмму работы&ndash;&gt;-->
+<!--                <div id="container" style="float: left; height: 400px; width: 25%"></div> &lt;!&ndash;Вставляем круговую диаграмму загрузки&ndash;&gt;-->
+            </div>
         </div>
     </div>  <!--Макс_1 html-->
 </div> <!--Макс_1 html-->
@@ -1204,10 +1204,12 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div class="lazyload">
+<!--                <div id="container_work_2" style="float: left; height: 400px; width: 55%"></div> &lt;!&ndash;Вставляем линейную гистограмму работы&ndash;&gt;-->
+<!--                <div id="container_2" style="float: left; height: 400px; width: 25%"></div> &lt;!&ndash;Вставляем круговую диаграмму загрузки&ndash;&gt;-->
+            </div>
         </div>
-     </div>  <!--Макс_2 html-->
+    </div>  <!--Макс_2 html-->
 
 </div> <!--Макс_2 html-->
 <script th:inline="javascript">
@@ -1778,8 +1780,10 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <<div class="lazyload">
+<!--                <div id="container_work_3" style="float: left; height: 400px; width: 55%"></div> &lt;!&ndash;Вставляем линейную гистограмму работы&ndash;&gt;-->
+<!--                <div id="container_3" style="float: left; height: 400px; width: 25%"></div> &lt;!&ndash;Вставляем круговую диаграмму загрузки&ndash;&gt;-->
+            </div>
         </div>
     </div>  <!--М710 html-->
 </div> <!--М710 html-->
@@ -2351,8 +2355,10 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div class="lazyload">
+<!--                <div id="container_work_4" style="float: left; height: 400px; width: 55%"></div> &lt;!&ndash;Вставляем линейную гистограмму работы&ndash;&gt;-->
+<!--                <div id="container_4" style="float: left; height: 400px; width: 25%"></div> &lt;!&ndash;Вставляем круговую диаграмму загрузки&ndash;&gt;-->
+            </div>
         </div>
     </div>  <!--РТК12С html-->
 </div> <!--РТК12С html-->
@@ -2924,8 +2930,10 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div class="lazyload">
+<!--                <div id="container_work_5" style="float: left; height: 400px; width: 55%"></div> &lt;!&ndash;Вставляем линейную гистограмму работы&ndash;&gt;-->
+<!--                <div id="container_5" style="float: left; height: 400px; width: 25%"></div> &lt;!&ndash;Вставляем круговую диаграмму загрузки&ndash;&gt;-->
+            </div>
         </div>
     </div>  <!--P250 html-->
 </div> <!--P250 html-->
@@ -3497,8 +3505,10 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_krot" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_krot" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div class="lazyload">
+<!--                <div id="container_work_krot" style="float: left; height: 400px; width: 55%"></div> &lt;!&ndash;Вставляем линейную гистограмму работы&ndash;&gt;-->
+<!--                <div id="container_krot" style="float: left; height: 400px; width: 25%"></div> &lt;!&ndash;Вставляем круговую диаграмму загрузки&ndash;&gt;-->
+            </div>
         </div>
     </div>  <!--krot html-->
 </div> <!--krot html-->
@@ -4070,8 +4080,10 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_prans" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_prans" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div class="lazyload">
+<!--                <div id="container_work_prans" style="float: left; height: 400px; width: 55%"></div> &lt;!&ndash;Вставляем линейную гистограмму работы&ndash;&gt;-->
+<!--                <div id="container_prans" style="float: left; height: 400px; width: 25%"></div> &lt;!&ndash;Вставляем круговую диаграмму загрузки&ndash;&gt;-->
+            </div>
         </div>
     </div>  <!--prans html-->
 </div> <!--prans html-->
@@ -4779,36 +4791,6 @@
     );
 
 </script> <!--Кнопки Персонал и Место-->
-
-<script>
-
-    window.onload = function () {
-        window.setTimeout(() => {
-            document.body.classList.add('loaded');
-            document.body.classList.remove('loaded_hiding');
-            // alert('Страница загружена:' + document.readyState);
-        }, 500);
-    }
-
-    window.onunload = function() {
-        document.body.classList.remove('loaded');
-        document.body.classList.add('loaded_hiding');
-        // alert('Покидание страницы:' + document.readyState);
-    }
-
-    // if (document.readyState == 'loading') {
-    //     document.body.classList.remove('loaded');
-    //     document.body.classList.add('loaded_hiding');
-    //     // alert('Покидание страницы:' + document.readyState);
-    // } else {
-    //     document.body.classList.add('loaded');
-    //     document.body.classList.remove('loaded_hiding');
-    //     alert('Страница загружена:' + document.readyState);
-    // }
-
-
-</script>
-
 
 </body>
 
