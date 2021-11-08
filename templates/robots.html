@@ -431,7 +431,7 @@
         <h2>Выберите дату:</h2>
     </div>
 
-    <form  action="#" th:action="@{/robots}" th:object="${calendar_date}" method="post" >
+    <form  action="#" th:action="@{/robots}" th:object="${calendar_date}" method="get" >
 
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
             <input type='text' class="form-control" th:field="*{content_date}"/>
