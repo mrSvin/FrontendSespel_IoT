@@ -24,7 +24,40 @@
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap-3.3.0.min.js"></script>
 
+    <script >
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "yyyy-mm",
+                language: 'ru',
+                viewMode: "months",
+                minViewMode: "months",
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
 
+
+
+            $('#button_obnovit').on("click", function() {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+
+                var mes = datas.getMonth()+1;
+                var year = datas.getFullYear();
+
+                name_data = mes+"-" + year;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
 
     <style>
         .preloader {
