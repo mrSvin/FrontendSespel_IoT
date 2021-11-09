@@ -635,7 +635,9 @@
     </div>  <!--Макс_1 html-->
 </div> <!--Макс_1 html-->
 <script th:inline="javascript">
-    var colors = ['#207210', '#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -658,6 +660,9 @@
             timezoneOffset: new Date().getTimezoneOffset()
         }
     });
+
+    var colors = ['#207210', '#38e817', '#ffea32', '#000000', '#e81e1d'];
+
     Highcharts.chart('container_work', {
         chart: {
             plotBackgroundColor: null,
@@ -669,6 +674,9 @@
         title: {
             text: 'Работа оборудования'
         },
+        colors:colors,
+
+
         xAxis: {
             type: 'datetime'
         },
@@ -679,14 +687,8 @@
             categories: ['Сварка','Работа', 'Ожидание', 'Выключен', 'В аварии'],
             reversed: true
         },
-        colors:colors,
         credits: {
             enabled: false
-        },
-
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
         },
 
         series: [
