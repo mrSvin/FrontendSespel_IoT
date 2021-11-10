@@ -201,13 +201,11 @@
         });
 
     </script>   <!--Календарь js-->
+
     <!--Календарь -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     <!--Календарь Русский язык-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
-
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 
 
     <!-- Загрузка страницы -->
@@ -281,7 +279,7 @@
         <h2>Выберите дату:</h2>
     </div>
 
-    <form action="#" th:action="@{/liteyka}" th:object="${calendar_date}" method="post">
+    <form  action="#" th:action="@{/liteyka}" th:object="${calendar_date}" method="post" >
 
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
             <input type='text' class="form-control" th:field="*{content_date}"/>
@@ -290,7 +288,7 @@
 		                    </span>
         </div>
 
-        <div class="form-actions">
+        <div class="form-actions" >
             <button type="submit"
                     class="follow"
                     id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
@@ -299,6 +297,7 @@
     </form>
 
 </div>      <!--Календарь html-->
+
 <script >
     $(function () {
         $('#datepicker').datepicker({
@@ -331,7 +330,6 @@
     });
 
 </script>   <!--Календарь js-->
-
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
