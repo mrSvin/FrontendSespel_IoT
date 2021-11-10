@@ -304,15 +304,86 @@
         }
 
     </style> <!--Кнопки Персонал и Местоположение-->
+    <style>
+        .preloader {
+            /*фиксированное позиционирование*/
+            position: fixed;
+            /* координаты положения */
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /* фоновый цвет элемента */
+            background: #e0e0e0;
+            /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+            z-index: 1001;
+        }
 
-    <script src="https://code.highcharts.com/highcharts.js" ></script>
-    <script src="https://code.highcharts.com/modules/exporting.js" ></script>
+        .preloader__row {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            width: 70px;
+            height: 70px;
+            margin-top: -35px;
+            margin-left: -35px;
+            text-align: center;
+            animation: preloader-rotate 2s infinite linear;
+        }
+
+        .preloader__item {
+            position: absolute;
+            display: inline-block;
+            top: 0;
+            background-color: #337ab7;
+            border-radius: 100%;
+            width: 35px;
+            height: 35px;
+            animation: preloader-bounce 2s infinite ease-in-out;
+        }
+
+        .preloader__item:last-child {
+            top: auto;
+            bottom: 0;
+            animation-delay: -1s;
+        }
+
+        @keyframes preloader-rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes preloader-bounce {
+
+            0%,
+            100% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .loaded_hiding .preloader {
+            transition: 0.3s opacity;
+            opacity: 0;
+        }
+
+        .loaded .preloader {
+            display: none;
+        }
+    </style>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="https://code.highcharts.com/modules/xrange.js" ></script>
+    <script src="https://code.highcharts.com/modules/xrange.js"></script>
 
-    <script src="/js/jquery-3.6.0.min.js" ></script>
-    <script src="/js/bootstrap-3.3.0.min.js" ></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap-3.3.0.min.js"></script>
 
     <script>
         $(function () {
@@ -353,6 +424,15 @@
 
 
     <!-- Загрузка страницы -->
+    <script>
+        window.onload = function () {
+            document.body.classList.add('loaded_hiding');
+            window.setTimeout(function () {
+                document.body.classList.add('loaded');
+                document.body.classList.remove('loaded_hiding');
+            }, 500);
+        }
+    </script>
 
 </head>
 
@@ -391,7 +471,13 @@
     </ul>
 </div>  <!-- Меню -->
 
-
+<!-- Загрузка страницы -->
+<div class="preloader">
+    <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+    </div>
+</div>
 
 <body>
 <!--Шапка html-->
@@ -882,10 +968,9 @@
 </script>   <!--js количество операций-->
 
 <script th:inline="javascript">
-    window.onload = function () {
+
     const timezone = new Date().getTimezoneOffset()
 
-    //УВФ-1 1
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -908,7 +993,9 @@
             timezoneOffset: timezone
         }
     });
+
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+
     Highcharts.chart('container_work', {
         chart: {
             plotBackgroundColor: null,
@@ -1206,7 +1293,53 @@
 
     });
 
-    // УВФ-1 2
+</script>   <!--УВФ-1 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    Highcharts.chart('container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', [[${work}]] ], [ 'Включен', [[${pass}]] ], [ 'Выключен', [[${fail}]] ],  [ 'В аварии', [[${avar}]]],  [ 'Нагрузка', [[${nagruzka}]]],   ]
+        }]
+    });
+</script>   <!--УВФ-1 js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -1229,7 +1362,9 @@
             timezoneOffset: new Date().getTimezoneOffset()
         }
     });
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+
     Highcharts.chart('container_work_2', {
         chart: {
             plotBackgroundColor: null,
@@ -1527,7 +1662,53 @@
 
     });
 
-    //NTX1000
+</script>   <!--УВФ-2 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    Highcharts.chart('container_2', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', [[${work_2}]] ], [ 'Включен', [[${pass_2}]] ], [ 'Выключен', [[${fail_2}]] ],  [ 'В аварии', [[${avar_2__2}]]],  [ 'Нагрузка', [[${nagruzka_2__2}]]],   ]
+        }]
+    });
+</script>   <!--УВФ-2 js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -1550,7 +1731,9 @@
             timezoneOffset: new Date().getTimezoneOffset()
         }
     });
-    colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+    var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
     Highcharts.chart('container_work3', {
         chart: {
             plotBackgroundColor: null,
@@ -2162,7 +2345,53 @@
 
     });
 
-    //NLX3000
+</script>   <!--NTX1000 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    Highcharts.chart('container3', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе без нагрузки', [[${work_3}]] ], [ 'Включен', [[${pass_3}]] ], [ 'Выключен', [[${fail_3}]] ],  [ 'В аварии', [[${avar_3}]]],  [ 'Нагрузка', [[${nagruzka_3}]]],   ]
+        }]
+    });
+</script>   <!--NTX1000 js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -2185,7 +2414,9 @@
             timezoneOffset: new Date().getTimezoneOffset()
         }
     });
-    colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+    var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
     Highcharts.chart('container_work4', {
         chart: {
             plotBackgroundColor: null,
@@ -2797,7 +3028,53 @@
 
     });
 
-    //Gamma2000
+</script>   <!--NLX3000 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    Highcharts.chart('container4', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе без нагрузки', [[${work_nlx3000}]] ], [ 'Включен', [[${pass_nlx3000}]] ], [ 'Выключен', [[${fail_nlx3000}]] ],  [ 'В аварии', [[${avar_nlx3000}]]],  [ 'Нагрузка', [[${nagruzka_nlx3000}]]],   ]
+        }]
+    });
+</script>   <!--NLX3000 js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -2820,7 +3097,9 @@
             timezoneOffset: new Date().getTimezoneOffset()
         }
     });
-    colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+    var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
     Highcharts.chart('container_work5', {
         chart: {
             plotBackgroundColor: null,
@@ -3429,7 +3708,53 @@
 
     });
 
-    //CTX650
+</script>   <!--GAMMA2000 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    Highcharts.chart('container5', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе без нагрузки', [[${work_dmg_gamma2000}]] ], [ 'Включен', [[${pass_dmg_gamma2000}]] ], [ 'Выключен', [[${fail_dmg_gamma2000}]] ],  [ 'В аварии', [[${avar_dmg_gamma2000}]]],  [ 'Нагрузка', [[${nagruzka_dmg_gamma2000}]]],   ]
+        }]
+    });
+</script>   <!--GAMMA2000 js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -3452,7 +3777,9 @@
             timezoneOffset: new Date().getTimezoneOffset()
         }
     });
-    colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+    var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
     Highcharts.chart('container_work6', {
         chart: {
             plotBackgroundColor: null,
@@ -4061,7 +4388,53 @@
 
     });
 
-    //DMF260
+</script>   <!--CTX650 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    Highcharts.chart('container6', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе без нагрузки', [[${work_dmg_ctx650}]] ], [ 'Включен', [[${pass_dmg_ctx650}]] ], [ 'Выключен', [[${fail_dmg_ctx650}]] ],  [ 'В аварии', [[${avar_dmg_ctx650}]]],  [ 'Нагрузка', [[${nagruzka_dmg_ctx650}]]],   ]
+        }]
+    });
+</script>   <!--CTX650 js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -4084,7 +4457,9 @@
             timezoneOffset: new Date().getTimezoneOffset()
         }
     });
-    colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+    var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
     Highcharts.chart('container_work7', {
         chart: {
             plotBackgroundColor: null,
@@ -4693,7 +5068,53 @@
 
     });
 
-    //DMU50 1
+</script>   <!--dmf260 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    Highcharts.chart('container7', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе без нагрузки', [[${work_dmg_dmf260}]] ], [ 'Включен', [[${pass_dmg_dmf260}]] ], [ 'Выключен', [[${fail_dmg_dmf260}]] ],  [ 'В аварии', [[${avar_dmg_dmf260}]]],  [ 'Нагрузка', [[${nagruzka_dmg_dmf260}]]],   ]
+        }]
+    });
+</script>   <!--dmf260 js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -4716,7 +5137,689 @@
             timezoneOffset: new Date().getTimezoneOffset()
         }
     });
-    colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+    var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+    Highcharts.chart('container_work7', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            borderColor: 'gray',
+            type: 'xrange'
+        },
+        title: {
+            text: 'Работа оборудования'
+        },
+        colors:colors,
+
+
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            categories: ['Нагрузка','Работа', 'Ожидание', 'Выключен', 'В аварии'],
+            reversed: true
+        },
+        credits: {
+            enabled: false
+        },
+
+        series: [
+            {
+                name: 'Под нагрузкой',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#24621d',
+                data:   [
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_0}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_1}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_2}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_3}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_4}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_5}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_6}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_7}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_8}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_9}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_10}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_11}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_12}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_13}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_14}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_15}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_16}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_17}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_18}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_19}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_20}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_21}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_22}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_23}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_24}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_25}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_26}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_27}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_28}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_29}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_30}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_31}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_32}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_33}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_34}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_35}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_36}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_37}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_38}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_39}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_40}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_41}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_42}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_43}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_44}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_45}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_46}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_47}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_48}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_49}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_50}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_51}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_52}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_53}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_54}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_55}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_56}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_57}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_58}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_59}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_60}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_61}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_62}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_63}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_64}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_65}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_66}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_67}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_68}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_69}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_70}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_71}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_72}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_73}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_74}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_75}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_76}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_77}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_78}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_79}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_80}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_81}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_82}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_83}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_84}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_85}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_86}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_87}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_88}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_89}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_90}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_91}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_92}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_93}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_94}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_95}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_96}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_97}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_98}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_99}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_100}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_101}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_102}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_103}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_104}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_105}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_106}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_107}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_108}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_109}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_110}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_111}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_112}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_113}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_114}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_115}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_116}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_117}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_118}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_119}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_120}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_121}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_122}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_123}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_124}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_125}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_126}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_127}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_128}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_129}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_130}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_131}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_132}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_133}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_134}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_135}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_136}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_137}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_138}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_139}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_140}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_141}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_142}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_143}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_144}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_145}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_146}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_147}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_148}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_149}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_150}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_151}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_152}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_153}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_154}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_155}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_156}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_157}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_158}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_159}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_160}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_161}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_162}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_163}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_164}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_165}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_166}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_167}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_168}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_169}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_170}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_171}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_172}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_173}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_174}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_175}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_176}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_177}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_178}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_179}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_180}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_181}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_182}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_183}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_184}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_185}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_186}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_187}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_188}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_189}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_190}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_191}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_192}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_193}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_194}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_195}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_196}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_197}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_198}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_199}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_200}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_201}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_202}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_203}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_204}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_205}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_206}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_207}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_208}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_209}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_210}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_211}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_212}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_213}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_214}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_215}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_216}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_217}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_218}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_219}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_220}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_221}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_222}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_223}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_224}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_225}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_226}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_227}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_228}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_229}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_230}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_231}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_232}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_233}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_234}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_235}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_236}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_237}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_238}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_239}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_240}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_241}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_242}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_243}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_244}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_245}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_246}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_247}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_248}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_249}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_250}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_251}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_252}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_253}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_254}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_255}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_256}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_257}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_258}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_259}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_260}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_261}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_262}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_263}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_264}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_265}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_266}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_267}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_268}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_269}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_270}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_271}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_272}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_273}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_274}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_275}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_276}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_277}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_278}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_279}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_280}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_281}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_282}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_283}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_284}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_285}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_286}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_287}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_288}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_289}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_290}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_291}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_292}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_293}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_294}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_295}]])).getTime(), y: 0,},
+                    {x:  (new Date([[${array_nagruzka_dmg_dmf260_296}]])).getTime(), x2: (new Date([[${array_nagruzka_dmg_dmf260_297}]])).getTime(), y: 0,},
+
+                ],
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
+                name: 'Работа',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#38e817',
+                data:   [
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_0}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_1}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_2}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_3}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_4}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_5}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_6}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_7}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_8}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_9}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_10}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_11}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_12}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_13}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_14}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_15}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_16}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_17}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_18}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_19}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_20}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_21}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_22}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_23}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_24}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_25}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_26}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_27}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_28}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_29}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_30}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_31}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_32}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_33}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_34}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_35}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_36}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_37}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_38}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_39}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_40}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_41}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_42}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_43}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_44}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_45}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_46}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_47}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_48}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_49}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_50}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_51}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_52}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_53}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_54}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_55}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_56}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_57}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_58}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_59}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_60}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_61}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_62}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_63}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_64}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_65}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_66}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_67}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_68}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_69}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_70}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_71}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_72}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_73}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_74}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_75}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_76}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_77}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_78}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_79}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_80}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_81}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_82}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_83}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_84}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_85}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_86}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_87}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_88}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_89}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_90}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_91}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_92}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_93}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_94}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_95}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_96}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_97}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_98}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_99}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_100}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_101}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_102}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_103}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_104}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_105}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_106}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_107}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_108}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_109}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_110}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_111}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_112}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_113}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_114}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_115}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_116}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_117}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_118}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_119}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_120}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_121}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_122}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_123}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_124}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_125}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_126}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_127}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_128}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_129}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_130}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_131}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_132}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_133}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_134}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_135}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_136}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_137}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_138}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_139}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_140}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_141}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_142}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_143}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_144}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_145}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_146}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_147}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_148}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_149}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_150}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_151}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_152}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_153}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_154}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_155}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_156}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_157}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_158}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_159}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_160}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_161}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_162}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_163}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_164}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_165}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_166}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_167}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_168}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_169}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_170}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_171}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_172}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_173}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_174}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_175}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_176}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_177}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_178}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_179}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_180}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_181}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_182}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_183}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_184}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_185}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_186}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_187}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_188}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_189}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_190}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_191}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_192}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_193}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_194}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_195}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_196}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_197}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_198}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_199}]])).getTime(), y: 1,},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_200}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_201}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_202}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_203}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_204}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_205}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_206}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_207}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_208}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_209}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_210}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_211}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_212}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_213}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_214}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_215}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_216}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_217}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_218}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_219}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_220}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_221}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_222}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_223}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_224}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_225}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_226}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_227}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_228}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_229}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_230}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_231}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_232}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_233}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_234}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_235}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_236}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_237}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_238}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_239}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_240}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_241}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_242}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_243}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_244}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_245}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_246}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_247}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_248}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_249}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_250}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_251}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_252}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_253}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_254}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_255}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_256}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_257}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_258}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_259}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_260}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_261}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_262}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_263}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_264}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_265}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_266}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_267}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_268}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_269}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_270}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_271}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_272}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_273}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_274}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_275}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_276}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_277}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_278}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_279}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_280}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_281}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_282}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_283}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_284}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_285}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_286}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_287}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_288}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_289}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_290}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_291}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_292}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_293}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_294}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_295}]])).getTime(), y: 1},
+                    {x:  (new Date([[${array_rabota_dmg_dmf260_296}]])).getTime(), x2: (new Date([[${array_rabota_dmg_dmf260_297}]])).getTime(), y: 1},
+
+                ],
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
+                name: 'Ожидание',
+                pointWidth: 30,
+                borderColor: 'gray',
+                tooltip: {
+                    pointFormat: ''
+                },
+                data:   [
+                    {x:  (new Date([[${array_pause_dmg_dmf260_0}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_1}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_2}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_3}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_4}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_5}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_6}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_7}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_8}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_9}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_10}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_11}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_12}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_13}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_14}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_15}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_16}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_17}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_18}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_19}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_20}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_21}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_22}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_23}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_24}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_25}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_26}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_27}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_28}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_29}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_30}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_31}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_32}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_33}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_34}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_35}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_36}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_37}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_38}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_39}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_40}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_41}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_42}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_43}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_44}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_45}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_46}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_47}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_48}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_49}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_50}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_51}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_52}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_53}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_54}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_55}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_56}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_57}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_58}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_59}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_60}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_61}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_62}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_63}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_64}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_65}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_66}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_67}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_68}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_69}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_70}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_71}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_72}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_73}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_74}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_75}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_76}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_77}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_78}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_79}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_80}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_81}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_82}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_83}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_84}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_85}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_86}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_87}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_88}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_89}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_90}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_91}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_92}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_93}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_94}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_95}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_96}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_97}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_98}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_99}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_100}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_101}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_102}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_103}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_104}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_105}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_106}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_107}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_108}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_109}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_110}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_111}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_112}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_113}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_114}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_115}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_116}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_117}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_118}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_119}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_120}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_121}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_122}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_123}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_124}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_125}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_126}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_127}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_128}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_129}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_130}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_131}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_132}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_133}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_134}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_135}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_136}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_137}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_138}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_139}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_140}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_141}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_142}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_143}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_144}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_145}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_146}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_147}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_148}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_149}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_150}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_151}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_152}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_153}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_154}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_155}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_156}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_157}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_158}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_159}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_160}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_161}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_162}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_163}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_164}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_165}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_166}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_167}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_168}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_169}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_170}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_171}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_172}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_173}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_174}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_175}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_176}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_177}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_178}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_179}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_180}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_181}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_182}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_183}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_184}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_185}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_186}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_187}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_188}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_189}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_190}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_191}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_192}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_193}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_194}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_195}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_196}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_197}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_198}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_199}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_200}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_201}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_202}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_203}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_204}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_205}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_206}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_207}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_208}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_209}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_210}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_211}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_212}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_213}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_214}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_215}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_216}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_217}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_218}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_219}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_220}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_221}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_222}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_223}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_224}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_225}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_226}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_227}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_228}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_229}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_230}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_231}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_232}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_233}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_234}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_235}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_236}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_237}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_238}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_239}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_240}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_241}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_242}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_243}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_244}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_245}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_246}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_247}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_248}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_249}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_250}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_251}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_252}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_253}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_254}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_255}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_256}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_257}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_258}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_259}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_260}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_261}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_262}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_263}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_264}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_265}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_266}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_267}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_268}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_269}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_270}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_271}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_272}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_273}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_274}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_275}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_276}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_277}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_278}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_279}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_280}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_281}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_282}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_283}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_284}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_285}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_286}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_287}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_288}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_289}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_290}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_291}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_292}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_293}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_294}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_295}]])).getTime(), y: 2,},
+                    {x:  (new Date([[${array_pause_dmg_dmf260_296}]])).getTime(), x2: (new Date([[${array_pause_dmg_dmf260_297}]])).getTime(), y: 2,},
+
+                ],
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
+                name: 'Выключен',
+
+                pointWidth: 20,
+                data:   [{x:  (new Date([[${array_off_dmg_dmf260_0}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_1}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_2}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_3}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_4}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_5}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_6}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_7}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_8}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_9}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_10}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_11}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_12}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_13}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_14}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_15}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_16}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_17}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_18}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_19}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_20}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_21}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_22}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_23}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_24}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_25}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_26}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_27}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_28}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_29}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_30}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_31}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_32}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_33}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_34}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_35}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_36}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_37}]])).getTime(), y: 3},
+                    {x:  (new Date([[${array_off_dmg_dmf260_38}]])).getTime(), x2: (new Date([[${array_off_dmg_dmf260_39}]])).getTime(), y: 3},
+                ],
+                dataLabels: {
+                    enabled: true,
+                }
+            },
+            {
+                name: 'В аварии',
+                pointWidth: 20,
+                data: [
+                    {x:  (new Date([[${array_avar_dmg_dmf260_0}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_1}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_2}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_3}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_4}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_5}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_6}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_7}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_8}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_9}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_10}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_11}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_12}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_13}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_14}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_15}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_16}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_17}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_18}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_19}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_20}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_21}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_22}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_23}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_24}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_25}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_26}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_27}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_28}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_29}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_30}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_31}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_32}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_33}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_34}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_35}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_36}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_37}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_38}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_39}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_40}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_41}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_42}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_43}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_44}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_45}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_46}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_47}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_48}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_49}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_50}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_51}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_52}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_53}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_54}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_55}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_56}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_57}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_58}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_59}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_60}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_61}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_62}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_63}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_64}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_65}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_66}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_67}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_68}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_69}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_70}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_71}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_72}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_73}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_74}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_75}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_76}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_77}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_78}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_79}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_80}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_81}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_82}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_83}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_84}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_85}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_86}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_87}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_88}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_89}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_90}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_91}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_92}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_93}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_94}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_95}]])).getTime(), y: 4},
+                    {x:  (new Date([[${array_avar_dmg_dmf260_96}]])).getTime(), x2: (new Date([[${array_avar_dmg_dmf260_97}]])).getTime(), y: 4},
+                ],
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        ]
+
+
+    });
+
+</script>   <!--dmf260 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    Highcharts.chart('container7', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе без нагрузки', [[${work_dmg_dmf260}]] ], [ 'Включен', [[${pass_dmg_dmf260}]] ], [ 'Выключен', [[${fail_dmg_dmf260}]] ],  [ 'В аварии', [[${avar_dmg_dmf260}]]],  [ 'Нагрузка', [[${nagruzka_dmg_dmf260}]]],   ]
+        }]
+    });
+</script>   <!--dmf260 js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
     Highcharts.chart('container_work8', {
         chart: {
             plotBackgroundColor: null,
@@ -5325,7 +6428,53 @@
 
     });
 
-    //DMU50 2
+</script>   <!--dmu50_1 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    Highcharts.chart('container8', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе без нагрузки', [[${work_dmg_dmu50_1}]] ], [ 'Включен', [[${pass_dmg_dmu50_1}]] ], [ 'Выключен', [[${fail_dmg_dmu50_1}]] ],  [ 'В аварии', [[${avar_dmg_dmu50_1}]]],  [ 'Нагрузка', [[${nagruzka_dmg_dmu50_1}]]],   ]
+        }]
+    });
+</script>   <!--dmu50_1 js круговая диагрмма загрузки оборудования-->
+
+<script th:inline="javascript">
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -5348,7 +6497,9 @@
             timezoneOffset: new Date().getTimezoneOffset()
         }
     });
-    colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+    var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
     Highcharts.chart('container_work9', {
         chart: {
             plotBackgroundColor: null,
@@ -5956,356 +7107,10 @@
 
 
     });
-}
 
-</script>   <!--Скрипты всех станков линейная диагрмма работы оборудования-->
+</script>   <!--dmu50_2 js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
-    // УВФ-1 1
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${work}]] ], [ 'Включен', [[${pass}]] ], [ 'Выключен', [[${fail}]] ],  [ 'В аварии', [[${avar}]]],  [ 'Нагрузка', [[${nagruzka}]]],   ]
-        }]
-    });
-
-    // УВФ-1 2
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container_2', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${work_2}]] ], [ 'Включен', [[${pass_2}]] ], [ 'Выключен', [[${fail_2}]] ],  [ 'В аварии', [[${avar_2__2}]]],  [ 'Нагрузка', [[${nagruzka_2__2}]]],   ]
-        }]
-    });
-
-    // NTX1000
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container3', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_3}]] ], [ 'Включен', [[${pass_3}]] ], [ 'Выключен', [[${fail_3}]] ],  [ 'В аварии', [[${avar_3}]]],  [ 'Нагрузка', [[${nagruzka_3}]]],   ]
-        }]
-    });
-
-    //NLX3000
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container4', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_nlx3000}]] ], [ 'Включен', [[${pass_nlx3000}]] ], [ 'Выключен', [[${fail_nlx3000}]] ],  [ 'В аварии', [[${avar_nlx3000}]]],  [ 'Нагрузка', [[${nagruzka_nlx3000}]]],   ]
-        }]
-    });
-
-    //GAMMA2000
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container5', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_dmg_gamma2000}]] ], [ 'Включен', [[${pass_dmg_gamma2000}]] ], [ 'Выключен', [[${fail_dmg_gamma2000}]] ],  [ 'В аварии', [[${avar_dmg_gamma2000}]]],  [ 'Нагрузка', [[${nagruzka_dmg_gamma2000}]]],   ]
-        }]
-    });
-
-    //CTX650
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container6', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_dmg_ctx650}]] ], [ 'Включен', [[${pass_dmg_ctx650}]] ], [ 'Выключен', [[${fail_dmg_ctx650}]] ],  [ 'В аварии', [[${avar_dmg_ctx650}]]],  [ 'Нагрузка', [[${nagruzka_dmg_ctx650}]]],   ]
-        }]
-    });
-
-    //DMF260
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container7', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_dmg_dmf260}]] ], [ 'Включен', [[${pass_dmg_dmf260}]] ], [ 'Выключен', [[${fail_dmg_dmf260}]] ],  [ 'В аварии', [[${avar_dmg_dmf260}]]],  [ 'Нагрузка', [[${nagruzka_dmg_dmf260}]]],   ]
-        }]
-    });
-
-    //DMU50 1
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container8', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_dmg_dmu50_1}]] ], [ 'Включен', [[${pass_dmg_dmu50_1}]] ], [ 'Выключен', [[${fail_dmg_dmu50_1}]] ],  [ 'В аварии', [[${avar_dmg_dmu50_1}]]],  [ 'Нагрузка', [[${nagruzka_dmg_dmu50_1}]]],   ]
-        }]
-    });
-
-    //DMU50 2
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
     Highcharts.chart('container9', {
         chart: {
             plotBackgroundColor: null,
@@ -6346,7 +7151,7 @@
             data : [ [ 'По программе без нагрузки', [[${work_dmg_dmu50_2}]] ], [ 'Включен', [[${pass_dmg_dmu50_2}]] ], [ 'Выключен', [[${fail_dmg_dmu50_2}]] ],  [ 'В аварии', [[${avar_dmg_dmu50_2}]]],  [ 'Нагрузка', [[${nagruzka_dmg_dmu50_2}]]],   ]
         }]
     });
-</script>   <!--Скрипты всех станков круговая диагрмма загрузки оборудования-->
+</script>   <!--dmu50_2 js круговая диагрмма загрузки оборудования-->
 
 <script th:inline="javascript">
     $('.icon_personal_uvf_1_1').hover(
