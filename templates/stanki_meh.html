@@ -304,86 +304,15 @@
         }
 
     </style> <!--Кнопки Персонал и Местоположение-->
-    <style>
-        .preloader {
-            /*фиксированное позиционирование*/
-            position: fixed;
-            /* координаты положения */
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            /* фоновый цвет элемента */
-            background: #e0e0e0;
-            /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
-            z-index: 1001;
-        }
 
-        .preloader__row {
-            position: relative;
-            top: 50%;
-            left: 50%;
-            width: 70px;
-            height: 70px;
-            margin-top: -35px;
-            margin-left: -35px;
-            text-align: center;
-            animation: preloader-rotate 2s infinite linear;
-        }
-
-        .preloader__item {
-            position: absolute;
-            display: inline-block;
-            top: 0;
-            background-color: #337ab7;
-            border-radius: 100%;
-            width: 35px;
-            height: 35px;
-            animation: preloader-bounce 2s infinite ease-in-out;
-        }
-
-        .preloader__item:last-child {
-            top: auto;
-            bottom: 0;
-            animation-delay: -1s;
-        }
-
-        @keyframes preloader-rotate {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes preloader-bounce {
-
-            0%,
-            100% {
-                transform: scale(0);
-            }
-
-            50% {
-                transform: scale(1);
-            }
-        }
-
-        .loaded_hiding .preloader {
-            transition: 0.3s opacity;
-            opacity: 0;
-        }
-
-        .loaded .preloader {
-            display: none;
-        }
-    </style>
-
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js" ></script>
+    <script src="https://code.highcharts.com/modules/exporting.js" ></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="https://code.highcharts.com/modules/xrange.js"></script>
+    <script src="https://code.highcharts.com/modules/xrange.js" ></script>
 
-    <script src="/js/jquery-3.6.0.min.js"></script>
-    <script src="/js/bootstrap-3.3.0.min.js"></script>
+    <script src="/js/jquery-3.6.0.min.js" ></script>
+    <script src="/js/bootstrap-3.3.0.min.js" ></script>
 
     <script>
         $(function () {
@@ -424,15 +353,6 @@
 
 
     <!-- Загрузка страницы -->
-    <script>
-        window.onload = function () {
-            document.body.classList.add('loaded_hiding');
-            window.setTimeout(function () {
-                document.body.classList.add('loaded');
-                document.body.classList.remove('loaded_hiding');
-            }, 500);
-        }
-    </script>
 
 </head>
 
@@ -471,13 +391,7 @@
     </ul>
 </div>  <!-- Меню -->
 
-<!-- Загрузка страницы -->
-<div class="preloader">
-    <div class="preloader__row">
-        <div class="preloader__item"></div>
-        <div class="preloader__item"></div>
-    </div>
-</div>
+
 
 <body>
 <!--Шапка html-->
@@ -968,12 +882,10 @@
 </script>   <!--js количество операций-->
 
 <script th:inline="javascript">
-
+    window.onload = function () {
     const timezone = new Date().getTimezoneOffset()
 
-	
     //УВФ-1 1
-	window.onload = function () {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -996,7 +908,7 @@
             timezoneOffset: timezone
         }
     });
-	var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
     Highcharts.chart('container_work', {
         chart: {
             plotBackgroundColor: null,
@@ -1293,9 +1205,8 @@
 
 
     });
-}
+
     // УВФ-1 2
-	window.onload = function () {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -1615,10 +1526,8 @@
 
 
     });
-}
 
     //NTX1000
-	window.onload = function () {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -2252,9 +2161,8 @@
 
 
     });
-}
+
     //NLX3000
-	window.onload = function () {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -2888,10 +2796,8 @@
 
 
     });
-}
 
     //Gamma2000
-	window.onload = function () {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -3522,9 +3428,8 @@
 
 
     });
-}
+
     //CTX650
-	window.onload = function () {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -4155,9 +4060,8 @@
 
 
     });
-}
+
     //DMF260
-	window.onload = function () {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -4788,9 +4692,8 @@
 
 
     });
-}
+
     //DMU50 1
-	window.onload = function () {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -5421,9 +5324,8 @@
 
 
     });
-}
+
     //DMU50 2
-	window.onload = function () {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -6055,406 +5957,398 @@
 
     });
 }
+
 </script>   <!--Скрипты всех станков линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
-    // УВФ-1 1
-	window.onload = function () {
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
+    window.onload = function () {
+        // УВФ-1 1
+        var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+        Highcharts.chart('container', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
 
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
+            title: {
+                text: 'Загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
 
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${work}]] ], [ 'Включен', [[${pass}]] ], [ 'Выключен', [[${fail}]] ],  [ 'В аварии', [[${avar}]]],  [ 'Нагрузка', [[${nagruzka}]]],   ]
-        }]
-    });
-}
-    // УВФ-1 2
-	window.onload = function () {
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container_2', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors: colors,
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                name: 'Показатель',
+                data: [['По программе', [[${work}]]], ['Включен', [[${pass}]]], ['Выключен', [[${fail}]]], ['В аварии', [[${avar}]]], ['Нагрузка', [[${nagruzka}]]],]
+            }]
+        });
 
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
+        // УВФ-1 2
+        colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+        Highcharts.chart('container_2', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
 
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${work_2}]] ], [ 'Включен', [[${pass_2}]] ], [ 'Выключен', [[${fail_2}]] ],  [ 'В аварии', [[${avar_2__2}]]],  [ 'Нагрузка', [[${nagruzka_2__2}]]],   ]
-        }]
-    });
-}
-    // NTX1000
-	window.onload = function () {
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container3', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
+            title: {
+                text: 'Загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
 
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors: colors,
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                name: 'Показатель',
+                data: [['По программе', [[${work_2}]]], ['Включен', [[${pass_2}]]], ['Выключен', [[${fail_2}]]], ['В аварии', [[${avar_2__2}]]], ['Нагрузка', [[${nagruzka_2__2}]]],]
+            }]
+        });
 
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_3}]] ], [ 'Включен', [[${pass_3}]] ], [ 'Выключен', [[${fail_3}]] ],  [ 'В аварии', [[${avar_3}]]],  [ 'Нагрузка', [[${nagruzka_3}]]],   ]
-        }]
-    });
-}
-    //NLX3000
-	window.onload = function () {
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container4', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
+        // NTX1000
+        colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+        Highcharts.chart('container3', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
 
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
+            title: {
+                text: 'Загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
 
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_nlx3000}]] ], [ 'Включен', [[${pass_nlx3000}]] ], [ 'Выключен', [[${fail_nlx3000}]] ],  [ 'В аварии', [[${avar_nlx3000}]]],  [ 'Нагрузка', [[${nagruzka_nlx3000}]]],   ]
-        }]
-    });
-}
-	
-    //GAMMA2000
-	window.onload = function () {
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container5', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors: colors,
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                name: 'Показатель',
+                data: [['По программе без нагрузки', [[${work_3}]]], ['Включен', [[${pass_3}]]], ['Выключен', [[${fail_3}]]], ['В аварии', [[${avar_3}]]], ['Нагрузка', [[${nagruzka_3}]]],]
+            }]
+        });
 
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
+        //NLX3000
+        colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+        Highcharts.chart('container4', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
 
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_dmg_gamma2000}]] ], [ 'Включен', [[${pass_dmg_gamma2000}]] ], [ 'Выключен', [[${fail_dmg_gamma2000}]] ],  [ 'В аварии', [[${avar_dmg_gamma2000}]]],  [ 'Нагрузка', [[${nagruzka_dmg_gamma2000}]]],   ]
-        }]
-    });
-}
-    //CTX650
-	window.onload = function () {
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container6', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
+            title: {
+                text: 'Загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
 
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors: colors,
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                name: 'Показатель',
+                data: [['По программе без нагрузки', [[${work_nlx3000}]]], ['Включен', [[${pass_nlx3000}]]], ['Выключен', [[${fail_nlx3000}]]], ['В аварии', [[${avar_nlx3000}]]], ['Нагрузка', [[${nagruzka_nlx3000}]]],]
+            }]
+        });
 
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_dmg_ctx650}]] ], [ 'Включен', [[${pass_dmg_ctx650}]] ], [ 'Выключен', [[${fail_dmg_ctx650}]] ],  [ 'В аварии', [[${avar_dmg_ctx650}]]],  [ 'Нагрузка', [[${nagruzka_dmg_ctx650}]]],   ]
-        }]
-    });
-}
-    //DMF260
-	window.onload = function () {
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container7', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
+        //GAMMA2000
+        colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+        Highcharts.chart('container5', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
 
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
+            title: {
+                text: 'Загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
 
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_dmg_dmf260}]] ], [ 'Включен', [[${pass_dmg_dmf260}]] ], [ 'Выключен', [[${fail_dmg_dmf260}]] ],  [ 'В аварии', [[${avar_dmg_dmf260}]]],  [ 'Нагрузка', [[${nagruzka_dmg_dmf260}]]],   ]
-        }]
-    });
-}
-    //DMU50 1
-	window.onload = function () {
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container8', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors: colors,
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                name: 'Показатель',
+                data: [['По программе без нагрузки', [[${work_dmg_gamma2000}]]], ['Включен', [[${pass_dmg_gamma2000}]]], ['Выключен', [[${fail_dmg_gamma2000}]]], ['В аварии', [[${avar_dmg_gamma2000}]]], ['Нагрузка', [[${nagruzka_dmg_gamma2000}]]],]
+            }]
+        });
 
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
+        //CTX650
+        colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+        Highcharts.chart('container6', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
 
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_dmg_dmu50_1}]] ], [ 'Включен', [[${pass_dmg_dmu50_1}]] ], [ 'Выключен', [[${fail_dmg_dmu50_1}]] ],  [ 'В аварии', [[${avar_dmg_dmu50_1}]]],  [ 'Нагрузка', [[${nagruzka_dmg_dmu50_1}]]],   ]
-        }]
-    });
-}
-    //DMU50 2
-	window.onload = function () {
-    colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    Highcharts.chart('container9', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
+            title: {
+                text: 'Загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
 
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors: colors,
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                name: 'Показатель',
+                data: [['По программе без нагрузки', [[${work_dmg_ctx650}]]], ['Включен', [[${pass_dmg_ctx650}]]], ['Выключен', [[${fail_dmg_ctx650}]]], ['В аварии', [[${avar_dmg_ctx650}]]], ['Нагрузка', [[${nagruzka_dmg_ctx650}]]],]
+            }]
+        });
 
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе без нагрузки', [[${work_dmg_dmu50_2}]] ], [ 'Включен', [[${pass_dmg_dmu50_2}]] ], [ 'Выключен', [[${fail_dmg_dmu50_2}]] ],  [ 'В аварии', [[${avar_dmg_dmu50_2}]]],  [ 'Нагрузка', [[${nagruzka_dmg_dmu50_2}]]],   ]
-        }]
-    });
-}
-	</script>   <!--Скрипты всех станков круговая диагрмма загрузки оборудования-->
+        //DMF260
+        colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+        Highcharts.chart('container7', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+
+            title: {
+                text: 'Загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors: colors,
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                name: 'Показатель',
+                data: [['По программе без нагрузки', [[${work_dmg_dmf260}]]], ['Включен', [[${pass_dmg_dmf260}]]], ['Выключен', [[${fail_dmg_dmf260}]]], ['В аварии', [[${avar_dmg_dmf260}]]], ['Нагрузка', [[${nagruzka_dmg_dmf260}]]],]
+            }]
+        });
+
+        //DMU50 1
+        colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+        Highcharts.chart('container8', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+
+            title: {
+                text: 'Загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors: colors,
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                name: 'Показатель',
+                data: [['По программе без нагрузки', [[${work_dmg_dmu50_1}]]], ['Включен', [[${pass_dmg_dmu50_1}]]], ['Выключен', [[${fail_dmg_dmu50_1}]]], ['В аварии', [[${avar_dmg_dmu50_1}]]], ['Нагрузка', [[${nagruzka_dmg_dmu50_1}]]],]
+            }]
+        });
+
+        //DMU50 2
+        colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+        Highcharts.chart('container9', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+
+            title: {
+                text: 'Загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors: colors,
+            credits: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                name: 'Показатель',
+                data: [['По программе без нагрузки', [[${work_dmg_dmu50_2}]]], ['Включен', [[${pass_dmg_dmu50_2}]]], ['Выключен', [[${fail_dmg_dmu50_2}]]], ['В аварии', [[${avar_dmg_dmu50_2}]]], ['Нагрузка', [[${nagruzka_dmg_dmu50_2}]]],]
+            }]
+        });
+    }
+</script>   <!--Скрипты всех станков круговая диагрмма загрузки оборудования-->
 
 <script th:inline="javascript">
     $('.icon_personal_uvf_1_1').hover(
