@@ -44,7 +44,7 @@ Highcharts.chart('container_work', {
         title: {
             text: ''
         },
-        categories: ['Нагрузка','Работа1', 'Ожидание1', 'Выключен1', 'В аварии1'],
+        categories: ['Нагрузка','Работа', 'Ожидание', 'Выключен', 'В аварии'],
         reversed: true
     },
     credits: {
@@ -221,7 +221,6 @@ Highcharts.chart('container_work', {
             tooltip: {
                 pointFormat: '<b>Программа: {point.programname}</b>'
             },
-            color: 'rgb(56, 232, 23)',
             data:   [
                 {x:  (new Date(array_rabota[0])).getTime(), x2: (new Date(array_rabota[1])).getTime(), y: 1},
                 {x:  (new Date(array_rabota[2])).getTime(), x2: (new Date(array_rabota[3])).getTime(), y: 1},
@@ -383,7 +382,6 @@ Highcharts.chart('container_work', {
             tooltip: {
                 pointFormat: ''
             },
-            color: 'rgb(255, 234, 50)',
             data:   [
                 {x:  (new Date(array_pause[0])).getTime(), x2: (new Date(array_pause[1])).getTime(), y: 2},
                 {x:  (new Date(array_pause[2])).getTime(), x2: (new Date(array_pause[3])).getTime(), y: 2},
@@ -542,8 +540,8 @@ Highcharts.chart('container_work', {
         },
         {
             name: 'Выключен',
+
             pointWidth: 20,
-            color: 'rgb(0, 0, 0)',
             data:   [
                 {x:  (new Date(array_off[0])).getTime(), x2: (new Date(array_off[1])).getTime(), y: 3},
                 {x:  (new Date(array_off[2])).getTime(), x2: (new Date(array_off[3])).getTime(), y: 3},
@@ -574,7 +572,6 @@ Highcharts.chart('container_work', {
             name: 'В аварии',
             pointWidth: 20,
             borderColor: 'gray',
-            color: 'rgb(232, 30, 29)',
             data: [
                 {x:  (new Date(array_avar[0])).getTime(), x2: (new Date(array_avar[1])).getTime(), y: 4},
                 {x:  (new Date(array_avar[2])).getTime(), x2: (new Date(array_avar[3])).getTime(), y: 4},
