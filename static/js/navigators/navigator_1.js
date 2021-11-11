@@ -218,9 +218,6 @@ Highcharts.chart('container_work', {
             name: 'Работа',
             pointWidth: 30,
             borderColor: 'gray',
-            tooltip: {
-                pointFormat: '<b>Программа: {point.programname}</b>'
-            },
             data:   [
                 {x:  (new Date(array_rabota[0])).getTime(), x2: (new Date(array_rabota[1])).getTime(), y: 1},
                 {x:  (new Date(array_rabota[2])).getTime(), x2: (new Date(array_rabota[3])).getTime(), y: 1},
