@@ -68,295 +68,295 @@ Highcharts.chart('container_work', {
                     x: (new Date(array_rabota[0])).getTime(),
                     x2: (new Date(array_rabota[1])).getTime(),
                     y: 0,
-                    programname: array_name[0]
+                    programname: array_programname[0]
                 },
                 {
                     x: (new Date(array_rabota[2])).getTime(),
                     x2: (new Date(array_rabota[3])).getTime(),
                     y: 0,
-                    programname: array_name[1]
+                    programname: array_programname[1]
                 },
                 {
                     x: (new Date(array_rabota[4])).getTime(),
                     x2: (new Date(array_rabota[5])).getTime(),
                     y: 0,
-                    programname: array_name[2]
+                    programname: array_programname[2]
                 },
                 {
                     x: (new Date(array_rabota[6])).getTime(),
                     x2: (new Date(array_rabota[7])).getTime(),
                     y: 0,
-                    programname: array_name[3]
+                    programname: array_programname[3]
                 },
                 {
                     x: (new Date(array_rabota[8])).getTime(),
                     x2: (new Date(array_rabota[9])).getTime(),
                     y: 0,
-                    programname: array_name[4]
+                    programname: array_programname[4]
                 },
                 {
                     x: (new Date(array_rabota[10])).getTime(),
                     x2: (new Date(array_rabota[11])).getTime(),
                     y: 0,
-                    programname: array_name[5]
+                    programname: array_programname[5]
                 },
                 {
                     x: (new Date(array_rabota[12])).getTime(),
                     x2: (new Date(array_rabota[13])).getTime(),
                     y: 0,
-                    programname: array_name[6]
+                    programname: array_programname[6]
                 },
                 {
                     x: (new Date(array_rabota[14])).getTime(),
                     x2: (new Date(array_rabota[15])).getTime(),
                     y: 0,
-                    programname: array_name[7]
+                    programname: array_programname[7]
                 },
                 {
                     x: (new Date(array_rabota[16])).getTime(),
                     x2: (new Date(array_rabota[17])).getTime(),
                     y: 0,
-                    programname: array_name[8]
+                    programname: array_programname[8]
                 },
                 {
                     x: (new Date(array_rabota[18])).getTime(),
                     x2: (new Date(array_rabota[19])).getTime(),
                     y: 0,
-                    programname: array_name[9]
+                    programname: array_programname[9]
                 },
                 {
                     x: (new Date(array_rabota[20])).getTime(),
                     x2: (new Date(array_rabota[21])).getTime(),
                     y: 0,
-                    programname: array_name[10]
+                    programname: array_programname[10]
                 },
                 {
                     x: (new Date(array_rabota[22])).getTime(),
                     x2: (new Date(array_rabota[23])).getTime(),
                     y: 0,
-                    programname: array_name[11]
+                    programname: array_programname[11]
                 },
                 {
                     x: (new Date(array_rabota[24])).getTime(),
                     x2: (new Date(array_rabota[25])).getTime(),
                     y: 0,
-                    programname: array_name[12]
+                    programname: array_programname[12]
                 },
                 {
                     x: (new Date(array_rabota[26])).getTime(),
                     x2: (new Date(array_rabota[27])).getTime(),
                     y: 0,
-                    programname: array_name[13]
+                    programname: array_programname[13]
                 },
                 {
                     x: (new Date(array_rabota[28])).getTime(),
                     x2: (new Date(array_rabota[29])).getTime(),
                     y: 0,
-                    programname: array_name[14]
+                    programname: array_programname[14]
                 },
                 {
                     x: (new Date(array_rabota[30])).getTime(),
                     x2: (new Date(array_rabota[31])).getTime(),
                     y: 0,
-                    programname: array_name[15]
+                    programname: array_programname[15]
                 },
                 {
                     x: (new Date(array_rabota[32])).getTime(),
                     x2: (new Date(array_rabota[33])).getTime(),
                     y: 0,
-                    programname: array_name[16]
+                    programname: array_programname[16]
                 },
                 {
                     x: (new Date(array_rabota[34])).getTime(),
                     x2: (new Date(array_rabota[35])).getTime(),
                     y: 0,
-                    programname: array_name[17]
+                    programname: array_programname[17]
                 },
                 {
                     x: (new Date(array_rabota[36])).getTime(),
                     x2: (new Date(array_rabota[37])).getTime(),
                     y: 0,
-                    programname: array_name[18]
+                    programname: array_programname[18]
                 },
                 {
                     x: (new Date(array_rabota[38])).getTime(),
                     x2: (new Date(array_rabota[39])).getTime(),
                     y: 0,
-                    programname: array_name[19]
+                    programname: array_programname[19]
                 },
                 {
                     x: (new Date(array_rabota[40])).getTime(),
                     x2: (new Date(array_rabota[41])).getTime(),
                     y: 0,
-                    programname: array_name[20]
+                    programname: array_programname[20]
                 },
                 {
                     x: (new Date(array_rabota[42])).getTime(),
                     x2: (new Date(array_rabota[43])).getTime(),
                     y: 0,
-                    programname: array_name[21]
+                    programname: array_programname[21]
                 },
                 {
                     x: (new Date(array_rabota[44])).getTime(),
                     x2: (new Date(array_rabota[45])).getTime(),
                     y: 0,
-                    programname: array_name[22]
+                    programname: array_programname[22]
                 },
                 {
                     x: (new Date(array_rabota[46])).getTime(),
                     x2: (new Date(array_rabota[47])).getTime(),
                     y: 0,
-                    programname: array_name[23]
+                    programname: array_programname[23]
                 },
                 {
                     x: (new Date(array_rabota[48])).getTime(),
                     x2: (new Date(array_rabota[49])).getTime(),
                     y: 0,
-                    programname: array_name[24]
+                    programname: array_programname[24]
                 },
                 {
                     x: (new Date(array_rabota[50])).getTime(),
                     x2: (new Date(array_rabota[51])).getTime(),
                     y: 0,
-                    programname: array_name[25]
+                    programname: array_programname[25]
                 },
                 {
                     x: (new Date(array_rabota[52])).getTime(),
                     x2: (new Date(array_rabota[53])).getTime(),
                     y: 0,
-                    programname: array_name[26]
+                    programname: array_programname[26]
                 },
                 {
                     x: (new Date(array_rabota[54])).getTime(),
                     x2: (new Date(array_rabota[55])).getTime(),
                     y: 0,
-                    programname: array_name[27]
+                    programname: array_programname[27]
                 },
                 {
                     x: (new Date(array_rabota[56])).getTime(),
                     x2: (new Date(array_rabota[57])).getTime(),
                     y: 0,
-                    programname: array_name[28]
+                    programname: array_programname[28]
                 },
                 {
                     x: (new Date(array_rabota[58])).getTime(),
                     x2: (new Date(array_rabota[59])).getTime(),
                     y: 0,
-                    programname: array_name[29]
+                    programname: array_programname[29]
                 },
                 {
                     x: (new Date(array_rabota[60])).getTime(),
                     x2: (new Date(array_rabota[61])).getTime(),
                     y: 0,
-                    programname: array_name[30]
+                    programname: array_programname[30]
                 },
                 {
                     x: (new Date(array_rabota[62])).getTime(),
                     x2: (new Date(array_rabota[63])).getTime(),
                     y: 0,
-                    programname: array_name[31]
+                    programname: array_programname[31]
                 },
                 {
                     x: (new Date(array_rabota[64])).getTime(),
                     x2: (new Date(array_rabota[65])).getTime(),
                     y: 0,
-                    programname: array_name[32]
+                    programname: array_programname[32]
                 },
                 {
                     x: (new Date(array_rabota[66])).getTime(),
                     x2: (new Date(array_rabota[67])).getTime(),
                     y: 0,
-                    programname: array_name[33]
+                    programname: array_programname[33]
                 },
                 {
                     x: (new Date(array_rabota[68])).getTime(),
                     x2: (new Date(array_rabota[69])).getTime(),
                     y: 0,
-                    programname: array_name[34]
+                    programname: array_programname[34]
                 },
                 {
                     x: (new Date(array_rabota[70])).getTime(),
                     x2: (new Date(array_rabota[71])).getTime(),
                     y: 0,
-                    programname: array_name[35]
+                    programname: array_programname[35]
                 },
                 {
                     x: (new Date(array_rabota[72])).getTime(),
                     x2: (new Date(array_rabota[73])).getTime(),
                     y: 0,
-                    programname: array_name[36]
+                    programname: array_programname[36]
                 },
                 {
                     x: (new Date(array_rabota[74])).getTime(),
                     x2: (new Date(array_rabota[75])).getTime(),
                     y: 0,
-                    programname: array_name[37]
+                    programname: array_programname[37]
                 },
                 {
                     x: (new Date(array_rabota[76])).getTime(),
                     x2: (new Date(array_rabota[77])).getTime(),
                     y: 0,
-                    programname: array_name[38]
+                    programname: array_programname[38]
                 },
                 {
                     x: (new Date(array_rabota[78])).getTime(),
                     x2: (new Date(array_rabota[79])).getTime(),
                     y: 0,
-                    programname: array_name[39]
+                    programname: array_programname[39]
                 },
                 {
                     x: (new Date(array_rabota[80])).getTime(),
                     x2: (new Date(array_rabota[81])).getTime(),
                     y: 0,
-                    programname: array_name[40]
+                    programname: array_programname[40]
                 },
                 {
                     x: (new Date(array_rabota[82])).getTime(),
                     x2: (new Date(array_rabota[83])).getTime(),
                     y: 0,
-                    programname: array_name[41]
+                    programname: array_programname[41]
                 },
                 {
                     x: (new Date(array_rabota[84])).getTime(),
                     x2: (new Date(array_rabota[85])).getTime(),
                     y: 0,
-                    programname: array_name[42]
+                    programname: array_programname[42]
                 },
                 {
                     x: (new Date(array_rabota[86])).getTime(),
                     x2: (new Date(array_rabota[87])).getTime(),
                     y: 0,
-                    programname: array_name[43]
+                    programname: array_programname[43]
                 },
                 {
                     x: (new Date(array_rabota[88])).getTime(),
                     x2: (new Date(array_rabota[89])).getTime(),
                     y: 0,
-                    programname: array_name[44]
+                    programname: array_programname[44]
                 },
                 {
                     x: (new Date(array_rabota[90])).getTime(),
                     x2: (new Date(array_rabota[91])).getTime(),
                     y: 0,
-                    programname: array_name[45]
+                    programname: array_programname[45]
                 },
                 {
                     x: (new Date(array_rabota[92])).getTime(),
                     x2: (new Date(array_rabota[93])).getTime(),
                     y: 0,
-                    programname: array_name[46]
+                    programname: array_programname[46]
                 },
                 {
                     x: (new Date(array_rabota[94])).getTime(),
                     x2: (new Date(array_rabota[95])).getTime(),
                     y: 0,
-                    programname: array_name[47]
+                    programname: array_programname[47]
                 },
                 {
                     x: (new Date(array_rabota[96])).getTime(),
                     x2: (new Date(array_rabota[97])).getTime(),
                     y: 0,
-                    programname: array_name[48]
+                    programname: array_programname[48]
                 },
             ],
         },
