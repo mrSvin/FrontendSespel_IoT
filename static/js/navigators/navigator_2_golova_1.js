@@ -214,9 +214,12 @@ Highcharts.chart('container_work_2', {
             }
         },
         {
-            // name: 'Работа',
-            // pointWidth: 30,
-            // borderColor: 'gray',
+            name: 'Работа',
+            pointWidth: 30,
+            borderColor: 'gray',
+            tooltip: {
+                pointFormat: ''
+            },
             data:   [
                 {x:  (new Date(array_rabota_2_golova_1[0])).getTime(), x2: (new Date(array_rabota_2_golova_1[1])).getTime(), y: 1},
                 {x:  (new Date(array_rabota_2_golova_1[2])).getTime(), x2: (new Date(array_rabota_2_golova_1[3])).getTime(), y: 1},
