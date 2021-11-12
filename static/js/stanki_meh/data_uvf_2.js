@@ -26,7 +26,7 @@ Highcharts.setOptions({
 
 var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
 
-Highcharts.chart('container_work', {
+Highcharts.chart('container_work_2', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -1226,7 +1226,7 @@ Highcharts.chart('container_work', {
 });
 
 var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-Highcharts.chart('container', {
+Highcharts.chart('container_2', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
