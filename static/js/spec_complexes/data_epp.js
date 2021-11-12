@@ -36,7 +36,7 @@ Highcharts.chart('container_work_epp', {
     title: {
         text: 'Работа оборудования'
     },
-    colors:colors,
+    colors: colors,
 
 
     xAxis: {
@@ -59,7 +59,7 @@ Highcharts.chart('container_work_epp', {
             borderColor: 'gray',
             pointWidth: 30,
             tooltip: {
-                pointFormat: '<b>Программа: {point.programname}</b>'
+                pointFormat: '<b>Табельный: {point.programname}</b>'
             },
 
             data:   [
