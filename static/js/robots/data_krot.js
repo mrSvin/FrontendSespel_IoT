@@ -23,7 +23,7 @@ Highcharts.setOptions({
 
 var colors = ['#207210', '#38e817', '#ffea32', '#000000', '#e81e1d'];
 
-Highcharts.chart('container_work_6', {
+Highcharts.chart('container_work_krot', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -504,7 +504,7 @@ Highcharts.chart('container_work_6', {
 
 <!--krot круговая диагрмма загрузки оборудования-->
 var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-Highcharts.chart('container_6', {
+Highcharts.chart('container_krot', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
