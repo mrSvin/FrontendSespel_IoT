@@ -210,7 +210,6 @@ Highcharts.chart('container_work2', {
                 {x:  (new Date(progress_array_rabota[292])).getTime(), x2: (new Date(progress_array_rabota[293])).getTime(), y: 0, programname: progress_programname[148]},
                 {x:  (new Date(progress_array_rabota[294])).getTime(), x2: (new Date(progress_array_rabota[295])).getTime(), y: 0, programname: progress_programname[149]},
                 {x:  (new Date(progress_array_rabota[296])).getTime(), x2: (new Date(progress_array_rabota[297])).getTime(), y: 0, programname: progress_programname[150]},
-                {x:  (new Date(progress_array_rabota[298])).getTime(), x2: (new Date(progress_array_rabota[299])).getTime(), y: 0, programname: progress_programname[151]},
 
             ],
         },
@@ -337,7 +336,6 @@ Highcharts.chart('container_work2', {
                 {x:  (new Date(progress_array_pause[222])).getTime(), x2: (new Date(progress_array_pause[223])).getTime(), y: 1},
                 {x:  (new Date(progress_array_pause[224])).getTime(), x2: (new Date(progress_array_pause[225])).getTime(), y: 1},
                 {x:  (new Date(progress_array_pause[226])).getTime(), x2: (new Date(progress_array_pause[227])).getTime(), y: 1},
-                {x:  (new Date(progress_array_pause[228])).getTime(), x2: (new Date(progress_array_pause[229])).getTime(), y: 1},
             ],
             dataLabels: {
                 enabled: true

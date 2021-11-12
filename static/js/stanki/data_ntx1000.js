@@ -209,7 +209,6 @@ Highcharts.chart('container_work3', {
             {x:  (new Date(ntx1000_array_rabota[292])).getTime(), x2: (new Date(ntx1000_array_rabota[293])).getTime(), y: 1, programname: ntx1000_programname[148]},
             {x:  (new Date(ntx1000_array_rabota[294])).getTime(), x2: (new Date(ntx1000_array_rabota[295])).getTime(), y: 1, programname: ntx1000_programname[149]},
             {x:  (new Date(ntx1000_array_rabota[296])).getTime(), x2: (new Date(ntx1000_array_rabota[297])).getTime(), y: 1, programname: ntx1000_programname[150]},
-            {x:  (new Date(ntx1000_array_rabota[298])).getTime(), x2: (new Date(ntx1000_array_rabota[299])).getTime(), y: 1, programname: ntx1000_programname[151]},
 
         ],
 
@@ -371,7 +370,6 @@ Highcharts.chart('container_work3', {
                 {x:  (new Date(ntx1000_array_pause[292])).getTime(), x2: (new Date(ntx1000_array_pause[293])).getTime(), y: 2},
                 {x:  (new Date(ntx1000_array_pause[294])).getTime(), x2: (new Date(ntx1000_array_pause[295])).getTime(), y: 2},
                 {x:  (new Date(ntx1000_array_pause[296])).getTime(), x2: (new Date(ntx1000_array_pause[297])).getTime(), y: 2},
-                {x:  (new Date(ntx1000_array_pause[298])).getTime(), x2: (new Date(ntx1000_array_pause[299])).getTime(), y: 2},
 
             ],
             dataLabels: {
