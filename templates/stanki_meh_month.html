@@ -465,7 +465,7 @@
             margin-left: -5px;
         }
 
-        .icon_mesto_dmg_ctx310{
+        .icon_mesto_dmg_ctx310_1{
 
             width: 60px;
             height: 60px;
@@ -474,24 +474,24 @@
             margin-top: 10px;
             margin-left: 30px;
         }
-        .icon_mesto_dmg_ctx310:hover {
+        .icon_mesto_dmg_ctx310_1:hover {
             -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
         }
-        .icon_personal_dmg_ctx310{
+        .icon_personal_dmg_ctx310_1{
             background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
             background-size: 60px 60px;
             margin-top: 10px;
             margin-left: 30px;
         }
-        .icon_personal_dmg_ctx310:hover {
+        .icon_personal_dmg_ctx310_1:hover {
             -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
         }
-        .label_mesto_dmg_ctx310{
+        .label_mesto_dmg_ctx310_1{
             color: #756e6e;
             margin-top: 65px;
             margin-left: 8px;
         }
-        .label_personal_dmg_ctx310{
+        .label_personal_dmg_ctx310_1{
             color: #756e6e;
             margin-top: 65px;
             margin-left: -5px;
@@ -787,16 +787,16 @@
 
 </div> <!-- DMC1035 #2 html-->
 
-<div style="border: 1px solid #333;">   <!--dmg_ctx310 html-->
+<div style="border: 1px solid #333;">   <!--dmg_ctx310_1 html-->
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
             <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
-                    <img src="images/dmg_ctx310.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ctx310</figcaption>
+                    <img src="images/dmg_ctx310_1.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX310 #1</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_dmg_ctx310" href="mesto/mesto_dmg_ctx310" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_dmg_ctx310'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_dmg_ctx310" href="personal/personal_dmg_ctx310" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_dmg_ctx310'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_dmg_ctx310_1" href="mesto/mesto_dmg_ctx310_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_dmg_ctx310_1'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_dmg_ctx310_1" href="personal/personal_dmg_ctx310_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_dmg_ctx310_1'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -805,7 +805,7 @@
         </div>
     </div>  <!--Прогресс html-->
 
-</div> <!--ctx310 html-->
+</div> <!--ctx310_1 html-->
 
 <script th:inline="javascript">
 
@@ -821,7 +821,7 @@
     var work_dmu50_1 = [[${dmg_dmu50_1_work}]];
     var work_dmu50_2 = [[${dmg_dmu50_2_work}]];
     var work_dmc1035 = [[${dmg_dmc1035_work}]];
-    var work_ctx310 = [[${dmg_ctx310_work}]];
+    var work_ctx310_1 = [[${dmg_ctx310_1_work}]];
 
     var pause_uvf_1_1 = [[${uvf_1_pass}]];
     var pause_uvf_1_2 = [[${uvf_2_pass}]];
@@ -833,7 +833,7 @@
     var pause_dmu50_1 = [[${dmg_dmu50_1_pass}]];
     var pause_dmu50_2 = [[${dmg_dmu50_2_pass}]];
     var pause_dmc1035 = [[${dmg_dmc1035_pass}]];
-    var pause_ctx310 = [[${dmg_ctx310_pass}]];
+    var pause_ctx310_1 = [[${dmg_ctx310_1_pass}]];
 
     var off_uvf_1_1 = [[${uvf_1_fail}]];
     var off_uvf_1_2 = [[${uvf_2_fail}]];
@@ -845,7 +845,7 @@
     var off_dmu50_1 = [[${dmg_dmu50_1_fail}]];
     var off_dmu50_2 = [[${dmg_dmu50_2_fail}]];
     var off_dmc1035 = [[${dmg_dmc1035_fail}]];
-    var off_ctx310 = [[${dmg_ctx310_fail}]];
+    var off_ctx310_1 = [[${dmg_ctx310_1_fail}]];
 
     var avar_uvf_1_1 = [[${uvf_1_avar}]];
     var avar_uvf_1_2 = [[${uvf_2_avar}]];
@@ -857,7 +857,7 @@
     var avar_dmu50_1 = [[${dmg_dmu50_1_avar}]];
     var avar_dmu50_2 = [[${dmg_dmu50_2_avar}]];
     var avar_dmc1035 = [[${dmg_dmc1035_avar}]];
-    var avar_ctx310 = [[${dmg_ctx310_avar}]];
+    var avar_ctx310_1 = [[${dmg_ctx310_1_avar}]];
 
 
     var nagruzka_uvf_1_1 = [[${uvf_1_nagruzka}]];
@@ -870,7 +870,7 @@
     var nagruzka_dmu50_1 = [[${dmg_dmu50_1_nagruzka}]];
     var nagruzka_dmu50_2 = [[${dmg_dmu50_2_nagruzka}]];
     var nagruzka_dmc1035 = [[${dmg_dmc1035_nagruzka}]];
-    var nagruzka_ctx310 = [[${dmg_ctx310_nagruzka}]];
+    var nagruzka_ctx310_1 = [[${dmg_ctx310_1_nagruzka}]];
 
     Highcharts.setOptions({
         lang: {
@@ -909,7 +909,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УВФ-1 #1', 'УВФ-1 #2', 'NTX1000', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50 #1', 'DMU50 #2', 'DMC1035', 'CTX310']
+            categories: ['УВФ-1 #1', 'УВФ-1 #2', 'NTX1000', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50 #1', 'DMU50 #2', 'DMC1035', 'CTX310 #1']
         },
         credits: {
             enabled: false
@@ -931,19 +931,19 @@
         },
         series: [{
             name: 'Работа',
-            data: [work_uvf_1_1, work_uvf_1_2, work_ntx1000, work_nlx3000, work_gamma2000, work_ctx650, work_dmf260, work_dmu50_1, work_dmu50_2, work_dmc1035, work_ctx310 ]
+            data: [work_uvf_1_1, work_uvf_1_2, work_ntx1000, work_nlx3000, work_gamma2000, work_ctx650, work_dmf260, work_dmu50_1, work_dmu50_2, work_dmc1035, work_ctx310_1 ]
         }, {
             name: 'Под нагрузкой',
-            data: [nagruzka_uvf_1_1, nagruzka_uvf_1_2, nagruzka_ntx1000, nagruzka_nlx3000, nagruzka_gamma2000, nagruzka_ctx650, nagruzka_dmf260, nagruzka_dmu50_1, nagruzka_dmu50_2, nagruzka_dmc1035, nagruzka_ctx310]
+            data: [nagruzka_uvf_1_1, nagruzka_uvf_1_2, nagruzka_ntx1000, nagruzka_nlx3000, nagruzka_gamma2000, nagruzka_ctx650, nagruzka_dmf260, nagruzka_dmu50_1, nagruzka_dmu50_2, nagruzka_dmc1035, nagruzka_ctx310_1]
         }, {
             name: 'Ожидание',
-            data: [pause_uvf_1_1, pause_uvf_1_2, pause_ntx1000, pause_nlx3000, pause_gamma2000, pause_ctx650, pause_dmf260, pause_dmu50_1, pause_dmu50_2, pause_dmc1035, pause_ctx310]
+            data: [pause_uvf_1_1, pause_uvf_1_2, pause_ntx1000, pause_nlx3000, pause_gamma2000, pause_ctx650, pause_dmf260, pause_dmu50_1, pause_dmu50_2, pause_dmc1035, pause_ctx310_1]
         }, {
             name: 'Авария',
-            data: [avar_uvf_1_1, avar_uvf_1_2, avar_ntx1000, avar_nlx3000, avar_gamma2000, avar_ctx650, avar_dmf260, avar_dmu50_1, avar_dmu50_2, avar_dmc1035, avar_ctx310]
+            data: [avar_uvf_1_1, avar_uvf_1_2, avar_ntx1000, avar_nlx3000, avar_gamma2000, avar_ctx650, avar_dmf260, avar_dmu50_1, avar_dmu50_2, avar_dmc1035, avar_ctx310_1]
         }, {
             name: 'Выключен',
-            data: [off_uvf_1_1, off_uvf_1_2, off_ntx1000, off_nlx3000, off_gamma2000, off_ctx650, off_dmf260, off_dmu50_1, off_dmu50_2, off_dmc1035, off_ctx310]
+            data: [off_uvf_1_1, off_uvf_1_2, off_ntx1000, off_nlx3000, off_gamma2000, off_ctx650, off_dmf260, off_dmu50_1, off_dmu50_2, off_dmc1035, off_ctx310_1]
         }]
     });
 
@@ -4163,166 +4163,166 @@
 
     var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
     {
-        var dmg_ctx310_rabota_day1 = [[${dmg_ctx310_rabota_day0}]];
-        var dmg_ctx310_rabota_day2 = [[${dmg_ctx310_rabota_day1}]];
-        var dmg_ctx310_rabota_day3 = [[${dmg_ctx310_rabota_day2}]];
-        var dmg_ctx310_rabota_day4 = [[${dmg_ctx310_rabota_day3}]];
-        var dmg_ctx310_rabota_day5 = [[${dmg_ctx310_rabota_day4}]];
-        var dmg_ctx310_rabota_day6 = [[${dmg_ctx310_rabota_day5}]];
-        var dmg_ctx310_rabota_day7 = [[${dmg_ctx310_rabota_day6}]];
-        var dmg_ctx310_rabota_day8 = [[${dmg_ctx310_rabota_day7}]];
-        var dmg_ctx310_rabota_day9 = [[${dmg_ctx310_rabota_day8}]];
-        var dmg_ctx310_rabota_day10 = [[${dmg_ctx310_rabota_day9}]];
-        var dmg_ctx310_rabota_day11 = [[${dmg_ctx310_rabota_day10}]];
-        var dmg_ctx310_rabota_day12 = [[${dmg_ctx310_rabota_day11}]];
-        var dmg_ctx310_rabota_day13 = [[${dmg_ctx310_rabota_day12}]];
-        var dmg_ctx310_rabota_day14 = [[${dmg_ctx310_rabota_day13}]];
-        var dmg_ctx310_rabota_day15 = [[${dmg_ctx310_rabota_day14}]];
-        var dmg_ctx310_rabota_day16 = [[${dmg_ctx310_rabota_day15}]];
-        var dmg_ctx310_rabota_day17 = [[${dmg_ctx310_rabota_day16}]];
-        var dmg_ctx310_rabota_day18 = [[${dmg_ctx310_rabota_day17}]];
-        var dmg_ctx310_rabota_day19 = [[${dmg_ctx310_rabota_day18}]];
-        var dmg_ctx310_rabota_day20 = [[${dmg_ctx310_rabota_day19}]];
-        var dmg_ctx310_rabota_day21 = [[${dmg_ctx310_rabota_day20}]];
-        var dmg_ctx310_rabota_day22 = [[${dmg_ctx310_rabota_day21}]];
-        var dmg_ctx310_rabota_day23 = [[${dmg_ctx310_rabota_day22}]];
-        var dmg_ctx310_rabota_day24 = [[${dmg_ctx310_rabota_day23}]];
-        var dmg_ctx310_rabota_day25 = [[${dmg_ctx310_rabota_day24}]];
-        var dmg_ctx310_rabota_day26 = [[${dmg_ctx310_rabota_day25}]];
-        var dmg_ctx310_rabota_day27 = [[${dmg_ctx310_rabota_day26}]];
-        var dmg_ctx310_rabota_day28 = [[${dmg_ctx310_rabota_day27}]];
-        var dmg_ctx310_rabota_day29 = [[${dmg_ctx310_rabota_day28}]];
-        var dmg_ctx310_rabota_day30 = [[${dmg_ctx310_rabota_day29}]];
-        var dmg_ctx310_rabota_day31 = [[${dmg_ctx310_rabota_day30}]];
+        var dmg_ctx310_1_rabota_day1 = [[${dmg_ctx310_1_rabota_day0}]];
+        var dmg_ctx310_1_rabota_day2 = [[${dmg_ctx310_1_rabota_day1}]];
+        var dmg_ctx310_1_rabota_day3 = [[${dmg_ctx310_1_rabota_day2}]];
+        var dmg_ctx310_1_rabota_day4 = [[${dmg_ctx310_1_rabota_day3}]];
+        var dmg_ctx310_1_rabota_day5 = [[${dmg_ctx310_1_rabota_day4}]];
+        var dmg_ctx310_1_rabota_day6 = [[${dmg_ctx310_1_rabota_day5}]];
+        var dmg_ctx310_1_rabota_day7 = [[${dmg_ctx310_1_rabota_day6}]];
+        var dmg_ctx310_1_rabota_day8 = [[${dmg_ctx310_1_rabota_day7}]];
+        var dmg_ctx310_1_rabota_day9 = [[${dmg_ctx310_1_rabota_day8}]];
+        var dmg_ctx310_1_rabota_day10 = [[${dmg_ctx310_1_rabota_day9}]];
+        var dmg_ctx310_1_rabota_day11 = [[${dmg_ctx310_1_rabota_day10}]];
+        var dmg_ctx310_1_rabota_day12 = [[${dmg_ctx310_1_rabota_day11}]];
+        var dmg_ctx310_1_rabota_day13 = [[${dmg_ctx310_1_rabota_day12}]];
+        var dmg_ctx310_1_rabota_day14 = [[${dmg_ctx310_1_rabota_day13}]];
+        var dmg_ctx310_1_rabota_day15 = [[${dmg_ctx310_1_rabota_day14}]];
+        var dmg_ctx310_1_rabota_day16 = [[${dmg_ctx310_1_rabota_day15}]];
+        var dmg_ctx310_1_rabota_day17 = [[${dmg_ctx310_1_rabota_day16}]];
+        var dmg_ctx310_1_rabota_day18 = [[${dmg_ctx310_1_rabota_day17}]];
+        var dmg_ctx310_1_rabota_day19 = [[${dmg_ctx310_1_rabota_day18}]];
+        var dmg_ctx310_1_rabota_day20 = [[${dmg_ctx310_1_rabota_day19}]];
+        var dmg_ctx310_1_rabota_day21 = [[${dmg_ctx310_1_rabota_day20}]];
+        var dmg_ctx310_1_rabota_day22 = [[${dmg_ctx310_1_rabota_day21}]];
+        var dmg_ctx310_1_rabota_day23 = [[${dmg_ctx310_1_rabota_day22}]];
+        var dmg_ctx310_1_rabota_day24 = [[${dmg_ctx310_1_rabota_day23}]];
+        var dmg_ctx310_1_rabota_day25 = [[${dmg_ctx310_1_rabota_day24}]];
+        var dmg_ctx310_1_rabota_day26 = [[${dmg_ctx310_1_rabota_day25}]];
+        var dmg_ctx310_1_rabota_day27 = [[${dmg_ctx310_1_rabota_day26}]];
+        var dmg_ctx310_1_rabota_day28 = [[${dmg_ctx310_1_rabota_day27}]];
+        var dmg_ctx310_1_rabota_day29 = [[${dmg_ctx310_1_rabota_day28}]];
+        var dmg_ctx310_1_rabota_day30 = [[${dmg_ctx310_1_rabota_day29}]];
+        var dmg_ctx310_1_rabota_day31 = [[${dmg_ctx310_1_rabota_day30}]];
 
-        var dmg_ctx310_pause_day1 = [[${dmg_ctx310_pause_day0}]];
-        var dmg_ctx310_pause_day2 = [[${dmg_ctx310_pause_day1}]];
-        var dmg_ctx310_pause_day3 = [[${dmg_ctx310_pause_day2}]];
-        var dmg_ctx310_pause_day4 = [[${dmg_ctx310_pause_day3}]];
-        var dmg_ctx310_pause_day5 = [[${dmg_ctx310_pause_day4}]];
-        var dmg_ctx310_pause_day6 = [[${dmg_ctx310_pause_day5}]];
-        var dmg_ctx310_pause_day7 = [[${dmg_ctx310_pause_day6}]];
-        var dmg_ctx310_pause_day8 = [[${dmg_ctx310_pause_day7}]];
-        var dmg_ctx310_pause_day9 = [[${dmg_ctx310_pause_day8}]];
-        var dmg_ctx310_pause_day10 = [[${dmg_ctx310_pause_day9}]];
-        var dmg_ctx310_pause_day11 = [[${dmg_ctx310_pause_day10}]];
-        var dmg_ctx310_pause_day12 = [[${dmg_ctx310_pause_day11}]];
-        var dmg_ctx310_pause_day13 = [[${dmg_ctx310_pause_day12}]];
-        var dmg_ctx310_pause_day14 = [[${dmg_ctx310_pause_day13}]];
-        var dmg_ctx310_pause_day15 = [[${dmg_ctx310_pause_day14}]];
-        var dmg_ctx310_pause_day16 = [[${dmg_ctx310_pause_day15}]];
-        var dmg_ctx310_pause_day17 = [[${dmg_ctx310_pause_day16}]];
-        var dmg_ctx310_pause_day18 = [[${dmg_ctx310_pause_day17}]];
-        var dmg_ctx310_pause_day19 = [[${dmg_ctx310_pause_day18}]];
-        var dmg_ctx310_pause_day20 = [[${dmg_ctx310_pause_day19}]];
-        var dmg_ctx310_pause_day21 = [[${dmg_ctx310_pause_day20}]];
-        var dmg_ctx310_pause_day22 = [[${dmg_ctx310_pause_day21}]];
-        var dmg_ctx310_pause_day23 = [[${dmg_ctx310_pause_day22}]];
-        var dmg_ctx310_pause_day24 = [[${dmg_ctx310_pause_day23}]];
-        var dmg_ctx310_pause_day25 = [[${dmg_ctx310_pause_day24}]];
-        var dmg_ctx310_pause_day26 = [[${dmg_ctx310_pause_day25}]];
-        var dmg_ctx310_pause_day27 = [[${dmg_ctx310_pause_day26}]];
-        var dmg_ctx310_pause_day28 = [[${dmg_ctx310_pause_day27}]];
-        var dmg_ctx310_pause_day29 = [[${dmg_ctx310_pause_day28}]];
-        var dmg_ctx310_pause_day30 = [[${dmg_ctx310_pause_day29}]];
-        var dmg_ctx310_pause_day31 = [[${dmg_ctx310_pause_day30}]];
+        var dmg_ctx310_1_pause_day1 = [[${dmg_ctx310_1_pause_day0}]];
+        var dmg_ctx310_1_pause_day2 = [[${dmg_ctx310_1_pause_day1}]];
+        var dmg_ctx310_1_pause_day3 = [[${dmg_ctx310_1_pause_day2}]];
+        var dmg_ctx310_1_pause_day4 = [[${dmg_ctx310_1_pause_day3}]];
+        var dmg_ctx310_1_pause_day5 = [[${dmg_ctx310_1_pause_day4}]];
+        var dmg_ctx310_1_pause_day6 = [[${dmg_ctx310_1_pause_day5}]];
+        var dmg_ctx310_1_pause_day7 = [[${dmg_ctx310_1_pause_day6}]];
+        var dmg_ctx310_1_pause_day8 = [[${dmg_ctx310_1_pause_day7}]];
+        var dmg_ctx310_1_pause_day9 = [[${dmg_ctx310_1_pause_day8}]];
+        var dmg_ctx310_1_pause_day10 = [[${dmg_ctx310_1_pause_day9}]];
+        var dmg_ctx310_1_pause_day11 = [[${dmg_ctx310_1_pause_day10}]];
+        var dmg_ctx310_1_pause_day12 = [[${dmg_ctx310_1_pause_day11}]];
+        var dmg_ctx310_1_pause_day13 = [[${dmg_ctx310_1_pause_day12}]];
+        var dmg_ctx310_1_pause_day14 = [[${dmg_ctx310_1_pause_day13}]];
+        var dmg_ctx310_1_pause_day15 = [[${dmg_ctx310_1_pause_day14}]];
+        var dmg_ctx310_1_pause_day16 = [[${dmg_ctx310_1_pause_day15}]];
+        var dmg_ctx310_1_pause_day17 = [[${dmg_ctx310_1_pause_day16}]];
+        var dmg_ctx310_1_pause_day18 = [[${dmg_ctx310_1_pause_day17}]];
+        var dmg_ctx310_1_pause_day19 = [[${dmg_ctx310_1_pause_day18}]];
+        var dmg_ctx310_1_pause_day20 = [[${dmg_ctx310_1_pause_day19}]];
+        var dmg_ctx310_1_pause_day21 = [[${dmg_ctx310_1_pause_day20}]];
+        var dmg_ctx310_1_pause_day22 = [[${dmg_ctx310_1_pause_day21}]];
+        var dmg_ctx310_1_pause_day23 = [[${dmg_ctx310_1_pause_day22}]];
+        var dmg_ctx310_1_pause_day24 = [[${dmg_ctx310_1_pause_day23}]];
+        var dmg_ctx310_1_pause_day25 = [[${dmg_ctx310_1_pause_day24}]];
+        var dmg_ctx310_1_pause_day26 = [[${dmg_ctx310_1_pause_day25}]];
+        var dmg_ctx310_1_pause_day27 = [[${dmg_ctx310_1_pause_day26}]];
+        var dmg_ctx310_1_pause_day28 = [[${dmg_ctx310_1_pause_day27}]];
+        var dmg_ctx310_1_pause_day29 = [[${dmg_ctx310_1_pause_day28}]];
+        var dmg_ctx310_1_pause_day30 = [[${dmg_ctx310_1_pause_day29}]];
+        var dmg_ctx310_1_pause_day31 = [[${dmg_ctx310_1_pause_day30}]];
 
-        var dmg_ctx310_off_day1 = [[${dmg_ctx310_off_day0}]];
-        var dmg_ctx310_off_day2 = [[${dmg_ctx310_off_day1}]];
-        var dmg_ctx310_off_day3 = [[${dmg_ctx310_off_day2}]];
-        var dmg_ctx310_off_day4 = [[${dmg_ctx310_off_day3}]];
-        var dmg_ctx310_off_day5 = [[${dmg_ctx310_off_day4}]];
-        var dmg_ctx310_off_day6 = [[${dmg_ctx310_off_day5}]];
-        var dmg_ctx310_off_day7 = [[${dmg_ctx310_off_day6}]];
-        var dmg_ctx310_off_day8 = [[${dmg_ctx310_off_day7}]];
-        var dmg_ctx310_off_day9 = [[${dmg_ctx310_off_day8}]];
-        var dmg_ctx310_off_day10 = [[${dmg_ctx310_off_day9}]];
-        var dmg_ctx310_off_day11 = [[${dmg_ctx310_off_day10}]];
-        var dmg_ctx310_off_day12 = [[${dmg_ctx310_off_day11}]];
-        var dmg_ctx310_off_day13 = [[${dmg_ctx310_off_day12}]];
-        var dmg_ctx310_off_day14 = [[${dmg_ctx310_off_day13}]];
-        var dmg_ctx310_off_day15 = [[${dmg_ctx310_off_day14}]];
-        var dmg_ctx310_off_day16 = [[${dmg_ctx310_off_day15}]];
-        var dmg_ctx310_off_day17 = [[${dmg_ctx310_off_day16}]];
-        var dmg_ctx310_off_day18 = [[${dmg_ctx310_off_day17}]];
-        var dmg_ctx310_off_day19 = [[${dmg_ctx310_off_day18}]];
-        var dmg_ctx310_off_day20 = [[${dmg_ctx310_off_day19}]];
-        var dmg_ctx310_off_day21 = [[${dmg_ctx310_off_day20}]];
-        var dmg_ctx310_off_day22 = [[${dmg_ctx310_off_day21}]];
-        var dmg_ctx310_off_day23 = [[${dmg_ctx310_off_day22}]];
-        var dmg_ctx310_off_day24 = [[${dmg_ctx310_off_day23}]];
-        var dmg_ctx310_off_day25 = [[${dmg_ctx310_off_day24}]];
-        var dmg_ctx310_off_day26 = [[${dmg_ctx310_off_day25}]];
-        var dmg_ctx310_off_day27 = [[${dmg_ctx310_off_day26}]];
-        var dmg_ctx310_off_day28 = [[${dmg_ctx310_off_day27}]];
-        var dmg_ctx310_off_day29 = [[${dmg_ctx310_off_day28}]];
-        var dmg_ctx310_off_day30 = [[${dmg_ctx310_off_day29}]];
-        var dmg_ctx310_off_day31 = [[${dmg_ctx310_off_day30}]];
+        var dmg_ctx310_1_off_day1 = [[${dmg_ctx310_1_off_day0}]];
+        var dmg_ctx310_1_off_day2 = [[${dmg_ctx310_1_off_day1}]];
+        var dmg_ctx310_1_off_day3 = [[${dmg_ctx310_1_off_day2}]];
+        var dmg_ctx310_1_off_day4 = [[${dmg_ctx310_1_off_day3}]];
+        var dmg_ctx310_1_off_day5 = [[${dmg_ctx310_1_off_day4}]];
+        var dmg_ctx310_1_off_day6 = [[${dmg_ctx310_1_off_day5}]];
+        var dmg_ctx310_1_off_day7 = [[${dmg_ctx310_1_off_day6}]];
+        var dmg_ctx310_1_off_day8 = [[${dmg_ctx310_1_off_day7}]];
+        var dmg_ctx310_1_off_day9 = [[${dmg_ctx310_1_off_day8}]];
+        var dmg_ctx310_1_off_day10 = [[${dmg_ctx310_1_off_day9}]];
+        var dmg_ctx310_1_off_day11 = [[${dmg_ctx310_1_off_day10}]];
+        var dmg_ctx310_1_off_day12 = [[${dmg_ctx310_1_off_day11}]];
+        var dmg_ctx310_1_off_day13 = [[${dmg_ctx310_1_off_day12}]];
+        var dmg_ctx310_1_off_day14 = [[${dmg_ctx310_1_off_day13}]];
+        var dmg_ctx310_1_off_day15 = [[${dmg_ctx310_1_off_day14}]];
+        var dmg_ctx310_1_off_day16 = [[${dmg_ctx310_1_off_day15}]];
+        var dmg_ctx310_1_off_day17 = [[${dmg_ctx310_1_off_day16}]];
+        var dmg_ctx310_1_off_day18 = [[${dmg_ctx310_1_off_day17}]];
+        var dmg_ctx310_1_off_day19 = [[${dmg_ctx310_1_off_day18}]];
+        var dmg_ctx310_1_off_day20 = [[${dmg_ctx310_1_off_day19}]];
+        var dmg_ctx310_1_off_day21 = [[${dmg_ctx310_1_off_day20}]];
+        var dmg_ctx310_1_off_day22 = [[${dmg_ctx310_1_off_day21}]];
+        var dmg_ctx310_1_off_day23 = [[${dmg_ctx310_1_off_day22}]];
+        var dmg_ctx310_1_off_day24 = [[${dmg_ctx310_1_off_day23}]];
+        var dmg_ctx310_1_off_day25 = [[${dmg_ctx310_1_off_day24}]];
+        var dmg_ctx310_1_off_day26 = [[${dmg_ctx310_1_off_day25}]];
+        var dmg_ctx310_1_off_day27 = [[${dmg_ctx310_1_off_day26}]];
+        var dmg_ctx310_1_off_day28 = [[${dmg_ctx310_1_off_day27}]];
+        var dmg_ctx310_1_off_day29 = [[${dmg_ctx310_1_off_day28}]];
+        var dmg_ctx310_1_off_day30 = [[${dmg_ctx310_1_off_day29}]];
+        var dmg_ctx310_1_off_day31 = [[${dmg_ctx310_1_off_day30}]];
 
-        var dmg_ctx310_avar_day1 = [[${dmg_ctx310_avar_day0}]];
-        var dmg_ctx310_avar_day2 = [[${dmg_ctx310_avar_day1}]];
-        var dmg_ctx310_avar_day3 = [[${dmg_ctx310_avar_day2}]];
-        var dmg_ctx310_avar_day4 = [[${dmg_ctx310_avar_day3}]];
-        var dmg_ctx310_avar_day5 = [[${dmg_ctx310_avar_day4}]];
-        var dmg_ctx310_avar_day6 = [[${dmg_ctx310_avar_day5}]];
-        var dmg_ctx310_avar_day7 = [[${dmg_ctx310_avar_day6}]];
-        var dmg_ctx310_avar_day8 = [[${dmg_ctx310_avar_day7}]];
-        var dmg_ctx310_avar_day9 = [[${dmg_ctx310_avar_day8}]];
-        var dmg_ctx310_avar_day10 = [[${dmg_ctx310_avar_day9}]];
-        var dmg_ctx310_avar_day11 = [[${dmg_ctx310_avar_day10}]];
-        var dmg_ctx310_avar_day12 = [[${dmg_ctx310_avar_day11}]];
-        var dmg_ctx310_avar_day13 = [[${dmg_ctx310_avar_day12}]];
-        var dmg_ctx310_avar_day14 = [[${dmg_ctx310_avar_day13}]];
-        var dmg_ctx310_avar_day15 = [[${dmg_ctx310_avar_day14}]];
-        var dmg_ctx310_avar_day16 = [[${dmg_ctx310_avar_day15}]];
-        var dmg_ctx310_avar_day17 = [[${dmg_ctx310_avar_day16}]];
-        var dmg_ctx310_avar_day18 = [[${dmg_ctx310_avar_day17}]];
-        var dmg_ctx310_avar_day19 = [[${dmg_ctx310_avar_day18}]];
-        var dmg_ctx310_avar_day20 = [[${dmg_ctx310_avar_day19}]];
-        var dmg_ctx310_avar_day21 = [[${dmg_ctx310_avar_day20}]];
-        var dmg_ctx310_avar_day22 = [[${dmg_ctx310_avar_day21}]];
-        var dmg_ctx310_avar_day23 = [[${dmg_ctx310_avar_day22}]];
-        var dmg_ctx310_avar_day24 = [[${dmg_ctx310_avar_day23}]];
-        var dmg_ctx310_avar_day25 = [[${dmg_ctx310_avar_day24}]];
-        var dmg_ctx310_avar_day26 = [[${dmg_ctx310_avar_day25}]];
-        var dmg_ctx310_avar_day27 = [[${dmg_ctx310_avar_day26}]];
-        var dmg_ctx310_avar_day28 = [[${dmg_ctx310_avar_day27}]];
-        var dmg_ctx310_avar_day29 = [[${dmg_ctx310_avar_day28}]];
-        var dmg_ctx310_avar_day30 = [[${dmg_ctx310_avar_day29}]];
-        var dmg_ctx310_avar_day31 = [[${dmg_ctx310_avar_day30}]];
+        var dmg_ctx310_1_avar_day1 = [[${dmg_ctx310_1_avar_day0}]];
+        var dmg_ctx310_1_avar_day2 = [[${dmg_ctx310_1_avar_day1}]];
+        var dmg_ctx310_1_avar_day3 = [[${dmg_ctx310_1_avar_day2}]];
+        var dmg_ctx310_1_avar_day4 = [[${dmg_ctx310_1_avar_day3}]];
+        var dmg_ctx310_1_avar_day5 = [[${dmg_ctx310_1_avar_day4}]];
+        var dmg_ctx310_1_avar_day6 = [[${dmg_ctx310_1_avar_day5}]];
+        var dmg_ctx310_1_avar_day7 = [[${dmg_ctx310_1_avar_day6}]];
+        var dmg_ctx310_1_avar_day8 = [[${dmg_ctx310_1_avar_day7}]];
+        var dmg_ctx310_1_avar_day9 = [[${dmg_ctx310_1_avar_day8}]];
+        var dmg_ctx310_1_avar_day10 = [[${dmg_ctx310_1_avar_day9}]];
+        var dmg_ctx310_1_avar_day11 = [[${dmg_ctx310_1_avar_day10}]];
+        var dmg_ctx310_1_avar_day12 = [[${dmg_ctx310_1_avar_day11}]];
+        var dmg_ctx310_1_avar_day13 = [[${dmg_ctx310_1_avar_day12}]];
+        var dmg_ctx310_1_avar_day14 = [[${dmg_ctx310_1_avar_day13}]];
+        var dmg_ctx310_1_avar_day15 = [[${dmg_ctx310_1_avar_day14}]];
+        var dmg_ctx310_1_avar_day16 = [[${dmg_ctx310_1_avar_day15}]];
+        var dmg_ctx310_1_avar_day17 = [[${dmg_ctx310_1_avar_day16}]];
+        var dmg_ctx310_1_avar_day18 = [[${dmg_ctx310_1_avar_day17}]];
+        var dmg_ctx310_1_avar_day19 = [[${dmg_ctx310_1_avar_day18}]];
+        var dmg_ctx310_1_avar_day20 = [[${dmg_ctx310_1_avar_day19}]];
+        var dmg_ctx310_1_avar_day21 = [[${dmg_ctx310_1_avar_day20}]];
+        var dmg_ctx310_1_avar_day22 = [[${dmg_ctx310_1_avar_day21}]];
+        var dmg_ctx310_1_avar_day23 = [[${dmg_ctx310_1_avar_day22}]];
+        var dmg_ctx310_1_avar_day24 = [[${dmg_ctx310_1_avar_day23}]];
+        var dmg_ctx310_1_avar_day25 = [[${dmg_ctx310_1_avar_day24}]];
+        var dmg_ctx310_1_avar_day26 = [[${dmg_ctx310_1_avar_day25}]];
+        var dmg_ctx310_1_avar_day27 = [[${dmg_ctx310_1_avar_day26}]];
+        var dmg_ctx310_1_avar_day28 = [[${dmg_ctx310_1_avar_day27}]];
+        var dmg_ctx310_1_avar_day29 = [[${dmg_ctx310_1_avar_day28}]];
+        var dmg_ctx310_1_avar_day30 = [[${dmg_ctx310_1_avar_day29}]];
+        var dmg_ctx310_1_avar_day31 = [[${dmg_ctx310_1_avar_day30}]];
 
-        var dmg_ctx310_nagruzka_day1 = [[${dmg_ctx310_nagruzka_day0}]];
-        var dmg_ctx310_nagruzka_day2 = [[${dmg_ctx310_nagruzka_day1}]];
-        var dmg_ctx310_nagruzka_day3 = [[${dmg_ctx310_nagruzka_day2}]];
-        var dmg_ctx310_nagruzka_day4 = [[${dmg_ctx310_nagruzka_day3}]];
-        var dmg_ctx310_nagruzka_day5 = [[${dmg_ctx310_nagruzka_day4}]];
-        var dmg_ctx310_nagruzka_day6 = [[${dmg_ctx310_nagruzka_day5}]];
-        var dmg_ctx310_nagruzka_day7 = [[${dmg_ctx310_nagruzka_day6}]];
-        var dmg_ctx310_nagruzka_day8 = [[${dmg_ctx310_nagruzka_day7}]];
-        var dmg_ctx310_nagruzka_day9 = [[${dmg_ctx310_nagruzka_day8}]];
-        var dmg_ctx310_nagruzka_day10 = [[${dmg_ctx310_nagruzka_day9}]];
-        var dmg_ctx310_nagruzka_day11 = [[${dmg_ctx310_nagruzka_day10}]];
-        var dmg_ctx310_nagruzka_day12 = [[${dmg_ctx310_nagruzka_day11}]];
-        var dmg_ctx310_nagruzka_day13 = [[${dmg_ctx310_nagruzka_day12}]];
-        var dmg_ctx310_nagruzka_day14 = [[${dmg_ctx310_nagruzka_day13}]];
-        var dmg_ctx310_nagruzka_day15 = [[${dmg_ctx310_nagruzka_day14}]];
-        var dmg_ctx310_nagruzka_day16 = [[${dmg_ctx310_nagruzka_day15}]];
-        var dmg_ctx310_nagruzka_day17 = [[${dmg_ctx310_nagruzka_day16}]];
-        var dmg_ctx310_nagruzka_day18 = [[${dmg_ctx310_nagruzka_day17}]];
-        var dmg_ctx310_nagruzka_day19 = [[${dmg_ctx310_nagruzka_day18}]];
-        var dmg_ctx310_nagruzka_day20 = [[${dmg_ctx310_nagruzka_day19}]];
-        var dmg_ctx310_nagruzka_day21 = [[${dmg_ctx310_nagruzka_day20}]];
-        var dmg_ctx310_nagruzka_day22 = [[${dmg_ctx310_nagruzka_day21}]];
-        var dmg_ctx310_nagruzka_day23 = [[${dmg_ctx310_nagruzka_day22}]];
-        var dmg_ctx310_nagruzka_day24 = [[${dmg_ctx310_nagruzka_day23}]];
-        var dmg_ctx310_nagruzka_day25 = [[${dmg_ctx310_nagruzka_day24}]];
-        var dmg_ctx310_nagruzka_day26 = [[${dmg_ctx310_nagruzka_day25}]];
-        var dmg_ctx310_nagruzka_day27 = [[${dmg_ctx310_nagruzka_day26}]];
-        var dmg_ctx310_nagruzka_day28 = [[${dmg_ctx310_nagruzka_day27}]];
-        var dmg_ctx310_nagruzka_day29 = [[${dmg_ctx310_nagruzka_day28}]];
-        var dmg_ctx310_nagruzka_day30 = [[${dmg_ctx310_nagruzka_day29}]];
-        var dmg_ctx310_nagruzka_day31 = [[${dmg_ctx310_nagruzka_day30}]];
-    } <!--Переменные для dmg_ctx310-->
+        var dmg_ctx310_1_nagruzka_day1 = [[${dmg_ctx310_1_nagruzka_day0}]];
+        var dmg_ctx310_1_nagruzka_day2 = [[${dmg_ctx310_1_nagruzka_day1}]];
+        var dmg_ctx310_1_nagruzka_day3 = [[${dmg_ctx310_1_nagruzka_day2}]];
+        var dmg_ctx310_1_nagruzka_day4 = [[${dmg_ctx310_1_nagruzka_day3}]];
+        var dmg_ctx310_1_nagruzka_day5 = [[${dmg_ctx310_1_nagruzka_day4}]];
+        var dmg_ctx310_1_nagruzka_day6 = [[${dmg_ctx310_1_nagruzka_day5}]];
+        var dmg_ctx310_1_nagruzka_day7 = [[${dmg_ctx310_1_nagruzka_day6}]];
+        var dmg_ctx310_1_nagruzka_day8 = [[${dmg_ctx310_1_nagruzka_day7}]];
+        var dmg_ctx310_1_nagruzka_day9 = [[${dmg_ctx310_1_nagruzka_day8}]];
+        var dmg_ctx310_1_nagruzka_day10 = [[${dmg_ctx310_1_nagruzka_day9}]];
+        var dmg_ctx310_1_nagruzka_day11 = [[${dmg_ctx310_1_nagruzka_day10}]];
+        var dmg_ctx310_1_nagruzka_day12 = [[${dmg_ctx310_1_nagruzka_day11}]];
+        var dmg_ctx310_1_nagruzka_day13 = [[${dmg_ctx310_1_nagruzka_day12}]];
+        var dmg_ctx310_1_nagruzka_day14 = [[${dmg_ctx310_1_nagruzka_day13}]];
+        var dmg_ctx310_1_nagruzka_day15 = [[${dmg_ctx310_1_nagruzka_day14}]];
+        var dmg_ctx310_1_nagruzka_day16 = [[${dmg_ctx310_1_nagruzka_day15}]];
+        var dmg_ctx310_1_nagruzka_day17 = [[${dmg_ctx310_1_nagruzka_day16}]];
+        var dmg_ctx310_1_nagruzka_day18 = [[${dmg_ctx310_1_nagruzka_day17}]];
+        var dmg_ctx310_1_nagruzka_day19 = [[${dmg_ctx310_1_nagruzka_day18}]];
+        var dmg_ctx310_1_nagruzka_day20 = [[${dmg_ctx310_1_nagruzka_day19}]];
+        var dmg_ctx310_1_nagruzka_day21 = [[${dmg_ctx310_1_nagruzka_day20}]];
+        var dmg_ctx310_1_nagruzka_day22 = [[${dmg_ctx310_1_nagruzka_day21}]];
+        var dmg_ctx310_1_nagruzka_day23 = [[${dmg_ctx310_1_nagruzka_day22}]];
+        var dmg_ctx310_1_nagruzka_day24 = [[${dmg_ctx310_1_nagruzka_day23}]];
+        var dmg_ctx310_1_nagruzka_day25 = [[${dmg_ctx310_1_nagruzka_day24}]];
+        var dmg_ctx310_1_nagruzka_day26 = [[${dmg_ctx310_1_nagruzka_day25}]];
+        var dmg_ctx310_1_nagruzka_day27 = [[${dmg_ctx310_1_nagruzka_day26}]];
+        var dmg_ctx310_1_nagruzka_day28 = [[${dmg_ctx310_1_nagruzka_day27}]];
+        var dmg_ctx310_1_nagruzka_day29 = [[${dmg_ctx310_1_nagruzka_day28}]];
+        var dmg_ctx310_1_nagruzka_day30 = [[${dmg_ctx310_1_nagruzka_day29}]];
+        var dmg_ctx310_1_nagruzka_day31 = [[${dmg_ctx310_1_nagruzka_day30}]];
+    } <!--Переменные для dmg_ctx310_1-->
 
     Highcharts.setOptions({
         lang: {
@@ -4387,23 +4387,23 @@
         },
         series: [{
             name: 'Работа',
-            data: [dmg_ctx310_rabota_day1, dmg_ctx310_rabota_day2, dmg_ctx310_rabota_day3,dmg_ctx310_rabota_day4,dmg_ctx310_rabota_day5,dmg_ctx310_rabota_day6,dmg_ctx310_rabota_day7,dmg_ctx310_rabota_day8,dmg_ctx310_rabota_day9,dmg_ctx310_rabota_day10,dmg_ctx310_rabota_day11,dmg_ctx310_rabota_day12,dmg_ctx310_rabota_day13,dmg_ctx310_rabota_day14,dmg_ctx310_rabota_day15,dmg_ctx310_rabota_day16,dmg_ctx310_rabota_day17,dmg_ctx310_rabota_day18,dmg_ctx310_rabota_day19,dmg_ctx310_rabota_day20,dmg_ctx310_rabota_day21,dmg_ctx310_rabota_day22,dmg_ctx310_rabota_day23,dmg_ctx310_rabota_day24,dmg_ctx310_rabota_day25,dmg_ctx310_rabota_day26,dmg_ctx310_rabota_day27,dmg_ctx310_rabota_day28,dmg_ctx310_rabota_day29,dmg_ctx310_rabota_day30,dmg_ctx310_rabota_day31]
+            data: [dmg_ctx310_1_rabota_day1, dmg_ctx310_1_rabota_day2, dmg_ctx310_1_rabota_day3,dmg_ctx310_1_rabota_day4,dmg_ctx310_1_rabota_day5,dmg_ctx310_1_rabota_day6,dmg_ctx310_1_rabota_day7,dmg_ctx310_1_rabota_day8,dmg_ctx310_1_rabota_day9,dmg_ctx310_1_rabota_day10,dmg_ctx310_1_rabota_day11,dmg_ctx310_1_rabota_day12,dmg_ctx310_1_rabota_day13,dmg_ctx310_1_rabota_day14,dmg_ctx310_1_rabota_day15,dmg_ctx310_1_rabota_day16,dmg_ctx310_1_rabota_day17,dmg_ctx310_1_rabota_day18,dmg_ctx310_1_rabota_day19,dmg_ctx310_1_rabota_day20,dmg_ctx310_1_rabota_day21,dmg_ctx310_1_rabota_day22,dmg_ctx310_1_rabota_day23,dmg_ctx310_1_rabota_day24,dmg_ctx310_1_rabota_day25,dmg_ctx310_1_rabota_day26,dmg_ctx310_1_rabota_day27,dmg_ctx310_1_rabota_day28,dmg_ctx310_1_rabota_day29,dmg_ctx310_1_rabota_day30,dmg_ctx310_1_rabota_day31]
         }, {
             name: 'Под нагрузкой',
-            data: [dmg_ctx310_nagruzka_day1, dmg_ctx310_nagruzka_day2, dmg_ctx310_nagruzka_day3,dmg_ctx310_nagruzka_day4,dmg_ctx310_nagruzka_day5,dmg_ctx310_nagruzka_day6,dmg_ctx310_nagruzka_day7,dmg_ctx310_nagruzka_day8,dmg_ctx310_nagruzka_day9,dmg_ctx310_nagruzka_day10,dmg_ctx310_nagruzka_day11,dmg_ctx310_nagruzka_day12,dmg_ctx310_nagruzka_day13,dmg_ctx310_nagruzka_day14,dmg_ctx310_nagruzka_day15,dmg_ctx310_nagruzka_day16,dmg_ctx310_nagruzka_day17,dmg_ctx310_nagruzka_day18,dmg_ctx310_nagruzka_day19,dmg_ctx310_nagruzka_day20,dmg_ctx310_nagruzka_day21,dmg_ctx310_nagruzka_day22,dmg_ctx310_nagruzka_day23,dmg_ctx310_nagruzka_day24,dmg_ctx310_nagruzka_day25,dmg_ctx310_nagruzka_day26,dmg_ctx310_nagruzka_day27,dmg_ctx310_nagruzka_day28,dmg_ctx310_nagruzka_day29,dmg_ctx310_nagruzka_day30,dmg_ctx310_nagruzka_day31]
+            data: [dmg_ctx310_1_nagruzka_day1, dmg_ctx310_1_nagruzka_day2, dmg_ctx310_1_nagruzka_day3,dmg_ctx310_1_nagruzka_day4,dmg_ctx310_1_nagruzka_day5,dmg_ctx310_1_nagruzka_day6,dmg_ctx310_1_nagruzka_day7,dmg_ctx310_1_nagruzka_day8,dmg_ctx310_1_nagruzka_day9,dmg_ctx310_1_nagruzka_day10,dmg_ctx310_1_nagruzka_day11,dmg_ctx310_1_nagruzka_day12,dmg_ctx310_1_nagruzka_day13,dmg_ctx310_1_nagruzka_day14,dmg_ctx310_1_nagruzka_day15,dmg_ctx310_1_nagruzka_day16,dmg_ctx310_1_nagruzka_day17,dmg_ctx310_1_nagruzka_day18,dmg_ctx310_1_nagruzka_day19,dmg_ctx310_1_nagruzka_day20,dmg_ctx310_1_nagruzka_day21,dmg_ctx310_1_nagruzka_day22,dmg_ctx310_1_nagruzka_day23,dmg_ctx310_1_nagruzka_day24,dmg_ctx310_1_nagruzka_day25,dmg_ctx310_1_nagruzka_day26,dmg_ctx310_1_nagruzka_day27,dmg_ctx310_1_nagruzka_day28,dmg_ctx310_1_nagruzka_day29,dmg_ctx310_1_nagruzka_day30,dmg_ctx310_1_nagruzka_day31]
         }, {
             name: 'Ожидание',
-            data: [dmg_ctx310_pause_day1, dmg_ctx310_pause_day2, dmg_ctx310_pause_day3,dmg_ctx310_pause_day4,dmg_ctx310_pause_day5,dmg_ctx310_pause_day6,dmg_ctx310_pause_day7,dmg_ctx310_pause_day8,dmg_ctx310_pause_day9,dmg_ctx310_pause_day10,dmg_ctx310_pause_day11,dmg_ctx310_pause_day12,dmg_ctx310_pause_day13,dmg_ctx310_pause_day14,dmg_ctx310_pause_day15,dmg_ctx310_pause_day16,dmg_ctx310_pause_day17,dmg_ctx310_pause_day18,dmg_ctx310_pause_day19,dmg_ctx310_pause_day20,dmg_ctx310_pause_day21,dmg_ctx310_pause_day22,dmg_ctx310_pause_day23,dmg_ctx310_pause_day24,dmg_ctx310_pause_day25,dmg_ctx310_pause_day26,dmg_ctx310_pause_day27,dmg_ctx310_pause_day28,dmg_ctx310_pause_day29,dmg_ctx310_pause_day30,dmg_ctx310_pause_day31]
+            data: [dmg_ctx310_1_pause_day1, dmg_ctx310_1_pause_day2, dmg_ctx310_1_pause_day3,dmg_ctx310_1_pause_day4,dmg_ctx310_1_pause_day5,dmg_ctx310_1_pause_day6,dmg_ctx310_1_pause_day7,dmg_ctx310_1_pause_day8,dmg_ctx310_1_pause_day9,dmg_ctx310_1_pause_day10,dmg_ctx310_1_pause_day11,dmg_ctx310_1_pause_day12,dmg_ctx310_1_pause_day13,dmg_ctx310_1_pause_day14,dmg_ctx310_1_pause_day15,dmg_ctx310_1_pause_day16,dmg_ctx310_1_pause_day17,dmg_ctx310_1_pause_day18,dmg_ctx310_1_pause_day19,dmg_ctx310_1_pause_day20,dmg_ctx310_1_pause_day21,dmg_ctx310_1_pause_day22,dmg_ctx310_1_pause_day23,dmg_ctx310_1_pause_day24,dmg_ctx310_1_pause_day25,dmg_ctx310_1_pause_day26,dmg_ctx310_1_pause_day27,dmg_ctx310_1_pause_day28,dmg_ctx310_1_pause_day29,dmg_ctx310_1_pause_day30,dmg_ctx310_1_pause_day31]
         }, {
             name: 'Авария',
-            data: [dmg_ctx310_avar_day1, dmg_ctx310_avar_day2, dmg_ctx310_avar_day3,dmg_ctx310_avar_day4,dmg_ctx310_avar_day5,dmg_ctx310_avar_day6,dmg_ctx310_avar_day7,dmg_ctx310_avar_day8,dmg_ctx310_avar_day9,dmg_ctx310_avar_day10,dmg_ctx310_avar_day11,dmg_ctx310_avar_day12,dmg_ctx310_avar_day13,dmg_ctx310_avar_day14,dmg_ctx310_avar_day15,dmg_ctx310_avar_day16,dmg_ctx310_avar_day17,dmg_ctx310_avar_day18,dmg_ctx310_avar_day19,dmg_ctx310_avar_day20,dmg_ctx310_avar_day21,dmg_ctx310_avar_day22,dmg_ctx310_avar_day23,dmg_ctx310_avar_day24,dmg_ctx310_avar_day25,dmg_ctx310_avar_day26,dmg_ctx310_avar_day27,dmg_ctx310_avar_day28,dmg_ctx310_avar_day29,dmg_ctx310_avar_day30,dmg_ctx310_avar_day31]
+            data: [dmg_ctx310_1_avar_day1, dmg_ctx310_1_avar_day2, dmg_ctx310_1_avar_day3,dmg_ctx310_1_avar_day4,dmg_ctx310_1_avar_day5,dmg_ctx310_1_avar_day6,dmg_ctx310_1_avar_day7,dmg_ctx310_1_avar_day8,dmg_ctx310_1_avar_day9,dmg_ctx310_1_avar_day10,dmg_ctx310_1_avar_day11,dmg_ctx310_1_avar_day12,dmg_ctx310_1_avar_day13,dmg_ctx310_1_avar_day14,dmg_ctx310_1_avar_day15,dmg_ctx310_1_avar_day16,dmg_ctx310_1_avar_day17,dmg_ctx310_1_avar_day18,dmg_ctx310_1_avar_day19,dmg_ctx310_1_avar_day20,dmg_ctx310_1_avar_day21,dmg_ctx310_1_avar_day22,dmg_ctx310_1_avar_day23,dmg_ctx310_1_avar_day24,dmg_ctx310_1_avar_day25,dmg_ctx310_1_avar_day26,dmg_ctx310_1_avar_day27,dmg_ctx310_1_avar_day28,dmg_ctx310_1_avar_day29,dmg_ctx310_1_avar_day30,dmg_ctx310_1_avar_day31]
         }, {
             name: 'Выключен',
-            data: [dmg_ctx310_off_day1, dmg_ctx310_off_day2, dmg_ctx310_off_day3,dmg_ctx310_off_day4,dmg_ctx310_off_day5,dmg_ctx310_off_day6,dmg_ctx310_off_day7,dmg_ctx310_off_day8,dmg_ctx310_off_day9,dmg_ctx310_off_day10,dmg_ctx310_off_day11,dmg_ctx310_off_day12,dmg_ctx310_off_day13,dmg_ctx310_off_day14,dmg_ctx310_off_day15,dmg_ctx310_off_day16,dmg_ctx310_off_day17,dmg_ctx310_off_day18,dmg_ctx310_off_day19,dmg_ctx310_off_day20,dmg_ctx310_off_day21,dmg_ctx310_off_day22,dmg_ctx310_off_day23,dmg_ctx310_off_day24,dmg_ctx310_off_day25,dmg_ctx310_off_day26,dmg_ctx310_off_day27,dmg_ctx310_off_day28,dmg_ctx310_off_day29,dmg_ctx310_off_day30,dmg_ctx310_off_day31]
+            data: [dmg_ctx310_1_off_day1, dmg_ctx310_1_off_day2, dmg_ctx310_1_off_day3,dmg_ctx310_1_off_day4,dmg_ctx310_1_off_day5,dmg_ctx310_1_off_day6,dmg_ctx310_1_off_day7,dmg_ctx310_1_off_day8,dmg_ctx310_1_off_day9,dmg_ctx310_1_off_day10,dmg_ctx310_1_off_day11,dmg_ctx310_1_off_day12,dmg_ctx310_1_off_day13,dmg_ctx310_1_off_day14,dmg_ctx310_1_off_day15,dmg_ctx310_1_off_day16,dmg_ctx310_1_off_day17,dmg_ctx310_1_off_day18,dmg_ctx310_1_off_day19,dmg_ctx310_1_off_day20,dmg_ctx310_1_off_day21,dmg_ctx310_1_off_day22,dmg_ctx310_1_off_day23,dmg_ctx310_1_off_day24,dmg_ctx310_1_off_day25,dmg_ctx310_1_off_day26,dmg_ctx310_1_off_day27,dmg_ctx310_1_off_day28,dmg_ctx310_1_off_day29,dmg_ctx310_1_off_day30,dmg_ctx310_1_off_day31]
         }]
     });
 
-</script>   <!--ctx310 js диагрмма загрузки оборудования по дням-->
+</script>   <!--ctx310_1 js диагрмма загрузки оборудования по дням-->
 <script th:inline="javascript">
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
 
@@ -4467,11 +4467,11 @@
         series : [ {
             type : 'pie',
             name : 'Показатель',
-            data : [ [ 'По программе', [[${dmg_ctx310_work}]] ], [ 'Включен', [[${dmg_ctx310_pass}]] ],
-                [ 'Выключен', [[${dmg_ctx310_fail}]] ],  [ 'В аварии', [[${dmg_ctx310_avar}]]],  [ 'Под нагрузкой', [[${dmg_ctx310_nagruzka}]]]   ]
+            data : [ [ 'По программе', [[${dmg_ctx310_1_work}]] ], [ 'Включен', [[${dmg_ctx310_1_pass}]] ],
+                [ 'Выключен', [[${dmg_ctx310_1_fail}]] ],  [ 'В аварии', [[${dmg_ctx310_1_avar}]]],  [ 'Под нагрузкой', [[${dmg_ctx310_1_nagruzka}]]]   ]
         }]
     });
-</script>   <!--ctx310 круговая диагрмма загрузки оборудования-->
+</script>   <!--ctx310_1 круговая диагрмма загрузки оборудования-->
 
 <script th:inline="javascript">
     $('.icon_personal_uvf_1_1').hover(
@@ -4684,24 +4684,24 @@
         }
     );
 
-    $('.icon_personal_dmg_ctx310').hover(
+    $('.icon_personal_dmg_ctx310_1').hover(
         function(){
-            $('.label_personal_dmg_ctx310').css('color','#000000');
-            $('.label_personal_dmg_ctx310').css('margin-top','70px');
+            $('.label_personal_dmg_ctx310_1').css('color','#000000');
+            $('.label_personal_dmg_ctx310_1').css('margin-top','70px');
         },
         function(){
-            $('.label_personal_dmg_ctx310').css('color','#756e6e');
-            $('.label_personal_dmg_ctx310').css('margin-top','65px');
+            $('.label_personal_dmg_ctx310_1').css('color','#756e6e');
+            $('.label_personal_dmg_ctx310_1').css('margin-top','65px');
         }
     );
-    $('.icon_mesto_dmg_ctx310').hover(
+    $('.icon_mesto_dmg_ctx310_1').hover(
         function(){
-            $('.label_mesto_dmg_ctx310').css('color','#000000');
-            $('.label_mesto_dmg_ctx310').css('margin-top','70px');
+            $('.label_mesto_dmg_ctx310_1').css('color','#000000');
+            $('.label_mesto_dmg_ctx310_1').css('margin-top','70px');
         },
         function(){
-            $('.label_mesto_dmg_ctx310').css('color','#756e6e');
-            $('.label_mesto_dmg_ctx310').css('margin-top','65px');
+            $('.label_mesto_dmg_ctx310_1').css('color','#756e6e');
+            $('.label_mesto_dmg_ctx310_1').css('margin-top','65px');
         }
     );
 
