@@ -54,7 +54,10 @@ Highcharts.chart('container_work_2', {
     series: [
         {
             name: 'Работа',
-            pointWidth: 20,
+            borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#38e817',
             data:   [
                 {x:  (new Date(maks_2_array_rabota[0])).getTime(), x2: (new Date(maks_2_array_rabota[1])).getTime(),  y: 1, programname: maks_2_array_programname[0]},
                 {x:  (new Date(maks_2_array_rabota[2])).getTime(), x2: (new Date(maks_2_array_rabota[3])).getTime(),  y: 1, programname: maks_2_array_programname[1]},
@@ -161,8 +164,10 @@ Highcharts.chart('container_work_2', {
         },
         {
             name: 'Ожидание',
-            pointWidth: 30,
             borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#ffea32',
             tooltip: {
                 pointFormat: ''
             },
@@ -273,8 +278,10 @@ Highcharts.chart('container_work_2', {
         },
         {
             name: 'Выключен',
-
-            pointWidth: 20,
+            borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#000000',
             data:   [
                 {x:  (new Date(maks_2_array_off[0])).getTime(), x2: (new Date(maks_2_array_off[1])).getTime(), y: 3},
                 {x:  (new Date(maks_2_array_off[2])).getTime(), x2: (new Date(maks_2_array_off[3])).getTime(), y: 3},
@@ -303,8 +310,10 @@ Highcharts.chart('container_work_2', {
         },
         {
             name: 'В аварии',
-            pointWidth: 20,
             borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#e81e1d',
             data: [
                 {x:  (new Date(maks_2_array_avar[0])).getTime(), x2: (new Date(maks_2_array_avar[1])).getTime(), y: 4},
                 {x:  (new Date(maks_2_array_avar[2])).getTime(), x2: (new Date(maks_2_array_avar[3])).getTime(), y: 4},

@@ -385,7 +385,6 @@ Highcharts.chart('container_work3', {
             pointWidth: 30,
             colorByPoint: false,
             color: '#000000',
-            pointWidth: 20,
             data:   [
                 {x:  (new Date(ntx1000_array_off[0])).getTime(), x2: (new Date(ntx1000_array_off[1])).getTime(), y: 3},
                 {x:  (new Date(ntx1000_array_off[2])).getTime(), x2: (new Date(ntx1000_array_off[3])).getTime(), y: 3},
@@ -418,7 +417,6 @@ Highcharts.chart('container_work3', {
             pointWidth: 30,
             colorByPoint: false,
             color: '#e81e1d',
-            pointWidth: 20,
             data: [
                 {x:  (new Date(ntx1000_array_avar[0])).getTime(), x2: (new Date(ntx1000_array_avar[1])).getTime(), y: 4},
                 {x:  (new Date(ntx1000_array_avar[2])).getTime(), x2: (new Date(ntx1000_array_avar[3])).getTime(), y: 4},

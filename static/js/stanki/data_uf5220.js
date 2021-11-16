@@ -55,8 +55,10 @@ Highcharts.chart('container_work', {
     series: [
         {
             name: 'Работа',
-            pointWidth: 30,
             borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#38e817',
             tooltip: {
                 pointFormat: '<b>Программа: {point.programname}</b>'
             },
@@ -218,8 +220,10 @@ Highcharts.chart('container_work', {
 
         {
             name: 'Ожидание',
-            pointWidth: 30,
             borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#ffea32',
             tooltip: {
                 pointFormat: ''
             },
@@ -380,8 +384,10 @@ Highcharts.chart('container_work', {
         },
         {
             name: 'Выключен',
-
-            pointWidth: 20,
+            borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#000000',
             data: [
                 {x: (new Date(uf5220_array_off[0])).getTime(), x2: (new Date(uf5220_array_off[1])).getTime(), y: 2},
                 {x: (new Date(uf5220_array_off[2])).getTime(), x2: (new Date(uf5220_array_off[3])).getTime(), y: 2},
@@ -470,8 +476,10 @@ Highcharts.chart('container_work', {
         },
         {
             name: 'В аварии',
-            pointWidth: 20,
             borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#e81e1d',
             data: [{}],
             dataLabels: {
                 enabled: true

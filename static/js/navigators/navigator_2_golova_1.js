@@ -215,8 +215,10 @@ Highcharts.chart('container_work_2', {
         },
         {
             name: 'Работа',
-            pointWidth: 30,
             borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#38e817',
             tooltip: {
                 pointFormat: ''
             },
@@ -376,8 +378,10 @@ Highcharts.chart('container_work_2', {
         },
         {
             name: 'Ожидание',
-            pointWidth: 30,
             borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#ffea32',
             tooltip: {
                 pointFormat: ''
             },
@@ -539,8 +543,10 @@ Highcharts.chart('container_work_2', {
         },
         {
             name: 'Выключен',
-
-            pointWidth: 20,
+            borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#000000',
             data:   [
                 {x:  (new Date(array_off_2_golova_1[0])).getTime(), x2: (new Date(array_off_2_golova_1[1])).getTime(), y: 3},
                 {x:  (new Date(array_off_2_golova_1[2])).getTime(), x2: (new Date(array_off_2_golova_1[3])).getTime(), y: 3},
@@ -569,8 +575,10 @@ Highcharts.chart('container_work_2', {
         },
         {
             name: 'В аварии',
-            pointWidth: 20,
             borderColor: 'gray',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: '#e81e1d',
             data: [
                 {x:  (new Date(array_avar_2_golova_1[0])).getTime(), x2: (new Date(array_avar_2_golova_1[1])).getTime(), y: 4},
                 {x:  (new Date(array_avar_2_golova_1[2])).getTime(), x2: (new Date(array_avar_2_golova_1[3])).getTime(), y: 4},

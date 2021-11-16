@@ -59,6 +59,8 @@
     name: 'Работа',
     borderColor: 'gray',
     pointWidth: 30,
+    colorByPoint: false,
+    color: '#38e817',
     tooltip: {
     pointFormat: '<b>Программа: {point.programname}</b>'
 },
@@ -365,6 +367,8 @@
             name: 'Ожидание',
             pointWidth: 30,
             borderColor: 'gray',
+            colorByPoint: false,
+            color: '#ffea32',
             tooltip: {
                 pointFormat: ''
             },
@@ -621,8 +625,9 @@
         },
         {
             name: 'Выключен',
-
             pointWidth: 20,
+            colorByPoint: false,
+            color: '#000000',
             data: [
                 {x: (new Date(uvf_1_1_array_off[0])).getTime(), x2: (new Date(uvf_1_1_array_off[1])).getTime(), y: 2},
                 {x: (new Date(uvf_1_1_array_off[2])).getTime(), x2: (new Date(uvf_1_1_array_off[3])).getTime(), y: 2},
@@ -712,6 +717,8 @@
         {
             name: 'В аварии',
             pointWidth: 20,
+            colorByPoint: false,
+            color: '#e81e1d',
             data: [
                 {
                     x: (new Date(uvf_1_1_array_avar[0])).getTime(),
@@ -968,6 +975,8 @@
         {
             name: 'Нагрузка',
             pointWidth: 20,
+            colorByPoint: false,
+            color: '#24621d',
             data: [
                 {
                     x: (new Date(uvf_1_1_array_nagruzka[0])).getTime(),
