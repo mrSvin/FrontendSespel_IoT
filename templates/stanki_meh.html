@@ -335,6 +335,38 @@
             margin-left: -5px;
         }
 
+        .icon_mesto_dmg_ctx310{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_dmg_ctx310:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_dmg_ctx310{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_dmg_ctx310:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_dmg_ctx310{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_dmg_ctx310{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
     </style> <!--Кнопки Персонал и Местоположение-->
     <style>
         .preloader {
@@ -778,6 +810,25 @@
     </div>  <!--УВФ-1 html-->
 </div> <!--DMC1035 html-->
 
+<div style="border: 1px solid #333;">   <!--ctx310 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx310.png" class="stanok_img" alt="no image"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX310</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_dmg_ctx310" href="mesto/mesto_dmg_ctx310" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_dmg_ctx310'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_dmg_ctx310" href="personal/personal_dmg_ctx310" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_dmg_ctx310'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work11" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container11" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--ctx310 html-->
+</div> <!--ctx310 html-->
+
 
 <script th:inline="javascript">
 
@@ -793,6 +844,7 @@
     var work_dmu50_1 = [[${work_dmg_dmu50_1}]];
     var work_dmu50_2 = [[${work_dmg_dmu50_2}]];
     var work_dmc1035 = [[${work_dmg_dmc1035}]];
+    var work_ctx310 = [[${work_dmg_ctx310}]];
 
     var pause_uvf_1_1 = [[${pass}]];
     var pause_uvf_1_2 = [[${pass_2}]];
@@ -804,6 +856,7 @@
     var pause_dmu50_1 = [[${pass_dmg_dmu50_1}]];
     var pause_dmu50_2 = [[${pass_dmg_dmu50_2}]];
     var pause_dmc1035 = [[${pass_dmg_dmc1035}]];
+    var pause_ctx310 = [[${pass_dmg_ctx310}]];
 
     var off_uvf_1_1 = [[${fail}]];
     var off_uvf_1_2 = [[${fail_2}]];
@@ -815,6 +868,7 @@
     var off_dmu50_1 = [[${fail_dmg_dmu50_1}]];
     var off_dmu50_2 = [[${fail_dmg_dmu50_2}]];
     var off_dmc1035 = [[${fail_dmg_dmc1035}]];
+    var off_ctx310 = [[${fail_dmg_ctx310}]];
 
     var avar_uvf_1_1 = [[${avar}]];
     var avar_uvf_1_2 = [[${avar_2__2}]];
@@ -826,6 +880,8 @@
     var avar_dmu50_1 = [[${avar_dmg_dmu50_1}]];
     var avar_dmu50_2 = [[${avar_dmg_dmu50_2}]];
     var avar_dmc1035 = [[${avar_dmg_dmc1035}]];
+    var avar_ctx310 = [[${avar_dmg_ctx310}]];
+
 
 
     var nagruzka_uvf_1_1 = [[${nagruzka}]];
@@ -838,6 +894,7 @@
     var nagruzka_dmu50_1 = [[${nagruzka_dmg_dmu50_1}]];
     var nagruzka_dmu50_2 = [[${nagruzka_dmg_dmu50_2}]];
     var nagruzka_dmc1035 = [[${nagruzka_dmg_dmc1035}]];
+    var nagruzka_ctx310 = [[${nagruzka_dmg_ctx310}]];
 
     Highcharts.setOptions({
         lang: {
@@ -876,7 +933,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УВФ-1 #1', 'УВФ-1 #2', 'NTX1000', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50 #1', 'DMU50 #2', 'DMC1035']
+            categories: ['УВФ-1 #1', 'УВФ-1 #2', 'NTX1000', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50 #1', 'DMU50 #2', 'DMC1035', 'CTX310']
         },
         credits: {
             enabled: false
@@ -898,19 +955,19 @@
         },
         series: [{
             name: 'Работа',
-            data: [work_uvf_1_1, work_uvf_1_2, work_ntx1000, work_nlx3000, work_gamma2000, work_ctx650, work_dmf260, work_dmu50_1, work_dmu50_2, work_dmc1035 ]
+            data: [work_uvf_1_1, work_uvf_1_2, work_ntx1000, work_nlx3000, work_gamma2000, work_ctx650, work_dmf260, work_dmu50_1, work_dmu50_2, work_dmc1035, work_ctx310 ]
         }, {
             name: 'Под нагрузкой',
-            data: [nagruzka_uvf_1_1, nagruzka_uvf_1_2, nagruzka_ntx1000, nagruzka_nlx3000, nagruzka_gamma2000, nagruzka_ctx650, nagruzka_dmf260, nagruzka_dmu50_1, nagruzka_dmu50_2, nagruzka_dmc1035]
+            data: [nagruzka_uvf_1_1, nagruzka_uvf_1_2, nagruzka_ntx1000, nagruzka_nlx3000, nagruzka_gamma2000, nagruzka_ctx650, nagruzka_dmf260, nagruzka_dmu50_1, nagruzka_dmu50_2, nagruzka_dmc1035, nagruzka_ctx310]
         }, {
             name: 'Ожидание',
-            data: [pause_uvf_1_1, pause_uvf_1_2, pause_ntx1000, pause_nlx3000, pause_gamma2000, pause_ctx650, pause_dmf260, pause_dmu50_1, pause_dmu50_2, pause_dmc1035]
+            data: [pause_uvf_1_1, pause_uvf_1_2, pause_ntx1000, pause_nlx3000, pause_gamma2000, pause_ctx650, pause_dmf260, pause_dmu50_1, pause_dmu50_2, pause_dmc1035, pause_ctx310]
         }, {
             name: 'Авария',
-            data: [avar_uvf_1_1, avar_uvf_1_2, avar_ntx1000, avar_nlx3000, avar_gamma2000, avar_ctx650, avar_dmf260, avar_dmu50_1, avar_dmu50_2, avar_dmc1035]
+            data: [avar_uvf_1_1, avar_uvf_1_2, avar_ntx1000, avar_nlx3000, avar_gamma2000, avar_ctx650, avar_dmf260, avar_dmu50_1, avar_dmu50_2, avar_dmc1035, avar_ctx310]
         }, {
             name: 'Выключен',
-            data: [off_uvf_1_1, off_uvf_1_2, off_ntx1000, off_nlx3000, off_gamma2000, off_ctx650, off_dmf260, off_dmu50_1, off_dmu50_2, off_dmc1035]
+            data: [off_uvf_1_1, off_uvf_1_2, off_ntx1000, off_nlx3000, off_gamma2000, off_ctx650, off_dmf260, off_dmu50_1, off_dmu50_2, off_dmc1035, off_ctx310]
         }]
     });
 
@@ -927,6 +984,7 @@
     var dmu50_1_kol_op = [[${dmu50_1_kol_op}]];
     var dmu50_2_kol_op = [[${dmu50_2_kol_op}]];
     var dmc1035_kol_op = [[${dmc1035_kol_op}]];
+    var ctx310_kol_op = [[${ctx310_kol_op}]];
 
     var kol_long_operations_uvf_1_1 = [[${kol_long_operations_uvf_1_1}]];
     var kol_long_operations_uvf_1_2 = [[${kol_long_operations_uvf_1_2}]];
@@ -938,6 +996,7 @@
     var kol_long_operations_dmu50_1 = [[${kol_long_operations_dmu50_1}]];
     var kol_long_operations_dmu50_2 = [[${kol_long_operations_dmu50_2}]];
     var kol_long_operations_dmc1035 = [[${kol_long_operations_dmc1035}]];
+    var kol_long_operations_ctx310 = [[${kol_long_operations_ctx310}]];
 
     Highcharts.setOptions({
         lang: {
@@ -975,7 +1034,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УВФ-1', 'УВФ-2', 'NTX1000', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50-1', 'DMU50-2', 'DMC1035'],
+            categories: ['УВФ-1', 'УВФ-2', 'NTX1000', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50-1', 'DMU50-2', 'DMC1035', 'CTX310'],
             title: {
                 text: null
             }
@@ -1017,10 +1076,10 @@
         },
         series: [{
             name: 'Общее количество операций',
-            data: [uvf_1_1_kol_op, uvf_1_2_kol_op, ntx1000_kol_op, nlx3000_kol_op, gamma2000_kol_op, ctx650_kol_op, dmf260_kol_op, dmu50_1_kol_op, dmu50_2_kol_op, dmc1035_kol_op]
+            data: [uvf_1_1_kol_op, uvf_1_2_kol_op, ntx1000_kol_op, nlx3000_kol_op, gamma2000_kol_op, ctx650_kol_op, dmf260_kol_op, dmu50_1_kol_op, dmu50_2_kol_op, dmc1035_kol_op, ctx310_kol_op]
         }, {
             name: 'Количество операций более 3 минут',
-            data: [kol_long_operations_uvf_1_1, kol_long_operations_uvf_1_2, kol_long_operations_ntx1000, kol_long_operations_nlx3000, kol_long_operations_gamma2000, kol_long_operations_ctx650, kol_long_operations_dmf260, kol_long_operations_dmu50_1, kol_long_operations_dmu50_2, kol_long_operations_dmc1035]
+            data: [kol_long_operations_uvf_1_1, kol_long_operations_uvf_1_2, kol_long_operations_ntx1000, kol_long_operations_nlx3000, kol_long_operations_gamma2000, kol_long_operations_ctx650, kol_long_operations_dmf260, kol_long_operations_dmu50_1, kol_long_operations_dmu50_2, kol_long_operations_dmc1035, kol_long_operations_ctx310]
         }]
     });
 </script>   <!--js количество операций-->
@@ -1195,6 +1254,23 @@
     var dmg_dmc1035_avar = [[${avar_dmg_dmc1035}]];
 </script>   <!--dmc1035 js круговая диагрмма загрузки оборудования-->
 <script src="/js/stanki_meh/data_dmg_dmc1035.js"></script>
+
+<script th:inline="javascript">
+    var dmg_ctx310_array_rabota = [[${dmg_ctx310_array_rabota}]];
+    var dmg_ctx310_array_pause = [[${dmg_ctx310_array_pause}]];
+    var dmg_ctx310_array_off = [[${dmg_ctx310_array_off}]];
+    var dmg_ctx310_array_programname = [[${dmg_ctx310_array_programname}]];
+    var dmg_ctx310_array_nagruzka = [[${dmg_ctx310_array_nagruzka}]];
+    var dmg_ctx310_array_avar = [[${dmg_ctx310_array_avar}]];
+</script>   <!--ctx310 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var dmg_ctx310_work = [[${work_dmg_ctx310}]];
+    var dmg_ctx310_pass = [[${pass_dmg_ctx310}]];
+    var dmg_ctx310_fail = [[${fail_dmg_ctx310}]];
+    var dmg_ctx310_nagruzka = [[${nagruzka_dmg_ctx310}]];
+    var dmg_ctx310_avar = [[${avar_dmg_ctx310}]];
+</script>   <!--ctx310 js круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki_meh/data_dmg_ctx310.js"></script>
 
 <script th:inline="javascript">
     $('.icon_personal_uvf_1_1').hover(
@@ -1407,6 +1483,26 @@
         }
     );
 
+    $('.icon_personal_dmg_ctx310').hover(
+        function(){
+            $('.label_personal_dmg_ctx310').css('color','#000000');
+            $('.label_personal_dmg_ctx310').css('margin-top','70px');
+        },
+        function(){
+            $('.label_personal_dmg_ctx310').css('color','#756e6e');
+            $('.label_personal_dmg_ctx310').css('margin-top','65px');
+        }
+    );
+    $('.icon_mesto_dmg_ctx310').hover(
+        function(){
+            $('.label_mesto_dmg_ctx310').css('color','#000000');
+            $('.label_mesto_dmg_ctx310').css('margin-top','70px');
+        },
+        function(){
+            $('.label_mesto_dmg_ctx310').css('color','#756e6e');
+            $('.label_mesto_dmg_ctx310').css('margin-top','65px');
+        }
+    );
 
 </script> <!--Кнопки Персонал и Место-->
 
