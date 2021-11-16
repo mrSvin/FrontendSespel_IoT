@@ -598,7 +598,6 @@ Highcharts.chart('container_work4', {
                 {x:  (new Date(sk50_array_nagruzka[292])).getTime(), x2: (new Date(sk50_array_nagruzka[293])).getTime(), y: 0},
                 {x:  (new Date(sk50_array_nagruzka[294])).getTime(), x2: (new Date(sk50_array_nagruzka[295])).getTime(), y: 0},
                 {x:  (new Date(sk50_array_nagruzka[296])).getTime(), x2: (new Date(sk50_array_nagruzka[297])).getTime(), y: 0},
-                {x:  (new Date(sk50_array_nagruzka[298])).getTime(), x2: (new Date(sk50_array_nagruzka[299])).getTime(), y: 0},
 
             ],
             dataLabels: {
