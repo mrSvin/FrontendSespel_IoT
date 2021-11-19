@@ -431,7 +431,7 @@ Highcharts.chart('container_work2', {
             pointWidth: 30,
             colorByPoint: false,
             color: '#e81e1d',
-            data: [{x:0,x2:0}],
+            data: [{x:0,x2:0, y: 3}],
             dataLabels: {
                 enabled: true
             }
@@ -443,7 +443,7 @@ Highcharts.chart('container_work2', {
             pointWidth: 30,
             colorByPoint: false,
             color: '#24621d',
-            data: [{x:0,x2:0}],
+            data: [{x:0,x2:0, y: 4}],
             dataLabels: {
                 enabled: true
             }
