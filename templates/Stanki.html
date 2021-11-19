@@ -1306,7 +1306,7 @@
     );
 </script> <!--Кнопки Персонал и Место-->
 <script>
-    var count = 0;
+    var count = 1;
     var color = "white";
 
     if(localStorage['color'] != null) {
@@ -1321,6 +1321,7 @@
     $("#clear").on("click", function() {
         $("#count").html(count);
         window.localStorage['count'] = count;
+        $("#color").html(color);
         window.localStorage['color'] = color;
         count++;
         if (count % 2 == 0) {
