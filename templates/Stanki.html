@@ -1320,6 +1320,7 @@
     $("#clear").on("click", function() {
         $("#count").html(count);
         window.localStorage['count'] = count;
+        window.localStorage['color'] = color;
         count++;
         if (count % 2 == 0) {
             color = "black";
