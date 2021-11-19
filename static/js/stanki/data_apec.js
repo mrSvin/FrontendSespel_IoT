@@ -618,7 +618,7 @@ Highcharts.chart('container_work5', {
 });
 
 <!--apec круговая диагрмма загрузки оборудования-->
-var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
 Highcharts.chart('container5', {
     chart: {
         plotBackgroundColor: null,
@@ -657,6 +657,6 @@ Highcharts.chart('container5', {
         type : 'pie',
         name : 'Показатель',
         data : [ [ 'По программе', apec_work ], [ 'Включен', apec_pass ],
-            [ 'Выключен', apec_fail ],  [ 'В аварии', apec_avar],  [ 'Под нагрузкой', apec_ruchnoi]   ]
+            [ 'Выключен', apec_fail ],  [ 'В аварии', apec_avar],  [ 'Ручной', apec_ruchnoi]   ]
     }]
 });
