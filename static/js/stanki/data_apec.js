@@ -44,7 +44,7 @@ Highcharts.chart('container_work5', {
         title: {
             text: ''
         },
-        categories: ['Под нагрузкой', 'Работа', 'Ожидание', 'Выключен', 'В аварии'],
+        categories: ['Ручной', 'Работа', 'Ожидание', 'Выключен', 'В аварии'],
         reversed: true
     },
     credits: {
