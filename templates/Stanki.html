@@ -1316,6 +1316,7 @@
     if(localStorage['count'] != null) {
         count = parseInt(window.localStorage['count']);
     }
+    document.body.style.backgroundColor = color;
 
     $("#clear").on("click", function() {
         $("#count").html(count);
@@ -1329,7 +1330,6 @@
         {
             color = "white";
         }
-        document.body.style.backgroundColor = color;
     });
 
 </script><!-- Скрипт счетчик -->
