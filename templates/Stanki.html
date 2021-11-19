@@ -315,7 +315,6 @@
 
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap-3.3.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 
 
@@ -368,43 +367,6 @@
         }
     </script>
 
-    <script>
-        var count = 0;
-        var color = "white";
-
-        if(localStorage['count'] != null) {
-            count = parseInt(window.localStorage['count']);
-        }
-
-        // setInterval(function() {
-        //     $("#count").html(count);
-        //     window.localStorage['count'] = count;
-        //     count++;
-        //     if (count % 2 == 0) {
-        //         color = "black";
-        //     }
-        //     else
-        //     {
-        //         color = "white";
-        //     }
-        //     document.body.style.backgroundColor = color;
-        // }, 100);
-
-        $("#clear").on("click", function() {
-            $("#count").html(count);
-            window.localStorage['count'] = count;
-            count++;
-            if (count % 2 == 0) {
-                color = "black";
-            }
-            else
-            {
-                color = "white";
-            }
-            document.body.style.backgroundColor = color;
-        });
-
-    </script><!-- Скрипт счетчик -->
 
 </head>
 <header>
@@ -1343,5 +1305,33 @@
         }
     );
 </script> <!--Кнопки Персонал и Место-->
+<script>
+    var count = 0;
+    var color = "white";
+
+    if(localStorage['color'] != null) {
+        color = parseInt(window.localStorage['color']);
+    }
+
+    if(localStorage['count'] != null) {
+        count = parseInt(window.localStorage['count']);
+    }
+
+    $("#clear").on("click", function() {
+        $("#count").html(count);
+        window.localStorage['count'] = count;
+        count++;
+        if (count % 2 == 0) {
+            color = "black";
+        }
+        else
+        {
+            color = "white";
+        }
+        document.body.style.backgroundColor = color;
+    });
+
+</script><!-- Скрипт счетчик -->
+
 </body>
 </html>
