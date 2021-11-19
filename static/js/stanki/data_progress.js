@@ -431,7 +431,57 @@ Highcharts.chart('container_work2', {
             pointWidth: 30,
             colorByPoint: false,
             color: '#e81e1d',
-            data: [{}],
+            data: [
+                {x:  (new Date(progress_array_avar[0])).getTime(), x2: (new Date(progress_array_avar[1])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[2])).getTime(), x2: (new Date(progress_array_avar[3])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[4])).getTime(), x2: (new Date(progress_array_avar[5])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[6])).getTime(), x2: (new Date(progress_array_avar[7])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[8])).getTime(), x2: (new Date(progress_array_avar[9])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[10])).getTime(), x2: (new Date(progress_array_avar[11])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[12])).getTime(), x2: (new Date(progress_array_avar[13])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[14])).getTime(), x2: (new Date(progress_array_avar[15])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[16])).getTime(), x2: (new Date(progress_array_avar[17])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[18])).getTime(), x2: (new Date(progress_array_avar[19])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[20])).getTime(), x2: (new Date(progress_array_avar[21])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[22])).getTime(), x2: (new Date(progress_array_avar[23])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[24])).getTime(), x2: (new Date(progress_array_avar[25])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[26])).getTime(), x2: (new Date(progress_array_avar[27])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[28])).getTime(), x2: (new Date(progress_array_avar[29])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[30])).getTime(), x2: (new Date(progress_array_avar[31])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[32])).getTime(), x2: (new Date(progress_array_avar[33])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[34])).getTime(), x2: (new Date(progress_array_avar[35])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[36])).getTime(), x2: (new Date(progress_array_avar[37])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[38])).getTime(), x2: (new Date(progress_array_avar[39])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[40])).getTime(), x2: (new Date(progress_array_avar[41])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[42])).getTime(), x2: (new Date(progress_array_avar[43])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[44])).getTime(), x2: (new Date(progress_array_avar[45])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[46])).getTime(), x2: (new Date(progress_array_avar[47])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[48])).getTime(), x2: (new Date(progress_array_avar[49])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[50])).getTime(), x2: (new Date(progress_array_avar[51])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[52])).getTime(), x2: (new Date(progress_array_avar[53])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[54])).getTime(), x2: (new Date(progress_array_avar[55])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[56])).getTime(), x2: (new Date(progress_array_avar[57])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[58])).getTime(), x2: (new Date(progress_array_avar[59])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[60])).getTime(), x2: (new Date(progress_array_avar[61])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[62])).getTime(), x2: (new Date(progress_array_avar[63])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[64])).getTime(), x2: (new Date(progress_array_avar[65])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[66])).getTime(), x2: (new Date(progress_array_avar[67])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[68])).getTime(), x2: (new Date(progress_array_avar[69])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[70])).getTime(), x2: (new Date(progress_array_avar[71])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[72])).getTime(), x2: (new Date(progress_array_avar[73])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[74])).getTime(), x2: (new Date(progress_array_avar[75])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[76])).getTime(), x2: (new Date(progress_array_avar[77])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[78])).getTime(), x2: (new Date(progress_array_avar[79])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[80])).getTime(), x2: (new Date(progress_array_avar[81])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[82])).getTime(), x2: (new Date(progress_array_avar[83])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[84])).getTime(), x2: (new Date(progress_array_avar[85])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[86])).getTime(), x2: (new Date(progress_array_avar[87])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[88])).getTime(), x2: (new Date(progress_array_avar[89])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[90])).getTime(), x2: (new Date(progress_array_avar[91])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[92])).getTime(), x2: (new Date(progress_array_avar[93])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[94])).getTime(), x2: (new Date(progress_array_avar[95])).getTime(), y: 3},
+                {x:  (new Date(progress_array_avar[96])).getTime(), x2: (new Date(progress_array_avar[97])).getTime(), y: 3},
+            ],
             dataLabels: {
                 enabled: true
             }
@@ -443,7 +493,7 @@ Highcharts.chart('container_work2', {
 });
 
 <!-- круговая диагрмма загрузки оборудования-->
-var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d'];
+var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
 Highcharts.chart('container2', {
     chart: {
         plotBackgroundColor: null,
