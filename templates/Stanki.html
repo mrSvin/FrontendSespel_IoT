@@ -831,7 +831,8 @@
 
     var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
     var nagruzka_sk50 = [[${sk50_nagruzka}]];
-    var nagruzka_apec = [[${apec_nagruzka}]];
+
+    var ruchnoi_apec = [[${apec_ruchnoi}]];
 
     Highcharts.setOptions({
         lang: {
@@ -895,7 +896,7 @@
             data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec]
         }, {
             name: 'Под нагрузкой',
-            data: [0, 0, nagruzka_ntx1000,nagruzka_sk50, nagruzka_apec]
+            data: [0, 0, nagruzka_ntx1000,nagruzka_sk50, ruchnoi_apec]
         }, {
             name: 'Ожидание',
             data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec]
@@ -1081,7 +1082,7 @@
     var apec_array_pause = [[${apec_array_pause}]];
     var apec_array_off = [[${apec_array_off}]];
     var apec_array_avar = [[${apec_array_avar}]];
-    var apec_array_nagruzka = [[${apec_array_nagruzka}]];
+    var apec_array_ruchnoi = [[${apec_array_ruchnoi}]];
     var apec_array_programname = [[${apec_array_programname}]];
 
 </script>   <!--apec js линейная диагрмма работы оборудования -->
@@ -1090,7 +1091,7 @@
     var apec_pass = [[${apec_pass}]];
     var apec_fail = [[${apec_fail}]];
     var apec_avar = [[${apec_avar}]];
-    var apec_nagruzka = [[${apec_nagruzka}]];
+    var apec_ruchnoi = [[${apec_ruchnoi}]];
 </script>   <!--apec круговая диагрмма загрузки оборудования-->
 <script src="/js/stanki/data_apec.js"></script>
 
@@ -1176,6 +1177,27 @@
         function () {
             $('.label_mesto_sk50').css('color', '#756e6e');
             $('.label_mesto_sk50').css('margin-top', '65px');
+        }
+    );
+
+    $('.icon_personal_apec').hover(
+        function () {
+            $('.label_personal_apec').css('color', '#000000');
+            $('.label_personal_apec').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_personal_apec').css('color', '#756e6e');
+            $('.label_personal_apec').css('margin-top', '65px');
+        }
+    );
+    $('.icon_mesto_apec').hover(
+        function () {
+            $('.label_mesto_apec').css('color', '#000000');
+            $('.label_mesto_apec').css('margin-top', '70px');
+        },
+        function () {
+            $('.label_mesto_apec').css('color', '#756e6e');
+            $('.label_mesto_apec').css('margin-top', '65px');
         }
     );
 </script> <!--Кнопки Персонал и Место-->
