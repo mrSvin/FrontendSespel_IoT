@@ -163,6 +163,44 @@
             margin-top: 65px;
             margin-left: -5px;
         }
+    /*    */
+
+        .icon_mesto_apec {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_apec:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_apec {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_apec:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_apec {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_apec {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
 
 
     </style> <!--Кнопки Персонал и Местоположение-->
@@ -735,6 +773,36 @@
     </div>  <!--sk50 html-->
 </div> <!--sk50 html-->
 
+<div style="border: 1px solid #333;">   <!--apec html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;">
+                <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/apec.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">APEC
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_apec" href="mesto/mesto_apec"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto_apec'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_apec"
+                           href="personal/personal_apec"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal_apec'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work5" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container5" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--apec html-->
+</div> <!--apec html-->
+
 <script th:inline="javascript">
 
     var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000'];
@@ -743,22 +811,27 @@
     var work_progress = [[${progress_work}]];
     var work_ntx1000 = [[${ntx1000_work}]];
     var work_sk50 = [[${sk50_work}]];
+    var work_apec = [[${apec_work}]];
 
     var pause_uf5220 = [[${pass}]];
     var pause_progress = [[${progress_pass}]];
     var pause_ntx1000 = [[${ntx1000_pass}]];
     var pause_sk50 = [[${sk50_pass}]];
+    var pause_apec = [[${apec_pass}]];
 
     var off_uf5220 = [[${fail}]];
     var off_progress = [[${progress_fail}]];
     var off_ntx1000 = [[${ntx1000_fail}]];
     var off_sk50 = [[${sk50_fail}]];
+    var off_apec = [[${apec_fail}]];
 
     var avar_ntx1000 = [[${ntx1000_avar}]];
     var avar_sk50 = [[${sk50_avar}]];
+    var avar_apec = [[${apec_avar}]];
 
     var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
     var nagruzka_sk50 = [[${sk50_nagruzka}]];
+    var nagruzka_apec = [[${apec_nagruzka}]];
 
     Highcharts.setOptions({
         lang: {
@@ -797,7 +870,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50']
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC']
         },
         credits: {
             enabled: false
@@ -819,19 +892,19 @@
         },
         series: [{
             name: 'Работа',
-            data: [work_uf5220, work_progress, work_ntx1000, work_sk50]
+            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec]
         }, {
             name: 'Под нагрузкой',
-            data: [0, 0, nagruzka_ntx1000,nagruzka_sk50]
+            data: [0, 0, nagruzka_ntx1000,nagruzka_sk50, nagruzka_apec]
         }, {
             name: 'Ожидание',
-            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50]
+            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec]
         }, {
             name: 'Авария',
-            data: [0, 0, avar_ntx1000, avar_sk50]
+            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec]
         }, {
             name: 'Выключен',
-            data: [off_uf5220, off_progress, off_ntx1000, off_sk50]
+            data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec]
         }]
     });
 
@@ -842,11 +915,13 @@
     var progress_kol_op = [[${progress_kol_op}]];
     var ntx1000_kol_op = [[${ntx1000_kol_op}]];
     var sk50_kol_op = [[${sk50_kol_op}]];
+    var apec_kol_op = [[${apec_kol_op}]];
 
     var kol_long_operations_uf5220 = [[${kol_long_operations_uf5220}]];
     var kol_long_operations_progress = [[${kol_long_operations_progress}]];
     var kol_long_operations_ntx1000 = [[${kol_long_operations_ntx1000}]];
     var kol_long_operations_sk50 = [[${kol_long_operations_sk50}]];
+    var kol_long_operations_apec = [[${kol_long_operations_apec}]];
 
     Highcharts.setOptions({
         lang: {
@@ -884,7 +959,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50'],
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC'],
             title: {
                 text: null
             }
@@ -926,10 +1001,10 @@
         },
         series: [{
             name: 'Общее количество операций',
-            data: [uf5220_kol_op, progress_kol_op, ntx1000_kol_op, sk50_kol_op]
+            data: [uf5220_kol_op, progress_kol_op, ntx1000_kol_op, sk50_kol_op, apec_kol_op]
         }, {
             name: 'Количество операций более 3 минут',
-            data: [kol_long_operations_uf5220, kol_long_operations_progress, kol_long_operations_ntx1000, kol_long_operations_sk50]
+            data: [kol_long_operations_uf5220, kol_long_operations_progress, kol_long_operations_ntx1000, kol_long_operations_sk50, kol_long_operations_apec]
         }]
     });
 </script>   <!--js количество операций-->
@@ -999,6 +1074,25 @@
     var sk50_nagruzka = [[${sk50_nagruzka}]];
 </script>   <!--sk50 круговая диагрмма загрузки оборудования-->
 <script src="/js/stanki/data_sk50.js"></script>
+
+<script th:inline="javascript">
+
+    var apec_array_rabota = [[${apec_array_rabota}]];
+    var apec_array_pause = [[${apec_array_pause}]];
+    var apec_array_off = [[${apec_array_off}]];
+    var apec_array_avar = [[${apec_array_avar}]];
+    var apec_array_nagruzka = [[${apec_array_nagruzka}]];
+    var apec_array_programname = [[${apec_array_programname}]];
+
+</script>   <!--apec js линейная диагрмма работы оборудования -->
+<script th:inline="javascript">
+    var apec_work = [[${apec_work}]];
+    var apec_pass = [[${apec_pass}]];
+    var apec_fail = [[${apec_fail}]];
+    var apec_avar = [[${apec_avar}]];
+    var apec_nagruzka = [[${apec_nagruzka}]];
+</script>   <!--apec круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_apec.js"></script>
 
 <script th:inline="javascript">
     $('.icon_personal_uf5220').hover(
