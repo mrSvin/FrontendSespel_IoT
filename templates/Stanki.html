@@ -825,11 +825,14 @@
     var off_sk50 = [[${sk50_fail}]];
     var off_apec = [[${apec_fail}]];
 
+    var avar_uf5220 = [[${avar}]];
+    var avar_progress = [[${progress_avar}]];
     var avar_ntx1000 = [[${ntx1000_avar}]];
     var avar_sk50 = [[${sk50_avar}]];
     var avar_apec = [[${apec_avar}]];
 
     var uf5220_nagruzka = [[${uf5220_nagruzka}]];
+    var progress_nagruzka = [[${progress_nagruzka}]];
     var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
     var nagruzka_sk50 = [[${sk50_nagruzka}]];
 
@@ -903,7 +906,7 @@
             data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec]
         }, {
             name: 'Авария',
-            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec]
+            data: [avar_uf5220, avar_progress, avar_ntx1000, avar_sk50, avar_apec]
         }, {
             name: 'Выключен',
             data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec]
@@ -1015,6 +1018,7 @@
     var uf5220_array_rabota = [[${uf5220_array_rabota}]];
     var uf5220_array_pause = [[${uf5220_array_pause}]];
     var uf5220_array_off = [[${uf5220_array_off}]];
+    var uf5220_array_avar = [[${uf5220_array_avar}]];
     var uf5220_array_programname = [[${uf5220_array_programname}]];
 </script>   <!--УФ 5220 js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
@@ -1030,6 +1034,7 @@
     var progress_array_rabota = [[${progress_array_rabota}]];
     var progress_array_pause = [[${progress_array_pause}]];
     var progress_array_off = [[${progress_array_off}]];
+    var progress_array_avar = [[${progress_array_avar}]];
     var progress_array_programname = [[${progress_array_programname}]];
 </script>   <!--Прогресс js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
