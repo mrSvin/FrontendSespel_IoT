@@ -6,9 +6,9 @@
     <title>Станки</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
 
-    <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
-    <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/> <!-- Меню -->
-    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/menu_buttons.css"/> <!-- Меню -->
+    <link rel="stylesheet" type="text/css" href="../static/css/styles_header.css"/>
 
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
@@ -316,6 +316,8 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap-3.3.0.min.js"></script>
 
+
+
     <script>
         $(function () {
             $('#datepicker').datepicker({
@@ -364,6 +366,44 @@
             }, 500);
         }
     </script>
+
+    <script>
+        var count = 0;
+        var color = "white";
+
+        if(localStorage['count'] != null) {
+            count = parseInt(window.localStorage['count']);
+        }
+
+        // setInterval(function() {
+        //     $("#count").html(count);
+        //     window.localStorage['count'] = count;
+        //     count++;
+        //     if (count % 2 == 0) {
+        //         color = "black";
+        //     }
+        //     else
+        //     {
+        //         color = "white";
+        //     }
+        //     document.body.style.backgroundColor = color;
+        // }, 100);
+
+        $("#clear").on("click", function() {
+            $("#count").html(count);
+            window.localStorage['count'] = count;
+            count++;
+            if (count % 2 == 0) {
+                color = "black";
+            }
+            else
+            {
+                color = "white";
+            }
+            document.body.style.backgroundColor = color;
+        });
+
+    </script><!-- Скрипт счетчик -->
 
 </head>
 <header>
@@ -437,7 +477,14 @@
                     id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
             </button>
         </div>
+
+        <div id="count"></div>
+        <br>
+        <input type='button' id="clear" value='Очистить счетчик'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     </form>
+
+
 
 </div>      <!--Календарь html-->
 
@@ -1017,7 +1064,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3'],
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC'],
             title: {
                 text: null
             }
