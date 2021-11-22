@@ -146,7 +146,7 @@
 
   <style>
 
-    .icon_mesto_uf5220{
+    .icon_mesto{
 
       width: 60px;
       height: 60px;
@@ -155,92 +155,43 @@
       margin-top: 10px;
       margin-left: 30px;
     }
-    .icon_mesto_uf5220:hover {
+    .icon_mesto:hover {
       -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
     }
-    .icon_personal_uf5220{
+
+    .icon_mesto:hover > div {
+      color: #000000;
+      margin-top: 70px;
+    }
+
+
+    .icon_personal{
       background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
       background-size: 60px 60px;
       margin-top: 10px;
       margin-left: 30px;
     }
-    .icon_personal_uf5220:hover {
+    .icon_personal:hover {
       -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
     }
-    .label_mesto_uf5220{
+
+    .icon_personal:hover > div {
+      color: #000000;
+      margin-top: 70px;
+    }
+
+    .label_mesto{
       color: #756e6e;
       margin-top: 65px;
       margin-left: 8px;
     }
-    .label_personal_uf5220{
+
+    .label_personal{
       color: #756e6e;
       margin-top: 65px;
       margin-left: -5px;
     }
 
-    .icon_mesto_progress{
-
-      width: 60px;
-      height: 60px;
-      background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-      background-size: 60px 60px;
-      margin-top: 10px;
-      margin-left: 30px;
-    }
-    .icon_mesto_progress:hover {
-      -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-    }
-    .icon_personal_progress{
-      background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-      background-size: 60px 60px;
-      margin-top: 10px;
-      margin-left: 30px;
-    }
-    .icon_personal_progress:hover {
-      -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-    }
-    .label_mesto_progress{
-      color: #756e6e;
-      margin-top: 65px;
-      margin-left: 8px;
-    }
-    .label_personal_progress{
-      color: #756e6e;
-      margin-top: 65px;
-      margin-left: -5px;
-    }
-
-    .icon_mesto_ntx1000{
-
-      width: 60px;
-      height: 60px;
-      background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-      background-size: 60px 60px;
-      margin-top: 10px;
-      margin-left: 30px;
-    }
-    .icon_mesto_ntx1000:hover {
-      -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-    }
-    .icon_personal_ntx1000{
-      background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-      background-size: 60px 60px;
-      margin-top: 10px;
-      margin-left: 30px;
-    }
-    .icon_personal_ntx1000:hover {
-      -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-    }
-    .label_mesto_ntx1000{
-      color: #756e6e;
-      margin-top: 65px;
-      margin-left: 8px;
-    }
-    .label_personal_ntx1000{
-      color: #756e6e;
-      margin-top: 65px;
-      margin-left: -5px;
-    }
 
   </style> <!--Кнопки Персонал и Местоположение-->
 
@@ -328,8 +279,8 @@
           <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CRYSTA-Apex S9168</figcaption>
         </div>
         <div>
-          <a style="text-decoration: none; float: left" class="icon_mesto_uf5220" href="mesto/mesto_kim" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_uf5220'>Место</div></a>
-          <a style="text-decoration: none; float: left" class="icon_personal_uf5220" href="personal/personal_kim" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_uf5220'>Персонал</div></a>
+          <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_kim" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+          <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_kim" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
         </div>
       </div>
       <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
@@ -338,346 +289,22 @@
   </div>  <!--УФ 5220 html-->
 
 </div> <!--КИМ html-->
-
 <script th:inline="javascript">
-
-  var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'];
-  {
-    var kim_rabota_day1 = [[${kim_rabota_day0}]];
-    var kim_rabota_day2 = [[${kim_rabota_day1}]];
-    var kim_rabota_day3 = [[${kim_rabota_day2}]];
-    var kim_rabota_day4 = [[${kim_rabota_day3}]];
-    var kim_rabota_day5 = [[${kim_rabota_day4}]];
-    var kim_rabota_day6 = [[${kim_rabota_day5}]];
-    var kim_rabota_day7 = [[${kim_rabota_day6}]];
-    var kim_rabota_day8 = [[${kim_rabota_day7}]];
-    var kim_rabota_day9 = [[${kim_rabota_day8}]];
-    var kim_rabota_day10 = [[${kim_rabota_day9}]];
-    var kim_rabota_day11 = [[${kim_rabota_day10}]];
-    var kim_rabota_day12 = [[${kim_rabota_day11}]];
-    var kim_rabota_day13 = [[${kim_rabota_day12}]];
-    var kim_rabota_day14 = [[${kim_rabota_day13}]];
-    var kim_rabota_day15 = [[${kim_rabota_day14}]];
-    var kim_rabota_day16 = [[${kim_rabota_day15}]];
-    var kim_rabota_day17 = [[${kim_rabota_day16}]];
-    var kim_rabota_day18 = [[${kim_rabota_day17}]];
-    var kim_rabota_day19 = [[${kim_rabota_day18}]];
-    var kim_rabota_day20 = [[${kim_rabota_day19}]];
-    var kim_rabota_day21 = [[${kim_rabota_day20}]];
-    var kim_rabota_day22 = [[${kim_rabota_day21}]];
-    var kim_rabota_day23 = [[${kim_rabota_day22}]];
-    var kim_rabota_day24 = [[${kim_rabota_day23}]];
-    var kim_rabota_day25 = [[${kim_rabota_day24}]];
-    var kim_rabota_day26 = [[${kim_rabota_day25}]];
-    var kim_rabota_day27 = [[${kim_rabota_day26}]];
-    var kim_rabota_day28 = [[${kim_rabota_day27}]];
-    var kim_rabota_day29 = [[${kim_rabota_day28}]];
-    var kim_rabota_day30 = [[${kim_rabota_day29}]];
-    var kim_rabota_day31 = [[${kim_rabota_day30}]];
-
-    var kim_pause_day1 = [[${kim_pause_day0}]];
-    var kim_pause_day2 = [[${kim_pause_day1}]];
-    var kim_pause_day3 = [[${kim_pause_day2}]];
-    var kim_pause_day4 = [[${kim_pause_day3}]];
-    var kim_pause_day5 = [[${kim_pause_day4}]];
-    var kim_pause_day6 = [[${kim_pause_day5}]];
-    var kim_pause_day7 = [[${kim_pause_day6}]];
-    var kim_pause_day8 = [[${kim_pause_day7}]];
-    var kim_pause_day9 = [[${kim_pause_day8}]];
-    var kim_pause_day10 = [[${kim_pause_day9}]];
-    var kim_pause_day11 = [[${kim_pause_day10}]];
-    var kim_pause_day12 = [[${kim_pause_day11}]];
-    var kim_pause_day13 = [[${kim_pause_day12}]];
-    var kim_pause_day14 = [[${kim_pause_day13}]];
-    var kim_pause_day15 = [[${kim_pause_day14}]];
-    var kim_pause_day16 = [[${kim_pause_day15}]];
-    var kim_pause_day17 = [[${kim_pause_day16}]];
-    var kim_pause_day18 = [[${kim_pause_day17}]];
-    var kim_pause_day19 = [[${kim_pause_day18}]];
-    var kim_pause_day20 = [[${kim_pause_day19}]];
-    var kim_pause_day21 = [[${kim_pause_day20}]];
-    var kim_pause_day22 = [[${kim_pause_day21}]];
-    var kim_pause_day23 = [[${kim_pause_day22}]];
-    var kim_pause_day24 = [[${kim_pause_day23}]];
-    var kim_pause_day25 = [[${kim_pause_day24}]];
-    var kim_pause_day26 = [[${kim_pause_day25}]];
-    var kim_pause_day27 = [[${kim_pause_day26}]];
-    var kim_pause_day28 = [[${kim_pause_day27}]];
-    var kim_pause_day29 = [[${kim_pause_day28}]];
-    var kim_pause_day30 = [[${kim_pause_day29}]];
-    var kim_pause_day31 = [[${kim_pause_day30}]];
-
-    var kim_off_day1 = [[${kim_off_day0}]];
-    var kim_off_day2 = [[${kim_off_day1}]];
-    var kim_off_day3 = [[${kim_off_day2}]];
-    var kim_off_day4 = [[${kim_off_day3}]];
-    var kim_off_day5 = [[${kim_off_day4}]];
-    var kim_off_day6 = [[${kim_off_day5}]];
-    var kim_off_day7 = [[${kim_off_day6}]];
-    var kim_off_day8 = [[${kim_off_day7}]];
-    var kim_off_day9 = [[${kim_off_day8}]];
-    var kim_off_day10 = [[${kim_off_day9}]];
-    var kim_off_day11 = [[${kim_off_day10}]];
-    var kim_off_day12 = [[${kim_off_day11}]];
-    var kim_off_day13 = [[${kim_off_day12}]];
-    var kim_off_day14 = [[${kim_off_day13}]];
-    var kim_off_day15 = [[${kim_off_day14}]];
-    var kim_off_day16 = [[${kim_off_day15}]];
-    var kim_off_day17 = [[${kim_off_day16}]];
-    var kim_off_day18 = [[${kim_off_day17}]];
-    var kim_off_day19 = [[${kim_off_day18}]];
-    var kim_off_day20 = [[${kim_off_day19}]];
-    var kim_off_day21 = [[${kim_off_day20}]];
-    var kim_off_day22 = [[${kim_off_day21}]];
-    var kim_off_day23 = [[${kim_off_day22}]];
-    var kim_off_day24 = [[${kim_off_day23}]];
-    var kim_off_day25 = [[${kim_off_day24}]];
-    var kim_off_day26 = [[${kim_off_day25}]];
-    var kim_off_day27 = [[${kim_off_day26}]];
-    var kim_off_day28 = [[${kim_off_day27}]];
-    var kim_off_day29 = [[${kim_off_day28}]];
-    var kim_off_day30 = [[${kim_off_day29}]];
-    var kim_off_day31 = [[${kim_off_day30}]];
-
-    var kim_avar_day1 = [[${kim_avar_day0}]];
-    var kim_avar_day2 = [[${kim_avar_day1}]];
-    var kim_avar_day3 = [[${kim_avar_day2}]];
-    var kim_avar_day4 = [[${kim_avar_day3}]];
-    var kim_avar_day5 = [[${kim_avar_day4}]];
-    var kim_avar_day6 = [[${kim_avar_day5}]];
-    var kim_avar_day7 = [[${kim_avar_day6}]];
-    var kim_avar_day8 = [[${kim_avar_day7}]];
-    var kim_avar_day9 = [[${kim_avar_day8}]];
-    var kim_avar_day10 = [[${kim_avar_day9}]];
-    var kim_avar_day11 = [[${kim_avar_day10}]];
-    var kim_avar_day12 = [[${kim_avar_day11}]];
-    var kim_avar_day13 = [[${kim_avar_day12}]];
-    var kim_avar_day14 = [[${kim_avar_day13}]];
-    var kim_avar_day15 = [[${kim_avar_day14}]];
-    var kim_avar_day16 = [[${kim_avar_day15}]];
-    var kim_avar_day17 = [[${kim_avar_day16}]];
-    var kim_avar_day18 = [[${kim_avar_day17}]];
-    var kim_avar_day19 = [[${kim_avar_day18}]];
-    var kim_avar_day20 = [[${kim_avar_day19}]];
-    var kim_avar_day21 = [[${kim_avar_day20}]];
-    var kim_avar_day22 = [[${kim_avar_day21}]];
-    var kim_avar_day23 = [[${kim_avar_day22}]];
-    var kim_avar_day24 = [[${kim_avar_day23}]];
-    var kim_avar_day25 = [[${kim_avar_day24}]];
-    var kim_avar_day26 = [[${kim_avar_day25}]];
-    var kim_avar_day27 = [[${kim_avar_day26}]];
-    var kim_avar_day28 = [[${kim_avar_day27}]];
-    var kim_avar_day29 = [[${kim_avar_day28}]];
-    var kim_avar_day30 = [[${kim_avar_day29}]];
-    var kim_avar_day31 = [[${kim_avar_day30}]];
-
-    var kim_kalibrovka_day1 = [[${kim_kalibrovka_day0}]];
-    var kim_kalibrovka_day2 = [[${kim_kalibrovka_day1}]];
-    var kim_kalibrovka_day3 = [[${kim_kalibrovka_day2}]];
-    var kim_kalibrovka_day4 = [[${kim_kalibrovka_day3}]];
-    var kim_kalibrovka_day5 = [[${kim_kalibrovka_day4}]];
-    var kim_kalibrovka_day6 = [[${kim_kalibrovka_day5}]];
-    var kim_kalibrovka_day7 = [[${kim_kalibrovka_day6}]];
-    var kim_kalibrovka_day8 = [[${kim_kalibrovka_day7}]];
-    var kim_kalibrovka_day9 = [[${kim_kalibrovka_day8}]];
-    var kim_kalibrovka_day10 = [[${kim_kalibrovka_day9}]];
-    var kim_kalibrovka_day11 = [[${kim_kalibrovka_day10}]];
-    var kim_kalibrovka_day12 = [[${kim_kalibrovka_day11}]];
-    var kim_kalibrovka_day13 = [[${kim_kalibrovka_day12}]];
-    var kim_kalibrovka_day14 = [[${kim_kalibrovka_day13}]];
-    var kim_kalibrovka_day15 = [[${kim_kalibrovka_day14}]];
-    var kim_kalibrovka_day16 = [[${kim_kalibrovka_day15}]];
-    var kim_kalibrovka_day17 = [[${kim_kalibrovka_day16}]];
-    var kim_kalibrovka_day18 = [[${kim_kalibrovka_day17}]];
-    var kim_kalibrovka_day19 = [[${kim_kalibrovka_day18}]];
-    var kim_kalibrovka_day20 = [[${kim_kalibrovka_day19}]];
-    var kim_kalibrovka_day21 = [[${kim_kalibrovka_day20}]];
-    var kim_kalibrovka_day22 = [[${kim_kalibrovka_day21}]];
-    var kim_kalibrovka_day23 = [[${kim_kalibrovka_day22}]];
-    var kim_kalibrovka_day24 = [[${kim_kalibrovka_day23}]];
-    var kim_kalibrovka_day25 = [[${kim_kalibrovka_day24}]];
-    var kim_kalibrovka_day26 = [[${kim_kalibrovka_day25}]];
-    var kim_kalibrovka_day27 = [[${kim_kalibrovka_day26}]];
-    var kim_kalibrovka_day28 = [[${kim_kalibrovka_day27}]];
-    var kim_kalibrovka_day29 = [[${kim_kalibrovka_day28}]];
-    var kim_kalibrovka_day30 = [[${kim_kalibrovka_day29}]];
-    var kim_kalibrovka_day31 = [[${kim_kalibrovka_day30}]];
-
-  } <!--Переменные для kim-->
-
-  Highcharts.setOptions({
-    lang: {
-      loading: 'Загрузка...',
-      months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-      weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-      shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-      exportButtonTitle: "Экспорт",
-      printButtonTitle: "Печать",
-      rangeSelectorFrom: "С",
-      rangeSelectorTo: "По",
-      rangeSelectorZoom: "Период",
-      downloadPNG: 'Скачать PNG',
-      downloadJPEG: 'Скачать JPEG',
-      downloadPDF: 'Скачать PDF',
-      downloadSVG: 'Скачать SVG',
-      printChart: 'Напечатать график',
-      viewFullscreen: 'На весь экран'
-    },
-    global: {
-      timezoneOffset: new Date().getTimezoneOffset()
-    }
-  });
-
-  Highcharts.chart('container_days1', {
-    chart: {
-      type: 'column'
-    },
-    colors:colors,
-    title: {
-      text: 'Загрузка оборудования по дням'
-    },
-    xAxis: {
-      title: {
-        text: 'Дни месяца',
-        align: 'high'
-      },
-      labels: {
-        style: {
-          fontSize: '18px',
-        }
-      },
-      categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
-    },
-    credits: {
-      enabled: false
-    },
-    yAxis: {
-      min: 0,
-      title: {
-        text: '%'
-      }
-    },
-    tooltip: {
-      pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-      shared: true
-    },
-    plotOptions: {
-      column: {
-        stacking: 'percent'
-      }
-    },
-    series: [{
-      name: 'Работа',
-      data: [kim_rabota_day1, kim_rabota_day2, kim_rabota_day3,kim_rabota_day4,kim_rabota_day5,kim_rabota_day6,kim_rabota_day7,kim_rabota_day8,kim_rabota_day9,kim_rabota_day10,kim_rabota_day11,kim_rabota_day12,kim_rabota_day13,kim_rabota_day14,kim_rabota_day15,kim_rabota_day16,kim_rabota_day17,kim_rabota_day18,kim_rabota_day19,kim_rabota_day20,kim_rabota_day21,kim_rabota_day22,kim_rabota_day23,kim_rabota_day24,kim_rabota_day25,kim_rabota_day26,kim_rabota_day27,kim_rabota_day28,kim_rabota_day29,kim_rabota_day30,kim_rabota_day31]
-    }, {
-      name: 'Ожидание',
-      data: [kim_pause_day1, kim_pause_day2, kim_pause_day3,kim_pause_day4,kim_pause_day5,kim_pause_day6,kim_pause_day7,kim_pause_day8,kim_pause_day9,kim_pause_day10,kim_pause_day11,kim_pause_day12,kim_pause_day13,kim_pause_day14,kim_pause_day15,kim_pause_day16,kim_pause_day17,kim_pause_day18,kim_pause_day19,kim_pause_day20,kim_pause_day21,kim_pause_day22,kim_pause_day23,kim_pause_day24,kim_pause_day25,kim_pause_day26,kim_pause_day27,kim_pause_day28,kim_pause_day29,kim_pause_day30,kim_pause_day31]
-    }, {
-      name: 'Выключен',
-      data: [kim_off_day1, kim_off_day2, kim_off_day3,kim_off_day4,kim_off_day5,kim_off_day6,kim_off_day7,kim_off_day8,kim_off_day9,kim_off_day10,kim_off_day11,kim_off_day12,kim_off_day13,kim_off_day14,kim_off_day15,kim_off_day16,kim_off_day17,kim_off_day18,kim_off_day19,kim_off_day20,kim_off_day21,kim_off_day22,kim_off_day23,kim_off_day24,kim_off_day25,kim_off_day26,kim_off_day27,kim_off_day28,kim_off_day29,kim_off_day30,kim_off_day31]
-    }, {
-      name: 'Авария',
-      data: [kim_avar_day1, kim_avar_day2, kim_avar_day3,kim_avar_day4,kim_avar_day5,kim_avar_day6,kim_avar_day7,kim_avar_day8,kim_avar_day9,kim_avar_day10,kim_avar_day11,kim_avar_day12,kim_avar_day13,kim_avar_day14,kim_avar_day15,kim_avar_day16,kim_avar_day17,kim_avar_day18,kim_avar_day19,kim_avar_day20,kim_avar_day21,kim_avar_day22,kim_avar_day23,kim_avar_day24,kim_avar_day25,kim_avar_day26,kim_avar_day27,kim_avar_day28,kim_avar_day29,kim_avar_day30,kim_avar_day31]
-    }, {
-      name: 'Калибровка',
-      data: [kim_kalibrovka_day1, kim_kalibrovka_day2, kim_kalibrovka_day3,kim_kalibrovka_day4,kim_kalibrovka_day5,kim_kalibrovka_day6,kim_kalibrovka_day7,kim_kalibrovka_day8,kim_kalibrovka_day9,kim_kalibrovka_day10,kim_kalibrovka_day11,kim_kalibrovka_day12,kim_kalibrovka_day13,kim_kalibrovka_day14,kim_kalibrovka_day15,kim_kalibrovka_day16,kim_kalibrovka_day17,kim_kalibrovka_day18,kim_kalibrovka_day19,kim_kalibrovka_day20,kim_kalibrovka_day21,kim_kalibrovka_day22,kim_kalibrovka_day23,kim_kalibrovka_day24,kim_kalibrovka_day25,kim_kalibrovka_day26,kim_kalibrovka_day27,kim_kalibrovka_day28,kim_kalibrovka_day29,kim_kalibrovka_day30,kim_kalibrovka_day31]
-    }]
-  });
-
-
-</script>   <!--КИМ js диагрмма загрузки оборудования по дням-->
+  var kim_rabota_day = [[${kim_rabota_day}]];
+  var kim_pause_day = [[${kim_pause_day}]];
+  var kim_off_day = [[${kim_off_day}]];
+  var kim_avar_day = [[${kim_avar_day}]];
+  var kim_kalibrovka_day = [[${kim_kalibrovka_day}]];
+</script>   <!--Переменные для линейной диаграммы kim-->
 <script th:inline="javascript">
-  var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'];
+  var kim_work = [[${kim_work}]];
+  var kim_pass = [[${kim_pass}]];
+  var kim_fail = [[${kim_fail}]];
+  var kim_avar = [[${kim_avar}]];
+  var  kim_kalibrovka = [[${kim_kalibrovka}]];
+</script>   <!--Переменные для круговой диаграммы kim-->
+<script src="/js/month/kim/data_kim_month.js"></script>
 
-  Highcharts.setOptions({
-    lang: {
-      loading: 'Загрузка...',
-      months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-      weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-      shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-      exportButtonTitle: "Экспорт",
-      printButtonTitle: "Печать",
-      rangeSelectorFrom: "С",
-      rangeSelectorTo: "По",
-      rangeSelectorZoom: "Период",
-      downloadPNG: 'Скачать PNG',
-      downloadJPEG: 'Скачать JPEG',
-      downloadPDF: 'Скачать PDF',
-      downloadSVG: 'Скачать SVG',
-      printChart: 'Напечатать график',
-      viewFullscreen: 'На весь экран'
-    },
-    global: {
-      timezoneOffset: new Date().getTimezoneOffset()
-    }
-  });
-
-  Highcharts.chart('container', {
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: 'pie'
-    },
-
-    title: {
-      text: 'Загрузка оборудования'
-    },
-    tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-
-    accessibility: {
-      point: {
-        valueSuffix: '%'
-      }
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: false
-        },
-        showInLegend: true
-      }
-    },
-    colors:colors,
-    credits: {
-      enabled: false
-    },
-    series : [ {
-      type : 'pie',
-      name : 'Показатель',
-      data : [ [ 'По программе', [[${kim_work}]] ], [ 'Включен', [[${kim_pass}]] ], [ 'Выключен', [[${kim_fail}]] ],  [ 'В аварии', [[${kim_avar}]] ],  [ 'Калибровка', [[${kim_kalibrovka}]] ]  ]
-    }]
-  });
-</script>   <!--КИМ js круговая диагрмма загрузки оборудования-->
-
-
-<script th:inline="javascript">
-  $('.icon_personal_uf5220').hover(
-          function(){
-            $('.label_personal_uf5220').css('color','#000000');
-            $('.label_personal_uf5220').css('margin-top','70px');
-          },
-          function(){
-            $('.label_personal_uf5220').css('color','#756e6e');
-            $('.label_personal_uf5220').css('margin-top','65px');
-          }
-  );
-  $('.icon_mesto_uf5220').hover(
-          function(){
-            $('.label_mesto_uf5220').css('color','#000000');
-            $('.label_mesto_uf5220').css('margin-top','70px');
-          },
-          function(){
-            $('.label_mesto_uf5220').css('color','#756e6e');
-            $('.label_mesto_uf5220').css('margin-top','65px');
-          }
-  );
-
-</script> <!--Кнопки Персонал и Место-->
 
 </body>
 
