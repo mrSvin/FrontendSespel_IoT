@@ -6,9 +6,9 @@
     <title>Станки</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
 
-    <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
-    <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/> <!-- Меню -->
-    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/menu_buttons.css"/> <!-- Меню -->
+    <link rel="stylesheet" type="text/css" href="../static/css/styles_header.css"/>
 
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
@@ -316,6 +316,8 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap-3.3.0.min.js"></script>
 
+
+
     <script>
         $(function () {
             $('#datepicker').datepicker({
@@ -364,6 +366,7 @@
             }, 500);
         }
     </script>
+
 
 </head>
 <header>
@@ -436,8 +439,14 @@
                     class="follow"
                     id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
             </button>
+            <input type='button' id="clear" class="follow" value='Тема' style="float: right; margin: 1.5%;  font-size: 150%; text-align: center"/>
+
         </div>
+
+
     </form>
+
+
 
 </div>      <!--Календарь html-->
 
@@ -1017,7 +1026,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3'],
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC'],
             title: {
                 text: null
             }
@@ -1296,5 +1305,51 @@
         }
     );
 </script> <!--Кнопки Персонал и Место-->
+<script>
+    var count = 0;
+    var color = "white";
+
+    //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
+    if(localStorage['count'] != null) {
+        count = parseInt(window.localStorage['count']);
+    }
+
+
+    // Условия для смены цвета
+    if (count == 0) {
+        color = "white";
+        document.body.style.backgroundColor = color;
+    }
+
+
+    if (count == 1) {
+        color = "#121212";
+        document.body.style.backgroundColor = color;
+
+    }
+
+    //Заменяем фон на значение переменной
+
+    $("#clear").on("click", function() {
+        count++; // увеличиваем счетчик при клике на кнопку
+        if(count > 1) // условие сброса счетчика
+        {
+            count = 0;
+        }
+        if (count == 0) { // при нуле белый цвет
+            color = "white";
+            document.body.style.backgroundColor = color; // функция изменения цвета фона
+        }
+        if (count == 1) { // при единице темный цвет
+            color = "#121212";
+            document.body.style.backgroundColor = color;
+        }
+
+        window.localStorage['count'] = count; // сохранение переменной в память
+
+    });
+
+</script><!-- Скрипт счетчик -->
+
 </body>
 </html>
