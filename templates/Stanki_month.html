@@ -425,9 +425,9 @@
 
 <div style="display: flex; justify-content: space-between">
 
-        <div id="container_sum_zagruzka" style="height: 400px; width: 45%"></div> <!--Общая загрузка html-->
+    <div id="container_sum_zagruzka" style="height: 400px; width: 45%"></div> <!--Общая загрузка html-->
 
-        <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
+    <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
 </div>  <!--Общая загрузка-->
 
 <script th:inline="javascript">
@@ -542,6 +542,7 @@
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    var sum_rabota = [[${uf5220_work}]] + [[${progress_work}]];
 
     Highcharts.setOptions({
         lang: {
@@ -603,7 +604,7 @@
         series : [ {
             type : 'pie',
             name : 'Показатель',
-            data : [ [ 'По программе', [[${sum_rabota}]] ], [ 'Включен', [[${sum_pause}]] ],
+            data : [ [ 'По программе', sum_rabota ], [ 'Включен', [[${sum_pause}]] ],
                 [ 'Выключен', [[${sum_off}]] ],  [ 'В аварии', [[${sum_avar}]]],  [ 'Под нагрузкой', [[${sum_nagruzka}]]]   ]
         }]
     });
@@ -632,101 +633,11 @@
 
     var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
     {
-        var uf5220_rabota_day1 = [[${uf5220_rabota_day0}]];
-        var uf5220_rabota_day2 = [[${uf5220_rabota_day1}]];
-        var uf5220_rabota_day3 = [[${uf5220_rabota_day2}]];
-        var uf5220_rabota_day4 = [[${uf5220_rabota_day3}]];
-        var uf5220_rabota_day5 = [[${uf5220_rabota_day4}]];
-        var uf5220_rabota_day6 = [[${uf5220_rabota_day5}]];
-        var uf5220_rabota_day7 = [[${uf5220_rabota_day6}]];
-        var uf5220_rabota_day8 = [[${uf5220_rabota_day7}]];
-        var uf5220_rabota_day9 = [[${uf5220_rabota_day8}]];
-        var uf5220_rabota_day10 = [[${uf5220_rabota_day9}]];
-        var uf5220_rabota_day11 = [[${uf5220_rabota_day10}]];
-        var uf5220_rabota_day12 = [[${uf5220_rabota_day11}]];
-        var uf5220_rabota_day13 = [[${uf5220_rabota_day12}]];
-        var uf5220_rabota_day14 = [[${uf5220_rabota_day13}]];
-        var uf5220_rabota_day15 = [[${uf5220_rabota_day14}]];
-        var uf5220_rabota_day16 = [[${uf5220_rabota_day15}]];
-        var uf5220_rabota_day17 = [[${uf5220_rabota_day16}]];
-        var uf5220_rabota_day18 = [[${uf5220_rabota_day17}]];
-        var uf5220_rabota_day19 = [[${uf5220_rabota_day18}]];
-        var uf5220_rabota_day20 = [[${uf5220_rabota_day19}]];
-        var uf5220_rabota_day21 = [[${uf5220_rabota_day20}]];
-        var uf5220_rabota_day22 = [[${uf5220_rabota_day21}]];
-        var uf5220_rabota_day23 = [[${uf5220_rabota_day22}]];
-        var uf5220_rabota_day24 = [[${uf5220_rabota_day23}]];
-        var uf5220_rabota_day25 = [[${uf5220_rabota_day24}]];
-        var uf5220_rabota_day26 = [[${uf5220_rabota_day25}]];
-        var uf5220_rabota_day27 = [[${uf5220_rabota_day26}]];
-        var uf5220_rabota_day28 = [[${uf5220_rabota_day27}]];
-        var uf5220_rabota_day29 = [[${uf5220_rabota_day28}]];
-        var uf5220_rabota_day30 = [[${uf5220_rabota_day29}]];
-        var uf5220_rabota_day31 = [[${uf5220_rabota_day30}]];
+        var uf5220_rabota_day = [[${uf5220_rabota_day}]];
 
-        var uf5220_pause_day1 = [[${uf5220_pause_day0}]];
-        var uf5220_pause_day2 = [[${uf5220_pause_day1}]];
-        var uf5220_pause_day3 = [[${uf5220_pause_day2}]];
-        var uf5220_pause_day4 = [[${uf5220_pause_day3}]];
-        var uf5220_pause_day5 = [[${uf5220_pause_day4}]];
-        var uf5220_pause_day6 = [[${uf5220_pause_day5}]];
-        var uf5220_pause_day7 = [[${uf5220_pause_day6}]];
-        var uf5220_pause_day8 = [[${uf5220_pause_day7}]];
-        var uf5220_pause_day9 = [[${uf5220_pause_day8}]];
-        var uf5220_pause_day10 = [[${uf5220_pause_day9}]];
-        var uf5220_pause_day11 = [[${uf5220_pause_day10}]];
-        var uf5220_pause_day12 = [[${uf5220_pause_day11}]];
-        var uf5220_pause_day13 = [[${uf5220_pause_day12}]];
-        var uf5220_pause_day14 = [[${uf5220_pause_day13}]];
-        var uf5220_pause_day15 = [[${uf5220_pause_day14}]];
-        var uf5220_pause_day16 = [[${uf5220_pause_day15}]];
-        var uf5220_pause_day17 = [[${uf5220_pause_day16}]];
-        var uf5220_pause_day18 = [[${uf5220_pause_day17}]];
-        var uf5220_pause_day19 = [[${uf5220_pause_day18}]];
-        var uf5220_pause_day20 = [[${uf5220_pause_day19}]];
-        var uf5220_pause_day21 = [[${uf5220_pause_day20}]];
-        var uf5220_pause_day22 = [[${uf5220_pause_day21}]];
-        var uf5220_pause_day23 = [[${uf5220_pause_day22}]];
-        var uf5220_pause_day24 = [[${uf5220_pause_day23}]];
-        var uf5220_pause_day25 = [[${uf5220_pause_day24}]];
-        var uf5220_pause_day26 = [[${uf5220_pause_day25}]];
-        var uf5220_pause_day27 = [[${uf5220_pause_day26}]];
-        var uf5220_pause_day28 = [[${uf5220_pause_day27}]];
-        var uf5220_pause_day29 = [[${uf5220_pause_day28}]];
-        var uf5220_pause_day30 = [[${uf5220_pause_day29}]];
-        var uf5220_pause_day31 = [[${uf5220_pause_day30}]];
+        var uf5220_pause_day = [[${uf5220_pause_day}]];
 
-        var uf5220_off_day1 = [[${uf5220_off_day0}]];
-        var uf5220_off_day2 = [[${uf5220_off_day1}]];
-        var uf5220_off_day3 = [[${uf5220_off_day2}]];
-        var uf5220_off_day4 = [[${uf5220_off_day3}]];
-        var uf5220_off_day5 = [[${uf5220_off_day4}]];
-        var uf5220_off_day6 = [[${uf5220_off_day5}]];
-        var uf5220_off_day7 = [[${uf5220_off_day6}]];
-        var uf5220_off_day8 = [[${uf5220_off_day7}]];
-        var uf5220_off_day9 = [[${uf5220_off_day8}]];
-        var uf5220_off_day10 = [[${uf5220_off_day9}]];
-        var uf5220_off_day11 = [[${uf5220_off_day10}]];
-        var uf5220_off_day12 = [[${uf5220_off_day11}]];
-        var uf5220_off_day13 = [[${uf5220_off_day12}]];
-        var uf5220_off_day14 = [[${uf5220_off_day13}]];
-        var uf5220_off_day15 = [[${uf5220_off_day14}]];
-        var uf5220_off_day16 = [[${uf5220_off_day15}]];
-        var uf5220_off_day17 = [[${uf5220_off_day16}]];
-        var uf5220_off_day18 = [[${uf5220_off_day17}]];
-        var uf5220_off_day19 = [[${uf5220_off_day18}]];
-        var uf5220_off_day20 = [[${uf5220_off_day19}]];
-        var uf5220_off_day21 = [[${uf5220_off_day20}]];
-        var uf5220_off_day22 = [[${uf5220_off_day21}]];
-        var uf5220_off_day23 = [[${uf5220_off_day22}]];
-        var uf5220_off_day24 = [[${uf5220_off_day23}]];
-        var uf5220_off_day25 = [[${uf5220_off_day24}]];
-        var uf5220_off_day26 = [[${uf5220_off_day25}]];
-        var uf5220_off_day27 = [[${uf5220_off_day26}]];
-        var uf5220_off_day28 = [[${uf5220_off_day27}]];
-        var uf5220_off_day29 = [[${uf5220_off_day28}]];
-        var uf5220_off_day30 = [[${uf5220_off_day29}]];
-        var uf5220_off_day31 = [[${uf5220_off_day30}]];
+        var uf5220_off_day = [[${uf5220_off_day}]];
 
     } <!--Переменные для uf5220-->
 
@@ -793,19 +704,25 @@
         },
         series: [{
             name: 'Работа',
-            data: [uf5220_rabota_day1, uf5220_rabota_day2, uf5220_rabota_day3,uf5220_rabota_day4,uf5220_rabota_day5,uf5220_rabota_day6,uf5220_rabota_day7,uf5220_rabota_day8,uf5220_rabota_day9,uf5220_rabota_day10,uf5220_rabota_day11,uf5220_rabota_day12,uf5220_rabota_day13,uf5220_rabota_day14,uf5220_rabota_day15,uf5220_rabota_day16,uf5220_rabota_day17,uf5220_rabota_day18,uf5220_rabota_day19,uf5220_rabota_day20,uf5220_rabota_day21,uf5220_rabota_day22,uf5220_rabota_day23,uf5220_rabota_day24,uf5220_rabota_day25,uf5220_rabota_day26,uf5220_rabota_day27,uf5220_rabota_day28,uf5220_rabota_day29,uf5220_rabota_day30,uf5220_rabota_day31]
+            data: [uf5220_rabota_day[0], uf5220_rabota_day[1], uf5220_rabota_day[2],uf5220_rabota_day[3],uf5220_rabota_day[4],uf5220_rabota_day[5],uf5220_rabota_day[6],uf5220_rabota_day[7],uf5220_rabota_day[8],uf5220_rabota_day[9],uf5220_rabota_day[10],uf5220_rabota_day[11],
+                uf5220_rabota_day[12],uf5220_rabota_day[13],uf5220_rabota_day[14],uf5220_rabota_day[15],uf5220_rabota_day[16],uf5220_rabota_day[17],uf5220_rabota_day[18],uf5220_rabota_day[19],uf5220_rabota_day[20],uf5220_rabota_day[21],uf5220_rabota_day[22],uf5220_rabota_day[23],
+                uf5220_rabota_day[24],uf5220_rabota_day[25],uf5220_rabota_day[26],uf5220_rabota_day[27],uf5220_rabota_day[28],uf5220_rabota_day[29],uf5220_rabota_day[30]]
         }, {
             name: 'Под нагрузкой',
             data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         }, {
             name: 'Ожидание',
-            data: [uf5220_pause_day1, uf5220_pause_day2, uf5220_pause_day3,uf5220_pause_day4,uf5220_pause_day5,uf5220_pause_day6,uf5220_pause_day7,uf5220_pause_day8,uf5220_pause_day9,uf5220_pause_day10,uf5220_pause_day11,uf5220_pause_day12,uf5220_pause_day13,uf5220_pause_day14,uf5220_pause_day15,uf5220_pause_day16,uf5220_pause_day17,uf5220_pause_day18,uf5220_pause_day19,uf5220_pause_day20,uf5220_pause_day21,uf5220_pause_day22,uf5220_pause_day23,uf5220_pause_day24,uf5220_pause_day25,uf5220_pause_day26,uf5220_pause_day27,uf5220_pause_day28,uf5220_pause_day29,uf5220_pause_day30,uf5220_pause_day31]
+            data: [uf5220_pause_day[0], uf5220_pause_day[1], uf5220_pause_day[2],uf5220_pause_day[3],uf5220_pause_day[4],uf5220_pause_day[5],uf5220_pause_day[6],uf5220_pause_day[7],uf5220_pause_day[8],uf5220_pause_day[9],uf5220_pause_day[10],uf5220_pause_day[11],
+                uf5220_pause_day[12],uf5220_pause_day[13],uf5220_pause_day[14],uf5220_pause_day[15],uf5220_pause_day[16],uf5220_pause_day[17],uf5220_pause_day[18],uf5220_pause_day[19],uf5220_pause_day[20],uf5220_pause_day[21],uf5220_pause_day[22],uf5220_pause_day[23],
+                uf5220_pause_day[24],uf5220_pause_day[25],uf5220_pause_day[26],uf5220_pause_day[27],uf5220_pause_day[28],uf5220_pause_day[29],uf5220_pause_day[30]]
         }, {
             name: 'Авария',
             data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         }, {
             name: 'Выключен',
-            data: [uf5220_off_day1, uf5220_off_day2, uf5220_off_day3,uf5220_off_day4,uf5220_off_day5,uf5220_off_day6,uf5220_off_day7,uf5220_off_day8,uf5220_off_day9,uf5220_off_day10,uf5220_off_day11,uf5220_off_day12,uf5220_off_day13,uf5220_off_day14,uf5220_off_day15,uf5220_off_day16,uf5220_off_day17,uf5220_off_day18,uf5220_off_day19,uf5220_off_day20,uf5220_off_day21,uf5220_off_day22,uf5220_off_day23,uf5220_off_day24,uf5220_off_day25,uf5220_off_day26,uf5220_off_day27,uf5220_off_day28,uf5220_off_day29,uf5220_off_day30,uf5220_off_day31]
+            data: [uf5220_off_day[0], uf5220_off_day[1], uf5220_off_day[2],uf5220_off_day[3],uf5220_off_day[4],uf5220_off_day[5],uf5220_off_day[6],uf5220_off_day[7],uf5220_off_day[8],uf5220_off_day[9],uf5220_off_day[10],uf5220_off_day[11],
+                uf5220_off_day[12],uf5220_off_day[13],uf5220_off_day[14],uf5220_off_day[15],uf5220_off_day[16],uf5220_off_day[17],uf5220_off_day[18],uf5220_off_day[19],uf5220_off_day[20],uf5220_off_day[21],uf5220_off_day[22],uf5220_off_day[23],
+                uf5220_off_day[24],uf5220_off_day[25],uf5220_off_day[26],uf5220_off_day[27],uf5220_off_day[28],uf5220_off_day[29],uf5220_off_day[30]]
         }]
     });
 
