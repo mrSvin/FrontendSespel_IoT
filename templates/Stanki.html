@@ -1,70 +1,240 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Станки</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
     <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/> <!-- Меню -->
     <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
-    <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/>
-
-    <!-- Optional theme -->
-
 
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css" />
-
-    <script src="js/highcharts.js"></script>
-    <script src="js/exporting.js"></script>
-    <script src="js/export-data.js"></script>
-    <script src="js/accessibility.js"></script>
-    <script src="js/xrange.js"></script>
-
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/bootstrap-3.3.0.min.js"></script>
+    <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
 
-    <script >
-        $(function () {
-            $('#datepicker').datepicker({
-                format: "yyyy-mm",
-                language: 'ru',
-                viewMode: "months",
-                minViewMode: "months",
-                autoclose: true,
-                todayHighlight: true,
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                orientation: "button"
-            });
-            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+    <style>
+
+        .icon_mesto_uf5220 {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_uf5220:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_uf5220 {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_uf5220:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_uf5220 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_uf5220 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_progress {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_progress:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_progress {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_progress:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_progress {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_progress {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_ntx1000 {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_ntx1000:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_ntx1000 {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_ntx1000:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_ntx1000 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_ntx1000 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_sk50 {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_sk50:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_sk50 {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_sk50:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_sk50 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_sk50 {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_apec {
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_mesto_apec:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+
+        .icon_personal_apec {
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+
+        .icon_personal_apec:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+
+        .label_mesto_apec {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+
+        .label_personal_apec {
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
+
+        .icon_mesto_dmg_dmu50_3{
+
+            width: 60px;
+            height: 60px;
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_mesto_dmg_dmu50_3:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+        }
+        .icon_personal_dmg_dmu50_3{
+            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+            background-size: 60px 60px;
+            margin-top: 10px;
+            margin-left: 30px;
+        }
+        .icon_personal_dmg_dmu50_3:hover {
+            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+        }
+        .label_mesto_dmg_dmu50_3{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: 8px;
+        }
+        .label_personal_dmg_dmu50_3{
+            color: #756e6e;
+            margin-top: 65px;
+            margin-left: -5px;
+        }
 
 
-
-            $('#button_obnovit').on("click", function() {
-                var datas = $('#datepicker').data().datepicker.viewDate;
-
-                var mes = datas.getMonth()+1;
-                var year = datas.getFullYear();
-
-                name_data = mes+"-" + year;
-                <!--console.log(name_data);-->
-            });
-
-
-        });
-
-    </script>   <!--Календарь js-->
-
-    <!--Календарь -->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
-    <!--Календарь Русский язык-->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
-
-
+    </style> <!--Кнопки Персонал и Местоположение-->
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -136,6 +306,55 @@
             display: none;
         }
     </style>
+
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
+    <script src="js/export-data.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="js/xrange.js"></script>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap-3.3.0.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+            $('#button_obnovit').on("click", function () {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+                var day = datas.getDate();
+                var mes = datas.getMonth() + 1;
+                var year = datas.getFullYear();
+
+                name_data = year + "-" + mes + "-" + day;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
+
+    <!--Календарь -->
+    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
+    <!--Календарь Русский язык-->
+    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
+
+
+    <!-- Загрузка страницы -->
     <script>
         window.onload = function () {
             document.body.classList.add('loaded_hiding');
@@ -146,205 +365,7 @@
         }
     </script>
 
-    <style>
-
-        .icon_mesto_uf5220{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_uf5220:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_uf5220{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_uf5220:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_uf5220{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_uf5220{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-        .icon_mesto_progress{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_progress:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_progress{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_progress:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_progress{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_progress{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-        .icon_mesto_ntx1000{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_ntx1000:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_ntx1000{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_ntx1000:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_ntx1000{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_ntx1000{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-        .icon_mesto_sk50{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_sk50:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_sk50{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_sk50:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_sk50{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_sk50{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-
-        .icon_mesto_apec{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_apec:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_apec{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_apec:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_apec{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_apec{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-        .icon_mesto_dmg_dmu50_3{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_dmg_dmu50_3:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_dmg_dmu50_3{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_dmg_dmu50_3:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_dmg_dmu50_3{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_dmg_dmu50_3{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-    </style> <!--Кнопки Персонал и Местоположение-->
-
 </head>
-
 <header>
     <ul class="hr">
         <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
@@ -366,13 +387,7 @@
             th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
     </ul>       <!--Шапка html-->
 </header>       <!--Шапка html-->
-<!-- Загрузка страницы -->
-<div class="preloader">
-    <div class="preloader__row">
-        <div class="preloader__item"></div>
-        <div class="preloader__item"></div>
-    </div>
-</div>
+
 <div>
     <ul id="menu_ul">
         <li id="menu_li"><a id="menu_a" href="displayStanki" class="menu-color">Мех.уч.II пл.</a></li>
@@ -385,33 +400,38 @@
         <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
     </ul>
 </div>  <!-- Меню -->
+<!-- Загрузка страницы -->
+<div class="preloader">
+    <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+    </div>
+</div>
 
 <body>
 
 <div style="clear: both">
     <form>
-        <button formaction="displayStanki" class="btn_change" style="width:40%">Суточный отчет</button>
-        <button formaction="displayStankiMonth" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF;">Месячный отчет</button>
+        <button formaction="displayStanki" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF;">Суточный отчет</button>
+        <button formaction="displayStankiMonth" class="btn_change" style="width:40%">Месячный отчет</button>
     </form>
 </div>  <!--Кнопки суточный и месячный отчеты html-->
 
-
 <div class="container">
-    <div style="width: 250px; float: left">
-        <h2>Выберите месяц:</h2>
+    <div style="width: 220px; float: left">
+        <h2>Выберите дату:</h2>
     </div>
 
-
-    <form  action="#" th:action="@{/displayStankiMonth}" th:object="${calendar_month}" method="post" >
+    <form action="#" th:action="@{/displayStanki}" th:object="${calendar_date}" method="post">
 
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
-            <input type='text' class="form-control" th:field="*{content_month}"/>
+            <input type='text' class="form-control" th:field="*{content_date}"/>
             <span class="input-group-addon">
 		                        <span class="glyphicon glyphicon-calendar"></span>
 		                    </span>
         </div>
 
-        <div class="form-actions" >
+        <div class="form-actions">
             <button type="submit"
                     class="follow"
                     id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
@@ -421,42 +441,451 @@
 
 </div>      <!--Календарь html-->
 
-
-
 <div style="display: flex; justify-content: space-between">
 
-    <div id="container_sum_zagruzka" style="height: 400px; width: 45%"></div> <!--Общая загрузка html-->
+    <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
+    <!--Общая загрузка html-->
 
-    <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
-</div>  <!--Общая загрузка-->
+    <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
+    <!--Количество операций html-->
+</div>  <!--Общая загрузка и количество операций html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/UVF_5220.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; margin-bottom: 15px; font-weight: bold; font-size: 150%; text-align: center">УФ5220
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_uf5220"
+                           href="mesto/mesto_uf5220"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto_uf5220'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_uf5220"
+                           href="personal/personal_uf5220"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal_uf5220'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--УФ 5220 html-->
+    <form method="post" style="margin: 1%;">
+        <center>
+            <table width="98%">
+
+                <text class="first">Текущие параметры комплекса</text>
+                <tr>
+                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
+                    <th colspan="2" style="text-align:center">Технология</th>
+                    <th colspan="2" style="text-align:center">Координаты</th>
+                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
+                </tr>
+                <tr>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Номер инструмента</td>
+                    <td>
+                        <li th:text="${nomer_inst}"></li>
+                    </td>
+                    <td>Имя УП</td>
+                    <td><small th:text="${name_program}"></small></td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${pos_x}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${nagr_x}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор подачи</td>
+                    <td>
+                        <li th:text="${kor_podach}"></li>
+                    </td>
+                    <td>Номер кадра</td>
+                    <td>
+                        <li th:text="${nomer_kadr}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${pos_y}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${nagr_y}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор скорости</td>
+                    <td>
+                        <li th:text="${kor_speed}"></li>
+                    </td>
+                    <td>Статус программы</td>
+                    <td>
+                        <li th:text="${status_work}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${pos_z}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${nagr_z}"></li>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
+</div> <!--УФ 5220 html-->
+
+<div style="border: 1px solid #333;">   <!--Прогресс html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;">
+                <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/progress.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Прогресс
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_progress"
+                           href="mesto/mesto_progress"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto_progress'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_progress"
+                           href="personal/personal_progress"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal_progress'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work2" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container2" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Прогресс html-->
+    <form method="post" style="margin: 1%;">
+        <center>
+            <table width="98%">
+
+                <text class="first">Текущие параметры комплекса</text>
+                <tr>
+                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
+                    <th colspan="2" style="text-align:center">Технология</th>
+                    <th colspan="2" style="text-align:center">Координаты</th>
+                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
+                </tr>
+                <tr>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Номер инструмента</td>
+                    <td>
+                        <li th:text="${progress_nomer_inst}"></li>
+                    </td>
+                    <td>Имя УП</td>
+                    <td><small th:text="${progress_name_program}"></small></td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${progress_pos_x}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${progress_nagr_x}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор подачи</td>
+                    <td>
+                        <li th:text="${progress_kor_podach}"></li>
+                    </td>
+                    <td>Номер кадра</td>
+                    <td>
+                        <li th:text="${progress_nomer_kadr}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${progress_pos_y}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${progress_nagr_y}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор скорости</td>
+                    <td>
+                        <li th:text="${progress_kor_speed}"></li>
+                    </td>
+                    <td>Статус программы</td>
+                    <td>
+                        <li th:text="${progress_status_work}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${progress_pos_z}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${progress_nagr_z}"></li>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
+</div> <!--Прогресс html-->
+
+<div style="border: 1px solid #333;">   <!--NTX1000 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;">
+                <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/ntx1000.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">NTX1000
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_ntx1000" href="mesto/mesto_ntx1000"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto_ntx1000'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_ntx1000"
+                           href="personal/personal_ntx1000"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal_ntx1000'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work3" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container3" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--NTX1000 html-->
+    <form method="post" style="margin: 1%;">
+        <center>
+            <table width="98%">
+
+                <text class="first">Текущие параметры комплекса</text>
+                <tr>
+                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
+                    <th colspan="2" style="text-align:center">Технология</th>
+                    <th colspan="2" style="text-align:center">Координаты</th>
+                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
+                </tr>
+                <tr>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Номер инструмента</td>
+                    <td>
+                        <li th:text="${ntx1000_nomer_inst}"></li>
+                    </td>
+                    <td>Имя УП</td>
+                    <td>
+                        <li th:text="${ntx1000_name_program}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${ntx1000_pos_x}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${ntx1000_nagr_x}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор подачи</td>
+                    <td>
+                        <li th:text="${ntx1000_kor_podach}"></li>
+                    </td>
+                    <td>Номер кадра</td>
+                    <td>
+                        <li th:text="${ntx1000_nomer_kadr}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${ntx1000_pos_y}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${ntx1000_nagr_y}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор скорости</td>
+                    <td>
+                        <li th:text="${ntx1000_kor_speed}"></li>
+                    </td>
+                    <td>Статус программы</td>
+                    <td>
+                        <li th:text="${ntx1000_status_work}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${ntx1000_pos_z}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${ntx1000_nagr_z}"></li>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
+</div> <!--NTX1000 html-->
+
+<div style="border: 1px solid #333;">   <!--sk50 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;">
+                <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/sk50.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">SK50
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_sk50" href="mesto/mesto_sk50"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto_sk50'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_sk50"
+                           href="personal/personal_sk50"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal_sk50'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work4" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container4" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--sk50 html-->
+</div> <!--sk50 html-->
+
+<div style="border: 1px solid #333;">   <!--apec html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;">
+                <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/apec.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">APEC
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_apec" href="mesto/mesto_apec"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto_apec'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_apec"
+                           href="personal/personal_apec"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal_apec'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work5" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container5" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--apec html-->
+</div> <!--apec html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #3</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto_dmg_dmu50_3" href="mesto/mesto_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_dmg_dmu50_3'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal_dmg_dmu50_3" href="personal/personal_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_dmg_dmu50_3'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+</div> <!--DMU50-3 html-->
 
 <script th:inline="javascript">
-    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
 
-    var work_uf5220 = [[${uf5220_work}]];
+    var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000'];
+
+    var work_uf5220 = [[${work}]];
     var work_progress = [[${progress_work}]];
     var work_ntx1000 = [[${ntx1000_work}]];
     var work_sk50 = [[${sk50_work}]];
     var work_apec = [[${apec_work}]];
+    var work_dmu50_3 = [[${work_dmg_dmu50_3}]];
 
-    var pause_uf5220 = [[${uf5220_pass}]];
+    var pause_uf5220 = [[${pass}]];
     var pause_progress = [[${progress_pass}]];
     var pause_ntx1000 = [[${ntx1000_pass}]];
     var pause_sk50 = [[${sk50_pass}]];
     var pause_apec = [[${apec_pass}]];
+    var pause_dmu50_3 = [[${pass_dmg_dmu50_3}]];
 
-    var off_uf5220 = [[${uf5220_fail}]];
+    var off_uf5220 = [[${fail}]];
     var off_progress = [[${progress_fail}]];
     var off_ntx1000 = [[${ntx1000_fail}]];
     var off_sk50 = [[${sk50_fail}]];
     var off_apec = [[${apec_fail}]];
+    var off_dmu50_3 = [[${fail_dmg_dmu50_3}]];
 
     var avar_ntx1000 = [[${ntx1000_avar}]];
     var avar_sk50 = [[${sk50_avar}]];
     var avar_apec = [[${apec_avar}]];
+    var avar_dmu50_3 = [[${avar_dmg_dmu50_3}]];
 
     var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
     var nagruzka_sk50 = [[${sk50_nagruzka}]];
+    var nagruzka_dmu50_3 = [[${nagruzka_dmg_dmu50_3}]];
 
     var ruchnoi_apec = [[${apec_ruchnoi}]];
 
@@ -487,7 +916,7 @@
         chart: {
             type: 'column'
         },
-        colors:colors,
+        colors: colors,
         title: {
             text: 'Общая загрузка оборудования'
         },
@@ -519,24 +948,38 @@
         },
         series: [{
             name: 'Работа',
-            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec]
+            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3]
         }, {
             name: 'Под нагрузкой',
-            data: [0, 0, nagruzka_ntx1000, nagruzka_sk50, ruchnoi_apec]
+            data: [0, 0, nagruzka_ntx1000,nagruzka_sk50, ruchnoi_apec, nagruzka_dmu50_3]
         }, {
             name: 'Ожидание',
-            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec]
+            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3]
         }, {
             name: 'Авария',
-            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec]
+            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3]
         }, {
             name: 'Выключен',
-            data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec]
+            data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3]
         }]
     });
+
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+
+    var uf5220_kol_op = [[${uf5220_kol_op}]];
+    var progress_kol_op = [[${progress_kol_op}]];
+    var ntx1000_kol_op = [[${ntx1000_kol_op}]];
+    var sk50_kol_op = [[${sk50_kol_op}]];
+    var apec_kol_op = [[${apec_kol_op}]];
+    var dmu50_3_kol_op = [[${dmu50_3_kol_op}]];
+
+    var kol_long_operations_uf5220 = [[${kol_long_operations_uf5220}]];
+    var kol_long_operations_progress = [[${kol_long_operations_progress}]];
+    var kol_long_operations_ntx1000 = [[${kol_long_operations_ntx1000}]];
+    var kol_long_operations_sk50 = [[${kol_long_operations_sk50}]];
+    var kol_long_operations_apec = [[${kol_long_operations_apec}]];
+    var kol_long_operations_dmu50_3 = [[${kol_long_operations_dmu50_3}]];
 
     Highcharts.setOptions({
         lang: {
@@ -561,2026 +1004,274 @@
         }
     });
 
-    Highcharts.chart('container_sum_zagruzka_krug', {
+    Highcharts.chart('container_kol_operations', {
         chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
+            type: 'bar'
         },
-
         title: {
-            text: 'Суммарная загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${sum_rabota}]] ], [ 'Включен', [[${sum_pause}]] ],
-                [ 'Выключен', [[${sum_off}]] ],  [ 'В аварии', [[${sum_avar}]]],  [ 'Под нагрузкой', [[${sum_nagruzka}]]]   ]
-        }]
-    });
-</script>   <!--Общая js круговая диагрмма загрузки оборудования-->
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/UVF_5220.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">УФ5220</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_uf5220" href="mesto/mesto_uf5220" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto_uf5220'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_uf5220" href="personal/personal_uf5220" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_uf5220'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--УФ 5220 html-->
-
-</div> <!--УФ 5220 html-->
-<script th:inline="javascript">
-
-    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
-    {
-        var uf5220_rabota_day1 = [[${uf5220_rabota_day0}]];
-        var uf5220_rabota_day2 = [[${uf5220_rabota_day1}]];
-        var uf5220_rabota_day3 = [[${uf5220_rabota_day2}]];
-        var uf5220_rabota_day4 = [[${uf5220_rabota_day3}]];
-        var uf5220_rabota_day5 = [[${uf5220_rabota_day4}]];
-        var uf5220_rabota_day6 = [[${uf5220_rabota_day5}]];
-        var uf5220_rabota_day7 = [[${uf5220_rabota_day6}]];
-        var uf5220_rabota_day8 = [[${uf5220_rabota_day7}]];
-        var uf5220_rabota_day9 = [[${uf5220_rabota_day8}]];
-        var uf5220_rabota_day10 = [[${uf5220_rabota_day9}]];
-        var uf5220_rabota_day11 = [[${uf5220_rabota_day10}]];
-        var uf5220_rabota_day12 = [[${uf5220_rabota_day11}]];
-        var uf5220_rabota_day13 = [[${uf5220_rabota_day12}]];
-        var uf5220_rabota_day14 = [[${uf5220_rabota_day13}]];
-        var uf5220_rabota_day15 = [[${uf5220_rabota_day14}]];
-        var uf5220_rabota_day16 = [[${uf5220_rabota_day15}]];
-        var uf5220_rabota_day17 = [[${uf5220_rabota_day16}]];
-        var uf5220_rabota_day18 = [[${uf5220_rabota_day17}]];
-        var uf5220_rabota_day19 = [[${uf5220_rabota_day18}]];
-        var uf5220_rabota_day20 = [[${uf5220_rabota_day19}]];
-        var uf5220_rabota_day21 = [[${uf5220_rabota_day20}]];
-        var uf5220_rabota_day22 = [[${uf5220_rabota_day21}]];
-        var uf5220_rabota_day23 = [[${uf5220_rabota_day22}]];
-        var uf5220_rabota_day24 = [[${uf5220_rabota_day23}]];
-        var uf5220_rabota_day25 = [[${uf5220_rabota_day24}]];
-        var uf5220_rabota_day26 = [[${uf5220_rabota_day25}]];
-        var uf5220_rabota_day27 = [[${uf5220_rabota_day26}]];
-        var uf5220_rabota_day28 = [[${uf5220_rabota_day27}]];
-        var uf5220_rabota_day29 = [[${uf5220_rabota_day28}]];
-        var uf5220_rabota_day30 = [[${uf5220_rabota_day29}]];
-        var uf5220_rabota_day31 = [[${uf5220_rabota_day30}]];
-
-        var uf5220_pause_day1 = [[${uf5220_pause_day0}]];
-        var uf5220_pause_day2 = [[${uf5220_pause_day1}]];
-        var uf5220_pause_day3 = [[${uf5220_pause_day2}]];
-        var uf5220_pause_day4 = [[${uf5220_pause_day3}]];
-        var uf5220_pause_day5 = [[${uf5220_pause_day4}]];
-        var uf5220_pause_day6 = [[${uf5220_pause_day5}]];
-        var uf5220_pause_day7 = [[${uf5220_pause_day6}]];
-        var uf5220_pause_day8 = [[${uf5220_pause_day7}]];
-        var uf5220_pause_day9 = [[${uf5220_pause_day8}]];
-        var uf5220_pause_day10 = [[${uf5220_pause_day9}]];
-        var uf5220_pause_day11 = [[${uf5220_pause_day10}]];
-        var uf5220_pause_day12 = [[${uf5220_pause_day11}]];
-        var uf5220_pause_day13 = [[${uf5220_pause_day12}]];
-        var uf5220_pause_day14 = [[${uf5220_pause_day13}]];
-        var uf5220_pause_day15 = [[${uf5220_pause_day14}]];
-        var uf5220_pause_day16 = [[${uf5220_pause_day15}]];
-        var uf5220_pause_day17 = [[${uf5220_pause_day16}]];
-        var uf5220_pause_day18 = [[${uf5220_pause_day17}]];
-        var uf5220_pause_day19 = [[${uf5220_pause_day18}]];
-        var uf5220_pause_day20 = [[${uf5220_pause_day19}]];
-        var uf5220_pause_day21 = [[${uf5220_pause_day20}]];
-        var uf5220_pause_day22 = [[${uf5220_pause_day21}]];
-        var uf5220_pause_day23 = [[${uf5220_pause_day22}]];
-        var uf5220_pause_day24 = [[${uf5220_pause_day23}]];
-        var uf5220_pause_day25 = [[${uf5220_pause_day24}]];
-        var uf5220_pause_day26 = [[${uf5220_pause_day25}]];
-        var uf5220_pause_day27 = [[${uf5220_pause_day26}]];
-        var uf5220_pause_day28 = [[${uf5220_pause_day27}]];
-        var uf5220_pause_day29 = [[${uf5220_pause_day28}]];
-        var uf5220_pause_day30 = [[${uf5220_pause_day29}]];
-        var uf5220_pause_day31 = [[${uf5220_pause_day30}]];
-
-        var uf5220_off_day1 = [[${uf5220_off_day0}]];
-        var uf5220_off_day2 = [[${uf5220_off_day1}]];
-        var uf5220_off_day3 = [[${uf5220_off_day2}]];
-        var uf5220_off_day4 = [[${uf5220_off_day3}]];
-        var uf5220_off_day5 = [[${uf5220_off_day4}]];
-        var uf5220_off_day6 = [[${uf5220_off_day5}]];
-        var uf5220_off_day7 = [[${uf5220_off_day6}]];
-        var uf5220_off_day8 = [[${uf5220_off_day7}]];
-        var uf5220_off_day9 = [[${uf5220_off_day8}]];
-        var uf5220_off_day10 = [[${uf5220_off_day9}]];
-        var uf5220_off_day11 = [[${uf5220_off_day10}]];
-        var uf5220_off_day12 = [[${uf5220_off_day11}]];
-        var uf5220_off_day13 = [[${uf5220_off_day12}]];
-        var uf5220_off_day14 = [[${uf5220_off_day13}]];
-        var uf5220_off_day15 = [[${uf5220_off_day14}]];
-        var uf5220_off_day16 = [[${uf5220_off_day15}]];
-        var uf5220_off_day17 = [[${uf5220_off_day16}]];
-        var uf5220_off_day18 = [[${uf5220_off_day17}]];
-        var uf5220_off_day19 = [[${uf5220_off_day18}]];
-        var uf5220_off_day20 = [[${uf5220_off_day19}]];
-        var uf5220_off_day21 = [[${uf5220_off_day20}]];
-        var uf5220_off_day22 = [[${uf5220_off_day21}]];
-        var uf5220_off_day23 = [[${uf5220_off_day22}]];
-        var uf5220_off_day24 = [[${uf5220_off_day23}]];
-        var uf5220_off_day25 = [[${uf5220_off_day24}]];
-        var uf5220_off_day26 = [[${uf5220_off_day25}]];
-        var uf5220_off_day27 = [[${uf5220_off_day26}]];
-        var uf5220_off_day28 = [[${uf5220_off_day27}]];
-        var uf5220_off_day29 = [[${uf5220_off_day28}]];
-        var uf5220_off_day30 = [[${uf5220_off_day29}]];
-        var uf5220_off_day31 = [[${uf5220_off_day30}]];
-
-    } <!--Переменные для uf5220-->
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container_days1', {
-        chart: {
-            type: 'column'
-        },
-        colors:colors,
-        title: {
-            text: 'Загрузка оборудования по дням'
+            text: 'Количество операций'
         },
         xAxis: {
-            title: {
-                text: 'Дни месяца',
-                align: 'high'
-            },
             labels: {
                 style: {
                     fontSize: '18px',
                 }
             },
-            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
-        },
-        credits: {
-            enabled: false
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3'],
+            title: {
+                text: null
+            }
         },
         yAxis: {
             min: 0,
             title: {
-                text: '%'
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
             }
         },
         tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
+            valueSuffix: ' операций'
         },
         plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Работа',
-            data: [uf5220_rabota_day1, uf5220_rabota_day2, uf5220_rabota_day3,uf5220_rabota_day4,uf5220_rabota_day5,uf5220_rabota_day6,uf5220_rabota_day7,uf5220_rabota_day8,uf5220_rabota_day9,uf5220_rabota_day10,uf5220_rabota_day11,uf5220_rabota_day12,uf5220_rabota_day13,uf5220_rabota_day14,uf5220_rabota_day15,uf5220_rabota_day16,uf5220_rabota_day17,uf5220_rabota_day18,uf5220_rabota_day19,uf5220_rabota_day20,uf5220_rabota_day21,uf5220_rabota_day22,uf5220_rabota_day23,uf5220_rabota_day24,uf5220_rabota_day25,uf5220_rabota_day26,uf5220_rabota_day27,uf5220_rabota_day28,uf5220_rabota_day29,uf5220_rabota_day30,uf5220_rabota_day31]
-        }, {
-            name: 'Под нагрузкой',
-            data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        }, {
-            name: 'Ожидание',
-            data: [uf5220_pause_day1, uf5220_pause_day2, uf5220_pause_day3,uf5220_pause_day4,uf5220_pause_day5,uf5220_pause_day6,uf5220_pause_day7,uf5220_pause_day8,uf5220_pause_day9,uf5220_pause_day10,uf5220_pause_day11,uf5220_pause_day12,uf5220_pause_day13,uf5220_pause_day14,uf5220_pause_day15,uf5220_pause_day16,uf5220_pause_day17,uf5220_pause_day18,uf5220_pause_day19,uf5220_pause_day20,uf5220_pause_day21,uf5220_pause_day22,uf5220_pause_day23,uf5220_pause_day24,uf5220_pause_day25,uf5220_pause_day26,uf5220_pause_day27,uf5220_pause_day28,uf5220_pause_day29,uf5220_pause_day30,uf5220_pause_day31]
-        }, {
-            name: 'Авария',
-            data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        }, {
-            name: 'Выключен',
-            data: [uf5220_off_day1, uf5220_off_day2, uf5220_off_day3,uf5220_off_day4,uf5220_off_day5,uf5220_off_day6,uf5220_off_day7,uf5220_off_day8,uf5220_off_day9,uf5220_off_day10,uf5220_off_day11,uf5220_off_day12,uf5220_off_day13,uf5220_off_day14,uf5220_off_day15,uf5220_off_day16,uf5220_off_day17,uf5220_off_day18,uf5220_off_day19,uf5220_off_day20,uf5220_off_day21,uf5220_off_day22,uf5220_off_day23,uf5220_off_day24,uf5220_off_day25,uf5220_off_day26,uf5220_off_day27,uf5220_off_day28,uf5220_off_day29,uf5220_off_day30,uf5220_off_day31]
-        }]
-    });
-
-
-</script>   <!--УФ 5220 js диагрмма загрузки оборудования по дням-->
-<script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
+            bar: {
                 dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
+                    enabled: true
+                }
             }
         },
-        colors:colors,
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            shadow: true
+        },
         credits: {
             enabled: false
         },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${uf5220_work}]] ], [ 'Включен', [[${uf5220_pass}]] ], [ 'Выключен', [[${uf5220_fail}]] ],  [ 'В аварии', [[${uf5220_avar}]] ], [ 'Под нагрузкой', 0 ]  ]
+        series: [{
+            name: 'Общее количество операций',
+            data: [uf5220_kol_op, progress_kol_op, ntx1000_kol_op, sk50_kol_op, apec_kol_op, dmu50_3_kol_op]
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: [kol_long_operations_uf5220, kol_long_operations_progress, kol_long_operations_ntx1000, kol_long_operations_sk50, kol_long_operations_apec, kol_long_operations_dmu50_3]
         }]
     });
+</script>   <!--js количество операций-->
+
+<script th:inline="javascript">
+    var uf5220_array_rabota = [[${uf5220_array_rabota}]];
+    var uf5220_array_pause = [[${uf5220_array_pause}]];
+    var uf5220_array_off = [[${uf5220_array_off}]];
+    var uf5220_array_programname = [[${uf5220_array_programname}]];
+</script>   <!--УФ 5220 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var uf5220_work = [[${work}]];
+    var uf5220_pass = [[${pass}]];
+    var uf5220_fail = [[${fail}]];
+    var uf5220_avar = [[${avar}]];
+    var uf5220_nagruzka = [[${nagruzka}]];
 </script>   <!--УФ 5220 js круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_uf5220.js"></script>
 
-
-<div style="border: 1px solid #333;">   <!--Прогресс html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/progress.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Прогресс</figcaption>
-                    <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto_progress" href="mesto/mesto_progress" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto_progress'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_progress" href="personal/personal_progress" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_progress'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--Прогресс html-->
-
-</div> <!--Прогресс html-->
 <script th:inline="javascript">
-
-    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
-    {
-        var progress_rabota_day1 = [[${progress_rabota_day0}]];
-        var progress_rabota_day2 = [[${progress_rabota_day1}]];
-        var progress_rabota_day3 = [[${progress_rabota_day2}]];
-        var progress_rabota_day4 = [[${progress_rabota_day3}]];
-        var progress_rabota_day5 = [[${progress_rabota_day4}]];
-        var progress_rabota_day6 = [[${progress_rabota_day5}]];
-        var progress_rabota_day7 = [[${progress_rabota_day6}]];
-        var progress_rabota_day8 = [[${progress_rabota_day7}]];
-        var progress_rabota_day9 = [[${progress_rabota_day8}]];
-        var progress_rabota_day10 = [[${progress_rabota_day9}]];
-        var progress_rabota_day11 = [[${progress_rabota_day10}]];
-        var progress_rabota_day12 = [[${progress_rabota_day11}]];
-        var progress_rabota_day13 = [[${progress_rabota_day12}]];
-        var progress_rabota_day14 = [[${progress_rabota_day13}]];
-        var progress_rabota_day15 = [[${progress_rabota_day14}]];
-        var progress_rabota_day16 = [[${progress_rabota_day15}]];
-        var progress_rabota_day17 = [[${progress_rabota_day16}]];
-        var progress_rabota_day18 = [[${progress_rabota_day17}]];
-        var progress_rabota_day19 = [[${progress_rabota_day18}]];
-        var progress_rabota_day20 = [[${progress_rabota_day19}]];
-        var progress_rabota_day21 = [[${progress_rabota_day20}]];
-        var progress_rabota_day22 = [[${progress_rabota_day21}]];
-        var progress_rabota_day23 = [[${progress_rabota_day22}]];
-        var progress_rabota_day24 = [[${progress_rabota_day23}]];
-        var progress_rabota_day25 = [[${progress_rabota_day24}]];
-        var progress_rabota_day26 = [[${progress_rabota_day25}]];
-        var progress_rabota_day27 = [[${progress_rabota_day26}]];
-        var progress_rabota_day28 = [[${progress_rabota_day27}]];
-        var progress_rabota_day29 = [[${progress_rabota_day28}]];
-        var progress_rabota_day30 = [[${progress_rabota_day29}]];
-        var progress_rabota_day31 = [[${progress_rabota_day30}]];
-
-        var progress_pause_day1 = [[${progress_pause_day0}]];
-        var progress_pause_day2 = [[${progress_pause_day1}]];
-        var progress_pause_day3 = [[${progress_pause_day2}]];
-        var progress_pause_day4 = [[${progress_pause_day3}]];
-        var progress_pause_day5 = [[${progress_pause_day4}]];
-        var progress_pause_day6 = [[${progress_pause_day5}]];
-        var progress_pause_day7 = [[${progress_pause_day6}]];
-        var progress_pause_day8 = [[${progress_pause_day7}]];
-        var progress_pause_day9 = [[${progress_pause_day8}]];
-        var progress_pause_day10 = [[${progress_pause_day9}]];
-        var progress_pause_day11 = [[${progress_pause_day10}]];
-        var progress_pause_day12 = [[${progress_pause_day11}]];
-        var progress_pause_day13 = [[${progress_pause_day12}]];
-        var progress_pause_day14 = [[${progress_pause_day13}]];
-        var progress_pause_day15 = [[${progress_pause_day14}]];
-        var progress_pause_day16 = [[${progress_pause_day15}]];
-        var progress_pause_day17 = [[${progress_pause_day16}]];
-        var progress_pause_day18 = [[${progress_pause_day17}]];
-        var progress_pause_day19 = [[${progress_pause_day18}]];
-        var progress_pause_day20 = [[${progress_pause_day19}]];
-        var progress_pause_day21 = [[${progress_pause_day20}]];
-        var progress_pause_day22 = [[${progress_pause_day21}]];
-        var progress_pause_day23 = [[${progress_pause_day22}]];
-        var progress_pause_day24 = [[${progress_pause_day23}]];
-        var progress_pause_day25 = [[${progress_pause_day24}]];
-        var progress_pause_day26 = [[${progress_pause_day25}]];
-        var progress_pause_day27 = [[${progress_pause_day26}]];
-        var progress_pause_day28 = [[${progress_pause_day27}]];
-        var progress_pause_day29 = [[${progress_pause_day28}]];
-        var progress_pause_day30 = [[${progress_pause_day29}]];
-        var progress_pause_day31 = [[${progress_pause_day30}]];
-
-        var progress_off_day1 = [[${progress_off_day0}]];
-        var progress_off_day2 = [[${progress_off_day1}]];
-        var progress_off_day3 = [[${progress_off_day2}]];
-        var progress_off_day4 = [[${progress_off_day3}]];
-        var progress_off_day5 = [[${progress_off_day4}]];
-        var progress_off_day6 = [[${progress_off_day5}]];
-        var progress_off_day7 = [[${progress_off_day6}]];
-        var progress_off_day8 = [[${progress_off_day7}]];
-        var progress_off_day9 = [[${progress_off_day8}]];
-        var progress_off_day10 = [[${progress_off_day9}]];
-        var progress_off_day11 = [[${progress_off_day10}]];
-        var progress_off_day12 = [[${progress_off_day11}]];
-        var progress_off_day13 = [[${progress_off_day12}]];
-        var progress_off_day14 = [[${progress_off_day13}]];
-        var progress_off_day15 = [[${progress_off_day14}]];
-        var progress_off_day16 = [[${progress_off_day15}]];
-        var progress_off_day17 = [[${progress_off_day16}]];
-        var progress_off_day18 = [[${progress_off_day17}]];
-        var progress_off_day19 = [[${progress_off_day18}]];
-        var progress_off_day20 = [[${progress_off_day19}]];
-        var progress_off_day21 = [[${progress_off_day20}]];
-        var progress_off_day22 = [[${progress_off_day21}]];
-        var progress_off_day23 = [[${progress_off_day22}]];
-        var progress_off_day24 = [[${progress_off_day23}]];
-        var progress_off_day25 = [[${progress_off_day24}]];
-        var progress_off_day26 = [[${progress_off_day25}]];
-        var progress_off_day27 = [[${progress_off_day26}]];
-        var progress_off_day28 = [[${progress_off_day27}]];
-        var progress_off_day29 = [[${progress_off_day28}]];
-        var progress_off_day30 = [[${progress_off_day29}]];
-        var progress_off_day31 = [[${progress_off_day30}]];
-
-    } <!--Переменные для progress-->
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container_days2', {
-        chart: {
-            type: 'column'
-        },
-        colors:colors,
-        title: {
-            text: 'Загрузка оборудования по дням'
-        },
-        xAxis: {
-            title: {
-                text: 'Дни месяца',
-                align: 'high'
-            },
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Работа',
-            data: [progress_rabota_day1, progress_rabota_day2, progress_rabota_day3,progress_rabota_day4,progress_rabota_day5,progress_rabota_day6,progress_rabota_day7,progress_rabota_day8,progress_rabota_day9,progress_rabota_day10,progress_rabota_day11,progress_rabota_day12,progress_rabota_day13,progress_rabota_day14,progress_rabota_day15,progress_rabota_day16,progress_rabota_day17,progress_rabota_day18,progress_rabota_day19,progress_rabota_day20,progress_rabota_day21,progress_rabota_day22,progress_rabota_day23,progress_rabota_day24,progress_rabota_day25,progress_rabota_day26,progress_rabota_day27,progress_rabota_day28,progress_rabota_day29,progress_rabota_day30,progress_rabota_day31]
-        }, {
-            name: 'Под нагрузкой',
-            data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        }, {
-            name: 'Ожидание',
-            data: [progress_pause_day1, progress_pause_day2, progress_pause_day3,progress_pause_day4,progress_pause_day5,progress_pause_day6,progress_pause_day7,progress_pause_day8,progress_pause_day9,progress_pause_day10,progress_pause_day11,progress_pause_day12,progress_pause_day13,progress_pause_day14,progress_pause_day15,progress_pause_day16,progress_pause_day17,progress_pause_day18,progress_pause_day19,progress_pause_day20,progress_pause_day21,progress_pause_day22,progress_pause_day23,progress_pause_day24,progress_pause_day25,progress_pause_day26,progress_pause_day27,progress_pause_day28,progress_pause_day29,progress_pause_day30,progress_pause_day31]
-        }, {
-            name: 'Авария',
-            data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        }, {
-            name: 'Выключен',
-            data: [progress_off_day1, progress_off_day2, progress_off_day3,progress_off_day4,progress_off_day5,progress_off_day6,progress_off_day7,progress_off_day8,progress_off_day9,progress_off_day10,progress_off_day11,progress_off_day12,progress_off_day13,progress_off_day14,progress_off_day15,progress_off_day16,progress_off_day17,progress_off_day18,progress_off_day19,progress_off_day20,progress_off_day21,progress_off_day22,progress_off_day23,progress_off_day24,progress_off_day25,progress_off_day26,progress_off_day27,progress_off_day28,progress_off_day29,progress_off_day30,progress_off_day31]
-        }]
-    });
-
-
-</script>   <!--Прогресс js диагрмма загрузки оборудования по дням-->
+    var progress_array_rabota = [[${progress_array_rabota}]];
+    var progress_array_pause = [[${progress_array_pause}]];
+    var progress_array_off = [[${progress_array_off}]];
+    var progress_array_programname = [[${progress_array_programname}]];
+</script>   <!--Прогресс js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container2', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${progress_work}]] ], [ 'Включен', [[${progress_pass}]] ],
-                [ 'Выключен', [[${progress_fail}]] ],  [ 'В аварии', [[${progress_avar}]] ], [ 'Под нагрузкой', 0 ]  ]
-        }]
-    });
+    var progress_work = [[${progress_work}]];
+    var progress_pass = [[${progress_pass}]];
+    var progress_fail = [[${progress_fail}]];
+    var progress_avar = [[${progress_avar}]];
+    var progress_nagruzka = [[${progress_nagruzka}]];
 </script>   <!--Прогресс круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_progress.js"></script>
 
-
-<div style="border: 1px solid #333;">   <!--NTX1000 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/ntx1000.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">NTX1000</figcaption>
-                    <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto_ntx1000" href="mesto/mesto_ntx1000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto_ntx1000'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_ntx1000" href="personal/personal_ntx1000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_ntx1000'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--Прогресс html-->
-
-</div> <!--NTX1000 html-->
 <script th:inline="javascript">
-
-    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
-    {
-        var ntx1000_rabota_day1 = [[${ntx1000_rabota_day0}]];
-        var ntx1000_rabota_day2 = [[${ntx1000_rabota_day1}]];
-        var ntx1000_rabota_day3 = [[${ntx1000_rabota_day2}]];
-        var ntx1000_rabota_day4 = [[${ntx1000_rabota_day3}]];
-        var ntx1000_rabota_day5 = [[${ntx1000_rabota_day4}]];
-        var ntx1000_rabota_day6 = [[${ntx1000_rabota_day5}]];
-        var ntx1000_rabota_day7 = [[${ntx1000_rabota_day6}]];
-        var ntx1000_rabota_day8 = [[${ntx1000_rabota_day7}]];
-        var ntx1000_rabota_day9 = [[${ntx1000_rabota_day8}]];
-        var ntx1000_rabota_day10 = [[${ntx1000_rabota_day9}]];
-        var ntx1000_rabota_day11 = [[${ntx1000_rabota_day10}]];
-        var ntx1000_rabota_day12 = [[${ntx1000_rabota_day11}]];
-        var ntx1000_rabota_day13 = [[${ntx1000_rabota_day12}]];
-        var ntx1000_rabota_day14 = [[${ntx1000_rabota_day13}]];
-        var ntx1000_rabota_day15 = [[${ntx1000_rabota_day14}]];
-        var ntx1000_rabota_day16 = [[${ntx1000_rabota_day15}]];
-        var ntx1000_rabota_day17 = [[${ntx1000_rabota_day16}]];
-        var ntx1000_rabota_day18 = [[${ntx1000_rabota_day17}]];
-        var ntx1000_rabota_day19 = [[${ntx1000_rabota_day18}]];
-        var ntx1000_rabota_day20 = [[${ntx1000_rabota_day19}]];
-        var ntx1000_rabota_day21 = [[${ntx1000_rabota_day20}]];
-        var ntx1000_rabota_day22 = [[${ntx1000_rabota_day21}]];
-        var ntx1000_rabota_day23 = [[${ntx1000_rabota_day22}]];
-        var ntx1000_rabota_day24 = [[${ntx1000_rabota_day23}]];
-        var ntx1000_rabota_day25 = [[${ntx1000_rabota_day24}]];
-        var ntx1000_rabota_day26 = [[${ntx1000_rabota_day25}]];
-        var ntx1000_rabota_day27 = [[${ntx1000_rabota_day26}]];
-        var ntx1000_rabota_day28 = [[${ntx1000_rabota_day27}]];
-        var ntx1000_rabota_day29 = [[${ntx1000_rabota_day28}]];
-        var ntx1000_rabota_day30 = [[${ntx1000_rabota_day29}]];
-        var ntx1000_rabota_day31 = [[${ntx1000_rabota_day30}]];
-
-        var ntx1000_pause_day1 = [[${ntx1000_pause_day0}]];
-        var ntx1000_pause_day2 = [[${ntx1000_pause_day1}]];
-        var ntx1000_pause_day3 = [[${ntx1000_pause_day2}]];
-        var ntx1000_pause_day4 = [[${ntx1000_pause_day3}]];
-        var ntx1000_pause_day5 = [[${ntx1000_pause_day4}]];
-        var ntx1000_pause_day6 = [[${ntx1000_pause_day5}]];
-        var ntx1000_pause_day7 = [[${ntx1000_pause_day6}]];
-        var ntx1000_pause_day8 = [[${ntx1000_pause_day7}]];
-        var ntx1000_pause_day9 = [[${ntx1000_pause_day8}]];
-        var ntx1000_pause_day10 = [[${ntx1000_pause_day9}]];
-        var ntx1000_pause_day11 = [[${ntx1000_pause_day10}]];
-        var ntx1000_pause_day12 = [[${ntx1000_pause_day11}]];
-        var ntx1000_pause_day13 = [[${ntx1000_pause_day12}]];
-        var ntx1000_pause_day14 = [[${ntx1000_pause_day13}]];
-        var ntx1000_pause_day15 = [[${ntx1000_pause_day14}]];
-        var ntx1000_pause_day16 = [[${ntx1000_pause_day15}]];
-        var ntx1000_pause_day17 = [[${ntx1000_pause_day16}]];
-        var ntx1000_pause_day18 = [[${ntx1000_pause_day17}]];
-        var ntx1000_pause_day19 = [[${ntx1000_pause_day18}]];
-        var ntx1000_pause_day20 = [[${ntx1000_pause_day19}]];
-        var ntx1000_pause_day21 = [[${ntx1000_pause_day20}]];
-        var ntx1000_pause_day22 = [[${ntx1000_pause_day21}]];
-        var ntx1000_pause_day23 = [[${ntx1000_pause_day22}]];
-        var ntx1000_pause_day24 = [[${ntx1000_pause_day23}]];
-        var ntx1000_pause_day25 = [[${ntx1000_pause_day24}]];
-        var ntx1000_pause_day26 = [[${ntx1000_pause_day25}]];
-        var ntx1000_pause_day27 = [[${ntx1000_pause_day26}]];
-        var ntx1000_pause_day28 = [[${ntx1000_pause_day27}]];
-        var ntx1000_pause_day29 = [[${ntx1000_pause_day28}]];
-        var ntx1000_pause_day30 = [[${ntx1000_pause_day29}]];
-        var ntx1000_pause_day31 = [[${ntx1000_pause_day30}]];
-
-        var ntx1000_off_day1 = [[${ntx1000_off_day0}]];
-        var ntx1000_off_day2 = [[${ntx1000_off_day1}]];
-        var ntx1000_off_day3 = [[${ntx1000_off_day2}]];
-        var ntx1000_off_day4 = [[${ntx1000_off_day3}]];
-        var ntx1000_off_day5 = [[${ntx1000_off_day4}]];
-        var ntx1000_off_day6 = [[${ntx1000_off_day5}]];
-        var ntx1000_off_day7 = [[${ntx1000_off_day6}]];
-        var ntx1000_off_day8 = [[${ntx1000_off_day7}]];
-        var ntx1000_off_day9 = [[${ntx1000_off_day8}]];
-        var ntx1000_off_day10 = [[${ntx1000_off_day9}]];
-        var ntx1000_off_day11 = [[${ntx1000_off_day10}]];
-        var ntx1000_off_day12 = [[${ntx1000_off_day11}]];
-        var ntx1000_off_day13 = [[${ntx1000_off_day12}]];
-        var ntx1000_off_day14 = [[${ntx1000_off_day13}]];
-        var ntx1000_off_day15 = [[${ntx1000_off_day14}]];
-        var ntx1000_off_day16 = [[${ntx1000_off_day15}]];
-        var ntx1000_off_day17 = [[${ntx1000_off_day16}]];
-        var ntx1000_off_day18 = [[${ntx1000_off_day17}]];
-        var ntx1000_off_day19 = [[${ntx1000_off_day18}]];
-        var ntx1000_off_day20 = [[${ntx1000_off_day19}]];
-        var ntx1000_off_day21 = [[${ntx1000_off_day20}]];
-        var ntx1000_off_day22 = [[${ntx1000_off_day21}]];
-        var ntx1000_off_day23 = [[${ntx1000_off_day22}]];
-        var ntx1000_off_day24 = [[${ntx1000_off_day23}]];
-        var ntx1000_off_day25 = [[${ntx1000_off_day24}]];
-        var ntx1000_off_day26 = [[${ntx1000_off_day25}]];
-        var ntx1000_off_day27 = [[${ntx1000_off_day26}]];
-        var ntx1000_off_day28 = [[${ntx1000_off_day27}]];
-        var ntx1000_off_day29 = [[${ntx1000_off_day28}]];
-        var ntx1000_off_day30 = [[${ntx1000_off_day29}]];
-        var ntx1000_off_day31 = [[${ntx1000_off_day30}]];
-
-        var ntx1000_avar_day1 = [[${ntx1000_avar_day0}]];
-        var ntx1000_avar_day2 = [[${ntx1000_avar_day1}]];
-        var ntx1000_avar_day3 = [[${ntx1000_avar_day2}]];
-        var ntx1000_avar_day4 = [[${ntx1000_avar_day3}]];
-        var ntx1000_avar_day5 = [[${ntx1000_avar_day4}]];
-        var ntx1000_avar_day6 = [[${ntx1000_avar_day5}]];
-        var ntx1000_avar_day7 = [[${ntx1000_avar_day6}]];
-        var ntx1000_avar_day8 = [[${ntx1000_avar_day7}]];
-        var ntx1000_avar_day9 = [[${ntx1000_avar_day8}]];
-        var ntx1000_avar_day10 = [[${ntx1000_avar_day9}]];
-        var ntx1000_avar_day11 = [[${ntx1000_avar_day10}]];
-        var ntx1000_avar_day12 = [[${ntx1000_avar_day11}]];
-        var ntx1000_avar_day13 = [[${ntx1000_avar_day12}]];
-        var ntx1000_avar_day14 = [[${ntx1000_avar_day13}]];
-        var ntx1000_avar_day15 = [[${ntx1000_avar_day14}]];
-        var ntx1000_avar_day16 = [[${ntx1000_avar_day15}]];
-        var ntx1000_avar_day17 = [[${ntx1000_avar_day16}]];
-        var ntx1000_avar_day18 = [[${ntx1000_avar_day17}]];
-        var ntx1000_avar_day19 = [[${ntx1000_avar_day18}]];
-        var ntx1000_avar_day20 = [[${ntx1000_avar_day19}]];
-        var ntx1000_avar_day21 = [[${ntx1000_avar_day20}]];
-        var ntx1000_avar_day22 = [[${ntx1000_avar_day21}]];
-        var ntx1000_avar_day23 = [[${ntx1000_avar_day22}]];
-        var ntx1000_avar_day24 = [[${ntx1000_avar_day23}]];
-        var ntx1000_avar_day25 = [[${ntx1000_avar_day24}]];
-        var ntx1000_avar_day26 = [[${ntx1000_avar_day25}]];
-        var ntx1000_avar_day27 = [[${ntx1000_avar_day26}]];
-        var ntx1000_avar_day28 = [[${ntx1000_avar_day27}]];
-        var ntx1000_avar_day29 = [[${ntx1000_avar_day28}]];
-        var ntx1000_avar_day30 = [[${ntx1000_avar_day29}]];
-        var ntx1000_avar_day31 = [[${ntx1000_avar_day30}]];
-
-        var ntx1000_nagruzka_day1 = [[${ntx1000_nagruzka_day0}]];
-        var ntx1000_nagruzka_day2 = [[${ntx1000_nagruzka_day1}]];
-        var ntx1000_nagruzka_day3 = [[${ntx1000_nagruzka_day2}]];
-        var ntx1000_nagruzka_day4 = [[${ntx1000_nagruzka_day3}]];
-        var ntx1000_nagruzka_day5 = [[${ntx1000_nagruzka_day4}]];
-        var ntx1000_nagruzka_day6 = [[${ntx1000_nagruzka_day5}]];
-        var ntx1000_nagruzka_day7 = [[${ntx1000_nagruzka_day6}]];
-        var ntx1000_nagruzka_day8 = [[${ntx1000_nagruzka_day7}]];
-        var ntx1000_nagruzka_day9 = [[${ntx1000_nagruzka_day8}]];
-        var ntx1000_nagruzka_day10 = [[${ntx1000_nagruzka_day9}]];
-        var ntx1000_nagruzka_day11 = [[${ntx1000_nagruzka_day10}]];
-        var ntx1000_nagruzka_day12 = [[${ntx1000_nagruzka_day11}]];
-        var ntx1000_nagruzka_day13 = [[${ntx1000_nagruzka_day12}]];
-        var ntx1000_nagruzka_day14 = [[${ntx1000_nagruzka_day13}]];
-        var ntx1000_nagruzka_day15 = [[${ntx1000_nagruzka_day14}]];
-        var ntx1000_nagruzka_day16 = [[${ntx1000_nagruzka_day15}]];
-        var ntx1000_nagruzka_day17 = [[${ntx1000_nagruzka_day16}]];
-        var ntx1000_nagruzka_day18 = [[${ntx1000_nagruzka_day17}]];
-        var ntx1000_nagruzka_day19 = [[${ntx1000_nagruzka_day18}]];
-        var ntx1000_nagruzka_day20 = [[${ntx1000_nagruzka_day19}]];
-        var ntx1000_nagruzka_day21 = [[${ntx1000_nagruzka_day20}]];
-        var ntx1000_nagruzka_day22 = [[${ntx1000_nagruzka_day21}]];
-        var ntx1000_nagruzka_day23 = [[${ntx1000_nagruzka_day22}]];
-        var ntx1000_nagruzka_day24 = [[${ntx1000_nagruzka_day23}]];
-        var ntx1000_nagruzka_day25 = [[${ntx1000_nagruzka_day24}]];
-        var ntx1000_nagruzka_day26 = [[${ntx1000_nagruzka_day25}]];
-        var ntx1000_nagruzka_day27 = [[${ntx1000_nagruzka_day26}]];
-        var ntx1000_nagruzka_day28 = [[${ntx1000_nagruzka_day27}]];
-        var ntx1000_nagruzka_day29 = [[${ntx1000_nagruzka_day28}]];
-        var ntx1000_nagruzka_day30 = [[${ntx1000_nagruzka_day29}]];
-        var ntx1000_nagruzka_day31 = [[${ntx1000_nagruzka_day30}]];
-    } <!--Переменные для NTX1000-->
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container_days3', {
-        chart: {
-            type: 'column'
-        },
-        colors:colors,
-        title: {
-            text: 'Загрузка оборудования по дням'
-        },
-        xAxis: {
-            title: {
-                text: 'Дни месяца',
-                align: 'high'
-            },
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Работа',
-            data: [ntx1000_rabota_day1, ntx1000_rabota_day2, ntx1000_rabota_day3,ntx1000_rabota_day4,ntx1000_rabota_day5,ntx1000_rabota_day6,ntx1000_rabota_day7,ntx1000_rabota_day8,ntx1000_rabota_day9,ntx1000_rabota_day10,ntx1000_rabota_day11,ntx1000_rabota_day12,ntx1000_rabota_day13,ntx1000_rabota_day14,ntx1000_rabota_day15,ntx1000_rabota_day16,ntx1000_rabota_day17,ntx1000_rabota_day18,ntx1000_rabota_day19,ntx1000_rabota_day20,ntx1000_rabota_day21,ntx1000_rabota_day22,ntx1000_rabota_day23,ntx1000_rabota_day24,ntx1000_rabota_day25,ntx1000_rabota_day26,ntx1000_rabota_day27,ntx1000_rabota_day28,ntx1000_rabota_day29,ntx1000_rabota_day30,ntx1000_rabota_day31]
-        }, {
-            name: 'Под нагрузкой',
-            data: [ntx1000_nagruzka_day1, ntx1000_nagruzka_day2, ntx1000_nagruzka_day3,ntx1000_nagruzka_day4,ntx1000_nagruzka_day5,ntx1000_nagruzka_day6,ntx1000_nagruzka_day7,ntx1000_nagruzka_day8,ntx1000_nagruzka_day9,ntx1000_nagruzka_day10,ntx1000_nagruzka_day11,ntx1000_nagruzka_day12,ntx1000_nagruzka_day13,ntx1000_nagruzka_day14,ntx1000_nagruzka_day15,ntx1000_nagruzka_day16,ntx1000_nagruzka_day17,ntx1000_nagruzka_day18,ntx1000_nagruzka_day19,ntx1000_nagruzka_day20,ntx1000_nagruzka_day21,ntx1000_nagruzka_day22,ntx1000_nagruzka_day23,ntx1000_nagruzka_day24,ntx1000_nagruzka_day25,ntx1000_nagruzka_day26,ntx1000_nagruzka_day27,ntx1000_nagruzka_day28,ntx1000_nagruzka_day29,ntx1000_nagruzka_day30,ntx1000_nagruzka_day31]
-        }, {
-            name: 'Ожидание',
-            data: [ntx1000_pause_day1, ntx1000_pause_day2, ntx1000_pause_day3,ntx1000_pause_day4,ntx1000_pause_day5,ntx1000_pause_day6,ntx1000_pause_day7,ntx1000_pause_day8,ntx1000_pause_day9,ntx1000_pause_day10,ntx1000_pause_day11,ntx1000_pause_day12,ntx1000_pause_day13,ntx1000_pause_day14,ntx1000_pause_day15,ntx1000_pause_day16,ntx1000_pause_day17,ntx1000_pause_day18,ntx1000_pause_day19,ntx1000_pause_day20,ntx1000_pause_day21,ntx1000_pause_day22,ntx1000_pause_day23,ntx1000_pause_day24,ntx1000_pause_day25,ntx1000_pause_day26,ntx1000_pause_day27,ntx1000_pause_day28,ntx1000_pause_day29,ntx1000_pause_day30,ntx1000_pause_day31]
-        }, {
-            name: 'Авария',
-            data: [ntx1000_avar_day1, ntx1000_avar_day2, ntx1000_avar_day3,ntx1000_avar_day4,ntx1000_avar_day5,ntx1000_avar_day6,ntx1000_avar_day7,ntx1000_avar_day8,ntx1000_avar_day9,ntx1000_avar_day10,ntx1000_avar_day11,ntx1000_avar_day12,ntx1000_avar_day13,ntx1000_avar_day14,ntx1000_avar_day15,ntx1000_avar_day16,ntx1000_avar_day17,ntx1000_avar_day18,ntx1000_avar_day19,ntx1000_avar_day20,ntx1000_avar_day21,ntx1000_avar_day22,ntx1000_avar_day23,ntx1000_avar_day24,ntx1000_avar_day25,ntx1000_avar_day26,ntx1000_avar_day27,ntx1000_avar_day28,ntx1000_avar_day29,ntx1000_avar_day30,ntx1000_avar_day31]
-        }, {
-            name: 'Выключен',
-            data: [ntx1000_off_day1, ntx1000_off_day2, ntx1000_off_day3,ntx1000_off_day4,ntx1000_off_day5,ntx1000_off_day6,ntx1000_off_day7,ntx1000_off_day8,ntx1000_off_day9,ntx1000_off_day10,ntx1000_off_day11,ntx1000_off_day12,ntx1000_off_day13,ntx1000_off_day14,ntx1000_off_day15,ntx1000_off_day16,ntx1000_off_day17,ntx1000_off_day18,ntx1000_off_day19,ntx1000_off_day20,ntx1000_off_day21,ntx1000_off_day22,ntx1000_off_day23,ntx1000_off_day24,ntx1000_off_day25,ntx1000_off_day26,ntx1000_off_day27,ntx1000_off_day28,ntx1000_off_day29,ntx1000_off_day30,ntx1000_off_day31]
-        }]
-    });
-
-</script>   <!--NTX1000 js диагрмма загрузки оборудования по дням-->
+    var ntx1000_array_rabota = [[${ntx1000_array_rabota}]];
+    var ntx1000_array_pause = [[${ntx1000_array_pause}]];
+    var ntx1000_array_off = [[${ntx1000_array_off}]];
+    var ntx1000_array_avar = [[${ntx1000_array_avar}]];
+    var ntx1000_array_nagruzka = [[${ntx1000_array_nagruzka}]];
+    var ntx1000_array_programname = [[${ntx1000_array_programname}]];
+</script>   <!--NTX1000 js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container3', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${ntx1000_work}]] ], [ 'Включен', [[${ntx1000_pass}]] ],
-                [ 'Выключен', [[${ntx1000_fail}]] ],  [ 'В аварии', [[${ntx1000_avar}]]],  [ 'Под нагрузкой', [[${ntx1000_nagruzka}]]]   ]
-        }]
-    });
+    var ntx1000_work = [[${ntx1000_work}]];
+    var ntx1000_pass = [[${ntx1000_pass}]];
+    var ntx1000_fail = [[${ntx1000_fail}]];
+    var ntx1000_avar = [[${ntx1000_avar}]];
+    var ntx1000_nagruzka = [[${ntx1000_nagruzka}]];
 </script>   <!--NTX1000 круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_ntx1000.js"></script>
 
-<div style="border: 1px solid #333;">   <!--sk50 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/sk50.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">SK50</figcaption>
-                    <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto_sk50" href="mesto/mesto_sk50" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto_sk50'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_sk50" href="personal/personal_sk50" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_sk50'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--Прогресс html-->
-
-</div> <!--sk50 html-->
 <script th:inline="javascript">
 
-    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
-    {
-        var sk50_rabota_day1 = [[${sk50_rabota_day0}]];
-        var sk50_rabota_day2 = [[${sk50_rabota_day1}]];
-        var sk50_rabota_day3 = [[${sk50_rabota_day2}]];
-        var sk50_rabota_day4 = [[${sk50_rabota_day3}]];
-        var sk50_rabota_day5 = [[${sk50_rabota_day4}]];
-        var sk50_rabota_day6 = [[${sk50_rabota_day5}]];
-        var sk50_rabota_day7 = [[${sk50_rabota_day6}]];
-        var sk50_rabota_day8 = [[${sk50_rabota_day7}]];
-        var sk50_rabota_day9 = [[${sk50_rabota_day8}]];
-        var sk50_rabota_day10 = [[${sk50_rabota_day9}]];
-        var sk50_rabota_day11 = [[${sk50_rabota_day10}]];
-        var sk50_rabota_day12 = [[${sk50_rabota_day11}]];
-        var sk50_rabota_day13 = [[${sk50_rabota_day12}]];
-        var sk50_rabota_day14 = [[${sk50_rabota_day13}]];
-        var sk50_rabota_day15 = [[${sk50_rabota_day14}]];
-        var sk50_rabota_day16 = [[${sk50_rabota_day15}]];
-        var sk50_rabota_day17 = [[${sk50_rabota_day16}]];
-        var sk50_rabota_day18 = [[${sk50_rabota_day17}]];
-        var sk50_rabota_day19 = [[${sk50_rabota_day18}]];
-        var sk50_rabota_day20 = [[${sk50_rabota_day19}]];
-        var sk50_rabota_day21 = [[${sk50_rabota_day20}]];
-        var sk50_rabota_day22 = [[${sk50_rabota_day21}]];
-        var sk50_rabota_day23 = [[${sk50_rabota_day22}]];
-        var sk50_rabota_day24 = [[${sk50_rabota_day23}]];
-        var sk50_rabota_day25 = [[${sk50_rabota_day24}]];
-        var sk50_rabota_day26 = [[${sk50_rabota_day25}]];
-        var sk50_rabota_day27 = [[${sk50_rabota_day26}]];
-        var sk50_rabota_day28 = [[${sk50_rabota_day27}]];
-        var sk50_rabota_day29 = [[${sk50_rabota_day28}]];
-        var sk50_rabota_day30 = [[${sk50_rabota_day29}]];
-        var sk50_rabota_day31 = [[${sk50_rabota_day30}]];
+    var sk50_array_rabota = [[${sk50_array_rabota}]];
+    var sk50_array_pause = [[${sk50_array_pause}]];
+    var sk50_array_off = [[${sk50_array_off}]];
+    var sk50_array_avar = [[${sk50_array_avar}]];
+    var sk50_array_nagruzka = [[${sk50_array_nagruzka}]];
+    var sk50_array_programname = [[${sk50_array_programname}]];
 
-        var sk50_pause_day1 = [[${sk50_pause_day0}]];
-        var sk50_pause_day2 = [[${sk50_pause_day1}]];
-        var sk50_pause_day3 = [[${sk50_pause_day2}]];
-        var sk50_pause_day4 = [[${sk50_pause_day3}]];
-        var sk50_pause_day5 = [[${sk50_pause_day4}]];
-        var sk50_pause_day6 = [[${sk50_pause_day5}]];
-        var sk50_pause_day7 = [[${sk50_pause_day6}]];
-        var sk50_pause_day8 = [[${sk50_pause_day7}]];
-        var sk50_pause_day9 = [[${sk50_pause_day8}]];
-        var sk50_pause_day10 = [[${sk50_pause_day9}]];
-        var sk50_pause_day11 = [[${sk50_pause_day10}]];
-        var sk50_pause_day12 = [[${sk50_pause_day11}]];
-        var sk50_pause_day13 = [[${sk50_pause_day12}]];
-        var sk50_pause_day14 = [[${sk50_pause_day13}]];
-        var sk50_pause_day15 = [[${sk50_pause_day14}]];
-        var sk50_pause_day16 = [[${sk50_pause_day15}]];
-        var sk50_pause_day17 = [[${sk50_pause_day16}]];
-        var sk50_pause_day18 = [[${sk50_pause_day17}]];
-        var sk50_pause_day19 = [[${sk50_pause_day18}]];
-        var sk50_pause_day20 = [[${sk50_pause_day19}]];
-        var sk50_pause_day21 = [[${sk50_pause_day20}]];
-        var sk50_pause_day22 = [[${sk50_pause_day21}]];
-        var sk50_pause_day23 = [[${sk50_pause_day22}]];
-        var sk50_pause_day24 = [[${sk50_pause_day23}]];
-        var sk50_pause_day25 = [[${sk50_pause_day24}]];
-        var sk50_pause_day26 = [[${sk50_pause_day25}]];
-        var sk50_pause_day27 = [[${sk50_pause_day26}]];
-        var sk50_pause_day28 = [[${sk50_pause_day27}]];
-        var sk50_pause_day29 = [[${sk50_pause_day28}]];
-        var sk50_pause_day30 = [[${sk50_pause_day29}]];
-        var sk50_pause_day31 = [[${sk50_pause_day30}]];
-
-        var sk50_off_day1 = [[${sk50_off_day0}]];
-        var sk50_off_day2 = [[${sk50_off_day1}]];
-        var sk50_off_day3 = [[${sk50_off_day2}]];
-        var sk50_off_day4 = [[${sk50_off_day3}]];
-        var sk50_off_day5 = [[${sk50_off_day4}]];
-        var sk50_off_day6 = [[${sk50_off_day5}]];
-        var sk50_off_day7 = [[${sk50_off_day6}]];
-        var sk50_off_day8 = [[${sk50_off_day7}]];
-        var sk50_off_day9 = [[${sk50_off_day8}]];
-        var sk50_off_day10 = [[${sk50_off_day9}]];
-        var sk50_off_day11 = [[${sk50_off_day10}]];
-        var sk50_off_day12 = [[${sk50_off_day11}]];
-        var sk50_off_day13 = [[${sk50_off_day12}]];
-        var sk50_off_day14 = [[${sk50_off_day13}]];
-        var sk50_off_day15 = [[${sk50_off_day14}]];
-        var sk50_off_day16 = [[${sk50_off_day15}]];
-        var sk50_off_day17 = [[${sk50_off_day16}]];
-        var sk50_off_day18 = [[${sk50_off_day17}]];
-        var sk50_off_day19 = [[${sk50_off_day18}]];
-        var sk50_off_day20 = [[${sk50_off_day19}]];
-        var sk50_off_day21 = [[${sk50_off_day20}]];
-        var sk50_off_day22 = [[${sk50_off_day21}]];
-        var sk50_off_day23 = [[${sk50_off_day22}]];
-        var sk50_off_day24 = [[${sk50_off_day23}]];
-        var sk50_off_day25 = [[${sk50_off_day24}]];
-        var sk50_off_day26 = [[${sk50_off_day25}]];
-        var sk50_off_day27 = [[${sk50_off_day26}]];
-        var sk50_off_day28 = [[${sk50_off_day27}]];
-        var sk50_off_day29 = [[${sk50_off_day28}]];
-        var sk50_off_day30 = [[${sk50_off_day29}]];
-        var sk50_off_day31 = [[${sk50_off_day30}]];
-
-        var sk50_avar_day1 = [[${sk50_avar_day0}]];
-        var sk50_avar_day2 = [[${sk50_avar_day1}]];
-        var sk50_avar_day3 = [[${sk50_avar_day2}]];
-        var sk50_avar_day4 = [[${sk50_avar_day3}]];
-        var sk50_avar_day5 = [[${sk50_avar_day4}]];
-        var sk50_avar_day6 = [[${sk50_avar_day5}]];
-        var sk50_avar_day7 = [[${sk50_avar_day6}]];
-        var sk50_avar_day8 = [[${sk50_avar_day7}]];
-        var sk50_avar_day9 = [[${sk50_avar_day8}]];
-        var sk50_avar_day10 = [[${sk50_avar_day9}]];
-        var sk50_avar_day11 = [[${sk50_avar_day10}]];
-        var sk50_avar_day12 = [[${sk50_avar_day11}]];
-        var sk50_avar_day13 = [[${sk50_avar_day12}]];
-        var sk50_avar_day14 = [[${sk50_avar_day13}]];
-        var sk50_avar_day15 = [[${sk50_avar_day14}]];
-        var sk50_avar_day16 = [[${sk50_avar_day15}]];
-        var sk50_avar_day17 = [[${sk50_avar_day16}]];
-        var sk50_avar_day18 = [[${sk50_avar_day17}]];
-        var sk50_avar_day19 = [[${sk50_avar_day18}]];
-        var sk50_avar_day20 = [[${sk50_avar_day19}]];
-        var sk50_avar_day21 = [[${sk50_avar_day20}]];
-        var sk50_avar_day22 = [[${sk50_avar_day21}]];
-        var sk50_avar_day23 = [[${sk50_avar_day22}]];
-        var sk50_avar_day24 = [[${sk50_avar_day23}]];
-        var sk50_avar_day25 = [[${sk50_avar_day24}]];
-        var sk50_avar_day26 = [[${sk50_avar_day25}]];
-        var sk50_avar_day27 = [[${sk50_avar_day26}]];
-        var sk50_avar_day28 = [[${sk50_avar_day27}]];
-        var sk50_avar_day29 = [[${sk50_avar_day28}]];
-        var sk50_avar_day30 = [[${sk50_avar_day29}]];
-        var sk50_avar_day31 = [[${sk50_avar_day30}]];
-
-        var sk50_nagruzka_day1 = [[${sk50_nagruzka_day0}]];
-        var sk50_nagruzka_day2 = [[${sk50_nagruzka_day1}]];
-        var sk50_nagruzka_day3 = [[${sk50_nagruzka_day2}]];
-        var sk50_nagruzka_day4 = [[${sk50_nagruzka_day3}]];
-        var sk50_nagruzka_day5 = [[${sk50_nagruzka_day4}]];
-        var sk50_nagruzka_day6 = [[${sk50_nagruzka_day5}]];
-        var sk50_nagruzka_day7 = [[${sk50_nagruzka_day6}]];
-        var sk50_nagruzka_day8 = [[${sk50_nagruzka_day7}]];
-        var sk50_nagruzka_day9 = [[${sk50_nagruzka_day8}]];
-        var sk50_nagruzka_day10 = [[${sk50_nagruzka_day9}]];
-        var sk50_nagruzka_day11 = [[${sk50_nagruzka_day10}]];
-        var sk50_nagruzka_day12 = [[${sk50_nagruzka_day11}]];
-        var sk50_nagruzka_day13 = [[${sk50_nagruzka_day12}]];
-        var sk50_nagruzka_day14 = [[${sk50_nagruzka_day13}]];
-        var sk50_nagruzka_day15 = [[${sk50_nagruzka_day14}]];
-        var sk50_nagruzka_day16 = [[${sk50_nagruzka_day15}]];
-        var sk50_nagruzka_day17 = [[${sk50_nagruzka_day16}]];
-        var sk50_nagruzka_day18 = [[${sk50_nagruzka_day17}]];
-        var sk50_nagruzka_day19 = [[${sk50_nagruzka_day18}]];
-        var sk50_nagruzka_day20 = [[${sk50_nagruzka_day19}]];
-        var sk50_nagruzka_day21 = [[${sk50_nagruzka_day20}]];
-        var sk50_nagruzka_day22 = [[${sk50_nagruzka_day21}]];
-        var sk50_nagruzka_day23 = [[${sk50_nagruzka_day22}]];
-        var sk50_nagruzka_day24 = [[${sk50_nagruzka_day23}]];
-        var sk50_nagruzka_day25 = [[${sk50_nagruzka_day24}]];
-        var sk50_nagruzka_day26 = [[${sk50_nagruzka_day25}]];
-        var sk50_nagruzka_day27 = [[${sk50_nagruzka_day26}]];
-        var sk50_nagruzka_day28 = [[${sk50_nagruzka_day27}]];
-        var sk50_nagruzka_day29 = [[${sk50_nagruzka_day28}]];
-        var sk50_nagruzka_day30 = [[${sk50_nagruzka_day29}]];
-        var sk50_nagruzka_day31 = [[${sk50_nagruzka_day30}]];
-    } <!--Переменные для sk50-->
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container_days4', {
-        chart: {
-            type: 'column'
-        },
-        colors:colors,
-        title: {
-            text: 'Загрузка оборудования по дням'
-        },
-        xAxis: {
-            title: {
-                text: 'Дни месяца',
-                align: 'high'
-            },
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Работа',
-            data: [sk50_rabota_day1, sk50_rabota_day2, sk50_rabota_day3,sk50_rabota_day4,sk50_rabota_day5,sk50_rabota_day6,sk50_rabota_day7,sk50_rabota_day8,sk50_rabota_day9,sk50_rabota_day10,sk50_rabota_day11,sk50_rabota_day12,sk50_rabota_day13,sk50_rabota_day14,sk50_rabota_day15,sk50_rabota_day16,sk50_rabota_day17,sk50_rabota_day18,sk50_rabota_day19,sk50_rabota_day20,sk50_rabota_day21,sk50_rabota_day22,sk50_rabota_day23,sk50_rabota_day24,sk50_rabota_day25,sk50_rabota_day26,sk50_rabota_day27,sk50_rabota_day28,sk50_rabota_day29,sk50_rabota_day30,sk50_rabota_day31]
-        }, {
-            name: 'Под нагрузкой',
-            data: [sk50_nagruzka_day1, sk50_nagruzka_day2, sk50_nagruzka_day3,sk50_nagruzka_day4,sk50_nagruzka_day5,sk50_nagruzka_day6,sk50_nagruzka_day7,sk50_nagruzka_day8,sk50_nagruzka_day9,sk50_nagruzka_day10,sk50_nagruzka_day11,sk50_nagruzka_day12,sk50_nagruzka_day13,sk50_nagruzka_day14,sk50_nagruzka_day15,sk50_nagruzka_day16,sk50_nagruzka_day17,sk50_nagruzka_day18,sk50_nagruzka_day19,sk50_nagruzka_day20,sk50_nagruzka_day21,sk50_nagruzka_day22,sk50_nagruzka_day23,sk50_nagruzka_day24,sk50_nagruzka_day25,sk50_nagruzka_day26,sk50_nagruzka_day27,sk50_nagruzka_day28,sk50_nagruzka_day29,sk50_nagruzka_day30,sk50_nagruzka_day31]
-        }, {
-            name: 'Ожидание',
-            data: [sk50_pause_day1, sk50_pause_day2, sk50_pause_day3,sk50_pause_day4,sk50_pause_day5,sk50_pause_day6,sk50_pause_day7,sk50_pause_day8,sk50_pause_day9,sk50_pause_day10,sk50_pause_day11,sk50_pause_day12,sk50_pause_day13,sk50_pause_day14,sk50_pause_day15,sk50_pause_day16,sk50_pause_day17,sk50_pause_day18,sk50_pause_day19,sk50_pause_day20,sk50_pause_day21,sk50_pause_day22,sk50_pause_day23,sk50_pause_day24,sk50_pause_day25,sk50_pause_day26,sk50_pause_day27,sk50_pause_day28,sk50_pause_day29,sk50_pause_day30,sk50_pause_day31]
-        }, {
-            name: 'Авария',
-            data: [sk50_avar_day1, sk50_avar_day2, sk50_avar_day3,sk50_avar_day4,sk50_avar_day5,sk50_avar_day6,sk50_avar_day7,sk50_avar_day8,sk50_avar_day9,sk50_avar_day10,sk50_avar_day11,sk50_avar_day12,sk50_avar_day13,sk50_avar_day14,sk50_avar_day15,sk50_avar_day16,sk50_avar_day17,sk50_avar_day18,sk50_avar_day19,sk50_avar_day20,sk50_avar_day21,sk50_avar_day22,sk50_avar_day23,sk50_avar_day24,sk50_avar_day25,sk50_avar_day26,sk50_avar_day27,sk50_avar_day28,sk50_avar_day29,sk50_avar_day30,sk50_avar_day31]
-        }, {
-            name: 'Выключен',
-            data: [sk50_off_day1, sk50_off_day2, sk50_off_day3,sk50_off_day4,sk50_off_day5,sk50_off_day6,sk50_off_day7,sk50_off_day8,sk50_off_day9,sk50_off_day10,sk50_off_day11,sk50_off_day12,sk50_off_day13,sk50_off_day14,sk50_off_day15,sk50_off_day16,sk50_off_day17,sk50_off_day18,sk50_off_day19,sk50_off_day20,sk50_off_day21,sk50_off_day22,sk50_off_day23,sk50_off_day24,sk50_off_day25,sk50_off_day26,sk50_off_day27,sk50_off_day28,sk50_off_day29,sk50_off_day30,sk50_off_day31]
-        }]
-    });
-
-</script>   <!--sk50 js диагрмма загрузки оборудования по дням-->
+</script>   <!--sk50 js линейная диагрмма работы оборудования -->
 <script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container4', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${sk50_work}]] ], [ 'Включен', [[${sk50_pass}]] ],
-                [ 'Выключен', [[${sk50_fail}]] ],  [ 'В аварии', [[${sk50_avar}]]],  [ 'Под нагрузкой', [[${sk50_nagruzka}]]]   ]
-        }]
-    });
+    var sk50_work = [[${sk50_work}]];
+    var sk50_pass = [[${sk50_pass}]];
+    var sk50_fail = [[${sk50_fail}]];
+    var sk50_avar = [[${sk50_avar}]];
+    var sk50_nagruzka = [[${sk50_nagruzka}]];
 </script>   <!--sk50 круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_sk50.js"></script>
 
-<div style="border: 1px solid #333;">   <!--apec html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/apec.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">APEC</figcaption>
-                    <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto_apec" href="mesto/mesto_apec" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto_apec'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_apec" href="personal/personal_apec" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_apec'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--Прогресс html-->
-
-</div> <!--apec html-->
 <script th:inline="javascript">
 
-    var colors = ['#38e817','#5c7ed0', '#ffea32', '#e81e1d', '#000000'];
-    {
-        var apec_rabota_day1 = [[${apec_rabota_day0}]];
-        var apec_rabota_day2 = [[${apec_rabota_day1}]];
-        var apec_rabota_day3 = [[${apec_rabota_day2}]];
-        var apec_rabota_day4 = [[${apec_rabota_day3}]];
-        var apec_rabota_day5 = [[${apec_rabota_day4}]];
-        var apec_rabota_day6 = [[${apec_rabota_day5}]];
-        var apec_rabota_day7 = [[${apec_rabota_day6}]];
-        var apec_rabota_day8 = [[${apec_rabota_day7}]];
-        var apec_rabota_day9 = [[${apec_rabota_day8}]];
-        var apec_rabota_day10 = [[${apec_rabota_day9}]];
-        var apec_rabota_day11 = [[${apec_rabota_day10}]];
-        var apec_rabota_day12 = [[${apec_rabota_day11}]];
-        var apec_rabota_day13 = [[${apec_rabota_day12}]];
-        var apec_rabota_day14 = [[${apec_rabota_day13}]];
-        var apec_rabota_day15 = [[${apec_rabota_day14}]];
-        var apec_rabota_day16 = [[${apec_rabota_day15}]];
-        var apec_rabota_day17 = [[${apec_rabota_day16}]];
-        var apec_rabota_day18 = [[${apec_rabota_day17}]];
-        var apec_rabota_day19 = [[${apec_rabota_day18}]];
-        var apec_rabota_day20 = [[${apec_rabota_day19}]];
-        var apec_rabota_day21 = [[${apec_rabota_day20}]];
-        var apec_rabota_day22 = [[${apec_rabota_day21}]];
-        var apec_rabota_day23 = [[${apec_rabota_day22}]];
-        var apec_rabota_day24 = [[${apec_rabota_day23}]];
-        var apec_rabota_day25 = [[${apec_rabota_day24}]];
-        var apec_rabota_day26 = [[${apec_rabota_day25}]];
-        var apec_rabota_day27 = [[${apec_rabota_day26}]];
-        var apec_rabota_day28 = [[${apec_rabota_day27}]];
-        var apec_rabota_day29 = [[${apec_rabota_day28}]];
-        var apec_rabota_day30 = [[${apec_rabota_day29}]];
-        var apec_rabota_day31 = [[${apec_rabota_day30}]];
+    var apec_array_rabota = [[${apec_array_rabota}]];
+    var apec_array_pause = [[${apec_array_pause}]];
+    var apec_array_off = [[${apec_array_off}]];
+    var apec_array_avar = [[${apec_array_avar}]];
+    var apec_array_ruchnoi = [[${apec_array_ruchnoi}]];
+    var apec_array_programname = [[${apec_array_programname}]];
 
-        var apec_pause_day1 = [[${apec_pause_day0}]];
-        var apec_pause_day2 = [[${apec_pause_day1}]];
-        var apec_pause_day3 = [[${apec_pause_day2}]];
-        var apec_pause_day4 = [[${apec_pause_day3}]];
-        var apec_pause_day5 = [[${apec_pause_day4}]];
-        var apec_pause_day6 = [[${apec_pause_day5}]];
-        var apec_pause_day7 = [[${apec_pause_day6}]];
-        var apec_pause_day8 = [[${apec_pause_day7}]];
-        var apec_pause_day9 = [[${apec_pause_day8}]];
-        var apec_pause_day10 = [[${apec_pause_day9}]];
-        var apec_pause_day11 = [[${apec_pause_day10}]];
-        var apec_pause_day12 = [[${apec_pause_day11}]];
-        var apec_pause_day13 = [[${apec_pause_day12}]];
-        var apec_pause_day14 = [[${apec_pause_day13}]];
-        var apec_pause_day15 = [[${apec_pause_day14}]];
-        var apec_pause_day16 = [[${apec_pause_day15}]];
-        var apec_pause_day17 = [[${apec_pause_day16}]];
-        var apec_pause_day18 = [[${apec_pause_day17}]];
-        var apec_pause_day19 = [[${apec_pause_day18}]];
-        var apec_pause_day20 = [[${apec_pause_day19}]];
-        var apec_pause_day21 = [[${apec_pause_day20}]];
-        var apec_pause_day22 = [[${apec_pause_day21}]];
-        var apec_pause_day23 = [[${apec_pause_day22}]];
-        var apec_pause_day24 = [[${apec_pause_day23}]];
-        var apec_pause_day25 = [[${apec_pause_day24}]];
-        var apec_pause_day26 = [[${apec_pause_day25}]];
-        var apec_pause_day27 = [[${apec_pause_day26}]];
-        var apec_pause_day28 = [[${apec_pause_day27}]];
-        var apec_pause_day29 = [[${apec_pause_day28}]];
-        var apec_pause_day30 = [[${apec_pause_day29}]];
-        var apec_pause_day31 = [[${apec_pause_day30}]];
-
-        var apec_off_day1 = [[${apec_off_day0}]];
-        var apec_off_day2 = [[${apec_off_day1}]];
-        var apec_off_day3 = [[${apec_off_day2}]];
-        var apec_off_day4 = [[${apec_off_day3}]];
-        var apec_off_day5 = [[${apec_off_day4}]];
-        var apec_off_day6 = [[${apec_off_day5}]];
-        var apec_off_day7 = [[${apec_off_day6}]];
-        var apec_off_day8 = [[${apec_off_day7}]];
-        var apec_off_day9 = [[${apec_off_day8}]];
-        var apec_off_day10 = [[${apec_off_day9}]];
-        var apec_off_day11 = [[${apec_off_day10}]];
-        var apec_off_day12 = [[${apec_off_day11}]];
-        var apec_off_day13 = [[${apec_off_day12}]];
-        var apec_off_day14 = [[${apec_off_day13}]];
-        var apec_off_day15 = [[${apec_off_day14}]];
-        var apec_off_day16 = [[${apec_off_day15}]];
-        var apec_off_day17 = [[${apec_off_day16}]];
-        var apec_off_day18 = [[${apec_off_day17}]];
-        var apec_off_day19 = [[${apec_off_day18}]];
-        var apec_off_day20 = [[${apec_off_day19}]];
-        var apec_off_day21 = [[${apec_off_day20}]];
-        var apec_off_day22 = [[${apec_off_day21}]];
-        var apec_off_day23 = [[${apec_off_day22}]];
-        var apec_off_day24 = [[${apec_off_day23}]];
-        var apec_off_day25 = [[${apec_off_day24}]];
-        var apec_off_day26 = [[${apec_off_day25}]];
-        var apec_off_day27 = [[${apec_off_day26}]];
-        var apec_off_day28 = [[${apec_off_day27}]];
-        var apec_off_day29 = [[${apec_off_day28}]];
-        var apec_off_day30 = [[${apec_off_day29}]];
-        var apec_off_day31 = [[${apec_off_day30}]];
-
-        var apec_avar_day1 = [[${apec_avar_day0}]];
-        var apec_avar_day2 = [[${apec_avar_day1}]];
-        var apec_avar_day3 = [[${apec_avar_day2}]];
-        var apec_avar_day4 = [[${apec_avar_day3}]];
-        var apec_avar_day5 = [[${apec_avar_day4}]];
-        var apec_avar_day6 = [[${apec_avar_day5}]];
-        var apec_avar_day7 = [[${apec_avar_day6}]];
-        var apec_avar_day8 = [[${apec_avar_day7}]];
-        var apec_avar_day9 = [[${apec_avar_day8}]];
-        var apec_avar_day10 = [[${apec_avar_day9}]];
-        var apec_avar_day11 = [[${apec_avar_day10}]];
-        var apec_avar_day12 = [[${apec_avar_day11}]];
-        var apec_avar_day13 = [[${apec_avar_day12}]];
-        var apec_avar_day14 = [[${apec_avar_day13}]];
-        var apec_avar_day15 = [[${apec_avar_day14}]];
-        var apec_avar_day16 = [[${apec_avar_day15}]];
-        var apec_avar_day17 = [[${apec_avar_day16}]];
-        var apec_avar_day18 = [[${apec_avar_day17}]];
-        var apec_avar_day19 = [[${apec_avar_day18}]];
-        var apec_avar_day20 = [[${apec_avar_day19}]];
-        var apec_avar_day21 = [[${apec_avar_day20}]];
-        var apec_avar_day22 = [[${apec_avar_day21}]];
-        var apec_avar_day23 = [[${apec_avar_day22}]];
-        var apec_avar_day24 = [[${apec_avar_day23}]];
-        var apec_avar_day25 = [[${apec_avar_day24}]];
-        var apec_avar_day26 = [[${apec_avar_day25}]];
-        var apec_avar_day27 = [[${apec_avar_day26}]];
-        var apec_avar_day28 = [[${apec_avar_day27}]];
-        var apec_avar_day29 = [[${apec_avar_day28}]];
-        var apec_avar_day30 = [[${apec_avar_day29}]];
-        var apec_avar_day31 = [[${apec_avar_day30}]];
-
-        var apec_ruchnoi_day1 = [[${apec_ruchnoi_day0}]];
-        var apec_ruchnoi_day2 = [[${apec_ruchnoi_day1}]];
-        var apec_ruchnoi_day3 = [[${apec_ruchnoi_day2}]];
-        var apec_ruchnoi_day4 = [[${apec_ruchnoi_day3}]];
-        var apec_ruchnoi_day5 = [[${apec_ruchnoi_day4}]];
-        var apec_ruchnoi_day6 = [[${apec_ruchnoi_day5}]];
-        var apec_ruchnoi_day7 = [[${apec_ruchnoi_day6}]];
-        var apec_ruchnoi_day8 = [[${apec_ruchnoi_day7}]];
-        var apec_ruchnoi_day9 = [[${apec_ruchnoi_day8}]];
-        var apec_ruchnoi_day10 = [[${apec_ruchnoi_day9}]];
-        var apec_ruchnoi_day11 = [[${apec_ruchnoi_day10}]];
-        var apec_ruchnoi_day12 = [[${apec_ruchnoi_day11}]];
-        var apec_ruchnoi_day13 = [[${apec_ruchnoi_day12}]];
-        var apec_ruchnoi_day14 = [[${apec_ruchnoi_day13}]];
-        var apec_ruchnoi_day15 = [[${apec_ruchnoi_day14}]];
-        var apec_ruchnoi_day16 = [[${apec_ruchnoi_day15}]];
-        var apec_ruchnoi_day17 = [[${apec_ruchnoi_day16}]];
-        var apec_ruchnoi_day18 = [[${apec_ruchnoi_day17}]];
-        var apec_ruchnoi_day19 = [[${apec_ruchnoi_day18}]];
-        var apec_ruchnoi_day20 = [[${apec_ruchnoi_day19}]];
-        var apec_ruchnoi_day21 = [[${apec_ruchnoi_day20}]];
-        var apec_ruchnoi_day22 = [[${apec_ruchnoi_day21}]];
-        var apec_ruchnoi_day23 = [[${apec_ruchnoi_day22}]];
-        var apec_ruchnoi_day24 = [[${apec_ruchnoi_day23}]];
-        var apec_ruchnoi_day25 = [[${apec_ruchnoi_day24}]];
-        var apec_ruchnoi_day26 = [[${apec_ruchnoi_day25}]];
-        var apec_ruchnoi_day27 = [[${apec_ruchnoi_day26}]];
-        var apec_ruchnoi_day28 = [[${apec_ruchnoi_day27}]];
-        var apec_ruchnoi_day29 = [[${apec_ruchnoi_day28}]];
-        var apec_ruchnoi_day30 = [[${apec_ruchnoi_day29}]];
-        var apec_ruchnoi_day31 = [[${apec_ruchnoi_day30}]];
-    } <!--Переменные для apec-->
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container_days5', {
-        chart: {
-            type: 'column'
-        },
-        colors:colors,
-        title: {
-            text: 'Загрузка оборудования по дням'
-        },
-        xAxis: {
-            title: {
-                text: 'Дни месяца',
-                align: 'high'
-            },
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Работа',
-            data: [apec_rabota_day1, apec_rabota_day2, apec_rabota_day3,apec_rabota_day4,apec_rabota_day5,apec_rabota_day6,apec_rabota_day7,apec_rabota_day8,apec_rabota_day9,apec_rabota_day10,apec_rabota_day11,apec_rabota_day12,apec_rabota_day13,apec_rabota_day14,apec_rabota_day15,apec_rabota_day16,apec_rabota_day17,apec_rabota_day18,apec_rabota_day19,apec_rabota_day20,apec_rabota_day21,apec_rabota_day22,apec_rabota_day23,apec_rabota_day24,apec_rabota_day25,apec_rabota_day26,apec_rabota_day27,apec_rabota_day28,apec_rabota_day29,apec_rabota_day30,apec_rabota_day31]
-        }, {
-            name: 'Ручной',
-            data: [apec_ruchnoi_day1, apec_ruchnoi_day2, apec_ruchnoi_day3,apec_ruchnoi_day4,apec_ruchnoi_day5,apec_ruchnoi_day6,apec_ruchnoi_day7,apec_ruchnoi_day8,apec_ruchnoi_day9,apec_ruchnoi_day10,apec_ruchnoi_day11,apec_ruchnoi_day12,apec_ruchnoi_day13,apec_ruchnoi_day14,apec_ruchnoi_day15,apec_ruchnoi_day16,apec_ruchnoi_day17,apec_ruchnoi_day18,apec_ruchnoi_day19,apec_ruchnoi_day20,apec_ruchnoi_day21,apec_ruchnoi_day22,apec_ruchnoi_day23,apec_ruchnoi_day24,apec_ruchnoi_day25,apec_ruchnoi_day26,apec_ruchnoi_day27,apec_ruchnoi_day28,apec_ruchnoi_day29,apec_ruchnoi_day30,apec_ruchnoi_day31]
-        }, {
-            name: 'Ожидание',
-            data: [apec_pause_day1, apec_pause_day2, apec_pause_day3,apec_pause_day4,apec_pause_day5,apec_pause_day6,apec_pause_day7,apec_pause_day8,apec_pause_day9,apec_pause_day10,apec_pause_day11,apec_pause_day12,apec_pause_day13,apec_pause_day14,apec_pause_day15,apec_pause_day16,apec_pause_day17,apec_pause_day18,apec_pause_day19,apec_pause_day20,apec_pause_day21,apec_pause_day22,apec_pause_day23,apec_pause_day24,apec_pause_day25,apec_pause_day26,apec_pause_day27,apec_pause_day28,apec_pause_day29,apec_pause_day30,apec_pause_day31]
-        }, {
-            name: 'Авария',
-            data: [apec_avar_day1, apec_avar_day2, apec_avar_day3,apec_avar_day4,apec_avar_day5,apec_avar_day6,apec_avar_day7,apec_avar_day8,apec_avar_day9,apec_avar_day10,apec_avar_day11,apec_avar_day12,apec_avar_day13,apec_avar_day14,apec_avar_day15,apec_avar_day16,apec_avar_day17,apec_avar_day18,apec_avar_day19,apec_avar_day20,apec_avar_day21,apec_avar_day22,apec_avar_day23,apec_avar_day24,apec_avar_day25,apec_avar_day26,apec_avar_day27,apec_avar_day28,apec_avar_day29,apec_avar_day30,apec_avar_day31]
-        }, {
-            name: 'Выключен',
-            data: [apec_off_day1, apec_off_day2, apec_off_day3,apec_off_day4,apec_off_day5,apec_off_day6,apec_off_day7,apec_off_day8,apec_off_day9,apec_off_day10,apec_off_day11,apec_off_day12,apec_off_day13,apec_off_day14,apec_off_day15,apec_off_day16,apec_off_day17,apec_off_day18,apec_off_day19,apec_off_day20,apec_off_day21,apec_off_day22,apec_off_day23,apec_off_day24,apec_off_day25,apec_off_day26,apec_off_day27,apec_off_day28,apec_off_day29,apec_off_day30,apec_off_day31]
-        }]
-    });
-
-</script>   <!--apec js диагрмма загрузки оборудования по дням-->
+</script>   <!--apec js линейная диагрмма работы оборудования -->
 <script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container5', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${apec_work}]] ], [ 'Включен', [[${apec_pass}]] ],
-                [ 'Выключен', [[${apec_fail}]] ],  [ 'В аварии', [[${apec_avar}]]],  [ 'Ручной', [[${apec_ruchnoi}]]]   ]
-        }]
-    });
+    var apec_work = [[${apec_work}]];
+    var apec_pass = [[${apec_pass}]];
+    var apec_fail = [[${apec_fail}]];
+    var apec_avar = [[${apec_avar}]];
+    var apec_ruchnoi = [[${apec_ruchnoi}]];
 </script>   <!--apec круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_apec.js"></script>
 
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #3</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_dmg_dmu50_3" href="mesto/mesto_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_dmg_dmu50_3'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_dmg_dmu50_3" href="personal/personal_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_dmg_dmu50_3'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-</div> <!-- DMU50 #3 html-->
 <script th:inline="javascript">
-
-    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
-    {
-        var dmg_dmu50_3_rabota_day1 = [[${dmg_dmu50_3_rabota_day0}]];
-        var dmg_dmu50_3_rabota_day2 = [[${dmg_dmu50_3_rabota_day1}]];
-        var dmg_dmu50_3_rabota_day3 = [[${dmg_dmu50_3_rabota_day2}]];
-        var dmg_dmu50_3_rabota_day4 = [[${dmg_dmu50_3_rabota_day3}]];
-        var dmg_dmu50_3_rabota_day5 = [[${dmg_dmu50_3_rabota_day4}]];
-        var dmg_dmu50_3_rabota_day6 = [[${dmg_dmu50_3_rabota_day5}]];
-        var dmg_dmu50_3_rabota_day7 = [[${dmg_dmu50_3_rabota_day6}]];
-        var dmg_dmu50_3_rabota_day8 = [[${dmg_dmu50_3_rabota_day7}]];
-        var dmg_dmu50_3_rabota_day9 = [[${dmg_dmu50_3_rabota_day8}]];
-        var dmg_dmu50_3_rabota_day10 = [[${dmg_dmu50_3_rabota_day9}]];
-        var dmg_dmu50_3_rabota_day11 = [[${dmg_dmu50_3_rabota_day10}]];
-        var dmg_dmu50_3_rabota_day12 = [[${dmg_dmu50_3_rabota_day11}]];
-        var dmg_dmu50_3_rabota_day13 = [[${dmg_dmu50_3_rabota_day12}]];
-        var dmg_dmu50_3_rabota_day14 = [[${dmg_dmu50_3_rabota_day13}]];
-        var dmg_dmu50_3_rabota_day15 = [[${dmg_dmu50_3_rabota_day14}]];
-        var dmg_dmu50_3_rabota_day16 = [[${dmg_dmu50_3_rabota_day15}]];
-        var dmg_dmu50_3_rabota_day17 = [[${dmg_dmu50_3_rabota_day16}]];
-        var dmg_dmu50_3_rabota_day18 = [[${dmg_dmu50_3_rabota_day17}]];
-        var dmg_dmu50_3_rabota_day19 = [[${dmg_dmu50_3_rabota_day18}]];
-        var dmg_dmu50_3_rabota_day20 = [[${dmg_dmu50_3_rabota_day19}]];
-        var dmg_dmu50_3_rabota_day21 = [[${dmg_dmu50_3_rabota_day20}]];
-        var dmg_dmu50_3_rabota_day22 = [[${dmg_dmu50_3_rabota_day21}]];
-        var dmg_dmu50_3_rabota_day23 = [[${dmg_dmu50_3_rabota_day22}]];
-        var dmg_dmu50_3_rabota_day24 = [[${dmg_dmu50_3_rabota_day23}]];
-        var dmg_dmu50_3_rabota_day25 = [[${dmg_dmu50_3_rabota_day24}]];
-        var dmg_dmu50_3_rabota_day26 = [[${dmg_dmu50_3_rabota_day25}]];
-        var dmg_dmu50_3_rabota_day27 = [[${dmg_dmu50_3_rabota_day26}]];
-        var dmg_dmu50_3_rabota_day28 = [[${dmg_dmu50_3_rabota_day27}]];
-        var dmg_dmu50_3_rabota_day29 = [[${dmg_dmu50_3_rabota_day28}]];
-        var dmg_dmu50_3_rabota_day30 = [[${dmg_dmu50_3_rabota_day29}]];
-        var dmg_dmu50_3_rabota_day31 = [[${dmg_dmu50_3_rabota_day30}]];
-
-        var dmg_dmu50_3_pause_day1 = [[${dmg_dmu50_3_pause_day0}]];
-        var dmg_dmu50_3_pause_day2 = [[${dmg_dmu50_3_pause_day1}]];
-        var dmg_dmu50_3_pause_day3 = [[${dmg_dmu50_3_pause_day2}]];
-        var dmg_dmu50_3_pause_day4 = [[${dmg_dmu50_3_pause_day3}]];
-        var dmg_dmu50_3_pause_day5 = [[${dmg_dmu50_3_pause_day4}]];
-        var dmg_dmu50_3_pause_day6 = [[${dmg_dmu50_3_pause_day5}]];
-        var dmg_dmu50_3_pause_day7 = [[${dmg_dmu50_3_pause_day6}]];
-        var dmg_dmu50_3_pause_day8 = [[${dmg_dmu50_3_pause_day7}]];
-        var dmg_dmu50_3_pause_day9 = [[${dmg_dmu50_3_pause_day8}]];
-        var dmg_dmu50_3_pause_day10 = [[${dmg_dmu50_3_pause_day9}]];
-        var dmg_dmu50_3_pause_day11 = [[${dmg_dmu50_3_pause_day10}]];
-        var dmg_dmu50_3_pause_day12 = [[${dmg_dmu50_3_pause_day11}]];
-        var dmg_dmu50_3_pause_day13 = [[${dmg_dmu50_3_pause_day12}]];
-        var dmg_dmu50_3_pause_day14 = [[${dmg_dmu50_3_pause_day13}]];
-        var dmg_dmu50_3_pause_day15 = [[${dmg_dmu50_3_pause_day14}]];
-        var dmg_dmu50_3_pause_day16 = [[${dmg_dmu50_3_pause_day15}]];
-        var dmg_dmu50_3_pause_day17 = [[${dmg_dmu50_3_pause_day16}]];
-        var dmg_dmu50_3_pause_day18 = [[${dmg_dmu50_3_pause_day17}]];
-        var dmg_dmu50_3_pause_day19 = [[${dmg_dmu50_3_pause_day18}]];
-        var dmg_dmu50_3_pause_day20 = [[${dmg_dmu50_3_pause_day19}]];
-        var dmg_dmu50_3_pause_day21 = [[${dmg_dmu50_3_pause_day20}]];
-        var dmg_dmu50_3_pause_day22 = [[${dmg_dmu50_3_pause_day21}]];
-        var dmg_dmu50_3_pause_day23 = [[${dmg_dmu50_3_pause_day22}]];
-        var dmg_dmu50_3_pause_day24 = [[${dmg_dmu50_3_pause_day23}]];
-        var dmg_dmu50_3_pause_day25 = [[${dmg_dmu50_3_pause_day24}]];
-        var dmg_dmu50_3_pause_day26 = [[${dmg_dmu50_3_pause_day25}]];
-        var dmg_dmu50_3_pause_day27 = [[${dmg_dmu50_3_pause_day26}]];
-        var dmg_dmu50_3_pause_day28 = [[${dmg_dmu50_3_pause_day27}]];
-        var dmg_dmu50_3_pause_day29 = [[${dmg_dmu50_3_pause_day28}]];
-        var dmg_dmu50_3_pause_day30 = [[${dmg_dmu50_3_pause_day29}]];
-        var dmg_dmu50_3_pause_day31 = [[${dmg_dmu50_3_pause_day30}]];
-
-        var dmg_dmu50_3_off_day1 = [[${dmg_dmu50_3_off_day0}]];
-        var dmg_dmu50_3_off_day2 = [[${dmg_dmu50_3_off_day1}]];
-        var dmg_dmu50_3_off_day3 = [[${dmg_dmu50_3_off_day2}]];
-        var dmg_dmu50_3_off_day4 = [[${dmg_dmu50_3_off_day3}]];
-        var dmg_dmu50_3_off_day5 = [[${dmg_dmu50_3_off_day4}]];
-        var dmg_dmu50_3_off_day6 = [[${dmg_dmu50_3_off_day5}]];
-        var dmg_dmu50_3_off_day7 = [[${dmg_dmu50_3_off_day6}]];
-        var dmg_dmu50_3_off_day8 = [[${dmg_dmu50_3_off_day7}]];
-        var dmg_dmu50_3_off_day9 = [[${dmg_dmu50_3_off_day8}]];
-        var dmg_dmu50_3_off_day10 = [[${dmg_dmu50_3_off_day9}]];
-        var dmg_dmu50_3_off_day11 = [[${dmg_dmu50_3_off_day10}]];
-        var dmg_dmu50_3_off_day12 = [[${dmg_dmu50_3_off_day11}]];
-        var dmg_dmu50_3_off_day13 = [[${dmg_dmu50_3_off_day12}]];
-        var dmg_dmu50_3_off_day14 = [[${dmg_dmu50_3_off_day13}]];
-        var dmg_dmu50_3_off_day15 = [[${dmg_dmu50_3_off_day14}]];
-        var dmg_dmu50_3_off_day16 = [[${dmg_dmu50_3_off_day15}]];
-        var dmg_dmu50_3_off_day17 = [[${dmg_dmu50_3_off_day16}]];
-        var dmg_dmu50_3_off_day18 = [[${dmg_dmu50_3_off_day17}]];
-        var dmg_dmu50_3_off_day19 = [[${dmg_dmu50_3_off_day18}]];
-        var dmg_dmu50_3_off_day20 = [[${dmg_dmu50_3_off_day19}]];
-        var dmg_dmu50_3_off_day21 = [[${dmg_dmu50_3_off_day20}]];
-        var dmg_dmu50_3_off_day22 = [[${dmg_dmu50_3_off_day21}]];
-        var dmg_dmu50_3_off_day23 = [[${dmg_dmu50_3_off_day22}]];
-        var dmg_dmu50_3_off_day24 = [[${dmg_dmu50_3_off_day23}]];
-        var dmg_dmu50_3_off_day25 = [[${dmg_dmu50_3_off_day24}]];
-        var dmg_dmu50_3_off_day26 = [[${dmg_dmu50_3_off_day25}]];
-        var dmg_dmu50_3_off_day27 = [[${dmg_dmu50_3_off_day26}]];
-        var dmg_dmu50_3_off_day28 = [[${dmg_dmu50_3_off_day27}]];
-        var dmg_dmu50_3_off_day29 = [[${dmg_dmu50_3_off_day28}]];
-        var dmg_dmu50_3_off_day30 = [[${dmg_dmu50_3_off_day29}]];
-        var dmg_dmu50_3_off_day31 = [[${dmg_dmu50_3_off_day30}]];
-
-        var dmg_dmu50_3_avar_day1 = [[${dmg_dmu50_3_avar_day0}]];
-        var dmg_dmu50_3_avar_day2 = [[${dmg_dmu50_3_avar_day1}]];
-        var dmg_dmu50_3_avar_day3 = [[${dmg_dmu50_3_avar_day2}]];
-        var dmg_dmu50_3_avar_day4 = [[${dmg_dmu50_3_avar_day3}]];
-        var dmg_dmu50_3_avar_day5 = [[${dmg_dmu50_3_avar_day4}]];
-        var dmg_dmu50_3_avar_day6 = [[${dmg_dmu50_3_avar_day5}]];
-        var dmg_dmu50_3_avar_day7 = [[${dmg_dmu50_3_avar_day6}]];
-        var dmg_dmu50_3_avar_day8 = [[${dmg_dmu50_3_avar_day7}]];
-        var dmg_dmu50_3_avar_day9 = [[${dmg_dmu50_3_avar_day8}]];
-        var dmg_dmu50_3_avar_day10 = [[${dmg_dmu50_3_avar_day9}]];
-        var dmg_dmu50_3_avar_day11 = [[${dmg_dmu50_3_avar_day10}]];
-        var dmg_dmu50_3_avar_day12 = [[${dmg_dmu50_3_avar_day11}]];
-        var dmg_dmu50_3_avar_day13 = [[${dmg_dmu50_3_avar_day12}]];
-        var dmg_dmu50_3_avar_day14 = [[${dmg_dmu50_3_avar_day13}]];
-        var dmg_dmu50_3_avar_day15 = [[${dmg_dmu50_3_avar_day14}]];
-        var dmg_dmu50_3_avar_day16 = [[${dmg_dmu50_3_avar_day15}]];
-        var dmg_dmu50_3_avar_day17 = [[${dmg_dmu50_3_avar_day16}]];
-        var dmg_dmu50_3_avar_day18 = [[${dmg_dmu50_3_avar_day17}]];
-        var dmg_dmu50_3_avar_day19 = [[${dmg_dmu50_3_avar_day18}]];
-        var dmg_dmu50_3_avar_day20 = [[${dmg_dmu50_3_avar_day19}]];
-        var dmg_dmu50_3_avar_day21 = [[${dmg_dmu50_3_avar_day20}]];
-        var dmg_dmu50_3_avar_day22 = [[${dmg_dmu50_3_avar_day21}]];
-        var dmg_dmu50_3_avar_day23 = [[${dmg_dmu50_3_avar_day22}]];
-        var dmg_dmu50_3_avar_day24 = [[${dmg_dmu50_3_avar_day23}]];
-        var dmg_dmu50_3_avar_day25 = [[${dmg_dmu50_3_avar_day24}]];
-        var dmg_dmu50_3_avar_day26 = [[${dmg_dmu50_3_avar_day25}]];
-        var dmg_dmu50_3_avar_day27 = [[${dmg_dmu50_3_avar_day26}]];
-        var dmg_dmu50_3_avar_day28 = [[${dmg_dmu50_3_avar_day27}]];
-        var dmg_dmu50_3_avar_day29 = [[${dmg_dmu50_3_avar_day28}]];
-        var dmg_dmu50_3_avar_day30 = [[${dmg_dmu50_3_avar_day29}]];
-        var dmg_dmu50_3_avar_day31 = [[${dmg_dmu50_3_avar_day30}]];
-
-        var dmg_dmu50_3_nagruzka_day1 = [[${dmg_dmu50_3_nagruzka_day0}]];
-        var dmg_dmu50_3_nagruzka_day2 = [[${dmg_dmu50_3_nagruzka_day1}]];
-        var dmg_dmu50_3_nagruzka_day3 = [[${dmg_dmu50_3_nagruzka_day2}]];
-        var dmg_dmu50_3_nagruzka_day4 = [[${dmg_dmu50_3_nagruzka_day3}]];
-        var dmg_dmu50_3_nagruzka_day5 = [[${dmg_dmu50_3_nagruzka_day4}]];
-        var dmg_dmu50_3_nagruzka_day6 = [[${dmg_dmu50_3_nagruzka_day5}]];
-        var dmg_dmu50_3_nagruzka_day7 = [[${dmg_dmu50_3_nagruzka_day6}]];
-        var dmg_dmu50_3_nagruzka_day8 = [[${dmg_dmu50_3_nagruzka_day7}]];
-        var dmg_dmu50_3_nagruzka_day9 = [[${dmg_dmu50_3_nagruzka_day8}]];
-        var dmg_dmu50_3_nagruzka_day10 = [[${dmg_dmu50_3_nagruzka_day9}]];
-        var dmg_dmu50_3_nagruzka_day11 = [[${dmg_dmu50_3_nagruzka_day10}]];
-        var dmg_dmu50_3_nagruzka_day12 = [[${dmg_dmu50_3_nagruzka_day11}]];
-        var dmg_dmu50_3_nagruzka_day13 = [[${dmg_dmu50_3_nagruzka_day12}]];
-        var dmg_dmu50_3_nagruzka_day14 = [[${dmg_dmu50_3_nagruzka_day13}]];
-        var dmg_dmu50_3_nagruzka_day15 = [[${dmg_dmu50_3_nagruzka_day14}]];
-        var dmg_dmu50_3_nagruzka_day16 = [[${dmg_dmu50_3_nagruzka_day15}]];
-        var dmg_dmu50_3_nagruzka_day17 = [[${dmg_dmu50_3_nagruzka_day16}]];
-        var dmg_dmu50_3_nagruzka_day18 = [[${dmg_dmu50_3_nagruzka_day17}]];
-        var dmg_dmu50_3_nagruzka_day19 = [[${dmg_dmu50_3_nagruzka_day18}]];
-        var dmg_dmu50_3_nagruzka_day20 = [[${dmg_dmu50_3_nagruzka_day19}]];
-        var dmg_dmu50_3_nagruzka_day21 = [[${dmg_dmu50_3_nagruzka_day20}]];
-        var dmg_dmu50_3_nagruzka_day22 = [[${dmg_dmu50_3_nagruzka_day21}]];
-        var dmg_dmu50_3_nagruzka_day23 = [[${dmg_dmu50_3_nagruzka_day22}]];
-        var dmg_dmu50_3_nagruzka_day24 = [[${dmg_dmu50_3_nagruzka_day23}]];
-        var dmg_dmu50_3_nagruzka_day25 = [[${dmg_dmu50_3_nagruzka_day24}]];
-        var dmg_dmu50_3_nagruzka_day26 = [[${dmg_dmu50_3_nagruzka_day25}]];
-        var dmg_dmu50_3_nagruzka_day27 = [[${dmg_dmu50_3_nagruzka_day26}]];
-        var dmg_dmu50_3_nagruzka_day28 = [[${dmg_dmu50_3_nagruzka_day27}]];
-        var dmg_dmu50_3_nagruzka_day29 = [[${dmg_dmu50_3_nagruzka_day28}]];
-        var dmg_dmu50_3_nagruzka_day30 = [[${dmg_dmu50_3_nagruzka_day29}]];
-        var dmg_dmu50_3_nagruzka_day31 = [[${dmg_dmu50_3_nagruzka_day30}]];
-    } <!--Переменные для dmg_dmu50_3-->
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container_days6', {
-        chart: {
-            type: 'column'
-        },
-        colors:colors,
-        title: {
-            text: 'Загрузка оборудования по дням'
-        },
-        xAxis: {
-            title: {
-                text: 'Дни месяца',
-                align: 'high'
-            },
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Работа',
-            data: [dmg_dmu50_3_rabota_day1, dmg_dmu50_3_rabota_day2, dmg_dmu50_3_rabota_day3,dmg_dmu50_3_rabota_day4,dmg_dmu50_3_rabota_day5,dmg_dmu50_3_rabota_day6,dmg_dmu50_3_rabota_day7,dmg_dmu50_3_rabota_day8,dmg_dmu50_3_rabota_day9,dmg_dmu50_3_rabota_day10,dmg_dmu50_3_rabota_day11,dmg_dmu50_3_rabota_day12,dmg_dmu50_3_rabota_day13,dmg_dmu50_3_rabota_day14,dmg_dmu50_3_rabota_day15,dmg_dmu50_3_rabota_day16,dmg_dmu50_3_rabota_day17,dmg_dmu50_3_rabota_day18,dmg_dmu50_3_rabota_day19,dmg_dmu50_3_rabota_day20,dmg_dmu50_3_rabota_day21,dmg_dmu50_3_rabota_day22,dmg_dmu50_3_rabota_day23,dmg_dmu50_3_rabota_day24,dmg_dmu50_3_rabota_day25,dmg_dmu50_3_rabota_day26,dmg_dmu50_3_rabota_day27,dmg_dmu50_3_rabota_day28,dmg_dmu50_3_rabota_day29,dmg_dmu50_3_rabota_day30,dmg_dmu50_3_rabota_day31]
-        }, {
-            name: 'Под нагрузкой',
-            data: [dmg_dmu50_3_nagruzka_day1, dmg_dmu50_3_nagruzka_day2, dmg_dmu50_3_nagruzka_day3,dmg_dmu50_3_nagruzka_day4,dmg_dmu50_3_nagruzka_day5,dmg_dmu50_3_nagruzka_day6,dmg_dmu50_3_nagruzka_day7,dmg_dmu50_3_nagruzka_day8,dmg_dmu50_3_nagruzka_day9,dmg_dmu50_3_nagruzka_day10,dmg_dmu50_3_nagruzka_day11,dmg_dmu50_3_nagruzka_day12,dmg_dmu50_3_nagruzka_day13,dmg_dmu50_3_nagruzka_day14,dmg_dmu50_3_nagruzka_day15,dmg_dmu50_3_nagruzka_day16,dmg_dmu50_3_nagruzka_day17,dmg_dmu50_3_nagruzka_day18,dmg_dmu50_3_nagruzka_day19,dmg_dmu50_3_nagruzka_day20,dmg_dmu50_3_nagruzka_day21,dmg_dmu50_3_nagruzka_day22,dmg_dmu50_3_nagruzka_day23,dmg_dmu50_3_nagruzka_day24,dmg_dmu50_3_nagruzka_day25,dmg_dmu50_3_nagruzka_day26,dmg_dmu50_3_nagruzka_day27,dmg_dmu50_3_nagruzka_day28,dmg_dmu50_3_nagruzka_day29,dmg_dmu50_3_nagruzka_day30,dmg_dmu50_3_nagruzka_day31]
-        }, {
-            name: 'Ожидание',
-            data: [dmg_dmu50_3_pause_day1, dmg_dmu50_3_pause_day2, dmg_dmu50_3_pause_day3,dmg_dmu50_3_pause_day4,dmg_dmu50_3_pause_day5,dmg_dmu50_3_pause_day6,dmg_dmu50_3_pause_day7,dmg_dmu50_3_pause_day8,dmg_dmu50_3_pause_day9,dmg_dmu50_3_pause_day10,dmg_dmu50_3_pause_day11,dmg_dmu50_3_pause_day12,dmg_dmu50_3_pause_day13,dmg_dmu50_3_pause_day14,dmg_dmu50_3_pause_day15,dmg_dmu50_3_pause_day16,dmg_dmu50_3_pause_day17,dmg_dmu50_3_pause_day18,dmg_dmu50_3_pause_day19,dmg_dmu50_3_pause_day20,dmg_dmu50_3_pause_day21,dmg_dmu50_3_pause_day22,dmg_dmu50_3_pause_day23,dmg_dmu50_3_pause_day24,dmg_dmu50_3_pause_day25,dmg_dmu50_3_pause_day26,dmg_dmu50_3_pause_day27,dmg_dmu50_3_pause_day28,dmg_dmu50_3_pause_day29,dmg_dmu50_3_pause_day30,dmg_dmu50_3_pause_day31]
-        }, {
-            name: 'Авария',
-            data: [dmg_dmu50_3_avar_day1, dmg_dmu50_3_avar_day2, dmg_dmu50_3_avar_day3,dmg_dmu50_3_avar_day4,dmg_dmu50_3_avar_day5,dmg_dmu50_3_avar_day6,dmg_dmu50_3_avar_day7,dmg_dmu50_3_avar_day8,dmg_dmu50_3_avar_day9,dmg_dmu50_3_avar_day10,dmg_dmu50_3_avar_day11,dmg_dmu50_3_avar_day12,dmg_dmu50_3_avar_day13,dmg_dmu50_3_avar_day14,dmg_dmu50_3_avar_day15,dmg_dmu50_3_avar_day16,dmg_dmu50_3_avar_day17,dmg_dmu50_3_avar_day18,dmg_dmu50_3_avar_day19,dmg_dmu50_3_avar_day20,dmg_dmu50_3_avar_day21,dmg_dmu50_3_avar_day22,dmg_dmu50_3_avar_day23,dmg_dmu50_3_avar_day24,dmg_dmu50_3_avar_day25,dmg_dmu50_3_avar_day26,dmg_dmu50_3_avar_day27,dmg_dmu50_3_avar_day28,dmg_dmu50_3_avar_day29,dmg_dmu50_3_avar_day30,dmg_dmu50_3_avar_day31]
-        }, {
-            name: 'Выключен',
-            data: [dmg_dmu50_3_off_day1, dmg_dmu50_3_off_day2, dmg_dmu50_3_off_day3,dmg_dmu50_3_off_day4,dmg_dmu50_3_off_day5,dmg_dmu50_3_off_day6,dmg_dmu50_3_off_day7,dmg_dmu50_3_off_day8,dmg_dmu50_3_off_day9,dmg_dmu50_3_off_day10,dmg_dmu50_3_off_day11,dmg_dmu50_3_off_day12,dmg_dmu50_3_off_day13,dmg_dmu50_3_off_day14,dmg_dmu50_3_off_day15,dmg_dmu50_3_off_day16,dmg_dmu50_3_off_day17,dmg_dmu50_3_off_day18,dmg_dmu50_3_off_day19,dmg_dmu50_3_off_day20,dmg_dmu50_3_off_day21,dmg_dmu50_3_off_day22,dmg_dmu50_3_off_day23,dmg_dmu50_3_off_day24,dmg_dmu50_3_off_day25,dmg_dmu50_3_off_day26,dmg_dmu50_3_off_day27,dmg_dmu50_3_off_day28,dmg_dmu50_3_off_day29,dmg_dmu50_3_off_day30,dmg_dmu50_3_off_day31]
-        }]
-    });
-
-</script>   <!--dmu50_3 js диагрмма загрузки оборудования по дням-->
+    var dmg_dmu50_3_array_rabota = [[${dmg_dmu50_3_array_rabota}]];
+    var dmg_dmu50_3_array_pause = [[${dmg_dmu50_3_array_pause}]];
+    var dmg_dmu50_3_array_off = [[${dmg_dmu50_3_array_off}]];
+    var dmg_dmu50_3_array_programname = [[${dmg_dmu50_3_array_programname}]];
+    var dmg_dmu50_3_array_nagruzka = [[${dmg_dmu50_3_array_nagruzka}]];
+    var dmg_dmu50_3_array_avar = [[${dmg_dmu50_3_array_avar}]];
+</script>   <!--dmu50_3 js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container6', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', [[${dmg_dmu50_3_work}]] ], [ 'Включен', [[${dmg_dmu50_3_pass}]] ],
-                [ 'Выключен', [[${dmg_dmu50_3_fail}]] ],  [ 'В аварии', [[${dmg_dmu50_3_avar}]]],  [ 'Под нагрузкой', [[${dmg_dmu50_3_nagruzka}]]]   ]
-        }]
-    });
-</script>   <!--dmu50_3 круговая диагрмма загрузки оборудования-->
+    var dmg_dmu50_3_work = [[${work_dmg_dmu50_3}]];
+    var dmg_dmu50_3_pass = [[${pass_dmg_dmu50_3}]];
+    var dmg_dmu50_3_fail = [[${fail_dmg_dmu50_3}]];
+    var dmg_dmu50_3_nagruzka = [[${nagruzka_dmg_dmu50_3}]];
+    var dmg_dmu50_3_avar = [[${avar_dmg_dmu50_3}]];
+</script>   <!--dmu50_3 js круговая диагрмма загрузки оборудования-->
+<script src="/js/stanki/data_dmg_dmu50_3.js"></script>
 
 <script th:inline="javascript">
     $('.icon_personal_uf5220').hover(
-        function(){
-            $('.label_personal_uf5220').css('color','#000000');
-            $('.label_personal_uf5220').css('margin-top','70px');
+        function () {
+            $('.label_personal_uf5220').css('color', '#000000');
+            $('.label_personal_uf5220').css('margin-top', '70px');
         },
-        function(){
-            $('.label_personal_uf5220').css('color','#756e6e');
-            $('.label_personal_uf5220').css('margin-top','65px');
+        function () {
+            $('.label_personal_uf5220').css('color', '#756e6e');
+            $('.label_personal_uf5220').css('margin-top', '65px');
         }
     );
     $('.icon_mesto_uf5220').hover(
-        function(){
-            $('.label_mesto_uf5220').css('color','#000000');
-            $('.label_mesto_uf5220').css('margin-top','70px');
+        function () {
+            $('.label_mesto_uf5220').css('color', '#000000');
+            $('.label_mesto_uf5220').css('margin-top', '70px');
         },
-        function(){
-            $('.label_mesto_uf5220').css('color','#756e6e');
-            $('.label_mesto_uf5220').css('margin-top','65px');
+        function () {
+            $('.label_mesto_uf5220').css('color', '#756e6e');
+            $('.label_mesto_uf5220').css('margin-top', '65px');
         }
     );
 
     $('.icon_personal_progress').hover(
-        function(){
-            $('.label_personal_progress').css('color','#000000');
-            $('.label_personal_progress').css('margin-top','70px');
+        function () {
+            $('.label_personal_progress').css('color', '#000000');
+            $('.label_personal_progress').css('margin-top', '70px');
         },
-        function(){
-            $('.label_personal_progress').css('color','#756e6e');
-            $('.label_personal_progress').css('margin-top','65px');
+        function () {
+            $('.label_personal_progress').css('color', '#756e6e');
+            $('.label_personal_progress').css('margin-top', '65px');
         }
     );
     $('.icon_mesto_progress').hover(
-        function(){
-            $('.label_mesto_progress').css('color','#000000');
-            $('.label_mesto_progress').css('margin-top','70px');
+        function () {
+            $('.label_mesto_progress').css('color', '#000000');
+            $('.label_mesto_progress').css('margin-top', '70px');
         },
-        function(){
-            $('.label_mesto_progress').css('color','#756e6e');
-            $('.label_mesto_progress').css('margin-top','65px');
+        function () {
+            $('.label_mesto_progress').css('color', '#756e6e');
+            $('.label_mesto_progress').css('margin-top', '65px');
         }
     );
 
     $('.icon_personal_ntx1000').hover(
-        function(){
-            $('.label_personal_ntx1000').css('color','#000000');
-            $('.label_personal_ntx1000').css('margin-top','70px');
+        function () {
+            $('.label_personal_ntx1000').css('color', '#000000');
+            $('.label_personal_ntx1000').css('margin-top', '70px');
         },
-        function(){
-            $('.label_personal_ntx1000').css('color','#756e6e');
-            $('.label_personal_ntx1000').css('margin-top','65px');
+        function () {
+            $('.label_personal_ntx1000').css('color', '#756e6e');
+            $('.label_personal_ntx1000').css('margin-top', '65px');
         }
     );
     $('.icon_mesto_ntx1000').hover(
-        function(){
-            $('.label_mesto_ntx1000').css('color','#000000');
-            $('.label_mesto_ntx1000').css('margin-top','70px');
+        function () {
+            $('.label_mesto_ntx1000').css('color', '#000000');
+            $('.label_mesto_ntx1000').css('margin-top', '70px');
         },
-        function(){
-            $('.label_mesto_ntx1000').css('color','#756e6e');
-            $('.label_mesto_ntx1000').css('margin-top','65px');
+        function () {
+            $('.label_mesto_ntx1000').css('color', '#756e6e');
+            $('.label_mesto_ntx1000').css('margin-top', '65px');
         }
     );
 
     $('.icon_personal_sk50').hover(
-        function(){
-            $('.label_personal_sk50').css('color','#000000');
-            $('.label_personal_sk50').css('margin-top','70px');
+        function () {
+            $('.label_personal_sk50').css('color', '#000000');
+            $('.label_personal_sk50').css('margin-top', '70px');
         },
-        function(){
-            $('.label_personal_sk50').css('color','#756e6e');
-            $('.label_personal_sk50').css('margin-top','65px');
+        function () {
+            $('.label_personal_sk50').css('color', '#756e6e');
+            $('.label_personal_sk50').css('margin-top', '65px');
         }
     );
     $('.icon_mesto_sk50').hover(
-        function(){
-            $('.label_mesto_sk50').css('color','#000000');
-            $('.label_mesto_sk50').css('margin-top','70px');
+        function () {
+            $('.label_mesto_sk50').css('color', '#000000');
+            $('.label_mesto_sk50').css('margin-top', '70px');
         },
-        function(){
-            $('.label_mesto_sk50').css('color','#756e6e');
-            $('.label_mesto_sk50').css('margin-top','65px');
+        function () {
+            $('.label_mesto_sk50').css('color', '#756e6e');
+            $('.label_mesto_sk50').css('margin-top', '65px');
         }
     );
 
     $('.icon_personal_apec').hover(
-        function(){
-            $('.label_personal_apec').css('color','#000000');
-            $('.label_personal_apec').css('margin-top','70px');
+        function () {
+            $('.label_personal_apec').css('color', '#000000');
+            $('.label_personal_apec').css('margin-top', '70px');
         },
-        function(){
-            $('.label_personal_apec').css('color','#756e6e');
-            $('.label_personal_apec').css('margin-top','65px');
+        function () {
+            $('.label_personal_apec').css('color', '#756e6e');
+            $('.label_personal_apec').css('margin-top', '65px');
         }
     );
     $('.icon_mesto_apec').hover(
-        function(){
-            $('.label_mesto_apec').css('color','#000000');
-            $('.label_mesto_apec').css('margin-top','70px');
+        function () {
+            $('.label_mesto_apec').css('color', '#000000');
+            $('.label_mesto_apec').css('margin-top', '70px');
         },
-        function(){
-            $('.label_mesto_apec').css('color','#756e6e');
-            $('.label_mesto_apec').css('margin-top','65px');
+        function () {
+            $('.label_mesto_apec').css('color', '#756e6e');
+            $('.label_mesto_apec').css('margin-top', '65px');
         }
     );
 
@@ -2604,13 +1295,6 @@
             $('.label_mesto_dmg_dmu50_3').css('margin-top','65px');
         }
     );
-
 </script> <!--Кнопки Персонал и Место-->
-
 </body>
 </html>
-
-
-
-
-
