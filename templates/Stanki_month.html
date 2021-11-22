@@ -4,9 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Станки</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
-    <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
-    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
-    <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/menu_buttons.css"/>
 
     <!-- Optional theme -->
 
@@ -148,7 +148,7 @@
 
     <style>
 
-        .icon_mesto_uf5220{
+        .icon_mesto{
 
             width: 60px;
             height: 60px;
@@ -157,189 +157,43 @@
             margin-top: 10px;
             margin-left: 30px;
         }
-        .icon_mesto_uf5220:hover {
+        .icon_mesto:hover {
             -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
         }
-        .icon_personal_uf5220{
+
+        .icon_mesto:hover > div {
+            color: #000000;
+            margin-top: 70px;
+        }
+
+
+        .icon_personal{
             background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
             background-size: 60px 60px;
             margin-top: 10px;
             margin-left: 30px;
         }
-        .icon_personal_uf5220:hover {
+        .icon_personal:hover {
             -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
         }
-        .label_mesto_uf5220{
+
+        .icon_personal:hover > div {
+            color: #000000;
+            margin-top: 70px;
+        }
+
+        .label_mesto{
             color: #756e6e;
             margin-top: 65px;
             margin-left: 8px;
         }
-        .label_personal_uf5220{
+
+        .label_personal{
             color: #756e6e;
             margin-top: 65px;
             margin-left: -5px;
         }
 
-        .icon_mesto_progress{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_progress:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_progress{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_progress:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_progress{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_progress{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-        .icon_mesto_ntx1000{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_ntx1000:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_ntx1000{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_ntx1000:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_ntx1000{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_ntx1000{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-        .icon_mesto_sk50{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_sk50:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_sk50{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_sk50:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_sk50{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_sk50{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-
-        .icon_mesto_apec{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_apec:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_apec{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_apec:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_apec{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_apec{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-        .icon_mesto_dmg_dmu50_3{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_dmg_dmu50_3:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_dmg_dmu50_3{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_dmg_dmu50_3:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_dmg_dmu50_3{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_dmg_dmu50_3{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
 
     </style> <!--Кнопки Персонал и Местоположение-->
 
@@ -618,8 +472,8 @@
                     <img src="images/UVF_5220.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">УФ5220</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_uf5220" href="mesto/mesto_uf5220" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto_uf5220'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_uf5220" href="personal/personal_uf5220" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_uf5220'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_uf5220" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_uf5220" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -651,8 +505,8 @@
                     <img src="images/progress.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Прогресс</figcaption>
                     <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto_progress" href="mesto/mesto_progress" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto_progress'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_progress" href="personal/personal_progress" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_progress'>Персонал</div></a>
+                        <a  style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_progress" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_progress" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -683,8 +537,8 @@
                     <img src="images/ntx1000.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">NTX1000</figcaption>
                     <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto_ntx1000" href="mesto/mesto_ntx1000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto_ntx1000'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_ntx1000" href="personal/personal_ntx1000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_ntx1000'>Персонал</div></a>
+                        <a  style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_ntx1000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_ntx1000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -718,8 +572,8 @@
                     <img src="images/sk50.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">SK50</figcaption>
                     <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto_sk50" href="mesto/mesto_sk50" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto_sk50'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_sk50" href="personal/personal_sk50" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_sk50'>Персонал</div></a>
+                        <a  style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_sk50" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_sk50" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -753,8 +607,8 @@
                     <img src="images/apec.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">APEC</figcaption>
                     <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto_apec" href="mesto/mesto_apec" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto_apec'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_apec" href="personal/personal_apec" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_apec'>Персонал</div></a>
+                        <a  style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_apec" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_apec" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -788,8 +642,8 @@
                     <img src="images/dmg_dmu50.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #3</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_dmg_dmu50_3" href="mesto/mesto_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto_dmg_dmu50_3'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_dmg_dmu50_3" href="personal/personal_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_dmg_dmu50_3'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -814,139 +668,6 @@
 </script>   <!--Переменные для круговой диаграммы dmu50_3-->
 <script src="/js/month/stanki/data_dmg_dmu50_3_month.js"></script>
 
-<script th:inline="javascript">
-    $('.icon_personal_uf5220').hover(
-        function(){
-            $('.label_personal_uf5220').css('color','#000000');
-            $('.label_personal_uf5220').css('margin-top','70px');
-        },
-        function(){
-            $('.label_personal_uf5220').css('color','#756e6e');
-            $('.label_personal_uf5220').css('margin-top','65px');
-        }
-    );
-    $('.icon_mesto_uf5220').hover(
-        function(){
-            $('.label_mesto_uf5220').css('color','#000000');
-            $('.label_mesto_uf5220').css('margin-top','70px');
-        },
-        function(){
-            $('.label_mesto_uf5220').css('color','#756e6e');
-            $('.label_mesto_uf5220').css('margin-top','65px');
-        }
-    );
-
-    $('.icon_personal_progress').hover(
-        function(){
-            $('.label_personal_progress').css('color','#000000');
-            $('.label_personal_progress').css('margin-top','70px');
-        },
-        function(){
-            $('.label_personal_progress').css('color','#756e6e');
-            $('.label_personal_progress').css('margin-top','65px');
-        }
-    );
-    $('.icon_mesto_progress').hover(
-        function(){
-            $('.label_mesto_progress').css('color','#000000');
-            $('.label_mesto_progress').css('margin-top','70px');
-        },
-        function(){
-            $('.label_mesto_progress').css('color','#756e6e');
-            $('.label_mesto_progress').css('margin-top','65px');
-        }
-    );
-
-    $('.icon_personal_ntx1000').hover(
-        function(){
-            $('.label_personal_ntx1000').css('color','#000000');
-            $('.label_personal_ntx1000').css('margin-top','70px');
-        },
-        function(){
-            $('.label_personal_ntx1000').css('color','#756e6e');
-            $('.label_personal_ntx1000').css('margin-top','65px');
-        }
-    );
-    $('.icon_mesto_ntx1000').hover(
-        function(){
-            $('.label_mesto_ntx1000').css('color','#000000');
-            $('.label_mesto_ntx1000').css('margin-top','70px');
-        },
-        function(){
-            $('.label_mesto_ntx1000').css('color','#756e6e');
-            $('.label_mesto_ntx1000').css('margin-top','65px');
-        }
-    );
-
-    $('.icon_personal_sk50').hover(
-        function(){
-            $('.label_personal_sk50').css('color','#000000');
-            $('.label_personal_sk50').css('margin-top','70px');
-        },
-        function(){
-            $('.label_personal_sk50').css('color','#756e6e');
-            $('.label_personal_sk50').css('margin-top','65px');
-        }
-    );
-    $('.icon_mesto_sk50').hover(
-        function(){
-            $('.label_mesto_sk50').css('color','#000000');
-            $('.label_mesto_sk50').css('margin-top','70px');
-        },
-        function(){
-            $('.label_mesto_sk50').css('color','#756e6e');
-            $('.label_mesto_sk50').css('margin-top','65px');
-        }
-    );
-
-    $('.icon_personal_apec').hover(
-        function(){
-            $('.label_personal_apec').css('color','#000000');
-            $('.label_personal_apec').css('margin-top','70px');
-        },
-        function(){
-            $('.label_personal_apec').css('color','#756e6e');
-            $('.label_personal_apec').css('margin-top','65px');
-        }
-    );
-    $('.icon_mesto_apec').hover(
-        function(){
-            $('.label_mesto_apec').css('color','#000000');
-            $('.label_mesto_apec').css('margin-top','70px');
-        },
-        function(){
-            $('.label_mesto_apec').css('color','#756e6e');
-            $('.label_mesto_apec').css('margin-top','65px');
-        }
-    );
-
-    $('.icon_personal_dmg_dmu50_3').hover(
-        function(){
-            $('.label_personal_dmg_dmu50_3').css('color','#000000');
-            $('.label_personal_dmg_dmu50_3').css('margin-top','70px');
-        },
-        function(){
-            $('.label_personal_dmg_dmu50_3').css('color','#756e6e');
-            $('.label_personal_dmg_dmu50_3').css('margin-top','65px');
-        }
-    );
-    $('.icon_mesto_dmg_dmu50_3').hover(
-        function(){
-            $('.label_mesto_dmg_dmu50_3').css('color','#000000');
-            $('.label_mesto_dmg_dmu50_3').css('margin-top','70px');
-        },
-        function(){
-            $('.label_mesto_dmg_dmu50_3').css('color','#756e6e');
-            $('.label_mesto_dmg_dmu50_3').css('margin-top','65px');
-        }
-    );
-
-</script> <!--Кнопки Персонал и Место-->
-
 </body>
 </html>
-
-
-
-
 
