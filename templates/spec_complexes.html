@@ -15,7 +15,7 @@
 
     <style>
 
-        .icon_mesto_press {
+        .icon_mesto{
 
             width: 60px;
             height: 60px;
@@ -24,70 +24,43 @@
             margin-top: 10px;
             margin-left: 30px;
         }
-
-        .icon_mesto_press:hover {
+        .icon_mesto:hover {
             -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
         }
 
-        .icon_personal_press {
+        .icon_mesto:hover > div {
+            color: #000000;
+            margin-top: 70px;
+        }
+
+
+        .icon_personal{
             background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
             background-size: 60px 60px;
             margin-top: 10px;
             margin-left: 30px;
         }
-
-        .icon_personal_press:hover {
+        .icon_personal:hover {
             -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
         }
 
-        .label_mesto_press {
+        .icon_personal:hover > div {
+            color: #000000;
+            margin-top: 70px;
+        }
+
+        .label_mesto{
             color: #756e6e;
             margin-top: 65px;
             margin-left: 8px;
         }
 
-        .label_personal_press {
+        .label_personal{
             color: #756e6e;
             margin-top: 65px;
             margin-left: -5px;
         }
 
-        .icon_mesto_epp {
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-
-        .icon_mesto_epp:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-
-        .icon_personal_epp {
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-
-        .icon_personal_epp:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-
-        .label_mesto_epp {
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-
-        .label_personal_epp {
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
 
     </style> <!--Кнопки Персонал и Местоположение-->
     <style>
@@ -309,8 +282,8 @@
                     <img src="images/press.jpg" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Пресс ЧПУ для ступиц</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_press" href="mesto/mesto_press" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto_press'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_press" href="personal/personal_press" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_press'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_press" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_press" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -428,14 +401,14 @@
                     <img src="images/epp.png" class="stanok_img"/>
                     <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ЭПП</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_epp" href="mesto/mesto_epp"
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_epp"
                            onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;">
-                            <div class='label_mesto_epp'>Место</div>
+                            <div class='label_mesto'>Место</div>
                         </a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_epp"
+                        <a style="text-decoration: none; float: left" class="icon_personal"
                            href="personal/personal_epp"
                            onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div class='label_personal_epp'>Персонал</div>
+                            <div class='label_personal'>Персонал</div>
                         </a>
                     </div>
                 </div>
@@ -466,52 +439,6 @@
     var data_temperatura = JSON.parse([[${epp_temperatura}]]);
 </script>   <!--ЭПП js Ток и Температура-->
 <script src="/js/spec_complexes/data_epp.js"></script>
-
-<script th:inline="javascript">
-
-    $('.icon_personal_press').hover(
-        function () {
-            $('.label_personal_press').css('color', '#000000');
-            $('.label_personal_press').css('margin-top', '70px');
-        },
-        function () {
-            $('.label_personal_press').css('color', '#756e6e');
-            $('.label_personal_press').css('margin-top', '65px');
-        }
-    );
-    $('.icon_mesto_press').hover(
-        function () {
-            $('.label_mesto_press').css('color', '#000000');
-            $('.label_mesto_press').css('margin-top', '70px');
-        },
-        function () {
-            $('.label_mesto_press').css('color', '#756e6e');
-            $('.label_mesto_press').css('margin-top', '65px');
-        }
-    );
-
-    $('.icon_personal_epp').hover(
-        function () {
-            $('.label_personal_epp').css('color', '#000000');
-            $('.label_personal_epp').css('margin-top', '70px');
-        },
-        function () {
-            $('.label_personal_epp').css('color', '#756e6e');
-            $('.label_personal_epp').css('margin-top', '65px');
-        }
-    );
-    $('.icon_mesto_epp').hover(
-        function () {
-            $('.label_mesto_epp').css('color', '#000000');
-            $('.label_mesto_epp').css('margin-top', '70px');
-        },
-        function () {
-            $('.label_mesto_epp').css('color', '#756e6e');
-            $('.label_mesto_epp').css('margin-top', '65px');
-        }
-    );
-
-</script> <!--Кнопки Персонал и Место-->
 
 </body>
 </html>

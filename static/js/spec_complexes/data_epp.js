@@ -23,7 +23,7 @@ Highcharts.setOptions({
     }
 });
 
-var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'];
+var colors = ['#207210', '#38e817', '#ffea32', '#000000', '#e81e1d'];
 
 Highcharts.chart('container_work_epp', {
     chart: {
@@ -46,7 +46,7 @@ Highcharts.chart('container_work_epp', {
         title: {
             text: ''
         },
-        categories: ['Работа', 'Ожидание', 'Выключен', 'В аварии', 'Нагрузка'],
+        categories: ['Нагрузка', 'Работа', 'Ожидание', 'Выключен', 'В аварии'],
         reversed: true
     },
     credits: {
