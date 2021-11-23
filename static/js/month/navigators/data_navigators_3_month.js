@@ -89,7 +89,7 @@ Highcharts.chart('container_days_4', {
     }]
 });
 
-var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210',];
 
 Highcharts.setOptions({
     lang: {
