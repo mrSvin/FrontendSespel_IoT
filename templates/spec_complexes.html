@@ -165,8 +165,8 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="js/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="https://code.highcharts.com/modules/xrange.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="js/xrange.js"></script>
 
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap-3.3.0.min.js"></script>
@@ -336,6 +336,7 @@
 <script th:inline="javascript">
     var data_davlenie = JSON.parse([[${davlenie}]]);
     var data_zad_davlenie = JSON.parse([[${zad_davlenie}]]);
+    const timezone = new Date().getTimezoneOffset()
     // var test = data_davlenie.replaceAll('\'',  '');
     // console.log(test);
 
@@ -462,6 +463,7 @@
     var data_tok = JSON.parse([[${epp_tok}]]);
     var data_temperatura = JSON.parse([[${epp_temperatura}]]);
 
+    // const timezone = new Date().getTimezoneOffset()
 
     Highcharts.setOptions({
         time: {
