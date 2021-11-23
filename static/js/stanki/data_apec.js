@@ -22,7 +22,7 @@ Highcharts.setOptions({
 });
 
 <!--apec линейная диагрмма загрузки оборудования-->
-var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+var colors = ['#5c7ed0','#38e817', '#ffea32', '#000000', '#e81e1d'];
 Highcharts.chart('container_work5', {
     chart: {
         plotBackgroundColor: null,
