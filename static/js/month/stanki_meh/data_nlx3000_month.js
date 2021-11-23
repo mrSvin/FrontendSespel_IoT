@@ -23,7 +23,7 @@ Highcharts.setOptions({
     }
 });
 
-Highcharts.chart('container_days3', {
+Highcharts.chart('container_days4', {
     chart: {
         type: 'column'
     },
@@ -63,29 +63,29 @@ Highcharts.chart('container_days3', {
     },
     series: [{
         name: 'Работа',
-        data: [ntx1000_2_rabota_day[0], ntx1000_2_rabota_day[1], ntx1000_2_rabota_day[2],ntx1000_2_rabota_day[3],ntx1000_2_rabota_day[4],ntx1000_2_rabota_day[5],ntx1000_2_rabota_day[6],ntx1000_2_rabota_day[7],ntx1000_2_rabota_day[8],ntx1000_2_rabota_day[9],ntx1000_2_rabota_day[10],ntx1000_2_rabota_day[11],
-            ntx1000_2_rabota_day[12],ntx1000_2_rabota_day[13],ntx1000_2_rabota_day[14],ntx1000_2_rabota_day[15],ntx1000_2_rabota_day[16],ntx1000_2_rabota_day[17],ntx1000_2_rabota_day[18],ntx1000_2_rabota_day[19],ntx1000_2_rabota_day[20],ntx1000_2_rabota_day[21],ntx1000_2_rabota_day[22],ntx1000_2_rabota_day[23],
-            ntx1000_2_rabota_day[24],ntx1000_2_rabota_day[25],ntx1000_2_rabota_day[26],ntx1000_2_rabota_day[27],ntx1000_2_rabota_day[28],ntx1000_2_rabota_day[29],ntx1000_2_rabota_day[30]]
+        data: [nlx3000_rabota_day[0], nlx3000_rabota_day[1], nlx3000_rabota_day[2],nlx3000_rabota_day[3],nlx3000_rabota_day[4],nlx3000_rabota_day[5],nlx3000_rabota_day[6],nlx3000_rabota_day[7],nlx3000_rabota_day[8],nlx3000_rabota_day[9],nlx3000_rabota_day[10],nlx3000_rabota_day[11],
+            nlx3000_rabota_day[12],nlx3000_rabota_day[13],nlx3000_rabota_day[14],nlx3000_rabota_day[15],nlx3000_rabota_day[16],nlx3000_rabota_day[17],nlx3000_rabota_day[18],nlx3000_rabota_day[19],nlx3000_rabota_day[20],nlx3000_rabota_day[21],nlx3000_rabota_day[22],nlx3000_rabota_day[23],
+            nlx3000_rabota_day[24],nlx3000_rabota_day[25],nlx3000_rabota_day[26],nlx3000_rabota_day[27],nlx3000_rabota_day[28],nlx3000_rabota_day[29],nlx3000_rabota_day[30]]
     }, {
         name: 'Ожидание',
-        data: [ntx1000_2_pause_day[0], ntx1000_2_pause_day[1], ntx1000_2_pause_day[2],ntx1000_2_pause_day[3],ntx1000_2_pause_day[4],ntx1000_2_pause_day[5],ntx1000_2_pause_day[6],ntx1000_2_pause_day[7],ntx1000_2_pause_day[8],ntx1000_2_pause_day[9],ntx1000_2_pause_day[10],ntx1000_2_pause_day[11],
-            ntx1000_2_pause_day[12],ntx1000_2_pause_day[13],ntx1000_2_pause_day[14],ntx1000_2_pause_day[15],ntx1000_2_pause_day[16],ntx1000_2_pause_day[17],ntx1000_2_pause_day[18],ntx1000_2_pause_day[19],ntx1000_2_pause_day[20],ntx1000_2_pause_day[21],ntx1000_2_pause_day[22],ntx1000_2_pause_day[23],
-            ntx1000_2_pause_day[24],ntx1000_2_pause_day[25],ntx1000_2_pause_day[26],ntx1000_2_pause_day[27],ntx1000_2_pause_day[28],ntx1000_2_pause_day[29],ntx1000_2_pause_day[30]]
+        data: [nlx3000_pause_day[0], nlx3000_pause_day[1], nlx3000_pause_day[2],nlx3000_pause_day[3],nlx3000_pause_day[4],nlx3000_pause_day[5],nlx3000_pause_day[6],nlx3000_pause_day[7],nlx3000_pause_day[8],nlx3000_pause_day[9],nlx3000_pause_day[10],nlx3000_pause_day[11],
+            nlx3000_pause_day[12],nlx3000_pause_day[13],nlx3000_pause_day[14],nlx3000_pause_day[15],nlx3000_pause_day[16],nlx3000_pause_day[17],nlx3000_pause_day[18],nlx3000_pause_day[19],nlx3000_pause_day[20],nlx3000_pause_day[21],nlx3000_pause_day[22],nlx3000_pause_day[23],
+            nlx3000_pause_day[24],nlx3000_pause_day[25],nlx3000_pause_day[26],nlx3000_pause_day[27],nlx3000_pause_day[28],nlx3000_pause_day[29],nlx3000_pause_day[30]]
     }, {
         name: 'Выключен',
-        data: [ntx1000_2_off_day[0], ntx1000_2_off_day[1], ntx1000_2_off_day[2],ntx1000_2_off_day[3],ntx1000_2_off_day[4],ntx1000_2_off_day[5],ntx1000_2_off_day[6],ntx1000_2_off_day[7],ntx1000_2_off_day[8],ntx1000_2_off_day[9],ntx1000_2_off_day[10],ntx1000_2_off_day[11],
-            ntx1000_2_off_day[12],ntx1000_2_off_day[13],ntx1000_2_off_day[14],ntx1000_2_off_day[15],ntx1000_2_off_day[16],ntx1000_2_off_day[17],ntx1000_2_off_day[18],ntx1000_2_off_day[19],ntx1000_2_off_day[20],ntx1000_2_off_day[21],ntx1000_2_off_day[22],ntx1000_2_off_day[23],
-            ntx1000_2_off_day[24],ntx1000_2_off_day[25],ntx1000_2_off_day[26],ntx1000_2_off_day[27],ntx1000_2_off_day[28],ntx1000_2_off_day[29],ntx1000_2_off_day[30]]
+        data: [nlx3000_off_day[0], nlx3000_off_day[1], nlx3000_off_day[2],nlx3000_off_day[3],nlx3000_off_day[4],nlx3000_off_day[5],nlx3000_off_day[6],nlx3000_off_day[7],nlx3000_off_day[8],nlx3000_off_day[9],nlx3000_off_day[10],nlx3000_off_day[11],
+            nlx3000_off_day[12],nlx3000_off_day[13],nlx3000_off_day[14],nlx3000_off_day[15],nlx3000_off_day[16],nlx3000_off_day[17],nlx3000_off_day[18],nlx3000_off_day[19],nlx3000_off_day[20],nlx3000_off_day[21],nlx3000_off_day[22],nlx3000_off_day[23],
+            nlx3000_off_day[24],nlx3000_off_day[25],nlx3000_off_day[26],nlx3000_off_day[27],nlx3000_off_day[28],nlx3000_off_day[29],nlx3000_off_day[30]]
     }, {
         name: 'Авария',
-        data: [ntx1000_2_avar_day[0], ntx1000_2_avar_day[1], ntx1000_2_avar_day[2],ntx1000_2_avar_day[3],ntx1000_2_avar_day[4],ntx1000_2_avar_day[5],ntx1000_2_avar_day[6],ntx1000_2_avar_day[7],ntx1000_2_avar_day[8],ntx1000_2_avar_day[9],ntx1000_2_avar_day[10],ntx1000_2_avar_day[11],
-            ntx1000_2_avar_day[12],ntx1000_2_avar_day[13],ntx1000_2_avar_day[14],ntx1000_2_avar_day[15],ntx1000_2_avar_day[16],ntx1000_2_avar_day[17],ntx1000_2_avar_day[18],ntx1000_2_avar_day[19],ntx1000_2_avar_day[20],ntx1000_2_avar_day[21],ntx1000_2_avar_day[22],ntx1000_2_avar_day[23],
-            ntx1000_2_avar_day[24],ntx1000_2_avar_day[25],ntx1000_2_avar_day[26],ntx1000_2_avar_day[27],ntx1000_2_avar_day[28],ntx1000_2_avar_day[29],ntx1000_2_avar_day[30]]
+        data: [nlx3000_avar_day[0], nlx3000_avar_day[1], nlx3000_avar_day[2],nlx3000_avar_day[3],nlx3000_avar_day[4],nlx3000_avar_day[5],nlx3000_avar_day[6],nlx3000_avar_day[7],nlx3000_avar_day[8],nlx3000_avar_day[9],nlx3000_avar_day[10],nlx3000_avar_day[11],
+            nlx3000_avar_day[12],nlx3000_avar_day[13],nlx3000_avar_day[14],nlx3000_avar_day[15],nlx3000_avar_day[16],nlx3000_avar_day[17],nlx3000_avar_day[18],nlx3000_avar_day[19],nlx3000_avar_day[20],nlx3000_avar_day[21],nlx3000_avar_day[22],nlx3000_avar_day[23],
+            nlx3000_avar_day[24],nlx3000_avar_day[25],nlx3000_avar_day[26],nlx3000_avar_day[27],nlx3000_avar_day[28],nlx3000_avar_day[29],nlx3000_avar_day[30]]
     }, {
         name: 'Под нагрузкой',
-        data: [ntx1000_2_nagruzka_day[0], ntx1000_2_nagruzka_day[1], ntx1000_2_nagruzka_day[2],ntx1000_2_nagruzka_day[3],ntx1000_2_nagruzka_day[4],ntx1000_2_nagruzka_day[5],ntx1000_2_nagruzka_day[6],ntx1000_2_nagruzka_day[7],ntx1000_2_nagruzka_day[8],ntx1000_2_nagruzka_day[9],ntx1000_2_nagruzka_day[10],ntx1000_2_nagruzka_day[11],
-            ntx1000_2_nagruzka_day[12],ntx1000_2_nagruzka_day[13],ntx1000_2_nagruzka_day[14],ntx1000_2_nagruzka_day[15],ntx1000_2_nagruzka_day[16],ntx1000_2_nagruzka_day[17],ntx1000_2_nagruzka_day[18],ntx1000_2_nagruzka_day[19],ntx1000_2_nagruzka_day[20],ntx1000_2_nagruzka_day[21],ntx1000_2_nagruzka_day[22],ntx1000_2_nagruzka_day[23],
-            ntx1000_2_nagruzka_day[24],ntx1000_2_nagruzka_day[25],ntx1000_2_nagruzka_day[26],ntx1000_2_nagruzka_day[27],ntx1000_2_nagruzka_day[28],ntx1000_2_nagruzka_day[29],ntx1000_2_nagruzka_day[30]]
+        data: [nlx3000_nagruzka_day[0], nlx3000_nagruzka_day[1], nlx3000_nagruzka_day[2],nlx3000_nagruzka_day[3],nlx3000_nagruzka_day[4],nlx3000_nagruzka_day[5],nlx3000_nagruzka_day[6],nlx3000_nagruzka_day[7],nlx3000_nagruzka_day[8],nlx3000_nagruzka_day[9],nlx3000_nagruzka_day[10],nlx3000_nagruzka_day[11],
+            nlx3000_nagruzka_day[12],nlx3000_nagruzka_day[13],nlx3000_nagruzka_day[14],nlx3000_nagruzka_day[15],nlx3000_nagruzka_day[16],nlx3000_nagruzka_day[17],nlx3000_nagruzka_day[18],nlx3000_nagruzka_day[19],nlx3000_nagruzka_day[20],nlx3000_nagruzka_day[21],nlx3000_nagruzka_day[22],nlx3000_nagruzka_day[23],
+            nlx3000_nagruzka_day[24],nlx3000_nagruzka_day[25],nlx3000_nagruzka_day[26],nlx3000_nagruzka_day[27],nlx3000_nagruzka_day[28],nlx3000_nagruzka_day[29],nlx3000_nagruzka_day[30]]
     }]
 });
 
@@ -114,7 +114,7 @@ Highcharts.setOptions({
     }
 });
 
-Highcharts.chart('container3', {
+Highcharts.chart('container4', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -151,6 +151,6 @@ Highcharts.chart('container3', {
     series : [ {
         type : 'pie',
         name : 'Показатель',
-        data : [ [ 'Работа', ntx1000_2_work ], [ 'Включен', ntx1000_2_pass ], [ 'Выключен', ntx1000_2_fail],  [ 'В аварии', ntx1000_2_avar ], [ 'Нагрузка', ntx1000_2_nagruzka ] ]
+        data : [[ 'Работа', nlx3000_work ], [ 'Включен', nlx3000_pass ], [ 'Выключен', nlx3000_fail],  [ 'В аварии', nlx3000_avar ], [ 'Нагрузка', nlx3000_nagruzka ] ]
     }]
 });
