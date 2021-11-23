@@ -319,6 +319,7 @@
 </div> <!--Пресс html-->
 
 <script th:inline="javascript">
+    const timezone = new Date().getTimezoneOffset()
     var press_array_rabota = [[${press_array_rabota}]];
     var press_array_pause = [[${press_array_pause}]];
     var press_array_off = [[${press_array_off}]];

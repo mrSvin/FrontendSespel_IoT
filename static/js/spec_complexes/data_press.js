@@ -1,4 +1,3 @@
-const timezone = new Date().getTimezoneOffset()
 
 Highcharts.setOptions({
     lang: {
