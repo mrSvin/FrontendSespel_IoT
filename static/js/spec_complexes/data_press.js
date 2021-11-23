@@ -685,6 +685,9 @@ Highcharts.chart('container', {
     }]
 });
 
+data_davlenie = JSON.parse([[${davlenie}]]);
+data_zad_davlenie = JSON.parse([[${zad_davlenie}]]);
+
 Highcharts.setOptions({
     time: {
         timezone: 'Europe/Moscow'
