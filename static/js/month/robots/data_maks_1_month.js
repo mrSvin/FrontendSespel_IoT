@@ -23,7 +23,7 @@ Highcharts.setOptions({
     }
 });
 
-Highcharts.chart('container_days', {
+Highcharts.chart('container_days1', {
     chart: {
         type: 'column'
     },
