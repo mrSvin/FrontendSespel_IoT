@@ -13,57 +13,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-
-    <style>
-
-        .icon_mesto{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-
-        .icon_mesto:hover > div {
-            color: #000000;
-            margin-top: 70px;
-        }
-
-
-        .icon_personal{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-
-        .icon_personal:hover > div {
-            color: #000000;
-            margin-top: 70px;
-        }
-
-        .label_mesto{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-
-        .label_personal{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-
-    </style> <!--Кнопки Персонал и Местоположение-->
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -399,7 +348,7 @@
                         <a style="text-decoration: none; float: left" class="icon_mesto"
                            href="mesto/mesto_progress"
                            onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
-                            <div class='label_mesto_progress'>Место</div>
+                            <div class='label_mesto'>Место</div>
                         </a>
                         <a style="text-decoration: none; float: left" class="icon_personal"
                            href="personal/personal_progress"
@@ -650,7 +599,7 @@
                         <a style="text-decoration: none; float: left" class="icon_personal"
                            href="personal/personal"
                            onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div class='label_personal_apec'>Персонал</div>
+                            <div class='label_personal'>Персонал</div>
                         </a>
                     </div>
                 </div>
