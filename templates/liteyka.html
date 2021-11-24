@@ -12,155 +12,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-    <style>
-
-        .icon_mesto_pech_nerg {
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-
-        .icon_mesto_pech_nerg:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-
-        .icon_personal_pech_nerg {
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-
-        .icon_personal_pech_nerg:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-
-        .label_mesto_pech_nerg {
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-
-        .label_personal_pech_nerg {
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-        .icon_mesto_epp {
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-
-        .icon_mesto_epp:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-
-        .icon_personal_epp {
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-
-        .icon_personal_epp:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-
-        .label_mesto_epp {
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-
-        .label_personal_epp {
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-    </style> <!--Кнопки Персонал и Местоположение-->
-    <style>
-        .preloader {
-            /*фиксированное позиционирование*/
-            position: fixed;
-            /* координаты положения */
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            /* фоновый цвет элемента */
-            background: #e0e0e0;
-            /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
-            z-index: 1001;
-        }
-
-        .preloader__row {
-            position: relative;
-            top: 50%;
-            left: 50%;
-            width: 70px;
-            height: 70px;
-            margin-top: -35px;
-            margin-left: -35px;
-            text-align: center;
-            animation: preloader-rotate 2s infinite linear;
-        }
-
-        .preloader__item {
-            position: absolute;
-            display: inline-block;
-            top: 0;
-            background-color: #337ab7;
-            border-radius: 100%;
-            width: 35px;
-            height: 35px;
-            animation: preloader-bounce 2s infinite ease-in-out;
-        }
-
-        .preloader__item:last-child {
-            top: auto;
-            bottom: 0;
-            animation-delay: -1s;
-        }
-
-        @keyframes preloader-rotate {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes preloader-bounce {
-
-            0%,
-            100% {
-                transform: scale(0);
-            }
-
-            50% {
-                transform: scale(1);
-            }
-        }
-
-        .loaded_hiding .preloader {
-            transition: 0.3s opacity;
-            opacity: 0;
-        }
-
-        .loaded .preloader {
-            display: none;
-        }
-    </style>
-
     <script src="js/highcharts.js"></script>
     <script src="js/exporting.js"></script>
     <script src="js/export-data.js"></script>
@@ -273,7 +124,6 @@
     </form>
 </div>  <!--Кнопки суточный и месячный отчеты html-->
 
-
 <div class="container">
     <div style="width: 220px; float: left">
         <h2>Выберите дату:</h2>
@@ -339,8 +189,8 @@
                     <img src="images/pech.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Печь Индукционная</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_pech_nerg" href="mesto/mesto_pech_nerg" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(660, screen.availHeight)+',width='+Math.min(1920, screen.availWidth)); return false;"><div class='label_mesto_pech_nerg'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_pech_nerg" href="personal/personal_pech_nerg" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_pech_nerg'>Персонал</div></a>                    </div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_pech_nerg" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(660, screen.availHeight)+',width='+Math.min(1920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_pech_nerg" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>                    </div>
                 </div>
             </div>
             <div id="container_work" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
@@ -363,34 +213,7 @@
     var pech_nerg_nagruzka = [[${nagruzka}]];
     var pech_nerg_avar = [[${avar}]];
 </script>   <!--Склад js круговая диагрмма загрузки оборудования-->
-<script src="/js/liteyka/data_pech_nerg.js"></script>
-
-
-<script th:inline="javascript">
-
-    $('.icon_personal_pech_nerg').hover(
-        function () {
-            $('.label_personal_pech_nerg').css('color', '#000000');
-            $('.label_personal_pech_nerg').css('margin-top', '70px');
-        },
-        function () {
-            $('.label_personal_pech_nerg').css('color', '#756e6e');
-            $('.label_personal_pech_nerg').css('margin-top', '65px');
-        }
-    );
-    $('.icon_mesto_pech_nerg').hover(
-        function () {
-            $('.label_mesto_pech_nerg').css('color', '#000000');
-            $('.label_mesto_pech_nerg').css('margin-top', '70px');
-        },
-        function () {
-            $('.label_mesto_pech_nerg').css('color', '#756e6e');
-            $('.label_mesto_pech_nerg').css('margin-top', '65px');
-        }
-    );
-
-
-</script> <!--Кнопки Персонал и Место-->
+<script src="/js/sutki/liteyka/data_pech_nerg.js"></script>
 
 </body>
 </html>

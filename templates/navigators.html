@@ -12,178 +12,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-
-    <style>
-
-        .icon_mesto_navigator_1{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_navigator_1:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_navigator_1{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_navigator_1:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_navigator_1{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_navigator_1{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-        .icon_mesto_navigator_2{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_navigator_2:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_navigator_2{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_navigator_2:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_navigator_2{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_navigator_2{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-        .icon_mesto_navigator_3{
-
-            width: 60px;
-            height: 60px;
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_mesto_navigator_3:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
-        }
-        .icon_personal_navigator_3{
-            background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
-            background-size: 60px 60px;
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-        .icon_personal_navigator_3:hover {
-            -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-        }
-        .label_mesto_navigator_3{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: 8px;
-        }
-        .label_personal_navigator_3{
-            color: #756e6e;
-            margin-top: 65px;
-            margin-left: -5px;
-        }
-
-    </style> <!--Кнопки Персонал и Местоположение-->
-    <style>
-        .preloader {
-            /*фиксированное позиционирование*/
-            position: fixed;
-            /* координаты положения */
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            /* фоновый цвет элемента */
-            background: #e0e0e0;
-            /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
-            z-index: 1001;
-        }
-
-        .preloader__row {
-            position: relative;
-            top: 50%;
-            left: 50%;
-            width: 70px;
-            height: 70px;
-            margin-top: -35px;
-            margin-left: -35px;
-            text-align: center;
-            animation: preloader-rotate 2s infinite linear;
-        }
-
-        .preloader__item {
-            position: absolute;
-            display: inline-block;
-            top: 0;
-            background-color: #337ab7;
-            border-radius: 100%;
-            width: 35px;
-            height: 35px;
-            animation: preloader-bounce 2s infinite ease-in-out;
-        }
-
-        .preloader__item:last-child {
-            top: auto;
-            bottom: 0;
-            animation-delay: -1s;
-        }
-
-        @keyframes preloader-rotate {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes preloader-bounce {
-
-            0%,
-            100% {
-                transform: scale(0);
-            }
-
-            50% {
-                transform: scale(1);
-            }
-        }
-
-        .loaded_hiding .preloader {
-            transition: 0.3s opacity;
-            opacity: 0;
-        }
-
-        .loaded .preloader {
-            display: none;
-        }
-    </style>
-
     <script src="js/highcharts.js"></script>
     <script src="js/exporting.js"></script>
     <script src="js/export-data.js"></script>
@@ -364,8 +192,8 @@
                     <img src="images/navigator.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Навигатор #1</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_navigator_1" href="mesto/mesto_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto_navigator_1'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_navigator_1" href="personal/personal_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_navigator_1'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -382,8 +210,8 @@
                 <img src="images/navigator.png" class="stanok_img"/>
                 <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Навигатор #2</figcaption>
                 <div style="margin-bottom: 20px">
-                    <a style="text-decoration: none; float: left" class="icon_mesto_navigator_2" href="mesto/mesto_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto_navigator_2'>Место</div></a>
-                    <a style="text-decoration: none; float: left" class="icon_personal_navigator_1" href="personal/personal_navigator_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_navigator_2'>Персонал</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_navigator_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                 </div>
             </div>
         </div>
@@ -411,8 +239,8 @@
                     <img src="images/navigator.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Навигатор #3</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto_navigator_3" href="mesto/mesto_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto_navigator_3'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal_navigator_3" href="personal/personal_navigator_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal_navigator_3'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_navigator_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -439,7 +267,7 @@
     var navigator_1_nagruzka = [[${nagruzka}]];
 
 </script>   <!--Навигатор_1 js круговая диагрмма загрузки оборудования-->
-<script src="/js/navigators/navigator_1.js"></script>
+<script src="/js/sutki/navigators/navigator_1.js"></script>
 
 <script th:inline="javascript">
     var array_rabota_2_golova_1 = [[${array_rabota_2_golova_1}]];
@@ -463,7 +291,7 @@
     var nagruzka_2_golova_1 = [[${nagruzka_2_golova_1}]];
 
 </script>   <!--Навигатор_2_голова_1 js круговая диагрмма загрузки оборудования-->
-<script src="/js/navigators/navigator_2_golova_1.js"></script>
+<script src="/js/sutki/navigators/navigator_2_golova_1.js"></script>
 
 <script th:inline="javascript">
 
@@ -483,7 +311,7 @@
     var nagruzka_2_golova_2 = [[${nagruzka_2_golova_2}]];
 
 </script>   <!--Навигатор_2_голова_2 js круговая диагрмма загрузки оборудования-->
-<script src="/js/navigators/navigator_2_golova_2.js"></script>
+<script src="/js/sutki/navigators/navigator_2_golova_2.js"></script>
 
 <script th:inline="javascript">
 
@@ -501,74 +329,8 @@
     var navigator_3_nagruzka = [[${nagruzka_3}]];
 
 </script>   <!--Навигатор_3 js круговая диагрмма загрузки оборудования-->
-<script src="/js/navigators/navigator_3.js"></script>
+<script src="/js/sutki/navigators/navigator_3.js"></script>
 
-<script th:inline="javascript">
-
-    $('.icon_personal_navigator_1').hover(
-        function(){
-            $('.label_personal_navigator_1').css('color','#000000');
-            $('.label_personal_navigator_1').css('margin-top','70px');
-        },
-        function(){
-            $('.label_personal_navigator_1').css('color','#756e6e');
-            $('.label_personal_navigator_1').css('margin-top','65px');
-        }
-    );
-    $('.icon_mesto_navigator_1').hover(
-        function(){
-            $('.label_mesto_navigator_1').css('color','#000000');
-            $('.label_mesto_navigator_1').css('margin-top','70px');
-        },
-        function(){
-            $('.label_mesto_navigator_1').css('color','#756e6e');
-            $('.label_mesto_navigator_1').css('margin-top','65px');
-        }
-    );
-
-    $('.icon_personal_navigator_2').hover(
-        function(){
-            $('.label_personal_navigator_2').css('color','#000000');
-            $('.label_personal_navigator_2').css('margin-top','70px');
-        },
-        function(){
-            $('.label_personal_navigator_2').css('color','#756e6e');
-            $('.label_personal_navigator_2').css('margin-top','65px');
-        }
-    );
-    $('.icon_mesto_navigator_2').hover(
-        function(){
-            $('.label_mesto_navigator_2').css('color','#000000');
-            $('.label_mesto_navigator_2').css('margin-top','70px');
-        },
-        function(){
-            $('.label_mesto_navigator_2').css('color','#756e6e');
-            $('.label_mesto_navigator_2').css('margin-top','65px');
-        }
-    );
-
-    $('.icon_personal_navigator_3').hover(
-        function(){
-            $('.label_personal_navigator_3').css('color','#000000');
-            $('.label_personal_navigator_3').css('margin-top','70px');
-        },
-        function(){
-            $('.label_personal_navigator_3').css('color','#756e6e');
-            $('.label_personal_navigator_3').css('margin-top','65px');
-        }
-    );
-    $('.icon_mesto_navigator_3').hover(
-        function(){
-            $('.label_mesto_navigator_3').css('color','#000000');
-            $('.label_mesto_navigator_3').css('margin-top','70px');
-        },
-        function(){
-            $('.label_mesto_navigator_3').css('color','#756e6e');
-            $('.label_mesto_navigator_3').css('margin-top','65px');
-        }
-    );
-
-</script> <!--Кнопки Персонал и Место-->
 </body>
 
 
