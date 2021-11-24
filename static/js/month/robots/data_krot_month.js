@@ -23,7 +23,7 @@ Highcharts.setOptions({
     }
 });
 
-Highcharts.chart('container_days6', {
+Highcharts.chart('container_days_krot', {
     chart: {
         type: 'column'
     },
@@ -114,7 +114,7 @@ Highcharts.setOptions({
     }
 });
 
-Highcharts.chart('container6', {
+Highcharts.chart('container_krot', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
