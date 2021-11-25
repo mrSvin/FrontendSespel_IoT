@@ -621,7 +621,11 @@
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-
+    var sum_rabota = [[${uvf_1_work}]] + [[${uvf_2_work}]] + [[${ntx1000_2_work}]] + [[${nlx3000_work}]] + [[${dmg_gamma2000_work}]] + [[${dmg_ctx650_work}]] + [[${dmg_dmf260_work}]] + [[${dmg_dmu50_1_work}]] + [[${dmg_dmu50_2_work}]] + [[${dmg_dmc1035_work}]] + [[${dmg_ctx310_1_work}]] + [[${dmg_ctx510_1_work}]]
+    var sum_pause = [[${uvf_1_pass}]] + [[${uvf_2_pass}]] + [[${ntx1000_2_pass}]] + [[${nlx3000_pass}]] + [[${dmg_gamma2000_pass}]] + [[${dmg_ctx650_pass}]] + [[${dmg_dmf260_pass}]] + [[${dmg_dmu50_1_pass}]] + [[${dmg_dmu50_2_pass}]] + [[${dmg_dmc1035_pass}]] + [[${dmg_ctx310_1_pass}]] + [[${dmg_ctx510_1_pass}]]
+    var sum_off = [[${uvf_1_fail}]] + [[${uvf_2_fail}]] + [[${ntx1000_2_fail}]] + [[${nlx3000_fail}]] + [[${dmg_gamma2000_fail}]] + [[${dmg_ctx650_fail}]] + [[${dmg_dmf260_fail}]] + [[${dmg_dmu50_1_fail}]] + [[${dmg_dmu50_2_fail}]] + [[${dmg_dmc1035_fail}]] + [[${dmg_ctx310_1_fail}]] + [[${dmg_ctx510_1_fail}]]
+    var sum_avar = [[${uvf_1_avar}]] + [[${uvf_2_avar}]] + [[${ntx1000_2_avar}]] + [[${nlx3000_avar}]] + [[${dmg_gamma2000_avar}]] + [[${dmg_ctx650_avar}]] + [[${dmg_dmf260_avar}]] + [[${dmg_dmu50_1_avar}]] + [[${dmg_dmu50_2_avar}]] + [[${dmg_dmc1035_avar}]] + [[${dmg_ctx310_1_avar}]] + [[${dmg_ctx510_1_avar}]]
+    var sum_nagruzka = [[${uvf_1_nagruzka}]] + [[${uvf_2_nagruzka}]] + [[${ntx1000_2_nagruzka}]] + [[${nlx3000_nagruzka}]] + [[${dmg_gamma2000_nagruzka}]] + [[${dmg_ctx650_nagruzka}]] + [[${dmg_dmf260_nagruzka}]] + [[${dmg_dmu50_1_nagruzka}]] + [[${dmg_dmu50_2_nagruzka}]] + [[${dmg_dmc1035_nagruzka}]] + [[${dmg_ctx310_1_nagruzka}]] + [[${dmg_ctx510_1_nagruzka}]]
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -682,8 +686,8 @@
         series : [ {
             type : 'pie',
             name : 'Показатель',
-            data : [ [ 'По программе', [[${sum_rabota}]] ], [ 'Включен', [[${sum_pause}]] ],
-                [ 'Выключен', [[${sum_off}]] ],  [ 'В аварии', [[${sum_avar}]]],  [ 'Под нагрузкой', [[${sum_nagruzka}]]]   ]
+            data : [ [ 'По программе', sum_rabota ], [ 'Включен', sum_pause ],
+                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka]   ]
         }]
     });
 </script>   <!--Общая js круговая диагрмма загрузки оборудования-->

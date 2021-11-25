@@ -350,7 +350,12 @@
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    var sum_rabota = [[${uf5220_work}]] + [[${progress_work}]];
+    var sum_rabota = [[${uf5220_work}]] + [[${progress_work}]] + [[${ntx1000_work}]] + [[${sk50_work}]] + [[${apec_work}]] + [[${dmg_dmu50_3_work}]] + [[${dmg_dmu50_4_work}]];
+    var sum_pause = [[${uf5220_pass}]] + [[${progress_pass}]] + [[${ntx1000_pass}]] + [[${sk50_pass}]] + [[${apec_pass}]] + [[${dmg_dmu50_3_pass}]] + [[${dmg_dmu50_4_pass}]];
+    var sum_off = [[${uf5220_fail}]] + [[${progress_fail}]] + [[${ntx1000_fail}]] + [[${sk50_fail}]] + [[${apec_fail}]] + [[${dmg_dmu50_3_fail}]] + [[${dmg_dmu50_4_fail}]];
+    var sum_avar = [[${uf5220_avar}]] + [[${progress_avar}]] + [[${ntx1000_avar}]] + [[${sk50_avar}]] + [[${apec_avar}]] + [[${dmg_dmu50_3_avar}]] + [[${dmg_dmu50_4_avar}]];
+    var sum_nagruzka = [[${uf5220_work}]] + [[${progress_work}]] + [[${ntx1000_work}]] + [[${sk50_work}]] + [[${apec_work}]] + [[${dmg_dmu50_3_work}]] + [[${dmg_dmu50_4_work}]];
+
 
     Highcharts.setOptions({
         lang: {
@@ -412,8 +417,8 @@
         series : [ {
             type : 'pie',
             name : 'Показатель',
-            data : [ [ 'По программе', sum_rabota ], [ 'Включен', [[${sum_pause}]] ],
-                [ 'Выключен', [[${sum_off}]] ],  [ 'В аварии', [[${sum_avar}]]],  [ 'Под нагрузкой', [[${sum_nagruzka}]]]   ]
+            data : [ [ 'По программе', sum_rabota ], [ 'Включен', sum_pause ],
+                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka]   ]
         }]
     });
 </script>   <!--Общая js круговая диагрмма загрузки оборудования-->
