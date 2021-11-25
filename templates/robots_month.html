@@ -225,10 +225,11 @@
 
 </div>      <!--Календарь html-->
 
-<div style="display: flex">
-    <figure class="highcharts-figure">
-        <div id="container_sum_zagruzka" style="height: 400px; width: 800px"></div>
-    </figure>   <!--Общая загрузка html-->
+<div style="display: flex; justify-content: space-between">
+
+    <div id="container_sum_zagruzka" style="height: 400px; width: 50%"></div>
+
+    <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>
 </div>  <!--Общая загрузка  html-->
 <script th:inline="javascript">
 
@@ -353,6 +354,77 @@
     });
 
 </script>   <!--js Общая загрузка-->
+<script th:inline="javascript">
+    var sum_rabota = [[${maks_1_work}]] + [[${maks_2_work}]] + [[${m710_work}]] + [[${rtk12c_work}]] + [[${p250_work}]] + [[${krot_work}]] + [[${prans_work}]]
+    var sum_pause = [[${maks_1_pass}]] + [[${maks_2_pass}]] + [[${m710_pass}]] + [[${rtk12c_pass}]] + [[${p250_pass}]] + [[${krot_pass}]] + [[${prans_pass}]]
+    var sum_off = [[${maks_1_fail}]] + [[${maks_2_fail}]] + [[${m710_fail}]] + [[${rtk12c_fail}]] + [[${p250_fail}]] + [[${krot_fail}]] + [[${prans_fail}]]
+    var sum_avar = [[${maks_1_avar}]] + [[${maks_2_avar}]] + [[${m710_avar}]] + [[${rtk12c_avar}]] + [[${p250_avar}]] + [[${krot_avar}]] + [[${prans_avar}]]
+    var sum_nagruzka = [[${maks_1_nagruzka}]] + [[${maks_2_nagruzka}]] + [[${m710_nagruzka}]] + [[${rtk12c_nagruzka}]] + [[${p250_nagruzka}]] + [[${krot_nagruzka}]] + [[${prans_nagruzka}]]
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka_krug', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Суммарная загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', sum_rabota ], [ 'Включен', sum_pause ],
+                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka]   ]
+        }]
+    });
+</script>   <!--Общая js круговая диагрмма загрузки оборудования-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
