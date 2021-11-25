@@ -243,6 +243,7 @@
     var work_apec = [[${apec_work}]];
     var work_dmu50_3 = [[${dmg_dmu50_3_work}]];
     var work_dmu50_4 = [[${dmg_dmu50_4_work}]];
+    var work_ctx310_2 = [[${dmg_ctx310_2_work}]];
 
     var pause_uf5220 = [[${uf5220_pass}]];
     var pause_progress = [[${progress_pass}]];
@@ -251,6 +252,7 @@
     var pause_apec = [[${apec_pass}]];
     var pause_dmu50_3 = [[${dmg_dmu50_3_pass}]];
     var pause_dmu50_4 = [[${dmg_dmu50_4_pass}]];
+    var pause_ctx310_2 = [[${dmg_ctx310_2_pass}]];
 
     var off_uf5220 = [[${uf5220_fail}]];
     var off_progress = [[${progress_fail}]];
@@ -259,17 +261,20 @@
     var off_apec = [[${apec_fail}]];
     var off_dmu50_3 = [[${dmg_dmu50_3_fail}]];
     var off_dmu50_4 = [[${dmg_dmu50_4_fail}]];
+    var off_ctx310_2 = [[${dmg_ctx310_2_fail}]];
 
     var avar_ntx1000 = [[${ntx1000_avar}]];
     var avar_sk50 = [[${sk50_avar}]];
     var avar_apec = [[${apec_avar}]];
     var avar_dmu50_3 = [[${dmg_dmu50_3_avar}]];
     var avar_dmu50_4 = [[${dmg_dmu50_4_avar}]];
+    var avar_ctx310_2 = [[${dmg_ctx310_2_avar}]];
 
     var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
     var nagruzka_sk50 = [[${sk50_nagruzka}]];
     var nagruzka_dmu50_3 = [[${dmg_dmu50_3_nagruzka}]];
     var nagruzka_dmu50_4 = [[${dmg_dmu50_4_nagruzka}]];
+    var nagruzka_ctx310_2 = [[${dmg_ctx310_2_nagruzka}]];
 
     var ruchnoi_apec = [[${apec_ruchnoi}]];
 
@@ -310,7 +315,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4']
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2']
         },
         credits: {
             enabled: false
@@ -332,29 +337,29 @@
         },
         series: [{
             name: 'Работа',
-            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4]
+            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2]
         }, {
             name: 'Под нагрузкой',
-            data: [0, 0, nagruzka_ntx1000, nagruzka_sk50, ruchnoi_apec, nagruzka_dmu50_3, nagruzka_dmu50_4]
+            data: [0, 0, nagruzka_ntx1000, nagruzka_sk50, ruchnoi_apec, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2]
         }, {
             name: 'Ожидание',
-            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4]
+            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2]
         }, {
             name: 'Авария',
-            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4]
+            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4, avar_ctx310_2]
         }, {
             name: 'Выключен',
-            data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4]
+            data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2]
         }]
     });
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    var sum_rabota = [[${uf5220_work}]] + [[${progress_work}]] + [[${ntx1000_work}]] + [[${sk50_work}]] + [[${apec_work}]] + [[${dmg_dmu50_3_work}]] + [[${dmg_dmu50_4_work}]];
-    var sum_pause = [[${uf5220_pass}]] + [[${progress_pass}]] + [[${ntx1000_pass}]] + [[${sk50_pass}]] + [[${apec_pass}]] + [[${dmg_dmu50_3_pass}]] + [[${dmg_dmu50_4_pass}]];
-    var sum_off = [[${uf5220_fail}]] + [[${progress_fail}]] + [[${ntx1000_fail}]] + [[${sk50_fail}]] + [[${apec_fail}]] + [[${dmg_dmu50_3_fail}]] + [[${dmg_dmu50_4_fail}]];
-    var sum_avar = [[${uf5220_avar}]] + [[${progress_avar}]] + [[${ntx1000_avar}]] + [[${sk50_avar}]] + [[${apec_avar}]] + [[${dmg_dmu50_3_avar}]] + [[${dmg_dmu50_4_avar}]];
-    var sum_nagruzka = [[${uf5220_work}]] + [[${progress_work}]] + [[${ntx1000_work}]] + [[${sk50_work}]] + [[${apec_work}]] + [[${dmg_dmu50_3_work}]] + [[${dmg_dmu50_4_work}]];
+    var sum_rabota = [[${uf5220_work}]] + [[${progress_work}]] + [[${ntx1000_work}]] + [[${sk50_work}]] + [[${apec_work}]] + [[${dmg_dmu50_3_work}]] + [[${dmg_dmu50_4_work}]] + [[${dmg_ctx310_2_work}]];
+    var sum_pause = [[${uf5220_pass}]] + [[${progress_pass}]] + [[${ntx1000_pass}]] + [[${sk50_pass}]] + [[${apec_pass}]] + [[${dmg_dmu50_3_pass}]] + [[${dmg_dmu50_4_pass}]] + [[${dmg_ctx310_2_pass}]];
+    var sum_off = [[${uf5220_fail}]] + [[${progress_fail}]] + [[${ntx1000_fail}]] + [[${sk50_fail}]] + [[${apec_fail}]] + [[${dmg_dmu50_3_fail}]] + [[${dmg_dmu50_4_fail}]] + [[${dmg_ctx310_2_fail}]];
+    var sum_avar = [[${uf5220_avar}]] + [[${progress_avar}]] + [[${ntx1000_avar}]] + [[${sk50_avar}]] + [[${apec_avar}]] + [[${dmg_dmu50_3_avar}]] + [[${dmg_dmu50_4_avar}]] + [[${dmg_ctx310_2_avar}]];
+    var sum_nagruzka = [[${uf5220_work}]] + [[${progress_work}]] + [[${ntx1000_work}]] + [[${sk50_work}]] + [[${apec_work}]] + [[${dmg_dmu50_3_work}]] + [[${dmg_dmu50_4_work}]] + [[${dmg_ctx310_2_nagruzka}]];
 
 
     Highcharts.setOptions({
@@ -660,6 +665,41 @@
     var  dmg_dmu50_4_nagruzka = [[${dmg_dmu50_4_nagruzka}]];
 </script>   <!--Переменные для круговой диаграммы dmu50_4-->
 <script src="/js/month/stanki/data_dmg_dmu50_4_month.js"></script>
+
+<div style="border: 1px solid #333;">   <!--dmg_ctx310_2 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx310.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX310 #1</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_ctx310_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx310_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days8" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container8" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+
+</div> <!--ctx310_2 html-->
+<script th:inline="javascript">
+    var dmg_ctx310_2_rabota_day = [[${dmg_ctx310_2_rabota_day}]];
+    var dmg_ctx310_2_pause_day = [[${dmg_ctx310_2_pause_day}]];
+    var dmg_ctx310_2_off_day = [[${dmg_ctx310_2_off_day}]];
+    var dmg_ctx310_2_avar_day = [[${dmg_ctx310_2_avar_day}]];
+    var dmg_ctx310_2_nagruzka_day = [[${dmg_ctx310_2_nagruzka_day}]];
+</script>   <!--Переменные для линейной диаграммы dmg_ctx310_2-->
+<script th:inline="javascript">
+    var dmg_ctx310_2_work = [[${dmg_ctx310_2_work}]];
+    var dmg_ctx310_2_pass = [[${dmg_ctx310_2_pass}]];
+    var dmg_ctx310_2_fail = [[${dmg_ctx310_2_fail}]];
+    var dmg_ctx310_2_avar = [[${dmg_ctx310_2_avar}]];
+    var  dmg_ctx310_2_nagruzka = [[${dmg_ctx310_2_nagruzka}]];
+</script>   <!--Переменные для круговой диаграммы dmg_ctx310_2-->
+<script src="/js/month/stanki_meh/data_dmg_ctx310_2_month.js"></script>
 
 </body>
 </html>
