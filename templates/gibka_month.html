@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Литьё</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css" />
+
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
+    <script src="js/export-data.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="js/xrange.js"></script>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap-3.3.0.min.js"></script>
+
+    <!--Календарь -->
+    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+    <!--Календарь Русский язык-->
+    <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
+
+    <style>
+        .preloader {
+            /*фиксированное позиционирование*/
+            position: fixed;
+            /* координаты положения */
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /* фоновый цвет элемента */
+            background: #e0e0e0;
+            /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+            z-index: 1001;
+        }
+
+        .preloader__row {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            width: 70px;
+            height: 70px;
+            margin-top: -35px;
+            margin-left: -35px;
+            text-align: center;
+            animation: preloader-rotate 2s infinite linear;
+        }
+
+        .preloader__item {
+            position: absolute;
+            display: inline-block;
+            top: 0;
+            background-color: #337ab7;
+            border-radius: 100%;
+            width: 35px;
+            height: 35px;
+            animation: preloader-bounce 2s infinite ease-in-out;
+        }
+
+        .preloader__item:last-child {
+            top: auto;
+            bottom: 0;
+            animation-delay: -1s;
+        }
+
+        @keyframes preloader-rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes preloader-bounce {
+
+            0%,
+            100% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .loaded_hiding .preloader {
+            transition: 0.3s opacity;
+            opacity: 0;
+        }
+
+        .loaded .preloader {
+            display: none;
+        }
+    </style>
+    <script >
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "yyyy-mm",
+                language: 'ru',
+                viewMode: "months",
+                minViewMode: "months",
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+
+            $('#button_obnovit').on("click", function() {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+
+                var mes = datas.getMonth()+1;
+                var year = datas.getFullYear();
+
+                name_data = mes+"-" + year;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
+    <script>
+        window.onload = function () {
+            document.body.classList.add('loaded_hiding');
+            window.setTimeout(function () {
+                document.body.classList.add('loaded');
+                document.body.classList.remove('loaded_hiding');
+            }, 500);
+        }
+    </script>
+
+
+
+</head>
+
+<header>
+    <ul class="hr">
+        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
+        <div method="post" class="dropdown" style="float: right">
+
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
+            <div class="dropdown-content" style="float: right; text-align: center">
+                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; "/></p>
+                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
+                <p th:text="${user_mail}"></p>
+                <form th:action="@{/logout}" method="post">
+                    <button class="follow" type="submit">
+                        Выход
+                    </button>
+                </form>
+            </div>
+        </div>
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
+    </ul>       <!--Шапка html-->
+</header>       <!--Шапка html-->
+
+<div>
+    <ul id="menu_ul">
+        <li id="menu_li"><a id="menu_a" href="displayStanki">Мех.уч.II пл.</a></li>
+        <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
+        <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
+        <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.I пл.</a></li>
+        <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
+        <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
+        <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
+        <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
+        <li id="menu_li8"><a id="menu_a8" href="gibka" class="menu-color">Гибка</a></li>
+    </ul>
+</div>  <!-- Меню -->
+
+<!-- Загрузка страницы -->
+<div class="preloader">
+    <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+    </div>
+</div>
+
+<body>
+
+<div style="clear: both">
+    <form>
+        <button formaction="gibka" class="btn_change" style="width:40%">Суточный отчет</button>
+        <button formaction="gibka_month" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF;">Месячный отчет</button>
+    </form>
+</div>  <!--Кнопки суточный и месячный отчеты html-->
+
+<div class="container">
+    <div style="width: 250px; float: left">
+        <h2>Выберите месяц:</h2>
+    </div>
+
+    <form  action="#" th:action="@{/gibka_month}" th:object="${calendar_month}" method="post" >
+
+        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+            <input type='text' class="form-control" th:field="*{content_month}"/>
+            <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+        </div>
+
+        <div class="form-actions" >
+            <button type="submit"
+                    class="follow"
+                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
+            </button>
+        </div>
+    </form>
+
+
+</div>      <!--Календарь html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div class="img" style="float: left; margin: 2%;"> <!--Вставляем изображение станка 1-->
+            <div class="parent_image">
+                <img src="images/test.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
+                <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Печь Индукционная</figcaption>
+                <div>
+                    <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_test" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(660, screen.availHeight)+',width='+Math.min(1920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_test" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                </div>
+            </div>
+        </div>
+        <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+    </div>  <!--test html-->
+
+</div> <!--Тест html-->
+<script th:inline="javascript">
+    var test_rabota_day = [[${test_rabota_day}]];
+    var test_pause_day = [[${test_pause_day}]];
+    var test_off_day = [[${test_off_day}]];
+    var test_avar_day = [[${test_avar_day}]];
+    var test_nagruzka_day = [[${test_nagruzka_day}]];
+</script>   <!--Переменные для линейной диаграммы test-->
+<script th:inline="javascript">
+    var test_work = [[${test_work}]];
+    var test_pass = [[${test_pass}]];
+    var test_fail = [[${test_fail}]];
+    var test_avar = [[${test_avar}]];
+    var  test_nagruzka = [[${test_nagruzka}]];
+</script>   <!--Переменные для круговой диаграммы test-->
+<script src="/js/month/gibka/test_month.js"></script>
+
+
+</body>
+</html>
