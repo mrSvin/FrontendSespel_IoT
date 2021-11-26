@@ -9,7 +9,7 @@
     text-shadow: 2px 0 2px black;
 }
 
-#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7 {
+#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8 {
     text-decoration: none; /*убираем подчеркивание текста ссылок*/
     background: rgb(58, 111, 219); /*добавляем фон к пункту меню*/
     color: #fff; /*меняем цвет ссылок*/
@@ -71,7 +71,12 @@
     background: #D43737; /*добавляем эффект при наведении*/
 }
 
-#menu_li, #menu_li1, #menu_li2, #menu_li3, #menu_li4, #menu_li5, #menu_li6, #menu_li7 {
+#menu_a8:hover {
+    font-family: MONTSERRAT;
+    background: #D43737; /*добавляем эффект при наведении*/
+}
+
+#menu_li, #menu_li1, #menu_li2, #menu_li3, #menu_li4, #menu_li5, #menu_li6, #menu_li7, #menu_li8 {
     float: left; /*Размещаем список горизонтально для реализации меню*/
 }
 
