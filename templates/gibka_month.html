@@ -226,34 +226,34 @@
     <div style="overflow: hidden;">
         <div class="img" style="float: left; margin: 2%;"> <!--Вставляем изображение станка 1-->
             <div class="parent_image">
-                <img src="images/test.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
-                <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Печь Индукционная</figcaption>
+                <img src="images/faccin.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
+                <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">4HEL</figcaption>
                 <div>
-                    <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_test" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(660, screen.availHeight)+',width='+Math.min(1920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                    <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_test" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(660, screen.availHeight)+',width='+Math.min(1920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                 </div>
             </div>
         </div>
         <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
         <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-    </div>  <!--test html-->
+    </div>  <!--faccin_1 html-->
 
 </div> <!--Тест html-->
 <script th:inline="javascript">
-    var test_rabota_day = [[${test_rabota_day}]];
-    var test_pause_day = [[${test_pause_day}]];
-    var test_off_day = [[${test_off_day}]];
-    var test_avar_day = [[${test_avar_day}]];
-    var test_nagruzka_day = [[${test_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы test-->
+    var faccin_1_rabota_day = [[${faccin_1_rabota_day}]];
+    var faccin_1_pause_day = [[${faccin_1_pause_day}]];
+    var faccin_1_off_day = [[${faccin_1_off_day}]];
+    var faccin_1_avar_day = [[${faccin_1_avar_day}]];
+    var faccin_1_nagruzka_day = [[${faccin_1_nagruzka_day}]];
+</script>   <!--Переменные для линейной диаграммы faccin_1-->
 <script th:inline="javascript">
-    var test_work = [[${test_work}]];
-    var test_pass = [[${test_pass}]];
-    var test_fail = [[${test_fail}]];
-    var test_avar = [[${test_avar}]];
-    var  test_nagruzka = [[${test_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы test-->
-<script src="/js/month/gibka/test_month.js"></script>
+    var faccin_1_work = [[${faccin_1_work}]];
+    var faccin_1_pass = [[${faccin_1_pass}]];
+    var faccin_1_fail = [[${faccin_1_fail}]];
+    var faccin_1_avar = [[${faccin_1_avar}]];
+    var  faccin_1_nagruzka = [[${faccin_1_nagruzka}]];
+</script>   <!--Переменные для круговой диаграммы faccin_1-->
+<script src="/js/month/gibka/data_faccin_1_month.js"></script>
 
 
 </body>

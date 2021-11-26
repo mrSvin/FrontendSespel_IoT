@@ -259,34 +259,34 @@
     <div style="width: 100%;   margin: 2%;">
       <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
         <div class="parent_image">
-          <img src="images/test.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
-          <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Печь Индукционная</figcaption>
+          <img src="images/faccin_1.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
+          <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">4HEL</figcaption>
           <div>
-            <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_test" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(660, screen.availHeight)+',width='+Math.min(1920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-            <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_test" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>                    </div>
+            <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(660, screen.availHeight)+',width='+Math.min(1920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+            <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>                    </div>
         </div>
       </div>
       <div id="container_work" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
       <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
     </div>
-  </div>  <!--test html-->
-</div> <!--test html-->
+  </div>  <!--faccin_1 html-->
+</div> <!--faccin_1 html-->
 <script th:inline="javascript">
-  var test_array_rabota = [[${test_array_rabota}]];
-  var test_array_pause = [[${test_array_pause}]];
-  var test_array_off = [[${test_array_off}]];
-  var test_array_programname = [[${test_array_programname}]];
-  var test_array_nagruzka = [[${test_array_nagruzka}]];
-  var test_array_avar = [[${test_array_avar}]];
+  var faccin_1_array_rabota = [[${faccin_1_array_rabota}]];
+  var faccin_1_array_pause = [[${faccin_1_array_pause}]];
+  var faccin_1_array_off = [[${faccin_1_array_off}]];
+  var faccin_1_array_programname = [[${faccin_1_array_programname}]];
+  var faccin_1_array_nagruzka = [[${faccin_1_array_nagruzka}]];
+  var faccin_1_array_avar = [[${faccin_1_array_avar}]];
 </script>   <!--Склад Мех js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
-  var test_work = [[${work}]];
-  var test_pass = [[${pass}]];
-  var test_fail = [[${fail}]];
-  var test_nagruzka = [[${nagruzka}]];
-  var test_avar = [[${avar}]];
-</script>   <!--test круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/gibka/data_test.js"></script>
+  var faccin_1_work = [[${work}]];
+  var faccin_1_pass = [[${pass}]];
+  var faccin_1_fail = [[${fail}]];
+  var faccin_1_nagruzka = [[${nagruzka}]];
+  var faccin_1_avar = [[${avar}]];
+</script>   <!--faccin_1 круговая диагрмма загрузки оборудования-->
+<script src="/js/sutki/gibka/data_faccin_1.js"></script>
 
 </body>
 </html>
