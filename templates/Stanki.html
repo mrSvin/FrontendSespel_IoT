@@ -671,7 +671,7 @@
 
 <script th:inline="javascript">
 
-    var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000'];
+    var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000', '#5c7ed0'];
 
     var work_uf5220 = [[${work}]];
     var work_progress = [[${progress_work}]];
@@ -787,6 +787,9 @@
         }, {
             name: 'Выключен',
             data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2]
+        }, {
+            name: 'Ручной',
+            data: [ruchnoi_apec]
         }]
     });
 
