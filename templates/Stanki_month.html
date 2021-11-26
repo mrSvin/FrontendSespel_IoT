@@ -340,7 +340,7 @@
             data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2]
         }, {
             name: 'Под нагрузкой',
-            data: [0, 0, nagruzka_ntx1000, nagruzka_sk50, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2]
+            data: [0, 0, nagruzka_ntx1000, nagruzka_sk50, 0, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2]
         }, {
             name: 'Ожидание',
             data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2]
@@ -353,7 +353,7 @@
         },
             {
                 name: 'Ручной',
-                data: [ruchnoi_apec]
+                data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0]
             }]
     });
 </script>   <!--js Общая загрузка-->
@@ -362,8 +362,8 @@
     var sum_rabota = [[${uf5220_work}]] + [[${progress_work}]] + [[${ntx1000_work}]] + [[${sk50_work}]] + [[${apec_work}]] + [[${dmg_dmu50_3_work}]] + [[${dmg_dmu50_4_work}]] + [[${dmg_ctx310_2_work}]];
     var sum_pause = [[${uf5220_pass}]] + [[${progress_pass}]] + [[${ntx1000_pass}]] + [[${sk50_pass}]] + [[${apec_pass}]] + [[${dmg_dmu50_3_pass}]] + [[${dmg_dmu50_4_pass}]] + [[${dmg_ctx310_2_pass}]];
     var sum_off = [[${uf5220_fail}]] + [[${progress_fail}]] + [[${ntx1000_fail}]] + [[${sk50_fail}]] + [[${apec_fail}]] + [[${dmg_dmu50_3_fail}]] + [[${dmg_dmu50_4_fail}]] + [[${dmg_ctx310_2_fail}]];
-    var sum_avar = [[${uf5220_avar}]] + [[${progress_avar}]] + [[${ntx1000_avar}]] + [[${sk50_avar}]] + [[${apec_avar}]] + [[${dmg_dmu50_3_avar}]] + [[${dmg_dmu50_4_avar}]] + [[${dmg_ctx310_2_avar}]];
-    var sum_nagruzka = [[${uf5220_nagruzka}]] + [[${progress_nagruzka}]] + [[${ntx1000_nagruzka}]] + [[${sk50_nagruzka}]] + [[${dmg_dmu50_3_nagruzka}]] + [[${dmg_dmu50_4_nagruzka}]] + [[${dmg_ctx310_2_nagruzka}]];
+    var sum_avar = [[${ntx1000_avar}]] + [[${sk50_avar}]] + [[${apec_avar}]] + [[${dmg_dmu50_3_avar}]] + [[${dmg_dmu50_4_avar}]] + [[${dmg_ctx310_2_avar}]];
+    var sum_nagruzka = [[${ntx1000_nagruzka}]] + [[${sk50_nagruzka}]] + [[${dmg_dmu50_3_nagruzka}]] + [[${dmg_dmu50_4_nagruzka}]] + [[${dmg_ctx310_2_nagruzka}]];
     var sum_ruchoi = + [[${apec_ruchnoi}]];
 
     Highcharts.setOptions({
