@@ -355,6 +355,7 @@
 
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
     var sum_rabota = [[${maks_1_work}]] + [[${maks_2_work}]] + [[${m710_work}]] + [[${rtk12c_work}]] + [[${p250_work}]] + [[${krot_work}]] + [[${prans_work}]]
     var sum_pause = [[${maks_1_pass}]] + [[${maks_2_pass}]] + [[${m710_pass}]] + [[${rtk12c_pass}]] + [[${p250_pass}]] + [[${krot_pass}]] + [[${prans_pass}]]
     var sum_off = [[${maks_1_fail}]] + [[${maks_2_fail}]] + [[${m710_fail}]] + [[${rtk12c_fail}]] + [[${p250_fail}]] + [[${krot_fail}]] + [[${prans_fail}]]
