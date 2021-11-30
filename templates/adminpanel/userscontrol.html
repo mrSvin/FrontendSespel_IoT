@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Управление пользователями</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" href="../css/styles_header.css"/>
+    <style>
+        /* Таблица с текущими параметрами */
+        body {
+            margin: 0;
+            background: #ffffff;
+
+        }
+        table {
+            border-collapse: collapse;
+            line-height: 1.1;
+            background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+            color: #0C213B;
+
+        }
+        caption {
+
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .first {
+            padding: 5px 35px;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<body>
+
+<style>
+    body_table {
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        line-height: 1.4;
+        color: #333;
+        background-color: #fff;
+        padding: 0 5vw;
+    }
+
+    /* Standard Tables */
+
+    table {
+        margin: 1em 0;
+        border-collapse: collapse;
+        border: 0.1em solid #d6d6d6;
+    }
+
+    caption {
+        text-align: left;
+        font-style: italic;
+        padding: 0.25em 0.5em 0.5em 0.5em;
+    }
+
+    th,
+    td {
+        padding: 0.25em 0.5em 0.25em 1em;
+        vertical-align: text-top;
+        text-align: left;
+        text-indent: -0.5em;
+    }
+
+    th {
+        vertical-align: bottom;
+        background-color: #666;
+        color: #fff;
+    }
+
+    tr:nth-child(even) th[scope=row] {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(odd) th[scope=row] {
+        background-color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    tr:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    td:nth-of-type(2) {
+        font-style: italic;
+    }
+
+    th:nth-of-type(3),
+    td:nth-of-type(3) {
+        text-align: right;
+    }
+
+    /* Fixed Headers */
+
+    thead {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    /* th[scope=row] {
+      position: -webkit-sticky;
+      position: sticky;
+      left: 0;
+      z-index: 1;
+    } */
+
+    th[scope=row] {
+        vertical-align: top;
+        color: inherit;
+        background-color: inherit;
+        background: linear-gradient(90deg, transparent 0%, transparent calc(100% - .05em), #d6d6d6 calc(100% - .05em), #d6d6d6 100%);
+    }
+
+    table:nth-of-type(2) th:not([scope=row]):first-child {
+        left: 0;
+        z-index: 3;
+        background: linear-gradient(90deg, #666 0%, #666 calc(100% - .05em), #ccc calc(100% - .05em), #ccc 100%);
+    }
+
+    /* Strictly for making the scrolling happen. */
+
+
+    body {
+        padding-bottom: 90vh;
+    }
+
+</style>
+
+
+<style>
+
+    #myModal {
+        width: 400px; height: 600px;
+        margin: 0 auto;
+        padding: 18px 9px;
+        border-radius: 4px;
+        background: #fafafa;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        margin: auto;
+        display: none;
+        opacity: 0;
+        z-index: 38;
+        text-align: center;
+    }
+    #myModal #myModal__close {
+        width: 21px; height: 21px;
+        position: absolute;
+        top: 1px; right: 11px;
+        cursor: pointer;
+        display: block;
+        font-size: 29px;
+    }
+    #myOverlay {
+        z-index: 37;
+        position: fixed;
+        background-color: rgba(0,0,0,.7);
+        width: 100%; height: 100%;
+        top: 0; left: 0;
+        cursor :pointer;
+        display :none;
+    }
+</style>    <!--Всплывающее окно-->
+
+<table id="myTable" style="margin-left: auto; margin-right: auto;">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Имя пользователя</th>
+        <th>пароль</th>
+        <th>Права доступа</th>
+        <th>enabled</th>
+        <th>эл. почта</th>
+        <th>фото</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>    <!--Таблица изменений-->
+
+
+<a class="myLinkModal" href="#">Добавить пользователя</a>
+
+<form id="myModal" action="#" th:action="@{/adminpanel/userscontrol}" th:object="${usercontrol}" method="post">
+    <p>Добавление пользователя</p>
+    <span id="myModal__close" class="close">ₓ</span>
+    <p style="margin: 1%"> Имя: <textarea type="text" th:field="*{addusername}"></textarea></p>
+    <p style="margin: 1%"> Пароль: <textarea type="text" th:field="*{adduserpassword}"></textarea></p>
+    <p style="margin: 1%"> Права доступа: <textarea type="text" th:field="*{addrole}"></textarea></p>
+    <p style="margin: 1%"> enabled: <textarea type="text" th:field="*{addenabled}"></textarea></p>
+    <p style="margin: 1%"> Почта: <textarea type="text" th:field="*{addmail}"></textarea></p>
+    <p style="margin: 1%"> Фото: <textarea type="text" th:field="*{addphoto}"></textarea></p>
+    <p style="margin: 1%"><input type="submit" value="Добавить" /></p>
+</form>
+<div id="myOverlay"></div>
+
+
+<script>
+    $(document).ready(function() {
+        $('a.myLinkModal').click( function(event){
+            event.preventDefault();
+            $('#myOverlay').fadeIn(297, function(){
+                $('#myModal')
+                    .css('display', 'block')
+                    .animate({opacity: 1}, 198);
+            });
+        });
+
+        $('#myModal__close, #myOverlay').click( function(){
+            $('#myModal').animate({opacity: 0}, 198,
+                function(){
+                    $(this).css('display', 'none');
+                    $('#myOverlay').fadeOut(297);
+                });
+        });
+    });
+</script>
+
+<script th:inline="javascript">
+
+    var id = [[${id}]];
+    var username = [[${username}]];
+    var enabled = [[${enabled}]];
+    var mail = [[${mail}]];
+    var photo = [[${photo}]];
+    var role = [[${role}]];
+
+
+    $.each( id, function( index ){
+        $("#myTable > tbody").append(
+            "<tr>" +
+            "<td>" + id[index] + "</td>" +
+            "<td>"+ username[index] + "</td>" +
+            "<td>" + "*********" + "</td>" +
+            "<td>"+ role[index] + "</td>" +
+            "<td>"+ enabled[index] + "</td>" +
+            "<td>"+ mail[index] + "</td>" +
+            "<td>"+ photo[index] + "</td>" +
+            "</tr>" );
+    });
+</script> <!--JS таблица-->
+
+</body>
+</html>

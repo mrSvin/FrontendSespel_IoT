@@ -217,6 +217,8 @@
         </div>
     </form>
 
+    <input type='button' id='clear' value='Смена цвета'/>
+
 </div>      <!--Календарь html-->
 
 <div style="display: flex; justify-content: space-between">
@@ -1035,6 +1037,50 @@
     var dmg_ctx310_2_avar = [[${avar_dmg_ctx310_2}]];
 </script>   <!--ctx310_2 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_dmg_ctx310_2.js"></script>
+
+
+
+<script>
+    <!--    переменная состояния темы страницы-->
+    var count = 0;
+
+    //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
+    if(localStorage['count'] != null) {
+        count = parseInt(window.localStorage['count']);
+    }
+
+    // Условия для смены цвета вне нажатия на кнопку
+    if (count == 0)
+    {
+        document.body.style.backgroundColor = "white";
+    }
+    else if (count == 1)
+    {
+        document.body.style.backgroundColor = "black";
+    }
+
+    // Смена цвета по кнопке
+    $("#clear").on("click", function() {
+        count++; // увеличиваем счетчик
+        if(count > 1) // если он больше 1, меняем на ноль
+        {
+            count = 0;
+        }
+        window.localStorage['count'] = count; // сохраняем переменную в локальном хранилище
+
+        // Условия для смены цвета после нажатия на кнопку
+        if (count == 0)
+        {
+            document.body.style.backgroundColor = "white";
+        }
+        else if (count == 1)
+        {
+            document.body.style.backgroundColor = "black";
+        }
+    });
+
+
+</script>
 
 </body>
 </html>

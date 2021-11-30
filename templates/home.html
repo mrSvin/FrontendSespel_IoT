@@ -25,6 +25,7 @@
                 <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
                 <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
+                <p th:text="${user_role}"></p>
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
                         Выход
