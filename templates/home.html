@@ -113,11 +113,13 @@
 
     if(role_status === "ROLE_ADMIN")
     {
-        document.getElementById("role_vision").innerHTML = "Админ";
+        document.getElementsByClassName("role_vision").innerHTML = "Админ";
+        console.log("Первое условие выполнилось");
     }
     else if (role_status === "ROLE_USER")
     {
-        document.getElementById("role_vision").innerHTML = "Пользователь"
+        document.getElementsByClassName("role_vision").innerHTML = "Пользователь"
+        console.log("Второе условие выполнилось");
     }
 </script>
 </body>
