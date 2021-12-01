@@ -26,7 +26,7 @@
                 <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
                 <p id="role_vision"></p>
-                <button id="admin" onclick="window.location.href = 'adduser';">Администрирование</button>
+                <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
                         Выход
