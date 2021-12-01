@@ -50,7 +50,7 @@ td {
     font-family: "Open Sans", sans-serif;
     right: 0;
     min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 12px 0px #989292;
     border-radius: 5px; /* Уголки */
     margin: 8%;
     background-color: #ffffff;
@@ -71,6 +71,12 @@ td {
     height: 100px;
     object-fit: cover;
 }
+
+.dropdown-content p {
+    color: #545050;
+    font-size: 14px;
+}
+
 
 .dropdown-content:hover {
     background-color: #f1f1f1;
@@ -153,5 +159,4 @@ td {
 }
 
 #role_vision {
-    font-size: 19px;
 }

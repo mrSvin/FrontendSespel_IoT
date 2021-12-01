@@ -23,9 +23,10 @@
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center">
                 <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
-                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
+                <li style="font-weight: 400; font-size: 120%; color: #000000" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
                 <p id="role_vision"></p>
+                <div style=" display: block; border-bottom: 1px solid #e8eaed; line-height: normal"></div>
                 <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
@@ -111,13 +112,13 @@
 
     if(role_status === "ROLE_ADMIN")
     {
-        document.getElementById("role_vision").innerHTML = "Админ";
+        document.getElementById("role_vision").innerHTML = "Роль: Админ";
         document.getElementById("admin").style.display = "inline";
 
     }
     else if (role_status === "ROLE_USER")
     {
-        document.getElementById("role_vision").innerHTML = "Пользователь"
+        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
         document.getElementById("admin").style.display = "none";
     }
 </script>
