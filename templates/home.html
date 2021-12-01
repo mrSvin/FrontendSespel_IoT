@@ -21,14 +21,13 @@
         <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
         <div method="post" class="dropdown" style="float: right">
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
-            <div class="dropdown-content" style="float: right; text-align: center">
+            <div class="dropdown-content" style="float: right; text-align: center; background-color: whitesmoke">
                 <p id="role_vision"></p>
                 <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
-                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
-                <div style=" display: block; border-bottom: 1px solid #e8eaed; line-height: normal"></div>
+                <li style="font-weight: 400; font-size: 18px" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
-                <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование
-                </button>
+                <div style=" display: block; border-bottom: 1px solid #e8eaed; line-height: normal"></div>
+                <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
                         Выход
