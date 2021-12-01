@@ -4,8 +4,8 @@
     <meta charset="utf-8"/>
     <title>Home</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
-    <link rel="stylesheet" type="text/css" href="css/styles_home.css"/>
-    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/styles_home.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/styles_header.css"/>
     <script>
         window.onload = function () {
             document.body.classList.add('loaded_hiding');
@@ -18,14 +18,15 @@
 </head>
 <header>
     <ul class="hr">
-        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
+        <a href="home" ><img style="margin: 0.1%" src="../images/logo_black.png" class="icon-logo"/> </a>
         <div method="post" class="dropdown" style="float: right">
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center">
                 <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
                 <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
-                <p th:text="${user_role}"></p>
+                <!--                <p th:text="${user_role}"></p>-->
+                <p class="role_vision"></p>
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
                         Выход
@@ -105,5 +106,20 @@
         <h2>Teamcenter</h2>
     </a>
 </div>
+
+<script th:inline="javascript">
+    var role_status = [[${user_role}]];
+    console.log(role_status);
+
+
+    if(role_status === "ROLE_ADMIN")
+    {
+        document.getElementById("role_vision").innerHTML = "Админ";
+    }
+    else if (role_status === "ROLE_USER")
+    {
+        document.getElementById("role_vision").innerHTML = "Пользователь"
+    }
+</script>
 </body>
 </html>
