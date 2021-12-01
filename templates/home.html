@@ -26,7 +26,7 @@
                 <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
                 <li style="font-weight: 400; font-size: 18px" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
-                <div style=" display: block; border-bottom: 1px solid #e8eaed; line-height: normal"></div>
+                <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
                 <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
