@@ -49,10 +49,10 @@
     <thead>
     <tr style="position: sticky; width: 100%; margin-top: 90px; top: 108px; z-index: 2">
         <th>ID</th>
-        <th>Имя пользователя</th>
+        <th>Логин</th>
         <th>Пароль</th>
         <th>Права доступа</th>
-        <th>Enabled</th>
+        <th>Активность</th>
         <th>Электронная почта</th>
         <th>Фото</th>
     </tr>
@@ -62,15 +62,28 @@
 </table>    <!--Таблица изменений-->
 
 <form id="myModal" action="#" th:action="@{/adminpanel/adduser}" th:object="${usercontrol}" method="get">
-    <p>Добавление пользователя</p>
-    <span id="myModal__close" class="close">ₓ</span>
-    <p style="margin: 1%"> Имя: <textarea type="text" th:field="*{addusername}"></textarea></p>
-    <p style="margin: 1%"> Пароль: <textarea type="text" th:field="*{adduserpassword}"></textarea></p>
-    <p style="margin: 1%"> Права доступа: <textarea type="text" th:field="*{addrole}"></textarea></p>
-    <p style="margin: 1%"> enabled: <textarea type="text" th:field="*{addenabled}"></textarea></p>
-    <p style="margin: 1%"> Почта: <textarea type="text" th:field="*{addmail}"></textarea></p>
-    <p style="margin: 1%"> Фото: <textarea type="text" th:field="*{addphoto}"></textarea></p>
-    <p style="margin: 1%"><input type="submit" value="Добавить" /></p>
+    <div class="add_user_form">
+        <p>Добавление пользователя</p>
+        <span id="myModal__close" class="close">ₓ</span>
+        <p>Логин: <input th:field="*{addusername}"></p>
+    <!--    <p> Имя: <textarea type="text" th:field="*{addusername}"></textarea></p>-->
+        <p>Пароль: <input type="password" name="pwd" pattern=(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,} th:field="*{adduserpassword}" title="Пароль должен содержать минимум 1 цифру, заглавную и строчную буквы и быть не менее 7 символов"></p>
+    <!--    <p> Пароль: <textarea type="text" th:field="*{adduserpassword}"></textarea></p>-->
+    <!--    <p> Права доступа: <textarea type="text" th:field="*{addrole}"></textarea></p>-->
+        <p>Почта: <input th:field="*{addmail}"></p>
+        <p>Фото: <input th:field="*{addphoto}"></p>
+        <!--        <p> Почта: <textarea type="text" th:field="*{addmail}"></textarea></p>-->
+        <!--        <p> Фото: <textarea type="text" th:field="*{addphoto}"></textarea></p>-->
+        <p>Права доступа: <select name="list_roles">
+            <option value="ROLE_USER" th:field="*{addrole}" selected>Пользователь</option>
+            <option value="ROLE_ADMIN" th:field="*{addrole}">Администратор</option>
+        </select></p>
+        <p>Активность:</p>
+            <label><input type="radio" name="role" value=1 th:field="*{addenabled}" checked >Активен</label>
+            <label><input type="radio" name="role" value=0 th:field="*{addenabled}">Заблокирован</label>
+<!--        <p> enabled: <textarea type="text" th:field="*{addenabled}"></textarea></p>-->
+        <p><input type="submit" value="Добавить" /></p>
+    </div>
 </form>
 <div id="myOverlay"></div>
 
