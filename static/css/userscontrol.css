@@ -160,8 +160,8 @@ td > img {
     margin: 3%;
     transition: 1s;
     border-radius: 360px;
-    min-width: 100px;
-    min-height: 100px;
+    width: 100px;
+    height: 100px;
     margin-top:0;
 }
 
