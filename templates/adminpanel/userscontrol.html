@@ -4,230 +4,62 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Управление пользователями</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
-    <link rel="stylesheet" type="text/css" href="../css/styles_header.css"/>
-    <style>
-        /* Таблица с текущими параметрами */
-        body {
-            margin: 0;
-            background: #ffffff;
+    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="css/userscontrol.css"/>
 
-        }
-        table {
-            border-collapse: collapse;
-            line-height: 1.1;
-            background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
-            color: #0C213B;
-
-        }
-        caption {
-
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .first {
-            padding: 5px 35px;
-            font-size: 1em;
-            font-weight: bold;
-            text-align: center;
-        }
-
-    </style>
 </head>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+
 <body>
-
 <style>
-    body_table {
-        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
-        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-        line-height: 1.4;
-        color: #333;
-        background-color: #fff;
-        padding: 0 5vw;
-    }
-
-    /* Standard Tables */
-
-    table {
-        margin: 1em 0;
-        border-collapse: collapse;
-        border: 0.1em solid #d6d6d6;
-    }
-
-    caption {
-        text-align: left;
-        font-style: italic;
-        padding: 0.25em 0.5em 0.5em 0.5em;
-    }
-
-    th,
-    td {
-        padding: 0.25em 0.5em 0.25em 1em;
-        vertical-align: text-top;
-        text-align: left;
-        text-indent: -0.5em;
-    }
-
-    th {
-        vertical-align: bottom;
-        background-color: #666;
-        color: #fff;
-    }
-
-    tr:nth-child(even) th[scope=row] {
-        background-color: #f2f2f2;
-    }
-
-    tr:nth-child(odd) th[scope=row] {
-        background-color: #fff;
-    }
-
-    tr:nth-child(even) {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    tr:nth-child(odd) {
-        background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    td:nth-of-type(2) {
-        font-style: italic;
-    }
-
-    th:nth-of-type(3),
-    td:nth-of-type(3) {
-        text-align: right;
-    }
-
-    /* Fixed Headers */
-
-    thead {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        z-index: 2;
-    }
-
-    /* th[scope=row] {
-      position: -webkit-sticky;
-      position: sticky;
-      left: 0;
-      z-index: 1;
-    } */
-
-    th[scope=row] {
-        vertical-align: top;
-        color: inherit;
-        background-color: inherit;
-        background: linear-gradient(90deg, transparent 0%, transparent calc(100% - .05em), #d6d6d6 calc(100% - .05em), #d6d6d6 100%);
-    }
-
-    table:nth-of-type(2) th:not([scope=row]):first-child {
-        left: 0;
-        z-index: 3;
-        background: linear-gradient(90deg, #666 0%, #666 calc(100% - .05em), #ccc calc(100% - .05em), #ccc 100%);
-    }
-
-    /* Strictly for making the scrolling happen. */
-
-
-    body {
-        padding-bottom: 90vh;
-    }
 
 </style>
 
 
-<style>
-
-    #myModal {
-        width: 400px; height: 600px;
-        margin: 0 auto;
-        padding: 18px 9px;
-        border-radius: 4px;
-        background: #fafafa;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        margin: auto;
-        display: none;
-        opacity: 0;
-        z-index: 38;
-        text-align: center;
-    }
-    #myModal #myModal__close {
-        width: 21px; height: 21px;
-        position: absolute;
-        top: 1px; right: 11px;
-        cursor: pointer;
-        display: block;
-        font-size: 29px;
-    }
-    #myOverlay {
-        z-index: 37;
-        position: fixed;
-        background-color: rgba(0,0,0,.7);
-        width: 100%; height: 100%;
-        top: 0; left: 0;
-        cursor :pointer;
-        display :none;
-    }
-
-    #myModal2 {
-        width: 400px; height: 600px;
-        margin: 0 auto;
-        padding: 18px 9px;
-        border-radius: 4px;
-        background: #fafafa;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        margin: auto;
-        display: none;
-        opacity: 0;
-        z-index: 38;
-        text-align: center;
-    }
-    #myModal2 #myModal2__close {
-        width: 21px; height: 21px;
-        position: absolute;
-        top: 1px; right: 11px;
-        cursor: pointer;
-        display: block;
-        font-size: 29px;
-    }
-    #myOverlay2 {
-        z-index: 37;
-        position: fixed;
-        background-color: rgba(0,0,0,.7);
-        width: 100%; height: 100%;
-        top: 0; left: 0;
-        cursor :pointer;
-        display :none;
-    }
-
-</style>    <!--Всплывающее окно-->
-
-<table id="myTable" style="margin-left: auto; margin-right: auto;">
+<header style="position: fixed; width: 100vw; top: 0px; z-index: 3">
+    <ul class="hr">
+        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
+        <div method="post" class="dropdown" style="float: right">
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
+            <div class="dropdown-content" style="float: right; text-align: center; background-color: whitesmoke">
+                <p id="role_vision"></p>
+                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
+                <li style="font-weight: 400; font-size: 18px" th:text="${user_name}"></li>
+                <p th:text="${user_mail}"></p>
+                <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
+                <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
+                <form th:action="@{/logout}" method="post">
+                    <button class="follow" type="submit">
+                        Выход
+                    </button>
+                </form>
+            </div>
+        </div>
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
+    </ul>       <!--Шапка html-->
+</header>       <!--Шапка html-->
+<div style="position: fixed; width: 100vw; top: 60px; z-index: 2; background-color: rgb(36, 97, 219);height: 50px; display:flex; align-items: flex-end; ">
+    <a class="myLinkModal" href="#" style="">Добавить пользователя</a>
+    <a class="myLinkModal2" href="#">Удалить пользователя</a>
+</div>
+<table id="myTable" style="margin-left: auto; margin-right: auto; margin-top: 100px; position: sticky; width: 80vw">
     <thead>
-    <tr>
-        <th>id</th>
+    <tr style="position: sticky; width: 100%; margin-top: 90px; top: 108px; z-index: 2">
+        <th>ID</th>
         <th>Имя пользователя</th>
-        <th>пароль</th>
+        <th>Пароль</th>
         <th>Права доступа</th>
-        <th>enabled</th>
-        <th>эл. почта</th>
-        <th>фото</th>
+        <th>Enabled</th>
+        <th>Электронная почта</th>
+        <th>Фото</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="margin-top: 100px">
     </tbody>
 </table>    <!--Таблица изменений-->
-
-
-<a class="myLinkModal" href="#">Добавить пользователя</a>
-<a class="myLinkModal2" href="#">Удалить пользователя</a>
 
 <form id="myModal" action="#" th:action="@{/adminpanel/adduser}" th:object="${usercontrol}" method="get">
     <p>Добавление пользователя</p>
@@ -297,11 +129,10 @@
 
     var id = [[${id}]];
     var username = [[${username}]];
+    var role = [[${role}]];
     var enabled = [[${enabled}]];
     var mail = [[${mail}]];
     var photo = [[${photo}]];
-    var role = [[${role}]];
-
 
     $.each( id, function( index ){
         $("#myTable > tbody").append(
@@ -312,10 +143,24 @@
             "<td>"+ role[index] + "</td>" +
             "<td>"+ enabled[index] + "</td>" +
             "<td>"+ mail[index] + "</td>" +
-            "<td>"+ photo[index] + "</td>" +
-            "</tr>" );
+            "<td>"+ "<img src='" + photo[index] + "' class='avatar' style='border-radius: 360px; min-width: 100px; min-height: 100px; margin-top:0; ' onerror=\"this.style.display='none'\"/>" + "</td>" +
+            "</tr>" ); // Отображение фото по ссылке
     });
 </script> <!--JS таблица-->
+<script th:inline="javascript">
+    var role_status = [[${user_role}]];
 
+    if(role_status === "ROLE_ADMIN")
+    {
+        document.getElementById("role_vision").innerHTML = "Роль: Админ";
+        document.getElementById("admin").style.display = "inline";
+
+    }
+    else if (role_status === "ROLE_USER")
+    {
+        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
+        document.getElementById("admin").style.display = "none";
+    }
+</script>
 </body>
 </html>

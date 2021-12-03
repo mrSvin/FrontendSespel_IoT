@@ -1,0 +1,150 @@
+
+body {
+    margin: 0;
+}
+
+table {
+    margin: 1em 0;
+    border-collapse: collapse;
+    border: 0.1em solid #ffffff;
+    border-color: #7aade3;
+}
+
+th,
+td {
+    padding: 0.25em 0.5em 0.25em 1em;
+    vertical-align: text-top;
+    text-align: left;
+    text-indent: -0.5em;
+    font-size: 22px;
+    border-color: #7aade3;
+}
+
+th {
+    vertical-align: bottom;
+    background-color: #4e86be;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+th:nth-of-type(n),
+td:nth-of-type(n) {
+    font-style: italic;
+    text-align: left;
+}
+
+td:nth-of-type(7) {
+    text-align: center;
+}
+
+
+
+#myModal {
+    width: 400px; height: 600px;
+    margin: 0 auto;
+    padding: 18px 9px;
+    border-radius: 4px;
+    background: #fafafa;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    margin: auto;
+    display: none;
+    opacity: 0;
+    z-index: 38;
+    text-align: center;
+}
+#myModal #myModal__close {
+    width: 21px; height: 21px;
+    position: absolute;
+    top: 1px; right: 11px;
+    cursor: pointer;
+    display: block;
+    font-size: 29px;
+}
+#myOverlay {
+    z-index: 37;
+    position: fixed;
+    background-color: rgba(0,0,0,.7);
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    cursor :pointer;
+    display :none;
+}
+
+#myModal2 {
+    width: 400px; height: 600px;
+    margin: 0 auto;
+    padding: 18px 9px;
+    border-radius: 4px;
+    background: #fafafa;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    margin: auto;
+    display: none;
+    opacity: 0;
+    z-index: 38;
+    text-align: center;
+}
+#myModal2 #myModal2__close {
+    width: 21px; height: 21px;
+    position: absolute;
+    top: 1px; right: 11px;
+    cursor: pointer;
+    display: block;
+    font-size: 29px;
+}
+#myOverlay2 {
+    z-index: 37;
+    position: fixed;
+    background-color: rgba(0,0,0,.7);
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    cursor :pointer;
+    display :none;
+}
+
+.myLinkModal{
+    display: flex;
+    background-color: #e7f3ff;
+    padding: 10px;
+    margin: 5px;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    font-family: arial;
+    font-weight: bolder;
+    color: #385898;
+}
+
+.myLinkModal:hover{
+    color: #0749dc;
+    background-color: #bdcad7;
+    transition: 1s;
+}
+
+.myLinkModal2{
+    display: flex;
+    background-color: #fc3c3c;
+    padding: 10px;
+    margin: 5px;
+    margin-left: 20px;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    font-family: arial;
+    font-weight: bolder;
+    color: #eee7e7;
+}
+
+.myLinkModal2:hover{
+    color: #c4bdbd;
+    background-color: #ff0000;
+    transition: 1s;
+}
