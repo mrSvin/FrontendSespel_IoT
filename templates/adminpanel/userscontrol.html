@@ -134,6 +134,8 @@
     var mail = [[${mail}]];
     var photo = [[${photo}]];
     var id = [1,24,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,20,21,22,23];
+    var im1 = "<img src=\'";
+    var im2 = "\'class=\'avatar\' style=\'border-radius: 360px; min-width: 100px; min-height: 100px; margin-top:0; \'/>"
     // var username = ['admin','adykov_av','alexandrov_pv','anaskin_ie','atamanchuk_me','buklov_av','chesnokov_av','danilova_tv','dubinin_vi','fadeeva_ni','galkin_sa','ilyin_se','ivanov_an','kirillov_rv','konstantionov_va','maksimov_sv','oksana','petrov_ev','sarandaev_mv','sava','suhouzdov_aa','user'];
     // var enabled = ['1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'];
     // var mail = ['alva@sespel.com','adal@sespel.com','alpe@sespel.com','','miat@sespel.com','albu@sespel.com','chan@sespel.com','tada@sespel.com','vldu@sespel.com','','gase@sespel.com','ilse@sespel.com','','roki@sespel.com','kovl@sespel.com','','','','masa@sespel.com','','ansu@sespel.com','user@user.com'];
@@ -149,7 +151,7 @@
             "<td>"+ role[index] + "</td>" +
             "<td>"+ enabled[index] + "</td>" +
             "<td>"+ mail[index] + "</td>" +
-            "<td>"+ "<img src=" + photo[index] + " class='avatar' style='border-radius: 360px; min-width: 100px; min-height: 100px; margin-top:0; '/>" + "</td>" +
+            "<td>"+ im1 + photo[index] + im2 + "</td>" +
             "</tr>" );
     });
 </script> <!--JS таблица-->
