@@ -153,3 +153,15 @@ td:nth-of-type(7) {
     background-color: #ff0000;
     transition: 1s;
 }
+
+td > img {
+    vertical-align: middle;
+    object-fit: cover;
+    margin: 3%;
+    transition: 1s;
+    border-radius: 360px;
+    min-width: 100px;
+    min-height: 100px;
+    margin-top:0;
+}
+
