@@ -9,19 +9,19 @@ table {
     border-spacing: 0;
     border: 0.1em solid #ffffff;
     border-color: #7aade3;
-    border-width: 2px;
+    border-width: 1px;
     /*width: 80vw;*/
 }
 
 th,
 td {
     padding: 0.25em 0.5em 0.25em 1em;
-    vertical-align: text-top;
+    vertical-align: center;
     text-align: left;
     text-indent: -0.5em;
     font-size: 22px;
     border-color: #7aade3;
-    border-width: 2px;
+    border-width: 1px;
 }
 
 th {
