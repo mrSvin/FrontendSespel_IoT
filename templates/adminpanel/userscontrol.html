@@ -42,10 +42,10 @@
     </ul>       <!--Шапка html-->
 </header>       <!--Шапка html-->
 <div style="display: flex; justify-content: center; position: fixed; width: 100vw; top: 60px; z-index: 2; background-color: rgb(36, 97, 219);height: 50px; display:flex; align-items: flex-end; ">
-    <a class="myLinkModal" href="#" style="">Добавить пользователя</a>
-    <a class="myLinkModal2" href="#">Удалить пользователя</a>
+    <a class="link_add" href="#" style="">Добавить пользователя</a>
+    <a class="link_delete" href="#">Удалить пользователя</a>
 </div>
-<table id="myTable" style="margin-left: auto; margin-right: auto; margin-top: 100px; position: sticky; width: 80vw">
+<table id="table_users" style="margin-left: auto; margin-right: auto; margin-top: 100px; position: sticky; width: 80vw">
     <thead>
     <tr style="position: sticky; width: 100%; margin-top: 90px; top: 108px; z-index: 2">
         <th>ID</th>
@@ -61,19 +61,14 @@
     </tbody>
 </table>    <!--Таблица изменений-->
 
-<form id="myModal" action="#" th:action="@{/adminpanel/adduser}" th:object="${usercontrol}" method="get">
+<form id="form_add" action="#" th:action="@{/adminpanel/adduser}" th:object="${usercontrol}" method="get">
     <div class="add_user_form">
         <p>Добавление пользователя</p>
-        <span id="myModal__close" class="close">ₓ</span>
+        <span id="form_add__close" class="close">ₓ</span>
         <p>Логин: <input id="login" th:field="*{addusername}" /></p>
-    <!--    <p> Имя: <textarea type="text" th:field="*{addusername}"></textarea></p>-->
         <p>Пароль: <input id="pwd" type="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}" th:field="*{adduserpassword}" title="Пароль должен содержать минимум 1 цифру, заглавную и строчную буквы и быть не менее 7 символов"/></p>
-    <!--    <p> Пароль: <textarea type="text" th:field="*{adduserpassword}"></textarea></p>-->
-    <!--    <p> Права доступа: <textarea type="text" th:field="*{addrole}"></textarea></p>-->
         <p>Почта: <input id="mail" name="mail" th:field="*{addmail}"/></p>
         <p>Фото: <input id="photo" name="photo" th:field="*{addphoto}"/></p>
-        <!--        <p> Почта: <textarea type="text" th:field="*{addmail}"></textarea></p>-->
-        <!--        <p> Фото: <textarea type="text" th:field="*{addphoto}"></textarea></p>-->
         <p>Права доступа:
             <select id="list_roles" th:field="*{addrole}" >
                 <option label="Пользователь" value="ROLE_USER"></option>
@@ -81,39 +76,39 @@
             </select>
         </p>
         <p>Активность:</p>
-            <label><input type="radio" name="role" value="1" id="role" th:field="*{addenabled}" checked="checked"/>Активен</label>
+            <label><input type="radio" name="role" value="1" id="role" th:field="*{addenabled}"/>Активен</label>
             <label><input type="radio" name="role" value="0" th:field="*{addenabled}"/>Заблокирован</label>
 <!--        <p> enabled: <textarea type="text" th:field="*{addenabled}"></textarea></p>-->
         <p><input type="submit" value="Добавить" /></p>
     </div>
 </form>
-<div id="myOverlay"></div>
+<div id="overlay_add"></div>
 
-<form id="myModal2" action="#" th:action="@{/adminpanel/userdelete}" th:object="${usercontrol}" method="get">
+<form id="form_delete" action="#" th:action="@{/adminpanel/userdelete}" th:object="${usercontrol}" method="get">
     <p>Удаление пользователя</p>
-    <span id="myModal2__close" class="close">ₓ</span>
+    <span id="form_delete__close" class="close">ₓ</span>
     <p style="margin: 1%"> Введите имя удаляемого пользователя: <textarea type="text" th:field="*{deleteUser}"></textarea></p>
     <p style="margin: 1%"><input type="submit" value="Удалить" /></p>
 </form>
-<div id="myOverlay2"></div>
+<div id="overlay_delete"></div>
 
 
 <script>
     $(document).ready(function() {
-        $('a.myLinkModal').click( function(event){
+        $('a.link_add').click( function(event){
             event.preventDefault();
-            $('#myOverlay').fadeIn(297, function(){
-                $('#myModal')
+            $('#overlay_add').fadeIn(297, function(){
+                $('#form_add')
                     .css('display', 'block')
                     .animate({opacity: 1}, 198);
             });
         });
 
-        $('#myModal__close, #myOverlay').click( function(){
-            $('#myModal').animate({opacity: 0}, 198,
+        $('#form_add__close, #overlay_add').click( function(){
+            $('#form_add').animate({opacity: 0}, 198,
                 function(){
                     $(this).css('display', 'none');
-                    $('#myOverlay').fadeOut(297);
+                    $('#overlay_add').fadeOut(297);
                 });
         });
     });
@@ -121,20 +116,20 @@
 
 <script>
     $(document).ready(function() {
-        $('a.myLinkModal2').click( function(event){
+        $('a.link_delete').click( function(event){
             event.preventDefault();
-            $('#myOverlay2').fadeIn(297, function(){
-                $('#myModal2')
+            $('#overlay_delete').fadeIn(297, function(){
+                $('#form_delete')
                     .css('display', 'block')
                     .animate({opacity: 1}, 198);
             });
         });
 
-        $('#myModal2__close, #myOverlay2').click( function(){
-            $('#myModal2').animate({opacity: 0}, 198,
+        $('#form_delete__close, #overlay_delete').click( function(){
+            $('#form_delete').animate({opacity: 0}, 198,
                 function(){
                     $(this).css('display', 'none');
-                    $('#myOverlay2').fadeOut(297);
+                    $('#overlay_delete').fadeOut(297);
                 });
         });
     });
@@ -158,7 +153,7 @@
 
 
     $.each( id, function( index ){
-        $("#myTable > tbody").append(
+        $("#table_users > tbody").append(
             "<tr>" +
             "<td>" + id[index] + "</td>" +
             "<td>"+ username[index] + "</td>" +
@@ -187,23 +182,23 @@
     }
 </script>
 <script>  // Скрипт для запрета отправки незаполненной формы
-    $('role')[0].checked = "true" // задать активность по умолчанию
+    // $('role')[0].checked = "true" // задать активность по умолчанию
 
 
-    $("#myModal").submit(function(event) {
-            if(!$("#myModal #login").val()){ // если значение условия нулевое, то условие выполняется.
+    $("#form_add").submit(function(event) {
+            if(!$("#form_add #login").val()){ // если значение условия нулевое, то условие выполняется.
                 alert("Введите логин");
                 event.preventDefault();  // Запрет на отправку
             } else
-            if(!$("#myModal #pwd").val()){
+            if(!$("#form_add #pwd").val()){
                 alert("Введите пароль");
                 event.preventDefault();
             } else
-            if(!$("#myModal #mail").val()){
+            if(!$("#form_add #mail").val()){
                 alert("Введите почту");
                 event.preventDefault();
             } else
-            if(!$("#myModal #photo").val()){
+            if(!$("#form_add #photo").val()){
                 alert("Вставьте ссылку на фото");
                 event.preventDefault();
             }
