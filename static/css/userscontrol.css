@@ -51,7 +51,7 @@ td:nth-of-type(7) {
 
 
 
-#myModal {
+#form_add {
     width: 400px; height: 600px;
     margin: 0 auto;
     padding: 18px 9px;
@@ -65,7 +65,7 @@ td:nth-of-type(7) {
     z-index: 38;
     text-align: center;
 }
-#myModal #myModal__close {
+#form_add #form_add__close {
     width: 21px; height: 21px;
     position: absolute;
     top: 1px; right: 11px;
@@ -73,7 +73,7 @@ td:nth-of-type(7) {
     display: block;
     font-size: 29px;
 }
-#myOverlay {
+#overlay_add {
     z-index: 37;
     position: fixed;
     background-color: rgba(0,0,0,.7);
@@ -83,7 +83,7 @@ td:nth-of-type(7) {
     display :none;
 }
 
-#myModal2 {
+#form_delete {
     width: 400px; height: 600px;
     margin: 0 auto;
     padding: 18px 9px;
@@ -97,7 +97,7 @@ td:nth-of-type(7) {
     z-index: 38;
     text-align: center;
 }
-#myModal2 #myModal2__close {
+#form_delete #form_delete__close {
     width: 21px; height: 21px;
     position: absolute;
     top: 1px; right: 11px;
@@ -105,7 +105,7 @@ td:nth-of-type(7) {
     display: block;
     font-size: 29px;
 }
-#myOverlay2 {
+#overlay_delete {
     z-index: 37;
     position: fixed;
     background-color: rgba(0,0,0,.7);
@@ -115,7 +115,7 @@ td:nth-of-type(7) {
     display :none;
 }
 
-.myLinkModal{
+.link_add{
     display: flex;
     background-color: #e7f3ff;
     padding: 10px;
@@ -128,13 +128,13 @@ td:nth-of-type(7) {
     color: #385898;
 }
 
-.myLinkModal:hover{
+.link_add:hover{
     color: #0749dc;
     background-color: #bdcad7;
     transition: 1s;
 }
 
-.myLinkModal2{
+.link_delete{
     display: flex;
     background-color: #e85959;
     padding: 10px;
@@ -148,7 +148,7 @@ td:nth-of-type(7) {
     color: #eee7e7;
 }
 
-.myLinkModal2:hover{
+.link_delete:hover{
     color: #c4bdbd;
     background-color: #ff0000;
     transition: 1s;
