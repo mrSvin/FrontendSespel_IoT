@@ -75,9 +75,9 @@
         <!--        <p> Почта: <textarea type="text" th:field="*{addmail}"></textarea></p>-->
         <!--        <p> Фото: <textarea type="text" th:field="*{addphoto}"></textarea></p>-->
         <p>Права доступа:
-            <select id="list_roles">
-                <option label="Пользователь" value="ROLE_USER" th:field="*{addrole}"></option>
-                <option label="Администратор" value="ROLE_ADMIN" th:field="*{addrole}"></option>
+            <select id="list_roles" th:field="*{addrole}">
+                <option label="Пользователь" value="ROLE_USER"></option>
+                <option label="Администратор" value="ROLE_ADMIN"></option>
             </select>
         </p>
         <p>Активность:</p>
