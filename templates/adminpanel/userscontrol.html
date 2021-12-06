@@ -204,32 +204,31 @@
 </script> <!-- Скрипт для запрета отправки незаполненной формы добавления пользователя -->
 
 <script>
-    var trigger = 0;
-    $("#form_delete").submit(function(event) {
+    var trigger = 0; // Триггер для выполнения отправки формы, 1 - да, 0 - нет
+    $("#form_delete").submit(function(event) { // При нажатии на кнопку удалить пользователя
         if (!$("#form_delete #delete_user").val()) { // если значение условия нулевое, то условие выполняется.
             alert("Введите логин удаляемого пользователя");
             event.preventDefault();  // Запрет на отправку
         }
 
-        else {
+        else { // если же значение не пустое, перебираем массив
             $.each(username, function (index, value){
-                    console.log('Индекс' + index + "Значение" + value);
-                    if (value === ($("#form_delete #delete_user").val())){
-                        trigger = 1;
-                        return false;
+                    if (value === ($("#form_delete #delete_user").val())){ // если был найден введенный элемент
+                        trigger = 1; // переключаем триггер
+                        return false; // выходим из цикла
                     }
                     else {
-                        trigger = 0;
+                        trigger = 0; // иначе обновляем триггер и продолжаем поиск
                     }
 
                 }
             );
-            if (trigger == 0) {
-                event.preventDefault();
+            if (trigger == 0) {  // если триггер не изменился
+                event.preventDefault(); // Запрет на отправку
                 alert("Нет такого пользователя");
             }
             else{
-                trigger == 1;
+                trigger == 1; // иначе, пользователь удален
                 alert("Пользователь " + value + "удален");
             }
             }
