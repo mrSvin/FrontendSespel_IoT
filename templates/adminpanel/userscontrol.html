@@ -186,9 +186,9 @@
         document.getElementById("admin").style.display = "none";
     }
 </script>
-<script>
+<script>  // Скрипт для запрета отправки незаполненной формы
     $("#myModal").submit(function(event) {
-        if (!$("#myModal #photo").val()) {
+        if ((!$("#myModal #login").val())&&(!$("#myModal #pwd").val())&&(!$("#myModal #photo").val())&&(!$("#myModal #mail").val())) {
             alert("Форма должна быть заполнена");
             event.preventDefault();  // this will prevent form submission
         }});
