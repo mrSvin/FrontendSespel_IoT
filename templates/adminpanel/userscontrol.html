@@ -202,27 +202,37 @@
             }
     });
 </script> <!-- Скрипт для запрета отправки незаполненной формы добавления пользователя -->
+
 <script>
-    // var lusername = ['admin','adykov_av','alexandrov_pv','anaskin_ie','atamanchuk_me','buklov_av','chesnokov_av','danilova_tv','dubinin_vi','fadeeva_ni','galkin_sa','ilyin_se','ivanov_an','kirillov_rv','konstantionov_va','maksimov_sv','oksana','petrov_ev','sarandaev_mv','sava','suhouzdov_aa','user'];
-    // $('role')[0].checked = "true" // задать активность по умолчанию
+    var trigger = 0;
     $("#form_delete").submit(function(event) {
-        if(!$("#form_delete #delete_user").val()){ // если значение условия нулевое, то условие выполняется.
+        if (!$("#form_delete #delete_user").val()) { // если значение условия нулевое, то условие выполняется.
             alert("Введите логин удаляемого пользователя");
             event.preventDefault();  // Запрет на отправку
         }
 
-        else
-            for (var i = 0; i < username.length; i++)
-            {
-                if (username[i] === ($("#form_delete #delete_user").val())) {
-                    alert("Есть такой пользователь");
-                    return true;
+        else {
+            $.each(username, function (index, value){
+                    console.log('Индекс' + index + "Значение" + value);
+                    if (value === ($("#form_delete #delete_user").val())){
+                        trigger = 1;
+                        return false;
+                    }
+                    else {
+                        trigger = 0;
+                    }
+
                 }
+            );
+            if (trigger == 0) {
+                event.preventDefault();
+                alert("Нет такого пользователя");
             }
-        if (username[i] === (!$("#form_delete #delete_user").val())) {
-            alert("Нет такого пользователя");
-            event.preventDefault();
-        }
+            else{
+                trigger == 0;
+                alert("Пользователь " + value + "удален");
+            }
+            }
 
     });
 </script> <!-- Скрипт для запрета отправки незаполненной формы удаления пользователя -->
