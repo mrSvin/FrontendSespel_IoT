@@ -87,7 +87,7 @@
 <form id="form_delete" action="#" th:action="@{/adminpanel/userdelete}" th:object="${usercontrol}" method="get">
     <p>Удаление пользователя</p>
     <span id="form_delete__close" class="close">ₓ</span>
-    <p style="margin: 1%"> Введите имя удаляемого пользователя: <textarea type="text" th:field="*{deleteUser}"></textarea></p>
+    <p style="margin: 1%"> Введите имя удаляемого пользователя: <input id="delete_user" th:field="*{deleteUser}" /></textarea></p>
     <p style="margin: 1%"><input type="submit" value="Удалить" /></p>
 </form>
 <div id="overlay_delete"></div>
@@ -180,11 +180,9 @@
         document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
         document.getElementById("admin").style.display = "none";
     }
-</script>
-<script>  // Скрипт для запрета отправки незаполненной формы
-    // $('role')[0].checked = "true" // задать активность по умолчанию
+</script> <!--Скрипт отображения в header  кнопки администрирование-->
 
-
+<script>
     $("#form_add").submit(function(event) {
             if(!$("#form_add #login").val()){ // если значение условия нулевое, то условие выполняется.
                 alert("Введите логин");
@@ -203,6 +201,34 @@
                 event.preventDefault();
             }
     });
+</script> <!-- Скрипт для запрета отправки незаполненной формы добавления пользователя -->
+<script>
+    // var lusername = ['admin','adykov_av','alexandrov_pv','anaskin_ie','atamanchuk_me','buklov_av','chesnokov_av','danilova_tv','dubinin_vi','fadeeva_ni','galkin_sa','ilyin_se','ivanov_an','kirillov_rv','konstantionov_va','maksimov_sv','oksana','petrov_ev','sarandaev_mv','sava','suhouzdov_aa','user'];
+    // $('role')[0].checked = "true" // задать активность по умолчанию
+    $("#form_delete").submit(function(event) {
+        if(!$("#form_delete #delete_user").val()){ // если значение условия нулевое, то условие выполняется.
+            alert("Введите логин удаляемого пользователя");
+            event.preventDefault();  // Запрет на отправку
+        }
+
+        else
+            for (var i = 0; i < username.length; i++)
+            {
+                if (username[i] === ($("#form_delete #delete_user").val())) {
+                    alert("Есть такой пользователь");
+                    return true;
+                }
+            }
+        if (username[i] === ($("#form_delete #delete_user").val())) {
+            alert("Нет такого пользователя");
+            event.preventDefault();
+        }
+
+    });
+</script> <!-- Скрипт для запрета отправки незаполненной формы удаления пользователя -->
+<script>
+
 </script>
+
 </body>
 </html>
