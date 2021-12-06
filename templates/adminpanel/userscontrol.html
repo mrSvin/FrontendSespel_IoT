@@ -87,7 +87,7 @@
 <form id="form_delete" action="#" th:action="@{/adminpanel/userdelete}" th:object="${usercontrol}" method="get">
     <p>Удаление пользователя</p>
     <span id="form_delete__close" class="close">ₓ</span>
-    <p style="margin: 1%"> Введите имя удаляемого пользователя: <input id="delete_user" th:field="*{deleteUser}" /></textarea></p>
+    <p style="margin: 1%"> Введите имя удаляемого пользователя: <input id="delete_user" th:field="*{deleteUser}" /></p>
     <p style="margin: 1%"><input type="submit" value="Удалить" /></p>
 </form>
 <div id="overlay_delete"></div>
@@ -219,7 +219,7 @@
                     return true;
                 }
             }
-        if (username[i] === ($("#form_delete #delete_user").val())) {
+        if (username[i] === (!$("#form_delete #delete_user").val())) {
             alert("Нет такого пользователя");
             event.preventDefault();
         }
