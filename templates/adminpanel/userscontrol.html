@@ -188,7 +188,7 @@
 </script>
 <script>
     $("#myModal").submit(function(event) {
-        if (!$("#myModal #pwd #photo #mail #role").val()) {
+        if (!$("#myModal #photo").val()) {
             alert("Форма должна быть заполнена");
             event.preventDefault();  // this will prevent form submission
         }});
