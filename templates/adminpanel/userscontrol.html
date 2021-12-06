@@ -81,7 +81,7 @@
             </select>
         </p>
         <p>Активность:</p>
-            <label><input type="radio" name="role" value="1" id="active_enab" th:field="*{addenabled}" checked="checked" selected="selected"/>Активен</label>
+            <label><input type="radio" name="role" value="1" id="role" th:field="*{addenabled}" checked="checked"/>Активен</label>
             <label><input type="radio" name="role" value="0" th:field="*{addenabled}"/>Заблокирован</label>
 <!--        <p> enabled: <textarea type="text" th:field="*{addenabled}"></textarea></p>-->
         <p><input type="submit" value="Добавить" /></p>
@@ -187,6 +187,7 @@
     }
 </script>
 <script>  // Скрипт для запрета отправки незаполненной формы
+    $('role')[0].checked = "true" // задать активность по умолчанию
 
 
     $("#myModal").submit(function(event) {
