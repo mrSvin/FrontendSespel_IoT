@@ -188,7 +188,8 @@
 </script>
 <script>  // Скрипт для запрета отправки незаполненной формы
     $("#myModal").submit(function(event) {
-        if((!$("#myModal #login").val()) && (!$("#myModal #pwd").val()) && (!$("#myModal #photo").val()) && (!$("#myModal #mail").val())) {
+        if(!$("#myModal #login, #pwd, #photo, #mail").val()){
+            // if((!$("#myModal #login").val()) && (!$("#myModal #pwd").val()) && (!$("#myModal #photo").val()) && (!$("#myModal #mail").val()))
             // if(($('.test').val() >= 1) && ($('.test').val() <= 100))
             alert("Форма должна быть заполнена");
             event.preventDefault();  // this will prevent form submission
