@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Управление пользователями</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
-    <link rel="stylesheet" type="text/css" href="../css/styles_header.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/userscontrol.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/userscontrol.css"/>
 
 </head>
 
@@ -187,13 +187,26 @@
     }
 </script>
 <script>  // Скрипт для запрета отправки незаполненной формы
+
+
     $("#myModal").submit(function(event) {
-        if(!$("#myModal #login, #pwd, #photo, #mail").val()){
-            // if((!$("#myModal #login").val()) && (!$("#myModal #pwd").val()) && (!$("#myModal #photo").val()) && (!$("#myModal #mail").val()))
-            // if(($('.test').val() >= 1) && ($('.test').val() <= 100))
-            alert("Форма должна быть заполнена");
-            event.preventDefault();  // this will prevent form submission
-        }});
+            if(!$("#myModal #login").val()){ // если значение условия нулевое, то условие выполняется.
+                alert("Введите логин");
+                event.preventDefault();  // Запрет на отправку
+            } else
+            if(!$("#myModal #pwd").val()){
+                alert("Введите пароль");
+                event.preventDefault();
+            } else
+            if(!$("#myModal #mail").val()){
+                alert("Введите почту");
+                event.preventDefault();
+            } else
+            if(!$("#myModal #photo").val()){
+                alert("Вставьте ссылку на фото");
+                event.preventDefault();
+            }
+    });
 </script>
 </body>
 </html>
