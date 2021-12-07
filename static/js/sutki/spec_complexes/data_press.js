@@ -19,7 +19,7 @@ Highcharts.setOptions({
         viewFullscreen: 'На весь экран'
     },
     global: {
-        timezoneOffset: timezone
+        timezoneOffset: new Date().getTimezoneOffset()
     }
 });
 
