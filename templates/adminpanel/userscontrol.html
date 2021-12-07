@@ -205,7 +205,7 @@
 
         if($("#form_add #login").val()){ // если значение не пустое
             $.each(username, function (index, value){
-                    if (value === ($("#form_delete #delete_user").val())){ // если был найден введенный элемент
+                    if (value === ($("#form_add #login").val())){ // если был найден введенный элемент
                         add_trigger = 1; // переключаем триггер
                         return false; // выходим из цикла
                     }
