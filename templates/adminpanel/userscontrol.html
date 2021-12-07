@@ -66,7 +66,7 @@
         <p>Добавление пользователя</p>
         <span id="form_add__close" class="close">ₓ</span>
         <p>Логин: <input id="login" th:field="*{addusername}" /></p>
-        <p>Пароль: <input id="pwd" type="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}" th:field="*{adduserpassword}" title="Пароль должен содержать минимум 1 цифру, заглавную и строчную буквы и быть не менее 7 символов"/></p>
+        <p>Пароль: <input id="pwd" type="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z]).{7,}" th:field="*{adduserpassword}" title="Пароль должен содержать минимум 1 цифру, строчную буквы и быть не менее 7 символов"/></p>
         <p>Почта: <input id="mail" name="mail" th:field="*{addmail}"/></p>
         <p>Фото: <input id="photo" name="photo" th:field="*{addphoto}"/></p>
         <p>Права доступа:
@@ -76,8 +76,8 @@
             </select>
         </p>
         <p>Активность:</p>
-            <label><input type="radio" name="role" value="1" id="role" th:field="*{addenabled}"/>Активен</label>
-            <label><input type="radio" name="role" value="0" th:field="*{addenabled}"/>Заблокирован</label>
+            <label><input type="radio" name="role" value="1" id="role" th:field="*{addenabled}" required="required"/>Активен</label>
+            <label><input type="radio" name="role" value="0" th:field="*{addenabled}" required="required"/>Заблокирован</label>
 <!--        <p> enabled: <textarea type="text" th:field="*{addenabled}"></textarea></p>-->
         <p><input type="submit" value="Добавить" /></p>
     </div>
