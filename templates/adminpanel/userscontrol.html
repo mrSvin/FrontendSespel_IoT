@@ -65,10 +65,10 @@
     <div class="add_user_form">
         <p>Добавление пользователя</p>
         <span id="form_add__close" class="close">ₓ</span>
-        <p>Логин: <input id="login" th:field="*{addusername}" /></p>
-        <p>Пароль: <input id="pwd" type="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z]).{7,}" th:field="*{adduserpassword}" title="Пароль должен содержать минимум 1 цифру, строчную буквы и быть не менее 7 символов"/></p>
-        <p>Почта: <input id="mail" name="mail" th:field="*{addmail}"/></p>
-        <p>Фото: <input id="photo" name="photo" th:field="*{addphoto}"/></p>
+        <p>Логин: <input id="login" th:field="*{addusername}" required="required"/></p>
+        <p>Пароль: <input id="pwd" type="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z]).{7,}" th:field="*{adduserpassword}" title="Пароль должен содержать минимум 1 цифру, строчную буквы и быть не менее 7 символов" required="required"/></p>
+        <p>Почта: <input id="mail" name="mail" th:field="*{addmail}" required="required"/></p>
+        <p>Фото: <input id="photo" name="photo" th:field="*{addphoto}" required="required"/></p>
         <p>Права доступа:
             <select id="list_roles" th:field="*{addrole}" >
                 <option label="Пользователь" value="ROLE_USER"></option>
@@ -87,7 +87,7 @@
 <form id="form_delete" action="#" th:action="@{/adminpanel/userdelete}" th:object="${usercontrol}" method="get">
     <p>Удаление пользователя</p>
     <span id="form_delete__close" class="close">ₓ</span>
-    <p style="margin: 1%"> Введите имя удаляемого пользователя: <input id="delete_user" th:field="*{deleteUser}" /></p>
+    <p style="margin: 1%"> Введите имя удаляемого пользователя: <input id="delete_user" th:field="*{deleteUser}" required="required"/></p>
     <p style="margin: 1%"><input type="submit" value="Удалить" /></p>
 </form>
 <div id="overlay_delete"></div>
@@ -185,23 +185,6 @@
 <script>
     var add_trigger = 0; // Триггер для запрета добавления уже существующих пользователей
     $("#form_add").submit(function(event) {
-            if(!$("#form_add #login").val()){ // если значение условия нулевое, то условие выполняется.
-                alert("Введите логин");
-                event.preventDefault();  // Запрет на отправку
-            } else
-            if(!$("#form_add #pwd").val()){
-                alert("Введите пароль");
-                event.preventDefault();
-            } else
-            if(!$("#form_add #mail").val()){
-                alert("Введите почту");
-                event.preventDefault();
-            } else
-            if(!$("#form_add #photo").val()){
-                alert("Вставьте ссылку на фото");
-                event.preventDefault();
-            }
-
 
         if($("#form_add #login").val()){ // если значение не пустое
             $.each(username, function (index, value){
@@ -232,13 +215,9 @@
 <script>
     var del_trigger = 0; // Триггер для запрета удаления несуществующих пользователей
     $("#form_delete").submit(function(event) { // При нажатии на кнопку удалить пользователя
-        if (!$("#form_delete #delete_user").val()) { // если значение условия нулевое, то условие выполняется.
-            alert("Введите логин удаляемого пользователя");
-            event.preventDefault();  // Запрет на отправку
-        }
+        if ($("#form_delete #delete_user").val()) { // если значение условия не пустое
 
-        else { // если же значение не пустое, перебираем массив
-            $.each(username, function (index, value){
+            $.each(username, function (index, value){ // запускаем цикл
                     if (value === ($("#form_delete #delete_user").val())){ // если был найден введенный элемент
                         del_trigger = 1; // переключаем триггер
                         return false; // выходим из цикла
@@ -256,7 +235,7 @@
             else{
                 del_trigger = 0; // иначе, пользователь удален
             }
-            }
+        }
 
     });
 </script> <!-- Скрипт для запрета отправки незаполненной формы удаления пользователя -->
