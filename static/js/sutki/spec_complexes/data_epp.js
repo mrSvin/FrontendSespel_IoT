@@ -1,3 +1,5 @@
+const timezone = new Date().getTimezoneOffset()
+
 Highcharts.setOptions({
     lang: {
         loading: 'Загрузка...',
@@ -17,7 +19,7 @@ Highcharts.setOptions({
         viewFullscreen: 'На весь экран'
     },
     global: {
-        timezoneOffset: new Date().getTimezoneOffset()
+        timezoneOffset: timezone
     }
 });
 
