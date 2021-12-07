@@ -1,5 +1,3 @@
-
-
 Highcharts.setOptions({
     lang: {
         loading: 'Загрузка...',
@@ -17,6 +15,9 @@ Highcharts.setOptions({
         downloadSVG: 'Скачать SVG',
         printChart: 'Напечатать график',
         viewFullscreen: 'На весь экран'
+    },
+    time: {
+        timezone: 'Europe/Moscow'
     },
     global: {
         timezoneOffset: new Date().getTimezoneOffset()
