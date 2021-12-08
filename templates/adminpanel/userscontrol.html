@@ -6,6 +6,7 @@
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" href="../css/styles_header.css"/>
     <link rel="stylesheet" type="text/css" href="../css/userscontrol.css"/>
+    <script src="../js/header.js"></script>
 
 </head>
 
@@ -169,21 +170,21 @@
             "</tr>" );
     });
 </script> <!--JS таблица-->
-<script th:inline="javascript">
-    var role_status = [[${user_role}]];
+<!--<script th:inline="javascript">-->
+<!--    var role_status = [[${user_role}]];-->
 
-    if(role_status === "ROLE_ADMIN")
-    {
-        document.getElementById("role_vision").innerHTML = "Роль: Админ";
-        document.getElementById("admin").style.display = "inline";
+<!--    if(role_status === "ROLE_ADMIN")-->
+<!--    {-->
+<!--        document.getElementById("role_vision").innerHTML = "Роль: Админ";-->
+<!--        document.getElementById("admin").style.display = "inline";-->
 
-    }
-    else if (role_status === "ROLE_USER")
-    {
-        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
-        document.getElementById("admin").style.display = "none";
-    }
-</script> <!--Скрипт отображения в header  кнопки администрирование-->
+<!--    }-->
+<!--    else if (role_status === "ROLE_USER")-->
+<!--    {-->
+<!--        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"-->
+<!--        document.getElementById("admin").style.display = "none";-->
+<!--    }-->
+<!--</script> &lt;!&ndash;Скрипт отображения в header  кнопки администрирование&ndash;&gt;-->
 
 <script>
     var add_trigger = 0; // Триггер для запрета добавления уже существующих пользователей
@@ -242,9 +243,6 @@
 
     });
 </script> <!-- Скрипт для запрета отправки незаполненной формы удаления пользователя -->
-<script>
-
-</script>
 
 </body>
 </html>
