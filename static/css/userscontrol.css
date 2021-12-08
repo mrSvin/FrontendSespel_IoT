@@ -52,7 +52,7 @@ td:nth-of-type(7) {
 
 
 #form_add {
-    width: 400px; height: 600px;
+    width: 400px; max-height: 600px;
     margin: 0 auto;
     padding: 18px 9px;
     border-radius: 4px;
@@ -84,7 +84,7 @@ td:nth-of-type(7) {
 }
 
 #form_delete {
-    width: 400px; height: 600px;
+    width: 400px; height: 300px;
     margin: 0 auto;
     padding: 18px 9px;
     border-radius: 4px;
@@ -165,7 +165,134 @@ td > img {
     margin-top:0;
 }
 
-.add_user_form{
-    /*display: block;*/
+.add_user_form > input {
+    border: 2px solid #eeeeee;
+    height: 46px;
+    margin: 10px 0 0 0;
+    padding: 1%;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #333333;
+    letter-spacing: .01em;
+    font-style: normal;
+    font-weight: 300;
+    font-family: source-sans-pro;
+}
 
+.add_user_form > h3 {
+    font-style: normal;
+    font-family: 'Economica', 'Arial', sans-serif;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+.add_user_form > p {
+    font-family: 'Economica', 'Arial', sans-serif;
+}
+
+#list_roles {
+    border: 2px solid #eeeeee;
+    height: 46px;
+    margin: 10px 0 0 0;
+    padding: 1%;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #333333;
+    letter-spacing: .01em;
+    font-style: normal;
+    font-weight: 300;
+    font-family: source-sans-pro;
+}
+
+#list_roles > option{
+    border: 2px solid #eeeeee;
+    height: 46px;
+    margin: 10px 0 0 0;
+    padding: 1%;
+    font-size: 1em;
+    line-height: 1.5em;
+    color: #333333;
+    letter-spacing: .01em;
+    font-style: normal;
+    font-weight: 300;
+    font-family: source-sans-pro;
+}
+
+#submit {
+    display: block;
+    border-radius: 15%;
+    width: 25%;
+    height: 60px;
+    margin: 30px auto 0;
+    background: #376ce8;
+    text-align: center;
+    transition: background, color, .5s ease;
+    border: 0;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #ffffff;
+    letter-spacing: .01em;
+    font-style: normal;
+    font-weight: 300;
+    font-family: source-sans-pro;
+}
+#submit:hover {
+    background: #648dec;
+    color: #3b3333;
+}
+
+.span_style {
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #333333;
+    letter-spacing: .01em;
+    font-style: normal;
+    font-weight: 300;
+    font-family: source-sans-pro;
+}
+
+.delete_user_form > input {
+    border: 2px solid #eeeeee;
+    height: 46px;
+    width: 90%;
+    margin: 10px 0 0 0;
+    padding: 1%;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #333333;
+    letter-spacing: .01em;
+    font-style: normal;
+    font-weight: 300;
+    font-family: source-sans-pro;
+}
+
+.delete_user_form > h3 {
+    font-style: normal;
+    font-family: 'Economica', 'Arial', sans-serif;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+#sumbit_del{
+    display: block;
+    border-radius: 15%;
+    width: 25%;
+    height: 60px;
+    margin: 30px auto 0;
+    background: #ea4358;
+    text-align: center;
+    transition: background, color, .5s ease;
+    border: 0;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #ffffff;
+    letter-spacing: .01em;
+    font-style: normal;
+    font-weight: 300;
+    font-family: source-sans-pro;
+}
+
+#sumbit_del:hover{
+    color: #000000;
+    background: #b73142;
 }

@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Управление пользователями</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
-    <link rel="stylesheet" type="text/css" href="../css/styles_header.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/userscontrol.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/userscontrol.css"/>
 
 </head>
 
@@ -63,32 +63,35 @@
 
 <form id="form_add" action="#" th:action="@{/adminpanel/adduser}" th:object="${usercontrol}" method="get">
     <div class="add_user_form">
-        <p>Добавление пользователя</p>
+        <h3>Добавление пользователя</h3>
         <span id="form_add__close" class="close">ₓ</span>
-        <p>Логин: <input id="login" th:field="*{addusername}" required="required"/></p>
-        <p>Пароль: <input id="pwd" type="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z]).{7,}" th:field="*{adduserpassword}" title="Пароль должен содержать минимум 1 цифру, строчную буквы и быть не менее 7 символов" required="required"/></p>
-        <p>Почта: <input id="mail" name="mail" th:field="*{addmail}" required="required"/></p>
-        <p>Фото: <input id="photo" name="photo" th:field="*{addphoto}" required="required"/></p>
-        <p>Права доступа:
+        <input id="login" th:field="*{addusername}" required="required" placeholder="Логин*"/>
+        <input id="pwd" type="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z]).{7,}" th:field="*{adduserpassword}" title="Пароль должен содержать минимум 1 цифру, строчную буквы и быть не менее 7 символов" required="required" placeholder="Пароль*"/>
+        <input id="mail" name="mail" th:field="*{addmail}" required="required" placeholder="Адрес электронной почты*"/>
+        <input id="photo" name="photo" th:field="*{addphoto}" required="required" placeholder="Адрес фото*"/>
+        <h3>Права доступа:<br>
             <select id="list_roles" th:field="*{addrole}" >
                 <option label="Пользователь" value="ROLE_USER"></option>
                 <option label="Администратор" value="ROLE_ADMIN"></option>
             </select>
-        </p>
-        <p>Активность:</p>
-            <label><input type="radio" name="role" value="1" id="role" th:field="*{addenabled}" required="required"/>Активен</label>
-            <label><input type="radio" name="role" value="0" th:field="*{addenabled}" required="required"/>Заблокирован</label>
+        </h3>
+        <h3>Активность:</h3>
+            <label><input class="custom-radio" type="radio" name="role" value="1" id="role" th:field="*{addenabled}" required="required" selected="selected"/><span class="span_style">Активен</span></label>
+            <label><input class="custom-radio" type="radio" name="role" value="0" th:field="*{addenabled}" required="required"/><span class="span_style">Заблокирован</span></label>
 <!--        <p> enabled: <textarea type="text" th:field="*{addenabled}"></textarea></p>-->
-        <p><input type="submit" value="Добавить" /></p>
+        <input id="submit" type="submit" value="Добавить"/>
     </div>
 </form>
 <div id="overlay_add"></div>
 
 <form id="form_delete" action="#" th:action="@{/adminpanel/userdelete}" th:object="${usercontrol}" method="get">
-    <p>Удаление пользователя</p>
+    <div class="delete_user_form">
+    <h3>Удаление пользователя</h3>
     <span id="form_delete__close" class="close">ₓ</span>
-    <p style="margin: 1%"> Введите имя удаляемого пользователя: <input id="delete_user" th:field="*{deleteUser}" required="required"/></p>
-    <p style="margin: 1%"><input type="submit" value="Удалить" /></p>
+    <input id="delete_user" th:field="*{deleteUser}" required="required" placeholder="Введите имя удаляемого пользователя*"/>
+    <input id="sumbit_del" type="submit" value="Удалить"/>
+    </div>
+
 </form>
 <div id="overlay_delete"></div>
 
