@@ -169,21 +169,22 @@
             "</tr>" );
     });
 </script> <!--JS таблица-->
-<!--<script th:inline="javascript">-->
-<!--    var role_status = [[${user_role}]];-->
+<script th:inline="javascript">
+    var role_status = [[${user_role}]];
 
-<!--    if(role_status === "ROLE_ADMIN")-->
-<!--    {-->
-<!--        document.getElementById("role_vision").innerHTML = "Роль: Админ";-->
-<!--        document.getElementById("admin").style.display = "inline";-->
+    if(role_status === "ROLE_ADMIN")
+    {
+        document.getElementById("role_vision").innerHTML = "Роль: Админ";
+        document.getElementById("admin").style.display = "inline";
 
-<!--    }-->
-<!--    else if (role_status === "ROLE_USER")-->
-<!--    {-->
-<!--        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"-->
-<!--        document.getElementById("admin").style.display = "none";-->
-<!--    }-->
-<!--</script> &lt;!&ndash;Скрипт отображения в header  кнопки администрирование&ndash;&gt;-->
+    }
+    else if (role_status === "ROLE_USER")
+    {
+        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
+        document.getElementById("admin").style.display = "none";
+    }
+</script>
+<!--Скрипт отображения в header  кнопки администрирование-->
 
 <script>
     var add_trigger = 0; // Триггер для запрета добавления уже существующих пользователей
@@ -242,8 +243,6 @@
 
     });
 </script> <!-- Скрипт для запрета отправки незаполненной формы удаления пользователя -->
-
-<script src="../js/header.js"></script>
 
 </body>
 </html>
