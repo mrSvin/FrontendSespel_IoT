@@ -67,7 +67,7 @@
         <span id="form_add__close" class="close">ₓ</span>
         <input id="login" th:field="*{addusername}" required="required" placeholder="Логин*"/>
         <input id="pwd" type="password" name="pwd" pattern="(?=.*\d)(?=.*[a-z]).{7,}" th:field="*{adduserpassword}" title="Пароль должен содержать минимум 1 цифру, строчную буквы и быть не менее 7 символов" required="required" placeholder="Пароль*"/>
-        <input id="mail" name="mail" th:field="*{addmail}" required="required" placeholder="Адрес электронной почты*"/>
+        <input id="mail" name="mail" th:field="*{addmail}" required="required" placeholder="Email*"/>
         <input id="photo" name="photo" th:field="*{addphoto}" required="required" placeholder="Адрес фото*"/>
         <h3>Права доступа:</h3>
             <select id="list_roles" th:field="*{addrole}" >
