@@ -184,6 +184,7 @@ td > img {
     font-family: 'Economica', 'Arial', sans-serif;
     font-size: 1.2em;
     text-transform: uppercase;
+    margin-bottom: 0px;
 }
 
 .add_user_form > p {
@@ -271,6 +272,7 @@ td > img {
     font-family: 'Economica', 'Arial', sans-serif;
     font-size: 1.2em;
     text-transform: uppercase;
+    margin-bottom: 0px;
 }
 
 #sumbit_del{
