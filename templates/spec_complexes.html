@@ -269,8 +269,8 @@
     // console.log(test);
 
     Highcharts.setOptions({
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
+        time: {
+            timezone: 'Europe/Moscow'
         }
     });
 
@@ -390,8 +390,8 @@
     var data_temperatura = JSON.parse([[${epp_temperatura}]]);
 
     Highcharts.setOptions({
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
+        time: {
+            timezone: 'Europe/Moscow'
         }
     });
 
