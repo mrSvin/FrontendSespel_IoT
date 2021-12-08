@@ -34,15 +34,18 @@
     </style>
  </head>
 
-<header>
+<header style="position: fixed; width: 100vw; top: 0px; z-index: 3">
     <ul class="hr">
-        <a href="../home"><img style="margin: 0.1%" src="../images/logo_black.png" class="icon-logo"/></a>
+        <a href="../home" ><img style="margin: 0.1%" src="../images/logo_black.png" class="icon-logo"/> </a>
         <div method="post" class="dropdown" style="float: right">
-            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
-            <div class="dropdown-content" style="float: right; text-align: center">
-                <p><img th:src="@{${image_user}}"  width="100" height="100" style="border-radius: 360px; "/></p>
-                <li style="font-weight: 600; font-size: 150%" th:text="${user_name}"></li>
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; margin-right: 30px"/>
+            <div class="dropdown-content" style="float: right; text-align: center; background-color: whitesmoke">
+                <p id="role_vision"></p>
+                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
+                <li style="font-weight: 400; font-size: 18px" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
+                <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
+                <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
                         Выход
@@ -50,7 +53,8 @@
                 </form>
             </div>
         </div>
-        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center" th:text="'Добро пожаловать, '  + ${user_name} + '!   '" />
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
     </ul>       <!--Шапка html-->
 </header>       <!--Шапка html-->
 
@@ -66,7 +70,22 @@
 </form>
 
 <li style=" font-size: 100%; margin: 1%" th:text="'Последнее изменение : '  + ${last_time_change} + ' пользователем, ' + ${last_user_change}"></li>
+<script th:inline="javascript">
+    var role_status = [[${user_role}]];
 
+    if(role_status === "ROLE_ADMIN")
+    {
+        document.getElementById("role_vision").innerHTML = "Роль: Админ";
+        document.getElementById("admin").style.display = "inline";
+
+    }
+    else if (role_status === "ROLE_USER")
+    {
+        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
+        document.getElementById("admin").style.display = "none";
+    }
+</script>
+<!--Скрипт отображения в header  кнопки администрирование-->
 </body>
 
 <style>
