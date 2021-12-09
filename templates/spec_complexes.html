@@ -264,9 +264,81 @@
 <script th:inline="javascript">
     var data_davlenie = JSON.parse([[${davlenie}]]);
     var data_zad_davlenie = JSON.parse([[${zad_davlenie}]]);
+
+    // Highcharts.setOptions({
+    //     time: {
+    //         timezone: 'Europe/Moscow'
+    //     }
+    // });
+
+    Highcharts.getJSON(
+        'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+        function (data) {
+
+            Highcharts.chart('container_press_davlenie', {
+                chart: {
+                    zoomType: 'x'
+                },
+                title: {
+                    text: 'Хронология запрессовок'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Давление, тонн'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
+                            },
+                            stops: [
+                                [0, Highcharts.getOptions().colors[0]],
+                                [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                            ]
+                        },
+                        marker: {
+                            radius: 2
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+
+                series: [{
+                    type: 'area',
+                    name: 'Давление запрессовки, т',
+                    data: data_davlenie
+                },{
+
+                    name: 'Заданное давление, т',
+                    data: data_zad_davlenie
+                }
+                ]
+            });
+        }
+    );
 </script>   <!--Пресс js Давление-->
 <script src="/js/sutki/spec_complexes/data_press.js"></script>
-<script src="/js/sutki/spec_complexes/data_press_dav.js"></script>
+
 
 
 <div style="border: 1px solid #333;">
@@ -313,9 +385,81 @@
 <script th:inline="javascript">
     var data_tok = JSON.parse([[${epp_tok}]]);
     var data_temperatura = JSON.parse([[${epp_temperatura}]]);
+
+    // Highcharts.setOptions({
+    //     time: {
+    //         timezone: 'Europe/Moscow'
+    //     }
+    // });
+
+    Highcharts.getJSON(
+        'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+        function (data) {
+
+            Highcharts.chart('container_epp_tok', {
+                chart: {
+                    zoomType: 'x'
+                },
+                title: {
+                    text: 'Хронология технологического процесса'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Амплитуда'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
+                            },
+                            stops: [
+                                [0, Highcharts.getOptions().colors[0]],
+                                [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                            ]
+                        },
+                        marker: {
+                            radius: 2
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+
+                series: [{
+                    type: 'area',
+                    name: 'Ток, А',
+                    data: data_tok
+                },
+                    {
+                        name: 'Температура, С',
+                        data: data_temperatura
+                    }
+                ]
+            });
+        }
+    );
 </script>   <!--ЭПП js Ток и Температура-->
 <script src="/js/sutki/spec_complexes/data_epp.js"></script>
-<script src="/js/sutki/spec_complexes/data_epp_tok.js"></script>
+
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
