@@ -18,7 +18,7 @@ Highcharts.setOptions({
         printChart: 'Напечатать график',
         viewFullscreen: 'На весь экран'
     },
-    global: {
+    time: {
         timezoneOffset: timezone
     }
 });

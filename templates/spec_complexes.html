@@ -265,11 +265,11 @@
     var data_davlenie = JSON.parse([[${davlenie}]]);
     var data_zad_davlenie = JSON.parse([[${zad_davlenie}]]);
 
-    // Highcharts.setOptions({
-    //     time: {
-    //         timezone: 'Europe/Moscow'
-    //     }
-    // });
+    Highcharts.setOptions({
+        time: {
+            timezone: 0
+        }
+    });
 
     Highcharts.getJSON(
         'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
@@ -386,11 +386,11 @@
     var data_tok = JSON.parse([[${epp_tok}]]);
     var data_temperatura = JSON.parse([[${epp_temperatura}]]);
 
-    // Highcharts.setOptions({
-    //     time: {
-    //         timezone: 'Europe/Moscow'
-    //     }
-    // });
+    Highcharts.setOptions({
+        time: {
+            timezone: 0
+        }
+    });
 
     Highcharts.getJSON(
         'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
