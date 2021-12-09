@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Станки</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <link rel="stylesheet" type="text/css" href="../css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/menu_buttons.css"/> <!-- Меню -->
+    <link rel="stylesheet" type="text/css" href="../css/styles_header.css"/>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+
+    <style>
+        .preloader {
+            /*фиксированное позиционирование*/
+            position: fixed;
+            /* координаты положения */
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /* фоновый цвет элемента */
+            background: #e0e0e0;
+            /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+            z-index: 1001;
+        }
+
+        .preloader__row {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            width: 70px;
+            height: 70px;
+            margin-top: -35px;
+            margin-left: -35px;
+            text-align: center;
+            animation: preloader-rotate 2s infinite linear;
+        }
+
+        .preloader__item {
+            position: absolute;
+            display: inline-block;
+            top: 0;
+            background-color: #337ab7;
+            border-radius: 100%;
+            width: 35px;
+            height: 35px;
+            animation: preloader-bounce 2s infinite ease-in-out;
+        }
+
+        .preloader__item:last-child {
+            top: auto;
+            bottom: 0;
+            animation-delay: -1s;
+        }
+
+        @keyframes preloader-rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes preloader-bounce {
+
+            0%,
+            100% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .loaded_hiding .preloader {
+            transition: 0.3s opacity;
+            opacity: 0;
+        }
+
+        .loaded .preloader {
+            display: none;
+        }
+    </style>
+
+    <script src="../js/highcharts.js"></script>
+    <script src="../js/exporting.js"></script>
+    <script src="../js/export-data.js"></script>
+    <script src="../js/accessibility.js"></script>
+    <script src="../js/xrange.js"></script>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap-3.3.0.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+            $('#button_obnovit').on("click", function () {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+                var day = datas.getDate();
+                var mes = datas.getMonth() + 1;
+                var year = datas.getFullYear();
+
+                name_data = year + "-" + mes + "-" + day;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
+
+    <!--Календарь -->
+    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
+    <!--Календарь Русский язык-->
+    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
+
+
+    <!-- Загрузка страницы -->
+    <script>
+        window.onload = function () {
+            document.body.classList.add('loaded_hiding');
+            window.setTimeout(function () {
+                document.body.classList.add('loaded');
+                document.body.classList.remove('loaded_hiding');
+            }, 500);
+        }
+    </script>
+
+</head>
+<body>
+<div style="display: flex; justify-content: space-between">
+
+    <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
+    <!--Общая загрузка html-->
+</div>  <!--Общая загрузка и количество операций html-->
+
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000', '#5c7ed0'];
+
+    var work_uf5220 = [[${work}]];
+    var work_progress = [[${progress_work}]];
+    var work_ntx1000 = [[${ntx1000_work}]];
+    var work_sk50 = [[${sk50_work}]];
+    var work_apec = [[${apec_work}]];
+    var work_dmu50_3 = [[${work_dmg_dmu50_3}]];
+    var work_dmu50_4 = [[${work_dmg_dmu50_4}]];
+    var work_ctx310_2 = [[${work_dmg_ctx310_2}]];
+    var work_ctx510_2 = [[${work_dmg_ctx510_2}]];
+
+    var pause_uf5220 = [[${pass}]];
+    var pause_progress = [[${progress_pass}]];
+    var pause_ntx1000 = [[${ntx1000_pass}]];
+    var pause_sk50 = [[${sk50_pass}]];
+    var pause_apec = [[${apec_pass}]];
+    var pause_dmu50_3 = [[${pass_dmg_dmu50_3}]];
+    var pause_dmu50_4 = [[${pass_dmg_dmu50_4}]];
+    var pause_ctx310_2 = [[${pass_dmg_ctx310_2}]];
+    var pause_ctx510_2 = [[${pass_dmg_ctx510_2}]];
+
+    var off_uf5220 = [[${fail}]];
+    var off_progress = [[${progress_fail}]];
+    var off_ntx1000 = [[${ntx1000_fail}]];
+    var off_sk50 = [[${sk50_fail}]];
+    var off_apec = [[${apec_fail}]];
+    var off_dmu50_3 = [[${fail_dmg_dmu50_3}]];
+    var off_dmu50_4 = [[${fail_dmg_dmu50_4}]];
+    var off_ctx310_2 = [[${fail_dmg_ctx310_2}]];
+    var off_ctx510_2 = [[${fail_dmg_ctx510_2}]];
+
+    var avar_ntx1000 = [[${ntx1000_avar}]];
+    var avar_sk50 = [[${sk50_avar}]];
+    var avar_apec = [[${apec_avar}]];
+    var avar_dmu50_3 = [[${avar_dmg_dmu50_3}]];
+    var avar_dmu50_4 = [[${avar_dmg_dmu50_4}]];
+    var avar_ctx310_2 = [[${avar_dmg_ctx310_2}]];
+    var avar_ctx510_2 = [[${avar_dmg_ctx510_2}]];
+
+    var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
+    var nagruzka_sk50 = [[${sk50_nagruzka}]];
+    var nagruzka_dmu50_3 = [[${nagruzka_dmg_dmu50_3}]];
+    var nagruzka_dmu50_4 = [[${nagruzka_dmg_dmu50_4}]];
+    var nagruzka_ctx310_2 = [[${nagruzka_dmg_ctx310_2}]];
+    var nagruzka_ctx510_2 = [[${nagruzka_dmg_ctx510_2}]];
+
+    var ruchnoi_apec = [[${apec_ruchnoi}]];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors: colors,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2, work_ctx510_2]
+        }, {
+            name: 'Под нагрузкой',
+            data: [0, 0, nagruzka_ntx1000,nagruzka_sk50, 0, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2, nagruzka_ctx510_2]
+        }, {
+            name: 'Ожидание',
+            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2, pause_ctx510_2]
+        }, {
+            name: 'Авария',
+            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4, avar_ctx310_2, avar_ctx510_2]
+        }, {
+            name: 'Выключен',
+            data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2, off_ctx510_2]
+        }, {
+            name: 'Ручной',
+            data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0]
+        }]
+    });
+
+</script>   <!--js Общая загрузка-->
+
+</body>
+</html>
