@@ -109,7 +109,6 @@
       display: none;
     }
   </style>
-
   <style>
     th {
       text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black;
@@ -215,6 +214,43 @@
     }
 
   </style>
+
+  <script>
+    $(function () {
+      $('#datepicker').datepicker({
+        format: "dd/mm/yyyy",
+        language: 'ru',
+        autoclose: true,
+        todayHighlight: true,
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        autoclose: true,
+        changeMonth: true,
+        changeYear: true,
+        orientation: "button"
+      });
+      <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+      $('#button_obnovit').on("click", function () {
+        var datas = $('#datepicker').data().datepicker.viewDate;
+        var day = datas.getDate();
+        var mes = datas.getMonth() + 1;
+        var year = datas.getFullYear();
+
+        name_data = year + "-" + mes + "-" + day;
+        <!--console.log(name_data);-->
+      });
+
+
+    });
+
+  </script>   <!--Календарь js-->
+
+  <!--Календарь -->
+  <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
+  <!--Календарь Русский язык-->
+  <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
 
   <!-- Загрузка страницы -->
   <script>
@@ -478,66 +514,66 @@
 
 
 </script>   <!--js Общая загрузка-->
-<script th:inline="javascript">
+<!--<script th:inline="javascript">-->
 
-  table = document.getElementById('myTable').rows; // Обращение к таблице по ID
-  table[1].cells[1].innerHTML = work_uf5220;
-  table[2].cells[1].innerHTML = work_progress;
-  table[3].cells[1].innerHTML = work_ntx1000;
-  table[4].cells[1].innerHTML = work_sk50;
-  table[5].cells[1].innerHTML = work_apec;
-  table[6].cells[1].innerHTML = work_dmu50_3;
-  table[7].cells[1].innerHTML = work_dmu50_4;
-  table[8].cells[1].innerHTML = work_ctx310_2;
-  table[9].cells[1].innerHTML = work_ctx510_2;
-  table[10].cells[1].innerHTML = work_ctx510_3;
-// Столбец Работа
-  table[3].cells[2].innerHTML = nagruzka_ntx1000;
-  table[4].cells[2].innerHTML = nagruzka_sk50;
-  table[6].cells[2].innerHTML = nagruzka_dmu50_3;
-  table[7].cells[2].innerHTML = nagruzka_dmu50_4;
-  table[8].cells[2].innerHTML = nagruzka_ctx310_2;
-  table[9].cells[2].innerHTML = nagruzka_ctx510_2;
-  table[10].cells[2].innerHTML = nagruzka_ctx510_3;
-// Столбец Нагрузка
+<!--  table = document.getElementById('myTable').rows; // Обращение к таблице по ID-->
+<!--  table[1].cells[1].innerHTML = work_uf5220;-->
+<!--  table[2].cells[1].innerHTML = work_progress;-->
+<!--  table[3].cells[1].innerHTML = work_ntx1000;-->
+<!--  table[4].cells[1].innerHTML = work_sk50;-->
+<!--  table[5].cells[1].innerHTML = work_apec;-->
+<!--  table[6].cells[1].innerHTML = work_dmu50_3;-->
+<!--  table[7].cells[1].innerHTML = work_dmu50_4;-->
+<!--  table[8].cells[1].innerHTML = work_ctx310_2;-->
+<!--  table[9].cells[1].innerHTML = work_ctx510_2;-->
+<!--  table[10].cells[1].innerHTML = work_ctx510_3;-->
+<!--// Столбец Работа-->
+<!--  table[3].cells[2].innerHTML = nagruzka_ntx1000;-->
+<!--  table[4].cells[2].innerHTML = nagruzka_sk50;-->
+<!--  table[6].cells[2].innerHTML = nagruzka_dmu50_3;-->
+<!--  table[7].cells[2].innerHTML = nagruzka_dmu50_4;-->
+<!--  table[8].cells[2].innerHTML = nagruzka_ctx310_2;-->
+<!--  table[9].cells[2].innerHTML = nagruzka_ctx510_2;-->
+<!--  table[10].cells[2].innerHTML = nagruzka_ctx510_3;-->
+<!--// Столбец Нагрузка-->
 
-  table[1].cells[3].innerHTML = pause_uf5220;
-  table[2].cells[3].innerHTML = pause_progress;
-  table[3].cells[3].innerHTML = pause_ntx1000;
-  table[4].cells[3].innerHTML = pause_sk50;
-  table[5].cells[3].innerHTML = pause_apec;
-  table[6].cells[3].innerHTML = pause_dmu50_3;
-  table[7].cells[3].innerHTML = pause_dmu50_4;
-  table[8].cells[3].innerHTML = pause_ctx310_2;
-  table[9].cells[3].innerHTML = pause_ctx510_2;
-  table[10].cells[3].innerHTML = pause_ctx510_3;
-// Столбец пауза
+<!--  table[1].cells[3].innerHTML = pause_uf5220;-->
+<!--  table[2].cells[3].innerHTML = pause_progress;-->
+<!--  table[3].cells[3].innerHTML = pause_ntx1000;-->
+<!--  table[4].cells[3].innerHTML = pause_sk50;-->
+<!--  table[5].cells[3].innerHTML = pause_apec;-->
+<!--  table[6].cells[3].innerHTML = pause_dmu50_3;-->
+<!--  table[7].cells[3].innerHTML = pause_dmu50_4;-->
+<!--  table[8].cells[3].innerHTML = pause_ctx310_2;-->
+<!--  table[9].cells[3].innerHTML = pause_ctx510_2;-->
+<!--  table[10].cells[3].innerHTML = pause_ctx510_3;-->
+<!--// Столбец пауза-->
 
-  table[3].cells[4].innerHTML = avar_ntx1000;
-  table[4].cells[4].innerHTML = avar_sk50;
-  table[5].cells[4].innerHTML = avar_apec;
-  table[6].cells[4].innerHTML = avar_dmu50_4;
-  table[7].cells[4].innerHTML = avar_dmu50_4;
-  table[8].cells[4].innerHTML = avar_ctx310_2;
-  table[9].cells[4].innerHTML = avar_ctx510_2;
-  table[10].cells[4].innerHTML = avar_ctx510_3;
-// Столбец выключен
+<!--  table[3].cells[4].innerHTML = avar_ntx1000;-->
+<!--  table[4].cells[4].innerHTML = avar_sk50;-->
+<!--  table[5].cells[4].innerHTML = avar_apec;-->
+<!--  table[6].cells[4].innerHTML = avar_dmu50_4;-->
+<!--  table[7].cells[4].innerHTML = avar_dmu50_4;-->
+<!--  table[8].cells[4].innerHTML = avar_ctx310_2;-->
+<!--  table[9].cells[4].innerHTML = avar_ctx510_2;-->
+<!--  table[10].cells[4].innerHTML = avar_ctx510_3;-->
+<!--// Столбец выключен-->
 
-  table[1].cells[5].innerHTML = off_uf5220;
-  table[2].cells[5].innerHTML = off_progress;
-  table[3].cells[5].innerHTML = off_ntx1000;
-  table[4].cells[5].innerHTML = off_sk50;
-  table[5].cells[5].innerHTML = off_apec;
-  table[6].cells[5].innerHTML = off_dmu50_3;
-  table[7].cells[5].innerHTML = off_dmu50_4;
-  table[8].cells[5].innerHTML = off_ctx310_2;
-  table[9].cells[5].innerHTML = off_ctx510_2;
-  table[10].cells[5].innerHTML = off_ctx510_3;
+<!--  table[1].cells[5].innerHTML = off_uf5220;-->
+<!--  table[2].cells[5].innerHTML = off_progress;-->
+<!--  table[3].cells[5].innerHTML = off_ntx1000;-->
+<!--  table[4].cells[5].innerHTML = off_sk50;-->
+<!--  table[5].cells[5].innerHTML = off_apec;-->
+<!--  table[6].cells[5].innerHTML = off_dmu50_3;-->
+<!--  table[7].cells[5].innerHTML = off_dmu50_4;-->
+<!--  table[8].cells[5].innerHTML = off_ctx310_2;-->
+<!--  table[9].cells[5].innerHTML = off_ctx510_2;-->
+<!--  table[10].cells[5].innerHTML = off_ctx510_3;-->
 
-  table[5].cells[6].innerHTML = ruchnoi_apec;
-  //Столбец ручной режим
+<!--  table[5].cells[6].innerHTML = ruchnoi_apec;-->
+<!--  //Столбец ручной режим-->
 
-</script>
+<!--</script> -->
 <!--Запись переменных в таблицу-->
 
 </body>
