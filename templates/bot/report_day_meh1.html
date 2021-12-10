@@ -310,7 +310,7 @@
 
     table = document.getElementById('myTable').rows; // Обращение к таблице по ID
     table[1].cells[1].innerHTML = work_uvf_1_1/uvf_1_1_koef;
-    table[2].cells[1].innerHTML = work_uvf_1_2/uvf_1_2_koef.toFixed(2);
+    table[2].cells[1].innerHTML = Math.round(work_uvf_1_2/uvf_1_2_koef * 10) / 10;
     table[3].cells[1].innerHTML = work_ntx1000/ntx1000_koef;
     table[4].cells[1].innerHTML = work_nlx3000/nlx3000_koef;
     table[5].cells[1].innerHTML = work_gamma2000/gamma2000_koef;
