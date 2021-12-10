@@ -295,76 +295,88 @@
 
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
+    var uvf_1_1_koef = (work_uvf_1_1 + nagruzka_uvf_1_1 + pause_uvf_1_1 + avar_uvf_1_1 + off_uvf_1_1)/100;
+    var uvf_1_2_koef = (work_uvf_1_2 + nagruzka_uvf_1_2 + pause_uvf_1_2 + avar_uvf_1_2 + off_uvf_1_2)/100;
+    var ntx1000_koef = (work_ntx1000 + nagruzka_ntx1000 + pause_ntx1000 + avar_ntx1000 + off_ntx1000)/100;
+    var nlx3000_koef = (work_nlx3000 + nagruzka_nlx3000 + pause_nlx3000 + avar_nlx3000 + off_nlx3000)/100;
+    var gamma2000_koef = (work_gamma2000 + nagruzka_gamma2000 + pause_gamma2000 + avar_gamma2000 + off_gamma2000)/100;
+    var ctx650_koef = (work_ctx650 + nagruzka_ctx650 + pause_ctx650 + avar_ctx650 + off_ctx650)/100;
+    var dmf260_koef = (work_dmf260 + nagruzka_dmf260 + pause_dmf260 + avar_dmf260 + off_dmf260)/100;
+    var dmu50_1_koef = (work_dmu50_1 + nagruzka_dmu50_1 + pause_dmu50_1 + avar_dmu50_1 + off_dmu50_1)/100;
+    var dmu50_2_koef = (work_dmu50_2 + nagruzka_dmu50_2 + pause_dmu50_2 + avar_dmu50_2 + off_dmu50_2)/100;
+    var dmc1035_koef = (work_dmc1035 + nagruzka_dmc1035 + pause_dmc1035 + avar_dmc1035 + off_dmc1035)/100;
+    var ctx310_1_koef = (work_ctx310_1 + nagruzka_ctx310_1 + pause_ctx310_1 + avar_ctx310_1 + off_ctx310_1)/100;
+    var ctx510_1_koef = (work_ctx510_1 + nagruzka_ctx510_1 + pause_ctx510_1 + avar_ctx510_1 + off_ctx510_1)/100;
 
     table = document.getElementById('myTable').rows; // Обращение к таблице по ID
-    table[1].cells[1].innerHTML = work_uvf_1_1;
-    table[2].cells[1].innerHTML = work_uvf_1_2;
-    table[3].cells[1].innerHTML = work_ntx1000;
-    table[4].cells[1].innerHTML = work_nlx3000;
-    table[5].cells[1].innerHTML = work_gamma2000;
-    table[6].cells[1].innerHTML = work_ctx650;
-    table[7].cells[1].innerHTML = work_dmf260;
-    table[8].cells[1].innerHTML = work_dmu50_1;
-    table[9].cells[1].innerHTML = work_dmu50_2;
-    table[10].cells[1].innerHTML = work_dmc1035;
-    table[11].cells[1].innerHTML = work_ctx310_1;
-    table[12].cells[1].innerHTML = work_ctx510_1;
+    table[1].cells[1].innerHTML = work_uvf_1_1/uvf_1_1_koef;
+    table[2].cells[1].innerHTML = work_uvf_1_2/uvf_1_2_koef;
+    table[3].cells[1].innerHTML = work_ntx1000/ntx1000_koef;
+    table[4].cells[1].innerHTML = work_nlx3000/nlx3000_koef;
+    table[5].cells[1].innerHTML = work_gamma2000/gamma2000_koef;
+    table[6].cells[1].innerHTML = work_ctx650/ctx650_koef;
+    table[7].cells[1].innerHTML = work_dmf260/dmf260_koef;
+    table[8].cells[1].innerHTML = work_dmu50_1/dmu50_1_koef;
+    table[9].cells[1].innerHTML = work_dmu50_2/dmu50_2_koef;
+    table[10].cells[1].innerHTML = work_dmc1035/dmc1035_koef;
+    table[11].cells[1].innerHTML = work_ctx310_1/ctx310_1_koef;
+    table[12].cells[1].innerHTML = work_ctx510_1/ctx510_1_koef;
 
     // Столбец Работа
-    table[1].cells[2].innerHTML = nagruzka_uvf_1_1;
-    table[2].cells[2].innerHTML = nagruzka_uvf_1_2;
-    table[3].cells[2].innerHTML = nagruzka_ntx1000;
-    table[4].cells[2].innerHTML = nagruzka_nlx3000;
-    table[5].cells[2].innerHTML = nagruzka_gamma2000;
-    table[6].cells[2].innerHTML = nagruzka_ctx650;
-    table[7].cells[2].innerHTML = nagruzka_dmf260;
-    table[8].cells[2].innerHTML = nagruzka_dmu50_1;
-    table[9].cells[2].innerHTML = nagruzka_dmu50_2;
-    table[10].cells[2].innerHTML = nagruzka_dmc1035;
-    table[11].cells[2].innerHTML = nagruzka_ctx310_1;
-    table[12].cells[2].innerHTML = nagruzka_ctx510_1;
+    table[1].cells[2].innerHTML = nagruzka_uvf_1_1/uvf_1_1_koef;
+    table[2].cells[2].innerHTML = nagruzka_uvf_1_2/uvf_1_2_koef;
+    table[3].cells[2].innerHTML = nagruzka_ntx1000/ntx1000_koef;
+    table[4].cells[2].innerHTML = nagruzka_nlx3000/nlx3000_koef;
+    table[5].cells[2].innerHTML = nagruzka_gamma2000/gamma2000_koef;
+    table[6].cells[2].innerHTML = nagruzka_ctx650/ctx650_koef;
+    table[7].cells[2].innerHTML = nagruzka_dmf260/dmf260_koef;
+    table[8].cells[2].innerHTML = nagruzka_dmu50_1/dmu50_1_koef;
+    table[9].cells[2].innerHTML = nagruzka_dmu50_2/dmu50_2_koef;
+    table[10].cells[2].innerHTML = nagruzka_dmc1035/dmc1035_koef;
+    table[11].cells[2].innerHTML = nagruzka_ctx310_1/ctx310_1_koef;
+    table[12].cells[2].innerHTML = nagruzka_ctx510_1/ctx510_1_koef;
     // Столбец Нагрузка
 
-    table[1].cells[3].innerHTML = pause_uvf_1_1;
-    table[2].cells[3].innerHTML = pause_uvf_1_2;
-    table[3].cells[3].innerHTML = pause_ntx1000;
-    table[4].cells[3].innerHTML = pause_nlx3000;
-    table[5].cells[3].innerHTML = pause_gamma2000;
-    table[6].cells[3].innerHTML = pause_ctx650;
-    table[7].cells[3].innerHTML = pause_dmf260;
-    table[8].cells[3].innerHTML = pause_dmu50_1;
-    table[9].cells[3].innerHTML = pause_dmu50_2;
-    table[10].cells[3].innerHTML = pause_dmc1035;
-    table[11].cells[3].innerHTML = pause_ctx310_1;
-    table[12].cells[3].innerHTML = pause_ctx510_1;
+    table[1].cells[3].innerHTML = pause_uvf_1_1/uvf_1_1_koef;
+    table[2].cells[3].innerHTML = pause_uvf_1_2/uvf_1_2_koef;
+    table[3].cells[3].innerHTML = pause_ntx1000/ntx1000_koef;
+    table[4].cells[3].innerHTML = pause_nlx3000/nlx3000_koef;
+    table[5].cells[3].innerHTML = pause_gamma2000/gamma2000_koef;
+    table[6].cells[3].innerHTML = pause_ctx650/ctx650_koef;
+    table[7].cells[3].innerHTML = pause_dmf260/dmf260_koef;
+    table[8].cells[3].innerHTML = pause_dmu50_1/dmu50_1_koef;
+    table[9].cells[3].innerHTML = pause_dmu50_2/dmu50_2_koef;
+    table[10].cells[3].innerHTML = pause_dmc1035/dmc1035_koef;
+    table[11].cells[3].innerHTML = pause_ctx310_1/ctx310_1_koef;
+    table[12].cells[3].innerHTML = pause_ctx510_1/ctx510_1_koef;
     // Столбец пауза
 
-    table[1].cells[4].innerHTML = avar_uvf_1_1;
-    table[2].cells[4].innerHTML = avar_uvf_1_2;
-    table[3].cells[4].innerHTML = avar_ntx1000;
-    table[4].cells[4].innerHTML = avar_nlx3000;
-    table[5].cells[4].innerHTML = avar_gamma2000;
-    table[6].cells[4].innerHTML = avar_ctx650;
-    table[7].cells[4].innerHTML = avar_dmf260;
-    table[8].cells[4].innerHTML = avar_dmu50_1;
-    table[9].cells[4].innerHTML = avar_dmu50_2;
-    table[10].cells[4].innerHTML = avar_dmc1035;
-    table[11].cells[4].innerHTML = avar_ctx310_1;
-    table[12].cells[4].innerHTML = avar_ctx510_1;
+    table[1].cells[4].innerHTML = avar_uvf_1_1/uvf_1_1_koef;
+    table[2].cells[4].innerHTML = avar_uvf_1_2/uvf_1_2_koef;
+    table[3].cells[4].innerHTML = avar_ntx1000/ntx1000_koef;
+    table[4].cells[4].innerHTML = avar_nlx3000/nlx3000_koef;
+    table[5].cells[4].innerHTML = avar_gamma2000/gamma2000_koef;
+    table[6].cells[4].innerHTML = avar_ctx650/ctx650_koef;
+    table[7].cells[4].innerHTML = avar_dmf260/dmf260_koef;
+    table[8].cells[4].innerHTML = avar_dmu50_1/dmu50_1_koef;
+    table[9].cells[4].innerHTML = avar_dmu50_2/dmu50_2_koef;
+    table[10].cells[4].innerHTML = avar_dmc1035/dmc1035_koef;
+    table[11].cells[4].innerHTML = avar_ctx310_1/ctx310_1_koef;
+    table[12].cells[4].innerHTML = avar_ctx510_1/ctx510_1_koef;
     // Столбец выключен
 
-    table[1].cells[5].innerHTML = off_uvf_1_1;
-    table[2].cells[5].innerHTML = off_uvf_1_2;
-    table[3].cells[5].innerHTML = off_ntx1000;
-    table[4].cells[5].innerHTML = off_nlx3000;
-    table[5].cells[5].innerHTML = off_gamma2000;
-    table[6].cells[5].innerHTML = off_ctx650;
-    table[7].cells[5].innerHTML = off_dmf260;
-    table[8].cells[5].innerHTML = off_dmu50_1;
-    table[9].cells[5].innerHTML = off_dmu50_2;
-    table[10].cells[5].innerHTML = off_dmc1035;
-    table[11].cells[5].innerHTML = off_ctx310_1;
-    table[12].cells[5].innerHTML = off_ctx510_1;
+    table[1].cells[5].innerHTML = off_uvf_1_1/uvf_1_1_koef;
+    table[2].cells[5].innerHTML = off_uvf_1_2/uvf_1_2_koef;
+    table[3].cells[5].innerHTML = off_ntx1000/ntx1000_koef;
+    table[4].cells[5].innerHTML = off_nlx3000/nlx3000_koef;
+    table[5].cells[5].innerHTML = off_gamma2000/gamma2000_koef;
+    table[6].cells[5].innerHTML = off_ctx650/ctx650_koef;
+    table[7].cells[5].innerHTML = off_dmf260/dmf260_koef;
+    table[8].cells[5].innerHTML = off_dmu50_1/dmu50_1_koef;
+    table[9].cells[5].innerHTML = off_dmu50_2/dmu50_2_koef;
+    table[10].cells[5].innerHTML = off_dmc1035/dmc1035_koef;
+    table[11].cells[5].innerHTML = off_ctx310_1/ctx310_1_koef;
+    table[12].cells[5].innerHTML = off_ctx510_1/ctx510_1_koef;
 
     //Столбец ручной режим
 
