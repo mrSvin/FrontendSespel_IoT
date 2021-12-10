@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Станки</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <link rel="stylesheet" type="text/css" href="../css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/report_day_style.css"/>
+    <!--  <link rel="stylesheet" type="text/css" href="../css/menu_buttons.css"/> &lt;!&ndash; Меню &ndash;&gt;-->
+    <!--  <link rel="stylesheet" type="text/css" href="../css/styles_header.css"/>-->
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+
+    <script src="../js/highcharts.js"></script>
+    <script src="../js/exporting.js"></script>
+    <script src="../js/export-data.js"></script>
+    <script src="../js/accessibility.js"></script>
+    <script src="../js/xrange.js"></script>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap-3.3.0.min.js"></script>
+
+</head>
+<body>
+<h1>Станки Мех.площадка I</h1>
+<div style="display: flex; justify-content: space-between">
+    <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
+    <table id='myTable' style="min-height: 400px; width: 45%">
+        <thead>
+        <tr>
+            <th>Станки</th>
+            <th>Работа</th>
+            <th>Нагрузка</th>
+            <th>Пауза</th>
+            <th>Авария</th>
+            <th>Выключен</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="hit">
+            <td>УВФ-1 #1</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>УВФ-1 #2</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>NTX1000 #2</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>NLX3000</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>GAMMA2000</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>CTX650</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>DMF260</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>DMU50 #1</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>DMU50 #2</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>DMC1035</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>CTX310 #1</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>CTX310 #1</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        <tr class="hit">
+            <td>CTX510 #1</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+        </tr>
+        </tbody>
+    </table>    <!--Таблица изменений-->
+    <!--Общая загрузка html-->
+</div>  <!--Общая загрузка и количество операций html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000'];
+
+    var work_uvf_1_1 = [[${work}]];
+    var work_uvf_1_2 = [[${work_2}]];
+    var work_ntx1000 = [[${work_3}]];
+    var work_nlx3000 = [[${work_nlx3000}]];
+    var work_gamma2000 = [[${work_dmg_gamma2000}]];
+    var work_ctx650 = [[${work_dmg_ctx650}]];
+    var work_dmf260 = [[${work_dmg_dmf260}]];
+    var work_dmu50_1 = [[${work_dmg_dmu50_1}]];
+    var work_dmu50_2 = [[${work_dmg_dmu50_2}]];
+    var work_dmc1035 = [[${work_dmg_dmc1035}]];
+    var work_ctx310_1 = [[${work_dmg_ctx310_1}]];
+    var work_ctx510_1 = [[${work_dmg_ctx510_1}]];
+
+    var pause_uvf_1_1 = [[${pass}]];
+    var pause_uvf_1_2 = [[${pass_2}]];
+    var pause_ntx1000 = [[${pass_3}]];
+    var pause_nlx3000 = [[${pass_nlx3000}]];
+    var pause_gamma2000 = [[${pass_dmg_gamma2000}]];
+    var pause_ctx650 = [[${pass_dmg_ctx650}]];
+    var pause_dmf260 = [[${pass_dmg_dmf260}]];
+    var pause_dmu50_1 = [[${pass_dmg_dmu50_1}]];
+    var pause_dmu50_2 = [[${pass_dmg_dmu50_2}]];
+    var pause_dmc1035 = [[${pass_dmg_dmc1035}]];
+    var pause_ctx310_1 = [[${pass_dmg_ctx310_1}]];
+    var pause_ctx510_1 = [[${pass_dmg_ctx510_1}]];
+
+    var off_uvf_1_1 = [[${fail}]];
+    var off_uvf_1_2 = [[${fail_2}]];
+    var off_ntx1000 = [[${fail_3}]];
+    var off_nlx3000 = [[${fail_nlx3000}]];
+    var off_gamma2000 = [[${fail_dmg_gamma2000}]];
+    var off_ctx650 = [[${fail_dmg_ctx650}]];
+    var off_dmf260 = [[${fail_dmg_dmf260}]];
+    var off_dmu50_1 = [[${fail_dmg_dmu50_1}]];
+    var off_dmu50_2 = [[${fail_dmg_dmu50_2}]];
+    var off_dmc1035 = [[${fail_dmg_dmc1035}]];
+    var off_ctx310_1 = [[${fail_dmg_ctx310_1}]];
+    var off_ctx510_1 = [[${fail_dmg_ctx510_1}]];
+
+    var avar_uvf_1_1 = [[${avar}]];
+    var avar_uvf_1_2 = [[${avar_2__2}]];
+    var avar_ntx1000 = [[${avar_3}]];
+    var avar_nlx3000 = [[${avar_nlx3000}]];
+    var avar_gamma2000 = [[${avar_dmg_gamma2000}]];
+    var avar_ctx650 = [[${avar_dmg_ctx650}]];
+    var avar_dmf260 = [[${avar_dmg_dmf260}]];
+    var avar_dmu50_1 = [[${avar_dmg_dmu50_1}]];
+    var avar_dmu50_2 = [[${avar_dmg_dmu50_2}]];
+    var avar_dmc1035 = [[${avar_dmg_dmc1035}]];
+    var avar_ctx310_1 = [[${avar_dmg_ctx310_1}]];
+    var avar_ctx510_1 = [[${avar_dmg_ctx510_1}]];
+
+
+
+    var nagruzka_uvf_1_1 = [[${nagruzka}]];
+    var nagruzka_uvf_1_2 = [[${nagruzka_2__2}]];
+    var nagruzka_ntx1000 = [[${nagruzka_3}]];
+    var nagruzka_nlx3000 = [[${nagruzka_nlx3000}]];
+    var nagruzka_gamma2000 = [[${nagruzka_dmg_gamma2000}]];
+    var nagruzka_ctx650 = [[${nagruzka_dmg_ctx650}]];
+    var nagruzka_dmf260 = [[${nagruzka_dmg_dmf260}]];
+    var nagruzka_dmu50_1 = [[${nagruzka_dmg_dmu50_1}]];
+    var nagruzka_dmu50_2 = [[${nagruzka_dmg_dmu50_2}]];
+    var nagruzka_dmc1035 = [[${nagruzka_dmg_dmc1035}]];
+    var nagruzka_ctx310_1 = [[${nagruzka_dmg_ctx310_1}]];
+    var nagruzka_ctx510_1 = [[${nagruzka_dmg_ctx510_1}]];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors: colors,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['УВФ-1 #1', 'УВФ-1 #2', 'NTX1000', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50 #1', 'DMU50 #2', 'DMC1035', 'CTX310 #1', 'CTX510 #1']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [work_uvf_1_1, work_uvf_1_2, work_ntx1000, work_nlx3000, work_gamma2000, work_ctx650, work_dmf260, work_dmu50_1, work_dmu50_2, work_dmc1035, work_ctx310_1, work_ctx510_1 ]
+        }, {
+            name: 'Под нагрузкой',
+            data: [nagruzka_uvf_1_1, nagruzka_uvf_1_2, nagruzka_ntx1000, nagruzka_nlx3000, nagruzka_gamma2000, nagruzka_ctx650, nagruzka_dmf260, nagruzka_dmu50_1, nagruzka_dmu50_2, nagruzka_dmc1035, nagruzka_ctx310_1, nagruzka_ctx510_1]
+        }, {
+            name: 'Ожидание',
+            data: [pause_uvf_1_1, pause_uvf_1_2, pause_ntx1000, pause_nlx3000, pause_gamma2000, pause_ctx650, pause_dmf260, pause_dmu50_1, pause_dmu50_2, pause_dmc1035, pause_ctx310_1, pause_ctx510_1]
+        }, {
+            name: 'Авария',
+            data: [avar_uvf_1_1, avar_uvf_1_2, avar_ntx1000, avar_nlx3000, avar_gamma2000, avar_ctx650, avar_dmf260, avar_dmu50_1, avar_dmu50_2, avar_dmc1035, avar_ctx310_1, avar_ctx510_1]
+        }, {
+            name: 'Выключен',
+            data: [off_uvf_1_1, off_uvf_1_2, off_ntx1000, off_nlx3000, off_gamma2000, off_ctx650, off_dmf260, off_dmu50_1, off_dmu50_2, off_dmc1035, off_ctx310_1, off_ctx510_1]
+        }]
+    });
+
+</script>   <!--js Общая загрузка-->
+<script th:inline="javascript">
+
+    table = document.getElementById('myTable').rows; // Обращение к таблице по ID
+    table[1].cells[1].innerHTML = work_uvf_1_1;
+    table[2].cells[1].innerHTML = work_uvf_1_2;
+    table[3].cells[1].innerHTML = work_ntx1000;
+    table[4].cells[1].innerHTML = work_nlx3000;
+    table[5].cells[1].innerHTML = work_gamma2000;
+    table[6].cells[1].innerHTML = work_ctx650;
+    table[7].cells[1].innerHTML = work_dmf260;
+    table[8].cells[1].innerHTML = work_dmu50_1;
+    table[9].cells[1].innerHTML = work_dmu50_2;
+    table[10].cells[1].innerHTML = work_dmc1035;
+    table[11].cells[1].innerHTML = work_ctx310_1;
+    table[12].cells[1].innerHTML = work_ctx510_1;
+
+    // Столбец Работа
+    table[1].cells[2].innerHTML = nagruzka_uvf_1_1;
+    table[2].cells[2].innerHTML = nagruzka_uvf_1_2;
+    table[3].cells[2].innerHTML = nagruzka_ntx1000;
+    table[4].cells[2].innerHTML = nagruzka_nlx3000;
+    table[5].cells[2].innerHTML = nagruzka_gamma2000;
+    table[6].cells[2].innerHTML = nagruzka_ctx650;
+    table[7].cells[2].innerHTML = nagruzka_dmf260;
+    table[8].cells[2].innerHTML = nagruzka_dmu50_1;
+    table[9].cells[2].innerHTML = nagruzka_dmu50_2;
+    table[10].cells[2].innerHTML = nagruzka_dmc1035;
+    table[11].cells[2].innerHTML = nagruzka_ctx310_1;
+    table[12].cells[2].innerHTML = nagruzka_ctx510_1;
+    // Столбец Нагрузка
+
+    table[1].cells[3].innerHTML = pause_uvf_1_1;
+    table[2].cells[3].innerHTML = pause_uvf_1_2;
+    table[3].cells[3].innerHTML = pause_ntx1000;
+    table[4].cells[3].innerHTML = pause_nlx3000;
+    table[5].cells[3].innerHTML = pause_gamma2000;
+    table[6].cells[3].innerHTML = pause_ctx650;
+    table[7].cells[3].innerHTML = pause_dmf260;
+    table[8].cells[3].innerHTML = pause_dmu50_1;
+    table[9].cells[3].innerHTML = pause_dmu50_2;
+    table[10].cells[3].innerHTML = pause_dmc1035;
+    table[11].cells[3].innerHTML = pause_ctx310_1;
+    table[12].cells[3].innerHTML = pause_ctx510_1;
+    // Столбец пауза
+
+    table[1].cells[4].innerHTML = avar_uvf_1_1;
+    table[2].cells[4].innerHTML = avar_uvf_1_2;
+    table[3].cells[4].innerHTML = avar_ntx1000;
+    table[4].cells[4].innerHTML = avar_nlx3000;
+    table[5].cells[4].innerHTML = avar_gamma2000;
+    table[6].cells[4].innerHTML = avar_ctx650;
+    table[7].cells[4].innerHTML = avar_dmf260;
+    table[8].cells[4].innerHTML = avar_dmu50_1;
+    table[9].cells[4].innerHTML = avar_dmu50_2;
+    table[10].cells[4].innerHTML = avar_dmc1035;
+    table[11].cells[4].innerHTML = avar_ctx310_1;
+    table[12].cells[4].innerHTML = avar_ctx510_1;
+    // Столбец выключен
+
+    table[1].cells[5].innerHTML = off_uvf_1_1;
+    table[2].cells[5].innerHTML = off_uvf_1_2;
+    table[3].cells[5].innerHTML = off_ntx1000;
+    table[4].cells[5].innerHTML = off_nlx3000;
+    table[5].cells[5].innerHTML = off_gamma2000;
+    table[6].cells[5].innerHTML = off_ctx650;
+    table[7].cells[5].innerHTML = off_dmf260;
+    table[8].cells[5].innerHTML = off_dmu50_1;
+    table[9].cells[5].innerHTML = off_dmu50_2;
+    table[10].cells[5].innerHTML = off_dmc1035;
+    table[11].cells[5].innerHTML = off_ctx310_1;
+    table[12].cells[5].innerHTML = off_ctx510_1;
+
+    //Столбец ручной режим
+
+</script><!--Запись переменных в таблицу-->
+</body>
+</html>
