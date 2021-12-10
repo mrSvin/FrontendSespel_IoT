@@ -256,7 +256,115 @@
 
 </script>   <!--Календарь js-->
 
+<div style="display: flex">
+    <figure class="highcharts-figure">
+        <div id="container_sum_zagruzka" style="height: 400px; width: 800px"></div>
+    </figure>   <!--Общая загрузка html-->
+</div>  <!--Общая загрузка  html-->
+<script th:inline="javascript">
 
+    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
+
+    var navigator_1_work_sum = [[${work_sum}]];
+    var navigator_1_pass_sum = [[${pass_sum}]];
+    var navigator_1_fail_sum = [[${fail_sum}]];
+    var navigator_1_avar_sum = [[${avar_sum}]];
+    var navigator_1_nagruzka_sum = [[${nagruzka_sum}]];
+
+    var work_2_golova_1_sum = [[${work_2_golova_1_sum}]];
+    var pass_2_golova_1_sum = [[${pass_2_golova_1_sum}]];
+    var fail_2_golova_1_sum = [[${fail_2_golova_1_sum}]];
+    var avar_2_golova_1_sum = [[${avar_2_golova_1_sum}]];
+    var nagruzka_2_golova_1_sum = [[${nagruzka_2_golova_1_sum}]];
+
+    var work_2_golova_2_sum = [[${work_2_golova_2_sum}]];
+    var pass_2_golova_2_sum = [[${pass_2_golova_2_sum}]];
+    var fail_2_golova_2_sum = [[${fail_2_golova_2_sum}]];
+    var avar_2_golova_2_sum = [[${avar_2_golova_2_sum}]];
+    var nagruzka_2_golova_2_sum = [[${nagruzka_2_golova_2_sum}]];
+
+    var navigator_3_work_sum = [[${work_3_sum}]];
+    var navigator_3_pass_sum = [[${pass_3_sum}]];
+    var navigator_3_fail_sum = [[${fail_3_sum}]];
+    var navigator_3_avar_sum = [[${avar_3_sum}]];
+    var navigator_3_nagruzka_sum = [[${nagruzka_3_sum}]];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['Навигатор #1', 'Навигатор #2-1', 'Навигатор #2-2', 'Навигатор #3']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum]
+        }, {
+            name: 'Под нагрузкой',
+            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum]
+        }, {
+            name: 'Ожидание',
+            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum]
+        }, {
+            name: 'Авария',
+            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum]
+        }, {
+            name: 'Выключен',
+            data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum]
+        }]
+    });
+
+</script>   <!--js Общая загрузка-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
