@@ -353,8 +353,6 @@
     var sum_off = [[${navigator_1_fail}]] + [[${navigator_2_golova_1_fail}]] + [[${navigator_2_golova_2_fail}]] [[${navigator_3_fail}]] + [[${trulaser_fail}]];
     var sum_avar = [[${navigator_1_avar}]] + [[${navigator_2_golova_1_avar}]] + [[${navigator_2_golova_2_avar}]] + [[${navigator_3_avar}]] + [[${trulaser_avar}]];
     var sum_nagruzka = [[${navigator_1_nagruzka}]] + [[${navigator_2_golova_1_nagruzka}]] + [[${navigator_2_golova_2_nagruzka}]] + [[${navigator_3_nagruzka}]] + [[${trulaser_nagruzka}]];
-
-
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -416,7 +414,7 @@
             type : 'pie',
             name : 'Показатель',
             data : [ [ 'По программе', sum_rabota ], [ 'Включен', sum_pause ],
-                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka]]
+                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka]   ]
         }]
     });
 </script>   <!--Общая js круговая диагрмма загрузки оборудования-->
