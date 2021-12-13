@@ -23,7 +23,7 @@ Highcharts.setOptions({
 
 <!--trulaser линейная диагрмма загрузки оборудования-->
 var colors = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
-Highcharts.chart('container_work5', {
+Highcharts.chart('container_work_5', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -545,7 +545,7 @@ Highcharts.chart('container_work5', {
 
 <!--trulaser круговая диагрмма загрузки оборудования-->
 var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-Highcharts.chart('container5', {
+Highcharts.chart('container_5', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
