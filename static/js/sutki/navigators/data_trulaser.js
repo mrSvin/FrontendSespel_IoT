@@ -263,7 +263,6 @@ Highcharts.chart('container_work_5', {
                 {x:  (new Date(trulaser_array_rabota[392])).getTime(), x2: (new Date(trulaser_array_rabota[393])).getTime(),  y: 1, programname: trulaser_array_programname[198]},
                 {x:  (new Date(trulaser_array_rabota[394])).getTime(), x2: (new Date(trulaser_array_rabota[395])).getTime(),  y: 1, programname: trulaser_array_programname[199]},
                 {x:  (new Date(trulaser_array_rabota[396])).getTime(), x2: (new Date(trulaser_array_rabota[397])).getTime(),  y: 1, programname: trulaser_array_programname[200]},
-                {x:  (new Date(trulaser_array_rabota[398])).getTime(), x2: (new Date(trulaser_array_rabota[399])).getTime(),  y: 1, programname: trulaser_array_programname[201]},
             ],
 
         },
@@ -478,7 +477,6 @@ Highcharts.chart('container_work_5', {
                 {x:  (new Date(trulaser_array_pause[392])).getTime(), x2: (new Date(trulaser_array_pause[393])).getTime(),  y: 2},
                 {x:  (new Date(trulaser_array_pause[394])).getTime(), x2: (new Date(trulaser_array_pause[395])).getTime(),  y: 2},
                 {x:  (new Date(trulaser_array_pause[396])).getTime(), x2: (new Date(trulaser_array_pause[397])).getTime(),  y: 2},
-                {x:  (new Date(trulaser_array_pause[398])).getTime(), x2: (new Date(trulaser_array_pause[399])).getTime(),  y: 2},
             ],
             dataLabels: {
                 enabled: true
