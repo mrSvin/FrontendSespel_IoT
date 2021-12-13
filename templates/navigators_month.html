@@ -231,6 +231,196 @@
 
 </div>      <!--Календарь html-->
 
+<div style="display: flex; justify-content: space-between">
+
+    <div id="container_sum_zagruzka" style="height: 400px; width: 45%"></div> <!--Общая загрузка html-->
+
+    <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
+</div>  <!--Общая загрузка-->
+<script th:inline="javascript">
+    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000', '#5c7ed0' ];
+
+    var work_navigator_1 = [[${navigator_1_work}]];
+    var pass_navigator_1 = [[${navigator_1_pass}]];
+    var fail_navigator_1 = [[${navigator_1_fail}]];
+    var avar_navigator_1 = [[${navigator_1_avar}]];
+    var  nagruzka_navigator_1 = [[${navigator_1_nagruzka}]];
+
+    var work_navigator_2_golova_1 = [[${navigator_2_golova_1_work}]];
+    var pass_navigator_2_golova_1 = [[${navigator_2_golova_1_pass}]];
+    var fail_navigator_2_golova_1 = [[${navigator_2_golova_1_fail}]];
+    var avar_navigator_2_golova_1 = [[${navigator_2_golova_1_avar}]];
+    var  nagruzka_navigator_2_golova_1 = [[${navigator_2_golova_1_nagruzka}]];
+
+    var work_navigator_2_golova_2 = [[${navigator_2_golova_2_work}]];
+    var pass_navigator_2_golova_2 = [[${navigator_2_golova_2_pass}]];
+    var fail_navigator_2_golova_2 = [[${navigator_2_golova_2_fail}]];
+    var avar_navigator_2_golova_2 = [[${navigator_2_golova_2_avar}]];
+    var  nagruzka_navigator_2_golova_2 = [[${navigator_2_golova_2_nagruzka}]];
+
+    var work_navigator_3 = [[${navigator_3_work}]];
+    var pass_navigator_3 = [[${navigator_3_pass}]];
+    var fail_navigator_3 = [[${navigator_3_fail}]];
+    var avar_navigator_3 = [[${navigator_3_avar}]];
+    var  nagruzka_navigator_3 = [[${navigator_3_nagruzka}]];
+
+    var work_trulaser = [[${trulaser_work}]];
+    var pass_trulaser = [[${trulaser_pass}]];
+    var fail_trulaser = [[${trulaser_fail}]];
+    var avar_trulaser = [[${trulaser_avar}]];
+    var  nagruzka_trulaser = [[${trulaser_nagruzka}]];
+
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors:colors,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [work_navigator_1, work_navigator_2_golova_1, work_navigator_2_golova_2, work_navigator_3, work_trulaser]
+        }, {
+            name: 'Под нагрузкой',
+            data: [nagruzka_navigator_1, nagruzka_navigator_2_golova_1, nagruzka_navigator_2_golova_2, nagruzka_navigator_3, nagruzka_trulaser]
+        }, {
+            name: 'Ожидание',
+            data: [pass_navigator_1, pass_navigator_2_golova_1, pass_navigator_2_golova_2, pass_navigator_3, pass_trulaser]
+        }, {
+            name: 'Авария',
+            data: [avar_navigator_1, avar_navigator_2_golova_1, avar_navigator_2_golova_2, avar_navigator_3, avar_trulaser]
+        }, {
+            name: 'Выключен',
+            data: [fail_navigator_1, fail_navigator_2_golova_1, fail_navigator_2_golova_2, fail_navigator_3, fail_trulaser]
+        }]
+    });
+</script>   <!--js Общая загрузка-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210', '#5c7ed0'];
+    var sum_rabota = [[${navigator_1_work}]] + [[${navigator_2_golova_1_work}]] + [[${navigator_2_golova_2_work}]] + [[${navigator_3_work}]] + [[${trulaser_work}]];
+    var sum_pause = [[${navigator_1_pass}]] + [[${navigator_2_golova_1_pass}]] + [[${navigator_2_golova_2_pass}]] + [[${navigator_3_pass}]] + [[${trulaser_pass}]];
+    var sum_off = [[${navigator_1_fail}]] + [[${navigator_2_golova_1_fail}]] + [[${navigator_2_golova_2_fail}]] [[${navigator_3_fail}]] + [[${trulaser_fail}]];
+    var sum_avar = [[${navigator_1_avar}]] + [[${navigator_2_golova_1_avar}]] + [[${navigator_2_golova_2_avar}]] + [[${navigator_3_avar}]] + [[${trulaser_avar}]];
+    var sum_nagruzka = [[${navigator_1_nagruzka}]] + [[${navigator_2_golova_1_nagruzka}]] + [[${navigator_2_golova_2_nagruzka}]] + [[${navigator_3_nagruzka}]] + [[${trulaser_nagruzka}]];
+
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka_krug', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Суммарная загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', sum_rabota ], [ 'Включен', sum_pause ],
+                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka]]
+        }]
+    });
+</script>   <!--Общая js круговая диагрмма загрузки оборудования-->
+
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
