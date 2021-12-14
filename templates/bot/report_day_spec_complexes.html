@@ -26,7 +26,11 @@
 <body>
 <h1>Спец. комплексы</h1>
 <div style="display: flex; justify-content: space-around">
-    <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
+    <div style=" display: flex; flex-direction: column; min-height: 400px; width: 45%">
+        <div id="container_sum_zagruzka"></div>
+        <div style="display: flex; height: 400px; width: 55%;" id="container_press_davlenie"></div>
+        <div style="display: flex; height: 400px; width: 55%;" id="container_epp_tok"></div>
+    </div>
     <table id='myTable' style="min-height: 400px; width: 45%">
         <thead>
         <tr>
@@ -151,6 +155,199 @@
 
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
+
+    var data_davlenie = JSON.parse([[${davlenie}]]);
+    var data_zad_davlenie = JSON.parse([[${zad_davlenie}]]);
+    // var test = data_davlenie.replaceAll('\'',  '');
+    // console.log(test);
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        }
+    });
+
+    Highcharts.getJSON(
+        'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+        function (data) {
+
+            Highcharts.chart('container_press_davlenie', {
+                chart: {
+                    zoomType: 'x'
+                },
+                time: {
+                    timezoneOffset: 0
+                },
+                title: {
+                    text: 'Хронология запрессовок'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Давление, тонн'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
+                            },
+                            stops: [
+                                [0, Highcharts.getOptions().colors[0]],
+                                [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                            ]
+                        },
+                        marker: {
+                            radius: 2
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+
+                series: [{
+                    type: 'area',
+                    name: 'Давление запрессовки, т',
+                    data: data_davlenie
+                },{
+
+                    name: 'Заданное давление, т',
+                    data: data_zad_davlenie
+                }
+                ]
+            });
+        }
+    );
+
+</script>   <!--Пресс js Давление-->
+<script th:inline="javascript">
+
+    var data_tok = JSON.parse([[${epp_tok}]]);
+    var data_temperatura = JSON.parse([[${epp_temperatura}]]);
+
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        }
+    });
+
+    Highcharts.getJSON(
+        'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+        function (data) {
+
+            Highcharts.chart('container_epp_tok', {
+                chart: {
+                    zoomType: 'x'
+                },
+                time: {
+                    timezoneOffset: 0
+                },
+                title: {
+                    text: 'Хронология технологического процесса'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Амплитуда'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
+                            },
+                            stops: [
+                                [0, Highcharts.getOptions().colors[0]],
+                                [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                            ]
+                        },
+                        marker: {
+                            radius: 2
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+
+                series: [{
+                    type: 'area',
+                    name: 'Ток, А',
+                    data: data_tok
+                },
+                    {
+                        name: 'Температура, С',
+                        data: data_temperatura
+                    }
+                ]
+            });
+        }
+    );
+
+</script>   <!--ЭПП js Ток и Температура-->
+<script th:inline="javascript">
     var press_koef = (press_work + press_nagruzka + press_pass + press_avar + press_fail)/100;
     var epp_koef = (epp_work + epp_nagruzka + epp_pass + epp_avar + epp_fail)/100;
 
@@ -168,13 +365,15 @@
     table[2].cells[3].innerHTML = Math.round(epp_pass/epp_koef * 10) / 10 + "%";
     // Столбец пауза
 
-    table[1].cells[4].innerHTML = Math.round(press_fail/press_koef * 10) / 10 + "%";
-    table[2].cells[4].innerHTML = Math.round(epp_fail/epp_koef * 10) / 10 + "%";
+    table[1].cells[4].innerHTML = Math.round(press_avar/press_koef * 10) / 10 + "%";
+    table[2].cells[4].innerHTML = Math.round(epp_avar/epp_koef * 10) / 10 + "%";
+    //Столбец ручной режим
+
+    table[1].cells[5].innerHTML = Math.round(press_fail/press_koef * 10) / 10 + "%";
+    table[2].cells[5].innerHTML = Math.round(epp_fail/epp_koef * 10) / 10 + "%";
     // Столбец выключен
 
-    table[1].cells[5].innerHTML = Math.round(press_avar/press_koef * 10) / 10 + "%";
-    table[2].cells[5].innerHTML = Math.round(epp_avar/epp_koef * 10) / 10 + "%";
-    //Столбец ручной режим
+
 
 </script><!--Запись переменных в таблицу-->
 </body>
