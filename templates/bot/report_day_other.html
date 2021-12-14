@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Остальное</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <link rel="stylesheet" type="text/css" href="../css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/report_day_style.css"/>
+    <!--  <link rel="stylesheet" type="text/css" href="../css/menu_buttons.css"/> &lt;!&ndash; Меню &ndash;&gt;-->
+    <!--  <link rel="stylesheet" type="text/css" href="../css/styles_header.css"/>-->
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+
+    <script src="../js/highcharts.js"></script>
+    <script src="../js/exporting.js"></script>
+    <script src="../js/export-data.js"></script>
+    <script src="../js/accessibility.js"></script>
+    <script src="../js/xrange.js"></script>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap-3.3.0.min.js"></script>
+
+</head>
+<body>
+<h1>ОТК, Склады, Литейка</h1>
+<div style="display: flex; justify-content: space-around; min-height: 80vh;">
+    <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
+    <table id='myTable' style="min-height: 400px; width: 45%">
+        <thead>
+        <tr>
+            <th>Станки</th>
+            <th>Работа</th>
+            <th>Нагрузка</th>
+            <th>Пауза</th>
+            <th>Авария</th>
+            <th>Выключен</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="hit">
+            <td>CRYSTA-Apex</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+        </tr>
+        <tr class="hit">
+            <td>Склад Мех. цеха</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+        </tr>
+        <tr class="hit">
+            <td>Печь Индукционная</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+        </tr>
+        </tbody>
+    </table>    <!--Таблица изменений-->
+    <!--Общая загрузка html-->
+</div>  <!--Общая загрузка и количество операций html-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000'];
+
+    var crysta_apex_work = [[${crysta_apex_work}]];
+    var crysta_apex_pass = [[${crysta_apex_pass}]];
+    var crysta_apex_fail = [[${crysta_apex_fail}]];
+    var crysta_apex_avar = [[${crysta_apex_avar}]];
+    var crysta_apex_kalibrovka = [[${crysta_apex_kalibrovka}]];
+
+    var sclad_meh_work = [[${work}]];
+    var sclad_meh_pass = [[${pass}]];
+    var sclad_meh_fail = [[${fail}]];
+    var sclad_meh_nagruzka = [[${nagruzka}]];
+    var sclad_meh_avar = [[${avar}]];
+
+    var pech_nerg_work = [[${pech_nerg_work}]];
+    var pech_nerg_pass = [[${pech_nerg_pass}]];
+    var pech_nerg_fail = [[${pech_nerg_fail}]];
+    var pech_nerg_nagruzka = [[${pech_nerg_nagruzka}]];
+    var pech_nerg_avar = [[${pech_nerg_avar}]];
+
+
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors: colors,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['CRYSTA-Apex', 'Склад Мех. цеха', 'Печь Индукционная']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: []
+        }, {
+            name: 'Под нагрузкой',
+            data: []
+        }, {
+            name: 'Ожидание',
+            data: []
+        }, {
+            name: 'Авария',
+            data: []
+        }, {
+            name: 'Выключен',
+            data: []
+        }]
+    });
+
+</script>   <!--js Общая загрузка-->
+<script th:inline="javascript">
+
+    var crysta_apex_koef = (crysta_apex_work + crysta_apex_pass + crysta_apex_fail + crysta_apex_avar + crysta_apex_kalibrovka)/100;
+    var sclad_meh_koef = (sclad_meh_work + sclad_meh_pass + sclad_meh_fail + sclad_meh_nagruzka + sclad_meh_avar)/100;
+    var pech_nerg_koef = (pech_nerg_work + pech_nerg_pass + pech_nerg_fail + pech_nerg_nagruzka + pech_nerg_avar)/100;
+
+    table = document.getElementById('myTable').rows; // Обращение к таблице по ID
+    table[1].cells[1].innerHTML = Math.round(crysta_apex_work/crysta_apex_koef * 10) / 10 + "%";
+    table[2].cells[1].innerHTML = Math.round(sclad_meh_work/sclad_meh_koef * 10) / 10 + "%";
+    table[3].cells[1].innerHTML = Math.round(pech_nerg_work/pech_nerg_koef * 10) / 10 + "%";
+    // Столбец Работа
+
+    table[1].cells[2].innerHTML = Math.round(crysta_apex_kalibrovka/crysta_apex_koef * 10) / 10 + "%";
+    table[2].cells[2].innerHTML = Math.round(sclad_meh_nagruzka/sclad_meh_koef * 10) / 10 + "%";
+    table[3].cells[2].innerHTML = Math.round(pech_nerg_nagruzka/pech_nerg_koef * 10) / 10 + "%";
+    // Столбец Нагрузка
+
+    table[1].cells[3].innerHTML = Math.round(crysta_apex_pass/crysta_apex_koef * 10) / 10 + "%";
+    table[2].cells[3].innerHTML = Math.round(sclad_meh_pass/sclad_meh_koef * 10) / 10 + "%";
+    table[3].cells[3].innerHTML = Math.round(pech_nerg_pass/pech_nerg_koef * 10) / 10 + "%";
+    // Столбец пауза
+
+    table[1].cells[4].innerHTML = Math.round(crysta_apex_avar/crysta_apex_koef * 10) / 10 + "%";
+    table[2].cells[4].innerHTML = Math.round(sclad_meh_avar/sclad_meh_koef * 10) / 10 + "%";
+    table[3].cells[4].innerHTML = Math.round(pech_nerg_avar/pech_nerg_koef * 10) / 10 + "%";
+    // Столбец авария
+
+    table[1].cells[5].innerHTML = Math.round(crysta_apex_fail/crysta_apex_koef * 10) / 10 + "%";
+    table[2].cells[5].innerHTML = Math.round(sclad_meh_fail/sclad_meh_koef * 10) / 10 + "%";
+    table[3].cells[5].innerHTML = Math.round(pech_nerg_fail/pech_nerg_koef * 10) / 10 + "%";
+    //Столбец выключен
+
+</script><!--Запись переменных в таблицу-->
+</body>
+</html>
