@@ -100,36 +100,26 @@
 
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
-            type: 'xrange'
+            type: 'bar'
         },
-        colors:colors,
         title: {
             text: 'Общая загрузка оборудования'
         },
-        yAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
+        xAxis: {
             categories: ['Пресс ЧПУ', 'ЭПП']
         },
-        credits: {
-            enabled: false
-        },
-        xAxis: {
+        yAxis: {
             min: 0,
             title: {
                 text: '%'
             }
         },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
+        legend: {
+            reversed: true
         },
         plotOptions: {
-            column: {
-                stacking: 'percent'
+            series: {
+                stacking: 'normal'
             }
         },
         series: [{
@@ -138,13 +128,14 @@
         }, {
             name: 'Под нагрузкой',
             data: [press_nagruzka, epp_nagruzka]
-        }, {
+        },
+            {
             name: 'Ожидание',
             data: [press_pass, epp_pass]
-        }, {
+        },  {
             name: 'Авария',
             data: [press_avar, epp_avar]
-        }, {
+        },  {
             name: 'Выключен',
             data: [press_fail, epp_fail]
         }]
