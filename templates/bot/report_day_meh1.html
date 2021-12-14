@@ -41,99 +41,99 @@
         <tbody>
         <tr class="hit">
             <td>УВФ-1 #1</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>УВФ-1 #2</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>NTX1000 #2</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>NLX3000</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>GAMMA2000</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>CTX650</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>DMF260</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>DMU50 #1</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>DMU50 #2</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>DMC1035</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>CTX310 #1</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         <tr class="hit">
             <td>CTX510 #1</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
-            <td>Нет данных</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
         </tr>
         </tbody>
     </table>    <!--Таблица изменений-->
@@ -301,7 +301,7 @@
     var ctx510_1_koef = (work_ctx510_1 + nagruzka_ctx510_1 + pause_ctx510_1 + avar_ctx510_1 + off_ctx510_1)/100;
 
     table = document.getElementById('myTable').rows; // Обращение к таблице по ID
-    table[1].cells[1].innerHTML = Math.round(work_uvf_1_1/uvf_1_1_koef * 10) / 10;
+    table[1].cells[1].innerHTML = Math.round(work_uvf_1_1/uvf_1_1_koef * 10) / 10 + "%";
     table[2].cells[1].innerHTML = Math.round(work_uvf_1_2/uvf_1_2_koef * 10) / 10;
     table[3].cells[1].innerHTML = Math.round(work_ntx1000/ntx1000_koef * 10) / 10;
     table[4].cells[1].innerHTML = Math.round(work_nlx3000/nlx3000_koef * 10) / 10;
