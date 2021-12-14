@@ -128,7 +128,16 @@
             }
         },
         legend: {
-            reversed: true
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            shadow: true
         },
         plotOptions: {
             series: {
@@ -194,7 +203,7 @@
                     timezoneOffset: 0
                 },
                 title: {
-                    text: 'Хронология запрессовок'
+                    text: 'Хронология запрессовок Пресса ЧПУ'
                 },
                 xAxis: {
                     type: 'datetime'
@@ -290,7 +299,7 @@
                     timezoneOffset: 0
                 },
                 title: {
-                    text: 'Хронология технологического процесса'
+                    text: 'Хронология технологического процесса ЭПП'
                 },
                 xAxis: {
                     type: 'datetime'
@@ -301,7 +310,16 @@
                     }
                 },
                 legend: {
-                    enabled: false
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                    shadow: true
                 },
                 plotOptions: {
                     area: {
