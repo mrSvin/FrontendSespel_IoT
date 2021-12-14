@@ -25,10 +25,9 @@
 </head>
 <body>
 <h1>Спец. комплексы</h1>
-<div style="display: flex; justify-content: space-around; min-height: 80vh;">
-    <div style=" display: flex; max-height: 60%; width: 80%">
-        <div id="container_sum_zagruzka" style="width: 45%; height: 100%;"></div>
-        <table id='myTable' style="height: 100%; width: 45%">
+<div style="display: flex; justify-content: space-around; min-height: 50vh;">
+    <div id="container_sum_zagruzka" style="width: 45%"></div>
+    <table id='myTable' style="width: 45%">
             <thead>
             <tr>
                 <th>Станки</th>
@@ -58,13 +57,13 @@
             </tr>
             </tbody>
         </table>    <!--Таблица изменений-->
-    </div>
-    <div style=" display: flex; max-height: 40%; width: 80%">
-        <div style="width: 100%; height: 45%;" id="container_press_davlenie"></div>
-        <div style="width: 100%; height: 45%;" id="container_epp_tok"></div>
-    </div>
-    <!--Общая загрузка html-->
 </div>  <!--Общая загрузка и количество операций html-->
+
+<div style="display: flex; justify-content: space-around; min-height: 40vh;">
+    <div style="width: 45%;" id="container_press_davlenie"></div>
+    <div style="width: 45%;" id="container_epp_tok"></div>
+</div>  <!--Общие Ток и давление-->
+
 <script th:inline="javascript">
 
     var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
