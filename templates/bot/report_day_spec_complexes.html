@@ -100,13 +100,13 @@
 
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
-            type: 'line'
+            type: 'xrange'
         },
         colors:colors,
         title: {
             text: 'Общая загрузка оборудования'
         },
-        xAxis: {
+        yAxis: {
             labels: {
                 style: {
                     fontSize: '18px',
@@ -117,7 +117,7 @@
         credits: {
             enabled: false
         },
-        yAxis: {
+        xAxis: {
             min: 0,
             title: {
                 text: '%'
