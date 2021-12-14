@@ -102,11 +102,19 @@
         chart: {
             type: 'bar'
         },
+        colors:colors,
         title: {
             text: 'Общая загрузка оборудования'
         },
         xAxis: {
             categories: ['Пресс ЧПУ', 'ЭПП']
+        },
+        credits: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
         },
         yAxis: {
             min: 0,
@@ -119,7 +127,7 @@
         },
         plotOptions: {
             series: {
-                stacking: 'normal'
+                stacking: 'percent'
             }
         },
         series: [{
