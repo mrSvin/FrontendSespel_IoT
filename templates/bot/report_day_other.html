@@ -46,6 +46,7 @@
             <td>0%</td>
             <td>0%</td>
             <td>0%</td>
+            <td>0%</td>
         </tr>
         <tr class="hit">
             <td>Склад Мех. цеха</td>
@@ -54,9 +55,11 @@
             <td>0%</td>
             <td>0%</td>
             <td>0%</td>
+            <td>0%</td>
         </tr>
         <tr class="hit">
             <td>Печь Индукционная</td>
+            <td>0%</td>
             <td>0%</td>
             <td>0%</td>
             <td>0%</td>
@@ -150,20 +153,25 @@
         },
         series: [{
             name: 'Работа',
-            data: []
+            data: [crysta_apex_work, sclad_meh_work, pech_nerg_work]
         }, {
             name: 'Под нагрузкой',
-            data: []
+            data: [sclad_meh_nagruzka, pech_nerg_nagruzka]
         }, {
             name: 'Ожидание',
-            data: []
+            data: [crysta_apex_pass, sclad_meh_pass, pech_nerg_pass]
         }, {
             name: 'Авария',
-            data: []
+            data: [crysta_apex_avar, sclad_meh_avar, pech_nerg_avar]
         }, {
             name: 'Выключен',
-            data: []
-        }]
+            data: [crysta_apex_fail, sclad_meh_fail, pech_nerg_fail]
+        },
+        {
+            name: 'Калибровка',
+            data: [crysta_apex_kalibrovka, 0, 0]
+        }
+        ]
     });
 
 </script>   <!--js Общая загрузка-->
@@ -179,7 +187,6 @@
     table[3].cells[1].innerHTML = Math.round(pech_nerg_work/pech_nerg_koef * 10) / 10 + "%";
     // Столбец Работа
 
-    table[1].cells[2].innerHTML = Math.round(crysta_apex_kalibrovka/crysta_apex_koef * 10) / 10 + "%";
     table[2].cells[2].innerHTML = Math.round(sclad_meh_nagruzka/sclad_meh_koef * 10) / 10 + "%";
     table[3].cells[2].innerHTML = Math.round(pech_nerg_nagruzka/pech_nerg_koef * 10) / 10 + "%";
     // Столбец Нагрузка
@@ -198,6 +205,9 @@
     table[2].cells[5].innerHTML = Math.round(sclad_meh_fail/sclad_meh_koef * 10) / 10 + "%";
     table[3].cells[5].innerHTML = Math.round(pech_nerg_fail/pech_nerg_koef * 10) / 10 + "%";
     //Столбец выключен
+
+    table[1].cells[6].innerHTML = Math.round(crysta_apex_kalibrovka/crysta_apex_koef * 10) / 10 + "%";
+    //Столбец калибровка
 
 </script><!--Запись переменных в таблицу-->
 </body>
