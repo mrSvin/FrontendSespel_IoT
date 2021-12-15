@@ -230,6 +230,178 @@
 
 </div>      <!--Календарь html-->
 
+<div style="display: flex; justify-content: space-between">
+
+    <div id="container_sum_zagruzka" style="height: 400px; width: 45%"></div> <!--Общая загрузка html-->
+
+    <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
+</div>  <!--Общая загрузка-->
+<script th:inline="javascript">
+
+    var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000', '#5c7ed0'];
+
+    var press_work_sum = [[${press_work}]];
+    var press_pass_sum = [[${press_pass}]];
+    var press_fail_sum = [[${press_fail}]];
+    var press_avar_sum = [[${press_avar}]];
+    var  press_nagruzka_sum = [[${press_nagruzka}]];
+
+    var epp_work_sum = [[${epp_work}]];
+    var epp_pass_sum = [[${epp_pass}]];
+    var epp_fail_sum = [[${epp_fail}]];
+    var epp_avar_sum = [[${epp_avar}]];
+    var  epp_nagruzka_sum = [[${epp_nagruzka}]];
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors: colors,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['Пресс ЧПУ для ступиц', 'ЭПП']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Работа',
+            data: [press_work_sum, epp_work_sum]
+        }, {
+            name: 'Под нагрузкой',
+            data: [press_nagruzka_sum, epp_nagruzka_sum]
+        }, {
+            name: 'Ожидание',
+            data: [press_pass_sum, epp_pass_sum]
+        }, {
+            name: 'Авария',
+            data: [press_avar_sum, epp_avar_sum]
+        }, {
+            name: 'Выключен',
+            data: [press_fail_sum, epp_fail_sum]
+        }]
+    });
+
+</script>   <!--js Общая загрузка-->
+<script th:inline="javascript">
+    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+    var sum_rabota = [[${press_work}]] + [[${epp_work}]];
+    var sum_pause = [[${press_pass}]] + [[${epp_pass}]];
+    var sum_off = [[${press_fail}]] + [[${epp_fail}]];
+    var sum_avar = [[${press_avar}]] + [[${epp_avar}]];
+    var sum_nagruzka = [[${press_nagruzka}]] + [[${epp_nagruzka}]];
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран'
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('container_sum_zagruzka_krug', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Суммарная загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colors,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', sum_rabota ], [ 'Включен', sum_pause ],
+                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka]   ]
+        }]
+    });
+</script>   <!--Общая js круговая диагрмма загрузки оборудования-->
+
+
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
