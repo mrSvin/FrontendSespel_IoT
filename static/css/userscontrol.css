@@ -165,9 +165,10 @@ td > img {
     margin-top:0;
 }
 
-.add_user_form > input {
+.add_user_form > input, .add_user_form > div > input {
     border: 2px solid #eeeeee;
     height: 46px;
+    min-width: 252px;
     margin: 10px 0 0 0;
     padding: 1%;
     font-size: 1.2em;
@@ -297,4 +298,18 @@ td > img {
 #sumbit_del:hover{
     color: #000000;
     background: #b73142;
+}
+
+
+.password-control {
+    position: absolute;
+    top: 30px;
+    right: 90px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(../images/view.svg) 0 0 no-repeat;
+}
+.password-control.view {
+    background: url(../images/no-view.svg) 0 0 no-repeat;
 }
