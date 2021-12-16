@@ -190,14 +190,12 @@
 </div>
 
 <body>
-
 <div style="clear: both">
     <form>
         <button formaction="displayStanki" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF;">Суточный отчет</button>
         <button formaction="displayStankiMonth" class="btn_change" style="width:40%">Месячный отчет</button>
     </form>
 </div>  <!--Кнопки суточный и месячный отчеты html-->
-
 <div class="container">
     <div style="width: 220px; float: left">
         <h2>Выберите дату:</h2>
@@ -222,6 +220,7 @@
 
 </div>      <!--Календарь html-->
 
+
 <div style="display: flex; justify-content: space-between">
 
     <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
@@ -230,486 +229,6 @@
     <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
     <!--Количество операций html-->
 </div>  <!--Общая загрузка и количество операций html-->
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/UVF_5220.png" class="stanok_img"/>
-                    <figcaption style="margin: 1.5%; margin-bottom: 15px; font-weight: bold; font-size: 150%; text-align: center">УФ5220
-                    </figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto"
-                           href="mesto/mesto_uf5220"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
-                            <div class='label_mesto'>Место</div>
-                        </a>
-                        <a style="text-decoration: none; float: left" class="icon_personal"
-                           href="personal/personal_uf5220"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div class='label_personal'>Персонал</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--УФ 5220 html-->
-    <form method="post" style="margin: 1%;">
-        <center>
-            <table width="98%">
-
-                <text class="first">Текущие параметры комплекса</text>
-                <tr>
-                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
-                    <th colspan="2" style="text-align:center">Технология</th>
-                    <th colspan="2" style="text-align:center">Координаты</th>
-                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
-                </tr>
-                <tr>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Номер инструмента</td>
-                    <td>
-                        <li th:text="${nomer_inst}"></li>
-                    </td>
-                    <td>Имя УП</td>
-                    <td><small th:text="${name_program}"></small></td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${pos_x}"></li>
-                    </td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${nagr_x}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор подачи</td>
-                    <td>
-                        <li th:text="${kor_podach}"></li>
-                    </td>
-                    <td>Номер кадра</td>
-                    <td>
-                        <li th:text="${nomer_kadr}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${pos_y}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${nagr_y}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор скорости</td>
-                    <td>
-                        <li th:text="${kor_speed}"></li>
-                    </td>
-                    <td>Статус программы</td>
-                    <td>
-                        <li th:text="${status_work}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${pos_z}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${nagr_z}"></li>
-                    </td>
-                </tr>
-
-            </table>
-        </center>
-    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
-</div> <!--УФ 5220 html-->
-
-<div style="border: 1px solid #333;">   <!--Прогресс html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;">
-                <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/progress.png" class="stanok_img"/>
-                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Прогресс
-                    </figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto"
-                           href="mesto/mesto_progress"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
-                            <div class='label_mesto'>Место</div>
-                        </a>
-                        <a style="text-decoration: none; float: left" class="icon_personal"
-                           href="personal/personal_progress"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div class='label_personal'>Персонал</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work2" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container2" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--Прогресс html-->
-    <form method="post" style="margin: 1%;">
-        <center>
-            <table width="98%">
-
-                <text class="first">Текущие параметры комплекса</text>
-                <tr>
-                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
-                    <th colspan="2" style="text-align:center">Технология</th>
-                    <th colspan="2" style="text-align:center">Координаты</th>
-                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
-                </tr>
-                <tr>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Номер инструмента</td>
-                    <td>
-                        <li th:text="${progress_nomer_inst}"></li>
-                    </td>
-                    <td>Имя УП</td>
-                    <td><small th:text="${progress_name_program}"></small></td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${progress_pos_x}"></li>
-                    </td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${progress_nagr_x}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор подачи</td>
-                    <td>
-                        <li th:text="${progress_kor_podach}"></li>
-                    </td>
-                    <td>Номер кадра</td>
-                    <td>
-                        <li th:text="${progress_nomer_kadr}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${progress_pos_y}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${progress_nagr_y}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор скорости</td>
-                    <td>
-                        <li th:text="${progress_kor_speed}"></li>
-                    </td>
-                    <td>Статус программы</td>
-                    <td>
-                        <li th:text="${progress_status_work}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${progress_pos_z}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${progress_nagr_z}"></li>
-                    </td>
-                </tr>
-
-            </table>
-        </center>
-    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
-</div> <!--Прогресс html-->
-
-<div style="border: 1px solid #333;">   <!--NTX1000 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;">
-                <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/ntx1000.png" class="stanok_img"/>
-                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">NTX1000
-                    </figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_ntx1000"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
-                            <div class='label_mesto'>Место</div>
-                        </a>
-                        <a style="text-decoration: none; float: left" class="icon_personal"
-                           href="personal/personal_ntx1000"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div class='label_personal'>Персонал</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work3" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container3" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--NTX1000 html-->
-    <form method="post" style="margin: 1%;">
-        <center>
-            <table width="98%">
-
-                <text class="first">Текущие параметры комплекса</text>
-                <tr>
-                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
-                    <th colspan="2" style="text-align:center">Технология</th>
-                    <th colspan="2" style="text-align:center">Координаты</th>
-                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
-                </tr>
-                <tr>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Номер инструмента</td>
-                    <td>
-                        <li th:text="${ntx1000_nomer_inst}"></li>
-                    </td>
-                    <td>Имя УП</td>
-                    <td>
-                        <li th:text="${ntx1000_name_program}"></li>
-                    </td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${ntx1000_pos_x}"></li>
-                    </td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${ntx1000_nagr_x}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор подачи</td>
-                    <td>
-                        <li th:text="${ntx1000_kor_podach}"></li>
-                    </td>
-                    <td>Номер кадра</td>
-                    <td>
-                        <li th:text="${ntx1000_nomer_kadr}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${ntx1000_pos_y}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${ntx1000_nagr_y}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор скорости</td>
-                    <td>
-                        <li th:text="${ntx1000_kor_speed}"></li>
-                    </td>
-                    <td>Статус программы</td>
-                    <td>
-                        <li th:text="${ntx1000_status_work}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${ntx1000_pos_z}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${ntx1000_nagr_z}"></li>
-                    </td>
-                </tr>
-
-            </table>
-        </center>
-    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
-</div> <!--NTX1000 html-->
-
-<div style="border: 1px solid #333;">   <!--sk50 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;">
-                <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/sk50.png" class="stanok_img"/>
-                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">SK50
-                    </figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_sk50"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
-                            <div class='label_mesto'>Место</div>
-                        </a>
-                        <a style="text-decoration: none; float: left" class="icon_personal"
-                           href="personal/personal_sk50"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div class='label_personal'>Персонал</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work4" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container4" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--sk50 html-->
-</div> <!--sk50 html-->
-
-<div style="border: 1px solid #333;">   <!--apec html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;">
-                <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/apec.png" class="stanok_img"/>
-                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">APEC
-                    </figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_apec"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
-                            <div class='label_mesto'>Место</div>
-                        </a>
-                        <a style="text-decoration: none; float: left" class="icon_personal"
-                           href="personal/personal_apec"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div class='label_personal'>Персонал</div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work5" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container5" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--apec html-->
-</div> <!--apec html-->
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #3</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-</div> <!--DMU50-3 html-->
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #4</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_dmu50_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmu50_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work7" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container7" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-</div> <!--DMU50-4 html-->
-
-<div style="border: 1px solid #333;">   <!--ctx310_2 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_ctx310.png" class="stanok_img" alt="no image"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX310 #2</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_ctx310_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx310_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work8" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container8" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--ctx310_2 html-->
-</div> <!--ctx310_2 html-->
-
-<div style="border: 1px solid #333;">   <!--ctx510_2 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_ctx510.png" class="stanok_img" alt="no image"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #2</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_ctx510_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work9" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container9" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--ctx510_2 html-->
-</div> <!--ctx510_2 html-->
-
-<div style="border: 1px solid #333;">   <!--ctx510_3 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_ctx510.png" class="stanok_img" alt="no image"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #3</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_ctx510_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work10" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container10" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--ctx510_3 html-->
-</div> <!--ctx510_3 html-->
-
 <script th:inline="javascript">
 
     var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000', '#5c7ed0'];
@@ -955,6 +474,112 @@
     });
 </script>   <!--js количество операций-->
 
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/UVF_5220.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; margin-bottom: 15px; font-weight: bold; font-size: 150%; text-align: center">УФ5220
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto"
+                           href="mesto/mesto_uf5220"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal"
+                           href="personal/personal_uf5220"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--УФ 5220 html-->
+    <form method="post" style="margin: 1%;">
+        <center>
+            <table width="98%">
+
+                <text class="first">Текущие параметры комплекса</text>
+                <tr>
+                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
+                    <th colspan="2" style="text-align:center">Технология</th>
+                    <th colspan="2" style="text-align:center">Координаты</th>
+                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
+                </tr>
+                <tr>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Номер инструмента</td>
+                    <td>
+                        <li th:text="${nomer_inst}"></li>
+                    </td>
+                    <td>Имя УП</td>
+                    <td><small th:text="${name_program}"></small></td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${pos_x}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${nagr_x}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор подачи</td>
+                    <td>
+                        <li th:text="${kor_podach}"></li>
+                    </td>
+                    <td>Номер кадра</td>
+                    <td>
+                        <li th:text="${nomer_kadr}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${pos_y}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${nagr_y}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор скорости</td>
+                    <td>
+                        <li th:text="${kor_speed}"></li>
+                    </td>
+                    <td>Статус программы</td>
+                    <td>
+                        <li th:text="${status_work}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${pos_z}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${nagr_z}"></li>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
+</div> <!--УФ 5220 html-->
 <script th:inline="javascript">
     var uf5220_array_rabota = [[${uf5220_array_rabota}]];
     var uf5220_array_pause = [[${uf5220_array_pause}]];
@@ -970,6 +595,113 @@
 </script>   <!--УФ 5220 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_uf5220.js"></script>
 
+<div style="border: 1px solid #333;">   <!--Прогресс html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;">
+                <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/progress.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Прогресс
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto"
+                           href="mesto/mesto_progress"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal"
+                           href="personal/personal_progress"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work2" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container2" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Прогресс html-->
+    <form method="post" style="margin: 1%;">
+        <center>
+            <table width="98%">
+
+                <text class="first">Текущие параметры комплекса</text>
+                <tr>
+                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
+                    <th colspan="2" style="text-align:center">Технология</th>
+                    <th colspan="2" style="text-align:center">Координаты</th>
+                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
+                </tr>
+                <tr>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Номер инструмента</td>
+                    <td>
+                        <li th:text="${progress_nomer_inst}"></li>
+                    </td>
+                    <td>Имя УП</td>
+                    <td><small th:text="${progress_name_program}"></small></td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${progress_pos_x}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${progress_nagr_x}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор подачи</td>
+                    <td>
+                        <li th:text="${progress_kor_podach}"></li>
+                    </td>
+                    <td>Номер кадра</td>
+                    <td>
+                        <li th:text="${progress_nomer_kadr}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${progress_pos_y}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${progress_nagr_y}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор скорости</td>
+                    <td>
+                        <li th:text="${progress_kor_speed}"></li>
+                    </td>
+                    <td>Статус программы</td>
+                    <td>
+                        <li th:text="${progress_status_work}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${progress_pos_z}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${progress_nagr_z}"></li>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
+</div> <!--Прогресс html-->
 <script th:inline="javascript">
     var progress_array_rabota = [[${progress_array_rabota}]];
     var progress_array_pause = [[${progress_array_pause}]];
@@ -985,6 +717,114 @@
 </script>   <!--Прогресс круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_progress.js"></script>
 
+<div style="border: 1px solid #333;">   <!--NTX1000 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;">
+                <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/ntx1000.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">NTX1000
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_ntx1000"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal"
+                           href="personal/personal_ntx1000"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work3" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container3" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--NTX1000 html-->
+    <form method="post" style="margin: 1%;">
+        <center>
+            <table width="98%">
+
+                <text class="first">Текущие параметры комплекса</text>
+                <tr>
+                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
+                    <th colspan="2" style="text-align:center">Технология</th>
+                    <th colspan="2" style="text-align:center">Координаты</th>
+                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
+                </tr>
+                <tr>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Наименование</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                    <td class="first">Ось</td>
+                    <td class="first">Значение</td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Номер инструмента</td>
+                    <td>
+                        <li th:text="${ntx1000_nomer_inst}"></li>
+                    </td>
+                    <td>Имя УП</td>
+                    <td>
+                        <li th:text="${ntx1000_name_program}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${ntx1000_pos_x}"></li>
+                    </td>
+                    <td>X</td>
+                    <td>
+                        <li th:text="${ntx1000_nagr_x}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор подачи</td>
+                    <td>
+                        <li th:text="${ntx1000_kor_podach}"></li>
+                    </td>
+                    <td>Номер кадра</td>
+                    <td>
+                        <li th:text="${ntx1000_nomer_kadr}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${ntx1000_pos_y}"></li>
+                    </td>
+                    <td>Y</td>
+                    <td>
+                        <li th:text="${ntx1000_nagr_y}"></li>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:5px 5px;">Корректор скорости</td>
+                    <td>
+                        <li th:text="${ntx1000_kor_speed}"></li>
+                    </td>
+                    <td>Статус программы</td>
+                    <td>
+                        <li th:text="${ntx1000_status_work}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${ntx1000_pos_z}"></li>
+                    </td>
+                    <td>Z</td>
+                    <td>
+                        <li th:text="${ntx1000_nagr_z}"></li>
+                    </td>
+                </tr>
+
+            </table>
+        </center>
+    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
+</div> <!--NTX1000 html-->
 <script th:inline="javascript">
     var ntx1000_array_rabota = [[${ntx1000_array_rabota}]];
     var ntx1000_array_pause = [[${ntx1000_array_pause}]];
@@ -1002,6 +842,35 @@
 </script>   <!--NTX1000 круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_ntx1000.js"></script>
 
+<div style="border: 1px solid #333;">   <!--sk50 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;">
+                <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/sk50.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">SK50
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_sk50"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal"
+                           href="personal/personal_sk50"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work4" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container4" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--sk50 html-->
+</div> <!--sk50 html-->
 <script th:inline="javascript">
 
     var sk50_array_rabota = [[${sk50_array_rabota}]];
@@ -1021,6 +890,35 @@
 </script>   <!--sk50 круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_sk50.js"></script>
 
+<div style="border: 1px solid #333;">   <!--apec html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;">
+                <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/apec.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">APEC
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_apec"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
+                            <div class='label_mesto'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal"
+                           href="personal/personal_apec"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work5" style="float: left; height: 400px; width: 55%"></div>
+            <!--Вставляем линейную гистограмму работы-->
+            <div id="container5" style="float: left; height: 400px; width: 25%"></div>
+            <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--apec html-->
+</div> <!--apec html-->
 <script th:inline="javascript">
 
     var apec_array_rabota = [[${apec_array_rabota}]];
@@ -1040,6 +938,24 @@
 </script>   <!--apec круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_apec.js"></script>
 
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #3</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+</div> <!--DMU50-3 html-->
 <script th:inline="javascript">
     var dmg_dmu50_3_array_rabota = [[${dmg_dmu50_3_array_rabota}]];
     var dmg_dmu50_3_array_pause = [[${dmg_dmu50_3_array_pause}]];
@@ -1057,6 +973,24 @@
 </script>   <!--dmu50_3 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_dmg_dmu50_3.js"></script>
 
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #4</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_dmu50_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmu50_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work7" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container7" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+</div> <!--DMU50-4 html-->
 <script th:inline="javascript">
     var dmg_dmu50_4_array_rabota = [[${dmg_dmu50_4_array_rabota}]];
     var dmg_dmu50_4_array_pause = [[${dmg_dmu50_4_array_pause}]];
@@ -1074,6 +1008,24 @@
 </script>   <!--dmu50_4 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_dmg_dmu50_4.js"></script>
 
+<div style="border: 1px solid #333;">   <!--ctx310_2 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx310.png" class="stanok_img" alt="no image"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX310 #2</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_ctx310_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx310_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work8" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container8" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--ctx310_2 html-->
+</div> <!--ctx310_2 html-->
 <script th:inline="javascript">
     var dmg_ctx310_2_array_rabota = [[${dmg_ctx310_2_array_rabota}]];
     var dmg_ctx310_2_array_pause = [[${dmg_ctx310_2_array_pause}]];
@@ -1091,6 +1043,24 @@
 </script>   <!--ctx310_2 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_dmg_ctx310_2.js"></script>
 
+<div style="border: 1px solid #333;">   <!--ctx510_2 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx510.png" class="stanok_img" alt="no image"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #2</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_ctx510_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work9" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container9" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--ctx510_2 html-->
+</div> <!--ctx510_2 html-->
 <script th:inline="javascript">
     var dmg_ctx510_2_array_rabota = [[${dmg_ctx510_2_array_rabota}]];
     var dmg_ctx510_2_array_pause = [[${dmg_ctx510_2_array_pause}]];
@@ -1108,6 +1078,24 @@
 </script>   <!--ctx510_2 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_dmg_ctx510_2.js"></script>
 
+<div style="border: 1px solid #333;">   <!--ctx510_3 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx510.png" class="stanok_img" alt="no image"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #3</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_dmg_ctx510_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work10" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container10" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--ctx510_3 html-->
+</div> <!--ctx510_3 html-->
 <script th:inline="javascript">
     var dmg_ctx510_3_array_rabota = [[${dmg_ctx510_3_array_rabota}]];
     var dmg_ctx510_3_array_pause = [[${dmg_ctx510_3_array_pause}]];
