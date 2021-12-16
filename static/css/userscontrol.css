@@ -178,6 +178,11 @@ td > img {
     font-style: normal;
     font-weight: 300;
     font-family: source-sans-pro;
+    cursor: pointer;
+}
+
+.add_user_form > select, .add_user_form > label > input, .delete_user_form > input{
+    cursor: pointer;
 }
 
 .add_user_form > h3 {
