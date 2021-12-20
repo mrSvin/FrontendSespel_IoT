@@ -294,6 +294,12 @@
     var trulaser_pass_sum = [[${pass_trulaser}]];
     var trulaser_fail_sum = [[${fail_trulaser}]];
 
+    var cometa_1_work_sum = [[${work_cometa_1}]];
+    var cometa_1_pass_sum = [[${pass_cometa_1}]];
+    var cometa_1_fail_sum = [[${fail_cometa_1}]];
+    var cometa_1_avar_sum = [[${avar_cometa_1}]];
+    var cometa_1_nagruzka_sum = [[${nagruzka_cometa_1}]];
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -331,7 +337,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser']
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1']
         },
         credits: {
             enabled: false
@@ -353,19 +359,19 @@
         },
         series: [{
             name: 'Работа',
-            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum]
+            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum, cometa_1_work_sum]
         }, {
             name: 'Под нагрузкой',
-            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0]
+            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, cometa_1_nagruzka_sum]
         }, {
             name: 'Ожидание',
-            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum]
+            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum, cometa_1_pass_sum]
         }, {
             name: 'Авария',
-            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0]
+            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0, cometa_1_avar_sum]
         }, {
             name: 'Выключен',
-            data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum, trulaser_fail_sum]
+            data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum, trulaser_fail_sum, cometa_1_fail_sum]
         }]
     });
 
@@ -389,73 +395,6 @@
         </div>
     </div>  <!--Навигатор_1 html-->
 </div> <!--Навигатор_1 html-->
-
-<div style="overflow: hidden;">
-    <div style="width: 100%;   margin: 2%;">
-        <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-            <div class="parent_image">
-                <img src="images/navigator.png" class="stanok_img"/>
-                <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Навигатор #2</figcaption>
-                <div style="margin-bottom: 20px">
-                    <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_navigator_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                    <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_navigator_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                </div>
-            </div>
-        </div>
-        <div id="container_work_2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-        <div id="container_2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-    </div>
-</div>  <!--Навигатор_2_голова_1 html-->
-
-<div style="overflow: hidden;">
-    <div style="width: 100%;   margin: 2%;">
-        <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-            <div class="parent_image">
-            </div>
-        </div>
-        <div id="container_work_3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-        <div id="container_3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-    </div>
-</div>  <!--Навигатор_2_голова_2 html-->
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/navigator.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Навигатор #3</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_navigator_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_navigator_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work_4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--Навигатор_3 html-->
-</div> <!--Навигатор_3 html-->
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/trulaser.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">TruLaser</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_trulaser" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_trulaser" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work_5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--trulaser html-->
-</div> <!--trulaser html-->
-
 <script th:inline="javascript">
 
     var array_rabota = [[${array_rabota}]];
@@ -475,6 +414,22 @@
 </script>   <!--Навигатор_1 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/navigators/navigator_1.js"></script>
 
+<div style="overflow: hidden;">
+    <div style="width: 100%;   margin: 2%;">
+        <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+            <div class="parent_image">
+                <img src="images/navigator.png" class="stanok_img"/>
+                <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Навигатор #2</figcaption>
+                <div style="margin-bottom: 20px">
+                    <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_navigator_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_navigator_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                </div>
+            </div>
+        </div>
+        <div id="container_work_2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container_2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+    </div>
+</div>  <!--Навигатор_2_голова_1 html-->
 <script th:inline="javascript">
     var array_rabota_2_golova_1 = [[${array_rabota_2_golova_1}]];
 
@@ -488,7 +443,6 @@
 
 
 </script>   <!--Навигатор_2_голова_1 js линейная диагрмма работы оборудования-->
-
 <script th:inline="javascript">
     var work_2_golova_1 = [[${work_2_golova_1}]];
     var pass_2_golova_1 = [[${pass_2_golova_1}]];
@@ -499,6 +453,16 @@
 </script>   <!--Навигатор_2_голова_1 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/navigators/navigator_2_golova_1.js"></script>
 
+<div style="overflow: hidden;">
+    <div style="width: 100%;   margin: 2%;">
+        <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+            <div class="parent_image">
+            </div>
+        </div>
+        <div id="container_work_3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container_3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+    </div>
+</div>  <!--Навигатор_2_голова_2 html-->
 <script th:inline="javascript">
 
     var array_rabota_2_golova_2 = [[${array_rabota_2_golova_2}]];
@@ -519,6 +483,24 @@
 </script>   <!--Навигатор_2_голова_2 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/navigators/navigator_2_golova_2.js"></script>
 
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/navigator.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Навигатор #3</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_navigator_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_navigator_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work_4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Навигатор_3 html-->
+</div> <!--Навигатор_3 html-->
 <script th:inline="javascript">
 
     var array_rabota_3 = [[${array_rabota_3}]];
@@ -537,6 +519,24 @@
 </script>   <!--Навигатор_3 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/navigators/navigator_3.js"></script>
 
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/trulaser.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">TruLaser</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_trulaser" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_trulaser" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work_5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--trulaser html-->
+</div> <!--trulaser html-->
 <script th:inline="javascript">
     var trulaser_array_rabota = [[${trulaser_array_rabota}]];
     var trulaser_array_pause = [[${trulaser_array_pause}]];
@@ -551,6 +551,41 @@
     var trulaser_avar = [[${avar_trulaser}]];
 </script>   <!--trulaser js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/navigators/data_trulaser.js"></script>
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/cometa.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Комета #1</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_cometa_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_cometa_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work_6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--cometa 1 html-->
+</div> <!--cometa 1 html-->
+<script th:inline="javascript">
+    var cometa_1_array_rabota = [[${cometa_1_array_rabota}]];
+    var cometa_1_array_pause = [[${cometa_1_array_pause}]];
+    var cometa_1_array_off = [[${cometa_1_array_off}]];
+    var cometa_1_array_avar = [[${cometa_1_array_avar}]];
+    var cometa_1_array_nagruzka = [[${cometa_1_array_nagruzka}]];
+
+</script>   <!--cometa js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var cometa_1_work = [[${work_cometa_1}]];
+    var cometa_1_pass = [[${pass_cometa_1}]];
+    var cometa_1_fail = [[${fail_cometa_1}]];
+    var cometa_1_nagruzka = [[${nagruzka_cometa_1}]];
+    var cometa_1_avar = [[${avar_cometa_1}]];
+</script>   <!--cometa js круговая диагрмма загрузки оборудования-->
+<script src="/js/sutki/navigators/data_cometa_1.js"></script>
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
