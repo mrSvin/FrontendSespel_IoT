@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Энергоресурсы</title>
+  <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+  <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
+  <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
+  <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/> <!-- Меню -->
+
+  <script src="js/jquery-3.6.0.min.js"></script>
+</head>
+<header>
+  <ul class="hr">
+    <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
+    <div method="post" class="dropdown" style="float: right">
+      <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
+      <div class="dropdown-content" style="float: right; text-align: center; background-color: whitesmoke">
+        <p id="role_vision"></p>
+        <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
+        <li style="font-weight: 400; font-size: 18px" th:text="${user_name}"></li>
+        <p th:text="${user_mail}"></p>
+        <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
+        <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
+        <form th:action="@{/logout}" method="post">
+          <button class="follow" type="submit">
+            Выход
+          </button>
+        </form>
+      </div>
+    </div>
+    <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+        th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
+  </ul>       <!--Шапка html-->
+</header>       <!--Шапка html-->
+
+
+<!--<div>-->
+<!--    <ul id="menu_ul">-->
+<!--        <li id="menu_li" style="margin-left: auto; margin-right: auto;"><a id="menu_a" class="menu-color">Энергоресурсы</a></li>-->
+<!--    </ul>-->
+<!--</div>  &lt;!&ndash; Меню &ndash;&gt;-->
+<div class="preloader">
+  <div class="preloader__row">
+    <div class="preloader__item"></div>
+    <div class="preloader__item"></div>
+  </div>
+</div>
+<script>
+  window.onload = function () {
+    document.body.classList.add('loaded_hiding');
+    window.setTimeout(function () {
+      document.body.classList.add('loaded');
+      document.body.classList.remove('loaded_hiding');
+    }, 500);
+  }
+</script> <!--Загрузка страницы-->
+
+<body>
+<div style="clear: both">
+  <form>
+    <button formaction="energy_source" class="btn_change" style="width:40%;" >Суточный отчет</button>
+    <button formaction="energy_source_month" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF;">Месячный отчет</button>
+  </form>
+</div>  <!--Кнопки суточный и месячный отчеты html-->
+<h2 style="text-shadow: 1px 0 1px black; font-weight: bolder; color: #fff; margin: 0 auto; text-align: center; font-size: 50px; position: relative; top: -140px;">Энергоресурсы</h2>
+<div class="container">
+  <div style="width: 220px; float: left">
+    <h2>Выберите дату:</h2>
+  </div>
+
+  <form  action="#" th:action="@{/navigators}" th:object="${calendar_date}" method="post" >
+
+    <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+      <input type='text' class="form-control" th:field="*{content_date}"/>
+      <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+    </div>
+
+    <div class="form-actions" >
+      <button type="submit"
+              class="follow"
+              id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
+      </button>
+    </div>
+  </form>
+
+</div>      <!--Календарь html-->
+<script >
+  $(function () {
+    $('#datepicker').datepicker({
+      format: "dd/mm/yyyy",
+      language: 'ru',
+      autoclose: true,
+      todayHighlight: true,
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      autoclose: true,
+      changeMonth: true,
+      changeYear: true,
+      orientation: "button"
+    });
+    <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+
+    $('#button_obnovit').on("click", function() {
+      var datas = $('#datepicker').data().datepicker.viewDate;
+      var day = datas.getDate();
+      var mes = datas.getMonth()+1;
+      var year = datas.getFullYear();
+
+      name_data = year+"-" +mes+"-" +day;
+      <!--console.log(name_data);-->
+    });
+
+
+  });
+
+</script>   <!--Календарь js-->
+<!--Календарь Русский язык-->
+<script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
+
+
+<script th:inline="javascript">
+  var role_status = [[${user_role}]];
+
+  if(role_status === "ROLE_ADMIN")
+  {
+    document.getElementById("role_vision").innerHTML = "Роль: Админ";
+    document.getElementById("admin").style.display = "inline";
+
+  }
+  else if (role_status === "ROLE_USER")
+  {
+    document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
+    document.getElementById("admin").style.display = "none";
+  }
+</script>
+<!--Скрипт отображения в header  кнопки администрирование-->
+</body>
+</html>
