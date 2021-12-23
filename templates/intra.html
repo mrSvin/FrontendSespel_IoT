@@ -5,6 +5,7 @@
     <title>Home</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
+    <script src="js/jquery-3.6.0.min.js"></script>
 
     <style>
 
@@ -90,4 +91,9 @@
         border:none ;
     }
 </style>
+<script>
+    $(document).ready(function(){
+        $(".parent_image").css('background-image', "none");
+    });
+</script>
 </html>
