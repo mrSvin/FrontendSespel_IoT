@@ -17,6 +17,7 @@ function uf5220 (){
     mar_left = 780;
     bground = 'url(../images/apec.png)';
     place_img = "../images/ii_ploshadka.png";
+    console.log(mar_top,mar_left, bground, place_img)
 };
 
 
