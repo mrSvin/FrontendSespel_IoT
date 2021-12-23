@@ -78,14 +78,10 @@ Highcharts.chart('container_days_6', {
             cometa_1_off_day[24],cometa_1_off_day[25],cometa_1_off_day[26],cometa_1_off_day[27],cometa_1_off_day[28],cometa_1_off_day[29],cometa_1_off_day[30]]
     }, {
         name: 'Авария',
-        data: [cometa_1_avar_day[0], cometa_1_avar_day[1], cometa_1_avar_day[2],cometa_1_avar_day[3],cometa_1_avar_day[4],cometa_1_avar_day[5],cometa_1_avar_day[6],cometa_1_avar_day[7],cometa_1_avar_day[8],cometa_1_avar_day[9],cometa_1_avar_day[10],cometa_1_avar_day[11],
-            cometa_1_avar_day[12],cometa_1_avar_day[13],cometa_1_avar_day[14],cometa_1_avar_day[15],cometa_1_avar_day[16],cometa_1_avar_day[17],cometa_1_avar_day[18],cometa_1_avar_day[19],cometa_1_avar_day[20],cometa_1_avar_day[21],cometa_1_avar_day[22],cometa_1_avar_day[23],
-            cometa_1_avar_day[24],cometa_1_avar_day[25],cometa_1_avar_day[26],cometa_1_avar_day[27],cometa_1_avar_day[28],cometa_1_avar_day[29],cometa_1_avar_day[30]]
+        data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }, {
         name: 'Под нагрузкой',
-        data: [cometa_1_nagruzka_day[0], cometa_1_nagruzka_day[1], cometa_1_nagruzka_day[2],cometa_1_nagruzka_day[3],cometa_1_nagruzka_day[4],cometa_1_nagruzka_day[5],cometa_1_nagruzka_day[6],cometa_1_nagruzka_day[7],cometa_1_nagruzka_day[8],cometa_1_nagruzka_day[9],cometa_1_nagruzka_day[10],cometa_1_nagruzka_day[11],
-            cometa_1_nagruzka_day[12],cometa_1_nagruzka_day[13],cometa_1_nagruzka_day[14],cometa_1_nagruzka_day[15],cometa_1_nagruzka_day[16],cometa_1_nagruzka_day[17],cometa_1_nagruzka_day[18],cometa_1_nagruzka_day[19],cometa_1_nagruzka_day[20],cometa_1_nagruzka_day[21],cometa_1_nagruzka_day[22],cometa_1_nagruzka_day[23],
-            cometa_1_nagruzka_day[24],cometa_1_nagruzka_day[25],cometa_1_nagruzka_day[26],cometa_1_nagruzka_day[27],cometa_1_nagruzka_day[28],cometa_1_nagruzka_day[29],cometa_1_nagruzka_day[30]]
+        data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }]
 });
 
@@ -151,6 +147,6 @@ Highcharts.chart('container_6', {
     series : [ {
         type : 'pie',
         name : 'Показатель',
-        data : [ [ 'Работа', cometa_1_work ], [ 'Включен', cometa_1_pass ], [ 'Выключен', cometa_1_fail],  [ 'В аварии', cometa_1_avar ], [ 'Нагрузка', cometa_1_nagruzka ]  ]
+        data : [ [ 'Работа', cometa_1_work ], [ 'Включен', cometa_1_pass ], [ 'Выключен', cometa_1_fail],  [ 'В аварии', 0 ], [ 'Нагрузка', 0 ]  ]
     }]
 });
