@@ -294,11 +294,11 @@
     var trulaser_pass_sum = [[${pass_trulaser}]];
     var trulaser_fail_sum = [[${fail_trulaser}]];
 
-    var cometa_1_work_sum = [[${work_cometa_1}]];
-    var cometa_1_pass_sum = [[${pass_cometa_1}]];
-    var cometa_1_fail_sum = [[${fail_cometa_1}]];
-    var cometa_1_avar_sum = [[${avar_cometa_1}]];
-    var cometa_1_nagruzka_sum = [[${nagruzka_cometa_1}]];
+    var kometa_1_work_sum = [[${work_kometa_1}]];
+    var kometa_1_pass_sum = [[${pass_kometa_1}]];
+    var kometa_1_fail_sum = [[${fail_kometa_1}]];
+    var kometa_1_avar_sum = [[${avar_kometa_1}]];
+    var kometa_1_nagruzka_sum = [[${nagruzka_kometa_1}]];
 
     Highcharts.setOptions({
         lang: {
@@ -359,19 +359,19 @@
         },
         series: [{
             name: 'Работа',
-            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum, cometa_1_work_sum]
+            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum, kometa_1_work_sum]
         }, {
             name: 'Под нагрузкой',
-            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, cometa_1_nagruzka_sum]
+            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, kometa_1_nagruzka_sum]
         }, {
             name: 'Ожидание',
-            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum, cometa_1_pass_sum]
+            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum, kometa_1_pass_sum]
         }, {
             name: 'Авария',
-            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0, cometa_1_avar_sum]
+            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0, kometa_1_avar_sum]
         }, {
             name: 'Выключен',
-            data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum, trulaser_fail_sum, cometa_1_fail_sum]
+            data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum, trulaser_fail_sum, kometa_1_fail_sum]
         }]
     });
 
@@ -557,35 +557,32 @@
         <div style="width: 100%;   margin: 2%;">
             <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
-                    <img src="images/cometa.png" class="stanok_img"/>
+                    <img src="images/kometa.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Комета #1</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_cometa_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_cometa_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_kometa_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_kometa_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
             <div id="container_work_6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
             <div id="container_6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
-    </div>  <!--cometa 1 html-->
-</div> <!--cometa 1 html-->
+    </div>  <!--kometa 1 html-->
+</div> <!--kometa 1 html-->
 <script th:inline="javascript">
-    var cometa_1_array_rabota = [[${cometa_1_array_rabota}]];
-    var cometa_1_array_pause = [[${cometa_1_array_pause}]];
-    var cometa_1_array_off = [[${cometa_1_array_off}]];
-    var cometa_1_array_avar = [[${cometa_1_array_avar}]];
-    var cometa_1_array_nagruzka = [[${cometa_1_array_nagruzka}]];
+    var kometa_1_array_rabota = [[${kometa_1_array_rabota}]];
+    var kometa_1_array_pause = [[${kometa_1_array_pause}]];
+    var kometa_1_array_off = [[${kometa_1_array_off}]];
 
-</script>   <!--cometa js линейная диагрмма работы оборудования-->
+</script>   <!--kometa js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
-    var cometa_1_work = [[${work_cometa_1}]];
-    var cometa_1_pass = [[${pass_cometa_1}]];
-    var cometa_1_fail = [[${fail_cometa_1}]];
-    var cometa_1_nagruzka = [[${nagruzka_cometa_1}]];
-    var cometa_1_avar = [[${avar_cometa_1}]];
-</script>   <!--cometa js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/navigators/data_cometa_1.js"></script>
+    var kometa_1_work = [[${work_kometa_1}]];
+    var kometa_1_pass = [[${pass_kometa_1}]];
+    var kometa_1_fail = [[${fail_kometa_1}]];
+
+</script>   <!--kometa js круговая диагрмма загрузки оборудования-->
+<script src="/js/sutki/navigators/data_kometa_1.js"></script>
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];

@@ -63,19 +63,19 @@ Highcharts.chart('container_days_6', {
     },
     series: [{
         name: 'Работа',
-        data: [cometa_1_rabota_day[0], cometa_1_rabota_day[1], cometa_1_rabota_day[2],cometa_1_rabota_day[3],cometa_1_rabota_day[4],cometa_1_rabota_day[5],cometa_1_rabota_day[6],cometa_1_rabota_day[7],cometa_1_rabota_day[8],cometa_1_rabota_day[9],cometa_1_rabota_day[10],cometa_1_rabota_day[11],
-            cometa_1_rabota_day[12],cometa_1_rabota_day[13],cometa_1_rabota_day[14],cometa_1_rabota_day[15],cometa_1_rabota_day[16],cometa_1_rabota_day[17],cometa_1_rabota_day[18],cometa_1_rabota_day[19],cometa_1_rabota_day[20],cometa_1_rabota_day[21],cometa_1_rabota_day[22],cometa_1_rabota_day[23],
-            cometa_1_rabota_day[24],cometa_1_rabota_day[25],cometa_1_rabota_day[26],cometa_1_rabota_day[27],cometa_1_rabota_day[28],cometa_1_rabota_day[29],cometa_1_rabota_day[30]]
+        data: [kometa_1_rabota_day[0], kometa_1_rabota_day[1], kometa_1_rabota_day[2],kometa_1_rabota_day[3],kometa_1_rabota_day[4],kometa_1_rabota_day[5],kometa_1_rabota_day[6],kometa_1_rabota_day[7],kometa_1_rabota_day[8],kometa_1_rabota_day[9],kometa_1_rabota_day[10],kometa_1_rabota_day[11],
+            kometa_1_rabota_day[12],kometa_1_rabota_day[13],kometa_1_rabota_day[14],kometa_1_rabota_day[15],kometa_1_rabota_day[16],kometa_1_rabota_day[17],kometa_1_rabota_day[18],kometa_1_rabota_day[19],kometa_1_rabota_day[20],kometa_1_rabota_day[21],kometa_1_rabota_day[22],kometa_1_rabota_day[23],
+            kometa_1_rabota_day[24],kometa_1_rabota_day[25],kometa_1_rabota_day[26],kometa_1_rabota_day[27],kometa_1_rabota_day[28],kometa_1_rabota_day[29],kometa_1_rabota_day[30]]
     }, {
         name: 'Ожидание',
-        data: [cometa_1_pause_day[0], cometa_1_pause_day[1], cometa_1_pause_day[2],cometa_1_pause_day[3],cometa_1_pause_day[4],cometa_1_pause_day[5],cometa_1_pause_day[6],cometa_1_pause_day[7],cometa_1_pause_day[8],cometa_1_pause_day[9],cometa_1_pause_day[10],cometa_1_pause_day[11],
-            cometa_1_pause_day[12],cometa_1_pause_day[13],cometa_1_pause_day[14],cometa_1_pause_day[15],cometa_1_pause_day[16],cometa_1_pause_day[17],cometa_1_pause_day[18],cometa_1_pause_day[19],cometa_1_pause_day[20],cometa_1_pause_day[21],cometa_1_pause_day[22],cometa_1_pause_day[23],
-            cometa_1_pause_day[24],cometa_1_pause_day[25],cometa_1_pause_day[26],cometa_1_pause_day[27],cometa_1_pause_day[28],cometa_1_pause_day[29],cometa_1_pause_day[30]]
+        data: [kometa_1_pause_day[0], kometa_1_pause_day[1], kometa_1_pause_day[2],kometa_1_pause_day[3],kometa_1_pause_day[4],kometa_1_pause_day[5],kometa_1_pause_day[6],kometa_1_pause_day[7],kometa_1_pause_day[8],kometa_1_pause_day[9],kometa_1_pause_day[10],kometa_1_pause_day[11],
+            kometa_1_pause_day[12],kometa_1_pause_day[13],kometa_1_pause_day[14],kometa_1_pause_day[15],kometa_1_pause_day[16],kometa_1_pause_day[17],kometa_1_pause_day[18],kometa_1_pause_day[19],kometa_1_pause_day[20],kometa_1_pause_day[21],kometa_1_pause_day[22],kometa_1_pause_day[23],
+            kometa_1_pause_day[24],kometa_1_pause_day[25],kometa_1_pause_day[26],kometa_1_pause_day[27],kometa_1_pause_day[28],kometa_1_pause_day[29],kometa_1_pause_day[30]]
     }, {
         name: 'Выключен',
-        data: [cometa_1_off_day[0], cometa_1_off_day[1], cometa_1_off_day[2],cometa_1_off_day[3],cometa_1_off_day[4],cometa_1_off_day[5],cometa_1_off_day[6],cometa_1_off_day[7],cometa_1_off_day[8],cometa_1_off_day[9],cometa_1_off_day[10],cometa_1_off_day[11],
-            cometa_1_off_day[12],cometa_1_off_day[13],cometa_1_off_day[14],cometa_1_off_day[15],cometa_1_off_day[16],cometa_1_off_day[17],cometa_1_off_day[18],cometa_1_off_day[19],cometa_1_off_day[20],cometa_1_off_day[21],cometa_1_off_day[22],cometa_1_off_day[23],
-            cometa_1_off_day[24],cometa_1_off_day[25],cometa_1_off_day[26],cometa_1_off_day[27],cometa_1_off_day[28],cometa_1_off_day[29],cometa_1_off_day[30]]
+        data: [kometa_1_off_day[0], kometa_1_off_day[1], kometa_1_off_day[2],kometa_1_off_day[3],kometa_1_off_day[4],kometa_1_off_day[5],kometa_1_off_day[6],kometa_1_off_day[7],kometa_1_off_day[8],kometa_1_off_day[9],kometa_1_off_day[10],kometa_1_off_day[11],
+            kometa_1_off_day[12],kometa_1_off_day[13],kometa_1_off_day[14],kometa_1_off_day[15],kometa_1_off_day[16],kometa_1_off_day[17],kometa_1_off_day[18],kometa_1_off_day[19],kometa_1_off_day[20],kometa_1_off_day[21],kometa_1_off_day[22],kometa_1_off_day[23],
+            kometa_1_off_day[24],kometa_1_off_day[25],kometa_1_off_day[26],kometa_1_off_day[27],kometa_1_off_day[28],kometa_1_off_day[29],kometa_1_off_day[30]]
     }, {
         name: 'Авария',
         data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -147,6 +147,6 @@ Highcharts.chart('container_6', {
     series : [ {
         type : 'pie',
         name : 'Показатель',
-        data : [ [ 'Работа', cometa_1_work ], [ 'Включен', cometa_1_pass ], [ 'Выключен', cometa_1_fail],  [ 'В аварии', 0 ], [ 'Нагрузка', 0 ]  ]
+        data : [ [ 'Работа', kometa_1_work ], [ 'Включен', kometa_1_pass ], [ 'Выключен', kometa_1_fail],  [ 'В аварии', 0 ], [ 'Нагрузка', 0 ]  ]
     }]
 });

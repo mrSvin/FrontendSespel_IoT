@@ -271,12 +271,9 @@
     var avar_trulaser = [[${trulaser_avar}]];
     var nagruzka_trulaser = [[${trulaser_nagruzka}]];
 
-    var work_cometa_1 = [[${cometa_1_work}]];
-    var pass_cometa_1 = [[${cometa_1_pass}]];
-    var fail_cometa_1 = [[${cometa_1_fail}]];
-    var avar_cometa_1 = [[${cometa_1_avar}]];
-    var nagruzka_cometa_1 = [[${cometa_1_nagruzka}]];
-
+    var work_kometa_1 = [[${kometa_1_work}]];
+    var pass_kometa_1 = [[${kometa_1_pass}]];
+    var fail_kometa_1 = [[${kometa_1_fail}]];
 
     Highcharts.setOptions({
         lang: {
@@ -337,29 +334,29 @@
         },
         series: [{
             name: 'Работа',
-            data: [work_navigator_1, work_navigator_2_golova_1, work_navigator_2_golova_2, work_navigator_3, work_trulaser, work_cometa_1]
+            data: [work_navigator_1, work_navigator_2_golova_1, work_navigator_2_golova_2, work_navigator_3, work_trulaser, work_kometa_1]
         }, {
             name: 'Под нагрузкой',
-            data: [nagruzka_navigator_1, nagruzka_navigator_2_golova_1, nagruzka_navigator_2_golova_2, nagruzka_navigator_3, nagruzka_trulaser, nagruzka_cometa_1]
+            data: [nagruzka_navigator_1, nagruzka_navigator_2_golova_1, nagruzka_navigator_2_golova_2, nagruzka_navigator_3, nagruzka_trulaser, 0]
         }, {
             name: 'Ожидание',
-            data: [pass_navigator_1, pass_navigator_2_golova_1, pass_navigator_2_golova_2, pass_navigator_3, pass_trulaser, pass_cometa_1]
+            data: [pass_navigator_1, pass_navigator_2_golova_1, pass_navigator_2_golova_2, pass_navigator_3, pass_trulaser, pass_kometa_1]
         }, {
             name: 'Авария',
-            data: [avar_navigator_1, avar_navigator_2_golova_1, avar_navigator_2_golova_2, avar_navigator_3, avar_trulaser, avar_cometa_1]
+            data: [avar_navigator_1, avar_navigator_2_golova_1, avar_navigator_2_golova_2, avar_navigator_3, avar_trulaser, 0]
         }, {
             name: 'Выключен',
-            data: [fail_navigator_1, fail_navigator_2_golova_1, fail_navigator_2_golova_2, fail_navigator_3, fail_trulaser, fail_cometa_1]
+            data: [fail_navigator_1, fail_navigator_2_golova_1, fail_navigator_2_golova_2, fail_navigator_3, fail_trulaser, fail_kometa_1]
         }]
     });
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    var sum_rabota = [[${navigator_1_work}]] + [[${navigator_2_golova_1_work}]] + [[${navigator_2_golova_2_work}]] + [[${navigator_3_work}]] + [[${trulaser_work}]] + [[${cometa_1_work}]];
-    var sum_pause = [[${navigator_1_pass}]] + [[${navigator_2_golova_1_pass}]] + [[${navigator_2_golova_2_pass}]] + [[${navigator_3_pass}]] + [[${trulaser_pass}]] + [[${cometa_1_pass}]];
-    var sum_off = [[${navigator_1_fail}]] + [[${navigator_2_golova_1_fail}]] + [[${navigator_2_golova_2_fail}]] + [[${navigator_3_fail}]] + [[${trulaser_fail}]] + [[${cometa_1_fail}]];
-    var sum_avar = [[${navigator_1_avar}]] + [[${navigator_2_golova_1_avar}]] + [[${navigator_2_golova_2_avar}]] + [[${navigator_3_avar}]] + [[${trulaser_avar}]] + [[${cometa_1_avar}]];
-    var sum_nagruzka = [[${navigator_1_nagruzka}]] + [[${navigator_2_golova_1_nagruzka}]] + [[${navigator_2_golova_2_nagruzka}]] + [[${navigator_3_nagruzka}]] + [[${trulaser_nagruzka}]] + [[${cometa_1_nagruzka}]];
+    var sum_rabota = [[${navigator_1_work}]] + [[${navigator_2_golova_1_work}]] + [[${navigator_2_golova_2_work}]] + [[${navigator_3_work}]] + [[${trulaser_work}]] + [[${kometa_1_work}]];
+    var sum_pause = [[${navigator_1_pass}]] + [[${navigator_2_golova_1_pass}]] + [[${navigator_2_golova_2_pass}]] + [[${navigator_3_pass}]] + [[${trulaser_pass}]] + [[${kometa_1_pass}]];
+    var sum_off = [[${navigator_1_fail}]] + [[${navigator_2_golova_1_fail}]] + [[${navigator_2_golova_2_fail}]] + [[${navigator_3_fail}]] + [[${trulaser_fail}]] + [[${kometa_1_fail}]];
+    var sum_avar = [[${navigator_1_avar}]] + [[${navigator_2_golova_1_avar}]] + [[${navigator_2_golova_2_avar}]] + [[${navigator_3_avar}]] + [[${trulaser_avar}]];
+    var sum_nagruzka = [[${navigator_1_nagruzka}]] + [[${navigator_2_golova_1_nagruzka}]] + [[${navigator_2_golova_2_nagruzka}]] + [[${navigator_3_nagruzka}]] + [[${trulaser_nagruzka}]] ;
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -589,11 +586,11 @@
         <div style="width: 100%;   margin: 2%;">
             <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
-                    <img src="images/cometa.png" class="stanok_img"/>
+                    <img src="images/kometa.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Комета #1</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_cometa" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_cometa" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_kometa" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_kometa" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -601,23 +598,19 @@
             <div id="container_6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>
-</div> <!--cometa 1 html-->
+</div> <!--kometa 1 html-->
 <script th:inline="javascript">
-    var cometa_1_rabota_day = [[${cometa_1_rabota_day}]];
-    var cometa_1_pause_day = [[${cometa_1_pause_day}]];
-    var cometa_1_off_day = [[${cometa_1_off_day}]];
-    var cometa_1_avar_day = [[${cometa_1_avar_day}]];
-    var cometa_1_nagruzka_day = [[${cometa_1_nagruzka_day}]];
+    var kometa_1_rabota_day = [[${kometa_1_rabota_day}]];
+    var kometa_1_pause_day = [[${kometa_1_pause_day}]];
+    var kometa_1_off_day = [[${kometa_1_off_day}]];
 
-</script>   <!--Переменные для линейной диаграммы cometa 1-->
+</script>   <!--Переменные для линейной диаграммы kometa 1-->
 <script th:inline="javascript">
-    var cometa_1_work = [[${cometa_1_work}]];
-    var cometa_1_pass = [[${cometa_1_pass}]];
-    var cometa_1_fail = [[${cometa_1_fail}]];
-    var cometa_1_avar = [[${cometa_1_avar}]];
-    var  cometa_1_nagruzka = [[${cometa_1_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы cometa 1-->
-<script src="/js/month/navigators/data_cometa_1_month.js"></script>
+    var kometa_1_work = [[${kometa_1_work}]];
+    var kometa_1_pass = [[${kometa_1_pass}]];
+    var kometa_1_fail = [[${kometa_1_fail}]];
+</script>   <!--Переменные для круговой диаграммы kometa 1-->
+<script src="/js/month/navigators/data_kometa_1_month.js"></script>
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
