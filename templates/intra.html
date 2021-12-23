@@ -5,7 +5,6 @@
     <title>Home</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
-    <script src="js/jquery-3.6.0.min.js"></script>
 
     <style>
 
@@ -62,7 +61,7 @@
     </ul>       <!--Шапка html-->
 </header>       <!--Шапка html-->
 <body>
-<iframe id="iframeName" src="http://89.151.134.234:46088/" height="100%"></iframe>
+<iframe src="http://89.151.134.234:46088/" height="100%"></iframe>
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
 
@@ -91,22 +90,4 @@
         border:none ;
     }
 </style>
-<script>
-    // $('#iframeName').on('load', () => {
-    //     let iframeHead = $('#iframeName').contents().find('head');
-    //     let iframeCSS = '<style>.iframe-css{color: #e91905}</style>';
-    //     $(iframeHead).append(iframeCSS);
-    // });
-    //
-    //
-    // $(document).ready(function(){
-    //     $(".parent_image").css('background-image', "none");
-    // });
-
-    window.onload = () => {
-        let iframeName = document.getElementById('iframeName');
-        let iframeContent = iframeName.contentDocument;
-        iframeContent.body.innerHTML = iframeContent.body.innerHTML + '<style>.parent_image{background-image: none;}</style>';
-    }
-</script>
 </html>
