@@ -246,6 +246,22 @@
     }
 </style>
 
+<!--<script>-->
+<!--    mar_top = -65;-->
+<!--    mar_left = 270;-->
+<!--    bground = 'url(../images/dmg_dmu50.png) no-repeat';-->
+<!--    place_img = "../images/ii_ploshadka.png";-->
+<!--    size = 40;-->
+
+<!--    window.localStorage['mar_top'] = mar_top;-->
+<!--    window.localStorage['mar_left'] = mar_left;-->
+<!--    window.localStorage['bground'] = bground;-->
+<!--    window.localStorage['place_img'] = place_img;-->
+<!--    window.localStorage['size'] = size;-->
+<!--</script>-->
+<!--Скрипт полигон для подбора координат-->
+
+
 <script>
     //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
     if(localStorage['mar_top'] != null) {
@@ -254,6 +270,10 @@
 
     if(localStorage['mar_left'] != null) {
         mar_left = parseInt(window.localStorage['mar_left']);
+    }
+
+    if(localStorage['size'] != null) {
+        size = parseInt(window.localStorage['size']);
     }
 
     if(localStorage['bground'] != null) {
@@ -267,10 +287,16 @@
     $(document).ready(function(){
         $(".icon").css('marginTop', mar_top);
         $(".icon").css('marginLeft', mar_left);
-        $('.icon').css('backgroundImage', bground)
+        $('.icon').css('background', bground);
+        $('.icon').css('backgroundSize', size)
+        $('.icon').css('width', size)
+        $('.icon').css('height', size)
+
         $(".place_img").attr("src", place_img);
         $(".pulse2").css('marginTop', mar_top - 10);
         $(".pulse2").css('marginLeft', mar_left - 10);
+        $('.pulse2').css('width', size + 20)
+        $('.pulse2').css('height', size + 20)
     });
 </script>
 <!--Скрипт прототип для будущего места для станков-->
