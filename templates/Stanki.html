@@ -1187,10 +1187,15 @@
         bground = 'url(../images/apec.png)';
         place_img = "../images/ii_ploshadka.png";
 
+        console.log("Переменные uf до", mar_top, mar_left, bground, place_img);
+
         window.localStorage['mar_top'] = mar_top;
         window.localStorage['mar_left'] = mar_left;
         window.localStorage['bground'] = bground;
         window.localStorage['place_img'] = place_img;
+
+        console.log("Переменные после",window.localStorage['mar_top'], window.localStorage['mar_left'], window.localStorage['bground'], window.localStorage['place_img'] )
+
 
     };
 
