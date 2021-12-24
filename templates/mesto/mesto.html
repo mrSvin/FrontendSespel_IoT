@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/js/mesto.js"></script>
+<!--    <script src="/js/mesto.js"></script>-->
 </head>
 <div id="toplayer">
     <img src="" class="place_img"/>
@@ -247,6 +247,26 @@
     }
 </style>
 
+<script>
+
+    //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
+    if(localStorage['mar_top'] != null) {
+        mar_top = parseInt(window.localStorage['mar_top']);
+    }
+
+    if(localStorage['mar_left'] != null) {
+        mar_left = parseInt(window.localStorage['mar_left']);
+    }
+
+    if(localStorage['bground'] != null) {
+        bground = parseInt(window.localStorage['bground']);
+    }
+
+    if(localStorage['place_img'] != null) {
+        place_img = parseInt(window.localStorage['place_img']);
+    }
+
+</script>
 
 <script>
     $(document).ready(function(){
@@ -257,9 +277,11 @@
         $(".pulse2").css('marginTop', mar_top - 10);
         $(".pulse2").css('marginLeft', mar_left - 10);
     });
-    alert("Снарутжи")
+
+    console.log("Переменные", mar_top, mar_left, bground, place_img)
 </script>
 <!--Скрипт прототип для будущего места для станков-->
+
 
 
 <style>
