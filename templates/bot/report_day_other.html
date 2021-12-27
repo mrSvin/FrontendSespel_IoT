@@ -24,7 +24,7 @@
 
 </head>
 <body>
-<h1>ОТК, Склады, Литейка</h1>
+<h1>ОТК, Склады, Литейка, Гибка</h1>
 <div style="display: flex; justify-content: space-around; min-height: 80vh;">
     <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
     <table id='myTable' style="min-height: 400px; width: 45%">
@@ -67,6 +67,15 @@
             <td>0%</td>
             <td>0%</td>
         </tr>
+        <tr class="hit">
+            <td>FACCIN 4</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+        </tr>
         </tbody>
     </table>    <!--Таблица изменений-->
     <!--Общая загрузка html-->
@@ -93,7 +102,11 @@
     var pech_nerg_nagruzka = [[${pech_nerg_nagruzka}]];
     var pech_nerg_avar = [[${pech_nerg_avar}]];
 
-
+    var faccin_1_work = [[${work_faccin_1}]];
+    var faccin_1_pass = [[${pass_faccin_1}]];
+    var faccin_1_fail = [[${fail_faccin_1}]];
+    var faccin_1_nagruzka = [[${nagruzka_faccin_1}]];
+    var faccin_1_avar = [[${avar_faccin_1}]];
 
     Highcharts.setOptions({
         lang: {
@@ -132,7 +145,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['CRYSTA-Apex', 'Склад Мех. цеха', 'Печь Индукционная']
+            categories: ['CRYSTA-Apex', 'Склад Мех. цеха', 'Печь Индукционная', 'FACCIN 4']
         },
         credits: {
             enabled: false
@@ -154,24 +167,24 @@
         },
         series: [{
             name: 'Работа',
-            data: [crysta_apex_work, sclad_meh_work, pech_nerg_work]
+            data: [crysta_apex_work, sclad_meh_work, pech_nerg_work, faccin_1_work]
         }, {
             name: 'Под нагрузкой',
-            data: [sclad_meh_nagruzka, pech_nerg_nagruzka]
+            data: [sclad_meh_nagruzka, pech_nerg_nagruzka, faccin_1_nagruzka]
         }, {
             name: 'Ожидание',
-            data: [crysta_apex_pass, sclad_meh_pass, pech_nerg_pass]
+            data: [crysta_apex_pass, sclad_meh_pass, pech_nerg_pass, faccin_1_pass]
         }, {
             name: 'Авария',
-            data: [crysta_apex_avar, sclad_meh_avar, pech_nerg_avar]
+            data: [crysta_apex_avar, sclad_meh_avar, pech_nerg_avar, faccin_1_avar]
         }, {
             name: 'Выключен',
-            data: [crysta_apex_fail, sclad_meh_fail, pech_nerg_fail]
+            data: [crysta_apex_fail, sclad_meh_fail, pech_nerg_fail, faccin_1_fail]
         },
-        {
-            name: 'Калибровка',
-            data: [crysta_apex_kalibrovka, 0, 0]
-        }
+            {
+                name: 'Калибровка',
+                data: [crysta_apex_kalibrovka, 0, 0, 0]
+            }
         ]
     });
 
@@ -181,30 +194,36 @@
     var crysta_apex_koef = (crysta_apex_work + crysta_apex_pass + crysta_apex_fail + crysta_apex_avar + crysta_apex_kalibrovka)/100;
     var sclad_meh_koef = (sclad_meh_work + sclad_meh_pass + sclad_meh_fail + sclad_meh_nagruzka + sclad_meh_avar)/100;
     var pech_nerg_koef = (pech_nerg_work + pech_nerg_pass + pech_nerg_fail + pech_nerg_nagruzka + pech_nerg_avar)/100;
+    var faccin_1_koef = (faccin_1_work + faccin_1_pass + faccin_1_fail + faccin_1_nagruzka + faccin_1_avar)/100;
 
     table = document.getElementById('myTable').rows; // Обращение к таблице по ID
     table[1].cells[1].innerHTML = Math.round(crysta_apex_work/crysta_apex_koef * 10) / 10 + "%";
     table[2].cells[1].innerHTML = Math.round(sclad_meh_work/sclad_meh_koef * 10) / 10 + "%";
     table[3].cells[1].innerHTML = Math.round(pech_nerg_work/pech_nerg_koef * 10) / 10 + "%";
+    table[4].cells[1].innerHTML = Math.round(faccin_1_work/faccin_1_koef * 10) / 10 + "%";
     // Столбец Работа
 
     table[2].cells[2].innerHTML = Math.round(sclad_meh_nagruzka/sclad_meh_koef * 10) / 10 + "%";
     table[3].cells[2].innerHTML = Math.round(pech_nerg_nagruzka/pech_nerg_koef * 10) / 10 + "%";
+    table[4].cells[2].innerHTML = Math.round(faccin_1_nagruzka/faccin_1_koef * 10) / 10 + "%";
     // Столбец Нагрузка
 
     table[1].cells[3].innerHTML = Math.round(crysta_apex_pass/crysta_apex_koef * 10) / 10 + "%";
     table[2].cells[3].innerHTML = Math.round(sclad_meh_pass/sclad_meh_koef * 10) / 10 + "%";
     table[3].cells[3].innerHTML = Math.round(pech_nerg_pass/pech_nerg_koef * 10) / 10 + "%";
+    table[4].cells[3].innerHTML = Math.round(faccin_1_pass/faccin_1_koef * 10) / 10 + "%";
     // Столбец пауза
 
     table[1].cells[4].innerHTML = Math.round(crysta_apex_avar/crysta_apex_koef * 10) / 10 + "%";
     table[2].cells[4].innerHTML = Math.round(sclad_meh_avar/sclad_meh_koef * 10) / 10 + "%";
     table[3].cells[4].innerHTML = Math.round(pech_nerg_avar/pech_nerg_koef * 10) / 10 + "%";
+    table[4].cells[4].innerHTML = Math.round(faccin_1_avar/faccin_1_koef * 10) / 10 + "%";
     // Столбец авария
 
     table[1].cells[5].innerHTML = Math.round(crysta_apex_fail/crysta_apex_koef * 10) / 10 + "%";
     table[2].cells[5].innerHTML = Math.round(sclad_meh_fail/sclad_meh_koef * 10) / 10 + "%";
     table[3].cells[5].innerHTML = Math.round(pech_nerg_fail/pech_nerg_koef * 10) / 10 + "%";
+    table[4].cells[5].innerHTML = Math.round(faccin_1_fail/faccin_1_koef * 10) / 10 + "%";
     //Столбец выключен
 
     table[1].cells[6].innerHTML = Math.round(crysta_apex_kalibrovka/crysta_apex_koef * 10) / 10 + "%";
