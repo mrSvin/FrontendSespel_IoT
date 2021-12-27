@@ -158,3 +158,91 @@ function dmg_ctx310_3 (){
 
 // конец мест второй площадки
 
+
+// Начало мест ОТК
+function crystal_apex (){
+    mar_top = -145;
+    mar_left = 680;
+    bground = 'url(../images/crystal_apex.jpg) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+// конец мест ОТК
+
+// Начало мест навигаторы
+function navigator_1(){
+    mar_top = -110;
+    mar_left = 900;
+    bground = 'url(../images/navigator.png) no-repeat';
+    place_img = "../images/sbor_ceh.png";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function navigator_2(){
+    mar_top = -145;
+    mar_left = 680;
+    bground = 'url(../images/navigator.png) no-repeat';
+    place_img = "../images/sbor_ceh.png";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function navigator_3(){
+    mar_top = -145;
+    mar_left = 680;
+    bground = 'url(../images/navigator.png) no-repeat';
+    place_img = "../images/sbor_ceh.png";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function trulaser(){
+    mar_top = -420;
+    mar_left = 740;
+    bground = 'url(../images/trulaser.png) no-repeat';
+    place_img = "../images/sbor_ceh.png";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function kometa_1(){
+    mar_top = -382;
+    mar_left = 190;
+    bground = 'url(../images/kometa.png) no-repeat';
+    place_img = "../images/ceh_5.png";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+// конец мест навигаторы
