@@ -126,8 +126,6 @@
     var kometa_1_work_sum = [[${work_kometa_1}]];
     var kometa_1_pass_sum = [[${pass_kometa_1}]];
     var kometa_1_fail_sum = [[${fail_kometa_1}]];
-    var kometa_1_avar_sum = [[${avar_kometa_1}]];
-    var kometa_1_nagruzka_sum = [[${nagruzka_kometa_1}]];
 
     Highcharts.setOptions({
         lang: {
@@ -191,13 +189,13 @@
             data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum, kometa_1_work_sum]
         }, {
             name: 'Под нагрузкой',
-            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, kometa_1_nagruzka_sum]
+            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, 0]
         }, {
             name: 'Ожидание',
             data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum, kometa_1_pass_sum]
         }, {
             name: 'Авария',
-            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0, kometa_1_avar_sum]
+            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0, 0]
         }, {
             name: 'Выключен',
             data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum, trulaser_fail_sum, kometa_1_fail_sum]
