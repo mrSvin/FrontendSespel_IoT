@@ -240,6 +240,12 @@
     var faccin_1_avar_sum = [[${faccin_1_avar}]];
     var  faccin_1_nagruzka_sum = [[${faccin_1_nagruzka}]];
 
+    var faccin_2_work_sum = [[${faccin_2_work}]];
+    var faccin_2_pass_sum = [[${faccin_2_pass}]];
+    var faccin_2_fail_sum = [[${faccin_2_fail}]];
+    var faccin_2_avar_sum = [[${faccin_2_avar}]];
+    var  faccin_2_nagruzka_sum = [[${faccin_2_nagruzka}]];
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -277,7 +283,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['FACCIN 4']
+            categories: ['FACCIN 4', "FACCIN 10"]
         },
         credits: {
             enabled: false
@@ -299,30 +305,30 @@
         },
         series: [{
             name: 'Работа',
-            data: [faccin_1_work_sum]
+            data: [faccin_1_work_sum, faccin_2_work_sum]
         }, {
             name: 'Под нагрузкой',
-            data: [faccin_1_nagruzka_sum]
+            data: [faccin_1_nagruzka_sum, faccin_2_nagruzka_sum]
         }, {
             name: 'Ожидание',
-            data: [faccin_1_pass_sum]
+            data: [faccin_1_pass_sum, faccin_2_pass_sum]
         }, {
             name: 'Авария',
-            data: [faccin_1_avar_sum]
+            data: [faccin_1_avar_sum, faccin_2_avar_sum]
         }, {
             name: 'Выключен',
-            data: [faccin_1_fail_sum]
+            data: [faccin_1_fail_sum, faccin_2_fail_sum]
         }]
     });
 
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    var sum_rabota = [[${faccin_1_work}]];
-    var sum_pause = [[${faccin_1_pass}]];
-    var sum_off = [[${faccin_1_fail}]];
-    var sum_avar = [[${faccin_1_avar}]];
-    var sum_nagruzka = [[${faccin_1_nagruzka}]];
+    var sum_rabota = [[${faccin_1_work}]] + [[${faccin_2_work}]];
+    var sum_pause = [[${faccin_1_pass}]] + [[${faccin_2_pass}]];
+    var sum_off = [[${faccin_1_fail}]] + [[${faccin_2_fail}]];
+    var sum_avar = [[${faccin_1_avar}]] + [[${faccin_2_avar}]];
+    var sum_nagruzka = [[${faccin_1_nagruzka}]] + [[${faccin_2_nagruzka}]];
 
     Highcharts.setOptions({
         lang: {
@@ -398,7 +404,7 @@
                     <img src="images/faccin.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">FACCIN 4</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(660, screen.availHeight)+',width='+Math.min(1920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="faccin_1(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(660, screen.availHeight)+',width='+Math.min(1920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
                         <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
@@ -424,6 +430,41 @@
     var  faccin_1_nagruzka = [[${faccin_1_nagruzka}]];
 </script>   <!--Переменные для круговой диаграммы faccin_1-->
 <script src="/js/month/gibka/data_faccin_1_month.js"></script>
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/faccin_2.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">FACCIN 10</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="faccin_2(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(660, screen.availHeight)+',width='+Math.min(1920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_faccin_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="container_days2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+    </div>  <!--Печь ИНдукционная html-->
+
+</div> <!--faccin_2 html-->
+<script th:inline="javascript">
+    var faccin_2_rabota_day = [[${faccin_2_rabota_day}]];
+    var faccin_2_pause_day = [[${faccin_2_pause_day}]];
+    var faccin_2_off_day = [[${faccin_2_off_day}]];
+    var faccin_2_avar_day = [[${faccin_2_avar_day}]];
+    var faccin_2_nagruzka_day = [[${faccin_2_nagruzka_day}]];
+</script>   <!--Переменные для линейной диаграммы faccin_2-->
+<script th:inline="javascript">
+    var faccin_2_work = [[${faccin_2_work}]];
+    var faccin_2_pass = [[${faccin_2_pass}]];
+    var faccin_2_fail = [[${faccin_2_fail}]];
+    var faccin_2_avar = [[${faccin_2_avar}]];
+    var  faccin_2_nagruzka = [[${faccin_2_nagruzka}]];
+</script>   <!--Переменные для круговой диаграммы faccin_2-->
+<script src="/js/month/gibka/data_faccin_2_month.js"></script>
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];

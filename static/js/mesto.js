@@ -433,3 +433,34 @@ function dmg_ctx510_1 (){
 
 
 // конец мест Мех.2
+
+
+// Начало мест гибка.
+function faccin_1 (){
+    mar_top = -390;
+    mar_left = 175;
+    bground = 'url(../images/faccin.png) no-repeat';
+    place_img = "../images/sbor_ceh";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function faccin_2 (){
+    mar_top = -410;
+    mar_left = 360;
+    bground = 'url(../images/faccin.png) no-repeat';
+    place_img = "../images/sbor_ceh";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+// Начало мест гибка.
