@@ -378,7 +378,7 @@ function dmg_dmu50_2 (){
 function dmg_dmc1035 (){
     mar_top = -590;
     mar_left = 115;
-    bground = 'url(../images/dmg_dmс1035.png) no-repeat';
+    bground = 'url(../images/dmg_dmc1035.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
 
