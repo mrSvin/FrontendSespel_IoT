@@ -290,7 +290,7 @@
       data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4, avar_ctx310_2, avar_ctx510_2, avar_ctx510_3, avar_ctx310_3] // , avar_ctx510_4
     }, {
       name: 'Выключен',
-      data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2, off_ctx510_2] //, off_ctx510_4
+      data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2, off_ctx510_2, off_ctx310_3] //, off_ctx510_4
     }, {
       name: 'Ручной',
       data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0, 0, 0, 0] // ,0
@@ -310,9 +310,9 @@
   var dmu50_4_koef = (work_dmu50_4 + nagruzka_dmu50_4 + pause_dmu50_4 + off_dmu50_4 + avar_dmu50_4)/100;
   var ctx310_2_koef = (work_ctx310_2 + nagruzka_ctx310_2 + pause_ctx310_2 + avar_ctx310_2 + off_ctx310_2)/100;
   var ctx510_2_koef = (work_ctx510_2 + nagruzka_ctx510_2 + pause_ctx510_2 + avar_ctx510_2 + off_ctx510_2)/100;
-  var ctx510_3_koef = (work_ctx510_3 + nagruzka_ctx510_3 + pause_ctx510_3 + avar_ctx510_3+ off_ctx510_3)/100;
-  var ctx310_3_koef = (work_ctx310_3 + nagruzka_ctx310_3 + pause_ctx310_3 + off_ctx310_3)/100;
-  var ctx510_4_koef = (work_ctx510_4 + nagruzka_ctx510_4 + pause_ctx510_4 + avar_ctx510_4 + off_ctx510_4)/100;
+  var ctx510_3_koef = (work_ctx510_3 + nagruzka_ctx510_3 + pause_ctx510_3 + avar_ctx510_3 + off_ctx510_3)/100;
+  var ctx310_3_koef = (work_ctx310_3 + nagruzka_ctx310_3 + pause_ctx310_3 + avar_ctx310_3 + off_ctx310_3)/100;
+  // var ctx510_4_koef = (work_ctx510_4 + nagruzka_ctx510_4 + pause_ctx510_4 + avar_ctx510_4 + off_ctx510_4)/100;
 
   table = document.getElementById('myTable').rows; // Обращение к таблице по ID
   table[1].cells[1].innerHTML = Math.round(work_uf5220/uf5220_koef * 10) / 10 + "%";
@@ -326,7 +326,7 @@
   table[9].cells[1].innerHTML = Math.round(work_ctx510_2/ctx510_2_koef * 10) / 10 + "%";
   table[10].cells[1].innerHTML = Math.round(work_ctx510_3/ctx510_3_koef * 10) / 10 + "%";
   table[11].cells[1].innerHTML = Math.round(work_ctx310_3/ctx310_3_koef * 10) / 10 + "%";
-  table[12].cells[1].innerHTML = Math.round(work_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
+  // table[12].cells[1].innerHTML = Math.round(work_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
   // Столбец Работа
   table[3].cells[2].innerHTML = Math.round(nagruzka_ntx1000/ntx1000_koef * 10) / 10 + "%";
   table[4].cells[2].innerHTML = Math.round(nagruzka_sk50/sk50_koef * 10) / 10 + "%";
@@ -336,7 +336,7 @@
   table[9].cells[2].innerHTML = Math.round(nagruzka_ctx510_2/ctx510_2_koef * 10) / 10 + "%";
   table[10].cells[2].innerHTML = Math.round(nagruzka_ctx510_3/ctx510_3_koef * 10) / 10 + "%";
   table[11].cells[2].innerHTML = Math.round(nagruzka_ctx310_3/ctx310_3_koef * 10) / 10 + "%";
-  table[12].cells[2].innerHTML = Math.round(nagruzka_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
+  // table[12].cells[2].innerHTML = Math.round(nagruzka_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
   // Столбец Нагрузка
 
   table[1].cells[3].innerHTML = Math.round(pause_uf5220/uf5220_koef * 10) / 10 + "%";
@@ -350,7 +350,7 @@
   table[9].cells[3].innerHTML = Math.round(pause_ctx510_2/ctx510_2_koef * 10) / 10 + "%";
   table[10].cells[3].innerHTML = Math.round(pause_ctx510_3/ctx510_3_koef * 10) / 10 + "%";
   table[11].cells[3].innerHTML = Math.round(pause_ctx310_3/ctx310_3_koef * 10) / 10 + "%";
-  table[12].cells[3].innerHTML = Math.round(pause_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
+  // table[12].cells[3].innerHTML = Math.round(pause_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
   // Столбец пауза
 
   table[3].cells[4].innerHTML = Math.round(avar_ntx1000/ntx1000_koef * 10) / 10 + "%";
@@ -362,7 +362,7 @@
   table[9].cells[4].innerHTML = Math.round(avar_ctx510_2/ctx510_2_koef * 10) / 10 + "%";
   table[10].cells[4].innerHTML = Math.round(avar_ctx510_3/ctx510_3_koef * 10) / 10 + "%";
   table[11].cells[4].innerHTML = Math.round(avar_ctx310_3/ctx310_3_koef * 10) / 10 + "%";
-  table[12].cells[4].innerHTML = Math.round(avar_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
+  // table[12].cells[4].innerHTML = Math.round(avar_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
   // Столбец выключен
 
   table[1].cells[5].innerHTML = Math.round(off_uf5220/uf5220_koef * 10) / 10 + "%";
@@ -376,7 +376,7 @@
   table[9].cells[5].innerHTML = Math.round(off_ctx510_2/ctx510_2_koef * 10) / 10 + "%";
   table[10].cells[5].innerHTML = Math.round(off_ctx510_3/ctx510_3_koef * 10) / 10 + "%";
   table[11].cells[5].innerHTML = Math.round(off_ctx310_3/ctx310_3_koef * 10) / 10 + "%";
-  table[12].cells[5].innerHTML = Math.round(off_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
+  // table[12].cells[5].innerHTML = Math.round(off_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
 
   table[5].cells[6].innerHTML = Math.round(ruchnoi_apec/apec_koef * 10) / 10 + "%";
   //Столбец ручной режим
