@@ -335,7 +335,7 @@ function dmg_ctx650 (){
 function dmg_dmf260 (){
     mar_top = -780;
     mar_left = 200;
-    bground = 'url(../images/dmf260.png) no-repeat';
+    bground = 'url(../images/dmg_dmf260.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
 
