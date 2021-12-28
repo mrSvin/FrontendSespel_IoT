@@ -35,11 +35,7 @@
 </header>       <!--Шапка html-->
 
 
-<!--<div>-->
-<!--    <ul id="menu_ul">-->
-<!--        <li id="menu_li" style="margin-left: auto; margin-right: auto;"><a id="menu_a" class="menu-color">Энергоресурсы</a></li>-->
-<!--    </ul>-->
-<!--</div>  &lt;!&ndash; Меню &ndash;&gt;-->
+
 <div class="preloader">
     <div class="preloader__row">
         <div class="preloader__item"></div>
@@ -55,38 +51,38 @@
         }, 500);
     }
 </script> <!--Загрузка страницы-->
-
+<h2>В данный момент раздел находится в разработке</h2>
 <body>
-<div style="clear: both">
-    <form>
-        <button formaction="energy_source" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF;">Суточный отчет</button>
-        <button formaction="energy_source_month" class="btn_change" style="width:40%">Месячный отчет</button>
-    </form>
-</div>  <!--Кнопки суточный и месячный отчеты html-->
-<h2 style="text-shadow: 1px 0 1px black; font-weight: bolder; color: #fff; margin: 0 auto; text-align: center; font-size: 50px; position: relative; top: -140px;">Энергоресурсы</h2>
-<div class="container">
-    <div style="width: 220px; float: left">
-        <h2>Выберите дату:</h2>
-    </div>
+<!--<div style="clear: both">-->
+<!--    <form>-->
+<!--        <button formaction="energy_source" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF;">Суточный отчет</button>-->
+<!--        <button formaction="energy_source_month" class="btn_change" style="width:40%">Месячный отчет</button>-->
+<!--    </form>-->
+<!--</div>  &lt;!&ndash;Кнопки суточный и месячный отчеты html&ndash;&gt;-->
+<!--<h2 style="text-shadow: 1px 0 1px black; font-weight: bolder; color: #fff; margin: 0 auto; text-align: center; font-size: 50px; position: relative; top: -140px;">Энергоресурсы</h2>-->
+<!--<div class="container">-->
+<!--    <div style="width: 220px; float: left">-->
+<!--        <h2>Выберите дату:</h2>-->
+<!--    </div>-->
 
-    <form  action="#" th:action="@{/navigators}" th:object="${calendar_date}" method="post" >
+<!--    <form  action="#" th:action="@{/navigators}" th:object="${calendar_date}" method="post" >-->
 
-        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
-            <input type='text' class="form-control" th:field="*{content_date}"/>
-            <span class="input-group-addon">
-		                        <span class="glyphicon glyphicon-calendar"></span>
-		                    </span>
-        </div>
+<!--        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">-->
+<!--            <input type='text' class="form-control" th:field="*{content_date}"/>-->
+<!--            <span class="input-group-addon">-->
+<!--		                        <span class="glyphicon glyphicon-calendar"></span>-->
+<!--		                    </span>-->
+<!--        </div>-->
 
-        <div class="form-actions" >
-            <button type="submit"
-                    class="follow"
-                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
-            </button>
-        </div>
-    </form>
+<!--        <div class="form-actions" >-->
+<!--            <button type="submit"-->
+<!--                    class="follow"-->
+<!--                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </form>-->
 
-</div>      <!--Календарь html-->
+<!--</div>      &lt;!&ndash;Календарь html&ndash;&gt;-->
 <script >
     $(function () {
         $('#datepicker').datepicker({
