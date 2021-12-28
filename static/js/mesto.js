@@ -321,7 +321,7 @@ function dmg_gamma2000 (){
 function dmg_ctx650 (){
     mar_top = -500;
     mar_left = 310;
-    bground = 'url(../images/ctx650.png) no-repeat';
+    bground = 'url(../images/dmg_ctx650.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
 
