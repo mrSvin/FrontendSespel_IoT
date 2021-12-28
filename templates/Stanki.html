@@ -335,7 +335,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4']
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3'] // , 'CTX510 #4'
         },
         credits: {
             enabled: false
@@ -441,7 +441,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4'],
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3'], // , 'CTX510 #4'
             title: {
                 text: null
             }
@@ -1165,40 +1165,40 @@
 </script>   <!--ctx310_3 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_dmg_ctx310_3.js"></script>
 
-<div style="border: 1px solid #333;">   <!--ctx510_4 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_ctx510.png" class="stanok_img" alt="no image"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #4</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_4 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_work12" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container12" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--ctx510_4 html-->
-</div> <!--ctx510_4 html-->
-<script th:inline="javascript">
-    var dmg_ctx510_4_array_rabota = [[${dmg_ctx510_4_array_rabota}]];
-    var dmg_ctx510_4_array_pause = [[${dmg_ctx510_4_array_pause}]];
-    var dmg_ctx510_4_array_off = [[${dmg_ctx510_4_array_off}]];
-    var dmg_ctx510_4_array_programname = [[${dmg_ctx510_4_array_programname}]];
-    var dmg_ctx510_4_array_nagruzka = [[${dmg_ctx510_4_array_nagruzka}]];
-    var dmg_ctx510_4_array_avar = [[${dmg_ctx510_4_array_avar}]];
-</script>   <!--ctx510_4 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var dmg_ctx510_4_work = [[${work_dmg_ctx510_4}]];
-    var dmg_ctx510_4_pass = [[${pass_dmg_ctx510_4}]];
-    var dmg_ctx510_4_fail = [[${fail_dmg_ctx510_4}]];
-    var dmg_ctx510_4_nagruzka = [[${nagruzka_dmg_ctx510_4}]];
-    var dmg_ctx510_4_avar = [[${avar_dmg_ctx510_4}]];
-</script>   <!--ctx510_4 js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/stanki/data_dmg_ctx510_4.js"></script>
+<!--<div style="border: 1px solid #333;">   &lt;!&ndash;ctx510_4 html&ndash;&gt;-->
+<!--    <div style="overflow: hidden;">-->
+<!--        <div style="width: 100%;   margin: 2%;">-->
+<!--            <div class="img" style="float: left;"> &lt;!&ndash;Вставляем изображение станка 1&ndash;&gt;-->
+<!--                <div class="parent_image">-->
+<!--                    <img src="images/dmg_ctx510.png" class="stanok_img" alt="no image"/>-->
+<!--                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #4</figcaption>-->
+<!--                    <div>-->
+<!--                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_4 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>-->
+<!--                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div id="container_work12" style="float: left; height: 400px; width: 55%"></div> &lt;!&ndash;Вставляем линейную гистограмму работы&ndash;&gt;-->
+<!--            <div id="container12" style="float: left; height: 400px; width: 25%"></div> &lt;!&ndash;Вставляем круговую диаграмму загрузки&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>  &lt;!&ndash;ctx510_4 html&ndash;&gt;-->
+<!--</div> &lt;!&ndash;ctx510_4 html&ndash;&gt;-->
+<!--<script th:inline="javascript">-->
+<!--    var dmg_ctx510_4_array_rabota = [[${dmg_ctx510_4_array_rabota}]];-->
+<!--    var dmg_ctx510_4_array_pause = [[${dmg_ctx510_4_array_pause}]];-->
+<!--    var dmg_ctx510_4_array_off = [[${dmg_ctx510_4_array_off}]];-->
+<!--    var dmg_ctx510_4_array_programname = [[${dmg_ctx510_4_array_programname}]];-->
+<!--    var dmg_ctx510_4_array_nagruzka = [[${dmg_ctx510_4_array_nagruzka}]];-->
+<!--    var dmg_ctx510_4_array_avar = [[${dmg_ctx510_4_array_avar}]];-->
+<!--</script>   &lt;!&ndash;ctx510_4 js линейная диагрмма работы оборудования&ndash;&gt;-->
+<!--<script th:inline="javascript">-->
+<!--    var dmg_ctx510_4_work = [[${work_dmg_ctx510_4}]];-->
+<!--    var dmg_ctx510_4_pass = [[${pass_dmg_ctx510_4}]];-->
+<!--    var dmg_ctx510_4_fail = [[${fail_dmg_ctx510_4}]];-->
+<!--    var dmg_ctx510_4_nagruzka = [[${nagruzka_dmg_ctx510_4}]];-->
+<!--    var dmg_ctx510_4_avar = [[${avar_dmg_ctx510_4}]];-->
+<!--</script>   &lt;!&ndash;ctx510_4 js круговая диагрмма загрузки оборудования&ndash;&gt;-->
+<!--<script src="/js/sutki/stanki/data_dmg_ctx510_4.js"></script>-->
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
