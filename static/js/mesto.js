@@ -156,6 +156,20 @@ function dmg_ctx310_3 (){
     window.localStorage['size'] = size;
 };
 
+function dmg_ctx510_4 (){
+    mar_top = -65;
+    mar_left = 190;
+    bground = 'url(../images/dmg_ctx510.png) no-repeat';
+    place_img = "../images/ii_ploshadka.png";
+    size = 25;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
 // конец мест второй площадки
 
 
