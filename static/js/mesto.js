@@ -246,3 +246,176 @@ function kometa_1(){
     window.localStorage['size'] = size;
 };
 // конец мест навигаторы
+
+// Начало мест Мех.1
+function uvf_1(){
+    mar_top = -340;
+    mar_left = 280;
+    bground = 'url(../images/uvf_1_2.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function uvf_2(){
+    mar_top = -180;
+    mar_left = 280;
+    bground = 'url(../images/uvf_1_2.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function ntx1000_2 (){
+    mar_top = -670;
+    mar_left = 490;
+    bground = 'url(../images/ntx1000.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function nlx3000 (){
+    mar_top = -590;
+    mar_left = 310;
+    bground = 'url(../images/NLX3000.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function dmg_gamma2000 (){
+    mar_top = -590;
+    mar_left = 310;
+    bground = 'url(../images/NLX3000.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function dmg_ctx650 (){
+    mar_top = -500;
+    mar_left = 310;
+    bground = 'url(../images/ctx650.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function dmg_dmf260 (){
+    mar_top = -780;
+    mar_left = 200;
+    bground = 'url(../images/dmf260.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+
+function dmg_dmu50_1 (){
+    mar_top = -500;
+    mar_left = 115;
+    bground = 'url(../images/dmg_dmu50.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function dmg_dmu50_2 (){
+    mar_top = -410;
+    mar_left = 115;
+    bground = 'url(../images/dmg_dmu50.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function dmg_dmc1035 (){
+    mar_top = -590;
+    mar_left = 115;
+    bground = 'url(../images/dmg_dmс1035.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function dmg_ctx310_1 (){
+    mar_top = -590;
+    mar_left = 470;
+    bground = 'url(../images/dmg_ctx310.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function dmg_ctx510_1 (){
+    mar_top = -490;
+    mar_left = 470;
+    bground = 'url(../images/dmg_ctx510.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+
+// конец мест Мех.2
