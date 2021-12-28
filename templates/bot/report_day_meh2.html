@@ -130,6 +130,24 @@
       <td>0%</td>
       <td>0%</td>
     </tr>
+    <tr class="hit">
+      <td> CTX310 #3 </td>
+      <td>0%</td>
+      <td>0%</td>
+      <td>0%</td>
+      <td>0%</td>
+      <td>0%</td>
+      <td>0%</td>
+    </tr>
+    <tr class="hit">
+      <td> CTX510 #4 </td>
+      <td>0%</td>
+      <td>0%</td>
+      <td>0%</td>
+      <td>0%</td>
+      <td>0%</td>
+      <td>0%</td>
+    </tr>
     </tbody>
   </table>    <!--Таблица изменений-->
   <!--Общая загрузка html-->
@@ -147,7 +165,9 @@
   var work_dmu50_4 = [[${work_dmg_dmu50_4}]];
   var work_ctx310_2 = [[${work_dmg_ctx310_2}]];
   var work_ctx510_2 = [[${work_dmg_ctx510_2}]];
-  var work_ctx510_3 = [[${work_dmg_ctx510_3}]];
+  var work_ctx510_3 = [[${work_dmg_ctx510_3}]]
+  var work_ctx310_3 = [[${work_dmg_ctx310_3}]];
+  var work_ctx510_4 = [[${work_dmg_ctx510_4}]]
 
   var pause_uf5220 = [[${pass}]];
   var pause_progress = [[${progress_pass}]];
@@ -159,6 +179,8 @@
   var pause_ctx310_2 = [[${pass_dmg_ctx310_2}]];
   var pause_ctx510_2 = [[${pass_dmg_ctx510_2}]];
   var pause_ctx510_3 = [[${pass_dmg_ctx510_3}]];
+  var pause_ctx310_3 = [[${pass_dmg_ctx310_3}]];
+  var pause_ctx510_4 = [[${pass_dmg_ctx510_4}]];
 
   var off_uf5220 = [[${fail}]];
   var off_progress = [[${progress_fail}]];
@@ -170,6 +192,8 @@
   var off_ctx310_2 = [[${fail_dmg_ctx310_2}]];
   var off_ctx510_2 = [[${fail_dmg_ctx510_2}]];
   var off_ctx510_3 = [[${fail_dmg_ctx510_3}]];
+  var off_ctx310_3 = [[${fail_dmg_ctx310_3}]];
+  var off_ctx510_4 = [[${fail_dmg_ctx510_4}]];
 
   var avar_ntx1000 = [[${ntx1000_avar}]];
   var avar_sk50 = [[${sk50_avar}]];
@@ -179,6 +203,8 @@
   var avar_ctx310_2 = [[${avar_dmg_ctx310_2}]];
   var avar_ctx510_2 = [[${avar_dmg_ctx510_2}]];
   var avar_ctx510_3 = [[${avar_dmg_ctx510_3}]];
+  var avar_ctx310_3 = [[${avar_dmg_ctx310_3}]];
+  var avar_ctx510_4 = [[${avar_dmg_ctx510_4}]];
 
   var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
   var nagruzka_sk50 = [[${sk50_nagruzka}]];
@@ -187,6 +213,8 @@
   var nagruzka_ctx310_2 = [[${nagruzka_dmg_ctx310_2}]];
   var nagruzka_ctx510_2 = [[${nagruzka_dmg_ctx510_2}]];
   var nagruzka_ctx510_3 = [[${nagruzka_dmg_ctx510_3}]];
+  var nagruzka_ctx310_3 = [[${nagruzka_dmg_ctx310_3}]];
+  var nagruzka_ctx510_4 = [[${nagruzka_dmg_ctx510_4}]];
 
 
   var ruchnoi_apec = [[${apec_ruchnoi}]];
@@ -228,7 +256,7 @@
           fontSize: '18px',
         }
       },
-      categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3']
+      categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4']
     },
     credits: {
       enabled: false
@@ -250,22 +278,22 @@
     },
     series: [{
       name: 'Работа',
-      data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2, work_ctx510_2, work_ctx510_3]
+      data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2, work_ctx510_2, work_ctx510_3, work_ctx310_3, work_ctx510_4]
     }, {
       name: 'Под нагрузкой',
-      data: [0, 0, nagruzka_ntx1000,nagruzka_sk50, 0, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2, nagruzka_ctx510_2, nagruzka_ctx510_3]
+      data: [0, 0, nagruzka_ntx1000,nagruzka_sk50, 0, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2, nagruzka_ctx510_2, nagruzka_ctx510_3, nagruzka_ctx310_3, nagruzka_ctx510_4]
     }, {
       name: 'Ожидание',
-      data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2, pause_ctx510_2, pause_ctx510_3]
+      data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2, pause_ctx510_2, pause_ctx510_3, pause_ctx310_3, pause_ctx510_4]
     }, {
       name: 'Авария',
-      data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4, avar_ctx310_2, avar_ctx510_2, avar_ctx510_3]
+      data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4, avar_ctx310_2, avar_ctx510_2, avar_ctx510_3, avar_ctx310_3, avar_ctx510_4]
     }, {
       name: 'Выключен',
       data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2, off_ctx510_2, off_ctx510_3]
     }, {
       name: 'Ручной',
-      data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0]
+      data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0, 0, 0]
     }]
   });
 
@@ -283,6 +311,8 @@
   var ctx310_2_koef = (work_ctx310_2 + nagruzka_ctx310_2 + pause_ctx310_2 + avar_ctx310_2 + off_ctx310_2)/100;
   var ctx510_2_koef = (work_ctx510_2 + nagruzka_ctx510_2 + pause_ctx510_2 + avar_ctx510_2 + off_ctx510_2)/100;
   var ctx510_3_koef = (work_ctx510_3 + nagruzka_ctx510_3 + pause_ctx510_3 + avar_ctx510_3+ off_ctx510_3)/100;
+  var ctx310_3_koef = (work_ctx310_3 + nagruzka_ctx310_3 + pause_ctx310_3 +3 + off_ctx310_3)/100;
+  var ctx510_4_koef = (work_ctx510_4 + nagruzka_ctx510_4 + pause_ctx510_4 + avar_ctx510_4 + off_ctx510_4)/100;
 
   table = document.getElementById('myTable').rows; // Обращение к таблице по ID
   table[1].cells[1].innerHTML = Math.round(work_uf5220/uf5220_koef * 10) / 10 + "%";
@@ -295,6 +325,8 @@
   table[8].cells[1].innerHTML = Math.round(work_ctx310_2/ctx310_2_koef * 10) / 10 + "%";
   table[9].cells[1].innerHTML = Math.round(work_ctx510_2/ctx510_2_koef * 10) / 10 + "%";
   table[10].cells[1].innerHTML = Math.round(work_ctx510_3/ctx510_3_koef * 10) / 10 + "%";
+  table[11].cells[1].innerHTML = Math.round(work_ctx310_3/ctx310_3_koef * 10) / 10 + "%";
+  table[12].cells[1].innerHTML = Math.round(work_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
   // Столбец Работа
   table[3].cells[2].innerHTML = Math.round(nagruzka_ntx1000/ntx1000_koef * 10) / 10 + "%";
   table[4].cells[2].innerHTML = Math.round(nagruzka_sk50/sk50_koef * 10) / 10 + "%";
@@ -303,6 +335,8 @@
   table[8].cells[2].innerHTML = Math.round(nagruzka_ctx310_2/ctx310_2_koef * 10) / 10 + "%";
   table[9].cells[2].innerHTML = Math.round(nagruzka_ctx510_2/ctx510_2_koef * 10) / 10 + "%";
   table[10].cells[2].innerHTML = Math.round(nagruzka_ctx510_3/ctx510_3_koef * 10) / 10 + "%";
+  table[11].cells[2].innerHTML = Math.round(nagruzka_ctx310_3/ctx310_3_koef * 10) / 10 + "%";
+  table[12].cells[2].innerHTML = Math.round(nagruzka_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
   // Столбец Нагрузка
 
   table[1].cells[3].innerHTML = Math.round(pause_uf5220/uf5220_koef * 10) / 10 + "%";
@@ -315,6 +349,8 @@
   table[8].cells[3].innerHTML = Math.round(pause_ctx310_2/ctx310_2_koef * 10) / 10 + "%";
   table[9].cells[3].innerHTML = Math.round(pause_ctx510_2/ctx510_2_koef * 10) / 10 + "%";
   table[10].cells[3].innerHTML = Math.round(pause_ctx510_3/ctx510_3_koef * 10) / 10 + "%";
+  table[11].cells[3].innerHTML = Math.round(pause_ctx310_3/ctx310_3_koef * 10) / 10 + "%";
+  table[12].cells[3].innerHTML = Math.round(pause_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
   // Столбец пауза
 
   table[3].cells[4].innerHTML = Math.round(avar_ntx1000/ntx1000_koef * 10) / 10 + "%";
@@ -325,6 +361,8 @@
   table[8].cells[4].innerHTML = Math.round(avar_ctx310_2/ctx310_2_koef * 10) / 10 + "%";
   table[9].cells[4].innerHTML = Math.round(avar_ctx510_2/ctx510_2_koef * 10) / 10 + "%";
   table[10].cells[4].innerHTML = Math.round(avar_ctx510_3/ctx510_3_koef * 10) / 10 + "%";
+  table[11].cells[4].innerHTML = Math.round(avar_ctx310_3/ctx310_3_koef * 10) / 10 + "%";
+  table[12].cells[4].innerHTML = Math.round(avar_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
   // Столбец выключен
 
   table[1].cells[5].innerHTML = Math.round(off_uf5220/uf5220_koef * 10) / 10 + "%";
@@ -337,6 +375,8 @@
   table[8].cells[5].innerHTML = Math.round(off_ctx310_2/ctx310_2_koef * 10) / 10 + "%";
   table[9].cells[5].innerHTML = Math.round(off_ctx510_2/ctx510_2_koef * 10) / 10 + "%";
   table[10].cells[5].innerHTML = Math.round(off_ctx510_3/ctx510_3_koef * 10) / 10 + "%";
+  table[11].cells[5].innerHTML = Math.round(off_ctx310_3/ctx310_3_koef * 10) / 10 + "%";
+  table[12].cells[5].innerHTML = Math.round(off_ctx510_4/ctx510_4_koef * 10) / 10 + "%";
 
   table[5].cells[6].innerHTML = Math.round(ruchnoi_apec/apec_koef * 10) / 10 + "%";
   //Столбец ручной режим
