@@ -430,9 +430,109 @@ function dmg_ctx510_1 (){
     window.localStorage['place_img'] = place_img;
     window.localStorage['size'] = size;
 };
+// конец мест Мех.1
 
 
-// конец мест Мех.2
+// начало мест Роботы
+function maks_1 (){
+    mar_top = -255;
+    mar_left = 620;
+    bground = 'url(../images/robot.png) no-repeat';
+    place_img = "../images/ceh_6.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function maks_2 (){
+    mar_top = -450;
+    mar_left = 210;
+    bground = 'url(../images/robot.png) no-repeat';
+    place_img = "../images/ceh_6.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function m710 (){
+    mar_top = -920;
+    mar_left = 800;
+    bground = 'url(../images/robot.png) no-repeat';
+    place_img = "../images/ceh_6.png";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function rtk12c (){
+    mar_top = -750;
+    mar_left = 800;
+    bground = 'url(../images/robot.png) no-repeat';
+    place_img = "../images/ceh_6.png";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function P250 (){
+    mar_top = -820;
+    mar_left = 270;
+    bground = 'url(../images/robot_p250.png) no-repeat';
+    place_img = "../images/ceh_6.png";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function krot (){
+    mar_top = -920;
+    mar_left = 800;
+    bground = 'url(../images/robot.png) no-repeat';
+    place_img = "../images/ceh_6.png";
+    size = 60;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function prans (){
+    mar_top = -655;
+    mar_left = 820;
+    bground = 'url(../images/robot.png) no-repeat';
+    place_img = "../images/ceh_6.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+// конец мест Роботы
 
 
 // Начало мест гибка.
