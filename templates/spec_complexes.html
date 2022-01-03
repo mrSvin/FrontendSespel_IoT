@@ -329,10 +329,10 @@
         <div style="width: 100%;   margin: 2%;">
             <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
-                    <img src="images/press.jpg" class="stanok_img"/>
+                    <img src="images/press.png" class="stanok_img"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Пресс ЧПУ для ступиц</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_press" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="press(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
                         <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_press" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
@@ -469,15 +469,8 @@
                     <img src="images/epp.png" class="stanok_img"/>
                     <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ЭПП</figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto_epp"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;">
-                            <div class='label_mesto'>Место</div>
-                        </a>
-                        <a style="text-decoration: none; float: left" class="icon_personal"
-                           href="personal/personal_epp"
-                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div class='label_personal'>Персонал</div>
-                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="epp(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_epp" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>
@@ -619,5 +612,16 @@
     }
 </script>
 <!--Скрипт отображения в header  кнопки администрирование-->
+
+<script>
+    var mar_top = localStorage.getItem('mar_top');
+    var mar_left = localStorage.getItem('mar_left');
+    var bground = localStorage.getItem('bground');
+    var place_img = localStorage.getItem('place_img');
+    var size  = localStorage.getItem('size');
+</script>
+<script src="/js/mesto.js"></script>
+<!--Скрипт с вызовом функций для изменения места-->
+
 </body>
 </html>

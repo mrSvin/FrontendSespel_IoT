@@ -534,6 +534,36 @@ function prans (){
 
 // конец мест Роботы
 
+// Начало мест Спец. комплексы
+function press (){
+    mar_top = -480;
+    mar_left = 765;
+    bground = 'url(../images/press.png) no-repeat';
+    place_img = "../images/ii_ploshadka.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+
+function epp (){
+    mar_top = -825;
+    mar_left = 220;
+    bground = 'url(../images/epp.png) no-repeat';
+    place_img = "../images/ceh_6.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+// конец мест Спес. комплексы
+
 
 // Начало мест гибка.
 function faccin_1 (){
@@ -563,4 +593,4 @@ function faccin_2 (){
     window.localStorage['place_img'] = place_img;
     window.localStorage['size'] = size;
 };
-// Начало мест гибка.
+// Конец мест гибка.
