@@ -564,6 +564,21 @@ function epp (){
 };
 // конец мест Спес. комплексы
 
+// Начало мест Склады
+function sklad (){
+    mar_top = -485;
+    mar_left = 680;
+    bground = 'url(../images/sklad.png) no-repeat';
+    place_img = "../images/meh_ceh.png";
+    size = 40;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+// конец мест Склады
 
 // Начало мест гибка.
 function faccin_1 (){
