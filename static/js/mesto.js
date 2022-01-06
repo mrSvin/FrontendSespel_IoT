@@ -580,6 +580,22 @@ function sklad (){
 };
 // конец мест Склады
 
+// Начало мест Литье
+function pech_nerg (){
+    mar_top = -125;
+    mar_left = 180;
+    bground = 'url(../images/pech.png) no-repeat';
+    place_img = "../images/ceh_1.png";
+    size = 70;
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['size'] = size;
+};
+// конец мест литье
+
 // Начало мест гибка.
 function faccin_1 (){
     mar_top = -390;
