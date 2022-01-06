@@ -177,7 +177,7 @@ function dmg_ctx510_4 (){
 function crystal_apex (){
     mar_top = -145;
     mar_left = 680;
-    bground = 'url(../images/crystal_apex.jpg) no-repeat';
+    bground = 'url(../images/crystal_apex.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
 
