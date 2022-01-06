@@ -466,7 +466,7 @@ function m710 (){
     mar_top = -920;
     mar_left = 800;
     bground = 'url(../images/robot.png) no-repeat';
-    place_img = "../images/ceh_6.png";
+    place_img = "../images/sbor_ceh.png";
     size = 60;
 
     window.localStorage['mar_top'] = mar_top;
@@ -480,7 +480,7 @@ function rtk12c (){
     mar_top = -750;
     mar_left = 800;
     bground = 'url(../images/robot.png) no-repeat';
-    place_img = "../images/ceh_6.png";
+    place_img = "../images/sbor_ceh.png";
     size = 60;
 
     window.localStorage['mar_top'] = mar_top;
@@ -490,11 +490,11 @@ function rtk12c (){
     window.localStorage['size'] = size;
 };
 
-function P250 (){
+function p250 (){
     mar_top = -820;
     mar_left = 270;
     bground = 'url(../images/robot_p250.png) no-repeat';
-    place_img = "../images/ceh_6.png";
+    place_img = "../images/ceh_5.png";
     size = 60;
 
     window.localStorage['mar_top'] = mar_top;
@@ -508,7 +508,7 @@ function krot (){
     mar_top = -920;
     mar_left = 800;
     bground = 'url(../images/robot.png) no-repeat';
-    place_img = "../images/ceh_6.png";
+    place_img = "../images/sbor_ceh.png";
     size = 60;
 
     window.localStorage['mar_top'] = mar_top;
