@@ -12,9 +12,6 @@
 <div class="pulse2"></div>
 <div class="icon"></div>
 <style>
-    .place_img{
-        width: 100%;
-    }
     .icon{
         position: absolute;
         width: 40px;
@@ -287,6 +284,10 @@
         place_img = window.localStorage['place_img'];
     }
 
+    if(localStorage['bwidth'] != null) {
+        place_img = window.localStorage['bwidth'];
+    }
+
     $(document).ready(function(){
         $(".icon").css('marginTop', mar_top);
         $(".icon").css('marginLeft', mar_left);
@@ -296,6 +297,7 @@
         $('.icon').css('height', size)
 
         $(".place_img").attr("src", place_img);
+        $(".place_img").css("width", bwidth);
         $(".pulse2").css('marginTop', mar_top - 10);
         $(".pulse2").css('marginLeft', mar_left - 10);
         $('.pulse2').css('width', size + 20)
