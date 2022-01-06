@@ -6,12 +6,13 @@ function uf5220 (){
     place_img = "../images/ii_ploshadka.png";
     size = 40;
     // Изменения значений
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
     // Сохранение значений
 };
@@ -22,12 +23,13 @@ function progress (){
     bground = 'url(../images/progress.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -37,12 +39,13 @@ function ntx1000_1 (){
     bground = 'url(../images/ntx1000.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -52,12 +55,13 @@ function sk50 (){
     bground = 'url(../images/sk50.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -67,12 +71,13 @@ function apec (){
     bground = 'url(../images/apec.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -82,12 +87,13 @@ function dmg_dmu50_3 (){
     bground = 'url(../images/dmg_dmu50.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -97,12 +103,13 @@ function dmg_dmu50_4 (){
     bground = 'url(../images/dmg_dmu50.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -112,12 +119,13 @@ function dmg_ctx310_2 (){
     bground = 'url(../images/dmg_ctx310.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -127,12 +135,13 @@ function dmg_ctx510_2 (){
     bground = 'url(../images/dmg_ctx510.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -142,12 +151,13 @@ function dmg_ctx510_3 (){
     bground = 'url(../images/dmg_ctx510.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -158,12 +168,13 @@ function dmg_ctx310_3 (){
     bground = 'url(../images/dmg_ctx310.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -173,12 +184,13 @@ function dmg_ctx510_4 (){
     bground = 'url(../images/dmg_ctx510.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -192,12 +204,13 @@ function crystal_apex (){
     bground = 'url(../images/crystal_apex.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 // конец мест ОТК
@@ -209,12 +222,13 @@ function navigator_1(){
     bground = 'url(../images/navigator.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -224,12 +238,13 @@ function navigator_2(){
     bground = 'url(../images/navigator.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -239,12 +254,13 @@ function navigator_3(){
     bground = 'url(../images/navigator.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -254,12 +270,13 @@ function trulaser(){
     bground = 'url(../images/trulaser.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -269,12 +286,13 @@ function kometa_1(){
     bground = 'url(../images/kometa.png) no-repeat';
     place_img = "../images/ceh_5.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 // конец мест навигаторы
@@ -286,12 +304,13 @@ function uvf_1(){
     bground = 'url(../images/uvf_1_2.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -301,12 +320,13 @@ function uvf_2(){
     bground = 'url(../images/uvf_1_2.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -316,12 +336,13 @@ function ntx1000_2 (){
     bground = 'url(../images/ntx1000.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -331,12 +352,13 @@ function nlx3000 (){
     bground = 'url(../images/NLX3000.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -346,12 +368,13 @@ function dmg_gamma2000 (){
     bground = 'url(../images/NLX3000.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -361,12 +384,13 @@ function dmg_ctx650 (){
     bground = 'url(../images/dmg_ctx650.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -376,12 +400,13 @@ function dmg_dmf260 (){
     bground = 'url(../images/dmg_dmf260.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -392,12 +417,13 @@ function dmg_dmu50_1 (){
     bground = 'url(../images/dmg_dmu50.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -407,12 +433,13 @@ function dmg_dmu50_2 (){
     bground = 'url(../images/dmg_dmu50.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -422,12 +449,13 @@ function dmg_dmc1035 (){
     bground = 'url(../images/dmg_dmc1035.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -437,12 +465,13 @@ function dmg_ctx310_1 (){
     bground = 'url(../images/dmg_ctx310.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -452,12 +481,13 @@ function dmg_ctx510_1 (){
     bground = 'url(../images/dmg_ctx510.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 // конец мест Мех.1
@@ -470,12 +500,13 @@ function maks_1 (){
     bground = 'url(../images/robot.png) no-repeat';
     place_img = "../images/ceh_6.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -485,12 +516,13 @@ function maks_2 (){
     bground = 'url(../images/robot.png) no-repeat';
     place_img = "../images/ceh_6.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -500,12 +532,13 @@ function m710 (){
     bground = 'url(../images/robot.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -515,12 +548,13 @@ function rtk12c (){
     bground = 'url(../images/robot.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -530,12 +564,13 @@ function p250 (){
     bground = 'url(../images/robot_p250.png) no-repeat';
     place_img = "../images/ceh_5.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -545,12 +580,13 @@ function krot (){
     bground = 'url(../images/robot.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -560,12 +596,13 @@ function prans (){
     bground = 'url(../images/robot.png) no-repeat';
     place_img = "../images/ceh_6.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -578,12 +615,13 @@ function press (){
     bground = 'url(../images/press.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -593,12 +631,13 @@ function epp (){
     bground = 'url(../images/epp.png) no-repeat';
     place_img = "../images/ceh_6.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 // конец мест Спес. комплексы
@@ -610,12 +649,13 @@ function sklad (){
     bground = 'url(../images/sklad.png) no-repeat';
     place_img = "../images/meh_ceh.png";
     size = 40;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 // конец мест Склады
@@ -627,12 +667,13 @@ function pech_nerg (){
     bground = 'url(../images/pech.png) no-repeat';
     place_img = "../images/ceh_1.png";
     size = 70;
-    bwidth = "100%"
+    bwidth = "100%";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 // конец мест литье
@@ -644,12 +685,13 @@ function faccin_1 (){
     bground = 'url(../images/faccin.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 
@@ -659,12 +701,13 @@ function faccin_2 (){
     bground = 'url(../images/faccin.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
-    bwidth = "unset"
+    bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;
+    window.localStorage['place_img'] = place_img;    
+    window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
 // Конец мест гибка.
