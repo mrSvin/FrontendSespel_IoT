@@ -244,13 +244,17 @@
     var press_pass_sum = [[${press_pass}]];
     var press_fail_sum = [[${press_fail}]];
     var press_avar_sum = [[${press_avar}]];
-    var  press_nagruzka_sum = [[${press_nagruzka}]];
+    var press_nagruzka_sum = [[${press_nagruzka}]];
 
     var epp_work_sum = [[${epp_work}]];
     var epp_pass_sum = [[${epp_pass}]];
     var epp_fail_sum = [[${epp_fail}]];
     var epp_avar_sum = [[${epp_avar}]];
-    var  epp_nagruzka_sum = [[${epp_nagruzka}]];
+    var epp_nagruzka_sum = [[${epp_nagruzka}]];
+
+    var stp13m_work_sum = [[${work_stp13m}]];
+    var stp13m_pass_sum = [[${pass_stp13m}]];
+    var stp13m_fail_sum = [[${fail_stp13m}]];
 
     Highcharts.setOptions({
         lang: {
@@ -289,7 +293,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['Пресс ЧПУ для ступиц', 'ЭПП']
+            categories: ['Пресс ЧПУ для ступиц', 'ЭПП', 'СТП13М']
         },
         credits: {
             enabled: false
@@ -311,28 +315,28 @@
         },
         series: [{
             name: 'Работа',
-            data: [press_work_sum, epp_work_sum]
+            data: [press_work_sum, epp_work_sum, stp13m_work_sum]
         }, {
             name: 'Под нагрузкой',
-            data: [press_nagruzka_sum, epp_nagruzka_sum]
+            data: [press_nagruzka_sum, epp_nagruzka_sum, 0]
         }, {
             name: 'Ожидание',
-            data: [press_pass_sum, epp_pass_sum]
+            data: [press_pass_sum, epp_pass_sum, stp13m_pass_sum]
         }, {
             name: 'Авария',
-            data: [press_avar_sum, epp_avar_sum]
+            data: [press_avar_sum, epp_avar_sum, 0]
         }, {
             name: 'Выключен',
-            data: [press_fail_sum, epp_fail_sum]
+            data: [press_fail_sum, epp_fail_sum, stp13m_fail_sum]
         }]
     });
 
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    var sum_rabota = [[${press_work}]] + [[${epp_work}]];
-    var sum_pause = [[${press_pass}]] + [[${epp_pass}]];
-    var sum_off = [[${press_fail}]] + [[${epp_fail}]];
+    var sum_rabota = [[${press_work}]] + [[${epp_work}]] + [[${work_stp13m}]];
+    var sum_pause = [[${press_pass}]] + [[${epp_pass}]] + [[${pass_stp13m}]];
+    var sum_off = [[${press_fail}]] + [[${epp_fail}]] + [[${fail_stp13m}]];
     var sum_avar = [[${press_avar}]] + [[${epp_avar}]];
     var sum_nagruzka = [[${press_nagruzka}]] + [[${epp_nagruzka}]];
     Highcharts.setOptions({
@@ -471,6 +475,37 @@
     var  epp_nagruzka = [[${epp_nagruzka}]];
 </script>   <!--Переменные для круговой диаграммы epp-->
 <script src="/js/month/spec_complexes/data_epp_month.js"></script>
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/stp13m.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">СТП13М</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="stp13m(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_epp" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days_stp13m" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_stp13m" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--html-->
+
+</div> <!-- Пресс html-->
+<script th:inline="javascript">
+    var stp13m_rabota_day = [[${stp13m_rabota_day}]];
+    var stp13m_pause_day = [[${stp13m_pause_day}]];
+    var stp13m_off_day = [[${stp13m_off_day}]];
+</script>   <!--Переменные для линейной диаграммы stp13m-->
+<script th:inline="javascript">
+    var stp13m_work = [[${stp13m_work}]];
+    var stp13m_pass = [[${stp13m_pass}]];
+    var stp13m_fail = [[${stp13m_fail}]];
+</script>   <!--Переменные для круговой диаграммы stp13m-->
+<script src="/js/month/spec_complexes/data_stp13m_month.js"></script>
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];

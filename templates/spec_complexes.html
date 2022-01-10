@@ -247,6 +247,10 @@
     var epp_nagruzka_sum = [[${nagruzka_epp}]];
     var epp_avar_sum = [[${avar_epp}]];
 
+    var stp13m_work_sum = [[${work_stp13m}]];
+    var stp13m_pass_sum = [[${pass_stp13m}]];
+    var stp13m_fail_sum = [[${fail_stp13m}]];
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -284,7 +288,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['Пресс ЧПУ для ступиц', 'ЭПП']
+            categories: ['Пресс ЧПУ для ступиц', 'ЭПП', "СТП13М"]
         },
         credits: {
             enabled: false
@@ -306,19 +310,19 @@
         },
         series: [{
             name: 'Работа',
-            data: [press_work_sum, epp_work_sum]
+            data: [press_work_sum, epp_work_sum, stp13m_work_sum]
         }, {
             name: 'Под нагрузкой',
-            data: [press_nagruzka_sum, epp_nagruzka_sum]
+            data: [press_nagruzka_sum, epp_nagruzka_sum, 0]
         }, {
             name: 'Ожидание',
-            data: [press_pass_sum, epp_pass_sum]
+            data: [press_pass_sum, epp_pass_sum, stp13m_pass_sum]
         }, {
             name: 'Авария',
-            data: [press_avar_sum, epp_avar_sum]
+            data: [press_avar_sum, epp_avar_sum, 0]
         }, {
             name: 'Выключен',
-            data: [press_fail_sum, epp_fail_sum]
+            data: [press_fail_sum, epp_fail_sum, stp13m_fail_sum]
         }]
     });
 
@@ -459,8 +463,6 @@
 </script>   <!--Пресс js Давление-->
 <script src="/js/sutki/spec_complexes/data_press.js"></script>
 
-
-
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
@@ -594,6 +596,39 @@
 
 </script>   <!--ЭПП js Ток и Температура-->
 <script src="/js/sutki/spec_complexes/data_epp.js"></script>
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/stp13m.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">СТП13М</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="stp13m(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_epp" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work_stp13m" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_stp13m" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+        <div style="display: flex; height: 400px; width: 55%;" id="container_stp13m_davlenie"></div>
+    </div>  <!--Пресс html-->
+</div> <!--stp13m html-->
+<script th:inline="javascript">
+    var stp13m_array_rabota = [[${stp13m_array_rabota}]];
+    var stp13m_array_pause = [[${stp13m_array_pause}]];
+    var stp13m_array_off = [[${stp13m_array_off}]];
+
+</script>   <!--stp13m js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var stp13m_work = [[${work_stp13m}]];
+    var stp13m_pass = [[${pass_stp13m}]];
+    var stp13m_fail = [[${fail_stp13m}]];
+</script>   <!--stp13m js круговая диагрмма загрузки оборудования-->
+<script src="/js/sutki/spec_complexes/data_stp13m.js"></script>
+
 
 
 <script th:inline="javascript">
