@@ -640,6 +640,22 @@ function epp (){
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
+
+function stp13m (){
+    mar_top = -310;
+    mar_left = 550;
+    bground = 'url(../images/stp13m.png) no-repeat';
+    place_img = "../images/sbor_ceh.png";
+    size = 60;
+    bwidth = "unset";
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['bwidth'] = bwidth;
+    window.localStorage['size'] = size;
+};
 // конец мест Спес. комплексы
 
 // Начало мест Склады
