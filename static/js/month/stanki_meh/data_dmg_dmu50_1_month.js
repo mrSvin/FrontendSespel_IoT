@@ -1,4 +1,4 @@
-var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
 Highcharts.setOptions({
     lang: {
@@ -62,30 +62,30 @@ Highcharts.chart('container_days8', {
         }
     },
     series: [{
-        name: 'Работа',
-        data: [dmg_dmu50_1_rabota_day[0], dmg_dmu50_1_rabota_day[1], dmg_dmu50_1_rabota_day[2],dmg_dmu50_1_rabota_day[3],dmg_dmu50_1_rabota_day[4],dmg_dmu50_1_rabota_day[5],dmg_dmu50_1_rabota_day[6],dmg_dmu50_1_rabota_day[7],dmg_dmu50_1_rabota_day[8],dmg_dmu50_1_rabota_day[9],dmg_dmu50_1_rabota_day[10],dmg_dmu50_1_rabota_day[11],
-            dmg_dmu50_1_rabota_day[12],dmg_dmu50_1_rabota_day[13],dmg_dmu50_1_rabota_day[14],dmg_dmu50_1_rabota_day[15],dmg_dmu50_1_rabota_day[16],dmg_dmu50_1_rabota_day[17],dmg_dmu50_1_rabota_day[18],dmg_dmu50_1_rabota_day[19],dmg_dmu50_1_rabota_day[20],dmg_dmu50_1_rabota_day[21],dmg_dmu50_1_rabota_day[22],dmg_dmu50_1_rabota_day[23],
-            dmg_dmu50_1_rabota_day[24],dmg_dmu50_1_rabota_day[25],dmg_dmu50_1_rabota_day[26],dmg_dmu50_1_rabota_day[27],dmg_dmu50_1_rabota_day[28],dmg_dmu50_1_rabota_day[29],dmg_dmu50_1_rabota_day[30]]
-    }, {
-        name: 'Ожидание',
-        data: [dmg_dmu50_1_pause_day[0], dmg_dmu50_1_pause_day[1], dmg_dmu50_1_pause_day[2],dmg_dmu50_1_pause_day[3],dmg_dmu50_1_pause_day[4],dmg_dmu50_1_pause_day[5],dmg_dmu50_1_pause_day[6],dmg_dmu50_1_pause_day[7],dmg_dmu50_1_pause_day[8],dmg_dmu50_1_pause_day[9],dmg_dmu50_1_pause_day[10],dmg_dmu50_1_pause_day[11],
-            dmg_dmu50_1_pause_day[12],dmg_dmu50_1_pause_day[13],dmg_dmu50_1_pause_day[14],dmg_dmu50_1_pause_day[15],dmg_dmu50_1_pause_day[16],dmg_dmu50_1_pause_day[17],dmg_dmu50_1_pause_day[18],dmg_dmu50_1_pause_day[19],dmg_dmu50_1_pause_day[20],dmg_dmu50_1_pause_day[21],dmg_dmu50_1_pause_day[22],dmg_dmu50_1_pause_day[23],
-            dmg_dmu50_1_pause_day[24],dmg_dmu50_1_pause_day[25],dmg_dmu50_1_pause_day[26],dmg_dmu50_1_pause_day[27],dmg_dmu50_1_pause_day[28],dmg_dmu50_1_pause_day[29],dmg_dmu50_1_pause_day[30]]
+        name: 'Авария',
+        data: [dmg_dmu50_1_avar_day[0], dmg_dmu50_1_avar_day[1], dmg_dmu50_1_avar_day[2],dmg_dmu50_1_avar_day[3],dmg_dmu50_1_avar_day[4],dmg_dmu50_1_avar_day[5],dmg_dmu50_1_avar_day[6],dmg_dmu50_1_avar_day[7],dmg_dmu50_1_avar_day[8],dmg_dmu50_1_avar_day[9],dmg_dmu50_1_avar_day[10],dmg_dmu50_1_avar_day[11],
+            dmg_dmu50_1_avar_day[12],dmg_dmu50_1_avar_day[13],dmg_dmu50_1_avar_day[14],dmg_dmu50_1_avar_day[15],dmg_dmu50_1_avar_day[16],dmg_dmu50_1_avar_day[17],dmg_dmu50_1_avar_day[18],dmg_dmu50_1_avar_day[19],dmg_dmu50_1_avar_day[20],dmg_dmu50_1_avar_day[21],dmg_dmu50_1_avar_day[22],dmg_dmu50_1_avar_day[23],
+            dmg_dmu50_1_avar_day[24],dmg_dmu50_1_avar_day[25],dmg_dmu50_1_avar_day[26],dmg_dmu50_1_avar_day[27],dmg_dmu50_1_avar_day[28],dmg_dmu50_1_avar_day[29],dmg_dmu50_1_avar_day[30]]
     }, {
         name: 'Выключен',
         data: [dmg_dmu50_1_off_day[0], dmg_dmu50_1_off_day[1], dmg_dmu50_1_off_day[2],dmg_dmu50_1_off_day[3],dmg_dmu50_1_off_day[4],dmg_dmu50_1_off_day[5],dmg_dmu50_1_off_day[6],dmg_dmu50_1_off_day[7],dmg_dmu50_1_off_day[8],dmg_dmu50_1_off_day[9],dmg_dmu50_1_off_day[10],dmg_dmu50_1_off_day[11],
             dmg_dmu50_1_off_day[12],dmg_dmu50_1_off_day[13],dmg_dmu50_1_off_day[14],dmg_dmu50_1_off_day[15],dmg_dmu50_1_off_day[16],dmg_dmu50_1_off_day[17],dmg_dmu50_1_off_day[18],dmg_dmu50_1_off_day[19],dmg_dmu50_1_off_day[20],dmg_dmu50_1_off_day[21],dmg_dmu50_1_off_day[22],dmg_dmu50_1_off_day[23],
             dmg_dmu50_1_off_day[24],dmg_dmu50_1_off_day[25],dmg_dmu50_1_off_day[26],dmg_dmu50_1_off_day[27],dmg_dmu50_1_off_day[28],dmg_dmu50_1_off_day[29],dmg_dmu50_1_off_day[30]]
     }, {
-        name: 'Авария',
-        data: [dmg_dmu50_1_avar_day[0], dmg_dmu50_1_avar_day[1], dmg_dmu50_1_avar_day[2],dmg_dmu50_1_avar_day[3],dmg_dmu50_1_avar_day[4],dmg_dmu50_1_avar_day[5],dmg_dmu50_1_avar_day[6],dmg_dmu50_1_avar_day[7],dmg_dmu50_1_avar_day[8],dmg_dmu50_1_avar_day[9],dmg_dmu50_1_avar_day[10],dmg_dmu50_1_avar_day[11],
-            dmg_dmu50_1_avar_day[12],dmg_dmu50_1_avar_day[13],dmg_dmu50_1_avar_day[14],dmg_dmu50_1_avar_day[15],dmg_dmu50_1_avar_day[16],dmg_dmu50_1_avar_day[17],dmg_dmu50_1_avar_day[18],dmg_dmu50_1_avar_day[19],dmg_dmu50_1_avar_day[20],dmg_dmu50_1_avar_day[21],dmg_dmu50_1_avar_day[22],dmg_dmu50_1_avar_day[23],
-            dmg_dmu50_1_avar_day[24],dmg_dmu50_1_avar_day[25],dmg_dmu50_1_avar_day[26],dmg_dmu50_1_avar_day[27],dmg_dmu50_1_avar_day[28],dmg_dmu50_1_avar_day[29],dmg_dmu50_1_avar_day[30]]
+        name: 'Ожидание',
+        data: [dmg_dmu50_1_pause_day[0], dmg_dmu50_1_pause_day[1], dmg_dmu50_1_pause_day[2],dmg_dmu50_1_pause_day[3],dmg_dmu50_1_pause_day[4],dmg_dmu50_1_pause_day[5],dmg_dmu50_1_pause_day[6],dmg_dmu50_1_pause_day[7],dmg_dmu50_1_pause_day[8],dmg_dmu50_1_pause_day[9],dmg_dmu50_1_pause_day[10],dmg_dmu50_1_pause_day[11],
+            dmg_dmu50_1_pause_day[12],dmg_dmu50_1_pause_day[13],dmg_dmu50_1_pause_day[14],dmg_dmu50_1_pause_day[15],dmg_dmu50_1_pause_day[16],dmg_dmu50_1_pause_day[17],dmg_dmu50_1_pause_day[18],dmg_dmu50_1_pause_day[19],dmg_dmu50_1_pause_day[20],dmg_dmu50_1_pause_day[21],dmg_dmu50_1_pause_day[22],dmg_dmu50_1_pause_day[23],
+            dmg_dmu50_1_pause_day[24],dmg_dmu50_1_pause_day[25],dmg_dmu50_1_pause_day[26],dmg_dmu50_1_pause_day[27],dmg_dmu50_1_pause_day[28],dmg_dmu50_1_pause_day[29],dmg_dmu50_1_pause_day[30]]
     }, {
         name: 'Под нагрузкой',
         data: [dmg_dmu50_1_nagruzka_day[0], dmg_dmu50_1_nagruzka_day[1], dmg_dmu50_1_nagruzka_day[2],dmg_dmu50_1_nagruzka_day[3],dmg_dmu50_1_nagruzka_day[4],dmg_dmu50_1_nagruzka_day[5],dmg_dmu50_1_nagruzka_day[6],dmg_dmu50_1_nagruzka_day[7],dmg_dmu50_1_nagruzka_day[8],dmg_dmu50_1_nagruzka_day[9],dmg_dmu50_1_nagruzka_day[10],dmg_dmu50_1_nagruzka_day[11],
             dmg_dmu50_1_nagruzka_day[12],dmg_dmu50_1_nagruzka_day[13],dmg_dmu50_1_nagruzka_day[14],dmg_dmu50_1_nagruzka_day[15],dmg_dmu50_1_nagruzka_day[16],dmg_dmu50_1_nagruzka_day[17],dmg_dmu50_1_nagruzka_day[18],dmg_dmu50_1_nagruzka_day[19],dmg_dmu50_1_nagruzka_day[20],dmg_dmu50_1_nagruzka_day[21],dmg_dmu50_1_nagruzka_day[22],dmg_dmu50_1_nagruzka_day[23],
             dmg_dmu50_1_nagruzka_day[24],dmg_dmu50_1_nagruzka_day[25],dmg_dmu50_1_nagruzka_day[26],dmg_dmu50_1_nagruzka_day[27],dmg_dmu50_1_nagruzka_day[28],dmg_dmu50_1_nagruzka_day[29],dmg_dmu50_1_nagruzka_day[30]]
+    }, {
+        name: 'Работа',
+        data: [dmg_dmu50_1_rabota_day[0], dmg_dmu50_1_rabota_day[1], dmg_dmu50_1_rabota_day[2],dmg_dmu50_1_rabota_day[3],dmg_dmu50_1_rabota_day[4],dmg_dmu50_1_rabota_day[5],dmg_dmu50_1_rabota_day[6],dmg_dmu50_1_rabota_day[7],dmg_dmu50_1_rabota_day[8],dmg_dmu50_1_rabota_day[9],dmg_dmu50_1_rabota_day[10],dmg_dmu50_1_rabota_day[11],
+            dmg_dmu50_1_rabota_day[12],dmg_dmu50_1_rabota_day[13],dmg_dmu50_1_rabota_day[14],dmg_dmu50_1_rabota_day[15],dmg_dmu50_1_rabota_day[16],dmg_dmu50_1_rabota_day[17],dmg_dmu50_1_rabota_day[18],dmg_dmu50_1_rabota_day[19],dmg_dmu50_1_rabota_day[20],dmg_dmu50_1_rabota_day[21],dmg_dmu50_1_rabota_day[22],dmg_dmu50_1_rabota_day[23],
+            dmg_dmu50_1_rabota_day[24],dmg_dmu50_1_rabota_day[25],dmg_dmu50_1_rabota_day[26],dmg_dmu50_1_rabota_day[27],dmg_dmu50_1_rabota_day[28],dmg_dmu50_1_rabota_day[29],dmg_dmu50_1_rabota_day[30]]
     }]
 });
 

@@ -1,4 +1,4 @@
-var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
 Highcharts.setOptions({
     lang: {
@@ -62,30 +62,30 @@ Highcharts.chart('container_days4', {
         }
     },
     series: [{
-        name: 'Работа',
-        data: [nlx3000_rabota_day[0], nlx3000_rabota_day[1], nlx3000_rabota_day[2],nlx3000_rabota_day[3],nlx3000_rabota_day[4],nlx3000_rabota_day[5],nlx3000_rabota_day[6],nlx3000_rabota_day[7],nlx3000_rabota_day[8],nlx3000_rabota_day[9],nlx3000_rabota_day[10],nlx3000_rabota_day[11],
-            nlx3000_rabota_day[12],nlx3000_rabota_day[13],nlx3000_rabota_day[14],nlx3000_rabota_day[15],nlx3000_rabota_day[16],nlx3000_rabota_day[17],nlx3000_rabota_day[18],nlx3000_rabota_day[19],nlx3000_rabota_day[20],nlx3000_rabota_day[21],nlx3000_rabota_day[22],nlx3000_rabota_day[23],
-            nlx3000_rabota_day[24],nlx3000_rabota_day[25],nlx3000_rabota_day[26],nlx3000_rabota_day[27],nlx3000_rabota_day[28],nlx3000_rabota_day[29],nlx3000_rabota_day[30]]
-    }, {
-        name: 'Ожидание',
-        data: [nlx3000_pause_day[0], nlx3000_pause_day[1], nlx3000_pause_day[2],nlx3000_pause_day[3],nlx3000_pause_day[4],nlx3000_pause_day[5],nlx3000_pause_day[6],nlx3000_pause_day[7],nlx3000_pause_day[8],nlx3000_pause_day[9],nlx3000_pause_day[10],nlx3000_pause_day[11],
-            nlx3000_pause_day[12],nlx3000_pause_day[13],nlx3000_pause_day[14],nlx3000_pause_day[15],nlx3000_pause_day[16],nlx3000_pause_day[17],nlx3000_pause_day[18],nlx3000_pause_day[19],nlx3000_pause_day[20],nlx3000_pause_day[21],nlx3000_pause_day[22],nlx3000_pause_day[23],
-            nlx3000_pause_day[24],nlx3000_pause_day[25],nlx3000_pause_day[26],nlx3000_pause_day[27],nlx3000_pause_day[28],nlx3000_pause_day[29],nlx3000_pause_day[30]]
+        name: 'Авария',
+        data: [nlx3000_avar_day[0], nlx3000_avar_day[1], nlx3000_avar_day[2],nlx3000_avar_day[3],nlx3000_avar_day[4],nlx3000_avar_day[5],nlx3000_avar_day[6],nlx3000_avar_day[7],nlx3000_avar_day[8],nlx3000_avar_day[9],nlx3000_avar_day[10],nlx3000_avar_day[11],
+            nlx3000_avar_day[12],nlx3000_avar_day[13],nlx3000_avar_day[14],nlx3000_avar_day[15],nlx3000_avar_day[16],nlx3000_avar_day[17],nlx3000_avar_day[18],nlx3000_avar_day[19],nlx3000_avar_day[20],nlx3000_avar_day[21],nlx3000_avar_day[22],nlx3000_avar_day[23],
+            nlx3000_avar_day[24],nlx3000_avar_day[25],nlx3000_avar_day[26],nlx3000_avar_day[27],nlx3000_avar_day[28],nlx3000_avar_day[29],nlx3000_avar_day[30]]
     }, {
         name: 'Выключен',
         data: [nlx3000_off_day[0], nlx3000_off_day[1], nlx3000_off_day[2],nlx3000_off_day[3],nlx3000_off_day[4],nlx3000_off_day[5],nlx3000_off_day[6],nlx3000_off_day[7],nlx3000_off_day[8],nlx3000_off_day[9],nlx3000_off_day[10],nlx3000_off_day[11],
             nlx3000_off_day[12],nlx3000_off_day[13],nlx3000_off_day[14],nlx3000_off_day[15],nlx3000_off_day[16],nlx3000_off_day[17],nlx3000_off_day[18],nlx3000_off_day[19],nlx3000_off_day[20],nlx3000_off_day[21],nlx3000_off_day[22],nlx3000_off_day[23],
             nlx3000_off_day[24],nlx3000_off_day[25],nlx3000_off_day[26],nlx3000_off_day[27],nlx3000_off_day[28],nlx3000_off_day[29],nlx3000_off_day[30]]
     }, {
-        name: 'Авария',
-        data: [nlx3000_avar_day[0], nlx3000_avar_day[1], nlx3000_avar_day[2],nlx3000_avar_day[3],nlx3000_avar_day[4],nlx3000_avar_day[5],nlx3000_avar_day[6],nlx3000_avar_day[7],nlx3000_avar_day[8],nlx3000_avar_day[9],nlx3000_avar_day[10],nlx3000_avar_day[11],
-            nlx3000_avar_day[12],nlx3000_avar_day[13],nlx3000_avar_day[14],nlx3000_avar_day[15],nlx3000_avar_day[16],nlx3000_avar_day[17],nlx3000_avar_day[18],nlx3000_avar_day[19],nlx3000_avar_day[20],nlx3000_avar_day[21],nlx3000_avar_day[22],nlx3000_avar_day[23],
-            nlx3000_avar_day[24],nlx3000_avar_day[25],nlx3000_avar_day[26],nlx3000_avar_day[27],nlx3000_avar_day[28],nlx3000_avar_day[29],nlx3000_avar_day[30]]
+        name: 'Ожидание',
+        data: [nlx3000_pause_day[0], nlx3000_pause_day[1], nlx3000_pause_day[2],nlx3000_pause_day[3],nlx3000_pause_day[4],nlx3000_pause_day[5],nlx3000_pause_day[6],nlx3000_pause_day[7],nlx3000_pause_day[8],nlx3000_pause_day[9],nlx3000_pause_day[10],nlx3000_pause_day[11],
+            nlx3000_pause_day[12],nlx3000_pause_day[13],nlx3000_pause_day[14],nlx3000_pause_day[15],nlx3000_pause_day[16],nlx3000_pause_day[17],nlx3000_pause_day[18],nlx3000_pause_day[19],nlx3000_pause_day[20],nlx3000_pause_day[21],nlx3000_pause_day[22],nlx3000_pause_day[23],
+            nlx3000_pause_day[24],nlx3000_pause_day[25],nlx3000_pause_day[26],nlx3000_pause_day[27],nlx3000_pause_day[28],nlx3000_pause_day[29],nlx3000_pause_day[30]]
     }, {
         name: 'Под нагрузкой',
         data: [nlx3000_nagruzka_day[0], nlx3000_nagruzka_day[1], nlx3000_nagruzka_day[2],nlx3000_nagruzka_day[3],nlx3000_nagruzka_day[4],nlx3000_nagruzka_day[5],nlx3000_nagruzka_day[6],nlx3000_nagruzka_day[7],nlx3000_nagruzka_day[8],nlx3000_nagruzka_day[9],nlx3000_nagruzka_day[10],nlx3000_nagruzka_day[11],
             nlx3000_nagruzka_day[12],nlx3000_nagruzka_day[13],nlx3000_nagruzka_day[14],nlx3000_nagruzka_day[15],nlx3000_nagruzka_day[16],nlx3000_nagruzka_day[17],nlx3000_nagruzka_day[18],nlx3000_nagruzka_day[19],nlx3000_nagruzka_day[20],nlx3000_nagruzka_day[21],nlx3000_nagruzka_day[22],nlx3000_nagruzka_day[23],
             nlx3000_nagruzka_day[24],nlx3000_nagruzka_day[25],nlx3000_nagruzka_day[26],nlx3000_nagruzka_day[27],nlx3000_nagruzka_day[28],nlx3000_nagruzka_day[29],nlx3000_nagruzka_day[30]]
+    }, {
+        name: 'Работа',
+        data: [nlx3000_rabota_day[0], nlx3000_rabota_day[1], nlx3000_rabota_day[2],nlx3000_rabota_day[3],nlx3000_rabota_day[4],nlx3000_rabota_day[5],nlx3000_rabota_day[6],nlx3000_rabota_day[7],nlx3000_rabota_day[8],nlx3000_rabota_day[9],nlx3000_rabota_day[10],nlx3000_rabota_day[11],
+            nlx3000_rabota_day[12],nlx3000_rabota_day[13],nlx3000_rabota_day[14],nlx3000_rabota_day[15],nlx3000_rabota_day[16],nlx3000_rabota_day[17],nlx3000_rabota_day[18],nlx3000_rabota_day[19],nlx3000_rabota_day[20],nlx3000_rabota_day[21],nlx3000_rabota_day[22],nlx3000_rabota_day[23],
+            nlx3000_rabota_day[24],nlx3000_rabota_day[25],nlx3000_rabota_day[26],nlx3000_rabota_day[27],nlx3000_rabota_day[28],nlx3000_rabota_day[29],nlx3000_rabota_day[30]]
     }]
 });
 
