@@ -335,7 +335,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3'] // , 'CTX510 #4'
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4']
         },
         credits: {
             enabled: false
@@ -358,22 +358,22 @@
         },
         series: [{
             name: 'Авария',
-            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4, avar_ctx310_2, avar_ctx510_2, avar_ctx510_3, avar_ctx310_3] // , avar_ctx510_4
+            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4, avar_ctx310_2, avar_ctx510_2, avar_ctx510_3, avar_ctx310_3, avar_ctx510_4]
         }, {
             name: 'Выключен',
-            data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2, off_ctx510_2, off_ctx510_3, off_ctx310_3] // , off_ctx510_4
+            data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2, off_ctx510_2, off_ctx510_3, off_ctx310_3, off_ctx510_4]
         }, {
             name: 'Ручной',
-            data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0, 0, 0, 0] // ,0
+            data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0, 0, 0, 0,0]
         }, {
             name: 'Ожидание',
-            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2, pause_ctx510_2, pause_ctx510_3, pause_ctx310_3] // , pause_ctx510_4
+            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2, pause_ctx510_2, pause_ctx510_3, pause_ctx310_3, pause_ctx510_4]
         }, {
             name: 'Под нагрузкой',
-            data: [0, 0, nagruzka_ntx1000,nagruzka_sk50, 0, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2, nagruzka_ctx510_2, nagruzka_ctx510_3, nagruzka_ctx310_3] // , nagruzka_ctx510_4
+            data: [0, 0, nagruzka_ntx1000,nagruzka_sk50, 0, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2, nagruzka_ctx510_2, nagruzka_ctx510_3, nagruzka_ctx310_3, nagruzka_ctx510_4]
         }, {
             name: 'Работа',
-            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2, work_ctx510_2, work_ctx510_3, work_ctx310_3] // , work_ctx510_4
+            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2, work_ctx510_2, work_ctx510_3, work_ctx310_3, work_ctx510_4]
         }]
     });
 
@@ -442,7 +442,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3'], // , 'CTX510 #4'
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4'],
             title: {
                 text: null
             }
@@ -484,10 +484,10 @@
         },
         series: [{
             name: 'Общее количество операций',
-            data: [uf5220_kol_op, progress_kol_op, ntx1000_kol_op, sk50_kol_op, apec_kol_op, dmu50_3_kol_op, dmu50_4_kol_op, ctx310_2_kol_op, ctx510_2_kol_op, ctx510_3_kol_op, ctx310_3_kol_op] // , ctx510_4_kol_op
+            data: [uf5220_kol_op, progress_kol_op, ntx1000_kol_op, sk50_kol_op, apec_kol_op, dmu50_3_kol_op, dmu50_4_kol_op, ctx310_2_kol_op, ctx510_2_kol_op, ctx510_3_kol_op, ctx310_3_kol_op, ctx510_4_kol_op]
         }, {
             name: 'Количество операций более 3 минут',
-            data: [kol_long_operations_uf5220, kol_long_operations_progress, kol_long_operations_ntx1000, kol_long_operations_sk50, kol_long_operations_apec, kol_long_operations_dmu50_3, kol_long_operations_dmu50_4, kol_long_operations_ctx310_2, kol_long_operations_ctx510_2, kol_long_operations_ctx510_3, kol_long_operations_ctx310_3] // , kol_long_operations_ctx510_4
+            data: [kol_long_operations_uf5220, kol_long_operations_progress, kol_long_operations_ntx1000, kol_long_operations_sk50, kol_long_operations_apec, kol_long_operations_dmu50_3, kol_long_operations_dmu50_4, kol_long_operations_ctx310_2, kol_long_operations_ctx510_2, kol_long_operations_ctx510_3, kol_long_operations_ctx310_3, kol_long_operations_ctx510_4]
         }]
     });
 </script>   <!--js количество операций-->
@@ -1166,40 +1166,40 @@
 </script>   <!--ctx310_3 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_dmg_ctx310_3.js"></script>
 
-<!--<div style="border: 1px solid #333;">   &lt;!&ndash;ctx510_4 html&ndash;&gt;-->
-<!--    <div style="overflow: hidden;">-->
-<!--        <div style="width: 100%;   margin: 2%;">-->
-<!--            <div class="img" style="float: left;"> &lt;!&ndash;Вставляем изображение станка 1&ndash;&gt;-->
-<!--                <div class="parent_image">-->
-<!--                    <img src="images/dmg_ctx510.png" class="stanok_img" alt="no image"/>-->
-<!--                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #4</figcaption>-->
-<!--                    <div>-->
-<!--                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_4 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>-->
-<!--                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div id="container_work12" style="float: left; height: 400px; width: 55%"></div> &lt;!&ndash;Вставляем линейную гистограмму работы&ndash;&gt;-->
-<!--            <div id="container12" style="float: left; height: 400px; width: 25%"></div> &lt;!&ndash;Вставляем круговую диаграмму загрузки&ndash;&gt;-->
-<!--        </div>-->
-<!--    </div>  &lt;!&ndash;ctx510_4 html&ndash;&gt;-->
-<!--</div> &lt;!&ndash;ctx510_4 html&ndash;&gt;-->
-<!--<script th:inline="javascript">-->
-<!--    var dmg_ctx510_4_array_rabota = [[${dmg_ctx510_4_array_rabota}]];-->
-<!--    var dmg_ctx510_4_array_pause = [[${dmg_ctx510_4_array_pause}]];-->
-<!--    var dmg_ctx510_4_array_off = [[${dmg_ctx510_4_array_off}]];-->
-<!--    var dmg_ctx510_4_array_programname = [[${dmg_ctx510_4_array_programname}]];-->
-<!--    var dmg_ctx510_4_array_nagruzka = [[${dmg_ctx510_4_array_nagruzka}]];-->
-<!--    var dmg_ctx510_4_array_avar = [[${dmg_ctx510_4_array_avar}]];-->
-<!--</script>   &lt;!&ndash;ctx510_4 js линейная диагрмма работы оборудования&ndash;&gt;-->
-<!--<script th:inline="javascript">-->
-<!--    var dmg_ctx510_4_work = [[${work_dmg_ctx510_4}]];-->
-<!--    var dmg_ctx510_4_pass = [[${pass_dmg_ctx510_4}]];-->
-<!--    var dmg_ctx510_4_fail = [[${fail_dmg_ctx510_4}]];-->
-<!--    var dmg_ctx510_4_nagruzka = [[${nagruzka_dmg_ctx510_4}]];-->
-<!--    var dmg_ctx510_4_avar = [[${avar_dmg_ctx510_4}]];-->
-<!--</script>   &lt;!&ndash;ctx510_4 js круговая диагрмма загрузки оборудования&ndash;&gt;-->
-<!--<script src="/js/sutki/stanki/data_dmg_ctx510_4.js"></script>-->
+<div style="border: 1px solid #333;">   <!--ctx510_4 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx510.png" class="stanok_img" alt="no image"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #4</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_4 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work12" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container12" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--ctx510_4 html-->
+</div> <!--ctx510_4 html-->
+<script th:inline="javascript">
+    var dmg_ctx510_4_array_rabota = [[${dmg_ctx510_4_array_rabota}]];
+    var dmg_ctx510_4_array_pause = [[${dmg_ctx510_4_array_pause}]];
+    var dmg_ctx510_4_array_off = [[${dmg_ctx510_4_array_off}]];
+    var dmg_ctx510_4_array_programname = [[${dmg_ctx510_4_array_programname}]];
+    var dmg_ctx510_4_array_nagruzka = [[${dmg_ctx510_4_array_nagruzka}]];
+    var dmg_ctx510_4_array_avar = [[${dmg_ctx510_4_array_avar}]];
+</script>   <!--ctx510_4 js линейная диагрмма работы оборудования-->
+<script th:inline="javascript">
+    var dmg_ctx510_4_work = [[${work_dmg_ctx510_4}]];
+    var dmg_ctx510_4_pass = [[${pass_dmg_ctx510_4}]];
+    var dmg_ctx510_4_fail = [[${fail_dmg_ctx510_4}]];
+    var dmg_ctx510_4_nagruzka = [[${nagruzka_dmg_ctx510_4}]];
+    var dmg_ctx510_4_avar = [[${avar_dmg_ctx510_4}]];
+</script>   <!--ctx510_4 js круговая диагрмма загрузки оборудования-->
+<script src="/js/sutki/stanki/data_dmg_ctx510_4.js"></script>
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
