@@ -82,7 +82,7 @@
 </div>  <!--Общая загрузка и количество операций html-->
 <script th:inline="javascript">
 
-    var colors = ['#38e817', '#207210', '#ffea32', '#e81e1d', '#000000', '#5c7ed0'];
+    var colors = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#207210','#38e817'];
 
     var crysta_apex_work = [[${crysta_apex_work}]];
     var crysta_apex_pass = [[${crysta_apex_pass}]];
@@ -166,26 +166,24 @@
             }
         },
         series: [{
-            name: 'Работа',
-            data: [crysta_apex_work, sclad_meh_work, pech_nerg_work, faccin_1_work]
-        }, {
-            name: 'Под нагрузкой',
-            data: [sclad_meh_nagruzka, pech_nerg_nagruzka, 0, faccin_1_nagruzka]
-        }, {
-            name: 'Ожидание',
-            data: [crysta_apex_pass, sclad_meh_pass, pech_nerg_pass, faccin_1_pass]
-        }, {
             name: 'Авария',
             data: [crysta_apex_avar, sclad_meh_avar, pech_nerg_avar, faccin_1_avar]
         }, {
             name: 'Выключен',
             data: [crysta_apex_fail, sclad_meh_fail, pech_nerg_fail, faccin_1_fail]
-        },
-            {
-                name: 'Калибровка',
-                data: [crysta_apex_kalibrovka, 0, 0, 0]
-            }
-        ]
+        }, {
+            name: 'Ожидание',
+            data: [crysta_apex_pass, sclad_meh_pass, pech_nerg_pass, faccin_1_pass]
+        }, {
+            name: 'Калибровка',
+            data: [crysta_apex_kalibrovka, 0, 0, 0]
+        }, {
+            name: 'Под нагрузкой',
+            data: [sclad_meh_nagruzka, pech_nerg_nagruzka, 0, faccin_1_nagruzka]
+        },{
+            name: 'Работа',
+            data: [crysta_apex_work, sclad_meh_work, pech_nerg_work, faccin_1_work]
+        }]
     });
 
 </script>   <!--js Общая загрузка-->

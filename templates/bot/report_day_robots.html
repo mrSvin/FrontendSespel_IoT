@@ -101,7 +101,7 @@
 </div>  <!--Общая загрузка и количество операций html-->
 <script th:inline="javascript">
 
-    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
+    var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
     var work_maks_1 = [[${work}]];
     var pause_maks_1 = [[${pass}]];
@@ -204,20 +204,20 @@
             }
         },
         series: [{
-            name: 'Работа',
-            data: [work_maks_1, work_maks_2, work_m710, work_rtc12c, work_p250, work_krot, work_prans]
-        }, {
-            name: 'Под нагрузкой',
-            data: [nagruzka_maks_1, nagruzka_maks_2, nagruzka_m710, nagruzka_rtc12c, nagruzka_p250, nagruzka_krot, nagruzka_prans]
-        }, {
-            name: 'Ожидание',
-            data: [pause_maks_1, pause_maks_2, pause_m710, pause_rtc12c, pause_p250, pause_krot, pause_prans]
-        }, {
             name: 'Авария',
             data: [avar_maks_1, avar_maks_2, avar_m710, avar_rtc12c, avar_p250, avar_krot, avar_prans]
         }, {
             name: 'Выключен',
             data: [off_maks_1, off_maks_2, off_m710, off_rtc12c, off_p250, off_krot, off_prans]
+        }, {
+            name: 'Ожидание',
+            data: [pause_maks_1, pause_maks_2, pause_m710, pause_rtc12c, pause_p250, pause_krot, pause_prans]
+        }, {
+            name: 'Под нагрузкой',
+            data: [nagruzka_maks_1, nagruzka_maks_2, nagruzka_m710, nagruzka_rtc12c, nagruzka_p250, nagruzka_krot, nagruzka_prans]
+        }, {
+            name: 'Работа',
+            data: [work_maks_1, work_maks_2, work_m710, work_rtc12c, work_p250, work_krot, work_prans]
         }]
     });
 

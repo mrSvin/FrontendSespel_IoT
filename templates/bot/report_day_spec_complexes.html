@@ -66,7 +66,7 @@
 
 <script th:inline="javascript">
 
-    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
+    var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
     var press_work = [[${work_press}]];
     var press_pass = [[${pass_press}]];
@@ -136,21 +136,20 @@
             }
         },
         series: [{
-            name: 'Работа',
-            data: [press_work, epp_work]
+            name: 'Авария',
+            data: [press_avar, epp_avar]
+        }, {
+            name: 'Выключен',
+            data: [press_fail, epp_fail]
+        }, {
+            name: 'Ожидание',
+            data: [press_pass, epp_pass]
         }, {
             name: 'Под нагрузкой',
             data: [press_nagruzka, epp_nagruzka]
-        },
-            {
-            name: 'Ожидание',
-            data: [press_pass, epp_pass]
-        },  {
-            name: 'Авария',
-            data: [press_avar, epp_avar]
-        },  {
-            name: 'Выключен',
-            data: [press_fail, epp_fail]
+        }, {
+            name: 'Работа',
+            data: [press_work, epp_work]
         }]
     });
 

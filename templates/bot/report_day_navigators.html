@@ -93,7 +93,7 @@
 </div>  <!--Общая загрузка и количество операций html-->
 <script th:inline="javascript">
 
-    var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
+    var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
     var navigator_1_work_sum = [[${work}]];
     var navigator_1_pass_sum = [[${pass}]];
@@ -185,21 +185,21 @@
             }
         },
         series: [{
-            name: 'Работа',
-            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum, kometa_1_work_sum]
-        }, {
-            name: 'Под нагрузкой',
-            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, 0]
-        }, {
-            name: 'Ожидание',
-            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum, kometa_1_pass_sum]
-        }, {
             name: 'Авария',
             data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0, 0]
         }, {
             name: 'Выключен',
             data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum, trulaser_fail_sum, kometa_1_fail_sum]
-        }]
+        }, {
+            name: 'Ожидание',
+            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum, kometa_1_pass_sum]
+        }, {
+            name: 'Под нагрузкой',
+            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, 0]
+        }, {
+            name: 'Работа',
+            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum, kometa_1_work_sum]
+        }, ]
     });
 
 </script>   <!--js Общая загрузка-->
