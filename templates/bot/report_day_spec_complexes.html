@@ -55,6 +55,14 @@
                 <td>0%</td>
                 <td>0%</td>
             </tr>
+            <tr class="hit">
+                <td>СТП13М</td>
+                <td>0%</td>
+                <td>0%</td>
+                <td>0%</td>
+                <td>0%</td>
+                <td>0%</td>
+            </tr>
             </tbody>
         </table>    <!--Таблица изменений-->
 </div>  <!--Общая загрузка и количество операций html-->
@@ -79,6 +87,10 @@
     var epp_fail = [[${fail_epp}]];
     var epp_nagruzka = [[${nagruzka_epp}]];
     var epp_avar = [[${avar_epp}]];
+
+    var stp13m_work = [[${work_stp13m}]];
+    var stp13m_pass = [[${pass_stp13m}]];
+    var stp13m_fail = [[${fail_stp13m}]];
 
     Highcharts.setOptions({
         lang: {
@@ -112,7 +124,7 @@
             text: 'Общая загрузка оборудования'
         },
         xAxis: {
-            categories: ['Пресс ЧПУ', 'ЭПП']
+            categories: ['Пресс ЧПУ', 'ЭПП', 'СТП13М']
         },
         credits: {
             enabled: false
@@ -137,19 +149,19 @@
         },
         series: [{
             name: 'Авария',
-            data: [press_avar, epp_avar]
+            data: [press_avar, epp_avar, 0]
         }, {
             name: 'Выключен',
-            data: [press_fail, epp_fail]
+            data: [press_fail, epp_fail, stp13m_fail]
         }, {
             name: 'Ожидание',
-            data: [press_pass, epp_pass]
+            data: [press_pass, epp_pass, stp13m_pass]
         }, {
             name: 'Под нагрузкой',
-            data: [press_nagruzka, epp_nagruzka]
+            data: [press_nagruzka, epp_nagruzka, 0]
         }, {
             name: 'Работа',
-            data: [press_work, epp_work]
+            data: [press_work, epp_work, stp13m_work]
         }]
     });
 
@@ -350,11 +362,12 @@
 <script th:inline="javascript">
     var press_koef = (press_work + press_nagruzka + press_pass + press_avar + press_fail)/100;
     var epp_koef = (epp_work + epp_nagruzka + epp_pass + epp_avar + epp_fail)/100;
-
+    var stp13m_koef = (stp13m_work + stp13m_pass + stp13m_fail)/100;
 
     table = document.getElementById('myTable').rows; // Обращение к таблице по ID
     table[1].cells[1].innerHTML = Math.round(press_work/press_koef * 10) / 10 + "%";
     table[2].cells[1].innerHTML = Math.round(epp_work/epp_koef * 10) / 10 + "%";
+    table[3].cells[1].innerHTML = Math.round(stp13m_work/stp13m_koef * 10) / 10 + "%";
     // Столбец Работа
 
     table[1].cells[2].innerHTML = Math.round(press_nagruzka/press_koef * 10) / 10 + "%";
@@ -363,6 +376,7 @@
 
     table[1].cells[3].innerHTML = Math.round(press_pass/press_koef  * 10) / 10 + "%";
     table[2].cells[3].innerHTML = Math.round(epp_pass/epp_koef * 10) / 10 + "%";
+    table[3].cells[3].innerHTML = Math.round(stp13m_pass/stp13m_koef * 10) / 10 + "%";
     // Столбец пауза
 
     table[1].cells[4].innerHTML = Math.round(press_avar/press_koef * 10) / 10 + "%";
@@ -371,6 +385,7 @@
 
     table[1].cells[5].innerHTML = Math.round(press_fail/press_koef * 10) / 10 + "%";
     table[2].cells[5].innerHTML = Math.round(epp_fail/epp_koef * 10) / 10 + "%";
+    table[3].cells[5].innerHTML = Math.round(stp13m_fail/stp13m_koef * 10) / 10 + "%";
     // Столбец выключен
 
 
