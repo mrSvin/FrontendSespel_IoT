@@ -1,4 +1,4 @@
-var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
 Highcharts.setOptions({
     lang: {
@@ -62,30 +62,30 @@ Highcharts.chart('container_days2', {
         }
     },
     series: [{
-        name: 'Работа',
-        data: [maks_2_rabota_day[0], maks_2_rabota_day[1], maks_2_rabota_day[2],maks_2_rabota_day[3],maks_2_rabota_day[4],maks_2_rabota_day[5],maks_2_rabota_day[6],maks_2_rabota_day[7],maks_2_rabota_day[8],maks_2_rabota_day[9],maks_2_rabota_day[10],maks_2_rabota_day[11],
-            maks_2_rabota_day[12],maks_2_rabota_day[13],maks_2_rabota_day[14],maks_2_rabota_day[15],maks_2_rabota_day[16],maks_2_rabota_day[17],maks_2_rabota_day[18],maks_2_rabota_day[19],maks_2_rabota_day[20],maks_2_rabota_day[21],maks_2_rabota_day[22],maks_2_rabota_day[23],
-            maks_2_rabota_day[24],maks_2_rabota_day[25],maks_2_rabota_day[26],maks_2_rabota_day[27],maks_2_rabota_day[28],maks_2_rabota_day[29],maks_2_rabota_day[30]]
-    }, {
-        name: 'Ожидание',
-        data: [maks_2_pause_day[0], maks_2_pause_day[1], maks_2_pause_day[2],maks_2_pause_day[3],maks_2_pause_day[4],maks_2_pause_day[5],maks_2_pause_day[6],maks_2_pause_day[7],maks_2_pause_day[8],maks_2_pause_day[9],maks_2_pause_day[10],maks_2_pause_day[11],
-            maks_2_pause_day[12],maks_2_pause_day[13],maks_2_pause_day[14],maks_2_pause_day[15],maks_2_pause_day[16],maks_2_pause_day[17],maks_2_pause_day[18],maks_2_pause_day[19],maks_2_pause_day[20],maks_2_pause_day[21],maks_2_pause_day[22],maks_2_pause_day[23],
-            maks_2_pause_day[24],maks_2_pause_day[25],maks_2_pause_day[26],maks_2_pause_day[27],maks_2_pause_day[28],maks_2_pause_day[29],maks_2_pause_day[30]]
+        name: 'Авария',
+        data: [maks_2_avar_day[0], maks_2_avar_day[1], maks_2_avar_day[2],maks_2_avar_day[3],maks_2_avar_day[4],maks_2_avar_day[5],maks_2_avar_day[6],maks_2_avar_day[7],maks_2_avar_day[8],maks_2_avar_day[9],maks_2_avar_day[10],maks_2_avar_day[11],
+            maks_2_avar_day[12],maks_2_avar_day[13],maks_2_avar_day[14],maks_2_avar_day[15],maks_2_avar_day[16],maks_2_avar_day[17],maks_2_avar_day[18],maks_2_avar_day[19],maks_2_avar_day[20],maks_2_avar_day[21],maks_2_avar_day[22],maks_2_avar_day[23],
+            maks_2_avar_day[24],maks_2_avar_day[25],maks_2_avar_day[26],maks_2_avar_day[27],maks_2_avar_day[28],maks_2_avar_day[29],maks_2_avar_day[30]]
     }, {
         name: 'Выключен',
         data: [maks_2_off_day[0], maks_2_off_day[1], maks_2_off_day[2],maks_2_off_day[3],maks_2_off_day[4],maks_2_off_day[5],maks_2_off_day[6],maks_2_off_day[7],maks_2_off_day[8],maks_2_off_day[9],maks_2_off_day[10],maks_2_off_day[11],
             maks_2_off_day[12],maks_2_off_day[13],maks_2_off_day[14],maks_2_off_day[15],maks_2_off_day[16],maks_2_off_day[17],maks_2_off_day[18],maks_2_off_day[19],maks_2_off_day[20],maks_2_off_day[21],maks_2_off_day[22],maks_2_off_day[23],
             maks_2_off_day[24],maks_2_off_day[25],maks_2_off_day[26],maks_2_off_day[27],maks_2_off_day[28],maks_2_off_day[29],maks_2_off_day[30]]
     }, {
-        name: 'Авария',
-        data: [maks_2_avar_day[0], maks_2_avar_day[1], maks_2_avar_day[2],maks_2_avar_day[3],maks_2_avar_day[4],maks_2_avar_day[5],maks_2_avar_day[6],maks_2_avar_day[7],maks_2_avar_day[8],maks_2_avar_day[9],maks_2_avar_day[10],maks_2_avar_day[11],
-            maks_2_avar_day[12],maks_2_avar_day[13],maks_2_avar_day[14],maks_2_avar_day[15],maks_2_avar_day[16],maks_2_avar_day[17],maks_2_avar_day[18],maks_2_avar_day[19],maks_2_avar_day[20],maks_2_avar_day[21],maks_2_avar_day[22],maks_2_avar_day[23],
-            maks_2_avar_day[24],maks_2_avar_day[25],maks_2_avar_day[26],maks_2_avar_day[27],maks_2_avar_day[28],maks_2_avar_day[29],maks_2_avar_day[30]]
+        name: 'Ожидание',
+        data: [maks_2_pause_day[0], maks_2_pause_day[1], maks_2_pause_day[2],maks_2_pause_day[3],maks_2_pause_day[4],maks_2_pause_day[5],maks_2_pause_day[6],maks_2_pause_day[7],maks_2_pause_day[8],maks_2_pause_day[9],maks_2_pause_day[10],maks_2_pause_day[11],
+            maks_2_pause_day[12],maks_2_pause_day[13],maks_2_pause_day[14],maks_2_pause_day[15],maks_2_pause_day[16],maks_2_pause_day[17],maks_2_pause_day[18],maks_2_pause_day[19],maks_2_pause_day[20],maks_2_pause_day[21],maks_2_pause_day[22],maks_2_pause_day[23],
+            maks_2_pause_day[24],maks_2_pause_day[25],maks_2_pause_day[26],maks_2_pause_day[27],maks_2_pause_day[28],maks_2_pause_day[29],maks_2_pause_day[30]]
     }, {
         name: 'Сварка',
         data: [maks_2_nagruzka_day[0], maks_2_nagruzka_day[1], maks_2_nagruzka_day[2],maks_2_nagruzka_day[3],maks_2_nagruzka_day[4],maks_2_nagruzka_day[5],maks_2_nagruzka_day[6],maks_2_nagruzka_day[7],maks_2_nagruzka_day[8],maks_2_nagruzka_day[9],maks_2_nagruzka_day[10],maks_2_nagruzka_day[11],
             maks_2_nagruzka_day[12],maks_2_nagruzka_day[13],maks_2_nagruzka_day[14],maks_2_nagruzka_day[15],maks_2_nagruzka_day[16],maks_2_nagruzka_day[17],maks_2_nagruzka_day[18],maks_2_nagruzka_day[19],maks_2_nagruzka_day[20],maks_2_nagruzka_day[21],maks_2_nagruzka_day[22],maks_2_nagruzka_day[23],
             maks_2_nagruzka_day[24],maks_2_nagruzka_day[25],maks_2_nagruzka_day[26],maks_2_nagruzka_day[27],maks_2_nagruzka_day[28],maks_2_nagruzka_day[29],maks_2_nagruzka_day[30]]
+    }, {
+        name: 'Работа',
+        data: [maks_2_rabota_day[0], maks_2_rabota_day[1], maks_2_rabota_day[2],maks_2_rabota_day[3],maks_2_rabota_day[4],maks_2_rabota_day[5],maks_2_rabota_day[6],maks_2_rabota_day[7],maks_2_rabota_day[8],maks_2_rabota_day[9],maks_2_rabota_day[10],maks_2_rabota_day[11],
+            maks_2_rabota_day[12],maks_2_rabota_day[13],maks_2_rabota_day[14],maks_2_rabota_day[15],maks_2_rabota_day[16],maks_2_rabota_day[17],maks_2_rabota_day[18],maks_2_rabota_day[19],maks_2_rabota_day[20],maks_2_rabota_day[21],maks_2_rabota_day[22],maks_2_rabota_day[23],
+            maks_2_rabota_day[24],maks_2_rabota_day[25],maks_2_rabota_day[26],maks_2_rabota_day[27],maks_2_rabota_day[28],maks_2_rabota_day[29],maks_2_rabota_day[30]]
     }]
 });
 
