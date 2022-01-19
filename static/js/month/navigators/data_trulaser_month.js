@@ -1,4 +1,4 @@
-var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
 Highcharts.setOptions({
     lang: {
@@ -62,26 +62,26 @@ Highcharts.chart('container_days_5', {
         }
     },
     series: [{
-        name: 'Работа',
-        data: [trulaser_rabota_day[0], trulaser_rabota_day[1], trulaser_rabota_day[2],trulaser_rabota_day[3],trulaser_rabota_day[4],trulaser_rabota_day[5],trulaser_rabota_day[6],trulaser_rabota_day[7],trulaser_rabota_day[8],trulaser_rabota_day[9],trulaser_rabota_day[10],trulaser_rabota_day[11],
-            trulaser_rabota_day[12],trulaser_rabota_day[13],trulaser_rabota_day[14],trulaser_rabota_day[15],trulaser_rabota_day[16],trulaser_rabota_day[17],trulaser_rabota_day[18],trulaser_rabota_day[19],trulaser_rabota_day[20],trulaser_rabota_day[21],trulaser_rabota_day[22],trulaser_rabota_day[23],
-            trulaser_rabota_day[24],trulaser_rabota_day[25],trulaser_rabota_day[26],trulaser_rabota_day[27],trulaser_rabota_day[28],trulaser_rabota_day[29],trulaser_rabota_day[30]]
-    }, {
-        name: 'Ожидание',
-        data: [trulaser_pause_day[0], trulaser_pause_day[1], trulaser_pause_day[2],trulaser_pause_day[3],trulaser_pause_day[4],trulaser_pause_day[5],trulaser_pause_day[6],trulaser_pause_day[7],trulaser_pause_day[8],trulaser_pause_day[9],trulaser_pause_day[10],trulaser_pause_day[11],
-            trulaser_pause_day[12],trulaser_pause_day[13],trulaser_pause_day[14],trulaser_pause_day[15],trulaser_pause_day[16],trulaser_pause_day[17],trulaser_pause_day[18],trulaser_pause_day[19],trulaser_pause_day[20],trulaser_pause_day[21],trulaser_pause_day[22],trulaser_pause_day[23],
-            trulaser_pause_day[24],trulaser_pause_day[25],trulaser_pause_day[26],trulaser_pause_day[27],trulaser_pause_day[28],trulaser_pause_day[29],trulaser_pause_day[30]]
+        name: 'Авария',
+        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }, {
         name: 'Выключен',
         data: [trulaser_off_day[0], trulaser_off_day[1], trulaser_off_day[2],trulaser_off_day[3],trulaser_off_day[4],trulaser_off_day[5],trulaser_off_day[6],trulaser_off_day[7],trulaser_off_day[8],trulaser_off_day[9],trulaser_off_day[10],trulaser_off_day[11],
             trulaser_off_day[12],trulaser_off_day[13],trulaser_off_day[14],trulaser_off_day[15],trulaser_off_day[16],trulaser_off_day[17],trulaser_off_day[18],trulaser_off_day[19],trulaser_off_day[20],trulaser_off_day[21],trulaser_off_day[22],trulaser_off_day[23],
             trulaser_off_day[24],trulaser_off_day[25],trulaser_off_day[26],trulaser_off_day[27],trulaser_off_day[28],trulaser_off_day[29],trulaser_off_day[30]]
     }, {
-        name: 'Авария',
-        data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        name: 'Ожидание',
+        data: [trulaser_pause_day[0], trulaser_pause_day[1], trulaser_pause_day[2],trulaser_pause_day[3],trulaser_pause_day[4],trulaser_pause_day[5],trulaser_pause_day[6],trulaser_pause_day[7],trulaser_pause_day[8],trulaser_pause_day[9],trulaser_pause_day[10],trulaser_pause_day[11],
+            trulaser_pause_day[12],trulaser_pause_day[13],trulaser_pause_day[14],trulaser_pause_day[15],trulaser_pause_day[16],trulaser_pause_day[17],trulaser_pause_day[18],trulaser_pause_day[19],trulaser_pause_day[20],trulaser_pause_day[21],trulaser_pause_day[22],trulaser_pause_day[23],
+            trulaser_pause_day[24],trulaser_pause_day[25],trulaser_pause_day[26],trulaser_pause_day[27],trulaser_pause_day[28],trulaser_pause_day[29],trulaser_pause_day[30]]
     }, {
         name: 'Под нагрузкой',
-        data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    }, {
+        name: 'Работа',
+        data: [trulaser_rabota_day[0], trulaser_rabota_day[1], trulaser_rabota_day[2],trulaser_rabota_day[3],trulaser_rabota_day[4],trulaser_rabota_day[5],trulaser_rabota_day[6],trulaser_rabota_day[7],trulaser_rabota_day[8],trulaser_rabota_day[9],trulaser_rabota_day[10],trulaser_rabota_day[11],
+            trulaser_rabota_day[12],trulaser_rabota_day[13],trulaser_rabota_day[14],trulaser_rabota_day[15],trulaser_rabota_day[16],trulaser_rabota_day[17],trulaser_rabota_day[18],trulaser_rabota_day[19],trulaser_rabota_day[20],trulaser_rabota_day[21],trulaser_rabota_day[22],trulaser_rabota_day[23],
+            trulaser_rabota_day[24],trulaser_rabota_day[25],trulaser_rabota_day[26],trulaser_rabota_day[27],trulaser_rabota_day[28],trulaser_rabota_day[29],trulaser_rabota_day[30]]
     }]
 });
 

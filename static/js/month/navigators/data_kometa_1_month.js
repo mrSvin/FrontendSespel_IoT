@@ -1,4 +1,4 @@
-var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
 Highcharts.setOptions({
     lang: {
@@ -62,27 +62,27 @@ Highcharts.chart('container_days_6', {
         }
     },
     series: [{
-        name: 'Работа',
-        data: [kometa_1_rabota_day[0], kometa_1_rabota_day[1], kometa_1_rabota_day[2],kometa_1_rabota_day[3],kometa_1_rabota_day[4],kometa_1_rabota_day[5],kometa_1_rabota_day[6],kometa_1_rabota_day[7],kometa_1_rabota_day[8],kometa_1_rabota_day[9],kometa_1_rabota_day[10],kometa_1_rabota_day[11],
-            kometa_1_rabota_day[12],kometa_1_rabota_day[13],kometa_1_rabota_day[14],kometa_1_rabota_day[15],kometa_1_rabota_day[16],kometa_1_rabota_day[17],kometa_1_rabota_day[18],kometa_1_rabota_day[19],kometa_1_rabota_day[20],kometa_1_rabota_day[21],kometa_1_rabota_day[22],kometa_1_rabota_day[23],
-            kometa_1_rabota_day[24],kometa_1_rabota_day[25],kometa_1_rabota_day[26],kometa_1_rabota_day[27],kometa_1_rabota_day[28],kometa_1_rabota_day[29],kometa_1_rabota_day[30]]
-    }, {
-        name: 'Ожидание',
-        data: [kometa_1_pause_day[0], kometa_1_pause_day[1], kometa_1_pause_day[2],kometa_1_pause_day[3],kometa_1_pause_day[4],kometa_1_pause_day[5],kometa_1_pause_day[6],kometa_1_pause_day[7],kometa_1_pause_day[8],kometa_1_pause_day[9],kometa_1_pause_day[10],kometa_1_pause_day[11],
-            kometa_1_pause_day[12],kometa_1_pause_day[13],kometa_1_pause_day[14],kometa_1_pause_day[15],kometa_1_pause_day[16],kometa_1_pause_day[17],kometa_1_pause_day[18],kometa_1_pause_day[19],kometa_1_pause_day[20],kometa_1_pause_day[21],kometa_1_pause_day[22],kometa_1_pause_day[23],
-            kometa_1_pause_day[24],kometa_1_pause_day[25],kometa_1_pause_day[26],kometa_1_pause_day[27],kometa_1_pause_day[28],kometa_1_pause_day[29],kometa_1_pause_day[30]]
+        name: 'Авария',
+        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }, {
         name: 'Выключен',
         data: [kometa_1_off_day[0], kometa_1_off_day[1], kometa_1_off_day[2],kometa_1_off_day[3],kometa_1_off_day[4],kometa_1_off_day[5],kometa_1_off_day[6],kometa_1_off_day[7],kometa_1_off_day[8],kometa_1_off_day[9],kometa_1_off_day[10],kometa_1_off_day[11],
             kometa_1_off_day[12],kometa_1_off_day[13],kometa_1_off_day[14],kometa_1_off_day[15],kometa_1_off_day[16],kometa_1_off_day[17],kometa_1_off_day[18],kometa_1_off_day[19],kometa_1_off_day[20],kometa_1_off_day[21],kometa_1_off_day[22],kometa_1_off_day[23],
             kometa_1_off_day[24],kometa_1_off_day[25],kometa_1_off_day[26],kometa_1_off_day[27],kometa_1_off_day[28],kometa_1_off_day[29],kometa_1_off_day[30]]
     }, {
-        name: 'Авария',
-        data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        name: 'Ожидание',
+        data: [kometa_1_pause_day[0], kometa_1_pause_day[1], kometa_1_pause_day[2],kometa_1_pause_day[3],kometa_1_pause_day[4],kometa_1_pause_day[5],kometa_1_pause_day[6],kometa_1_pause_day[7],kometa_1_pause_day[8],kometa_1_pause_day[9],kometa_1_pause_day[10],kometa_1_pause_day[11],
+            kometa_1_pause_day[12],kometa_1_pause_day[13],kometa_1_pause_day[14],kometa_1_pause_day[15],kometa_1_pause_day[16],kometa_1_pause_day[17],kometa_1_pause_day[18],kometa_1_pause_day[19],kometa_1_pause_day[20],kometa_1_pause_day[21],kometa_1_pause_day[22],kometa_1_pause_day[23],
+            kometa_1_pause_day[24],kometa_1_pause_day[25],kometa_1_pause_day[26],kometa_1_pause_day[27],kometa_1_pause_day[28],kometa_1_pause_day[29],kometa_1_pause_day[30]]
     }, {
         name: 'Под нагрузкой',
-        data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    }]
+        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    }, {
+        name: 'Работа',
+        data: [kometa_1_rabota_day[0], kometa_1_rabota_day[1], kometa_1_rabota_day[2],kometa_1_rabota_day[3],kometa_1_rabota_day[4],kometa_1_rabota_day[5],kometa_1_rabota_day[6],kometa_1_rabota_day[7],kometa_1_rabota_day[8],kometa_1_rabota_day[9],kometa_1_rabota_day[10],kometa_1_rabota_day[11],
+            kometa_1_rabota_day[12],kometa_1_rabota_day[13],kometa_1_rabota_day[14],kometa_1_rabota_day[15],kometa_1_rabota_day[16],kometa_1_rabota_day[17],kometa_1_rabota_day[18],kometa_1_rabota_day[19],kometa_1_rabota_day[20],kometa_1_rabota_day[21],kometa_1_rabota_day[22],kometa_1_rabota_day[23],
+            kometa_1_rabota_day[24],kometa_1_rabota_day[25],kometa_1_rabota_day[26],kometa_1_rabota_day[27],kometa_1_rabota_day[28],kometa_1_rabota_day[29],kometa_1_rabota_day[30]]
+    }, ]
 });
 
 var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210',];
