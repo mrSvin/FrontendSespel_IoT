@@ -347,8 +347,9 @@
             }
         },
         tooltip: {
-            pointFormat: '<span style="color: #38e817">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true,
+            borderColor: '#38e817'
         },
         plotOptions: {
             column: {
