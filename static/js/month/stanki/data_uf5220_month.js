@@ -1,4 +1,4 @@
-var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
+var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
 Highcharts.setOptions({
     lang: {
@@ -62,26 +62,26 @@ Highcharts.chart('container_days1', {
         }
     },
     series: [{
-        name: 'Работа',
-        data: [uf5220_rabota_day[0], uf5220_rabota_day[1], uf5220_rabota_day[2],uf5220_rabota_day[3],uf5220_rabota_day[4],uf5220_rabota_day[5],uf5220_rabota_day[6],uf5220_rabota_day[7],uf5220_rabota_day[8],uf5220_rabota_day[9],uf5220_rabota_day[10],uf5220_rabota_day[11],
-            uf5220_rabota_day[12],uf5220_rabota_day[13],uf5220_rabota_day[14],uf5220_rabota_day[15],uf5220_rabota_day[16],uf5220_rabota_day[17],uf5220_rabota_day[18],uf5220_rabota_day[19],uf5220_rabota_day[20],uf5220_rabota_day[21],uf5220_rabota_day[22],uf5220_rabota_day[23],
-            uf5220_rabota_day[24],uf5220_rabota_day[25],uf5220_rabota_day[26],uf5220_rabota_day[27],uf5220_rabota_day[28],uf5220_rabota_day[29],uf5220_rabota_day[30]]
+        name: 'Авария',
+        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }, {
-        name: 'Под нагрузкой',
-        data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        name: 'Выключен',
+        data: [uf5220_off_day[0], uf5220_off_day[1], uf5220_off_day[2],uf5220_off_day[3],uf5220_off_day[4],uf5220_off_day[5],uf5220_off_day[6],uf5220_off_day[7],uf5220_off_day[8],uf5220_off_day[9],uf5220_off_day[10],uf5220_off_day[11],
+            uf5220_off_day[12],uf5220_off_day[13],uf5220_off_day[14],uf5220_off_day[15],uf5220_off_day[16],uf5220_off_day[17],uf5220_off_day[18],uf5220_off_day[19],uf5220_off_day[20],uf5220_off_day[21],uf5220_off_day[22],uf5220_off_day[23],
+            uf5220_off_day[24],uf5220_off_day[25],uf5220_off_day[26],uf5220_off_day[27],uf5220_off_day[28],uf5220_off_day[29],uf5220_off_day[30]]
     }, {
         name: 'Ожидание',
         data: [uf5220_pause_day[0], uf5220_pause_day[1], uf5220_pause_day[2],uf5220_pause_day[3],uf5220_pause_day[4],uf5220_pause_day[5],uf5220_pause_day[6],uf5220_pause_day[7],uf5220_pause_day[8],uf5220_pause_day[9],uf5220_pause_day[10],uf5220_pause_day[11],
             uf5220_pause_day[12],uf5220_pause_day[13],uf5220_pause_day[14],uf5220_pause_day[15],uf5220_pause_day[16],uf5220_pause_day[17],uf5220_pause_day[18],uf5220_pause_day[19],uf5220_pause_day[20],uf5220_pause_day[21],uf5220_pause_day[22],uf5220_pause_day[23],
             uf5220_pause_day[24],uf5220_pause_day[25],uf5220_pause_day[26],uf5220_pause_day[27],uf5220_pause_day[28],uf5220_pause_day[29],uf5220_pause_day[30]]
     }, {
-        name: 'Авария',
-        data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        name: 'Под нагрузкой',
+        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }, {
-        name: 'Выключен',
-        data: [uf5220_off_day[0], uf5220_off_day[1], uf5220_off_day[2],uf5220_off_day[3],uf5220_off_day[4],uf5220_off_day[5],uf5220_off_day[6],uf5220_off_day[7],uf5220_off_day[8],uf5220_off_day[9],uf5220_off_day[10],uf5220_off_day[11],
-            uf5220_off_day[12],uf5220_off_day[13],uf5220_off_day[14],uf5220_off_day[15],uf5220_off_day[16],uf5220_off_day[17],uf5220_off_day[18],uf5220_off_day[19],uf5220_off_day[20],uf5220_off_day[21],uf5220_off_day[22],uf5220_off_day[23],
-            uf5220_off_day[24],uf5220_off_day[25],uf5220_off_day[26],uf5220_off_day[27],uf5220_off_day[28],uf5220_off_day[29],uf5220_off_day[30]]
+        name: 'Работа',
+        data: [uf5220_rabota_day[0], uf5220_rabota_day[1], uf5220_rabota_day[2],uf5220_rabota_day[3],uf5220_rabota_day[4],uf5220_rabota_day[5],uf5220_rabota_day[6],uf5220_rabota_day[7],uf5220_rabota_day[8],uf5220_rabota_day[9],uf5220_rabota_day[10],uf5220_rabota_day[11],
+            uf5220_rabota_day[12],uf5220_rabota_day[13],uf5220_rabota_day[14],uf5220_rabota_day[15],uf5220_rabota_day[16],uf5220_rabota_day[17],uf5220_rabota_day[18],uf5220_rabota_day[19],uf5220_rabota_day[20],uf5220_rabota_day[21],uf5220_rabota_day[22],uf5220_rabota_day[23],
+            uf5220_rabota_day[24],uf5220_rabota_day[25],uf5220_rabota_day[26],uf5220_rabota_day[27],uf5220_rabota_day[28],uf5220_rabota_day[29],uf5220_rabota_day[30]]
     }]
 });
 

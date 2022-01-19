@@ -1,4 +1,4 @@
-var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
+var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
 Highcharts.setOptions({
     lang: {
@@ -62,21 +62,6 @@ Highcharts.chart('container_days3', {
         }
     },
     series: [{
-        name: 'Работа',
-        data: [ntx1000_rabota_day[0], ntx1000_rabota_day[1], ntx1000_rabota_day[2],ntx1000_rabota_day[3],ntx1000_rabota_day[4],ntx1000_rabota_day[5],ntx1000_rabota_day[6],ntx1000_rabota_day[7],ntx1000_rabota_day[8],ntx1000_rabota_day[9],ntx1000_rabota_day[10],ntx1000_rabota_day[11],
-            ntx1000_rabota_day[12],ntx1000_rabota_day[13],ntx1000_rabota_day[14],ntx1000_rabota_day[15],ntx1000_rabota_day[16],ntx1000_rabota_day[17],ntx1000_rabota_day[18],ntx1000_rabota_day[19],ntx1000_rabota_day[20],ntx1000_rabota_day[21],ntx1000_rabota_day[22],ntx1000_rabota_day[23],
-            ntx1000_rabota_day[24],ntx1000_rabota_day[25],ntx1000_rabota_day[26],ntx1000_rabota_day[27],ntx1000_rabota_day[28],ntx1000_rabota_day[29],ntx1000_rabota_day[30]]
-    }, {
-        name: 'Под нагрузкой',
-        data: [ntx1000_nagruzka_day[0], ntx1000_nagruzka_day[1], ntx1000_nagruzka_day[2],ntx1000_nagruzka_day[3],ntx1000_nagruzka_day[4],ntx1000_nagruzka_day[5],ntx1000_nagruzka_day[6],ntx1000_nagruzka_day[7],ntx1000_nagruzka_day[8],ntx1000_nagruzka_day[9],ntx1000_nagruzka_day[10],ntx1000_nagruzka_day[11],
-            ntx1000_nagruzka_day[12],ntx1000_nagruzka_day[13],ntx1000_nagruzka_day[14],ntx1000_nagruzka_day[15],ntx1000_nagruzka_day[16],ntx1000_nagruzka_day[17],ntx1000_nagruzka_day[18],ntx1000_nagruzka_day[19],ntx1000_nagruzka_day[20],ntx1000_nagruzka_day[21],ntx1000_nagruzka_day[22],ntx1000_nagruzka_day[23],
-            ntx1000_nagruzka_day[24],ntx1000_nagruzka_day[25],ntx1000_nagruzka_day[26],ntx1000_nagruzka_day[27],ntx1000_nagruzka_day[28],ntx1000_nagruzka_day[29],ntx1000_nagruzka_day[30]]
-    }, {
-        name: 'Ожидание',
-        data: [ntx1000_pause_day[0], ntx1000_pause_day[1], ntx1000_pause_day[2],ntx1000_pause_day[3],ntx1000_pause_day[4],ntx1000_pause_day[5],ntx1000_pause_day[6],ntx1000_pause_day[7],ntx1000_pause_day[8],ntx1000_pause_day[9],ntx1000_pause_day[10],ntx1000_pause_day[11],
-            ntx1000_pause_day[12],ntx1000_pause_day[13],ntx1000_pause_day[14],ntx1000_pause_day[15],ntx1000_pause_day[16],ntx1000_pause_day[17],ntx1000_pause_day[18],ntx1000_pause_day[19],ntx1000_pause_day[20],ntx1000_pause_day[21],ntx1000_pause_day[22],ntx1000_pause_day[23],
-            ntx1000_pause_day[24],ntx1000_pause_day[25],ntx1000_pause_day[26],ntx1000_pause_day[27],ntx1000_pause_day[28],ntx1000_pause_day[29],ntx1000_pause_day[30]]
-    }, {
         name: 'Авария',
         data: [ntx1000_avar_day[0], ntx1000_avar_day[1], ntx1000_avar_day[2],ntx1000_avar_day[3],ntx1000_avar_day[4],ntx1000_avar_day[5],ntx1000_avar_day[6],ntx1000_avar_day[7],ntx1000_avar_day[8],ntx1000_avar_day[9],ntx1000_avar_day[10],ntx1000_avar_day[11],
             ntx1000_avar_day[12],ntx1000_avar_day[13],ntx1000_avar_day[14],ntx1000_avar_day[15],ntx1000_avar_day[16],ntx1000_avar_day[17],ntx1000_avar_day[18],ntx1000_avar_day[19],ntx1000_avar_day[20],ntx1000_avar_day[21],ntx1000_avar_day[22],ntx1000_avar_day[23],
@@ -86,6 +71,21 @@ Highcharts.chart('container_days3', {
         data: [ntx1000_off_day[0], ntx1000_off_day[1], ntx1000_off_day[2],ntx1000_off_day[3],ntx1000_off_day[4],ntx1000_off_day[5],ntx1000_off_day[6],ntx1000_off_day[7],ntx1000_off_day[8],ntx1000_off_day[9],ntx1000_off_day[10],ntx1000_off_day[11],
             ntx1000_off_day[12],ntx1000_off_day[13],ntx1000_off_day[14],ntx1000_off_day[15],ntx1000_off_day[16],ntx1000_off_day[17],ntx1000_off_day[18],ntx1000_off_day[19],ntx1000_off_day[20],ntx1000_off_day[21],ntx1000_off_day[22],ntx1000_off_day[23],
             ntx1000_off_day[24],ntx1000_off_day[25],ntx1000_off_day[26],ntx1000_off_day[27],ntx1000_off_day[28],ntx1000_off_day[29],ntx1000_off_day[30]]
+    }, {
+        name: 'Ожидание',
+        data: [ntx1000_pause_day[0], ntx1000_pause_day[1], ntx1000_pause_day[2],ntx1000_pause_day[3],ntx1000_pause_day[4],ntx1000_pause_day[5],ntx1000_pause_day[6],ntx1000_pause_day[7],ntx1000_pause_day[8],ntx1000_pause_day[9],ntx1000_pause_day[10],ntx1000_pause_day[11],
+            ntx1000_pause_day[12],ntx1000_pause_day[13],ntx1000_pause_day[14],ntx1000_pause_day[15],ntx1000_pause_day[16],ntx1000_pause_day[17],ntx1000_pause_day[18],ntx1000_pause_day[19],ntx1000_pause_day[20],ntx1000_pause_day[21],ntx1000_pause_day[22],ntx1000_pause_day[23],
+            ntx1000_pause_day[24],ntx1000_pause_day[25],ntx1000_pause_day[26],ntx1000_pause_day[27],ntx1000_pause_day[28],ntx1000_pause_day[29],ntx1000_pause_day[30]]
+    }, {
+        name: 'Под нагрузкой',
+        data: [ntx1000_nagruzka_day[0], ntx1000_nagruzka_day[1], ntx1000_nagruzka_day[2],ntx1000_nagruzka_day[3],ntx1000_nagruzka_day[4],ntx1000_nagruzka_day[5],ntx1000_nagruzka_day[6],ntx1000_nagruzka_day[7],ntx1000_nagruzka_day[8],ntx1000_nagruzka_day[9],ntx1000_nagruzka_day[10],ntx1000_nagruzka_day[11],
+            ntx1000_nagruzka_day[12],ntx1000_nagruzka_day[13],ntx1000_nagruzka_day[14],ntx1000_nagruzka_day[15],ntx1000_nagruzka_day[16],ntx1000_nagruzka_day[17],ntx1000_nagruzka_day[18],ntx1000_nagruzka_day[19],ntx1000_nagruzka_day[20],ntx1000_nagruzka_day[21],ntx1000_nagruzka_day[22],ntx1000_nagruzka_day[23],
+            ntx1000_nagruzka_day[24],ntx1000_nagruzka_day[25],ntx1000_nagruzka_day[26],ntx1000_nagruzka_day[27],ntx1000_nagruzka_day[28],ntx1000_nagruzka_day[29],ntx1000_nagruzka_day[30]]
+    }, {
+        name: 'Работа',
+        data: [ntx1000_rabota_day[0], ntx1000_rabota_day[1], ntx1000_rabota_day[2],ntx1000_rabota_day[3],ntx1000_rabota_day[4],ntx1000_rabota_day[5],ntx1000_rabota_day[6],ntx1000_rabota_day[7],ntx1000_rabota_day[8],ntx1000_rabota_day[9],ntx1000_rabota_day[10],ntx1000_rabota_day[11],
+            ntx1000_rabota_day[12],ntx1000_rabota_day[13],ntx1000_rabota_day[14],ntx1000_rabota_day[15],ntx1000_rabota_day[16],ntx1000_rabota_day[17],ntx1000_rabota_day[18],ntx1000_rabota_day[19],ntx1000_rabota_day[20],ntx1000_rabota_day[21],ntx1000_rabota_day[22],ntx1000_rabota_day[23],
+            ntx1000_rabota_day[24],ntx1000_rabota_day[25],ntx1000_rabota_day[26],ntx1000_rabota_day[27],ntx1000_rabota_day[28],ntx1000_rabota_day[29],ntx1000_rabota_day[30]]
     }]
 });
 

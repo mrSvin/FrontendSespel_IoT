@@ -1,4 +1,4 @@
-var colors = ['#38e817','#207210', '#ffea32', '#e81e1d', '#000000'];
+var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
 Highcharts.setOptions({
     lang: {
@@ -62,26 +62,26 @@ Highcharts.chart('container_days2', {
         }
     },
     series: [{
-        name: 'Работа',
-        data: [progress_rabota_day[0], progress_rabota_day[1], progress_rabota_day[2],progress_rabota_day[3],progress_rabota_day[4],progress_rabota_day[5],progress_rabota_day[6],progress_rabota_day[7],progress_rabota_day[8],progress_rabota_day[9],progress_rabota_day[10],progress_rabota_day[11],
-            progress_rabota_day[12],progress_rabota_day[13],progress_rabota_day[14],progress_rabota_day[15],progress_rabota_day[16],progress_rabota_day[17],progress_rabota_day[18],progress_rabota_day[19],progress_rabota_day[20],progress_rabota_day[21],progress_rabota_day[22],progress_rabota_day[23],
-            progress_rabota_day[24],progress_rabota_day[25],progress_rabota_day[26],progress_rabota_day[27],progress_rabota_day[28],progress_rabota_day[29],progress_rabota_day[30]]
+        name: 'Авария',
+        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }, {
-        name: 'Под нагрузкой',
-        data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        name: 'Выключен',
+        data: [progress_off_day[0], progress_off_day[1], progress_off_day[2],progress_off_day[3],progress_off_day[4],progress_off_day[5],progress_off_day[6],progress_off_day[7],progress_off_day[8],progress_off_day[9],progress_off_day[10],progress_off_day[11],
+            progress_off_day[12],progress_off_day[13],progress_off_day[14],progress_off_day[15],progress_off_day[16],progress_off_day[17],progress_off_day[18],progress_off_day[19],progress_off_day[20],progress_off_day[21],progress_off_day[22],progress_off_day[23],
+            progress_off_day[24],progress_off_day[25],progress_off_day[26],progress_off_day[27],progress_off_day[28],progress_off_day[29],progress_off_day[30]]
     }, {
         name: 'Ожидание',
         data: [progress_pause_day[0], progress_pause_day[1], progress_pause_day[2],progress_pause_day[3],progress_pause_day[4],progress_pause_day[5],progress_pause_day[6],progress_pause_day[7],progress_pause_day[8],progress_pause_day[9],progress_pause_day[10],progress_pause_day[11],
             progress_pause_day[12],progress_pause_day[13],progress_pause_day[14],progress_pause_day[15],progress_pause_day[16],progress_pause_day[17],progress_pause_day[18],progress_pause_day[19],progress_pause_day[20],progress_pause_day[21],progress_pause_day[22],progress_pause_day[23],
             progress_pause_day[24],progress_pause_day[25],progress_pause_day[26],progress_pause_day[27],progress_pause_day[28],progress_pause_day[29],progress_pause_day[30]]
     }, {
-        name: 'Авария',
-        data: [0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        name: 'Под нагрузкой',
+        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }, {
-        name: 'Выключен',
-        data: [progress_off_day[0], progress_off_day[1], progress_off_day[2],progress_off_day[3],progress_off_day[4],progress_off_day[5],progress_off_day[6],progress_off_day[7],progress_off_day[8],progress_off_day[9],progress_off_day[10],progress_off_day[11],
-            progress_off_day[12],progress_off_day[13],progress_off_day[14],progress_off_day[15],progress_off_day[16],progress_off_day[17],progress_off_day[18],progress_off_day[19],progress_off_day[20],progress_off_day[21],progress_off_day[22],progress_off_day[23],
-            progress_off_day[24],progress_off_day[25],progress_off_day[26],progress_off_day[27],progress_off_day[28],progress_off_day[29],progress_off_day[30]]
+        name: 'Работа',
+        data: [progress_rabota_day[0], progress_rabota_day[1], progress_rabota_day[2],progress_rabota_day[3],progress_rabota_day[4],progress_rabota_day[5],progress_rabota_day[6],progress_rabota_day[7],progress_rabota_day[8],progress_rabota_day[9],progress_rabota_day[10],progress_rabota_day[11],
+            progress_rabota_day[12],progress_rabota_day[13],progress_rabota_day[14],progress_rabota_day[15],progress_rabota_day[16],progress_rabota_day[17],progress_rabota_day[18],progress_rabota_day[19],progress_rabota_day[20],progress_rabota_day[21],progress_rabota_day[22],progress_rabota_day[23],
+            progress_rabota_day[24],progress_rabota_day[25],progress_rabota_day[26],progress_rabota_day[27],progress_rabota_day[28],progress_rabota_day[29],progress_rabota_day[30]]
     }]
 });
 

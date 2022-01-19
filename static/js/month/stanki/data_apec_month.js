@@ -1,4 +1,4 @@
-var colors = ['#38e817','#5c7ed0', '#ffea32', '#e81e1d', '#000000'];
+var colors = ['#e81e1d','#000000', '#ffea32', '#5c7ed0', '#38e817'];
 
 Highcharts.setOptions({
     lang: {
@@ -62,21 +62,6 @@ Highcharts.chart('container_days5', {
         }
     },
     series: [{
-        name: 'Работа',
-        data: [apec_rabota_day[0], apec_rabota_day[1], apec_rabota_day[2],apec_rabota_day[3],apec_rabota_day[4],apec_rabota_day[5],apec_rabota_day[6],apec_rabota_day[7],apec_rabota_day[8],apec_rabota_day[9],apec_rabota_day[10],apec_rabota_day[11],
-            apec_rabota_day[12],apec_rabota_day[13],apec_rabota_day[14],apec_rabota_day[15],apec_rabota_day[16],apec_rabota_day[17],apec_rabota_day[18],apec_rabota_day[19],apec_rabota_day[20],apec_rabota_day[21],apec_rabota_day[22],apec_rabota_day[23],
-            apec_rabota_day[24],apec_rabota_day[25],apec_rabota_day[26],apec_rabota_day[27],apec_rabota_day[28],apec_rabota_day[29],apec_rabota_day[30]]
-    }, {
-        name: 'Ручной',
-        data: [apec_ruchnoi_day[0], apec_ruchnoi_day[1], apec_ruchnoi_day[2],apec_ruchnoi_day[3],apec_ruchnoi_day[4],apec_ruchnoi_day[5],apec_ruchnoi_day[6],apec_ruchnoi_day[7],apec_ruchnoi_day[8],apec_ruchnoi_day[9],apec_ruchnoi_day[10],apec_ruchnoi_day[11],
-            apec_ruchnoi_day[12],apec_ruchnoi_day[13],apec_ruchnoi_day[14],apec_ruchnoi_day[15],apec_ruchnoi_day[16],apec_ruchnoi_day[17],apec_ruchnoi_day[18],apec_ruchnoi_day[19],apec_ruchnoi_day[20],apec_ruchnoi_day[21],apec_ruchnoi_day[22],apec_ruchnoi_day[23],
-            apec_ruchnoi_day[24],apec_ruchnoi_day[25],apec_ruchnoi_day[26],apec_ruchnoi_day[27],apec_ruchnoi_day[28],apec_ruchnoi_day[29],apec_ruchnoi_day[30]]
-    }, {
-        name: 'Ожидание',
-        data: [apec_pause_day[0], apec_pause_day[1], apec_pause_day[2],apec_pause_day[3],apec_pause_day[4],apec_pause_day[5],apec_pause_day[6],apec_pause_day[7],apec_pause_day[8],apec_pause_day[9],apec_pause_day[10],apec_pause_day[11],
-            apec_pause_day[12],apec_pause_day[13],apec_pause_day[14],apec_pause_day[15],apec_pause_day[16],apec_pause_day[17],apec_pause_day[18],apec_pause_day[19],apec_pause_day[20],apec_pause_day[21],apec_pause_day[22],apec_pause_day[23],
-            apec_pause_day[24],apec_pause_day[25],apec_pause_day[26],apec_pause_day[27],apec_pause_day[28],apec_pause_day[29],apec_pause_day[30]]
-    }, {
         name: 'Авария',
         data: [apec_avar_day[0], apec_avar_day[1], apec_avar_day[2],apec_avar_day[3],apec_avar_day[4],apec_avar_day[5],apec_avar_day[6],apec_avar_day[7],apec_avar_day[8],apec_avar_day[9],apec_avar_day[10],apec_avar_day[11],
             apec_avar_day[12],apec_avar_day[13],apec_avar_day[14],apec_avar_day[15],apec_avar_day[16],apec_avar_day[17],apec_avar_day[18],apec_avar_day[19],apec_avar_day[20],apec_avar_day[21],apec_avar_day[22],apec_avar_day[23],
@@ -86,6 +71,21 @@ Highcharts.chart('container_days5', {
         data: [apec_off_day[0], apec_off_day[1], apec_off_day[2],apec_off_day[3],apec_off_day[4],apec_off_day[5],apec_off_day[6],apec_off_day[7],apec_off_day[8],apec_off_day[9],apec_off_day[10],apec_off_day[11],
             apec_off_day[12],apec_off_day[13],apec_off_day[14],apec_off_day[15],apec_off_day[16],apec_off_day[17],apec_off_day[18],apec_off_day[19],apec_off_day[20],apec_off_day[21],apec_off_day[22],apec_off_day[23],
             apec_off_day[24],apec_off_day[25],apec_off_day[26],apec_off_day[27],apec_off_day[28],apec_off_day[29],apec_off_day[30]]
+    }, {
+        name: 'Ожидание',
+        data: [apec_pause_day[0], apec_pause_day[1], apec_pause_day[2],apec_pause_day[3],apec_pause_day[4],apec_pause_day[5],apec_pause_day[6],apec_pause_day[7],apec_pause_day[8],apec_pause_day[9],apec_pause_day[10],apec_pause_day[11],
+            apec_pause_day[12],apec_pause_day[13],apec_pause_day[14],apec_pause_day[15],apec_pause_day[16],apec_pause_day[17],apec_pause_day[18],apec_pause_day[19],apec_pause_day[20],apec_pause_day[21],apec_pause_day[22],apec_pause_day[23],
+            apec_pause_day[24],apec_pause_day[25],apec_pause_day[26],apec_pause_day[27],apec_pause_day[28],apec_pause_day[29],apec_pause_day[30]]
+    }, {
+        name: 'Ручной',
+        data: [apec_ruchnoi_day[0], apec_ruchnoi_day[1], apec_ruchnoi_day[2],apec_ruchnoi_day[3],apec_ruchnoi_day[4],apec_ruchnoi_day[5],apec_ruchnoi_day[6],apec_ruchnoi_day[7],apec_ruchnoi_day[8],apec_ruchnoi_day[9],apec_ruchnoi_day[10],apec_ruchnoi_day[11],
+            apec_ruchnoi_day[12],apec_ruchnoi_day[13],apec_ruchnoi_day[14],apec_ruchnoi_day[15],apec_ruchnoi_day[16],apec_ruchnoi_day[17],apec_ruchnoi_day[18],apec_ruchnoi_day[19],apec_ruchnoi_day[20],apec_ruchnoi_day[21],apec_ruchnoi_day[22],apec_ruchnoi_day[23],
+            apec_ruchnoi_day[24],apec_ruchnoi_day[25],apec_ruchnoi_day[26],apec_ruchnoi_day[27],apec_ruchnoi_day[28],apec_ruchnoi_day[29],apec_ruchnoi_day[30]]
+    }, {
+        name: 'Работа',
+        data: [apec_rabota_day[0], apec_rabota_day[1], apec_rabota_day[2],apec_rabota_day[3],apec_rabota_day[4],apec_rabota_day[5],apec_rabota_day[6],apec_rabota_day[7],apec_rabota_day[8],apec_rabota_day[9],apec_rabota_day[10],apec_rabota_day[11],
+            apec_rabota_day[12],apec_rabota_day[13],apec_rabota_day[14],apec_rabota_day[15],apec_rabota_day[16],apec_rabota_day[17],apec_rabota_day[18],apec_rabota_day[19],apec_rabota_day[20],apec_rabota_day[21],apec_rabota_day[22],apec_rabota_day[23],
+            apec_rabota_day[24],apec_rabota_day[25],apec_rabota_day[26],apec_rabota_day[27],apec_rabota_day[28],apec_rabota_day[29],apec_rabota_day[30]]
     }]
 });
 
