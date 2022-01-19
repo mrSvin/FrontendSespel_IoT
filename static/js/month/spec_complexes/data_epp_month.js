@@ -1,4 +1,4 @@
-var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
 Highcharts.setOptions({
     lang: {
@@ -62,30 +62,30 @@ Highcharts.chart('container_days_epp', {
         }
     },
     series: [{
-        name: 'Работа',
-        data: [epp_rabota_day[0], epp_rabota_day[1], epp_rabota_day[2],epp_rabota_day[3],epp_rabota_day[4],epp_rabota_day[5],epp_rabota_day[6],epp_rabota_day[7],epp_rabota_day[8],epp_rabota_day[9],epp_rabota_day[10],epp_rabota_day[11],
-            epp_rabota_day[12],epp_rabota_day[13],epp_rabota_day[14],epp_rabota_day[15],epp_rabota_day[16],epp_rabota_day[17],epp_rabota_day[18],epp_rabota_day[19],epp_rabota_day[20],epp_rabota_day[21],epp_rabota_day[22],epp_rabota_day[23],
-            epp_rabota_day[24],epp_rabota_day[25],epp_rabota_day[26],epp_rabota_day[27],epp_rabota_day[28],epp_rabota_day[29],epp_rabota_day[30]]
-    }, {
-        name: 'Ожидание',
-        data: [epp_pause_day[0], epp_pause_day[1], epp_pause_day[2],epp_pause_day[3],epp_pause_day[4],epp_pause_day[5],epp_pause_day[6],epp_pause_day[7],epp_pause_day[8],epp_pause_day[9],epp_pause_day[10],epp_pause_day[11],
-            epp_pause_day[12],epp_pause_day[13],epp_pause_day[14],epp_pause_day[15],epp_pause_day[16],epp_pause_day[17],epp_pause_day[18],epp_pause_day[19],epp_pause_day[20],epp_pause_day[21],epp_pause_day[22],epp_pause_day[23],
-            epp_pause_day[24],epp_pause_day[25],epp_pause_day[26],epp_pause_day[27],epp_pause_day[28],epp_pause_day[29],epp_pause_day[30]]
+        name: 'Авария',
+        data: [epp_avar_day[0], epp_avar_day[1], epp_avar_day[2],epp_avar_day[3],epp_avar_day[4],epp_avar_day[5],epp_avar_day[6],epp_avar_day[7],epp_avar_day[8],epp_avar_day[9],epp_avar_day[10],epp_avar_day[11],
+            epp_avar_day[12],epp_avar_day[13],epp_avar_day[14],epp_avar_day[15],epp_avar_day[16],epp_avar_day[17],epp_avar_day[18],epp_avar_day[19],epp_avar_day[20],epp_avar_day[21],epp_avar_day[22],epp_avar_day[23],
+            epp_avar_day[24],epp_avar_day[25],epp_avar_day[26],epp_avar_day[27],epp_avar_day[28],epp_avar_day[29],epp_avar_day[30]]
     }, {
         name: 'Выключен',
         data: [epp_off_day[0], epp_off_day[1], epp_off_day[2],epp_off_day[3],epp_off_day[4],epp_off_day[5],epp_off_day[6],epp_off_day[7],epp_off_day[8],epp_off_day[9],epp_off_day[10],epp_off_day[11],
             epp_off_day[12],epp_off_day[13],epp_off_day[14],epp_off_day[15],epp_off_day[16],epp_off_day[17],epp_off_day[18],epp_off_day[19],epp_off_day[20],epp_off_day[21],epp_off_day[22],epp_off_day[23],
             epp_off_day[24],epp_off_day[25],epp_off_day[26],epp_off_day[27],epp_off_day[28],epp_off_day[29],epp_off_day[30]]
     }, {
-        name: 'Авария',
-        data: [epp_avar_day[0], epp_avar_day[1], epp_avar_day[2],epp_avar_day[3],epp_avar_day[4],epp_avar_day[5],epp_avar_day[6],epp_avar_day[7],epp_avar_day[8],epp_avar_day[9],epp_avar_day[10],epp_avar_day[11],
-            epp_avar_day[12],epp_avar_day[13],epp_avar_day[14],epp_avar_day[15],epp_avar_day[16],epp_avar_day[17],epp_avar_day[18],epp_avar_day[19],epp_avar_day[20],epp_avar_day[21],epp_avar_day[22],epp_avar_day[23],
-            epp_avar_day[24],epp_avar_day[25],epp_avar_day[26],epp_avar_day[27],epp_avar_day[28],epp_avar_day[29],epp_avar_day[30]]
+        name: 'Ожидание',
+        data: [epp_pause_day[0], epp_pause_day[1], epp_pause_day[2],epp_pause_day[3],epp_pause_day[4],epp_pause_day[5],epp_pause_day[6],epp_pause_day[7],epp_pause_day[8],epp_pause_day[9],epp_pause_day[10],epp_pause_day[11],
+            epp_pause_day[12],epp_pause_day[13],epp_pause_day[14],epp_pause_day[15],epp_pause_day[16],epp_pause_day[17],epp_pause_day[18],epp_pause_day[19],epp_pause_day[20],epp_pause_day[21],epp_pause_day[22],epp_pause_day[23],
+            epp_pause_day[24],epp_pause_day[25],epp_pause_day[26],epp_pause_day[27],epp_pause_day[28],epp_pause_day[29],epp_pause_day[30]]
     }, {
         name: 'Нагрузка',
         data: [epp_nagruzka_day[0], epp_nagruzka_day[1], epp_nagruzka_day[2],epp_nagruzka_day[3],epp_nagruzka_day[4],epp_nagruzka_day[5],epp_nagruzka_day[6],epp_nagruzka_day[7],epp_nagruzka_day[8],epp_nagruzka_day[9],epp_nagruzka_day[10],epp_nagruzka_day[11],
             epp_nagruzka_day[12],epp_nagruzka_day[13],epp_nagruzka_day[14],epp_nagruzka_day[15],epp_nagruzka_day[16],epp_nagruzka_day[17],epp_nagruzka_day[18],epp_nagruzka_day[19],epp_nagruzka_day[20],epp_nagruzka_day[21],epp_nagruzka_day[22],epp_nagruzka_day[23],
             epp_nagruzka_day[24],epp_nagruzka_day[25],epp_nagruzka_day[26],epp_nagruzka_day[27],epp_nagruzka_day[28],epp_nagruzka_day[29],epp_nagruzka_day[30]]
+    }, {
+        name: 'Работа',
+        data: [epp_rabota_day[0], epp_rabota_day[1], epp_rabota_day[2],epp_rabota_day[3],epp_rabota_day[4],epp_rabota_day[5],epp_rabota_day[6],epp_rabota_day[7],epp_rabota_day[8],epp_rabota_day[9],epp_rabota_day[10],epp_rabota_day[11],
+            epp_rabota_day[12],epp_rabota_day[13],epp_rabota_day[14],epp_rabota_day[15],epp_rabota_day[16],epp_rabota_day[17],epp_rabota_day[18],epp_rabota_day[19],epp_rabota_day[20],epp_rabota_day[21],epp_rabota_day[22],epp_rabota_day[23],
+            epp_rabota_day[24],epp_rabota_day[25],epp_rabota_day[26],epp_rabota_day[27],epp_rabota_day[28],epp_rabota_day[29],epp_rabota_day[30]]
     }]
 });
 
