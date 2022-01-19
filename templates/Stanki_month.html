@@ -359,25 +359,24 @@
             }
         },
         series: [{
-            name: 'Работа',
-            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2, work_ctx510_2, work_ctx510_3, work_ctx310_3] // , work_ctx510_4
-        }, {
-            name: 'Под нагрузкой',
-            data: [0, 0, nagruzka_ntx1000, nagruzka_sk50, 0, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2, nagruzka_ctx510_2, nagruzka_ctx510_3, nagruzka_ctx310_3] // , nagruzka_ctx510_4
-        }, {
-            name: 'Ожидание',
-            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2, pause_ctx510_2, pause_ctx510_3, pause_ctx310_3] // , pause_ctx510_4
-        }, {
             name: 'Авария',
             data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4, avar_ctx310_2, avar_ctx510_2, avar_ctx510_3, avar_ctx310_3] // , avar_ctx510_4
         }, {
             name: 'Выключен',
             data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2, off_ctx510_2, off_ctx510_3, off_ctx310_3] // , off_ctx510_4
-        },
-            {
-                name: 'Ручной',
-                data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0, 0, 0, 0] // ,0
-            }]
+        }, {
+            name: 'Ручной',
+            data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0, 0, 0, 0] // ,0
+        }, {
+            name: 'Ожидание',
+            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2, pause_ctx510_2, pause_ctx510_3, pause_ctx310_3] // , pause_ctx510_4
+        }, {
+            name: 'Под нагрузкой',
+            data: [0, 0, nagruzka_ntx1000, nagruzka_sk50, 0, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2, nagruzka_ctx510_2, nagruzka_ctx510_3, nagruzka_ctx310_3] // , nagruzka_ctx510_4
+        },{
+            name: 'Работа',
+            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2, work_ctx510_2, work_ctx510_3, work_ctx310_3] // , work_ctx510_4
+        }]
     });
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">

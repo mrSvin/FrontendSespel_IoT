@@ -333,21 +333,21 @@
             }
         },
         series: [{
-            name: 'Работа',
-            data: [work_navigator_1, work_navigator_2_golova_1, work_navigator_2_golova_2, work_navigator_3, work_trulaser, work_kometa_1]
-        }, {
-            name: 'Под нагрузкой',
-            data: [nagruzka_navigator_1, nagruzka_navigator_2_golova_1, nagruzka_navigator_2_golova_2, nagruzka_navigator_3, nagruzka_trulaser, 0]
-        }, {
-            name: 'Ожидание',
-            data: [pass_navigator_1, pass_navigator_2_golova_1, pass_navigator_2_golova_2, pass_navigator_3, pass_trulaser, pass_kometa_1]
-        }, {
             name: 'Авария',
             data: [avar_navigator_1, avar_navigator_2_golova_1, avar_navigator_2_golova_2, avar_navigator_3, avar_trulaser, 0]
         }, {
             name: 'Выключен',
             data: [fail_navigator_1, fail_navigator_2_golova_1, fail_navigator_2_golova_2, fail_navigator_3, fail_trulaser, fail_kometa_1]
-        }]
+        }, {
+            name: 'Ожидание',
+            data: [pass_navigator_1, pass_navigator_2_golova_1, pass_navigator_2_golova_2, pass_navigator_3, pass_trulaser, pass_kometa_1]
+        }, {
+            name: 'Под нагрузкой',
+            data: [nagruzka_navigator_1, nagruzka_navigator_2_golova_1, nagruzka_navigator_2_golova_2, nagruzka_navigator_3, nagruzka_trulaser, 0]
+        }, {
+            name: 'Работа',
+            data: [work_navigator_1, work_navigator_2_golova_1, work_navigator_2_golova_2, work_navigator_3, work_trulaser, work_kometa_1]
+        }, ]
     });
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
