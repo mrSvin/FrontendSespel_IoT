@@ -128,6 +128,7 @@ function dark(){
         $('.highcharts-pie-series > path').attr('style',' stroke: white;'); // обводка круглых диаграм
         $('.highcharts-pie-series > rect').attr('style',' stroke: white;'); // обводка кнопок круглых диаграмм
 
+        $('.highcharts-point').attr('style','stroke: white;'); // обводка круглых кнопок
         $('.highcharts-point > rect').attr('style','stroke: white;'); // обводка диаграммы работа оборудования
 
 
@@ -164,7 +165,7 @@ function dark(){
             $(this).css('width', '100px');
         });
 
-        // $('.highcharts-point').attr('style','stroke: white;'); // обводка круглых кнопок
+
     }
     else if (count == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
