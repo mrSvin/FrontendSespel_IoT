@@ -159,6 +159,7 @@
                 <p th:text="${user_mail}"></p>
                 <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
                 <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
+                <input type='button' id='dark_button' style="background: url(light_butt.png) no-repeat center; width: 100px; height: 45px; background-size: 90% 80%; border: none;">
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
                         Выход
@@ -1271,6 +1272,34 @@
 </script>
 <script src="/js/mesto.js"></script>
 <!--Скрипт с вызовом функций для изменения места-->
+
+<script src="/js/dark.js"></script>
+<script>
+
+    var count = 0; <!--    переменная состояния темы страницы-->
+
+    //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
+    if(localStorage['count'] != null) {
+        count = parseInt(window.localStorage['count']);
+    }
+    // Условия для смены цвета вне нажатия на кнопку
+
+
+    dark(); // Вызов функции
+    // Смена цвета по кнопке
+    $("#dark_button").on("click", function() {
+        count++; // увеличиваем счетчик
+        if(count > 1) // если он больше 1, меняем на ноль
+        {
+            count = 0;
+        }
+        window.localStorage['count'] = count; // сохраняем переменную в локальном хранилище
+
+        // Условия для смены цвета после нажатия на кнопку
+        dark();
+    });
+</script>
+<!--Скрипт темной темы-->
 
 </body>
 </html>
