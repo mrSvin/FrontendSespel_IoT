@@ -151,7 +151,7 @@ function dark(){
 
         $('table').attr('style','text-shadow: none!important; color: #0C213B!important; background: radial-gradient(farthest-corner at 50% 50%, white, #DCECF8)!important;');
 
-        $('#dark_button').css('background', 'url(light_butt.png) no-repeat'); // картинка лого
+        $('#dark_button').css('background', 'url(../images/light_butt.png) no-repeat'); // картинка лого
         $('#dark_button').css('width', '100px'); // картинка лого
         $('#dark_button').css('height', '45px'); // картинка лого
         $('#dark_button').css('background-size', '90% 80%'); // картинка лого
@@ -319,7 +319,7 @@ function dark(){
 
         $('table').attr('style','text-shadow: 1px 2px 3px white, 0 0 2em black, 0 0 0.1em white!important; color: black!important; background: radial-gradient(farthest-corner at 50% 50%, white, #808488)!important;');
 
-        $('#dark_button').css('background', 'url(dark_butt.png) no-repeat'); // картинка лого
+        $('#dark_button').css('background', 'url(../images/dark_butt.png) no-repeat'); // картинка лого
         $('#dark_button').css('width', '100px'); // картинка лого
         $('#dark_button').css('height', '45px'); // картинка лого
         $('#dark_button').css('background-size', '90% 80%'); // картинка лого
