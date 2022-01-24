@@ -159,7 +159,7 @@
                 <p th:text="${user_mail}"></p>
                 <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
                 <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
-<!--                <input type='button' id='dark_button' style="background: url(images/light_butt.png) no-repeat center; width: 100px; height: 45px; background-size: 90% 80%; border: none;"/>-->
+                <input type='button' id='dark_button' style="background: url(images/light_butt.png) no-repeat center; width: 100px; height: 45px; background-size: 90% 80%; border: none;"/>
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
                         Выход
@@ -1244,22 +1244,7 @@
 </script>   <!--ctx510_5 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_dmg_ctx510_5.js"></script>
 
-<script th:inline="javascript">
-    var role_status = [[${user_role}]];
 
-    if(role_status === "ROLE_ADMIN")
-    {
-        document.getElementById("role_vision").innerHTML = "Роль: Админ";
-        document.getElementById("admin").style.display = "inline";
-
-    }
-    else if (role_status === "ROLE_USER")
-    {
-        document.getElementById("role_vision").innerHTML = "Роль: Пользователь";
-        document.getElementById("admin").style.display = "none";
-    }
-</script>
-<!--Скрипт отображения в header  кнопки администрирование-->
 
 
 <script>
@@ -1300,6 +1285,23 @@
     });
 </script>
 <!--Скрипт темной темы-->
+
+<script th:inline="javascript">
+    var role_status = [[${user_role}]];
+
+    if(role_status === "ROLE_ADMIN")
+    {
+        document.getElementById("role_vision").innerHTML = "Роль: Админ";
+        document.getElementById("admin").style.display = "inline";
+
+    }
+    else if (role_status === "ROLE_USER")
+    {
+        document.getElementById("role_vision").innerHTML = "Роль: Пользователь";
+        document.getElementById("admin").style.display = "none";
+    }
+</script>
+<!--Скрипт отображения в header  кнопки администрирование-->
 
 </body>
 </html>
