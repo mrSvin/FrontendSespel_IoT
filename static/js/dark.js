@@ -12,7 +12,7 @@ function dark(){
         $('.dropdown-content > li').attr('style','color #333;'); // цвет имени польвателя
         $('.dropdown-content > p').attr('style','color: #545050; font-size: 14px;'); // цвет почты
         $('.dropdown-content > div').attr('style',' display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal'); // цвет линии разделения кнопки администрации
-        $('#admin').attr('style','color: #ffffff!important; background: #ff3b3b!important; font-size: 12px;important; margin-bottom: 25px!important;'); // кнопка админа
+        $('#admin').attr('style','color: #ffffff!important; background: #ff3b3b!important; font-size: 12px!important; margin-bottom: 25px!important;'); // кнопка админа
 
 //Начало светлые темы для навигационных меню: цвет фона, цвет рамки справа, темно красный цвет при наведении.
         $("#menu_a").css('background-color', "rgb(58, 111, 219)");
@@ -179,7 +179,7 @@ function dark(){
         $('.dropdown-content > li').attr('style','color #333;'); // цвет имени польвателя
         $('.dropdown-content > p').attr('style','color: #545050; font-size: 14px;'); // цвет почты
         $('.dropdown-content > div').attr('style',' display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal'); // цвет линии разделения кнопки администрации
-        $('#admin').attr('style','color: #ffffff!important; background: #ff3b3b!important; font-size: 12px;important; margin-bottom: 25px!important;'); // кнопка админа
+        $('#admin').attr('style','color: #ffffff!important; background: #ff3b3b!important; font-size: 12px!important; margin-bottom: 25px!important;'); // кнопка админа
 
 // Начало Темные темы для навигационных меню: цвет фона, цвет рамки справа, темно красный цвет при наведении.
         $("#menu_a").css('background-color', "rgb(18 62 153)");
