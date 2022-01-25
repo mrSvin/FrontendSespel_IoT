@@ -312,7 +312,7 @@ function kometa_1(){
     window.localStorage['size'] = size;
 };
 
-function kometa_3(){
+function kometa_2(){
     mar_top = -520;
     mar_left = 940;
     bground = 'url(../images/kometa.png) no-repeat';
