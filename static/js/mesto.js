@@ -311,6 +311,22 @@ function kometa_1(){
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
+
+function kometa_3(){
+    mar_top = -520;
+    mar_left = 940;
+    bground = 'url(../images/kometa.png) no-repeat';
+    place_img = "../images/sbor_ceh.png";
+    size = 40;
+    bwidth = "unset";
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['bwidth'] = bwidth;
+    window.localStorage['size'] = size;
+};
 // конец мест навигаторы
 
 // Начало мест Мех.1

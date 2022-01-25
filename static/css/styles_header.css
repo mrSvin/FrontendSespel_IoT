@@ -177,7 +177,7 @@ td {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: blue;
+    background-color: rgb(36, 97, 219);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -189,7 +189,7 @@ td {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: yellow;
+    background-color: #dcdc23;
     -webkit-transition: .4s;
     transition: .4s;
 }
