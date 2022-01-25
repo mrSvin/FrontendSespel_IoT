@@ -14,92 +14,21 @@ function dark(){
         $('.dropdown-content > div').attr('style',' display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal'); // цвет линии разделения кнопки администрации
         // $('#admin').attr('style','color: #ffffff!important; background: #ff3b3b!important; font-size: 12px!important; margin-bottom: 25px!important;'); // кнопка админа итак красивая
 
-//Начало светлые темы для навигационных меню: цвет фона, цвет рамки справа, темно красный цвет при наведении.
-        $("#menu_a").css('background-color', "rgb(58, 111, 219)");
-        $("#menu_a").css('border-right', "1px solid #F36262");
-        $("#menu_a").hover(function() {
+//Начало светлые темы для навигационных меню:
+        $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").attr('style','background-color: rgb(58, 111, 219); border-right: 1px solid #F36262"'); // цвета навигационных меню и рамки
+        $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").hover(function() {
             $(this).css("background-color",'#D43737');
         }, function(){
             $(this).css("background-color", "rgb(58, 111, 219)");
         });
 
-        $("#menu_a1").css('background-color', "rgb(58, 111, 219)");
-        $("#menu_a1").css('border-right', "1px solid #F36262");
-        $("#menu_a1").hover(function() {
-            $(this).css("background-color",'#D43737');
-        }, function(){
-            $(this).css("background-color", "rgb(58, 111, 219)");
-        });
-
-        $("#menu_a2").css('background-color', "rgb(58, 111, 219)");
-        $("#menu_a2").css('border-right', "1px solid #F36262");
-        $("#menu_a2").hover(function() {
-            $(this).css("background-color",'#D43737');
-        }, function(){
-            $(this).css("background-color", "rgb(58, 111, 219)");
-        });
-
-        $("#menu_a3").css('background-color', "rgb(58, 111, 219)");
-        $("#menu_a3").css('border-right', "1px solid #F36262");
-        $("#menu_a3").hover(function() {
-            $(this).css("background-color",'#D43737');
-        }, function(){
-            $(this).css("background-color", "rgb(58, 111, 219)");
-        });
-
-        $("#menu_a4").css('background-color', "rgb(58, 111, 219)");
-        $("#menu_a4").css('border-right', "1px solid #F36262");
-        $("#menu_a4").hover(function() {
-            $(this).css("background-color",'#D43737');
-        }, function(){
-            $(this).css("background-color", "rgb(58, 111, 219)");
-        });
-
-        $("#menu_a5").css('background-color', "rgb(58, 111, 219)");
-        $("#menu_a5").css('border-right', "1px solid #F36262");
-        $("#menu_a5").hover(function() {
-            $(this).css("background-color",'#D43737');
-        }, function(){
-            $(this).css("background-color", "rgb(58, 111, 219)");
-        });
-
-        $("#menu_a6").css('background-color', "rgb(58, 111, 219)");
-        $("#menu_a6").css('border-right', "1px solid #F36262");
-        $("#menu_a6").hover(function() {
-            $(this).css("background-color",'#D43737');
-        }, function(){
-            $(this).css("background-color", "rgb(58, 111, 219)");
-        });
-
-        $("#menu_a7").css('background-color', "rgb(58, 111, 219)");
-        $("#menu_a7").css('border-right', "1px solid #F36262");
-        $("#menu_a7").hover(function() {
-            $(this).css("background-color",'#D43737');
-        }, function(){
-            $(this).css("background-color", "rgb(58, 111, 219)");
-        });
-
-        $("#menu_a8").css('background-color', "rgb(58, 111, 219)");
-        $("#menu_a8").css('border-right', "1px solid #F36262");
-        $("#menu_a8").hover(function() {
-            $(this).css("background-color",'#D43737');
-        }, function(){
-            $(this).css("background-color", "rgb(58, 111, 219)");
-        });
-
-        $("#menu_a9").css('background-color', "rgb(58, 111, 219)");
-        $("#menu_a9").css('border-right', "1px solid #F36262");
-        $("#menu_a9").hover(function() {
-            $(this).css("background-color",'#D43737');
-        }, function(){
-            $(this).css("background-color", "rgb(58, 111, 219)");
-        });
-// Конец Светлые темы для навигационных меню: цвет фона, цвет рамки справа, темно красный цвет при наведении.
-
-        $('.menu-color').attr('style','background: #D43737 !important; border-right: 1px solid #F36262 !important'); // светлая тема кнопка текущей позиции и темные границы в меню
+        $('.menu-color').attr('style','background: #D43737; border-right: 1px solid #F36262'); // светлая тема кнопка текущей позиции и темные границы в меню
         $(".menu-color").hover(function() {
-            $(this).attr('style','background: #D43737 !important; border-right: 1px solid #F36262 !important'); // Защита, чтоба кнопка текущей позиции оставалась светлова цвета при наведении
+            $(this).attr('style','background: #D43737; border-right: 1px solid #F36262'); // Защита, чтоба кнопка текущей позиции оставалась светлова цвета при наведении
         });
+// Конец Светлые темы для навигационных меню
+
+
 
         $('.btn_change').css('background-color' , '#fff'); // кнопки суточных
         $('.btn_change').css('borderColor' , '#6793d6'); // и месячных отчетов
@@ -152,19 +81,6 @@ function dark(){
 
         $('table').attr('style','text-shadow: none!important; color: #0C213B!important; background: radial-gradient(farthest-corner at 50% 50%, white, #DCECF8)!important;');
 
-        $('#dark_button').css('background', 'url(../images/light_butt.png) no-repeat'); // картинка лого
-        $('#dark_button').css('width', '100px'); // картинка лого
-        $('#dark_button').css('height', '45px'); // картинка лого
-        $('#dark_button').css('background-size', '90% 80%'); // картинка лого
-        $('#dark_button').css('border', 'none'); // картинка лого
-
-        $("#dark_button").hover(function() { // свечение при наведении на персонад
-            $(this).css('width', '102px');
-
-        }, function(){
-            $(this).css('width', '100px');
-        });
-
 
     }
     else if (count == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -183,85 +99,14 @@ function dark(){
         // $('#admin').attr('style','color: #ffffff!important; background: #ff3b3b!important; font-size: 12px!important; margin-bottom: 25px!important;'); // кнопка админа итак красивая
 
 // Начало Темные темы для навигационных меню: цвет фона, цвет рамки справа, темно красный цвет при наведении.
-        $("#menu_a").css('background-color', "rgb(18 62 153)");
-        $("#menu_a").css('border-right', "1px solid #1e2760");
-        $("#menu_a").hover(function() {
+        $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").attr('style','background-color: rgb(18 62 153); border-right: 1px solid #1e2760"');
+
+        $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").hover(function() {
             $(this).css("background-color",'#a50f0f');
         }, function(){
             $(this).css("background-color", "rgb(18 62 153)");
         });
 
-        $("#menu_a1").css('background-color', "rgb(18 62 153)");
-        $("#menu_a1").css('border-right', "1px solid #1e2760");
-        $("#menu_a1").hover(function() {
-            $(this).css("background-color",'#a50f0f');
-        }, function(){
-            $(this).css("background-color", "rgb(18 62 153)");
-        });
-
-        $("#menu_a2").css('background-color', "rgb(18 62 153)");
-        $("#menu_a2").css('border-right', "1px solid #1e2760");
-        $("#menu_a2").hover(function() {
-            $(this).css("background-color",'#a50f0f');
-        }, function(){
-            $(this).css("background-color", "rgb(18 62 153)");
-        });
-
-        $("#menu_a3").css('background-color', "rgb(18 62 153)");
-        $("#menu_a3").css('border-right', "1px solid #1e2760");
-        $("#menu_a3").hover(function() {
-            $(this).css("background-color",'#a50f0f');
-        }, function(){
-            $(this).css("background-color", "rgb(18 62 153)");
-        });
-
-        $("#menu_a4").css('background-color', "rgb(18 62 153)");
-        $("#menu_a4").css('border-right', "1px solid #1e2760");
-        $("#menu_a4").hover(function() {
-            $(this).css("background-color",'#a50f0f');
-        }, function(){
-            $(this).css("background-color", "rgb(18 62 153)");
-        });
-
-        $("#menu_a5").css('background-color', "rgb(18 62 153)");
-        $("#menu_a5").css('border-right', "1px solid #1e2760");
-        $("#menu_a5").hover(function() {
-            $(this).css("background-color",'#a50f0f');
-        }, function(){
-            $(this).css("background-color", "rgb(18 62 153)");
-        });
-
-        $("#menu_a6").css('background-color', "rgb(18 62 153)");
-        $("#menu_a6").css('border-right', "1px solid #1e2760");
-        $("#menu_a6").hover(function() {
-            $(this).css("background-color",'#a50f0f');
-        }, function(){
-            $(this).css("background-color", "rgb(18 62 153)");
-        });
-
-        $("#menu_a7").css('background-color', "rgb(18 62 153)");
-        $("#menu_a7").css('border-right', "1px solid #1e2760");
-        $("#menu_a7").hover(function() {
-            $(this).css("background-color",'#a50f0f');
-        }, function(){
-            $(this).css("background-color", "rgb(18 62 153)");
-        });
-
-        $("#menu_a8").css('background-color', "rgb(18 62 153)");
-        $("#menu_a8").css('border-right', "1px solid #1e2760");
-        $("#menu_a8").hover(function() {
-            $(this).css("background-color",'#a50f0f');
-        }, function(){
-            $(this).css("background-color", "rgb(18 62 153)");
-        });
-
-        $("#menu_a9").css('background-color', "rgb(18 62 153)");
-        $("#menu_a9").css('border-right', "1px solid #1e2760");
-        $("#menu_a9").hover(function() {
-            $(this).css("background-color",'#a50f0f');
-        }, function(){
-            $(this).css("background-color", "rgb(18 62 153)");
-        });
 // Конец Темные темы для навигационных меню: цвет фона, цвет рамки справа, темно красный цвет при наведении.
 
         $('.menu-color').attr('style','background: #a50f0f !important; border-right: 1px solid #1e2760 !important'); // темная тема кнопка текущей позиции и темные границы в меню
@@ -317,21 +162,9 @@ function dark(){
             $(this).css('-webkit-box-shadow', 'none');
         });
         // конец мест и персонала
-
         $('table').attr('style','text-shadow: 1px 2px 3px white, 0 0 2em black, 0 0 0.1em white!important; color: black!important; background: radial-gradient(farthest-corner at 50% 50%, white, #808488)!important;');
 
-        $('#dark_button').css('background', 'url(../images/dark_butt.png) no-repeat'); // картинка лого
-        $('#dark_button').css('width', '100px'); // картинка лого
-        $('#dark_button').css('height', '45px'); // картинка лого
-        $('#dark_button').css('background-size', '90% 80%'); // картинка лого
-        $('#dark_button').css('border', 'none'); // картинка лого
-
-        $("#dark_button").hover(function() { // свечение при наведении на персонад
-            $(this).css('width', '102px');
-
-        }, function(){
-            $(this).css('width', '100px');
-        });
+        document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы.
 
 
 
