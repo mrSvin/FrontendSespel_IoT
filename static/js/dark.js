@@ -1,182 +1,168 @@
-var color_white_value = "white";
+var back_color = "#ffffff"; // основной цвет фона(и цвет текста кнопок обновить и выход)
+var text_color = "#333333"; // основной цвет текста
+// var text_color_gray = "#545050"; // цвет для роли пользователя старый
+var drop_down_line = '#c9cbd0'; // цвет линии разделения в выпадающем меню
+var header_color = '#2461db'; // цвет шапки
+var nav_menu_color1 = '#3a6fdb';// цвета навигационных меню
+var nav_menu_color2 = '#D43737';// цвета навигационных меню при наведении
+var nav_menu_color3 = '#F36262';// цвет правой стенки навигационного меню
+var sutoch_butt = '#6793d6'; // цвет фона выделенной кнопки месяца
+var knopki = '#4f759b'; // цвета кнопок обновить и выход
+var calen_1_color = '#555555'; // текст в календаре
+var calen_3_color = '#cccccc'; // рамка вокруг кнопки календаря
+var calen_4_color = '#eeeeee'; // фон вокруг кнопки календаря
+var hicharts_color_3 = '#666666'; // графики цвет надписей наименования
+var hicharts_color_4 = '#999999'; // графики цвет тени легенды количества операций
+var hicharts_color_5 = '#e6e6e6'; // графики цвет линий в графиках
+var mesto_personal_color = '#756e6e'; // цвета надписи место и персонал
+var table_color_1 = '#0C213B'; // градиентые цвета таблицы
+var table_color_3 = '#DCECF8'; // градиентые цвета таблицы
 
-function white_colors(color_arg)
-{
-    $('body').attr("style", "background-color:" + color_arg + "; color: #333"); // цвет фона тела и текста
+var grafik_phone = '#ffffff';
+var legend_color = '#ffffff';
+
+// Переменные для темной темы
+var back_color_black = "#111111"; // основной цвет фона(и цвет текста кнопок обновить и выход)
+var text_color_black = "#fff"; // основной цвет текста
+// var text_color_gray_black = "#545050"; // цвет для роли пользователя старый
+var drop_down_line_black = '#cccccc'; // цвет линии разделения в выпадающем меню
+var header_color_black = '#3b3636'; // цвет шапки
+var nav_menu_color1_black = '#26272c';// цвета навигационных меню
+var nav_menu_color2_black = '#696161';// цвета навигационных меню при наведении
+var nav_menu_color3_black = '#000000';// цвет правой стенки навигационного меню
+var sutoch_butt_black = '#052467'; // цвет фона выделенной кнопки месяца
+var knopki_black = '#666666'; // цвета кнопок обновить и выход
+var calen_1_color_black = '#fff'; // текст в календаре
+var calen_3_color_black = '#cccccc'; // рамка вокруг кнопки календаря
+var calen_4_color_black = '#333030'; // фон вокруг кнопки календаря
+var hicharts_color_3_black = '#9a9797'; // графики цвет надписей наименования
+var hicharts_color_4_black = '#b2b0b0'; // графики цвет тени легенды количества операций
+var hicharts_color_5_black = '#bebebe'; // графики цвет линий в графиках
+var mesto_personal_color_black = '#d5cece'; // цвета надписи место и персонал
+var table_color_1_black = "#cec7c7"; // градиентые цвета таблицы
+var table_color_3_black = '#808488'; // градиентые цвета таблицы
+
+var grafik_phone_black = '#262424';
+var legend_color_black = '#6b6666';
+
+// Определения функций
+//back_color: #fff; header_color: #2461db; text_color: #333333; knopki: #4f759b;
+function backgroundes(back_color, header_color, text_color, knopki){
+    $('body').attr("style", "background-color:" + back_color + "; color:" + text_color); // цвет фона и основной цвет текста
+    $(".hr, #menu_ul").attr("style", 'background-color:' + header_color + ';'); // цвет шапки
+    $('.follow').attr('style','color:' + back_color + '; background: ' + knopki +'; font-size: 145%; margin: 19px 0px;'); // кнопки обновить и выход, цвет текста внутри кнопок соответствует цвету фона
 }
+
+//text_color: #333333; drop_down_line: #e8eaed; back_color: #fff;
+function drop_content_colors(text_color, drop_down_line, back_color){
+    $('.dropdown-content').attr('style','background:' + back_color +'; float: right; text-align: center; box-shadow: 0px 3px 6px 0px' + text_color + ';'); // цвет выпадающего меню
+    $('#role_vision').attr('style','color:' + text_color + '; font-size: 14px;'); // цвет роли пользователя
+    $('.dropdown-content > li').attr('style','color:' + text_color + ";"); // цвет имени польвателя
+    $('.dropdown-content > p').attr('style','color:' + text_color + '; font-size: 14px;'); // цвет почты
+    $('.dropdown-content > div').attr('style',' display: block; border-bottom: 1px solid' + drop_down_line + '; margin-bottom: 5px; line-height: normal;'); // цвет линии разделения кнопки администрации
+}
+
+// nav_menu_color1: #3a6fdb; nav_menu_color2: #D43737; nav_menu_color3: #F36262; back_color: #fff; sutoch_butt: #6793d6;
+function nav_menu(nav_menu_color1, nav_menu_color2, nav_menu_color3, back_color, sutoch_butt) {
+    $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").attr('style','background-color:' + nav_menu_color1 + '; border-right: 1px solid' + nav_menu_color3 + ';'); // цвета навигационных меню и рамки
+    $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").hover(function() {
+        $(this).css("background-color",nav_menu_color2);
+    }, function(){
+        $(this).css("background-color", nav_menu_color1);
+    });
+
+    $('.menu-color').attr('style','background-color:' + nav_menu_color2 + '!important; border-right: 1px solid' + nav_menu_color3 + ';'); // светлая тема кнопка текущей позиции и темные границы в меню
+    $(".menu-color").hover(function() {
+        $(this).attr('style','background-color:' + nav_menu_color2 + '!important; border-right: 1px solid' + nav_menu_color3 + ';'); // Защита, чтоба кнопка текущей позиции оставалась светлова цвета при наведении
+    });
+
+    $('.btn_change').css('background-color' , back_color); // кнопки суточных
+    $('.btn_change').css('borderColor' , sutoch_butt); // и месячных отчетов
+}
+
+// calen_1_color: #555555; back_color: #fff; calen_3_color: #666666; calen_4_color: #eeeeee;
+function calendar(calen_1_color ,back_color, calen_3_color, calen_4_color){
+    $('.form-control').attr('style','color:' + calen_1_color +'; background:' + back_color + '; border: 1px solid' + calen_3_color + ';'); // форма заполнения даты
+    $('.input-group-addon').attr('style','color:' + calen_1_color +'; background:' + calen_4_color +'; border: 1px solid ' + calen_3_color +';'); // кнопка календаря
+}
+
+// back_color: #fff; text_color: #333333; hicharts_color_3: #666666;, hicharts_color_4: #999999;, hicharts_color_5: #e6e6e6;
+function hightcharts_colors(back_color, text_color, hicharts_color_3, hicharts_color_4, hicharts_color_5, grafik_phone, legend_color)
+{
+    $('.highcharts-background').attr('style','fill:' + grafik_phone +';'); // цвет фона графиков
+    $('.highcharts-title').attr('style','color:' + text_color + '; font-size: 18px; fill:' + text_color + ';'); // название графиков
+    $('.highcharts-axis-labels.highcharts-xaxis-labels > text').attr('style','fill:' + hicharts_color_3 + '; font-size: 18px;'); // надписи названий станков
+    $('.highcharts-legend-box').attr('style','fill:' + legend_color + ';'); // цвет поля легенды
+    $('.highcharts-legend-box.highcharts-shadow').attr('style','stroke: ' + hicharts_color_4 + ';'); // цвет рамки легенды у количества операций
+    $('.highcharts-axis.highcharts-yaxis > text').attr('style','fill:' + hicharts_color_3 + ';'); // цвет надписей первой оси
+    $('.highcharts-axis-labels.highcharts-yaxis-labels > text').attr('style','fill:' +  hicharts_color_3 + ';'); // цвет надписей второй оси
+    $('.highcharts-yaxis-grid >.highcharts-grid-line').attr('style','stroke:' + hicharts_color_5 + ';'); // цвета колонок
+    $('.highcharts-axis-line').attr('style','stroke:' + hicharts_color_5 + ';'); // цвета осей x y
+    $('.highcharts-button-box').attr('style',' fill:' + back_color + ';'); // цвета кнопки печати и тд
+    $('.highcharts-pie-series > path').attr('style',' stroke:' + text_color + ';'); // обводка круглых диаграм
+    $('.highcharts-pie-series > rect').attr('style',' stroke:' + text_color + ';'); // обводка кнопок круглых диаграмм
+    $('.highcharts-point').attr('style','stroke:' + text_color + ';'); // обводка круглых кнопок
+    $('.highcharts-point > rect').attr('style','stroke:' + text_color + ';'); // обводка диаграммы работа оборудования
+}
+
+// mesto_personal_color: #756e6e; back_color: #fff;
+function mesto_personal(mesto_personal_color, back_color){
+    $('.label_mesto').attr('style','color:' + mesto_personal_color + ';'); // надпись место
+    $('.label_personal').attr('style','color:' + mesto_personal_color + ';'); // надпись персонал
+
+    $(".icon_mesto").hover(function() { // свечение при наведении на место
+        $(this).css('-webkit-box-shadow', 'inset 0px 0px 12px 12px' + back_color);
+    }, function(){
+        $(this).css('-webkit-box-shadow', 'none');
+    });
+
+    $(".icon_personal").hover(function() { // свечение при наведении на персонад
+        $(this).css('-webkit-box-shadow', 'inset 0px 0px 12px 12px' + back_color);
+    }, function(){
+        $(this).css('-webkit-box-shadow', 'none');
+    });
+}
+
+// table_color_1:#0C213B; back_color: #fff; table_color_3: #DCECF8;
+function table_colors(table_color_1, back_color, table_color_3) {
+    $('table').attr('style','text-shadow: none; color:' + table_color_1 + '; background: radial-gradient(farthest-corner at 50% 50%,' + back_color + ',' + table_color_3 + ');');
+}
+
 
 function dark(){
     if (count == 0) // условие светлой темы
     {
-
-
-
-        white_colors(color_white_value);
-
-        // $('body').attr("style", "background-color: white; color: #333"); // цвет фона тела и текста
-        $(".hr, #menu_ul").attr("style", 'background-color: rgb(36, 97, 219)'); // цвет шапки
-
         $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого
 
-        $('header > ul > li').attr('style','color #fff;'); // цвет добро пожаловать пользователь
+        backgroundes(back_color, header_color, text_color, knopki); // Вызов функции для основных фонов
+        drop_content_colors(text_color, drop_down_line, back_color); // Вызов функции для выпадающих меню
+        nav_menu(nav_menu_color1, nav_menu_color2, nav_menu_color3, back_color, sutoch_butt); // Вызов функции для меню навигации
+        calendar(calen_1_color, back_color, calen_3_color,calen_4_color); // Вызов функции для календаря
+        hightcharts_colors(back_color, text_color, hicharts_color_3, hicharts_color_4, hicharts_color_5, grafik_phone, legend_color); // Вызов функции для графиков
+        mesto_personal(mesto_personal_color, back_color); // Вызов функции для надписей место и персонал
+        table_colors(table_color_1, back_color, table_color_3); // Вызов функции для таблицы
 
-        $('.dropdown-content').attr('style','background: #fff; float: right; text-align: center;'); // цвет выпадающего меню
-        $('#role_vision').attr('style','color: #545050; font-size: 14px;'); // цвет роли пользователя
-        $('.dropdown-content > li').attr('style','color #333;'); // цвет имени польвателя
-        $('.dropdown-content > p').attr('style','color: #545050; font-size: 14px;'); // цвет почты
-        $('.dropdown-content > div').attr('style',' display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal'); // цвет линии разделения кнопки администрации
-        // $('#admin').attr('style','color: #ffffff; background: #ff3b3b; font-size: 12px; margin-bottom: 25px;'); // кнопка админа итак красивая
-
-//Начало светлые темы для навигационных меню:
-        $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").attr('style','background-color: rgb(58, 111, 219); border-right: 1px solid #F36262"'); // цвета навигационных меню и рамки
-        $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").hover(function() {
-            $(this).css("background-color",'#D43737');
-        }, function(){
-            $(this).css("background-color", "rgb(58, 111, 219)");
-        });
-
-        $('.menu-color').attr('style','background: #D43737; border-right: 1px solid #F36262'); // светлая тема кнопка текущей позиции и темные границы в меню
-        $(".menu-color").hover(function() {
-            $(this).attr('style','background: #D43737; border-right: 1px solid #F36262'); // Защита, чтоба кнопка текущей позиции оставалась светлова цвета при наведении
-        });
-// Конец Светлые темы для навигационных меню
-
-        $('.btn_change').css('background-color' , '#fff'); // кнопки суточных
-        $('.btn_change').css('borderColor' , '#6793d6'); // и месячных отчетов
-        // $('h2').attr('style','color: #333;'); // цвет надписи выберите дату(заголовки)
-
-        $('.form-control').attr('style','color: #555; background: #fff; border: 1px solid #ccc'); // форма заполнения даты
-        $('.input-group-addon').attr('style','color: #555; background: #eee; border: 1px solid #ccc'); // кнопка календаря
-        $('.follow').attr('style','color: #fff; background: #4f759b; font-size: 145%; margin: 19px 0px;'); // кнопки обновить и выход
-
-        $('.highcharts-background').attr('style','fill: #fff'); // цвет фона графиков
-        $('.highcharts-title').attr('style','color: #333333; font-size: 18px; fill: #333333;'); // название графиков
-        $('.highcharts-axis-labels.highcharts-xaxis-labels>text').attr('style','fill: #666666; font-size: 18px;'); // надписи названий станков
-        $('.highcharts-legend-box').attr('style','fill: #fff; stroke: #fff;'); // цвет поля легенды
-
+        // $('header > ul > li').attr('style','color #fff;'); // цвет добро пожаловать пользователь исправить
+        // $('#admin').attr('style','color: #ffffff; background: #ff3b3b; font-size: 12px; margin-bottom: 25px;'); // кнопка админа не могу
         // $('.highcharts-legend-item').attr('style','stroke: none; stroke-width: 0;'); // цвет надписей в легенде слишком сложно
-        // $('.highcharts-legend-item > text').attr('style','fill: #333333; color: #333333;; font-size:12px;font-weight:bold;'); // цвет надписей в легенде
-
-        $('.highcharts-axis.highcharts-yaxis > text').attr('style','fill: #666;'); // цвет надписей первой оси
-        $('.highcharts-axis-labels.highcharts-yaxis-labels > text').attr('style','fill: #666;'); // цвет надписей второй оси
-
-        $('.highcharts-yaxis-grid >.highcharts-grid-line').attr('style','stroke: #e6e6e6;'); // цвета колонок
-        $('.highcharts-axis-line').attr('style','stroke: #e6e6e6;;'); // цвета осей x y
-
-        $('.highcharts-button-box').attr('style',' fill: #fff;'); // цвета кнопки печати и тд
-
-        $('.highcharts-pie-series > path').attr('style',' stroke: white;'); // обводка круглых диаграм
-        $('.highcharts-pie-series > rect').attr('style',' stroke: white;'); // обводка кнопок круглых диаграмм
-
-        $('.highcharts-point').attr('style','stroke: white;'); // обводка круглых кнопок
-        $('.highcharts-point > rect').attr('style','stroke: white;'); // обводка диаграммы работа оборудования
-
-
-
-        // начало мест и персонала
-        $('.label_mesto').attr('style','color: #756e6e;'); // надпись место
-        $('.label_personal').attr('style','color: #756e6e;'); // надпись персонал
-
-        $(".icon_mesto").hover(function() { // свечение при наведении на место
-            $(this).css('-webkit-box-shadow', 'inset 0px 0px 12px 12px white');
-        }, function(){
-            $(this).css('-webkit-box-shadow', 'none');
-        });
-
-        $(".icon_personal").hover(function() { // свечение при наведении на персонад
-            $(this).css('-webkit-box-shadow', 'inset 0px 0px 12px 12px white');
-        }, function(){
-            $(this).css('-webkit-box-shadow', 'none');
-        });
-        // конец мест и персонала
-
-        $('table').attr('style','text-shadow: none; color: #0C213B; background: radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);');
-
-
+        // $('.highcharts-legend-item > text').attr('style','fill: red; color: red; font-size:12px; font-weight:bold; '); // цвет надписей в легенде сбрасывается при наведении
     }
     else if (count == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
-        $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
-        $(".hr, #menu_ul").attr("style", 'background-color: rgb(35 76 157)'); // цвет шапки
-
         $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
+        document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
 
-        $('header > ul > li').attr('style','color: green;'); // цвет добро пожаловать пользователь
+        // $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
+        // $(".hr, #menu_ul").attr("style", 'background-color: #234C9D'); // цвет шапки
 
-        $('.dropdown-content').attr('style','background: green; float: right; text-align: center;'); // цвет выпадающего меню
-        $('#role_vision').attr('style','color: #545050; font-size: 14px;'); // цвет роли пользователя
-        $('.dropdown-content > li').attr('style','color #333;'); // цвет имени польвателя
-        $('.dropdown-content > p').attr('style','color: #545050; font-size: 14px;'); // цвет почты
-        $('.dropdown-content > div').attr('style',' display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal'); // цвет линии разделения кнопки администрации
-        // $('#admin').attr('style','color: #ffffff; background: #ff3b3b; font-size: 12px; margin-bottom: 25px;'); // кнопка админа итак красивая
+        backgroundes(back_color_black, header_color_black, text_color_black, knopki_black); // Вызов функции для основных фонов
+        drop_content_colors(text_color_black, drop_down_line_black, back_color_black); // Вызов функции для выпадающих меню
+        nav_menu(nav_menu_color1_black, nav_menu_color2_black, nav_menu_color3_black, back_color_black, sutoch_butt_black); // Вызов функции для меню навигации
+        calendar(calen_1_color_black, back_color_black, calen_3_color_black, calen_4_color_black); // Вызов функции для календаря
+        hightcharts_colors(back_color_black, text_color_black, hicharts_color_3_black, hicharts_color_4_black, hicharts_color_5_black, grafik_phone_black, legend_color_black); // Вызов функции для графиков
+        mesto_personal(mesto_personal_color_black, back_color_black); // Вызов функции для надписей место и персонал
+        table_colors(table_color_1_black, back_color_black, table_color_3_black); // Вызов функции для таблицы
 
-// Начало Темные темы для навигационных меню: цвет фона, цвет рамки справа, темно красный цвет при наведении.
-        $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").attr('style','background-color: rgb(18 62 153); border-right: 1px solid #1e2760"');
-        $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").hover(function() {
-            $(this).css("background-color",'#a50f0f');
-        }, function(){
-            $(this).css("background-color", "rgb(18 62 153)");
-        });
-
-        $('.menu-color').attr('style','background: #a50f0f ; border-right: 1px solid #1e2760 '); // темная тема кнопка текущей позиции и темные границы в меню
-        $(".menu-color").hover(function() {
-            $(this).attr('style','background: #a50f0f ; border-right: 1px solid #1e2760 '); // Защита, чтоба кнопка текущей позиции оставалась темного цвета при наведении
-        });
-// Конец Темные темы для навигационных меню: цвет фона, цвет рамки справа, темно красный цвет при наведении.
-
-        $('.btn_change').css('background-color' , 'rgb(5,36,103)'); // кнопки суточный
-        $('.btn_change').css('borderColor' , 'rgb(5,36,103)'); //  и месячный отчеты
-        // $('h2').attr('style','color: white;'); // цвет надписи выберите дату(заголовки)
-
-        $('.form-control').attr('style','color: red; background: blue; border: 1px solid green'); // форма заполнения даты
-        $('.input-group-addon').attr('style','color: red; background: blue; border: 1px solid green'); // кнопка календаря
-        $('.follow').attr('style','color: black; background: gray; font-size: 145%; margin: 19px 0px;'); // кнопки обновить и выход
-
-        $('.highcharts-background').attr('style','fill: #0a0202'); // цвет фона графиков
-        $('.highcharts-title').attr('style','color: #333333; font-size: 18px; fill: white;'); // название графиков
-        $('.highcharts-axis-labels.highcharts-xaxis-labels>text').attr('style','fill: red; font-size: 18px;'); // надписи названий станков
-        $('.highcharts-legend-box').attr('style','fill: red; stroke: red;'); // цвет поля легенды
-
-        // $('.highcharts-legend-item').attr('style','stroke: blue; stroke-width: 0.1px;'); // цвет надписей в легенде слишком сложно
-        // $('.highcharts-legend-item > text').attr('style','fill: green; color: green; font-size:12px;font-weight:bold;'); // цвет надписей в легенде слишком сложно
-
-        $('.highcharts-axis.highcharts-yaxis > text').attr('style','fill: red;'); // цвет надписей первой оси
-        $('.highcharts-axis-labels.highcharts-yaxis-labels > text').attr('style','fill: red;'); // цвет надписей второй оси
-
-        $('.highcharts-yaxis-grid >.highcharts-grid-line').attr('style','stroke: green;'); // цвета колонок
-        $('.highcharts-axis-line').attr('style','stroke: red;'); // цвета осей x y
-        $('.highcharts-button-box').attr('style',' fill: red;'); // цвета кнопки печати и тд
-
-        $('.highcharts-point').attr('style','stroke: white;'); // обводка круглых кнопок
-        $('.highcharts-series > rect').attr('style',' stroke: red;'); // обводка диаграмм
-
-
-        $('.highcharts-pie-series > path').attr('style',' stroke: green;'); // обводка круглых диаграм
-        $('.highcharts-pie-series > rect').attr('style',' stroke: green;'); // обводка кнопок круглых диаграмм
-
-        $('.highcharts-point > rect').attr('style','stroke: blue;'); // обводка диаграммы работа оборудования
-
-        // начало мест и персонала
-        $('.label_mesto').attr('style','color: white;'); // надпись место
-        $('.label_personal').attr('style','color: white;'); // надпись персонал
-
-        $(".icon_mesto").hover(function() { // свечение при наведении на место
-            $(this).css('-webkit-box-shadow', 'inset 0px 0px 12px 12px #111111');
-        }, function(){
-            $(this).css('-webkit-box-shadow', 'none');
-        });
-
-        $(".icon_personal").hover(function() { // свечение при наведении на персонад
-            $(this).css('-webkit-box-shadow', 'inset 0px 0px 12px 12px #111111');
-        }, function(){
-            $(this).css('-webkit-box-shadow', 'none');
-        });
-        // конец мест и персонала
         $('table').attr('style','text-shadow: 1px 2px 3px white, 0 0 2em black, 0 0 0.1em white; color: black; background: radial-gradient(farthest-corner at 50% 50%, white, #808488);');
-
-        document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы.
-
-
-
     }
 }
