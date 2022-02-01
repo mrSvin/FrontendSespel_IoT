@@ -159,12 +159,11 @@
                 <p th:text="${user_mail}"></p>
                 <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
                 <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
-
                 <label class="switch">
+                    <p style="z-index: 2; font-weight: bold; position: relative; font-size: 1.1rem; word-spacing: 1.8rem; top: 20%">Светлая Темная</p>
                     <input type="checkbox" id='dark_button'/>
                     <span class="slider round"></span>
                 </label>
-
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
                         Выход
