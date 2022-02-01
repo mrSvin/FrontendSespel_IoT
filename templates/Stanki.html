@@ -149,7 +149,7 @@
 </head>
 <header>
     <div style="display: flex; width: 100vw; justify-content: space-around; flex-wrap: nowrap; width: 100%;">
-        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/></a>
+        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo" style="height: 100%;"/></a>
             <ul id="menu_ul">
                 <li id="menu_li"><a id="menu_a" href="displayStanki" class="menu-color">Мех.уч.II пл.</a></li>
                 <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
@@ -159,13 +159,13 @@
                 <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
                 <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
                 <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
+                <div style="display:flex;">
+                    <form style="display:flex; flex-direction: column; justify-content: space-between; margin: 0 10%;">
+                        <button formaction="displayStanki" class="button_color">Суточный отчет</button>
+                        <button formaction="displayStankiMonth" class="button_color">Месячный отчет</button>
+                    </form>
+                </div>  <!-- Меню -->
             </ul>
-        <div style="display:flex;">
-            <form style="display:flex; flex-direction: column; justify-content: space-between; margin: 0 10%;">
-                <button  formaction="displayStanki" class="button_color" class="button_color_active">Суточный отчет</button>
-                <button formaction="displayStankiMonth" class="button_color">Месячный отчет</button>
-            </form>
-        </div>  <!-- Меню -->
         <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
             th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
         <div method="post" class="dropdown" style="float: right">

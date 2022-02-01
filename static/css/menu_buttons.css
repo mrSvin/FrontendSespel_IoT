@@ -8,14 +8,14 @@
     margin: 0 0 4px 0; /*убираем отступы*/
     padding-left: 0; /*убираем отступы*/
     margin-top: 0px; /*делаем отступ сверху*/
-    background: rgb(36, 97, 219); /*добавляем фон всему меню*/
+    /*background: rgb(36, 97, 219); !*добавляем фон всему меню*!*/
     /*height: 50px; !*задаем высоту*!*/
     text-shadow: 2px 0 2px black;
 }
 
 #menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8 {
     text-decoration: none; /*убираем подчеркивание текста ссылок*/
-    background: rgb(36, 97, 219); /*добавляем фон к пункту меню*/
+    /*background: rgb(36, 97, 219); !*добавляем фон к пункту меню*!*/
     color: #fff; /*меняем цвет ссылок*/
     padding: 0px 15px; /*добавляем отступ*/
     font-family: MONTSERRAT; /*меняем шрифт*/
@@ -48,25 +48,25 @@
     justify-content: center;
     margin: 6px;
 
-    border: 1px solid #155ab7;
-    border-radius: 3px;
+    /*border: 1px solid #155ab7;*/
+    /*border-radius: 3px;*/
     padding: 1px 5px;
-    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    /*box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);*/
     /*inset -2px 1px 1.3rem #000000;*/
 
 }
 
 #menu_ul > li >a:hover{
     color: rgb(200, 200, 200);
-    background: #D43737!important;
+    /*background: #D43737!important;*/
     opacity: 95%;
-    border: 1px solid #701414;
+    /*border: 1px solid #701414;*/
 
-    -webkit-box-shadow: 0px 0px 1px 0px rgb(22, 33, 72);
-    -webkit-transition: .25s linear 0s;
-    -moz-transition: .25s linear 0s;
-    -o-transition: .25s linear 0s;
-    transition: .25s linear 0s
+    /*-webkit-box-shadow: 0px 0px 1px 0px rgb(22, 33, 72);*/
+    /*-webkit-transition: .25s linear 0s;*/
+    /*-moz-transition: .25s linear 0s;*/
+    /*-o-transition: .25s linear 0s;*/
+    /*transition: .25s linear 0s*/
 
 }
 
@@ -84,26 +84,46 @@
 .button_color {
     position: relative;
     display: inline-block;
+    margin: 5px;
     padding: 2px;
-    border: 3px solid #6793d6;
     color: #FFFFFF;
-    background: #ffffff;
+    /*background: #ffffff;*/
     font-size: 15px;
     font-family: arial;
-    background-image: linear-gradient(#6793d6, #6793d6);
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    /*background-size: 0% 100%;*/
-    transition: background-size .5s, color .5s;
+    /*background-image: linear-gradient(#6793d6, #6793d6);*/
+    /*background-position: 50% 50%;*/
+    /*background-repeat: no-repeat;*/
     text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black;
     font-weight: bolder;
+    /*border-color: #6793d6;*/
+    /*border-radius: 3px;*/
+    /*box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);*/
 }
 
 .button_color:hover {
-    background-size: 100% 100%;
-    color: rgb(220 220 220) !important;
+    color: rgb(200, 200, 200);
+    /*background: #D43737;*/
+    /*opacity: 95%;*/
+    /*border-color: #D43737;*/
+
+
+
+    /*-webkit-box-shadow: 0px 0px 1px 0px rgb(22, 33, 72);*/
+    /*-webkit-transition: .25s linear 0s;*/
+    /*-moz-transition: .25s linear 0s;*/
+    /*-o-transition: .25s linear 0s;*/
+    /*transition: .25s linear 0s*/
 }
 
-.button_color_active {
+.menu-color {
+    /*background: #D43737!important;*/
+    opacity: 95%;
+    /*box-shadow: none!important;*/
+    color: #f84747!important;
+    text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black !important;
+    /*border: 1px solid #701414!important;*/
+}
 
+.menu-color:hover {
+    color: rgb(200, 200, 200)!important;
 }

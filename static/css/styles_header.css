@@ -122,12 +122,7 @@ td {
     width: 130px;
     background: #4f759be0;
 }
-.menu-color {
-    background: #D43737!important;
-    opacity: 95%;
-    box-shadow: none!important;
-    border: 1px solid #701414!important;
-}
+
 
 .switch {
     position: relative;
