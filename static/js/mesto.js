@@ -265,11 +265,11 @@ function navigator_2(){
 };
 
 function navigator_3(){
-    mar_top = -145;
-    mar_left = 680;
+    mar_top = -200;
+    mar_left = 220;
     bground = 'url(../images/navigator.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
-    size = 60;
+    size = 50;
     bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
@@ -313,11 +313,27 @@ function kometa_1(){
 };
 
 function kometa_2(){
-    mar_top = -520;
-    mar_left = 940;
+    mar_top = -370;
+    mar_left = 1015;
     bground = 'url(../images/kometa.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
-    size = 40;
+    size = 50;
+    bwidth = "unset";
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['bwidth'] = bwidth;
+    window.localStorage['size'] = size;
+};
+
+function kometa_3(){
+    mar_top = -340;
+    mar_left = 870;
+    bground = 'url(../images/kometa.png) no-repeat';
+    place_img = "../images/sbor_ceh.png";
+    size = 50;
     bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
@@ -563,7 +579,7 @@ function m710 (){
     mar_left = 800;
     bground = 'url(../images/robot.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
-    size = 60;
+    size = 40;
     bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
@@ -608,7 +624,7 @@ function p250 (){
 
 function krot (){
     mar_top = -920;
-    mar_left = 800;
+    mar_left = 890;
     bground = 'url(../images/robot.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
