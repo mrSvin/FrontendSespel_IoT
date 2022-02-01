@@ -148,9 +148,8 @@
 
 </head>
 <header>
-    <ul class="hr" style="display: flex; flex-wrap: nowrap; align-items: stretch">
-        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
-        <div style="display: flex; width: 100vw; justify-content: center; background: rgb(36, 97, 219); padding: 0 5vw">
+    <div style="display: flex; width: 100vw; justify-content: space-around; flex-wrap: nowrap; width: 100%;">
+        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/></a>
             <ul id="menu_ul">
                 <li id="menu_li"><a id="menu_a" href="displayStanki" class="menu-color">Мех.уч.II пл.</a></li>
                 <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
@@ -161,10 +160,9 @@
                 <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
                 <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
             </ul>
-        </div>
         <div style="display:flex;">
             <form style="display:flex; flex-direction: column; justify-content: space-between; margin: 0 10%;">
-                <button  formaction="displayStanki" class="button_color">Суточный отчет</button>
+                <button  formaction="displayStanki" class="button_color" class="button_color_active">Суточный отчет</button>
                 <button formaction="displayStankiMonth" class="button_color">Месячный отчет</button>
             </form>
         </div>  <!-- Меню -->
@@ -191,7 +189,7 @@
                 </form>
             </div>
         </div>
-    </ul>       <!--Шапка html-->
+    </div>
 </header>       <!--Шапка html-->
 
 <div class="preloader">
