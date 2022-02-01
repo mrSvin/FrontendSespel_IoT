@@ -22,28 +22,28 @@ var grafik_phone = '#ffffff';
 var legend_color = '#ffffff';
 
 // Переменные для темной темы
-var back_color_black = "#111111"; // основной цвет фона(и цвет текста кнопок обновить и выход)
-var text_color_black = "#fff"; // основной цвет текста
+var back_color_black = "#161821"; // основной цвет фона(и цвет текста кнопок обновить и выход)
+var text_color_black = "#83addd"; // основной цвет текста
 // var text_color_gray_black = "#545050"; // цвет для роли пользователя старый
 var drop_down_line_black = '#cccccc'; // цвет линии разделения в выпадающем меню
-var header_color_black = '#3b3636'; // цвет шапки
+var header_color_black = '#161821'; // цвет шапки
 var nav_menu_color1_black = '#26272c';// цвета навигационных меню
 var nav_menu_color2_black = '#696161';// цвета навигационных меню при наведении
 var nav_menu_color3_black = '#000000';// цвет правой стенки навигационного меню
 var sutoch_butt_black = '#052467'; // цвет фона выделенной кнопки месяца
-var knopki_black = '#666666'; // цвета кнопок обновить и выход
-var calen_1_color_black = '#fff'; // текст в календаре
-var calen_3_color_black = '#cccccc'; // рамка вокруг кнопки календаря
-var calen_4_color_black = '#333030'; // фон вокруг кнопки календаря
-var hicharts_color_3_black = '#9a9797'; // графики цвет надписей наименования
-var hicharts_color_4_black = '#b2b0b0'; // графики цвет тени легенды количества операций
-var hicharts_color_5_black = '#bebebe'; // графики цвет линий в графиках
-var mesto_personal_color_black = '#d5cece'; // цвета надписи место и персонал
+var knopki_black = '#83addd'; // цвета кнопок обновить и выход
+var calen_1_color_black = '#b3b8be'; // текст в календаре
+var calen_3_color_black = '#83addd'; // рамка вокруг кнопки календаря
+var calen_4_color_black = '#83addd'; // фон вокруг кнопки календаря
+var hicharts_color_3_black = '#b3b8be'; // графики цвет надписей наименования
+var hicharts_color_4_black = '#83addd'; // графики цвет тени легенды количества операций
+var hicharts_color_5_black = '#83addd'; // графики цвет линий в графиках
+var mesto_personal_color_black = '#b3b8be'; // цвета надписи место и персонал
 var table_color_1_black = "#cec7c7"; // градиентые цвета таблицы
-var table_color_3_black = '#808488'; // градиентые цвета таблицы
+var table_color_3_black = '#83addd'; // градиентые цвета таблицы
 
-var grafik_phone_black = '#262424';
-var legend_color_black = '#6b6666';
+var grafik_phone_black = '#161821';
+var legend_color_black = '#b3b8be';
 
 
 // Определения функций
