@@ -313,8 +313,8 @@ function kometa_1(){
 };
 
 function kometa_2(){
-    mar_top = -370;
-    mar_left = 1015;
+    mar_top = -300;
+    mar_left = 948;
     bground = 'url(../images/kometa.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 50;
