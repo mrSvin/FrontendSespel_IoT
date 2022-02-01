@@ -249,8 +249,8 @@ function navigator_1(){
 };
 
 function navigator_2(){
-    mar_top = -145;
-    mar_left = 680;
+    mar_top = -100;
+    mar_left = 540;
     bground = 'url(../images/navigator.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
     size = 60;
@@ -627,7 +627,7 @@ function krot (){
     mar_left = 890;
     bground = 'url(../images/robot.png) no-repeat';
     place_img = "../images/sbor_ceh.png";
-    size = 60;
+    size = 40;
     bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;
