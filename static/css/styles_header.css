@@ -47,10 +47,9 @@ td {
 .dropdown-content {
     display: none;
     position: absolute;
-    font-family: "Open Sans", sans-serif;
     right: 0;
-    min-width: 180px;
-    box-shadow: 0px 3px 12px 0px #989292;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 5px; /* Уголки */
     margin: 8%;
     background-color: #ffffff;
@@ -71,12 +70,6 @@ td {
     height: 100px;
     object-fit: cover;
 }
-
-.dropdown-content p {
-    color: #545050;
-    font-size: 14px;
-}
-
 
 .dropdown-content:hover {
     background-color: #f1f1f1;
@@ -113,7 +106,7 @@ td {
     font-family: "Open Sans", sans-serif;
     color: #ffffff;
     background: #4f759b;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
     letter-spacing: 0.025em;
     border: none;
@@ -128,37 +121,13 @@ td {
 .follow:hover {
     width: 130px;
     background: #4f759be0;
-    font-size: 17px;
 }
 .menu-color {
     background: #D43737!important;
+    opacity: 95%;
+    box-shadow: none!important;
+    border: 1px solid #701414!important;
 }
-
-#admin{
-    display: none;
-    background: #ff3b3b;
-    width: 145px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.025em;
-    border-radius: 5px;
-    font-family: "Open Sans", sans-serif;
-    color: #ffffff;
-    border: none;
-    min-height: 35px;
-    margin-bottom: 25px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-
-}
-
-#admin:hover {
-    background: #ff3b3b;
-    width: 160px;
-    font-size: 13px;
-}
-
-
 
 .switch {
     position: relative;
@@ -212,3 +181,4 @@ input:checked + .slider:before {
 .slider.round, .slider.round:before {
     border-radius: 34px;
 }
+

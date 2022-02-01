@@ -1,104 +1,105 @@
 
 #menu_ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /*justify-content: safe center;*/
     list-style: none; /*убираем маркеры списка*/
-    margin: 0; /*убираем отступы*/
+    margin: 0 0 4px 0; /*убираем отступы*/
     padding-left: 0; /*убираем отступы*/
     margin-top: 0px; /*делаем отступ сверху*/
     background: rgb(36, 97, 219); /*добавляем фон всему меню*/
-    height: 50px; /*задаем высоту*/
+    /*height: 50px; !*задаем высоту*!*/
     text-shadow: 2px 0 2px black;
 }
 
 #menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8 {
     text-decoration: none; /*убираем подчеркивание текста ссылок*/
-    background: rgb(58, 111, 219); /*добавляем фон к пункту меню*/
+    background: rgb(36, 97, 219); /*добавляем фон к пункту меню*/
     color: #fff; /*меняем цвет ссылок*/
     padding: 0px 15px; /*добавляем отступ*/
     font-family: MONTSERRAT; /*меняем шрифт*/
-    font-size: 250%;
+    font-size: 150%;
     line-height: 50px; /*ровняем меню по вертикали*/
-    display: block;
-    border-right: 1px solid #F36262; /*добавляем бордюр справа*/
+    /*display: block;*/
+    /*border-right: 1px solid #F36262; !*добавляем бордюр справа*!*/
     -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
     -o-transition: all 0.3s 0.01s ease;
     -webkit-transition: all 0.3s 0.01s ease;
+    text-transform: uppercase;
 
 }
 /*Общее свойство для кнопок при наведении*/
+
+#menu_ul > li {
+    /*min-width: 176px;*/
+    /*max-width: 235px;*/
+    margin-top: 4px;
+    /*-webkit-box-shadow: 0px 1px 5px 0px rgb(204, 204, 204);*/
+
+}
+
+#menu_ul > li > a {
+    display: flex;
+    flex-wrap: nowrap;
+    /*border-width: 2px;*/
+    /*border-color: black;*/
+    /*border-bottom-style: solid ;*/
+    justify-content: center;
+    margin: 6px;
+
+    border: 1px solid #155ab7;
+    border-radius: 3px;
+    padding: 1px 5px;
+    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    /*inset -2px 1px 1.3rem #000000;*/
+
+}
+
 #menu_ul > li >a:hover{
     color: rgb(200, 200, 200);
+    background: #D43737!important;
+    opacity: 95%;
+    border: 1px solid #701414;
+
+    -webkit-box-shadow: 0px 0px 1px 0px rgb(22, 33, 72);
+    -webkit-transition: .25s linear 0s;
+    -moz-transition: .25s linear 0s;
+    -o-transition: .25s linear 0s;
+    transition: .25s linear 0s
+
 }
 
-#menu_a:hover {
+
+#menu_a:hover, #menu_a1:hover, #menu_a2:hover, #menu_a3:hover, #menu_a4:hover, #menu_a5:hover, #menu_a6:hover, #menu_a7:hover, #menu_a8:hover {
     font-family: MONTSERRAT;
-    background: #D43737; /*добавляем эффект при наведении*/
-
 
 }
 
-#menu_a1:hover {
-    font-family: MONTSERRAT;
-    background: #D43737; /*добавляем эффект при наведении*/
-}
 
-#menu_a2:hover {
-    font-family: MONTSERRAT;
-    background: #D43737; /*добавляем эффект при наведении*/
-}
+/*#menu_li, #menu_li1, #menu_li2, #menu_li3, #menu_li4, #menu_li5, #menu_li6, #menu_li7, #menu_li8 {*/
+/*    float: left; !*Размещаем список горизонтально для реализации меню*!*/
+/*}*/
 
-#menu_a3:hover {
-    font-family: MONTSERRAT;
-    background: #D43737; /*добавляем эффект при наведении*/
-}
-
-#menu_a4:hover {
-    font-family: MONTSERRAT;
-    background: #D43737; /*добавляем эффект при наведении*/
-}
-
-#menu_a5:hover {
-    font-family: MONTSERRAT;
-    background: #D43737; /*добавляем эффект при наведении*/
-}
-
-#menu_a6:hover {
-    font-family: MONTSERRAT;
-    background: #D43737; /*добавляем эффект при наведении*/
-}
-
-#menu_a7:hover {
-    font-family: MONTSERRAT;
-    background: #D43737; /*добавляем эффект при наведении*/
-}
-
-#menu_a8:hover {
-    font-family: MONTSERRAT;
-    background: #D43737; /*добавляем эффект при наведении*/
-}
-
-#menu_li, #menu_li1, #menu_li2, #menu_li3, #menu_li4, #menu_li5, #menu_li6, #menu_li7, #menu_li8 {
-    float: left; /*Размещаем список горизонтально для реализации меню*/
-}
-
-.btn_change {
+.button_color {
     position: relative;
     display: inline-block;
-    padding: 15px;
+    padding: 2px;
     border: 3px solid #6793d6;
-    color: #333;
+    color: #FFFFFF;
     background: #ffffff;
-    font-size: 30px;
+    font-size: 15px;
     font-family: arial;
     background-image: linear-gradient(#6793d6, #6793d6);
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    background-size: 0% 100%;
+    /*background-size: 0% 100%;*/
     transition: background-size .5s, color .5s;
-    text-shadow: 1px 0 1px black;
+    text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black;
     font-weight: bolder;
 }
 
-.btn_change:hover {
+.button_color:hover {
     background-size: 100% 100%;
     color: rgb(220 220 220) !important;
 }

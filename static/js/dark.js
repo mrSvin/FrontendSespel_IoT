@@ -92,7 +92,9 @@ function hightcharts_colors(back_color, text_color, hicharts_color_3, hicharts_c
 {
     $('.highcharts-background').attr('style','fill:' + grafik_phone +';'); // цвет фона графиков
     $('.highcharts-title').attr('style','color:' + text_color + '; font-size: 18px; fill:' + text_color + ';'); // название графиков
-    $('.highcharts-axis-labels.highcharts-xaxis-labels > text').attr('style','fill:' + hicharts_color_3 + '; font-size: 18px;'); // надписи названий станков
+
+    $('.highcharts-axis-labels.highcharts-xaxis-labels > text').attr('style','fill:' + hicharts_color_3 + ';');  // надписи названий станков
+    $('#container_sum_zagruzka .highcharts-axis-labels.highcharts-xaxis-labels > text, #container_kol_operations .highcharts-axis-labels.highcharts-xaxis-labels > text').attr('style','fill:' + hicharts_color_3 + ';font-size: 18px;'); // надписи названий станков для общей загрузки и количества операций
     $('.highcharts-legend-box').attr('style','fill:' + legend_color + ';'); // цвет поля легенды
     $('.highcharts-legend-box.highcharts-shadow').attr('style','stroke: ' + hicharts_color_4 + ';'); // цвет рамки легенды у количества операций
     $('.highcharts-axis.highcharts-yaxis > text').attr('style','fill:' + hicharts_color_3 + ';'); // цвет надписей первой оси
@@ -132,7 +134,7 @@ function table_colors(table_color_1, back_color, table_color_3) {
 function dark(){
     if (count == 0) // условие светлой темы
     {
-        $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого
+        // $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого
         backgroundes(back_color, header_color, text_color, knopki); // Вызов функции для основных фонов
         drop_content_colors(text_color, drop_down_line, back_color); // Вызов функции для выпадающих меню
         nav_menu(nav_menu_color1, nav_menu_color2, nav_menu_color3, back_color, sutoch_butt); // Вызов функции для меню навигации
@@ -140,6 +142,7 @@ function dark(){
         hightcharts_colors(back_color, text_color, hicharts_color_3, hicharts_color_4, hicharts_color_5, grafik_phone, legend_color); // Вызов функции для графиков
         mesto_personal(mesto_personal_color, back_color); // Вызов функции для надписей место и персонал
         table_colors(table_color_1, back_color, table_color_3); // Вызов функции для таблицы
+
         // $('header > ul > li').attr('style','color #fff;'); // цвет добро пожаловать пользователь исправить
         // $('#admin').attr('style','color: #ffffff; background: #ff3b3b; font-size: 12px; margin-bottom: 25px;'); // кнопка админа не могу
         // $('.highcharts-legend-item').attr('style','stroke: none; stroke-width: 0;'); // цвет надписей в легенде слишком сложно
@@ -147,11 +150,12 @@ function dark(){
     }
     else if (count == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
-        $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
+        // $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
         document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
 
         // $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
         // $(".hr, #menu_ul").attr("style", 'background-color: #234C9D'); // цвет шапки
+
         backgroundes(back_color_black, header_color_black, text_color_black, knopki_black); // Вызов функции для основных фонов
         drop_content_colors(text_color_black, drop_down_line_black, back_color_black); // Вызов функции для выпадающих меню
         nav_menu(nav_menu_color1_black, nav_menu_color2_black, nav_menu_color3_black, back_color_black, sutoch_butt_black); // Вызов функции для меню навигации
@@ -159,6 +163,8 @@ function dark(){
         hightcharts_colors(back_color_black, text_color_black, hicharts_color_3_black, hicharts_color_4_black, hicharts_color_5_black, grafik_phone_black, legend_color_black); // Вызов функции для графиков
         mesto_personal(mesto_personal_color_black, back_color_black); // Вызов функции для надписей место и персонал
         table_colors(table_color_1_black, back_color_black, table_color_3_black); // Вызов функции для таблицы
+
+
         $('table').attr('style','text-shadow: 1px 2px 3px white, 0 0 2em black, 0 0 0.1em white; color: black; background: radial-gradient(farthest-corner at 50% 50%, white, #808488);');
     }
 }

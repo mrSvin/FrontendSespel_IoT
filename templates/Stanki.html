@@ -148,8 +148,28 @@
 
 </head>
 <header>
-    <ul class="hr">
+    <ul class="hr" style="display: flex; flex-wrap: nowrap; align-items: stretch">
         <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
+        <div style="display: flex; width: 100vw; justify-content: center; background: rgb(36, 97, 219); padding: 0 5vw">
+            <ul id="menu_ul">
+                <li id="menu_li"><a id="menu_a" href="displayStanki" class="menu-color">Мех.уч.II пл.</a></li>
+                <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
+                <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
+                <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.I пл.</a></li>
+                <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
+                <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
+                <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
+                <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
+            </ul>
+        </div>
+        <div style="display:flex;">
+            <form style="display:flex; flex-direction: column; justify-content: space-between; margin: 0 10%;">
+                <button  formaction="displayStanki" class="button_color">Суточный отчет</button>
+                <button formaction="displayStankiMonth" class="button_color">Месячный отчет</button>
+            </form>
+        </div>  <!-- Меню -->
+        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
+            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
         <div method="post" class="dropdown" style="float: right">
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center; background-color: whitesmoke">
@@ -171,25 +191,9 @@
                 </form>
             </div>
         </div>
-        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
-            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
     </ul>       <!--Шапка html-->
 </header>       <!--Шапка html-->
 
-<div>
-    <ul id="menu_ul">
-        <li id="menu_li"><a id="menu_a" href="displayStanki" class="menu-color">Мех.уч.II пл.</a></li>
-        <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
-        <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
-        <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.I пл.</a></li>
-        <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
-        <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
-        <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
-        <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
-        <li id="menu_li8"><a id="menu_a8" href="gibka">Гибка</a></li>
-    </ul>
-</div>  <!-- Меню -->
-<!-- Загрузка страницы -->
 <div class="preloader">
     <div class="preloader__row">
         <div class="preloader__item"></div>
