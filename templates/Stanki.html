@@ -159,12 +159,6 @@
                 <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
                 <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
                 <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
-                <div style="display:flex;">
-                    <form style="display:flex; flex-direction: column; justify-content: space-between; margin: 0 10%;">
-                        <button formaction="displayStanki" class="button_color">Суточный отчет</button>
-                        <button formaction="displayStankiMonth" class="button_color">Месячный отчет</button>
-                    </form>
-                </div>  <!-- Меню -->
             </ul>
         <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
             th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
@@ -190,6 +184,12 @@
             </div>
         </div>
     </div>
+    <div style="display:flex; justify-content: center;">
+        <form>
+            <button  formaction="displayStanki" class="button_color button_color_active">Суточный отчет</button>
+            <button formaction="displayStankiMonth" class="button_color">Месячный отчет</button>
+        </form>
+    </div>  <!-- Меню -->
 </header>       <!--Шапка html-->
 
 <div class="preloader">
@@ -200,12 +200,6 @@
 </div>
 
 <body>
-<div style="clear: both">
-    <form>
-        <button formaction="displayStanki" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF;">Суточный отчет</button>
-        <button formaction="displayStankiMonth" class="btn_change" style="width:40%">Месячный отчет</button>
-    </form>
-</div>  <!--Кнопки суточный и месячный отчеты html-->
 <div class="container">
     <div style="width: 220px; float: left">
         <h2>Выберите дату:</h2>

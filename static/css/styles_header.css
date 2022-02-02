@@ -9,15 +9,11 @@ ul.hr {
 
 }
 
-.hr img {
-    transition: 1s;
-    margin-top: 20px;
-}
-
 .icon-logo:hover {
     background: #D43737;
     border-radius: 10px 33px 33px;
     transform: scale(1.01);
+    transition: 1s;
 }
 
 ul.hr li {

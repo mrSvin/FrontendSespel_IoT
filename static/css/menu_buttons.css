@@ -83,18 +83,28 @@
 
 .button_color {
     position: relative;
-    display: inline-block;
+    display: inline;
     margin: 5px;
-    padding: 2px;
     color: #FFFFFF;
     /*background: #ffffff;*/
-    font-size: 15px;
+    font-size: 18px;
     font-family: arial;
     /*background-image: linear-gradient(#6793d6, #6793d6);*/
     /*background-position: 50% 50%;*/
     /*background-repeat: no-repeat;*/
     text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black;
     font-weight: bolder;
+
+    -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+    -o-transition: all 0.3s 0.01s ease;
+    -webkit-transition: all 0.3s 0.01s ease;
+
+
+    margin: 5px;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background-color: transparent;
     /*border-color: #6793d6;*/
     /*border-radius: 3px;*/
     /*box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);*/
@@ -114,6 +124,16 @@
     /*-o-transition: .25s linear 0s;*/
     /*transition: .25s linear 0s*/
 }
+
+.button_color_active {
+    color: #f84747!important;
+    text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black !important;
+}
+
+.button_color_active:hover {
+    color: rgb(200, 200, 200)!important;
+}
+
 
 .menu-color {
     /*background: #D43737!important;*/
