@@ -10,7 +10,7 @@
     margin-top: 0px; /*делаем отступ сверху*/
     /*background: rgb(36, 97, 219); !*добавляем фон всему меню*!*/
     /*height: 50px; !*задаем высоту*!*/
-    text-shadow: 2px 0 2px black;
+    /*text-shadow: 2px 0 2px black;*/
 }
 
 #menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8 {
@@ -20,13 +20,35 @@
     padding: 0px 15px; /*добавляем отступ*/
     font-family: MONTSERRAT; /*меняем шрифт*/
     font-size: 150%;
-    line-height: 50px; /*ровняем меню по вертикали*/
-    /*display: block;*/
-    /*border-right: 1px solid #F36262; !*добавляем бордюр справа*!*/
+
     -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
     -o-transition: all 0.3s 0.01s ease;
     -webkit-transition: all 0.3s 0.01s ease;
     text-transform: uppercase;
+
+
+    /*color: #1f2a4b;*/
+    color: #ebedf3;
+    /*background: #ffffff;*/
+    font-size: 18px;
+    font-family: arial;
+    /*background-image: linear-gradient(#6793d6, #6793d6);*/
+    /*background-position: 50% 50%;*/
+    /*background-repeat: no-repeat;*/
+    /*text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 4px black;*/
+    font-weight: bolder;
+    text-transform: uppercase;
+
+    -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+    -o-transition: all 0.3s 0.01s ease;
+    -webkit-transition: all 0.3s 0.01s ease;
+
+
+    margin: 5px;
+    padding: 0 20px;
+    border: 0;
+    outline: none;
+    background-color: transparent;
 
 }
 /*Общее свойство для кнопок при наведении*/
@@ -46,20 +68,21 @@
     /*border-color: black;*/
     /*border-bottom-style: solid ;*/
     justify-content: center;
-    margin: 6px;
+    margin: 0px;
 
     /*border: 1px solid #155ab7;*/
     /*border-radius: 3px;*/
-    padding: 1px 5px;
+    padding: 1px 15px;
     /*box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);*/
     /*inset -2px 1px 1.3rem #000000;*/
 
 }
 
 #menu_ul > li >a:hover{
-    color: rgb(200, 200, 200);
+    color: #14b2f3 !important;
     /*background: #D43737!important;*/
     opacity: 95%;
+    text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px #1aaae5 !important;
     /*border: 1px solid #701414;*/
 
     /*-webkit-box-shadow: 0px 0px 1px 0px rgb(22, 33, 72);*/
@@ -67,7 +90,7 @@
     /*-moz-transition: .25s linear 0s;*/
     /*-o-transition: .25s linear 0s;*/
     /*transition: .25s linear 0s*/
-    box-shadow: 0px 5px 5px 0px #4a9bb2;
+    /*box-shadow: 0px 7px 8px -2px #4a9bb2, inset 0px -16px 21px -21px #4a9bb2!important;*/
 
 }
 
@@ -80,16 +103,18 @@
 
 .button_color {
     position: relative;
+    font-weight: 700;
     display: inline;
     margin: 5px;
-    color: #FFFFFF;
+    /*color: #1f2a4b;*/
+    color: #ebedf3;
     /*background: #ffffff;*/
     font-size: 18px;
     font-family: arial;
     /*background-image: linear-gradient(#6793d6, #6793d6);*/
     /*background-position: 50% 50%;*/
     /*background-repeat: no-repeat;*/
-    text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black;
+    /*text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black;*/
     font-weight: bolder;
     text-transform: uppercase;
 
@@ -106,15 +131,15 @@
     /*border-color: #6793d6;*/
     /*border-radius: 3px;*/
     /*box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);*/
-
 }
 
 .button_color:hover {
-    color: rgb(200, 200, 200);
-    box-shadow: 0px 5px 5px 0px #4a9bb2;
+    color: #14b2f3 !important;
+    text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px #1aaae5 !important;
     /*background: #D43737;*/
     /*opacity: 95%;*/
     /*border-color: #D43737;*/
+    /*box-shadow: 0px 7px 8px -2px #4a9bb2, inset 0px -16px 21px -21px #4a9bb2!important;*/
 
 
 
@@ -126,13 +151,14 @@
 }
 
 .button_color_active {
-    color: #f84747!important;
-    text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black !important;
-    box-shadow: 0px 5px 5px 0px #4a9bb2!important;
+    color: #1aaae5!important;
+    /*text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black !important;*/
+    /*box-shadow: 0px 7px 8px -2px #4a9bb2, inset 0px -16px 21px -21px #4a9bb2!important;*/
+    text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px #1aaae5 !important;
 }
 
 .button_color_active:hover {
-    color: rgb(200, 200, 200)!important;
+    color: #14b2f3 !important;
 }
 
 
@@ -140,12 +166,13 @@
     /*background: #D43737!important;*/
     opacity: 95%;
     /*box-shadow: none!important;*/
-    color: #f84747!important;
-    text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black !important;
-    box-shadow: 0px 5px 5px 0px #4a9bb2!important;
+    color: #1aaae5!important;
+    text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px #1aaae5 !important;
     /*border: 1px solid #701414!important;*/
+    /*box-shadow: 0px 7px 8px -2px #4a9bb2, inset 0px -16px 21px -21px #4a9bb2!important;*/
+
 }
 
 .menu-color:hover {
-    color: rgb(200, 200, 200)!important;
+    color: #14b2f3 !important;
 }

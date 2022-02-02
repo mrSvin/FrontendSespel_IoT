@@ -1,4 +1,4 @@
-var back_color = "#ffffff"; // основной цвет фона(и цвет текста кнопок обновить и выход)
+var back_color = "#f2f6f8"; // основной цвет фона(и цвет текста кнопок обновить и выход)
 var text_color = "#333333"; // основной цвет текста
 // var text_color_gray = "#545050"; // цвет для роли пользователя старый
 var drop_down_line = '#c9cbd0'; // цвет линии разделения в выпадающем меню
@@ -16,10 +16,10 @@ var hicharts_color_4 = '#999999'; // графики цвет тени леген
 var hicharts_color_5 = '#e6e6e6'; // графики цвет линий в графиках
 var mesto_personal_color = '#756e6e'; // цвета надписи место и персонал
 var table_color_1 = '#0C213B'; // градиентые цвета таблицы
-var table_color_3 = '#DCECF8'; // градиентые цвета таблицы
+var table_color_3 = '#d1e6f6'; // градиентые цвета таблицы
 
-var grafik_phone = '#ffffff';
-var legend_color = '#ffffff';
+var grafik_phone = '#f2f6f8';
+var legend_color = '#f2f6f8';
 
 // Переменные для темной темы
 var back_color_black = "#161821"; // основной цвет фона(и цвет текста кнопок обновить и выход)
@@ -27,10 +27,10 @@ var text_color_black = "#83addd"; // основной цвет текста
 // var text_color_gray_black = "#545050"; // цвет для роли пользователя старый
 var drop_down_line_black = '#cccccc'; // цвет линии разделения в выпадающем меню
 var header_color_black = '#161821'; // цвет шапки
-var nav_menu_color1_black = '#26272c';// цвета навигационных меню
-var nav_menu_color2_black = '#696161';// цвета навигационных меню при наведении
-var nav_menu_color3_black = '#000000';// цвет правой стенки навигационного меню
-var sutoch_butt_black = '#052467'; // цвет фона выделенной кнопки месяца
+// var nav_menu_color1_black = '#26272c';// цвета навигационных меню
+// var nav_menu_color2_black = '#696161';// цвета навигационных меню при наведении
+// var nav_menu_color3_black = '#000000';// цвет правой стенки навигационного меню
+// var sutoch_butt_black = '#052467'; // цвет фона выделенной кнопки месяца
 var knopki_black = '#83addd'; // цвета кнопок обновить и выход
 var calen_1_color_black = '#b3b8be'; // текст в календаре
 var calen_3_color_black = '#83addd'; // рамка вокруг кнопки календаря
@@ -44,6 +44,11 @@ var table_color_3_black = '#83addd'; // градиентые цвета табл
 
 var grafik_phone_black = '#161821';
 var legend_color_black = '#b3b8be';
+
+var nav_menu_col1 = "#14b2f3";
+var nav_menu_col2 = "#1aaae5";
+var nav_menu_col3 = "#e0f7fe";
+var nav_menu_col4 = "#000";
 
 
 // Определения функций
@@ -80,6 +85,42 @@ function drop_content_colors(text_color, drop_down_line, back_color){
 //     $('.btn_change').css('background-color' , back_color); // кнопки суточных
 //     $('.btn_change').css('borderColor' , sutoch_butt); // и месячных отчетов
 // }
+
+
+
+
+function nav_menu(nav_menu_col1, nav_menu_col2, nav_menu_col3, nav_menu_col4) {
+    $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").attr('style','color:' + nav_menu_col3 + ';'); // цвета навигационных меню и рамки
+    $("#menu_a, #menu_a1, #menu_a2, #menu_a3, #menu_a4, #menu_a5, #menu_a6, #menu_a7, #menu_a8, #menu_a9").hover(function() {
+        $(this).attr('style', 'color:' + nav_menu_col1 +'; text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px' + nav_menu_col2 + '!important;');
+    }, function(){
+        $(this).attr('style','color:' + nav_menu_col3 + '!important; text-shadow: none;');
+    });
+
+    $('.menu-color').attr('style','color:' + nav_menu_col2 + '!important; text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px' + nav_menu_col2 + '!important;'); // светлая тема кнопка текущей позиции и темные границы в меню
+    $(".menu-color").hover(function() {
+        $(this).attr('style','color:' + nav_menu_col1 + ';');
+    }, function(){
+        $(this).attr('style','color:' + nav_menu_col2 + '!important;');
+    });
+
+    $('.button_color').attr('style','color:' + nav_menu_col3 + '!important; '); // светлая тема кнопка текущей позиции и темные границы в меню
+    $(".button_color").hover(function() {
+        $(this).attr('style','color:' + nav_menu_col1 +'!important; text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px' + nav_menu_col2 + '!important;');
+    }, function(){
+        $(this).attr('style','color:' + nav_menu_col3 + '; text-shadow: none;');
+    });
+
+    $('.button_color_active.button_color').attr('style','color:' + nav_menu_col2 + '!important; text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px' + nav_menu_col2 + '!important;'); // светлая тема кнопка текущей позиции и темные границы в меню
+    $(".button_color_active.button_color").hover(function() {
+        $(this).attr('style','color:' + nav_menu_col1 + ';');
+    }, function(){
+        $(this).attr('style','color:' + nav_menu_col2 + '!important; text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px' + nav_menu_col2 + '!important;');
+    });
+
+    $('.neo-line').attr('style',' background:' + nav_menu_col4 + '!important; box-shadow: 0px 0px 5px 3px' + nav_menu_col1 + ', inset 0px 0px 0px 0px' + nav_menu_col1 + '!important;'); // светлая тема кнопка текущей позиции и темные границы в меню
+}
+
 
 // calen_1_color: #555555; back_color: #fff; calen_3_color: #666666; calen_4_color: #eeeeee;
 function calendar(calen_1_color ,back_color, calen_3_color, calen_4_color){
@@ -142,6 +183,18 @@ function dark(){
         hightcharts_colors(back_color, text_color, hicharts_color_3, hicharts_color_4, hicharts_color_5, grafik_phone, legend_color); // Вызов функции для графиков
         mesto_personal(mesto_personal_color, back_color); // Вызов функции для надписей место и персонал
         table_colors(table_color_1, back_color, table_color_3); // Вызов функции для таблицы
+        nav_menu(nav_menu_col1, nav_menu_col2, nav_menu_col4, nav_menu_col2 );
+
+        // var nav_menu_col1 = "#14b2f3";
+        // var nav_menu_col2 = "#1aaae5";
+        // var nav_menu_col3 = "#e0f7fe";
+        // var nav_menu_col4 = "#4A9BB5";
+        // var col5 = "#4a9bb2";
+        //
+        // var col6 = "#292a2d"
+        // var nav_menu_col4 = "#000";
+        // var col8 = "#ebedf3";
+
 
         // $('header > ul > li').attr('style','color #fff;'); // цвет добро пожаловать пользователь исправить
         // $('#admin').attr('style','color: #ffffff; background: #ff3b3b; font-size: 12px; margin-bottom: 25px;'); // кнопка админа не могу
@@ -163,7 +216,7 @@ function dark(){
         hightcharts_colors(back_color_black, text_color_black, hicharts_color_3_black, hicharts_color_4_black, hicharts_color_5_black, grafik_phone_black, legend_color_black); // Вызов функции для графиков
         mesto_personal(mesto_personal_color_black, back_color_black); // Вызов функции для надписей место и персонал
         table_colors(table_color_1_black, back_color_black, table_color_3_black); // Вызов функции для таблицы
-
+        nav_menu(nav_menu_col1, nav_menu_col2, nav_menu_col3);
 
         $('table').attr('style','text-shadow: 1px 2px 3px white, 0 0 2em black, 0 0 0.1em white; color: black; background: radial-gradient(farthest-corner at 50% 50%, white, #808488);');
     }
