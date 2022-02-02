@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    /*justify-content: safe center;*/
+    align-items: center;
     list-style: none; /*убираем маркеры списка*/
     margin: 0 0 4px 0; /*убираем отступы*/
     padding-left: 0; /*убираем отступы*/
@@ -71,10 +71,6 @@
 }
 
 
-#menu_a:hover, #menu_a1:hover, #menu_a2:hover, #menu_a3:hover, #menu_a4:hover, #menu_a5:hover, #menu_a6:hover, #menu_a7:hover, #menu_a8:hover {
-    font-family: MONTSERRAT;
-
-}
 
 
 /*#menu_li, #menu_li1, #menu_li2, #menu_li3, #menu_li4, #menu_li5, #menu_li6, #menu_li7, #menu_li8 {*/
@@ -94,6 +90,7 @@
     /*background-repeat: no-repeat;*/
     text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black;
     font-weight: bolder;
+    text-transform: uppercase;
 
     -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
     -o-transition: all 0.3s 0.01s ease;
@@ -101,7 +98,7 @@
 
 
     margin: 5px;
-    padding: 0;
+    padding: 0 20px;
     border: 0;
     outline: none;
     background-color: transparent;

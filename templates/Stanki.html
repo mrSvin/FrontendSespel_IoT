@@ -148,8 +148,8 @@
 
 </head>
 <header>
-    <div style="display: flex; width: 100vw; justify-content: space-around; flex-wrap: nowrap; width: 100%;">
-        <a href="home" ><img style="margin: 0.1%;" src="images/logo_black.png" class="icon-logo"/></a>
+    <div style="display: flex; width: 100vw; justify-content: space-between; flex-wrap: nowrap; width: 100%;">
+        <a href="home" style="display: flex; align-item: flex-start" ><img style="margin: 0.1%;" src="images/logo_black.png" class="icon-logo"/></a>
             <ul id="menu_ul">
                 <li id="menu_li"><a id="menu_a" href="displayStanki" class="menu-color">Мех.уч.II пл.</a></li>
                 <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
@@ -160,8 +160,8 @@
                 <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
                 <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
             </ul>
-        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
-            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
+<!--        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"-->
+<!--            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>-->
         <div method="post" class="dropdown" style="float: right">
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center; background-color: whitesmoke">

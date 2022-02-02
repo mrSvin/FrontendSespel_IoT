@@ -2,12 +2,6 @@ li {
     list-style-type: none; /* Убираем маркеры */
 }
 
-ul.hr {
-    margin: 0; /* Обнуляем значение отступов */
-    padding: 4px; /* Значение полей */
-    background-color: rgb(36, 97, 219);
-
-}
 
 .icon-logo:hover {
     background: #D43737;
@@ -15,12 +9,6 @@ ul.hr {
     transform: scale(1.01);
     transition: 1s;
 }
-
-ul.hr li {
-    display: inline; /* Отображать как строчный элемент */
-    margin-right: 5px; /* Отступ слева */
-}
-
 
 th {
     padding: 10px;
@@ -50,8 +38,6 @@ td {
     margin: 8%;
     background-color: #ffffff;
     opacity: 0;
-    /*transition: 1s;*/
-
 
 }
 
