@@ -177,7 +177,7 @@ function table_colors(table_color_1, back_color, table_color_3) {
 function dark(){
     if (count == 0) // условие светлой темы
     {
-        // $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого
+        $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого
         backgroundes(back_color, header_color, text_color, knopki); // Вызов функции для основных фонов
         drop_content_colors(text_color, drop_down_line, back_color, text_color); // Вызов функции для выпадающих меню
         // nav_menu(nav_menu_color1, nav_menu_color2, nav_menu_color3, back_color, sutoch_butt); // Вызов функции для меню навигации
@@ -205,7 +205,7 @@ function dark(){
     }
     else if (count == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
-        // $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
+        $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
         document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
 
         // $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
