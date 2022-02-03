@@ -51,6 +51,7 @@ var nav_menu_col3 = "#e0f7fe";
 var nav_menu_col4 = "#000";
 
 
+
 // Определения функций
 //back_color: #fff; header_color: #2461db; text_color: #333333; knopki: #4f759b;
 function backgroundes(back_color, header_color, text_color, knopki){
@@ -60,12 +61,13 @@ function backgroundes(back_color, header_color, text_color, knopki){
 }
 
 //text_color: #333333; drop_down_line: #e8eaed; back_color: #fff;
-function drop_content_colors(text_color, drop_down_line, back_color){
+function drop_content_colors(text_color, drop_down_line, back_color, mail_color){
     $('.dropdown-content').attr('style','background:' + back_color +'; float: right; text-align: center; box-shadow: 0px 3px 6px 0px' + text_color + ';'); // цвет выпадающего меню
     $('#role_vision').attr('style','color:' + text_color + '; font-size: 14px;'); // цвет роли пользователя
     $('.dropdown-content > li').attr('style','color:' + text_color + ";"); // цвет имени польвателя
-    $('.dropdown-content > p').attr('style','color:' + text_color + '; font-size: 14px;'); // цвет почты
+    $('.dropdown-content > p').attr('style','color:' + mail_color + '; font-size: 14px;'); // цвет почты
     $('.dropdown-content > div').attr('style',' display: block; border-bottom: 1px solid' + drop_down_line + '; margin-bottom: 5px; line-height: normal;'); // цвет линии разделения кнопки администрации
+    $('.div_login_mail > p').attr('style',' color:' + mail_color + ';font-size: 12px;'); // цвет линии разделения кнопки администрации
 }
 
 // nav_menu_color1: #3a6fdb; nav_menu_color2: #D43737; nav_menu_color3: #F36262; back_color: #fff; sutoch_butt: #6793d6;
@@ -175,9 +177,9 @@ function table_colors(table_color_1, back_color, table_color_3) {
 function dark(){
     if (count == 0) // условие светлой темы
     {
-        $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого
+        // $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого
         backgroundes(back_color, header_color, text_color, knopki); // Вызов функции для основных фонов
-        drop_content_colors(text_color, drop_down_line, back_color); // Вызов функции для выпадающих меню
+        drop_content_colors(text_color, drop_down_line, back_color, text_color); // Вызов функции для выпадающих меню
         // nav_menu(nav_menu_color1, nav_menu_color2, nav_menu_color3, back_color, sutoch_butt); // Вызов функции для меню навигации
         calendar(calen_1_color, back_color, calen_3_color,calen_4_color); // Вызов функции для календаря
         hightcharts_colors(back_color, text_color, hicharts_color_3, hicharts_color_4, hicharts_color_5, grafik_phone, legend_color); // Вызов функции для графиков
@@ -203,14 +205,14 @@ function dark(){
     }
     else if (count == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
-        $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
+        // $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
         document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
 
         // $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
         // $(".hr, #menu_ul").attr("style", 'background-color: #234C9D'); // цвет шапки
 
         backgroundes(back_color_black, header_color_black, text_color_black, knopki_black); // Вызов функции для основных фонов
-        drop_content_colors(text_color_black, drop_down_line_black, back_color_black); // Вызов функции для выпадающих меню
+        drop_content_colors(text_color_black, drop_down_line_black, back_color_black, hicharts_color_3_black); // Вызов функции для выпадающих меню
         // nav_menu(nav_menu_color1_black, nav_menu_color2_black, nav_menu_color3_black, back_color_black, sutoch_butt_black); // Вызов функции для меню навигации
         calendar(calen_1_color_black, back_color_black, calen_3_color_black, calen_4_color_black); // Вызов функции для календаря
         hightcharts_colors(back_color_black, text_color_black, hicharts_color_3_black, hicharts_color_4_black, hicharts_color_5_black, grafik_phone_black, legend_color_black); // Вызов функции для графиков

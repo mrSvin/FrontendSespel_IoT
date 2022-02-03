@@ -160,9 +160,12 @@
                 <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
                 <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
             </ul>
-<!--        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"-->
-<!--            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>-->
-        <div method="post" class="dropdown" style="float: right">
+        <div style="display: flex; flex-direction: row;">
+            <div class="div_login_mail">
+                <li style="font-weight: 400; font-size: 18px" th:text="${user_name}"></li>
+                <p th:text="${user_mail}"></p>
+            </div>
+          <div method="post" class="dropdown" style="float: right">
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center; background-color: whitesmoke">
                 <p id="role_vision"></p>
@@ -182,6 +185,7 @@
                     </button>
                 </form>
             </div>
+        </div>
         </div>
     </div>
     <div style="display:flex; justify-content: center;">

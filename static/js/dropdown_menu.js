@@ -2,7 +2,6 @@ function show_dropdown_content() {
     $('.dropdown-content').css('display', 'block'); // показать меню
     $('.dropdown-content').css('top', '50px');
     $('.dropdown-content').css('right', '10px');
-    $('.dropdown-content').css('background', 'white');
     $('.dropdown-content').css('opacity', '1'); //  убрать прозрачность
     $('.dropdown-content').css('z-index', '5'); // на передний план
 }
