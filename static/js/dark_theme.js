@@ -120,8 +120,6 @@ function hightcharts_colors(back_color, text_color, calen_1_color, calen_3_color
 {
     $('.highcharts-background').attr('style','fill:' + back_color +';'); // цвет фона графиков
     $('.highcharts-title').attr('style','color:' + text_color + '; font-size: 18px; fill:' + text_color + ';'); // название графиков
-    $('#container_press_davlenie .highcharts-background').attr('style','fill:' + back_color +';'); // цвет фона графиков
-
     $('.highcharts-axis-labels.highcharts-xaxis-labels > text').attr('style','fill:' + calen_1_color + ';');  // надписи названий станков
     $('#container_sum_zagruzka .highcharts-axis-labels.highcharts-xaxis-labels > text, #container_kol_operations .highcharts-axis-labels.highcharts-xaxis-labels > text').attr('style','fill:' + calen_1_color + ';font-size: 18px;'); // надписи названий станков для общей загрузки и количества операций
     $('.highcharts-legend-box').attr('style','fill:' + legend_color + ';'); // цвет поля легенды
