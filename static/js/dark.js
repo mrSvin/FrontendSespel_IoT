@@ -51,6 +51,47 @@ var nav_menu_col3 = "#e0f7fe";
 var nav_menu_col4 = "#000";
 
 
+function light_theme_button() {
+    $('.slider').attr('style','position: absolute;');
+    $('.slider').css('top', '0');
+    $('.slider').css('left', '0');
+    $('.slider').css('right', '0');
+    $('.slider').css('bottom', '0');
+    $('.slider').css('background-color', 'rgb(204, 204, 204)');
+    $('.slider').css('-webkit-box-shadow', '0px 0px 3px 1px rgb(204, 204, 204)');
+
+    $('.slider_before').attr('style','position: absolute;');
+    $('.slider_before').css('content', ';');
+    $('.slider_before').css('height',  '25px');
+    $('.slider_before').css('width', '60px');
+    $('.slider_before').css('left', '0px');
+    $('.slider_before').css('bottom', '0px');
+    $('.slider_before').css('background-color', '#fff');
+    $('.slider_before').css('-webkit-transition', '.4s');
+
+    $('.slider.round, .slider_before.round_before').css('border-radius', '34px');
+}
+
+function dark_theme_button() {
+    $('.slider').attr('style','position: absolute;' +
+        ' top: 0; left: 0; right: 0; bottom: 0;' +
+        ' background-color: black;' +
+        ' -webkit-box-shadow: 0px 0px 2px 1px #2d2c2c;');
+
+
+    $('.slider_before').attr('style','position: absolute;' +
+        ' content: "";' +
+        ' height: 25px;' +
+        ' width: 60px;' +
+        ' left: 0px;' +
+        ' bottom: 0px;' +
+        ' -webkit-transition: .4s; background-color: #231f2a;' +
+        ' -webkit-transform: translateX(63px);' +
+        ' -ms-transform: translateX(63px);' +
+        ' transform: translateX(63px);');
+    $('.slider.round, .slider_before.round_before').css('border-radius', '34px');
+}
+
 
 // Определения функций
 //back_color: #fff; header_color: #2461db; text_color: #333333; knopki: #4f759b;
@@ -186,17 +227,7 @@ function dark(){
         mesto_personal(mesto_personal_color, back_color); // Вызов функции для надписей место и персонал
         table_colors(table_color_1, back_color, table_color_3); // Вызов функции для таблицы
         nav_menu(nav_menu_col1, nav_menu_col2, nav_menu_col4, nav_menu_col2 );
-
-        // var nav_menu_col1 = "#14b2f3";
-        // var nav_menu_col2 = "#1aaae5";
-        // var nav_menu_col3 = "#e0f7fe";
-        // var nav_menu_col4 = "#4A9BB5";
-        // var col5 = "#4a9bb2";
-        //
-        // var col6 = "#292a2d"
-        // var nav_menu_col4 = "#000";
-        // var col8 = "#ebedf3";
-
+        light_theme_button();
 
         // $('header > ul > li').attr('style','color #fff;'); // цвет добро пожаловать пользователь исправить
         // $('#admin').attr('style','color: #ffffff; background: #ff3b3b; font-size: 12px; margin-bottom: 25px;'); // кнопка админа не могу
@@ -208,7 +239,7 @@ function dark(){
         $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
         document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
 
-        // $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
+        $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
         // $(".hr, #menu_ul").attr("style", 'background-color: #234C9D'); // цвет шапки
 
         backgroundes(back_color_black, header_color_black, text_color_black, knopki_black); // Вызов функции для основных фонов
@@ -219,8 +250,10 @@ function dark(){
         mesto_personal(mesto_personal_color_black, back_color_black); // Вызов функции для надписей место и персонал
         table_colors(table_color_1_black, back_color_black, table_color_3_black); // Вызов функции для таблицы
         nav_menu(nav_menu_col1, nav_menu_col2, nav_menu_col3);
-
+        dark_theme_button();
         $('table').attr('style','text-shadow: 1px 2px 3px white, 0 0 2em black, 0 0 0.1em white; color: black; background: radial-gradient(farthest-corner at 50% 50%, white, #808488);');
     }
+
 }
+
 

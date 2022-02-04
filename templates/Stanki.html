@@ -149,7 +149,7 @@
 </head>
 <header>
     <div style="display: flex; width: 100vw; justify-content: space-between; flex-wrap: nowrap; width: 100%;">
-        <a href="home" style="display: flex; align-item: flex-start" ><img style="margin: 4%;" src="images/logo_black.png" class="icon-logo"/></a>
+        <a href="home" style="display: flex; align-items: flex-start;" ><img src="images/logo_black.png" class="icon-logo"/></a>
             <ul id="menu_ul">
                 <li id="menu_li"><a id="menu_a" href="displayStanki" class="menu-color">Мех.уч.2 пл.</a><div class="neo-line"></div></li>
                 <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
@@ -162,22 +162,21 @@
             </ul>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
-                <li style="font-weight: 400; font-size: 18px" th:text="${user_name}"></li>
+                <li th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
             </div>
-          <div method="post" class="dropdown" style="float: right">
-            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
-            <div class="dropdown-content" style="float: right; text-align: center; background-color: whitesmoke">
+          <div method="post" class="dropdown">
+            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+            <div class="dropdown-content">
                 <p id="role_vision"></p>
                 <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
-                <li style="font-weight: 400; font-size: 18px" th:text="${user_name}"></li>
+                <li th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
                 <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
                 <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
                 <label class="switch">
-                    <p style="z-index: 2; font-weight: bold; position: relative; font-size: 1.1rem; word-spacing: 1.8rem; top: 20%">Светлая Темная</p>
-                    <input type="checkbox" id='dark_button'/>
-                    <span class="slider round"></span>
+                    <p>Светлая Темная</p>
+                    <span class="slider round"><input type="checkbox" id='dark_button'/><span class="slider_before round_before"></span></span>
                 </label>
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">

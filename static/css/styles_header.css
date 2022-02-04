@@ -2,6 +2,9 @@ li {
     list-style-type: none; /* Убираем маркеры */
 }
 
+.icon-logo {
+    margin: 4%;
+}
 
 .icon-logo:hover {
     background: #D43737;
@@ -26,6 +29,8 @@ td {
 .dropdown {
     position: relative;
     display: inline-block;
+    float: right;
+    margin-right: 0.5vw;
 }
 
 .dropdown-content {
@@ -36,8 +41,10 @@ td {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 5px; /* Уголки */
     margin: 8%;
-    background-color: #ffffff;
     opacity: 0;
+    float: right;
+    text-align: center;
+    background-color: whitesmoke
 
 }
 
@@ -51,6 +58,13 @@ td {
     width: 100px;
     height: 100px;
     object-fit: cover;
+    border-radius: 360px;
+    margin-top:0;
+}
+
+.dropdown-content li {
+    font-weight: 400;
+    font-size: 18px
 }
 
 #role_vision {
@@ -65,6 +79,7 @@ td {
     margin: 10%;
     margin-right: 15px;
     transition: 1s;
+    border-radius: 360px;
 }
 
 .avatar:hover {
@@ -134,43 +149,16 @@ td {
 
 .switch input {display:none;}
 
-.slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgb(204, 204, 204);
-    -webkit-box-shadow: 0px 0px 3px 1px rgb(204, 204, 204);
+.switch p {
+    z-index: 2;
+    font-weight: bold;
+    position: relative;
+    font-size: 1.1rem;
+    word-spacing: 1.8rem;
+    top: 20%
 }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 25px;
-    width: 60px;
-    left: 0px;
-    bottom: 0px;
-    background-color: #fff;
-    -webkit-transition: .4s;
-}
 
-input:checked + .slider {
-    background-color: black;
-    -webkit-box-shadow: 0px 0px 2px 1px #2d2c2c;
-}
-input:focus + .slider {
-    box-shadow: 0 0 1px black;
-}
-input:checked + .slider:before {
-    background-color: #231f2a;
-    -webkit-transform: translateX(63px);
-    -ms-transform: translateX(63px);
-    transform: translateX(63px);
-}
-.slider.round, .slider.round:before {
-    border-radius: 34px;
-}
 
 .neo-line {
     display: block;
@@ -192,7 +180,11 @@ input:checked + .slider:before {
 .div_login_mail > p{
     color: #b3b8be;
     font-size: 12px;
+}
 
+.div_login_mail li {
+    font-weight: 400;
+    font-size: 18px;
 }
 
 
