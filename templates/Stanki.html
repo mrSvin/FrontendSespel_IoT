@@ -1247,9 +1247,6 @@
 </script>   <!--ctx510_5 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_dmg_ctx510_5.js"></script>
 
-
-
-
 <script>
     var mar_top = localStorage.getItem('mar_top');
     var mar_left = localStorage.getItem('mar_left');
@@ -1260,34 +1257,6 @@
 </script>
 <script src="/js/mesto.js"></script>
 <!--Скрипт с вызовом функций для изменения места-->
-
-<script src="/js/dark.js"></script>
-<script>
-
-    var count = 0; <!--    переменная состояния темы страницы-->
-
-    //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
-    if(localStorage['count'] != null) {
-        count = parseInt(window.localStorage['count']);
-    }
-    // Условия для смены цвета вне нажатия на кнопку
-
-
-    dark(); // Вызов функции
-    // Смена цвета по кнопке
-    $("#dark_button").on("click", function() {
-        count++; // увеличиваем счетчик
-        if(count > 1) // если он больше 1, меняем на ноль
-        {
-            count = 0;
-        }
-        window.localStorage['count'] = count; // сохраняем переменную в локальном хранилище
-
-        // Условия для смены цвета после нажатия на кнопку
-        dark();
-    });
-</script>
-<!--Скрипт темной темы-->
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
@@ -1306,10 +1275,38 @@
 </script>
 <!--Скрипт отображения в header  кнопки администрирование-->
 
+<script src="/js/dark_theme.js"></script>
+<script>
+
+    var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
+
+    //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
+    if(localStorage['dark_theme_state'] != null) {
+        dark_theme_state = parseInt(window.localStorage['dark_theme_state']);
+    }
+    // Условия для смены цвета вне нажатия на кнопку
+
+
+    dark_theme(); // Вызов функции
+    // Смена цвета по кнопке
+    $("#dark_button").on("click", function() {
+        dark_theme_state++; // увеличиваем счетчик
+        if(dark_theme_state > 1) // если он больше 1, меняем на ноль
+        {
+            dark_theme_state = 0;
+        }
+        window.localStorage['dark_theme_state'] = dark_theme_state; // сохраняем переменную в локальном хранилище
+
+        // Условия для смены цвета после нажатия на кнопку
+        dark_theme();
+    });
+</script>
+<!--Скрипт темной темы-->
+
 <script src="/js/dropdown_menu.js"></script>
 <script>
     click_avatar();
-</script> <!-- вызов функции для выпадающего меню -->
+</script> <!-- Скрипт вызова функции для выпадающего меню -->
 
 </body>
 </html>
