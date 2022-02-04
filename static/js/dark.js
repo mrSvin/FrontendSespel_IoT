@@ -70,6 +70,10 @@ function light_theme_button() {
     $('.slider_before').css('-webkit-transition', '.4s');
 
     $('.slider.round, .slider_before.round_before').css('border-radius', '34px');
+
+    // if($('.dropdown-content').css('display') == 'block') { // если уже открыто
+    //     show_dropdown_content(); // скрыть меню
+    // }
 }
 
 function dark_theme_button() {
@@ -90,6 +94,10 @@ function dark_theme_button() {
         ' -ms-transform: translateX(63px);' +
         ' transform: translateX(63px);');
     $('.slider.round, .slider_before.round_before').css('border-radius', '34px');
+
+    // if($('.dropdown-content').css('display') == 'block') { // если уже открыто
+    //     show_dropdown_content(); // скрыть меню
+    // }
 }
 
 
@@ -103,9 +111,9 @@ function backgroundes(back_color, header_color, text_color, knopki){
 
 //text_color: #333333; drop_down_line: #e8eaed; back_color: #fff;
 function drop_content_colors(text_color, drop_down_line, back_color, mail_color){
+
     $('.dropdown-content').css('background', back_color); // цвет выпадающего меню
     $('.dropdown-content').css('box-shadow', '0px 3px 6px 0px' + text_color);
-    // $('.dropdown-content').attr('style','background:' + back_color +'; float: right; text-align: center; box-shadow: 0px 3px 6px 0px' + text_color + ';'); // Строка убийца
     $('#role_vision').attr('style','color:' + text_color + '; font-size: 14px;'); // цвет роли пользователя
     $('.dropdown-content > li').attr('style','color:' + text_color + ";"); // цвет имени польвателя
     $('.dropdown-content > p').attr('style','color:' + mail_color + '; font-size: 14px;'); // цвет почты
