@@ -23,7 +23,7 @@ function hide_dropdown_content_outside_click() {
 
 
 function click_avatar() {
-    $( ".dropdown input" ).click(function() { // кликаем изображению
+    $( ".dropdown>input" ).click(function() { // кликаем изображению
         if($('.dropdown-content').css('display') == 'none') { // если выпадающее меню скрыто
             show_dropdown_content(); // показать меню
         }
