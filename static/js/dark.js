@@ -71,9 +71,9 @@ function light_theme_button() {
 
     $('.slider.round, .slider_before.round_before').css('border-radius', '34px');
 
-    // if($('.dropdown-content').css('display') == 'block') { // если уже открыто
-    //     show_dropdown_content(); // скрыть меню
-    // }
+    if($('.dropdown-content').css('display') == 'block') { // если уже открыто
+        show_dropdown_content(); // скрыть меню
+    }
 }
 
 function dark_theme_button() {
@@ -95,9 +95,9 @@ function dark_theme_button() {
         ' transform: translateX(63px);');
     $('.slider.round, .slider_before.round_before').css('border-radius', '34px');
 
-    // if($('.dropdown-content').css('display') == 'block') { // если уже открыто
-    //     show_dropdown_content(); // скрыть меню
-    // }
+    if($('.dropdown-content').css('display') == 'block') { // если уже открыто
+        show_dropdown_content(); // скрыть меню
+    }
 }
 
 
