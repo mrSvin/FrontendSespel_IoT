@@ -182,7 +182,7 @@ function dark_theme(){
         $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
         backgroundes(back_color_black, text_color_black, text_color_black); // Вызов функции для основных фонов
         drop_content_colors(text_color_black, calen_3_color, back_color_black, mesto_personal_color_black); // Вызов функции для выпадающих меню
-        calendar(mesto_personal_color_black, back_color_black, text_color_black, text_color_black); // Вызов функции для календаря
+        calendar(back_color_black, back_color_black, text_color_black, text_color_black); // Вызов функции для календаря
         hightcharts_colors(back_color_black, text_color_black, mesto_personal_color_black, text_color_black, mesto_personal_color_black); // Вызов функции для графиков
         mesto_personal(mesto_personal_color_black, back_color_black); // Вызов функции для надписей место и персонал
         nav_menu(nav_menu_col1, nav_menu_col2, back_color); // навигационное меню
