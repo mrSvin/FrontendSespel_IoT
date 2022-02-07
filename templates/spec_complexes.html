@@ -253,6 +253,8 @@
     var stp13m_pass_sum = [[${pass_stp13m}]];
     var stp13m_fail_sum = [[${fail_stp13m}]];
 
+    const timezone = new Date().getTimezoneOffset()
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -271,8 +273,13 @@
             printChart: 'Напечатать график',
             viewFullscreen: 'На весь экран'
         },
+        plotOptions: {
+            xrange: {
+                grouping: false
+            }
+        },
         global: {
-            timezoneOffset: new Date().getTimezoneOffset()
+            timezoneOffset: timezone
         }
     });
 
@@ -370,8 +377,6 @@
 
     var data_davlenie = JSON.parse([[${davlenie}]]);
     var data_zad_davlenie = JSON.parse([[${zad_davlenie}]]);
-    // var test = data_davlenie.replaceAll('\'',  '');
-    // console.log(test);
 
     Highcharts.setOptions({
         lang: {
@@ -511,27 +516,6 @@
 
     var data_tok = JSON.parse([[${epp_tok}]]);
     var data_temperatura = JSON.parse([[${epp_temperatura}]]);
-
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        }
-    });
 
     Highcharts.getJSON(
         'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
