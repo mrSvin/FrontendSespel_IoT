@@ -296,6 +296,8 @@
     var nagruzka_ctx310_1 = [[${dmg_ctx310_1_nagruzka}]];
     var nagruzka_ctx510_1 = [[${dmg_ctx510_1_nagruzka}]];
 
+    const timezone = new Date().getTimezoneOffset()
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -314,8 +316,13 @@
             printChart: 'Напечатать график',
             viewFullscreen: 'На весь экран'
         },
+        plotOptions: {
+            xrange: {
+                grouping: false
+            }
+        },
         global: {
-            timezoneOffset: new Date().getTimezoneOffset()
+            timezoneOffset: timezone
         }
     });
 
