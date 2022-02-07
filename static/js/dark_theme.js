@@ -20,7 +20,7 @@ var text_color_black = "#83addd"; // основной цвет текста
 var mesto_personal_color_black = '#b3b8be'; // цвета надписи место и персонал
 
 
-// Определения функций
+
 function light_theme_button() {
     $('.slider').attr('style','position: absolute;');
     $('.slider').css('top', '0');
@@ -64,9 +64,10 @@ function dark_theme_button() {
 }
 
 function backgroundes(back_color, text_color, knopki){
-    $('body').attr("style", "background-color:" + back_color + "; color:" + text_color); // цвет фона и основной цвет текста
-    // $(".hr, #menu_ul").attr("style", 'background-color:' + header_color + ';'); // цвет шапки
+    $('body').attr("style", "background-color:" + back_color + "; color:" + text_color + ';'); // цвет фона и основной цвет текста
     $('.follow').attr('style','color:' + back_color + '; background: ' + knopki +'; font-size: 145%; margin: 19px 0px;'); // кнопки обновить и выход, цвет текста внутри кнопок соответствует цвету фона
+    $('h1, h2, h3').attr("style", "color:" + text_color + ';'); // цвет текста заголовков
+
 }
 
 function drop_content_colors(text_color, drop_down_line, back_color, mail_color){
@@ -179,7 +180,7 @@ function dark_theme(){
     {
         $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
         document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
-        $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
+        // $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
         backgroundes(back_color_black, text_color_black, text_color_black); // Вызов функции для основных фонов
         drop_content_colors(text_color_black, calen_3_color, back_color_black, mesto_personal_color_black); // Вызов функции для выпадающих меню
         calendar(back_color, back_color_black, text_color_black, text_color_black); // Вызов функции для календаря
