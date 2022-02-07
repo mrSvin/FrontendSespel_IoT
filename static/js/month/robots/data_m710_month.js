@@ -1,28 +1,5 @@
 var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
-Highcharts.setOptions({
-    lang: {
-        loading: 'Загрузка...',
-        months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-        weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-        shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-        exportButtonTitle: "Экспорт",
-        printButtonTitle: "Печать",
-        rangeSelectorFrom: "С",
-        rangeSelectorTo: "По",
-        rangeSelectorZoom: "Период",
-        downloadPNG: 'Скачать PNG',
-        downloadJPEG: 'Скачать JPEG',
-        downloadPDF: 'Скачать PDF',
-        downloadSVG: 'Скачать SVG',
-        printChart: 'Напечатать график',
-        viewFullscreen: 'На весь экран'
-    },
-    global: {
-        timezoneOffset: new Date().getTimezoneOffset()
-    }
-});
-
 Highcharts.chart('container_days3', {
     chart: {
         type: 'column'

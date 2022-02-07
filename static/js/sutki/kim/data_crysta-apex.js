@@ -1,4 +1,3 @@
-
 const timezone = new Date().getTimezoneOffset()
 
 Highcharts.setOptions({
@@ -18,6 +17,11 @@ Highcharts.setOptions({
         downloadSVG: 'Скачать SVG',
         printChart: 'Напечатать график',
         viewFullscreen: 'На весь экран'
+    },
+    plotOptions: {
+        xrange: {
+            grouping: false
+        }
     },
     global: {
         timezoneOffset: timezone

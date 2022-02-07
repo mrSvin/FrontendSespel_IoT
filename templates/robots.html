@@ -311,6 +311,8 @@
     var nagruzka_prans = [[${nagruzka_prans}]];
 
 
+    const timezone = new Date().getTimezoneOffset()
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -329,8 +331,13 @@
             printChart: 'Напечатать график',
             viewFullscreen: 'На весь экран'
         },
+        plotOptions: {
+            xrange: {
+                grouping: false
+            }
+        },
         global: {
-            timezoneOffset: new Date().getTimezoneOffset()
+            timezoneOffset: timezone
         }
     });
 
