@@ -18,6 +18,11 @@ Highcharts.setOptions({
         printChart: 'Напечатать график',
         viewFullscreen: 'На весь экран'
     },
+    plotOptions: {
+        xrange: {
+            grouping: false
+        }
+    },
     global: {
         timezoneOffset: timezone
     }

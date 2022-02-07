@@ -273,6 +273,7 @@
   var faccin_2_nagruzka_sum = [[${nagruzka_faccin_2}]];
   var faccin_2_avar_sum = [[${avar_faccin_2}]];
 
+  const timezone = new Date().getTimezoneOffset()
 
   Highcharts.setOptions({
     lang: {
@@ -292,8 +293,13 @@
       printChart: 'Напечатать график',
       viewFullscreen: 'На весь экран'
     },
+    plotOptions: {
+      xrange: {
+        grouping: false
+      }
+    },
     global: {
-      timezoneOffset: new Date().getTimezoneOffset()
+      timezoneOffset: timezone
     }
   });
 

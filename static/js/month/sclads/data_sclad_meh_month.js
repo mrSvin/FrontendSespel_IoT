@@ -1,4 +1,5 @@
 var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+const timezone = new Date().getTimezoneOffset()
 
 Highcharts.setOptions({
     lang: {
@@ -18,8 +19,13 @@ Highcharts.setOptions({
         printChart: 'Напечатать график',
         viewFullscreen: 'На весь экран'
     },
+    plotOptions: {
+        xrange: {
+            grouping: false
+        }
+    },
     global: {
-        timezoneOffset: new Date().getTimezoneOffset()
+        timezoneOffset: timezone
     }
 });
 

@@ -243,6 +243,8 @@
     var faccin_2_avar_sum = [[${faccin_2_avar}]];
     var  faccin_2_nagruzka_sum = [[${faccin_2_nagruzka}]];
 
+    const timezone = new Date().getTimezoneOffset()
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -261,8 +263,13 @@
             printChart: 'Напечатать график',
             viewFullscreen: 'На весь экран'
         },
+        plotOptions: {
+            xrange: {
+                grouping: false
+            }
+        },
         global: {
-            timezoneOffset: new Date().getTimezoneOffset()
+            timezoneOffset: timezone
         }
     });
 
@@ -326,29 +333,6 @@
     var sum_off = [[${faccin_1_fail}]] + [[${faccin_2_fail}]];
     var sum_avar = [[${faccin_1_avar}]] + [[${faccin_2_avar}]];
     var sum_nagruzka = [[${faccin_1_nagruzka}]] + [[${faccin_2_nagruzka}]];
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
 
     Highcharts.chart('container_sum_zagruzka_krug', {
         chart: {
