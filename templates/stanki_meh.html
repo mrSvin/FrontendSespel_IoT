@@ -145,43 +145,52 @@
 </head>
 
 <header>
-    <ul class="hr">
-        <a href="home" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
-        <div method="post" class="dropdown" style="float: right">
-            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
-            <div class="dropdown-content" style="float: right; text-align: center; background-color: whitesmoke">
-                <p id="role_vision"></p>
-                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
-                <li style="font-weight: 400; font-size: 18px" th:text="${user_name}"></li>
+    <div style="display: flex; width: 100vw; justify-content: space-between; flex-wrap: nowrap; width: 100%;">
+        <a href="home" style="display: flex; align-items: flex-start;" ><img src="images/logo_black.png" class="icon-logo"/></a>
+        <ul id="menu_ul">
+            <li id="menu_li"><a id="menu_a" href="displayStanki">Мех.уч.2 пл.</a></li>
+            <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
+            <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
+            <li id="menu_li3"><a id="menu_a3" href="stanki_meh" class="menu-color">Мех.уч.1 пл.</a><div class="neo-line"></div></li>
+            <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
+            <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
+            <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
+            <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
+        </ul>
+        <div style="display: flex; flex-direction: row;">
+            <div class="div_login_mail">
+                <li th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
-                <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
-                <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
-                <form th:action="@{/logout}" method="post">
-                    <button class="follow" type="submit">
-                        Выход
-                    </button>
-                </form>
+            </div>
+            <div method="post" class="dropdown">
+                <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+                <div class="dropdown-content">
+                    <p id="role_vision"></p>
+                    <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
+                    <li th:text="${user_name}"></li>
+                    <p th:text="${user_mail}"></p>
+                    <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
+                    <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
+                    <label class="switch">
+                        <p>Светлая Темная</p>
+                        <span class="slider round"><input type="checkbox" id='dark_button'/><span class="slider_before round_before"></span></span>
+                    </label>
+                    <form th:action="@{/logout}" method="post">
+                        <button class="follow" type="submit">
+                            Выход
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-        <li style="float: right; color: #ffffff; font-size: 120%; margin: 0.3%; text-align: center"
-            th:text="'Добро пожаловать, '  + ${user_name} + '!   '"/>
-    </ul>       <!--Шапка html-->
+    </div>
+    <div style="display:flex; justify-content: center;">
+        <form>
+            <button  formaction="stanki_meh" class="button_color button_color_active">Суточный отчет<div class="neo-line"></div></button>
+            <button formaction="stanki_meh_month" class="button_color">Месячный отчет</button>
+        </form>
+    </div>  <!-- Меню -->
 </header>       <!--Шапка html-->
-
-<div>
-    <ul id="menu_ul">
-        <li id="menu_li"><a id="menu_a" href="displayStanki">Мех.уч.II пл.</a></li>
-        <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
-        <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
-        <li id="menu_li3"><a id="menu_a3" href="stanki_meh" class="menu-color">Мех.уч.I пл.</a></li>
-        <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
-        <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
-        <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
-        <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
-        <li id="menu_li8"><a id="menu_a8" href="gibka">Гибка</a></li>
-    </ul>
-</div>  <!-- Меню -->
-
 <!-- Загрузка страницы -->
 <div class="preloader">
     <div class="preloader__row">
@@ -189,18 +198,8 @@
         <div class="preloader__item"></div>
     </div>
 </div>
-
 <body>
 <!--Шапка html-->
-
-<div style="clear: both">
-    <form>
-        <button formaction="stanki_meh" class="btn_change" style="width:40%; background-size: 100% 100%; color: #FFFFFF; ">Суточный отчет</button>
-        <button formaction="stanki_meh_month" class="btn_change" style="width:40%">Месячный отчет</button>
-    </form>
-</div>  <!--Кнопки суточный и месячный отчеты html-->
-
-
 <div class="container">
     <div style="width: 220px; float: left">
         <h2>Выберите дату:</h2>
@@ -976,5 +975,37 @@
 <script src="/js/mesto.js"></script>
 <!--Скрипт с вызовом функций для изменения места-->
 
+<script src="/js/dark_theme.js"></script>
+<script>
+
+    var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
+
+    //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
+    if(localStorage['dark_theme_state'] != null) {
+        dark_theme_state = parseInt(window.localStorage['dark_theme_state']);
+    }
+    // Условия для смены цвета вне нажатия на кнопку
+
+
+    dark_theme(); // Вызов функции
+    // Смена цвета по кнопке
+    $("#dark_button").on("click", function() {
+        dark_theme_state++; // увеличиваем счетчик
+        if(dark_theme_state > 1) // если он больше 1, меняем на ноль
+        {
+            dark_theme_state = 0;
+        }
+        window.localStorage['dark_theme_state'] = dark_theme_state; // сохраняем переменную в локальном хранилище
+
+        // Условия для смены цвета после нажатия на кнопку
+        dark_theme();
+    });
+</script>
+<!--Скрипт темной темы-->
+
+<script src="/js/dropdown_menu.js"></script>
+<script>
+    click_avatar();
+</script> <!-- Скрипт вызова функции для выпадающего меню -->
 </body>
 </html>
