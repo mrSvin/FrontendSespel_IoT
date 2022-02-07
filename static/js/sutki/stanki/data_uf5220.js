@@ -1,15 +1,3 @@
-
-Highcharts.setOptions({
-    plotOptions: {
-        xrange: {
-            grouping: false
-        }
-    },
-    global: {
-        timezoneOffset: timezone
-    }
-});
-
 <!-- линейная диагрмма загрузки оборудования-->
 var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d'];
 Highcharts.chart('container_work', {
