@@ -8,23 +8,23 @@
     <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
     <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/>
 
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
+    <script src="js/export-data.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="js/xrange.js"></script>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap-3.3.0.min.js"></script>
 
 </head>
 
 <header>
     <div style="display: flex; width: 100vw; justify-content: space-between; flex-wrap: nowrap; width: 100%;">
         <a href="home" style="display: flex; align-items: flex-start;" ><img src="images/logo_black.png" class="icon-logo"/></a>
-        <ul id="menu_ul">
-            <li id="menu_li"><a id="menu_a" href="displayStanki">Мех.уч.2 пл.</a></li>
-            <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
-            <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
-            <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.1 пл.</a></li>
-            <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
-            <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
-            <li id="menu_li6"><a id="menu_a6" href="sclads" class="menu-color">Склады</a><div class="neo-line"></div></li>
-            <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
-            <li id="menu_li8"><a id="menu_a8" href="gibka">Гибка</a></li>
-        </ul>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
                 <li th:text="${user_name}"></li>
@@ -52,12 +52,6 @@
             </div>
         </div>
     </div>
-    <div style="display:flex; justify-content: center;">
-        <form>
-            <button  formaction="sclads" class="button_color button_color_active">Суточный отчет<div class="neo-line"></div></button>
-            <button formaction="sclads_month" class="button_color">Месячный отчет</button>
-        </form>
-    </div>  <!-- Меню -->
 </header>       <!--Шапка html-->
 <script src="js/jquery-3.6.0.min.js"></script>
 
