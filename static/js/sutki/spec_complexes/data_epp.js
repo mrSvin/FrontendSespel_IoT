@@ -363,7 +363,6 @@ Highcharts.chart('container_work_epp', {
             pointWidth: 30,
             colorByPoint: false,
             color: '#000000',
-            pointWidth: 20,
             data:   [
                 {x:  (new Date(epp_array_off[0])).getTime(), x2: (new Date(epp_array_off[1])).getTime(), y: 2},
                 {x:  (new Date(epp_array_off[2])).getTime(), x2: (new Date(epp_array_off[3])).getTime(), y: 2},
