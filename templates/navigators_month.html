@@ -210,17 +210,13 @@
     <div style="width: 250px; float: left">
         <h2>Выберите месяц:</h2>
     </div>
-
-
     <form  action="#" th:action="@{/navigators_month}" th:object="${calendar_month}" method="post" >
-
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
             <input type='text' class="form-control" th:field="*{content_month}"/>
             <span class="input-group-addon">
-		                        <span class="glyphicon glyphicon-calendar"></span>
-		                    </span>
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
         </div>
-
         <div class="form-actions" >
             <button type="submit"
                     class="follow"
@@ -228,16 +224,10 @@
             </button>
         </div>
     </form>
-
-
-
-
 </div>      <!--Календарь html-->
 
 <div style="display: flex; justify-content: space-between">
-
     <div id="container_sum_zagruzka" style="height: 400px; width: 45%"></div> <!--Общая загрузка html-->
-
     <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
 </div>  <!--Общая загрузка-->
 <script th:inline="javascript">
@@ -281,6 +271,8 @@
     var pass_kometa_2 = [[${kometa_2_pass}]];
     var fail_kometa_2 = [[${kometa_2_fail}]];
 
+    const timezone = new Date().getTimezoneOffset()
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -299,8 +291,13 @@
             printChart: 'Напечатать график',
             viewFullscreen: 'На весь экран'
         },
+        plotOptions: {
+            xrange: {
+                grouping: false
+            }
+        },
         global: {
-            timezoneOffset: new Date().getTimezoneOffset()
+            timezoneOffset: timezone
         }
     });
 
