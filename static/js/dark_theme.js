@@ -40,9 +40,9 @@ function home_background(phone, text_color, ramka, grad_col1, grad_col2, shadow_
     $('.icon-container').attr("style", 'box-shadow: 0 0 0.5px 0.5px' + ramka + ' inset; background: linear-gradient(45deg,' + grad_col1 +',' + grad_col2 + ');');
 
     $(".icon-container").hover(function() {
-        $('.container-home:hover h2').attr('style','text-shadow: 1px 0 3px' + shadow_color + '!important;');
+        $('h2',this ).attr('style','text-shadow: 1px 0 3px' + shadow_color + '!important; color:'  + shadow_color + ';');
     }, function(){
-        $('.container-home:hover h2').attr('style','text-shadow: none;');
+        $('h2',this ).attr('style','text-shadow: none; color:'  + shadow_color + ';');
     });
 
 }
