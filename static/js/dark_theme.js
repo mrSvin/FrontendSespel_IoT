@@ -196,7 +196,6 @@ function dark_theme(){
     else if (dark_theme_state == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
         $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
-        document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
         // $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
         backgroundes(back_color_black, text_color_black, text_color_black); // Вызов функции для основных фонов
         drop_content_colors(text_color_black, calen_3_color, back_color_black, mesto_personal_color_black); // Вызов функции для выпадающих меню
@@ -208,6 +207,8 @@ function dark_theme(){
         table_colors_black(); // Вызов функции для таблицы
         home_background(home_phone_dark, text_color_black);
         login_background(login_phone_dark, back_color, opacity_login_dark);
+
+        document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
     }
 }
 
