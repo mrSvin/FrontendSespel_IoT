@@ -2,7 +2,7 @@
 /* Таблица с текущими параметрами */
 body {
     margin: 0;
-    background: url("https://instapik.ru/wp-content/uploads/2020/08/black-background.jpg") no-repeat center center fixed;
+    background-color: #f2f6f8;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -28,23 +28,26 @@ caption {
 
 /*Фон*/
 
-.main-container {
+.main-container-home {
     max-width: 885px;
     display: flex;
     flex-wrap: wrap;
-    margin: 20px auto 50px auto;
+    margin: 0px auto 50px auto;
 }
 
-.container {
+.container-home {
     margin: 0 auto;
     position: relative;
     width: 250px;
 }
-.container h2 {
+.container-home h2 {
     transition: 1s;
     position: relative;
     bottom: 10px;
     right: -15px;
+    font-size: 24px!important;
+    margin: 0 auto;
+    text-shadow: none;
 }
 
 .icon-container {
@@ -94,9 +97,8 @@ caption {
     transition-duration: 1s;
     opacity: 1;
 }
-.container:hover h2{
-    /*font-size: 24px;*/
-    text-shadow: 1px 0 3px white;
+.container-home:hover h2{
+    text-shadow: 1px 0 3px white!important;
     transition-duration: 1s;
     bottom: 15px;
 }
@@ -104,7 +106,7 @@ caption {
     position: absolute;
     width: 200px;
     height: 200px;
-    background: url(../images/UVF_5220.png) no-repeat;
+    background-color: url(../images/UVF_5220.png) no-repeat;
     background-size: 200px 200px;
 }
 
