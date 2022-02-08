@@ -59,13 +59,13 @@ td {
     height: 100px;
     object-fit: cover;
     border-radius: 360px;
-    margin: 10px 0 0 0!important;
+    margin: 8px 0 0 0!important;
 }
 
 .dropdown-content li {
     font-weight: 400;
     font-size: 18px;
-    margin: 10px 0 0 0!important;
+    margin: 7px 0 0 0!important;
 }
 
 .dropdown-content > p {
@@ -73,11 +73,11 @@ td {
 }
 
 .dropdown-content > div {
-    margin: 10px 0 0 0!important;
+    margin: 13px 0 0 0!important;
 }
 
 #role_vision {
-    margin: 10px 0 0 0!important;
+    margin: 12px 0 0 0!important;
 }
 
 .avatar {
@@ -109,7 +109,7 @@ td {
     width: 115px;
     transition: all 0.2s ease;
     cursor: pointer;
-    margin: 10px 0!important;
+    margin: 17px 0!important;
 }
 
 .follow:hover {
@@ -132,7 +132,7 @@ td {
     margin-bottom: 25px;
     transition: all 0.2s ease;
     cursor: pointer;
-    margin: 10px 0 0 0!important;
+    margin: 17px 0 0 0!important;
 
 }
 
@@ -150,7 +150,7 @@ td {
     width: 120px;
     height: 25px;
     cursor: pointer;
-    margin: 10px 0 0 0!important;
+    margin: 17px 0 0 0!important;
 
     -moz-user-select: none;
     -khtml-user-select: none;
