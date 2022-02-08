@@ -19,12 +19,12 @@ var back_color_black = "#161821"; // основной цвет фона(и цв�
 var text_color_black = "#83addd"; // основной цвет текста
 var mesto_personal_color_black = '#b3b8be'; // цвета надписи место и персонал
 
-var home_phone_light = 'url(images/blue_lines.jpg)';
+var home_phone_light = 'url(images/white_lines.jpg)';
 var home_phone_dark = 'url(images/line.jpg)';
 
 
-function home_background(phone) {
-    $('.home-body').attr("style", "background:" + phone + "no-repeat;"); // цвет фона и основной цвет текста
+function home_background(phone, text_color) {
+    $('.home-body').attr("style", "background:" + phone + "no-repeat; background-size: 100vw 100vh; color:" + text_color + "!important;"); // цвет фона и основной цвет текста
 }
 function light_theme_button() {
     $('.slider').attr('style','position: absolute;');
@@ -69,19 +69,19 @@ function dark_theme_button() {
 }
 
 function backgroundes(back_color, text_color, knopki){
-    $('body').attr("style", "background-color:" + back_color + "; color:" + text_color + ';'); // цвет фона и основной цвет текста
+    $('body').attr("style", "background-color:" + back_color + "; color:" + text_color + '!important;'); // цвет фона и основной цвет текста
     $('.follow').attr('style','color:' + back_color + '; background: ' + knopki +'; font-size: 145%; margin: 19px 0px;'); // кнопки обновить и выход, цвет текста внутри кнопок соответствует цвету фона
-    $('h1, h2, h3').attr("style", "color:" + text_color + ';'); // цвет текста заголовков
+    $('h1, h2, h3').attr("style", "color:" + text_color + '!important;'); // цвет текста заголовков
 }
 
 function drop_content_colors(text_color, drop_down_line, back_color, mail_color){
     $('.dropdown-content').css('background', back_color); // цвет выпадающего меню
     $('.dropdown-content').css('box-shadow', '0px 3px 6px 0px' + text_color);
-    $('#role_vision').attr('style','color:' + text_color + '; font-size: 14px;'); // цвет роли пользователя
-    $('.dropdown-content > li').attr('style','color:' + text_color + ";"); // цвет имени польвателя
-    $('.dropdown-content > p').attr('style','color:' + mail_color + '; font-size: 14px;'); // цвет почты
+    $('#role_vision').attr('style','color:' + text_color + '!important; font-size: 14px;'); // цвет роли пользователя
+    $('.dropdown-content > li').attr('style','color:' + text_color + '!important;'); // цвет имени польвателя
+    $('.dropdown-content > p').attr('style','color:' + mail_color + '!important; font-size: 14px;'); // цвет почты
     $('.dropdown-content > div').attr('style',' display: block; border-bottom: 1px solid' + drop_down_line + '; margin-bottom: 5px; line-height: normal;'); // цвет линии разделения кнопки администрации
-    $('.div_login_mail > p').attr('style',' color:' + mail_color + ';font-size: 12px;'); // цвет линии разделения кнопки администрации
+    $('.div_login_mail > p').attr('style','color:' + mail_color + '!important; font-size: 12px;'); // цвет линии разделения кнопки администрации
 }
 
 function nav_menu(nav_menu_col1, nav_menu_col2, nav_menu_col3, back_color_black) {
@@ -94,7 +94,7 @@ function nav_menu(nav_menu_col1, nav_menu_col2, nav_menu_col3, back_color_black)
 
     $('.menu-color').attr('style','color:' + nav_menu_col2 + '!important; text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px' + nav_menu_col2 + '!important;'); // светлая тема кнопка текущей позиции и темные границы в меню
     $(".menu-color").hover(function() {
-        $(this).attr('style','color:' + nav_menu_col1 + ';');
+        $(this).attr('style','color:' + nav_menu_col1 + '!important;');
     }, function(){
         $(this).attr('style','color:' + nav_menu_col2 + '!important;');
     });
@@ -103,17 +103,17 @@ function nav_menu(nav_menu_col1, nav_menu_col2, nav_menu_col3, back_color_black)
     $(".button_color").hover(function() {
         $(this).attr('style','color:' + nav_menu_col1 +'!important; text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px' + nav_menu_col2 + '!important;');
     }, function(){
-        $(this).attr('style','color:' + nav_menu_col3 + '; text-shadow: none;');
+        $(this).attr('style','color:' + nav_menu_col3 + '!important; text-shadow: none;');
     });
 
     $('.button_color_active.button_color').attr('style','color:' + nav_menu_col2 + '!important; text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px' + nav_menu_col2 + '!important;'); // светлая тема кнопка текущей позиции и темные границы в меню
     $(".button_color_active.button_color").hover(function() {
-        $(this).attr('style','color:' + nav_menu_col1 + ';');
+        $(this).attr('style','color:' + nav_menu_col1 + '!important;');
     }, function(){
         $(this).attr('style','color:' + nav_menu_col2 + '!important; text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px' + nav_menu_col2 + '!important;');
     });
 
-    $('.neo-line').attr('style',' background:' + back_color_black + '!important; box-shadow: 0px 0px 5px 3px' + nav_menu_col1 + ', inset 0px 0px 0px 0px' + nav_menu_col1 + '!important;'); // светлая тема кнопка текущей позиции и темные границы в меню
+    $('.neo-line').attr('style','background:' + back_color_black + '!important; box-shadow: 0px 0px 5px 3px' + nav_menu_col1 + ', inset 0px 0px 0px 0px' + nav_menu_col1 + '!important;'); // светлая тема кнопка текущей позиции и темные границы в меню
 }
 
 function calendar(calen_1_color ,back_color, calen_3_color, calen_4_color){
@@ -178,7 +178,7 @@ function dark_theme(){
         nav_menu(nav_menu_col1, nav_menu_col2, back_color_black, nav_menu_col2 ); // навигационное меню
         light_theme_button(); // функция для кнопки смены темы на светлую
         table_colors_white(table_color_1, back_color, table_color_3); // Вызов функции для таблицы
-        home_background(home_phone_light);
+        home_background(home_phone_light, text_color);
     }
     else if (dark_theme_state == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
@@ -193,7 +193,7 @@ function dark_theme(){
         nav_menu(nav_menu_col1, nav_menu_col2, back_color); // навигационное меню
         dark_theme_button(); // функция для кнопки смены темы на темную
         table_colors_black(); // Вызов функции для таблицы
-        home_background(home_phone_dark);
+        home_background(home_phone_dark, text_color_black);
     }
 }
 
