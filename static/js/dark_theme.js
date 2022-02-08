@@ -35,8 +35,9 @@ function login_background(phone, color, opacity) {
     $('.login-box').css('background', 'rgba(0,0,0,' + opacity +')');
 }
 
-function home_background(phone, text_color) {
+function home_background(phone, text_color, ramka, grad_col1, grad_col2) {
     $('.home-body').attr("style", "background:" + phone + "no-repeat center center fixed; background-size: cover; background-repeat: no-repeat; color:" + text_color + "!important;"); // цвет фона и основной цвет текста
+    $('.icon-container').attr("style", 'box-shadow: 0 0 0.5px 0.5px' + ramka + ' inset; background: linear-gradient(45deg,' + grad_col1 +',' + grad_col2 + ');');
 }
 function light_theme_button() {
     $('.slider').attr('style','position: absolute;');
@@ -190,8 +191,9 @@ function dark_theme(){
         nav_menu(nav_menu_col1, nav_menu_col2, back_color_black, nav_menu_col2 ); // навигационное меню
         light_theme_button(); // функция для кнопки смены темы на светлую
         table_colors_white(table_color_1, back_color, table_color_3); // Вызов функции для таблицы
-        home_background(home_phone_light, text_color);
+        home_background(home_phone_light, text_color, calen_1_color, back_color, knopki);
         login_background(login_phone_light, text_color, opacity_login_light);
+
     }
     else if (dark_theme_state == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
@@ -205,7 +207,7 @@ function dark_theme(){
         nav_menu(nav_menu_col1, nav_menu_col2, back_color); // навигационное меню
         dark_theme_button(); // функция для кнопки смены темы на темную
         table_colors_black(); // Вызов функции для таблицы
-        home_background(home_phone_dark, text_color_black);
+        home_background(home_phone_dark, text_color_black, calen_1_color, calen_1_color, back_color);
         login_background(login_phone_dark, back_color, opacity_login_dark);
 
         document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
