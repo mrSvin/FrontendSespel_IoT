@@ -29,14 +29,14 @@ var opacity_login_light = '.5';
 var opacity_login_dark = '.7';
 
 function login_background(phone, color, opacity) {
-    $('.login-body').attr("style", "background:" + phone + "no-repeat;  background-size: 100vw 100vh;"); // цвет фона и основной цвет текста
+    $('.login-body').attr("style", "background:" + phone + "no-repeat; background-size: cover; background-repeat: no-repeat;"); // цвет фона и основной цвет текста
     $('.login-body legend').attr("style", "color:" + color + ";"); // цвет фона и основной цвет текста
     $('.alert').attr("style", "color:" + color + ";"); // цвет фона и основной цвет текста
     $('.login-box').css('background', 'rgba(0,0,0,' + opacity +')');
 }
 
 function home_background(phone, text_color) {
-    $('.home-body').attr("style", "background:" + phone + "no-repeat; background-size: 100vw 100vh; color:" + text_color + "!important;"); // цвет фона и основной цвет текста
+    $('.home-body').attr("style", "background:" + phone + "no-repeat; background-size: cover; background-repeat: no-repeat; color:" + text_color + "!important;"); // цвет фона и основной цвет текста
 }
 function light_theme_button() {
     $('.slider').attr('style','position: absolute;');
