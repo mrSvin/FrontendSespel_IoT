@@ -22,14 +22,14 @@ var mesto_personal_color_black = '#b3b8be'; // цвета надписи мес�
 var home_phone_light = 'url(images/white_lines.jpg)'; // светлый фон в меню home
 var home_phone_dark = 'url(images/line.jpg)'; // темный фон в меню home
 
-var login_phone_dark = 'url(images/background_login_dark.jpg) no-repeat';
-var login_phone_light = 'url(images/background_login_light.jpg) no-repeat';
+var login_phone_dark = 'url(images/background_login_dark.jpg)';
+var login_phone_light = 'url(images/background_login_light.jpg)';
 
 var opacity_login_light = '.5';
 var opacity_login_dark = '.7';
 
 function login_background(phone, color, opacity) {
-    $('.login-body').attr("style", "background:" + phone + ";"); // цвет фона и основной цвет текста
+    $('.login-body').attr("style", "background:" + phone + "no-repeat;  background-size: 100vw 100vh;"); // цвет фона и основной цвет текста
     $('.login-body legend').attr("style", "color:" + color + ";"); // цвет фона и основной цвет текста
     $('.alert').attr("style", "color:" + color + ";"); // цвет фона и основной цвет текста
     $('.login-box').css('background', 'rgba(0,0,0,' + opacity +')');
