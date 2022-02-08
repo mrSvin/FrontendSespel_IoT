@@ -39,7 +39,7 @@ function home_background(phone, text_color, ramka, grad_col1, grad_col2, shadow_
     $('.home-body').attr("style", "background:" + phone + "no-repeat center center fixed; background-size: cover; background-repeat: no-repeat; color:" + text_color + "!important;"); // цвет фона и основной цвет текста
     $('.icon-container').attr("style", 'box-shadow: 0 0 0.5px 0.5px' + ramka + ' inset; background: linear-gradient(45deg,' + grad_col1 +',' + grad_col2 + ');');
 
-    $(".icon-container").hover(function() {
+    $(".container-home").hover(function() {
         $('h2',this ).attr('style','text-shadow: 1px 0 3px' + shadow_color + '!important; color:'  + shadow_color + ';');
     }, function(){
         $('h2',this ).attr('style','text-shadow: none; color:'  + shadow_color + ';');
