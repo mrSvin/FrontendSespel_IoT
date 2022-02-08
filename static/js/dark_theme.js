@@ -20,7 +20,9 @@ var text_color_black = "#83addd"; // основной цвет текста
 var mesto_personal_color_black = '#b3b8be'; // цвета надписи место и персонал
 
 
-
+function home_background() {
+    $('.home-body').attr("style", "background: url(images/line.jpg) no-repeat;"); // цвет фона и основной цвет текста
+}
 function light_theme_button() {
     $('.slider').attr('style','position: absolute;');
     $('.slider').css('top', '0');
@@ -67,7 +69,6 @@ function backgroundes(back_color, text_color, knopki){
     $('body').attr("style", "background-color:" + back_color + "; color:" + text_color + ';'); // цвет фона и основной цвет текста
     $('.follow').attr('style','color:' + back_color + '; background: ' + knopki +'; font-size: 145%; margin: 19px 0px;'); // кнопки обновить и выход, цвет текста внутри кнопок соответствует цвету фона
     $('h1, h2, h3').attr("style", "color:" + text_color + ';'); // цвет текста заголовков
-
 }
 
 function drop_content_colors(text_color, drop_down_line, back_color, mail_color){
@@ -174,7 +175,7 @@ function dark_theme(){
         nav_menu(nav_menu_col1, nav_menu_col2, back_color_black, nav_menu_col2 ); // навигационное меню
         light_theme_button(); // функция для кнопки смены темы на светлую
         table_colors_white(table_color_1, back_color, table_color_3); // Вызов функции для таблицы
-
+        home_background();
     }
     else if (dark_theme_state == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
@@ -189,6 +190,7 @@ function dark_theme(){
         nav_menu(nav_menu_col1, nav_menu_col2, back_color); // навигационное меню
         dark_theme_button(); // функция для кнопки смены темы на темную
         table_colors_black(); // Вызов функции для таблицы
+        home_background();
     }
 }
 
