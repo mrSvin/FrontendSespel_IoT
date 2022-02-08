@@ -28,11 +28,13 @@ var login_phone_light = 'url(images/background_login_light.jpg)';
 var opacity_login_light = '.5';
 var opacity_login_dark = '.7';
 
-function login_background(phone, color, opacity) {
+function login_background(phone, color, opacity, h2color) {
     $('.login-body').attr("style", "background:" + phone + "no-repeat center center fixed; background-size: cover; background-repeat: no-repeat;"); // цвет фона и основной цвет текста
     $('.login-body legend').attr("style", "color:" + color + ";"); // цвет фона и основной цвет текста
     $('.alert').attr("style", "color:" + color + ";"); // цвет фона и основной цвет текста
     $('.login-box').css('background', 'rgba(0,0,0,' + opacity +')');
+    $('.login-box h2').css('color', h2color);
+
 }
 
 function home_background(phone, text_color, ramka, grad_col1, grad_col2, shadow_color, text_color) {
@@ -199,7 +201,7 @@ function dark_theme(){
         light_theme_button(); // функция для кнопки смены темы на светлую
         table_colors_white(table_color_1, back_color, table_color_3); // Вызов функции для таблицы
         home_background(home_phone_light, text_color, calen_1_color, back_color, knopki, back_color_black, text_color);
-        login_background(login_phone_light, text_color, opacity_login_light);
+        login_background(login_phone_light, text_color, opacity_login_light, back_color);
 
     }
     else if (dark_theme_state == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -215,7 +217,7 @@ function dark_theme(){
         dark_theme_button(); // функция для кнопки смены темы на темную
         table_colors_black(); // Вызов функции для таблицы
         home_background(home_phone_dark, text_color_black, calen_1_color, calen_1_color, back_color, back_color, text_color_black);
-        login_background(login_phone_dark, back_color, opacity_login_dark);
+        login_background(login_phone_dark, back_color, opacity_login_dark, text_color_black);
 
         document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
     }
