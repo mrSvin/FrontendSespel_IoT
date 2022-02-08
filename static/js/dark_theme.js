@@ -19,9 +19,21 @@ var back_color_black = "#161821"; // основной цвет фона(и цв�
 var text_color_black = "#83addd"; // основной цвет текста
 var mesto_personal_color_black = '#b3b8be'; // цвета надписи место и персонал
 
-var home_phone_light = 'url(images/white_lines.jpg)';
-var home_phone_dark = 'url(images/line.jpg)';
+var home_phone_light = 'url(images/white_lines.jpg)'; // светлый фон в меню home
+var home_phone_dark = 'url(images/line.jpg)'; // темный фон в меню home
 
+var login_phone_dark = 'url(images/background_login_dark) no-repeat';
+var login_phone_light = 'url(images/background_login_light) no-repeat';
+
+var opacity_login_light = '.5';
+var opacity_login_dark = '.7';
+
+function login_background(phone, color, opacity) {
+    $('.login-body').attr("style", "background:" + phone + ";"); // цвет фона и основной цвет текста
+    $('.login-body legend').attr("style", "color:" + color + ";"); // цвет фона и основной цвет текста
+    $('.alert').attr("style", "color:" + color + ";"); // цвет фона и основной цвет текста
+    $('.login-box').css('background', 'rgba(0,0,0,' + opacity +')');
+}
 
 function home_background(phone, text_color) {
     $('.home-body').attr("style", "background:" + phone + "no-repeat; background-size: 100vw 100vh; color:" + text_color + "!important;"); // цвет фона и основной цвет текста
@@ -179,6 +191,7 @@ function dark_theme(){
         light_theme_button(); // функция для кнопки смены темы на светлую
         table_colors_white(table_color_1, back_color, table_color_3); // Вызов функции для таблицы
         home_background(home_phone_light, text_color);
+        login_background(login_phone_light, text_color, opacity_login_light);
     }
     else if (dark_theme_state == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
@@ -194,6 +207,7 @@ function dark_theme(){
         dark_theme_button(); // функция для кнопки смены темы на темную
         table_colors_black(); // Вызов функции для таблицы
         home_background(home_phone_dark, text_color_black);
+        login_background(login_phone_dark, back_color, opacity_login_dark);
     }
 }
 
