@@ -316,3 +316,10 @@ td > img {
     flex-wrap: nowrap;
     width: 100%;
 }
+
+.icon-logo-admin:hover {
+    background: #D43737;
+    border-radius: 10px 33px 33px;
+    transform: scale(1.01);
+    transition: 1s;
+}
