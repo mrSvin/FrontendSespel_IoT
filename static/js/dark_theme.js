@@ -28,9 +28,10 @@ var login_phone_light = 'url(images/background_login_light.jpg)';
 var opacity_login_light = '.5';
 var opacity_login_dark = '.7';
 
-function panel_admin(back_color) {
+function panel_admin(back_color, border_color) {
     $('.header-div').attr("style", "background-color:" + back_color + ';'); // цвет фона и основной цвет текста
-
+    $('#table_users').attr("style", 'border: 1px solid' + border_color +'!important; border-color:' + border_color +';');
+    $('#table_users td, #table_users tr, #table_users th').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +';');
 }
 
 function login_background(phone, color, opacity, h2color) {
@@ -197,7 +198,7 @@ function dark_theme(){
     if (dark_theme_state == 0) // условие светлой темы
     {   $('.icon-logo-admin').attr("src", "../images/logo_black.png"); // картинка лого
         $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого
-        panel_admin(back_color);
+        panel_admin(back_color, back_color_black);
         backgroundes(back_color, text_color, knopki); // Вызов функции для основных фонов
         drop_content_colors(text_color, drop_down_line, back_color, text_color); // Вызов функции для выпадающих меню
         calendar(calen_1_color, back_color, calen_3_color,calen_4_color); // Вызов функции для календаря
@@ -215,7 +216,7 @@ function dark_theme(){
     {
         $('.icon-logo-admin').attr("src", "../images/logo_white.png"); // картинка лого
         $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
-        panel_admin(back_color_black);
+        panel_admin(back_color_black, back_color);
         backgroundes(back_color_black, text_color_black, text_color_black); // Вызов функции для основных фонов
         drop_content_colors(text_color_black, calen_3_color, back_color_black, mesto_personal_color_black); // Вызов функции для выпадающих меню
         calendar(back_color, back_color_black, text_color_black, text_color_black); // Вызов функции для календаря
