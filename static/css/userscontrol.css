@@ -9,8 +9,9 @@ body {
     /*border-spacing: 0;*/
     /*border-color: #0C213B;*/
     /*border-width: 2px;*/
+    margin: 70px 0;
     width: 90vw;
-    border: 0.1em solid #ffffff;
+    border: 1px solid white;
     border-color: white;
 }
 
@@ -21,15 +22,23 @@ td {
     text-align: left;
     text-indent: -0.5em;
     font-size: 20px;
-    border-color:  #ffffff;
-    border-width: 1px;
+    border: none!important;
+    outline: 1px solid white!important;
+    /*border-width: 1px;*/
+    text-shadow: none!important;
+}
+
+tr{
+    outline: 1px solid white;
 }
 
 th {
+    /*border: 1px solid white;*/
     vertical-align: center;
     background-color: #0C213B;
     color: #fff;
-    border-color: #ffffff;
+    /*border-color: #ffffff;*/
+    /*outline: 1px solid white;*/
     padding: 5px;
     text-shadow: none!important;
 }

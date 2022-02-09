@@ -17,7 +17,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <body>
-<header>
+<header style="position: fixed; width: 100vw; z-index: 3;">
     <div class="header-div">
         <a href="../home" style="display: flex; align-items: flex-start;" ><img src="../logo_black.png" class="icon-logo-admin"/></a>
         <div style="display:flex; justify-content: center; align-items: center;">
@@ -54,11 +54,11 @@
         </div>
     </div>
 </header>       <!--Шапка html-->
-
+<div style="display: block;"><div>
 <div style="display: flex; justify-content: center;">
     <table id="table_users">
         <thead>
-        <tr style="position: sticky; width: 100%; z-index: 2">
+        <tr style="position: sticky;width: 100%;margin-top: 90px;top: 75px;z-index: 1;">
             <th>ID</th>
             <th>Логин</th>
             <th>Пароль</th>
