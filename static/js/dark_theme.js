@@ -28,6 +28,11 @@ var login_phone_light = 'url(images/background_login_light.jpg)';
 var opacity_login_light = '.5';
 var opacity_login_dark = '.7';
 
+function panel_admin(back_color) {
+    $('.header-div').attr("style", "background-color:" + back_color + ';'); // цвет фона и основной цвет текста
+
+}
+
 function login_background(phone, color, opacity, h2color) {
     $('.login-body').attr("style", "background:" + phone + "no-repeat center center fixed; background-size: cover; background-repeat: no-repeat;"); // цвет фона и основной цвет текста
     $('.login-body legend').attr("style", "color:" + color + ";"); // цвет фона и основной цвет текста
@@ -190,8 +195,9 @@ function table_colors_black() {
 
 function dark_theme(){
     if (dark_theme_state == 0) // условие светлой темы
-    {
+    {   $('.icon-logo-admin').attr("src", "../images/logo_black.png"); // картинка лого
         $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого
+        panel_admin(back_color);
         backgroundes(back_color, text_color, knopki); // Вызов функции для основных фонов
         drop_content_colors(text_color, drop_down_line, back_color, text_color); // Вызов функции для выпадающих меню
         calendar(calen_1_color, back_color, calen_3_color,calen_4_color); // Вызов функции для календаря
@@ -203,11 +209,13 @@ function dark_theme(){
         home_background(home_phone_light, text_color, calen_1_color, back_color, knopki, back_color_black, text_color);
         login_background(login_phone_light, text_color, opacity_login_light, back_color);
 
+
     }
     else if (dark_theme_state == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
+        $('.icon-logo-admin').attr("src", "../images/logo_white.png"); // картинка лого
         $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
-        // $('body').attr("style", "background-color: #111111; color: white"); // цвет фона тела и текста
+        panel_admin(back_color_black);
         backgroundes(back_color_black, text_color_black, text_color_black); // Вызов функции для основных фонов
         drop_content_colors(text_color_black, calen_3_color, back_color_black, mesto_personal_color_black); // Вызов функции для выпадающих меню
         calendar(back_color, back_color_black, text_color_black, text_color_black); // Вызов функции для календаря

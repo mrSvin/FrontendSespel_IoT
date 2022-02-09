@@ -3,32 +3,35 @@ body {
     margin: 0;
 }
 
-table {
-    margin: 1em 0;
-    border-collapse: separate;
-    border-spacing: 0;
+#table_users {
+    /*margin: 0 0;*/
+    /*border-collapse: separate;*/
+    /*border-spacing: 0;*/
+    /*border-color: #0C213B;*/
+    /*border-width: 2px;*/
+    width: 90vw;
     border: 0.1em solid #ffffff;
-    border-color: #7aade3;
-    border-width: 1px;
-    /*width: 80vw;*/
+    border-color: white;
 }
 
 th,
 td {
-    padding: 0.25em 0.5em 0.25em 1em;
+    padding: 0.25em 0.5em 0.25em 1em!important;
     vertical-align: center;
     text-align: left;
     text-indent: -0.5em;
-    font-size: 22px;
-    border-color: #7aade3;
+    font-size: 20px;
+    border-color:  #ffffff;
     border-width: 1px;
 }
 
 th {
-    vertical-align: bottom;
-    background-color: #4e86be;
+    vertical-align: center;
+    background-color: #0C213B;
     color: #fff;
-    border-color: #7aade3;
+    border-color: #ffffff;
+    padding: 5px;
+    text-shadow: none!important;
 }
 
 tr:nth-child(even) {
@@ -41,7 +44,7 @@ tr:nth-child(odd) {
 
 th:nth-of-type(n),
 td:nth-of-type(n) {
-    font-style: italic;
+    /*font-style: italic;*/
     text-align: center;
 }
 
@@ -116,42 +119,19 @@ td:nth-of-type(7) {
 }
 
 .link_add{
-    display: flex;
-    background-color: #e7f3ff;
-    padding: 10px;
-    margin: 5px;
-    text-decoration: none;
-    color: black;
-    border-radius: 5px;
-    font-family: arial;
-    font-weight: bolder;
-    color: #385898;
+    text-decoration: none!important;
 }
 
 .link_add:hover{
-    color: #0749dc;
-    background-color: #bdcad7;
-    transition: 1s;
+
 }
 
 .link_delete{
-    display: flex;
-    background-color: #e85959;
-    padding: 10px;
-    margin: 5px;
-    margin-left: 20px;
-    text-decoration: none;
-    color: black;
-    border-radius: 5px;
-    font-family: arial;
-    font-weight: bolder;
-    color: #eee7e7;
+    text-decoration: none!important;
 }
 
 .link_delete:hover{
-    color: #c4bdbd;
-    background-color: #ff0000;
-    transition: 1s;
+
 }
 
 td > img {
@@ -317,4 +297,13 @@ td > img {
 }
 .password-control.view {
     background: url(../images/no-view.svg) 0 0 no-repeat;
+}
+
+.header-div {
+    background-color: #f2f6f8;
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 100%;
 }
