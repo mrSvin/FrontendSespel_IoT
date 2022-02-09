@@ -317,6 +317,10 @@ td > img {
     width: 100%;
 }
 
+.icon-logo-admin {
+    margin: 4%;
+}
+
 .icon-logo-admin:hover {
     background: #D43737;
     border-radius: 10px 33px 33px;
