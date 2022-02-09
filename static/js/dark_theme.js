@@ -30,10 +30,8 @@ var opacity_login_dark = '.7';
 
 function panel_admin(back_color, border_color) {
     $('.header-div').attr("style", "background-color:" + back_color + ';'); // цвет фона и основной цвет текста
-    $('#table_users').attr("style", 'border: 1px solid' + border_color +'!important; border-color:' + border_color +'!important; outline: 1px solid' + border_color + '!important;');
     $('#table_users th, #table_users tr , #table_users td').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important;');
     $('.tr-sticky').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important ;position: sticky; width: 100%; margin-top: 90px; top: 75px; z-index: 1;');
-
 }
 
 function login_background(phone, color, opacity, h2color) {
