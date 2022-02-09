@@ -323,3 +323,11 @@ td > img {
     transform: scale(1.01);
     transition: 1s;
 }
+
+.tr-sticky {
+    position: sticky;
+    width: 100%;
+    margin-top: 90px;
+    top: 75px;
+    z-index: 1;
+}
