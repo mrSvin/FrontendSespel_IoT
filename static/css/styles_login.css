@@ -29,7 +29,7 @@
     -webkit-box-shadow: 0 0 12px #6633FF;
 }
 body {
-    background: url(../images/background_login.jpg) no-repeat center center fixed;
+    background: url(../images/background_login_light.jpg) no-repeat center center fixed;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -203,3 +203,5 @@ body {
     pointer-events: none;
     margin-left: 0px;
 }
+
+
