@@ -131,6 +131,10 @@
     var trulaser_pass_sum = [[${pass_trulaser}]];
     var trulaser_fail_sum = [[${fail_trulaser}]];
 
+    var kometa_1_work_sum = [[${work_kometa_1}]];
+    var kometa_1_pass_sum = [[${pass_kometa_1}]];
+    var kometa_1_fail_sum = [[${fail_kometa_1}]];
+
     var kometa_3_work_sum = [[${work_kometa_3}]];
     var kometa_3_pass_sum = [[${pass_kometa_3}]];
     var kometa_3_fail_sum = [[${fail_kometa_3}]];
@@ -172,7 +176,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1']
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2']
         },
         credits: {
             enabled: false
@@ -194,19 +198,19 @@
         },
         series: [{
             name: 'Авария',
-            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0, 0]
+            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0, 0, 0]
         }, {
             name: 'Выключен',
-            data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum, trulaser_fail_sum, kometa_3_fail_sum]
+            data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum, trulaser_fail_sum, kometa_1_fail_sum, kometa_3_fail_sum]
         }, {
             name: 'Ожидание',
-            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum, kometa_3_pass_sum]
+            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum, kometa_1_pass_sum, kometa_3_pass_sum]
         }, {
             name: 'Под нагрузкой',
-            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, 0]
+            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, 0, 0]
         }, {
             name: 'Работа',
-            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum, kometa_3_work_sum]
+            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum, kometa_1_work_sum, kometa_3_work_sum]
         }, ]
     });
 
@@ -217,6 +221,7 @@
     var golova_2_koef = (work_2_golova_2_sum + pass_2_golova_2_sum + fail_2_golova_2_sum + avar_2_golova_2_sum + nagruzka_2_golova_2_sum)/100;
     var navigator_3_koef = (navigator_3_work_sum + navigator_3_pass_sum + navigator_3_fail_sum + navigator_3_avar_sum + navigator_3_nagruzka_sum)/100;
     var trulaser_koef = (trulaser_work_sum + trulaser_pass_sum + trulaser_fail_sum)/100;
+    var kometa_1_koef = (kometa_1_work_sum + kometa_1_pass_sum + kometa_1_fail_sum)/100;
     var kometa_3_koef = (kometa_3_work_sum + kometa_3_pass_sum + kometa_3_fail_sum)/100;
 
     table = document.getElementById('myTable').rows; // Обращение к таблице по ID
@@ -225,7 +230,8 @@
     table[3].cells[1].innerHTML = Math.round(work_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
     table[4].cells[1].innerHTML = Math.round(navigator_3_work_sum/navigator_3_koef * 10) / 10 + "%";
     table[5].cells[1].innerHTML = Math.round(trulaser_work_sum/trulaser_koef * 10) / 10 + "%";
-    table[6].cells[1].innerHTML = Math.round(kometa_3_work_sum/kometa_3_koef * 10) / 10 + "%";
+    table[6].cells[1].innerHTML = Math.round(kometa_1_work_sum/kometa_1_koef * 10) / 10 + "%";
+    table[7].cells[1].innerHTML = Math.round(kometa_3_work_sum/kometa_3_koef * 10) / 10 + "%";
     // Столбец Работа
 
     table[1].cells[2].innerHTML = Math.round(navigator_1_nagruzka_sum/navigator_1_koef * 10) / 10 + "%";
@@ -239,7 +245,8 @@
     table[3].cells[3].innerHTML = Math.round(pass_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
     table[4].cells[3].innerHTML = Math.round(navigator_3_pass_sum/navigator_3_koef * 10) / 10 + "%";
     table[5].cells[3].innerHTML = Math.round(trulaser_pass_sum/trulaser_koef * 10) / 10 + "%";
-    table[6].cells[3].innerHTML = Math.round(kometa_3_pass_sum/kometa_3_koef * 10) / 10 + "%";
+    table[6].cells[3].innerHTML = Math.round(kometa_1_pass_sum/kometa_1_koef * 10) / 10 + "%";
+    table[7].cells[3].innerHTML = Math.round(kometa_3_pass_sum/kometa_3_koef * 10) / 10 + "%";
     // Столбец пауза
 
     table[1].cells[4].innerHTML = Math.round(navigator_1_avar_sum/navigator_1_koef * 10) / 10 + "%";
@@ -253,7 +260,8 @@
     table[3].cells[5].innerHTML = Math.round(fail_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
     table[4].cells[5].innerHTML = Math.round(navigator_3_fail_sum/navigator_3_koef * 10) / 10 + "%";
     table[5].cells[5].innerHTML = Math.round(trulaser_fail_sum/trulaser_koef * 10) / 10 + "%";
-    table[6].cells[5].innerHTML = Math.round(kometa_3_fail_sum/kometa_3_koef * 10) / 10 + "%";
+    table[6].cells[5].innerHTML = Math.round(kometa_1_fail_sum/kometa_1_koef * 10) / 10 + "%";
+    table[7].cells[5].innerHTML = Math.round(kometa_3_fail_sum/kometa_3_koef * 10) / 10 + "%";
     //Столбец ручной режим
 
 </script><!--Запись переменных в таблицy-->
