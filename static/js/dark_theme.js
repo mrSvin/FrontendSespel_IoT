@@ -101,7 +101,7 @@ function backgroundes(back_color, text_color, knopki){
     $('body').attr("style", "background-color:" + back_color + "; color:" + text_color + '!important;'); // цвет фона и основной цвет текста
     $('.follow').attr('style','color:' + back_color + '; background: ' + knopki +'; font-size: 145%; margin: 19px 0px;'); // кнопки обновить и выход, цвет текста внутри кнопок соответствует цвету фона
     $('h1, h2, h3').attr("style", "color:" + text_color + '!important;'); // цвет текста заголовков
-    $('.preloader').attr("style", `background: ${back_color}`); // цвет фона и основной цвет текста
+    // $('.preloader').attr("style", `background: ${back_color}`); // цвет фона и основной цвет текста
 }
 
 function drop_content_colors(text_color, drop_down_line, back_color, mail_color){

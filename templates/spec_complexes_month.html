@@ -134,6 +134,8 @@
 
     </script>   <!--Календарь js-->
     <script>
+        var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
+
         window.onload = function () {
             if (dark_theme_state == 0) {$('.preloader').attr("style", `background: #f2f6f8`);}
             else if (dark_theme_state == 1) {$('.preloader').attr("style", `background: #161821`);}
@@ -529,8 +531,6 @@
 
 <script src="/js/dark_theme.js"></script>
 <script>
-
-    var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
 
     //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
     if(localStorage['dark_theme_state'] != null) {
