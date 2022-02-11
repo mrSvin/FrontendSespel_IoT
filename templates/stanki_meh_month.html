@@ -192,7 +192,6 @@
         </form>
     </div>  <!-- Меню -->
 </header>       <!--Шапка html-->
-
 <!-- Загрузка страницы -->
 <div class="preloader">
     <div class="preloader__row">
@@ -200,6 +199,40 @@
         <div class="preloader__item"></div>
     </div>
 </div>
+<!-- Загрузка страницы и темная тема-->
+<script>
+    var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
+
+    if(localStorage['dark_theme_state'] != null) {
+        dark_theme_state = parseInt(window.localStorage['dark_theme_state']); // Если она уже локально задана сохраняем
+    }
+
+    if (dark_theme_state == 0) {$('.preloader').attr("style", `background: #f2f6f8`);} // присвоение цвета загрузочного меню
+    else if (dark_theme_state == 1) {$('.preloader').attr("style", `background: #161821`);} // в двух цветах
+
+    window.onload = function () { // прелоудер
+        document.body.classList.add('loaded_hiding');
+        window.setTimeout(function () {
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
+        }, 500);
+
+        dark_theme(); // Вызов функции
+        // Смена цвета по кнопке
+        $("#dark_button").on("click", function() {
+            dark_theme_state++; // увеличиваем счетчик
+            if(dark_theme_state > 1) // если он больше 1, меняем на ноль
+            {
+                dark_theme_state = 0;
+            }
+            window.localStorage['dark_theme_state'] = dark_theme_state; // сохраняем переменную в локальном хранилище
+            // Условия для смены цвета после нажатия на кнопку
+            dark_theme();
+        });
+    }
+</script>
+<script src="/js/dark_theme.js"></script>
+
 <body>
 <div class="container">
     <div style="width: 250px; float: left">
@@ -874,34 +907,6 @@
 </script>
 <script src="/js/mesto.js"></script>
 <!--Скрипт с вызовом функций для изменения места-->
-
-<script src="/js/dark_theme.js"></script>
-<script>
-
-    var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
-
-    //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
-    if(localStorage['dark_theme_state'] != null) {
-        dark_theme_state = parseInt(window.localStorage['dark_theme_state']);
-    }
-    // Условия для смены цвета вне нажатия на кнопку
-
-
-    dark_theme(); // Вызов функции
-    // Смена цвета по кнопке
-    $("#dark_button").on("click", function() {
-        dark_theme_state++; // увеличиваем счетчик
-        if(dark_theme_state > 1) // если он больше 1, меняем на ноль
-        {
-            dark_theme_state = 0;
-        }
-        window.localStorage['dark_theme_state'] = dark_theme_state; // сохраняем переменную в локальном хранилище
-
-        // Условия для смены цвета после нажатия на кнопку
-        dark_theme();
-    });
-</script>
-<!--Скрипт темной темы-->
 
 <script src="/js/dropdown_menu.js"></script>
 <script>
