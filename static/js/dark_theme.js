@@ -149,7 +149,7 @@ function calendar(calen_1_color ,back_color, calen_3_color, calen_4_color){
     $('.input-group-addon').attr('style','color:' + calen_1_color +'; background:' + calen_4_color +'; border: 1px solid ' + calen_3_color +';'); // кнопка календаря
 }
 
-function hightcharts_colors(back_color, text_color, calen_1_color, calen_3_color, legend_color)
+function hightcharts_colors(back_color, text_color, calen_1_color, calen_3_color, legend_color, line_special)
 {
     $('.highcharts-background').attr('style','fill:' + back_color +';'); // цвет фона графиков
     $('.highcharts-title').attr('style','color:' + text_color + '; font-size: 18px; fill:' + text_color + ';'); // название графиков
@@ -167,8 +167,8 @@ function hightcharts_colors(back_color, text_color, calen_1_color, calen_3_color
     $('.highcharts-point').attr('style','stroke:' + calen_1_color + ';'); // обводка круглых кнопок
     $('.highcharts-point > rect').attr('style','stroke:' + calen_1_color + ';'); // обводка диаграммы работа оборудования
 
-    $( "path[aria-label*='Заданное давление, т, series 2 of 2. Line with 102 data points.']" ).attr( 'style', `stroke: ${calen_1_color}` );
-    $( "path[aria-label*='Температура, С, series 2 of 2. Line with 12 data points.']" ).attr( 'style', `stroke: ${calen_1_color}` );
+    $( "path[aria-label*='Заданное давление, т, series 2 of 2. Line with 102 data points.']" ).attr( 'style', `stroke: ${line_special};` ); // отдельный цвет линии в графиках
+    $( "path[aria-label*='Температура, С, series 2 of 2. Line with 12 data points.']" ).attr( 'style', `stroke: ${line_special};` ); // для спец. комплексов.
 }
 
 function mesto_personal(calen_1_color, back_color){
@@ -205,7 +205,7 @@ function dark_theme(){
         backgroundes(back_color, text_color, knopki); // Вызов функции для основных фонов
         drop_content_colors(text_color, drop_down_line, back_color, text_color); // Вызов функции для выпадающих меню
         calendar(calen_1_color, back_color, calen_3_color,calen_4_color); // Вызов функции для календаря
-        hightcharts_colors(back_color, text_color, calen_1_color, calen_3_color, back_color); // Вызов функции для графиков
+        hightcharts_colors(back_color, text_color, calen_1_color, calen_3_color, back_color, back_color_black); // Вызов функции для графиков
         mesto_personal(calen_1_color, back_color); // Вызов функции для надписей место и персонал
         nav_menu(nav_menu_col1, nav_menu_col2, back_color_black, nav_menu_col2 ); // навигационное меню
         light_theme_button(); // функция для кнопки смены темы на светлую
@@ -223,7 +223,7 @@ function dark_theme(){
         backgroundes(back_color_black, text_color_black, text_color_black); // Вызов функции для основных фонов
         drop_content_colors(text_color_black, calen_3_color, back_color_black, mesto_personal_color_black); // Вызов функции для выпадающих меню
         calendar(back_color, back_color_black, text_color_black, text_color_black); // Вызов функции для календаря
-        hightcharts_colors(back_color_black, text_color_black, mesto_personal_color_black, text_color_black, mesto_personal_color_black); // Вызов функции для графиков
+        hightcharts_colors(back_color_black, text_color_black, mesto_personal_color_black, text_color_black, mesto_personal_color_black, back_color); // Вызов функции для графиков
         mesto_personal(mesto_personal_color_black, back_color_black); // Вызов функции для надписей место и персонал
         nav_menu(nav_menu_col1, nav_menu_col2, back_color); // навигационное меню
         dark_theme_button(); // функция для кнопки смены темы на темную
