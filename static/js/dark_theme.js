@@ -167,8 +167,8 @@ function hightcharts_colors(back_color, text_color, calen_1_color, calen_3_color
     $('.highcharts-point').attr('style','stroke:' + calen_1_color + ';'); // обводка круглых кнопок
     $('.highcharts-point > rect').attr('style','stroke:' + calen_1_color + ';'); // обводка диаграммы работа оборудования
 
-    $( "path[aria-label*='Заданное давление, т, series 2 of 2. Line with 102 data points.']" ).attr( 'style', `stroke: ${line_special};` ); // отдельный цвет линии в графиках
-    $( "path[aria-label*='Температура, С, series 2 of 2. Line with 12 data points.']" ).attr( 'style', `stroke: ${line_special};` ); // для спец. комплексов.
+    $( "path[aria-label*='Заданное давление, т, series 2 of 2. Line with 102 data points.']" ).attr( 'style', `stroke: red;` ); // отдельный цвет линии в графиках
+    $( "path[aria-label*='Температура, С, series 2 of 2. Line with 12 data points.']" ).attr( 'style', `stroke: red;` ); // для спец. комплексов.
 }
 
 function mesto_personal(calen_1_color, back_color){
