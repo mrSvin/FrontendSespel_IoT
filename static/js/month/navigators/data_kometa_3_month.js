@@ -43,22 +43,22 @@ Highcharts.chart('container_days_8', {
         data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }, {
         name: 'Выключен',
-        data: [kometa_2_off_day[0], kometa_2_off_day[1], kometa_2_off_day[2],kometa_2_off_day[3],kometa_2_off_day[4],kometa_2_off_day[5],kometa_2_off_day[6],kometa_2_off_day[7],kometa_2_off_day[8],kometa_2_off_day[9],kometa_2_off_day[10],kometa_2_off_day[11],
-            kometa_2_off_day[12],kometa_2_off_day[13],kometa_2_off_day[14],kometa_2_off_day[15],kometa_2_off_day[16],kometa_2_off_day[17],kometa_2_off_day[18],kometa_2_off_day[19],kometa_2_off_day[20],kometa_2_off_day[21],kometa_2_off_day[22],kometa_2_off_day[23],
-            kometa_2_off_day[24],kometa_2_off_day[25],kometa_2_off_day[26],kometa_2_off_day[27],kometa_2_off_day[28],kometa_2_off_day[29],kometa_2_off_day[30]]
+        data: [kometa_3_off_day[0], kometa_3_off_day[1], kometa_3_off_day[2],kometa_3_off_day[3],kometa_3_off_day[4],kometa_3_off_day[5],kometa_3_off_day[6],kometa_3_off_day[7],kometa_3_off_day[8],kometa_3_off_day[9],kometa_3_off_day[10],kometa_3_off_day[11],
+            kometa_3_off_day[12],kometa_3_off_day[13],kometa_3_off_day[14],kometa_3_off_day[15],kometa_3_off_day[16],kometa_3_off_day[17],kometa_3_off_day[18],kometa_3_off_day[19],kometa_3_off_day[20],kometa_3_off_day[21],kometa_3_off_day[22],kometa_3_off_day[23],
+            kometa_3_off_day[24],kometa_3_off_day[25],kometa_3_off_day[26],kometa_3_off_day[27],kometa_3_off_day[28],kometa_3_off_day[29],kometa_3_off_day[30]]
     }, {
         name: 'Ожидание',
-        data: [kometa_2_pause_day[0], kometa_2_pause_day[1], kometa_2_pause_day[2],kometa_2_pause_day[3],kometa_2_pause_day[4],kometa_2_pause_day[5],kometa_2_pause_day[6],kometa_2_pause_day[7],kometa_2_pause_day[8],kometa_2_pause_day[9],kometa_2_pause_day[10],kometa_2_pause_day[11],
-            kometa_2_pause_day[12],kometa_2_pause_day[13],kometa_2_pause_day[14],kometa_2_pause_day[15],kometa_2_pause_day[16],kometa_2_pause_day[17],kometa_2_pause_day[18],kometa_2_pause_day[19],kometa_2_pause_day[20],kometa_2_pause_day[21],kometa_2_pause_day[22],kometa_2_pause_day[23],
-            kometa_2_pause_day[24],kometa_2_pause_day[25],kometa_2_pause_day[26],kometa_2_pause_day[27],kometa_2_pause_day[28],kometa_2_pause_day[29],kometa_2_pause_day[30]]
+        data: [kometa_3_pause_day[0], kometa_3_pause_day[1], kometa_3_pause_day[2],kometa_3_pause_day[3],kometa_3_pause_day[4],kometa_3_pause_day[5],kometa_3_pause_day[6],kometa_3_pause_day[7],kometa_3_pause_day[8],kometa_3_pause_day[9],kometa_3_pause_day[10],kometa_3_pause_day[11],
+            kometa_3_pause_day[12],kometa_3_pause_day[13],kometa_3_pause_day[14],kometa_3_pause_day[15],kometa_3_pause_day[16],kometa_3_pause_day[17],kometa_3_pause_day[18],kometa_3_pause_day[19],kometa_3_pause_day[20],kometa_3_pause_day[21],kometa_3_pause_day[22],kometa_3_pause_day[23],
+            kometa_3_pause_day[24],kometa_3_pause_day[25],kometa_3_pause_day[26],kometa_3_pause_day[27],kometa_3_pause_day[28],kometa_3_pause_day[29],kometa_3_pause_day[30]]
     }, {
         name: 'Под нагрузкой',
         data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     }, {
         name: 'Работа',
-        data: [kometa_2_rabota_day[0], kometa_2_rabota_day[1], kometa_2_rabota_day[2],kometa_2_rabota_day[3],kometa_2_rabota_day[4],kometa_2_rabota_day[5],kometa_2_rabota_day[6],kometa_2_rabota_day[7],kometa_2_rabota_day[8],kometa_2_rabota_day[9],kometa_2_rabota_day[10],kometa_2_rabota_day[11],
-            kometa_2_rabota_day[12],kometa_2_rabota_day[13],kometa_2_rabota_day[14],kometa_2_rabota_day[15],kometa_2_rabota_day[16],kometa_2_rabota_day[17],kometa_2_rabota_day[18],kometa_2_rabota_day[19],kometa_2_rabota_day[20],kometa_2_rabota_day[21],kometa_2_rabota_day[22],kometa_2_rabota_day[23],
-            kometa_2_rabota_day[24],kometa_2_rabota_day[25],kometa_2_rabota_day[26],kometa_2_rabota_day[27],kometa_2_rabota_day[28],kometa_2_rabota_day[29],kometa_2_rabota_day[30]]
+        data: [kometa_3_rabota_day[0], kometa_3_rabota_day[1], kometa_3_rabota_day[2],kometa_3_rabota_day[3],kometa_3_rabota_day[4],kometa_3_rabota_day[5],kometa_3_rabota_day[6],kometa_3_rabota_day[7],kometa_3_rabota_day[8],kometa_3_rabota_day[9],kometa_3_rabota_day[10],kometa_3_rabota_day[11],
+            kometa_3_rabota_day[12],kometa_3_rabota_day[13],kometa_3_rabota_day[14],kometa_3_rabota_day[15],kometa_3_rabota_day[16],kometa_3_rabota_day[17],kometa_3_rabota_day[18],kometa_3_rabota_day[19],kometa_3_rabota_day[20],kometa_3_rabota_day[21],kometa_3_rabota_day[22],kometa_3_rabota_day[23],
+            kometa_3_rabota_day[24],kometa_3_rabota_day[25],kometa_3_rabota_day[26],kometa_3_rabota_day[27],kometa_3_rabota_day[28],kometa_3_rabota_day[29],kometa_3_rabota_day[30]]
     }, ]
 });
 
@@ -124,6 +124,6 @@ Highcharts.chart('container_8', {
     series : [ {
         type : 'pie',
         name : 'Показатель',
-        data : [ [ 'Работа', kometa_2_work ], [ 'Включен', kometa_2_pass ], [ 'Выключен', kometa_2_fail],  [ 'В аварии', 0 ], [ 'Нагрузка', 0 ]  ]
+        data : [ [ 'Работа', kometa_3_work ], [ 'Включен', kometa_3_pass ], [ 'Выключен', kometa_3_fail],  [ 'В аварии', 0 ], [ 'Нагрузка', 0 ]  ]
     }]
 });
