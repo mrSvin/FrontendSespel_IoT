@@ -33,12 +33,14 @@ caption {
     display: flex;
     flex-wrap: wrap;
     margin: 0px auto 50px auto;
+    justify-content: space-evenly;
 }
 
 .container-home {
-    margin: 0 auto;
+    /*margin: 0 auto;*/
     position: relative;
     width: 250px;
+
 }
 .container-home h2 {
     transition: 1s;
