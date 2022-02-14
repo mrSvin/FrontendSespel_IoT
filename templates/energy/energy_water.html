@@ -51,9 +51,9 @@
     </script>   <!--Календарь js-->
 
     <!--Календарь -->
-    <script type="text/javascript" src="../js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
     <!--Календарь Русский язык-->
-    <script type="text/javascript" src="../js/bootstrap-datepicker.ru.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
 
     <style>
         .preloader {
@@ -180,6 +180,22 @@
             </div>
         </div>
     </div>
+    <div style="">
+        <h2>Выберите месяц:</h2>
+        <form  action="#" th:action="@{/energy/energy_water}" th:object="${calendar_month}" method="post" >
+            <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+                <input type='text' class="form-control" th:field="*{content_month}"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+
+            <div class="form-actions" >
+                <button type="submit"
+                        class="follow"
+                        id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
+                </button>
+            </div>
+        </form>
+    </div>
 </header>
 <!--Шапка html-->
 <body>
@@ -222,24 +238,6 @@
     }
 </script>
 <script src="/js/dark_theme.js"></script>
-
-<div style="width: 250px; float: left">
-    <h2>Выберите месяц:</h2>
-    <form  action="#" th:action="@{/energy/energy_water}" th:object="${calendar_month}" method="post" >
-        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
-            <input type='text' class="form-control" th:field="*{content_month}"/>
-            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-        </div>
-
-        <div class="form-actions" >
-            <button type="submit"
-                    class="follow"
-                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
-            </button>
-        </div>
-    </form>
-</div>
-
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
