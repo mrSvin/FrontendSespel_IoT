@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <title>Станки Мех.площадка II</title>
+  <title>Станки Мех.участок площадка 2</title>
   <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
 
   <link rel="stylesheet" type="text/css" href="../css/styles_stanki.css"/>
@@ -24,7 +24,7 @@
 
 </head>
 <body>
-<h1>Станки Мех.площадка II</h1>
+<h1>Станки Мех.участок площадка 1</h1>
 <div style="display: flex; justify-content: space-around; min-height: 80vh;">
   <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
   <table id='myTable' style="min-height: 400px; width: 45%">
@@ -288,7 +288,10 @@
     plotOptions: {
       column: {
         stacking: 'percent'
-      }
+      },
+      series: {
+        borderColor: 'gray'
+      },
     },
     series: [{
       name: 'Авария',

@@ -68,13 +68,6 @@
     <script th:inline="javascript">
         var vrs1 = [[${vrs1}]];
 
-
-        // for (var i = 0; i < vrs1.length - 1; i += 1) {
-        //     if(vrs1[i] <= vrs1[i + 1]) {
-        //         vrs1[i] = (vrs1[i + 1] - vrs1[i]).toFixed(3);
-        //     }
-        // }
-
         vrs1.forEach(function(item, i, arr) {
             if(arr[i] <= arr[i + 1])
             {
@@ -84,9 +77,6 @@
         });
         console.log(vrs1);
 
-
-
-        console.log(vrs1);
     </script>   <!--Переменные для линейной диаграммы sclad_meh-->
 </head>
 
