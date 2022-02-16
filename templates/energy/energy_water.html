@@ -67,15 +67,20 @@
 
     <script th:inline="javascript">
         var vrs1 = [[${vrs1}]];
+        var result;
+        var n = 0;
+        console.log("Массив на входе: " + vrs1);
 
-        vrs1.forEach(function(item, i, arr) {
-            if(arr[i] <= arr[i + 1])
-            {
-                arr[i] = (arr[i + 1] - arr[i]).toFixed(3);
+        vrs1 = $.map(vrs1, function () {
+            n++;
+            if (vrs1[n] - vrs1[n - 1] > 0) {
+                result = (vrs1[n] - vrs1[n - 1]).toFixed(2);
+            } else {
+                result = 0;
             }
-            console.log(arr[i]);
+            return result;
         });
-        console.log(vrs1);
+        console.log("Массив на выходе: " + vrs1);
 
     </script>   <!--Переменные для линейной диаграммы sclad_meh-->
 </head>
