@@ -58,11 +58,11 @@ Highcharts.chart('container_days1', {
     yAxis: {
         min: 0,
         title: {
-            text: 'литров'
+            text: 'кубов'
         }
     },
     tooltip: {
-        valueSuffix: ' литров'
+        valueSuffix: ' кубов'
         // pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}<br/>',
         // shared: true
     },
