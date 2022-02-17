@@ -777,7 +777,7 @@ function faccin_2 (){
 // Конец мест гибка.
 
 //Начало мест водоснабжение.
-function vrs1 (){
+function vrs1(){
     mar_top = -80;
     mar_left = 608;
     bground = 'url(../images/faccin.png) no-repeat';
