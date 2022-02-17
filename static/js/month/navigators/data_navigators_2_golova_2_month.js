@@ -6,7 +6,7 @@ Highcharts.chart('container_days_3', {
     },
     colors:colors,
     title: {
-        text: 'Загрузка оборудования по дням'
+        text: 'Загрузка головы 2 по дням'
     },
     xAxis: {
         title: {
@@ -100,7 +100,7 @@ Highcharts.chart('container_3', {
     },
 
     title: {
-        text: 'Загрузка оборудования'
+        text: 'Загрузка головы 2'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
