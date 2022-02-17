@@ -775,3 +775,21 @@ function faccin_2 (){
     window.localStorage['size'] = size;
 };
 // Конец мест гибка.
+
+//Начало мест водоснабжение.
+function vrs1 (){
+    mar_top = -80;
+    mar_left = 608;
+    bground = 'url(../images/faccin.png) no-repeat';
+    place_img = "../images/1_ploshadka_outside.png";
+    size = 60;
+    bwidth = "unset";
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['bwidth'] = bwidth;
+    window.localStorage['size'] = size;
+};
+// Конец мест водоснабжение.
