@@ -79,8 +79,8 @@ Highcharts.chart('container_days1', {
     
     series: [{
         name: 'Расход',
-        data: [vrs2[0], vrs2[1], vrs2[2],vrs2[3],vrs2[4],vrs2[5],vrs2[6],vrs2[7],vrs2[8],vrs2[9],vrs2[10],vrs2[11],
-            vrs2[12],vrs2[13],vrs2[14],vrs2[15],vrs2[16],vrs2[17],vrs2[18],vrs2[19],vrs2[20],vrs2[21],vrs2[22],vrs2[23],
-            vrs2[24],vrs2[25],vrs2[26],vrs2[27],vrs2[28],vrs2[29],vrs2[30]]
+        data: [vrs1[0], vrs1[1], vrs1[2],vrs1[3],vrs1[4],vrs1[5],vrs1[6],vrs1[7],vrs1[8],vrs1[9],vrs1[10],vrs1[11],
+            vrs1[12],vrs1[13],vrs1[14],vrs1[15],vrs1[16],vrs1[17],vrs1[18],vrs1[19],vrs1[20],vrs1[21],vrs1[22],vrs1[23],
+            vrs1[24],vrs1[25],vrs1[26],vrs1[27],vrs1[28],vrs1[29],vrs1[30]]
     }]
 });
