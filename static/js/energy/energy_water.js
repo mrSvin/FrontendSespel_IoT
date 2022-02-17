@@ -58,7 +58,7 @@ Highcharts.chart('container_days1', {
     yAxis: {
         min: 0,
         title: {
-            text: '%'
+            text: 'мл'
         }
     },
     tooltip: {
@@ -67,12 +67,14 @@ Highcharts.chart('container_days1', {
     },
     plotOptions: {
         column: {
-            stacking: 'percent'
+            dataLabels: {
+                enabled: false
+            }
         }
     },
-    // legend: {
-    //     enabled:false
-    // },
+    legend: {
+        enabled:false
+    },
     
     series: [{
         name: 'Расход',
