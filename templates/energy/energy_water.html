@@ -158,7 +158,8 @@
     vrs1 = $.map(vrs1, function () {
         n++;
         if (vrs1[n] - vrs1[n - 1] > 0) {
-            result = (vrs1[n] - vrs1[n - 1]).toFixed(2);
+            result = parseFloat((vrs1[n] - vrs1[n - 1]).toFixed(2));
+
         } else {
             result = 0;
         }
