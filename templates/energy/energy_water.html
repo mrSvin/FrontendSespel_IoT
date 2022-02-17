@@ -100,20 +100,20 @@
         <div style="width: 250px; float: left">
             <h2 style="margin: 0;">Выберите месяц:</h2>
         </div>
-        <form style="margin: 0 20px;"  action="#" th:action="@{/energy/energy_water}" th:object="${calendar_month}" method="post" >
+        <form style="margin: 0 20px; display: flex; flex-direction: row;"  action="#" th:action="@{/energy/energy_water}" th:object="${calendar_month}" method="post" >
             <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
                 <input type='text' class="form-control" th:field="*{content_month}"/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
+            <div class="form-actions" >
+                <button type="submit"
+                        class="follow"
+                        id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
+                </button>
+            </div>
         </form>
-        <div class="form-actions" >
-            <button type="submit"
-                    class="follow"
-                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
-            </button>
-        </div>
     </div>      <!--Календарь html-->
 </header>
 <!--Шапка html-->
@@ -146,7 +146,6 @@
     var vrs1 = [[${vrs1}]];
     var result;
     var n = 0;
-    console.log("Массив на входе: " + vrs1);
 
     vrs1 = $.map(vrs1, function () {
         n++;
@@ -158,7 +157,6 @@
         }
         return result;
     });
-    console.log("Массив на выходе: " + vrs1);
 
 </script>   <!--Переменные для линейной диаграммы sclad_meh-->
 <script src="/js/energy/energy_water.js"></script>
