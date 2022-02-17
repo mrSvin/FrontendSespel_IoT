@@ -113,8 +113,7 @@ td {
 }
 
 .follow:hover {
-    width: 130px;
-    background: #4f759be0;
+    box-shadow: 0px 0px 5px 0px #14B2E9, inset 0px 0px 0px 0px#14b2f3!important;
 }
 
 #admin{

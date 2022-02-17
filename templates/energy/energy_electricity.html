@@ -68,9 +68,9 @@
     <div class="header-div">
         <a href="../home" style="display: flex; align-items: flex-start;" ><img src="../images/logo_black.png" class="icon-logo-admin"/></a>
         <ul id="menu_ul">
-            <li id="menu_li"><a id="menu_a" href="energy/energy_water.html" class="menu-color">Водоснабжение</a><div class="neo-line"></div></li>
+            <li id="menu_li"><a id="menu_a" href="energy/energy_water">Водоснабжение</a></li>
             <li id="menu_li1"><a id="menu_a1" href="energy/energy_gaz">Газ</a></li>
-            <li id="menu_li2"><a id="menu_a2" href="energy/energy_electricity">Электроэнергия</a></li>
+            <li id="menu_li2"><a id="menu_a2" href="energy/energy_electricity" class="menu-color">Электроэнергия</a><div class="neo-line"></div></li>
         </ul>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
@@ -160,42 +160,6 @@
     }
 </script>
 <script src="/js/dark_theme.js"></script>
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="../images/nasos.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ВРС1</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="../mesto/mesto" onclick="vrs1(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1002, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="../personal/personal_pech_nerg" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="container_days1" style="float: left; height: 400px; width: 75%"></div> <!--Вставляем линейную гистограмму работы-->
-    </div>  <!--Печь ИНдукционная html-->
-</div> <!--Расход воды html-->
-<script th:inline="javascript">
-    var vrs1 = [[${vrs1}]];
-    var result;
-    var n = 0;
-
-    vrs1 = $.map(vrs1, function () {
-        n++;
-        if (vrs1[n] - vrs1[n - 1] > 0 && vrs1[n] - vrs1[n - 1] < 120) {
-            result = parseFloat((vrs1[n] - vrs1[n - 1]).toFixed(2));
-
-        } else {
-            result = 0;
-        }
-        return result;
-    });
-
-</script>   <!--Переменные для линейной диаграммы sclad_meh-->
-<script src="/js/energy/energy_water.js"></script>
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];

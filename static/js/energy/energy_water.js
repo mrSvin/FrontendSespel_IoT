@@ -1,7 +1,5 @@
 var colors = ['#5c7ed0'];
 
-console.log("Im open x3")
-
 const timezone = new Date().getTimezoneOffset()
 
 Highcharts.setOptions({

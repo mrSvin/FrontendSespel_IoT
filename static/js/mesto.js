@@ -780,7 +780,7 @@ function faccin_2 (){
 function vrs1(){
     mar_top = -80;
     mar_left = 608;
-    bground = 'url(../images/faccin.png) no-repeat';
+    bground = 'url(../images/nasos.png) no-repeat';
     place_img = "../images/1_ploshadka_outside.png";
     size = 60;
     bwidth = "unset";
