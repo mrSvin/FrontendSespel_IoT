@@ -1,6 +1,6 @@
 var colors = ['#5c7ed0'];
 
-console.log("Im open")
+console.log("Im open x2")
 
 const timezone = new Date().getTimezoneOffset()
 
