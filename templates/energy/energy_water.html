@@ -195,7 +195,6 @@
             </div>
         </div>
         <div id="container_days1" style="float: left; height: 400px; width: 75%"></div>
-
     </div>
     <div style="display: flex; justify-content: center;">
         <table id="table_energy">
@@ -208,6 +207,31 @@
         </table>    <!--Таблица изменений-->
     </div>
 </div> <!--Расход воды html-->
+<script th:inline="javascript">
+    var vrs1 = [[${vrs1}]];
+    var result;
+    var n = 0;
+
+    vrs1 = $.map(vrs1, function () {
+        n++;
+        delta = vrs1[n] - vrs1[n - 1];
+        if (delta > 0) {
+            result = parseFloat(delta.toFixed(2));
+        } else {
+            result = 0;
+        }
+        if (delta>120) {
+            result = 0;
+        }
+        return result;
+    });
+
+    $.each( vrs1, function( index ){
+        $("#table_energy > thead > tr").append("<th>" + (index + 1) + "</th>");
+        $("#table_energy > tbody").append(
+            "<td>" + vrs1[index] + "</td>");
+    });
+</script> <!--JS таблица-->
 <script src="/js/energy/energy_water.js"></script>
 
 <script th:inline="javascript">
@@ -238,33 +262,6 @@
 </script>
 <script src="/js/mesto.js"></script>
 <!--Скрипт с вызовом функций для изменения места-->
-
-<script th:inline="javascript">
-
-    var vrs1 = [[${vrs1}]];
-    var result;
-    var n = 0;
-
-    vrs1 = $.map(vrs1, function () {
-        n++;
-        delta = vrs1[n] - vrs1[n - 1];
-        if (delta > 0) {
-            result = parseFloat(delta.toFixed(2));
-        } else {
-            result = 0;
-        }
-        if (delta>120) {
-            result = 0;
-        }
-        return result;
-    });
-
-    $.each( vrs1, function( index ){
-        $("#table_energy > thead > tr").append("<th>" + (index + 1) + "</th>");
-        $("#table_energy > tbody").append(
-            "<td>" + vrs1[index] + "</td>");
-    });
-</script> <!--JS таблица-->
 
 </body>
 </html>
