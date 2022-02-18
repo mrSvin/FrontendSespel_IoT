@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/menu_buttons.css"/> <!-- Меню -->
     <link rel="stylesheet" type="text/css" href="../../css/styles_header.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/userscontrol.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/styles_energy.css"/>
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
@@ -194,9 +195,51 @@
             </div>
         </div>
         <div id="container_days1" style="float: left; height: 400px; width: 75%"></div>
-        <!--Вставляем линейную гистограмму работы-->
-    </div>  <!--Печь ИНдукционная html-->
+
+    </div>
+    <div style="display: flex; justify-content: center;">
+        <table id="table_energy">
+            <thead>
+            <tr>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+                <th>13</th>
+                <th>14</th>
+                <th>15</th>
+                <th>16</th>
+                <th>17</th>
+                <th>18</th>
+                <th>19</th>
+                <th>20</th>
+                <th>21</th>
+                <th>22</th>
+                <th>23</th>
+                <th>24</th>
+                <th>25</th>
+                <th>26</th>
+                <th>27</th>
+                <th>28</th>
+                <th>29</th>
+                <th>30</th>
+                <th>31</th>
+            </tr>
+            </thead>
+            <tbody style="margin-top: 100px">
+            </tbody>
+        </table>    <!--Таблица изменений-->
+    </div>
 </div> <!--Расход воды html-->
+
 <script th:inline="javascript">
     var vrs1 = [[${vrs1}]];
     var result;
@@ -247,6 +290,13 @@
 </script>
 <script src="/js/mesto.js"></script>
 <!--Скрипт с вызовом функций для изменения места-->
+
+<script th:inline="javascript">
+    $.each( vrs1, function( index ){
+        $("#table_energy > tbody").append(
+            "<td>" + vrs1[index] + "</td>");
+    });
+</script> <!--JS таблица-->
 
 </body>
 </html>

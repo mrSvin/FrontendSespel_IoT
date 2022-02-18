@@ -1,0 +1,62 @@
+
+body {
+    margin: 0;
+}
+
+#table_energy {
+    /*margin: 0 0;*/
+    /*border-collapse: separate;*/
+    /*border-spacing: 0;*/
+    /*border-color: #0C213B;*/
+    /*border-width: 2px;*/
+    margin: 70px 0;
+    width: 90vw;
+    border-top: 1px solid white;
+    border-color: white;
+}
+
+#table_energy th,
+#table_energy td {
+    padding: 0.25em 0.5em 0.25em 1em!important;
+    vertical-align: center;
+    text-align: left;
+    text-indent: -0.5em;
+    font-size: 20px;
+    border: none!important;
+    outline: 1px solid white!important;
+    /*border-width: 1px;*/
+    text-shadow: none!important;
+}
+
+#table_energy tr{
+    outline: 1px solid white;
+}
+
+#table_energy th {
+    /*border: 1px solid white;*/
+    vertical-align: center;
+    background-color: #0C213B;
+    color: #fff;
+    /*border-color: #ffffff;*/
+    /*outline: 1px solid white;*/
+    padding: 5px;
+    text-shadow: none!important;
+}
+
+#table_energy tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+#table_energy tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+#table_energy th:nth-of-type(n),
+#table_energy td:nth-of-type(n) {
+    /*font-style: italic;*/
+    text-align: center;
+}
+
+#table_energy td:nth-of-type(7) {
+    text-align: center;
+}
