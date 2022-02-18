@@ -199,12 +199,14 @@
     <div style="display: flex; justify-content: center;">
         <table id="table_energy">
             <thead>
-            <tr>
-                <th>Дни</th>
-            </tr>
+                <tr>
+                    <th>Дни</th>
+                </tr>
             </thead>
             <tbody style="margin-top: 100px">
-                <td>Куб.лит</td>
+                <tr>
+                    <td>Куб.лит</td>
+                </tr>
             </tbody>
         </table>    <!--Таблица изменений-->
     </div>
@@ -230,7 +232,7 @@
 
     $.each( vrs1, function( index ){
         $("#table_energy > thead > tr").append("<th>" + (index + 1) + "</th>");
-        $("#table_energy > tbody").append(
+        $("#table_energy > tbody > tr").append(
             "<td>" + vrs1[index] + "</td>");
     });
 </script> <!--JS таблица-->
