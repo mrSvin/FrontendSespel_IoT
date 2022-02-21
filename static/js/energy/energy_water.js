@@ -56,7 +56,7 @@ Highcharts.chart('container_days1', {
     yAxis: {
         min: 0,
         title: {
-            text: 'кубов'
+            text: 'Расход кубов воды'
         }
     },
     tooltip: {
