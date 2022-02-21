@@ -63,9 +63,9 @@ body {
 }
 
 .table_general {
-    margin: 20px auto;
-    /*position: relative;*/
-    width: 50%;
+    margin: 5px 10px;
+    position: relative;
+    width: 75%;
     border-color: white;
 }
 
