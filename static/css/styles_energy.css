@@ -7,6 +7,8 @@ body {
     margin: 10px auto;
     min-width: 70%;
     border-color: white;
+    position: absolute;
+    top: 50%;
 
 
 }
