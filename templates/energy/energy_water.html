@@ -243,6 +243,42 @@
 </script>
 <script src="/js/dark_theme.js"></script>
 
+<table class="table_general">
+    <thead>
+    <tr>
+        <th>Давление, бар</th>
+        <th>Температура в помещении</th>
+        <th>Температура воды</th>
+        <th>Температура на улице</th>
+    </tr>
+    </thead>
+    <tbody style="margin-top: 100px">
+    <tr>
+    </tr>
+    </tbody>
+</table>    <!--Таблица изменений-->
+<script th:inline="javascript">
+    var vrs1_data = [[${vrs1_data}]];
+    var result;
+    var n = 0;
+
+    vrs1_data = $.map(vrs1_data, function () {
+        n++;
+        delta =  vrs1_data[n];
+        if (delta > 0) {
+            result = parseFloat(delta.toFixed(2));
+        } else {
+            result = 0;
+        }
+        return result;
+    });
+
+    $.each( vrs1_data, function( index ){
+        $(".table_general > tbody > tr").append(
+            "<td>" + vrs1_data[index] + "</td>");
+    });
+</script>   <!--Переменные для линейной диаграммы sclad_meh-->
+
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
