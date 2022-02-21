@@ -5,11 +5,9 @@ body {
 
 #table_energy {
     margin: 10px auto;
-    /*margin: 0px 0px 0px 21%;*/
-    /*max-width: 80%;*/
     min-width: 70%;
-    border-top: 1px solid white;
     border-color: white;
+
 
 }
 
@@ -22,6 +20,7 @@ body {
     outline: 1px solid white!important;
     text-shadow: none!important;
     text-align: center;
+
     /*width: 50px;*/
 }
 
