@@ -243,36 +243,6 @@
 </script>
 <script src="/js/dark_theme.js"></script>
 
-<table class="table_general">
-    <thead>
-    <tr>
-        <th>Давление, бар</th>
-        <th>Температура в помещении</th>
-        <th>Температура воды</th>
-        <th>Температура на улице</th>
-        <th>Суммарный расход воды, кубов</th>
-        <th>Температура на улице</th>
-    </tr>
-    </thead>
-    <tbody style="margin-top: 100px">
-    <tr>
-    </tr>
-    </tbody>
-</table>    <!--Таблица изменений-->
-<script th:inline="javascript">
-    var vrs1_data = [[${vrs1_data}]];
-
-    $.each( vrs1_data, function( index ){
-        if(index == 0 || index == 3 || index == 4) {
-            return;
-        }
-        else {
-            $(".table_general > tbody > tr").append(
-                "<td>" + vrs1_data[index] + "</td>");
-        }
-
-    });
-</script>   <!--Переменные для линейной диаграммы sclad_meh-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -296,6 +266,21 @@
                 </div>
             </div>
         </div>
+        <table class="table_general">
+            <thead>
+            <tr>
+                <th>Давление, бар</th>
+                <th>Температура в помещении</th>
+                <th>Температура воды,°C</th>
+                <th>Температура на улице,°C</th>
+                <th>Суммарный расход воды, кубов</th>
+            </tr>
+            </thead>
+            <tbody style="margin-top: 100px">
+            <tr>
+            </tr>
+            </tbody>
+        </table>    <!--Таблица изменений-->
         <div id="container_days1" style="float: left; height: 400px; width: 75%"></div>
         <table class="table_energy">
             <thead>
@@ -311,6 +296,20 @@
         </table>    <!--Таблица изменений-->
     </div>
 </div> <!--Расход воды html-->
+<script th:inline="javascript">
+    var vrs1_data = [[${vrs1_data}]];
+
+    $.each( vrs1_data, function( index ){
+        if(index == 0 || index == 3 || index == 4) {
+            return;
+        }
+        else {
+            $(".table_general > tbody > tr").append(
+                "<td>" + vrs1_data[index] + "</td>");
+        }
+
+    });
+</script>   <!--Переменные для общей диаграммы-->
 <script th:inline="javascript">
     var vrs1 = [[${vrs1}]];
     var result;
