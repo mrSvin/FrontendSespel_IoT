@@ -4,13 +4,10 @@ body {
 }
 
 .table_energy {
-    margin: 10px auto;
-    min-width: 70%;
+    margin: 5px 10px;
+    position: relative;
+    width: 75%;
     border-color: white;
-    position: absolute;
-    top: 50%;
-
-
 }
 
 .table_energy th,
