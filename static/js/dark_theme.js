@@ -33,9 +33,9 @@ var opacity_login_dark = '.7';
 function panel_admin(back_color, border_color, table_color_1, table_color_2 ) {
     $('.header-div').attr("style", "background-color:" + back_color + ';'); // цвет фона и основной цвет текста
     $('#table_users th, #table_users tr , #table_users td').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important;');
-    $('#table_energy th, #table_energy tr , #table_energy td').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important;');
-    $('#table_energy > thead > tr > th:nth-of-type(1), #table_energy > tbody > tr > td:nth-of-type(1)').attr("style", `background-color: ${table_color_2}!important;` + 'outline: 1px solid' + border_color +'!important');
-    $('#table_energy > thead > tr > th:nth-of-type(n+2)').attr("style", `background-color: ${table_color_1};` + 'outline: 1px solid' + border_color +'!important;' + `color: ${border_color}`);
+    $('.table_energy th, .table_energy tr , .table_energy td').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important;');
+    $('.table_energy > thead > tr > th:nth-of-type(1), .table_energy > tbody > tr > td:nth-of-type(1)').attr("style", `background-color: ${table_color_2}!important;` + 'outline: 1px solid' + border_color +'!important');
+    $('.table_energy > thead > tr > th:nth-of-type(n+2)').attr("style", `background-color: ${table_color_1};` + 'outline: 1px solid' + border_color +'!important;' + `color: ${border_color}`);
     $('.tr-sticky').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important ;position: sticky; width: 100%; margin-top: 90px; top: 75px; z-index: 1;');
 
 
