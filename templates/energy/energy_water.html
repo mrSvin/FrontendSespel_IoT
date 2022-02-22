@@ -372,19 +372,10 @@
         </div>
         <table class="table_general" id="vrs2_general">
             <thead>
-            <tr><th colspan="5" style="font-size: 20px">Текущие параметры</th></tr>
             <tr>
-                <th>Давление, бар</th>
                 <th>Суммарный расход воды, кубов</th>
-                <th>Температура в помещении</th>
-                <th>Температура воды,°C</th>
-                <th>Температура на улице,°C</th>
             </tr>
             </thead>
-            <tbody style="margin-top: 100px">
-            <tr>
-            </tr>
-            </tbody>
         </table>    <!--Таблица изменений-->
         <div id="container_days2" style="float: left; height: 400px; width: 75%"></div>
         <table class="table_energy" id="vrs_2_days">
@@ -400,20 +391,11 @@
             </tbody>
         </table>    <!--Таблица изменений-->
     </div>
-</div> <!--ВРС1 html-->
+</div> <!--ВРС2 html-->
 <script th:inline="javascript">
     var vrs2_data = [[${vrs2_data}]];
+    $("#vrs2_general > thead > tr").append("<th>" + vrs2_data[0] + "</th>");
 
-    $.each( vrs2_data, function( index ){
-        if(index == 0 || index == 3 || index == 4) {
-            return;
-        }
-        else {
-            $("#vrs2_general > tbody > tr").append(
-                "<td>" + vrs2_data[index] + "</td>");
-        }
-
-    });
 </script>   <!--Формирование таблицы общей диаграммы-->
 <script th:inline="javascript">
     var vrs2 = [[${vrs2}]];
