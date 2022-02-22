@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Аварии станка Gamma 2000</title>
+    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+
+    <link rel="stylesheet" type="text/css" href="../../css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/menu_buttons.css"/> <!-- Меню -->
+    <link rel="stylesheet" type="text/css" href="../../css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/userscontrol.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/styles_energy.css"/>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+
+    <script src="../../js/highcharts.js"></script>
+    <script src="../../js/exporting.js"></script>
+    <script src="../../js/export-data.js"></script>
+    <script src="../../js/accessibility.js"></script>
+    <script src="../../js/xrange.js"></script>
+
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script src="../../js/bootstrap-3.3.0.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+            $('#button_obnovit').on("click", function () {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+                var day = datas.getDate();
+                var mes = datas.getMonth() + 1;
+                var year = datas.getFullYear();
+
+                name_data = year + "-" + mes + "-" + day;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
+
+    <!--Календарь -->
+    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
+    <!--Календарь Русский язык-->
+    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
+
+</head>
+
+<header>
+    <div class="header-div">
+        <a href="../home" style="display: flex; align-items: flex-start;"><img src="../images/logo_black.png"
+                                                                               class="icon-logo-admin"/></a>
+        <ul id="menu_ul">
+            <li id="menu_li"><a id="menu_a" href="energy_water" class="menu-color">Водоснабжение</a>
+                <div class="neo-line"></div>
+            </li>
+            <li id="menu_li1"><a id="menu_a1" href="energy_gaz">Газ</a></li>
+            <li id="menu_li2"><a id="menu_a2" href="energy_electricity">Электроэнергия</a></li>
+        </ul>
+        <div style="display: flex; flex-direction: row;">
+            <div class="div_login_mail">
+                <li th:text="${user_name}"></li>
+                <p th:text="${user_mail}"></p>
+            </div>
+            <div method="post" class="dropdown">
+                <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+                <div class="dropdown-content">
+                    <p id="role_vision"></p>
+                    <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
+                    <li th:text="${user_name}"></li>
+                    <p th:text="${user_mail}"></p>
+                    <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
+                    <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование
+                    </button>
+                    <label class="switch">
+                        <p>Светлая Темная</p>
+                        <span class="slider round"><input type="checkbox" id='dark_button'/><span
+                                class="slider_before round_before"></span></span>
+                    </label>
+                    <form th:action="@{/logout}" method="post">
+                        <button class="follow" type="submit">
+                            Выход
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div style="width: 220px; float: left">
+            <h2>Выберите дату:</h2>
+        </div>
+
+        <form action="#" th:action="@{/stanki/alarm/1}" th:object="${calendar_date}" method="post">
+
+            <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+                <input type='text' class="form-control" th:field="*{content_date}"/>
+                <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit"
+                        class="follow"
+                        id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                    Обновить
+                </button>
+            </div>
+        </form>
+
+    </div>      <!--Календарь html-->
+</header>
+<!--Шапка html-->
+<body>
+<div class="preloader">
+    <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+    </div>
+</div>
+<!-- Загрузка страницы и темная тема-->
+<script>
+    var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
+
+    if (localStorage['dark_theme_state'] != null) {
+        dark_theme_state = parseInt(window.localStorage['dark_theme_state']); // Если она уже локально задана сохраняем
+    }
+
+    if (dark_theme_state == 0) {
+        $('.preloader').attr("style", `background: #f2f6f8`);
+    } // присвоение цвета загрузочного меню
+    else if (dark_theme_state == 1) {
+        $('.preloader').attr("style", `background: #161821`);
+    } // в двух цветах
+
+    window.onload = function () { // прелоудер
+        document.body.classList.add('loaded_hiding');
+        window.setTimeout(function () {
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
+        }, 500);
+
+        dark_theme(); // Вызов функции
+        // Смена цвета по кнопке
+        $("#dark_button").on("click", function () {
+            dark_theme_state++; // увеличиваем счетчик
+            if (dark_theme_state > 1) // если он больше 1, меняем на ноль
+            {
+                dark_theme_state = 0;
+            }
+            window.localStorage['dark_theme_state'] = dark_theme_state; // сохраняем переменную в локальном хранилище
+            // Условия для смены цвета после нажатия на кнопку
+            dark_theme();
+        });
+    }
+</script>
+<script src="/js/dark_theme.js"></script>
+
+<script th:inline="javascript">
+    var role_status = [[${user_role}]];
+
+    if (role_status === "ROLE_ADMIN") {
+        document.getElementById("role_vision").innerHTML = "Роль: Админ";
+        document.getElementById("admin").style.display = "inline";
+
+    } else if (role_status === "ROLE_USER") {
+        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
+        document.getElementById("admin").style.display = "none";
+    }
+</script>
+<!--Скрипт отображения в header  кнопки администрирование-->
+
+<script src="/js/dropdown_menu.js"></script>
+<script>
+    click_avatar();
+</script> <!-- Скрипт вызова функции для выпадающего меню -->
+
+<script src="/js/mesto.js"></script>
+<!--Скрипт с вызовом функций для изменения места-->
+
+<div style="display: flex; justify-content: space-between">
+
+    <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
+    <!--Количество ошибок html-->
+</div>  <!--Общая загрузка и количество аварий html-->
+<script th:inline="javascript">
+
+    var AlarmNo = [[${AlarmNo}]];
+    var AlarmContent = [[${AlarmContent}]];
+    var programNo = [[${programNo}]];
+    var time = [[${time}]];
+    console.log(AlarmNo)
+    console.log(AlarmContent)
+    console.log(programNo)
+    console.log(time)
+
+    //Считаем количество уникальных значений
+    var count = AlarmNo.reduce((acc, n) => (acc[n] = (acc[n] || 0) + 1, acc), {});
+    console.log(count);
+
+    var numberAlarm = Object.keys(count);
+    var countAlarm = Object.values(count);
+
+    console.log(numberAlarm);
+    console.log(countAlarm);
+
+    Highcharts.chart('container_kol_operations', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Количество аварий'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: numberAlarm,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' аварий'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Количество аварий',
+            data: countAlarm
+        }]
+    });
+</script>   <!--js количество аварий-->
+
+</body>
+</html>
