@@ -169,9 +169,9 @@
 
     <div class="container" style="display: flex; justify-content: center; align-items: center;">
         <div style="width: 250px; float: left">
-            <h2>Выберите дату:</h2>
+            <h2 class="choose_month">Выберите дату:</h2>
         </div>
-        <form action="#" th:action="@{/stanki/alarm/1}" th:object="${calendar_date}" method="post" id="form_update">
+        <form style="margin: 0 20px; display: flex; align-items: center;" action="#" th:action="@{/stanki/alarm/1}" th:object="${calendar_date}" method="post" id="form_update">
 
             <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
                 <input type='text' class="form-control" th:field="*{content_date}"/>
