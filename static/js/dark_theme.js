@@ -33,7 +33,7 @@ var opacity_login_light = '.5';
 var opacity_login_dark = '.7';
 
 
-function panel_admin(back_color, border_color, table_color_1, table_color_2 ) {
+function panel_admin(back_color, border_color, table_color_1, table_color_2, table_itog ) {
     $('.header-div').attr("style", "background-color:" + back_color + ';'); // цвет фона и основной цвет текста
     $('#table_users th, #table_users tr , #table_users td').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important;');
     $('.table_energy th, .table_energy tr , .table_energy td').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important;');
