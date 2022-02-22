@@ -200,12 +200,12 @@ function mesto_personal(calen_1_color, back_color){
 
 function table_colors_white(table_color_1, back_color, table_color_3) {
     $('table').attr('style','text-shadow: none; color:' + table_color_1 + '; background: radial-gradient(farthest-corner at 50% 50%,' + back_color + ',' + table_color_3 + ');');
-    $('#vrs2_general > thead > tr').attr('style','text-shadow: none; color:' + table_color_1 + '; background: radial-gradient(farthest-corner at 50% 50%,' + back_color + ',' + table_color_3 + ');');
+    $('#vrs2_general > thead > tr > th:nth-child(2)').attr('style','text-shadow: none; color:' + table_color_1 + '; background: radial-gradient(farthest-corner at 50% 50%,' + back_color + ',' + table_color_3 + ')!important; outline: 0px solid #d1e6f6!important;');
 }
 
 function table_colors_black() {
     $('table').attr('style','text-shadow: 1px 2px 3px white, 0 0 2em black, 0 0 0.1em white; color: black; background: radial-gradient(farthest-corner at 50% 50%, white, #808488);');
-    $('#vrs2_general > thead > tr').attr('style', 'text-shadow: 1px 2px 3px white, 0 0 2em black, 0 0 0.1em white; color: black; background: radial-gradient(farthest-corner at 50% 50%, white, #808488);');
+    $('#vrs2_general > thead > tr > th:nth-child(2)').attr('style', 'text-shadow: 1px 2px 3px white, 0 0 2em black, 0 0 0.1em white; color: black; background: radial-gradient(farthest-corner at 50% 50%, white, #808488)!important; outline: 0px solid white!important;');
 }
 
 
