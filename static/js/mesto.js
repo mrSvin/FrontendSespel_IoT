@@ -792,4 +792,22 @@ function vrs1(){
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
+
+function vrs2(){
+    mar_top = -1000;
+    mar_left = 308;
+    bground = 'url(../images/nasos.png) no-repeat';
+    place_img = "../images/2_ploshadka_outside.png";
+    size = 60;
+    bwidth = "unset";
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['bwidth'] = bwidth;
+    window.localStorage['size'] = size;
+};
+
+
 // Конец мест водоснабжение.
