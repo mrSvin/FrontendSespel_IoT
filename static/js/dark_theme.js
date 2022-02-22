@@ -216,7 +216,7 @@ function dark_theme(){
     if (dark_theme_state == 0) // условие светлой темы
     {   $('.icon-logo-admin').attr("src", "../images/logo_black.png"); // картинка лого для папок на уровень ниже
         $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого обычная
-        $('.icon-logo-admin .icon-alarm').attr("src", "../../images/logo_black.png"); // картинка для аварий
+        $('.icon-alarm').attr("src", "../../images/logo_black.png"); // картинка для аварий
         panel_admin(back_color, back_color_black, table_color_3, knopki, good_blue);
         backgroundes(back_color, text_color, knopki); // Вызов функции для основных фонов
         drop_content_colors(text_color, drop_down_line, back_color, text_color); // Вызов функции для выпадающих меню
@@ -235,7 +235,7 @@ function dark_theme(){
     {
         $('.icon-logo-admin').attr("src", "../images/logo_white.png"); // картинка лого
         $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
-        $('.icon-logo-admin .icon-alarm').attr("src", "../../images/logo_white.png"); // картинка для аварий
+        $('.icon-alarm').attr("src", "../../images/logo_white.png"); // картинка для аварий
         panel_admin(back_color_black, back_color, table_color_1, table_color_4, good_blue_black);
         backgroundes(back_color_black, text_color_black, text_color_black); // Вызов функции для основных фонов
         drop_content_colors(text_color_black, calen_3_color, back_color_black, mesto_personal_color_black); // Вызов функции для выпадающих меню
