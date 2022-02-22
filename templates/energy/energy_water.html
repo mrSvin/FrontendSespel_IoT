@@ -295,7 +295,7 @@
             </tbody>
         </table>    <!--Таблица изменений-->
     </div>
-</div> <!--Расход воды html-->
+</div> <!--ВРС1 html-->
 <script th:inline="javascript">
     var vrs1_data = [[${vrs1_data}]];
 
@@ -309,7 +309,7 @@
         }
 
     });
-</script>   <!--Переменные для общей диаграммы-->
+</script>   <!--Формирование таблицы общей диаграммы-->
 <script th:inline="javascript">
     var vrs1 = [[${vrs1}]];
     var result;
@@ -328,11 +328,11 @@
             result = 0;
         }
         return result;
-    });
+    }); // функция преобразования изначального массива
 
     $.each( vrs1, function( index ){
         sum = sum + vrs1[index];
-    });
+    }); // Сумма всех элементов преобразованного массива
     sum = parseFloat(sum.toFixed(2));
 
     $.each( vrs1, function( index ){
@@ -341,12 +341,118 @@
         }
         $("#vrs_1_days > thead > tr").append("<th>" + (index + 1) + "</th>");
         $("#vrs_1_days > tbody > tr").append("<td>" + vrs1[index] + "</td>");
-    });
+    }); // формирование таблицы ежемесячного расхода
 
-    $(".table_energy > thead > tr").append("<th>Итого</th>");
-    $(".table_energy > tbody > tr").append("<td>" + sum + "</td>");
+    $("#vrs_1_days > thead > tr").append("<th>Итого</th>"); // формирование последней ячейки таблицы
+    $("#vrs_1_days > tbody > tr").append("<td>" + sum + "</td>"); // с общей суммой
 </script> <!--JS таблица-->
-<script src="/js/energy/energy_water.js"></script>
+<script src="/js/energy/water_vrs1.js"></script>
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left; min-height: 600px;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="../images/nasos.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ВРС2
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="../mesto/mesto"
+                           onclick="vrs2(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1002, screen.availWidth)); return false;">
+                            <div class='label_mesto'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal"
+                           href="../personal/personal_pech_nerg"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table_general" id="vrs2_general">
+            <thead>
+            <tr><th colspan="5" style="font-size: 20px">Текущие параметры</th></tr>
+            <tr>
+                <th>Давление, бар</th>
+                <th>Суммарный расход воды, кубов</th>
+                <th>Температура в помещении</th>
+                <th>Температура воды,°C</th>
+                <th>Температура на улице,°C</th>
+            </tr>
+            </thead>
+            <tbody style="margin-top: 100px">
+            <tr>
+            </tr>
+            </tbody>
+        </table>    <!--Таблица изменений-->
+        <div id="container_days2" style="float: left; height: 400px; width: 75%"></div>
+        <table class="table_energy" id="vrs_2_days">
+            <thead>
+            <tr>
+                <th>Дни</th>
+            </tr>
+            </thead>
+            <tbody style="margin-top: 100px">
+            <tr>
+                <td>Кубов</td>
+            </tr>
+            </tbody>
+        </table>    <!--Таблица изменений-->
+    </div>
+</div> <!--ВРС1 html-->
+<script th:inline="javascript">
+    var vrs2_data = [[${vrs2_data}]];
+
+    $.each( vrs2_data, function( index ){
+        if(index == 0 || index == 3 || index == 4) {
+            return;
+        }
+        else {
+            $("#vrs2_general > tbody > tr").append(
+                "<td>" + vrs2_data[index] + "</td>");
+        }
+
+    });
+</script>   <!--Формирование таблицы общей диаграммы-->
+<script th:inline="javascript">
+    var vrs2 = [[${vrs2}]];
+    var result;
+    var n = 0;
+    sum = 0
+
+    vrs2 = $.map(vrs2, function () {
+        n++;
+        delta = vrs2[n] - vrs2[n - 1];
+        if (delta > 0) {
+            result = parseFloat(delta.toFixed(2));
+        } else {
+            result = 0;
+        }
+        if (delta>120) {
+            result = 0;
+        }
+        return result;
+    }); // функция преобразования изначального массива
+
+    $.each( vrs2, function( index ){
+        sum = sum + vrs2[index];
+    }); // Сумма всех элементов преобразованного массива
+    sum = parseFloat(sum.toFixed(2));
+
+    $.each( vrs2, function( index ){
+        if (index == 31 ) {
+            return false;
+        }
+        $("#vrs_2_days > thead > tr").append("<th>" + (index + 1) + "</th>");
+        $("#vrs_2_days > tbody > tr").append("<td>" + vrs2[index] + "</td>");
+    }); // формирование таблицы ежемесячного расхода
+
+    $("#vrs_2_days  > thead > tr").append("<th>Итого</th>"); // формирование последней ячейки таблицы
+    $("#vrs_2_days > tbody > tr").append("<td>" + sum + "</td>"); // с общей суммой
+</script> <!--JS таблица-->
+<script src="/js/energy/water_vrs2.js"></script>
+
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
