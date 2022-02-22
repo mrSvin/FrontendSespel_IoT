@@ -106,7 +106,7 @@
             <h2>Выберите дату:</h2>
         </div>
 
-        <form action="#" th:action="@{/stanki/alarm/1}" th:object="${calendar_date}" method="post">
+        <form action="#" th:action="@{/stanki/alarm/1}" th:object="${calendar_date}" method="post" id="form_update">
 
             <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
                 <input type='text' class="form-control" th:field="*{content_date}"/>
@@ -279,6 +279,14 @@
         }]
     });
 </script>   <!--js количество аварий-->
+
+<script>
+    var form_path = document.location.pathname;
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", form_path)
+
+    $('#form_update').attr('action',form_path);
+
+</script> <!-- Скрипт присваивания пути в запрос -->
 
 </body>
 </html>
