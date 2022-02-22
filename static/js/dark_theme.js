@@ -12,6 +12,9 @@ var knopki = '#4f759b'; // цвета кнопок обновить и выхо�
 var nav_menu_col1 = "#14b2f3"; // цвет надписи в навигационном меню
 var nav_menu_col2 = "#1aaae5"; // цвет надписи в навигационном меню при наведении
 
+var good_blue = "#168aff"; // приятный синий
+var good_blue_black = "#0c66c1"; // приятный синий темнее
+
 var table_color_1 = '#0C213B'; // градиентые цвета таблицы
 var table_color_3 = '#d1e6f6'; // градиентые цвета таблицы
 var table_color_4 = '#223362'; // цвета таблицы
@@ -38,7 +41,7 @@ function panel_admin(back_color, border_color, table_color_1, table_color_2 ) {
     $('.table_energy > thead > tr > th:nth-of-type(n+2)').attr("style", `background-color: ${table_color_1};` + 'outline: 1px solid' + border_color +'!important;' + `color: ${border_color}`);
     $('.table_general th, .table_general tr , .table_general td').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important;');
     $('.table_general th').attr('style', 'background-color: ' + table_color_2 + '!important; outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important;');
-
+    $('.table_energy > thead > tr > th:nth-last-child(1)').attr('style', 'background-color: ' + table_itog + '!important; outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important;');
     $('.tr-sticky').attr("style", 'outline: 1px solid' + border_color +'!important; border-color:' + border_color +'!important ;position: sticky; width: 100%; margin-top: 90px; top: 75px; z-index: 1;');
 
 
@@ -213,7 +216,7 @@ function dark_theme(){
     if (dark_theme_state == 0) // условие светлой темы
     {   $('.icon-logo-admin').attr("src", "../images/logo_black.png"); // картинка лого
         $('.icon-logo').attr("src", "images/logo_black.png"); // картинка лого
-        panel_admin(back_color, back_color_black, table_color_3, knopki);
+        panel_admin(back_color, back_color_black, table_color_3, knopki, good_blue);
         backgroundes(back_color, text_color, knopki); // Вызов функции для основных фонов
         drop_content_colors(text_color, drop_down_line, back_color, text_color); // Вызов функции для выпадающих меню
         calendar(calen_1_color, back_color, calen_3_color,calen_4_color); // Вызов функции для календаря
@@ -231,7 +234,7 @@ function dark_theme(){
     {
         $('.icon-logo-admin').attr("src", "../images/logo_white.png"); // картинка лого
         $('.icon-logo').attr("src", "images/logo_white.png"); // картинка лого
-        panel_admin(back_color_black, back_color, table_color_1, table_color_4);
+        panel_admin(back_color_black, back_color, table_color_1, table_color_4, good_blue_black);
         backgroundes(back_color_black, text_color_black, text_color_black); // Вызов функции для основных фонов
         drop_content_colors(text_color_black, calen_3_color, back_color_black, mesto_personal_color_black); // Вызов функции для выпадающих меню
         calendar(back_color, back_color_black, text_color_black, text_color_black); // Вызов функции для календаря
