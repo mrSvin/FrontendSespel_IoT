@@ -1,5 +1,6 @@
 #table_alarm {
-    width: 75%;
+    min-width: 90%;
+    margin: 5px auto;
 }
 
 #table_alarm td {
@@ -9,34 +10,5 @@
 .alarm-div {
     display: flex;
     justify-content: center;
-    width: 80%;
-}
-
-@media (max-width: 1355px)
-{
-
-    .alarm-div {
-        width: 100%!important;
-    }
-
-    #table_alarm {
-        margin-left: 0!important;
-    }
-
-}
-
-@media (max-width: 1135px)
-{
-
-    #table_alarm td {
-        font-size: 16px;
-    }
-
-}
-
-@media (max-width: 1024px)
-{
-    #table_alarm td {
-        font-size: 12px;
-    }
+    width: 100vw;
 }
