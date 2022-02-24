@@ -269,15 +269,22 @@
                     </div>
                 </div>
             </div>
-            <div id="container_kol_operations" style="height: 400px; width: 60%"></div><!--Количество ошибок html-->
+            <div id="container_kol_operations" style="height: 400px; width: 80%"></div><!--Количество ошибок html-->
+            <table class="table_general" id="table_alarm" style="width: 80%">
+                <thead>
+                <tr>
+                    <th>Номер ошибки</th>
+                    <th>Описание</th>
+                    <th>Имя программы</th>
+                    <th>Время</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>  <!--Общая загрузка и количество аварий html-->
-
-<!--<div style="display: flex; justify-content: center">-->
-<!--    <div id="container_kol_operations" style="height: 400px; width: 60%"></div>-->
-<!--    &lt;!&ndash;Количество ошибок html&ndash;&gt;-->
-<!--</div>  &lt;!&ndash;Общая загрузка и количество аварий html&ndash;&gt;-->
 <script th:inline="javascript">
 
     var colors = ['#e81e1d'];
@@ -352,6 +359,22 @@
         }]
     });
 </script>   <!--js количество аварий-->
+<script th:inline="javascript">
+
+    $.each( AlarmNo, function( index ){
+        // if (index == 31 ) {
+        //     return false;
+        // }
+        $("#table_alarm > tbody").append(
+            "<tr>" +
+            "<td>" + AlarmNo[index] + "</td>" +
+            "<td>" + AlarmContent[index] + "</td>" +
+            "<td>" + programNo[index] + "</td>" +
+            "<td>" + time[index] + "</td>" +
+            "</tr>" );
+    });
+</script> <!--JS таблица-->
+
 
 <script>
     var form_path = document.location.pathname;
