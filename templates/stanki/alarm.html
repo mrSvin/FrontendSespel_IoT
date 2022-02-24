@@ -275,7 +275,7 @@
                 <col style="width:5%"/>
                 <col style="width:40%"/>
                 <col style="width:20%"/>
-                <col style="width:15%"/>
+                <col style="width:5%"/>
             </colgroup>
             <thead>
             <tr>
@@ -297,6 +297,11 @@
     var AlarmContent = [[${AlarmContent}]];
     var programNo = [[${programNo}]];
     var time = [[${time}]];
+
+    $.each( time, function( index ){
+        time[index] = time[index].substring(10, 19);
+    }); // Преобразование массива времени
+
     console.log(AlarmNo)
     console.log(AlarmContent)
     console.log(programNo)
