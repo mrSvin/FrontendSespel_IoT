@@ -82,6 +82,22 @@ caption {
     margin-top: 70px;
 }
 
+.icon_error{
+    background: url(../images/error.png) no-repeat;
+    background-size: 60px 60px;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.icon_error:hover {
+    -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+}
+
+.icon_error:hover > div {
+    color: #000000;
+    margin-top: 70px;
+}
+
+
 .label_mesto{
     color: #756e6e;
     margin-top: 65px;
