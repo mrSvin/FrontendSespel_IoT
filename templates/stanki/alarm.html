@@ -256,10 +256,28 @@
     click_avatar();
 </script> <!-- Скрипт вызова функции для выпадающего меню -->
 
-<div style="display: flex; justify-content: center">
-    <div id="container_kol_operations" style="height: 400px; width: 80%"></div>
-    <!--Количество ошибок html-->
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/faccin.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Станок</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="faccin_1(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_kol_operations" style="height: 400px; width: 60%"></div><!--Количество ошибок html-->
+        </div>
+    </div>
 </div>  <!--Общая загрузка и количество аварий html-->
+
+<!--<div style="display: flex; justify-content: center">-->
+<!--    <div id="container_kol_operations" style="height: 400px; width: 60%"></div>-->
+<!--    &lt;!&ndash;Количество ошибок html&ndash;&gt;-->
+<!--</div>  &lt;!&ndash;Общая загрузка и количество аварий html&ndash;&gt;-->
 <script th:inline="javascript">
 
     var colors = ['#e81e1d'];
@@ -300,7 +318,6 @@
             title: {
                 text: 'Номера ошибок'
             },
-            allowDecimals: 'boolean',
         },
         yAxis: {
             min: 0,
@@ -311,7 +328,7 @@
             labels: {
                 overflow: 'justify'
             },
-            allowDecimals: 'boolean',
+            allowDecimals: false,
         },
         tooltip: {
             valueSuffix: ' аварий'
