@@ -303,10 +303,10 @@
         time[index] = time[index].substring(10, 19);
     }); // Преобразование массива времени
 
-    console.log(AlarmNo)
-    console.log(AlarmContent)
-    console.log(programNo)
-    console.log(time)
+    // console.log(AlarmNo)
+    // console.log(AlarmContent)
+    // console.log(programNo)
+    // console.log(time)
 
     //Считаем количество уникальных значений
     var count = AlarmNo.reduce((acc, n) => (acc[n] = (acc[n] || 0) + 1, acc), {});
@@ -315,8 +315,8 @@
     var numberAlarm = Object.keys(count);
     var countAlarm = Object.values(count);
 
-    console.log(numberAlarm);
-    console.log(countAlarm);
+    // console.log(numberAlarm);
+    // console.log(countAlarm);
 
     Highcharts.chart('container_kol_operations', {
         chart: {
