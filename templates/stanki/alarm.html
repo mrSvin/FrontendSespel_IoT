@@ -138,6 +138,7 @@
 <header>
     <div class="header-div">
         <a href="../../home" style="display: flex; align-items: flex-start;"><img src="../../images/logo_black.png" class="icon-logo-admin icon-alarm"/></a>
+        <h1>Аварии станка Gamma 2000</h1>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
                 <li th:text="${user_name}"></li>
@@ -260,9 +261,9 @@
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+            <div class="img" style="float: left; min-height: 10px;"> <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
-                    <img src="../../images/faccin.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
+                    <img src="../../images/gamma2000.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Станок</figcaption>
                 </div>
             </div>
@@ -272,7 +273,7 @@
     <div class="alarm-div">
         <table class="table_general" id="table_alarm">
             <colgroup>
-                <col style="width:5%"/>
+                <col style="width:5%; font-weight: bolder;"/>
                 <col style="width:40%"/>
                 <col style="width:20%"/>
                 <col style="width:5%"/>

@@ -1,6 +1,7 @@
 #table_alarm {
     min-width: 90%;
     margin: 5px auto;
+    margin-bottom: 20px;
 }
 
 #table_alarm td {
