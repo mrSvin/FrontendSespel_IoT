@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/styles_header.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/userscontrol.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/styles_energy.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/alarm_styles.css"/>
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
@@ -263,25 +264,23 @@
                 <div class="parent_image">
                     <img src="../../images/faccin.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
                     <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Станок</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="faccin_1(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
                 </div>
             </div>
             <div id="container_kol_operations" style="height: 400px; width: 80%"></div><!--Количество ошибок html-->
-            <table class="table_general" id="table_alarm" style="width: 80%">
-                <thead>
-                <tr>
-                    <th>Номер ошибки</th>
-                    <th>Описание</th>
-                    <th>Имя программы</th>
-                    <th>Время</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+            <div class="alarm-div">
+                <table class="table_general" id="table_alarm">
+                    <thead>
+                    <tr>
+                        <th>Номер ошибки</th>
+                        <th>Описание</th>
+                        <th>Имя программы</th>
+                        <th>Время</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>  <!--Общая загрузка и количество аварий html-->
