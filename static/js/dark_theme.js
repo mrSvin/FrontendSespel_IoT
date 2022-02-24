@@ -199,6 +199,12 @@ function mesto_personal(calen_1_color, back_color){
     }, function(){
         $(this).css('-webkit-box-shadow', 'none');
     });
+
+    $(".icon_error").hover(function() { // свечение при наведении на персонад
+        $(this).css('-webkit-box-shadow', 'inset 0px 0px 12px 12px' + back_color);
+    }, function(){
+        $(this).css('-webkit-box-shadow', 'none');
+    });
 }
 
 function table_colors_white(table_color_1, back_color, table_color_3) {
