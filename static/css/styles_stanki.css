@@ -87,6 +87,7 @@ caption {
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;
+    width: 60px;
 }
 .icon_error:hover {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
@@ -108,6 +109,12 @@ caption {
     color: #756e6e;
     margin-top: 65px;
     margin-left: -5px;
+}
+
+.label_error{
+    color: #756e6e;
+    margin-top: 65px;
+    margin-left: 4px;
 }
 
 .choose_month {
