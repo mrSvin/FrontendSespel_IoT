@@ -272,7 +272,10 @@
                     <h5 id="ip">0.0.0.0</h5>
                 </div>
             </div>
-            <div id="container_kol_operations" style="height: 400px; width: 71%"></div><!--Количество ошибок html-->
+            <div style="display: flex;">
+                <div id="container_kol_operations" style="height: 400px; width: 100%; padding: 5px"></div><!--Количество ошибок html-->
+                <p class="error-tittle">Количество аварий:</p>
+            </div>
         </div>
     </div>
     <div class="alarm-div">
@@ -303,6 +306,8 @@
     var AlarmContent = [[${AlarmContent}]];
     var programNo = [[${programNo}]];
     var time = [[${time}]];
+
+    $('.error-tittle').text(`Количество аварий: ${AlarmNo.length}`); // Количество аварий перед графиком
 
     $.each(time, function (index) {
         time[index] = time[index].substring(10, 19);
