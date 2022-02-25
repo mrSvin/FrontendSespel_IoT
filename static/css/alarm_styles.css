@@ -13,3 +13,13 @@
     justify-content: center;
     width: 100%;
 }
+
+.error-tittle {
+    display: block;
+    min-width: 22%;
+    max-width: 40%;
+    font-size: 18px;
+    position: relative;
+    left: -50%;
+    top: -25px;
+}
