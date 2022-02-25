@@ -395,7 +395,7 @@
     var form_path = document.location.pathname;
     $('#form_update').attr('action', form_path);
 
-    //Создаем объект со станками
+    //Создаем объекты с атрибутами станков
     const Gamma2000 = {name:"Gamma 2000", src:"../../images/gamma2000.png"};
     const Ctx310_1 = {name:"CTX310 #1", src:"../../images/dmg_ctx310.png"};
     const Ctx310_2 = {name:"CTX310 #2", src:"../../images/dmg_ctx310.png"};
@@ -423,7 +423,7 @@
     const searchIndex= form_path.lastIndexOf("/")+1;
     const index = form_path.substr(searchIndex, form_path.length)
 
-    //Выбираем с соотвествующим индексом нужный объект
+    //Выбираем с соотвествующим индексом нужный объект и заполняем его данными страницу
     $('figcaption').text(stanki[index].name).attr('title');
     $('img.stanok_img').attr('src', stanki[index].src);
 
