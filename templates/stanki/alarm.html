@@ -137,7 +137,8 @@
 
 <header>
     <div class="header-div">
-        <a href="../../home" style="display: flex; align-items: flex-start;"><img src="../../images/logo_black.png" class="icon-logo-admin icon-alarm"/></a>
+        <a href="../../home" style="display: flex; align-items: flex-start;"><img src="../../images/logo_black.png"
+                                                                                  class="icon-logo-admin icon-alarm"/></a>
         <h1>Аналитика аварийных состояний оборудования</h1>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
@@ -173,7 +174,8 @@
         <div style="width: 250px; float: left">
             <h2 class="choose_month">Выберите дату:</h2>
         </div>
-        <form style="margin: 0 20px; display: flex; align-items: center;" action="#" th:action="@{/stanki/alarm/1}" th:object="${calendar_date}" method="post" id="form_update">
+        <form style="margin: 0 20px; display: flex; align-items: center;" action="#" th:action="@{/stanki/alarm/1}"
+              th:object="${calendar_date}" method="post" id="form_update">
 
             <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
                 <input type='text' class="form-control" th:field="*{content_date}"/>
@@ -263,8 +265,10 @@
         <div style="width: 100%;   margin: 2%;">
             <div class="img" style="float: left; min-height: 10px;"> <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
-                    <img src="../../images/gamma2000.png" class="stanok_img" style="margin-left: auto; margin-right: auto; display: block"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">GAMMA2000</figcaption>
+                    <img src="../../images/gamma2000.png" class="stanok_img"
+                         style="margin-left: auto; margin-right: auto; display: block"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">GAMMA2000
+                    </figcaption>
                 </div>
             </div>
             <div id="container_kol_operations" style="height: 400px; width: 71%"></div><!--Количество ошибок html-->
@@ -299,7 +303,7 @@
     var programNo = [[${programNo}]];
     var time = [[${time}]];
 
-    $.each( time, function( index ){
+    $.each(time, function (index) {
         time[index] = time[index].substring(10, 19);
     }); // Преобразование массива времени
 
@@ -310,7 +314,7 @@
 
     //Считаем количество уникальных значений
     var count = AlarmNo.reduce((acc, n) => (acc[n] = (acc[n] || 0) + 1, acc), {});
-    console.log(count);
+    // console.log(count);
 
     var numberAlarm = Object.keys(count);
     var countAlarm = Object.values(count);
@@ -322,7 +326,7 @@
         chart: {
             type: 'bar'
         },
-        colors:colors,
+        colors: colors,
         title: {
             text: 'Количество аварий'
         },
@@ -359,7 +363,7 @@
             }
         },
         legend: {
-            enabled:false
+            enabled: false
         },
         credits: {
             enabled: false
@@ -372,7 +376,7 @@
 </script>   <!--js количество аварий-->
 <script th:inline="javascript">
 
-    $.each( AlarmNo, function( index ){
+    $.each(AlarmNo, function (index) {
         // if (index == 31 ) {
         //     return false;
         // }
@@ -382,14 +386,47 @@
             "<td>" + AlarmContent[index] + "</td>" +
             "<td>" + programNo[index] + "</td>" +
             "<td>" + time[index] + "</td>" +
-            "</tr>" );
+            "</tr>");
     });
 </script> <!--JS таблица-->
 
 
 <script>
     var form_path = document.location.pathname;
-    $('#form_update').attr('action',form_path);
+    $('#form_update').attr('action', form_path);
+
+    //Создаем объект со станками
+    const Gamma2000 = {name:"Gamma 2000", src:"../../images/gamma2000.png"};
+    const Ctx310_1 = {name:"CTX310 #1", src:"../../images/dmg_ctx310.png"};
+    const Ctx310_2 = {name:"CTX310 #2", src:"../../images/dmg_ctx310.png"};
+    const Ctx310_3 = {name:"CTX310 #3", src:"../../images/dmg_ctx310.png"};
+    const Ctx510_1 = {name:"CTX510 #1", src:"../../images/dmg_ctx510.png"};
+    const Ctx510_2 = {name:"CTX510 #2", src:"../../images/dmg_ctx510.png"};
+    const Ctx510_3 = {name:"CTX510 #2", src:"../../images/dmg_ctx510.png"};
+    const Ctx510_4 = {name:"CTX510 #2", src:"../../images/dmg_ctx510.png"};
+    const Ctx510_5 = {name:"CTX510 #2", src:"../../images/dmg_ctx510.png"};
+    const Ctx650 = {name:"CTX650", src:"../../images/dmg_ctx650.png"};
+    const Dmc1035 = {name:"DMC1035", src:"../../images/dmg_dmc1035.png"};
+    const Dmf260 = {name:"DMF260", src:"../../images/dmg_dmf260.png"};
+    const Dmu50_1 = {name:"DMU50 #1", src:"../../images/dmg_dmu50.png"};
+    const Dmu50_2 = {name:"DMU50 #2", src:"../../images/dmg_dmu50.png"};
+    const Nlx3000 = {name:"NLX3000", src:"../../images/NLX3000.png"};
+    const Ntx1000_1 = {name:"NTX1000 #1", src:"../../images/ntx1000.png"};
+    const Ntx1000_2 = {name:"NTX1000 #2", src:"../../images/ntx1000.png"};
+
+
+    var stanki = [ null, Gamma2000, Ctx310_1, Ctx310_2, Ctx310_3, Ctx510_1, Ctx510_2, Ctx510_3, Ctx510_4, Ctx510_5,
+        Ctx650, Dmc1035, Dmf260, Dmu50_1, Dmu50_2, Nlx3000, Ntx1000_1,Ntx1000_2];
+
+    //Парсим текущий открытый индекс станка
+    form_path.lastIndexOf("/")
+    const searchIndex= form_path.lastIndexOf("/")+1;
+    const index = form_path.substr(searchIndex, form_path.length)
+
+    //Выбираем с соотвествующим индексом нужный объект
+    $('figcaption').text(stanki[index].name).attr('title');
+    $('img.stanok_img').attr('src', stanki[index].src);
+
 </script> <!-- Скрипт присваивания пути в запрос -->
 
 </body>
