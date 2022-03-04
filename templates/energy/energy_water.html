@@ -437,11 +437,17 @@
 <script>
     var colors = ['#5c7ed0'];
     const timezone = new Date().getTimezoneOffset()
+
     const vrs1Data = {nameContainer:"container_days1", arrayData: vrs1};
     const vrs2Data = {nameContainer:"container_days2", arrayData: vrs2};
-    var arrayVrs = [vrs1Data, vrs2Data ];
+    const arrayObject = [vrs1Data, vrs2Data]
 
-    startSetData(arrayVrs);
+    setOptions();   //выставляем свойства для highcharts
+
+    $.map(arrayObject, function (arrayObject) { // итерируем выполнение setData для всех объектов массива arrayObject
+        setData(arrayObject.nameContainer, arrayObject.arrayData); //заполняем данными highcharts
+    });
+
 </script>
 
 
