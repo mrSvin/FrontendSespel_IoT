@@ -346,7 +346,6 @@
     $("#vrs_1_days > thead > tr").append("<th>Итого</th>"); // формирование последней ячейки таблицы
     $("#vrs_1_days > tbody > tr").append("<td>" + sum + "</td>"); // с общей суммой
 </script> <!--JS таблица-->
-<script src="/js/energy/water_vrs1.js"></script>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -433,7 +432,17 @@
     $("#vrs_2_days  > thead > tr").append("<th>Итого</th>"); // формирование последней ячейки таблицы
     $("#vrs_2_days > tbody > tr").append("<td>" + sum + "</td>"); // с общей суммой
 </script> <!--JS таблица-->
-<script src="/js/energy/water_vrs2.js"></script>
+
+<script src="/js/WaterGraph.js"></script>
+<script>
+    var colors = ['#5c7ed0'];
+    const timezone = new Date().getTimezoneOffset()
+    const vrs1Data = {nameContainer:"container_days1", arrayData: vrs1};
+    const vrs2Data = {nameContainer:"container_days2", arrayData: vrs2};
+    var arrayVrs = [vrs1Data, vrs2Data ];
+
+    startSetData(arrayVrs);
+</script>
 
 
 <script th:inline="javascript">
