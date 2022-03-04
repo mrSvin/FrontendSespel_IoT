@@ -1,4 +1,5 @@
-function params() {
+function setOptions() {
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -33,7 +34,7 @@ function setData(container, array) {
         chart: {
             type: 'column'
         },
-        colors:colors,
+        colors: colors,
         title: {
             text: 'Расход воды по дням'
         },
@@ -47,7 +48,7 @@ function setData(container, array) {
                     fontSize: '18px',
                 }
             },
-            categories: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
         },
         credits: {
             enabled: false
@@ -69,7 +70,7 @@ function setData(container, array) {
             }
         },
         legend: {
-            enabled:false
+            enabled: false
         },
 
         series: [{
@@ -78,19 +79,3 @@ function setData(container, array) {
         }]
     });
 }
-
-function startSetData(arrayObject)
-{
-    params();
-    $.map(arrayObject, function (arrayObject) {
-        var containerName = arrayObject.nameContainer;
-        var dataArray = arrayObject.arrayData;
-        setData(containerName, dataArray);
-    });
-
-}
-
-
-
-
-
