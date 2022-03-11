@@ -34,13 +34,8 @@ function setData(containerLine,containerRound, arrayAvar, arrayFail, arrayPass, 
         },
         plotOptions: {
             column: {
-                dataLabels: {
-                    enabled: false
-                }
+                stacking: 'percent'
             }
-        },
-        legend: {
-            enabled: false
         },
 
         series: [{
