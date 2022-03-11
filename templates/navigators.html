@@ -348,6 +348,12 @@
     var kometa_3_avar_sum = [[${avar_kometa_3}]];
     var kometa_3_nagruzka_sum = [[${nagruzka_kometa_3}]];
 
+    var ar55_work_sum = [[${work_ar55}]];
+    var ar55_pass_sum = [[${pass_ar55}]];
+    var ar55_fail_sum = [[${fail_ar55}]];
+    var ar55_nagruzka_sum = [[${nagruzka_ar55}]];
+    var ar55_avar_sum = [[${avar_ar55}]];
+
     const timezone = new Date().getTimezoneOffset()
 
     Highcharts.setOptions({
@@ -392,7 +398,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2', 'Комета #3']
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2', 'Комета #3', 'AR55']
         },
         credits: {
             enabled: false
@@ -414,19 +420,19 @@
         },
         series: [{
             name: 'Авария',
-            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0, kometa_1_avar_sum, kometa_2_avar_sum, kometa_3_avar_sum]
+            data: [navigator_1_avar_sum, avar_2_golova_1_sum, avar_2_golova_2_sum, navigator_3_avar_sum, 0, kometa_1_avar_sum, kometa_2_avar_sum, kometa_3_avar_sum, ar55_avar_sum]
         }, {
             name: 'Выключен',
-            data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum, trulaser_fail_sum, kometa_1_fail_sum, kometa_2_fail_sum, kometa_3_fail_sum]
+            data: [navigator_1_fail_sum, fail_2_golova_1_sum, fail_2_golova_2_sum, navigator_3_fail_sum, trulaser_fail_sum, kometa_1_fail_sum, kometa_2_fail_sum, kometa_3_fail_sum, ar55_fail_sum]
         }, {
             name: 'Ожидание',
-            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum, kometa_1_pass_sum, kometa_2_pass_sum, kometa_3_pass_sum]
+            data: [navigator_1_pass_sum, pass_2_golova_1_sum, pass_2_golova_2_sum, navigator_3_pass_sum, trulaser_pass_sum, kometa_1_pass_sum, kometa_2_pass_sum, kometa_3_pass_sum, ar55_pass_sum]
         }, {
             name: 'Под нагрузкой',
-            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, kometa_1_nagruzka_sum, kometa_2_nagruzka_sum, kometa_3_nagruzka_sum]
+            data: [navigator_1_nagruzka_sum, nagruzka_2_golova_1_sum, nagruzka_2_golova_2_sum, navigator_3_nagruzka_sum, 0, kometa_1_nagruzka_sum, kometa_2_nagruzka_sum, kometa_3_nagruzka_sum, ar55_nagruzka_sum]
         }, {
             name: 'Работа',
-            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum, kometa_1_work_sum, kometa_2_work_sum, kometa_3_work_sum]
+            data: [navigator_1_work_sum, work_2_golova_1_sum, work_2_golova_2_sum, navigator_3_work_sum, trulaser_work_sum, kometa_1_work_sum, kometa_2_work_sum, kometa_3_work_sum, ar55_work_sum]
         }]
     });
 
@@ -708,15 +714,8 @@
                     <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">AR55
                     </figcaption>
                     <div>
-                        <a style="text-decoration: none; float: left" className="icon_mesto" href="mesto/mesto"
-                           onClick="ar55(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;">
-                            <div className='label_mesto'>Место</div>
-                        </a>
-                        <a style="text-decoration: none; float: left" className="icon_personal"
-                           href="personal/personal_dmg_ctx510_4"
-                           onClick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div className='label_personal'>Персонал</div>
-                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="ar55(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_kometa_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     </div>
                 </div>
             </div>

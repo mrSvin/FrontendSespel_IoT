@@ -307,6 +307,12 @@
     var pass_kometa_3 = [[${kometa_3_pass}]];
     var fail_kometa_3 = [[${kometa_3_fail}]];
 
+    var work_ar55 = [[${ar55_work}]];
+    var pass_ar55 = [[${ar55_pass}]];
+    var fail_ar55 = [[${ar55_fail}]];
+    var avar_ar55 = [[${ar55_avar}]];
+    var nagruzka_ar55 = [[${ar55_nagruzka}]];
+
     const timezone = new Date().getTimezoneOffset()
 
     Highcharts.setOptions({
@@ -351,7 +357,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2',  'Комета #3']
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2',  'Комета #3', 'AR55']
         },
         credits: {
             enabled: false
@@ -373,29 +379,29 @@
         },
         series: [{
             name: 'Авария',
-            data: [avar_navigator_1, avar_navigator_2_golova_1, avar_navigator_2_golova_2, avar_navigator_3, avar_trulaser, 0, 0, 0]
+            data: [avar_navigator_1, avar_navigator_2_golova_1, avar_navigator_2_golova_2, avar_navigator_3, avar_trulaser, 0, 0, 0, avar_ar55]
         }, {
             name: 'Выключен',
-            data: [fail_navigator_1, fail_navigator_2_golova_1, fail_navigator_2_golova_2, fail_navigator_3, fail_trulaser, fail_kometa_1, fail_kometa_2, fail_kometa_3]
+            data: [fail_navigator_1, fail_navigator_2_golova_1, fail_navigator_2_golova_2, fail_navigator_3, fail_trulaser, fail_kometa_1, fail_kometa_2, fail_kometa_3, fail_ar55]
         }, {
             name: 'Ожидание',
-            data: [pass_navigator_1, pass_navigator_2_golova_1, pass_navigator_2_golova_2, pass_navigator_3, pass_trulaser, pass_kometa_1, pass_kometa_2, pass_kometa_3]
+            data: [pass_navigator_1, pass_navigator_2_golova_1, pass_navigator_2_golova_2, pass_navigator_3, pass_trulaser, pass_kometa_1, pass_kometa_2, pass_kometa_3, pass_ar55]
         }, {
             name: 'Под нагрузкой',
-            data: [nagruzka_navigator_1, nagruzka_navigator_2_golova_1, nagruzka_navigator_2_golova_2, nagruzka_navigator_3, nagruzka_trulaser, 0, 0, 0]
+            data: [nagruzka_navigator_1, nagruzka_navigator_2_golova_1, nagruzka_navigator_2_golova_2, nagruzka_navigator_3, nagruzka_trulaser, 0, 0, 0, nagruzka_ar55]
         }, {
             name: 'Работа',
-            data: [work_navigator_1, work_navigator_2_golova_1, work_navigator_2_golova_2, work_navigator_3, work_trulaser, work_kometa_1, work_kometa_2, work_kometa_3]
+            data: [work_navigator_1, work_navigator_2_golova_1, work_navigator_2_golova_2, work_navigator_3, work_trulaser, work_kometa_1, work_kometa_2, work_kometa_3, work_ar55]
         }, ]
     });
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
     var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    var sum_rabota = [[${navigator_1_work}]] + [[${navigator_2_golova_1_work}]] + [[${navigator_2_golova_2_work}]] + [[${navigator_3_work}]] + [[${trulaser_work}]] + [[${kometa_1_work}]] + [[${kometa_2_work}]] + [[${kometa_3_work}]];
-    var sum_pause = [[${navigator_1_pass}]] + [[${navigator_2_golova_1_pass}]] + [[${navigator_2_golova_2_pass}]] + [[${navigator_3_pass}]] + [[${trulaser_pass}]] + [[${kometa_1_pass}]] + [[${kometa_2_pass}]] + [[${kometa_3_pass}]];
-    var sum_off = [[${navigator_1_fail}]] + [[${navigator_2_golova_1_fail}]] + [[${navigator_2_golova_2_fail}]] + [[${navigator_3_fail}]] + [[${trulaser_fail}]] + [[${kometa_1_fail}]] + [[${kometa_2_fail}]] + [[${kometa_3_fail}]];
-    var sum_avar = [[${navigator_1_avar}]] + [[${navigator_2_golova_1_avar}]] + [[${navigator_2_golova_2_avar}]] + [[${navigator_3_avar}]] + [[${trulaser_avar}]];
-    var sum_nagruzka = [[${navigator_1_nagruzka}]] + [[${navigator_2_golova_1_nagruzka}]] + [[${navigator_2_golova_2_nagruzka}]] + [[${navigator_3_nagruzka}]] + [[${trulaser_nagruzka}]];
+    var sum_rabota = [[${navigator_1_work}]] + [[${navigator_2_golova_1_work}]] + [[${navigator_2_golova_2_work}]] + [[${navigator_3_work}]] + [[${trulaser_work}]] + [[${kometa_1_work}]] + [[${kometa_2_work}]] + [[${kometa_3_work}]] + [[${ar55_work}]];
+    var sum_pause = [[${navigator_1_pass}]] + [[${navigator_2_golova_1_pass}]] + [[${navigator_2_golova_2_pass}]] + [[${navigator_3_pass}]] + [[${trulaser_pass}]] + [[${kometa_1_pass}]] + [[${kometa_2_pass}]] + [[${kometa_3_pass}]] + [[${ar55_pass}]];
+    var sum_off = [[${navigator_1_fail}]] + [[${navigator_2_golova_1_fail}]] + [[${navigator_2_golova_2_fail}]] + [[${navigator_3_fail}]] + [[${trulaser_fail}]] + [[${kometa_1_fail}]] + [[${kometa_2_fail}]] + [[${kometa_3_fail}]] +  [[${ar55_fail}]];
+    var sum_avar = [[${navigator_1_avar}]] + [[${navigator_2_golova_1_avar}]] + [[${navigator_2_golova_2_avar}]] + [[${navigator_3_avar}]] + [[${trulaser_avar}]] + [[${ar55_avar}]];
+    var sum_nagruzka = [[${navigator_1_nagruzka}]] + [[${navigator_2_golova_1_nagruzka}]] + [[${navigator_2_golova_2_nagruzka}]] + [[${navigator_3_nagruzka}]] + [[${trulaser_nagruzka}]] + [[${ar55_nagruzka}]];
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
