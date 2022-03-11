@@ -506,7 +506,8 @@
     var uf5220_fail = [[${uf5220_fail}]];
     var uf5220_avar = [[${uf5220_avar}]];
 </script>   <!--Переменные для круговой диаграммы uf5220-->
-<script src="/js/month/stanki/data_uf5220_month.js"></script>
+
+<!--<script src="/js/month/stanki/data_uf5220_month.js"></script>-->
 
 <div style="border: 1px solid #333;">   <!--Прогресс html-->
     <div style="overflow: hidden;">
@@ -538,7 +539,7 @@
     var progress_fail = [[${progress_fail}]];
     var progress_avar = [[${progress_avar}]];
 </script>   <!--Переменные для круговой диаграммы progress-->
-<script src="/js/month/stanki/data_progress_month.js"></script>
+<!--<script src="/js/month/stanki/data_progress_month.js"></script>-->
 
 <div style="border: 1px solid #333;">   <!--NTX1000 html-->
     <div style="overflow: hidden;">
@@ -955,6 +956,27 @@
     click_avatar();
 </script> <!-- Скрипт вызова функции для выпадающего меню -->
 
+<script src="/js/month/universal.js"></script>
+<script>
+    const complex_uf5220 = {nameContainerLine:"container_days1", nameContainerRound:"container",
+        arrayAvar:[0], arrayFail:uf5220_off_day, arrayPass:uf5220_pause_day, arrayNagruzka:[0],
+        arrayWork:uf5220_rabota_day, avar:uf5220_avar, fail:uf5220_fail, pass:uf5220_pass, nagruzka:0,
+        work:uf5220_work};
+
+    const complex_progress = {nameContainerLine:"container_days2", nameContainerRound:"container2",
+        arrayAvar:[0], arrayFail:progress_off_day, arrayPass:progress_pause_day, arrayNagruzka:[0],
+        arrayWork:progress_rabota_day, avar:progress_avar, fail:progress_fail, pass:progress_pass, nagruzka:0,
+        work:progress_work};
+
+    const arrayObject = [complex_uf5220, complex_progress]
+
+    $.map(arrayObject, function (arrayObject) { // итерируем выполнение setData для всех объектов массива arrayObject
+        setData(arrayObject.nameContainerLine, arrayObject.nameContainerRound,
+            arrayObject.arrayAvar, arrayObject.arrayFail, arrayObject.arrayPass,
+            arrayObject.arrayNagruzka, arrayObject.arrayWork, arrayObject.avar,
+            arrayObject.fail, arrayObject.pass, arrayObject.nagruzka, arrayObject.work); //заполняем данными highcharts
+    });
+</script>
 
 </body>
 </html>
