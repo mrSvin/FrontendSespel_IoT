@@ -130,8 +130,8 @@ function dmg_ctx310_2 (){
 };
 
 function dmg_ctx510_2 (){
-    mar_top = -105;
-    mar_left = 235;
+    mar_top = -101;
+    mar_left = 106;
     bground = 'url(../images/dmg_ctx510.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
@@ -146,8 +146,8 @@ function dmg_ctx510_2 (){
 };
 
 function dmg_ctx510_3 (){
-    mar_top = -65;
-    mar_left = 210;
+    mar_top = -101;
+    mar_left = 85;
     bground = 'url(../images/dmg_ctx510.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
@@ -179,8 +179,8 @@ function dmg_ctx310_3 (){
 };
 
 function dmg_ctx510_4 (){
-    mar_top = -65;
-    mar_left = 190;
+    mar_top = -105;
+    mar_left = 235;
     bground = 'url(../images/dmg_ctx510.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
@@ -196,7 +196,7 @@ function dmg_ctx510_4 (){
 
 function dmg_ctx510_5 (){
     mar_top = -65;
-    mar_left = 168;
+    mar_left = 210;
     bground = 'url(../images/dmg_ctx510.png) no-repeat';
     place_img = "../images/ii_ploshadka.png";
     size = 25;
