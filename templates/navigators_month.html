@@ -787,8 +787,29 @@
 <!--Скрипт с вызовом функций для изменения места-->
 
 <script src="/js/dropdown_menu.js"></script>
+<!-- Скрипт вызова функции для выпадающего меню -->
+
+<script src="/js/month/universal_month.js"></script>
 <script>
-    click_avatar();
-</script> <!-- Скрипт вызова функции для выпадающего меню -->
+
+    const complexAr55 = {ar55RoundArray};
+
+    const arrayObject = [complexAr55]
+
+    $.map(arrayObject, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject
+
+        // Функция заполнения линейной диаграммы
+        // setDataLine("container_days" + (index + 1), arrayObject.arrayAvar,
+        //     arrayObject.arrayFail, arrayObject.arrayPass,
+        //     arrayObject.arrayNagruzka, arrayObject.arrayWork);
+        // Функция заполнения круговой диаграммы
+        setDataRound("container" + (index + 9), arrayObject[0],
+            arrayObject[1], arrayObject[2],
+            arrayObject[3], arrayObject[4])
+
+    });
+</script> <!-- Скрипт автоматического формирования графиков -->
+
+
 </body>
 </html>
