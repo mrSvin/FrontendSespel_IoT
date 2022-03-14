@@ -52,7 +52,7 @@ caption {
 
      width: 60px;
      height: 60px;
-     background: url(https://icons.iconarchive.com/icons/icons-land/vista-map-markers/64/Map-Marker-Marker-Outside-Chartreuse-icon.png) no-repeat;
+     background: url(../images/iconMesto.png) no-repeat;
      background-size: 60px 60px;
      margin-top: 10px;
      margin-left: 30px;
@@ -68,7 +68,7 @@ caption {
 
 
 .icon_personal{
-    background: url(https://icons.iconarchive.com/icons/icons-land/vista-people/72/Office-Customer-Male-Light-icon.png) no-repeat;
+    background: url(../images/iconPersonal.png) no-repeat;
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;
