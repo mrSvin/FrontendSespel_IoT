@@ -752,8 +752,8 @@
     var ar55_avar = [[${ar55_avar}]];
     var ar55_nagruzka = [[${ar55_nagruzka}]];
 
-    var ar55RoundArray = [[${ar55_month_round}]];
-    console.log(ar55RoundArray)
+    // var ar55RoundArray = [[${ar55_month_round}]];
+    // console.log(ar55RoundArray)
 
 </script>   <!--Переменные для круговой диаграммы AR55-->
 <script src="/js/month/navigators/data_ar55_month.js"></script>
@@ -792,6 +792,8 @@
 <script src="/js/month/universal_month.js"></script>
 <script>
 
+    // const ar55Diagrams = {lineArray:"", roundArray:[[${ar55_month_round}]]};
+
     const monthData = [ar55RoundArray]
 
     $.map(monthData, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject
@@ -807,6 +809,39 @@
 
     });
 </script> <!-- Скрипт автоматического формирования графиков -->
+
+
+<!--<script>-->
+
+<!--    const ar55Diagrams = {lineArray:"", roundArray:[[${ar55_month_round}]]};-->
+
+<!--    $.map(monthData, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject-->
+
+<!--        if (arrayObject.lineArray[3] == undefined)-->
+<!--        {-->
+<!--            arrayObject.lineArray.push(Array(31).fill(0));-->
+<!--            arrayObject.roundArray.push(0);-->
+<!--        }-->
+
+<!--        if (arrayObject.lineArray[4] == undefined)-->
+<!--        {-->
+<!--            arrayObject.lineArray.push(Array(31).fill(0));-->
+<!--            arrayObject.roundArray.push(0);-->
+<!--        }-->
+
+
+
+<!--        // Функция заполнения линейной диаграммы-->
+<!--        setDataLine("container_days" + (index + 9),  arrayObject.lineArray[0],-->
+<!--            arrayObject.lineArray[1], arrayObject.lineArray[2],-->
+<!--            arrayObject.lineArray[3], arrayObject.lineArray[4]);-->
+<!--        // Функция заполнения круговой диаграммы-->
+<!--        setDataRound("container" + (index + 9), arrayObject.roundArray[0],-->
+<!--            arrayObject.roundArray[1], arrayObject.roundArray[2],-->
+<!--            arrayObject.roundArray[3], arrayObject.roundArray[4]);-->
+
+<!--    });-->
+<!--</script> &lt;!&ndash; Скрипт автоматического формирования графиков &ndash;&gt;-->
 
 
 </body>
