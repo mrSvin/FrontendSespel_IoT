@@ -1,5 +1,5 @@
 var colorsMonth = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
-function setData(containerLine,containerRound, arrayAvar, arrayFail, arrayPass, arrayNagruzka, arrayWork, avar, fail, pass, nagruzka, work) {
+function setDataLine(containerLine, arrayAvar, arrayFail, arrayPass, arrayNagruzka, arrayWork) {
     Highcharts.chart(containerLine, {
         chart: {
             type: 'column'
@@ -57,6 +57,9 @@ function setData(containerLine,containerRound, arrayAvar, arrayFail, arrayPass, 
         }]
     });
 
+}
+
+function setDataRound(containerRound, avar, fail, pass, nagruzka, work) {
     Highcharts.chart(containerRound, {
         chart: {
             plotBackgroundColor: null,
