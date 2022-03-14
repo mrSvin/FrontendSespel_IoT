@@ -477,7 +477,7 @@
                 </div>
             </div>
             <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>
 </div> <!-- УВФ 1 html-->
@@ -648,6 +648,7 @@
                     <div>
                         <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx650(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
                         <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx650" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_error" href="stanki/alarm/10" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_error'>Ошибки</div></a>
                     </div>
                 </div>
             </div>
@@ -911,9 +912,30 @@
 <script src="/js/mesto.js"></script>
 <!--Скрипт с вызовом функций для изменения места-->
 
-<script src="/js/dropdown_menu.js"></script>
+<script src="/js/dropdown_menu.js"></script><!-- Скрипт вызова функции для выпадающего меню -->
+
+<script src="/js/month/universal_month.js"></script>
 <script>
-    click_avatar();
-</script> <!-- Скрипт вызова функции для выпадающего меню -->
+
+    const complex_ntx1000 = {arrayAvar:ntx1000_avar_day, arrayFail:ntx1000_off_day, arrayPass:ntx1000_pause_day, arrayNagruzka: ntx1000_nagruzka_day,
+        arrayWork:ntx1000_rabota_day, avar:ntx1000_avar, fail:ntx1000_fail, pass:ntx1000_pass, nagruzka:ntx1000_nagruzka,
+        work:ntx1000_work};
+
+
+    const arrayObject = [complex_uf5220]
+
+    $.map(arrayObject, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject
+
+        // Функция заполнения линейной диаграммы
+        setDataLine("container_days" + (index + 1), arrayObject.arrayAvar,
+            arrayObject.arrayFail, arrayObject.arrayPass,
+            arrayObject.arrayNagruzka, arrayObject.arrayWork);
+        // Функция заполнения круговой диаграммы
+        setDataRound("container" + (index + 1), arrayObject.avar,
+            arrayObject.fail, arrayObject.pass,
+            arrayObject.nagruzka, arrayObject.work)
+
+    });
+</script> <!-- Скрипт автоматического формирования графиков -->
 </body>
 </html>
