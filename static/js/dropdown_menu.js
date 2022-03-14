@@ -36,7 +36,7 @@ function click_avatar() {
 
 }
 
-
+click_avatar();
 
 
 
