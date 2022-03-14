@@ -790,58 +790,61 @@
 <!-- Скрипт вызова функции для выпадающего меню -->
 
 <script src="/js/month/universal_month.js"></script>
-<script>
-
-    // const ar55Diagrams = {lineArray:"", roundArray:[[${ar55_month_round}]]};
-
-    const monthData = [ar55RoundArray]
-
-    $.map(monthData, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject
-
-        // Функция заполнения линейной диаграммы
-        // setDataLine("container_days" + (index + 1),  arrayObject[0],
-        //     arrayObject[1], arrayObject[2],
-        //     arrayObject[3], arrayObject[4]);
-        // Функция заполнения круговой диаграммы
-        setDataRound("container" + (index + 9), arrayObject[0],
-            arrayObject[1], arrayObject[2],
-            arrayObject[3], arrayObject[4]);
-
-    });
-</script> <!-- Скрипт автоматического формирования графиков -->
-
-
 <!--<script>-->
 
-<!--    const ar55Diagrams = {lineArray:"", roundArray:[[${ar55_month_round}]]};-->
+<!--    // const ar55Diagrams = {lineArray:"", roundArray:[[${ar55_month_round}]]};-->
+
+<!--    const monthData = [ar55RoundArray]-->
 
 <!--    $.map(monthData, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject-->
 
-<!--        if (arrayObject.lineArray[3] == undefined)-->
-<!--        {-->
-<!--            arrayObject.lineArray.push(Array(31).fill(0));-->
-<!--            arrayObject.roundArray.push(0);-->
-<!--        }-->
-
-<!--        if (arrayObject.lineArray[4] == undefined)-->
-<!--        {-->
-<!--            arrayObject.lineArray.push(Array(31).fill(0));-->
-<!--            arrayObject.roundArray.push(0);-->
-<!--        }-->
-
-
-
 <!--        // Функция заполнения линейной диаграммы-->
-<!--        setDataLine("container_days" + (index + 9),  arrayObject.lineArray[0],-->
-<!--            arrayObject.lineArray[1], arrayObject.lineArray[2],-->
-<!--            arrayObject.lineArray[3], arrayObject.lineArray[4]);-->
+<!--        // setDataLine("container_days" + (index + 1),  arrayObject[0],-->
+<!--        //     arrayObject[1], arrayObject[2],-->
+<!--        //     arrayObject[3], arrayObject[4]);-->
 <!--        // Функция заполнения круговой диаграммы-->
-<!--        setDataRound("container" + (index + 9), arrayObject.roundArray[0],-->
-<!--            arrayObject.roundArray[1], arrayObject.roundArray[2],-->
-<!--            arrayObject.roundArray[3], arrayObject.roundArray[4]);-->
+<!--        setDataRound("container" + (index + 9), arrayObject[0],-->
+<!--            arrayObject[1], arrayObject[2],-->
+<!--            arrayObject[3], arrayObject[4]);-->
 
 <!--    });-->
 <!--</script> &lt;!&ndash; Скрипт автоматического формирования графиков &ndash;&gt;-->
+
+<script>
+
+    const ar55Diagrams = {lineArray:[[0]], roundArray:[[${ar55_month_round}]]};
+
+    const monthData = [ar55Diagrams];
+
+    $.map(monthData, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject
+
+        // if (arrayObject.lineArray[3] == undefined)
+        // {
+        //     arrayObject.lineArray.push(Array(31).fill(0));
+        //     arrayObject.roundArray.push(0);
+        // }
+
+        if (arrayObject.lineArray[5] == undefined)
+        {
+            arrayObject.lineArray.push(Array(31).fill(0));
+            arrayObject.roundArray.push(0);
+        }
+
+
+
+        // Функция заполнения линейной диаграммы
+        // setDataLine("container_days" + (index + 9),  arrayObject.lineArray[0],
+        //     arrayObject.lineArray[1], arrayObject.lineArray[2],
+        //     arrayObject.lineArray[3], arrayObject.lineArray[4]);
+        // Функция заполнения круговой диаграммы
+        setDataRound("container" + (index + 9), arrayObject.roundArray[0],
+            arrayObject.roundArray[1], arrayObject.roundArray[2],
+            arrayObject.roundArray[3], arrayObject.roundArray[4]);
+
+    });
+
+    console.log([ar55Diagrams])
+</script> <!-- Скрипт автоматического формирования графиков -->
 
 
 </body>
