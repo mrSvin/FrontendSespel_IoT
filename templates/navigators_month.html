@@ -263,7 +263,8 @@
     <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
 </div>  <!--Общая загрузка-->
 <script th:inline="javascript">
-    var colors = ['#e81e1d', '#000000','#ffea32', '#207210', '#38e817'];
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+    var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
 
     var work_navigator_1 = [[${navigator_1_work}]];
     var pass_navigator_1 = [[${navigator_1_pass}]];
@@ -347,7 +348,7 @@
         chart: {
             type: 'column'
         },
-        colors:colors,
+        colors:colorsLine,
         title: {
             text: 'Общая загрузка оборудования'
         },
@@ -396,34 +397,13 @@
     });
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    var sum_rabota = [[${navigator_1_work}]] + [[${navigator_2_golova_1_work}]] + [[${navigator_2_golova_2_work}]] + [[${navigator_3_work}]] + [[${trulaser_work}]] + [[${kometa_1_work}]] + [[${kometa_2_work}]] + [[${kometa_3_work}]] + [[${ar55_work}]];
-    var sum_pause = [[${navigator_1_pass}]] + [[${navigator_2_golova_1_pass}]] + [[${navigator_2_golova_2_pass}]] + [[${navigator_3_pass}]] + [[${trulaser_pass}]] + [[${kometa_1_pass}]] + [[${kometa_2_pass}]] + [[${kometa_3_pass}]] + [[${ar55_pass}]];
-    var sum_off = [[${navigator_1_fail}]] + [[${navigator_2_golova_1_fail}]] + [[${navigator_2_golova_2_fail}]] + [[${navigator_3_fail}]] + [[${trulaser_fail}]] + [[${kometa_1_fail}]] + [[${kometa_2_fail}]] + [[${kometa_3_fail}]] +  [[${ar55_fail}]];
-    var sum_avar = [[${navigator_1_avar}]] + [[${navigator_2_golova_1_avar}]] + [[${navigator_2_golova_2_avar}]] + [[${navigator_3_avar}]] + [[${trulaser_avar}]] + [[${ar55_avar}]];
-    var sum_nagruzka = [[${navigator_1_nagruzka}]] + [[${navigator_2_golova_1_nagruzka}]] + [[${navigator_2_golova_2_nagruzka}]] + [[${navigator_3_nagruzka}]] + [[${trulaser_nagruzka}]] + [[${ar55_nagruzka}]];
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
+
+    var sum_rabota = navigator_1_array_round[0] + navigator_2_golova_1_array_round[0] + navigator_2_golova_2_array_round[0] + navigator_3_array_round[0] + trulaser_array_round[0] + kometa_1_array_round[0] + kometa_2_array_round[0] + kometa_3_array_round[0] + ar55_array_round[0];
+    var sum_pause = navigator_1_array_round[1] + navigator_2_golova_1_array_round[1] + navigator_2_golova_2_array_round[1] + navigator_3_array_round[1] + trulaser_array_round[1] + kometa_1_array_round[1] + kometa_2_array_round[1] + kometa_3_array_round[1] + ar55_array_round[1];
+    var sum_off = navigator_1_array_round[2] + navigator_2_golova_1_array_round[2] + navigator_2_golova_2_array_round[2] + navigator_3_array_round[2] + trulaser_array_round[2] + kometa_1_array_round[2] + kometa_2_array_round[2] + kometa_3_array_round[2] + ar55_array_round[2];
+    var sum_avar = navigator_1_array_round[3] + navigator_2_golova_1_array_round[3] + navigator_2_golova_2_array_round[3] + navigator_3_array_round[3] + trulaser_array_round[3] + kometa_1_array_round[3] + kometa_2_array_round[3] + kometa_3_array_round[3] + ar55_array_round[3];
+    var sum_nagruzka = navigator_1_array_round[4] + navigator_2_golova_1_array_round[4] + navigator_2_golova_2_array_round[4] + navigator_3_array_round[4] + trulaser_array_round[4] + kometa_1_array_round[4] + kometa_2_array_round[4] + kometa_3_array_round[4] + ar55_array_round[4];
+
 
     Highcharts.chart('container_sum_zagruzka_krug', {
         chart: {
@@ -455,7 +435,7 @@
                 showInLegend: true
             }
         },
-        colors:colors,
+        colors:colorsRound,
         credits: {
             enabled: false
         },
@@ -632,8 +612,7 @@
 
 <!-- Переменные для диаграмм-->
 <script th:inline="javascript">
-    // var ar55_array_linear = [[${ar55_month_linear}]];
-    var ar55_array_linear = [[0,0,0,0,0,0,0,0,0,0,966,1262,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,117,562,0,57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,4992,4445,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,0,0,0,0,0,0,0]];
+    var ar55_array_linear = [[${ar55_month_linear}]];
 
     var navigator_1_array_round = [[${navigator_1_month_round}]];
     var navigator_2_golova_1_array_round = [[${navigator_2_golova_1_month_round}]];
@@ -666,14 +645,9 @@
 
     $.map(monthData, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject
 
-        console.log("Доооооооооооо",arrayObject.lineArray[0])
-
-        $.each(arrayObject.lineArray[0], function (index, value){
-            value = arrayObject.lineArray[0][index] - arrayObject.lineArray[4][index];
-            return value;
+        $.each(arrayObject.lineArray[0], function (index){
+            arrayObject.lineArray[0][index] = arrayObject.lineArray[0][index] - arrayObject.lineArray[4][index];
         });
-
-        console.log("Поооооооосле",arrayObject.lineArray[0])
 
         // Функция заполнения линейной диаграммы
         setDataLine("container_days" + (index + 1),  arrayObject.lineArray[0],

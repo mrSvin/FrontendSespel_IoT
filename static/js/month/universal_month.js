@@ -1,10 +1,9 @@
-var colorsMonth = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka) {
     Highcharts.chart(containerLine, {
         chart: {
             type: 'column'
         },
-        colors: colorsMonth,
+        colors: colorsLine,
         title: {
             text: 'Загрузка оборудования по дням'
         },
@@ -90,7 +89,7 @@ function setDataRound(containerRound, work, pass,fail, avar, nagruzka) {
                 showInLegend: true
             }
         },
-        colors:colors,
+        colors:colorsRound,
         credits: {
             enabled: false
         },
