@@ -484,6 +484,7 @@
     // Функция заполнения круговой диаграммы
     $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
         // Вычисление работы без нагрузки для линейной диаграммы
+        console.log(element[0])
         element[0] = element[0] - element[4];
         setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
     });
