@@ -560,7 +560,7 @@
         if(element != null) {
             $.each(element[0], function (index){
             element[0][index] = element[0][index] - element[4][index];
-        });
+            });
             setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
         }
 
@@ -571,8 +571,8 @@
         // Вычисление работы без нагрузки для линейной диаграммы
         if(element != null) {
             element[0] = element[0] - element[4];
+            setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
         }
-        setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
     });
 </script> <!--Скрипт для диаграмм станков-->
 <script th:inline="javascript">
@@ -591,20 +591,24 @@
 
     // Заполнение переменных общей круговой диаграммы
     $.map(roundDiagram, function (element) { // итерируем выполнение setData для всех объектов массива element
-        round_rabota = round_rabota + element[0];
-        round_pause = round_pause + element[1];
-        round_off = round_off + element[2];
-        round_avar = round_avar + element[3];
-        round_nagruzka = round_nagruzka + element[4];
+        if(element != null) {
+            round_rabota = round_rabota + element[0];
+            round_pause = round_pause + element[1];
+            round_off = round_off + element[2];
+            round_avar = round_avar + element[3];
+            round_nagruzka = round_nagruzka + element[4];
+        }
     });
 
     // Заполнение переменных общей линейной диаграммы
     $.map(roundDiagram, function (element) {
-        linear_rabota.push(Array(1).fill(element[0]));
-        linear_pause.push(Array(1).fill(element[1]));
-        linear_off.push(Array(1).fill(element[2]));
-        linear_avar.push(Array(1).fill(element[3]));
-        linear_nagruzka .push(Array(1).fill(element[4]));
+        if(element != null) {
+            linear_rabota.push(Array(1).fill(element[0]));
+            linear_pause.push(Array(1).fill(element[1]));
+            linear_off.push(Array(1).fill(element[2]));
+            linear_avar.push(Array(1).fill(element[3]));
+            linear_nagruzka.push(Array(1).fill(element[4]));
+        }
     });
 
     // Формирование графиков для общих круговой и линейной диаграммы
