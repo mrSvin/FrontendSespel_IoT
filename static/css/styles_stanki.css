@@ -121,9 +121,13 @@ caption {
     margin: 0!important;
 }
 
+#container_sum_zagruzka_krug {
+    width: 30%!important;
+  }
 
-
-
+#container_sum_zagruzka {
+    width: 65%!important;
+}
 
 
 
