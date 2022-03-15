@@ -487,13 +487,27 @@
     });
 </script>
 
+<script>
+    const roundDiagram = [navigator_1_array_round, navigator_2_golova_1_array_round, navigator_2_golova_1_array_round,
+        navigator_2_golova_2_array_round, navigator_3_array_round, trulaser_array_round, kometa_1_array_round,
+        kometa_2_array_round, kometa_3_array_round, ar55_array_round];
+</script>
+
 <script th:inline="javascript">
     // Переменные для общей круговой диаграммы(объявлено после функции map, т.к. там преобразуется работа).
-    var sum_rabota = navigator_1_array_round[0] + navigator_2_golova_1_array_round[0] + navigator_2_golova_2_array_round[0] + navigator_3_array_round[0] + trulaser_array_round[0] + kometa_1_array_round[0] + kometa_2_array_round[0] + kometa_3_array_round[0] + ar55_array_round[0];
-    var sum_pause = navigator_1_array_round[1] + navigator_2_golova_1_array_round[1] + navigator_2_golova_2_array_round[1] + navigator_3_array_round[1] + trulaser_array_round[1] + kometa_1_array_round[1] + kometa_2_array_round[1] + kometa_3_array_round[1] + ar55_array_round[1];
-    var sum_off = navigator_1_array_round[2] + navigator_2_golova_1_array_round[2] + navigator_2_golova_2_array_round[2] + navigator_3_array_round[2] + trulaser_array_round[2] + kometa_1_array_round[2] + kometa_2_array_round[2] + kometa_3_array_round[2] + ar55_array_round[2];
-    var sum_avar = navigator_1_array_round[3] + navigator_2_golova_1_array_round[3] + navigator_2_golova_2_array_round[3] + navigator_3_array_round[3] + trulaser_array_round[3] + kometa_1_array_round[3] + kometa_2_array_round[3] + kometa_3_array_round[3] + ar55_array_round[3];
-    var sum_nagruzka = navigator_1_array_round[4] + navigator_2_golova_1_array_round[4] + navigator_2_golova_2_array_round[4] + navigator_3_array_round[4] + trulaser_array_round[4] + kometa_1_array_round[4] + kometa_2_array_round[4] + kometa_3_array_round[4] + ar55_array_round[4];
+    var sum_rabota = 0;
+    var sum_pause = 0;
+    var sum_off = 0;
+    var sum_avar = 0;
+    var sum_nagruzka = 0;
+
+    $.map(roundDiagram, function (element) { // итерируем выполнение setData для всех объектов массива element
+        cum_rabota = cum_rabota + element[0];
+        sum_pause = cum_rabota + element[1];
+        sum_off = sum_off + element[2];
+        sum_avar = sum_avar + element[3];
+        sum_nagruzka = sum_nagruzka + element[4];
+    });
 
     // Формирование графиков для общих круговой и линейной диаграммы
     Highcharts.chart('container_sum_zagruzka', {
