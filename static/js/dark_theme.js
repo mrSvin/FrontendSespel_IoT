@@ -259,5 +259,10 @@ function dark_theme(){
         document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
     }
 }
-
+// Условие, чтобы при изменении ширины темная тема вызывалась снова
+window.addEventListener('resize',  function (){
+    window.setTimeout(function () {
+        dark_theme();
+    }, 500);
+});
 
