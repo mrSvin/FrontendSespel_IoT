@@ -9,9 +9,6 @@
     <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/>
     <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
 
-
-    <!-- Optional theme -->
-
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css" />
 
@@ -510,40 +507,40 @@
 
     // Переменные с массивами линейных и круговых диаграмм с сервера
     var uvf_1_array_linear = [[${uvf_1_month_linear}]]
-    var uvf_1_array_round = [[${uvf_1_month_round}]];
+    var uvf_1_array_round = [[${uvf_1_month_round}]]
 
     var uvf_2_array_linear = [[${uvf_2_month_linear}]]
-    var uvf_2_array_round = [[${uvf_2_month_round}]];
+    var uvf_2_array_round = [[${uvf_2_month_round}]]
 
     var ntx1000_array_linear = [[${dmg_ntx1000_month_linear}]]
-    var ntx1000_array_round = [[${dmg_ntx1000_month_round}]];
+    var ntx1000_array_round = [[${dmg_ntx1000_month_round}]]
 
     var nlx3000_array_linear = [[${dmg_nlx3000_month_linear}]]
-    var nlx3000_array_round = [[${dmg_nlx3000_month_round}]];
+    var nlx3000_array_round = [[${dmg_nlx3000_month_round}]]
 
     var gamma2000_array_linear = [[${dmg_gamma2000_month_linear}]]
-    var gamma2000_array_round = [[${dmg_gamma2000_month_round}]];
+    var gamma2000_array_round = [[${dmg_gamma2000_month_round}]]
 
     var ctx650_array_linear = [[${dmg_ctx650_month_linear}]]
-    var ctx650_array_round = [[${dmg_ctx650_month_round}]];
+    var ctx650_array_round = [[${dmg_ctx650_month_round}]]
 
     var dmf260_array_linear = [[${dmg_dmf260_month_linear}]]
-    var dmf260_array_round = [[${dmg_dmf260_month_round}]];
+    var dmf260_array_round = [[${dmg_dmf260_month_round}]]
 
     var dmu50_1_array_linear = [[${dmg_dmu50_1_month_linear}]]
-    var dmu50_1_array_round = [[${dmg_dmu50_1_month_round}]];
+    var dmu50_1_array_round = [[${dmg_dmu50_1_month_round}]]
 
     var dmu50_2_array_linear = [[${dmg_dmu50_2_month_linear}]]
-    var dmu50_2_array_round = [[${dmg_dmu50_2_month_round}]];
+    var dmu50_2_array_round = [[${dmg_dmu50_2_month_round}]]
 
     var dmc1035_array_linear = [[${dmg_dmc1035_month_linear}]]
-    var dmc1035_array_round = [[${dmg_dmc1035_month_round}]];
+    var dmc1035_array_round = [[${dmg_dmc1035_month_round}]]
 
     var ctx310_1_array_linear = [[${dmg_ctx310_1_month_linear}]]
-    var ctx310_1_array_round = [[${dmg_ctx310_1_month_round}]];
+    var ctx310_1_array_round = [[${dmg_ctx310_1_month_round}]]
 
     var ctx510_1_array_linear = [[${dmg_ctx510_1_month_linear}]]
-    var ctx510_1_array_round = [[${dmg_ctx510_1_month_round}]];
+    var ctx510_1_array_round = [[${dmg_ctx510_1_month_round}]]
 
     const linearDiagram = [uvf_1_array_linear, uvf_2_array_linear, ntx1000_array_linear,
         nlx3000_array_linear, gamma2000_array_linear, ctx650_array_linear, dmf260_array_linear,
@@ -560,10 +557,13 @@
     // Функция заполнения линейной диаграммы
     $.map(linearDiagram, function (element, index) {
         // Вычисление работы без нагрузки для линейной диаграммы
-        $.each(element[0], function (index){
+        if(element != null) {
+            $.each(element[0], function (index){
             element[0][index] = element[0][index] - element[4][index];
         });
-        setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
+            setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
+        }
+
     });
 
     // Функция заполнения круговой диаграммы
