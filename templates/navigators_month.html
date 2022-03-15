@@ -502,8 +502,8 @@
     var sum_nagruzka = 0;
 
     $.map(roundDiagram, function (element) { // итерируем выполнение setData для всех объектов массива element
-        sum_rabota = cum_rabota + element[0];
-        sum_pause = cum_rabota + element[1];
+        sum_rabota = sum_rabota + element[0];
+        sum_pause = sum_pause + element[1];
         sum_off = sum_off + element[2];
         sum_avar = sum_avar + element[3];
         sum_nagruzka = sum_nagruzka + element[4];
