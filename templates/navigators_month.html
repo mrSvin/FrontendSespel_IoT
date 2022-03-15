@@ -422,7 +422,7 @@
 
 </div> <!--AR55 html-->
 
-<!-- Формирования графиков -->
+<!--Функции для заполнения контейнеров-->
 <script src="/js/month/universal_month.js"></script>
 <script th:inline="javascript">
     // Цвета для линейной и круговой диаграмм
@@ -483,8 +483,7 @@
         element[0] = element[0] - element[4];
         setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
     });
-</script>
-
+</script> <!--Скрипт для диаграмм станков-->
 <script th:inline="javascript">
     // Переменные для общих диаграмм.
     var round_rabota = 0;
@@ -610,7 +609,7 @@
                 [ 'Выключен', round_off ],  [ 'В аварии', round_avar],  [ 'Под нагрузкой', round_nagruzka]   ]
         }]
     });
-</script>
+</script> <!--Скрипт для общих диаграмм станков-->
 
 <!--Скрипт отображения в header  кнопки администрирование-->
 <script th:inline="javascript">

@@ -259,209 +259,6 @@
     <div id="container_sum_zagruzka" style="height: 400px; width: 45%"></div> <!--Общая загрузка html-->
     <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
 </div>  <!--Общая загрузка-->
-<script th:inline="javascript">
-
-    var colors = ['#e81e1d', '#000000','#ffea32', '#207210', '#38e817'];
-
-    var work_uvf_1_1 = [[${uvf_1_work}]];
-    var work_uvf_1_2 = [[${uvf_2_work}]];
-    var work_ntx1000 = [[${ntx1000_2_work}]];
-    var work_nlx3000 = [[${nlx3000_work}]];
-    var work_gamma2000 = [[${dmg_gamma2000_work}]];
-    var work_ctx650 = [[${dmg_ctx650_work}]];
-    var work_dmf260 = [[${dmg_dmf260_work}]];
-    var work_dmu50_1 = [[${dmg_dmu50_1_work}]];
-    var work_dmu50_2 = [[${dmg_dmu50_2_work}]];
-    var work_dmc1035 = [[${dmg_dmc1035_work}]];
-    var work_ctx310_1 = [[${dmg_ctx310_1_work}]];
-    var work_ctx510_1 = [[${dmg_ctx510_1_work}]];
-
-    var pause_uvf_1_1 = [[${uvf_1_pass}]];
-    var pause_uvf_1_2 = [[${uvf_2_pass}]];
-    var pause_ntx1000 = [[${ntx1000_2_pass}]];
-    var pause_nlx3000 = [[${nlx3000_pass}]];
-    var pause_gamma2000 = [[${dmg_gamma2000_pass}]];
-    var pause_ctx650 = [[${dmg_ctx650_pass}]];
-    var pause_dmf260 = [[${dmg_dmf260_pass}]];
-    var pause_dmu50_1 = [[${dmg_dmu50_1_pass}]];
-    var pause_dmu50_2 = [[${dmg_dmu50_2_pass}]];
-    var pause_dmc1035 = [[${dmg_dmc1035_pass}]];
-    var pause_ctx310_1 = [[${dmg_ctx310_1_pass}]];
-    var pause_ctx510_1 = [[${dmg_ctx510_1_pass}]];
-
-    var off_uvf_1_1 = [[${uvf_1_fail}]];
-    var off_uvf_1_2 = [[${uvf_2_fail}]];
-    var off_ntx1000 = [[${ntx1000_2_fail}]];
-    var off_nlx3000 = [[${nlx3000_fail}]];
-    var off_gamma2000 = [[${dmg_gamma2000_fail}]];
-    var off_ctx650 = [[${dmg_ctx650_fail}]];
-    var off_dmf260 = [[${dmg_dmf260_fail}]];
-    var off_dmu50_1 = [[${dmg_dmu50_1_fail}]];
-    var off_dmu50_2 = [[${dmg_dmu50_2_fail}]];
-    var off_dmc1035 = [[${dmg_dmc1035_fail}]];
-    var off_ctx310_1 = [[${dmg_ctx310_1_fail}]];
-    var off_ctx510_1 = [[${dmg_ctx510_1_fail}]];
-
-    var avar_uvf_1_1 = [[${uvf_1_avar}]];
-    var avar_uvf_1_2 = [[${uvf_2_avar}]];
-    var avar_ntx1000 = [[${ntx1000_2_avar}]];
-    var avar_nlx3000 = [[${nlx3000_avar}]];
-    var avar_gamma2000 = [[${dmg_gamma2000_avar}]];
-    var avar_ctx650 = [[${dmg_ctx650_avar}]];
-    var avar_dmf260 = [[${dmg_dmf260_avar}]];
-    var avar_dmu50_1 = [[${dmg_dmu50_1_avar}]];
-    var avar_dmu50_2 = [[${dmg_dmu50_2_avar}]];
-    var avar_dmc1035 = [[${dmg_dmc1035_avar}]];
-    var avar_ctx310_1 = [[${dmg_ctx310_1_avar}]];
-    var avar_ctx510_1 = [[${dmg_ctx510_1_avar}]];
-
-
-    var nagruzka_uvf_1_1 = [[${uvf_1_nagruzka}]];
-    var nagruzka_uvf_1_2 = [[${uvf_2_nagruzka}]];
-    var nagruzka_ntx1000 = [[${ntx1000_2_nagruzka}]];
-    var nagruzka_nlx3000 = [[${nlx3000_nagruzka}]];
-    var nagruzka_gamma2000 = [[${dmg_gamma2000_nagruzka}]];
-    var nagruzka_ctx650 = [[${dmg_ctx650_nagruzka}]];
-    var nagruzka_dmf260 = [[${dmg_dmf260_nagruzka}]];
-    var nagruzka_dmu50_1 = [[${dmg_dmu50_1_nagruzka}]];
-    var nagruzka_dmu50_2 = [[${dmg_dmu50_2_nagruzka}]];
-    var nagruzka_dmc1035 = [[${dmg_dmc1035_nagruzka}]];
-    var nagruzka_ctx310_1 = [[${dmg_ctx310_1_nagruzka}]];
-    var nagruzka_ctx510_1 = [[${dmg_ctx510_1_nagruzka}]];
-
-    const timezone = new Date().getTimezoneOffset()
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        plotOptions: {
-            xrange: {
-                grouping: false
-            }
-        },
-        global: {
-            timezoneOffset: timezone
-        }
-    });
-
-    Highcharts.chart('container_sum_zagruzka', {
-        chart: {
-            type: 'column'
-        },
-        colors: colors,
-        title: {
-            text: 'Общая загрузка оборудования'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: ['УВФ-1 #1', 'УВФ-1 #2', 'NTX1000 #2', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50 #1', 'DMU50 #2', 'DMC1035', 'CTX310 #1', 'CTX510 #1']
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Авария',
-            data: [avar_uvf_1_1, avar_uvf_1_2, avar_ntx1000, avar_nlx3000, avar_gamma2000, avar_ctx650, avar_dmf260, avar_dmu50_1, avar_dmu50_2, avar_dmc1035, avar_ctx310_1, avar_ctx510_1]
-        }, {
-            name: 'Выключен',
-            data: [off_uvf_1_1, off_uvf_1_2, off_ntx1000, off_nlx3000, off_gamma2000, off_ctx650, off_dmf260, off_dmu50_1, off_dmu50_2, off_dmc1035, off_ctx310_1, off_ctx510_1]
-        }, {
-            name: 'Ожидание',
-            data: [pause_uvf_1_1, pause_uvf_1_2, pause_ntx1000, pause_nlx3000, pause_gamma2000, pause_ctx650, pause_dmf260, pause_dmu50_1, pause_dmu50_2, pause_dmc1035, pause_ctx310_1, pause_ctx510_1]
-        }, {
-            name: 'Под нагрузкой',
-            data: [nagruzka_uvf_1_1, nagruzka_uvf_1_2, nagruzka_ntx1000, nagruzka_nlx3000, nagruzka_gamma2000, nagruzka_ctx650, nagruzka_dmf260, nagruzka_dmu50_1, nagruzka_dmu50_2, nagruzka_dmc1035, nagruzka_ctx310_1, nagruzka_ctx510_1]
-        },{
-            name: 'Работа',
-            data: [work_uvf_1_1, work_uvf_1_2, work_ntx1000, work_nlx3000, work_gamma2000, work_ctx650, work_dmf260, work_dmu50_1, work_dmu50_2, work_dmc1035, work_ctx310_1, work_ctx510_1 ]
-        }]
-    });
-
-</script>   <!--js Общая загрузка-->
-<script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    var sum_rabota = [[${uvf_1_work}]] + [[${uvf_2_work}]] + [[${ntx1000_2_work}]] + [[${nlx3000_work}]] + [[${dmg_gamma2000_work}]] + [[${dmg_ctx650_work}]] + [[${dmg_dmf260_work}]] + [[${dmg_dmu50_1_work}]] + [[${dmg_dmu50_2_work}]] + [[${dmg_dmc1035_work}]] + [[${dmg_ctx310_1_work}]] + [[${dmg_ctx510_1_work}]]
-    var sum_pause = [[${uvf_1_pass}]] + [[${uvf_2_pass}]] + [[${ntx1000_2_pass}]] + [[${nlx3000_pass}]] + [[${dmg_gamma2000_pass}]] + [[${dmg_ctx650_pass}]] + [[${dmg_dmf260_pass}]] + [[${dmg_dmu50_1_pass}]] + [[${dmg_dmu50_2_pass}]] + [[${dmg_dmc1035_pass}]] + [[${dmg_ctx310_1_pass}]] + [[${dmg_ctx510_1_pass}]]
-    var sum_off = [[${uvf_1_fail}]] + [[${uvf_2_fail}]] + [[${ntx1000_2_fail}]] + [[${nlx3000_fail}]] + [[${dmg_gamma2000_fail}]] + [[${dmg_ctx650_fail}]] + [[${dmg_dmf260_fail}]] + [[${dmg_dmu50_1_fail}]] + [[${dmg_dmu50_2_fail}]] + [[${dmg_dmc1035_fail}]] + [[${dmg_ctx310_1_fail}]] + [[${dmg_ctx510_1_fail}]]
-    var sum_avar = [[${uvf_1_avar}]] + [[${uvf_2_avar}]] + [[${ntx1000_2_avar}]] + [[${nlx3000_avar}]] + [[${dmg_gamma2000_avar}]] + [[${dmg_ctx650_avar}]] + [[${dmg_dmf260_avar}]] + [[${dmg_dmu50_1_avar}]] + [[${dmg_dmu50_2_avar}]] + [[${dmg_dmc1035_avar}]] + [[${dmg_ctx310_1_avar}]] + [[${dmg_ctx510_1_avar}]]
-    var sum_nagruzka = [[${uvf_1_nagruzka}]] + [[${uvf_2_nagruzka}]] + [[${ntx1000_2_nagruzka}]] + [[${nlx3000_nagruzka}]] + [[${dmg_gamma2000_nagruzka}]] + [[${dmg_ctx650_nagruzka}]] + [[${dmg_dmf260_nagruzka}]] + [[${dmg_dmu50_1_nagruzka}]] + [[${dmg_dmu50_2_nagruzka}]] + [[${dmg_dmc1035_nagruzka}]] + [[${dmg_ctx310_1_nagruzka}]] + [[${dmg_ctx510_1_nagruzka}]]
-
-    Highcharts.chart('container_sum_zagruzka_krug', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Суммарная загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colors,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', sum_rabota ], [ 'Включен', sum_pause ],
-                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka]   ]
-        }]
-    });
-</script>   <!--Общая js круговая диагрмма загрузки оборудования-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -481,21 +278,6 @@
         </div>
     </div>
 </div> <!-- УВФ 1 html-->
-<script th:inline="javascript">
-    var uvf_1_rabota_day = [[${uvf_1_rabota_day}]];
-    var uvf_1_pause_day = [[${uvf_1_pause_day}]];
-    var uvf_1_off_day = [[${uvf_1_off_day}]];
-    var uvf_1_avar_day = [[${uvf_1_avar_day}]];
-    var uvf_1_nagruzka_day = [[${uvf_1_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы УВФ 1-->
-<script th:inline="javascript">
-    var uvf_1_work = [[${uvf_1_work}]];
-    var uvf_1_pass = [[${uvf_1_pass}]];
-    var uvf_1_fail = [[${uvf_1_fail}]];
-    var uvf_1_avar = [[${uvf_1_avar}]];
-    var  uvf_1_nagruzka = [[${uvf_1_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы УВФ 1-->
-<script src="/js/month/stanki_meh/data_uvf_1_month.js"></script>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -516,21 +298,7 @@
     </div>
 
 </div> <!-- УВФ 2 html-->
-<script th:inline="javascript">
-    var uvf_2_rabota_day = [[${uvf_2_rabota_day}]];
-    var uvf_2_pause_day = [[${uvf_2_pause_day}]];
-    var uvf_2_off_day = [[${uvf_2_off_day}]];
-    var uvf_2_avar_day = [[${uvf_2_avar_day}]];
-    var uvf_2_nagruzka_day = [[${uvf_2_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы УВФ 1-->
-<script th:inline="javascript">
-    var uvf_2_work = [[${uvf_2_work}]];
-    var uvf_2_pass = [[${uvf_2_pass}]];
-    var uvf_2_fail = [[${uvf_2_fail}]];
-    var uvf_2_avar = [[${uvf_2_avar}]];
-    var  uvf_2_nagruzka = [[${uvf_2_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы УВФ 1-->
-<script src="/js/month/stanki_meh/data_uvf_2_month.js"></script>
+
 
 <div style="border: 1px solid #333;">   <!--NTX1000 html-->
     <div style="overflow: hidden;">
@@ -551,21 +319,6 @@
     </div>
 
 </div> <!--NTX1000 html-->
-<script th:inline="javascript">
-    var ntx1000_2_rabota_day = [[${ntx1000_2_rabota_day}]];
-    var ntx1000_2_pause_day = [[${ntx1000_2_pause_day}]];
-    var ntx1000_2_off_day = [[${ntx1000_2_off_day}]];
-    var ntx1000_2_avar_day = [[${ntx1000_2_avar_day}]];
-    var ntx1000_2_nagruzka_day = [[${ntx1000_2_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы NTX1000-->
-<script th:inline="javascript">
-    var ntx1000_2_work = [[${ntx1000_2_work}]];
-    var ntx1000_2_pass = [[${ntx1000_2_pass}]];
-    var ntx1000_2_fail = [[${ntx1000_2_fail}]];
-    var ntx1000_2_avar = [[${ntx1000_2_avar}]];
-    var  ntx1000_2_nagruzka = [[${ntx1000_2_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы NTX1000-->
-<script src="/js/month/stanki_meh/data_ntx1000_2_month.js"></script>
 
 <div style="border: 1px solid #333;">   <!--nlx3000 html-->
     <div style="overflow: hidden;">
@@ -587,21 +340,6 @@
     </div>
 
 </div> <!--nlx3000 html-->
-<script th:inline="javascript">
-    var nlx3000_rabota_day = [[${nlx3000_rabota_day}]];
-    var nlx3000_pause_day = [[${nlx3000_pause_day}]];
-    var nlx3000_off_day = [[${nlx3000_off_day}]];
-    var nlx3000_avar_day = [[${nlx3000_avar_day}]];
-    var nlx3000_nagruzka_day = [[${nlx3000_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы NLX3000-->
-<script th:inline="javascript">
-    var nlx3000_work = [[${nlx3000_work}]];
-    var nlx3000_pass = [[${nlx3000_pass}]];
-    var nlx3000_fail = [[${nlx3000_fail}]];
-    var nlx3000_avar = [[${nlx3000_avar}]];
-    var  nlx3000_nagruzka = [[${nlx3000_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы NLX3000-->
-<script src="/js/month/stanki_meh/data_nlx3000_month.js"></script>
 
 <div style="border: 1px solid #333;">   <!--dmg_gamma2000 html-->
     <div style="overflow: hidden;">
@@ -622,21 +360,6 @@
         </div>
     </div>
 </div> <!--gamma2000 html-->
-<script th:inline="javascript">
-    var dmg_gamma2000_rabota_day = [[${dmg_gamma2000_rabota_day}]];
-    var dmg_gamma2000_pause_day = [[${dmg_gamma2000_pause_day}]];
-    var dmg_gamma2000_off_day = [[${dmg_gamma2000_off_day}]];
-    var dmg_gamma2000_avar_day = [[${dmg_gamma2000_avar_day}]];
-    var dmg_gamma2000_nagruzka_day = [[${dmg_gamma2000_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_gamma2000-->
-<script th:inline="javascript">
-    var dmg_gamma2000_work = [[${dmg_gamma2000_work}]];
-    var dmg_gamma2000_pass = [[${dmg_gamma2000_pass}]];
-    var dmg_gamma2000_fail = [[${dmg_gamma2000_fail}]];
-    var dmg_gamma2000_avar = [[${dmg_gamma2000_avar}]];
-    var  dmg_gamma2000_nagruzka = [[${dmg_gamma2000_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_gamma2000-->
-<script src="/js/month/stanki_meh/data_dmg_gamma2000_month.js"></script>
 
 <div style="border: 1px solid #333;">   <!--dmg_ctx650 html-->
     <div style="overflow: hidden;">
@@ -658,21 +381,6 @@
     </div>
 
 </div> <!--CTX650 html-->
-<script th:inline="javascript">
-    var dmg_ctx650_rabota_day = [[${dmg_ctx650_rabota_day}]];
-    var dmg_ctx650_pause_day = [[${dmg_ctx650_pause_day}]];
-    var dmg_ctx650_off_day = [[${dmg_ctx650_off_day}]];
-    var dmg_ctx650_avar_day = [[${dmg_ctx650_avar_day}]];
-    var dmg_ctx650_nagruzka_day = [[${dmg_ctx650_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_ctx650-->
-<script th:inline="javascript">
-    var dmg_ctx650_work = [[${dmg_ctx650_work}]];
-    var dmg_ctx650_pass = [[${dmg_ctx650_pass}]];
-    var dmg_ctx650_fail = [[${dmg_ctx650_fail}]];
-    var dmg_ctx650_avar = [[${dmg_ctx650_avar}]];
-    var  dmg_ctx650_nagruzka = [[${dmg_ctx650_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_ctx650-->
-<script src="/js/month/stanki_meh/data_dmg_ctx650_month.js"></script>
 
 <div style="border: 1px solid #333;">   <!--dmg_dmf260 html-->
     <div style="overflow: hidden;">
@@ -694,21 +402,6 @@
     </div>
 
 </div> <!--dmf260 html-->
-<script th:inline="javascript">
-    var dmg_dmf260_rabota_day = [[${dmg_dmf260_rabota_day}]];
-    var dmg_dmf260_pause_day = [[${dmg_dmf260_pause_day}]];
-    var dmg_dmf260_off_day = [[${dmg_dmf260_off_day}]];
-    var dmg_dmf260_avar_day = [[${dmg_dmf260_avar_day}]];
-    var dmg_dmf260_nagruzka_day = [[${dmg_dmf260_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_dmf260-->
-<script th:inline="javascript">
-    var dmg_dmf260_work = [[${dmg_dmf260_work}]];
-    var dmg_dmf260_pass = [[${dmg_dmf260_pass}]];
-    var dmg_dmf260_fail = [[${dmg_dmf260_fail}]];
-    var dmg_dmf260_avar = [[${dmg_dmf260_avar}]];
-    var  dmg_dmf260_nagruzka = [[${dmg_dmf260_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_dmf260-->
-<script src="/js/month/stanki_meh/data_dmg_dmf260_month.js"></script>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -728,21 +421,6 @@
         </div>
     </div>
 </div> <!-- DMU50 #1 html-->
-<script th:inline="javascript">
-    var dmg_dmu50_1_rabota_day = [[${dmg_dmu50_1_rabota_day}]];
-    var dmg_dmu50_1_pause_day = [[${dmg_dmu50_1_pause_day}]];
-    var dmg_dmu50_1_off_day = [[${dmg_dmu50_1_off_day}]];
-    var dmg_dmu50_1_avar_day = [[${dmg_dmu50_1_avar_day}]];
-    var dmg_dmu50_1_nagruzka_day = [[${dmg_dmu50_1_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_dmu50_1-->
-<script th:inline="javascript">
-    var dmg_dmu50_1_work = [[${dmg_dmu50_1_work}]];
-    var dmg_dmu50_1_pass = [[${dmg_dmu50_1_pass}]];
-    var dmg_dmu50_1_fail = [[${dmg_dmu50_1_fail}]];
-    var dmg_dmu50_1_avar = [[${dmg_dmu50_1_avar}]];
-    var  dmg_dmu50_1_nagruzka = [[${dmg_dmu50_1_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_dmu50_1-->
-<script src="/js/month/stanki_meh/data_dmg_dmu50_1_month.js"></script>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -763,21 +441,6 @@
     </div>
 
 </div> <!-- DMU50 #2 html-->
-<script th:inline="javascript">
-    var dmg_dmu50_2_rabota_day = [[${dmg_dmu50_2_rabota_day}]];
-    var dmg_dmu50_2_pause_day = [[${dmg_dmu50_2_pause_day}]];
-    var dmg_dmu50_2_off_day = [[${dmg_dmu50_2_off_day}]];
-    var dmg_dmu50_2_avar_day = [[${dmg_dmu50_2_avar_day}]];
-    var dmg_dmu50_2_nagruzka_day = [[${dmg_dmu50_2_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_dmu50_2-->
-<script th:inline="javascript">
-    var dmg_dmu50_2_work = [[${dmg_dmu50_2_work}]];
-    var dmg_dmu50_2_pass = [[${dmg_dmu50_2_pass}]];
-    var dmg_dmu50_2_fail = [[${dmg_dmu50_2_fail}]];
-    var dmg_dmu50_2_avar = [[${dmg_dmu50_2_avar}]];
-    var  dmg_dmu50_2_nagruzka = [[${dmg_dmu50_2_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_dmu50_2-->
-<script src="/js/month/stanki_meh/data_dmg_dmu50_2_month.js"></script>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -798,21 +461,6 @@
     </div>
 
 </div> <!-- DMC1035 #2 html-->
-<script th:inline="javascript">
-    var dmg_dmc1035_rabota_day = [[${dmg_dmc1035_rabota_day}]];
-    var dmg_dmc1035_pause_day = [[${dmg_dmc1035_pause_day}]];
-    var dmg_dmc1035_off_day = [[${dmg_dmc1035_off_day}]];
-    var dmg_dmc1035_avar_day = [[${dmg_dmc1035_avar_day}]];
-    var dmg_dmc1035_nagruzka_day = [[${dmg_dmc1035_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_dmc1035-->
-<script th:inline="javascript">
-    var dmg_dmc1035_work = [[${dmg_dmc1035_work}]];
-    var dmg_dmc1035_pass = [[${dmg_dmc1035_pass}]];
-    var dmg_dmc1035_fail = [[${dmg_dmc1035_fail}]];
-    var dmg_dmc1035_avar = [[${dmg_dmc1035_avar}]];
-    var  dmg_dmc1035_nagruzka = [[${dmg_dmc1035_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_dmc1035-->
-<script src="/js/month/stanki_meh/data_dmg_dmc1035_month.js"></script>
 
 <div style="border: 1px solid #333;">   <!--dmg_ctx310_1 html-->
     <div style="overflow: hidden;">
@@ -833,21 +481,6 @@
     </div>
 
 </div> <!--ctx310_1 html-->
-<script th:inline="javascript">
-    var dmg_ctx310_1_rabota_day = [[${dmg_ctx310_1_rabota_day}]];
-    var dmg_ctx310_1_pause_day = [[${dmg_ctx310_1_pause_day}]];
-    var dmg_ctx310_1_off_day = [[${dmg_ctx310_1_off_day}]];
-    var dmg_ctx310_1_avar_day = [[${dmg_ctx310_1_avar_day}]];
-    var dmg_ctx310_1_nagruzka_day = [[${dmg_ctx310_1_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_ctx310_1-->
-<script th:inline="javascript">
-    var dmg_ctx310_1_work = [[${dmg_ctx310_1_work}]];
-    var dmg_ctx310_1_pass = [[${dmg_ctx310_1_pass}]];
-    var dmg_ctx310_1_fail = [[${dmg_ctx310_1_fail}]];
-    var dmg_ctx310_1_avar = [[${dmg_ctx310_1_avar}]];
-    var  dmg_ctx310_1_nagruzka = [[${dmg_ctx310_1_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_ctx310_1-->
-<script src="/js/month/stanki_meh/data_dmg_ctx310_1_month.js"></script>
 
 <div style="border: 1px solid #333;">   <!--dmg_ctx510_1 html-->
     <div style="overflow: hidden;">
@@ -868,21 +501,204 @@
     </div>
 
 </div> <!--ctx510_1 html-->
+
+<script src="/js/month/universal_month.js"></script>
 <script th:inline="javascript">
-    var dmg_ctx510_1_rabota_day = [[${dmg_ctx510_1_rabota_day}]];
-    var dmg_ctx510_1_pause_day = [[${dmg_ctx510_1_pause_day}]];
-    var dmg_ctx510_1_off_day = [[${dmg_ctx510_1_off_day}]];
-    var dmg_ctx510_1_avar_day = [[${dmg_ctx510_1_avar_day}]];
-    var dmg_ctx510_1_nagruzka_day = [[${dmg_ctx510_1_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_ctx510_2-->
+    // Цвета для линейной и круговой диаграмм
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+    var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+
+    // Переменные с массивами линейных и круговых диаграмм с сервера
+    var uvf_1_array_linear = [[${uvf_1_month_linear}]]
+    var uvf_1_array_round = [[${uvf_1_month_round}]];
+
+    var uvf_2_array_linear = [[${uvf_2_month_linear}]]
+    var uvf_2_array_round = [[${uvf_2_month_round}]];
+
+    var ntx1000_array_linear = [[${ntx1000_month_linear}]]
+    var ntx1000_array_round = [[${ntx1000_month_round}]];
+
+    var nlx3000_array_linear = [[${nlx3000_month_linear}]]
+    var nlx3000_array_round = [[${nlx3000_month_round}]];
+
+    var gamma2000_array_linear = [[${gamma2000_month_linear}]]
+    var gamma2000_array_round = [[${gamma2000_month_round}]];
+
+    var ctx650_array_linear = [[${ctx650_month_linear}]]
+    var ctx650_array_round = [[${ctx650_month_round}]];
+
+    var dmf260_array_linear = [[${dmf260_month_linear}]]
+    var dmf260_array_round = [[${dmf260_month_round}]];
+
+    var dmu50_1_array_linear = [[${dmu50_1_month_linear}]]
+    var dmu50_1_array_round = [[${dmu50_1_month_round}]];
+
+    var dmu50_2_array_linear = [[${dmu50_2_month_linear}]]
+    var dmu50_2_array_round = [[${dmu50_2_month_round}]];
+
+    var dmc1035_array_linear = [[${dmc1035_month_linear}]]
+    var dmc1035_array_round = [[${dmc1035_month_round}]];
+
+    var ctx310_1_array_linear = [[${ctx310_1_month_linear}]]
+    var ctx310_1_array_round = [[${ctx310_1_month_round}]];
+
+    var ctx510_1_array_linear = [[${ctx510_1_month_linear}]]
+    var ctx510_1_array_round = [[${ctx510_1_month_round}]];
+
+    const linearDiagram = [uvf_1_array_linear, uvf_2_array_linear, ntx1000_array_linear,
+        nlx3000_array_linear, gamma2000_array_linear, ctx650_array_linear, dmf260_array_linear,
+        dmu50_1_array_linear, dmu50_2_array_linear, dmc1035_array_linear, ctx310_1_array_linear,
+        ctx510_1_array_linear];
+
+    const roundDiagram = [uvf_1_array_round,uvf_2_array_round, ntx1000_array_round, nlx3000_array_round,
+        gamma2000_array_round, ctx650_array_round, dmf260_array_round, dmu50_1_array_round, dmu50_2_array_round
+        dmc1035_array_round, ctx310_1_array_round, ctx510_1_array_round];
+
+
+    // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
+
+    // Функция заполнения линейной диаграммы
+    $.map(linearDiagram, function (element, index) {
+        // Вычисление работы без нагрузки для линейной диаграммы
+        $.each(element[0], function (index){
+            element[0][index] = element[0][index] - element[4][index];
+        });
+        setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
+    });
+
+    // Функция заполнения круговой диаграммы
+    $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
+        // Вычисление работы без нагрузки для линейной диаграммы
+        element[0] = element[0] - element[4];
+        setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
+    });
+</script> <!--Скрипт для диаграмм станков-->
 <script th:inline="javascript">
-    var dmg_ctx510_1_work = [[${dmg_ctx510_1_work}]];
-    var dmg_ctx510_1_pass = [[${dmg_ctx510_1_pass}]];
-    var dmg_ctx510_1_fail = [[${dmg_ctx510_1_fail}]];
-    var dmg_ctx510_1_avar = [[${dmg_ctx510_1_avar}]];
-    var  dmg_ctx510_1_nagruzka = [[${dmg_ctx510_1_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_ctx510_2-->
-<script src="/js/month/stanki_meh/data_dmg_ctx510_1_month.js"></script>
+    // Переменные для общих диаграмм.
+    var round_rabota = 0;
+    var round_pause = 0;
+    var round_off = 0;
+    var round_avar = 0;
+    var round_nagruzka = 0;
+
+    var linear_rabota = [];
+    var linear_pause = [];
+    var linear_off = [];
+    var linear_avar = [];
+    var linear_nagruzka = [];
+
+    // Заполнение переменных общей круговой диаграммы
+    $.map(roundDiagram, function (element) { // итерируем выполнение setData для всех объектов массива element
+        round_rabota = round_rabota + element[0];
+        round_pause = round_pause + element[1];
+        round_off = round_off + element[2];
+        round_avar = round_avar + element[3];
+        round_nagruzka = round_nagruzka + element[4];
+    });
+
+    // Заполнение переменных общей линейной диаграммы
+    $.map(roundDiagram, function (element) {
+        linear_rabota.push(Array(1).fill(element[0]));
+        linear_pause.push(Array(1).fill(element[1]));
+        linear_off.push(Array(1).fill(element[2]));
+        linear_avar.push(Array(1).fill(element[3]));
+        linear_nagruzka .push(Array(1).fill(element[4]));
+    });
+
+    // Формирование графиков для общих круговой и линейной диаграммы
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors:colorsLine,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2',  'Комета #3', 'AR55']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Авария',
+            data: linear_avar
+        }, {
+            name: 'Выключен',
+            data: linear_off
+        }, {
+            name: 'Ожидание',
+            data: linear_pause
+        }, {
+            name: 'Под нагрузкой',
+            data: linear_nagruzka
+        }, {
+            name: 'Работа',
+            data: linear_rabota
+        }, ]
+    });
+
+    Highcharts.chart('container_sum_zagruzka_krug', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Суммарная загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colorsRound,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [ [ 'По программе', round_rabota ], [ 'Включен', round_pause ],
+                [ 'Выключен', round_off ],  [ 'В аварии', round_avar],  [ 'Под нагрузкой', round_nagruzka]   ]
+        }]
+    });
+</script> <!--Скрипт для общих диаграмм станков-->
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
@@ -914,28 +730,5 @@
 
 <script src="/js/dropdown_menu.js"></script><!-- Скрипт вызова функции для выпадающего меню -->
 
-<script src="/js/month/universal_month.js"></script>
-<script>
-
-    const complex_ntx1000 = {arrayAvar:ntx1000_avar_day, arrayFail:ntx1000_off_day, arrayPass:ntx1000_pause_day, arrayNagruzka: ntx1000_nagruzka_day,
-        arrayWork:ntx1000_rabota_day, avar:ntx1000_avar, fail:ntx1000_fail, pass:ntx1000_pass, nagruzka:ntx1000_nagruzka,
-        work:ntx1000_work};
-
-
-    const arrayObject = [complex_uf5220]
-
-    $.map(arrayObject, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject
-
-        // Функция заполнения линейной диаграммы
-        setDataLine("container_days" + (index + 1), arrayObject.arrayAvar,
-            arrayObject.arrayFail, arrayObject.arrayPass,
-            arrayObject.arrayNagruzka, arrayObject.arrayWork);
-        // Функция заполнения круговой диаграммы
-        setDataRound("container" + (index + 1), arrayObject.avar,
-            arrayObject.fail, arrayObject.pass,
-            arrayObject.nagruzka, arrayObject.work)
-
-    });
-</script> <!-- Скрипт автоматического формирования графиков -->
 </body>
 </html>
