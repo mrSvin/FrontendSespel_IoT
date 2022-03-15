@@ -261,61 +261,153 @@
 
     <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
 </div>  <!--Общая загрузка-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/press.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Пресс ЧПУ для ступиц</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="press(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_press" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--html-->
+
+</div> <!-- Пресс html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/epp.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ЭПП</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="epp(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_epp" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days_epp" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_epp" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--html-->
+
+</div> <!-- ЭПП html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/stp13m.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">СТП13М</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="stp13m(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_epp" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days_stp13m" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_stp13m" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--html-->
+
+</div> <!-- Пресс html-->
+
+<script src="/js/month/universal_month.js"></script>
 <script th:inline="javascript">
+    // Цвета для линейной и круговой диаграмм
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+    var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
 
-    var colors = ['#e81e1d', '#000000','#ffea32', '#207210', '#38e817'];
+    // Переменные с массивами линейных и круговых диаграмм с сервера
+    var press_array_linear = [[${press_month_linear}]]
+    var press_array_round = [[${press_month_round}]]
 
-    var press_work_sum = [[${press_work}]];
-    var press_pass_sum = [[${press_pass}]];
-    var press_fail_sum = [[${press_fail}]];
-    var press_avar_sum = [[${press_avar}]];
-    var press_nagruzka_sum = [[${press_nagruzka}]];
+    var epp_array_linear = [[${epp_month_linear}]]
+    var epp_array_round = [[${epp_month_round}]]
 
-    var epp_work_sum = [[${epp_work}]];
-    var epp_pass_sum = [[${epp_pass}]];
-    var epp_fail_sum = [[${epp_fail}]];
-    var epp_avar_sum = [[${epp_avar}]];
-    var epp_nagruzka_sum = [[${epp_nagruzka}]];
+    var stp13m_array_linear = [[${stp13m_month_linear}]]
+    var stp13m_array_round = [[${stp13m_month_round}]]
 
-    var stp13m_work_sum = [[${stp13m_work}]];
-    var stp13m_pass_sum = [[${stp13m_pass}]];
-    var stp13m_fail_sum = [[${stp13m_fail}]];
+    const linearDiagram = [press_array_linear, epp_array_linear, stp13m_array_linear];
 
-    const timezone = new Date().getTimezoneOffset()
+    const roundDiagram = [press_array_round, epp_array_round, stp13m_array_round];
 
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        plotOptions: {
-            xrange: {
-                grouping: false
-            }
-        },
-        global: {
-            timezoneOffset: timezone
+
+    // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
+
+    // Функция заполнения линейной диаграммы
+    $.map(linearDiagram, function (element, index) {
+        // Вычисление работы без нагрузки для линейной диаграммы
+        if(element != null) {
+            $.each(element[0], function (index){
+                element[0][index] = element[0][index] - element[4][index];
+            });
+            setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
+        }
+
+    });
+
+    // Функция заполнения круговой диаграммы
+    $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
+        // Вычисление работы без нагрузки для линейной диаграммы
+        if(element != null) {
+            element[0] = element[0] - element[4];
+            setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
+        }
+    });
+</script> <!--Скрипт для диаграмм станков-->
+<script th:inline="javascript">
+    // Переменные для общих диаграмм.
+    var round_rabota = 0;
+    var round_pause = 0;
+    var round_off = 0;
+    var round_avar = 0;
+    var round_nagruzka = 0;
+
+    var linear_rabota = [];
+    var linear_pause = [];
+    var linear_off = [];
+    var linear_avar = [];
+    var linear_nagruzka = [];
+
+    // Заполнение переменных общей круговой диаграммы
+    $.map(roundDiagram, function (element) { // итерируем выполнение setData для всех объектов массива element
+        if(element != null) {
+            round_rabota = round_rabota + element[0];
+            round_pause = round_pause + element[1];
+            round_off = round_off + element[2];
+            round_avar = round_avar + element[3];
+            round_nagruzka = round_nagruzka + element[4];
         }
     });
 
+    // Заполнение переменных общей линейной диаграммы
+    $.map(roundDiagram, function (element) {
+        if(element != null) {
+            linear_rabota.push(Array(1).fill(element[0]));
+            linear_pause.push(Array(1).fill(element[1]));
+            linear_off.push(Array(1).fill(element[2]));
+            linear_avar.push(Array(1).fill(element[3]));
+            linear_nagruzka.push(Array(1).fill(element[4]));
+        }
+    });
+
+    // Формирование графиков для общих круговой и линейной диаграммы
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
         },
-        colors: colors,
+        colors:colorsLine,
         title: {
             text: 'Общая загрузка оборудования'
         },
@@ -347,30 +439,21 @@
         },
         series: [{
             name: 'Авария',
-            data: [press_avar_sum, epp_avar_sum, 0]
+            data: linear_avar
         }, {
             name: 'Выключен',
-            data: [press_fail_sum, epp_fail_sum, stp13m_fail_sum]
+            data: linear_off
         }, {
             name: 'Ожидание',
-            data: [press_pass_sum, epp_pass_sum, stp13m_pass_sum]
+            data: linear_pause
         }, {
             name: 'Под нагрузкой',
-            data: [press_nagruzka_sum, epp_nagruzka_sum, 0]
+            data: linear_nagruzka
         }, {
             name: 'Работа',
-            data: [press_work_sum, epp_work_sum, stp13m_work_sum]
-        }]
+            data: linear_rabota
+        }, ]
     });
-
-</script>   <!--js Общая загрузка-->
-<script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    var sum_rabota = [[${press_work}]] + [[${epp_work}]] + [[${work_stp13m}]];
-    var sum_pause = [[${press_pass}]] + [[${epp_pass}]] + [[${pass_stp13m}]];
-    var sum_off = [[${press_fail}]] + [[${epp_fail}]] + [[${fail_stp13m}]];
-    var sum_avar = [[${press_avar}]] + [[${epp_avar}]];
-    var sum_nagruzka = [[${press_nagruzka}]] + [[${epp_nagruzka}]];
 
     Highcharts.chart('container_sum_zagruzka_krug', {
         chart: {
@@ -386,7 +469,6 @@
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
-
         accessibility: {
             point: {
                 valueSuffix: '%'
@@ -402,120 +484,18 @@
                 showInLegend: true
             }
         },
-        colors:colors,
+        colors:colorsRound,
         credits: {
             enabled: false
         },
         series : [ {
             type : 'pie',
             name : 'Показатель',
-            data : [ [ 'По программе', sum_rabota ], [ 'Включен', sum_pause ],
-                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka]   ]
+            data : [ [ 'По программе', round_rabota ], [ 'Включен', round_pause ],
+                [ 'Выключен', round_off ],  [ 'В аварии', round_avar],  [ 'Под нагрузкой', round_nagruzka]   ]
         }]
     });
-</script>   <!--Общая js круговая диагрмма загрузки оборудования-->
-
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/press.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Пресс ЧПУ для ступиц</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="press(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_press" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--html-->
-
-</div> <!-- Пресс html-->
-<script th:inline="javascript">
-    var press_rabota_day = [[${press_rabota_day}]];
-    var press_pause_day = [[${press_pause_day}]];
-    var press_off_day = [[${press_off_day}]];
-    var press_avar_day = [[${press_avar_day}]];
-    var press_nagruzka_day = [[${press_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы press-->
-<script th:inline="javascript">
-    var press_work = [[${press_work}]];
-    var press_pass = [[${press_pass}]];
-    var press_fail = [[${press_fail}]];
-    var press_avar = [[${press_avar}]];
-    var  press_nagruzka = [[${press_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы press-->
-<script src="/js/month/spec_complexes/data_press_month.js"></script>
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/epp.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ЭПП</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="epp(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_epp" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days_epp" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_epp" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--html-->
-
-</div> <!-- ЭПП html-->
-<script th:inline="javascript">
-    var epp_rabota_day = [[${epp_rabota_day}]];
-    var epp_pause_day = [[${epp_pause_day}]];
-    var epp_off_day = [[${epp_off_day}]];
-    var epp_avar_day = [[${epp_avar_day}]];
-    var epp_nagruzka_day = [[${epp_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы epp-->
-<script th:inline="javascript">
-    var epp_work = [[${epp_work}]];
-    var epp_pass = [[${epp_pass}]];
-    var epp_fail = [[${epp_fail}]];
-    var epp_avar = [[${epp_avar}]];
-    var  epp_nagruzka = [[${epp_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы epp-->
-<script src="/js/month/spec_complexes/data_epp_month.js"></script>
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/stp13m.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">СТП13М</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="stp13m(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_epp" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days_stp13m" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_stp13m" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--html-->
-
-</div> <!-- Пресс html-->
-<script th:inline="javascript">
-    var stp13m_rabota_day = [[${stp13m_rabota_day}]];
-    var stp13m_pause_day = [[${stp13m_pause_day}]];
-    var stp13m_off_day = [[${stp13m_off_day}]];
-</script>   <!--Переменные для линейной диаграммы stp13m-->
-<script th:inline="javascript">
-    var stp13m_work = [[${stp13m_work}]];
-    var stp13m_pass = [[${stp13m_pass}]];
-    var stp13m_fail = [[${stp13m_fail}]];
-</script>   <!--Переменные для круговой диаграммы stp13m-->
-<script src="/js/month/spec_complexes/data_stp13m_month.js"></script>
+</script> <!--Скрипт для общих диаграмм станков-->
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
@@ -546,9 +526,6 @@
 <!--Скрипт с вызовом функций для изменения места-->
 
 <script src="/js/dropdown_menu.js"></script>
-<script>
-    click_avatar();
-</script> <!-- Скрипт вызова функции для выпадающего меню -->
 
 </body>
 </html>
