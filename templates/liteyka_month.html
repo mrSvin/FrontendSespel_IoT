@@ -254,7 +254,6 @@
         </div>
     </form>
 </div>      <!--Календарь html-->
-
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
         <div style="width: 100%;   margin: 2%;">
@@ -270,24 +269,48 @@
             </div>
         </div>
         <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-        <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        <div id="container1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
     </div>  <!--Печь ИНдукционная html-->
 </div> <!--Печь ИНдукционная html-->
+
+<script src="/js/month/universal_month.js"></script>
 <script th:inline="javascript">
-    var pech_nerg_rabota_day = [[${pech_nerg_rabota_day}]];
-    var pech_nerg_pause_day = [[${pech_nerg_pause_day}]];
-    var pech_nerg_off_day = [[${pech_nerg_off_day}]];
-    var pech_nerg_avar_day = [[${pech_nerg_avar_day}]];
-    var pech_nerg_nagruzka_day = [[${pech_nerg_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы pech_nerg-->
-<script th:inline="javascript">
-    var pech_nerg_work = [[${pech_nerg_work}]];
-    var pech_nerg_pass = [[${pech_nerg_pass}]];
-    var pech_nerg_fail = [[${pech_nerg_fail}]];
-    var pech_nerg_avar = [[${pech_nerg_avar}]];
-    var  pech_nerg_nagruzka = [[${pech_nerg_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы pech_nerg-->
-<script src="/js/month/liteyka/data_pech_nerg_month.js"></script>
+    // Цвета для линейной и круговой диаграмм
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+    var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+
+    // Переменные с массивами линейных и круговых диаграмм с сервера
+    var pech_nerg_array_linear = [[${pech_nerg_month_linear}]]
+    var pech_nerg_array_round = [[${pech_nerg_month_round}]]
+
+    const linearDiagram = [pech_nerg_array_linear];
+
+    const roundDiagram = [pech_nerg_array_round];
+
+
+    // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
+
+    // Функция заполнения линейной диаграммы
+    $.map(linearDiagram, function (element, index) {
+        // Вычисление работы без нагрузки для линейной диаграммы
+        if(element != null) {
+            $.each(element[0], function (index){
+                element[0][index] = element[0][index] - element[4][index];
+            });
+            setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
+        }
+
+    });
+
+    // Функция заполнения круговой диаграммы
+    $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
+        // Вычисление работы без нагрузки для линейной диаграммы
+        if(element != null) {
+            element[0] = element[0] - element[4];
+            setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
+        }
+    });
+</script> <!--Скрипт для диаграмм станков-->
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
@@ -318,8 +341,6 @@
 <!--Скрипт с вызовом функций для изменения места-->
 
 <script src="/js/dropdown_menu.js"></script>
-<script>
-    click_avatar();
-</script> <!-- Скрипт вызова функции для выпадающего меню -->
+
 </body>
 </html>
