@@ -532,7 +532,7 @@
     var navigator_2_golova_1_avar = [[${navigator_2_golova_1_avar}]];
     var  navigator_2_golova_1_nagruzka = [[${navigator_2_golova_1_nagruzka}]];
 </script>   <!--Переменные для круговой диаграммы Навигатор_2_1-->
-<script src="/js/month/navigators/data_navigators_2_golova_1_month.js"></script>
+
 
 <div style="overflow: hidden;">
     <div style="width: 100%;   margin: 2%;">
@@ -558,7 +558,7 @@
     var navigator_2_golova_2_avar = [[${navigator_2_golova_2_avar}]];
     var  navigator_2_golova_2_nagruzka = [[${navigator_2_golova_2_nagruzka}]];
 </script>   <!--Переменные для круговой диаграммы Навигатор_2_2-->
-<script src="/js/month/navigators/data_navigators_2_golova_2_month.js"></script>
+
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -754,15 +754,17 @@
 </script>   <!--Переменные для круговой диаграммы AR55-->
 
 <script th:inline="javascript">
-    var navigator_1_array = [[${navigator_1_month_round}]];
-    var navigator_2_golova_1_array = [[${navigator_2_golova_1_month_round}]];
-    var navigator_2_golova_2_array = [[${navigator_2_golova_2_month_round}]];
-    var navigator_3_array = [[${navigator_3_month_round}]];
-    var trulaser_array = [[${trulaser_month_round}]];
-    var kometa_1_array = [[${kometa_1_month_round}]];
-    var kometa_2_array = [[${kometa_2_month_round}]];
-    var kometa_3_array = [[${kometa_3_month_round}]];
-    var ar55_array = [[${ar55_month_round}]];
+    var ar55_array_linear = [[${ar55_month_linear}]];
+
+    var navigator_1_array_round = [[${navigator_1_month_round}]];
+    var navigator_2_golova_1_array_round = [[${navigator_2_golova_1_month_round}]];
+    var navigator_2_golova_2_array_round = [[${navigator_2_golova_2_month_round}]];
+    var navigator_3_array_round = [[${navigator_3_month_round}]];
+    var trulaser_array_round = [[${trulaser_month_round}]];
+    var kometa_1_array_round = [[${kometa_1_month_round}]];
+    var kometa_2_array_round = [[${kometa_2_month_round}]];
+    var kometa_3_array_round = [[${kometa_3_month_round}]];
+    var ar55_array_round = [[${ar55_month_round}]];
 
 </script>
 
@@ -802,17 +804,15 @@
 <script src="/js/month/universal_month.js"></script>
 <script>
 
-    // const ar55Diagrams = {lineArray:[[0]], roundArray:[[${ar55_month_round}]]};
-
-    const navigator_1_diagrams = {roundArray:navigator_1_array};
-    const navigator_2_golova_1_diagrams = {roundArray:navigator_2_golova_1_array};
-    const navigator_2_golova_2_diagrams = {roundArray:navigator_2_golova_2_array};
-    const navigator_3_diagrams = {roundArray:navigator_3_array};
-    const trulaser_diagrams = {roundArray:trulaser_array};
-    const kometa_1_diagrams = {roundArray:kometa_1_array};
-    const kometa_2_diagrams = {roundArray:kometa_2_array};
-    const kometa_3_diagrams = {roundArray:kometa_3_array};
-    const ar55_diagrams = {roundArray:ar55_array};
+    const navigator_1_diagrams = {lineArray: ar55_array_linear, roundArray:navigator_1_array_round};
+    const navigator_2_golova_1_diagrams = {lineArray: ar55_array_linear, roundArray:navigator_2_golova_1_array_round};
+    const navigator_2_golova_2_diagrams = {lineArray: ar55_array_linear, roundArray:navigator_2_golova_2_array_round};
+    const navigator_3_diagrams = {lineArray: ar55_array_linear, roundArray:navigator_3_array_round};
+    const trulaser_diagrams = {lineArray: ar55_array_linear, roundArray:trulaser_array_round};
+    const kometa_1_diagrams = {lineArray: ar55_array_linear, roundArray:kometa_1_array_round};
+    const kometa_2_diagrams = {lineArray: ar55_array_linear, roundArray:kometa_2_array_round};
+    const kometa_3_diagrams = {lineArray: ar55_array_linear, roundArray:kometa_3_array_round};
+    const ar55_diagrams = {lineArray: ar55_array_linear, roundArray:ar55_array_round};
 
     const monthData = [navigator_1_diagrams, navigator_2_golova_1_diagrams,
         navigator_2_golova_2_diagrams,navigator_3_diagrams,trulaser_diagrams,
@@ -821,11 +821,11 @@
     $.map(monthData, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject
 
         // Функция заполнения линейной диаграммы
-        // setDataLine("container_days" + (index + 9),  arrayObject.lineArray[0],
-        //     arrayObject.lineArray[1], arrayObject.lineArray[2],
-        //     arrayObject.lineArray[3], arrayObject.lineArray[4]);
-        // Функция заполнения круговой диаграммы
+        setDataLine("container_days" + (index + 1),  arrayObject.lineArray[0],
+            arrayObject.lineArray[1], arrayObject.lineArray[2],
+            arrayObject.lineArray[3], arrayObject.lineArray[4]);
 
+        // Функция заполнения круговой диаграммы
         // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
         setDataRound("container" + (index + 1), arrayObject.roundArray[0] - arrayObject.roundArray[4],
             arrayObject.roundArray[1], arrayObject.roundArray[2],
