@@ -127,7 +127,6 @@
                 var year = datas.getFullYear();
 
                 name_data = mes+"-" + year;
-                <!--console.log(name_data);-->
             });
 
 
@@ -481,20 +480,13 @@
     // Функция заполнения круговой диаграммы
     $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
         // Вычисление работы без нагрузки для линейной диаграммы
-        console.log(element[0])
         element[0] = element[0] - element[4];
         setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
     });
 </script>
 
-<script>
-    const roundDiagram = [navigator_1_array_round, navigator_2_golova_1_array_round, navigator_2_golova_1_array_round,
-        navigator_2_golova_2_array_round, navigator_3_array_round, trulaser_array_round, kometa_1_array_round,
-        kometa_2_array_round, kometa_3_array_round, ar55_array_round];
-</script>
-
 <script th:inline="javascript">
-    // Переменные для общей круговой диаграммы(объявлено после функции map, т.к. там преобразуется работа).
+    // Переменные для общих диаграмм.
     var round_rabota = 0;
     var round_pause = 0;
     var round_off = 0;
@@ -507,6 +499,7 @@
     var linear_avar = [];
     var linear_nagruzka = [];
 
+    // Заполнение переменных общей круговой диаграммы
     $.map(roundDiagram, function (element) { // итерируем выполнение setData для всех объектов массива element
         round_rabota = round_rabota + element[0];
         round_pause = round_pause + element[1];
@@ -515,6 +508,7 @@
         round_nagruzka = round_nagruzka + element[4];
     });
 
+    // Заполнение переменных общей линейной диаграммы
     $.map(roundDiagram, function (element) {
         linear_rabota.push(Array(1).fill(element[0]));
         linear_pause.push(Array(1).fill(element[1]));
