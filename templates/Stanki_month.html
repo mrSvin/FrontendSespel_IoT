@@ -341,10 +341,7 @@
         uf5220_nagruzka.push(Array(31).fill(0))
 
     //Круговые uf5220
-    var uf5220_work = [[${uf5220_work}]];
-    var uf5220_pass = [[${uf5220_pass}]];
-    var uf5220_fail = [[${uf5220_fail}]];
-    var uf5220_avar = [[${uf5220_avar}]];
+    var uf5220_array_round = [[${uf5220_month_round}]]
 
     //Линейные progress
     var progress_rabota_day = [[${progress_rabota_day}]];
@@ -356,10 +353,7 @@
         progress_nagruzka_day.push(Array(31).fill(0));
 
     //Круговые progress
-    var progress_work = [[${progress_work}]];
-    var progress_pass = [[${progress_pass}]];
-    var progress_fail = [[${progress_fail}]];
-    var progress_avar = [[${progress_avar}]];
+    var progress_array_round = [[${progress_month_round}]]
 
     //Линейные ntx1000
     var ntx1000_rabota_day = [[${ntx1000_rabota_day}]];
@@ -369,11 +363,7 @@
     var ntx1000_nagruzka_day = [[${ntx1000_nagruzka_day}]];
 
     //Круговые ntx1000
-    var ntx1000_work = [[${ntx1000_work}]];
-    var ntx1000_pass = [[${ntx1000_pass}]];
-    var ntx1000_fail = [[${ntx1000_fail}]];
-    var ntx1000_avar = [[${ntx1000_avar}]];
-    var ntx1000_nagruzka = [[${ntx1000_nagruzka}]];
+    var ntx1000_array_round = [[${ntx1000_month_round}]]
 
 </script>   <!--Переменные для uf5220 Прогресс и NTX1000-->
 <script src="/js/month/stanki/data_uvf5220_month.js"></script>
@@ -618,7 +608,7 @@
     const linearDiagram = [sk50_array_linear, apec_array_linear,dmu50_3_array_linear, dmu50_4_array_linear, ctx310_2_array_linear, ctx510_2_array_linear,
         ctx510_3_array_linear, ctx310_3_array_linear, ctx510_4_array_linear, ctx510_5_array_linear];
 
-    const roundDiagram = [sk50_array_round,apec_array_round, dmu50_3_array_round, dmu50_4_array_round, ctx310_2_array_round,
+    const roundDiagram = [uf5220_array_round, progress_array_round, ntx1000_array_round, sk50_array_round,apec_array_round, dmu50_3_array_round, dmu50_4_array_round, ctx310_2_array_round,
         ctx510_2_array_round, ctx510_3_array_round, ctx310_3_array_round, ctx510_4_array_round, ctx510_5_array_round];
 
 
@@ -647,11 +637,11 @@
         // Вычисление работы без нагрузки для линейной диаграммы
         if(element != null) {
             // Спец. условия для ручного режима на APEC
-            if(index != 1)
+            if(index != 4)
             {
                 element[0] = element[0] - element[4];
             }
-            setDataRound("container" + (index + 4), element[0], element[1], element[2], element[3], element[4]);
+            setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
         }
     });
 </script> <!--Скрипт для диаграмм станков-->
