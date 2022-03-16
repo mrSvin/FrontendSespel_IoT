@@ -28,7 +28,7 @@ Highcharts.setOptions({
     }
 });
 
-function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka) {
+function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, nagruzkaName='Под нагрузкой') {
     Highcharts.chart(containerLine, {
         chart: {
             type: 'column'
@@ -78,7 +78,7 @@ function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar,
             name: 'Ожидание',
             data: arrayPass
         }, {
-            name: 'Под нагрузкой',
+            name: nagruzkaName,
             data: arrayNagruzka
         }, {
             name: 'Работа',
@@ -88,7 +88,7 @@ function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar,
 
 }
 
-function setDataRound(containerRound, work, pass,fail, avar, nagruzka) {
+function setDataRound(containerRound, work, pass,fail, avar, nagruzka, nagruzkaName='Нагрузка') {
     Highcharts.chart(containerRound, {
         chart: {
             plotBackgroundColor: null,
@@ -126,7 +126,7 @@ function setDataRound(containerRound, work, pass,fail, avar, nagruzka) {
         series : [ {
             type : 'pie',
             name : 'Показатель',
-            data : [[ 'Работа', work ], [ 'Включен', pass ], [ 'Выключен', fail],  [ 'В аварии', avar ], [ 'Нагрузка', nagruzka ] ]
+            data : [[ 'Работа', work ], [ 'Включен', pass ], [ 'Выключен', fail],  [ 'В аварии', avar ], [ nagruzkaName, nagruzka ] ]
         }]
     });
 }
