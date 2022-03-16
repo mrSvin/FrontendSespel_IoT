@@ -376,8 +376,8 @@
     var ntx1000_nagruzka = [[${ntx1000_nagruzka}]];
 
 </script>   <!--Переменные для uf5220 Прогресс и NTX1000-->
-<script src="/js/month/stanki/data_uvf5220_1000_month.js"></script>
-<script src="/js/month/stanki/progress_ntx_1000_month.js"></script>
+<script src="/js/month/stanki/data_uvf5220_month.js"></script>
+<script src="/js/month/stanki/progress_month.js"></script>
 <script src="/js/month/stanki/data_ntx_1000_month.js"></script>
 
 <div style="border: 1px solid #333;">   <!--sk50 html-->
@@ -581,7 +581,7 @@
 <script src="/js/month/universal_month.js"></script>
 <script th:inline="javascript">
     // Цвета для линейной и круговой диаграмм
-    var colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
+    var colorsLine = [];
     var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210', '#5c7ed0'];
 
     // Переменные с массивами линейных и круговых диаграмм с сервера
@@ -622,10 +622,6 @@
         ctx510_2_array_round, ctx510_3_array_round, ctx310_3_array_round, ctx510_4_array_round, ctx510_5_array_round];
 
 
-    // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
-
-    var g = 0;
-
     // Функция заполнения линейной диаграммы
     $.map(linearDiagram, function (element, index) {
         // Вычисление работы без нагрузки для линейной диаграммы
@@ -636,6 +632,7 @@
                 setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4], 'Ручной режим');
             }
             else {
+                    colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
                     $.each(element[0], function (i){
                         element[0][i] = element[0][i] - element[4][i];
                     });
@@ -659,6 +656,9 @@
     });
 </script> <!--Скрипт для диаграмм станков-->
 <script th:inline="javascript">
+    // Переопределение цвета для общей диагрыммы
+    colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
+
     // Переменные для общих диаграмм.
     var round_rabota = 0;
     var round_pause = 0;
