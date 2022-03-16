@@ -87,7 +87,7 @@ Highcharts.setOptions({
     }
 });
 
-Highcharts.chart('container', {
+Highcharts.chart('container1', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
