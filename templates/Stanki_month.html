@@ -628,11 +628,11 @@
     $.map(linearDiagram, function (element, index) {
         // Вычисление работы без нагрузки для линейной диаграммы
         if(element != null) {
-            $.each(element[0], function (index){
+            $.each(element[0], function (i){
                 // Спец. условия для ручного режима на APEC
-                if(index != 1)
-                {colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
-                    element[0][index] = element[0][index] - element[4][index];
+                if(index != 1) {
+                    colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+                    element[0][i] = element[0][i] - element[4][i];
                     setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4]);
                 }
                 else {
@@ -674,7 +674,7 @@
     var linear_ruchnoi = [];
 
     // Заполнение переменных общей круговой диаграммы
-    $.map(roundDiagram, function (element) { // итерируем выполнение setData для всех объектов массива element
+    $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
         if(element != null) {
             round_rabota = round_rabota + element[0];
             round_pause = round_pause + element[1];
