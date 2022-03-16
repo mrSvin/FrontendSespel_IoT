@@ -679,12 +679,12 @@
             round_off = round_off + element[2];
             round_avar = round_avar + element[3];
             // Спец. условия для заполнения ручного режима на APEC
-            if(index != 1)
+            if(index != 4)
             {
                 round_nagruzka = round_nagruzka + element[4];
             }
             // Спец. условия для заполнения ручного режима на APEC
-            if(index == 1)
+            if(index == 4)
             {
                 round_ruchnoi = round_ruchnoi + element[4];
             }
@@ -701,12 +701,12 @@
             linear_avar.push(Array(1).fill(element[3]));
 
             // Спец. условия для заполнения ручного режима на APEC
-            if(index != 1)
+            if(index != 4)
             {
                 linear_nagruzka.push(Array(1).fill(element[4]));
             }
             // Спец. условия для заполнения ручного режима на APEC
-            if(index == 1)
+            if(index == 4)
             {
                 linear_ruchnoi.push(Array(1).fill(element[4]));
             }
