@@ -631,11 +631,15 @@
             $.each(element[0], function (index){
                 // Спец. условия для ручного режима на APEC
                 if(index != 1)
-                {
+                {colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
                     element[0][index] = element[0][index] - element[4][index];
+                    setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4]);
+                }
+                else {
+                    colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'];
+                    setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4], 'Ручной режим');
                 }
             });
-            setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4]);
         }
 
     });
