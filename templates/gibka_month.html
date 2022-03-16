@@ -260,56 +260,135 @@
 
     <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
 </div>  <!--Общая загрузка-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/faccin.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">FACCIN 4</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="faccin_1(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+    </div>  <!--Печь ИНдукционная html-->
+
+</div> <!--faccin_1 html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/faccin_2.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">FACCIN 10</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="faccin_2(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="container_days2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+    </div>  <!--Печь ИНдукционная html-->
+
+</div> <!--faccin_2 html-->
+
+<script src="/js/month/universal_month.js"></script>
 <script th:inline="javascript">
-    var colors = ['#e81e1d', '#000000','#ffea32', '#207210', '#38e817'];
+    // Цвета для линейной и круговой диаграмм
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+    var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
 
-    var faccin_1_work_sum = [[${faccin_1_work}]];
-    var faccin_1_pass_sum = [[${faccin_1_pass}]];
-    var faccin_1_fail_sum = [[${faccin_1_fail}]];
-    var faccin_1_avar_sum = [[${faccin_1_avar}]];
-    var  faccin_1_nagruzka_sum = [[${faccin_1_nagruzka}]];
+    // Переменные с массивами линейных и круговых диаграмм с сервера
+    var faccin_1_array_linear = [[${faccin_1_month_linear}]]
+    var faccin_1_array_round = [[${faccin_1_month_round}]]
 
-    var faccin_2_work_sum = [[${faccin_2_work}]];
-    var faccin_2_pass_sum = [[${faccin_2_pass}]];
-    var faccin_2_fail_sum = [[${faccin_2_fail}]];
-    var faccin_2_avar_sum = [[${faccin_2_avar}]];
-    var  faccin_2_nagruzka_sum = [[${faccin_2_nagruzka}]];
+    var faccin_2_array_linear = [[${faccin_2_month_linear}]]
+    var faccin_2_array_round = [[${faccin_2_month_round}]]
 
-    const timezone = new Date().getTimezoneOffset()
+    const linearDiagram = [faccin_1_array_linear, faccin_2_array_linear, ntx1000_array_linear,
+        nlx3000_array_linear, gamma2000_array_linear, ctx650_array_linear, dmf260_array_linear,
+        dmu50_1_array_linear, dmu50_2_array_linear, dmc1035_array_linear, ctx310_1_array_linear,
+        ctx510_1_array_linear];
 
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        plotOptions: {
-            xrange: {
-                grouping: false
-            }
-        },
-        global: {
-            timezoneOffset: timezone
+    const roundDiagram = [faccin_1_array_round,faccin_2_array_round, ntx1000_array_round, nlx3000_array_round,
+        gamma2000_array_round, ctx650_array_round, dmf260_array_round, dmu50_1_array_round, dmu50_2_array_round,
+        dmc1035_array_round, ctx310_1_array_round, ctx510_1_array_round];
+
+
+    // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
+
+    // Функция заполнения линейной диаграммы
+    $.map(linearDiagram, function (element, index) {
+        // Вычисление работы без нагрузки для линейной диаграммы
+        if(element != null) {
+            $.each(element[0], function (index){
+                element[0][index] = element[0][index] - element[4][index];
+            });
+            setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
+        }
+
+    });
+
+    // Функция заполнения круговой диаграммы
+    $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
+        // Вычисление работы без нагрузки для линейной диаграммы
+        if(element != null) {
+            element[0] = element[0] - element[4];
+            setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
+        }
+    });
+</script> <!--Скрипт для диаграмм станков-->
+<script th:inline="javascript">
+    // Переменные для общих диаграмм.
+    var round_rabota = 0;
+    var round_pause = 0;
+    var round_off = 0;
+    var round_avar = 0;
+    var round_nagruzka = 0;
+
+    var linear_rabota = [];
+    var linear_pause = [];
+    var linear_off = [];
+    var linear_avar = [];
+    var linear_nagruzka = [];
+
+    // Заполнение переменных общей круговой диаграммы
+    $.map(roundDiagram, function (element) { // итерируем выполнение setData для всех объектов массива element
+        if(element != null) {
+            round_rabota = round_rabota + element[0];
+            round_pause = round_pause + element[1];
+            round_off = round_off + element[2];
+            round_avar = round_avar + element[3];
+            round_nagruzka = round_nagruzka + element[4];
         }
     });
 
+    // Заполнение переменных общей линейной диаграммы
+    $.map(roundDiagram, function (element) {
+        if(element != null) {
+            linear_rabota.push(Array(1).fill(element[0]));
+            linear_pause.push(Array(1).fill(element[1]));
+            linear_off.push(Array(1).fill(element[2]));
+            linear_avar.push(Array(1).fill(element[3]));
+            linear_nagruzka.push(Array(1).fill(element[4]));
+        }
+    });
+
+    // Формирование графиков для общих круговой и линейной диаграммы
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
         },
-        colors: colors,
+        colors:colorsLine,
         title: {
             text: 'Общая загрузка оборудования'
         },
@@ -341,30 +420,21 @@
         },
         series: [{
             name: 'Авария',
-            data: [faccin_1_avar_sum, faccin_2_avar_sum]
+            data: linear_avar
         }, {
             name: 'Выключен',
-            data: [faccin_1_fail_sum, faccin_2_fail_sum]
+            data: linear_off
         }, {
             name: 'Ожидание',
-            data: [faccin_1_pass_sum, faccin_2_pass_sum]
+            data: linear_pause
         }, {
             name: 'Под нагрузкой',
-            data: [faccin_1_nagruzka_sum, faccin_2_nagruzka_sum]
+            data: linear_nagruzka
         }, {
             name: 'Работа',
-            data: [faccin_1_work_sum, faccin_2_work_sum]
-        }]
+            data: linear_rabota
+        }, ]
     });
-
-</script>   <!--js Общая загрузка-->
-<script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
-    var sum_rabota = [[${faccin_1_work}]] + [[${faccin_2_work}]];
-    var sum_pause = [[${faccin_1_pass}]] + [[${faccin_2_pass}]];
-    var sum_off = [[${faccin_1_fail}]] + [[${faccin_2_fail}]];
-    var sum_avar = [[${faccin_1_avar}]] + [[${faccin_2_avar}]];
-    var sum_nagruzka = [[${faccin_1_nagruzka}]] + [[${faccin_2_nagruzka}]];
 
     Highcharts.chart('container_sum_zagruzka_krug', {
         chart: {
@@ -380,7 +450,6 @@
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
-
         accessibility: {
             point: {
                 valueSuffix: '%'
@@ -396,88 +465,18 @@
                 showInLegend: true
             }
         },
-        colors:colors,
+        colors:colorsRound,
         credits: {
             enabled: false
         },
         series : [ {
             type : 'pie',
             name : 'Показатель',
-            data : [ [ 'По программе', sum_rabota ], [ 'Включен', sum_pause ],
-                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka]   ]
+            data : [ [ 'По программе', round_rabota ], [ 'Включен', round_pause ],
+                [ 'Выключен', round_off ],  [ 'В аварии', round_avar],  [ 'Под нагрузкой', round_nagruzka]   ]
         }]
     });
-</script>   <!--Общая js круговая диагрмма загрузки оборудования-->
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/faccin.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">FACCIN 4</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="faccin_1(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-        <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-    </div>  <!--Печь ИНдукционная html-->
-
-</div> <!--faccin_1 html-->
-<script th:inline="javascript">
-    var faccin_1_rabota_day = [[${faccin_1_rabota_day}]];
-    var faccin_1_pause_day = [[${faccin_1_pause_day}]];
-    var faccin_1_off_day = [[${faccin_1_off_day}]];
-    var faccin_1_avar_day = [[${faccin_1_avar_day}]];
-    var faccin_1_nagruzka_day = [[${faccin_1_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы faccin_1-->
-<script th:inline="javascript">
-    var faccin_1_work = [[${faccin_1_work}]];
-    var faccin_1_pass = [[${faccin_1_pass}]];
-    var faccin_1_fail = [[${faccin_1_fail}]];
-    var faccin_1_avar = [[${faccin_1_avar}]];
-    var  faccin_1_nagruzka = [[${faccin_1_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы faccin_1-->
-<script src="/js/month/gibka/data_faccin_1_month.js"></script>
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/faccin_2.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">FACCIN 10</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="faccin_2(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_faccin_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="container_days2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-        <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-    </div>  <!--Печь ИНдукционная html-->
-
-</div> <!--faccin_2 html-->
-<script th:inline="javascript">
-    var faccin_2_rabota_day = [[${faccin_2_rabota_day}]];
-    var faccin_2_pause_day = [[${faccin_2_pause_day}]];
-    var faccin_2_off_day = [[${faccin_2_off_day}]];
-    var faccin_2_avar_day = [[${faccin_2_avar_day}]];
-    var faccin_2_nagruzka_day = [[${faccin_2_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы faccin_2-->
-<script th:inline="javascript">
-    var faccin_2_work = [[${faccin_2_work}]];
-    var faccin_2_pass = [[${faccin_2_pass}]];
-    var faccin_2_fail = [[${faccin_2_fail}]];
-    var faccin_2_avar = [[${faccin_2_avar}]];
-    var  faccin_2_nagruzka = [[${faccin_2_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы faccin_2-->
-<script src="/js/month/gibka/data_faccin_2_month.js"></script>
+</script> <!--Скрипт для общих диаграмм станков-->
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
@@ -508,8 +507,5 @@
 <!--Скрипт с вызовом функций для изменения места-->
 
 <script src="/js/dropdown_menu.js"></script>
-<script>
-    click_avatar();
-</script> <!-- Скрипт вызова функции для выпадающего меню -->
 </body>
 </html>

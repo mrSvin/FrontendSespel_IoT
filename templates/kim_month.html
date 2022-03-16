@@ -273,26 +273,47 @@
         </div>
       </div>
       <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-      <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+      <div id="container1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
     </div>
   </div>  <!--УФ 5220 html-->
 
 </div> <!--КИМ html-->
+
+<script src="/js/month/universal_month.js"></script>
 <script th:inline="javascript">
-  var kim_rabota_day = [[${kim_rabota_day}]];
-  var kim_pause_day = [[${kim_pause_day}]];
-  var kim_off_day = [[${kim_off_day}]];
-  var kim_avar_day = [[${kim_avar_day}]];
-  var kim_kalibrovka_day = [[${kim_kalibrovka_day}]];
-</script>   <!--Переменные для линейной диаграммы kim-->
-<script th:inline="javascript">
-  var kim_work = [[${kim_work}]];
-  var kim_pass = [[${kim_pass}]];
-  var kim_fail = [[${kim_fail}]];
-  var kim_avar = [[${kim_avar}]];
-  var  kim_kalibrovka = [[${kim_kalibrovka}]];
-</script>   <!--Переменные для круговой диаграммы kim-->
-<script src="/js/month/kim/data_kim_month.js"></script>
+  // Цвета для линейной и круговой диаграмм
+  var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+  var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+
+  // Переменные с массивами линейных и круговых диаграмм с сервера
+  var kim_array_linear = [[${kim_month_linear}]]
+  var kim_array_round = [[${kim_month_round}]]
+
+  const linearDiagram = [kim_array_linear];
+  const roundDiagram = [kim_array_round];
+
+  // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
+  // Функция заполнения линейной диаграммы
+  $.map(linearDiagram, function (element, index) {
+    // Вычисление работы без нагрузки для линейной диаграммы
+    if(element != null) {
+      $.each(element[0], function (index){
+        element[0][index] = element[0][index] - element[4][index];
+      });
+      setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
+    }
+
+  });
+
+  // Функция заполнения круговой диаграммы
+  $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
+    // Вычисление работы без нагрузки для линейной диаграммы
+    if(element != null) {
+      element[0] = element[0] - element[4];
+      setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
+    }
+  });
+</script> <!--Скрипт для диаграмм станков-->
 
 <script th:inline="javascript">
   var role_status = [[${user_role}]];
@@ -323,9 +344,6 @@
 <!--Скрипт с вызовом функций для изменения места-->
 
 <script src="/js/dropdown_menu.js"></script>
-<script>
-  click_avatar();
-</script> <!-- Скрипт вызова функции для выпадающего меню -->
 
 </body>
 </html>
