@@ -297,9 +297,11 @@
   $.map(linearDiagram, function (element, index) {
     // Вычисление работы без нагрузки для линейной диаграммы
     if(element != null) {
-      $.each(element[0], function (index){
-        element[0][index] = element[0][index] - element[4][index];
-      });
+      if(index != 0) { // Иссключение для станка без нагрузки
+        $.each(element[0], function (index){
+          element[0][index] = element[0][index] - element[4][index];
+        });
+      }
       setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
     }
 
@@ -309,7 +311,9 @@
   $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
     // Вычисление работы без нагрузки для линейной диаграммы
     if(element != null) {
-      element[0] = element[0] - element[4];
+      if(index != 0) { // Иссключение для станка без нагрузки
+        element[0] = element[0] - element[4];
+      }
       setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
     }
   });
