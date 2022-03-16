@@ -262,118 +262,492 @@
     </form>
 
 </div>      <!--Календарь html-->
+
 <div style="display: flex; justify-content: space-between">
 
     <div id="container_sum_zagruzka" style="height: 400px; width: 45%"></div> <!--Общая загрузка html-->
 
     <div id="container_sum_zagruzka_krug" style="height: 400px; width: 50%"></div>    <!--Суммарная загрузка html-->
 </div>  <!--Общая загрузка-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/UVF_5220.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">УФ5220</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="uf5220(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_uf5220" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--УФ 5220 html-->
+
+</div> <!--УФ 5220 html-->
+
+<div style="border: 1px solid #333;">   <!--Прогресс html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/progress.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Прогресс</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="progress(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_progress" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Прогресс html-->
+
+</div> <!--Прогресс html-->
+
+<div style="border: 1px solid #333;">   <!--NTX1000 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/ntx1000.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">NTX1000</figcaption>
+                    <div>
+                        <a  style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="ntx1000_1 ();window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_ntx1000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Прогресс html-->
+
+</div> <!--NTX1000 html-->
+
 <script th:inline="javascript">
-    var colors = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
+    //Линейные uf5220
+    var uf5220_rabota_day = [[${uf5220_rabota_day}]];
+    var uf5220_pause_day = [[${uf5220_pause_day}]];
+    var uf5220_off_day = [[${uf5220_off_day}]];
+    var uf5220_avar_day = [];
+    var uf5220_nagruzka = [];
+        uf5220_avar_day.push(Array(31).fill(0))
+        uf5220_nagruzka.push(Array(31).fill(0))
 
-    var work_uf5220 = [[${uf5220_work}]];
-    var work_progress = [[${progress_work}]];
-    var work_ntx1000 = [[${ntx1000_work}]];
-    var work_sk50 = [[${sk50_work}]];
-    var work_apec = [[${apec_work}]];
-    var work_dmu50_3 = [[${dmg_dmu50_3_work}]];
-    var work_dmu50_4 = [[${dmg_dmu50_4_work}]];
-    var work_ctx310_2 = [[${dmg_ctx310_2_work}]];
-    var work_ctx510_2 = [[${dmg_ctx510_2_work}]];
-    var work_ctx510_3 = [[${dmg_ctx510_3_work}]];
-    var work_ctx310_3 = [[${dmg_ctx310_3_work}]];
-    var work_ctx510_4 = [[${dmg_ctx510_4_work}]];
-    var work_ctx510_5 = [[${dmg_ctx510_5_work}]];
+    //Круговые uf5220
+    var uf5220_work = [[${uf5220_work}]];
+    var uf5220_pass = [[${uf5220_pass}]];
+    var uf5220_fail = [[${uf5220_fail}]];
+    var uf5220_avar = [[${uf5220_avar}]];
 
-    var pause_uf5220 = [[${uf5220_pass}]];
-    var pause_progress = [[${progress_pass}]];
-    var pause_ntx1000 = [[${ntx1000_pass}]];
-    var pause_sk50 = [[${sk50_pass}]];
-    var pause_apec = [[${apec_pass}]];
-    var pause_dmu50_3 = [[${dmg_dmu50_3_pass}]];
-    var pause_dmu50_4 = [[${dmg_dmu50_4_pass}]];
-    var pause_ctx310_2 = [[${dmg_ctx310_2_pass}]];
-    var pause_ctx510_2 = [[${dmg_ctx510_2_pass}]];
-    var pause_ctx510_3 = [[${dmg_ctx510_3_pass}]];
-    var pause_ctx310_3 = [[${dmg_ctx310_3_pass}]];
-    var pause_ctx510_4 = [[${dmg_ctx510_4_pass}]];
-    var pause_ctx510_5 = [[${dmg_ctx510_5_pass}]];
+    //Линейные progress
+    var progress_rabota_day = [[${progress_rabota_day}]];
+    var progress_pause_day = [[${progress_pause_day}]];
+    var progress_off_day = [[${progress_off_day}]];
+    var progress_avar_day = [];
+    var progress_nagruzka_day = [];
+        progress_avar_day.push(Array(31).fill(0));
+        progress_nagruzka_day.push(Array(31).fill(0));
 
-    var off_uf5220 = [[${uf5220_fail}]];
-    var off_progress = [[${progress_fail}]];
-    var off_ntx1000 = [[${ntx1000_fail}]];
-    var off_sk50 = [[${sk50_fail}]];
-    var off_apec = [[${apec_fail}]];
-    var off_dmu50_3 = [[${dmg_dmu50_3_fail}]];
-    var off_dmu50_4 = [[${dmg_dmu50_4_fail}]];
-    var off_ctx310_2 = [[${dmg_ctx310_2_fail}]];
-    var off_ctx510_2 = [[${dmg_ctx510_2_fail}]];
-    var off_ctx510_3 = [[${dmg_ctx510_3_fail}]];
-    var off_ctx310_3 = [[${dmg_ctx310_3_fail}]];
-    var off_ctx510_4 = [[${dmg_ctx510_4_fail}]];
-    var off_ctx510_5 = [[${dmg_ctx510_5_fail}]];
+    //Круговые progress
+    var progress_work = [[${progress_work}]];
+    var progress_pass = [[${progress_pass}]];
+    var progress_fail = [[${progress_fail}]];
+    var progress_avar = [[${progress_avar}]];
+
+    //Линейные ntx1000
+    var ntx1000_rabota_day = [[${ntx1000_rabota_day}]];
+    var ntx1000_pause_day = [[${ntx1000_pause_day}]];
+    var ntx1000_off_day = [[${ntx1000_off_day}]];
+    var ntx1000_avar_day = [[${ntx1000_avar_day}]];
+    var ntx1000_nagruzka_day = [[${ntx1000_nagruzka_day}]];
+
+    //Круговые ntx1000
+    var ntx1000_work = [[${ntx1000_work}]];
+    var ntx1000_pass = [[${ntx1000_pass}]];
+    var ntx1000_fail = [[${ntx1000_fail}]];
+    var ntx1000_avar = [[${ntx1000_avar}]];
+    var ntx1000_nagruzka = [[${ntx1000_nagruzka}]];
+
+</script>   <!--Переменные для uf5220 Прогресс и NTX1000-->
+<script src="/js/month/stanki/data_uvf5220_1000_month.js"></script>
+<script src="/js/month/stanki/progress_ntx_1000_month.js"></script>
+<script src="/js/month/stanki/data_ntx_1000_month.js"></script>
+
+<div style="border: 1px solid #333;">   <!--sk50 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/sk50.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">SK50</figcaption>
+                    <div>
+                        <a  style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="sk50 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_sk50" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Прогресс html-->
+
+</div> <!--sk50 html-->
+
+<div style="border: 1px solid #333;">   <!--apec html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/apec.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">APEC</figcaption>
+                    <div>
+                        <a  style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="apec (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_apec" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>  <!--Прогресс html-->
+
+</div> <!--apec html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #3</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_dmu50_3 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+</div> <!-- DMU50 #3 html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #4</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_dmu50_4 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmu50_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days7" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container7" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+</div> <!-- DMU50 #4 html-->
+
+<div style="border: 1px solid #333;">   <!--dmg_ctx310_2 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx310.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX310 #2</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx310_2; window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx310_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days8" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container8" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+
+</div> <!--ctx310_2 html-->
+
+<div style="border: 1px solid #333;">   <!--dmg_ctx510_2 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx510.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #2</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_2(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days9" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container9" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+
+</div> <!--ctx510_2 html-->
+
+<div style="border: 1px solid #333;">   <!--dmg_ctx510_3 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx510.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #3</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_3(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days10" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container10" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+
+</div> <!--ctx510_3 html-->
+
+<div style="border: 1px solid #333;">   <!--dmg_ctx310_3 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx310.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX310 #3</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx310_3(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx310_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days11" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container11" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+
+</div> <!--ctx310_3 html-->
+
+<div style="border: 1px solid #333;">   <!--dmg_ctx510_4 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx510.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #4</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_4(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days12" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container12" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+
+</div> <!--ctx510_4 html-->
+
+<div style="border: 1px solid #333;">   <!--dmg_ctx510_5 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_ctx510.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #5</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_5(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days13" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container13" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+
+</div> <!--ctx510_5 html-->
+
+<script src="/js/month/universal_month.js"></script>
+<script th:inline="javascript">
+    // Цвета для линейной и круговой диаграмм
+    var colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
+    var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210', '#5c7ed0'];
+
+    // Переменные с массивами линейных и круговых диаграмм с сервера
+    var sk50_array_linear = [[${sk50_month_linear}]]
+    var sk50_array_round = [[${sk50_month_round}]]
+
+    var apec_array_linear = [[${apec_month_linear}]]
+    var apec_array_round = [[${apec_month_round}]]
+
+    var dmu50_3_array_linear = [[${dmg_dmu50_3_month_linear}]]
+    var dmu50_3_array_round = [[${dmg_dmu50_3_month_round}]]
+
+    var dmu50_4_array_linear = [[${dmg_dmu50_4_month_linear}]]
+    var dmu50_4_array_round = [[${dmg_dmu50_4_month_round}]]
+
+    var ctx310_2_array_linear = [[${dmg_ctx310_2_month_linear}]]
+    var ctx310_2_array_round = [[${dmg_ctx310_2_month_round}]]
+
+    var ctx510_2_array_linear = [[${dmg_ctx510_2_month_linear}]]
+    var ctx510_2_array_round = [[${dmg_ctx510_2_month_round}]]
+
+    var ctx510_3_array_linear = [[${dmg_ctx510_3_month_linear}]]
+    var ctx510_3_array_round = [[${dmg_ctx510_3_month_round}]]
+
+    var ctx310_3_array_linear = [[${dmg_ctx310_3_month_linear}]]
+    var ctx310_3_array_round = [[${dmg_ctx310_3_month_round}]]
+
+    var ctx510_4_array_linear = [[${dmg_ctx510_4_month_linear}]]
+    var ctx510_4_array_round = [[${dmg_ctx510_4_month_round}]]
+
+    var ctx510_5_array_linear = [[${dmg_ctx510_5_month_linear}]]
+    var ctx510_5_array_round = [[${dmg_ctx510_5_month_round}]]
+
+    const linearDiagram = [sk50_array_linear, apec_array_linear, ntx1000_array_linear,
+        nlx3000_array_linear, gamma2000_array_linear, ctx650_array_linear, dmf260_array_linear,
+        dmu50_1_array_linear, dmu50_2_array_linear, dmc1035_array_linear, ctx310_1_array_linear,
+        dmu50_3_array_linear, dmu50_4_array_linear, ctx310_2_array_linear, ctx510_2_array_linear,
+        ctx510_3_array_linear, ctx310_3_array_linear, ctx510_4_array_linear, ctx510_5_array_linear];
+
+    const roundDiagram = [sk50_array_round,apec_array_round, ntx1000_array_round, nlx3000_array_round,
+        gamma2000_array_round, ctx650_array_round, dmf260_array_round, dmu50_1_array_round, dmu50_2_array_round,
+        dmc1035_array_round, ctx310_1_array_round, dmu50_3_array_round, dmu50_4_array_round, ctx310_2_array_round,
+        ctx510_2_array_round, ctx510_3_array_round, ctx310_3_array_round, ctx510_4_array_round, ctx510_5_array_round];
 
 
-    var avar_ntx1000 = [[${ntx1000_avar}]];
-    var avar_sk50 = [[${sk50_avar}]];
-    var avar_apec = [[${apec_avar}]];
-    var avar_dmu50_3 = [[${dmg_dmu50_3_avar}]];
-    var avar_dmu50_4 = [[${dmg_dmu50_4_avar}]];
-    var avar_ctx310_2 = [[${dmg_ctx310_2_avar}]];
-    var avar_ctx510_2 = [[${dmg_ctx510_2_avar}]];
-    var avar_ctx510_3 = [[${dmg_ctx510_3_avar}]];
-    var avar_ctx310_3 = [[${dmg_ctx310_3_avar}]];
-    var avar_ctx510_4 = [[${dmg_ctx510_4_avar}]];
-    var avar_ctx510_5 = [[${dmg_ctx510_5_avar}]];
+    // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
 
-    var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
-    var nagruzka_sk50 = [[${sk50_nagruzka}]];
-    var nagruzka_dmu50_3 = [[${dmg_dmu50_3_nagruzka}]];
-    var nagruzka_dmu50_4 = [[${dmg_dmu50_4_nagruzka}]];
-    var nagruzka_ctx310_2 = [[${dmg_ctx310_2_nagruzka}]];
-    var nagruzka_ctx510_2 = [[${dmg_ctx510_2_nagruzka}]];
-    var nagruzka_ctx510_3 = [[${dmg_ctx510_3_nagruzka}]];
-    var nagruzka_ctx310_3 = [[${dmg_ctx310_3_nagruzka}]];
-    var nagruzka_ctx510_4 = [[${dmg_ctx510_4_nagruzka}]];
-    var nagruzka_ctx510_5 = [[${dmg_ctx510_5_nagruzka}]];
+    // Функция заполнения линейной диаграммы
+    $.map(linearDiagram, function (element, index) {
+        // Вычисление работы без нагрузки для линейной диаграммы
+        if(element != null) {
+            $.each(element[0], function (index){
+                // Спец. условия для ручного режима на APEC
+                if(index != 1)
+                {
+                    element[0][index] = element[0][index] - element[4][index];
+                }
+            });
+            setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4]);
+        }
 
-    var ruchnoi_apec = [[${apec_ruchnoi}]];
+    });
 
-    const timezone = new Date().getTimezoneOffset()
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        plotOptions: {
-            xrange: {
-                grouping: false
+    // Функция заполнения круговой диаграммы
+    $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
+        // Вычисление работы без нагрузки для линейной диаграммы
+        if(element != null) {
+            // Спец. условия для ручного режима на APEC
+            if(index != 1)
+            {
+                element[0] = element[0] - element[4];
             }
-        },
-        global: {
-            timezoneOffset: timezone
+            setDataRound("container" + (index + 4), element[0], element[1], element[2], element[3], element[4]);
+        }
+    });
+</script> <!--Скрипт для диаграмм станков-->
+<script th:inline="javascript">
+    // Переменные для общих диаграмм.
+    var round_rabota = 0;
+    var round_pause = 0;
+    var round_off = 0;
+    var round_avar = 0;
+    var round_nagruzka = 0;
+    var round_ruchnoi = 0;
+
+    var linear_rabota = [];
+    var linear_pause = [];
+    var linear_off = [];
+    var linear_avar = [];
+    var linear_nagruzka = [];
+    var linear_ruchnoi = [];
+
+    // Заполнение переменных общей круговой диаграммы
+    $.map(roundDiagram, function (element) { // итерируем выполнение setData для всех объектов массива element
+        if(element != null) {
+            round_rabota = round_rabota + element[0];
+            round_pause = round_pause + element[1];
+            round_off = round_off + element[2];
+            round_avar = round_avar + element[3];
+            // Спец. условия для заполнения ручного режима на APEC
+            if(index != 1)
+            {
+                round_nagruzka = round_nagruzka + element[4];
+            }
+            // Спец. условия для заполнения ручного режима на APEC
+            if(index == 1)
+            {
+                round_ruchnoi = round_ruchnoi + element[4];
+            }
+
         }
     });
 
+    // Доп вычисления для общей диаграммы, пока uf5220 progress ntx1000 на старой архитектуре
+    round_rabota = round_rabota + uf5220_work + progress_work + ntx1000_work;
+    round_pause = round_pause + uf5220_pass + progress_pass + ntx1000_pass;
+    round_off = round_off + uf5220_fail + progress_fail + ntx1000_fail;
+    round_avar =  round_avar + uf5220_avar + ntx1000_avar;
+
+    // linear_rabota.push(Array(1).fill(uf5220_work));
+    // linear_pause.push(Array(1).fill(uf5220_pass));
+    // linear_off.push(Array(1).fill(uf5220_fail));
+    // linear_avar.push(Array(1).fill(uf5220_avar));
+    // linear_nagruzka.push(Array(1).fill(0));
+    //
+    // linear_rabota.push(Array(1).fill(progress_work));
+    // linear_pause.push(Array(1).fill(progress_pass));
+    // linear_off.push(Array(1).fill(progress_fail));
+    // linear_avar.push(Array(1).fill(progress_avar));
+    // linear_nagruzka.push(Array(1).fill(0));
+    //
+    // linear_rabota.push(Array(1).fill(ntx1000_work));
+    // linear_pause.push(Array(1).fill(ntx1000_pass));
+    // linear_off.push(Array(1).fill(ntx1000_fail));
+    // linear_avar.push(Array(1).fill(ntx1000_avar));
+    // linear_nagruzka.push(Array(1).fill(ntx1000_nagruzka));
+
+    // Заполнение переменных общей линейной диаграммы
+    $.map(roundDiagram, function (element, index) {
+        if(element != null) {
+            linear_rabota.push(Array(1).fill(element[0]));
+            linear_pause.push(Array(1).fill(element[1]));
+            linear_off.push(Array(1).fill(element[2]));
+            linear_avar.push(Array(1).fill(element[3]));
+
+            // Спец. условия для заполнения ручного режима на APEC
+            if(index != 1)
+            {
+                linear_nagruzka.push(Array(1).fill(element[4]));
+            }
+            // Спец. условия для заполнения ручного режима на APEC
+            if(index == 1)
+            {
+                linear_ruchnoi.push(Array(1).fill(element[4]));
+            }
+            else linear_ruchnoi.push(Array(1).fill(0));
+
+        }
+    });
+
+    // Формирование графиков для общих круговой и линейной диаграммы
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
         },
-        colors:colors,
+        colors:colorsLine,
         title: {
             text: 'Общая загрузка оборудования'
         },
@@ -383,7 +757,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5']
+            categories: ['УВФ-1 #1', 'УВФ-1 #2', 'NTX1000 #2', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50 #1', 'DMU50 #2', 'DMC1035', 'CTX310 #1', 'CTX510 #1']
         },
         credits: {
             enabled: false
@@ -405,33 +779,25 @@
         },
         series: [{
             name: 'Авария',
-            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4, avar_ctx310_2, avar_ctx510_2, avar_ctx510_3, avar_ctx310_3, avar_ctx510_4, avar_ctx510_5]
+            data: linear_avar
         }, {
             name: 'Выключен',
-            data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2, off_ctx510_2, off_ctx510_3, off_ctx310_3, off_ctx510_4, off_ctx510_5]
-        }, {
+            data: linear_off
+        },  {
             name: 'Ручной',
-            data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0, 0, 0, 0,0,0]
-        }, {
+            data: linear_ruchnoi
+        },
+            {
             name: 'Ожидание',
-            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2, pause_ctx510_2, pause_ctx510_3, pause_ctx310_3, pause_ctx510_4, pause_ctx510_5]
+            data: linear_pause
         }, {
             name: 'Под нагрузкой',
-            data: [0, 0, nagruzka_ntx1000, nagruzka_sk50, 0, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2, nagruzka_ctx510_2, nagruzka_ctx510_3, nagruzka_ctx310_3, nagruzka_ctx510_4, nagruzka_ctx510_5]
-        },{
+            data: linear_nagruzka
+        }, {
             name: 'Работа',
-            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2, work_ctx510_2, work_ctx510_3, work_ctx310_3, work_ctx510_4, work_ctx510_5]
-        }]
+            data: linear_rabota
+        }, ]
     });
-</script>   <!--js Общая загрузка-->
-<script th:inline="javascript">
-    var colors = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210', '#5c7ed0'];
-    var sum_rabota = [[${uf5220_work}]] + [[${progress_work}]] + [[${ntx1000_work}]] + [[${sk50_work}]] + [[${apec_work}]] + [[${dmg_dmu50_3_work}]] + [[${dmg_dmu50_4_work}]] + [[${dmg_ctx310_2_work}]] + [[${dmg_ctx510_2_work}]] + [[${dmg_ctx510_3_work}]] + [[${dmg_ctx310_3_work}]] + [[${dmg_ctx510_4_work}]] + [[${dmg_ctx510_5_work}]];
-    var sum_pause = [[${uf5220_pass}]] + [[${progress_pass}]] + [[${ntx1000_pass}]] + [[${sk50_pass}]] + [[${apec_pass}]] + [[${dmg_dmu50_3_pass}]] + [[${dmg_dmu50_4_pass}]] + [[${dmg_ctx310_2_pass}]] + [[${dmg_ctx510_2_pass}]] + [[${dmg_ctx510_3_pass}]] + [[${dmg_ctx310_3_pass}]] + [[${dmg_ctx510_4_pass}]] + [[${dmg_ctx510_5_pass}]];
-    var sum_off = [[${uf5220_fail}]] + [[${progress_fail}]] + [[${ntx1000_fail}]] + [[${sk50_fail}]] + [[${apec_fail}]] + [[${dmg_dmu50_3_fail}]] + [[${dmg_dmu50_4_fail}]] + [[${dmg_ctx310_2_fail}]] + [[${dmg_ctx510_2_fail}]] + [[${dmg_ctx510_3_fail}]] + [[${dmg_ctx310_3_fail}]] + [[${dmg_ctx510_4_fail}]] + [[${dmg_ctx510_5_fail}]];
-    var sum_avar = [[${ntx1000_avar}]] + [[${sk50_avar}]] + [[${apec_avar}]] + [[${dmg_dmu50_3_avar}]] + [[${dmg_dmu50_4_avar}]] + [[${dmg_ctx310_2_avar}]] + [[${dmg_ctx510_2_avar}]] + [[${dmg_ctx510_3_avar}]] + [[${dmg_ctx310_3_avar}]] + [[${dmg_ctx510_4_avar}]] + [[${dmg_ctx510_5_avar}]];
-    var sum_nagruzka = [[${ntx1000_nagruzka}]] + [[${sk50_nagruzka}]] + [[${dmg_dmu50_3_nagruzka}]] + [[${dmg_dmu50_4_nagruzka}]] + [[${dmg_ctx310_2_nagruzka}]] + [[${dmg_ctx510_2_nagruzka}]] + [[${dmg_ctx510_3_nagruzka}]] + [[${dmg_ctx310_3_nagruzka}]] + [[${dmg_ctx510_4_nagruzka}]] + [[${dmg_ctx510_5_nagruzka}]];
-    var sum_ruchoi = [[${apec_ruchnoi}]];
 
     Highcharts.chart('container_sum_zagruzka_krug', {
         chart: {
@@ -447,7 +813,6 @@
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
-
         accessibility: {
             point: {
                 valueSuffix: '%'
@@ -463,452 +828,18 @@
                 showInLegend: true
             }
         },
-        colors:colors,
+        colors:colorsRound,
         credits: {
             enabled: false
         },
         series : [ {
             type : 'pie',
             name : 'Показатель',
-            data : [ [ 'По программе', sum_rabota ], [ 'Включен', sum_pause ],
-                [ 'Выключен', sum_off ],  [ 'В аварии', sum_avar],  [ 'Под нагрузкой', sum_nagruzka], [ 'Ручной', sum_ruchoi]   ]
+            data : [ [ 'По программе', round_rabota ], [ 'Включен', round_pause ],
+                [ 'Выключен', round_off ],  [ 'В аварии', round_avar],  [ 'Под нагрузкой', round_nagruzka],  [ 'Ручной', sum_ruchoi]  ]
         }]
     });
-</script>   <!--Общая js круговая диагрмма загрузки оборудования-->
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/UVF_5220.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">УФ5220</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="uf5220(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_uf5220" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--УФ 5220 html-->
-
-</div> <!--УФ 5220 html-->
-<script th:inline="javascript">
-    var uf5220_rabota_day = [[${uf5220_rabota_day}]];
-    var uf5220_pause_day = [[${uf5220_pause_day}]];
-    var uf5220_off_day = [[${uf5220_off_day}]];
-</script>   <!--Переменные для линейной диаграммы uf5220-->
-<script th:inline="javascript">
-    var uf5220_work = [[${uf5220_work}]];
-    var uf5220_pass = [[${uf5220_pass}]];
-    var uf5220_fail = [[${uf5220_fail}]];
-    var uf5220_avar = [[${uf5220_avar}]];
-</script>   <!--Переменные для круговой диаграммы uf5220-->
-
-<div style="border: 1px solid #333;">   <!--Прогресс html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/progress.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">Прогресс</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="progress(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_progress" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--Прогресс html-->
-
-</div> <!--Прогресс html-->
-<script th:inline="javascript">
-    var progress_rabota_day = [[${progress_rabota_day}]];
-    var progress_pause_day = [[${progress_pause_day}]];
-    var progress_off_day = [[${progress_off_day}]];
-</script>   <!--Переменные для линейной диаграммы progress-->
-<script th:inline="javascript">
-    var progress_work = [[${progress_work}]];
-    var progress_pass = [[${progress_pass}]];
-    var progress_fail = [[${progress_fail}]];
-    var progress_avar = [[${progress_avar}]];
-</script>   <!--Переменные для круговой диаграммы progress-->
-
-<div style="border: 1px solid #333;">   <!--NTX1000 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/ntx1000.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">NTX1000</figcaption>
-                    <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="ntx1000_1 ();window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_ntx1000" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--Прогресс html-->
-
-</div> <!--NTX1000 html-->
-<script th:inline="javascript">
-    var ntx1000_rabota_day = [[${ntx1000_rabota_day}]];
-    var ntx1000_pause_day = [[${ntx1000_pause_day}]];
-    var ntx1000_off_day = [[${ntx1000_off_day}]];
-    var ntx1000_avar_day = [[${ntx1000_avar_day}]];
-    var ntx1000_nagruzka_day = [[${ntx1000_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы ntx1000-->
-<script th:inline="javascript">
-    var ntx1000_work = [[${ntx1000_work}]];
-    var ntx1000_pass = [[${ntx1000_pass}]];
-    var ntx1000_fail = [[${ntx1000_fail}]];
-    var ntx1000_avar = [[${ntx1000_avar}]];
-    var  ntx1000_nagruzka = [[${ntx1000_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы ntx1000-->
-
-<div style="border: 1px solid #333;">   <!--sk50 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/sk50.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">SK50</figcaption>
-                    <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="sk50 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_sk50" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--Прогресс html-->
-
-</div> <!--sk50 html-->
-<script th:inline="javascript">
-    var sk50_rabota_day = [[${sk50_rabota_day}]];
-    var sk50_pause_day = [[${sk50_pause_day}]];
-    var sk50_off_day = [[${sk50_off_day}]];
-    var sk50_avar_day = [[${sk50_avar_day}]];
-    var sk50_nagruzka_day = [[${sk50_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы sk50-->
-<script th:inline="javascript">
-    var sk50_work = [[${sk50_work}]];
-    var sk50_pass = [[${sk50_pass}]];
-    var sk50_fail = [[${sk50_fail}]];
-    var sk50_avar = [[${sk50_avar}]];
-    var  sk50_nagruzka = [[${sk50_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы sk50-->
-
-<div style="border: 1px solid #333;">   <!--apec html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/apec.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">APEC</figcaption>
-                    <div>
-                        <a  style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="apec (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_apec" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>  <!--Прогресс html-->
-
-</div> <!--apec html-->
-<script th:inline="javascript">
-    var apec_rabota_day = [[${apec_rabota_day}]];
-    var apec_pause_day = [[${apec_pause_day}]];
-    var apec_off_day = [[${apec_off_day}]];
-    var apec_avar_day = [[${apec_avar_day}]];
-    var apec_ruchnoi_day = [[${apec_ruchnoi_day}]];
-</script>   <!--Переменные для линейной диаграммы apec-->
-<script th:inline="javascript">
-    var apec_work = [[${apec_work}]];
-    var apec_pass = [[${apec_pass}]];
-    var apec_fail = [[${apec_fail}]];
-    var apec_avar = [[${apec_avar}]];
-    var  apec_ruchnoi = [[${apec_ruchnoi}]];
-</script>   <!--Переменные для круговой диаграммы apec-->
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #3</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_dmu50_3 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmu50_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-</div> <!-- DMU50 #3 html-->
-<script th:inline="javascript">
-    var dmg_dmu50_3_rabota_day = [[${dmg_dmu50_3_rabota_day}]];
-    var dmg_dmu50_3_pause_day = [[${dmg_dmu50_3_pause_day}]];
-    var dmg_dmu50_3_off_day = [[${dmg_dmu50_3_off_day}]];
-    var dmg_dmu50_3_avar_day = [[${dmg_dmu50_3_avar_day}]];
-    var dmg_dmu50_3_nagruzka_day = [[${dmg_dmu50_3_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmu50_3-->
-<script th:inline="javascript">
-    var dmg_dmu50_3_work = [[${dmg_dmu50_3_work}]];
-    var dmg_dmu50_3_pass = [[${dmg_dmu50_3_pass}]];
-    var dmg_dmu50_3_fail = [[${dmg_dmu50_3_fail}]];
-    var dmg_dmu50_3_avar = [[${dmg_dmu50_3_avar}]];
-    var  dmg_dmu50_3_nagruzka = [[${dmg_dmu50_3_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmu50_3-->
-
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #4</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_dmu50_4 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmu50_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days7" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container7" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-</div> <!-- DMU50 #4 html-->
-<script th:inline="javascript">
-    var dmg_dmu50_4_rabota_day = [[${dmg_dmu50_4_rabota_day}]];
-    var dmg_dmu50_4_pause_day = [[${dmg_dmu50_4_pause_day}]];
-    var dmg_dmu50_4_off_day = [[${dmg_dmu50_4_off_day}]];
-    var dmg_dmu50_4_avar_day = [[${dmg_dmu50_4_avar_day}]];
-    var dmg_dmu50_4_nagruzka_day = [[${dmg_dmu50_4_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmu50_4-->
-<script th:inline="javascript">
-    var dmg_dmu50_4_work = [[${dmg_dmu50_4_work}]];
-    var dmg_dmu50_4_pass = [[${dmg_dmu50_4_pass}]];
-    var dmg_dmu50_4_fail = [[${dmg_dmu50_4_fail}]];
-    var dmg_dmu50_4_avar = [[${dmg_dmu50_4_avar}]];
-    var  dmg_dmu50_4_nagruzka = [[${dmg_dmu50_4_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmu50_4-->
-
-<div style="border: 1px solid #333;">   <!--dmg_ctx310_2 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_ctx310.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX310 #2</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx310_2; window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx310_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days8" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container8" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-
-</div> <!--ctx310_2 html-->
-<script th:inline="javascript">
-    var dmg_ctx310_2_rabota_day = [[${dmg_ctx310_2_rabota_day}]];
-    var dmg_ctx310_2_pause_day = [[${dmg_ctx310_2_pause_day}]];
-    var dmg_ctx310_2_off_day = [[${dmg_ctx310_2_off_day}]];
-    var dmg_ctx310_2_avar_day = [[${dmg_ctx310_2_avar_day}]];
-    var dmg_ctx310_2_nagruzka_day = [[${dmg_ctx310_2_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_ctx310_2-->
-<script th:inline="javascript">
-    var dmg_ctx310_2_work = [[${dmg_ctx310_2_work}]];
-    var dmg_ctx310_2_pass = [[${dmg_ctx310_2_pass}]];
-    var dmg_ctx310_2_fail = [[${dmg_ctx310_2_fail}]];
-    var dmg_ctx310_2_avar = [[${dmg_ctx310_2_avar}]];
-    var  dmg_ctx310_2_nagruzka = [[${dmg_ctx310_2_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_ctx310_2-->
-
-<div style="border: 1px solid #333;">   <!--dmg_ctx510_2 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_ctx510.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #2</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_2(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days9" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container9" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-
-</div> <!--ctx510_2 html-->
-<script th:inline="javascript">
-    var dmg_ctx510_2_rabota_day = [[${dmg_ctx510_2_rabota_day}]];
-    var dmg_ctx510_2_pause_day = [[${dmg_ctx510_2_pause_day}]];
-    var dmg_ctx510_2_off_day = [[${dmg_ctx510_2_off_day}]];
-    var dmg_ctx510_2_avar_day = [[${dmg_ctx510_2_avar_day}]];
-    var dmg_ctx510_2_nagruzka_day = [[${dmg_ctx510_2_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_ctx510_2-->
-<script th:inline="javascript">
-    var dmg_ctx510_2_work = [[${dmg_ctx510_2_work}]];
-    var dmg_ctx510_2_pass = [[${dmg_ctx510_2_pass}]];
-    var dmg_ctx510_2_fail = [[${dmg_ctx510_2_fail}]];
-    var dmg_ctx510_2_avar = [[${dmg_ctx510_2_avar}]];
-    var  dmg_ctx510_2_nagruzka = [[${dmg_ctx510_2_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_ctx510_2-->
-
-<div style="border: 1px solid #333;">   <!--dmg_ctx510_3 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_ctx510.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #3</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_3(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days10" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container10" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-
-</div> <!--ctx510_3 html-->
-<script th:inline="javascript">
-    var dmg_ctx510_3_rabota_day = [[${dmg_ctx510_3_rabota_day}]];
-    var dmg_ctx510_3_pause_day = [[${dmg_ctx510_3_pause_day}]];
-    var dmg_ctx510_3_off_day = [[${dmg_ctx510_3_off_day}]];
-    var dmg_ctx510_3_avar_day = [[${dmg_ctx510_3_avar_day}]];
-    var dmg_ctx510_3_nagruzka_day = [[${dmg_ctx510_3_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_ctx510_2-->
-<script th:inline="javascript">
-    var dmg_ctx510_3_work = [[${dmg_ctx510_3_work}]];
-    var dmg_ctx510_3_pass = [[${dmg_ctx510_3_pass}]];
-    var dmg_ctx510_3_fail = [[${dmg_ctx510_3_fail}]];
-    var dmg_ctx510_3_avar = [[${dmg_ctx510_3_avar}]];
-    var  dmg_ctx510_3_nagruzka = [[${dmg_ctx510_3_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_ctx510_2-->
-
-<div style="border: 1px solid #333;">   <!--dmg_ctx310_3 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_ctx310.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX310 #3</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx310_3(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx310_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days11" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container11" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-
-</div> <!--ctx310_3 html-->
-<script th:inline="javascript">
-    var dmg_ctx310_3_rabota_day = [[${dmg_ctx310_3_rabota_day}]];
-    var dmg_ctx310_3_pause_day = [[${dmg_ctx310_3_pause_day}]];
-    var dmg_ctx310_3_off_day = [[${dmg_ctx310_3_off_day}]];
-    var dmg_ctx310_3_avar_day = [[${dmg_ctx310_3_avar_day}]];
-    var dmg_ctx310_3_nagruzka_day = [[${dmg_ctx310_3_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_ctx310_3-->
-<script th:inline="javascript">
-    var dmg_ctx310_3_work = [[${dmg_ctx310_3_work}]];
-    var dmg_ctx310_3_pass = [[${dmg_ctx310_3_pass}]];
-    var dmg_ctx310_3_fail = [[${dmg_ctx310_3_fail}]];
-    var dmg_ctx310_3_avar = [[${dmg_ctx310_3_avar}]];
-    var dmg_ctx310_3_nagruzka = [[${dmg_ctx310_3_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_ctx310_3-->
-
-<div style="border: 1px solid #333;">   <!--dmg_ctx510_4 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_ctx510.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #4</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_4(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days12" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container12" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-
-</div> <!--ctx510_4 html-->
-<script th:inline="javascript">
-    var dmg_ctx510_4_rabota_day = [[${dmg_ctx510_4_rabota_day}]];
-    var dmg_ctx510_4_pause_day = [[${dmg_ctx510_4_pause_day}]];
-    var dmg_ctx510_4_off_day = [[${dmg_ctx510_4_off_day}]];
-    var dmg_ctx510_4_avar_day = [[${dmg_ctx510_4_avar_day}]];
-    var dmg_ctx510_4_nagruzka_day = [[${dmg_ctx510_4_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_ctx510_2-->
-<script th:inline="javascript">
-    var dmg_ctx510_4_work = [[${dmg_ctx510_4_work}]];
-    var dmg_ctx510_4_pass = [[${dmg_ctx510_4_pass}]];
-    var dmg_ctx510_4_fail = [[${dmg_ctx510_4_fail}]];
-    var dmg_ctx510_4_avar = [[${dmg_ctx510_4_avar}]];
-    var dmg_ctx510_4_nagruzka = [[${dmg_ctx510_4_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_ctx510_2-->
-
-<div style="border: 1px solid #333;">   <!--dmg_ctx510_5 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
-                <div class="parent_image">
-                    <img src="images/dmg_ctx510.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">CTX510 #5</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_ctx510_5(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days13" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container13" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-
-</div> <!--ctx510_5 html-->
-<script th:inline="javascript">
-    var dmg_ctx510_5_rabota_day = [[${dmg_ctx510_5_rabota_day}]];
-    var dmg_ctx510_5_pause_day = [[${dmg_ctx510_5_pause_day}]];
-    var dmg_ctx510_5_off_day = [[${dmg_ctx510_5_off_day}]];
-    var dmg_ctx510_5_avar_day = [[${dmg_ctx510_5_avar_day}]];
-    var dmg_ctx510_5_nagruzka_day = [[${dmg_ctx510_5_nagruzka_day}]];
-</script>   <!--Переменные для линейной диаграммы dmg_ctx510_2-->
-<script th:inline="javascript">
-    var dmg_ctx510_5_work = [[${dmg_ctx510_5_work}]];
-    var dmg_ctx510_5_pass = [[${dmg_ctx510_5_pass}]];
-    var dmg_ctx510_5_fail = [[${dmg_ctx510_5_fail}]];
-    var dmg_ctx510_5_avar = [[${dmg_ctx510_5_avar}]];
-    var dmg_ctx510_5_nagruzka = [[${dmg_ctx510_5_nagruzka}]];
-</script>   <!--Переменные для круговой диаграммы dmg_ctx510_2-->
+</script> <!--Скрипт для общих диаграмм станков-->
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
@@ -939,80 +870,6 @@
 
 <script src="/js/dropdown_menu.js"></script>
 <!--Скрипт для выпадающего меню-->
-
-<script src="/js/month/universal_month.js"></script>
-<script>
-    const complex_uf5220 = {arrayAvar: Array(31).fill(0), arrayFail:uf5220_off_day, arrayPass:uf5220_pause_day, arrayNagruzka:Array(31).fill(0),
-        arrayWork:uf5220_rabota_day, avar:uf5220_avar, fail:uf5220_fail, pass:uf5220_pass, nagruzka:0,
-        work:uf5220_work};
-
-    const complex_progress = {arrayAvar:Array(31).fill(0), arrayFail:progress_off_day, arrayPass:progress_pause_day, arrayNagruzka: Array(31).fill(0),
-        arrayWork:progress_rabota_day, avar:progress_avar, fail:progress_fail, pass:progress_pass, nagruzka:0,
-        work:progress_work};
-
-    const complex_ntx1000 = {arrayAvar:ntx1000_avar_day, arrayFail:ntx1000_off_day, arrayPass:ntx1000_pause_day, arrayNagruzka: ntx1000_nagruzka_day,
-        arrayWork:ntx1000_rabota_day, avar:ntx1000_avar, fail:ntx1000_fail, pass:ntx1000_pass, nagruzka:ntx1000_nagruzka,
-        work:ntx1000_work};
-
-    const complex_sk50 = {arrayAvar:sk50_avar_day, arrayFail:sk50_off_day, arrayPass:sk50_pause_day, arrayNagruzka: sk50_nagruzka_day,
-        arrayWork:sk50_rabota_day, avar:sk50_avar, fail:sk50_fail, pass:sk50_pass, nagruzka:sk50_nagruzka,
-        work:sk50_work};
-
-    const complex_apec = {arrayAvar:apec_avar_day, arrayFail:apec_off_day, arrayPass:apec_pause_day, arrayNagruzka: apec_ruchnoi_day,
-        arrayWork:apec_rabota_day, avar:apec_avar, fail:apec_fail, pass:apec_pass, nagruzka: apec_ruchnoi,
-        work:apec_work};
-
-    const complex_dmg_dmu50_3 = {arrayAvar:dmg_dmu50_3_avar_day, arrayFail:dmg_dmu50_3_off_day, arrayPass:dmg_dmu50_3_pause_day, arrayNagruzka: dmg_dmu50_3_nagruzka_day,
-        arrayWork:dmg_dmu50_3_rabota_day, avar:dmg_dmu50_3_avar, fail:dmg_dmu50_3_fail, pass:dmg_dmu50_3_pass, nagruzka:dmg_dmu50_3_nagruzka,
-        work:dmg_dmu50_3_work};
-
-    const complex_dmg_dmu50_4 = {arrayAvar:dmg_dmu50_4_avar_day, arrayFail:dmg_dmu50_4_off_day, arrayPass:dmg_dmu50_4_pause_day, arrayNagruzka: dmg_dmu50_4_nagruzka_day,
-        arrayWork:dmg_dmu50_4_rabota_day, avar:dmg_dmu50_4_avar, fail:dmg_dmu50_4_fail, pass:dmg_dmu50_4_pass, nagruzka:dmg_dmu50_4_nagruzka,
-        work:dmg_dmu50_4_work};
-
-    const complex_dmg_ctx310_2 = {arrayAvar:dmg_ctx310_2_avar_day, arrayFail:dmg_ctx310_2_off_day, arrayPass:dmg_ctx310_2_pause_day, arrayNagruzka: dmg_ctx310_2_nagruzka_day,
-        arrayWork:dmg_ctx310_2_rabota_day, avar:dmg_ctx310_2_avar, fail:dmg_ctx310_2_fail, pass:dmg_ctx310_2_pass, nagruzka:dmg_ctx310_2_nagruzka,
-        work:dmg_ctx310_2_work};
-
-    const complex_dmg_ctx510_2 = {arrayAvar:dmg_ctx510_2_avar_day, arrayFail:dmg_ctx510_2_off_day, arrayPass:dmg_ctx510_2_pause_day, arrayNagruzka: dmg_ctx510_2_nagruzka_day,
-        arrayWork:dmg_ctx510_2_rabota_day, avar:dmg_ctx510_2_avar, fail:dmg_ctx510_2_fail, pass:dmg_ctx510_2_pass, nagruzka:dmg_ctx510_2_nagruzka,
-        work:dmg_ctx510_2_work};
-
-    const complex_dmg_ctx510_3 = {arrayAvar:dmg_ctx510_3_avar_day, arrayFail:dmg_ctx510_3_off_day, arrayPass:dmg_ctx510_3_pause_day, arrayNagruzka: dmg_ctx510_3_nagruzka_day,
-        arrayWork:dmg_ctx510_3_rabota_day, avar:dmg_ctx510_3_avar, fail:dmg_ctx510_3_fail, pass:dmg_ctx510_3_pass, nagruzka:dmg_ctx510_3_nagruzka,
-        work:dmg_ctx510_3_work};
-
-    const complex_dmg_ctx310_3 = {arrayAvar:dmg_ctx310_3_avar_day, arrayFail:dmg_ctx310_3_off_day, arrayPass:dmg_ctx310_3_pause_day, arrayNagruzka: dmg_ctx310_3_nagruzka_day,
-        arrayWork:dmg_ctx310_3_rabota_day, avar:dmg_ctx310_3_avar, fail:dmg_ctx310_3_fail, pass:dmg_ctx310_3_pass, nagruzka:dmg_ctx310_3_nagruzka,
-        work:dmg_ctx310_3_work};
-
-    const complex_dmg_ctx510_4 = {arrayAvar:dmg_ctx510_4_avar_day, arrayFail:dmg_ctx510_4_off_day, arrayPass:dmg_ctx510_4_pause_day, arrayNagruzka: dmg_ctx510_4_nagruzka_day,
-        arrayWork:dmg_ctx510_4_rabota_day, avar:dmg_ctx510_4_avar, fail:dmg_ctx510_4_fail, pass:dmg_ctx510_4_pass, nagruzka:dmg_ctx510_4_nagruzka,
-        work:dmg_ctx510_4_work};
-
-    const complex_dmg_ctx510_5 = {arrayAvar:dmg_ctx510_5_avar_day, arrayFail:dmg_ctx510_5_off_day, arrayPass:dmg_ctx510_5_pause_day, arrayNagruzka: dmg_ctx510_5_nagruzka_day,
-        arrayWork:dmg_ctx510_5_rabota_day, avar:dmg_ctx510_5_avar, fail:dmg_ctx510_5_fail, pass:dmg_ctx510_5_pass, nagruzka:dmg_ctx510_5_nagruzka,
-        work:dmg_ctx510_5_work};
-
-    const arrayObject = [complex_uf5220, complex_progress,
-        complex_ntx1000, complex_sk50, complex_apec, complex_dmg_dmu50_3,
-        complex_dmg_dmu50_4, complex_dmg_ctx310_2, complex_dmg_ctx510_2,
-        complex_dmg_ctx510_3, complex_dmg_ctx310_3, complex_dmg_ctx510_4,
-        complex_dmg_ctx510_5]
-
-    $.map(arrayObject, function (arrayObject, index) { // итерируем выполнение setData для всех объектов массива arrayObject
-
-        // Функция заполнения линейной диаграммы
-        setDataLine("container_days" + (index + 1), arrayObject.arrayAvar,
-                    arrayObject.arrayFail, arrayObject.arrayPass,
-                    arrayObject.arrayNagruzka, arrayObject.arrayWork);
-        // Функция заполнения круговой диаграммы
-        setDataRound("container" + (index + 1), arrayObject.avar,
-                     arrayObject.fail, arrayObject.pass,
-                     arrayObject.nagruzka, arrayObject.work)
-
-    });
-</script> <!-- Скрипт автоматического формирования графиков -->
 
 </body>
 </html>
