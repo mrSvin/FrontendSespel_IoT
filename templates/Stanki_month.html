@@ -362,6 +362,13 @@
     var ntx1000_avar_day = [[${ntx1000_avar_day}]];
     var ntx1000_nagruzka_day = [[${ntx1000_nagruzka_day}]];
 
+    // NTX1000 вычисление работы без нагрузки.
+    $.each(ntx1000_rabota_day, function (index){
+        ntx1000_rabota_day[index] = ntx1000_rabota_day[index] - ntx1000_nagruzka_day[index];
+    });
+
+
+
     //Круговые ntx1000
     var ntx1000_array_round = [[${ntx1000_month_round}]]
 
@@ -684,25 +691,6 @@
 
         }
     });
-
-    // Доп вычисления для общей диаграммы, пока uf5220 progress ntx1000 на старой архитектуре
-    // linear_rabota.push(Array(1).fill(uf5220_work));
-    // linear_pause.push(Array(1).fill(uf5220_pass));
-    // linear_off.push(Array(1).fill(uf5220_fail));
-    // linear_avar.push(Array(1).fill(uf5220_avar));
-    // linear_nagruzka.push(Array(1).fill(0));
-    //
-    // linear_rabota.push(Array(1).fill(progress_work));
-    // linear_pause.push(Array(1).fill(progress_pass));
-    // linear_off.push(Array(1).fill(progress_fail));
-    // linear_avar.push(Array(1).fill(progress_avar));
-    // linear_nagruzka.push(Array(1).fill(0));
-    //
-    // linear_rabota.push(Array(1).fill(ntx1000_work));
-    // linear_pause.push(Array(1).fill(ntx1000_pass));
-    // linear_off.push(Array(1).fill(ntx1000_fail));
-    // linear_avar.push(Array(1).fill(ntx1000_avar));
-    // linear_nagruzka.push(Array(1).fill(ntx1000_nagruzka ));
 
     // Заполнение переменных общей линейной диаграммы
     $.map(roundDiagram, function (element, index) {
