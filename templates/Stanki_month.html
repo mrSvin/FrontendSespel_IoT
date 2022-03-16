@@ -624,22 +624,23 @@
 
     // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
 
+    var g = 0;
+
     // Функция заполнения линейной диаграммы
     $.map(linearDiagram, function (element, index) {
         // Вычисление работы без нагрузки для линейной диаграммы
         if(element != null) {
-            $.each(element[0], function (i){
-                // Спец. условия для ручного режима на APEC
-                if(index != 1) {
-                    colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
-                    element[0][i] = element[0][i] - element[4][i];
+            // Спец. условия для ручного режима на APEC
+            if(index == 1) {
+                colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'];
+                setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4], 'Ручной режим');
+            }
+            else {
+                    $.each(element[0], function (i){
+                        element[0][i] = element[0][i] - element[4][i];
+                    });
                     setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4]);
-                }
-                else {
-                    colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'];
-                    setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4], 'Ручной режим');
-                }
-            });
+                 }
         }
 
     });
@@ -835,7 +836,7 @@
             type : 'pie',
             name : 'Показатель',
             data : [ [ 'По программе', round_rabota ], [ 'Включен', round_pause ],
-                [ 'Выключен', round_off ],  [ 'В аварии', round_avar],  [ 'Под нагрузкой', round_nagruzka],  [ 'Ручной', sum_ruchoi]  ]
+                [ 'Выключен', round_off ],  [ 'В аварии', round_avar],  [ 'Под нагрузкой', round_nagruzka],  [ 'Ручной', round_ruchnoi]  ]
         }]
     });
 </script> <!--Скрипт для общих диаграмм станков-->
