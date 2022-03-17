@@ -694,23 +694,35 @@
     // Заполнение переменных общей линейной диаграммы
     $.map(roundDiagram, function (element, index) {
         if(element != null) {
+            if(index != 4)
+            {
+                linear_rabota.push(Array(1).fill(element[0]));
+                linear_pause.push(Array(1).fill(element[1]));
+                linear_off.push(Array(1).fill(element[2]));
+                linear_avar.push(Array(1).fill(element[3]));
+                linear_nagruzka.push(Array(1).fill(element[4]));
+                linear_ruchnoi.push(Array(1).fill(0));
+            }
+            // Спец. условия для заполнения ручного режима на APEC
+            else
+            {
+                linear_rabota.push(Array(1).fill(element[0]));
+                linear_pause.push(Array(1).fill(element[1]));
+                linear_off.push(Array(1).fill(element[2]));
+                linear_avar.push(Array(1).fill(element[3]));
+                linear_nagruzka.push(Array(1).fill(0));
+                linear_ruchnoi.push(Array(1).fill(element[4]));
+            }
+        }
+    });
+
+    $.map(roundDiagram, function (element) {
+        if(element != null) {
             linear_rabota.push(Array(1).fill(element[0]));
             linear_pause.push(Array(1).fill(element[1]));
             linear_off.push(Array(1).fill(element[2]));
             linear_avar.push(Array(1).fill(element[3]));
-
-            // Спец. условия для заполнения ручного режима на APEC
-            if(index != 4)
-            {
-                linear_nagruzka.push(Array(1).fill(element[4]));
-            }
-            // Спец. условия для заполнения ручного режима на APEC
-            if(index == 4)
-            {
-                linear_ruchnoi.push(Array(1).fill(element[4]));
-            }
-            else linear_ruchnoi.push(Array(1).fill(0));
-
+            linear_nagruzka.push(Array(1).fill(element[4]));
         }
     });
 
