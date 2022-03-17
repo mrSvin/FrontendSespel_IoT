@@ -330,52 +330,6 @@
 
 </div> <!--NTX1000 html-->
 
-<script th:inline="javascript">
-    //Линейные uf5220
-    var uf5220_rabota_day = [[${uf5220_rabota_day}]];
-    var uf5220_pause_day = [[${uf5220_pause_day}]];
-    var uf5220_off_day = [[${uf5220_off_day}]];
-    var uf5220_avar_day = [];
-    var uf5220_nagruzka = [];
-        uf5220_avar_day.push(Array(31).fill(0))
-        uf5220_nagruzka.push(Array(31).fill(0))
-
-    //Круговые uf5220
-    var uf5220_array_round = [[${uf5220_month_round}]]
-
-    //Линейные progress
-    var progress_rabota_day = [[${progress_rabota_day}]];
-    var progress_pause_day = [[${progress_pause_day}]];
-    var progress_off_day = [[${progress_off_day}]];
-    var progress_avar_day = [];
-    var progress_nagruzka_day = [];
-        progress_avar_day.push(Array(31).fill(0));
-        progress_nagruzka_day.push(Array(31).fill(0));
-
-    //Круговые progress
-    var progress_array_round = [[${progress_month_round}]]
-
-    //Линейные ntx1000
-    var ntx1000_rabota_day = [[${ntx1000_rabota_day}]];
-    var ntx1000_pause_day = [[${ntx1000_pause_day}]];
-    var ntx1000_off_day = [[${ntx1000_off_day}]];
-    var ntx1000_avar_day = [[${ntx1000_avar_day}]];
-    var ntx1000_nagruzka_day = [[${ntx1000_nagruzka_day}]];
-
-    // NTX1000 вычисление работы без нагрузки.
-    $.each(ntx1000_rabota_day, function (index){
-        ntx1000_rabota_day[index] = ntx1000_rabota_day[index] - ntx1000_nagruzka_day[index];
-    });
-
-
-
-    //Круговые ntx1000
-    var ntx1000_array_round = [[${ntx1000_month_round}]]
-
-</script>   <!--Переменные для uf5220 Прогресс и NTX1000-->
-<script src="/js/month/stanki/data_uf5220_month.js"></script>
-<script src="/js/month/stanki/data_progress_month.js"></script>
-<script src="/js/month/stanki/data_ntx1000_month.js"></script>
 
 <div style="border: 1px solid #333;">   <!--sk50 html-->
     <div style="overflow: hidden;">
@@ -574,6 +528,51 @@
     </div>
 
 </div> <!--ctx510_5 html-->
+
+<script th:inline="javascript">
+    //Линейные uf5220
+    var uf5220_rabota_day = [[${uf5220_rabota_day}]];
+    var uf5220_pause_day = [[${uf5220_pause_day}]];
+    var uf5220_off_day = [[${uf5220_off_day}]];
+    var uf5220_avar_day = Array(31).fill(0);
+    var uf5220_nagruzka = Array(31).fill(0);
+
+
+    //Круговые uf5220
+    var uf5220_array_round = [[${uf5220_month_round}]]
+
+    //Линейные progress
+    var progress_rabota_day = [[${progress_rabota_day}]];
+    var progress_pause_day = [[${progress_pause_day}]];
+    var progress_off_day = [[${progress_off_day}]];
+    var progress_avar_day = Array(31).fill(0);
+    var progress_nagruzka_day = Array(31).fill(0);
+
+    //Круговые progress
+    var progress_array_round = [[${progress_month_round}]]
+
+    //Линейные ntx1000
+    var ntx1000_rabota_day = [[${ntx1000_rabota_day}]];
+    var ntx1000_pause_day = [[${ntx1000_pause_day}]];
+    var ntx1000_off_day = [[${ntx1000_off_day}]];
+    var ntx1000_avar_day = [[${ntx1000_avar_day}]];
+    var ntx1000_nagruzka_day = [[${ntx1000_nagruzka_day}]];
+
+    // NTX1000 вычисление работы без нагрузки.
+    $.each(ntx1000_rabota_day, function (index){
+        ntx1000_rabota_day[index] = ntx1000_rabota_day[index] - ntx1000_nagruzka_day[index];
+    });
+
+
+
+    //Круговые ntx1000
+    var ntx1000_array_round = [[${ntx1000_month_round}]]
+
+</script>   <!--Переменные для uf5220 Прогресс и NTX1000-->
+<script src="/js/month/stanki/data_uf5220_month.js"></script>
+<script src="/js/month/stanki/data_progress_month.js"></script>
+<script src="/js/month/stanki/data_ntx1000_month.js"></script>
+
 
 <script src="/js/month/universal_month.js"></script>
 <script th:inline="javascript">
