@@ -716,16 +716,6 @@
         }
     });
 
-    $.map(roundDiagram, function (element) {
-        if(element != null) {
-            linear_rabota.push(Array(1).fill(element[0]));
-            linear_pause.push(Array(1).fill(element[1]));
-            linear_off.push(Array(1).fill(element[2]));
-            linear_avar.push(Array(1).fill(element[3]));
-            linear_nagruzka.push(Array(1).fill(element[4]));
-        }
-    });
-
     // Формирование графиков для общих круговой и линейной диаграммы
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
