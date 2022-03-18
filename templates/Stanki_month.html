@@ -529,6 +529,26 @@
 
 </div> <!--ctx510_5 html-->
 
+<div style="border: 1px solid #333;">   <!--dmg_dmc_1035_2 html-->
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_dmc_1035.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMC1035 #2</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_dmc1035_2(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmc1035" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_days14" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container14" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+
+</div> <!--dmc_1035_2 html-->
+
 <script th:inline="javascript">
     //Линейные uf5220
     var uf5220_rabota_day = [[${uf5220_rabota_day}]];
@@ -611,11 +631,15 @@
     var ctx510_5_array_linear = [[${dmg_ctx510_5_month_linear}]]
     var ctx510_5_array_round = [[${dmg_ctx510_5_month_round}]]
 
+    var dmc1035_2_array_linear = [[${dmg_dmc1035_2_month_linear}]]
+    var dmc1035_2_array_round = [[${dmg_dmc1035_2_month_round}]]
+
+
     const linearDiagram = [sk50_array_linear, apec_array_linear,dmu50_3_array_linear, dmu50_4_array_linear, ctx310_2_array_linear, ctx510_2_array_linear,
-        ctx510_3_array_linear, ctx310_3_array_linear, ctx510_4_array_linear, ctx510_5_array_linear];
+        ctx510_3_array_linear, ctx310_3_array_linear, ctx510_4_array_linear, ctx510_5_array_linear, dmc1035_2_array_linear];
 
     const roundDiagram = [uf5220_array_round, progress_array_round, ntx1000_array_round, sk50_array_round,apec_array_round, dmu50_3_array_round, dmu50_4_array_round, ctx310_2_array_round,
-        ctx510_2_array_round, ctx510_3_array_round, ctx310_3_array_round, ctx510_4_array_round, ctx510_5_array_round];
+        ctx510_2_array_round, ctx510_3_array_round, ctx310_3_array_round, ctx510_4_array_round, ctx510_5_array_round, dmc1035_2_array_round];
 
 
     // Функция заполнения линейной диаграммы
@@ -731,7 +755,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5']
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2']
         },
         credits: {
             enabled: false
