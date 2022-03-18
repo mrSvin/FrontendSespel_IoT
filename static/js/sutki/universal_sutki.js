@@ -1,10 +1,10 @@
-function pars(arrayParse, y, arrayName=null)
+function pars(arrayParse, lengh, y, arrayName=null)
 {
     var index = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    lengh = (arrayParse.length)/2-2
+    // lengh = (arrayParse.length)/2-2
 
     // Если имя программы не передано в функцию, то массив формируется без нее
     if (arrayName == null){
