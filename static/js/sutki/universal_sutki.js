@@ -10,7 +10,7 @@ function pars(arrayParse, y, arrayName=null)
     if (arrayName == null){
         while(index <= lengh)
         {   // Парсинг
-            arraySave.push({x:new Date(arrayParse[index*2]), x2:new Date(arrayParse[index * 2 + 1]), y:y})
+            arraySave.push({x:(new Date(arrayParse[index*2])).getTime(), x2:(new Date(arrayParse[index * 2 + 1])).getTime(), y:y})
             index += 1;
         }
     }
@@ -18,7 +18,7 @@ function pars(arrayParse, y, arrayName=null)
     else {
         while(index <= lengh)
         {   // Парсинг
-            arraySave.push({x:new Date(arrayParse[index*2]), x2:new Date(arrayParse[index * 2 + 1]), y:y, programname:arrayName[index]})
+            arraySave.push({x:(new Date(arrayParse[index*2])).getTime(), x2:(new Date(arrayParse[index * 2 + 1])).getTime(), y:y, programname:arrayName[index]})
             index += 1;
         }
     }
