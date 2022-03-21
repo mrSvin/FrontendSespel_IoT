@@ -1,3 +1,10 @@
+var mar_top = localStorage.getItem('mar_top');
+var mar_left = localStorage.getItem('mar_left');
+var bground = localStorage.getItem('bground');
+var place_img = localStorage.getItem('place_img');
+var size  = localStorage.getItem('size');
+var bwidth = localStorage.getItem('bwidth');
+
 // начало мест второй площадки
 function uf5220 (){
     mar_top = -115;
