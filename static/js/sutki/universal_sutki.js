@@ -61,8 +61,14 @@ function timeReplace(dataArray) {
 
 function pars(arrayParse, y, arrayName=null)
 {
+
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
+
+    if (arrayParse[index_pars] == undefined){
+        console.log("Aaaaaaaaaaaaaaaaaaaaaaaaa")
+        return false;
+    }
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
     lengh = (arrayParse.length)/2-2

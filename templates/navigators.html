@@ -585,10 +585,6 @@
     var ar55_data = [[${ar55_data}]];
     var kometa_3_data = [[${kometa_3_data}]]
 
-    console.log("1")
-    console.log(ar55_data)
-    console.log(kometa_3_data)
-
     // Массив с массивами
     const Diagram = [kometa_3_data, ar55_data]
 
@@ -599,10 +595,6 @@
             // Функция преобразования в дате сегодняшнего дня значений 23:59:59
             timeReplace(element);
 
-         console.log("2")
-            console.log(ar55_data)
-            console.log(kometa_3_data)
-
             // Функция формирования массивов с точками начала и конца
             var pars_nagruzka = pars(element[4], 0)
             var pars_rabota = pars(element[0], 1, element[5])
@@ -610,10 +602,6 @@
             var pars_off = pars(element[2], 3)
             var pars_avar = pars(element[3], 4)
             var roundDiagram = element[6];
-
-            console.log("3")
-            console.log(ar55_data)
-            console.log(kometa_3_data)
 
             // Функция заполнения линейной диаграммы
             setDataLine("container_work_" + (index + 8),  pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
