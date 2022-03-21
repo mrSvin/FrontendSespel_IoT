@@ -1,10 +1,70 @@
-function pars(arrayParse, lengh, y, arrayName=null)
+const timezone = new Date().getTimezoneOffset()
+var colorsLine = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
+Highcharts.setOptions({
+    lang: {
+        loading: 'Загрузка...',
+        months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+        weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+        shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+        exportButtonTitle: "Экспорт",
+        printButtonTitle: "Печать",
+        rangeSelectorFrom: "С",
+        rangeSelectorTo: "По",
+        rangeSelectorZoom: "Период",
+        downloadPNG: 'Скачать PNG',
+        downloadJPEG: 'Скачать JPEG',
+        downloadPDF: 'Скачать PDF',
+        downloadSVG: 'Скачать SVG',
+        printChart: 'Напечатать график',
+        viewFullscreen: 'На весь экран'
+    },
+    plotOptions: {
+        xrange: {
+            grouping: false
+        }
+    },
+    global: {
+        timezoneOffset: timezone
+    }
+});
+
+
+// Получение текущего времяни в формате toISO
+var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+// Преобразоавние времение в формат '2022-03-21 10:00:35'
+time = time.slice(0, 10) + " " + time.slice(11, 19);
+// Время, которое будет переписано в массивах 'текущая дата 23:59:59'
+time_miss = time.slice(0, 10) + " " + "23:59:59";
+// Функция преобразования в дате сегодняшнего дня значений 23:59:59
+
+function timeReplace(dataArray) {
+    // индекс ограничение, чтобы не обрабатывать 5-ый массив с именем программы
+    var index = 0;
+    // выполнять если текущие время не равно 23:59:59
+    if (time != time_miss) {
+        // пробег по массивам до массива с именем программы
+        while (index < 5) {
+            $.each(dataArray[index], function (i) {
+                // если в массиве время равно текущей дате 23:59:59
+                if (dataArray[index][i] == time_miss) {
+                    // то записать в него значение предыдущего индекса
+                    dataArray[index][i] = dataArray[index][i-1]
+                }
+            });
+            // после оконачния цикла each перейти к следующему массиву
+            index += 1;
+        }
+    }
+}
+
+function pars(arrayParse, y, arrayName=null)
 {
     var index = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    // lengh = (arrayParse.length)/2-2
+    lengh = (arrayParse.length)/2-2
 
     // Если имя программы не передано в функцию, то массив формируется без нее
     if (arrayName == null){
@@ -26,29 +86,142 @@ function pars(arrayParse, lengh, y, arrayName=null)
     return arraySave
 }
 
-// Получение текущего времяни в формате toISO
-var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
-// Преобразоавние времение в формат '2022-03-21 10:00:35'
-time = time.slice(0, 10) + " " + time.slice(11, 19);
-// Время, которое будет переписано в массивах 'текущая дата 23:59:59'
-time_miss = time.slice(0, 10) + " " + "23:59:59";
+function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, nagruzkaName='Под нагрузкой', nagruzkaColor = '#24621d') {
+    Highcharts.chart(containerLine, {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            plotBorderColor: 'gray',
+            type: 'xrange'
+        },
+        title: {
+            text: 'Работа оборудования'
+        },
+        colors:colorsLine,
 
-function timeReplace(dataArray) {
-    // индекс ограничение, чтобы не обрабатывать 5-ый массив с именем программы
-    var index = 0;
-    // выполнять если текущие время не равно 23:59:59
-    if (time != time_miss) {
-        // пробег по массивам до массива с именем программы
-        while (index < 5) {
-            $.each(dataArray[index], function (i) {
-                // если в массиве время равно текущей дате 23:59:59
-                if (dataArray[index][i] == time_miss) {
-                    // то записать в него значение предыдущего индекса
-                    dataArray[index][i] = dataArray[index][i-1]
+
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            categories: [nagruzkaName, 'Работа', 'Ожидание', 'Выключен', 'В аварии'],
+            reversed: true
+        },
+        credits: {
+            enabled: false
+        },
+
+        series: [
+            {
+                name: 'Работа',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#38e817',
+                tooltip: {
+                    pointFormat: '<b>Программа: {point.programname}</b>'
+                },
+                data: arrayWork,
+            },
+            {
+                name: 'Ожидание',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#ffea32',
+                tooltip: {
+                    pointFormat: ''
+                },
+                data: arrayPass,
+                dataLabels: {
+                    enabled: true
                 }
-            });
-            // после оконачния цикла each перейти к следующему массиву
-            index += 1;
-        }
-    }
+            },
+            {
+                name: 'Выключен',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#000000',
+                data: arrayFail,
+                dataLabels: {
+                    enabled: true,
+                }
+            },
+            {
+                name: 'В аварии',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#e81e1d',
+                data: arrayAvar,
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
+                name: nagruzkaName,
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: nagruzkaColor,
+                data: arrayNagruzka,
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        ]
+
+
+    });
+
 }
+
+function setDataRound(containerRound, work, pass,fail, avar, nagruzka, nagruzkaName='Нагрузка') {
+    Highcharts.chart(containerRound, {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+
+        title: {
+            text: 'Загрузка оборудования'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        colors:colorsRound,
+        credits: {
+            enabled: false
+        },
+        series : [ {
+            type : 'pie',
+            name : 'Показатель',
+            data : [[ 'Работа', work ], [ 'Включен', pass ], [ 'Выключен', fail],  [ 'В аварии', avar ], [ nagruzkaName, nagruzka ] ]
+        }]
+    });
+}
+
+

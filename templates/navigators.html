@@ -449,8 +449,8 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work_1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container_1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--Навигатор_1 html-->
 </div> <!--Навигатор_1 html-->
@@ -743,9 +743,31 @@
 
 <script src="/js/sutki/universal_sutki.js"></script>
 <script th:inline="javascript">
+    var colorsLine = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
+
 //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
     var ar55_data = [[${ar55_data}]];
     timeReplace(ar55_data)
+
+    // linearDiagram = [ar55_data]
+    //
+    // $.map(linearDiagram, function (element, index) {
+    //     // Вычисление работы без нагрузки для линейной диаграммы
+    //         timeReplace(element)
+    //
+    //
+    //         setDataLine("container_work_" + (index + 9),  element[0], element[1], element[2], element[3], element[4]);
+    //
+    // });
+    //
+    // $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
+    //     // Вычисление работы без нагрузки для линейной диаграммы
+    //     if(element != null) {
+    //         element[0] = element[0] - element[4];
+    //         setDataRound("container_" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
+    //     }
+    // });
+
 
     var ar55_array_nagruzka = pars(ar55_data[4],148, 0)
     var ar55_array_rabota = pars(ar55_data[0], 148, 1, ar55_data[5])
