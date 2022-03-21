@@ -66,8 +66,7 @@ function pars(arrayParse, y, arrayName=null)
     var arraySave = [] // Массив, который будет заполняться
 
     if (arrayParse[index_pars] == undefined){
-        arraySave.push({x:1, x2:1, y:1})
-        // return false;
+        return false;
     }
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
