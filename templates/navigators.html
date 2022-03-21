@@ -625,27 +625,21 @@
             setDataRound("container_" + (index + 8), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
         }
 
-            // Заполнение переменных общей круговой диаграммы
-            $.map(roundDiagram, function (element) { // итерируем выполнение setData для всех объектов массива element
-                if(element != null) {
-                    round_rabota = round_rabota + element[0];
-                    round_pause = round_pause + element[1];
-                    round_off = round_off + element[2];
-                    round_avar = round_avar + element[3];
-                    round_nagruzka = round_nagruzka + element[4];
-                }
-            });
+            // Заполнение переменных общей круговой и линейной диаграмм
+                if(roundDiagram != null) {
+                    round_rabota = round_rabota + roundDiagram[0];
+                    round_pause = round_pause + roundDiagram[1];
+                    round_off = round_off + roundDiagram[2];
+                    round_avar = round_avar + roundDiagram[3];
+                    round_nagruzka = round_nagruzka + roundDiagram[4];
 
-            // Заполнение переменных общей линейной диаграммы
-            $.map(roundDiagram, function (element) {
-                if(element != null) {
-                    linear_rabota.push(Array(1).fill(element[0]));
-                    linear_pause.push(Array(1).fill(element[1]));
-                    linear_off.push(Array(1).fill(element[2]));
-                    linear_avar.push(Array(1).fill(element[3]));
-                    linear_nagruzka.push(Array(1).fill(element[4]));
+                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                    linear_pause.push(Array(1).fill(roundDiagram[1]));
+                    linear_off.push(Array(1).fill(roundDiagram[2]));
+                    linear_avar.push(Array(1).fill(roundDiagram[3]));
+                    linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
                 }
-            });
+
     });
 
     // Формирование графиков для общих круговой и линейной диаграммы
