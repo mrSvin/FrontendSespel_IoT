@@ -576,11 +576,6 @@
 
 <script th:inline="javascript">
     // Переменные для общих диаграмм.
-    var round_rabota = 0;
-    var round_pause = 0;
-    var round_off = 0;
-    var round_avar = 0;
-    var round_nagruzka = 0;
 
     var linear_rabota = [];
     var linear_pause = [];
@@ -627,27 +622,21 @@
 
             // Заполнение переменных общей круговой и линейной диаграмм
                 if(roundDiagram != null) {
-                    round_rabota = round_rabota + roundDiagram[0];
-                    round_pause = round_pause + roundDiagram[1];
-                    round_off = round_off + roundDiagram[2];
-                    round_avar = round_avar + roundDiagram[3];
-                    round_nagruzka = round_nagruzka + roundDiagram[4];
-
                     linear_rabota.push(Array(1).fill(roundDiagram[0]));
                     linear_pause.push(Array(1).fill(roundDiagram[1]));
                     linear_off.push(Array(1).fill(roundDiagram[2]));
                     linear_avar.push(Array(1).fill(roundDiagram[3]));
                     linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
                 }
-
     });
+
 
     // Формирование графиков для общих круговой и линейной диаграммы
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
         },
-        colors:colorsLine,
+        colors:colorsRound,
         title: {
             text: 'Общая загрузка оборудования'
         },
@@ -693,47 +682,6 @@
             name: 'Работа',
             data: linear_rabota
         }, ]
-    });
-
-    Highcharts.chart('container_sum_zagruzka_krug', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Суммарная загрузка оборудования'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors:colorsRound,
-        credits: {
-            enabled: false
-        },
-        series : [ {
-            type : 'pie',
-            name : 'Показатель',
-            data : [ [ 'По программе', round_rabota ], [ 'Включен', round_pause ],
-                [ 'Выключен', round_off ],  [ 'В аварии', round_avar],  [ 'Под нагрузкой', round_nagruzka]   ]
-        }]
     });
 </script>
 
