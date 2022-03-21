@@ -632,11 +632,12 @@
 
 
     // Формирование графиков для общих круговой и линейной диаграммы
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
         },
-        colors:colorsRound,
+        colors:colorsLine,
         title: {
             text: 'Общая загрузка оборудования'
         },
