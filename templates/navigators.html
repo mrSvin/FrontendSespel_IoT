@@ -721,14 +721,14 @@
         </div>
     </div>
 </div> <!--AR55 html-->
-<!--<script th:inline="javascript">-->
-<!--    var ar55_array_rabota = [[${ar55_array_rabota}]];-->
-<!--    var ar55_array_pause = [[${ar55_array_pause}]];-->
-<!--    var ar55_array_off = [[${ar55_array_off}]];-->
-<!--    var ar55_array_programname = [[${ar55_array_programname}]];-->
-<!--    var ar55_array_nagruzka = [[${ar55_array_nagruzka}]];-->
-<!--    var ar55_array_avar = [[${ar55_array_avar}]];-->
-<!--</script>   &lt;!&ndash;AR55 js линейная диагрмма работы оборудования&ndash;&gt;-->
+<script th:inline="javascript">
+    // var ar55_array_rabota = [[${ar55_array_rabota}]];
+    // var ar55_array_pause = [[${ar55_array_pause}]];
+    // var ar55_array_off = [[${ar55_array_off}]];
+    // var ar55_array_programname = [[${ar55_array_programname}]];
+    // var ar55_array_nagruzka = [[${ar55_array_nagruzka}]];
+    // var ar55_array_avar = [[${ar55_array_avar}]];
+</script>   <!--AR55 js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
     var ar55_work = [[${work_ar55}]];
     var ar55_pass = [[${pass_ar55}]];
@@ -745,6 +745,7 @@
 <script th:inline="javascript">
 //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
     var ar55_data = [[${ar55_data}]];
+    timeReplace(ar55_data)
 
     var ar55_array_nagruzka = pars(ar55_data[4],148, 0)
     var ar55_array_rabota = pars(ar55_data[0], 148, 1, ar55_data[5])
