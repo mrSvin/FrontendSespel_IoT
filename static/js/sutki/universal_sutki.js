@@ -1,6 +1,6 @@
 // const timezone = new Date().getTimezoneOffset()
 var colorsLine = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
-
+var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
 Highcharts.setOptions({
     lang: {
         loading: 'Загрузка...',
@@ -181,7 +181,7 @@ function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar,
 
 }
 
-function setDataRound(containerRound, work, pass,fail, avar, nagruzka, nagruzkaName='Нагрузка') {
+function setDataRound(containerRound, work, pass, fail, avar, nagruzka, nagruzkaName='Нагрузка') {
     Highcharts.chart(containerRound, {
         chart: {
             plotBackgroundColor: null,
@@ -212,7 +212,7 @@ function setDataRound(containerRound, work, pass,fail, avar, nagruzka, nagruzkaN
                 showInLegend: true
             }
         },
-        colors:colorsLine,
+        colors:colorsRound,
         credits: {
             enabled: false
         },

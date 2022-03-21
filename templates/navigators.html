@@ -748,11 +748,13 @@
 //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
     var ar55_data = [[${ar55_data}]];
 
-    Diagram = [ar55_data]
+    var Diagram = [ar55_data]
 
     $.map(Diagram, function (element, index) {
         // Вычисление работы без нагрузки для линейной диаграммы
             timeReplace(element);
+
+            console.log(index)
 
             var nagruzka = pars(element[4], 0)
             var rabota = pars(element[0], 1, element[5])
@@ -764,8 +766,8 @@
             setDataLine("container_work_" + (index + 9),  rabota, pause, off, avar, nagruzka);
 
         if(roundDiagram != null) {
-            roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
-            setDataRound("container_" + (index + 9), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+            roundDiagram[0] = parseInt(roundDiagram[0]) - parseInt(roundDiagram[4]);
+            setDataRound("container_" + (index + 9), roundDiagram[0], parseInt(roundDiagram[1]), parseInt(roundDiagram[2]), parseInt(roundDiagram[3]), parseInt(roundDiagram[4]));
         }
     });
 
