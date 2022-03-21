@@ -45,7 +45,7 @@ function timeReplace(dataArray) {
     // выполнять если текущие время не равно 23:59:59
     if (time != time_miss) {
         // пробег по массивам до массива с именем программы
-        while (index < 5) {
+        while (index_time < 5) {
             $.each(dataArray[index_time], function (i) {
                 // если в массиве время равно текущей дате 23:59:59
                 if (dataArray[index_time][i] == time_miss) {
