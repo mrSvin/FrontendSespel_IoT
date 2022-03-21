@@ -1,6 +1,7 @@
 const timezone = new Date().getTimezoneOffset()
 var colorsLine = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
 var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
+
 Highcharts.setOptions({
     lang: {
         loading: 'Загрузка...',
