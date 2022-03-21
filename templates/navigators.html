@@ -747,36 +747,38 @@
 
 //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
     var ar55_data = [[${ar55_data}]];
-    timeReplace(ar55_data)
 
-    // linearDiagram = [ar55_data]
-    //
-    // $.map(linearDiagram, function (element, index) {
-    //     // Вычисление работы без нагрузки для линейной диаграммы
-    //         timeReplace(element)
-    //
-    //
-    //         setDataLine("container_work_" + (index + 9),  element[0], element[1], element[2], element[3], element[4]);
-    //
-    // });
-    //
-    // $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
-    //     // Вычисление работы без нагрузки для линейной диаграммы
-    //     if(element != null) {
-    //         element[0] = element[0] - element[4];
-    //         setDataRound("container_" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
-    //     }
-    // });
+    Diagram = [ar55_data]
+
+    $.map(Diagram, function (element, index) {
+        // Вычисление работы без нагрузки для линейной диаграммы
+            timeReplace(element);
+
+            var nagruzka = pars(element[4], 0)
+            var rabota = pars(element[0], 1, element[5])
+            var pause = pars(element[1], 2)
+            var off = pars(element[2], 3)
+            var avar = pars(element[3], 4)
+            var roundDiagram = element[6];
+
+            setDataLine("container_work_" + (index + 9),  rabota, pause, off, avar, nagruzka);
+
+        if(roundDiagram != null) {
+            roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+            setDataRound("container_" + (index + 9), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+        }
+    });
 
 
-    var ar55_array_nagruzka = pars(ar55_data[4], 0)
-    var ar55_array_rabota = pars(ar55_data[0], 1, ar55_data[5])
-    var ar55_array_pause = pars(ar55_data[1], 2)
-    var ar55_array_off = pars(ar55_data[2], 3)
-    var ar55_array_avar = pars(ar55_data[3], 4)
+    //
+    // var ar55_array_nagruzka = pars(ar55_data[4], 0)
+    // var ar55_array_rabota = pars(ar55_data[0], 1, ar55_data[5])
+    // var ar55_array_pause = pars(ar55_data[1], 2)
+    // var ar55_array_off = pars(ar55_data[2], 3)
+    // var ar55_array_avar = pars(ar55_data[3], 4)
 
 </script>
-<script src="/js/sutki/navigators/data_ar55.js"></script>
+<!--<script src="/js/sutki/navigators/data_ar55.js"></script>-->
 
 
 

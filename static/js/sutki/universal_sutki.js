@@ -212,7 +212,7 @@ function setDataRound(containerRound, work, pass,fail, avar, nagruzka, nagruzkaN
                 showInLegend: true
             }
         },
-        colors:colorsRound,
+        colors:colorsLine,
         credits: {
             enabled: false
         },
