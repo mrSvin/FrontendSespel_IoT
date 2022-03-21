@@ -41,7 +41,7 @@ function timeReplace(dataArray) {
         // пробег по массивам до массива с именем программы
         while (index < 5) {
             $.each(dataArray[index], function (i) {
-                // если в массиве время равно  23:59:59
+                // если в массиве время равно текущей дате 23:59:59
                 if (dataArray[index][i] == time_miss) {
                     // то записать в него значение предыдущего индекса
                     dataArray[index][i-1] = time
