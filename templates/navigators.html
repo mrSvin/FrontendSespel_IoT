@@ -596,15 +596,15 @@
             timeReplace(element);
 
             // Функция формирования массивов с точками начала и конца
-            var nagruzka = pars(element[4], 0)
-            var rabota = pars(element[0], 1, element[5])
-            var pause = pars(element[1], 2)
-            var off = pars(element[2], 3)
-            var avar = pars(element[3], 4)
+            var pars_nagruzka = pars(element[4], 0)
+            var pars_rabota = pars(element[0], 1, element[5])
+            var pars_pause = pars(element[1], 2)
+            var pars_off = pars(element[2], 3)
+            var pars_avar = pars(element[3], 4)
             var roundDiagram = element[6];
 
             // Функция заполнения линейной диаграммы
-            setDataLine("container_work_" + (index + 8),  rabota, pause, off, avar, nagruzka);
+            setDataLine("container_work_" + (index + 8),  pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
 
         if(roundDiagram != null) {
             // Преобразование элементов круговой диаграммы из строк в числа
