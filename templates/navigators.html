@@ -614,10 +614,15 @@
             setDataLine("container_work_" + (index + 8),  rabota, pause, off, avar, nagruzka);
 
         if(roundDiagram != null) {
+            // Преобразование элементов круговой диаграммы из строк в числа
+            $.each(roundDiagram, function (i){
+                roundDiagram[i] = parseInt(roundDiagram[i]);
+            });
+
             // Вычисление работы без нагрузки для линейной диаграммы
-            roundDiagram[0] = parseInt(roundDiagram[0]) - parseInt(roundDiagram[4]);
+            roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
             // Функция заполнения круговой диаграммы
-            setDataRound("container_" + (index + 8), roundDiagram[0], parseInt(roundDiagram[1]), parseInt(roundDiagram[2]), parseInt(roundDiagram[3]), parseInt(roundDiagram[4]));
+            setDataRound("container_" + (index + 8), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
         }
 
             // Заполнение переменных общей круговой диаграммы
