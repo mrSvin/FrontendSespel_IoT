@@ -44,7 +44,7 @@ function timeReplace(dataArray) {
                 // если в массиве время равно текущей дате 23:59:59
                 if (dataArray[index][i] == time_miss) {
                     // то записать в него значение предыдущего индекса
-                    dataArray[index][i-1] = time
+                    dataArray[index][i] = dataArray[index][i-1]
                 }
             });
             // после оконачния цикла each перейти к следующему массиву
