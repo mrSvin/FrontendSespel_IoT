@@ -261,170 +261,6 @@
 </div>  <!--Общая загрузка и количество операций html-->
 <script th:inline="javascript">
 
-    var colors = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
-
-    var work_uf5220 = [[${work}]];
-    var work_progress = [[${progress_work}]];
-    var work_ntx1000 = [[${ntx1000_work}]];
-    var work_sk50 = [[${sk50_work}]];
-    var work_apec = [[${apec_work}]];
-    var work_dmu50_3 = [[${work_dmg_dmu50_3}]];
-    var work_dmu50_4 = [[${work_dmg_dmu50_4}]];
-    var work_ctx310_2 = [[${work_dmg_ctx310_2}]];
-    var work_ctx510_2 = [[${work_dmg_ctx510_2}]];
-    var work_ctx510_3 = [[${work_dmg_ctx510_3}]];
-    var work_ctx310_3 = [[${work_dmg_ctx310_3}]];
-    var work_ctx510_4 = [[${work_dmg_ctx510_4}]];
-    var work_ctx510_5 = [[${work_dmg_ctx510_5}]];
-    var work_dmc1035_2 = [[${work_dmg_dmc1035_2}]];
-
-    var pause_uf5220 = [[${pass}]];
-    var pause_progress = [[${progress_pass}]];
-    var pause_ntx1000 = [[${ntx1000_pass}]];
-    var pause_sk50 = [[${sk50_pass}]];
-    var pause_apec = [[${apec_pass}]];
-    var pause_dmu50_3 = [[${pass_dmg_dmu50_3}]];
-    var pause_dmu50_4 = [[${pass_dmg_dmu50_4}]];
-    var pause_ctx310_2 = [[${pass_dmg_ctx310_2}]];
-    var pause_ctx510_2 = [[${pass_dmg_ctx510_2}]];
-    var pause_ctx510_3 = [[${pass_dmg_ctx510_3}]];
-    var pause_ctx310_3 = [[${pass_dmg_ctx310_3}]];
-    var pause_ctx510_4 = [[${pass_dmg_ctx510_4}]];
-    var pause_ctx510_5 = [[${pass_dmg_ctx510_5}]];
-    var pause_dmc1035_2 = [[${pass_dmg_dmc1035_2}]];
-
-    var off_uf5220 = [[${fail}]];
-    var off_progress = [[${progress_fail}]];
-    var off_ntx1000 = [[${ntx1000_fail}]];
-    var off_sk50 = [[${sk50_fail}]];
-    var off_apec = [[${apec_fail}]];
-    var off_dmu50_3 = [[${fail_dmg_dmu50_3}]];
-    var off_dmu50_4 = [[${fail_dmg_dmu50_4}]];
-    var off_ctx310_2 = [[${fail_dmg_ctx310_2}]];
-    var off_ctx510_2 = [[${fail_dmg_ctx510_2}]];
-    var off_ctx510_3 = [[${fail_dmg_ctx510_3}]];
-    var off_ctx310_3 = [[${fail_dmg_ctx310_3}]]
-    var off_ctx510_4 = [[${fail_dmg_ctx510_4}]];
-    var off_ctx510_5 = [[${fail_dmg_ctx510_5}]];
-    var off_dmc1035_2 = [[${fail_dmg_dmc1035_2}]];
-
-
-    var avar_ntx1000 = [[${ntx1000_avar}]];
-    var avar_sk50 = [[${sk50_avar}]];
-    var avar_apec = [[${apec_avar}]];
-    var avar_dmu50_3 = [[${avar_dmg_dmu50_3}]];
-    var avar_dmu50_4 = [[${avar_dmg_dmu50_4}]];
-    var avar_ctx310_2 = [[${avar_dmg_ctx310_2}]];
-    var avar_ctx510_2 = [[${avar_dmg_ctx510_2}]];
-    var avar_ctx510_3 = [[${avar_dmg_ctx510_3}]];
-    var avar_ctx310_3 = [[${avar_dmg_ctx310_3}]];
-    var avar_ctx510_4 = [[${avar_dmg_ctx510_4}]];
-    var avar_ctx510_5 = [[${avar_dmg_ctx510_5}]];
-    var avar_dmc1035_2 = [[${avar_dmg_dmc1035_2}]];
-
-    var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
-    var nagruzka_sk50 = [[${sk50_nagruzka}]];
-    var nagruzka_dmu50_3 = [[${nagruzka_dmg_dmu50_3}]];
-    var nagruzka_dmu50_4 = [[${nagruzka_dmg_dmu50_4}]];
-    var nagruzka_ctx310_2 = [[${nagruzka_dmg_ctx310_2}]];
-    var nagruzka_ctx510_2 = [[${nagruzka_dmg_ctx510_2}]];
-    var nagruzka_ctx510_3 = [[${nagruzka_dmg_ctx510_3}]];
-    var nagruzka_ctx310_3 = [[${nagruzka_dmg_ctx310_3}]];
-    var nagruzka_ctx510_4 = [[${nagruzka_dmg_ctx510_4}]];
-    var nagruzka_ctx510_5 = [[${nagruzka_dmg_ctx510_5}]];
-    var nagruzka_dmc1035_2 = [[${nagruzka_dmg_dmc1035_2}]];
-
-    var ruchnoi_apec = [[${apec_ruchnoi}]];
-
-    const timezone = new Date().getTimezoneOffset()
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        plotOptions: {
-            xrange: {
-                grouping: false
-            }
-        },
-        global: {
-            timezoneOffset: timezone
-        }
-    });
-
-    Highcharts.chart('container_sum_zagruzka', {
-        chart: {
-            type: 'column'
-        },
-        colors: colors,
-        title: {
-            text: 'Общая загрузка оборудования'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2']
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-            // borderColor: '#38e817' изменение цвета рамки
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Авария',
-            data: [0, 0, avar_ntx1000, avar_sk50, avar_apec, avar_dmu50_3, avar_dmu50_4, avar_ctx310_2, avar_ctx510_2, avar_ctx510_3, avar_ctx310_3, avar_ctx510_4, avar_ctx510_5, avar_dmc1035_2]
-        }, {
-            name: 'Выключен',
-            data: [off_uf5220, off_progress, off_ntx1000, off_sk50, off_apec, off_dmu50_3, off_dmu50_4, off_ctx310_2, off_ctx510_2, off_ctx510_3, off_ctx310_3, off_ctx510_4, off_ctx510_5, off_dmc1035_2]
-        }, {
-            name: 'Ручной',
-            data: [0, 0, 0, 0, ruchnoi_apec, 0, 0, 0, 0, 0, 0,0,0,0]
-        }, {
-            name: 'Ожидание',
-            data: [pause_uf5220, pause_progress, pause_ntx1000, pause_sk50, pause_apec, pause_dmu50_3, pause_dmu50_4, pause_ctx310_2, pause_ctx510_2, pause_ctx510_3, pause_ctx310_3, pause_ctx510_4, pause_ctx510_5, pause_dmc1035_2]
-        }, {
-            name: 'Под нагрузкой',
-            data: [0, 0, nagruzka_ntx1000,nagruzka_sk50, 0, nagruzka_dmu50_3, nagruzka_dmu50_4, nagruzka_ctx310_2, nagruzka_ctx510_2, nagruzka_ctx510_3, nagruzka_ctx310_3, nagruzka_ctx510_4, nagruzka_ctx510_5, nagruzka_dmc1035_2]
-        }, {
-            name: 'Работа',
-            data: [work_uf5220, work_progress, work_ntx1000, work_sk50, work_apec, work_dmu50_3, work_dmu50_4, work_ctx310_2, work_ctx510_2, work_ctx510_3, work_ctx310_3, work_ctx510_4, work_ctx510_5, work_dmc1035_2]
-        }]
-    });
-
-</script>   <!--js Общая загрузка-->
-<script th:inline="javascript">
-
     var uf5220_kol_op = [[${uf5220_kol_op}]];
     var progress_kol_op = [[${progress_kol_op}]];
     var ntx1000_kol_op = [[${ntx1000_kol_op}]];
@@ -541,9 +377,9 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work" style="float: left; height: 400px; width: 55%"></div>
+            <div id="container_work1" style="float: left; height: 400px; width: 55%"></div>
             <!--Вставляем линейную гистограмму работы-->
-            <div id="container" style="float: left; height: 400px; width: 25%"></div>
+            <div id="container1" style="float: left; height: 400px; width: 25%"></div>
             <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--УФ 5220 html-->
@@ -1311,19 +1147,21 @@
     var linear_nagruzka = [];
 
     //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
-    var navigator_1_data = [[${navigator_1_data}]];
-    var navigator_2_golova_1_data = [[${navigator_2_golova_1_data}]];
-    var navigator_2_golova_2_data = [[${navigator_2_golova_2_data}]];
-    var navigator_3_data = [[${navigator_3_data}]];
-    var trulaser_data = [[${trulaser_data}]];
-    var kometa_1_data = [[${kometa_1_data}]];
-    var kometa_2_data = [[${kometa_2_data}]];
-    var kometa_3_data = [[${kometa_3_data}]];
-    var ar55_data = [[${ar55_data}]];
+    var sk50_data = [[${sk50_data}]];
+    var apec_data = [[${apec_data}]];
+    var dmu50_3_data = [[${dmg_dmu50_3_data}]];
+    var dmu50_4_data = [[${dmg_dmu50_4_data}]];
+    var ctx310_2_data = [[${dmg_ctx310_2_data}]];
+    var ctx510_2_data = [[${dmg_ctx510_2_data}]];
+    var ctx510_3_data = [[${dmg_ctx510_3_data}]];
+    var ctx310_3_data = [[${dmg_ctx310_3_data}]];
+    var ctx510_4_data = [[${dmg_ctx510_4_data}]];
+    var ctx510_5_data = [[${dmg_ctx510_5_data}]];
+    var dmc1035_2_data = [[${dmg_dmc1035_2_data}]];
 
     // Массив с массивами
-    const Diagram = [navigator_1_data, navigator_2_golova_1_data, navigator_2_golova_2_data,
-        navigator_3_data, trulaser_data, kometa_1_data, kometa_2_data,  kometa_3_data, ar55_data]
+    const Diagram = [sk50_data, apec_data, dmu50_3_data,
+        dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data]
 
 
     // Функция распарсивания массивов
