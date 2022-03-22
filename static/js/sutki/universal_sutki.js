@@ -66,7 +66,7 @@ function pars(arrayParse, y, arrayName=null)
     var arraySave = [] // Массив, который будет заполняться
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    lengh = (arrayParse.length)/2-2
+    var lengh = (arrayParse.length)/2-2
 
     // Если имя программы не передано в функцию, то массив формируется без нее
     if (arrayName == null){
