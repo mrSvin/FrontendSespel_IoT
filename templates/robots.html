@@ -580,51 +580,50 @@
     // Функция распарсивания массивов
     $.map(Diagram, function (element, index) {
         // Отказ от работы с пустым массивом
-        if(element.length != 0) {
+        if(element != null) {
+            if (element.length != 0) {
 
 
-            // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-            timeReplace(element);
+                // Функция преобразования в дате сегодняшнего дня значений 23:59:59
+                timeReplace(element);
 
-            // Функция формирования массивов с точками начала и конца
-            var pars_nagruzka = pars(element[4], 0)
-            var pars_rabota = pars(element[0], 1, element[5])
-            var pars_pause = pars(element[1], 2)
-            var pars_off = pars(element[2], 3)
-            var pars_avar = pars(element[3], 4)
-            var roundDiagram = element[6];
+                // Функция формирования массивов с точками начала и конца
+                var pars_nagruzka = pars(element[4], 0)
+                var pars_rabota = pars(element[0], 1, element[5])
+                var pars_pause = pars(element[1], 2)
+                var pars_off = pars(element[2], 3)
+                var pars_avar = pars(element[3], 4)
+                var roundDiagram = element[6];
 
-            // Функция заполнения линейной диаграммы
-            if(index == 4) {
-                setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Покраска');
-            }
-            else if(index == 6)
-            {
-                setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Обработка');
-            }
-            else {
-                setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Сварка');
-            }
+                // Функция заполнения линейной диаграммы
+                if (index == 4) {
+                    setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Покраска');
+                } else if (index == 6) {
+                    setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Обработка');
+                } else {
+                    setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Сварка');
+                }
 
-            if (roundDiagram != null) {
-                // Преобразование элементов круговой диаграммы из строк в числа
-                $.each(roundDiagram, function (i) {
-                    roundDiagram[i] = parseInt(roundDiagram[i]);
-                });
+                if (roundDiagram != null) {
+                    // Преобразование элементов круговой диаграммы из строк в числа
+                    $.each(roundDiagram, function (i) {
+                        roundDiagram[i] = parseInt(roundDiagram[i]);
+                    });
 
-                // Вычисление работы без нагрузки для линейной диаграммы
-                roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
-                // Функция заполнения круговой диаграммы
-                setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
-            }
+                    // Вычисление работы без нагрузки для линейной диаграммы
+                    roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                    // Функция заполнения круговой диаграммы
+                    setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+                }
 
-            // Заполнение переменных общей круговой и линейной диаграмм
-            if (roundDiagram != null) {
-                linear_rabota.push(Array(1).fill(roundDiagram[0]));
-                linear_pause.push(Array(1).fill(roundDiagram[1]));
-                linear_off.push(Array(1).fill(roundDiagram[2]));
-                linear_avar.push(Array(1).fill(roundDiagram[3]));
-                linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+                // Заполнение переменных общей круговой и линейной диаграмм
+                if (roundDiagram != null) {
+                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                    linear_pause.push(Array(1).fill(roundDiagram[1]));
+                    linear_off.push(Array(1).fill(roundDiagram[2]));
+                    linear_avar.push(Array(1).fill(roundDiagram[3]));
+                    linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+                }
             }
         }
     });

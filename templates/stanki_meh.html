@@ -225,7 +225,6 @@
     }
 </script>
 
-
 <body>
 <!--Шапка html-->
 <div class="container">
@@ -650,7 +649,8 @@
     // Функция распарсивания массивов
     $.map(Diagram, function (element, index) {
         // Отказ от работы с пустым массивом
-            if(element.length != 0) {
+        if(element != null) {
+            if (element.length != 0) {
 
                 // Функция преобразования в дате сегодняшнего дня значений 23:59:59
                 timeReplace(element);
@@ -687,6 +687,7 @@
                     linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
                 }
             }
+        }
     });
 
     // Формирование графиков для общих круговой и линейной диаграммы
