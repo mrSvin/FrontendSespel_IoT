@@ -397,8 +397,8 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--УВФ-1 html-->
 </div> <!--УВФ-1 html-->
@@ -416,8 +416,8 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--УВФ-2 html-->
 </div> <!--УВФ-2 html-->
@@ -658,7 +658,6 @@
     // Функция распарсивания массивов
     $.map(Diagram, function (element, index) {
         // Отказ от работы с пустым массивом
-        if(element != null) {
             if(element.length != 0) {
 
                 // Функция преобразования в дате сегодняшнего дня значений 23:59:59
@@ -696,7 +695,6 @@
                     linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
                 }
             }
-        }
     });
 
     // Формирование графиков для общих круговой и линейной диаграммы
