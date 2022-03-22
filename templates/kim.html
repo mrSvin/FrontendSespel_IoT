@@ -278,11 +278,10 @@
 
 <!--Скрипт парсинга и заполнения диаграмм-->
 <script th:inline="javascript">
-        // Переменные для общих диаграмм.
+        var colorsKalibrovka = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
 
         //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
         var kim_data = [[${kim_data}]];
-
 
         // Массив с массивами
         const Diagram = [kim_data]
@@ -306,7 +305,7 @@
             var roundDiagram = element[6];
 
             // Функция заполнения линейной диаграммы
-            setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
+            setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, "Калибровка", "#5c7ed0" );
 
             if (roundDiagram != null) {
               // Преобразование элементов круговой диаграммы из строк в числа
@@ -317,7 +316,7 @@
               // Вычисление работы без нагрузки для линейной диаграммы
               roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
               // Функция заполнения круговой диаграммы
-              setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+              setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4], "Калибровка", 'colorsKalibrovka');
             }
           }
         });
