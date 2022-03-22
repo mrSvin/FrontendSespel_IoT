@@ -12,6 +12,58 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
+    <script src="/js/sutki/universal_sutki.js"></script>
+    <script src="/js/mesto.js"></script>
+    <script src="/js/dark_theme.js"></script>
+
+
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
+    <script src="js/export-data.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="js/xrange.js"></script>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap-3.3.0.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+            $('#button_obnovit').on("click", function () {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+                var day = datas.getDate();
+                var mes = datas.getMonth() + 1;
+                var year = datas.getFullYear();
+
+                name_data = year + "-" + mes + "-" + day;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
+
+    <!--Календарь -->
+    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+    <!--Календарь Русский язык-->
+    <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
+
+    <!--preloader style-->
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -83,65 +135,6 @@
             display: none;
         }
     </style>
-
-    <script src="js/highcharts.js"></script>
-    <script src="js/exporting.js"></script>
-    <script src="js/export-data.js"></script>
-    <script src="js/accessibility.js"></script>
-    <script src="js/xrange.js"></script>
-
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/bootstrap-3.3.0.min.js"></script>
-
-    <script>
-        $(function () {
-            $('#datepicker').datepicker({
-                format: "dd/mm/yyyy",
-                language: 'ru',
-                autoclose: true,
-                todayHighlight: true,
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                orientation: "button"
-            });
-            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
-
-
-            $('#button_obnovit').on("click", function () {
-                var datas = $('#datepicker').data().datepicker.viewDate;
-                var day = datas.getDate();
-                var mes = datas.getMonth() + 1;
-                var year = datas.getFullYear();
-
-                name_data = year + "-" + mes + "-" + day;
-                <!--console.log(name_data);-->
-            });
-
-
-        });
-
-    </script>   <!--Календарь js-->
-
-    <!--Календарь -->
-    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
-    <!--Календарь Русский язык-->
-    <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
-
-
-
-    <!-- Загрузка страницы -->
-    <script>
-        window.onload = function () {
-            document.body.classList.add('loaded_hiding');
-            window.setTimeout(function () {
-                document.body.classList.add('loaded');
-                document.body.classList.remove('loaded_hiding');
-            }, 500);
-        }
-    </script>
 
 </head>
 
@@ -233,7 +226,6 @@
         });
     }
 </script>
-<script src="/js/dark_theme.js"></script>
 
 <body>
 <div class="container">
@@ -305,25 +297,56 @@
             <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--Склад Мех html-->
-    <div style="display: flex; height: 400px; width: 55%; margin-left: 400px" id="container_sclad_meh_davlenie"></div>
 </div> <!--Склад Мех html-->
-<script th:inline="javascript">
-    var sclad_meh_array_rabota = [[${sclad_meh_array_rabota}]];
-    var sclad_meh_array_pause = [[${sclad_meh_array_pause}]];
-    var sclad_meh_array_off = [[${sclad_meh_array_off}]];
-    var sclad_meh_array_programname = [[${sclad_meh_array_programname}]];
-    var sclad_meh_array_nagruzka = [[${sclad_meh_array_nagruzka}]];
-    var sclad_meh_array_avar = [[${sclad_meh_array_avar}]];
-</script>   <!--Склад Мех js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var sclad_meh_work = [[${work}]];
-    var sclad_meh_pass = [[${pass}]];
-    var sclad_meh_fail = [[${fail}]];
-    var sclad_meh_nagruzka = [[${nagruzka}]];
-    var sclad_meh_avar = [[${avar}]];
-</script>   <!--Склад js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/sclads/data_sclad_meh.js"></script>
 
+<!--Скрипт парсинга и заполнения диаграмм-->
+<script th:inline="javascript">
+    // Переменные для общих диаграмм.
+
+    //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
+    var sclad_meh_data = [[${sclad_meh_data}]];
+
+
+    // Массив с массивами
+    const Diagram = [sclad_meh_data]
+
+
+    // Функция распарсивания массивов
+    $.map(Diagram, function (element, index) {
+        // Отказ от работы с пустым массивом
+        if(element.length != 0) {
+
+
+            // Функция преобразования в дате сегодняшнего дня значений 23:59:59
+            timeReplace(element);
+
+            // Функция формирования массивов с точками начала и конца
+            var pars_nagruzka = pars(element[4], 0)
+            var pars_rabota = pars(element[0], 1, element[5])
+            var pars_pause = pars(element[1], 2)
+            var pars_off = pars(element[2], 3)
+            var pars_avar = pars(element[3], 4)
+            var roundDiagram = element[6];
+
+            // Функция заполнения линейной диаграммы
+            setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
+
+            if (roundDiagram != null) {
+                // Преобразование элементов круговой диаграммы из строк в числа
+                $.each(roundDiagram, function (i) {
+                    roundDiagram[i] = parseInt(roundDiagram[i]);
+                });
+
+                // Вычисление работы без нагрузки для линейной диаграммы
+                roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                // Функция заполнения круговой диаграммы
+                setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+            }
+        }
+    });
+</script>
+
+<!--Скрипт отображения в header  кнопки администрирование-->
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
 
@@ -339,19 +362,8 @@
         document.getElementById("admin").style.display = "none";
     }
 </script>
-<!--Скрипт отображения в header  кнопки администрирование-->
 
-<script>
-    var mar_top = localStorage.getItem('mar_top');
-    var mar_left = localStorage.getItem('mar_left');
-    var bground = localStorage.getItem('bground');
-    var place_img = localStorage.getItem('place_img');
-    var size  = localStorage.getItem('size');
-    var bwidth = localStorage.getItem('bwidth');
-</script>
-<script src="/js/mesto.js"></script>
-<!--Скрипт с вызовом функций для изменения места-->
-
+<!--Скрипт кнопки выпадающего меню-->
 <script src="/js/dropdown_menu.js"></script>
 
 </body>
