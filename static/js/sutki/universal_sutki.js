@@ -186,7 +186,7 @@ function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar,
 
 }
 
-function setDataRound(containerRound, work, pass, fail, avar, nagruzka, nagruzkaName='Нагрузка', collorArray=colorsRound) {
+function setDataRound(containerRound, work, pass, fail, avar, nagruzka, nagruzkaName='Нагрузка', colorArray=colorsRound) {
     Highcharts.chart(containerRound, {
         chart: {
             plotBackgroundColor: null,
