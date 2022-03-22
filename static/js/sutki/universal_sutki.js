@@ -59,7 +59,7 @@ function timeReplace(dataArray) {
     }
 }
 
-function pars(arrayParse, y, arrayName=null)
+function pars(arrayParse, y, arrayName='null')
 {
 
     var index_pars = 0; // Индекс по одному из циклов
@@ -72,7 +72,7 @@ function pars(arrayParse, y, arrayName=null)
     }
 
     // Если имя программы не передано в функцию, то массив формируется без нее
-    if (arrayName[index_pars] == null){
+    if (arrayName[index_pars] == 'null'){
         while(index_pars <= lengh)
         {   // Парсинг
             arraySave.push({x:(new Date(arrayParse[index_pars*2])).getTime(), x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(), y:y})
