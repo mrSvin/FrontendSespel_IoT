@@ -72,7 +72,7 @@ function pars(arrayParse, y, arrayName=null)
     }
 
     // Если имя программы не передано в функцию, то массив формируется без нее
-    if (arrayName == null){
+    if (arrayName[index_pars] == null){
         while(index_pars <= lengh)
         {   // Парсинг
             arraySave.push({x:(new Date(arrayParse[index_pars*2])).getTime(), x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(), y:y})
@@ -84,6 +84,7 @@ function pars(arrayParse, y, arrayName=null)
         while(index_pars <= lengh)
         {   // Парсинг
             arraySave.push({x:(new Date(arrayParse[index_pars*2])).getTime(), x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(), y:y, programname:arrayName[index_pars]})
+            console.log(arrayName[index_pars])
             index_pars += 1;
         }
     }
