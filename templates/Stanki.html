@@ -13,6 +13,57 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
+    <script src="js/export-data.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="js/xrange.js"></script>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap-3.3.0.min.js"></script>
+
+    <script src="/js/sutki/universal_sutki.js"></script>
+    <script src="/js/mesto.js"></script>
+    <script src="/js/dark_theme.js"></script>
+
+    <script>
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+            $('#button_obnovit').on("click", function () {
+                var datas = $('#datepicker').data().datepicker.viewDate;
+                var day = datas.getDate();
+                var mes = datas.getMonth() + 1;
+                var year = datas.getFullYear();
+
+                name_data = year + "-" + mes + "-" + day;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
+
+    <!--Календарь -->
+    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
+    <!--Календарь Русский язык-->
+    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
+
+    <!--preloader style-->
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -84,67 +135,6 @@
             display: none;
         }
     </style>
-
-
-<!--    <script src="/js/mesto.js"></script>-->
-
-    <script src="js/highcharts.js"></script>
-    <script src="js/exporting.js"></script>
-    <script src="js/export-data.js"></script>
-    <script src="js/accessibility.js"></script>
-    <script src="js/xrange.js"></script>
-
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/bootstrap-3.3.0.min.js"></script>
-
-    <script>
-        $(function () {
-            $('#datepicker').datepicker({
-                format: "dd/mm/yyyy",
-                language: 'ru',
-                autoclose: true,
-                todayHighlight: true,
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                orientation: "button"
-            });
-            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
-
-
-            $('#button_obnovit').on("click", function () {
-                var datas = $('#datepicker').data().datepicker.viewDate;
-                var day = datas.getDate();
-                var mes = datas.getMonth() + 1;
-                var year = datas.getFullYear();
-
-                name_data = year + "-" + mes + "-" + day;
-                <!--console.log(name_data);-->
-            });
-
-
-        });
-
-    </script>   <!--Календарь js-->
-
-    <!--Календарь -->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
-    <!--Календарь Русский язык-->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
-
-
-    <!-- Загрузка страницы -->
-    <script>
-        window.onload = function () {
-            document.body.classList.add('loaded_hiding');
-            window.setTimeout(function () {
-                document.body.classList.add('loaded');
-                document.body.classList.remove('loaded_hiding');
-            }, 500);
-        }
-    </script>
 
 </head>
 <header>
@@ -234,7 +224,6 @@
         });
     }
 </script>
-<script src="/js/dark_theme.js"></script>
 
 <body>
 <div class="container">
@@ -1310,16 +1299,163 @@
 </script>   <!--dmc1035_2 js круговая диагрмма загрузки оборудования-->
 <script src="/js/sutki/stanki/data_dmg_dmc1035_2.js"></script>
 
-<script>
-    var mar_top = localStorage.getItem('mar_top');
-    var mar_left = localStorage.getItem('mar_left');
-    var bground = localStorage.getItem('bground');
-    var place_img = localStorage.getItem('place_img');
-    var size  = localStorage.getItem('size');
-    var bwidth = localStorage.getItem('bwidth');
+<!--Скрипт парсинга и заполнения диаграмм-->
+<script th:inline="javascript">
+    var colorsRuchnoi = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
+    // Переменные для общих диаграмм.
+
+    var linear_rabota = [];
+    var linear_pause = [];
+    var linear_off = [];
+    var linear_avar = [];
+    var linear_nagruzka = [];
+
+    //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
+    var navigator_1_data = [[${navigator_1_data}]];
+    var navigator_2_golova_1_data = [[${navigator_2_golova_1_data}]];
+    var navigator_2_golova_2_data = [[${navigator_2_golova_2_data}]];
+    var navigator_3_data = [[${navigator_3_data}]];
+    var trulaser_data = [[${trulaser_data}]];
+    var kometa_1_data = [[${kometa_1_data}]];
+    var kometa_2_data = [[${kometa_2_data}]];
+    var kometa_3_data = [[${kometa_3_data}]];
+    var ar55_data = [[${ar55_data}]];
+
+    // Массив с массивами
+    const Diagram = [navigator_1_data, navigator_2_golova_1_data, navigator_2_golova_2_data,
+        navigator_3_data, trulaser_data, kometa_1_data, kometa_2_data,  kometa_3_data, ar55_data]
+
+
+    // Функция распарсивания массивов
+    $.map(Diagram, function (element, index) {
+        // Отказ от работы с пустым массивом
+        if(element != null) {
+            if (element.length != 0) {
+
+                // Функция преобразования в дате сегодняшнего дня значений 23:59:59
+                timeReplace(element);
+
+                // Функция формирования массивов с точками начала и конца
+                var pars_nagruzka = pars(element[4], 0)
+                var pars_rabota = pars(element[0], 1, element[5])
+                var pars_pause = pars(element[1], 2)
+                var pars_off = pars(element[2], 3)
+                var pars_avar = pars(element[3], 4)
+                var roundDiagram = element[6];
+
+                // Спец. условия для ручного режима на APEC
+                if(index == 1) {
+                    setDataLine("container_work" + (index + 4), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Ручной режим', '#38e817');
+                }
+
+                else {
+                    setDataLine("container_work" + (index + 4), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
+                }
+
+                if (roundDiagram != null) {
+                    // Преобразование элементов круговой диаграммы из строк в числа
+                    $.each(roundDiagram, function (i) {
+                        roundDiagram[i] = parseInt(roundDiagram[i]);
+                    });
+
+                    // Спец. условия для ручного режима на APEC
+                    if(index == 1) {
+                        // Функция заполнения круговой диаграммы
+                        setDataRound("container" + (index + 4), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4], 'Ручной режим',colorsRuchnoi);
+                    }
+                    else {
+                        // Вычисление работы без нагрузки для круговой диаграммы
+                        roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                        // Функция заполнения круговой диаграммы
+                        setDataRound("container" + (index + 4), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+                    }
+                }
+
+                // Заполнение переменных общей линейной диаграмм
+                $.map(roundDiagram, function (element, index) {
+                    if(element != null) {
+                        if(index != 1)
+                        {
+                            linear_rabota.push(Array(1).fill(element[0]));
+                            linear_pause.push(Array(1).fill(element[1]));
+                            linear_off.push(Array(1).fill(element[2]));
+                            linear_avar.push(Array(1).fill(element[3]));
+                            linear_nagruzka.push(Array(1).fill(element[4]));
+                            linear_ruchnoi.push(Array(1).fill(0));
+                        }
+                        // Спец. условия для заполнения ручного режима на APECцйу
+                        else
+                        {
+                            linear_rabota.push(Array(1).fill(element[0]));
+                            linear_pause.push(Array(1).fill(element[1]));
+                            linear_off.push(Array(1).fill(element[2]));
+                            linear_avar.push(Array(1).fill(element[3]));
+                            linear_nagruzka.push(Array(1).fill(0));
+                            linear_ruchnoi.push(Array(1).fill(element[4]));
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+    // Формирование графиков для общих круговой и линейной диаграммы
+    colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors:colorsLine,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Авария',
+            data: linear_avar
+        }, {
+            name: 'Выключен',
+            data: linear_off
+        },{
+            name: 'Ручной',
+            data: linear_ruchnoi
+        }, {
+            name: 'Ожидание',
+            data: linear_pause
+        }, {
+            name: 'Под нагрузкой',
+            data: linear_nagruzka
+        }, {
+            name: 'Работа',
+            data: linear_rabota
+        }, ]
+    });
 </script>
-<script src="/js/mesto.js"></script>
-<!--Скрипт с вызовом функций для изменения места-->
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
