@@ -59,20 +59,20 @@ function timeReplace(dataArray) {
     }
 }
 
-function pars(arrayParse, y, arrayName='no')
+function pars(arrayParse, y, arrayName=null)
 {
 
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = (arrayParse.length)
+    var lengh = (arrayParse.length)/2-2
     if (lengh <= 0){
         return
     }
 
     // Если имя программы не передано в функцию, то массив формируется без нее
-    if (arrayName == 'no'){
+    if (arrayName == null){
         while(index_pars <= lengh)
         {   // Парсинг
             arraySave.push({x:(new Date(arrayParse[index_pars*2])).getTime(), x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(), y:y})
