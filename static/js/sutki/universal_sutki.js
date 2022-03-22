@@ -59,20 +59,20 @@ function timeReplace(dataArray) {
     }
 }
 
-function pars(arrayParse, y, arrayName='null')
+function pars(arrayParse, y, arrayName='no')
 {
 
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = (arrayParse.length)/2-2
+    var lengh = (arrayParse.length)
     if (lengh <= 0){
         return
     }
 
     // Если имя программы не передано в функцию, то массив формируется без нее
-    if (arrayName[index_pars] == 'null'){
+    if (arrayName == 'no'){
         while(index_pars <= lengh)
         {   // Парсинг
             arraySave.push({x:(new Date(arrayParse[index_pars*2])).getTime(), x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(), y:y})
@@ -84,7 +84,6 @@ function pars(arrayParse, y, arrayName='null')
         while(index_pars <= lengh)
         {   // Парсинг
             arraySave.push({x:(new Date(arrayParse[index_pars*2])).getTime(), x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(), y:y, programname:arrayName[index_pars]})
-            console.log(arrayName[index_pars])
             index_pars += 1;
         }
     }
