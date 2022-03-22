@@ -293,96 +293,96 @@
     <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
     <!--Количество операций html-->
 </div>  <!--Общая загрузка и количество операций html-->
-<script th:inline="javascript">
+<!--<script th:inline="javascript">-->
 
-    var uvf_1_1_kol_op = [[${uvf_1_1_kol_op}]];
-    var uvf_1_2_kol_op = [[${uvf_1_2_kol_op}]];
-    var ntx1000_kol_op = [[${ntx1000_kol_op}]];
-    var nlx3000_kol_op = [[${nlx3000_kol_op}]];
-    var gamma2000_kol_op = [[${gamma2000_kol_op}]];
-    var ctx650_kol_op = [[${ctx650_kol_op}]];
-    var dmf260_kol_op = [[${dmf260_kol_op}]];
-    var dmu50_1_kol_op = [[${dmu50_1_kol_op}]];
-    var dmu50_2_kol_op = [[${dmu50_2_kol_op}]];
-    var dmc1035_kol_op = [[${dmc1035_kol_op}]];
-    var ctx310_1_kol_op = [[${ctx310_1_kol_op}]];
-    var ctx510_1_kol_op = [[${ctx510_1_kol_op}]];
+<!--    var uvf_1_1_kol_op = [[${uvf_1_1_kol_op}]];-->
+<!--    var uvf_1_2_kol_op = [[${uvf_1_2_kol_op}]];-->
+<!--    var ntx1000_kol_op = [[${ntx1000_kol_op}]];-->
+<!--    var nlx3000_kol_op = [[${nlx3000_kol_op}]];-->
+<!--    var gamma2000_kol_op = [[${gamma2000_kol_op}]];-->
+<!--    var ctx650_kol_op = [[${ctx650_kol_op}]];-->
+<!--    var dmf260_kol_op = [[${dmf260_kol_op}]];-->
+<!--    var dmu50_1_kol_op = [[${dmu50_1_kol_op}]];-->
+<!--    var dmu50_2_kol_op = [[${dmu50_2_kol_op}]];-->
+<!--    var dmc1035_kol_op = [[${dmc1035_kol_op}]];-->
+<!--    var ctx310_1_kol_op = [[${ctx310_1_kol_op}]];-->
+<!--    var ctx510_1_kol_op = [[${ctx510_1_kol_op}]];-->
 
-    var kol_long_operations_uvf_1_1 = [[${kol_long_operations_uvf_1_1}]];
-    var kol_long_operations_uvf_1_2 = [[${kol_long_operations_uvf_1_2}]];
-    var kol_long_operations_ntx1000 = [[${kol_long_operations_ntx1000}]];
-    var kol_long_operations_nlx3000 = [[${kol_long_operations_nlx3000}]];
-    var kol_long_operations_gamma2000 = [[${kol_long_operations_gamma2000}]];
-    var kol_long_operations_ctx650 = [[${kol_long_operations_ctx650}]];
-    var kol_long_operations_dmf260 = [[${kol_long_operations_dmf260}]];
-    var kol_long_operations_dmu50_1 = [[${kol_long_operations_dmu50_1}]];
-    var kol_long_operations_dmu50_2 = [[${kol_long_operations_dmu50_2}]];
-    var kol_long_operations_dmc1035 = [[${kol_long_operations_dmc1035}]];
-    var kol_long_operations_ctx310_1 = [[${kol_long_operations_ctx310_1}]];
-    var kol_long_operations_ctx510_1 = [[${kol_long_operations_ctx510_1}]];
+<!--    var kol_long_operations_uvf_1_1 = [[${kol_long_operations_uvf_1_1}]];-->
+<!--    var kol_long_operations_uvf_1_2 = [[${kol_long_operations_uvf_1_2}]];-->
+<!--    var kol_long_operations_ntx1000 = [[${kol_long_operations_ntx1000}]];-->
+<!--    var kol_long_operations_nlx3000 = [[${kol_long_operations_nlx3000}]];-->
+<!--    var kol_long_operations_gamma2000 = [[${kol_long_operations_gamma2000}]];-->
+<!--    var kol_long_operations_ctx650 = [[${kol_long_operations_ctx650}]];-->
+<!--    var kol_long_operations_dmf260 = [[${kol_long_operations_dmf260}]];-->
+<!--    var kol_long_operations_dmu50_1 = [[${kol_long_operations_dmu50_1}]];-->
+<!--    var kol_long_operations_dmu50_2 = [[${kol_long_operations_dmu50_2}]];-->
+<!--    var kol_long_operations_dmc1035 = [[${kol_long_operations_dmc1035}]];-->
+<!--    var kol_long_operations_ctx310_1 = [[${kol_long_operations_ctx310_1}]];-->
+<!--    var kol_long_operations_ctx510_1 = [[${kol_long_operations_ctx510_1}]];-->
 
-    Highcharts.chart('container_kol_operations', {
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Количество операций'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: ['УВФ-1', 'УВФ-2', 'NTX1000 #2', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50-1', 'DMU50-2', 'DMC1035', 'CTX310 #1','CTX510 #1'],
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Количество',
-                align: 'high'
-            },
-            labels: {
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: ' операций'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 80,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor:
-                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-            shadow: true
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Общее количество операций',
-            data: [uvf_1_1_kol_op, uvf_1_2_kol_op, ntx1000_kol_op, nlx3000_kol_op, gamma2000_kol_op, ctx650_kol_op, dmf260_kol_op, dmu50_1_kol_op, dmu50_2_kol_op, dmc1035_kol_op, ctx310_1_kol_op, ctx510_1_kol_op]
-        }, {
-            name: 'Количество операций более 3 минут',
-            data: [kol_long_operations_uvf_1_1, kol_long_operations_uvf_1_2, kol_long_operations_ntx1000, kol_long_operations_nlx3000, kol_long_operations_gamma2000, kol_long_operations_ctx650, kol_long_operations_dmf260, kol_long_operations_dmu50_1, kol_long_operations_dmu50_2, kol_long_operations_dmc1035, kol_long_operations_ctx310_1, kol_long_operations_ctx510_1]
-        }]
-    });
-</script>   <!--js количество операций-->
+<!--    Highcharts.chart('container_kol_operations', {-->
+<!--        chart: {-->
+<!--            type: 'bar'-->
+<!--        },-->
+<!--        title: {-->
+<!--            text: 'Количество операций'-->
+<!--        },-->
+<!--        xAxis: {-->
+<!--            labels: {-->
+<!--                style: {-->
+<!--                    fontSize: '18px',-->
+<!--                }-->
+<!--            },-->
+<!--            categories: ['УВФ-1', 'УВФ-2', 'NTX1000 #2', 'NLX3000', 'GAMMA2000', 'CTX650', 'DMF260', 'DMU50-1', 'DMU50-2', 'DMC1035', 'CTX310 #1','CTX510 #1'],-->
+<!--            title: {-->
+<!--                text: null-->
+<!--            }-->
+<!--        },-->
+<!--        yAxis: {-->
+<!--            min: 0,-->
+<!--            title: {-->
+<!--                text: 'Количество',-->
+<!--                align: 'high'-->
+<!--            },-->
+<!--            labels: {-->
+<!--                overflow: 'justify'-->
+<!--            }-->
+<!--        },-->
+<!--        tooltip: {-->
+<!--            valueSuffix: ' операций'-->
+<!--        },-->
+<!--        plotOptions: {-->
+<!--            bar: {-->
+<!--                dataLabels: {-->
+<!--                    enabled: true-->
+<!--                }-->
+<!--            }-->
+<!--        },-->
+<!--        legend: {-->
+<!--            layout: 'vertical',-->
+<!--            align: 'right',-->
+<!--            verticalAlign: 'top',-->
+<!--            x: -40,-->
+<!--            y: 80,-->
+<!--            floating: true,-->
+<!--            borderWidth: 1,-->
+<!--            backgroundColor:-->
+<!--                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',-->
+<!--            shadow: true-->
+<!--        },-->
+<!--        credits: {-->
+<!--            enabled: false-->
+<!--        },-->
+<!--        series: [{-->
+<!--            name: 'Общее количество операций',-->
+<!--            data: [uvf_1_1_kol_op, uvf_1_2_kol_op, ntx1000_kol_op, nlx3000_kol_op, gamma2000_kol_op, ctx650_kol_op, dmf260_kol_op, dmu50_1_kol_op, dmu50_2_kol_op, dmc1035_kol_op, ctx310_1_kol_op, ctx510_1_kol_op]-->
+<!--        }, {-->
+<!--            name: 'Количество операций более 3 минут',-->
+<!--            data: [kol_long_operations_uvf_1_1, kol_long_operations_uvf_1_2, kol_long_operations_ntx1000, kol_long_operations_nlx3000, kol_long_operations_gamma2000, kol_long_operations_ctx650, kol_long_operations_dmf260, kol_long_operations_dmu50_1, kol_long_operations_dmu50_2, kol_long_operations_dmc1035, kol_long_operations_ctx310_1, kol_long_operations_ctx510_1]-->
+<!--        }]-->
+<!--    });-->
+<!--</script>   &lt;!&ndash;js количество операций&ndash;&gt;-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
