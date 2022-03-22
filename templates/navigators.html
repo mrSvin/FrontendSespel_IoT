@@ -135,17 +135,6 @@
         }
     </style>
     <!-- Загрузка страницы -->
-    <script>
-        window.onload = function () {
-            document.body.classList.add('loaded_hiding');
-            window.setTimeout(function () {
-                document.body.classList.add('loaded');
-                document.body.classList.remove('loaded_hiding');
-            }, 500);
-        }
-    </script>
-
-
 
 </head>
 
@@ -319,23 +308,6 @@
         </div>
     </div>  <!--Навигатор_1 html-->
 </div> <!--Навигатор_1 html-->
-<script th:inline="javascript">
-    var array_rabota = [[${array_rabota}]];
-    var array_pause = [[${array_pause}]];
-    var array_off = [[${array_off}]];
-    var array_avar = [[${array_avar}]];
-    var array_nagruzka = [[${array_nagruzka}]];
-
-</script>   <!--Навигатор_1 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var navigator_1_work = [[${work}]];
-    var navigator_1_pass = [[${pass}]];
-    var navigator_1_fail = [[${fail}]];
-    var navigator_1_avar = [[${avar}]];
-    var navigator_1_nagruzka = [[${nagruzka}]];
-
-</script>   <!--Навигатор_1 js круговая диагрмма загрузки оборудования-->
-<!--<script src="/js/sutki/navigators/navigator_1.js"></script>-->
 
 <div style="overflow: hidden;">
     <div style="width: 100%;   margin: 2%;">
@@ -353,24 +325,6 @@
         <div id="container_2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
     </div>
 </div>  <!--Навигатор_2_голова_1 html-->
-<script th:inline="javascript">
-    var array_rabota_2_golova_1 = [[${array_rabota_2_golova_1}]];
-    var array_pause_2_golova_1 = [[${array_pause_2_golova_1}]];
-    var array_off_2_golova_1 = [[${array_off_2_golova_1}]];
-    var array_avar_2_golova_1 = [[${array_avar_2_golova_1}]];
-    var array_nagruzka_2_golova_1 = [[${array_nagruzka_2_golova_1}]];
-
-
-</script>   <!--Навигатор_2_голова_1 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var work_2_golova_1 = [[${work_2_golova_1}]];
-    var pass_2_golova_1 = [[${pass_2_golova_1}]];
-    var fail_2_golova_1 = [[${fail_2_golova_1}]];
-    var avar_2_golova_1 = [[${avar_2_golova_1}]];
-    var nagruzka_2_golova_1 = [[${nagruzka_2_golova_1}]];
-
-</script>   <!--Навигатор_2_голова_1 js круговая диагрмма загрузки оборудования-->
-<!--<script src="/js/sutki/navigators/navigator_2_golova_1.js"></script>-->
 
 <div style="overflow: hidden;">
     <div style="width: 100%;   margin: 2%;">
@@ -382,25 +336,6 @@
         <div id="container_3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
     </div>
 </div>  <!--Навигатор_2_голова_2 html-->
-<script th:inline="javascript">
-
-    var array_rabota_2_golova_2 = [[${array_rabota_2_golova_2}]];
-    var array_pause_2_golova_2 = [[${array_pause_2_golova_2}]];
-    var array_off_2_golova_2 = [[${array_off_2_golova_2}]];
-    var array_avar_2_golova_2 = [[${array_avar_2_golova_2}]];
-    var array_nagruzka_2_golova_2 = [[${array_nagruzka_2_golova_2}]];
-
-</script>   <!--Навигатор_2_голова_2 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-
-    var work_2_golova_2 = [[${work_2_golova_2}]];
-    var pass_2_golova_2 = [[${pass_2_golova_2}]];
-    var fail_2_golova_2 = [[${fail_2_golova_2}]];
-    var avar_2_golova_2 = [[${avar_2_golova_2}]];
-    var nagruzka_2_golova_2 = [[${nagruzka_2_golova_2}]];
-
-</script>   <!--Навигатор_2_голова_2 js круговая диагрмма загрузки оборудования-->
-<!--<script src="/js/sutki/navigators/navigator_2_golova_2.js"></script>-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -420,23 +355,6 @@
         </div>
     </div>  <!--Навигатор_3 html-->
 </div> <!--Навигатор_3 html-->
-<script th:inline="javascript">
-
-    var array_rabota_3 = [[${array_rabota_3}]];
-    var array_pause_3 =[[${array_pause_3}]];
-    var array_off_3 = [[${array_off_3}]];
-    var array_avar_3 = [[${array_avar_3}]];
-    var array_nagruzka_3 =[[${array_nagruzka_3}]];
-</script>   <!--Навигатор_3 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var navigator_3_work = [[${work_3}]];
-    var navigator_3_pass = [[${pass_3}]];
-    var navigator_3_fail = [[${fail_3}]];
-    var navigator_3_avar = [[${avar_3}]];
-    var navigator_3_nagruzka = [[${nagruzka_3}]];
-
-</script>   <!--Навигатор_3 js круговая диагрмма загрузки оборудования-->
-<!--<script src="/js/sutki/navigators/navigator_3.js"></script>-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -456,20 +374,6 @@
         </div>
     </div>  <!--trulaser html-->
 </div> <!--trulaser html-->
-<script th:inline="javascript">
-    var trulaser_array_rabota = [[${trulaser_array_rabota}]];
-    var trulaser_array_pause = [[${trulaser_array_pause}]];
-    var trulaser_array_off = [[${trulaser_array_off}]];
-    var trulaser_array_programname = [[${trulaser_array_programname}]];
-</script>   <!--trulaser js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var trulaser_work = [[${work_trulaser}]];
-    var trulaser_pass = [[${pass_trulaser}]];
-    var trulaser_fail = [[${fail_trulaser}]];
-    var trulaser_nagruzka = [[${nagruzka_trulaser}]];
-    var trulaser_avar = [[${avar_trulaser}]];
-</script>   <!--trulaser js круговая диагрмма загрузки оборудования-->
-<!--<script src="/js/sutki/navigators/data_trulaser.js"></script>-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -489,19 +393,6 @@
         </div>
     </div>  <!--kometa 1 html-->
 </div> <!--kometa 1 html-->
-<script th:inline="javascript">
-    var kometa_1_array_rabota = [[${kometa_1_array_rabota}]];
-    var kometa_1_array_pause = [[${kometa_1_array_pause}]];
-    var kometa_1_array_off = [[${kometa_1_array_off}]];
-
-</script>   <!--kometa js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var kometa_1_work = [[${work_kometa_1}]];
-    var kometa_1_pass = [[${pass_kometa_1}]];
-    var kometa_1_fail = [[${fail_kometa_1}]];
-
-</script>   <!--kometa js круговая диагрмма загрузки оборудования-->
-<!--<script src="/js/sutki/navigators/data_kometa_1.js"></script>-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -521,19 +412,6 @@
         </div>
     </div>  <!--kometa 1 html-->
 </div> <!--kometa 2 html-->
-<script th:inline="javascript">
-    var kometa_2_array_rabota = [[${kometa_2_array_rabota}]];
-    var kometa_2_array_pause = [[${kometa_2_array_pause}]];
-    var kometa_2_array_off = [[${kometa_2_array_off}]];
-
-</script>   <!--kometa js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var kometa_2_work = [[${work_kometa_2}]];
-    var kometa_2_pass = [[${pass_kometa_2}]];
-    var kometa_2_fail = [[${fail_kometa_2}]];
-
-</script>   <!--kometa js круговая диагрмма загрузки оборудования-->
-<!--<script src="/js/sutki/navigators/data_kometa_2.js"></script>-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -573,7 +451,7 @@
     </div>
 </div> <!--AR55 html-->
 
-
+<!--Скрипт парсинга и заполнения диаграмм-->
 <script th:inline="javascript">
     // Переменные для общих диаграмм.
 
@@ -584,11 +462,19 @@
     var linear_nagruzka = [];
 
 //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
+    var navigator_1_data = [[${navigator_1_data}]];
+    var navigator_2_golova_1_data = [[${navigator_2_golova_1_data}]];
+    var navigator_2_golova_2_data = [[${navigator_2_golova_2_data}]];
+    var navigator_3_data = [[${navigator_3_data}]];
+    var trulaser_data = [[${trulaser_data}]];
+    var kometa_1_data = [[${kometa_1_data}]];
+    var kometa_2_data = [[${kometa_2_data}]];
+    var kometa_3_data = [[${kometa_3_data}]];
     var ar55_data = [[${ar55_data}]];
-    var kometa_3_data = [[${kometa_3_data}]]
 
     // Массив с массивами
-    const Diagram = [kometa_3_data, ar55_data]
+    const Diagram = [navigator_1_data, navigator_2_golova_1_data, navigator_2_golova_2_data,
+        navigator_3_data, trulaser_data, kometa_1_data, kometa_2_data,  kometa_3_data, ar55_data]
 
 
     // Функция распарсивания массивов
@@ -606,7 +492,7 @@
             var roundDiagram = element[6];
 
             // Функция заполнения линейной диаграммы
-            setDataLine("container_work_" + (index + 8),  pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
+            setDataLine("container_work_" + (index + 1),  pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
 
         if(roundDiagram != null) {
             // Преобразование элементов круговой диаграммы из строк в числа
@@ -617,7 +503,7 @@
             // Вычисление работы без нагрузки для линейной диаграммы
             roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
             // Функция заполнения круговой диаграммы
-            setDataRound("container_" + (index + 8), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+            setDataRound("container_" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
         }
 
             // Заполнение переменных общей круговой и линейной диаграмм
@@ -629,11 +515,6 @@
                     linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
                 }
     });
-
-    console.log("4")
-    console.log(ar55_data)
-    console.log(kometa_3_data)
-
 
     // Формирование графиков для общих круговой и линейной диаграммы
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
@@ -690,6 +571,7 @@
     });
 </script>
 
+<!--Скрипт отображения в header  кнопки администрирование-->
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
 
@@ -705,10 +587,9 @@
         document.getElementById("admin").style.display = "none";
     }
 </script>
-<!--Скрипт отображения в header  кнопки администрирование-->
 
+<!--Скрипт кнопки выпадающего меню-->
 <script src="/js/dropdown_menu.js"></script>
 
 </body>
-
 </html>
