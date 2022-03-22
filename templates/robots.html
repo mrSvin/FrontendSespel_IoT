@@ -21,6 +21,10 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap-3.3.0.min.js"></script>
 
+    <script src="/js/sutki/universal_sutki.js"></script>
+    <script src="/js/mesto.js"></script>
+    <script src="/js/dark_theme.js"></script>
+
     <script>
         $(function () {
             $('#datepicker').datepicker({
@@ -58,6 +62,7 @@
     <!--Календарь Русский язык-->
     <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
 
+    <!--preloader style-->
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -129,18 +134,6 @@
             display: none;
         }
     </style>
-    <!-- Загрузка страницы -->
-    <script>
-        window.onload = function () {
-            document.body.classList.add('loaded_hiding');
-            window.setTimeout(function () {
-                document.body.classList.add('loaded');
-                document.body.classList.remove('loaded_hiding');
-            }, 500);
-        }
-    </script>
-
-
 
 </head>
 
@@ -231,7 +224,6 @@
         });
     }
 </script>
-<script src="/js/dark_theme.js"></script>
 
 <body>
 <!--Шапка html-->
@@ -440,27 +432,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--Макс_1 html-->
 </div> <!--Макс_1 html-->
-<script th:inline="javascript">
-    var maks_1_array_rabota = [[${maks_1_array_rabota}]];
-    var maks_1_array_pause = [[${maks_1_array_pause}]];
-    var maks_1_array_off = [[${maks_1_array_off}]];
-    var maks_1_array_programname = [[${maks_1_array_programname}]];
-    var maks_1_array_nagruzka = [[${maks_1_array_nagruzka}]];
-    var maks_1_array_avar = [[${maks_1_array_avar}]];
-</script>   <!-- maks 1 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var maks_1_work = [[${work}]];
-    var maks_1_pass = [[${pass}]];
-    var maks_1_fail = [[${fail}]];
-    var maks_1_nagruzka = [[${nagruzka}]];
-    var maks_1_avar = [[${avar}]];
-</script>   <!-- maks 1 js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/robots/data_maks_1.js"></script>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -475,28 +451,12 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--Макс_2 html-->
 
 </div> <!--Макс_2 html-->
-<script th:inline="javascript">
-    var maks_2_array_rabota = [[${maks_2_array_rabota}]];
-    var maks_2_array_pause = [[${maks_2_array_pause}]];
-    var maks_2_array_off = [[${maks_2_array_off}]];
-    var maks_2_array_programname = [[${maks_2_array_programname}]];
-    var maks_2_array_nagruzka = [[${maks_2_array_nagruzka}]];
-    var maks_2_array_avar = [[${maks_2_array_avar}]];
-</script>   <!-- maks 2 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var maks_2_work = [[${work_2}]];
-    var maks_2_pass = [[${pass_2}]];
-    var maks_2_fail = [[${fail_2}]];
-    var maks_2_nagruzka = [[${nagruzka_2}]];
-    var maks_2_avar = [[${avar_2}]];
-</script>   <!-- maks 2 js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/robots/data_maks_2.js"></script>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -511,28 +471,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--М710 html-->
 </div> <!--М710 html-->
-<script th:inline="javascript">
-    var m710_array_rabota = [[${m710_array_rabota}]];
-    var m710_array_pause = [[${m710_array_pause}]];
-    var m710_array_off = [[${m710_array_off}]];
-    var m710_array_programname = [[${m710_array_programname}]];
-    var m710_array_nagruzka = [[${m710_array_nagruzka}]];
-    var m710_array_avar = [[${m710_array_avar}]];
-</script>   <!-- М710 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var m710_work = [[${work_3}]];
-    var m710_pass = [[${pass_3}]];
-    var m710_fail = [[${fail_3}]];
-    var m710_nagruzka = [[${nagruzka_3}]];
-    var m710_avar = [[${avar_3}]];
-</script>   <!-- М710 js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/robots/data_m710.js"></script>
-
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -547,27 +490,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--РТК12С html-->
 </div> <!--РТК12С html-->
-<script th:inline="javascript">
-    var ptk12c_array_rabota = [[${ptk12c_array_rabota}]];
-    var ptk12c_array_pause = [[${ptk12c_array_pause}]];
-    var ptk12c_array_off = [[${ptk12c_array_off}]];
-    var ptk12c_array_programname = [[${ptk12c_array_programname}]];
-    var ptk12c_array_nagruzka = [[${ptk12c_array_nagruzka}]];
-    var ptk12c_array_avar = [[${ptk12c_array_avar}]];
-</script>   <!-- РТК12С js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var ptk12c_work = [[${work_4}]];
-    var ptk12c_pass = [[${pass_4}]];
-    var ptk12c_fail = [[${fail_4}]];
-    var ptk12c_nagruzka = [[${nagruzka_4}]];
-    var ptk12c_avar = [[${avar_4}]];
-</script>   <!-- РТК12С js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/robots/data_ptk12c.js"></script>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -582,28 +509,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--P250 html-->
 </div> <!--P250 html-->
-<script th:inline="javascript">
-    var p250_array_rabota = [[${p250_array_rabota}]];
-    var p250_array_pause = [[${p250_array_pause}]];
-    var p250_array_off = [[${p250_array_off}]];
-    var p250_array_programname = [[${p250_array_programname}]];
-    var p250_array_nagruzka = [[${p250_array_nagruzka}]];
-    var p250_array_avar = [[${p250_array_avar}]];
-</script>   <!-- P250 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var p250_work = [[${work_5}]];
-    var p250_pass = [[${pass_5}]];
-    var p250_fail = [[${fail_5}]];
-    var p250_nagruzka = [[${nagruzka_5}]];
-    var p250_avar = [[${avar_5}]];
-</script>   <!-- P250 js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/robots/data_p250.js"></script>
-
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -618,27 +528,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_krot" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_krot" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--krot html-->
 </div> <!--krot html-->
-<script th:inline="javascript">
-    var krot_array_rabota = [[${krot_array_rabota}]];
-    var krot_array_pause = [[${krot_array_pause}]];
-    var krot_array_off = [[${krot_array_off}]];
-    var krot_array_programname = [[${krot_array_programname}]];
-    var krot_array_nagruzka = [[${krot_array_nagruzka}]];
-    var krot_array_avar = [[${krot_array_avar}]];
-</script>   <!-- krot js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var krot_work = [[${work_krot}]];
-    var krot_pass = [[${pass_krot}]];
-    var krot_fail = [[${fail_krot}]];
-    var krot_nagruzka = [[${nagruzka_krot}]];
-    var krot_avar = [[${avar_krot}]];
-</script>   <!-- krot js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/robots/data_krot.js"></script>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -653,28 +547,144 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work_prans" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container_prans" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work7" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container7" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--prans html-->
 </div> <!--prans html-->
-<script th:inline="javascript">
-    var prans_array_rabota = [[${prans_array_rabota}]];
-    var prans_array_pause = [[${prans_array_pause}]];
-    var prans_array_off = [[${prans_array_off}]];
-    var prans_array_programname = [[${prans_array_programname}]];
-    var prans_array_nagruzka = [[${prans_array_nagruzka}]];
-    var prans_array_avar = [[${prans_array_avar}]];
-</script>   <!-- prans js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var prans_work = [[${work_prans}]];
-    var prans_pass = [[${pass_prans}]];
-    var prans_fail = [[${fail_prans}]];
-    var prans_nagruzka = [[${nagruzka_prans}]];
-    var prans_avar = [[${avar_prans}]];
-</script>   <!-- prans js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/robots/data_prans.js"></script>
 
+<!--Скрипт парсинга и заполнения диаграмм-->
+<script th:inline="javascript">
+    // Переменные для общих диаграмм.
+
+    var linear_rabota = [];
+    var linear_pause = [];
+    var linear_off = [];
+    var linear_avar = [];
+    var linear_nagruzka = [];
+
+    //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
+    var maks_1_data = [[${maks_1_data}]];
+    var maks_2_data = [[${maks_2_data}]];
+    var m710_data = [[${m710_data}]];
+    var ptk12c_data = [[${ptk12c_data}]];
+    var p250_data = [[${p250_data}]];
+    var krot_data = [[${krot_data}]];
+    var prans_data = [[${prans_data}]];
+
+    // Массив с массивами
+    const Diagram = [maks_1_data, maks_2_data, m710_data,
+        ptk12c_data, p250_data, krot_data, prans_data]
+
+
+    // Функция распарсивания массивов
+    $.map(Diagram, function (element, index) {
+        // Отказ от работы с пустым массивом
+        if(element.length != 0) {
+
+
+            // Функция преобразования в дате сегодняшнего дня значений 23:59:59
+            timeReplace(element);
+
+            // Функция формирования массивов с точками начала и конца
+            var pars_nagruzka = pars(element[4], 0)
+            var pars_rabota = pars(element[0], 1, element[5])
+            var pars_pause = pars(element[1], 2)
+            var pars_off = pars(element[2], 3)
+            var pars_avar = pars(element[3], 4)
+            var roundDiagram = element[6];
+
+            // Функция заполнения линейной диаграммы
+            if(index == 4) {
+                setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Покраска');
+            }
+            else if(index == 6)
+            {
+                setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Обработка');
+            }
+            else {
+                setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Сварка');
+            }
+
+            if (roundDiagram != null) {
+                // Преобразование элементов круговой диаграммы из строк в числа
+                $.each(roundDiagram, function (i) {
+                    roundDiagram[i] = parseInt(roundDiagram[i]);
+                });
+
+                // Вычисление работы без нагрузки для линейной диаграммы
+                roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                // Функция заполнения круговой диаграммы
+                setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+            }
+
+            // Заполнение переменных общей круговой и линейной диаграмм
+            if (roundDiagram != null) {
+                linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                linear_pause.push(Array(1).fill(roundDiagram[1]));
+                linear_off.push(Array(1).fill(roundDiagram[2]));
+                linear_avar.push(Array(1).fill(roundDiagram[3]));
+                linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+            }
+        }
+    });
+
+    // Формирование графиков для общих круговой и линейной диаграммы
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors:colorsLine,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['МАКС #1', 'МАКС #2', 'М710', 'РТК12С', 'Р250', 'КРОТ', 'ПРАНС']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Авария',
+            data: linear_avar
+        }, {
+            name: 'Выключен',
+            data: linear_off
+        }, {
+            name: 'Ожидание',
+            data: linear_pause
+        }, {
+            name: 'Под нагрузкой',
+            data: linear_nagruzka
+        }, {
+            name: 'Работа',
+            data: linear_rabota
+        }, ]
+    });
+</script>
+
+<!--Скрипт отображения в header  кнопки администрирование-->
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
 
@@ -690,19 +700,9 @@
         document.getElementById("admin").style.display = "none";
     }
 </script>
-<!--Скрипт отображения в header  кнопки администрирование-->
 
-<script>
-    var mar_top = localStorage.getItem('mar_top');
-    var mar_left = localStorage.getItem('mar_left');
-    var bground = localStorage.getItem('bground');
-    var place_img = localStorage.getItem('place_img');
-    var size  = localStorage.getItem('size');
-    var bwidth = localStorage.getItem('bwidth');
-</script>
-<script src="/js/mesto.js"></script>
-<!--Скрипт с вызовом функций для изменения места-->
-
+<!--Скрипт кнопки выпадающего меню-->
 <script src="/js/dropdown_menu.js"></script>
+
 </body>
 </html>
