@@ -21,6 +21,10 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap-3.3.0.min.js"></script>
 
+    <script src="/js/sutki/universal_sutki.js"></script>
+    <script src="/js/mesto.js"></script>
+    <script src="/js/dark_theme.js"></script>
+
     <script>
         $(function () {
             $('#datepicker').datepicker({
@@ -58,6 +62,7 @@
     <!--Календарь Русский язык-->
     <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
 
+    <!--preloader style-->
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -129,16 +134,7 @@
             display: none;
         }
     </style>
-    <!-- Загрузка страницы -->
-    <script>
-        window.onload = function () {
-            document.body.classList.add('loaded_hiding');
-            window.setTimeout(function () {
-                document.body.classList.add('loaded');
-                document.body.classList.remove('loaded_hiding');
-            }, 500);
-        }
-    </script>
+
 </head>
 
 <header>
@@ -228,7 +224,6 @@
         });
     }
 </script>
-<script src="/js/dark_theme.js"></script>
 
 <body>
 <div class="container">
@@ -301,23 +296,55 @@
         </div>
     </div>  <!--Печь Нерж html-->
 </div> <!--Печь Нерж html-->
-<script th:inline="javascript">
-    var pech_nerg_array_rabota = [[${pech_nerg_array_rabota}]];
-    var pech_nerg_array_pause = [[${pech_nerg_array_pause}]];
-    var pech_nerg_array_off = [[${pech_nerg_array_off}]];
-    var pech_nerg_array_programname = [[${pech_nerg_array_programname}]];
-    var pech_nerg_array_nagruzka = [[${pech_nerg_array_nagruzka}]];
-    var pech_nerg_array_avar = [[${pech_nerg_array_avar}]];
-</script>   <!--Склад Мех js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var pech_nerg_work = [[${pech_nerg_work}]];
-    var pech_nerg_pass = [[${pech_nerg_pass}]];
-    var pech_nerg_fail = [[${pech_nerg_fail}]];
-    var pech_nerg_nagruzka = [[${pech_nerg_nagruzka}]];
-    var pech_nerg_avar = [[${pech_nerg_avar}]];
-</script>   <!--Склад js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/liteyka/data_pech_nerg.js"></script>
 
+<!--Скрипт парсинга и заполнения диаграмм-->
+<script th:inline="javascript">
+    // Переменные для общих диаграмм.
+
+    //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
+    var pech_nerg_data = [[${pech_nerg_data}]];
+
+
+    // Массив с массивами
+    const Diagram = [pech_nerg_data]
+
+
+    // Функция распарсивания массивов
+    $.map(Diagram, function (element, index) {
+        // Отказ от работы с пустым массивом
+        if(element.length != 0) {
+
+
+            // Функция преобразования в дате сегодняшнего дня значений 23:59:59
+            timeReplace(element);
+
+            // Функция формирования массивов с точками начала и конца
+            var pars_nagruzka = pars(element[4], 0)
+            var pars_rabota = pars(element[0], 1, element[5])
+            var pars_pause = pars(element[1], 2)
+            var pars_off = pars(element[2], 3)
+            var pars_avar = pars(element[3], 4)
+            var roundDiagram = element[6];
+
+            // Функция заполнения линейной диаграммы
+            setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
+
+            if (roundDiagram != null) {
+                // Преобразование элементов круговой диаграммы из строк в числа
+                $.each(roundDiagram, function (i) {
+                    roundDiagram[i] = parseInt(roundDiagram[i]);
+                });
+
+                // Вычисление работы без нагрузки для линейной диаграммы
+                roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                // Функция заполнения круговой диаграммы
+                setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+            }
+        }
+    });
+</script>
+
+<!--Скрипт отображения в header  кнопки администрирование-->
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
 
@@ -333,19 +360,8 @@
         document.getElementById("admin").style.display = "none";
     }
 </script>
-<!--Скрипт отображения в header  кнопки администрирование-->
 
-<script>
-    var mar_top = localStorage.getItem('mar_top');
-    var mar_left = localStorage.getItem('mar_left');
-    var bground = localStorage.getItem('bground');
-    var place_img = localStorage.getItem('place_img');
-    var size  = localStorage.getItem('size');
-    var bwidth = localStorage.getItem('bwidth');
-</script>
-<script src="/js/mesto.js"></script>
-<!--Скрипт с вызовом функций для изменения места-->
-
+<!--Скрипт кнопки выпадающего меню-->
 <script src="/js/dropdown_menu.js"></script>
 
 </body>
