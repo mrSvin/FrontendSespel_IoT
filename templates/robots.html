@@ -483,7 +483,13 @@
                     // Вычисление работы без нагрузки для линейной диаграммы
                     roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
                     // Функция заполнения круговой диаграммы
-                    setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+                    if (index == 4) {
+                        setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4],'Покраска');
+                    } else if (index == 6) {
+                        setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4],'Обработка');
+                    } else {
+                        setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4],'Сварка');
+                    }
                 }
 
                 // Заполнение переменных общей круговой и линейной диаграмм
