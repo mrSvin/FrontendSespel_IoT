@@ -967,6 +967,13 @@
     var linear_nagruzka = [];
     var linear_ruchnoi = [];
 
+    linear_rabota.push(uf5220_work, progress_work,ntx1000_work);
+    linear_pause.push(uf5220_pass, progress_pass, ntx1000_pass);
+    linear_off.push(uf5220_fail, progress_fail, ntx1000_fail);
+    linear_avar.push(0, 0, ntx1000_avar);
+    linear_nagruzka.push(0, 0, ntx1000_nagruzka);
+    linear_ruchnoi.push(0, 0 ,0);
+
     //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
     var sk50_data = [[${sk50_data}]];
     var apec_data = [[${apec_data}]];
@@ -1031,29 +1038,26 @@
                 }
 
                 // Заполнение переменных общей линейной диаграмм
-                $.map(roundDiagram, function (element, index) {
-                    if(element != null) {
-                        if(index != 1)
-                        {
-                            linear_rabota.push(Array(1).fill(element[0]));
-                            linear_pause.push(Array(1).fill(element[1]));
-                            linear_off.push(Array(1).fill(element[2]));
-                            linear_avar.push(Array(1).fill(element[3]));
-                            linear_nagruzka.push(Array(1).fill(element[4]));
-                            linear_ruchnoi.push(Array(1).fill(0));
-                        }
-                        // Спец. условия для заполнения ручного режима на APECцйу
-                        else
-                        {
-                            linear_rabota.push(Array(1).fill(element[0]));
-                            linear_pause.push(Array(1).fill(element[1]));
-                            linear_off.push(Array(1).fill(element[2]));
-                            linear_avar.push(Array(1).fill(element[3]));
-                            linear_nagruzka.push(Array(1).fill(0));
-                            linear_ruchnoi.push(Array(1).fill(element[4]));
-                        }
+                if (roundDiagram != null) {
+                    if (index != 1) {
+                        linear_rabota.push(roundDiagram[0]);
+                        linear_pause.push(roundDiagram[1]);
+                        linear_off.push(roundDiagram[2]);
+                        linear_avar.push(roundDiagram[3]);
+                        linear_nagruzka.push(roundDiagram[4]);
+                        linear_ruchnoi.push(0);
                     }
-                });
+                    // Спец. условия для заполнения ручного режима на APECцйу
+                    else {
+                        linear_rabota.push(roundDiagram[0]);
+                        linear_pause.push(roundDiagram[1]);
+                        linear_off.push(roundDiagram[2]);
+                        linear_avar.push(roundDiagram[3]);
+                        linear_nagruzka.push(0);
+                        linear_ruchnoi.push(roundDiagram[4]);
+
+                    }
+                }
             }
         }
     });
