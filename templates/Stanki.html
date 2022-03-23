@@ -987,15 +987,18 @@
     var ctx510_5_data = [[${dmg_ctx510_5_data}]];
     var dmc1035_2_data = [[${dmg_dmc1035_2_data}]];
 
+    console.log(sk50_data, apec_data, dmu50_3_data, dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data, ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data)
+
     // Массив с массивами
     const Diagram = [sk50_data, apec_data, dmu50_3_data,
         dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data]
 
+    console.log(Diagram)
 
     // Функция распарсивания массивов
     $.map(Diagram, function (element, index) {
         // Отказ от работы с пустым массивом
-        if(element != null) {
+        if(element != 0) {
             if (element.length != 0) {
 
                 // Функция преобразования в дате сегодняшнего дня значений 23:59:59
@@ -1038,7 +1041,7 @@
                 }
 
                 // Заполнение переменных общей линейной диаграмм
-                if (roundDiagram != null) {
+                if (roundDiagram != 0) {
                     if (index != 1) {
                         linear_rabota.push(roundDiagram[0]);
                         linear_pause.push(roundDiagram[1]);
@@ -1059,6 +1062,14 @@
                     }
                 }
             }
+        }
+        else {
+            linear_rabota.push(0);
+            linear_pause.push(0);
+            linear_off.push(0);
+            linear_avar.push(0);
+            linear_nagruzka.push(0);
+            linear_ruchnoi.push(0);
         }
     });
 
