@@ -679,12 +679,20 @@
                 }
 
                 // Заполнение переменных общей круговой и линейной диаграмм
-                if (roundDiagram != null) {
+                if (roundDiagram != 0) {
                     linear_rabota.push(roundDiagram[0]);
                     linear_pause.push(roundDiagram[1]);
                     linear_off.push(roundDiagram[2]);
                     linear_avar.push(roundDiagram[3]);
                     linear_nagruzka.push(roundDiagram[4]);
+                }
+                else {
+                    linear_rabota.push(0);
+                    linear_pause.push(0);
+                    linear_off.push(0);
+                    linear_avar.push(0);
+                    linear_nagruzka.push(0);
+                    linear_ruchnoi.push(0);
                 }
             }
         }

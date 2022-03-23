@@ -369,12 +369,19 @@
 
     // Заполнение переменных общей линейной диаграммы
     $.map(roundDiagram, function (element) {
-        if(element != null) {
+        if(element != 0) {
             linear_rabota.push(element[0]);
             linear_pause.push(element[1]);
             linear_off.push(element[2]);
             linear_avar.push(element[3]);
             linear_nagruzka.push(element[4]);
+        }
+        else {
+            linear_rabota.push(0);
+            linear_pause.push(0);
+            linear_off.push(0);
+            linear_avar.push(0);
+            linear_nagruzka.push(0);
         }
     });
 

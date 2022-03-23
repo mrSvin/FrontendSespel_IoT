@@ -555,12 +555,21 @@
                 }
 
                 // Заполнение переменных общей круговой и линейной диаграмм
-                if (roundDiagram != null) {
-                    linear_rabota.push(roundDiagram[0]);
-                    linear_pause.push(roundDiagram[1]);
-                    linear_off.push(roundDiagram[2]);
-                    linear_avar.push(roundDiagram[3]);
-                    linear_nagruzka.push(roundDiagram[4]);
+                if (roundDiagram != 0) {
+                    if (roundDiagram != null) {
+                        linear_rabota.push(roundDiagram[0]);
+                        linear_pause.push(roundDiagram[1]);
+                        linear_off.push(roundDiagram[2]);
+                        linear_avar.push(roundDiagram[3]);
+                        linear_nagruzka.push(roundDiagram[4]);
+                    }
+                }
+                else {
+                    linear_rabota.push(0);
+                    linear_pause.push(0);
+                    linear_off.push(0);
+                    linear_avar.push(0);
+                    linear_nagruzka.push(0);
                 }
             }
         }
@@ -582,7 +591,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2',  'Комета #3', 'AR55']
+            categories: ['Пресс ЧПУ для ступиц', 'ЭПП', 'СТП13М']
         },
         credits: {
             enabled: false

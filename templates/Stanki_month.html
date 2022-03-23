@@ -717,7 +717,7 @@
 
     // Заполнение переменных общей линейной диаграммы
     $.map(roundDiagram, function (element, index) {
-        if(element != null) {
+        if(element != 0) {
             if(index != 4)
             {
                 linear_rabota.push(element[0]);
@@ -737,6 +737,14 @@
                 linear_nagruzka.push(0);
                 linear_ruchnoi.push(element[4]);
             }
+        }
+        else {
+            linear_rabota.push(0);
+            linear_pause.push(0);
+            linear_off.push(0);
+            linear_avar.push(0);
+            linear_nagruzka.push(0);
+            linear_ruchnoi.push(0);
         }
     });
 
