@@ -287,7 +287,10 @@
 </script>   <!--Календарь js-->
 
 <div style="display: flex; justify-content: space-between;">
-        <div id="container_sum_zagruzka" style="height: 400px; width: 800px"></div>
+    <div id="container_sum_zagruzka" style="height: 400px; width: 800px"></div>
+
+    <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
+    <!--Количество операций html-->
 </div>  <!--Общая загрузка  html-->
 
 <div style="border: 1px solid #333;">
@@ -461,6 +464,9 @@
     var linear_avar = [];
     var linear_nagruzka = [];
 
+    var kol_op = [];
+    var kol_long_operations = [];
+
 //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
     var navigator_1_data = [[${navigator_1_data}]];
     var navigator_2_golova_1_data = [[${navigator_2_golova_1_data}]];
@@ -486,6 +492,9 @@
 
                 // Функция преобразования в дате сегодняшнего дня значений 23:59:59
                 timeReplace(element);
+                var ArrayCount = getCount(element[0]);
+                kol_op.push(ArrayCount[0])
+                kol_long_operations.push(ArrayCount[1])
 
                 // Функция формирования массивов с точками начала и конца
                 var pars_nagruzka = pars(element[4], 0)
@@ -524,6 +533,9 @@
                     linear_off.push(0);
                     linear_avar.push(0);
                     linear_nagruzka.push(0);
+
+                    kol_op.push(0)
+                    kol_long_operations.push(0)
                 }
             }
         }
@@ -581,6 +593,56 @@
             name: 'Работа',
             data: linear_rabota
         }, ]
+    });
+
+    Highcharts.chart('container_kol_operations', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Количество операций'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '15px',
+                }
+            },
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2',  'Комета #3', 'AR55'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: kol_op,
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: kol_long_operations,
+        }]
     });
 </script>
 

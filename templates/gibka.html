@@ -279,9 +279,11 @@
 </script>   <!--Календарь js-->
 
 <div style="display: flex; justify-content: space-between">
-
-  <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
   <!--Общая загрузка html-->
+  <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
+
+  <!--Количество операций html-->
+  <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
 </div>  <!--Общая загрузка и количество операций html-->
 <script th:inline="javascript">
 
@@ -401,22 +403,7 @@
     </div>
   </div>  <!--faccin_1 html-->
 </div> <!--faccin_1 html-->
-<script th:inline="javascript">
-  var faccin_1_array_rabota = [[${faccin_1_array_rabota}]];
-  var faccin_1_array_pause = [[${faccin_1_array_pause}]];
-  var faccin_1_array_off = [[${faccin_1_array_off}]];
-  var faccin_1_array_programname = [[${faccin_1_array_programname}]];
-  var faccin_1_array_nagruzka = [[${faccin_1_array_nagruzka}]];
-  var faccin_1_array_avar = [[${faccin_1_array_avar}]];
-</script>   <!--Склад Мех js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-  var faccin_1_work = [[${work_faccin_1}]];
-  var faccin_1_pass = [[${pass_faccin_1}]];
-  var faccin_1_fail = [[${fail_faccin_1}]];
-  var faccin_1_nagruzka = [[${nagruzka_faccin_1}]];
-  var faccin_1_avar = [[${avar_faccin_1}]];
-</script>   <!--faccin_1 круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/gibka/data_faccin_1.js"></script>
+
 
 <div style="border: 1px solid #333;">
   <div style="overflow: hidden;">
@@ -436,22 +423,6 @@
     </div>
   </div>  <!--faccin_2 html-->
 </div> <!--faccin_2 html-->
-<script th:inline="javascript">
-  var faccin_2_array_rabota = [[${faccin_2_array_rabota}]];
-  var faccin_2_array_pause = [[${faccin_2_array_pause}]];
-  var faccin_2_array_off = [[${faccin_2_array_off}]];
-  var faccin_2_array_programname = [[${faccin_2_array_programname}]];
-  var faccin_2_array_nagruzka = [[${faccin_2_array_nagruzka}]];
-  var faccin_2_array_avar = [[${faccin_2_array_avar}]];
-</script>   <!--Склад Мех js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-  var faccin_2_work = [[${work_faccin_2}]];
-  var faccin_2_pass = [[${pass_faccin_2}]];
-  var faccin_2_fail = [[${fail_faccin_2}]];
-  var faccin_2_nagruzka = [[${nagruzka_faccin_2}]];
-  var faccin_2_avar = [[${avar_faccin_2}]];
-</script>   <!--faccin_2 круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/gibka/data_faccin_2.js"></script>
 
 <!--Скрипт парсинга и заполнения диаграмм-->
 <script th:inline="javascript">
@@ -462,6 +433,9 @@
   var linear_off = [];
   var linear_avar = [];
   var linear_nagruzka = [];
+
+  var kol_op = [];
+  var kol_long_operations = [];
 
   //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
   var faccin_1_data = [[${faccin_1_data}]];
@@ -481,6 +455,9 @@
 
         // Функция преобразования в дате сегодняшнего дня значений 23:59:59
         timeReplace(element);
+        var ArrayCount = getCount(element[0]);
+        kol_op.push(ArrayCount[0])
+        kol_long_operations.push(ArrayCount[1])
 
         // Функция формирования массивов с точками начала и конца
         var pars_nagruzka = pars(element[4], 0)
@@ -519,6 +496,9 @@
           linear_off.push(0);
           linear_avar.push(0);
           linear_nagruzka.push(0);
+
+          kol_op.push(0)
+          kol_long_operations.push(0)
         }
       }
     }
@@ -576,6 +556,56 @@
       name: 'Работа',
       data: linear_rabota
     }, ]
+  });
+
+  Highcharts.chart('container_kol_operations', {
+    chart: {
+      type: 'bar'
+    },
+    title: {
+      text: 'Количество операций'
+    },
+    xAxis: {
+      labels: {
+        style: {
+          fontSize: '15px',
+        }
+      },
+      categories: ['FACCIN 4', 'FACCIN 10'],
+      title: {
+        text: null
+      }
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Количество',
+        align: 'high'
+      },
+      labels: {
+        overflow: 'justify'
+      }
+    },
+    tooltip: {
+      valueSuffix: ' операций'
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          enabled: true
+        }
+      }
+    },
+    credits: {
+      enabled: false
+    },
+    series: [{
+      name: 'Общее количество операций',
+      data: kol_op,
+    }, {
+      name: 'Количество операций более 3 минут',
+      data: kol_long_operations,
+    }]
   });
 </script>
 
