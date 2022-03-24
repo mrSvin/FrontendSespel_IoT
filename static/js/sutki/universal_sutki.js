@@ -59,6 +59,22 @@ function timeReplace(dataArray) {
     }
 }
 
+function getCount(Array){
+    var count = 0;
+    $.each(ctx510_2_data[0], function(i){
+        console.log(ctx510_2_data[0][i+1], "Not", time, "count=", count)
+        if(ctx510_2_data[0][i+1] !== time)
+        {
+            count += 1;
+        }
+        else{
+            return false
+        }
+    });
+    console.log(count)
+    return count
+}
+
 function pars(arrayParse, y, arrayName=null)
 {
 
