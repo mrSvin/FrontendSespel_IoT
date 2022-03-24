@@ -132,11 +132,17 @@
     var kometa_3_data = [[${kometa_3_data}]];
     var ar55_data = [[${ar55_data}]];
 
+
+
     // Массив с массивами
     const Diagram = [navigator_1_data, navigator_2_golova_1_data, navigator_2_golova_2_data,
         navigator_3_data, trulaser_data, kometa_1_data, kometa_2_data,  kometa_3_data, ar55_data]
 
-    $.map(Diagram, function (element) {
+    table = document.getElementById('myTable').rows; // Обращение к таблице по ID
+
+    var koef = []
+
+    $.map(Diagram, function (element, index) {
         // Отказ от работы с пустым массивом
         if(element != null) {
             if (element.length != 0) {
@@ -160,6 +166,7 @@
                     linear_off.push(Array(1).fill(roundDiagram[2]));
                     linear_avar.push(Array(1).fill(roundDiagram[3]));
                     linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+                    koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4])/100);
                 }
                 else {
                     linear_rabota.push(0);
@@ -167,9 +174,14 @@
                     linear_off.push(0);
                     linear_avar.push(0);
                     linear_nagruzka.push(0);
+                    koef.push(0)
                 }
             }
         }
+
+        $.each(roundDiagram, function (i) {
+            table[index+1].cells[i+1].innerHTML = Math.round(roundDiagram[i]/koef[index] * 10) / 10 + "%";
+        });
     });
 
     // Формирование графиков для общих круговой и линейной диаграммы
@@ -228,63 +240,67 @@
 
 </script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
-    var navigator_1_koef = (navigator_1_work_sum + navigator_1_pass_sum + navigator_1_fail_sum + navigator_1_avar_sum + navigator_1_nagruzka_sum)/100;
-    var golova_1_koef = (work_2_golova_1_sum + pass_2_golova_1_sum + fail_2_golova_1_sum + avar_2_golova_1_sum + nagruzka_2_golova_1_sum)/100;
-    var golova_2_koef = (work_2_golova_2_sum + pass_2_golova_2_sum + fail_2_golova_2_sum + avar_2_golova_2_sum + nagruzka_2_golova_2_sum)/100;
-    var navigator_3_koef = (navigator_3_work_sum + navigator_3_pass_sum + navigator_3_fail_sum + navigator_3_avar_sum + navigator_3_nagruzka_sum)/100;
-    var trulaser_koef = (trulaser_work_sum + trulaser_pass_sum + trulaser_fail_sum)/100;
-    var kometa_1_koef = (kometa_1_work_sum + kometa_1_pass_sum + kometa_1_fail_sum)/100;
-    var kometa_2_koef = (kometa_2_work_sum + kometa_2_pass_sum + kometa_2_fail_sum)/100;
-    var kometa_3_koef = (kometa_3_work_sum + kometa_3_pass_sum + kometa_3_fail_sum)/100;
-    var ar55_koef = (ar55_work_sum + ar55_pass_sum + ar55_fail_sum + ar55_avar_sum + ar55_nagruzka_sum)/100;
+    // var navigator_1_koef = (navigator_1_work_sum + navigator_1_pass_sum + navigator_1_fail_sum + navigator_1_avar_sum + navigator_1_nagruzka_sum)/100;
+    // var golova_1_koef = (work_2_golova_1_sum + pass_2_golova_1_sum + fail_2_golova_1_sum + avar_2_golova_1_sum + nagruzka_2_golova_1_sum)/100;
+    // var golova_2_koef = (work_2_golova_2_sum + pass_2_golova_2_sum + fail_2_golova_2_sum + avar_2_golova_2_sum + nagruzka_2_golova_2_sum)/100;
+    // var navigator_3_koef = (navigator_3_work_sum + navigator_3_pass_sum + navigator_3_fail_sum + navigator_3_avar_sum + navigator_3_nagruzka_sum)/100;
+    // var trulaser_koef = (trulaser_work_sum + trulaser_pass_sum + trulaser_fail_sum)/100;
+    // var kometa_1_koef = (kometa_1_work_sum + kometa_1_pass_sum + kometa_1_fail_sum)/100;
+    // var kometa_2_koef = (kometa_2_work_sum + kometa_2_pass_sum + kometa_2_fail_sum)/100;
+    // var kometa_3_koef = (kometa_3_work_sum + kometa_3_pass_sum + kometa_3_fail_sum)/100;
+    // var ar55_koef = (ar55_work_sum + ar55_pass_sum + ar55_fail_sum + ar55_avar_sum + ar55_nagruzka_sum)/100;
+    //
+    //
+    // $.each(Diagram, function (i){
+    //     table[i+1].cells[1].innerHTML = Math.round(/navigator_1_koef * 10) / 10 + "%";
+    // });
 
-    table = document.getElementById('myTable').rows; // Обращение к таблице по ID
-    table[1].cells[1].innerHTML = Math.round(navigator_1_work_sum/navigator_1_koef * 10) / 10 + "%";
-    table[2].cells[1].innerHTML = Math.round(work_2_golova_1_sum/golova_1_koef * 10) / 10 + "%";
-    table[3].cells[1].innerHTML = Math.round(work_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
-    table[4].cells[1].innerHTML = Math.round(navigator_3_work_sum/navigator_3_koef * 10) / 10 + "%";
-    table[5].cells[1].innerHTML = Math.round(trulaser_work_sum/trulaser_koef * 10) / 10 + "%";
-    table[6].cells[1].innerHTML = Math.round(kometa_1_work_sum/kometa_1_koef * 10) / 10 + "%";
-    table[7].cells[1].innerHTML = Math.round(kometa_2_work_sum/kometa_2_koef * 10) / 10 + "%";
-    table[8].cells[1].innerHTML = Math.round(kometa_3_work_sum/kometa_3_koef * 10) / 10 + "%";
-    table[9].cells[1].innerHTML = Math.round(ar55_work_sum/ar55_koef * 10) / 10 + "%";
-    // Столбец Работа
-
-    table[1].cells[2].innerHTML = Math.round(navigator_1_nagruzka_sum/navigator_1_koef * 10) / 10 + "%";
-    table[2].cells[2].innerHTML = Math.round(nagruzka_2_golova_1_sum/golova_1_koef * 10) / 10 + "%";
-    table[3].cells[2].innerHTML = Math.round(nagruzka_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
-    table[4].cells[2].innerHTML = Math.round(navigator_3_nagruzka_sum/navigator_3_koef * 10) / 10 + "%";
-    table[5].cells[2].innerHTML = Math.round(ar55_nagruzka_sum/ar55_koef * 10) / 10 + "%";
-    // Столбец Нагрузка
-
-    table[1].cells[3].innerHTML = Math.round(navigator_1_pass_sum/navigator_1_koef * 10) / 10 + "%";
-    table[2].cells[3].innerHTML = Math.round(pass_2_golova_1_sum/golova_1_koef * 10) / 10 + "%";
-    table[3].cells[3].innerHTML = Math.round(pass_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
-    table[4].cells[3].innerHTML = Math.round(navigator_3_pass_sum/navigator_3_koef * 10) / 10 + "%";
-    table[5].cells[3].innerHTML = Math.round(trulaser_pass_sum/trulaser_koef * 10) / 10 + "%";
-    table[6].cells[3].innerHTML = Math.round(kometa_1_pass_sum/kometa_1_koef * 10) / 10 + "%";
-    table[7].cells[3].innerHTML = Math.round(kometa_2_pass_sum/kometa_2_koef * 10) / 10 + "%";
-    table[8].cells[3].innerHTML = Math.round(kometa_3_pass_sum/kometa_3_koef * 10) / 10 + "%";
-    table[9].cells[3].innerHTML = Math.round(ar55_pass_sum/ar55_koef * 10) / 10 + "%";
-    // Столбец пауза
-
-    table[1].cells[4].innerHTML = Math.round(navigator_1_avar_sum/navigator_1_koef * 10) / 10 + "%";
-    table[2].cells[4].innerHTML = Math.round(avar_2_golova_1_sum/golova_1_koef * 10) / 10 + "%";
-    table[3].cells[4].innerHTML = Math.round(avar_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
-    table[4].cells[4].innerHTML = Math.round(navigator_3_avar_sum/navigator_3_koef * 10) / 10 + "%";
-    table[5].cells[4].innerHTML = Math.round(ar55_avar_sum/ar55_koef * 10) / 10 + "%";
-    // Столбец выключен
-
-    table[1].cells[5].innerHTML = Math.round(navigator_1_fail_sum/navigator_1_koef * 10) / 10 + "%";
-    table[2].cells[5].innerHTML = Math.round(fail_2_golova_1_sum/golova_1_koef * 10) / 10 + "%";
-    table[3].cells[5].innerHTML = Math.round(fail_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
-    table[4].cells[5].innerHTML = Math.round(navigator_3_fail_sum/navigator_3_koef * 10) / 10 + "%";
-    table[5].cells[5].innerHTML = Math.round(trulaser_fail_sum/trulaser_koef * 10) / 10 + "%";
-    table[6].cells[5].innerHTML = Math.round(kometa_1_fail_sum/kometa_1_koef * 10) / 10 + "%";
-    table[7].cells[5].innerHTML = Math.round(kometa_2_fail_sum/kometa_2_koef * 10) / 10 + "%";
-    table[8].cells[5].innerHTML = Math.round(kometa_3_fail_sum/kometa_3_koef * 10) / 10 + "%";
-    table[9].cells[5].innerHTML = Math.round(ar55_fail_sum/ar55_koef * 10) / 10 + "%";
-    //Столбец ручной режим
+    // table[1].cells[1].innerHTML = Math.round(navigator_1_work_sum/navigator_1_koef * 10) / 10 + "%";
+    // table[2].cells[1].innerHTML = Math.round(work_2_golova_1_sum/golova_1_koef * 10) / 10 + "%";
+    // table[3].cells[1].innerHTML = Math.round(work_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
+    // table[4].cells[1].innerHTML = Math.round(navigator_3_work_sum/navigator_3_koef * 10) / 10 + "%";
+    // table[5].cells[1].innerHTML = Math.round(trulaser_work_sum/trulaser_koef * 10) / 10 + "%";
+    // table[6].cells[1].innerHTML = Math.round(kometa_1_work_sum/kometa_1_koef * 10) / 10 + "%";
+    // table[7].cells[1].innerHTML = Math.round(kometa_2_work_sum/kometa_2_koef * 10) / 10 + "%";
+    // table[8].cells[1].innerHTML = Math.round(kometa_3_work_sum/kometa_3_koef * 10) / 10 + "%";
+    // table[9].cells[1].innerHTML = Math.round(ar55_work_sum/ar55_koef * 10) / 10 + "%";
+    // // Столбец Работа
+    //
+    // table[1].cells[2].innerHTML = Math.round(navigator_1_nagruzka_sum/navigator_1_koef * 10) / 10 + "%";
+    // table[2].cells[2].innerHTML = Math.round(nagruzka_2_golova_1_sum/golova_1_koef * 10) / 10 + "%";
+    // table[3].cells[2].innerHTML = Math.round(nagruzka_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
+    // table[4].cells[2].innerHTML = Math.round(navigator_3_nagruzka_sum/navigator_3_koef * 10) / 10 + "%";
+    // table[5].cells[2].innerHTML = Math.round(ar55_nagruzka_sum/ar55_koef * 10) / 10 + "%";
+    // // Столбец Нагрузка
+    //
+    // table[1].cells[3].innerHTML = Math.round(navigator_1_pass_sum/navigator_1_koef * 10) / 10 + "%";
+    // table[2].cells[3].innerHTML = Math.round(pass_2_golova_1_sum/golova_1_koef * 10) / 10 + "%";
+    // table[3].cells[3].innerHTML = Math.round(pass_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
+    // table[4].cells[3].innerHTML = Math.round(navigator_3_pass_sum/navigator_3_koef * 10) / 10 + "%";
+    // table[5].cells[3].innerHTML = Math.round(trulaser_pass_sum/trulaser_koef * 10) / 10 + "%";
+    // table[6].cells[3].innerHTML = Math.round(kometa_1_pass_sum/kometa_1_koef * 10) / 10 + "%";
+    // table[7].cells[3].innerHTML = Math.round(kometa_2_pass_sum/kometa_2_koef * 10) / 10 + "%";
+    // table[8].cells[3].innerHTML = Math.round(kometa_3_pass_sum/kometa_3_koef * 10) / 10 + "%";
+    // table[9].cells[3].innerHTML = Math.round(ar55_pass_sum/ar55_koef * 10) / 10 + "%";
+    // // Столбец пауза
+    //
+    // table[1].cells[4].innerHTML = Math.round(navigator_1_avar_sum/navigator_1_koef * 10) / 10 + "%";
+    // table[2].cells[4].innerHTML = Math.round(avar_2_golova_1_sum/golova_1_koef * 10) / 10 + "%";
+    // table[3].cells[4].innerHTML = Math.round(avar_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
+    // table[4].cells[4].innerHTML = Math.round(navigator_3_avar_sum/navigator_3_koef * 10) / 10 + "%";
+    // table[5].cells[4].innerHTML = Math.round(ar55_avar_sum/ar55_koef * 10) / 10 + "%";
+    // // Столбец выключен
+    //
+    // table[1].cells[5].innerHTML = Math.round(navigator_1_fail_sum/navigator_1_koef * 10) / 10 + "%";
+    // table[2].cells[5].innerHTML = Math.round(fail_2_golova_1_sum/golova_1_koef * 10) / 10 + "%";
+    // table[3].cells[5].innerHTML = Math.round(fail_2_golova_2_sum/golova_2_koef * 10) / 10 + "%";
+    // table[4].cells[5].innerHTML = Math.round(navigator_3_fail_sum/navigator_3_koef * 10) / 10 + "%";
+    // table[5].cells[5].innerHTML = Math.round(trulaser_fail_sum/trulaser_koef * 10) / 10 + "%";
+    // table[6].cells[5].innerHTML = Math.round(kometa_1_fail_sum/kometa_1_koef * 10) / 10 + "%";
+    // table[7].cells[5].innerHTML = Math.round(kometa_2_fail_sum/kometa_2_koef * 10) / 10 + "%";
+    // table[8].cells[5].innerHTML = Math.round(kometa_3_fail_sum/kometa_3_koef * 10) / 10 + "%";
+    // table[9].cells[5].innerHTML = Math.round(ar55_fail_sum/ar55_koef * 10) / 10 + "%";
+    // //Столбец ручной режим
 
 </script><!--Запись переменных в таблицy-->
 </body>
