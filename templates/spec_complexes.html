@@ -524,7 +524,7 @@
     // Функция распарсивания массивов
     $.map(Diagram, function (element, index) {
         // Отказ от работы с пустым массивом
-        if(element != null) {
+        if(element != 0) {
             if (element.length != 0) {
 
 
@@ -563,6 +563,13 @@
                         linear_avar.push(roundDiagram[3]);
                         linear_nagruzka.push(roundDiagram[4]);
                     }
+                    else {
+                        linear_rabota.push(0);
+                        linear_pause.push(0);
+                        linear_off.push(0);
+                        linear_avar.push(0);
+                        linear_nagruzka.push(0);
+                    }
                 }
                 else {
                     linear_rabota.push(0);
@@ -572,6 +579,13 @@
                     linear_nagruzka.push(0);
                 }
             }
+        }
+        else {
+            linear_rabota.push(0);
+            linear_pause.push(0);
+            linear_off.push(0);
+            linear_avar.push(0);
+            linear_nagruzka.push(0);
         }
     });
 
