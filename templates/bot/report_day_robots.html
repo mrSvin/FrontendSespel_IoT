@@ -32,10 +32,10 @@
         <tr>
             <th>Станки</th>
             <th>Работа</th>
-            <th>Нагрузка</th>
             <th>Пауза</th>
-            <th>Авария</th>
             <th>Выключен</th>
+            <th>Авария</th>
+            <th>Нагрузка</th>
         </tr>
         </thead>
         <tbody>
@@ -100,80 +100,77 @@
     <!--Общая загрузка html-->
 </div>  <!--Общая загрузка и количество операций html-->
 <script th:inline="javascript">
+    var linear_rabota = [];
+    var linear_pause = [];
+    var linear_off = [];
+    var linear_avar = [];
+    var linear_nagruzka = [];
 
-    var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+    var maks_1_data = [[${maks_1_data}]];
+    var maks_2_data = [[${maks_2_data}]];
+    var m710_data = [[${m710_data}]];
+    var ptk12c_data = [[${rtk12c_data}]];
+    var p250_data = [[${p250_data}]];
+    var krot_data = [[${krot_data}]];
+    var prans_data = [[${prans_data}]];
 
-    var work_maks_1 = [[${work}]];
-    var pause_maks_1 = [[${pass}]];
-    var off_maks_1 = [[${fail}]];
-    var avar_maks_1 = [[${avar}]];
-    var nagruzka_maks_1 = [[${nagruzka}]];
+    // Массив с массивами
+    const Diagram = [maks_1_data, maks_2_data, m710_data,
+        ptk12c_data, p250_data, krot_data, prans_data]
 
-    var work_maks_2 = [[${work_2}]];
-    var pause_maks_2 = [[${pass_2}]];
-    var off_maks_2 = [[${fail_2}]];
-    var avar_maks_2 = [[${avar_2}]];
-    var nagruzka_maks_2 = [[${nagruzka_2}]];
+    table = document.getElementById('myTable').rows; // Обращение к таблице по ID
 
-    var work_m710 = [[${work_3}]];
-    var pause_m710 = [[${pass_3}]];
-    var off_m710 = [[${fail_3}]];
-    var avar_m710 = [[${avar_3}]];
-    var nagruzka_m710 = [[${nagruzka_3}]];
+    var koef = []
 
-    var work_rtc12c = [[${work_4}]];
-    var pause_rtc12c = [[${pass_4}]];
-    var off_rtc12c = [[${fail_4}]];
-    var avar_rtc12c = [[${avar_4}]];
-    var nagruzka_rtc12c = [[${nagruzka_4}]];
+    $.map(Diagram, function (element, index) {
+        // Отказ от работы с пустым массивом
+        if(element != null) {
+            if (element.length != 0) {
 
-    var work_p250 = [[${work_5}]];
-    var pause_p250 = [[${pass_5}]];
-    var off_p250 = [[${fail_5}]];
-    var avar_p250 = [[${avar_5}]];
-    var nagruzka_p250 = [[${nagruzka_5}]];
+                var roundDiagram = element[6];
 
-    var work_krot = [[${work_krot}]];
-    var pause_krot = [[${pass_krot}]];
-    var off_krot = [[${fail_krot}]];
-    var avar_krot = [[${avar_krot}]];
-    var nagruzka_krot = [[${nagruzka_krot}]];
+                if (roundDiagram != null) {
+                    // Преобразование элементов круговой диаграммы из строк в числа
+                    $.each(roundDiagram, function (i) {
+                        roundDiagram[i] = parseInt(roundDiagram[i]);
+                    });
 
-    var work_prans = [[${work_prans}]];
-    var pause_prans = [[${pass_prans}]];
-    var off_prans = [[${fail_prans}]];
-    var avar_prans = [[${avar_prans}]];
-    var nagruzka_prans = [[${nagruzka_prans}]];
+                    // Вычисление работы без нагрузки для линейной диаграммы
+                    roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                }
 
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
+                // Заполнение переменных общей круговой и линейной диаграмм
+                if (roundDiagram != 0) {
+                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                    linear_pause.push(Array(1).fill(roundDiagram[1]));
+                    linear_off.push(Array(1).fill(roundDiagram[2]));
+                    linear_avar.push(Array(1).fill(roundDiagram[3]));
+                    linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+                    koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4])/100);
+                }
+                else {
+                    linear_rabota.push(0);
+                    linear_pause.push(0);
+                    linear_off.push(0);
+                    linear_avar.push(0);
+                    linear_nagruzka.push(0);
+                    koef.push(0)
+                }
+            }
         }
+
+        $.each(roundDiagram, function (i) {
+            table[index+1].cells[i+1].innerHTML = Math.round(roundDiagram[i]/koef[index] * 10) / 10 + "%";
+        });
     });
 
+    // Формирование графиков для общих круговой и линейной диаграммы
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
         },
-        colors:colors,
+        colors:colorsLine,
         title: {
             text: 'Общая загрузка оборудования'
         },
@@ -201,85 +198,26 @@
         plotOptions: {
             column: {
                 stacking: 'percent'
-            },
-            series: {
-                borderColor: 'gray'
-            },
+            }
         },
         series: [{
             name: 'Авария',
-            data: [avar_maks_1, avar_maks_2, avar_m710, avar_rtc12c, avar_p250, avar_krot, avar_prans]
+            data: linear_avar
         }, {
             name: 'Выключен',
-            data: [off_maks_1, off_maks_2, off_m710, off_rtc12c, off_p250, off_krot, off_prans]
+            data: linear_off
         }, {
             name: 'Ожидание',
-            data: [pause_maks_1, pause_maks_2, pause_m710, pause_rtc12c, pause_p250, pause_krot, pause_prans]
+            data: linear_pause
         }, {
             name: 'Под нагрузкой',
-            data: [nagruzka_maks_1, nagruzka_maks_2, nagruzka_m710, nagruzka_rtc12c, nagruzka_p250, nagruzka_krot, nagruzka_prans]
+            data: linear_nagruzka
         }, {
             name: 'Работа',
-            data: [work_maks_1, work_maks_2, work_m710, work_rtc12c, work_p250, work_krot, work_prans]
-        }]
+            data: linear_rabota
+        }, ]
     });
 
-</script>   <!--js Общая загрузка-->
-<script th:inline="javascript">
-    var maks_1_koef = (work_maks_1 + pause_maks_1 + off_maks_1 + avar_maks_1 + nagruzka_maks_1)/100;
-    var maks_2_koef = (work_maks_2 + pause_maks_2 + off_maks_2 + avar_maks_2 + nagruzka_maks_2)/100;
-    var m710_koef = (work_m710 + pause_m710 + off_m710 + avar_m710 + nagruzka_m710)/100;
-    var rtc12c_koef = (work_rtc12c + pause_rtc12c + off_rtc12c + avar_rtc12c + nagruzka_rtc12c)/100;
-    var p250_koef = (work_p250 + pause_p250 + off_p250 + avar_p250 + nagruzka_p250)/100;
-    var krot_koef = (work_krot + pause_krot + off_krot + avar_krot + nagruzka_krot)/100;
-    var prans_koef = (work_prans + pause_prans + off_prans + avar_prans + nagruzka_prans)/100;
-
-    table = document.getElementById('myTable').rows; // Обращение к таблице по ID
-    table[1].cells[1].innerHTML = Math.round(work_maks_1/maks_1_koef * 10) / 10 + "%";
-    table[2].cells[1].innerHTML = Math.round(work_maks_2/maks_2_koef * 10) / 10 + "%";
-    table[3].cells[1].innerHTML = Math.round(work_m710/m710_koef * 10) / 10 + "%";
-    table[4].cells[1].innerHTML = Math.round(work_rtc12c/rtc12c_koef * 10) / 10 + "%";
-    table[5].cells[1].innerHTML = Math.round(work_p250/p250_koef * 10) / 10 + "%";
-    table[6].cells[1].innerHTML = Math.round(work_krot/krot_koef * 10) / 10 + "%";
-    table[7].cells[1].innerHTML = Math.round(work_prans/prans_koef * 10) / 10 + "%";
-
-    // Столбец Работа
-    table[1].cells[2].innerHTML = Math.round(nagruzka_maks_1/maks_1_koef * 10) / 10 + "%";
-    table[2].cells[2].innerHTML = Math.round(nagruzka_maks_2/maks_2_koef * 10) / 10 + "%";
-    table[3].cells[2].innerHTML = Math.round(nagruzka_m710/m710_koef * 10) / 10 + "%";
-    table[4].cells[2].innerHTML = Math.round(nagruzka_rtc12c/rtc12c_koef * 10) / 10 + "%";
-    table[5].cells[2].innerHTML = Math.round(nagruzka_p250/p250_koef * 10) / 10 + "%";
-    table[6].cells[2].innerHTML = Math.round(nagruzka_krot/krot_koef * 10) / 10 + "%";
-    table[7].cells[2].innerHTML = Math.round(nagruzka_prans/prans_koef * 10) / 10 + "%";
-    // Столбец Нагрузка
-
-    table[1].cells[3].innerHTML = Math.round(pause_maks_1/maks_1_koef * 10) / 10 + "%";
-    table[2].cells[3].innerHTML = Math.round(pause_maks_2/maks_2_koef * 10) / 10 + "%";
-    table[3].cells[3].innerHTML = Math.round(pause_m710/m710_koef * 10) / 10 + "%";
-    table[4].cells[3].innerHTML = Math.round(pause_rtc12c/rtc12c_koef * 10) / 10 + "%";
-    table[5].cells[3].innerHTML = Math.round(pause_p250/p250_koef * 10) / 10 + "%";
-    table[6].cells[3].innerHTML = Math.round(pause_krot/krot_koef * 10) / 10 + "%";
-    table[7].cells[3].innerHTML = Math.round(pause_prans/prans_koef * 10) / 10 + "%";
-    // Столбец пауза
-
-    table[1].cells[4].innerHTML = Math.round(avar_maks_1/maks_1_koef * 10) / 10 + "%";
-    table[2].cells[4].innerHTML = Math.round(avar_maks_2/maks_2_koef * 10) / 10 + "%";
-    table[3].cells[4].innerHTML = Math.round(avar_m710/m710_koef * 10) / 10 + "%";
-    table[4].cells[4].innerHTML = Math.round(avar_rtc12c/rtc12c_koef * 10) / 10 + "%";
-    table[5].cells[4].innerHTML = Math.round(avar_p250/p250_koef * 10) / 10 + "%";
-    table[6].cells[4].innerHTML = Math.round(avar_krot/krot_koef * 10) / 10 + "%";
-    table[7].cells[4].innerHTML = Math.round(avar_prans/prans_koef * 10) / 10 + "%";
-    // Столбец выключен
-
-    table[1].cells[5].innerHTML = Math.round(off_maks_1/maks_1_koef * 10) / 10 + "%";
-    table[2].cells[5].innerHTML = Math.round(off_maks_2/maks_2_koef * 10) / 10 + "%";
-    table[3].cells[5].innerHTML = Math.round(off_m710/m710_koef * 10) / 10 + "%";
-    table[4].cells[5].innerHTML = Math.round(off_rtc12c/rtc12c_koef * 10) / 10 + "%";
-    table[5].cells[5].innerHTML = Math.round(off_p250/p250_koef * 10) / 10 + "%";
-    table[6].cells[5].innerHTML = Math.round(off_krot/krot_koef * 10) / 10 + "%";
-    table[7].cells[5].innerHTML = Math.round(off_prans/prans_koef * 10) / 10 + "%";
-    //Столбец ручной режим
-
-</script><!--Запись переменных в таблицу-->
+</script>   <!--js Общая загрузка и таблица-->
 </body>
 </html>
