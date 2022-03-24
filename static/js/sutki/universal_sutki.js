@@ -54,7 +54,7 @@ function timeReplace(dataArray) {
                 if(dataArray[index_time][0] == time_miss)
                 {
                     console.log(index_time)
-                    return
+                    return false
                 }
                 else {
                     // если в массиве время равно текущей дате 23:59:59
