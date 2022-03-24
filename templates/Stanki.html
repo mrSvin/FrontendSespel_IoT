@@ -259,101 +259,6 @@
     <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
     <!--Количество операций html-->
 </div>  <!--Общая загрузка и количество операций html-->
-<script th:inline="javascript">
-
-    var uf5220_kol_op = [[${uf5220_kol_op}]];
-    var progress_kol_op = [[${progress_kol_op}]];
-    var ntx1000_kol_op = [[${ntx1000_kol_op}]];
-    var sk50_kol_op = [[${sk50_kol_op}]];
-    var apec_kol_op = [[${apec_kol_op}]];
-    var dmu50_3_kol_op = [[${dmu50_3_kol_op}]];
-    var dmu50_4_kol_op = [[${dmu50_4_kol_op}]];
-    var ctx310_2_kol_op = [[${ctx310_2_kol_op}]];
-    var ctx510_2_kol_op = [[${ctx510_2_kol_op}]];
-    var ctx510_3_kol_op = [[${ctx510_3_kol_op}]];
-    var ctx310_3_kol_op = [[${ctx310_3_kol_op}]];
-    var ctx510_4_kol_op = [[${ctx510_4_kol_op}]];
-    var ctx510_5_kol_op = [[${ctx510_5_kol_op}]];
-    var dmc1035_2_kol_op = [[${dmc1035_2_kol_op}]];
-
-
-    var kol_long_operations_uf5220 = [[${kol_long_operations_uf5220}]];
-    var kol_long_operations_progress = [[${kol_long_operations_progress}]];
-    var kol_long_operations_ntx1000 = [[${kol_long_operations_ntx1000}]];
-    var kol_long_operations_sk50 = [[${kol_long_operations_sk50}]];
-    var kol_long_operations_apec = [[${kol_long_operations_apec}]];
-    var kol_long_operations_dmu50_3 = [[${kol_long_operations_dmu50_3}]];
-    var kol_long_operations_dmu50_4 = [[${kol_long_operations_dmu50_4}]];
-    var kol_long_operations_ctx310_2 = [[${kol_long_operations_ctx310_2}]];
-    var kol_long_operations_ctx510_2 = [[${kol_long_operations_ctx510_2}]];
-    var kol_long_operations_ctx510_3 = [[${kol_long_operations_ctx510_3}]];
-    var kol_long_operations_ctx310_3 = [[${kol_long_operations_ctx310_3}]];
-    var kol_long_operations_ctx510_4 = [[${kol_long_operations_ctx510_4}]];
-    var kol_long_operations_ctx510_5 = [[${kol_long_operations_ctx510_5}]];
-    var kol_long_operations_dmc1035_2 = [[${kol_long_operations_dmc1035_2}]];
-
-    Highcharts.chart('container_kol_operations', {
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Количество операций'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '15px',
-                }
-            },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2'],
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Количество',
-                align: 'high'
-            },
-            labels: {
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: ' операций'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 80,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor:
-                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-            shadow: true
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Общее количество операций',
-            data: [uf5220_kol_op, progress_kol_op, ntx1000_kol_op, sk50_kol_op, apec_kol_op, dmu50_3_kol_op, dmu50_4_kol_op, ctx310_2_kol_op, ctx510_2_kol_op, ctx510_3_kol_op, ctx310_3_kol_op, ctx510_4_kol_op, ctx510_5_kol_op, dmc1035_2_kol_op]
-        }, {
-            name: 'Количество операций более 3 минут',
-            data: [kol_long_operations_uf5220, kol_long_operations_progress, kol_long_operations_ntx1000, kol_long_operations_sk50, kol_long_operations_apec, kol_long_operations_dmu50_3, kol_long_operations_dmu50_4, kol_long_operations_ctx310_2, kol_long_operations_ctx510_2, kol_long_operations_ctx510_3, kol_long_operations_ctx310_3, kol_long_operations_ctx510_4, kol_long_operations_ctx510_5, kol_long_operations_dmc1035_2]
-        }]
-    });
-</script>   <!--js количество операций-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -466,6 +371,9 @@
     var uf5220_array_pause = [[${uf5220_array_pause}]];
     var uf5220_array_off = [[${uf5220_array_off}]];
     var uf5220_array_programname = [[${uf5220_array_programname}]];
+
+    var uf5220_kol_op = [[${uf5220_kol_op}]];
+    var kol_long_operations_uf5220 = [[${kol_long_operations_uf5220}]];
 </script>   <!--УФ 5220 js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
     var uf5220_work = [[${work}]];
@@ -588,6 +496,9 @@
     var progress_array_pause = [[${progress_array_pause}]];
     var progress_array_off = [[${progress_array_off}]];
     var progress_array_programname = [[${progress_array_programname}]];
+
+    var progress_kol_op = [[${progress_kol_op}]];
+    var kol_long_operations_progress = [[${kol_long_operations_progress}]];
 </script>   <!--Прогресс js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
     var progress_work = [[${progress_work}]];
@@ -713,6 +624,9 @@
     var ntx1000_array_avar = [[${ntx1000_array_avar}]];
     var ntx1000_array_nagruzka = [[${ntx1000_array_nagruzka}]];
     var ntx1000_array_programname = [[${ntx1000_array_programname}]];
+
+    var ntx1000_kol_op = [[${ntx1000_kol_op}]];
+    var kol_long_operations_ntx1000 = [[${kol_long_operations_ntx1000}]];
 </script>   <!--NTX1000 js линейная диагрмма работы оборудования-->
 <script th:inline="javascript">
     var ntx1000_work = [[${ntx1000_work}]];
@@ -974,6 +888,12 @@
     linear_nagruzka.push(0, 0, ntx1000_nagruzka);
     linear_ruchnoi.push(0, 0 ,0);
 
+    var kol_op = [];
+    var kol_long_operations = [];
+
+    kol_op.push(uf5220_kol_op, progress_kol_op, ntx1000_kol_op)
+    kol_long_operations.push(kol_long_operations_uf5220, kol_long_operations_progress, kol_long_operations_ntx1000)
+
     //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
     var sk50_data = [[${sk50_data}]];
     var apec_data = [[${apec_data}]];
@@ -1000,8 +920,10 @@
                 // Функция преобразования в дате сегодняшнего дня значений 23:59:59
                 timeReplace(element);
 
+                // Функция вычисления количества операций
                 var ArrayCount = getCount(element[0]);
-                console.log("Количество операций ", ArrayCount[0], "Количество операций более 3 минут",ArrayCount[1])
+                kol_op.push(ArrayCount[0])
+                kol_long_operations.push(ArrayCount[1])
 
                 // Функция формирования массивов с точками начала и конца
                 var pars_nagruzka = pars(element[4], 0)
@@ -1069,6 +991,9 @@
             linear_avar.push(0);
             linear_nagruzka.push(0);
             linear_ruchnoi.push(0);
+
+            kol_op.push(0)
+            kol_long_operations.push(0)
         }
     });
 
@@ -1127,6 +1052,68 @@
             name: 'Работа',
             data: linear_rabota
         }, ]
+    });
+
+    Highcharts.chart('container_kol_operations', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Количество операций'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '15px',
+                }
+            },
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: kol_op,
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: kol_long_operations,
+        }]
     });
 </script>
 
