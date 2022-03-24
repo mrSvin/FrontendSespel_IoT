@@ -51,10 +51,17 @@ function timeReplace(dataArray) {
         // пробег по массивам до массива с именем программы
         while (index_time < 5) {
             $.each(dataArray[index_time], function (i) {
-                // если в массиве время равно текущей дате 23:59:59
-                if ((dataArray[index_time][i] == time_miss) && i !== 0) {
-                    // то записать в него значение текущее время
-                    dataArray[index_time][i] = time; //dataArray[index_time][i-1]
+                if(dataArray[index_time][0] == time_miss)
+                {
+                    console.log(index_time)
+                    return
+                }
+                else {
+                    // если в массиве время равно текущей дате 23:59:59
+                    if ((dataArray[index_time][i] == time_miss)) {
+                        // то записать в него значение текущее время
+                        dataArray[index_time][i] = time; //dataArray[index_time][i-1]
+                    }
                 }
             });
             // после оконачния цикла each перейти к следующему массиву
