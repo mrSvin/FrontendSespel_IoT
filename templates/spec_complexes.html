@@ -258,6 +258,9 @@
 
     <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
     <!--Общая загрузка html-->
+
+    <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
+    <!--Количество операций html-->
 </div>  <!--Общая загрузка и количество операций html-->
 
 <div style="border: 1px solid #333;">
@@ -511,6 +514,9 @@
     var linear_avar = [];
     var linear_nagruzka = [];
 
+    var kol_op = [];
+    var kol_long_operations = [];
+
     //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
 
     var press_data = [[${press_data}]];
@@ -530,6 +536,9 @@
 
                 // Функция преобразования в дате сегодняшнего дня значений 23:59:59
                 timeReplace(element);
+                var ArrayCount = getCount(element[0]);
+                kol_op.push(ArrayCount[0])
+                kol_long_operations.push(ArrayCount[1])
 
                 // Функция формирования массивов с точками начала и конца
                 var pars_nagruzka = pars(element[4], 0)
@@ -586,6 +595,9 @@
             linear_off.push(0);
             linear_avar.push(0);
             linear_nagruzka.push(0);
+
+            kol_op.push(0)
+            kol_long_operations.push(0)
         }
     });
 
@@ -641,6 +653,68 @@
             name: 'Работа',
             data: linear_rabota
         }, ]
+    });
+
+    Highcharts.chart('container_kol_operations', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Количество операций'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '15px',
+                }
+            },
+            categories: ['Пресс ЧПУ для ступиц', 'ЭПП', 'СТП13М'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: kol_op,
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: kol_long_operations,
+        }]
     });
 </script>
 
