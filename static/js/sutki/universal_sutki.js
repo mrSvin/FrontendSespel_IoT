@@ -59,20 +59,35 @@ function timeReplace(dataArray) {
     }
 }
 
-function getCount(Array){
-    var count = 0;
-    $.each(Array, function(i){
-        console.log(Array[i+1], "Not", time, "count=", count)
-        if(Array[i+1] !== time && Array[i+1] !== time_miss)
+function getCount(arrayParse)
+{
+
+    var index_pars = 0; // Индекс по одному из циклов
+    var count = [0,0];
+
+    // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
+    var lengh = (arrayParse.length)/2-2
+    if (lengh <= 0){
+        return
+    }
+
+    while(index_pars <= lengh)
+    {   // Парсинг
+        if (new Date(arrayParse[index_pars*2]).getTime() !== (new Date(arrayParse[index_pars * 2 + 1])).getTime())
         {
-            count += 1;
+            count[0] += 1;
         }
-        else{
-            return false
+
+        if ((new Date(arrayParse[index_pars*2 + 1])).getTime() - (new Date(arrayParse[index_pars * 2])).getTime() > 180000)
+        {
+            count[1] += 1;
         }
-    });
-    console.log(count)
-    return count
+
+        index_pars += 1;
+    }
+
+    // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
+    return count;
 }
 
 function pars(arrayParse, y, arrayName=null)
