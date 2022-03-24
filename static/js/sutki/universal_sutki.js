@@ -38,10 +38,6 @@ time = time.slice(0, 10) + " " + time.slice(11, 19);
 // Время, которое будет переписано в массивах 'текущая дата 23:59:59'
 time_miss = time.slice(0, 10) + " " + "23:59:59";
 
-function getKolOp(array) {
-
-}
-
 // Функция преобразования в дате сегодняшнего дня значений 23:59:59
 function timeReplace(dataArray) {
     // индекс ограничение, чтобы не обрабатывать 5-ый массив с именем программы
@@ -51,17 +47,10 @@ function timeReplace(dataArray) {
         // пробег по массивам до массива с именем программы
         while (index_time < 5) {
             $.each(dataArray[index_time], function (i) {
-                if(dataArray[index_time][0] == time_miss)
-                {
-                    console.log(index_time)
-                    return false
-                }
-                else {
-                    // если в массиве время равно текущей дате 23:59:59
-                    if ((dataArray[index_time][i] == time_miss)) {
-                        // то записать в него значение текущее время
-                        dataArray[index_time][i] = time; //dataArray[index_time][i-1]
-                    }
+                // если в массиве время равно текущей дате 23:59:59
+                if (dataArray[index_time][i] == time_miss) {
+                    // то записать в него значение текущее время
+                    dataArray[index_time][i] = time; //dataArray[index_time][i-1]
                 }
             });
             // после оконачния цикла each перейти к следующему массиву
