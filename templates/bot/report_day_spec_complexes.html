@@ -32,10 +32,10 @@
             <tr>
                 <th>Станки</th>
                 <th>Работа</th>
-                <th>Нагрузка</th>
                 <th>Пауза</th>
-                <th>Авария</th>
                 <th>Выключен</th>
+                <th>Авария</th>
+                <th>Нагрузка</th>
             </tr>
             </thead>
             <tbody>
@@ -72,101 +72,7 @@
     <div style="width: 45%;" id="container_epp_tok"></div>
 </div>  <!--Общие Ток и давление-->
 
-<script th:inline="javascript">
 
-    var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
-
-    var press_work = [[${work_press}]];
-    var press_pass = [[${pass_press}]];
-    var press_fail = [[${fail_press}]];
-    var press_nagruzka = [[${nagruzka_press}]];
-    var press_avar = [[${avar_press}]];
-
-    var epp_work = [[${work_epp}]];
-    var epp_pass = [[${pass_epp}]];
-    var epp_fail = [[${fail_epp}]];
-    var epp_nagruzka = [[${nagruzka_epp}]];
-    var epp_avar = [[${avar_epp}]];
-
-    var stp13m_work = [[${work_stp13m}]];
-    var stp13m_pass = [[${pass_stp13m}]];
-    var stp13m_fail = [[${fail_stp13m}]];
-
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        }
-    });
-
-    Highcharts.chart('container_sum_zagruzka', {
-        chart: {
-            type: 'bar'
-        },
-        colors:colors,
-        title: {
-            text: 'Общая загрузка оборудования'
-        },
-        xAxis: {
-            categories: ['Пресс ЧПУ', 'ЭПП', 'СТП13М']
-        },
-        credits: {
-            enabled: false
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        legend: {
-            reversed: true
-        },
-        plotOptions: {
-            series: {
-                borderColor: 'gray',
-                stacking: 'percent'
-            },
-        },
-        series: [{
-            name: 'Авария',
-            data: [press_avar, epp_avar, 0]
-        }, {
-            name: 'Выключен',
-            data: [press_fail, epp_fail, stp13m_fail]
-        }, {
-            name: 'Ожидание',
-            data: [press_pass, epp_pass, stp13m_pass]
-        }, {
-            name: 'Под нагрузкой',
-            data: [press_nagruzka, epp_nagruzka, 0]
-        }, {
-            name: 'Работа',
-            data: [press_work, epp_work, stp13m_work]
-        }]
-    });
-
-</script>   <!--js Общая загрузка-->
 <script th:inline="javascript">
 
     var data_davlenie = JSON.parse([[${davlenie}]]);
@@ -360,37 +266,121 @@
     );
 
 </script>   <!--ЭПП js Ток и Температура-->
+
 <script th:inline="javascript">
-    var press_koef = (press_work + press_nagruzka + press_pass + press_avar + press_fail)/100;
-    var epp_koef = (epp_work + epp_nagruzka + epp_pass + epp_avar + epp_fail)/100;
-    var stp13m_koef = (stp13m_work + stp13m_pass + stp13m_fail)/100;
+    var linear_rabota = [];
+    var linear_pause = [];
+    var linear_off = [];
+    var linear_avar = [];
+    var linear_nagruzka = [];
+
+    var press_data = [[${press_data}]];
+    var epp_data = [[${epp_data}]];
+    var stp13m_data = [[${stp13m_data}]];
+
+    // Массив с массивами
+    const Diagram = [press_data, epp_data,  stp13m_data]
 
     table = document.getElementById('myTable').rows; // Обращение к таблице по ID
-    table[1].cells[1].innerHTML = Math.round(press_work/press_koef * 10) / 10 + "%";
-    table[2].cells[1].innerHTML = Math.round(epp_work/epp_koef * 10) / 10 + "%";
-    table[3].cells[1].innerHTML = Math.round(stp13m_work/stp13m_koef * 10) / 10 + "%";
-    // Столбец Работа
 
-    table[1].cells[2].innerHTML = Math.round(press_nagruzka/press_koef * 10) / 10 + "%";
-    table[2].cells[2].innerHTML = Math.round(epp_nagruzka/epp_koef * 10) / 10 + "%";
-    // Столбец Нагрузка
+    var koef = []
 
-    table[1].cells[3].innerHTML = Math.round(press_pass/press_koef  * 10) / 10 + "%";
-    table[2].cells[3].innerHTML = Math.round(epp_pass/epp_koef * 10) / 10 + "%";
-    table[3].cells[3].innerHTML = Math.round(stp13m_pass/stp13m_koef * 10) / 10 + "%";
-    // Столбец пауза
+    $.map(Diagram, function (element, index) {
+        // Отказ от работы с пустым массивом
+        if(element != null) {
+            if (element.length != 0) {
 
-    table[1].cells[4].innerHTML = Math.round(press_avar/press_koef * 10) / 10 + "%";
-    table[2].cells[4].innerHTML = Math.round(epp_avar/epp_koef * 10) / 10 + "%";
-    //Столбец ручной режим
+                var roundDiagram = element[6];
 
-    table[1].cells[5].innerHTML = Math.round(press_fail/press_koef * 10) / 10 + "%";
-    table[2].cells[5].innerHTML = Math.round(epp_fail/epp_koef * 10) / 10 + "%";
-    table[3].cells[5].innerHTML = Math.round(stp13m_fail/stp13m_koef * 10) / 10 + "%";
-    // Столбец выключен
+                if (roundDiagram != null) {
+                    // Преобразование элементов круговой диаграммы из строк в числа
+                    $.each(roundDiagram, function (i) {
+                        roundDiagram[i] = parseInt(roundDiagram[i]);
+                    });
 
+                    // Вычисление работы без нагрузки для линейной диаграммы
+                    roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                }
 
+                // Заполнение переменных общей круговой и линейной диаграмм
+                if (roundDiagram != 0) {
+                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                    linear_pause.push(Array(1).fill(roundDiagram[1]));
+                    linear_off.push(Array(1).fill(roundDiagram[2]));
+                    linear_avar.push(Array(1).fill(roundDiagram[3]));
+                    linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+                    koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4])/100);
+                }
+                else {
+                    linear_rabota.push(0);
+                    linear_pause.push(0);
+                    linear_off.push(0);
+                    linear_avar.push(0);
+                    linear_nagruzka.push(0);
+                    koef.push(0)
+                }
+            }
+        }
 
-</script><!--Запись переменных в таблицу-->
+        $.each(roundDiagram, function (i) {
+            table[index+1].cells[i+1].innerHTML = Math.round(roundDiagram[i]/koef[index] * 10) / 10 + "%";
+        });
+    });
+
+    // Формирование графиков для общих круговой и линейной диаграммы
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors:colorsLine,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: ['Пресс ЧПУ', 'ЭПП', 'СТП13М']
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Авария',
+            data: linear_avar
+        }, {
+            name: 'Выключен',
+            data: linear_off
+        }, {
+            name: 'Ожидание',
+            data: linear_pause
+        }, {
+            name: 'Под нагрузкой',
+            data: linear_nagruzka
+        }, {
+            name: 'Работа',
+            data: linear_rabota
+        }, ]
+    });
+
+</script>   <!--js Общая загрузка и таблица-->
 </body>
 </html>
