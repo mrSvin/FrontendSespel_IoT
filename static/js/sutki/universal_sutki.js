@@ -61,9 +61,9 @@ function timeReplace(dataArray) {
 
 function getCount(Array){
     var count = 0;
-    $.each(ctx510_2_data[0], function(i){
-        console.log(ctx510_2_data[0][i+1], "Not", time, "count=", count)
-        if(ctx510_2_data[0][i+1] !== time)
+    $.each(Array[0], function(i){
+        console.log(Array[0][i+1], "Not", time, "count=", count)
+        if(Array[i+1] !== time && Array[i+1] !== time_miss)
         {
             count += 1;
         }
