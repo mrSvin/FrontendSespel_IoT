@@ -61,7 +61,7 @@ function timeReplace(dataArray) {
 
 function getCount(Array){
     var count = 0;
-    $.each(Array[0], function(i){
+    $.each(Array, function(i){
         console.log(Array[i+1], "Not", time, "count=", count)
         if(Array[i+1] !== time && Array[i+1] !== time_miss)
         {
