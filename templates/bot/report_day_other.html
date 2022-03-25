@@ -89,68 +89,102 @@
     </table>    <!--Таблица изменений-->
     <!--Общая загрузка html-->
 </div>  <!--Общая загрузка и количество операций html-->
+
 <script th:inline="javascript">
+    var linear_rabota = [];
+    var linear_pause = [];
+    var linear_off = [];
+    var linear_avar = [];
+    var linear_nagruzka = [];
+    var linear_kalibrovka = [];
 
-    var colors = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#207210','#38e817'];
+    var kim_data = [[${kim_data}]];
+    var sclad_meh_data = [[${sclad_meh_data}]];
+    var pech_nerg_data = [[${pech_nerg_data}]];
+    var faccin_1_data = [[${faccin_1_data}]];
+    var faccin_2_data = [[${faccin_2_data}]];
 
-    var crysta_apex_work = [[${crysta_apex_work}]];
-    var crysta_apex_pass = [[${crysta_apex_pass}]];
-    var crysta_apex_fail = [[${crysta_apex_fail}]];
-    var crysta_apex_avar = [[${crysta_apex_avar}]];
-    var crysta_apex_kalibrovka = [[${crysta_apex_kalibrovka}]];
 
-    var sclad_meh_work = [[${work}]];
-    var sclad_meh_pass = [[${pass}]];
-    var sclad_meh_fail = [[${fail}]];
-    var sclad_meh_nagruzka = [[${nagruzka}]];
-    var sclad_meh_avar = [[${avar}]];
+    // Массив с массивами
+    const Diagram = [kim_data, sclad_meh_data,  pech_nerg_data, faccin_1_data, faccin_2_data]
 
-    var pech_nerg_work = [[${pech_nerg_work}]];
-    var pech_nerg_pass = [[${pech_nerg_pass}]];
-    var pech_nerg_fail = [[${pech_nerg_fail}]];
-    var pech_nerg_nagruzka = [[${pech_nerg_nagruzka}]];
-    var pech_nerg_avar = [[${pech_nerg_avar}]];
+    table = document.getElementById('myTable').rows; // Обращение к таблице по ID
 
-    var faccin_1_work = [[${work_faccin_1}]];
-    var faccin_1_pass = [[${pass_faccin_1}]];
-    var faccin_1_fail = [[${fail_faccin_1}]];
-    var faccin_1_nagruzka = [[${nagruzka_faccin_1}]];
-    var faccin_1_avar = [[${avar_faccin_1}]];
+    var koef = []
 
-    var faccin_2_work = [[${work_faccin_2}]];
-    var faccin_2_pass = [[${pass_faccin_2}]];
-    var faccin_2_fail = [[${fail_faccin_2}]];
-    var faccin_2_nagruzka = [[${nagruzka_faccin_2}]];
-    var faccin_2_avar = [[${avar_faccin_2}]];
+    $.map(Diagram, function (element, index) {
+        // Отказ от работы с пустым массивом
+        if(element != 0 || element.length != 0) {
+            var roundDiagram = element[6];
 
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
+            if (roundDiagram != null) {
+                // Преобразование элементов круговой диаграммы из строк в числа
+                $.each(roundDiagram, function (i) {
+                    roundDiagram[i] = parseInt(roundDiagram[i]);
+                });
+
+                // Вычисление работы без нагрузки для линейной диаграммы
+                roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+            }
+
+
+            // Заполнение переменных общей круговой и линейной диаграмм
+            if (roundDiagram != 0) {
+
+                if(index === 0 )
+                {
+                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                    linear_pause.push(Array(1).fill(roundDiagram[1]));
+                    linear_off.push(Array(1).fill(roundDiagram[2]));
+                    linear_avar.push(Array(1).fill(roundDiagram[3]));
+                    linear_kalibrovka.push(Array(1).fill(roundDiagram[4]));
+                    linear_nagruzka.push(0);
+                    koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4]) / 100);
+                }
+                else
+                {
+                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                    linear_pause.push(Array(1).fill(roundDiagram[1]));
+                    linear_off.push(Array(1).fill(roundDiagram[2]));
+                    linear_avar.push(Array(1).fill(roundDiagram[3]));
+                    linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+                    linear_kalibrovka.push(0);
+                    koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4]) / 100);}
+                }
+            else
+            {
+                linear_rabota.push(0);
+                linear_pause.push(0);
+                linear_off.push(0);
+                linear_avar.push(0);
+                linear_nagruzka.push(0);
+                linear_kalibrovka.push(0);
+                koef.push(0)
+            }
         }
+        else
+        {
+            linear_rabota.push(0);
+            linear_pause.push(0);
+            linear_off.push(0);
+            linear_avar.push(0);
+            linear_nagruzka.push(0);
+            linear_kalibrovka.push(0);
+            koef.push(0)
+        }
+
+        $.each(roundDiagram, function (i) {
+            table[index + 1].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
+        });
     });
 
+    // Формирование графиков для общих круговой и линейной диаграммы
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#207210','#38e817'];
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
         },
-        colors: colors,
+        colors:colorsLine,
         title: {
             text: 'Общая загрузка оборудования'
         },
@@ -178,79 +212,29 @@
         plotOptions: {
             column: {
                 stacking: 'percent'
-            },
-            series: {
-                borderColor: 'gray'
-            },
+            }
         },
         series: [{
             name: 'Авария',
-            data: [crysta_apex_avar, sclad_meh_avar, pech_nerg_avar, faccin_1_avar, faccin_2_avar]
+            data: linear_avar
         }, {
             name: 'Выключен',
-            data: [crysta_apex_fail, sclad_meh_fail, pech_nerg_fail, faccin_1_fail, faccin_2_fail]
+            data: linear_off
         }, {
             name: 'Ожидание',
-            data: [crysta_apex_pass, sclad_meh_pass, pech_nerg_pass, faccin_1_pass, faccin_2_pass]
+            data: linear_pause
         }, {
             name: 'Калибровка',
-            data: [crysta_apex_kalibrovka, 0, 0, 0, 0]
-        }, {
-            name: 'Под нагрузкой',
-            data: [0, sclad_meh_nagruzka, pech_nerg_nagruzka,  faccin_1_nagruzka, faccin_2_nagruzka]
+            data: linear_kalibrovka
         },{
+            name: 'Под нагрузкой',
+            data: linear_nagruzka
+        }, {
             name: 'Работа',
-            data: [crysta_apex_work, sclad_meh_work, pech_nerg_work, faccin_1_work, faccin_2_work]
-        }]
+            data: linear_rabota
+        }, ]
     });
 
-</script>   <!--js Общая загрузка-->
-<script th:inline="javascript">
-
-    var crysta_apex_koef = (crysta_apex_work + crysta_apex_pass + crysta_apex_fail + crysta_apex_avar + crysta_apex_kalibrovka)/100;
-    var sclad_meh_koef = (sclad_meh_work + sclad_meh_pass + sclad_meh_fail + sclad_meh_nagruzka + sclad_meh_avar)/100;
-    var pech_nerg_koef = (pech_nerg_work + pech_nerg_pass + pech_nerg_fail + pech_nerg_nagruzka + pech_nerg_avar)/100;
-    var faccin_1_koef = (faccin_1_work + faccin_1_pass + faccin_1_fail + faccin_1_nagruzka + faccin_1_avar)/100;
-    var faccin_2_koef = (faccin_2_work + faccin_2_pass + faccin_2_fail + faccin_2_nagruzka + faccin_2_avar)/100;
-
-    table = document.getElementById('myTable').rows; // Обращение к таблице по ID
-    table[1].cells[1].innerHTML = Math.round(crysta_apex_work/crysta_apex_koef * 10) / 10 + "%";
-    table[2].cells[1].innerHTML = Math.round(sclad_meh_work/sclad_meh_koef * 10) / 10 + "%";
-    table[3].cells[1].innerHTML = Math.round(pech_nerg_work/pech_nerg_koef * 10) / 10 + "%";
-    table[4].cells[1].innerHTML = Math.round(faccin_1_work/faccin_1_koef * 10) / 10 + "%";
-    table[5].cells[1].innerHTML = Math.round(faccin_2_work/faccin_2_koef * 10) / 10 + "%";
-    // Столбец Работа
-
-    table[2].cells[2].innerHTML = Math.round(sclad_meh_nagruzka/sclad_meh_koef * 10) / 10 + "%";
-    table[3].cells[2].innerHTML = Math.round(pech_nerg_nagruzka/pech_nerg_koef * 10) / 10 + "%";
-    table[4].cells[2].innerHTML = Math.round(faccin_1_nagruzka/faccin_1_koef * 10) / 10 + "%";
-    table[5].cells[2].innerHTML = Math.round(faccin_2_nagruzka/faccin_2_koef * 10) / 10 + "%";
-    // Столбец Нагрузка
-
-    table[1].cells[3].innerHTML = Math.round(crysta_apex_pass/crysta_apex_koef * 10) / 10 + "%";
-    table[2].cells[3].innerHTML = Math.round(sclad_meh_pass/sclad_meh_koef * 10) / 10 + "%";
-    table[3].cells[3].innerHTML = Math.round(pech_nerg_pass/pech_nerg_koef * 10) / 10 + "%";
-    table[4].cells[3].innerHTML = Math.round(faccin_1_pass/faccin_1_koef * 10) / 10 + "%";
-    table[5].cells[3].innerHTML = Math.round(faccin_2_pass/faccin_2_koef * 10) / 10 + "%";
-    // Столбец пауза
-
-    table[1].cells[4].innerHTML = Math.round(crysta_apex_avar/crysta_apex_koef * 10) / 10 + "%";
-    table[2].cells[4].innerHTML = Math.round(sclad_meh_avar/sclad_meh_koef * 10) / 10 + "%";
-    table[3].cells[4].innerHTML = Math.round(pech_nerg_avar/pech_nerg_koef * 10) / 10 + "%";
-    table[4].cells[4].innerHTML = Math.round(faccin_1_avar/faccin_1_koef * 10) / 10 + "%";
-    table[5].cells[4].innerHTML = Math.round(faccin_2_avar/faccin_2_koef * 10) / 10 + "%";
-    // Столбец авария
-
-    table[1].cells[5].innerHTML = Math.round(crysta_apex_fail/crysta_apex_koef * 10) / 10 + "%";
-    table[2].cells[5].innerHTML = Math.round(sclad_meh_fail/sclad_meh_koef * 10) / 10 + "%";
-    table[3].cells[5].innerHTML = Math.round(pech_nerg_fail/pech_nerg_koef * 10) / 10 + "%";
-    table[4].cells[5].innerHTML = Math.round(faccin_1_fail/faccin_1_koef * 10) / 10 + "%";
-    table[5].cells[5].innerHTML = Math.round(faccin_2_fail/faccin_2_koef * 10) / 10 + "%";
-    //Столбец выключен
-
-    table[1].cells[6].innerHTML = Math.round(crysta_apex_kalibrovka/crysta_apex_koef * 10) / 10 + "%";
-    //Столбец калибровка
-
-</script><!--Запись переменных в таблицу-->
+</script>   <!--js Общая загрузка и таблица-->
 </body>
 </html>
