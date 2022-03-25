@@ -287,43 +287,46 @@
 
     $.map(Diagram, function (element, index) {
         // Отказ от работы с пустым массивом
-        if(element != null) {
-            if (element.length != 0) {
+        if(element != 0 || element.length != 0) {
+                    var roundDiagram = element[6];
 
-                var roundDiagram = element[6];
+                    if (roundDiagram != null) {
+                        // Преобразование элементов круговой диаграммы из строк в числа
+                        $.each(roundDiagram, function (i) {
+                            roundDiagram[i] = parseInt(roundDiagram[i]);
+                        });
 
-                if (roundDiagram != null) {
-                    // Преобразование элементов круговой диаграммы из строк в числа
-                    $.each(roundDiagram, function (i) {
-                        roundDiagram[i] = parseInt(roundDiagram[i]);
-                    });
+                        // Вычисление работы без нагрузки для линейной диаграммы
+                        roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                    }
 
-                    // Вычисление работы без нагрузки для линейной диаграммы
-                    roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                    // Заполнение переменных общей круговой и линейной диаграмм
+                    if (roundDiagram != 0) {
+                        linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                        linear_pause.push(Array(1).fill(roundDiagram[1]));
+                        linear_off.push(Array(1).fill(roundDiagram[2]));
+                        linear_avar.push(Array(1).fill(roundDiagram[3]));
+                        linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+                        koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4]) / 100);
+                    } else {
+                        linear_rabota.push(0);
+                        linear_pause.push(0);
+                        linear_off.push(0);
+                        linear_avar.push(0);
+                        linear_nagruzka.push(0);
+                        koef.push(0)
+                    }
                 }
-
-                // Заполнение переменных общей круговой и линейной диаграмм
-                if (roundDiagram != 0) {
-                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
-                    linear_pause.push(Array(1).fill(roundDiagram[1]));
-                    linear_off.push(Array(1).fill(roundDiagram[2]));
-                    linear_avar.push(Array(1).fill(roundDiagram[3]));
-                    linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
-                    koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4])/100);
-                }
-                else {
-                    linear_rabota.push(0);
-                    linear_pause.push(0);
-                    linear_off.push(0);
-                    linear_avar.push(0);
-                    linear_nagruzka.push(0);
-                    koef.push(0)
-                }
+            else {
+                linear_rabota.push(0);
+                linear_pause.push(0);
+                linear_off.push(0);
+                linear_avar.push(0);
+                linear_nagruzka.push(0);
+                koef.push(0)
             }
-        }
-
         $.each(roundDiagram, function (i) {
-            table[index+1].cells[i+1].innerHTML = Math.round(roundDiagram[i]/koef[index] * 10) / 10 + "%";
+            table[index + 1].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
         });
     });
 
