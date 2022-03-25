@@ -202,7 +202,7 @@
   linear_off.push(uf5220_fail, progress_fail, ntx1000_fail);
   linear_avar.push(0, 0, ntx1000_avar);
   linear_nagruzka.push(0, 0, ntx1000_nagruzka);
-  linear_ruchnoi.push(0, 0 ,0);
+  linear_kalibrovka.push(0, 0 ,0);
 
   var uf5220_koef = (work_uf5220 + pause_uf5220 + off_uf5220)/100;
   var progress_koef = (work_progress + pause_progress + off_progress)/100;
@@ -265,7 +265,7 @@
           linear_pause.push(Array(1).fill(roundDiagram[1]));
           linear_off.push(Array(1).fill(roundDiagram[2]));
           linear_avar.push(Array(1).fill(roundDiagram[3]));
-          linear_ruchnoi.push(Array(1).fill(roundDiagram[4]));
+          linear_kalibrovka.push(Array(1).fill(roundDiagram[4]));
           linear_nagruzka.push(0);
           koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4]) / 100);
         }
@@ -276,7 +276,7 @@
           linear_off.push(Array(1).fill(roundDiagram[2]));
           linear_avar.push(Array(1).fill(roundDiagram[3]));
           linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
-          linear_ruchnoi.push(0);
+          linear_kalibrovka.push(0);
           koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4]) / 100);}
       }
       else
