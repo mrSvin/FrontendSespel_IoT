@@ -32,10 +32,10 @@
         <tr>
             <th>Станки</th>
             <th>Работа</th>
-            <th>Нагрузка</th>
             <th>Пауза</th>
-            <th>Авария</th>
             <th>Выключен</th>
+            <th>Авария</th>
+            <th>Нагрузка</th>
         </tr>
         </thead>
         <tbody>
@@ -139,105 +139,87 @@
     </table>    <!--Таблица изменений-->
     <!--Общая загрузка html-->
 </div>  <!--Общая загрузка и количество операций html-->
+
 <script th:inline="javascript">
+    var linear_rabota = [];
+    var linear_pause = [];
+    var linear_off = [];
+    var linear_avar = [];
+    var linear_nagruzka = [];
 
-    var colors = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
-
-    var work_uvf_1_1 = [[${work}]];
-    var work_uvf_1_2 = [[${work_2}]];
-    var work_ntx1000 = [[${work_3}]];
-    var work_nlx3000 = [[${work_nlx3000}]];
-    var work_gamma2000 = [[${work_dmg_gamma2000}]];
-    var work_ctx650 = [[${work_dmg_ctx650}]];
-    var work_dmf260 = [[${work_dmg_dmf260}]];
-    var work_dmu50_1 = [[${work_dmg_dmu50_1}]];
-    var work_dmu50_2 = [[${work_dmg_dmu50_2}]];
-    var work_dmc1035 = [[${work_dmg_dmc1035}]];
-    var work_ctx310_1 = [[${work_dmg_ctx310_1}]];
-    var work_ctx510_1 = [[${work_dmg_ctx510_1}]];
-
-    var pause_uvf_1_1 = [[${pass}]];
-    var pause_uvf_1_2 = [[${pass_2}]];
-    var pause_ntx1000 = [[${pass_3}]];
-    var pause_nlx3000 = [[${pass_nlx3000}]];
-    var pause_gamma2000 = [[${pass_dmg_gamma2000}]];
-    var pause_ctx650 = [[${pass_dmg_ctx650}]];
-    var pause_dmf260 = [[${pass_dmg_dmf260}]];
-    var pause_dmu50_1 = [[${pass_dmg_dmu50_1}]];
-    var pause_dmu50_2 = [[${pass_dmg_dmu50_2}]];
-    var pause_dmc1035 = [[${pass_dmg_dmc1035}]];
-    var pause_ctx310_1 = [[${pass_dmg_ctx310_1}]];
-    var pause_ctx510_1 = [[${pass_dmg_ctx510_1}]];
-
-    var off_uvf_1_1 = [[${fail}]];
-    var off_uvf_1_2 = [[${fail_2}]];
-    var off_ntx1000 = [[${fail_3}]];
-    var off_nlx3000 = [[${fail_nlx3000}]];
-    var off_gamma2000 = [[${fail_dmg_gamma2000}]];
-    var off_ctx650 = [[${fail_dmg_ctx650}]];
-    var off_dmf260 = [[${fail_dmg_dmf260}]];
-    var off_dmu50_1 = [[${fail_dmg_dmu50_1}]];
-    var off_dmu50_2 = [[${fail_dmg_dmu50_2}]];
-    var off_dmc1035 = [[${fail_dmg_dmc1035}]];
-    var off_ctx310_1 = [[${fail_dmg_ctx310_1}]];
-    var off_ctx510_1 = [[${fail_dmg_ctx510_1}]];
-
-    var avar_uvf_1_1 = [[${avar}]];
-    var avar_uvf_1_2 = [[${avar_2__2}]];
-    var avar_ntx1000 = [[${avar_3}]];
-    var avar_nlx3000 = [[${avar_nlx3000}]];
-    var avar_gamma2000 = [[${avar_dmg_gamma2000}]];
-    var avar_ctx650 = [[${avar_dmg_ctx650}]];
-    var avar_dmf260 = [[${avar_dmg_dmf260}]];
-    var avar_dmu50_1 = [[${avar_dmg_dmu50_1}]];
-    var avar_dmu50_2 = [[${avar_dmg_dmu50_2}]];
-    var avar_dmc1035 = [[${avar_dmg_dmc1035}]];
-    var avar_ctx310_1 = [[${avar_dmg_ctx310_1}]];
-    var avar_ctx510_1 = [[${avar_dmg_ctx510_1}]];
+    var uvf_1_data = [[${uvf_1_data}]];
+    var uvf_2_data = [[${uvf_2_data}]];
+    var dmg_ntx1000_data = [[${dmg_ntx1000_2_data}]];
+    var dmg_nlx3000_data = [[${dmg_nlx3000_data}]];
+    var dmg_gamma2000_data = [[${dmg_gamma2000_data}]];
+    var dmg_ctx650_data = [[${dmg_ctx650_data}]];
+    var dmg_dmf260_data = [[${dmg_dmf260_data}]];
+    var dmg_dmu50_1_data = [[${dmg_dmu50_1_data}]];
+    var dmg_dmu50_2_data = [[${dmg_dmu50_2_data}]];
+    var dmg_dmc1035_data = [[${dmg_dmc1035_data}]];
+    var dmg_ctx310_1_data = [[${dmg_ctx310_1_data}]];
+    var dmg_ctx510_1_data = [[${dmg_ctx510_1_data}]];
 
 
 
-    var nagruzka_uvf_1_1 = [[${nagruzka}]];
-    var nagruzka_uvf_1_2 = [[${nagruzka_2__2}]];
-    var nagruzka_ntx1000 = [[${nagruzka_3}]];
-    var nagruzka_nlx3000 = [[${nagruzka_nlx3000}]];
-    var nagruzka_gamma2000 = [[${nagruzka_dmg_gamma2000}]];
-    var nagruzka_ctx650 = [[${nagruzka_dmg_ctx650}]];
-    var nagruzka_dmf260 = [[${nagruzka_dmg_dmf260}]];
-    var nagruzka_dmu50_1 = [[${nagruzka_dmg_dmu50_1}]];
-    var nagruzka_dmu50_2 = [[${nagruzka_dmg_dmu50_2}]];
-    var nagruzka_dmc1035 = [[${nagruzka_dmg_dmc1035}]];
-    var nagruzka_ctx310_1 = [[${nagruzka_dmg_ctx310_1}]];
-    var nagruzka_ctx510_1 = [[${nagruzka_dmg_ctx510_1}]];
+    // Массив с массивами
+    const Diagram = [uvf_1_data,uvf_2_data,dmg_ntx1000_data,dmg_nlx3000_data,
+        dmg_gamma2000_data, dmg_ctx650_data,dmg_dmf260_data, dmg_dmu50_1_data,
+        dmg_dmu50_2_data, dmg_dmc1035_data, dmg_ctx310_1_data, dmg_ctx510_1_data]
 
-    Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
-        },
-        global: {
-            timezoneOffset: new Date().getTimezoneOffset()
+    table = document.getElementById('myTable').rows; // Обращение к таблице по ID
+
+    var koef = []
+
+    $.map(Diagram, function (element, index) {
+        // Отказ от работы с пустым массивом
+        if(element != null) {
+            if (element.length != 0) {
+
+                var roundDiagram = element[6];
+
+                if (roundDiagram != null) {
+                    // Преобразование элементов круговой диаграммы из строк в числа
+                    $.each(roundDiagram, function (i) {
+                        roundDiagram[i] = parseInt(roundDiagram[i]);
+                    });
+
+                    // Вычисление работы без нагрузки для линейной диаграммы
+                    roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                }
+
+                // Заполнение переменных общей круговой и линейной диаграмм
+                if (roundDiagram != 0) {
+                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                    linear_pause.push(Array(1).fill(roundDiagram[1]));
+                    linear_off.push(Array(1).fill(roundDiagram[2]));
+                    linear_avar.push(Array(1).fill(roundDiagram[3]));
+                    linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+                    koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4])/100);
+                }
+                else {
+                    linear_rabota.push(0);
+                    linear_pause.push(0);
+                    linear_off.push(0);
+                    linear_avar.push(0);
+                    linear_nagruzka.push(0);
+                    koef.push(0)
+                }
+            }
         }
+
+        $.each(roundDiagram, function (i) {
+            table[index+1].cells[i+1].innerHTML = Math.round(roundDiagram[i]/koef[index] * 10) / 10 + "%";
+        });
     });
 
+    // Формирование графиков для общих круговой и линейной диаграммы
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
         },
-        colors: colors,
+        colors:colorsLine,
         title: {
             text: 'Общая загрузка оборудования'
         },
@@ -265,115 +247,27 @@
         plotOptions: {
             column: {
                 stacking: 'percent'
-            },
-            series: {
-                borderColor: 'gray'
-            },
+            }
         },
         series: [{
             name: 'Авария',
-            data: [avar_uvf_1_1, avar_uvf_1_2, avar_ntx1000, avar_nlx3000, avar_gamma2000, avar_ctx650, avar_dmf260, avar_dmu50_1, avar_dmu50_2, avar_dmc1035, avar_ctx310_1, avar_ctx510_1]
+            data: linear_avar
         }, {
             name: 'Выключен',
-            data: [off_uvf_1_1, off_uvf_1_2, off_ntx1000, off_nlx3000, off_gamma2000, off_ctx650, off_dmf260, off_dmu50_1, off_dmu50_2, off_dmc1035, off_ctx310_1, off_ctx510_1]
+            data: linear_off
         }, {
             name: 'Ожидание',
-            data: [pause_uvf_1_1, pause_uvf_1_2, pause_ntx1000, pause_nlx3000, pause_gamma2000, pause_ctx650, pause_dmf260, pause_dmu50_1, pause_dmu50_2, pause_dmc1035, pause_ctx310_1, pause_ctx510_1]
+            data: linear_pause
         }, {
             name: 'Под нагрузкой',
-            data: [nagruzka_uvf_1_1, nagruzka_uvf_1_2, nagruzka_ntx1000, nagruzka_nlx3000, nagruzka_gamma2000, nagruzka_ctx650, nagruzka_dmf260, nagruzka_dmu50_1, nagruzka_dmu50_2, nagruzka_dmc1035, nagruzka_ctx310_1, nagruzka_ctx510_1]
+            data: linear_nagruzka
         }, {
             name: 'Работа',
-            data: [work_uvf_1_1, work_uvf_1_2, work_ntx1000, work_nlx3000, work_gamma2000, work_ctx650, work_dmf260, work_dmu50_1, work_dmu50_2, work_dmc1035, work_ctx310_1, work_ctx510_1 ]
-        }]
+            data: linear_rabota
+        }, ]
     });
 
-</script>   <!--js Общая загрузка-->
-<script th:inline="javascript">
-    var uvf_1_1_koef = (work_uvf_1_1 + nagruzka_uvf_1_1 + pause_uvf_1_1 + avar_uvf_1_1 + off_uvf_1_1)/100;
-    var uvf_1_2_koef = (work_uvf_1_2 + nagruzka_uvf_1_2 + pause_uvf_1_2 + avar_uvf_1_2 + off_uvf_1_2)/100;
-    var ntx1000_koef = (work_ntx1000 + nagruzka_ntx1000 + pause_ntx1000 + avar_ntx1000 + off_ntx1000)/100;
-    var nlx3000_koef = (work_nlx3000 + nagruzka_nlx3000 + pause_nlx3000 + avar_nlx3000 + off_nlx3000)/100;
-    var gamma2000_koef = (work_gamma2000 + nagruzka_gamma2000 + pause_gamma2000 + avar_gamma2000 + off_gamma2000)/100;
-    var ctx650_koef = (work_ctx650 + nagruzka_ctx650 + pause_ctx650 + avar_ctx650 + off_ctx650)/100;
-    var dmf260_koef = (work_dmf260 + nagruzka_dmf260 + pause_dmf260 + avar_dmf260 + off_dmf260)/100;
-    var dmu50_1_koef = (work_dmu50_1 + nagruzka_dmu50_1 + pause_dmu50_1 + avar_dmu50_1 + off_dmu50_1)/100;
-    var dmu50_2_koef = (work_dmu50_2 + nagruzka_dmu50_2 + pause_dmu50_2 + avar_dmu50_2 + off_dmu50_2)/100;
-    var dmc1035_koef = (work_dmc1035 + nagruzka_dmc1035 + pause_dmc1035 + avar_dmc1035 + off_dmc1035)/100;
-    var ctx310_1_koef = (work_ctx310_1 + nagruzka_ctx310_1 + pause_ctx310_1 + avar_ctx310_1 + off_ctx310_1)/100;
-    var ctx510_1_koef = (work_ctx510_1 + nagruzka_ctx510_1 + pause_ctx510_1 + avar_ctx510_1 + off_ctx510_1)/100;
+</script>   <!--js Общая загрузка и таблица-->
 
-    table = document.getElementById('myTable').rows; // Обращение к таблице по ID
-    table[1].cells[1].innerHTML = Math.round(work_uvf_1_1/uvf_1_1_koef * 10) / 10 + "%";
-    table[2].cells[1].innerHTML = Math.round(work_uvf_1_2/uvf_1_2_koef * 10) / 10 + "%";
-    table[3].cells[1].innerHTML = Math.round(work_ntx1000/ntx1000_koef * 10) / 10 + "%";
-    table[4].cells[1].innerHTML = Math.round(work_nlx3000/nlx3000_koef * 10) / 10 + "%";
-    table[5].cells[1].innerHTML = Math.round(work_gamma2000/gamma2000_koef * 10) / 10 + "%";
-    table[6].cells[1].innerHTML = Math.round(work_ctx650/ctx650_koef * 10) / 10 + "%";
-    table[7].cells[1].innerHTML = Math.round(work_dmf260/dmf260_koef * 10) / 10 + "%";
-    table[8].cells[1].innerHTML = Math.round(work_dmu50_1/dmu50_1_koef * 10) / 10 + "%";
-    table[9].cells[1].innerHTML = Math.round(work_dmu50_2/dmu50_2_koef * 10) / 10 + "%";
-    table[10].cells[1].innerHTML = Math.round(work_dmc1035/dmc1035_koef * 10) / 10 + "%";
-    table[11].cells[1].innerHTML = Math.round(work_ctx310_1/ctx310_1_koef * 10) / 10 + "%";
-    table[12].cells[1].innerHTML = Math.round(work_ctx510_1/ctx510_1_koef * 10) / 10 + "%";
-
-    // Столбец Работа
-    table[1].cells[2].innerHTML = Math.round(nagruzka_uvf_1_1/uvf_1_1_koef * 10) / 10 + "%";
-    table[2].cells[2].innerHTML = Math.round(nagruzka_uvf_1_2/uvf_1_2_koef * 10) / 10 + "%";
-    table[3].cells[2].innerHTML = Math.round(nagruzka_ntx1000/ntx1000_koef * 10) / 10 + "%";
-    table[4].cells[2].innerHTML = Math.round(nagruzka_nlx3000/nlx3000_koef * 10) / 10 + "%";
-    table[5].cells[2].innerHTML = Math.round(nagruzka_gamma2000/gamma2000_koef * 10) / 10 + "%";
-    table[6].cells[2].innerHTML = Math.round(nagruzka_ctx650/ctx650_koef * 10) / 10 + "%";
-    table[7].cells[2].innerHTML = Math.round(nagruzka_dmf260/dmf260_koef * 10) / 10 + "%";
-    table[8].cells[2].innerHTML = Math.round(nagruzka_dmu50_1/dmu50_1_koef * 10) / 10 + "%";
-    table[9].cells[2].innerHTML = Math.round(nagruzka_dmu50_2/dmu50_2_koef * 10) / 10 + "%";
-    table[10].cells[2].innerHTML = Math.round(nagruzka_dmc1035/dmc1035_koef * 10) / 10 + "%";
-    table[11].cells[2].innerHTML = Math.round(nagruzka_ctx310_1/ctx310_1_koef * 10) / 10 + "%";
-    table[12].cells[2].innerHTML = Math.round(nagruzka_ctx510_1/ctx510_1_koef * 10) / 10 + "%";
-    // Столбец Нагрузка
-
-    table[1].cells[3].innerHTML = Math.round(pause_uvf_1_1/uvf_1_1_koef * 10) / 10 + "%";
-    table[2].cells[3].innerHTML = Math.round(pause_uvf_1_2/uvf_1_2_koef * 10) / 10 + "%";
-    table[3].cells[3].innerHTML = Math.round(pause_ntx1000/ntx1000_koef * 10) / 10 + "%";
-    table[4].cells[3].innerHTML = Math.round(pause_nlx3000/nlx3000_koef * 10) / 10 + "%";
-    table[5].cells[3].innerHTML = Math.round(pause_gamma2000/gamma2000_koef * 10) / 10 + "%";
-    table[6].cells[3].innerHTML = Math.round(pause_ctx650/ctx650_koef * 10) / 10 + "%";
-    table[7].cells[3].innerHTML = Math.round(pause_dmf260/dmf260_koef * 10) / 10 + "%";
-    table[8].cells[3].innerHTML = Math.round(pause_dmu50_1/dmu50_1_koef * 10) / 10 + "%";
-    table[9].cells[3].innerHTML = Math.round(pause_dmu50_2/dmu50_2_koef * 10) / 10 + "%";
-    table[10].cells[3].innerHTML = Math.round(pause_dmc1035/dmc1035_koef * 10) / 10 + "%";
-    table[11].cells[3].innerHTML = Math.round(pause_ctx310_1/ctx310_1_koef * 10) / 10 + "%";
-    table[12].cells[3].innerHTML = Math.round(pause_ctx510_1/ctx510_1_koef * 10) / 10 + "%";
-    // Столбец пауза
-
-    table[1].cells[4].innerHTML = Math.round(avar_uvf_1_1/uvf_1_1_koef * 10) / 10 + "%";
-    table[2].cells[4].innerHTML = Math.round(avar_uvf_1_2/uvf_1_2_koef * 10) / 10 + "%";
-    table[3].cells[4].innerHTML = Math.round(avar_ntx1000/ntx1000_koef * 10) / 10 + "%";
-    table[4].cells[4].innerHTML = Math.round(avar_nlx3000/nlx3000_koef * 10) / 10 + "%";
-    table[5].cells[4].innerHTML = Math.round(avar_gamma2000/gamma2000_koef * 10) / 10 + "%";
-    table[6].cells[4].innerHTML = Math.round(avar_ctx650/ctx650_koef * 10) / 10 + "%";
-    table[7].cells[4].innerHTML = Math.round(avar_dmf260/dmf260_koef * 10) / 10 + "%";
-    table[8].cells[4].innerHTML = Math.round(avar_dmu50_1/dmu50_1_koef * 10) / 10 + "%";
-    table[9].cells[4].innerHTML = Math.round(avar_dmu50_2/dmu50_2_koef * 10) / 10 + "%";
-    table[10].cells[4].innerHTML = Math.round(avar_dmc1035/dmc1035_koef * 10) / 10 + "%";
-    table[11].cells[4].innerHTML = Math.round(avar_ctx310_1/ctx310_1_koef * 10) / 10 + "%";
-    table[12].cells[4].innerHTML = Math.round(avar_ctx510_1/ctx510_1_koef * 10) / 10 + "%";
-    // Столбец выключен
-
-    table[1].cells[5].innerHTML = Math.round(off_uvf_1_1/uvf_1_1_koef * 10) / 10 + "%";
-    table[2].cells[5].innerHTML = Math.round(off_uvf_1_2/uvf_1_2_koef * 10) / 10 + "%";
-    table[3].cells[5].innerHTML = Math.round(off_ntx1000/ntx1000_koef * 10) / 10 + "%";
-    table[4].cells[5].innerHTML = Math.round(off_nlx3000/nlx3000_koef * 10) / 10 + "%";
-    table[5].cells[5].innerHTML = Math.round(off_gamma2000/gamma2000_koef * 10) / 10 + "%";
-    table[6].cells[5].innerHTML = Math.round(off_ctx650/ctx650_koef * 10) / 10 + "%";
-    table[7].cells[5].innerHTML = Math.round(off_dmf260/dmf260_koef * 10) / 10 + "%";
-    table[8].cells[5].innerHTML = Math.round(off_dmu50_1/dmu50_1_koef * 10) / 10 + "%";
-    table[9].cells[5].innerHTML = Math.round(off_dmu50_2/dmu50_2_koef * 10) / 10 + "%";
-    table[10].cells[5].innerHTML = Math.round(off_dmc1035/dmc1035_koef * 10) / 10 + "%";
-    table[11].cells[5].innerHTML = Math.round(off_ctx310_1/ctx310_1_koef * 10) / 10 + "%";
-    table[12].cells[5].innerHTML = Math.round(off_ctx510_1/ctx510_1_koef * 10) / 10 + "%";
-    //Столбец ручной режим
-
-</script><!--Запись переменных в таблицу-->
 </body>
 </html>
