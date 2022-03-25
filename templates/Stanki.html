@@ -869,6 +869,25 @@
 
 </div> <!--dmc1035_2 html-->
 
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/dmg_dmu50.png" class="stanok_img"/>
+                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">DMU50 #5</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="dmg_dmu50_5 (); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_dmu50_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div id="container_work15" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container15" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        </div>
+    </div>
+</div> <!--DMU50-5 html-->
+
 <!--Скрипт парсинга и заполнения диаграмм-->
 <script th:inline="javascript">
     var colorsRuchnoi = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
@@ -906,10 +925,11 @@
     var ctx510_4_data = [[${dmg_ctx510_4_data}]];
     var ctx510_5_data = [[${dmg_ctx510_5_data}]];
     var dmc1035_2_data = [[${dmg_dmc1035_2_data}]];
+    var dmu50_5_data = [[${dmg_dmu50_5_data}]];
 
     // Массив с массивами
     const Diagram = [sk50_data, apec_data, dmu50_3_data,
-        dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data]
+        dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data, dmu50_5_data]
 
     // Функция распарсивания массивов
     $.map(Diagram, function (element, index) {
@@ -1013,7 +1033,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2']
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5']
         },
         credits: {
             enabled: false
