@@ -179,34 +179,30 @@
   var linear_nagruzka = [];
   var linear_kalibrovka = [];
 
-  var uf5220_work = [[${work}]];
-  var uf5220_pass = [[${pass}]];
-  var uf5220_fail = [[${fail}]];
-  var uf5220_avar = [[${avar}]];
-  var uf5220_nagruzka = [[${nagruzka}]];
+  var work_uf5220 = [[${work}]];
+  var pass_uf5220 = [[${pass}]];
+  var fail_uf5220 = [[${fail}]];
 
-  var progress_work = [[${progress_work}]];
-  var progress_pass = [[${progress_pass}]];
-  var progress_fail = [[${progress_fail}]];
-  var progress_avar = [[${progress_avar}]];
-  var progress_nagruzka = [[${progress_nagruzka}]];
+  var work_progress = [[${progress_work}]];
+  var pass_progress = [[${progress_pass}]];
+  var fail_progress = [[${progress_fail}]];
 
-  var ntx1000_work = [[${ntx1000_work}]];
-  var ntx1000_pass = [[${ntx1000_pass}]];
-  var ntx1000_fail = [[${ntx1000_fail}]];
-  var ntx1000_avar = [[${ntx1000_avar}]];
-  var ntx1000_nagruzka = [[${ntx1000_nagruzka}]];
+  var work_ntx1000 = [[${ntx1000_work}]];
+  var pass_ntx1000 = [[${ntx1000_pass}]];
+  var fail_ntx1000 = [[${ntx1000_fail}]];
+  var avar_ntx1000 = [[${ntx1000_avar}]];
+  var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
 
-  linear_rabota.push(uf5220_work, progress_work,ntx1000_work);
-  linear_pause.push(uf5220_pass, progress_pass, ntx1000_pass);
-  linear_off.push(uf5220_fail, progress_fail, ntx1000_fail);
+  linear_rabota.push(work_uf5220, work_progress,work_ntx1000);
+  linear_pause.push(pass_uf5220, pass_progress, pass_ntx1000);
+  linear_off.push(fail_uf5220, fail_progress, fail_ntx1000);
   linear_avar.push(0, 0, ntx1000_avar);
   linear_nagruzka.push(0, 0, ntx1000_nagruzka);
   linear_kalibrovka.push(0, 0 ,0);
 
-  var uf5220_koef = (work_uf5220 + pause_uf5220 + off_uf5220)/100;
-  var progress_koef = (work_progress + pause_progress + off_progress)/100;
-  var ntx1000_koef = (work_ntx1000 + nagruzka_ntx1000 + pause_ntx1000 + avar_ntx1000 + off_ntx1000)/100;
+  var uf5220_koef = (work_uf5220 + pass_uf5220 + fail_uf5220)/100;
+  var progress_koef = (work_progress + pass_progress + fail_progress)/100;
+  var ntx1000_koef = (work_ntx1000 + nagruzka_ntx1000 + pass_ntx1000 + avar_ntx1000 + fail_ntx1000)/100;
 
   var sk50_data = [[${sk50_data}]];
   var apec_data = [[${apec_data}]];
@@ -229,14 +225,18 @@
   table[1].cells[1].innerHTML = Math.round(work_uf5220/uf5220_koef * 10) / 10 + "%";
   table[2].cells[1].innerHTML = Math.round(work_progress/progress_koef * 10) / 10 + "%";
   table[3].cells[1].innerHTML = Math.round(work_ntx1000/ntx1000_koef * 10) / 10 + "%";
+
   table[3].cells[2].innerHTML = Math.round(nagruzka_ntx1000/ntx1000_koef * 10) / 10 + "%";
-  table[1].cells[3].innerHTML = Math.round(pause_uf5220/uf5220_koef * 10) / 10 + "%";
-  table[2].cells[3].innerHTML = Math.round(pause_progress/progress_koef * 10) / 10 + "%";
-  table[3].cells[3].innerHTML = Math.round(pause_ntx1000/ntx1000_koef * 10) / 10 + "%";
+
+  table[1].cells[3].innerHTML = Math.round(pass_uf5220/uf5220_koef * 10) / 10 + "%";
+  table[2].cells[3].innerHTML = Math.round(pass_progress/progress_koef * 10) / 10 + "%";
+  table[3].cells[3].innerHTML = Math.round(pass_ntx1000/ntx1000_koef * 10) / 10 + "%";
+
   table[3].cells[4].innerHTML = Math.round(avar_ntx1000/ntx1000_koef * 10) / 10 + "%";
-  table[1].cells[5].innerHTML = Math.round(off_uf5220/uf5220_koef * 10) / 10 + "%";
-  table[2].cells[5].innerHTML = Math.round(off_progress/progress_koef * 10) / 10 + "%";
-  table[3].cells[5].innerHTML = Math.round(off_ntx1000/ntx1000_koef * 10) / 10 + "%";
+
+  table[1].cells[5].innerHTML = Math.round(fail_uf5220/uf5220_koef * 10) / 10 + "%";
+  table[2].cells[5].innerHTML = Math.round(fail_progress/progress_koef * 10) / 10 + "%";
+  table[3].cells[5].innerHTML = Math.round(fail_ntx1000/ntx1000_koef * 10) / 10 + "%";
 
   var koef = []
 
