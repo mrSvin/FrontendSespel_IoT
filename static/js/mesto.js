@@ -452,11 +452,11 @@ function nlx3000 (){
 };
 
 function dmg_gamma2000 (){
-    mar_top = -590;
-    mar_left = 310;
-    bground = 'url(../images/NLX3000.png) no-repeat';
+    mar_top = -840;
+    mar_left = 520;
+    bground = 'url(../images/gamma2000.png) no-repeat';
     place_img = "../images/meh_ceh.png";
-    size = 40;
+    size = 60;
     bwidth = "unset";
 
     window.localStorage['mar_top'] = mar_top;

@@ -337,7 +337,6 @@ Highcharts.chart('container_work3', {
                 {x:  (new Date(ntx1000_array_rabota[590])).getTime(), x2: (new Date(ntx1000_array_rabota[591])).getTime(),  y: 1, programname: ntx1000_array_programname[295]},
                 {x:  (new Date(ntx1000_array_rabota[592])).getTime(), x2: (new Date(ntx1000_array_rabota[593])).getTime(),  y: 1, programname: ntx1000_array_programname[296]},
                 {x:  (new Date(ntx1000_array_rabota[594])).getTime(), x2: (new Date(ntx1000_array_rabota[595])).getTime(),  y: 1, programname: ntx1000_array_programname[297]},
-                {x:  (new Date(ntx1000_array_rabota[596])).getTime(), x2: (new Date(ntx1000_array_rabota[597])).getTime(),  y: 1, programname: ntx1000_array_programname[298]},
             ],
 
     },
@@ -649,7 +648,6 @@ Highcharts.chart('container_work3', {
                 {x:  (new Date(ntx1000_array_pause[590])).getTime(), x2: (new Date(ntx1000_array_pause[591])).getTime(), y: 2},
                 {x:  (new Date(ntx1000_array_pause[592])).getTime(), x2: (new Date(ntx1000_array_pause[593])).getTime(), y: 2},
                 {x:  (new Date(ntx1000_array_pause[594])).getTime(), x2: (new Date(ntx1000_array_pause[595])).getTime(), y: 2},
-                {x:  (new Date(ntx1000_array_pause[596])).getTime(), x2: (new Date(ntx1000_array_pause[597])).getTime(), y: 2},
             ],
             dataLabels: {
                 enabled: true
@@ -1031,10 +1029,6 @@ Highcharts.chart('container_work3', {
                 {x:  (new Date(ntx1000_array_nagruzka[590])).getTime(), x2: (new Date(ntx1000_array_nagruzka[591])).getTime(), y: 0},
                 {x:  (new Date(ntx1000_array_nagruzka[592])).getTime(), x2: (new Date(ntx1000_array_nagruzka[593])).getTime(), y: 0},
                 {x:  (new Date(ntx1000_array_nagruzka[594])).getTime(), x2: (new Date(ntx1000_array_nagruzka[595])).getTime(), y: 0},
-                {x:  (new Date(ntx1000_array_nagruzka[596])).getTime(), x2: (new Date(ntx1000_array_nagruzka[597])).getTime(), y: 0},
-
-
-
             ],
             dataLabels: {
                 enabled: true
