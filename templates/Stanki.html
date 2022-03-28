@@ -916,11 +916,11 @@
     //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
     var sk50_data = [[${sk50_data}]];
     var apec_data = [[${apec_data}]];
-    var dmu50_3_data = [[${dmg_dmu50_3_data}]];
+    var dmu50_3_data = 0//[[${dmg_dmu50_3_data}]];
     var dmu50_4_data = [[${dmg_dmu50_4_data}]];
-    var ctx310_2_data = [[${dmg_ctx310_2_data}]];
+    var ctx310_2_data = null // [[${dmg_ctx310_2_data}]];
     var ctx510_2_data = [[${dmg_ctx510_2_data}]];
-    var ctx510_3_data = [[${dmg_ctx510_3_data}]];
+    var ctx510_3_data = []//[[${dmg_ctx510_3_data}]];
     var ctx310_3_data = [[${dmg_ctx310_3_data}]];
     var ctx510_4_data = [[${dmg_ctx510_4_data}]];
     var ctx510_5_data = [[${dmg_ctx510_5_data}]];
@@ -931,91 +931,108 @@
     const Diagram = [sk50_data, apec_data, dmu50_3_data,
         dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data, dmu50_5_data]
 
-    // Функция распарсивания массивов
+    // Функция парсинга элементов массива на диаграмму и таблицу
     $.map(Diagram, function (element, index) {
-        // Отказ от работы с пустым массивом
-        if(element != 0) {
-            if (element.length != 0) {
-
-                // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-                timeReplace(element);
-
-                // Функция вычисления количества операций
-                var ArrayCount = getCount(element[0]);
-                kol_op.push(ArrayCount[0])
-                kol_long_operations.push(ArrayCount[1])
-
-                // Функция формирования массивов с точками начала и конца
-                var pars_nagruzka = pars(element[4], 0)
-                var pars_rabota = pars(element[0], 1, element[5])
-                var pars_pause = pars(element[1], 2)
-                var pars_off = pars(element[2], 3)
-                var pars_avar = pars(element[3], 4)
-                var roundDiagram = element[6];
-
-                // Спец. условия для ручного режима на APEC
-                if(index == 1) {
-                    setDataLine("container_work" + (index + 4), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Ручной режим', '#5c7ed0');
-                }
-
-                else {
-                    setDataLine("container_work" + (index + 4), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
-                }
-
-                if (roundDiagram != null) {
-                    // Преобразование элементов круговой диаграммы из строк в числа
-                    $.each(roundDiagram, function (i) {
-                        roundDiagram[i] = parseInt(roundDiagram[i]);
-                    });
-
-                    // Спец. условия для ручного режима на APEC
-                    if(index == 1) {
-                        // Функция заполнения круговой диаграммы
-                        setDataRound("container" + (index + 4), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4], 'Ручной режим',colorsRuchnoi);
-                    }
-                    else {
-                        // Вычисление работы без нагрузки для круговой диаграммы
-                        roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
-                        // Функция заполнения круговой диаграммы
-                        setDataRound("container" + (index + 4), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
-                    }
-                }
-
-                // Заполнение переменных общей линейной диаграмм
-                if (roundDiagram != 0) {
-                    if (index != 1) {
-                        linear_rabota.push(roundDiagram[0]);
-                        linear_pause.push(roundDiagram[1]);
-                        linear_off.push(roundDiagram[2]);
-                        linear_avar.push(roundDiagram[3]);
-                        linear_nagruzka.push(roundDiagram[4]);
-                        linear_ruchnoi.push(0);
-                    }
-                    // Спец. условия для заполнения ручного режима на APECцйу
-                    else {
-                        linear_rabota.push(roundDiagram[0]);
-                        linear_pause.push(roundDiagram[1]);
-                        linear_off.push(roundDiagram[2]);
-                        linear_avar.push(roundDiagram[3]);
-                        linear_nagruzka.push(0);
-                        linear_ruchnoi.push(roundDiagram[4]);
-
-                    }
-                }
-            }
-        }
-        else {
+        // Если массив станка приходит пустым или нулевым, то записываем в диаграмму нули и следующий цикл
+        if ((element === null) || (element == 0)) {
             linear_rabota.push(0);
             linear_pause.push(0);
             linear_off.push(0);
             linear_avar.push(0);
             linear_nagruzka.push(0);
-            linear_ruchnoi.push(0);
+            linear_kalibrovka.push(0);
 
             kol_op.push(0)
             kol_long_operations.push(0)
+            return
         }
-    });
+
+        else {
+            // Функция преобразования в дате сегодняшнего дня значений 23:59:59
+            timeReplace(element);
+
+            // Функция вычисления количества операций
+            var ArrayCount = getCount(element[0]);
+            kol_op.push(ArrayCount[0])
+            kol_long_operations.push(ArrayCount[1])
+
+            // Функция формирования массивов с точками начала и конца
+            var pars_nagruzka = pars(element[4], 0)
+            var pars_rabota = pars(element[0], 1, element[5])
+            var pars_pause = pars(element[1], 2)
+            var pars_off = pars(element[2], 3)
+            var pars_avar = pars(element[3], 4)
+
+            // Спец. условия для ручного режима на APEC
+            if(index == 1) {
+                setDataLine("container_work" + (index + 4), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, 'Ручной режим', '#5c7ed0');
+            }
+            // Заполнение линейных диаграмм для остальных станков
+            else {
+                setDataLine("container_work" + (index + 4), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
+            }
+
+            // Объявляем массив круговой диаграммы из 6-го массива станка.
+            var roundDiagram = element[6];
+
+            // Если этот массив пустой или нулевой, то записываем в диаграмму нули и следующий цикл
+            if ((roundDiagram == 0) || (roundDiagram === null)) {
+                linear_rabota.push(0);
+                linear_pause.push(0);
+                linear_off.push(0);
+                linear_avar.push(0);
+                linear_nagruzka.push(0);
+                linear_kalibrovka.push(0);
+
+                return
+            }
+
+            // Иначе, преобразовываем массив из строк в целые числа
+            else {
+                // Преобразование элементов круговой диаграммы из строк в числа
+                $.each(roundDiagram, function (i) {
+                    roundDiagram[i] = parseInt(roundDiagram[i]);
+                });
+
+                // Затем вычисляем работу без нагрузки для линейной диаграммы
+                roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+
+                // Спец. условия для ручного режима на APEC
+                if(index == 1) {
+                    // Функция заполнения круговой диаграммы
+                    setDataRound("container" + (index + 4), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4], 'Ручной режим',colorsRuchnoi);
+                }
+                else {
+                    // Вычисление работы без нагрузки для круговой диаграммы
+                    roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                    // Функция заполнения круговой диаграммы
+                    setDataRound("container" + (index + 4), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+                }
+
+                // Заполнение переменных общей линейной диаграмм
+                // Условие для записи APEC, у которого записывается калибровка, а нагрузка ноль
+                if (index === 1) {
+                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                    linear_pause.push(Array(1).fill(roundDiagram[1]));
+                    linear_off.push(Array(1).fill(roundDiagram[2]));
+                    linear_avar.push(Array(1).fill(roundDiagram[3]));
+                    linear_kalibrovka.push(Array(1).fill(roundDiagram[4]));
+                    linear_nagruzka.push(0);
+                }
+
+                // Для другого станка калибровка всегда ноль, а нагрузка записывается
+                else {
+                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                    linear_pause.push(Array(1).fill(roundDiagram[1]));
+                    linear_off.push(Array(1).fill(roundDiagram[2]));
+                    linear_avar.push(Array(1).fill(roundDiagram[3]));
+                    linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+                    linear_kalibrovka.push(0);
+                }
+
+            } // Конец условия, если roundDiagram не пустой
+        } // Конец условия, если Diagram[index] не пустой
+    }); // Конец функции $.map(Diagram)
 
     // Формирование графиков для общих круговой и линейной диаграммы
     colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
