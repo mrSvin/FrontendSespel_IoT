@@ -220,7 +220,7 @@
 
                 // Затем цикл, для заполнения таблицы. Index - станок, i - столбец
                 $.each(roundDiagram, function (i) {
-                    table[index + 4].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
+                    table[index + 1].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
                 }); // Конец цикла записи в таблицу
 
             } // Конец условия, если roundDiagram не пустой

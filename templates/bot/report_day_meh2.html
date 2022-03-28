@@ -316,7 +316,8 @@
           koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4]) / 100);
         }
 
-        // Затем цикл, для заполнения таблицы. Index - станок, i - столбец
+        // Затем цикл, для заполнения таблицы. Index - станок, i - столбец.
+        // Так, как первые три станка не в массиве +4
         $.each(roundDiagram, function (i) {
           // Условие для APEC
           if (index === 1) {
