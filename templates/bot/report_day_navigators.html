@@ -123,11 +123,11 @@
     var linear_nagruzka = [];
 
     var navigator_1_data = [[${navigator_1_data}]];
-    var navigator_2_golova_1_data = [[${navigator_2_golova_1_data}]];
+    var navigator_2_golova_1_data = 0 //[[${navigator_2_golova_1_data}]];
     var navigator_2_golova_2_data = [[${navigator_2_golova_2_data}]];
-    var navigator_3_data = [[${navigator_3_data}]];
+    var navigator_3_data = null//[[${navigator_3_data}]];
     var trulaser_data = [[${trulaser_data}]];
-    var kometa_1_data = [[${kometa_1_data}]];
+    var kometa_1_data = []//[[${kometa_1_data}]];
     var kometa_2_data = [[${kometa_2_data}]];
     var kometa_3_data = [[${kometa_3_data}]];
     var ar55_data = [[${ar55_data}]];
@@ -142,47 +142,61 @@
 
     var koef = []
 
+    // Функция парсинга элементов массива на диаграмму и таблицу
     $.map(Diagram, function (element, index) {
-        // Отказ от работы с пустым массивом
-        if(element != null) {
-            if (element.length != 0) {
-
-                var roundDiagram = element[6];
-
-                if (roundDiagram != null) {
-                    // Преобразование элементов круговой диаграммы из строк в числа
-                    $.each(roundDiagram, function (i) {
-                        roundDiagram[i] = parseInt(roundDiagram[i]);
-                    });
-
-                    // Вычисление работы без нагрузки для линейной диаграммы
-                    roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
-                }
-
-                // Заполнение переменных общей круговой и линейной диаграмм
-                if (roundDiagram != 0) {
-                    linear_rabota.push(Array(1).fill(roundDiagram[0]));
-                    linear_pause.push(Array(1).fill(roundDiagram[1]));
-                    linear_off.push(Array(1).fill(roundDiagram[2]));
-                    linear_avar.push(Array(1).fill(roundDiagram[3]));
-                    linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
-                    koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4])/100);
-                }
-                else {
-                    linear_rabota.push(0);
-                    linear_pause.push(0);
-                    linear_off.push(0);
-                    linear_avar.push(0);
-                    linear_nagruzka.push(0);
-                    koef.push(0)
-                }
-            }
+        // Если массив станка приходит пустым или нулевым, то записываем в диаграмму нули и следующий цикл
+        if ((element === null) || (element == 0)) {
+            linear_rabota.push(0);
+            linear_pause.push(0);
+            linear_off.push(0);
+            linear_avar.push(0);
+            linear_nagruzka.push(0);
+            koef.push(0)
+            return
         }
 
-        $.each(roundDiagram, function (i) {
-            table[index+1].cells[i+1].innerHTML = Math.round(roundDiagram[i]/koef[index] * 10) / 10 + "%";
-        });
-    });
+        else {
+            // Иначе, объявляем массив круговой диаграммы из 6-го массива станка.
+            var roundDiagram = element[6];
+
+            // Если этот массив пустой или нулевой, то записываем в диаграмму нули и следующий цикл
+            if ((roundDiagram == 0) || (roundDiagram === null)) {
+                linear_rabota.push(0);
+                linear_pause.push(0);
+                linear_off.push(0);
+                linear_avar.push(0);
+                linear_nagruzka.push(0);
+                koef.push(0)
+                return
+            }
+
+            // Иначе, преобразовываем массив из строк в целые числа
+            else {
+                // Преобразование элементов круговой диаграммы из строк в числа
+                $.each(roundDiagram, function (i) {
+                    roundDiagram[i] = parseInt(roundDiagram[i]);
+                });
+
+                // Затем вычисляем работу без нагрузки для линейной диаграммы
+                roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+
+                linear_rabota.push(Array(1).fill(roundDiagram[0]));
+                linear_pause.push(Array(1).fill(roundDiagram[1]));
+                linear_off.push(Array(1).fill(roundDiagram[2]));
+                linear_avar.push(Array(1).fill(roundDiagram[3]));
+                linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
+
+                //Вычисление коэффициента конкретного станка
+                koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4]) / 100);
+
+                // Затем цикл, для заполнения таблицы. Index - станок, i - столбец
+                $.each(roundDiagram, function (i) {
+                    table[index + 1].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
+                }); // Конец цикла записи в таблицу
+
+            } // Конец условия, если roundDiagram не пустой
+        } // Конец условия, если Diagram[index] не пустой
+    }); // Конец функции $.map(Diagram)
 
     // Формирование графиков для общих круговой и линейной диаграммы
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
