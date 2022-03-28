@@ -927,7 +927,6 @@
     var dmc1035_2_data = [[${dmg_dmc1035_2_data}]];
     var dmu50_5_data = [[${dmg_dmu50_5_data}]];
 
-    console.log(ctx510_2_data[6][0], ctx510_4_data[6][0])
 
     // Массив с массивами
     const Diagram = [sk50_data, apec_data, dmu50_3_data,
@@ -996,9 +995,6 @@
                     roundDiagram[i] = parseInt(roundDiagram[i]);
                 });
 
-                // Затем вычисляем работу без нагрузки для линейной диаграммы
-                roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
-
                 // Спец. условия для ручного режима на APEC
                 if(index == 1) {
                     // Функция заполнения круговой диаграммы
@@ -1007,6 +1003,9 @@
                 else {
                     // Вычисление работы без нагрузки для круговой диаграммы
                     roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                    if(roundDiagram[0] < 0) {
+                        console.log("Неверное значение работы на станке", index)
+                    }
                     // Функция заполнения круговой диаграммы
                     setDataRound("container" + (index + 4), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
                 }
