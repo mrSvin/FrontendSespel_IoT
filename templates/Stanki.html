@@ -940,7 +940,7 @@
             linear_off.push(0);
             linear_avar.push(0);
             linear_nagruzka.push(0);
-            linear_kalibrovka.push(0);
+            linear_ruchnoi.push(0);
 
             kol_op.push(0)
             kol_long_operations.push(0)
@@ -982,7 +982,7 @@
                 linear_off.push(0);
                 linear_avar.push(0);
                 linear_nagruzka.push(0);
-                linear_kalibrovka.push(0);
+                linear_ruchnoi.push(0);
 
                 return
             }
@@ -1010,24 +1010,24 @@
                 }
 
                 // Заполнение переменных общей линейной диаграмм
-                // Условие для записи APEC, у которого записывается калибровка, а нагрузка ноль
+                // Условие для записи APEC, у которого записывается ручной, а нагрузка ноль
                 if (index === 1) {
                     linear_rabota.push(Array(1).fill(roundDiagram[0]));
                     linear_pause.push(Array(1).fill(roundDiagram[1]));
                     linear_off.push(Array(1).fill(roundDiagram[2]));
                     linear_avar.push(Array(1).fill(roundDiagram[3]));
-                    linear_kalibrovka.push(Array(1).fill(roundDiagram[4]));
+                    linear_ruchnoi.push(Array(1).fill(roundDiagram[4]));
                     linear_nagruzka.push(0);
                 }
 
-                // Для другого станка калибровка всегда ноль, а нагрузка записывается
+                // Для другого станка ручной всегда ноль, а нагрузка записывается
                 else {
                     linear_rabota.push(Array(1).fill(roundDiagram[0]));
                     linear_pause.push(Array(1).fill(roundDiagram[1]));
                     linear_off.push(Array(1).fill(roundDiagram[2]));
                     linear_avar.push(Array(1).fill(roundDiagram[3]));
                     linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
-                    linear_kalibrovka.push(0);
+                    linear_ruchnoi.push(0);
                 }
 
             } // Конец условия, если roundDiagram не пустой
