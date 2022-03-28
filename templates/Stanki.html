@@ -1004,7 +1004,7 @@
                 else {
                     // Вычисление работы без нагрузки для круговой диаграммы
                     roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
-                    if(roundDiagram[0] > 0) {
+                    if(0 > roundDiagram[0]) {
                         console.log("Неверное значение работы на станке", index)
                     }
                     // Функция заполнения круговой диаграммы
