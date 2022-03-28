@@ -183,16 +183,16 @@
                         // Если столбец - нагрузка
                         if (i === 4) {
                             // То, вместо столбца нагрузка записать значение в следующий столбец - Ручной режим(i + 2)
-                            table[index + 4].cells[i + 2].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
+                            table[index + 1].cells[i + 2].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
                         }
                         else {
                             // Иначе записывать в таблицу без изменений(i + 1)
-                            table[index + 4].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
+                            table[index + 1].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
                         }
                     }
                     else {
                         // Иначе, если станок не KIM, записывать в таблицу без изменений(i + 1)
-                        table[index + 4].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
+                        table[index + 1].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
                     }
                 }); // Конец цикла записи в таблицу
 
