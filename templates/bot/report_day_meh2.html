@@ -252,7 +252,7 @@
 
   $.map(Diagram, function (element, index) {
 
-    if(element == null)
+    if((element === null) || (element === 0))
     {
       linear_rabota.push(0);
       linear_pause.push(0);
