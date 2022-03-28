@@ -140,42 +140,42 @@
 <header>
     <div style="display: flex; width: 100vw; justify-content: space-between; flex-wrap: nowrap; width: 100%;">
         <a href="home" style="display: flex; align-items: flex-start;" ><img src="images/logo_black.png" class="icon-logo"/></a>
-            <ul id="menu_ul">
-                <li id="menu_li"><a id="menu_a" href="displayStanki" class="menu-color">Мех.уч.2 пл.</a><div class="neo-line"></div></li>
-                <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
-                <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
-                <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.1 пл.</a></li>
-                <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
-                <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
-                <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
-                <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
-                <li id="menu_li8"><a id="menu_a8" href="gibka">Гибка</a></li>
-            </ul>
+        <ul id="menu_ul">
+            <li id="menu_li"><a id="menu_a" href="displayStanki" class="menu-color">Мех.уч.2 пл.</a><div class="neo-line"></div></li>
+            <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
+            <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
+            <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.1 пл.</a></li>
+            <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
+            <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
+            <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
+            <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
+            <li id="menu_li8"><a id="menu_a8" href="gibka">Гибка</a></li>
+        </ul>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
                 <li th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
             </div>
-          <div method="post" class="dropdown">
-            <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
-            <div class="dropdown-content">
-                <p id="role_vision"></p>
-                <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
-                <li th:text="${user_name}"></li>
-                <p th:text="${user_mail}"></p>
-                <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
-                <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
-                <label class="switch">
-                    <p>Светлая Темная</p>
-                    <span class="slider round"><input type="checkbox" id='dark_button'/><span class="slider_before round_before"></span></span>
-                </label>
-                <form th:action="@{/logout}" method="post">
-                    <button class="follow" type="submit">
-                        Выход
-                    </button>
-                </form>
+            <div method="post" class="dropdown">
+                <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+                <div class="dropdown-content">
+                    <p id="role_vision"></p>
+                    <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
+                    <li th:text="${user_name}"></li>
+                    <p th:text="${user_mail}"></p>
+                    <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
+                    <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
+                    <label class="switch">
+                        <p>Светлая Темная</p>
+                        <span class="slider round"><input type="checkbox" id='dark_button'/><span class="slider_before round_before"></span></span>
+                    </label>
+                    <form th:action="@{/logout}" method="post">
+                        <button class="follow" type="submit">
+                            Выход
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
         </div>
     </div>
     <div style="display:flex; justify-content: center;">
@@ -920,15 +920,14 @@
     var dmu50_4_data = [[${dmg_dmu50_4_data}]];
     var ctx310_2_data = null // [[${dmg_ctx310_2_data}]];
     var ctx510_2_data = [[${dmg_ctx510_2_data}]];
-    var ctx510_3_data = []//[[0],[0],[0],[0],[0],[0],[15,16,7,9,29]]//[[${dmg_ctx510_3_data}]];
+    var ctx510_3_data = []//[[${dmg_ctx510_3_data}]];
     var ctx310_3_data = [[${dmg_ctx310_3_data}]];
     var ctx510_4_data = [[${dmg_ctx510_4_data}]];
     var ctx510_5_data = [[${dmg_ctx510_5_data}]];
     var dmc1035_2_data = [[${dmg_dmc1035_2_data}]];
     var dmu50_5_data = [[${dmg_dmu50_5_data}]];
-</script>
 
-<script>
+
     // Массив с массивами
     const Diagram = [sk50_data, apec_data, dmu50_3_data,
         dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data, dmu50_5_data]
@@ -1005,7 +1004,7 @@
                     // Вычисление работы без нагрузки для круговой диаграммы
                     roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
                     if(roundDiagram[0] < 0) {
-                        console.log("Неверное значение работы на станке", index, roundDiagram[0])
+                        console.log("Неверное значение работы на станке", index)
                     }
                     // Функция заполнения круговой диаграммы
                     setDataRound("container" + (index + 4), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
