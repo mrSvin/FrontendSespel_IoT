@@ -148,8 +148,10 @@
                     roundDiagram[i] = parseInt(roundDiagram[i]);
                 });
 
-                // Затем вычисляем работу без нагрузки для линейной диаграммы
-                roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                if (index !== 0) {
+                    // Затем вычисляем работу без нагрузки для линейной диаграммы, кроме KIM
+                    roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+                }
 
                 // Условие для записи KIM, у которого записывается калибровка, а нагрузка ноль
                 if (index === 0) {
