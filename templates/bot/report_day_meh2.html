@@ -251,6 +251,19 @@
   var koef = []
 
   $.map(Diagram, function (element, index) {
+
+    if(element == null)
+    {
+      linear_rabota.push(0);
+      linear_pause.push(0);
+      linear_off.push(0);
+      linear_avar.push(0);
+      linear_nagruzka.push(0);
+      linear_kalibrovka.push(0);
+      koef.push(0)
+      return
+    }
+
     // Отказ от работы с пустым массивом
     if(element != 0 || element.length != 0) {
       var roundDiagram = element[6];
