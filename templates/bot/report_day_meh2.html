@@ -215,11 +215,11 @@
 
   var sk50_data = [[${sk50_data}]];
   var apec_data = [[${apec_data}]];
-  var dmu50_3_data = null // [[${dmg_dmu50_3_data}]];
+  var dmu50_3_data = [[${dmg_dmu50_3_data}]];
   var dmu50_4_data = [[${dmg_dmu50_4_data}]];
-  var ctx310_2_data = 0 //[[${dmg_ctx310_2_data}]];
+  var ctx310_2_data = [[${dmg_ctx310_2_data}]];
   var ctx510_2_data = [[${dmg_ctx510_2_data}]];
-  var ctx510_3_data = [] // [[${dmg_ctx510_3_data}]];
+  var ctx510_3_data = [[${dmg_ctx510_3_data}]];
   var ctx310_3_data = [[${dmg_ctx310_3_data}]];
   var ctx510_4_data = [[${dmg_ctx510_4_data}]];
   var ctx510_5_data = [[${dmg_ctx510_5_data}]];
@@ -230,6 +230,7 @@
   const Diagram = [sk50_data, apec_data, dmu50_3_data,
     dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data, dmu50_5_data]
 
+  // Запись в таблицу станков, которые не записываются в массив Diagram
   table = document.getElementById('myTable').rows; // Обращение к таблице по ID
   // older
   table[1].cells[1].innerHTML = Math.round(work_uf5220/uf5220_koef * 10) / 10 + "%";
@@ -248,11 +249,12 @@
   table[2].cells[5].innerHTML = Math.round(fail_progress/progress_koef * 10) / 10 + "%";
   table[3].cells[5].innerHTML = Math.round(fail_ntx1000/ntx1000_koef * 10) / 10 + "%";
 
+  // Коэффициент для вычисления записей в таблице
   var koef = []
 
+  // Функция парсинга элементов массива на диаграмму и таблицу
   $.map(Diagram, function (element, index) {
-  console.log("Start",element)
-
+    // Если массив станка приходит пустым или нулевым, то записываем в диаграмму нули и следующий цикл
     if ((element === null) || (element == 0)) {
       linear_rabota.push(0);
       linear_pause.push(0);
@@ -265,8 +267,10 @@
     }
 
     else {
+      // Иначе, объявляем массив круговой диаграммы из 6-го массива станка.
       var roundDiagram = element[6];
 
+      // Если этот массив пустой или нулевой, то записываем в диаграмму нули и следующий цикл
       if ((roundDiagram == 0) || (roundDiagram === null)) {
         linear_rabota.push(0);
         linear_pause.push(0);
@@ -278,15 +282,17 @@
         return
       }
 
+      // Иначе, преобразовываем массив из строк в целые числа
       else {
         // Преобразование элементов круговой диаграммы из строк в числа
         $.each(roundDiagram, function (i) {
           roundDiagram[i] = parseInt(roundDiagram[i]);
         });
 
-        // Вычисление работы без нагрузки для линейной диаграммы
+        // Затем вычисляем работу без нагрузки для линейной диаграммы
         roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
 
+        // Условие для записи APEC, у которого записывается калибровка, а нагрузка ноль
         if (index === 1) {
           linear_rabota.push(Array(1).fill(roundDiagram[0]));
           linear_pause.push(Array(1).fill(roundDiagram[1]));
@@ -294,9 +300,11 @@
           linear_avar.push(Array(1).fill(roundDiagram[3]));
           linear_kalibrovka.push(Array(1).fill(roundDiagram[4]));
           linear_nagruzka.push(0);
+          //Вычисление коэффициента APEC
           koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4]) / 100);
         }
 
+        // Для другого станка калибровка всегда ноль, а нагрузка записывается
         else {
           linear_rabota.push(Array(1).fill(roundDiagram[0]));
           linear_pause.push(Array(1).fill(roundDiagram[1]));
@@ -304,27 +312,33 @@
           linear_avar.push(Array(1).fill(roundDiagram[3]));
           linear_nagruzka.push(Array(1).fill(roundDiagram[4]));
           linear_kalibrovka.push(0);
+          //Вычисление коэффициента конкретного станка
           koef.push((roundDiagram[0] + roundDiagram[1] + roundDiagram[2] + roundDiagram[3] + roundDiagram[4]) / 100);
         }
 
+        // Затем цикл, для заполнения таблицы. Index - станок, i - столбец
         $.each(roundDiagram, function (i) {
-          // Спец. условие для apec
+          // Условие для APEC
           if (index === 1) {
+            // Если столбец - нагрузка
             if (i === 4) {
+              // То, вместо столбца нагрузка записать значение в следующий столбец - Ручной режим(i + 2)
               table[index + 4].cells[i + 2].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
             }
             else {
+              // Иначе записывать в таблицу без изменений(i + 1)
               table[index + 4].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
             }
           }
           else {
+            // Иначе, если станок не APEC, записывать в таблицу без изменений(i + 1)
             table[index + 4].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
           }
-        });
-      }
-    }
+        }); // Конец цикла записи в таблицу
 
-  });
+      } // Конец условия, если roundDiagram не пустой
+    } // Конец условия, если Diagram[index] не пустой
+  }); // Конец функции $.map(Diagram)
 
   // Формирование графиков для общих круговой и линейной диаграммы
   var colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#207210','#38e817'];
