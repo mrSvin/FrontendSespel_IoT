@@ -302,7 +302,7 @@
           element[0][index] = element[0][index] - element[4][index];
         });
       }
-      setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], "Калибровка");
+      setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], "Ручной режим");
     }
 
   });
@@ -314,7 +314,7 @@
       if(index != 0) { // Иссключение для станка без нагрузки
         element[0] = element[0] - element[4];
       }
-      setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4], "Калибровка");
+      setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4], "Ручной режим");
     }
   });
 </script> <!--Скрипт для диаграмм станков-->
