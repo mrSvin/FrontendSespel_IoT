@@ -59,37 +59,43 @@ function timeReplace(dataArray) {
     }
 }
 
-function getCount(arrayParse)
+// Функция вычисляет количества операций, аргумент массив работы
+function getPush_kol_op(arrayWork)
 {
 
     var index_pars = 0; // Индекс по одному из циклов
-    var count = [0,0];
+    var array_kol_op = [0,0];
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = (arrayParse.length)/2-2
+    var lengh = (arrayWork.length)/2-2
+    // Если длина меньше нуля, выйти из функции
     if (lengh <= 0){
         return
     }
 
     while(index_pars <= lengh)
-    {   // Парсинг
-        if (new Date(arrayParse[index_pars*2]).getTime() !== (new Date(arrayParse[index_pars * 2 + 1])).getTime())
+    {   // Условие обычной операции
+        if (new Date(arrayWork[index_pars*2]).getTime() !== (new Date(arrayWork[index_pars * 2 + 1])).getTime())
         {
-            count[0] += 1;
+            array_kol_op[0] += 1;
         }
 
-        if ((new Date(arrayParse[index_pars*2 + 1])).getTime() - (new Date(arrayParse[index_pars * 2])).getTime() > 180000)
+        // Условие обычной больше 180 секунд(3 минуты)
+        if ((new Date(arrayWork[index_pars*2 + 1])).getTime() - (new Date(arrayWork[index_pars * 2])).getTime() > 180000)
         {
-            count[1] += 1;
+            array_kol_op[1] += 1;
         }
 
         index_pars += 1;
     }
 
-    // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
-    return count;
+    // После выхода из цикла происходит запись количества операция для текущего станка
+    kol_op.push(array_kol_op[0])
+    kol_long_operations.push(array_kol_op[1])
 }
 
+// Функция парсит линейные диаграммы в массив объектов
+// Аргументы: массив со станками, y на графики, имя программы опционально
 function pars(arrayParse, y, arrayName=null)
 {
 
@@ -122,6 +128,8 @@ function pars(arrayParse, y, arrayName=null)
     return arraySave
 }
 
+// Функция загоняет массивы с данными в Highcharts линейной суточной,
+// можно в качестве параметра передать имя нагрузки и новый цвет
 function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, nagruzkaName='Под нагрузкой', nagruzkaColor = '#24621d') {
     Highcharts.chart(containerLine, {
         chart: {
@@ -217,6 +225,8 @@ function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar,
 
 }
 
+// Функция загоняет массивы с данными в Highcharts круговой суточной
+// можно в качестве параметра передать имя нагрузки и новый цвет
 function setDataRound(containerRound, work, pass, fail, avar, nagruzka, nagruzkaName='Нагрузка', colorArray=colorsRound) {
     Highcharts.chart(containerRound, {
         chart: {
@@ -258,6 +268,266 @@ function setDataRound(containerRound, work, pass, fail, avar, nagruzka, nagruzka
             data : [[ 'Работа', work ], [ 'Включен', pass ], [ 'Выключен', fail],  [ 'В аварии', avar ], [ nagruzkaName, nagruzka ] ]
         }]
     });
+}
+
+// Функция для заполнения переменных общей линейной диаграммы
+// нулями в случае пустого массива на входе
+// Принимает обрабатываемый массив станка и массив индексами ручного режима
+function pushZero (StanokElement, exception) {
+    // Если массив пустой или нулевой, то
+    if ((StanokElement === null) || (StanokElement == 0)) {
+        // Если массив с ручным режимом пустой
+        if(exception[0][4] !== 'ruchnoi') {
+            // То, заполняем переменные станка без ручного режима
+            linear_rabota.push(0);
+            linear_pause.push(0);
+            linear_off.push(0);
+            linear_avar.push(0);
+            linear_nagruzka.push(0);
+
+            kol_op.push(0)
+            kol_long_operations.push(0)
+            // Возвращаем единицу, чтобы вне функции пропустить пустой станок
+            return 1
+
+        }
+        else
+        {    // Иначе, заполняем переменные станка с ручным режимом
+            linear_rabota.push(0);
+            linear_pause.push(0);
+            linear_off.push(0);
+            linear_avar.push(0);
+            linear_nagruzka.push(0);
+            linear_ruchnoi.push(0);
+
+            kol_op.push(0)
+            kol_long_operations.push(0)
+            // Возвращаем единицу, чтобы вне функции пропустить пустой станок
+            return 1
+        }
+        // Если массив не оказался пустым или нулевым, возвращаем ноль и продолжаем работать с этим станком
+        return 0
+    }
+}
+
+// Функция парсит линейные суточные диаграммы и отправляет их
+// В Highcharts. Аргументы: stanok - массив переменных станка
+// exception - массив исключений
+// index - индекс текущего станка, startContainer - число с какого
+// станка начинать запись
+function buildLinearDiagram(stanok, exception, index, startContainer){
+    // Функция парсинга массивов с точками начала и конца
+    var pars_nagruzka = pars(stanok[4], 0)
+    var pars_rabota = pars(stanok[0], 1, stanok[5])
+    var pars_pause = pars(stanok[1], 2)
+    var pars_off = pars(stanok[2], 3)
+    var pars_avar = pars(stanok[3], 4)
+
+    // Переменная выполненности исключения, меняется на 1 если произошло исключение
+    var exceptionGoted = 0
+
+
+    // Пробегаемся по массиву исключений, если текущий станок будет найдет в исключениях, то выполним условие
+      $.each(exception, function (i) {
+        if(index == exception[i][0]) {
+            setDataLine("container_work" + (index + startContainer), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, exception[i][1], exception[i][2]);
+            // Меняем состояение переменной на 1, т.к. произошло исключение
+            exceptionGoted = 1
+            return
+        }
+    });
+
+    // Если исключения не случилось, обычная запись
+    if (exceptionGoted === 0) {
+        setDataLine("container_work" + (index + startContainer), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
+    }
+}
+
+// Функция парсит круговые диаграммы станков. Учитывает наличие ручного режима
+// Аргументы: stanok - массив переменных станка
+// exception - массив исключений
+// index - индекс текущего станка, startContainer - число с какого
+// станка начинать запись
+function buildRoundDiagram(roundDiagram, exception, index, startContainer) {
+    // Если массив пустой или нулевой, то
+    if ((roundDiagram == 0) || (roundDiagram === null)) {
+
+        // Если в первом элементе неимелся ручной режим
+        if (exception[0][4] !== 'ruchnoi') {
+            // То, заполняем переменные станка без ручного режима
+            linear_rabota.push(0);
+            linear_pause.push(0);
+            linear_off.push(0);
+            linear_avar.push(0);
+            linear_nagruzka.push(0);
+
+            // Выходим из функции и переходим к следующему станку
+            console.log("Пустая круговая без ручного", index + 1)
+            return
+
+        } else {    // Иначе, если массив имеет ручной режим, то заполняем переменные станка с ручным режимом
+            linear_rabota.push(0);
+            linear_pause.push(0);
+            linear_off.push(0);
+            linear_avar.push(0);
+            linear_nagruzka.push(0);
+            linear_ruchnoi.push(0);
+
+            // Выходим из функции и переходим к следующему станку
+            console.log("Пустая круговая c ручным режимом", index + 1)
+            return
+        }
+    }
+
+    // Иначе, если массив не оказался пустым, то
+    else
+    {
+        // Преобразование элементов круговой диаграммы из строк в числа
+        $.each(roundDiagram, function (i) {
+            roundDiagram[i] = parseInt(roundDiagram[i]);
+        });
+
+        // Переменная выполненности исключения, меняется на 1 если произошло исключение
+        var exceptionGoted = 0
+
+        // Пробегаемся по массиву исключений, если текущий станок будет найдет в исключениях, то выполним условие
+        $.each(exception, function (i) {
+            // Пробегаемся по массиву с индексами станков с ручным режимом, при соответсвии, загружаем такой массив в Highcharts
+            if (index == exception[i][0]) {
+                // В функцию SetDataRound exception передается [3], а не [2], т.к. круговая диаграмма требует не одного цвета, а целый массив
+                setDataRound("container" + (index + startContainer), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4], exception[i][1], exception[i][3]);
+                exceptionGoted = 1
+                return
+            }
+        });
+
+        // Если ручной режим не соответсвовал текущему станку, то обычная запись
+        if (exceptionGoted === 0) {
+            // Вычисление работы без нагрузки для круговой диаграммы
+            roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+            // Если работа оказалась меньше нуля предупредить
+            if (0 > roundDiagram[0]) {
+                console.log("Неверное значение работы на станке", index + 1)
+            }
+            setDataRound("container" + (index + startContainer), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
+        }
+    }
+}
+
+// Функция заполняет переменные общей диаграммы значениями, учитывая наличие или
+// отсутвие ручного режима Аргументы: stanok - массив переменных станка
+// exception - массив исключений
+// index - индекс текущего станка
+function buildCommonDiagrams(roundDiagram, exception, index) {
+
+    if ((roundDiagram == 0) || (roundDiagram === null)) {
+        return
+    }
+
+    else {
+        // Переменная выполненности исключения, меняется на 1 если произошло исключение
+        var exceptionGoted = 0
+
+
+        $.each(exception, function (i) {
+            if (index == exception[i][0]) {
+                if ((exception[i][4]) == 'ruchnoi') {
+                    linear_rabota.push(roundDiagram[0]);
+                    linear_pause.push(roundDiagram[1]);
+                    linear_off.push(roundDiagram[2]);
+                    linear_avar.push(roundDiagram[3]);
+                    linear_nagruzka.push(0);
+                    linear_ruchnoi.push(roundDiagram[4]);
+
+                    exceptionGoted = 1
+                    return
+                } else {
+                    linear_rabota.push(roundDiagram[0]);
+                    linear_pause.push(roundDiagram[1]);
+                    linear_off.push(roundDiagram[2]);
+                    linear_avar.push(roundDiagram[3]);
+                    linear_nagruzka.push(roundDiagram[4]);
+                    linear_ruchnoi.push(0);
+
+                    exceptionGoted = 1
+                    return
+                }
+            }
+        });
+
+        if (exceptionGoted === 0) {
+            linear_rabota.push(roundDiagram[0]);
+            linear_pause.push(roundDiagram[1]);
+            linear_off.push(roundDiagram[2]);
+            linear_avar.push(roundDiagram[3]);
+            linear_nagruzka.push(roundDiagram[4]);
+        }
+
+    }
+}
+
+// Универсальная функция сборки и формирования данных для графиков аргументы
+// Массив со станками, стартовый контейнер, если какие-то станки нужно пропустить
+// Массив с исключениями, для добавления отдельной переменной ручного режима
+// и изменения имени операции нагрузки и тд
+function build (stankiDataArray,  startContainer = 1, exception = [0])
+{
+    $.map(stankiDataArray, function (stanok, index) {
+
+        // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
+        // С помощью exception учитываются исключения
+        if (pushZero(stanok, exception)){
+            // Если массив оказался пустым, то переходим к следующему циклу $.map
+            console.log("Пустой вообще", index + 1)
+            return
+        }
+
+        // Функция преобразования в дате сегодняшнего дня значений 23:59:59
+        timeReplace(stanok);
+        // Функция вычисления и добавления станку количества операций
+        getPush_kol_op(stanok[0]);
+        // Функция формирования линейной диаграммы станка аргументы:
+        // массив станка, массив исключений, индекс станка, номер стартого станка
+        buildLinearDiagram(stanok, exception, index, startContainer)
+
+        // Объявляем массив круговой диаграммы из 6-го массива станка.
+        var roundDiagram = stanok[6];
+        // Функция формирования круговой диаграммы станка аргументы:
+        // круговой массив станка, массив исключений, индекс станка, номер стартого станка
+        buildRoundDiagram(roundDiagram, exception, index, startContainer)
+
+        // Функция формирования заполнение данных для общей диаграммы аргументы:
+        // круговой массив станка, массив исключений, индекс станка
+        buildCommonDiagrams(roundDiagram, exception, index)
+
+    }); // Конец функции $.map(Diagram)
+}
+
+// Отдельная функция для разделов, с одним станком без общих диаграмм и количеств операций
+function buildShort (stankiDataArray, exception = [0], startContainer = 1)
+{
+    $.map(stankiDataArray, function (stanok, index) {
+
+        // Если текущий массив пустой, следующий цикл
+        if ((stanok === null) || (stanok == 0)){
+            console.log("Пустой вообще", index + 1)
+            return
+        }
+
+        // Функция преобразования в дате сегодняшнего дня значений 23:59:59
+        timeReplace(stanok);
+        // Функция вычисления и добавления станку количества операций
+        // Функция формирования линейной диаграммы станка аргументы:
+        // массив станка, массив исключений, индекс станка, номер стартого станка
+        buildLinearDiagram(stanok, exception, index, startContainer)
+
+        // Объявляем массив круговой диаграммы из 6-го массива станка.
+        var roundDiagram = stanok[6];
+        // Функция формирования круговой диаграммы станка аргументы:
+        // круговой массив станка, массив исключений, индекс станка, номер стартого станка
+        buildRoundDiagram(roundDiagram, exception, index, startContainer)
+
+    }); // Конец функции $.map(Diagram)
 }
 
 
