@@ -455,21 +455,18 @@ function buildCommonDiagrams(roundDiagram, exception, index) {
 
         $.each(exception, function (i) {
             if ((exception[i][4]) == 'ruchnoi') {
+                linear_rabota.push(roundDiagram[0]);
+                linear_pause.push(roundDiagram[1]);
+                linear_off.push(roundDiagram[2]);
+                linear_avar.push(roundDiagram[3]);
                 if (index == exception[i][0]) {
-                    linear_rabota.push(roundDiagram[0]);
-                    linear_pause.push(roundDiagram[1]);
-                    linear_off.push(roundDiagram[2]);
-                    linear_avar.push(roundDiagram[3]);
+
                     linear_nagruzka.push(0);
                     linear_ruchnoi.push(roundDiagram[4]);
 
                     exceptionGoted = 1
                     return
                 } else {
-                    linear_rabota.push(roundDiagram[0]);
-                    linear_pause.push(roundDiagram[1]);
-                    linear_off.push(roundDiagram[2]);
-                    linear_avar.push(roundDiagram[3]);
                     linear_nagruzka.push(roundDiagram[4]);
                     linear_ruchnoi.push(0);
 
