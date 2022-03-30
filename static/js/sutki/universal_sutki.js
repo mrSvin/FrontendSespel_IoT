@@ -454,8 +454,8 @@ function buildCommonDiagrams(roundDiagram, exception, index) {
 
 
         $.each(exception, function (i) {
-            if (index == exception[i][0]) {
-                if ((exception[i][4]) == 'ruchnoi') {
+            if ((exception[i][4]) == 'ruchnoi') {
+                if (index == exception[i][0]) {
                     linear_rabota.push(roundDiagram[0]);
                     linear_pause.push(roundDiagram[1]);
                     linear_off.push(roundDiagram[2]);
