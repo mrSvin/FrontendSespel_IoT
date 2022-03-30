@@ -283,44 +283,19 @@
         //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
         var kim_data = [[${kim_data}]];
 
-        // Массив с массивами
-        const Diagram = [kim_data]
+</script>
 
+<script>
+  // Массив с массивами
+  const Diagram = [kim_data]
 
-        // Функция распарсивания массивов
-        $.map(Diagram, function (element, index) {
-          // Отказ от работы с пустым массивом
-          if(element != null) {
+  var exception = [[1,'Ручной режим','#5c7ed0', ['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'],'ruchnoi'],];
 
-            if (element.length != 0) {
+  // Функция сборщик, аргументы:
+  // Массив со станками, с какого станка начать, исключения если имеются,
+  // 2-ой и 3-ий аргументы опциональны
+  buildShort(Diagram, 1, exception)
 
-
-              // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-              timeReplace(element);
-
-              // Функция формирования массивов с точками начала и конца
-              var pars_nagruzka = pars(element[4], 0)
-              var pars_rabota = pars(element[0], 1, element[5])
-              var pars_pause = pars(element[1], 2)
-              var pars_off = pars(element[2], 3)
-              var pars_avar = pars(element[3], 4)
-              var roundDiagram = element[6];
-
-              // Функция заполнения линейной диаграммы
-              setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, "Ручной режим", "#5c7ed0");
-
-              if (roundDiagram != null) {
-                // Преобразование элементов круговой диаграммы из строк в числа
-                $.each(roundDiagram, function (i) {
-                  roundDiagram[i] = parseInt(roundDiagram[i]);
-                });
-
-                // Функция заполнения круговой диаграммы
-                setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4], "Ручной режим", colorsKalibrovka);
-              }
-            }
-          }
-        });
 </script>
 
 <!--Скрипт отображения в header  кнопки администрирование-->

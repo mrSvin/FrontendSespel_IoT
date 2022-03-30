@@ -554,71 +554,16 @@
     var dmg_ctx310_1_data = [[${dmg_ctx310_1_data}]];
     var dmg_ctx510_1_data = [[${dmg_ctx510_1_data}]];
 
+    </script>
+
+<script>
     // Массив с массивами
     const Diagram = [uvf_1_data,uvf_2_data,dmg_ntx1000_data,dmg_nlx3000_data,
         dmg_gamma2000_data, dmg_ctx650_data,dmg_dmf260_data, dmg_dmu50_1_data,
         dmg_dmu50_2_data, dmg_dmc1035_data, dmg_ctx310_1_data, dmg_ctx510_1_data]
 
+    build(Diagram)
 
-    // Функция распарсивания массивов
-    $.map(Diagram, function (element, index) {
-        // Отказ от работы с пустым массивом
-        if(element != null) {
-            if (element.length != 0) {
-
-                // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-                timeReplace(element);
-
-                // Функция вычисления количества операций
-                var ArrayCount = getCount(element[0]);
-                kol_op.push(ArrayCount[0])
-                kol_long_operations.push(ArrayCount[1])
-
-                // Функция формирования массивов с точками начала и конца
-                var pars_nagruzka = pars(element[4], 0)
-                var pars_rabota = pars(element[0], 1, element[5])
-                var pars_pause = pars(element[1], 2)
-                var pars_off = pars(element[2], 3)
-                var pars_avar = pars(element[3], 4)
-                var roundDiagram = element[6];
-
-                // Функция заполнения линейной диаграммы
-                setDataLine("container_work" + (index + 1), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
-
-                if (roundDiagram != null) {
-                    // Преобразование элементов круговой диаграммы из строк в числа
-                    $.each(roundDiagram, function (i) {
-                        roundDiagram[i] = parseInt(roundDiagram[i]);
-                    });
-
-                    // Вычисление работы без нагрузки для линейной диаграммы
-                    roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
-                    // Функция заполнения круговой диаграммы
-                    setDataRound("container" + (index + 1), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
-                }
-
-                // Заполнение переменных общей круговой и линейной диаграмм
-                if (roundDiagram != 0) {
-                    linear_rabota.push(roundDiagram[0]);
-                    linear_pause.push(roundDiagram[1]);
-                    linear_off.push(roundDiagram[2]);
-                    linear_avar.push(roundDiagram[3]);
-                    linear_nagruzka.push(roundDiagram[4]);
-                }
-                else {
-                    linear_rabota.push(0);
-                    linear_pause.push(0);
-                    linear_off.push(0);
-                    linear_avar.push(0);
-                    linear_nagruzka.push(0);
-                    linear_ruchnoi.push(0);
-
-                    kol_op.push(0)
-                    kol_long_operations.push(0)
-                }
-            }
-        }
-    });
 
     // Формирование графиков для общих круговой и линейной диаграммы
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
