@@ -525,8 +525,44 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
                 buildRoundDiagram(roundDiagram, exception, index, startContainer)
             }
         }
-        // Если stanok[6] не оказался массивом, выходим из цикла
-        else return;
+        // Если stanok[6] не оказался массивом, то заполняем нулями и переходим к следующему станку
+        else
+        {
+            var exceptionGoted = 0
+
+            // Пробегаемся по массиву с исключениями
+            $.each(exception, function (i) {
+                // Если в исключении найден ручной режим, то записываем нули c ручным режимом
+                if ((exception[i][4]) == 'ruchnoi') {
+                    linear_rabota.push(0);
+                    linear_pause.push(0);
+                    linear_off.push(0);
+                    linear_avar.push(0);
+                    linear_nagruzka.push(0);
+                    linear_ruchnoi.push(0);
+
+                    // Меняем состояние исключения
+                    exceptionGoted = 1
+                    // Выходим из цикла
+                    return
+                }
+            });
+
+            // Если исключения не было найдено, то записываем нули без ручного режима
+            if (exceptionGoted === 0) {
+                linear_rabota.push(0);
+                linear_pause.push(0);
+                linear_off.push(0);
+                linear_avar.push(0);
+                linear_nagruzka.push(0);
+
+                // Возвращаем единицу, что произошла запись пустого станка
+                return
+            }
+            // Если и второе условие не было выполнено, то выходим из функции, произошла запись пустого станка но с ручным режимом
+            return
+        }
+
         // Функция формирования заполнение данных для общей диаграммы аргументы:
         // круговой массив станка, массив исключений, индекс станка
         buildCommonDiagrams(roundDiagram, exception, index)
