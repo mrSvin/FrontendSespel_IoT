@@ -276,9 +276,33 @@ function setDataRound(containerRound, work, pass, fail, avar, nagruzka, nagruzka
 function pushZero (StanokElement, exception) {
     // Если массив пустой или нулевой, то
     if ((StanokElement === null) || (StanokElement == 0)) {
-        // Если массив с ручным режимом пустой
-        if(exception[0][4] !== 'ruchnoi') {
-            // То, заполняем переменные станка без ручного режима
+
+        // Переменная выполненности исключения, меняется на 1 если произошло исключение
+        var exceptionGoted = 0
+
+        // Пробегаемся по массиву с исключениями
+        $.each(exception, function (i) {
+            // Если в исключении найден ручной режим, то записываем нули c ручным режимом
+            if ((exception[i][4]) == 'ruchnoi') {
+                linear_rabota.push(0);
+                linear_pause.push(0);
+                linear_off.push(0);
+                linear_avar.push(0);
+                linear_nagruzka.push(0);
+                linear_ruchnoi.push(0);
+
+                kol_op.push(0)
+                kol_long_operations.push(0)
+
+                // Меняем состояние исключения
+                exceptionGoted = 1
+                // Выходим из цикла
+                return
+            }
+        });
+
+        // Если исключения не было найдено, то записываем нули без ручного режима
+        if (exceptionGoted === 0) {
             linear_rabota.push(0);
             linear_pause.push(0);
             linear_off.push(0);
@@ -287,28 +311,17 @@ function pushZero (StanokElement, exception) {
 
             kol_op.push(0)
             kol_long_operations.push(0)
-            // Возвращаем единицу, чтобы вне функции пропустить пустой станок
-            return 1
-
-        }
-        else
-        {    // Иначе, заполняем переменные станка с ручным режимом
-            linear_rabota.push(0);
-            linear_pause.push(0);
-            linear_off.push(0);
-            linear_avar.push(0);
-            linear_nagruzka.push(0);
-            linear_ruchnoi.push(0);
-
-            kol_op.push(0)
-            kol_long_operations.push(0)
-            // Возвращаем единицу, чтобы вне функции пропустить пустой станок
+            // Возвращаем единицу, что произошла запись пустого станка
             return 1
         }
-        // Если массив не оказался пустым или нулевым, возвращаем ноль и продолжаем работать с этим станком
-        return 0
+        // Если и второе условие не было выполнено, то возвращаем единицу, произошла запись пустого станка но с ручным режимом
+        return 1
     }
+    // Если массив не был пустым, возвращаем ноль
+    else return 0
 }
+
+
 
 // Функция парсит линейные суточные диаграммы и отправляет их
 // В Highcharts. Аргументы: stanok - массив переменных станка
@@ -352,31 +365,40 @@ function buildRoundDiagram(roundDiagram, exception, index, startContainer) {
     // Если массив пустой или нулевой, то
     if ((roundDiagram == 0) || (roundDiagram === null)) {
 
-        // Если в первом элементе неимелся ручной режим
-        if (exception[0][4] !== 'ruchnoi') {
-            // То, заполняем переменные станка без ручного режима
+        // Переменная выполненности исключения, меняется на 1 если произошло исключение
+        var exceptionGoted = 0
+
+        // Пробегаемся по массиву с исключениями
+        $.each(exception, function (i) {
+            // Если в исключении найден ручной режим, то записываем нули c ручным режимом
+            if ((exception[i][4]) == 'ruchnoi') {
+                linear_rabota.push(0);
+                linear_pause.push(0);
+                linear_off.push(0);
+                linear_avar.push(0);
+                linear_nagruzka.push(0);
+                linear_ruchnoi.push(0);
+
+                // Меняем состояние исключения
+                exceptionGoted = 1
+                // Выходим из цикла
+                return
+            }
+        });
+
+        // Если исключения не было найдено, то записываем нули без ручного режима
+        if (exceptionGoted === 0) {
             linear_rabota.push(0);
             linear_pause.push(0);
             linear_off.push(0);
             linear_avar.push(0);
             linear_nagruzka.push(0);
 
-            // Выходим из функции и переходим к следующему станку
-            console.log("Пустая круговая без ручного", index + 1)
-            return
-
-        } else {    // Иначе, если массив имеет ручной режим, то заполняем переменные станка с ручным режимом
-            linear_rabota.push(0);
-            linear_pause.push(0);
-            linear_off.push(0);
-            linear_avar.push(0);
-            linear_nagruzka.push(0);
-            linear_ruchnoi.push(0);
-
-            // Выходим из функции и переходим к следующему станку
-            console.log("Пустая круговая c ручным режимом", index + 1)
+            // Возвращаем единицу, что произошла запись пустого станка
             return
         }
+        // Если и второе условие не было выполнено, то выходим из функции, произошла запись пустого станка но с ручным режимом
+        return
     }
 
     // Иначе, если массив не оказался пустым, то
@@ -388,7 +410,7 @@ function buildRoundDiagram(roundDiagram, exception, index, startContainer) {
         });
 
         // Переменная выполненности исключения, меняется на 1 если произошло исключение
-        var exceptionGoted = 0
+        exceptionGoted = 0
 
         // Пробегаемся по массиву исключений, если текущий станок будет найдет в исключениях, то выполним условие
         $.each(exception, function (i) {
@@ -476,7 +498,7 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
 
         // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
         // С помощью exception учитываются исключения
-        if (pushZero(stanok, exception)){
+        if (pushZero(stanok, exception)) {
             // Если массив оказался пустым, то переходим к следующему циклу $.map
             console.log("Пустой вообще", index + 1)
             return
@@ -490,12 +512,21 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
         // массив станка, массив исключений, индекс станка, номер стартого станка
         buildLinearDiagram(stanok, exception, index, startContainer)
 
-        // Объявляем массив круговой диаграммы из 6-го массива станка.
-        var roundDiagram = stanok[6];
-        // Функция формирования круговой диаграммы станка аргументы:
-        // круговой массив станка, массив исключений, индекс станка, номер стартого станка
-        buildRoundDiagram(roundDiagram, exception, index, startContainer)
+        // Условие проверки является ли stanok[6] вообще массивом
+        if (Array.isArray(stanok[6]))
+        {
+            // Объявляем массив круговой диаграммы из 6-го массива станка.
+            var roundDiagram = stanok[6];
 
+            // Функция формирования круговой диаграммы станка аргументы:
+            // круговой массив станка, массив исключений, индекс станка, номер стартого станка
+            // функция выполнится, только если массив не пустой
+            if (roundDiagram !== 0){
+                buildRoundDiagram(roundDiagram, exception, index, startContainer)
+            }
+        }
+        // Если stanok[6] не оказался массивом, выходим из цикла
+        else return;
         // Функция формирования заполнение данных для общей диаграммы аргументы:
         // круговой массив станка, массив исключений, индекс станка
         buildCommonDiagrams(roundDiagram, exception, index)
@@ -504,7 +535,7 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
 }
 
 // Отдельная функция для разделов, с одним станком без общих диаграмм и количеств операций
-function buildShort (stankiDataArray, exception = [0], startContainer = 1)
+function buildShort (stankiDataArray,  startContainer = 1, exception = [0])
 {
     $.map(stankiDataArray, function (stanok, index) {
 
@@ -521,11 +552,21 @@ function buildShort (stankiDataArray, exception = [0], startContainer = 1)
         // массив станка, массив исключений, индекс станка, номер стартого станка
         buildLinearDiagram(stanok, exception, index, startContainer)
 
-        // Объявляем массив круговой диаграммы из 6-го массива станка.
-        var roundDiagram = stanok[6];
-        // Функция формирования круговой диаграммы станка аргументы:
-        // круговой массив станка, массив исключений, индекс станка, номер стартого станка
-        buildRoundDiagram(roundDiagram, exception, index, startContainer)
+        // Условие проверки является ли stanok[6] вообще массивом
+        if (Array.isArray(stanok[6]))
+        {
+            // Объявляем массив круговой диаграммы из 6-го массива станка.
+            var roundDiagram = stanok[6];
+
+            // Функция формирования круговой диаграммы станка аргументы:
+            // круговой массив станка, массив исключений, индекс станка, номер стартого станка
+            // функция выполнится, только если массив не пустой
+            if (roundDiagram !== 0){
+                buildRoundDiagram(roundDiagram, exception, index, startContainer)
+            }
+        }
+        // Если stanok[6] не оказался массивом, выходим из цикла
+        else return;
 
     }); // Конец функции $.map(Diagram)
 }
