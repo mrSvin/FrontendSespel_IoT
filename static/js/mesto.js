@@ -249,6 +249,22 @@ function dmg_dmu50_5 (){
     window.localStorage['size'] = size;
 };
 
+function dmg_dmu50_6 (){
+    mar_top = -65;
+    mar_left = 141;
+    bground = 'url(../images/dmg_dmu50.png) no-repeat';
+    place_img = "../images/ii_ploshadka.png";
+    size = 25;
+    bwidth = "unset";
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['bwidth'] = bwidth;
+    window.localStorage['size'] = size;
+};
+
 
 // конец мест второй площадки
 
