@@ -70,6 +70,8 @@ function getPush_kol_op(arrayWork)
     var lengh = (arrayWork.length)/2-2
     // Если длина меньше нуля, выйти из функции
     if (lengh <= 0){
+        kol_op.push(0)
+        kol_long_operations.push(0)
         return
     }
 
@@ -507,6 +509,7 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
         // Функция преобразования в дате сегодняшнего дня значений 23:59:59
         timeReplace(stanok);
         // Функция вычисления и добавления станку количества операций
+
         getPush_kol_op(stanok[0]);
         // Функция формирования линейной диаграммы станка аргументы:
         // массив станка, массив исключений, индекс станка, номер стартого станка
