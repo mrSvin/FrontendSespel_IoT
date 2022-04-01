@@ -1115,7 +1115,7 @@ function MakeTable (Array){
         );
 
         // Пробегаемся по массиву с именами станков и заполняем шапку
-        $.map(arrya, function(stanok){
+        $.map(Array, function(stanok){
                  $("#TimeTable > thead > tr").append(
                      "<th>" + stanok + "</th>"
                  )
@@ -1131,7 +1131,7 @@ function MakeTable (Array){
         )
 
         // Заполняем оставшееся тело пустыми ячейками
-        $.map(arrya, function(){
+        $.map(Array, function(){
         $("#TimeTable > tbody > tr").append(
             "<td></td>")
         });
