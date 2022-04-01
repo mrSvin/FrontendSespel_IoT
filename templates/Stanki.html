@@ -252,13 +252,15 @@
 
 
 <div style="display: flex; justify-content: space-between">
-
-    <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
     <!--Общая загрузка html-->
+    <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
 
-    <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
     <!--Количество операций html-->
+    <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
+
 </div>  <!--Общая загрузка и количество операций html-->
+<!--Таблица часов работы-->
+<table id='TimeTable' style="min-height: 400px; width: 70%"></table>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -910,6 +912,7 @@
 <!--Скрипт парсинга и заполнения диаграмм-->
 <script th:inline="javascript">
     // Переменные для общих диаграмм.
+    var categories = ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5','DMU50 #6']
 
     var linear_rabota = [];
     var linear_pause = [];
@@ -984,7 +987,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5','DMU50 #6']
+            categories: categories
         },
         credits: {
             enabled: false
@@ -1094,6 +1097,48 @@
 <!--Скрипт отображения в header  кнопки администрирование-->
 
 <script src="/js/dropdown_menu.js"></script>
+
+
+
+<script>
+function MakeTable (Array){
+
+        // Создаем шапку и тело таблицы
+        $("#TimeTable").append(
+            "<thead>" +
+            "<tr>" +
+            "<th>" + "Категории" + "</th>" +
+            "</tr>" +
+            "</thead>" +
+            "<tbody>" +
+            "</tbody>"
+        );
+
+        // Пробегаемся по массиву с именами станков и заполняем шапку
+        $.map(arrya, function(stanok){
+                 $("#TimeTable > thead > tr").append(
+                     "<th>" + stanok + "</th>"
+                 )
+             });
+
+        // Заполняем первый столбец таблицы
+        $("#TimeTable > tbody").append(
+            "<tr>" + "<td>" + "Работа" + "</td>" + "</tr>" +
+            "<tr>" + "<td>" + "Ожидание" + "</td>" + "</tr>" +
+            "<tr>" + "<td>" + "Выключен" + "</td>" + "</tr>" +
+            "<tr>" + "<td>" + "Авария" + "</td>" + "</tr>" +
+            "<tr>" + "<td>" + "Нагрузка" + "</td>" + "</tr>"
+        )
+
+        // Заполняем оставшееся тело пустыми ячейками
+        $.map(arrya, function(){
+        $("#TimeTable > tbody > tr").append(
+            "<td></td>")
+        });
+
+}
+MakeTable(categories)
+</script>
 
 </body>
 </html>
