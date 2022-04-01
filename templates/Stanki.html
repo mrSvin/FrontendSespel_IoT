@@ -1151,7 +1151,7 @@ MakeTable(categories)
     $(document).ready(function(){
         $("#gpdf").click(function(){
             pdfdoc.fromHTML($('#PDFcontent').html(), 10, 10, {
-                'width': 110,
+                'width': 1100,
             });
             pdfdoc.save('First.pdf');
         });});
