@@ -262,7 +262,9 @@
 
 </div>  <!--Общая загрузка и количество операций html-->
 <!--Таблица часов работы-->
-<table id='TimeTable' style="min-height: 400px; width: 70%"></table>
+<div id='PDFcontent'>
+    <table id='TimeTable' style="min-height: 400px; width: 70%"></table>
+</div>
 <button id='gpdf'>Generate PDF</button>
 
 <div style="border: 1px solid #333;">
@@ -1148,7 +1150,7 @@ MakeTable(categories)
 
     $(document).ready(function(){
         $("#gpdf").click(function(){
-            pdfdoc.fromHTML($('#TimeTable').html(), 10, 10, {
+            pdfdoc.fromHTML($('#PDFcontent').html(), 10, 10, {
                 'width': 110,
             });
             pdfdoc.save('First.pdf');
