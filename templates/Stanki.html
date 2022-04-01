@@ -978,6 +978,12 @@
 
     // Формирование графиков для общих круговой и линейной диаграммы
     colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
+   Highcharts.chart('PDFcontent', {
+       title: {
+           text: 'Таблица'
+       },
+   })
+
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
@@ -1147,6 +1153,7 @@ MakeTable(categories)
 <!--Создать PDF-->
 <script>
     var pdfdoc = new jsPDF();
+
 
     $(document).ready(function(){
         $("#gpdf").click(function(){
