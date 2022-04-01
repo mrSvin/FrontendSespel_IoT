@@ -13,6 +13,9 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.0.37/jspdf.plugin.autotable.js"></script>
+
     <script src="js/highcharts.js"></script>
     <script src="js/exporting.js"></script>
     <script src="js/export-data.js"></script>
@@ -263,9 +266,9 @@
 </div>  <!--Общая загрузка и количество операций html-->
 <!--Таблица часов работы-->
 <div id='PDFcontent'>
-    <table id='TimeTable' style="min-height: 400px; width: 70%"></table>
+    <table id='table_with_data' style="min-height: 400px; width: 70%"></table>
 </div>
-<button id='gpdf'>Generate PDF</button>
+<button onclick="generatePDF()">Export to PDF</button>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -917,7 +920,6 @@
 <!--Скрипт парсинга и заполнения диаграмм-->
 <script th:inline="javascript">
     // Переменные для общих диаграмм.
-    var categories = ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5','DMU50 #6']
 
     var linear_rabota = [];
     var linear_pause = [];
@@ -978,12 +980,6 @@
 
     // Формирование графиков для общих круговой и линейной диаграммы
     colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
-   Highcharts.chart('PDFcontent', {
-       title: {
-           text: 'Таблица'
-       },
-   })
-
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
@@ -998,7 +994,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: categories
+            categories: ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5','DMU50 #6']
         },
         credits: {
             enabled: false
@@ -1111,13 +1107,13 @@
 
 <!--Создать таблицу-->
 <script>
-function MakeTable (Array){
+    function MakeTable (Array){
 
         // Создаем шапку и тело таблицы
-        $("#TimeTable").append(
+        $("#table_with_data").append(
             "<thead>" +
             "<tr>" +
-            "<th>" + "Категории" + "</th>" +
+            "<th>" + "Category" + "</th>" +
             "</tr>" +
             "</thead>" +
             "<tbody>" +
@@ -1126,43 +1122,54 @@ function MakeTable (Array){
 
         // Пробегаемся по массиву с именами станков и заполняем шапку
         $.map(Array, function(stanok){
-                 $("#TimeTable > thead > tr").append(
-                     "<th>" + stanok + "</th>"
-                 )
-             });
+            $("#table_with_data > thead > tr").append(
+                "<th>" + stanok + "</th>"
+            )
+        });
 
         // Заполняем первый столбец таблицы
-        $("#TimeTable > tbody").append(
-            "<tr>" + "<td>" + "Работа" + "</td>" + "</tr>" +
-            "<tr>" + "<td>" + "Ожидание" + "</td>" + "</tr>" +
-            "<tr>" + "<td>" + "Выключен" + "</td>" + "</tr>" +
-            "<tr>" + "<td>" + "Авария" + "</td>" + "</tr>" +
-            "<tr>" + "<td>" + "Нагрузка" + "</td>" + "</tr>"
+        $("#table_with_data > tbody").append(
+            "<tr>" + "<td>" + "Work" + "</td>" + "</tr>" +
+            "<tr>" + "<td>" + "Pause" + "</td>" + "</tr>" +
+            "<tr>" + "<td>" + "Off" + "</td>" + "</tr>" +
+            "<tr>" + "<td>" + "Crash" + "</td>" + "</tr>" +
+            "<tr>" + "<td>" + "Workload" + "</td>" + "</tr>"
         )
 
         // Заполняем оставшееся тело пустыми ячейками
         $.map(Array, function(){
-        $("#TimeTable > tbody > tr").append(
-            "<td></td>")
+            $("#table_with_data > tbody > tr").append(
+                "<td></td>")
         });
 
-}
-MakeTable(categories)
+    }
+    var categories = ['UF5220', 'Progress', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5','DMU50 #6']
+
+    MakeTable(categories)
 </script>
 
 <!--Создать PDF-->
 <script>
-    var pdfdoc = new jsPDF();
+    //export table to pdf
+    function generatePDF() {
+        var doc = new jsPDF('l', 'pt');
 
+        var elem = document.getElementById('table_with_data');
+        var data = doc.autoTableHtmlToJson(elem);
+        doc.autoTable(data.columns, data.rows, {
+                margin: {left: 35},
+                theme: 'grid',
+                tableWidth: 'auto',
+                fontSize: 8,
+                overflow: 'linebreak',
+            }
+        );
 
-    $(document).ready(function(){
-        $("#gpdf").click(function(){
-            pdfdoc.fromHTML($('#PDFcontent').html(), 10, 10, {
-                'width': 1100,
-            });
-            pdfdoc.save('First.pdf');
-        });});
+        doc.save('Example_Table_To_PDF.pdf');
+    }
 </script>
+
+
 
 <style>
     #TimeTable{
