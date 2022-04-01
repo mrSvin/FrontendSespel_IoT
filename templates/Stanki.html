@@ -261,6 +261,7 @@
 </div>  <!--Общая загрузка и количество операций html-->
 <!--Таблица часов работы-->
 <table id='TimeTable' style="min-height: 400px; width: 70%"></table>
+<button id='gpdf'>Generate PDF</button>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -1098,8 +1099,7 @@
 
 <script src="/js/dropdown_menu.js"></script>
 
-
-
+<!--Создать таблицу-->
 <script>
 function MakeTable (Array){
 
@@ -1140,6 +1140,19 @@ function MakeTable (Array){
 MakeTable(categories)
 </script>
 
+<!--Создать PDF-->
+<script>
+    var pdfdoc = new jsPDF();
+
+    $(document).ready(function(){
+        $("#gpdf").click(function(){
+            pdfdoc.fromHTML($('#TableTime').html(), 10, 10, {
+                'width': 110,
+            });
+            pdfdoc.save('First.pdf');
+        });});
+</script>
+
 <style>
     #TimeTable{
         margin: 0 auto;
@@ -1150,9 +1163,19 @@ MakeTable(categories)
         font-size: 15px;
     }
 
-    #TimeTable > tbody > tr:nth-child(1) {
+    #TimeTable > tbody > tr > td:nth-child(1) {
         font-weight: bolder;
         font-size: 15px;
+    }
+
+    #TimeTable > tbody > tr > td:nth-child(n+1) {
+        font-weight: bolder;
+        font-size: 15px;
+
+    }
+
+    #TimeTable > tbody > tr > td:nth-child(n+2) {
+
     }
 
 </style>
