@@ -1146,7 +1146,7 @@ MakeTable(categories)
 
     $(document).ready(function(){
         $("#gpdf").click(function(){
-            pdfdoc.fromHTML($('#TableTime').html(), 10, 10, {
+            pdfdoc.fromHTML($('#TimeTable').html(), 10, 10, {
                 'width': 110,
             });
             pdfdoc.save('First.pdf');
