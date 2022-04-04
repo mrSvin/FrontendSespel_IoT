@@ -23,27 +23,62 @@ function getRequest(stanok, timeStart, timeEnd, tag=1) {
 
     var adress = 'http://192.168.3.41:8080/api/complex/' + stanok + '&beginTime:' + time_start + '&endTime:' + time_end + '&statusTag:' + tag
 
+    var out = []
 
-    var status
-    var time
-    var programName
+    var object = $.get(adress, function(data){
+        console.log(data)
 
+        var status
+        var time
+        var program
 
-    var dataArray = $.get(adress, function(data){
-        status = data.status
-        time = data.time
-        programName = data.time
+        status = appa.responseJSON.status
+        time = appa.responseJSON.time
+        program = appa.responseJSON.programName
+        console.log(2, status, time, program)
 
-        huy = [status, time, programName]
-        console.log(huy)
-        return huy
-
-
+        return 5
     });
 
-    console.log(dataArray)
+    console.log(object)
 
-    return dataArray
+    return object
+}
+
+function showGetResult(stanok, timeStart, timeEnd, tag=1)
+{
+    var adress = 'http://192.168.3.41:8080/api/complex/' + stanok + '&beginTime:' + time_start + '&endTime:' + time_end + '&statusTag:' + tag
+    var result = null;
+
+    $.ajax({
+        url: adress,
+        type: 'get',
+        dataType: 'html',
+        async: false,
+        success: result = $.get(adress, function(data) {
+            return;
+        })
+    });
+    return result;
+}
+
+function showGetResult (callback, stanok, timeStart, timeEnd, tag=1) {
+    var adress = 'http://192.168.3.41:8080/api/complex/' + stanok + '&beginTime:' + time_start + '&endTime:' + time_end + '&statusTag:' + tag
+    return $.get(adress, {}, callback);
+}
+
+showGetResult(function(data){console.log(data.responseJSON.status); return data.responseJSON.status;  }, stanok, time_start, time_end, tag);
+
+
+var happa = showGetResult(stanok, time_start, time_end, tag)
+
+
+
+var status = happa.responseJSON.status
+var time = happa.responseJSON.time
+var program = happa.responseJSON.programName
+console.log(2, status, time, program)
+
 
         // for(let i = 1; 100 > i-1; i++)
         // {
@@ -57,9 +92,29 @@ function getRequest(stanok, timeStart, timeEnd, tag=1) {
         //     }
         // }
 
-}
+
 
 var appa = getRequest(stanok, time_start, time_end, tag)
+console.log(appa)
+var status
+var time
+var program
+
+status = appa.responseJSON.status
+time = appa.responseJSON.time
+program = appa.responseJSON.programName
+console.log(2, status, time, program)
+
+
+window.setTimeout(function () {
+    status = appa.responseJSON.status
+    time = appa.responseJSON.time
+    program = appa.responseJSON.programName
+    console.log(2, status, time, program)
+}, 1000);
+
+console.log(1, status, time, program)
+
 
 var arrayStatus = appa.responseJSON.status
 var arrayTime = appa.responseJSON.time
