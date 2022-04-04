@@ -325,13 +325,13 @@
         console.log("delta = ", delta)
 
         if (delta > 0) {
-            result = parseFloat(delta.toFixed(2));
+            delta= parseFloat(delta.toFixed(2));
         } else {
-            result = 0;
+            delta = 0;
         }
 
         if (delta>120) {
-            result = 0;
+            delta = 0;
         }
 
         vrs1_days_new.push(delta)
@@ -356,19 +356,19 @@
     //     return result;
     // })); // функция преобразования изначального массива
 
-    console.log("2 ", vrs1_days)
+    console.log("2 ", vrs1_days_new)
 
-    $.each( vrs1_days, function( index ){
-        sum = sum + vrs1_days[index];
+    $.each( vrs1_days_new, function( index ){
+        sum = sum + vrs1_days_new[index];
     }); // Сумма всех элементов преобразованного массива
     sum = parseFloat(sum.toFixed(2));
 
-    $.each( vrs1_days, function( index ){
+    $.each( vrs1_days_new, function( index ){
         if (index == 31 ) {
             return false;
         }
         $("#vrs_1_days > thead > tr").append("<th>" + (index + 1) + "</th>");
-        $("#vrs_1_days > tbody > tr").append("<td>" + vrs1_days[index] + "</td>");
+        $("#vrs_1_days > tbody > tr").append("<td>" + vrs1_days_new[index] + "</td>");
     }); // формирование таблицы ежемесячного расхода
 
     $("#vrs_1_days > thead > tr").append("<th>Итого</th>"); // формирование последней ячейки таблицы
@@ -466,7 +466,7 @@
     var colors = ['#5c7ed0'];
     const timezone = new Date().getTimezoneOffset()
 
-    const vrs1Data = {nameContainer:"container_days1", arrayData: vrs1_days};
+    const vrs1Data = {nameContainer:"container_days1", arrayData: vrs1_days_new};
     const vrs2Data = {nameContainer:"container_days2", arrayData: vrs2_days};
     const arrayObject = [vrs1Data, vrs2Data]
 
