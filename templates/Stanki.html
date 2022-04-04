@@ -13,10 +13,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.0.37/jspdf.plugin.autotable.js"></script>
-
     <script src="js/highcharts.js"></script>
     <script src="js/exporting.js"></script>
     <script src="js/export-data.js"></script>
@@ -61,8 +57,6 @@
         });
 
     </script>   <!--Календарь js-->
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js'></script>
 
     <!--Календарь -->
     <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
@@ -258,18 +252,13 @@
 
 
 <div style="display: flex; justify-content: space-between">
-    <!--Общая загрузка html-->
+
     <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
+    <!--Общая загрузка html-->
 
-    <!--Количество операций html-->
     <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
-
+    <!--Количество операций html-->
 </div>  <!--Общая загрузка и количество операций html-->
-<!--Таблица часов работы-->
-<div id='PDFcontent'>
-    <table id='table_with_data' style="min-height: 400px; width: 70%"></table>
-</div>
-<button onclick="generatePDF()">Export to PDF</button>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -962,7 +951,7 @@
 
 <script>
 
-   // Массив с данными станков
+    // Массив с данными станков
     const Diagram = [sk50_data, apec_data, dmu50_3_data,
         dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data, dmu50_5_data,dmu50_6_data]
 
@@ -1105,99 +1094,6 @@
 <!--Скрипт отображения в header  кнопки администрирование-->
 
 <script src="/js/dropdown_menu.js"></script>
-
-<!--Создать таблицу-->
-<script>
-    function MakeTable (Array){
-
-        // Создаем шапку и тело таблицы
-        $("#table_with_data").append(
-            "<thead>" +
-            "<tr>" +
-            "<th>" + "Category" + "</th>" +
-            "</tr>" +
-            "</thead>" +
-            "<tbody>" +
-            "</tbody>"
-        );
-
-        // Пробегаемся по массиву с именами станков и заполняем шапку
-        $.map(Array, function(stanok){
-            $("#table_with_data > thead > tr").append(
-                "<th>" + stanok + "</th>"
-            )
-        });
-
-        // Заполняем первый столбец таблицы
-        $("#table_with_data > tbody").append(
-            "<tr>" + "<td>" + "Work" + "</td>" + "</tr>" +
-            "<tr>" + "<td>" + "Pause" + "</td>" + "</tr>" +
-            "<tr>" + "<td>" + "Off" + "</td>" + "</tr>" +
-            "<tr>" + "<td>" + "Crash" + "</td>" + "</tr>" +
-            "<tr>" + "<td>" + "Workload" + "</td>" + "</tr>"
-        )
-
-        // Заполняем оставшееся тело пустыми ячейками
-        $.map(Array, function(){
-            $("#table_with_data > tbody > tr").append(
-                "<td></td>")
-        });
-
-    }
-    var categories = ['UF5220', 'Progress', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5','DMU50 #6']
-
-    MakeTable(categories)
-</script>
-
-<!--Создать PDF-->
-<script>
-    //export table to pdf
-    function generatePDF() {
-        var doc = new jsPDF('l', 'pt');
-
-        var elem = document.getElementById('table_with_data');
-        var data = doc.autoTableHtmlToJson(elem);
-        doc.autoTable(data.columns, data.rows, {
-                margin: {left: 35},
-                theme: 'grid',
-                tableWidth: 'auto',
-                fontSize: 8,
-                overflow: 'linebreak',
-            }
-        );
-
-        doc.save('Example_Table_To_PDF.pdf');
-    }
-</script>
-
-
-
-<style>
-    #TimeTable{
-        margin: 0 auto;
-        width: 90%;
-    }
-
-    #TimeTable > thead > tr {
-        font-size: 15px;
-    }
-
-    #TimeTable > tbody > tr > td:nth-child(1) {
-        font-weight: bolder;
-        font-size: 15px;
-    }
-
-    #TimeTable > tbody > tr > td:nth-child(n+1) {
-        font-weight: bolder;
-        font-size: 15px;
-
-    }
-
-    #TimeTable > tbody > tr > td:nth-child(n+2) {
-
-    }
-
-</style>
 
 </body>
 </html>
