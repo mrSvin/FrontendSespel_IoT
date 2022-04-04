@@ -314,12 +314,13 @@
     var vrs1_days = [[${vrs1}]];
     console.log("1 ", vrs1_days)
     var result;
-    var n = 0;
+    var n = 1;
     sum = 0
 
     vrs1_days = $.map(vrs1_days, function () {
         n++;
         delta = vrs1_days[n] - vrs1_days[n - 1];
+        console.log("delta = ", delta)
         if (delta > 0) {
             result = parseFloat(delta.toFixed(2));
         } else {
@@ -328,6 +329,7 @@
         if (delta>120) {
             result = 0;
         }
+        console.log("return = ", result)
         return result;
     }); // функция преобразования изначального массива
 
