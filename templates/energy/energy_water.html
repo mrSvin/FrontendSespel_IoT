@@ -319,9 +319,9 @@
 
     var vrs1_days_new = []
 
-    for(var i = 1; vrs1_days.length>i; i++)
+    for(let i = 1; vrs1_days.length>i; i++)
     {
-        var delta = vrs1_days[n] - vrs1_days[n - 1];
+        let delta = vrs1_days[i] - vrs1_days[i-1];
         console.log("delta = ", delta)
 
         if (delta > 0) {
