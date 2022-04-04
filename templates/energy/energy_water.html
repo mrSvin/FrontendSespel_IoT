@@ -319,21 +319,42 @@
 
     var vrs1_days_new = []
 
-    vrs1_days_new.push($.map(vrs1_days, function () {
-        n++;
-        delta = vrs1_days[n] - vrs1_days[n - 1];
+    for(var i = 1; vrs1_days.length>i; i++)
+    {
+        var delta = vrs1_days[n] - vrs1_days[n - 1];
         console.log("delta = ", delta)
+
         if (delta > 0) {
             result = parseFloat(delta.toFixed(2));
         } else {
             result = 0;
         }
+
         if (delta>120) {
             result = 0;
         }
-        console.log("return = ", result)
-        return result;
-    })); // функция преобразования изначального массива
+
+        vrs1_days_new.push(delta)
+
+    }
+
+    // console.log(vrs1_days_new)
+    //
+    // vrs1_days_new.push($.each(vrs1_days, function () {
+    //     n++;
+    //     delta = vrs1_days[n] - vrs1_days[n - 1];
+    //     console.log("delta = ", delta)
+    //     if (delta > 0) {
+    //         result = parseFloat(delta.toFixed(2));
+    //     } else {
+    //         result = 0;
+    //     }
+    //     if (delta>120) {
+    //         result = 0;
+    //     }
+    //     console.log("return = ", result)
+    //     return result;
+    // })); // функция преобразования изначального массива
 
     console.log("2 ", vrs1_days)
 
