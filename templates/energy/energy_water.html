@@ -49,7 +49,6 @@
                 var year = datas.getFullYear();
 
                 name_data = mes + "-" + year;
-                <!--console.log(name_data);-->
             });
 
 
@@ -312,13 +311,12 @@
 </script>   <!--Формирование таблицы общей диаграммы-->
 <script th:inline="javascript">
     var vrs1_days = [[${vrs1}]];
-    console.log("1 ", vrs1_days)
-    var result;
-    var n = 1;
-    var sum = 0
+
+    var sum_vrs1 = 0
 
     var vrs1_days_new = []
 
+    // Цикл преобразования изначального массива
     for(let i = 1; vrs1_days.length>i; i++)
     {
         let delta = vrs1_days[i] - vrs1_days[i-1];
@@ -338,30 +336,12 @@
 
     }
 
-    // console.log(vrs1_days_new)
-    //
-    // vrs1_days_new.push($.each(vrs1_days, function () {
-    //     n++;
-    //     delta = vrs1_days[n] - vrs1_days[n - 1];
-    //     console.log("delta = ", delta)
-    //     if (delta > 0) {
-    //         result = parseFloat(delta.toFixed(2));
-    //     } else {
-    //         result = 0;
-    //     }
-    //     if (delta>120) {
-    //         result = 0;
-    //     }
-    //     console.log("return = ", result)
-    //     return result;
-    // })); // функция преобразования изначального массива
-
     console.log("2 ", vrs1_days_new)
 
     $.each( vrs1_days_new, function( index ){
-        sum = sum + vrs1_days_new[index];
+        sum_vrs1 = sum_vrs1 + vrs1_days_new[index];
     }); // Сумма всех элементов преобразованного массива
-    sum = parseFloat(sum.toFixed(2));
+    sum_vrs1 = parseFloat(sum_vrs1.toFixed(2));
 
     $.each( vrs1_days_new, function( index ){
         if (index == 31 ) {
@@ -372,7 +352,7 @@
     }); // формирование таблицы ежемесячного расхода
 
     $("#vrs_1_days > thead > tr").append("<th>Итого</th>"); // формирование последней ячейки таблицы
-    $("#vrs_1_days > tbody > tr").append("<td>" + sum + "</td>"); // с общей суммой
+    $("#vrs_1_days > tbody > tr").append("<td>" + sum_vrs1 + "</td>"); // с общей суммой
 </script> <!--JS таблица-->
 
 <div style="border: 1px solid #333;">
@@ -426,39 +406,43 @@
 </script>   <!--Формирование таблицы общей диаграммы-->
 <script th:inline="javascript">
     var vrs2_days = [[${vrs2}]];
-    var result;
-    var n = 0;
-    var sum = 0
 
-    vrs2_days = $.map(vrs2_days, function () {
-        n++;
-        delta = vrs2_days[n] - vrs2_days[n - 1];
+    var sum_vrs2 = 0
+
+    var vrs2_days_new = []
+
+    // Цикл преобразования изначального массива
+    for(let i = 1; vrs2_days.length>i; i++)
+    {
+        let delta = vrs2_days[i] - vrs2_days[i-1];
+
         if (delta > 0) {
-            result = parseFloat(delta.toFixed(2));
+            delta= parseFloat(delta.toFixed(2));
         } else {
-            result = 0;
+            delta = 0;
         }
+
         if (delta>120) {
-            result = 0;
+            delta = 0;
         }
-        return result;
-    }); // функция преобразования изначального массива
+        vrs2_days_new.push(delta)
+    }
 
-    $.each( vrs2_days, function( index ){
-        sum = sum + vrs2_days[index];
+    $.each( vrs2_days_new, function( index ){
+        sum_vrs2 = sum_vrs2 + vrs2_days_new[index];
     }); // Сумма всех элементов преобразованного массива
-    sum = parseFloat(sum.toFixed(2));
+    sum_vrs2 = parseFloat(sum_vrs2.toFixed(2));
 
-    $.each( vrs2_days, function( index ){
+    $.each( vrs2_days_new, function( index ){
         if (index == 31 ) {
             return false;
         }
         $("#vrs_2_days > thead > tr").append("<th>" + (index + 1) + "</th>");
-        $("#vrs_2_days > tbody > tr").append("<td>" + vrs2_days[index] + "</td>");
+        $("#vrs_2_days > tbody > tr").append("<td>" + vrs2_days_new[index] + "</td>");
     }); // формирование таблицы ежемесячного расхода
 
     $("#vrs_2_days  > thead > tr").append("<th>Итого</th>"); // формирование последней ячейки таблицы
-    $("#vrs_2_days > tbody > tr").append("<td>" + sum + "</td>"); // с общей суммой
+    $("#vrs_2_days > tbody > tr").append("<td>" + sum_vrs2 + "</td>"); // с общей суммой
 </script> <!--JS таблица-->
 
 <script src="/js/energy/WaterGraph.js"></script>
@@ -467,7 +451,7 @@
     const timezone = new Date().getTimezoneOffset()
 
     const vrs1Data = {nameContainer:"container_days1", arrayData: vrs1_days_new};
-    const vrs2Data = {nameContainer:"container_days2", arrayData: vrs2_days};
+    const vrs2Data = {nameContainer:"container_days2", arrayData: vrs2_days_new};
     const arrayObject = [vrs1Data, vrs2Data]
 
     setOptions();   //выставляем свойства для highcharts
