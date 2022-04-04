@@ -315,9 +315,11 @@
     console.log("1 ", vrs1_days)
     var result;
     var n = 1;
-    sum = 0
+    var sum = 0
 
-    vrs1_days = $.map(vrs1_days, function () {
+    var vrs1_days_new = []
+
+    vrs1_days_new.push($.map(vrs1_days, function () {
         n++;
         delta = vrs1_days[n] - vrs1_days[n - 1];
         console.log("delta = ", delta)
@@ -331,7 +333,7 @@
         }
         console.log("return = ", result)
         return result;
-    }); // функция преобразования изначального массива
+    })); // функция преобразования изначального массива
 
     console.log("2 ", vrs1_days)
 
@@ -405,7 +407,7 @@
     var vrs2_days = [[${vrs2}]];
     var result;
     var n = 0;
-    sum = 0
+    var sum = 0
 
     vrs2_days = $.map(vrs2_days, function () {
         n++;
