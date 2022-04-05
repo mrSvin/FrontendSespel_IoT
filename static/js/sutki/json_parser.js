@@ -1,84 +1,134 @@
-var string = ['dmg_dmu50_1', 'dmg_dmu50_2', 'dmg_dmu50_3', 'dmg_dmu50_4', 'dmg_dmu50_5']
 
+function showGetResult (stanok, timeStart, timeEnd, tag=1, callback) {
+    var adress = 'http://192.168.3.41:8080/api/complex/' + stanok + '&beginTime:' + time_start + '&endTime:' + time_end + '&statusTag:' + tag
+    var result = $.get(adress, callback);
+    return result
+}
 
-
-
-
-
-
-const stanok = 'dmg_dmu50_1'
-
+// var stanok = 'dmg_dmu50_1'
 var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+
 // Преобразоавние времение в формат '2022-03-21 10:00:35'
 var time_date = time.slice(0, 10)
-
 var time_start = time_date + " " + "00:00:00";
 var time_end = time_date + " " + "23:59:59";
 
-var tag = 1
+var string = ['dmg_dmu50_3']//, 'dmg_dmu50_2', 'dmg_dmu50_3'//, 'dmg_dmu50_4', 'dmg_dmu50_5', , 'dmg_dmu50_6', 'dmg_dmu50_7', , 'dmg_dmu50_8']
+
+$.map(string, function (stanok)
+    {
+        console.log("/////////////////////////////////////////////////////////////////////////////////////////////////////")
+        var time_rabota = []
+        var programName_rabota = []
+        var status_rabota = []
+
+        var time_pause = []
+        var status_pause = []
+
+        var time_fail = []
+        var status_fail = []
+
+        var time_avar = []
+        var status_avar = []
+
+        var time_nagruzka = []
+        var status_nagruzka = []
 
 
+// Запрос к работе
+        showGetResult(stanok, time_start, time_end, 1, function(data){
+                console.log("Вызвалась функция для работы")
+                $.map(data.time, function (element){
+                    time_rabota.push(element)
+                })
 
-function getRequest(stanok, timeStart, timeEnd, tag=1) {
+                $.map(data.programName, function (element){
+                    programName_rabota.push(element)
+                })
 
-    var adress = 'http://192.168.3.41:8080/api/complex/' + stanok + '&beginTime:' + time_start + '&endTime:' + time_end + '&statusTag:' + tag
+                $.map(data.status, function (element){
+                    status_rabota.push(element)
+                })
 
-    var out = []
+                console.log(stanok, "Rabota_time ", time_rabota)
+                console.log(stanok, "programName ", programName_rabota)
+                console.log(stanok, "status_rabota", status_rabota)
 
-    var object = $.get(adress, function(data){
-        console.log(data)
+            }
+        );
 
-        var status
-        var time
-        var program
+// Запрос к паузе
+        showGetResult(stanok, time_start, time_end, 2, function(data){
 
-        status = appa.responseJSON.status
-        time = appa.responseJSON.time
-        program = appa.responseJSON.programName
-        console.log(2, status, time, program)
+                console.log("Вызвалась функция для паузы")
+                $.map(data.time, function (element){
+                    time_pause.push(element)
+                })
 
-        return 5
-    });
+                $.map(data.status, function (element){
+                    status_pause.push(element)
+                })
 
-    console.log(object)
+                console.log(stanok, "time_pause", time_pause)
+                console.log(stanok, "status_pause", status_pause)
 
-    return object
-}
+            }
+        );
 
-function showGetResult(stanok, timeStart, timeEnd, tag=1)
-{
-    var adress = 'http://192.168.3.41:8080/api/complex/' + stanok + '&beginTime:' + time_start + '&endTime:' + time_end + '&statusTag:' + tag
-    var result = null;
+// Запрос к выключенному
+        showGetResult(stanok, time_start, time_end, 3, function(data){
 
-    $.ajax({
-        url: adress,
-        type: 'get',
-        dataType: 'html',
-        async: false,
-        success: result = $.get(adress, function(data) {
-            return;
-        })
-    });
-    return result;
-}
+                console.log("Вызвалась функция для выключенного")
+                $.map(data.time, function (element){
+                    time_fail.push(element)
+                })
 
-function showGetResult (callback, stanok, timeStart, timeEnd, tag=1) {
-    var adress = 'http://192.168.3.41:8080/api/complex/' + stanok + '&beginTime:' + time_start + '&endTime:' + time_end + '&statusTag:' + tag
-    return $.get(adress, {}, callback);
-}
+                $.map(data.status, function (element){
+                    status_fail.push(element)
+                })
 
-showGetResult(function(data){console.log(data.responseJSON.status); return data.responseJSON.status;  }, stanok, time_start, time_end, tag);
+                console.log(stanok, "time_fail", time_fail)
+                console.log(stanok, "status_fail", status_fail)
 
+            }
+        );
 
-var happa = showGetResult(stanok, time_start, time_end, tag)
+// Запрос к аварии
+        showGetResult(stanok, time_start, time_end, 4, function(data){
+                console.log("Вызвалась функция для аварии")
 
+                $.map(data.time, function (element){
+                    time_avar.push(element)
+                })
 
+                $.map(data.status, function (element){
+                    status_avar.push(element)
+                })
 
-var status = happa.responseJSON.status
-var time = happa.responseJSON.time
-var program = happa.responseJSON.programName
-console.log(2, status, time, program)
+                console.log(stanok, "time_avar", time_avar)
+                console.log(stanok, "status_avar", status_avar)
 
+            }
+        );
+
+// Запрос к нагрузки
+        showGetResult(stanok, time_start, time_end, 5, function(data){
+                console.log("Вызвалась функция для нагрузки")
+                $.map(data.time, function (element){
+                    time_nagruzka.push(element)
+                })
+
+                $.map(data.status, function (element){
+                    status_nagruzka.push(element)
+                })
+
+                console.log(stanok, "time_nagruzka", time_nagruzka)
+                console.log(stanok, "status_nagruzka", status_nagruzka)
+
+            }
+        );
+    }
+)
 
         // for(let i = 1; 100 > i-1; i++)
         // {

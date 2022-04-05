@@ -329,7 +329,6 @@
     for(let i = 1; daysThisMonth + 1>i; i++)
     {
         let delta = vrs1_days[i] - vrs1_days[i-1];
-        console.log("delta = ", delta)
 
         if (delta > 0) {
             delta= parseFloat(delta.toFixed(2));
@@ -344,8 +343,6 @@
         vrs1_days_new.push(delta)
 
     }
-
-    console.log("2 ", vrs1_days_new)
 
     $.each( vrs1_days_new, function( index ){
         sum_vrs1 = sum_vrs1 + vrs1_days_new[index];
