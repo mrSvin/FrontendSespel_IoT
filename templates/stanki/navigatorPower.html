@@ -238,101 +238,109 @@
 </script> <!-- Скрипт вызова функции для выпадающего меню -->
 
 
+<!--<script>-->
+<!--    var programName-->
+<!--    var statusWork-->
+<!--    var timeWork-->
+
+<!--    var statusPause-->
+<!--    var timePause-->
+
+<!--    var statusOff-->
+<!--    var timeOff-->
+
+<!--    var statusAvar-->
+<!--    var timeAvar-->
+
+<!--    var statusNagruzka-->
+<!--    var timeNagruzka-->
+
+<!--    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:1",-->
+<!--        function( data ) {-->
+<!--        programName = data.programName;-->
+<!--        statusWork = data.status;-->
+<!--        timeWork = data.time;-->
+
+<!--        showWork();-->
+<!--    });-->
+
+<!--    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:2",-->
+<!--        function( data ) {-->
+<!--            statusPause = data.status;-->
+<!--            timePause = data.time;-->
+
+<!--            showPause();-->
+<!--        });-->
+
+<!--    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:3",-->
+<!--        function( data ) {-->
+<!--            statusOff = data.status;-->
+<!--            timeOff = data.time;-->
+
+<!--            showOff();-->
+<!--        });-->
+
+<!--    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:4",-->
+<!--        function( data ) {-->
+<!--            statusAvar = data.status;-->
+<!--            timeAvar = data.time;-->
+
+<!--            showAvar();-->
+<!--        });-->
+
+<!--    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:5",-->
+<!--        function( data ) {-->
+<!--            statusNagruzka = data.status;-->
+<!--            timeNagruzka = data.time;-->
+
+<!--            showNagruzka();-->
+<!--        });-->
+
+<!--    function showWork() {-->
+<!--        console.log("_______Work________")-->
+<!--        console.log(programName);-->
+<!--        console.log(statusWork);-->
+<!--        console.log(timeWork);-->
+<!--    }-->
+
+<!--    function showPause() {-->
+<!--        console.log("_______Pause________")-->
+<!--        console.log(statusPause);-->
+<!--        console.log(timePause);-->
+<!--    }-->
+
+<!--    function showOff() {-->
+<!--        console.log("_______Off_______")-->
+<!--        console.log(statusOff);-->
+<!--        console.log(timeOff);-->
+<!--    }-->
+
+<!--    function showAvar() {-->
+<!--        console.log("_______Avar_______")-->
+<!--        console.log(statusAvar);-->
+<!--        console.log(timeAvar);-->
+<!--    }-->
+
+<!--    function showNagruzka() {-->
+<!--        console.log("_______Nagruzka_______")-->
+<!--        console.log(statusNagruzka);-->
+<!--        console.log(timeNagruzka);-->
+<!--    }-->
+<!--</script>-->
+
 <script>
-    var programName
-    var statusWork
-    var timeWork
+var product = "4919A2A3-290F-419F-A45C-E0DC75F91DB3"
+var startTime = "2022-04-02"
+var endTime = "2022-04-03"
 
-    var statusPause
-    var timePause
+var massivArray
 
-    var statusOff
-    var timeOff
+    var url = "http://192.168.3.41:8080/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + endTime
 
-    var statusAvar
-    var timeAvar
-
-    var statusNagruzka
-    var timeNagruzka
-
-    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:1",
-        function( data ) {
-        programName = data.programName;
-        statusWork = data.status;
-        timeWork = data.time;
-
-        showWork();
-    });
-
-    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:2",
-        function( data ) {
-            statusPause = data.status;
-            timePause = data.time;
-
-            showPause();
-        });
-
-    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:3",
-        function( data ) {
-            statusOff = data.status;
-            timeOff = data.time;
-
-            showOff();
-        });
-
-    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:4",
-        function( data ) {
-            statusAvar = data.status;
-            timeAvar = data.time;
-
-            showAvar();
-        });
-
-    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:5",
-        function( data ) {
-            statusNagruzka = data.status;
-            timeNagruzka = data.time;
-
-            showNagruzka();
-        });
-
-    function showWork() {
-        console.log("_______Work________")
-        console.log(programName);
-        console.log(statusWork);
-        console.log(timeWork);
-    }
-
-    function showPause() {
-        console.log("_______Pause________")
-        console.log(statusPause);
-        console.log(timePause);
-    }
-
-    function showOff() {
-        console.log("_______Off_______")
-        console.log(statusOff);
-        console.log(timeOff);
-    }
-
-    function showAvar() {
-        console.log("_______Avar_______")
-        console.log(statusAvar);
-        console.log(timeAvar);
-    }
-
-    function showNagruzka() {
-        console.log("_______Nagruzka_______")
-        console.log(statusNagruzka);
-        console.log(timeNagruzka);
-    }
-</script>
-
-<script>
-
-    $.get( "http://192.168.3.41:8080/api/complex/powerNavigator/product_uuid:4919A2A3-290F-419F-A45C-E0DC75F91DB3_startTime:2022-04-02_endTime:2022-04-03",
+    $.get( url,
         function( data ) {
             console.log(data)
+            massivArray = data
         });
 
 </script>
