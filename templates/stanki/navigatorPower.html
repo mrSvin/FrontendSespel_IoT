@@ -223,18 +223,56 @@
         <div style="width: 100%;   margin: 2%;">
             <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
                 <div class="parent_image">
-                    <img src="images/epp.png" class="stanok_img"/>
-                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ЭПП</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="epp(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_epp" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
+                    <img src="../images/navigator.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">С 00:00 до 06:00</figcaption>
                 </div>
             </div>
-            <div style="display: flex; height: 400px; width: 55%;" id="container_epp_tok"></div>
+            <div style="display: flex; height: 400px; width: 55%;" id="container_do6"></div>
         </div>
     </div>  <!--ЭПП html-->
-</div> <!--ЭПП html-->
+</div> <!--До 6 утра html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="../images/navigator.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">С 00:00 до 06:00</figcaption>
+                </div>
+            </div>
+            <div style="display: flex; height: 400px; width: 55%;" id="container_do12"></div>
+        </div>
+    </div>  <!--ЭПП html-->
+</div> <!--До 12 дня html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="../images/navigator.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">С 00:00 до 06:00</figcaption>
+                </div>
+            </div>
+            <div style="display: flex; height: 400px; width: 55%;" id="container_do18"></div>
+        </div>
+    </div>  <!--ЭПП html-->
+</div> <!--До 18 вечера html-->
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="../images/navigator.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">С 00:00 до 06:00</figcaption>
+                </div>
+            </div>
+            <div style="display: flex; height: 400px; width: 55%;" id="container_do24"></div>
+        </div>
+    </div>  <!--ЭПП html-->
+</div> <!--До 24 ночи html-->
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
@@ -347,13 +385,15 @@
 <!--</script>-->
 
 <script>
-    function highcharts() {
+
+// Функция для рисования графиков. Аргументы: id графика, массив данных
+function highcharts(id, dataArray) {
 
         Highcharts.getJSON(
             'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
             function (data) {
 
-                Highcharts.chart('container_epp_tok', {
+                Highcharts.chart(id, {
                     chart: {
                         polar: true,
                         zoomType: 'x',
@@ -411,7 +451,7 @@
                     series: [{
                         type: 'area',
                         name: 'Ток, А',
-                        data: do_6
+                        data: dataArray
                     },
                     ]
                 });
@@ -419,10 +459,8 @@
         );
     }
 
-
-
+// Функция перебора массива из запроса с разложением на 4 массива по времени
 function Perebor() {
-        // let allCategories = Object.keys(massivArray);
         for(let i=0; massivArray.length > i; i++)
         {
              if(new Date('2022-04-02 06:00:00').getTime() > (massivArray[i].time))
@@ -446,8 +484,11 @@ function Perebor() {
                 continue
             }
         }
-        console.log(do_6, do_12, do_18, do_24)
-        highcharts()
+
+    highcharts('container_do6', do_6)
+    highcharts('container_do12', do_12)
+    highcharts('container_do18', do_18)
+    highcharts('container_do24', do_24)
     }
 
 const timezone = new Date().getTimezoneOffset()
