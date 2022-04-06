@@ -218,6 +218,24 @@
 </script>
 <script src="/js/dark_theme.js"></script>
 
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="images/epp.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ЭПП</figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="epp(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(910, screen.availHeight)+',width='+Math.min(1010, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_epp" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; height: 400px; width: 55%;" id="container_epp_tok"></div>
+        </div>
+    </div>  <!--ЭПП html-->
+</div> <!--ЭПП html-->
+
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
 
@@ -329,34 +347,110 @@
 <!--</script>-->
 
 <script>
+    function highcharts() {
+
+        Highcharts.getJSON(
+            'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+            function (data) {
+
+                Highcharts.chart('container_epp_tok', {
+                    chart: {
+                        polar: true,
+                        zoomType: 'x',
+                        backgroundColor: 'none',
+                    },
+                    time: {
+                        timezoneOffset: 0
+                    },
+                    title: {
+                        text: 'Хронология технологического процесса',
+                        style: {
+                            color: '#83addd'
+                        }
+                    },
+                    xAxis: {
+                        type: 'datetime'
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Амплитуда'
+                        }
+                    },
+                    legend: {
+                        backgroundColor: '#f2f6f8',
+                        reversed: true
+                    },
+                    plotOptions: {
+                        area: {
+                            fillColor: {
+                                linearGradient: {
+                                    x1: 0,
+                                    y1: 0
+                                },
+                                stops: [
+                                    [0, Highcharts.getOptions().colors[0]],
+                                    [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                ]
+                            },
+                            marker: {
+                                radius: 2
+                            },
+                            lineWidth: 1,
+                            states: {
+                                hover: {
+                                    lineWidth: 1
+                                }
+                            },
+                            threshold: null
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+
+                    series: [{
+                        type: 'area',
+                        name: 'Ток, А',
+                        data: do_6
+                    },
+                    ]
+                });
+            }
+        );
+    }
+
+
+
 function Perebor() {
         // let allCategories = Object.keys(massivArray);
         for(let i=0; massivArray.length > i; i++)
         {
              if(new Date('2022-04-02 06:00:00').getTime() > (massivArray[i].time))
              {
-                do_6.push(massivArray[i]);
+                do_6.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                 continue
              }
             if(new Date('2022-04-02 12:00:00').getTime() > (massivArray[i].time))
             {
-                do_12.push(massivArray[i]);
+                do_12.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                 continue
             }
             if(new Date('2022-04-02 18:00:00').getTime() > (massivArray[i].time))
             {
-                do_18.push(massivArray[i]);
+                do_18.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                 continue
             }
             if(new Date('2022-04-02 23:59:59').getTime() > (massivArray[i].time))
             {
-                do_24.push(massivArray[i]);
+                do_24.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                 continue
             }
         }
         console.log(do_6, do_12, do_18, do_24)
+        highcharts()
     }
 
+const timezone = new Date().getTimezoneOffset()
 var product = "4919A2A3-290F-419F-A45C-E0DC75F91DB3"
 var startTime = "2022-04-02"
 var endTime = "2022-04-03"
