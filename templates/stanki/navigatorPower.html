@@ -335,7 +335,7 @@ function Perebor() {
         $.map(allCategories, function(cat){
             console.log(cat.slice(0, 10) + " " + cat.slice(11, 19))
 
-            if((cat.slice(0, 10) + " " + cat.slice(11, 19)) < "2022-04-02 06:00:00")
+            if("2022-04-02 06:00:00" > (cat.slice(0, 10) + " " + cat.slice(11, 19)))
             {
                 do_12[String(cat)] = String(massivArray[cat]); // так же добавит новый ключ, только "city" со значением "Moscow"
                 //Object.assign(do_12, cat: String(massivArray[cat]));
