@@ -329,11 +329,30 @@
 <!--</script>-->
 
 <script>
+function Perebor() {
+        let allCategories = Object.keys(massivArray);
+
+        $.map(allCategories, function(cat){
+            console.log(cat.slice(0, 10) + " " + cat.slice(11, 19))
+
+            if((cat.slice(0, 10) + " " + cat.slice(11, 19)) < "2022-04-02 06:00:00")
+            {
+                do_12[String(cat)] = String(massivArray[cat]); // так же добавит новый ключ, только "city" со значением "Moscow"
+                //Object.assign(do_12, cat: String(massivArray[cat]));
+            }
+        })
+        console.log(do_12)
+    }
+
+
 var product = "4919A2A3-290F-419F-A45C-E0DC75F91DB3"
 var startTime = "2022-04-02"
 var endTime = "2022-04-03"
 
 var massivArray
+
+var do_12 = {};
+
 
     var url = "http://192.168.3.41:8080/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + endTime
 
@@ -341,7 +360,9 @@ var massivArray
         function( data ) {
             console.log(data)
             massivArray = data
+            Perebor();
         });
+
 
 </script>
 
