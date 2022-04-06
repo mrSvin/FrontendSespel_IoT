@@ -509,7 +509,7 @@ function Perebor() {
 
     $.map(arraysTime, function (data){
         data[0] = ZeroTime(data[0])
-        highcharts(data[1])
+        highcharts(data[1], data[0])
     })
 
     }
