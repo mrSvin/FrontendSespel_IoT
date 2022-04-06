@@ -385,6 +385,26 @@
 <!--</script>-->
 
 <script>
+function ZeroTime(arrayTime) {
+    let newArray = []
+
+    for(let i=1; arrayTime.length-1 > i; i++)
+    {
+        newArray.push(arrayTime[i-1])
+
+        if(arrayTime[i][0] - arrayTime[i-1][0]  > 60000) {
+            console.log(i,"Спец логика между", new Date(arrayTime[i-1][0]+10800000).toISOString().slice(11, -5), 'И', new Date(arrayTime[i][0]+10800000).toISOString().slice(11, -5))
+            newArray.push(Array(arrayTime[i-1][0] + 1000, 0))
+            newArray.push(Array(arrayTime[i][0] - 1000, 0))
+        }
+    }
+    return newArray
+}
+
+// for(let i=0; nurArray.length-1 > i; i++)
+// {
+//     console.log(new Date(nurArray[i][0]+10800000).toISOString().slice(11, -5), nurArray[i][1])
+// }
 
 // Функция для рисования графиков. Аргументы: id графика, массив данных
 function highcharts(id, dataArray) {
@@ -485,10 +505,13 @@ function Perebor() {
             }
         }
 
-    highcharts('container_do6', do_6)
-    highcharts('container_do12', do_12)
-    highcharts('container_do18', do_18)
-    highcharts('container_do24', do_24)
+        const arraysTime = [[do_6,'container_do6'], [do_12,'container_do12'], [do_18,'container_do18'], [do_24,'container_do24']]
+
+    $.map(arraysTime, function (data){
+        data[0] = ZeroTime(data[0])
+        highcharts(data[1])
+    })
+
     }
 
 const timezone = new Date().getTimezoneOffset()
