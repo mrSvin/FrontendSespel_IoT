@@ -240,21 +240,91 @@
 
 <script>
     var programName
-    var status
-    var time
+    var statusWork
+    var timeWork
+
+    var statusPause
+    var timePause
+
+    var statusOff
+    var timeOff
+
+    var statusAvar
+    var timeAvar
+
+    var statusNagruzka
+    var timeNagruzka
+
     $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:1",
         function( data ) {
         programName = data.programName;
-        status = data.status;
-        time = data.time;
+        statusWork = data.status;
+        timeWork = data.time;
 
-        showMessage();
+        showWork();
     });
 
-    function showMessage() {
+    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:2",
+        function( data ) {
+            statusPause = data.status;
+            timePause = data.time;
+
+            showPause();
+        });
+
+    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:3",
+        function( data ) {
+            statusOff = data.status;
+            timeOff = data.time;
+
+            showOff();
+        });
+
+    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:4",
+        function( data ) {
+            statusAvar = data.status;
+            timeAvar = data.time;
+
+            showAvar();
+        });
+
+    $.get( "http://192.168.3.41:8080/api/complex/dmg_dmu50_1_beginTime:2022-03-30_endTime:2022-03-30 23:59_statusTag:5",
+        function( data ) {
+            statusNagruzka = data.status;
+            timeNagruzka = data.time;
+
+            showNagruzka();
+        });
+
+    function showWork() {
+        console.log("_______Work________")
         console.log(programName);
-        console.log(status);
-        console.log(time);
+        console.log(statusWork);
+        console.log(timeWork);
+    }
+
+    function showPause() {
+        console.log("_______Pause________")
+        console.log(statusPause);
+        console.log(timePause);
+    }
+
+    function showOff() {
+        console.log("_______Off_______")
+        console.log(statusOff);
+        console.log(timeOff);
+    }
+
+    function showAvar() {
+        console.log("_______Avar_______")
+        console.log(statusAvar);
+        console.log(timeAvar);
+    }
+
+    function showNagruzka() {
+        console.log("_______Nagruzka_______")
+        console.log(statusNagruzka);
+        console.log(timeNagruzka);
     }
 </script>
 
