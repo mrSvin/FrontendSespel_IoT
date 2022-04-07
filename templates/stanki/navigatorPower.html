@@ -278,8 +278,9 @@
                 data[0] = ZeroTime(data[0])
                 highcharts(data[1], data[0])
             })
-            document.body.classList.add('loaded');
-            document.body.classList.remove('loaded_hiding');
+
+            setTimeout(document.body.classList.add('loaded'),500);
+            setTimeout(document.body.classList.remove('loaded_hiding'),500);
         }
     </script>
 
