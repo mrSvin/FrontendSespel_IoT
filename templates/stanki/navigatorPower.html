@@ -278,6 +278,10 @@
                 data[0] = ZeroTime(data[0])
                 highcharts(data[1], data[0])
             })
+            window.setTimeout(function () {
+                document.body.classList.add('loaded');
+                document.body.classList.remove('loaded_hiding');
+            }, 500);
 
         }
     </script>
@@ -371,12 +375,6 @@
 
                 Perebor();
             });
-
-
-        window.setTimeout(function () {
-            document.body.classList.add('loaded');
-            document.body.classList.remove('loaded_hiding');
-        }, 500);
 
         dark_theme(); // Вызов функции
         // Смена цвета по кнопке
