@@ -264,22 +264,22 @@
         function Perebor() {
             for(let i=0; massivArray.length > i; i++)
             {
-                if(new Date(startTime + '06:00:00').getTime() > (massivArray[i].time))
+                if(new Date(startTime + ' 06:00:00').getTime() > (massivArray[i].time))
                 {
                     do_6.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
                 }
-                if(new Date(startTime + '12:00:00').getTime() > (massivArray[i].time))
+                if(new Date(startTime + ' 12:00:00').getTime() > (massivArray[i].time))
                 {
                     do_12.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
                 }
-                if(new Date(startTime + '18:00:00').getTime() > (massivArray[i].time))
+                if(new Date(startTime + ' 18:00:00').getTime() > (massivArray[i].time))
                 {
                     do_18.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
                 }
-                if(new Date(startTime + '23:59:59').getTime() > (massivArray[i].time))
+                if(new Date(startTime + ' 23:59:59').getTime() > (massivArray[i].time))
                 {
                     do_24.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
@@ -287,6 +287,8 @@
             }
 
             var arraysTime = [[do_6,'container_do6'], [do_12,'container_do12'], [do_18,'container_do18'], [do_24,'container_do24']]
+
+            console.log(arraysTime)
 
             $.map(arraysTime, function (data){
                 data[0] = ZeroTime(data[0])
