@@ -353,14 +353,20 @@
 </div>
 <!-- Загрузка страницы и темная тема-->
 <script>
+    $('#form_update').attr("object", "02-04-2022");
+    $('.form-control').attr("field", "02-04-2022");
+
+    console.log($('#form_update').attr('object'))
+    console.log($('.form-control').attr('field'))
+
+
     const timezone = new Date().getTimezoneOffset()
     var product = "4919A2A3-290F-419F-A45C-E0DC75F91DB3"
     var startTime = "2022-04-02"
     var endTime = "2022-04-03"
 
 
-    $('#form_update').attr("object", startTime); // картинка лого для папок на уровень ниже
-    $('.form-control').attr("field", startTime); // картинка лого для папок на уровень ниже
+
 
     var massivArray
 
