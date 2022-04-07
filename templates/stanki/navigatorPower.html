@@ -42,20 +42,33 @@
 
 
             $('#button_obnovit').on("click", function () {
-                var datas = $('#datepicker').data().datepicker.viewDate;
-                console.log(datas);
-                var day = datas.getDate();
-                var mes = datas.getMonth() + 1;
-                var year = datas.getFullYear();
+                var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
-                name_data = year + "-" + mes + "-" + day;
+                date = new Date(datas); // some mock date
+                ms = date.getTime() + 86400000;
 
-                $('#form_update').attr("object", name_data);
-                $('.form-control').attr("field", name_data);
+                startTime = datas.slice(0, 10)
+                timeEnd = new Date(ms).toISOString().slice(0, 10)
+
+
+                massivArray = []
+
+                do_6 = [];
+                do_12 = [];
+                do_18 = [];
+                do_24 = [];
+
+                url = "http://192.168.3.41:8080/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + endTime
+
+                $.get( url,
+                    function( data ) {
+                        massivArray = data
+
+                        Perebor();
+                    });
+
                 console.log(name_data);
             });
-
-
         });
 
     </script>   <!--Календарь js-->
@@ -338,7 +351,7 @@
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="follow" id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                <button class="follow" id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
                     Обновить
                 </button>
             </div>
@@ -365,11 +378,22 @@
 
     const timezone = new Date().getTimezoneOffset()
     var product = "4919A2A3-290F-419F-A45C-E0DC75F91DB3"
-    var startTime = "2022-04-02"
-    var endTime = "2022-04-03"
 
 
+    //var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    // Преобразоавние времение в формат '2022-03-21 10:00:35'
+    //var startTime = time.slice(0, 10)
 
+    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    var date = new Date(time); // some mock date
+    var ms = date.getTime() + 86400000;
+
+
+    // Преобразоавние времение в формат '2022-03-21 10:00:35'
+    var time_date = time.slice(0, 10)
+
+    var startTime = time.slice(0, 10)
+    var timeEnd = new Date(ms).toISOString().slice(0, 10)
 
     var massivArray
 
@@ -401,7 +425,6 @@
         $.get( url,
             function( data ) {
                 massivArray = data
-                // Пользовательские настройки
 
                 Perebor();
             });
