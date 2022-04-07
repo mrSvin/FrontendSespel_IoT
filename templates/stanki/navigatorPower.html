@@ -141,16 +141,18 @@
         <h1>Анализ работы навигаторов</h1>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
-                <li th:text="${user_name}"></li>
-                <p th:text="${user_mail}"></p>
+                <li></li>
+                <p></p>
             </div>
             <div method="post" class="dropdown">
-                <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+                <input type="image" alt="Avatar" class="avatar"/>
                 <div class="dropdown-content">
                     <p id="role_vision"></p>
-                    <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
-                    <li th:text="${user_name}"></li>
-                    <p th:text="${user_mail}"></p>
+                    <p><img width="100" style="border-radius: 360px; margin-top:0; "/></p>
+                    <div class="div_login_mail">
+                        <li></li>
+                        <p></p>
+                    </div>
                     <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
                     <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование
                     </button>
@@ -267,19 +269,6 @@
     </div>  <!--ЭПП html-->
 </div> <!--До 24 ночи html-->
 
-<script th:inline="javascript">
-    var role_status = [[${user_role}]];
-
-    if (role_status === "ROLE_ADMIN") {
-        document.getElementById("role_vision").innerHTML = "Роль: Админ";
-        document.getElementById("admin").style.display = "inline";
-
-    } else if (role_status === "ROLE_USER") {
-        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
-        document.getElementById("admin").style.display = "none";
-    }
-</script>
-<!--Скрипт отображения в header  кнопки администрирование-->
 
 <!-- Скрипт вызова функции для выпадающего меню -->
 <script src="/js/dropdown_menu.js"></script>
@@ -377,6 +366,25 @@
 <!--</script>-->
 
 <script>
+    function SetUserSetting(object) {
+        $('.avatar').attr("src", object.imageUser); // картинка лого для папок на уровень ниже
+        $('.dropdown-content img').attr("src", object.imageUser); // картинка лого для папок на уровень ниже
+        $('.div_login_mail li').html(object.userName); // картинка лого для папок на уровень ниже
+        $('.div_login_mail p').html(object.userMail); // картинка лого для папок на уровень ниже
+
+        var role_status = object.userRole;
+
+        if (role_status === "ROLE_ADMIN") {
+            document.getElementById("role_vision").innerHTML = "Роль: Админ";
+            document.getElementById("admin").style.display = "inline";
+
+        } else if (role_status === "ROLE_USER") {
+            document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
+            document.getElementById("admin").style.display = "none";
+        }
+    }
+
+
 function ZeroTime(arrayTime) {
     let newArray = []
 
@@ -525,8 +533,14 @@ var do_24 = [];
         function( data ) {
             console.log(data)
             massivArray = data
+            // Пользовательские настройки
+
             Perebor();
         });
+
+    $.post( "http://192.168.3.41:8080/api/userInfo", function( data ) {
+        SetUserSetting(data)
+    });
 
 
 </script>
