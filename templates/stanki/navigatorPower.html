@@ -133,6 +133,155 @@
         }
     </style>
 
+    <script>
+        // Функция получение пользовательских данных
+        function SetUserSetting() {
+            $.post( "http://192.168.3.41:8080/api/userInfo", function( data ) {
+
+                $('.avatar').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
+                $('.dropdown-content img').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
+                $('.div_login_mail li').html(data.userName); // картинка лого для папок на уровень ниже
+                $('.div_login_mail p').html(data.userMail); // картинка лого для папок на уровень ниже
+
+                var role_status = data.userRole;
+
+                if (role_status === "ROLE_ADMIN") {
+                    document.getElementById("role_vision").innerHTML = "Роль: Админ";
+                    document.getElementById("admin").style.display = "inline";
+
+                } else if (role_status === "ROLE_USER") {
+                    document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
+                    document.getElementById("admin").style.display = "none";
+                }
+            })
+        }
+
+        // Функция фильтрации графиков и присваивания нулей
+        function ZeroTime(arrayTime) {
+            let newArray = []
+
+            for(let i=1; arrayTime.length-1 > i; i++)
+            {
+                newArray.push(arrayTime[i-1])
+
+                if(arrayTime[i][0] - arrayTime[i-1][0]  > 60000) {
+                    console.log(i,"Спец логика между", new Date(arrayTime[i-1][0]+10800000).toISOString().slice(11, -5), 'И', new Date(arrayTime[i][0]+10800000).toISOString().slice(11, -5))
+                    newArray.push(Array(arrayTime[i-1][0] + 1000, 0))
+                    newArray.push(Array(arrayTime[i][0] - 1000, 0))
+                }
+            }
+            return newArray
+        }
+
+        // Функция для рисования графиков. Аргументы: id графика, массив данных
+        function highcharts(id, dataArray) {
+
+            Highcharts.getJSON(
+                'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+                function (data) {
+
+                    Highcharts.chart(id, {
+                        chart: {
+                            polar: true,
+                            zoomType: 'x',
+                            backgroundColor: 'none',
+                        },
+                        time: {
+                            timezoneOffset: timezone
+                        },
+                        title: {
+                            text: 'Хронология технологического процесса',
+                            style: {
+                                color: '#83addd'
+                            }
+                        },
+                        xAxis: {
+                            type: 'datetime'
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Амплитуда'
+                            }
+                        },
+                        legend: {
+                            backgroundColor: '#f2f6f8',
+                            reversed: true
+                        },
+                        plotOptions: {
+                            area: {
+                                fillColor: {
+                                    linearGradient: {
+                                        x1: 0,
+                                        y1: 0
+                                    },
+                                    stops: [
+                                        [0, Highcharts.getOptions().colors[0]],
+                                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                    ]
+                                },
+                                marker: {
+                                    radius: 2
+                                },
+                                lineWidth: 1,
+                                states: {
+                                    hover: {
+                                        lineWidth: 1
+                                    }
+                                },
+                                threshold: null
+                            }
+                        },
+                        credits: {
+                            enabled: false
+                        },
+
+                        series: [{
+                            type: 'area',
+                            name: 'Ток, А',
+                            data: dataArray
+                        },
+                        ]
+                    });
+                }
+            );
+        }
+
+        // Функция перебора массива из запроса с разложением на 4 массива по времени
+        function Perebor() {
+            for(let i=0; massivArray.length > i; i++)
+            {
+                if(new Date('2022-04-02 06:00:00').getTime() > (massivArray[i].time))
+                {
+                    do_6.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
+                    continue
+                }
+                if(new Date('2022-04-02 12:00:00').getTime() > (massivArray[i].time))
+                {
+                    do_12.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
+                    continue
+                }
+                if(new Date('2022-04-02 18:00:00').getTime() > (massivArray[i].time))
+                {
+                    do_18.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
+                    continue
+                }
+                if(new Date('2022-04-02 23:59:59').getTime() > (massivArray[i].time))
+                {
+                    do_24.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
+                    continue
+                }
+            }
+
+            const arraysTime = [[do_6,'container_do6'], [do_12,'container_do12'], [do_18,'container_do18'], [do_24,'container_do24']]
+
+            $.map(arraysTime, function (data){
+                data[0] = ZeroTime(data[0])
+                highcharts(data[1], data[0])
+            })
+
+        }
+    </script>
+
 </head>
 
 <header>
@@ -153,7 +302,6 @@
                         <li></li>
                         <p></p>
                     </div>
-                    <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
                     <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование
                     </button>
                     <label class="switch">
@@ -198,6 +346,32 @@
 
     window.onload = function () { // прелоудер
         document.body.classList.add('loaded_hiding');
+
+        SetUserSetting()
+        const timezone = new Date().getTimezoneOffset()
+        var product = "4919A2A3-290F-419F-A45C-E0DC75F91DB3"
+        var startTime = "2022-04-02"
+        var endTime = "2022-04-03"
+
+        var massivArray
+
+        var do_6 = [];
+        var do_12 = [];
+        var do_18 = [];
+        var do_24 = [];
+
+        var url = "http://192.168.3.41:8080/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + endTime
+
+        $.get( url,
+            function( data ) {
+                console.log(data)
+                massivArray = data
+                // Пользовательские настройки
+
+                Perebor();
+            });
+
+
         window.setTimeout(function () {
             document.body.classList.add('loaded');
             document.body.classList.remove('loaded_hiding');
@@ -218,6 +392,8 @@
     }
 </script>
 <script src="/js/dark_theme.js"></script>
+<!-- Скрипт вызова функции для выпадающего меню -->
+<script src="/js/dropdown_menu.js"></script>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -268,11 +444,6 @@
         </div>
     </div>  <!--ЭПП html-->
 </div> <!--До 24 ночи html-->
-
-
-<!-- Скрипт вызова функции для выпадающего меню -->
-<script src="/js/dropdown_menu.js"></script>
-
 
 
 <!--<script>-->
@@ -366,183 +537,6 @@
 <!--</script>-->
 
 <script>
-    function SetUserSetting(object) {
-        $('.avatar').attr("src", object.imageUser); // картинка лого для папок на уровень ниже
-        $('.dropdown-content img').attr("src", object.imageUser); // картинка лого для папок на уровень ниже
-        $('.div_login_mail li').html(object.userName); // картинка лого для папок на уровень ниже
-        $('.div_login_mail p').html(object.userMail); // картинка лого для папок на уровень ниже
-
-        var role_status = object.userRole;
-
-        if (role_status === "ROLE_ADMIN") {
-            document.getElementById("role_vision").innerHTML = "Роль: Админ";
-            document.getElementById("admin").style.display = "inline";
-
-        } else if (role_status === "ROLE_USER") {
-            document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
-            document.getElementById("admin").style.display = "none";
-        }
-    }
-
-
-function ZeroTime(arrayTime) {
-    let newArray = []
-
-    for(let i=1; arrayTime.length-1 > i; i++)
-    {
-        newArray.push(arrayTime[i-1])
-
-        if(arrayTime[i][0] - arrayTime[i-1][0]  > 60000) {
-            console.log(i,"Спец логика между", new Date(arrayTime[i-1][0]+10800000).toISOString().slice(11, -5), 'И', new Date(arrayTime[i][0]+10800000).toISOString().slice(11, -5))
-            newArray.push(Array(arrayTime[i-1][0] + 1000, 0))
-            newArray.push(Array(arrayTime[i][0] - 1000, 0))
-        }
-    }
-    return newArray
-}
-
-// for(let i=0; nurArray.length-1 > i; i++)
-// {
-//     console.log(new Date(nurArray[i][0]+10800000).toISOString().slice(11, -5), nurArray[i][1])
-// }
-
-// Функция для рисования графиков. Аргументы: id графика, массив данных
-function highcharts(id, dataArray) {
-
-        Highcharts.getJSON(
-            'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
-            function (data) {
-
-                Highcharts.chart(id, {
-                    chart: {
-                        polar: true,
-                        zoomType: 'x',
-                        backgroundColor: 'none',
-                    },
-                    time: {
-                        timezoneOffset: timezone
-                    },
-                    title: {
-                        text: 'Хронология технологического процесса',
-                        style: {
-                            color: '#83addd'
-                        }
-                    },
-                    xAxis: {
-                        type: 'datetime'
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Амплитуда'
-                        }
-                    },
-                    legend: {
-                        backgroundColor: '#f2f6f8',
-                        reversed: true
-                    },
-                    plotOptions: {
-                        area: {
-                            fillColor: {
-                                linearGradient: {
-                                    x1: 0,
-                                    y1: 0
-                                },
-                                stops: [
-                                    [0, Highcharts.getOptions().colors[0]],
-                                    [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                                ]
-                            },
-                            marker: {
-                                radius: 2
-                            },
-                            lineWidth: 1,
-                            states: {
-                                hover: {
-                                    lineWidth: 1
-                                }
-                            },
-                            threshold: null
-                        }
-                    },
-                    credits: {
-                        enabled: false
-                    },
-
-                    series: [{
-                        type: 'area',
-                        name: 'Ток, А',
-                        data: dataArray
-                    },
-                    ]
-                });
-            }
-        );
-    }
-
-// Функция перебора массива из запроса с разложением на 4 массива по времени
-function Perebor() {
-        for(let i=0; massivArray.length > i; i++)
-        {
-             if(new Date('2022-04-02 06:00:00').getTime() > (massivArray[i].time))
-             {
-                do_6.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
-                continue
-             }
-            if(new Date('2022-04-02 12:00:00').getTime() > (massivArray[i].time))
-            {
-                do_12.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
-                continue
-            }
-            if(new Date('2022-04-02 18:00:00').getTime() > (massivArray[i].time))
-            {
-                do_18.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
-                continue
-            }
-            if(new Date('2022-04-02 23:59:59').getTime() > (massivArray[i].time))
-            {
-                do_24.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
-                continue
-            }
-        }
-
-        const arraysTime = [[do_6,'container_do6'], [do_12,'container_do12'], [do_18,'container_do18'], [do_24,'container_do24']]
-
-    $.map(arraysTime, function (data){
-        data[0] = ZeroTime(data[0])
-        highcharts(data[1], data[0])
-    })
-
-    }
-
-const timezone = new Date().getTimezoneOffset()
-var product = "4919A2A3-290F-419F-A45C-E0DC75F91DB3"
-var startTime = "2022-04-02"
-var endTime = "2022-04-03"
-
-var massivArray
-
-var do_6 = [];
-var do_12 = [];
-var do_18 = [];
-var do_24 = [];
-
-
-    var url = "http://192.168.3.41:8080/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + endTime
-
-    $.get( url,
-        function( data ) {
-            console.log(data)
-            massivArray = data
-            // Пользовательские настройки
-
-            Perebor();
-        });
-
-    $.post( "http://192.168.3.41:8080/api/userInfo", function( data ) {
-        SetUserSetting(data)
-    });
-
-
 </script>
 
 
