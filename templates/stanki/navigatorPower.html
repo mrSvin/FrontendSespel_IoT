@@ -278,11 +278,8 @@
                 data[0] = ZeroTime(data[0])
                 highcharts(data[1], data[0])
             })
-            window.setTimeout(function () {
-                document.body.classList.add('loaded');
-                document.body.classList.remove('loaded_hiding');
-            }, 500);
-
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
         }
     </script>
 
@@ -394,13 +391,8 @@
 <!-- Скрипт вызова функции для выпадающего меню -->
 <script src="/js/dropdown_menu.js"></script>
 
-<div style="border: 1px solid #333;">
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div style="display: flex; height: 400px; width: 55%;" id="container_do6"></div>
-        </div>
-    </div>  <!--ЭПП html-->
-</div> <!--До 6 утра html-->
+<!--До 6 утра html-->
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 100%;" id="container_do6"></div>
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
