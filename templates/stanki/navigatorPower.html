@@ -43,6 +43,7 @@
 
             $('#button_obnovit').on("click", function () {
                 var datas = $('#datepicker').data().datepicker.viewDate;
+                console.log(datas);
                 var day = datas.getDate();
                 var mes = datas.getMonth() + 1;
                 var year = datas.getFullYear();
@@ -352,8 +353,8 @@
 </div>
 <!-- Загрузка страницы и темная тема-->
 <script>
-    $('#form_update').attr("object", "2022-04-02");
-    $('.form-control').attr("field", "2022-04-02");
+    //$('#form_update').attr("object", "2022-04-02");
+    //$('.form-control').attr("field", "2022-04-02");
 
     console.log($('#form_update').attr('object'))
     console.log($('.form-control').attr('field'))
