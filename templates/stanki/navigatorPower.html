@@ -66,8 +66,6 @@
 
                         Perebor();
                     });
-
-                console.log(name_data);
             });
         });
 
@@ -266,29 +264,29 @@
         function Perebor() {
             for(let i=0; massivArray.length > i; i++)
             {
-                if(new Date('2022-04-02 06:00:00').getTime() > (massivArray[i].time))
+                if(new Date(startTime + '06:00:00').getTime() > (massivArray[i].time))
                 {
                     do_6.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
                 }
-                if(new Date('2022-04-02 12:00:00').getTime() > (massivArray[i].time))
+                if(new Date(startTime + '12:00:00').getTime() > (massivArray[i].time))
                 {
                     do_12.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
                 }
-                if(new Date('2022-04-02 18:00:00').getTime() > (massivArray[i].time))
+                if(new Date(startTime + '18:00:00').getTime() > (massivArray[i].time))
                 {
                     do_18.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
                 }
-                if(new Date('2022-04-02 23:59:59').getTime() > (massivArray[i].time))
+                if(new Date(startTime + '23:59:59').getTime() > (massivArray[i].time))
                 {
                     do_24.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
                 }
             }
 
-            const arraysTime = [[do_6,'container_do6'], [do_12,'container_do12'], [do_18,'container_do18'], [do_24,'container_do24']]
+            var arraysTime = [[do_6,'container_do6'], [do_12,'container_do12'], [do_18,'container_do18'], [do_24,'container_do24']]
 
             $.map(arraysTime, function (data){
                 data[0] = ZeroTime(data[0])
@@ -387,10 +385,6 @@
     var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     var date = new Date(time); // some mock date
     var ms = date.getTime() + 86400000;
-
-
-    // Преобразоавние времение в формат '2022-03-21 10:00:35'
-    var time_date = time.slice(0, 10)
 
     var startTime = time.slice(0, 10)
     var timeEnd = new Date(ms).toISOString().slice(0, 10)
