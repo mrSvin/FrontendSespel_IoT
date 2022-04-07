@@ -49,6 +49,9 @@
                 var year = datas.getFullYear();
 
                 name_data = year + "-" + mes + "-" + day;
+
+                $('#form_update').attr("object", name_data);
+                $('.form-control').attr("field", name_data);
                 console.log(name_data);
             });
 
@@ -325,7 +328,7 @@
         <div style="width: 250px; float: left">
             <h2 class="choose_month">Выберите дату:</h2>
         </div>
-        <form style="margin: 0 20px; display: flex; align-items: center;" action="#" method="post" id="form_update">
+        <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
 
             <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
                 <input type='text' class="form-control"/>
