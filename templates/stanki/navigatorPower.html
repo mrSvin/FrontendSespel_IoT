@@ -386,12 +386,15 @@
 </div>
 <!-- Загрузка страницы и темная тема-->
 <script>
-    var Names = {'4919A2A3-290F-419F-A45C-E0DC75F91DB3': 'Навигатор #1','4919A2A3-290F-419F-A45C-E0DC75F91DB3': 'Навигатор #2 - голова 1','4919A2A3-290F-419F-A45C-E0DC75F91DB3': 'Навигатор #2 - голова 2','4919A2A3-290F-419F-A45C-E0DC75F91DB3': 'Навигатор #3'}
+    var Names = {'n1':['Навигатор #1', '4919A2A3-290F-419F-A45C-E0DC75F91DB3'], 'n2_1':['Навигатор #2 - голова 1', '4919A2A3-290F-419F-A45C-E0DC75F91DB3'], 'n2_2':['Навигатор #2 - голова 2', '4919A2A3-290F-419F-A45C-E0DC75F91DB3'],'n3':['Навигатор #3', '4919A2A3-290F-419F-A45C-E0DC75F91DB3']}
     var navigatorName
+    var product
 
-    if(localStorage['product'] != null) {
-        product = parseInt(window.localStorage['product']);
-        navigatorName = Names[product]
+    if(localStorage['local_data '] != null) {
+        local_data  = window.localStorage['local_data '];
+        navigatorName = Names[local_data [0]]
+        product = Names[local_data [1]]
+
     }
 
     const timezone = new Date().getTimezoneOffset()
