@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Анализ работы навигаторов</title>
-    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+    <link rel="shortcut icon" type="image/ico"/>
 
     <link rel="stylesheet" type="text/css" href="../../css/styles_stanki.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/menu_buttons.css"/> <!-- Меню -->
@@ -284,24 +284,32 @@
             }
 
             // Добавление в начало и конец массивов, переменную начала и конца с нулевыми значением
-            do_6.unshift(Array(new Date(startTime + ' 00:00:00').getTime(),0))
-            do_6.push(Array(new Date(startTime + ' 06:00:00').getTime(), 0))
+            if(do_6.length > 0){
+                do_6.unshift(Array(new Date(startTime + ' 00:00:00').getTime(),0))
+                do_6.push(Array(new Date(startTime + ' 06:00:00').getTime(), 0))
+            }
 
-            do_12.unshift(Array(new Date(startTime + ' 06:00:00').getTime(),0))
-            do_12.push(Array(new Date(startTime + ' 12:00:00').getTime(), 0))
+            if(do_12.length > 0) {
+                do_12.unshift(Array(new Date(startTime + ' 06:00:00').getTime(), 0))
+                do_12.push(Array(new Date(startTime + ' 12:00:00').getTime(), 0))
+            }
 
-            do_18.unshift(Array(new Date(startTime + ' 12:00:00').getTime(),0))
-            do_18.push(Array(new Date(startTime + ' 18:00:00').getTime(), 0))
+            if(do_18.length > 0) {
+                do_18.unshift(Array(new Date(startTime + ' 12:00:00').getTime(), 0))
+                do_18.push(Array(new Date(startTime + ' 18:00:00').getTime(), 0))
+            }
 
-            do_24.unshift(Array(new Date(startTime + ' 18:00:00').getTime(),0))
-            do_24.push(Array(new Date(startTime + ' 23:59:59').getTime(), 0))
+            if(do_24.length > 0) {
+                do_24.unshift(Array(new Date(startTime + ' 18:00:00').getTime(), 0))
+                do_24.push(Array(new Date(startTime + ' 23:59:59').getTime(), 0))
+            }
 
 
             var arraysTime = [[do_6, 'container_do6','00:00 - 06:00'], [do_12, 'container_do12','06:00 - 12:00'], [do_18, 'container_do18','12:00 - 18:00'], [do_24, 'container_do24','18:00 - 23:59']]
 
             $.map(arraysTime, function (data){
                 data[0] = ZeroTime(data[0])
-                highcharts(data[1], data[0], data[3])
+                highcharts(data[1], data[0], data[2])
             })
 
             setTimeout(document.body.classList.add('loaded'),1000);
@@ -336,7 +344,7 @@
                         <span class="slider round"><input type="checkbox" id='dark_button'/><span
                                 class="slider_before round_before"></span></span>
                     </label>
-                    <form th:action="@{/logout}" method="post">
+                    <form action="/logout" method="post">
                         <button class="follow" type="submit">
                             Выход
                         </button>
@@ -445,23 +453,21 @@
 
 
 <!--Шапка станка-->
-<div style="width: 100%;   margin: 0 auto;">
-    <div class="img" style="margin-bottom: 20px"> <!--Вставляем изображение станка 1-->
+<div style="display: flex; justify-content: center">
         <div class="parent_image">
-            <img src="images/navigator.png" class="stanok_img"/>
+            <img src="../images/navigator.png" class="stanok_img"/>
             <h2 id="navigatorName">Навигатор #1</h2>
         </div>
-    </div>
 </div>
 
 <!--До 6 утра html-->
-<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 100%;" id="container_do6"></div>
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%;" id="container_do6"></div>
 <!--До 12 дня html-->
-<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 100%;" id="container_do12"></div>
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%;" id="container_do12"></div>
 <!--До 18 вечера html-->
-<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 100%;" id="container_do18"></div>
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%;" id="container_do18"></div>
 <!--До 23 ночи html-->
-<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 100%;" id="container_do24"></div>
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%;" id="container_do24"></div>
 
 
 
