@@ -136,7 +136,7 @@ caption {
 .label_power{
     color: #756e6e;
     margin-top: 65px;
-    margin-left: 4px;
+    margin-left: -4px;
 }
 
 .choose_month {
