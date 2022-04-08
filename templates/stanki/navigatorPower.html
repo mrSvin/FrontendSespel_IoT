@@ -175,15 +175,19 @@
         function ZeroTime(arrayTime) {
             let newArray = []
 
-            for(let i=1; arrayTime.length-1 > i; i++)
+            for(let i=0; arrayTime.length > i; i++)
             {
-                newArray.push(arrayTime[i-1])
-
-                if(arrayTime[i][0] - arrayTime[i-1][0]  > 60000) {
-                    newArray.push(Array(arrayTime[i-1][0] + 1000, 0))
-                    newArray.push(Array(arrayTime[i][0] - 1000, 0))
+                newArray.push(arrayTime[i])
+                if (i == arrayTime.length - 1)
+                {
+                    break
+                }
+                if(arrayTime[i+1][0] - arrayTime[i][0]  > 60000) {
+                    newArray.push(Array(arrayTime[i][0] + 1000, 0))
+                    newArray.push(Array(arrayTime[i+1][0] - 1000, 0))
                 }
             }
+            console.log(newArray)
             return newArray
         }
 
@@ -262,33 +266,28 @@
 
         // Функция перебора массива из запроса с разложением на 4 массива по времени
         function Perebor() {
-            for(let i=0; massivArray.length > i; i++)
-            {
-                if(new Date(startTime + ' 06:00:00').getTime() > (massivArray[i].time))
-                {
+            for (let i = 0; massivArray.length > i; i++) {
+
+                if (new Date(startTime + ' 06:00:00').getTime() > (massivArray[i].time)) {
                     do_6.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
+                    console.log(massivArray[i].time, parseFloat(massivArray[i].value))
                     continue
                 }
-                if(new Date(startTime + ' 12:00:00').getTime() > (massivArray[i].time))
-                {
+                if (new Date(startTime + ' 12:00:00').getTime() > (massivArray[i].time)) {
                     do_12.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
                 }
-                if(new Date(startTime + ' 18:00:00').getTime() > (massivArray[i].time))
-                {
+                if (new Date(startTime + ' 18:00:00').getTime() > (massivArray[i].time)) {
                     do_18.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
                 }
-                if(new Date(startTime + ' 23:59:59').getTime() > (massivArray[i].time))
-                {
+                if (new Date(startTime + ' 23:59:59').getTime() > (massivArray[i].time)) {
                     do_24.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
                     continue
                 }
             }
 
-            var arraysTime = [[do_6,'container_do6'], [do_12,'container_do12'], [do_18,'container_do18'], [do_24,'container_do24']]
-
-            console.log(arraysTime)
+            var arraysTime = [[do_6, 'container_do6'], [do_12, 'container_do12'], [do_18, 'container_do18'], [do_24, 'container_do24']]
 
             $.map(arraysTime, function (data){
                 data[0] = ZeroTime(data[0])
@@ -344,7 +343,7 @@
         <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
 
             <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
-                <input type='text' class="form-control"/>
+                <input type='text' class="form-control" value="what"/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
