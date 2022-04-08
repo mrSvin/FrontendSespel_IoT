@@ -343,7 +343,7 @@
         <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
 
             <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
-                <input type='text' class="form-control" value="what"/>
+                <input type='text' class="form-control" value=""/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -370,8 +370,8 @@
     //$('#form_update').attr("object", "2022-04-02");
     //$('.form-control').attr("field", "2022-04-02");
 
-    console.log($('#form_update').attr('object'))
-    console.log($('.form-control').attr('field'))
+   // console.log($('#form_update').attr('object'))
+
 
 
     const timezone = new Date().getTimezoneOffset()
@@ -388,6 +388,8 @@
 
     var startTime = time.slice(0, 10)
     var timeEnd = new Date(ms).toISOString().slice(0, 10)
+
+    $('.form-control').attr('value', startTime)
 
     var massivArray
 
