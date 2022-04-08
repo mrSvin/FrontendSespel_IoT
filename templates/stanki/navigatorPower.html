@@ -176,7 +176,7 @@
 
         // Функция получение пользовательских данных
         function SetUserSetting() {
-            $.post( "http://192.168.3.41:8080/api/userInfo", function( data ) {
+            $.post( "http://" + document.location.host + "/api/userInfo", function( data ) {
 
                 $('.avatar').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
                 $('.dropdown-content img').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
