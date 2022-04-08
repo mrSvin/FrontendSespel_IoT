@@ -149,6 +149,31 @@
     </style>
 
     <script>
+        Highcharts.setOptions({
+            lang: {
+                loading: 'Загрузка...',
+                months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+                shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+                exportButtonTitle: "Экспорт",
+                printButtonTitle: "Печать",
+                rangeSelectorFrom: "С",
+                rangeSelectorTo: "По",
+                rangeSelectorZoom: "Период",
+                downloadPNG: 'Скачать PNG',
+                downloadJPEG: 'Скачать JPEG',
+                downloadPDF: 'Скачать PDF',
+                downloadSVG: 'Скачать SVG',
+                printChart: 'Напечатать график',
+                viewFullscreen: 'На весь экран'
+            },
+            plotOptions: {
+                xrange: {
+                    grouping: false
+                }
+            },
+        });
+
         // Функция получение пользовательских данных
         function SetUserSetting() {
             $.post( "http://192.168.3.41:8080/api/userInfo", function( data ) {
@@ -218,7 +243,7 @@
                         },
                         yAxis: {
                             title: {
-                                text: 'Амплитуда'
+                                text: 'Мощность, кВТ'
                             }
                         },
                         plotOptions: {
@@ -252,7 +277,7 @@
                             enabled: false
                         },
                         series: [{
-                            name: 'Ток, А',
+                            name: 'Мощность, кВТ',
                             data: dataArray
                         },
                         ]
@@ -323,7 +348,7 @@
 <header>
     <div class="header-div">
         <a href="../../home" style="display: flex; align-items: flex-start;"><img src="../../images/logo_black.png" class="icon-logo-admin icon-alarm"/></a>
-        <h1>Анализ мощности излучения на навигаторе</h1>
+        <h1>Анализ мощности излучения</h1>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
                 <li></li>
