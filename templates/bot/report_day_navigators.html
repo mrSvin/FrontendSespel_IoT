@@ -103,14 +103,6 @@
             <td>0%</td>
             <td>0%</td>
         </tr>
-        <tr class="hit">
-            <td>AR55</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-        </tr>
         </tbody>
     </table>    <!--Таблица изменений-->
     <!--Общая загрузка html-->
@@ -130,13 +122,13 @@
     var kometa_1_data = [[${kometa_1_data}]];
     var kometa_2_data = [[${kometa_2_data}]];
     var kometa_3_data = [[${kometa_3_data}]];
-    var ar55_data = [[${ar55_data}]];
+
 
 
 
     // Массив с массивами
     const Diagram = [navigator_1_data, navigator_2_golova_1_data, navigator_2_golova_2_data,
-        navigator_3_data, trulaser_data, kometa_1_data, kometa_2_data,  kometa_3_data, ar55_data]
+        navigator_3_data, trulaser_data, kometa_1_data, kometa_2_data,  kometa_3_data]
 
     table = document.getElementById('myTable').rows; // Обращение к таблице по ID
 
@@ -214,7 +206,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2',  'Комета #3', 'AR55']
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2',  'Комета #3']
         },
         credits: {
             enabled: false

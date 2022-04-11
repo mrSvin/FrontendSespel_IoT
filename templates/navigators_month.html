@@ -404,26 +404,6 @@
     </div>
 </div> <!--kometa 3 html-->
 
-<div style="border: 1px solid #333;">   <!--ar55 html-->
-    <div style="overflow: hidden;">
-        <div style="width: 100%;   margin: 2%;">
-            <div class="img" style="float: left;"> <!--Вставляем изображение станка-->
-                <div class="parent_image">
-                    <img src="images/ar55.png" class="stanok_img"/>
-                    <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">AR55</figcaption>
-                    <div>
-                        <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="ar55(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(680, screen.availHeight)+',width='+Math.min(1510, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_dmg_ctx510_4" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
-                    </div>
-                </div>
-            </div>
-            <div id="container_days9" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container9" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
-        </div>
-    </div>
-
-</div> <!--AR55 html-->
-
 <!--Функции для заполнения контейнеров-->
 <script src="/js/month/universal_month.js"></script>
 <script th:inline="javascript">
@@ -456,16 +436,13 @@
     var kometa_3_array_linear = [[${kometa_3_month_linear}]];
     var kometa_3_array_round = [[${kometa_3_month_round}]];
 
-    var ar55_array_linear = [[${ar55_month_linear}]];
-    var ar55_array_round = [[${ar55_month_round}]];
-    
     const linearDiagram = [navigator_1_array_linear, navigator_2_golova_1_array_linear,
         navigator_2_golova_2_array_linear, navigator_3_array_linear, trulaser_array_linear,
-        kometa_1_array_linear, kometa_2_array_linear, kometa_3_array_linear, ar55_array_linear];
+        kometa_1_array_linear, kometa_2_array_linear, kometa_3_array_linear];
     
     const roundDiagram = [navigator_1_array_round, navigator_2_golova_1_array_round, navigator_2_golova_2_array_round,
         navigator_3_array_round, trulaser_array_round, kometa_1_array_round,
-        kometa_2_array_round, kometa_3_array_round, ar55_array_round];
+        kometa_2_array_round, kometa_3_array_round];
 
 
     // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
@@ -548,7 +525,7 @@
                     fontSize: '18px',
                 }
             },
-            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2',  'Комета #3', 'AR55']
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3', 'TruLaser', 'Комета #1', 'Комета #2',  'Комета #3']
         },
         credits: {
             enabled: false
