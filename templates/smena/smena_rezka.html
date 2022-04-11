@@ -411,34 +411,6 @@
 </div>
 <!-- Загрузка страницы и темная тема-->
 <script>
-    var Names = {'n1':['Навигатор #1', '4919A2A3-290F-419F-A45C-E0DC75F91DB3'], 'n2_1':['Навигатор #2 - голова 1', '4919A2A3-290F-419F-A45C-E0DC75F91DB3'], 'n2_2':['Навигатор #2 - голова 2', '4919A2A3-290F-419F-A45C-E0DC75F91DB3'],'n3':['Навигатор #3', '4919A2A3-290F-419F-A45C-E0DC75F91DB3']}
-    var navigatorName
-    var product
-
-    const timezone = new Date().getTimezoneOffset()
-    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
-    var date = new Date(time); // some mock date
-    var ms = date.getTime() + 86400000;
-
-   // var startTime = time.slice(0, 10)
-   // var timeEnd = new Date(ms).toISOString().slice(0, 10)
-
-    //192.168.3.41:8080/api/complexData/navigator_1_days_date:2022-04-04
-    //_days
-
-        $('.form-control').attr('value', startTime)
-
-    var massivArray
-
-    var do_6 = [];
-    var do_12 = [];
-    var do_18 = [];
-    var do_24 = [];
-
-    var url1 = "http://" + document.location.host + "/api/complexData/" + 'navigator_1'  + "_days_date:" + startTime
-    var url2 = "http://" + document.location.host + "/api/complexData/" + 'navigator_1'  + "_days_date:" + startTime
-
-
     var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
 
     if (localStorage['dark_theme_state'] != null) {
@@ -454,17 +426,6 @@
 
     window.onload = function () { // прелоудер
         document.body.classList.add('loaded_hiding');
-
-        // Привязываем навигатору имя.
-        $('#navigatorName').html(navigatorName)
-
-        SetUserSetting()
-        $.get( url,
-            function( data ) {
-                massivArray = data
-
-                Perebor();
-            });
 
         dark_theme(); // Вызов функции
         // Смена цвета по кнопке
@@ -634,7 +595,72 @@
     </div>  <!--kometa 1 html-->
 </div> <!--kometa 3 html-->
 
-<script></script>
+<script>
+    function getDataPast(url) {
+        return $.ajax({
+            url : url,
+            type: 'GET',
+            success: handleDataPast
+        });
+    }
+
+    function handleDataPast(data) {
+        array_prew[0] = data.work
+        array_prew[1] = data.pause
+        array_prew[2] = data.off
+        array_prew[3] = data.avar
+        array_prew[4] = data.nagruzka
+
+        console.log(array_prew)
+    }
+
+    function getDataNow(url) {
+        return $.ajax({
+            url : url,
+            type: 'GET',
+            success: handleDataNow
+        });
+    }
+
+    function handleDataNow(data) {
+        array_now[0] = data.work
+        array_now[1] = data.pause
+        array_now[2] = data.off
+        array_now[3] = data.avar
+        array_now[4] = data.nagruzka
+
+        console.log(array_now)
+
+    }
+
+    var navigator_1_data = [[],[],[],[],[]];
+    var array_prew = [[],[],[],[],[]];
+    var array_now = [[],[],[],[],[]];
+
+
+    var navigator_2_golova_1_data = [[],[],[],[],[]];
+    var navigator_2_golova_2_data = [[],[],[],[],[]];
+    var navigator_3_data = [[],[],[],[],[]];
+
+    var Names = ['navigator_1']//,'navigator_2_golova_1', 'navigator_2_golova_2', 'navigator_3']
+
+    var startTime = '2022-04-04'
+    var pastTime = '2022-03-04'
+
+
+    $.map(Names, function (name){
+
+        var urlNow = 'http://'+ document.location.host +'/api/complexData/' + name + '_days_date:' + startTime
+        var urlPast = 'http://' + document.location.host + '/api/complexData/' + name + '_days_date:' + pastTime
+
+        getDataNow(urlNow)
+        getDataPast(urlPast)
+
+
+        console.log(urlNow, urlPast)
+    })
+
+</script>
 
 <!--Скрипт парсинга и заполнения диаграмм-->
 <script>
@@ -650,14 +676,6 @@
     var kol_long_operations = [];
 
     //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
-    var navigator_1_data = [[${navigator_1_data}]];
-    var navigator_2_golova_1_data = [[${navigator_2_golova_1_data}]];
-    var navigator_2_golova_2_data = [[${navigator_2_golova_2_data}]];
-    var navigator_3_data = [[${navigator_3_data}]];
-    var trulaser_data = [[${trulaser_data}]];
-    var kometa_1_data = [[${kometa_1_data}]];
-    var kometa_2_data = [[${kometa_2_data}]];
-    var kometa_3_data = [[${kometa_3_data}]];
 </script>
 
 <script>
