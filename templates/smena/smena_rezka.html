@@ -722,32 +722,43 @@
 
     // Функция вызывается после того, как все станки заполучили данные с запросов
     // Внутри функции нужно прописать ГЛОБАЛЬНЫЕ переменные станков
-    function twoWorkTime() {
-        // Массив с заполненными данными
-        var Diagram = [navigator_1_data,navigator_2_golova_1_data, navigator_2_golova_2_data, navigator_3_data, trulaser_data, kometa_1_data, kometa_2_data, kometa_3_data]
-        Diagram.map((stanok) => {
-            let smena_1 = [[],[],[],[],[],[]]
-            let smena_2 = [[],[],[],[],[],[]]
+    // function twoWorkTime() {
+    //     // Массив с заполненными данными
+    //     var Diagram = [navigator_1_data,navigator_2_golova_1_data, navigator_2_golova_2_data, navigator_3_data, trulaser_data, kometa_1_data, kometa_2_data, kometa_3_data]
+    //     Diagram.map((stanok) => {
+    //         let smena_1 = [[],[],[],[],[],[]]
+    //         let smena_2 = [[],[],[],[],[],[]]
+    //
+    //         for (let i = 0; stanok.length > i; i++) {
+    //             for (let j = 0; stanok[i].length > j; j++) {
+    //                 //console.log(new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime())
+    //                 //console.log(new Date(stanok[i][j]).getTime() + '>' + new Date(pastTime + ' 19:00:00').getTime())
+    //
+    //                 if ((new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok[i][j]).getTime())){
+    //                     smena_1[i].push(stanok[i][j])
+    //                 }
+    //                 else if ((new Date(stanok[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok[i][j]).getTime())){
+    //                     smena_2[i].push(stanok[i][j])
+    //                 }
+    //
+    //             }
+    //         }
+    //         console.log('19:00 - 7:00',smena_1)
+    //         console.log('7:00 - 19:00',smena_2)
+    //
+    //     })
+    // }
 
-            for (let i = 0; stanok.length > i; i++) {
-                for (let j = 0; stanok[i].length > j; j++) {
-                    //console.log(new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime())
-                    //console.log(new Date(stanok[i][j]).getTime() + '>' + new Date(pastTime + ' 19:00:00').getTime())
+    var xyz = 5;
+    if(xyz < 7){
+        console.log(xyz, '<', 7)
+    }else console.log(xyz, '>', 7)
 
-                    if ((new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok[i][j]).getTime())){
-                        smena_1[i].push(stanok[i][j])
-                    }
-                    else if ((new Date(stanok[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok[i][j]).getTime())){
-                        smena_2[i].push(stanok[i][j])
-                    }
+    if((xyz > 2) && (7 > xyz)){
+        console.log(xyz,">", 2, "И", 7, '>', xyz)
+    }else console.log("Иначе")
 
-                }
-            }
-            console.log('19:00 - 7:00',smena_1)
-            console.log('7:00 - 19:00',smena_2)
 
-        })
-    }
 
     // Стрелочная функция отправляющая запрос по url
     const sendRequest = url => {
