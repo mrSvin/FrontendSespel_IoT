@@ -730,6 +730,10 @@
             let smena_1 = [[],[],[],[],[],[]]
             let smena_2 = [[],[],[],[],[],[]]
 
+            if(stanok === null) {
+                return
+            }
+
             for (let i = 0; stanok.length > i; i++) {
                 for (let j = 0; stanok[i].length > j; j++) {
                     //console.log(new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime())
@@ -744,6 +748,8 @@
 
                 }
             }
+
+
             console.log('19:00 - 7:00',smena_1)
             console.log('7:00 - 19:00',smena_2)
 
