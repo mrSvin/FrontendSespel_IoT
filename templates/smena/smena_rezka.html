@@ -447,16 +447,19 @@
     //@@@@@@@@@@@             Функция плохо масштабируется,            @@@@@@@@@@@@@
     //@@@@@@@@@@@    обращается к глобальным переменным для записи     @@@@@@@@@@@@@
     ////////////////////////////////////////////////////////////////////////////////
-    function GetAllData(ArrayNames) {
+    function GetAllData(ArrayNames, Object) {
+
+        // Объект вывод
+        var MassivArray = Object
+
         // Функция перебирает набор имен Names и вызывает запроса присваивая значения ГЛОБАЛЬНЫМ переменным.
         ArrayNames.map((name) => {
             var urlNow = `http://${document.location.host}/api/complexData/${name}_days_date:${startTime}`
             var urlPast = `http://${document.location.host}/api/complexData/${name}_days_date:${pastTime}`
 
 
-            if (name === 'navigator_1')
-            {
-                sendRequest(urlNow).then((data) => {
+            // Запрос на сегодня
+            sendRequest(urlNow).then((data) => {
                     // если все ок, зайдет сюда
                     let arrayToday = [[],[],[],[],[]];
                     arrayToday[0] = data.work
@@ -466,12 +469,18 @@
                     arrayToday[4] = data.nagruzka
 
                     console.log(name)
-                    navigator_1_ready++
-                    navigator_1_today =  arrayToday
-                    navigator_1_data = checkerTodayYesterday(navigator_1_today,navigator_1_yesterday,navigator_1_ready)
+                    MassivArray[name]['ready'].push(0)
+                    MassivArray[name]['today'].push(arrayToday)
+
+                    var checkerData = checkerTodayYesterday(MassivArray[name]['today'],MassivArray[name]['yesterday'],MassivArray[name]['ready'])
+                        if (checkerData !== null)
+                        {
+                            MassivArray[name]['today']['complete'].push(checkerData)
+                        }
                 })
 
-                sendRequest(urlPast).then((data) => {
+            // Запрос на вчера
+            sendRequest(urlPast).then((data) => {
                     // если все ок, зайдет сюда
                     let arrayYesterday = [[],[],[],[],[]];
                     arrayYesterday[0] = data.work
@@ -481,243 +490,19 @@
                     arrayYesterday[4] = data.nagruzka
 
                     console.log(name)
-                    navigator_1_ready++
-                    navigator_1_yesterday =  arrayYesterday
-                    navigator_1_data = checkerTodayYesterday(navigator_1_today,navigator_1_yesterday,navigator_1_ready)
 
-                })
-            }
-            else if (name === 'navigator_2_golova_1')
-            {
-                sendRequest(urlNow).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayToday = [[],[],[],[],[]];
-                    arrayToday[0] = data.work
-                    arrayToday[1] = data.pause
-                    arrayToday[2] = data.off
-                    arrayToday[3] = data.avar
-                    arrayToday[4] = data.nagruzka
+                    MassivArray[name]['ready'].push(0)
+                    MassivArray[name]['yesterday'].push(arrayYesterday)
 
-                    console.log(name)
-                    navigator_2_golova_1_ready++
-                    navigator_2_golova_1_today =  arrayToday
-                    navigator_2_golova_1_data = checkerTodayYesterday(navigator_2_golova_1_today,navigator_2_golova_1_yesterday,navigator_2_golova_1_ready)
+                    var checkerData = checkerTodayYesterday(MassivArray[name]['today'],MassivArray[name]['yesterday'],MassivArray[name]['ready'])
+                    if (checkerData !== null)
+                    {
+                        MassivArray[name]['today']['complete'].push(checkerData)
+                    }
                 })
 
-                sendRequest(urlPast).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayYesterday = [[],[],[],[],[]];
-                    arrayYesterday[0] = data.work
-                    arrayYesterday[1] = data.pause
-                    arrayYesterday[2] = data.off
-                    arrayYesterday[3] = data.avar
-                    arrayYesterday[4] = data.nagruzka
-
-                    console.log(name)
-                    navigator_2_golova_1_ready++
-                    navigator_2_golova_1_yesterday =  arrayYesterday
-                    navigator_2_golova_1_data = checkerTodayYesterday(navigator_2_golova_1_today,navigator_2_golova_1_yesterday,navigator_2_golova_1_ready)
-                })
-            }
-
-            else if (name === 'navigator_2_golova_2')
-            {
-                sendRequest(urlNow).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayToday = [[],[],[],[],[]];
-                    arrayToday[0] = data.work
-                    arrayToday[1] = data.pause
-                    arrayToday[2] = data.off
-                    arrayToday[3] = data.avar
-                    arrayToday[4] = data.nagruzka
-
-                    console.log(name)
-                    navigator_2_golova_2_ready++
-                    navigator_2_golova_2_today =  arrayToday
-                    navigator_2_golova_2_data = checkerTodayYesterday(navigator_2_golova_2_today,navigator_2_golova_2_yesterday,navigator_2_golova_2_ready)
-                })
-
-                sendRequest(urlPast).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayYesterday = [[],[],[],[],[]];
-                    arrayYesterday[0] = data.work
-                    arrayYesterday[1] = data.pause
-                    arrayYesterday[2] = data.off
-                    arrayYesterday[3] = data.avar
-                    arrayYesterday[4] = data.nagruzka
-
-                    console.log(name)
-                    navigator_2_golova_2_ready++
-                    navigator_2_golova_2_yesterday =  arrayYesterday
-                    navigator_2_golova_2_data = checkerTodayYesterday(navigator_2_golova_2_today,navigator_2_golova_2_yesterday,navigator_2_golova_2_ready)
-                })
-            }
-
-            else if (name === 'navigator_3')
-            {
-                sendRequest(urlNow).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayToday = [[],[],[],[],[]];
-                    arrayToday[0] = data.work
-                    arrayToday[1] = data.pause
-                    arrayToday[2] = data.off
-                    arrayToday[3] = data.avar
-                    arrayToday[4] = data.nagruzka
-
-                    console.log(name)
-                    navigator_3_ready++
-                    navigator_3_today = arrayToday
-                    navigator_3_data = checkerTodayYesterday(navigator_3_today,navigator_3_yesterday,navigator_3_ready)
-                })
-
-                sendRequest(urlPast).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayYesterday = [[],[],[],[],[]];
-                    arrayYesterday[0] = data.work
-                    arrayYesterday[1] = data.pause
-                    arrayYesterday[2] = data.off
-                    arrayYesterday[3] = data.avar
-                    arrayYesterday[4] = data.nagruzka
-
-                    console.log(name)
-                    navigator_3_ready++
-                    navigator_3_yesterday =  arrayYesterday
-                    navigator_3_data = checkerTodayYesterday(navigator_3_today,navigator_3_yesterday,navigator_3_ready)
-                })
-            }
-
-            else if (name === 'trulaser')
-            {
-                sendRequest(urlNow).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayToday = [[],[],[],[],[]];
-                    arrayToday[0] = data.work
-                    arrayToday[1] = data.pause
-                    arrayToday[2] = data.off
-                    arrayToday[3] = data.avar
-                    arrayToday[4] = data.nagruzka
-
-                    console.log(name)
-                    trulaser_ready++
-                    trulaser_today =  arrayToday
-                    trulaser_data = checkerTodayYesterday(trulaser_today,trulaser_yesterday,trulaser_ready)
-                })
-
-                sendRequest(urlPast).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayYesterday = [[],[],[],[],[]];
-                    arrayYesterday[0] = data.work
-                    arrayYesterday[1] = data.pause
-                    arrayYesterday[2] = data.off
-                    arrayYesterday[3] = data.avar
-                    arrayYesterday[4] = data.nagruzka
-
-                    console.log(name)
-                    trulaser_ready++
-                    trulaser_yesterday =  arrayYesterday
-                    trulaser_data = checkerTodayYesterday(trulaser_today,trulaser_yesterday,trulaser_ready)
-                })
-            }
-
-            else if (name === 'kometa_1')
-            {
-                sendRequest(urlNow).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayToday = [[],[],[],[],[]];
-                    arrayToday[0] = data.work
-                    arrayToday[1] = data.pause
-                    arrayToday[2] = data.off
-                    arrayToday[3] = data.avar
-                    arrayToday[4] = data.nagruzka
-
-                    console.log(name)
-                    kometa_1_ready++
-                    kometa_1_today =  arrayToday
-                    kometa_1_data = checkerTodayYesterday(kometa_1_today,kometa_1_yesterday,kometa_1_ready)
-                })
-
-                sendRequest(urlPast).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayYesterday = [[],[],[],[],[]];
-                    arrayYesterday[0] = data.work
-                    arrayYesterday[1] = data.pause
-                    arrayYesterday[2] = data.off
-                    arrayYesterday[3] = data.avar
-                    arrayYesterday[4] = data.nagruzka
-
-                    console.log(name)
-                    kometa_1_ready++
-                    kometa_1_yesterday =  arrayYesterday
-                    kometa_1_data = checkerTodayYesterday(kometa_1_today,kometa_1_yesterday,kometa_1_ready)
-                })
-            }
-
-            else if (name === 'kometa_2')
-            {
-                sendRequest(urlNow).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayToday = [[],[],[],[],[]];
-                    arrayToday[0] = data.work
-                    arrayToday[1] = data.pause
-                    arrayToday[2] = data.off
-                    arrayToday[3] = data.avar
-                    arrayToday[4] = data.nagruzka
-
-                    console.log(name)
-                    kometa_2_ready++
-                    kometa_2_today =  arrayToday
-                    kometa_2_data = checkerTodayYesterday(kometa_2_today,kometa_2_yesterday,kometa_2_ready)
-                })
-
-                sendRequest(urlPast).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayYesterday = [[],[],[],[],[]];
-                    arrayYesterday[0] = data.work
-                    arrayYesterday[1] = data.pause
-                    arrayYesterday[2] = data.off
-                    arrayYesterday[3] = data.avar
-                    arrayYesterday[4] = data.nagruzka
-
-                    console.log(name)
-                    kometa_2_ready++
-                    kometa_2_yesterday =  arrayYesterday
-                    kometa_2_data = checkerTodayYesterday(kometa_2_today,kometa_2_yesterday,kometa_2_ready)
-                })
-            }
-
-            else if (name === 'kometa_3')
-            {
-                sendRequest(urlNow).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayToday = [[],[],[],[],[]];
-                    arrayToday[0] = data.work
-                    arrayToday[1] = data.pause
-                    arrayToday[2] = data.off
-                    arrayToday[3] = data.avar
-                    arrayToday[4] = data.nagruzka
-
-                    console.log(name)
-                    kometa_3_ready++
-                    kometa_3_today =  arrayToday
-                    kometa_3_data = checkerTodayYesterday(kometa_3_today,kometa_3_yesterday,kometa_3_ready)
-                })
-
-                sendRequest(urlPast).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayYesterday = [[],[],[],[],[]];
-                    arrayYesterday[0] = data.work
-                    arrayYesterday[1] = data.pause
-                    arrayYesterday[2] = data.off
-                    arrayYesterday[3] = data.avar
-                    arrayYesterday[4] = data.nagruzka
-
-                    console.log(name)
-                    kometa_3_ready++
-                    kometa_3_yesterday =  arrayYesterday
-                    kometa_3_data = checkerTodayYesterday(kometa_3_today,kometa_3_yesterday,kometa_3_ready)
-                })
-            }
         })
+        return MassivArray
     }
 
     // Функция вызывается после того, как все станки заполучили данные с запросов
@@ -757,9 +542,6 @@
     }
     // ]]>
 
-
-
-
     // Стрелочная функция отправляющая запрос по url
     const sendRequest = url => {
         // работаем с промисами для удобства, если ок, вызовем resolve, иначе reject у промиса
@@ -782,7 +564,7 @@
     // Аргументы: массив текущего дня, массив предыдущего дня, переменная готовности
     function checkerTodayYesterday (arrayToday, arrayYesterday,check)
     {
-        if(check === 2)
+        if(check.length === 2)
         {
             console.log("Готово")
             let arrayFull = []
@@ -857,14 +639,23 @@
     var kometa_3_ready = 0
 
     // Массив имен станков, для функции GetAllData
-    var Names = ['navigator_1','navigator_2_golova_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
+
+    var objectStankov = {'navigator_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
+                'navigator_2_golova_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
+                'navigator_2_golova_2':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
+                         'navigator_3':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]}}
+    //, 'trulaser':{'today':[], 'yesterday': []}, 'kometa_1':{'today':[], 'yesterday': []}, 'kometa_2':{'today':[], 'yesterday': []}, 'kometa_3':{'today':[], 'yesterday': []}}
+
+    // Имена берутся из ключей названий
+    var Names = Object.keys(objectStankov)
 
     // Текущая и предыдущая даты
     var startTime = '2022-04-04'
     var pastTime = '2022-03-04'
 
     // Запуск присвоения переменным данных из запросов.
-    GetAllData(Names)
+    var hello = GetAllData(Names, objectStankov)
+    console.log(hello)
 </script>
 
 <!--Скрипт парсинга и заполнения диаграмм-->
