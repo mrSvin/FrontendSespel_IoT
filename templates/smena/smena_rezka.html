@@ -476,6 +476,7 @@
                     var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
                     // Если в переменную не записался null
                     if (checkerData !== null){
+                            console.log(name, "Готов")
                             checkerData.map((check) => {
                                 Object[name]['complete'].push(check)
                             })
@@ -485,7 +486,6 @@
 
             // Запрос на вчера
             sendRequest(urlPast).then((data) => {
-                console.log(name)
                 Object[name]['ready'].push(0)
 
                 Object[name]['yesterday'].push(data.work)
@@ -499,6 +499,7 @@
                 var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
                 // Если в переменную не записался null
                 if (checkerData !== null){
+                    console.log(name, "Готов")
                     checkerData.map((check) => {
                         Object[name]['complete'].push(check)
                     })
@@ -571,13 +572,11 @@
             {   // метод concat объединяет массивы
                 arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
             }
-            console.log("Станок готов")
             checkerAllReady()
             return arrayFull
         }
         // Иначе вывести сообщение еще не готов
         else {
-            console.log("Еще не готов")
             return null
         }
     }
