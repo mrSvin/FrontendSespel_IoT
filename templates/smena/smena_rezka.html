@@ -448,12 +448,14 @@
         return new Promise((resolve, reject) => {$.ajax({url, type: 'GET'}).done(resolve).fail(reject)})
     }
 
+    // Функция формирует запрос по массиву имен и дате и передает его в объект
     function GetAllData(ArrayNames, Object) {
 
-        // Функция перебирает набор имен Names и вызывает запроса присваивая значения ГЛОБАЛЬНЫМ переменным.
+        // Через map пробегаемся по массиву имен
         ArrayNames.map((name) => {
-            var urlNow = `http://${document.location.host}/api/complexData/${name}_days_date:${startTime}`
-            var urlPast = `http://${document.location.host}/api/complexData/${name}_days_date:${pastTime}`
+            // Формируем для каждого станка
+            var urlNow = `/api/complexData/${name}_days_date:${startTime}`
+            var urlPast = `/api/complexData/${name}_days_date:${pastTime}`
 
 
             // Запрос на сегодня
@@ -557,41 +559,44 @@
             {
                 arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
             }
+            console.log("Станок готов")
             checkerAllReady()
             return arrayFull
         }
         else {
-            console.log("Еще не готово")
+            console.log("Еще не готов")
             return null
         }
     }
+</script>
 
+<script>
+    //Объявление переменных и запуск
 
-    ////////// Объявление переменных \\\\\\\\\\
-
-    // Массив имен станков, для функции GetAllData
-
+    // главный объект, на его основе работает вся логика, поля:
+    // имя станка{  массивы за текущий день, массивы за вчерашний день,
+    // массивы заполняющийся двумя нулями - проверка готовности, объеденные массивы за оба дня  }
     const objectStankov = {'navigator_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
-                'navigator_2_golova_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
-                'navigator_2_golova_2':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
-                         'navigator_3':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]}}
+        'navigator_2_golova_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
+        'navigator_2_golova_2':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
+        'navigator_3':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]}}
     //, 'trulaser':{'today':[], 'yesterday': []}, 'kometa_1':{'today':[], 'yesterday': []}, 'kometa_2':{'today':[], 'yesterday': []}, 'kometa_3':{'today':[], 'yesterday': []}}
 
-
+    // Клон объекта станков, чтобы не изменять оригинальный объект
     var clone = JSON.parse(JSON.stringify(objectStankov))
 
     // Имена берутся из ключей названий
     var Names = Object.keys(clone)
 
+    // Переменная хранящая количество станков, работает в функции checkerAllReady()
     var allStanki = Names.length
 
-    // Текущая и предыдущая даты
+    // Текущая и предыдущая даты. Глобальные переменные, видные из функций
     var startTime = '2022-04-04'
     var pastTime = '2022-03-04'
 
-    // Запуск присвоения переменным данных из запросов.
+    // Функция получения и отправки данных из запросов в clone.
     GetAllData(Names, clone)
-    console.log(clone)
 </script>
 
 <!--Скрипт парсинга и заполнения диаграмм-->
