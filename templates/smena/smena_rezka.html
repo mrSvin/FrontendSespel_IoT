@@ -441,6 +441,7 @@
     </div>  <!--kometa 1 html-->
 </div> <!--kometa 3 html-->
 
+<!--Универсальный скрипт получения данных из запросов и рисования из них графиков-->
 <script>
     // Стрелочная функция отправляющая запрос по url
     const sendRequest = url => {
@@ -476,7 +477,6 @@
                     var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
                     // Если в переменную не записался null
                     if (checkerData !== null){
-                            console.log(name, "Готов")
                             checkerData.map((check) => {
                                 Object[name]['complete'].push(check)
                             })
@@ -499,7 +499,6 @@
                 var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
                 // Если в переменную не записался null
                 if (checkerData !== null){
-                    console.log(name, "Готов")
                     checkerData.map((check) => {
                         Object[name]['complete'].push(check)
                     })
@@ -557,8 +556,6 @@
             // Запуск дальнейшей логики
             twoWorkTime(Names, clone)
         }
-        // Вывести сколько станков осталось
-        else console.log(`Осталось ${allStanki}`)
     }
 
     // Функция проверки, объеденяет входные массивы, если они оба готовы
@@ -582,7 +579,7 @@
         }
     }
 </script>
-
+<!--Скрипт объявления переменных и запуска основного скрипта-->
 <script>
     //Объявление переменных и запуск
 
