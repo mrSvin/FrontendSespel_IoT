@@ -442,11 +442,7 @@
 </div> <!--kometa 3 html-->
 
 <script>
-    // Обернул этот ужас в функцию, чтобы ее можно было повторно вызвать
-    // Аргумент массив имен станков
-    //@@@@@@@@@@@             Функция плохо масштабируется,            @@@@@@@@@@@@@
-    //@@@@@@@@@@@    обращается к глобальным переменным для записи     @@@@@@@@@@@@@
-    ////////////////////////////////////////////////////////////////////////////////
+
     function GetAllData(ArrayNames, Object) {
 
         // Объект вывод
@@ -474,8 +470,8 @@
 
                     var checkerData = checkerTodayYesterday(MassivArray[name]['today'],MassivArray[name]['yesterday'],MassivArray[name]['ready'])
                         if (checkerData !== null)
-                        {
-                            MassivArray[name]['today']['complete'].push(checkerData)
+                        {  console.log("Получилось")
+                            MassivArray[name]['complete'].push(checkerData)
                         }
                 })
 
@@ -497,7 +493,8 @@
                     var checkerData = checkerTodayYesterday(MassivArray[name]['today'],MassivArray[name]['yesterday'],MassivArray[name]['ready'])
                     if (checkerData !== null)
                     {
-                        MassivArray[name]['today']['complete'].push(checkerData)
+                        console.log("Получилось")
+                        MassivArray[name]['complete'].push(checkerData)
                     }
                 })
 
@@ -505,8 +502,7 @@
         return MassivArray
     }
 
-    // Функция вызывается после того, как все станки заполучили данные с запросов
-    // Внутри функции нужно прописать ГЛОБАЛЬНЫЕ переменные станков
+
     //<![CDATA[
     function twoWorkTime() {
         // Массив с заполненными данными
@@ -566,81 +562,26 @@
     {
         if(check.length === 2)
         {
-            console.log("Готово")
             let arrayFull = []
-            for (i=0; 5 > i; i++)
+            for (let i=0; 5 > i; i++)
             {
-                arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
+                arrayFull.push(arrayYesterday[0][i].concat(arrayToday[0][i]))
             }
             checkerAllReady()
             return arrayFull
         }
-        else console.log("Еще не готово")
-        return null
+        else {
+            console.log("Еще не готово")
+            return null
+        }
     }
 
 
     ////////// Объявление переменных \\\\\\\\\\
 
-    // Переменная Количества станков, не меняется.
-    const allStankiOld = 8
-
-    // Глобальная переменная общего числа
-    // станков для функции checkerAllReady()
-    // После того, когда достигнет нуля нарисуются графики
-    var allStanki = allStankiOld
-
-    // Переменная для записи полных данных станка
-    var navigator_1_data
-
-    // переменная для предыдущего дня
-    var navigator_1_yesterday
-
-    // Переменная для текущего дня
-    var navigator_1_today
-
-    // Переменная проверки обработка запроса
-    // если равна 2, то оба запроса обработались
-    var navigator_1_ready = 0
-
-    var navigator_2_golova_1_data
-    var navigator_2_golova_1_yesterday
-    var navigator_2_golova_1_today
-    var navigator_2_golova_1_ready = 0
-
-    var navigator_2_golova_2_data
-    var navigator_2_golova_2_yesterday
-    var navigator_2_golova_2_today
-    var navigator_2_golova_2_ready = 0
-
-    var navigator_3_data
-    var navigator_3_yesterday
-    var navigator_3_today
-    var navigator_3_ready = 0
-
-    var trulaser_data
-    var trulaser_yesterday
-    var trulaser_today
-    var trulaser_ready = 0
-
-    var kometa_1_data
-    var kometa_1_yesterday
-    var kometa_1_today
-    var kometa_1_ready = 0
-
-    var kometa_2_data
-    var kometa_2_yesterday
-    var kometa_2_today
-    var kometa_2_ready = 0
-
-    var kometa_3_data
-    var kometa_3_yesterday
-    var kometa_3_today
-    var kometa_3_ready = 0
-
     // Массив имен станков, для функции GetAllData
 
-    var objectStankov = {'navigator_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
+    var objectStankov = {'navigator_1':{'today':, 'yesterday': [], 'ready': [], 'complete':[]},
                 'navigator_2_golova_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
                 'navigator_2_golova_2':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
                          'navigator_3':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]}}
@@ -648,6 +589,8 @@
 
     // Имена берутся из ключей названий
     var Names = Object.keys(objectStankov)
+
+    var allStanki = Names.length
 
     // Текущая и предыдущая даты
     var startTime = '2022-04-04'
