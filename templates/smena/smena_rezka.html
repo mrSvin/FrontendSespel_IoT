@@ -442,6 +442,11 @@
 </div> <!--kometa 3 html-->
 
 <script>
+    // Стрелочная функция отправляющая запрос по url
+    const sendRequest = url => {
+        // работаем с промисами для удобства, если ок, вызовем resolve, иначе reject у промиса
+        return new Promise((resolve, reject) => {$.ajax({url, type: 'GET'}).done(resolve).fail(reject)})
+    }
 
     function GetAllData(ArrayNames, Object) {
 
@@ -456,52 +461,47 @@
 
             // Запрос на сегодня
             sendRequest(urlNow).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayToday = [[],[],[],[],[]];
-                    arrayToday[0] = data.work
-                    arrayToday[1] = data.pause
-                    arrayToday[2] = data.off
-                    arrayToday[3] = data.avar
-                    arrayToday[4] = data.nagruzka
-
                     console.log(name)
                     MassivArray[name]['ready'].push(0)
-                    MassivArray[name]['today'].push(arrayToday)
+
+                    MassivArray[name]['today'].push(data.work)
+                    MassivArray[name]['today'].push(data.pause)
+                    MassivArray[name]['today'].push(data.off)
+                    MassivArray[name]['today'].push(data.avar)
+                    MassivArray[name]['today'].push(data.nagruzka)
 
                     var checkerData = checkerTodayYesterday(MassivArray[name]['today'],MassivArray[name]['yesterday'],MassivArray[name]['ready'])
-                        if (checkerData !== null)
-                        {  console.log("Получилось")
-                            MassivArray[name]['complete'].push(checkerData)
+                        if (checkerData !== null){
+                            for(let i = 0; checkerData.length > i; i++){
+                                MassivArray[name]['complete'].push(checkerData[i])
+                            }
                         }
                 })
 
             // Запрос на вчера
             sendRequest(urlPast).then((data) => {
-                    // если все ок, зайдет сюда
-                    let arrayYesterday = [[],[],[],[],[]];
-                    arrayYesterday[0] = data.work
-                    arrayYesterday[1] = data.pause
-                    arrayYesterday[2] = data.off
-                    arrayYesterday[3] = data.avar
-                    arrayYesterday[4] = data.nagruzka
+                console.log(name)
+                MassivArray[name]['ready'].push(0)
 
-                    console.log(name)
-
-                    MassivArray[name]['ready'].push(0)
-                    MassivArray[name]['yesterday'].push(arrayYesterday)
+                MassivArray[name]['yesterday'].push(data.work)
+                MassivArray[name]['yesterday'].push(data.pause)
+                MassivArray[name]['yesterday'].push(data.off)
+                MassivArray[name]['yesterday'].push(data.avar)
+                MassivArray[name]['yesterday'].push(data.nagruzka)
 
                     var checkerData = checkerTodayYesterday(MassivArray[name]['today'],MassivArray[name]['yesterday'],MassivArray[name]['ready'])
                     if (checkerData !== null)
                     {
-                        console.log("Получилось")
-                        MassivArray[name]['complete'].push(checkerData)
+                        for(let i = 0; checkerData.length > i; i++){
+                            MassivArray[name]['complete'].push(checkerData[i])
+                        }
+
                     }
                 })
 
         })
         return MassivArray
     }
-
 
     //<![CDATA[
     function twoWorkTime() {
@@ -538,12 +538,6 @@
     }
     // ]]>
 
-    // Стрелочная функция отправляющая запрос по url
-    const sendRequest = url => {
-        // работаем с промисами для удобства, если ок, вызовем resolve, иначе reject у промиса
-        return new Promise((resolve, reject) => {$.ajax({url, type: 'GET'}).done(resolve).fail(reject)})
-    }
-
     // Функция проверяет все ли станки загрузились из запроса использует глобальную
     // переменную allStanki, при каждом вызове вычитается. Когда все станки готовы, начать обработку.
     function checkerAllReady(){
@@ -553,7 +547,7 @@
             // Запуск деления на две смены
             twoWorkTime()
         }
-        else console.log(`Осталось ${allStanki}`)
+        else console.log(`Осталось ${allStanki-1}`)
     }
 
     // Функция проверки, объеденяет входные массивы, если они оба готовы
@@ -565,8 +559,22 @@
             let arrayFull = []
             for (let i=0; 5 > i; i++)
             {
-                arrayFull.push(arrayYesterday[0][i].concat(arrayToday[0][i]))
+                for(let j=0; arrayYesterday[i].lenght > j; j++)
+                {
+                    arrayFull.push(arrayYesterday[i][j])
+                }
+
             }
+
+            for (let i=0; 5 > i; i++)
+            {
+                for(let j=0; arrayToday[i].lenght > j; j++)
+                {
+                    arrayFull.push(arrayToday[i][j])
+                }
+
+            }
+
             checkerAllReady()
             return arrayFull
         }

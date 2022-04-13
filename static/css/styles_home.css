@@ -180,7 +180,7 @@ h2 {
     width: 150px;
     height: 100px;
     margin-bottom: 50px;
-    background: url(https://owen.ru/uploads/41/111_4.png) no-repeat;
+    background: url(../images/owen.png) no-repeat;
     background-size: 150px 100px;
 }
 
@@ -213,7 +213,7 @@ h2 {
     width: 100px;
     height: 100px;
     margin-bottom: 50px;
-    background: url(https://glomos.ru/sites/default/files/wialon-logo.png) no-repeat;
+    background: url(../images/wialon-logo.png) no-repeat;
     background-size: 100px 100px;
 }
 
