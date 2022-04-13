@@ -542,12 +542,12 @@
     // переменную allStanki, при каждом вызове вычитается. Когда все станки готовы, начать обработку.
     function checkerAllReady(){
         allStanki--
-        if(allStanki === 0) {
+        if(allStanki === 1) {
             console.log("Все станки готовы")
             // Запуск деления на две смены
             twoWorkTime()
         }
-        else console.log(`Осталось ${allStanki-1}`)
+        else console.log(`Осталось ${allStanki}`)
     }
 
     // Функция проверки, объеденяет входные массивы, если они оба готовы
@@ -559,22 +559,8 @@
             let arrayFull = []
             for (let i=0; 5 > i; i++)
             {
-                for(let j=0; arrayYesterday[i].lenght > j; j++)
-                {
-                    arrayFull.push(arrayYesterday[i][j])
-                }
-
+                arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
             }
-
-            for (let i=0; 5 > i; i++)
-            {
-                for(let j=0; arrayToday[i].lenght > j; j++)
-                {
-                    arrayFull.push(arrayToday[i][j])
-                }
-
-            }
-
             checkerAllReady()
             return arrayFull
         }
