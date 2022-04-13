@@ -102,7 +102,7 @@
 
                 // $.get( url,
                 //     function( data ) {
-                //         massivArray = data
+                //         Object = data
                 //
                 //         Perebor();
                 //     });
@@ -450,9 +450,6 @@
 
     function GetAllData(ArrayNames, Object) {
 
-        // Объект вывод
-        var MassivArray = Object
-
         // Функция перебирает набор имен Names и вызывает запроса присваивая значения ГЛОБАЛЬНЫМ переменным.
         ArrayNames.map((name) => {
             var urlNow = `http://${document.location.host}/api/complexData/${name}_days_date:${startTime}`
@@ -462,18 +459,18 @@
             // Запрос на сегодня
             sendRequest(urlNow).then((data) => {
                     console.log(name)
-                    MassivArray[name]['ready'].push(0)
+                    Object[name]['ready'].push(0)
 
-                    MassivArray[name]['today'].push(data.work)
-                    MassivArray[name]['today'].push(data.pause)
-                    MassivArray[name]['today'].push(data.off)
-                    MassivArray[name]['today'].push(data.avar)
-                    MassivArray[name]['today'].push(data.nagruzka)
+                    Object[name]['today'].push(data.work)
+                    Object[name]['today'].push(data.pause)
+                    Object[name]['today'].push(data.off)
+                    Object[name]['today'].push(data.avar)
+                    Object[name]['today'].push(data.nagruzka)
 
-                    var checkerData = checkerTodayYesterday(MassivArray[name]['today'],MassivArray[name]['yesterday'],MassivArray[name]['ready'])
+                    var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
                         if (checkerData !== null){
                             for(let i = 0; checkerData.length > i; i++){
-                                MassivArray[name]['complete'].push(checkerData[i])
+                                Object[name]['complete'].push(checkerData[i])
                             }
                         }
                 })
@@ -481,26 +478,25 @@
             // Запрос на вчера
             sendRequest(urlPast).then((data) => {
                 console.log(name)
-                MassivArray[name]['ready'].push(0)
+                Object[name]['ready'].push(0)
 
-                MassivArray[name]['yesterday'].push(data.work)
-                MassivArray[name]['yesterday'].push(data.pause)
-                MassivArray[name]['yesterday'].push(data.off)
-                MassivArray[name]['yesterday'].push(data.avar)
-                MassivArray[name]['yesterday'].push(data.nagruzka)
+                Object[name]['yesterday'].push(data.work)
+                Object[name]['yesterday'].push(data.pause)
+                Object[name]['yesterday'].push(data.off)
+                Object[name]['yesterday'].push(data.avar)
+                Object[name]['yesterday'].push(data.nagruzka)
 
-                    var checkerData = checkerTodayYesterday(MassivArray[name]['today'],MassivArray[name]['yesterday'],MassivArray[name]['ready'])
+                    var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
                     if (checkerData !== null)
                     {
                         for(let i = 0; checkerData.length > i; i++){
-                            MassivArray[name]['complete'].push(checkerData[i])
+                            Object[name]['complete'].push(checkerData[i])
                         }
 
                     }
                 })
 
         })
-        return MassivArray
     }
 
     //<![CDATA[
@@ -575,14 +571,17 @@
 
     // Массив имен станков, для функции GetAllData
 
-    var objectStankov = {'navigator_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
+    const objectStankov = {'navigator_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
                 'navigator_2_golova_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
                 'navigator_2_golova_2':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
                          'navigator_3':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]}}
     //, 'trulaser':{'today':[], 'yesterday': []}, 'kometa_1':{'today':[], 'yesterday': []}, 'kometa_2':{'today':[], 'yesterday': []}, 'kometa_3':{'today':[], 'yesterday': []}}
 
+
+    var clone = JSON.parse(JSON.stringify(objectStankov))
+
     // Имена берутся из ключей названий
-    var Names = Object.keys(objectStankov)
+    var Names = Object.keys(clone)
 
     var allStanki = Names.length
 
@@ -591,8 +590,8 @@
     var pastTime = '2022-03-04'
 
     // Запуск присвоения переменным данных из запросов.
-    var hello = GetAllData(Names, objectStankov)
-    console.log(hello)
+    GetAllData(Names, clone)
+    console.log(clone)
 </script>
 
 <!--Скрипт парсинга и заполнения диаграмм-->
