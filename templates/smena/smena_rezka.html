@@ -453,29 +453,35 @@
 
         // Через map пробегаемся по массиву имен
         ArrayNames.map((name) => {
-            // Формируем для каждого станка
+            // Формируем для каждого станка url для запроса
             var urlNow = `/api/complexData/${name}_days_date:${startTime}`
             var urlPast = `/api/complexData/${name}_days_date:${pastTime}`
 
 
-            // Запрос на сегодня
+            // Запрос на текущий день для одного станка
             sendRequest(urlNow).then((data) => {
-                    console.log(name)
+
+                    // В массив обработки запроса добавляем ноль
                     Object[name]['ready'].push(0)
 
+                    // В массив текущего дня добавляем данные по запросу
                     Object[name]['today'].push(data.work)
                     Object[name]['today'].push(data.pause)
                     Object[name]['today'].push(data.off)
                     Object[name]['today'].push(data.avar)
                     Object[name]['today'].push(data.nagruzka)
 
+                    // Переменная checkerData будет записана только если для одного станка обработались оба запроса
+                    // Иначе в нее будет записан null
                     var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
-                        if (checkerData !== null){
-                            for(let i = 0; checkerData.length > i; i++){
-                                Object[name]['complete'].push(checkerData[i])
-                            }
-                        }
-                })
+                    // Если в переменную не записался null
+                    if (checkerData !== null){
+                            checkerData.map((check) => {
+                                Object[name]['complete'].push(check)
+                            })
+                    }
+            })
+
 
             // Запрос на вчера
             sendRequest(urlPast).then((data) => {
@@ -488,26 +494,30 @@
                 Object[name]['yesterday'].push(data.avar)
                 Object[name]['yesterday'].push(data.nagruzka)
 
-                    var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
-                    if (checkerData !== null)
-                    {
-                        for(let i = 0; checkerData.length > i; i++){
-                            Object[name]['complete'].push(checkerData[i])
-                        }
-
-                    }
-                })
+                // Переменная checkerData будет записана только если для одного станка обработались оба запроса
+                // Иначе в нее будет записан null
+                var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
+                // Если в переменную не записался null
+                if (checkerData !== null){
+                    checkerData.map((check) => {
+                        Object[name]['complete'].push(check)
+                    })
+                }
+            })
 
         })
     }
-
+    // Спец коммент для знаков && и < в xhtml
     //<![CDATA[
-    function twoWorkTime() {
+    // Функция запускается после обработки всех станков, делит время на две смены
+    function twoWorkTime(ArrayNames, Object) {
         // Массив с заполненными данными
-        var Diagram = [navigator_1_data,navigator_2_golova_1_data, navigator_2_golova_2_data, navigator_3_data, trulaser_data, kometa_1_data, kometa_2_data, kometa_3_data]
-        Diagram.map((stanok) => {
+
+        Names.map((name) => {
             let smena_1 = [[],[],[],[],[],[]]
             let smena_2 = [[],[],[],[],[],[]]
+
+            let stanok =  Object[name]['complete']
 
             if(stanok === null) {
                 return
@@ -528,7 +538,7 @@
                 }
             }
 
-
+            console.log(name)
             console.log('19:00 - 7:00',smena_1)
             console.log('7:00 - 19:00',smena_2)
 
@@ -542,9 +552,10 @@
         allStanki--
         if(allStanki === 1) {
             console.log("Все станки готовы")
-            // Запуск деления на две смены
-            twoWorkTime()
+            // Запуск дальнейшей логики
+            twoWorkTime(Names, clone)
         }
+        // Вывести сколько станков осталось
         else console.log(`Осталось ${allStanki}`)
     }
 
@@ -552,17 +563,19 @@
     // Аргументы: массив текущего дня, массив предыдущего дня, переменная готовности
     function checkerTodayYesterday (arrayToday, arrayYesterday,check)
     {
+        // Если массив готовности имеет две переменные
         if(check.length === 2)
-        {
+        {   // То запустиль логику объедения массивов вчерашнего и сегодняшнего дня
             let arrayFull = []
             for (let i=0; 5 > i; i++)
-            {
+            {   // метод concat объединяет массивы
                 arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
             }
             console.log("Станок готов")
             checkerAllReady()
             return arrayFull
         }
+        // Иначе вывести сообщение еще не готов
         else {
             console.log("Еще не готов")
             return null
