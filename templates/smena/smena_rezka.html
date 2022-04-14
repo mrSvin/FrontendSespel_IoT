@@ -593,7 +593,7 @@
             let arrayFull = []
             for (let i=0; 5 > i; i++)
             {   // метод concat объединяет массивы
-                if(arrayToday != undefined || arrayYesterday != undefined) {
+                if(arrayToday != undefined && arrayYesterday != undefined) {
                     arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
                 }
             }
