@@ -25,6 +25,8 @@
     <script src="../../js/bootstrap-3.3.0.min.js"></script>
 
     <script>
+        const timezone = new Date().getTimezoneOffset()
+
         Highcharts.setOptions({
             lang: {
                 loading: 'Загрузка...',
@@ -52,7 +54,7 @@
 
         // Функция получение пользовательских данных
         function SetUserSetting() {
-            $.post( "http://" + document.location.host + "/api/userInfo", function( data ) {
+            $.post("/api/userInfo", function( data ) {
 
                 $('.avatar').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
                 $('.dropdown-content img').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
@@ -75,7 +77,7 @@
 
         $(function () {
             $('#datepicker').datepicker({
-                format: "yyyy-mm-dd",
+                format: "dd-mm-yyyy",
                 language: 'ru',
                 autoclose: true,
                 todayHighlight: true,
@@ -98,14 +100,9 @@
                 startTime = datas.slice(0, 10)
                 timeEnd = new Date(ms).toISOString().slice(0, 10)
 
-                url = "http://" + document.location.host + "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd
-
-                // $.get( url,
-                //     function( data ) {
-                //         Object = data
-                //
-                //         Perebor();
-                //     });
+                clone = JSON.parse(JSON.stringify(objectStankov))
+                allStanki = Names.length
+                GetAllData(Names, clone)
             });
         });
 
@@ -583,8 +580,18 @@
 <!--Скрипт объявления переменных и запуска основного скрипта-->
 <script>
 
+
+    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    var date = new Date(time); // some mock date
+    var ms = date.getTime() - 86400000;
+
+    var startTime = time.slice(0, 10)
+    var pastTime = new Date(ms).toISOString().slice(0, 10)
+
+
     // Функция назначения объектам свойств
     function objectStatus() {return {'today':[], 'yesterday': [], 'ready': [], 'complete':[]}}
+    // Назанечение объекту полей.
     const objectStankov = {
         'navigator_1': objectStatus(),
         'navigator_2_golova_1': objectStatus(),
