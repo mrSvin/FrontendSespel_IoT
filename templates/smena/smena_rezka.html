@@ -582,16 +582,15 @@
 
 <!--Скрипт объявления переменных и запуска основного скрипта-->
 <script>
-    //Объявление переменных и запуск
 
-    // главный объект, на его основе работает вся логика, поля:
-    // имя станка{  массивы за текущий день, массивы за вчерашний день,
-    // массивы заполняющийся двумя нулями - проверка готовности, объеденные массивы за оба дня  }
-    const objectStankov = {'navigator_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
-        'navigator_2_golova_1':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
-        'navigator_2_golova_2':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]},
-        'navigator_3':{'today':[], 'yesterday': [], 'ready': [], 'complete':[]}}
-    //, 'trulaser':{'today':[], 'yesterday': []}, 'kometa_1':{'today':[], 'yesterday': []}, 'kometa_2':{'today':[], 'yesterday': []}, 'kometa_3':{'today':[], 'yesterday': []}}
+    // Функция назначения объектам свойств
+    function objectStatus() {return {'today':[], 'yesterday': [], 'ready': [], 'complete':[]}}
+    const objectStankov = {
+        'navigator_1': objectStatus(),
+        'navigator_2_golova_1': objectStatus(),
+        'navigator_2_golova_2': objectStatus(),
+        'navigator_3': objectStatus()
+    }
 
     // Клон объекта станков, чтобы не изменять оригинальный объект
     var clone = JSON.parse(JSON.stringify(objectStankov))
