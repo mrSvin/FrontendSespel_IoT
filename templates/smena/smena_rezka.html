@@ -98,7 +98,7 @@
                 ms = date.getTime() - 86400000;
 
                 startTime = datas.slice(0, 10)
-                timeEnd = new Date(ms).toISOString().slice(0, 10)
+                pastTime = new Date(ms).toISOString().slice(0, 10)
 
                 clone = JSON.parse(JSON.stringify(objectStankov))
                 allStanki = Names.length
@@ -579,12 +579,11 @@
 
 <!--Скрипт объявления переменных и запуска основного скрипта-->
 <script>
-
-
+    // Переменные настройка текущей и предыдущей даты
     var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     var date = new Date(time); // some mock date
     var ms = date.getTime() - 86400000;
-
+    // Текущая и предыдущая даты. Глобальные переменные, видные из функций
     var startTime = time.slice(0, 10)
     var pastTime = new Date(ms).toISOString().slice(0, 10)
 
@@ -607,10 +606,6 @@
 
     // Переменная хранящая количество станков, работает в функции checkerAllReady()
     var allStanki = Names.length
-
-    // Текущая и предыдущая даты. Глобальные переменные, видные из функций
-    var startTime = '2022-04-04'
-    var pastTime = '2022-03-04'
 
     // Функция получения и отправки данных из запросов в clone.
     GetAllData(Names, clone)
