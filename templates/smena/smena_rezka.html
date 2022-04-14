@@ -588,12 +588,14 @@
     function checkerTodayYesterday (arrayToday, arrayYesterday,check)
     {
         // Если массив готовности имеет две переменные
-        if((check.length === 2) && (arrayToday != undefined) && (arrayYesterday != undefined))
+        if(check.length === 2)
         {   // То запустиль логику объедения массивов вчерашнего и сегодняшнего дня
             let arrayFull = []
             for (let i=0; 5 > i; i++)
             {   // метод concat объединяет массивы
-                arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
+                if(arrayToday != undefined || arrayYesterday != undefined) {
+                    arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
+                }
             }
             checkerAllReady()
             return arrayFull
