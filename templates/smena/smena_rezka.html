@@ -591,6 +591,7 @@
     // Текущая и предыдущая даты. Глобальные переменные, видные из функций
     var startTime = time.slice(0, 10)
     var pastTime = new Date(ms).toISOString().slice(0, 10)
+    $('.form-control').attr('value', startTime)
 
 
     // Функция назначения объектам свойств
