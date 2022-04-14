@@ -510,7 +510,7 @@
     // Функция запускается после обработки всех станков, делит время на две смены
     function twoWorkTime(ArrayNames, Object) {
         // Массив с заполненными данными
-
+        console.log("_____Функция разбития а смены_____")
         Names.map((name) => {
             let smena_1 = [[],[],[],[],[],[]]
             let smena_2 = [[],[],[],[],[],[]]
@@ -520,6 +520,8 @@
             if(stanok === null) {
                 return
             }
+
+            console.log(name,stanok)
 
             for (let i = 0; stanok.length > i; i++) {
                 for (let j = 0; stanok[i].length > j; j++) {
@@ -536,9 +538,11 @@
                 }
             }
 
-            console.log(name)
+            //console.log(name)
             console.log('19:00 - 7:00',smena_1)
             console.log('7:00 - 19:00',smena_2)
+
+            //function make()
 
         })
     }
@@ -549,8 +553,9 @@
     function checkerAllReady(){
         allStanki--
         if(allStanki === 1) {
-            console.log("Все станки готовы")
+            console.log("________Все станки готовы________")
             // Запуск дальнейшей логики
+            console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
             twoWorkTime(Names, clone)
         }
     }
