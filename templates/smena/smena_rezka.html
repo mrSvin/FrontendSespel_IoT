@@ -77,7 +77,7 @@
 
         $(function () {
             $('#datepicker').datepicker({
-                format: "dd-mm-yyyy",
+                format: "yyyy-mm-dd",
                 language: 'ru',
                 autoclose: true,
                 todayHighlight: true,
@@ -508,14 +508,14 @@
     //<![CDATA[
     // Спец коммент для знаков && и < в xhtml
     // Функция запускается после обработки всех станков, делит время на две смены
-    function twoWorkTime(ArrayNames, Object) {
+    function twoWorkTime() {
         // Массив с заполненными данными
         console.log("_____Функция разбития а смены_____")
         Names.map((name) => {
             let smena_1 = [[],[],[],[],[],[]]
             let smena_2 = [[],[],[],[],[],[]]
 
-            let stanok =  Object[name]['complete']
+            let stanok =  clone[name]['complete']
 
             if(stanok === null) {
                 return
@@ -542,23 +542,69 @@
             console.log('19:00 - 7:00',smena_1)
             console.log('7:00 - 19:00',smena_2)
 
-            //function make()
+            //function make(smena_1, smena_2)
+        })
+    }
+
+    function roundDiagramData(smena1, smena2) {
+        let newSmena1 = []
+        let newSmena2 = []
+
+        smena1.map((element) => {
+            // Цикл преобразования изначального массива
+            for(let i = 1; element + 1>i; i++)
+            {
+                let delta = new Date(element[i]) - new Date(element[i-1]);
+
+                vrs2_days_new.push(delta)
+            }
+        })
+
+        smena2.map((element) => {
 
         })
     }
-    // ]]>
+
+
 
     // Функция проверяет все ли станки загрузились из запроса использует глобальную
     // переменную allStanki, при каждом вызове вычитается. Когда все станки готовы, начать обработку.
     function checkerAllReady(){
         allStanki--
+        console.log(allStanki)
         if(allStanki === 1) {
             console.log("________Все станки готовы________")
             // Запуск дальнейшей логики
-            console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
-            twoWorkTime(Names, clone)
+            //console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
+            let count = 0
+
+            // Проверка, все ли массивы заполнились
+            while(count < 300) {
+
+                for(let i = 0; i < Names.length; i++)
+                {
+                    if (clone[Names[i]]['complete'].length < 5) {
+                        count++
+                        break
+                    }
+                    if(i == Names.length-1) {
+                        twoWorkTime()
+                    }
+                }
+                // Если счетчик не прибавился, собрать мгновенно
+                if(count == 0) {
+                    twoWorkTime()
+                }
+                else if(count > 300)
+                {   // Иначе с задержкой в секунду
+                    setTimeout(twoWorkTime, 1000)
+                }
+
+            }
+
         }
     }
+    // ]]>
 
     // Функция проверки, объеденяет входные массивы, если они оба готовы
     // Аргументы: массив текущего дня, массив предыдущего дня, переменная готовности
