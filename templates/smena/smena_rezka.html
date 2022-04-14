@@ -576,32 +576,7 @@
             console.log("________Все станки готовы________")
             // Запуск дальнейшей логики
             //console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
-            let count = 0
-
-            // Проверка, все ли массивы заполнились
-            while(count < 300) {
-
-                for(let i = 0; i < Names.length; i++)
-                {
-                    if (clone[Names[i]]['complete'].length < 5) {
-                        count++
-                        break
-                    }
-                    if(i == Names.length-1) {
-                        twoWorkTime()
-                    }
-                }
-                // Если счетчик не прибавился, собрать мгновенно
-                if(count == 0) {
-                    twoWorkTime()
-                }
-                else if(count > 300)
-                {   // Иначе с задержкой в секунду
                     setTimeout(twoWorkTime, 1000)
-                }
-
-            }
-
         }
     }
     // ]]>
