@@ -514,8 +514,8 @@
         // Массив с заполненными данными
         console.log("_____Функция разбития а смены_____")
         Names.map((name) => {
-            let smena_1 = []
-            let smena_2 = []
+            let smena_1 = [];
+            let smena_2 = [];
 
             let stanok =  clone[name]['complete']
 
@@ -523,7 +523,7 @@
                 return
             }
 
-            console.log(name,stanok)
+            //console.log(name,stanok)
 
             for (let i = 0; stanok.length > i; i++) {
                 smena_1.push(Array())
@@ -532,13 +532,16 @@
                     //console.log(new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime())
                     //console.log(new Date(stanok[i][j]).getTime() + '>' + new Date(pastTime + ' 19:00:00').getTime())
 
-                    if(smena_1.length == 0)console.log("До смены", j)
-
 
                     if ((new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok[i][j]).getTime())){
-                        if((smena_1.length == 0) && (j%2!=0)) {
-                            console.log("Грязная запись")
+                        if((smena_1[i].length == 0) && (j%2!=0)) {
+                            console.log("Грязная запись1 ", stanok[i][j-1],"Начало, а", stanok[i][j], "конец")
                             smena_1[i].push(pastTime + ' 19:00:00')
+                            smena_1[i].push(stanok[i][j])
+                        }
+                        else if((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j-1]).getTime())) {
+                            console.log("Грязная запись2 ", stanok[i][j-1],"Начало, а", stanok[i][j], "конец")
+                            smena_1[i].push(startTime + ' 00:00:00')
                             smena_1[i].push(stanok[i][j])
                         }
                         else
@@ -547,14 +550,24 @@
                         }
 
                     }
-                    else if ((new Date(stanok[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok[i][j]).getTime())){
-                        smena_2[i].push(stanok[i][j])
-                    }
+                    // else if ((new Date(stanok[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok[i][j]).getTime())){
+                    //
+                    //     if((smena_2[i].length == 0) && (j%2!=0)) {
+                    //         console.log("Грязная запись")
+                    //         smena_2[i].push(pastTime + ' 19:00:00')
+                    //         smena_2[i].push(stanok[i][j])
+                    //     }
+                    //     else
+                    //     {
+                    //         smena_2[i].push(stanok[i][j])
+                    //     }
+                    // }
 
                 }
             }
 
-            //console.log(name)
+            console.log(name)
+            console.log(smena_1)
             //console.log('19:00 - 7:00',smena_1)
             //console.log('7:00 - 19:00',smena_2)
 
