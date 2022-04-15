@@ -530,7 +530,7 @@
             stanok.map((little, index) => {
                 stanok_change.push(Array())
                 for(let i=1; i < little.length; i++) {
-                    if ((new Date(startTime + ' 00:00:00') < new Date(little[i]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(little[i-1]).getTime())) {
+                    if ((new Date(startTime + ' 00:00:00') < new Date(little[i]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(little[i-1]).getTime()) && (i%2==0)) {
                         console.log("Вставка", index)
                         stanok_change[index].push(pastTime + ' 23:59:59')
                         stanok_change[index].push(little[i])
