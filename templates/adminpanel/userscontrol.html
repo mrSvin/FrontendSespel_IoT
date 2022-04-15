@@ -171,6 +171,7 @@
 
 
     $.each( id, function( index ){
+
         $("#table_users > tbody").append(
             "<tr>" +
             "<td>" + id[index] + "</td>" +
@@ -180,9 +181,10 @@
             "<td>"+ enabled[index] + "</td>" +
             "<td>"+ mail[index] + "</td>" +
             // "<td>"+ "<img src=" + photo[index] + " class='avatar'/>" + "</td>" +
-            "<td><img src="+ photo[index] + "/></td>" +
+            `<td><img src=`+ photo[index] + `></td>` +
             "</tr>" );
     });
+
 </script> <!--JS таблица-->
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
