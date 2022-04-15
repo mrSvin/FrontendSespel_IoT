@@ -58,7 +58,7 @@
                 do_18 = [];
                 do_24 = [];
 
-                url = "http://" + document.location.host + "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd
+                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd
 
                 $.get( url,
                     function( data ) {
@@ -438,7 +438,7 @@
     var do_18 = [];
     var do_24 = [];
 
-    var url = "http://" + document.location.host + "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd
+    var url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd
 
 
     var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
