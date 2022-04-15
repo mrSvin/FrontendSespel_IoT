@@ -6,43 +6,44 @@
     <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
     <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/> <!-- Меню -->
     <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/bootstrap-3.3.0.min.js"></script>
+
 
 </head>     <!--Стили-->
-<body class="login-body">
+<body className="login-body">
 <div align="center">
     <div align="center" style="float: inherit; margin: 1.5%;  font-size: 150%; text-align: inherit">
-        <img src="logo_black.png" class="icon-logo" style="margin: 0;"/>
+        <img src="logo_black.png" className="icon-logo" style="margin: 0;"/>
     </div>  <!--Лого-->
 
     <form action="#" method="post" name="f" style="float: inherit; margin: 1.5%;  font-size: 150%; text-align: inherit"
           th:action="@{/login}">
         <legend>Авторизуйтесь для начала работы.
         </legend>
-        <div th:if="${param.error}" class="alert alert-error">
+        <div th:if="${param.error}" className="alert alert-error">
             Некорректная авторизация.
         </div>
-        <div th:if="${param.logout}" class="alert alert-success">
+        <div th:if="${param.logout}" className="alert alert-success">
             Вы вышли из системы.
         </div>
     </form>      <!--Форма авторизации-->
 </div>  <!--Форма авторизации-->
 
-<div class="login-box">
+<div className="login-box">
     <h2>Авторизация</h2>
     <form action="#" method="post">
-        <div class="user-box">
+        <div className="user-box">
             <input type="text" th:name="username" required=""/>
             <label>Имя пользователя</label>
         </div>
-        <div class="user-box">
+        <div className="user-box">
             <input type="password" id="password" name="password" required=""/>
             <label>Пароль</label>
         </div>
         <p style="margin: 0">
-            <input id="remember" type="checkbox" name="remember-me" value="true" style="margin-left: 0px;"/> <label for="remember" class="remember_me">Запомнить меня</label>
+            <input id="remember" type="checkbox" name="remember-me" value="true" style="margin-left: 0px;"/> <label
+                htmlFor="remember" className="remember_me">Запомнить меня</label>
         </p>
-        <button type="submit" class="button" style="width: 80%; left: 6%; margin-top: 32px; margin-bottom: 0px; ">
+        <button type="submit" className="button" style="width: 80%; left: 6%; margin-top: 32px; margin-bottom: 0px; ">
             <span></span>
             <span></span>
             <span></span>
@@ -58,7 +59,7 @@
     var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
 
     //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
-    if(localStorage['dark_theme_state'] != null) {
+    if (localStorage['dark_theme_state'] != null) {
         dark_theme_state = parseInt(window.localStorage['dark_theme_state']);
     }
     // Условия для смены цвета вне нажатия на кнопку
@@ -66,9 +67,9 @@
 
     dark_theme(); // Вызов функции
     // Смена цвета по кнопке
-    $("#dark_button").on("click", function() {
+    $("#dark_button").on("click", function () {
         dark_theme_state++; // увеличиваем счетчик
-        if(dark_theme_state > 1) // если он больше 1, меняем на ноль
+        if (dark_theme_state > 1) // если он больше 1, меняем на ноль
         {
             dark_theme_state = 0;
         }
