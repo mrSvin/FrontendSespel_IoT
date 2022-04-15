@@ -514,8 +514,8 @@
         // Массив с заполненными данными
         console.log("_____Функция разбития а смены_____")
         Names.map((name) => {
-            let smena_1 = [[],[],[],[],[],[]]
-            let smena_2 = [[],[],[],[],[],[]]
+            let smena_1 = []
+            let smena_2 = []
 
             let stanok =  clone[name]['complete']
 
@@ -526,13 +526,26 @@
             console.log(name,stanok)
 
             for (let i = 0; stanok.length > i; i++) {
+                smena_1.push(Array())
+                smena_2.push(Array())
                 for (let j = 0; stanok[i].length > j; j++) {
                     //console.log(new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime())
                     //console.log(new Date(stanok[i][j]).getTime() + '>' + new Date(pastTime + ' 19:00:00').getTime())
 
+                    if(smena_1.length == 0)console.log("До смены", j)
+
+
                     if ((new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok[i][j]).getTime())){
-                        if(j%2==0) {}
-                        smena_1[i].push(stanok[i][j])
+                        if((smena_1.length == 0) && (j%2!=0)) {
+                            console.log("Грязная запись")
+                            smena_1[i].push(pastTime + ' 19:00:00')
+                            smena_1[i].push(stanok[i][j])
+                        }
+                        else
+                        {
+                            smena_1[i].push(stanok[i][j])
+                        }
+
                     }
                     else if ((new Date(stanok[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok[i][j]).getTime())){
                         smena_2[i].push(stanok[i][j])
@@ -542,8 +555,8 @@
             }
 
             //console.log(name)
-            console.log('19:00 - 7:00',smena_1)
-            console.log('7:00 - 19:00',smena_2)
+            //console.log('19:00 - 7:00',smena_1)
+            //console.log('7:00 - 19:00',smena_2)
 
             //function make(smena_1, smena_2)
         })
