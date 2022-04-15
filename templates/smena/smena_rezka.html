@@ -531,6 +531,7 @@
                     //console.log(new Date(stanok[i][j]).getTime() + '>' + new Date(pastTime + ' 19:00:00').getTime())
 
                     if ((new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok[i][j]).getTime())){
+                        if(j%2==0) {}
                         smena_1[i].push(stanok[i][j])
                     }
                     else if ((new Date(stanok[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok[i][j]).getTime())){
@@ -556,9 +557,9 @@
             // Цикл преобразования изначального массива
             for(let i = 1; element + 1>i; i++)
             {
-                let delta = new Date(element[i]) - new Date(element[i-1]);
-
-                vrs2_days_new.push(delta)
+                if(element[i]){}
+                //let delta = new Date(element[i]) - new Date(element[i-1]);
+               // vrs2_days_new.push(delta)
             }
         })
 
@@ -578,7 +579,7 @@
             console.log("________Все станки готовы________")
             // Запуск дальнейшей логики
             //console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
-                    twoWorkTime()
+                    setTimeout(twoWorkTime, 1)
         }
     }
 
