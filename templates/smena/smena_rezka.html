@@ -513,12 +513,16 @@
     function twoWorkTime() {
         // Массив с заполненными данными
         console.log("_____Функция разбития а смены_____")
-        Names.map((name) => {
-            console.log(name)
+        //Names.map((name) => {
+            let name = Names[0]
+
+        console.log(name)
             let smena_1 = [];
             let smena_2 = [];
 
             let stanok =  clone[name]['complete']
+            console.log(stanok)
+
 
             if(stanok === null) {
                 return
@@ -529,11 +533,16 @@
 
             stanok.map((little, index) => {
                 stanok_change.push(Array())
-                for(let i=1; i < little.length; i++) {
-                    if ((new Date(startTime + ' 00:00:00') < new Date(little[i]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(little[i-1]).getTime()) && (i%2==0)) {
-                        console.log("Вставка", index)
-                        stanok_change[index].push(pastTime + ' 23:59:59')
+                for(let i=0; i < little.length; i++) {
+                    if(i == little.length){
                         stanok_change[index].push(little[i])
+                        break
+                    }
+
+                    if ((new Date(startTime + ' 00:00:00') < new Date(little[i+1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(little[i]).getTime()) && (i%2==0)) {
+                        console.log("Вставка", index)
+                        stanok_change[index].push(little[i])
+                        stanok_change[index].push(pastTime + ' 23:59:59')
                     }
                     else stanok_change[index].push(little[i])
                 }
@@ -589,7 +598,7 @@
             // console.log('\n\n')
 
             //function make(smena_1, smena_2)
-        })
+       // })
     }
 
     function roundDiagramData(smena1, smena2) {
