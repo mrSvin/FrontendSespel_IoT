@@ -574,11 +574,11 @@
     function checkerAllReady(){
         allStanki--
         console.log(allStanki)
-        if(allStanki === 1) {
+        if(allStanki === 0) {
             console.log("________Все станки готовы________")
             // Запуск дальнейшей логики
             //console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
-                    setTimeout(twoWorkTime, 1000)
+                    twoWorkTime()
         }
     }
 
