@@ -2,6 +2,11 @@ const timezone = new Date().getTimezoneOffset()
 var colorsLine = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
 var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
 
+// Получение текущего времяни в формате toISO
+var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+// Преобразоавние времение в формат '2022-03-21 10:00:35'
+time = time.slice(0, 10) + " " + time.slice(11, 19);
+
 Highcharts.setOptions({
     lang: {
         loading: 'Загрузка...',
@@ -31,17 +36,17 @@ Highcharts.setOptions({
 });
 
 // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-function timeReplace(dataArray, time, missTime) {
+function timeReplace(dataArray) {
 
         // пробег по массивам до массива с именем программы
         for (let i=0; i<5; i++) {
-            if(dataArray[index_time].length%2 == 0){
+            if(dataArray[i].length%2 == 0){
                 continue
             }
             else if(missTime.slice(0, 10) == time.slice(0, 10)){
                 dataArray[i].push(time)
             }
-            else dataArray[i].push(missTime.slice(0, 10) + "23:59:59")
+            else dataArray[i].push(time_miss.slice(0, 10) + "23:59:59")
         }
 }
 
@@ -487,13 +492,6 @@ function buildCommonDiagrams(roundDiagram, exception, index) {
 // и изменения имени операции нагрузки и тд
 function build (stankiDataArray,  startContainer = 1, exception = [0])
 {
-    // Получение текущего времяни в формате toISO
-    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
-    // Преобразоавние времение в формат '2022-03-21 10:00:35'
-    time = time.slice(0, 10) + " " + time.slice(11, 19);
-
-    // время с календаря
-    var time_miss = $('#datepicker').data().datepicker.viewDate.toISOString();
 
     $.map(stankiDataArray, function (stanok, index) {
 
