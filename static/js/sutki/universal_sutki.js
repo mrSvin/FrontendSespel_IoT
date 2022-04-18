@@ -37,15 +37,23 @@ function timeReplace(dataArray, time) {
         // пробег по массивам до массива с именем программы
         for (let i=0; i<5; i++) {
 
-            if(dataArray[i].length%2 == 0){
-                continue
+            // Если дата сегодняшняя
+            if (dataArray[i][0].slice(0, 10) == time.slice(0, 10)) {
+                for (let j = 0; j < dataArray[i].length - 1; j++) {
+                    // Если элемент массива равен 23:59
+                    if (dataArray[i][j] == dataArray[i][j].slice(0, 10) + " 23:59:59") {
+                        // То записать последнее текущее время.
+                        console.log("Прошла замена")
+                        // То заменяем этот 23:59 на текущее время
+                        dataArray[i][j] = time
+                        break
+                    }
+
+                }
             }
-            else if(dataArray[i][0].slice(0,10) == time.slice(0, 10)){
-                dataArray[i].push(time)
-            }
-            else dataArray[i].push(dataArray[i].slice(0,10) + "23:59:59")
         }
 }
+
 
 // Функция вычисляет количества операций, аргумент массив работы
 function getPush_kol_op(arrayWork)
@@ -93,7 +101,7 @@ function pars(arrayParse, y, arrayName=null)
     var arraySave = [] // Массив, который будет заполняться
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = (arrayParse.length)/2-2
+    var lengh = (arrayParse.length)/2-1
 
     if (lengh <= 0){
         return
