@@ -38,26 +38,6 @@ time = time.slice(0, 10) + " " + time.slice(11, 19);
 // Время, которое будет переписано в массивах 'текущая дата 23:59:59'
 time_miss = time.slice(0, 10) + " " + "23:59:59";
 
-// Функция преобразования в дате сегодняшнего дня значений 23:59:59
-function timeReplace(dataArray) {
-    // индекс ограничение, чтобы не обрабатывать 5-ый массив с именем программы
-    var index_time = 0;
-    // выполнять если текущие время не равно 23:59:59
-    if (time != time_miss) {
-        // пробег по массивам до массива с именем программы
-        while (index_time < 5) {
-            $.each(dataArray[index_time], function (i) {
-                // если в массиве время равно текущей дате 23:59:59
-                if (dataArray[index_time][i] == time_miss) {
-                    // то записать в него значение текущее время
-                    dataArray[index_time][i] = time; //dataArray[index_time][i-1]
-                }
-            });
-            // после оконачния цикла each перейти к следующему массиву
-            index_time += 1;
-        }
-    }
-}
 
 // Функция вычисляет количества операций, аргумент массив работы
 function getPush_kol_op(arrayWork)
@@ -105,9 +85,17 @@ function pars(arrayParse, y, arrayName=null)
     var arraySave = [] // Массив, который будет заполняться
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = (arrayParse.length)/2-2
+    var lengh = arrayParse.length
+
     if (lengh <= 0){
         return
+    }
+
+    if(lengh%2 == 0) {
+        lengh = lengh/2
+    }
+    else {
+        lengh = lengh/2-1
     }
 
     // Если имя программы не передано в функцию, то массив формируется без нее
@@ -343,7 +331,7 @@ function buildLinearDiagram(stanok, exception, index, startContainer){
 
 
     // Пробегаемся по массиву исключений, если текущий станок будет найдет в исключениях, то выполним условие
-      $.each(exception, function (i) {
+    $.each(exception, function (i) {
         if(index == exception[i][0]) {
             setDataLine("container_work" + (index + startContainer), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, exception[i][1], exception[i][2]);
             // Меняем состояение переменной на 1, т.к. произошло исключение
@@ -503,8 +491,6 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
             return
         }
 
-        // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-        timeReplace(stanok);
         // Функция вычисления и добавления станку количества операций
 
         getPush_kol_op(stanok[0]);
@@ -643,3 +629,172 @@ function buildShort (stankiDataArray,  startContainer = 1, exception = [0])
 }
 
 
+/// Остальные для смены
+
+// Стрелочная функция отправляющая запрос по url
+const sendRequest = url => {
+    // работаем с промисами для удобства, если ок, вызовем resolve, иначе reject у промиса
+    return new Promise((resolve, reject) => {$.ajax({url, type: 'GET'}).done(resolve).fail(reject)})
+}
+
+// Функция формирует запрос по массиву имен и дате и передает его в объект
+function GetAllData(ArrayNames, Object) {
+
+    // Через map пробегаемся по массиву имен
+    ArrayNames.map((name) => {
+        // Формируем для каждого станка url для запроса
+        var urlNow = `/api/complexData/${name}_days_date:${startTime}`
+        var urlPast = `/api/complexData/${name}_days_date:${pastTime}`
+
+
+        // Запрос на текущий день для одного станка
+        sendRequest(urlNow).then((data) => {
+
+            // В массив обработки запроса добавляем ноль
+            Object[name]['ready'].push(0)
+
+            // В массив текущего дня добавляем данные по запросу
+            Object[name]['today'].push(data.work)
+            Object[name]['today'].push(data.pause)
+            Object[name]['today'].push(data.off)
+            Object[name]['today'].push(data.avar)
+            Object[name]['today'].push(data.nagruzka)
+
+            // Переменная checkerData будет записана только если для одного станка обработались оба запроса
+            // Иначе в нее будет записан null
+            var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
+            // Если в переменную не записался null
+            if (checkerData !== null){
+                checkerData.map((check) => {
+                    Object[name]['complete'].push(check)
+                })
+            }
+        })
+
+
+        // Запрос на вчера
+        sendRequest(urlPast).then((data) => {
+            Object[name]['ready'].push(0)
+
+            Object[name]['yesterday'].push(data.work)
+            Object[name]['yesterday'].push(data.pause)
+            Object[name]['yesterday'].push(data.off)
+            Object[name]['yesterday'].push(data.avar)
+            Object[name]['yesterday'].push(data.nagruzka)
+
+            // Переменная checkerData будет записана только если для одного станка обработались оба запроса
+            // Иначе в нее будет записан null
+            var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
+            // Если в переменную не записался null
+            if (checkerData !== null){
+                checkerData.map((check) => {
+                    Object[name]['complete'].push(check)
+                })
+            }
+        })
+
+    })
+}
+
+// Функция запускается после обработки всех станков, делит время на две смены
+function twoWorkTime() {
+    // Массив с заполненными данными
+
+    Names.map((name) => {
+        //let name = Names[0]
+
+        let smena_1 = [];
+        let smena_2 = [];
+
+        let stanok = clone[name]['complete']
+        //console.log(stanok)
+
+        if (stanok === null) {
+            return
+        }
+
+        let stanok_change = []
+
+        stanok.map((little, index) => {
+            stanok_change.push(Array())
+            for (let i = 0; i < little.length; i++) {
+                if (i == little.length) {
+                    stanok_change[index].push(little[i])
+                    break
+                }
+
+                if ((new Date(startTime + ' 00:00:00') < new Date(little[i + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(little[i]).getTime()) && (i % 2 == 0)) {
+                    //console.log("Вставка", index)
+                    stanok_change[index].push(little[i])
+                    stanok_change[index].push(pastTime + ' 23:59:59')
+                } else stanok_change[index].push(little[i])
+            }
+        })
+
+        for (let i = 0; stanok_change.length > i; i++) {
+            smena_1.push(Array())
+            smena_2.push(Array())
+            for (let j = 0; stanok_change[i].length > j; j++) {
+
+                if ((new Date(stanok_change[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok_change[i][j]).getTime())) {
+                    if ((smena_1[i].length == 0) && (j % 2 != 0)) {
+                        //console.log("Грязная запись 18:00 - 19:00 ", i, stanok_change[i][j - 1], "Начало, а", stanok_change[i][j], "конец")
+                        smena_1[i].push(pastTime + ' 19:00:00')
+                        smena_1[i].push(stanok_change[i][j])
+                    } else {
+                        smena_1[i].push(stanok_change[i][j])
+                    }
+                } else if ((new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok_change[i][j]).getTime())) {
+                    if ((smena_2[i].length == 0) && (j % 2 != 0)) {
+                        //console.log("Грязная запись 06:00 - 07:00", i, stanok_change[i][j - 1], "Начало, а", stanok_change[i][j], "конец")
+                        smena_2[i].push(startTime + ' 07:00:00')
+                        smena_2[i].push(stanok_change[i][j])
+                    } else {
+                        smena_2[i].push(stanok_change[i][j])
+                    }
+                }
+            }
+        }
+        console.log('19:00 - 7:00', smena_1)
+        console.log('7:00 - 19:00', smena_2)
+        Diagram.push(smena_1, smena_2)
+    })
+    build(Diagram)
+}
+
+// Функция проверяет все ли станки загрузились из запроса использует глобальную
+// переменную allStanki, при каждом вызове вычитается. Когда все станки готовы, начать обработку.
+function checkerAllReady(){
+    allStanki--
+    console.log(allStanki)
+    if(allStanki === 0) {
+        console.log("________Все станки готовы________")
+        // Запуск дальнейшей логики
+        //console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
+        setTimeout(twoWorkTime, 1)
+    }
+}
+
+
+// Функция проверки, объеденяет входные массивы, если они оба готовы
+// Аргументы: массив текущего дня, массив предыдущего дня, переменная готовности
+function checkerTodayYesterday (arrayToday, arrayYesterday,check)
+{
+    // Если массив готовности имеет две переменные
+    if(check.length === 2)
+    {   // То запустиль логику объедения массивов вчерашнего и сегодняшнего дня
+        let arrayFull = []
+        for (let i=0; 5 > i; i++)
+        {   // метод concat объединяет массивы
+            if(arrayToday[i] != undefined && arrayYesterday[i] != undefined) {
+                arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
+            }
+        }
+        checkerAllReady()
+        return arrayFull
+    }
+    // Иначе вывести сообщение еще не готов
+    else {
+        return null
+    }
+}
