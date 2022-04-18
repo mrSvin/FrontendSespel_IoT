@@ -2,7 +2,6 @@ const timezone = new Date().getTimezoneOffset()
 var colorsLine = ['#207210','#38e817', '#ffea32', '#000000', '#e81e1d'];
 var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
 
-
 Highcharts.setOptions({
     lang: {
         loading: 'Загрузка...',
@@ -31,29 +30,34 @@ Highcharts.setOptions({
     }
 });
 
+
+// Получение текущего времяни в формате toISO
+var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+// Преобразоавние времение в формат '2022-03-21 10:00:35'
+time = time.slice(0, 10) + " " + time.slice(11, 19);
+// Время, которое будет переписано в массивах 'текущая дата 23:59:59'
+time_miss = time.slice(0, 10) + " " + "23:59:59";
+
 // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-function timeReplace(dataArray, time) {
-
+function timeReplace(dataArray) {
+    // индекс ограничение, чтобы не обрабатывать 5-ый массив с именем программы
+    var index_time = 0;
+    // выполнять если текущие время не равно 23:59:59
+    if (time != time_miss) {
         // пробег по массивам до массива с именем программы
-        for (let i=0; i<5; i++) {
-
-            // Если дата сегодняшняя
-            if (dataArray[i][0].slice(0, 10) == time.slice(0, 10)) {
-                for (let j = 0; j < dataArray[i].length - 1; j++) {
-                    // Если элемент массива равен 23:59
-                    if (dataArray[i][j] == dataArray[i][j].slice(0, 10) + " 23:59:59") {
-                        // То записать последнее текущее время.
-                        console.log("Прошла замена")
-                        // То заменяем этот 23:59 на текущее время
-                        dataArray[i][j] = time
-                        break
-                    }
-
+        while (index_time < 5) {
+            $.each(dataArray[index_time], function (i) {
+                // если в массиве время равно текущей дате 23:59:59
+                if (dataArray[index_time][i] == time_miss) {
+                    // то записать в него значение текущее время
+                    dataArray[index_time][i] = time; //dataArray[index_time][i-1]
                 }
-            }
+            });
+            // после оконачния цикла each перейти к следующему массиву
+            index_time += 1;
         }
+    }
 }
-
 
 // Функция вычисляет количества операций, аргумент массив работы
 function getPush_kol_op(arrayWork)
@@ -101,12 +105,10 @@ function pars(arrayParse, y, arrayName=null)
     var arraySave = [] // Массив, который будет заполняться
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = (arrayParse.length)/2-1
-
+    var lengh = (arrayParse.length)/2
     if (lengh <= 0){
         return
     }
-
 
     // Если имя программы не передано в функцию, то массив формируется без нее
     if (arrayName == null){
@@ -341,7 +343,7 @@ function buildLinearDiagram(stanok, exception, index, startContainer){
 
 
     // Пробегаемся по массиву исключений, если текущий станок будет найдет в исключениях, то выполним условие
-      $.each(exception, function (i) {
+    $.each(exception, function (i) {
         if(index == exception[i][0]) {
             setDataLine("container_work" + (index + startContainer), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, exception[i][1], exception[i][2]);
             // Меняем состояение переменной на 1, т.к. произошло исключение
@@ -491,11 +493,6 @@ function buildCommonDiagrams(roundDiagram, exception, index) {
 // и изменения имени операции нагрузки и тд
 function build (stankiDataArray,  startContainer = 1, exception = [0])
 {
-    // Получение текущего времяни в формате toISO
-    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
-    // Преобразоавние времение в формат '2022-03-21 10:00:35'
-    time = time.slice(0, 10) + " " + time.slice(11, 19);
-
     $.map(stankiDataArray, function (stanok, index) {
 
         // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
@@ -507,7 +504,7 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
         }
 
         // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-        timeReplace(stanok, time);
+        timeReplace(stanok);
         // Функция вычисления и добавления станку количества операций
 
         getPush_kol_op(stanok[0]);
@@ -576,11 +573,6 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
 // Отдельная функция для разделов, с одним станком без общих диаграмм и количеств операций
 function buildShort (stankiDataArray,  startContainer = 1, exception = [0])
 {
-    // Получение текущего времяни в формате toISO
-    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
-// Преобразоавние времение в формат '2022-03-21 10:00:35'
-    time = time.slice(0, 10) + " " + time.slice(11, 19);
-
     $.map(stankiDataArray, function (stanok, index) {
 
         // Если текущий массив пустой, следующий цикл
@@ -590,7 +582,7 @@ function buildShort (stankiDataArray,  startContainer = 1, exception = [0])
         }
 
         // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-        timeReplace(stanok, time);
+        timeReplace(stanok);
         // Функция вычисления и добавления станку количества операций
         // Функция формирования линейной диаграммы станка аргументы:
         // массив станка, массив исключений, индекс станка, номер стартого станка
