@@ -36,10 +36,11 @@ function timeReplace(dataArray, time) {
 
         // пробег по массивам до массива с именем программы
         for (let i=0; i<5; i++) {
+
             if(dataArray[i].length%2 == 0){
                 continue
             }
-            else if(dataArray[i].slice(0,10) == time.slice(0, 10)){
+            else if(dataArray[i][0].slice(0,10) == time.slice(0, 10)){
                 dataArray[i].push(time)
             }
             else dataArray[i].push(dataArray[i].slice(0,10) + "23:59:59")
@@ -92,18 +93,12 @@ function pars(arrayParse, y, arrayName=null)
     var arraySave = [] // Массив, который будет заполняться
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = arrayParse.length
+    var lengh = (arrayParse.length)/2-2
 
     if (lengh <= 0){
         return
     }
 
-    if(lengh%2 == 0) {
-        lengh = lengh/2
-    }
-    else {
-        lengh = lengh/2-1
-    }
 
     // Если имя программы не передано в функцию, то массив формируется без нее
     if (arrayName == null){
