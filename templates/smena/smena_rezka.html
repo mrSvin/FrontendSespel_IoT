@@ -23,6 +23,7 @@
 
     <script src="../../js/jquery-3.6.0.min.js"></script>
     <script src="../../js/bootstrap-3.3.0.min.js"></script>
+    <script src="../../js/sutki/universal_sutki.js"></script>
 
     <script>
         const timezone = new Date().getTimezoneOffset()
@@ -290,9 +291,12 @@
 
 <div style="display: flex; justify-content: space-between;">
     <div id="container_sum_zagruzka" style="height: 400px; width: 800px"></div>
-
     <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
-    <!--Количество операций html-->
+
+    <div id="container_sum_zagruzka_2" style="height: 400px; width: 800px"></div>
+
+    <div id="container_kol_operations_2" style="height: 400px; width: 50%"></div>
+
 </div>  <!--Общая загрузка  html-->
 
 <div style="border: 1px solid #333;">
@@ -311,6 +315,9 @@
             </div>
             <div id="container_work1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
             <div id="container1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--Навигатор_1 html-->
 </div> <!--Навигатор_1 html-->
@@ -327,8 +334,11 @@
                 </div>
             </div>
         </div>
-        <div id="container_work2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-        <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        <div id="container_work3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+        <div id="container_work4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
     </div>
 </div>  <!--Навигатор_2_голова_1 html-->
 
@@ -338,8 +348,11 @@
             <div class="parent_image">
             </div>
         </div>
-        <div id="container_work3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-        <div id="container3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+        <div id="container_work5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+        <div id="container_work6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+        <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
     </div>
 </div>  <!--Навигатор_2_голова_2 html-->
 
@@ -356,8 +369,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work7" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container7" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work8" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container8" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--Навигатор_3 html-->
 </div> <!--Навигатор_3 html-->
@@ -375,8 +391,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work9" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container9" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work10" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container10" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--trulaser html-->
 </div> <!--trulaser html-->
@@ -394,8 +413,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work11" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container11" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work12" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container12" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--kometa 1 html-->
 </div> <!--kometa 1 html-->
@@ -413,8 +435,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work7" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container7" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work13" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container13" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work14" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container14" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--kometa 1 html-->
 </div> <!--kometa 2 html-->
@@ -432,8 +457,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work8" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container8" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work15" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container15" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work16" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container16" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--kometa 1 html-->
 </div> <!--kometa 3 html-->
@@ -441,6 +469,7 @@
 <!--Скипт с объявлением функций получения данных из запросов и рисования из них графиков-->
 <script>
     //<![CDATA[
+    // Спец коммент для знаков && и < в xhtml
 
     // Стрелочная функция отправляющая запрос по url
     const sendRequest = url => {
@@ -507,120 +536,71 @@
         })
     }
 
-
-    // Спец коммент для знаков && и < в xhtml
     // Функция запускается после обработки всех станков, делит время на две смены
     function twoWorkTime() {
         // Массив с заполненными данными
-        console.log("_____Функция разбития а смены_____")
-        //Names.map((name) => {
-            let name = Names[0]
 
-        console.log(name)
-            let smena_1 = [];
-            let smena_2 = [];
+            Names.map((name) => {
+                //let name = Names[0]
 
-            let stanok =  clone[name]['complete']
-            console.log(stanok)
+                let smena_1 = [];
+                let smena_2 = [];
 
+                let stanok = clone[name]['complete']
+                //console.log(stanok)
 
-            if(stanok === null) {
-                return
-            }
-
-
-            let stanok_change = []
-
-            stanok.map((little, index) => {
-                stanok_change.push(Array())
-                for(let i=0; i < little.length; i++) {
-                    if(i == little.length){
-                        stanok_change[index].push(little[i])
-                        break
-                    }
-
-                    if ((new Date(startTime + ' 00:00:00') < new Date(little[i+1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(little[i]).getTime()) && (i%2==0)) {
-                        console.log("Вставка", index)
-                        stanok_change[index].push(little[i])
-                        stanok_change[index].push(pastTime + ' 23:59:59')
-                    }
-                    else stanok_change[index].push(little[i])
+                if (stanok === null) {
+                    return
                 }
+
+                let stanok_change = []
+
+                stanok.map((little, index) => {
+                    stanok_change.push(Array())
+                    for (let i = 0; i < little.length; i++) {
+                        if (i == little.length) {
+                            stanok_change[index].push(little[i])
+                            break
+                        }
+
+                        if ((new Date(startTime + ' 00:00:00') < new Date(little[i + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(little[i]).getTime()) && (i % 2 == 0)) {
+                            //console.log("Вставка", index)
+                            stanok_change[index].push(little[i])
+                            stanok_change[index].push(pastTime + ' 23:59:59')
+                        } else stanok_change[index].push(little[i])
+                    }
+                })
+
+                for (let i = 0; stanok_change.length > i; i++) {
+                    smena_1.push(Array())
+                    smena_2.push(Array())
+                    for (let j = 0; stanok_change[i].length > j; j++) {
+
+                        if ((new Date(stanok_change[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok_change[i][j]).getTime())) {
+                            if ((smena_1[i].length == 0) && (j % 2 != 0)) {
+                                //console.log("Грязная запись 18:00 - 19:00 ", i, stanok_change[i][j - 1], "Начало, а", stanok_change[i][j], "конец")
+                                smena_1[i].push(pastTime + ' 19:00:00')
+                                smena_1[i].push(stanok_change[i][j])
+                            } else {
+                                smena_1[i].push(stanok_change[i][j])
+                            }
+                        } else if ((new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok_change[i][j]).getTime())) {
+                            if ((smena_2[i].length == 0) && (j % 2 != 0)) {
+                                //console.log("Грязная запись 06:00 - 07:00", i, stanok_change[i][j - 1], "Начало, а", stanok_change[i][j], "конец")
+                                smena_2[i].push(startTime + ' 07:00:00')
+                                smena_2[i].push(stanok_change[i][j])
+                            } else {
+                                smena_2[i].push(stanok_change[i][j])
+                            }
+                        }
+                    }
+                }
+                console.log('19:00 - 7:00', smena_1)
+                console.log('7:00 - 19:00', smena_2)
+                Diagram.push(smena_1, smena_2)
             })
-
-            console.log(stanok_change)
-
-
-            // for (let i = 0; stanok.length > i; i++) {
-            //     smena_1.push(Array())
-            //     smena_2.push(Array())
-            //     for (let j = 0; stanok[i].length > j; j++) {
-            //         //console.log(new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime())
-            //         //console.log(new Date(stanok[i][j]).getTime() + '>' + new Date(pastTime + ' 19:00:00').getTime())
-            //
-            //
-            //         if ((new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok[i][j]).getTime())){
-            //             if((smena_1[i].length == 0) && (j%2!=0)) {
-            //                 console.log("Грязная запись 18:00 - 19:00 ", stanok[i][j-1],"Начало, а", stanok[i][j], "конец")
-            //                 smena_1[i].push(pastTime + ' 19:00:00')
-            //                 smena_1[i].push(stanok[i][j])
-            //             }
-            //             else if((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j-1]).getTime())) {
-            //                 console.log("Грязная запись 23:00 - 00:00 ", stanok[i][j-1],"Начало, а", stanok[i][j], "конец")
-            //                 smena_1[i].push(startTime + ' 00:00:00')
-            //                 smena_1[i].push(stanok[i][j])
-            //             }
-            //             else
-            //             {
-            //                 smena_1[i].push(stanok[i][j])
-            //             }
-            //
-            //         }
-            //         else if ((new Date(stanok[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok[i][j]).getTime())){
-            //
-            //             if((smena_2[i].length == 0) && (j%2!=0)) {
-            //                 console.log("Грязная запись 06:00 - 07:00",stanok[i][j-1],"Начало, а", stanok[i][j], "конец")
-            //                 smena_2[i].push(pastTime + ' 07:00:00')
-            //                 smena_2[i].push(stanok[i][j])
-            //             }
-            //             else
-            //             {
-            //                 smena_2[i].push(stanok[i][j])
-            //             }
-            //         }
-            //
-            //     }
-            // }
-            // //console.log(smena_1)
-            // console.log('19:00 - 7:00',smena_1)
-            // console.log('7:00 - 19:00',smena_2)
-            //
-            // console.log('\n\n')
-
-            //function make(smena_1, smena_2)
-       // })
+        build(Diagram)
     }
-
-    function roundDiagramData(smena1, smena2) {
-        let newSmena1 = []
-        let newSmena2 = []
-
-        smena1.map((element) => {
-            // Цикл преобразования изначального массива
-            for(let i = 1; element + 1>i; i++)
-            {
-                if(element[i]){}
-                //let delta = new Date(element[i]) - new Date(element[i-1]);
-               // vrs2_days_new.push(delta)
-            }
-        })
-
-        smena2.map((element) => {
-
-        })
-    }
-
-
 
     // Функция проверяет все ли станки загрузились из запроса использует глобальную
     // переменную allStanki, при каждом вызове вычитается. Когда все станки готовы, начать обработку.
@@ -659,6 +639,7 @@
         }
     }
 
+    // Конец спец. коммента
     // ]]>
 </script>
 
@@ -692,6 +673,9 @@
 
     // Переменная хранящая количество станков, работает в функции checkerAllReady()
     var allStanki = Names.length
+
+    // Переменная в которую запишутся данные всех смен.
+    var Diagram = []
 
     // Функция получения и отправки данных из запросов в clone.
     GetAllData(Names, clone)
