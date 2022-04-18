@@ -30,33 +30,19 @@ Highcharts.setOptions({
     }
 });
 
-
-// Получение текущего времяни в формате toISO
-var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
-// Преобразоавние времение в формат '2022-03-21 10:00:35'
-time = time.slice(0, 10) + " " + time.slice(11, 19);
-// Время, которое будет переписано в массивах 'текущая дата 23:59:59'
-time_miss = time.slice(0, 10) + " " + "23:59:59";
-
 // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-function timeReplace(dataArray) {
-    // индекс ограничение, чтобы не обрабатывать 5-ый массив с именем программы
-    var index_time = 0;
-    // выполнять если текущие время не равно 23:59:59
-    if (time != time_miss) {
+function timeReplace(dataArray, time, missTime) {
+
         // пробег по массивам до массива с именем программы
-        while (index_time < 5) {
-            $.each(dataArray[index_time], function (i) {
-                // если в массиве время равно текущей дате 23:59:59
-                if (dataArray[index_time][i] == time_miss) {
-                    // то записать в него значение текущее время
-                    dataArray[index_time][i] = time; //dataArray[index_time][i-1]
-                }
-            });
-            // после оконачния цикла each перейти к следующему массиву
-            index_time += 1;
+        for (let i=0; i<5; i++) {
+            if(dataArray[index_time].length%2 == 0){
+                continue
+            }
+            else if(missTime.slice(0, 10) == time.slice(0, 10)){
+                dataArray[i].push(time)
+            }
+            else dataArray[i].push(missTime.slice(0, 10) + "23:59:59")
         }
-    }
 }
 
 // Функция вычисляет количества операций, аргумент массив работы
@@ -105,9 +91,17 @@ function pars(arrayParse, y, arrayName=null)
     var arraySave = [] // Массив, который будет заполняться
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = (arrayParse.length)/2-2
+    var lengh = arrayParse.length
+
     if (lengh <= 0){
         return
+    }
+
+    if(lengh%2 == 0) {
+        lengh = lengh/2
+    }
+    else {
+        lengh = (lengh-1)/2
     }
 
     // Если имя программы не передано в функцию, то массив формируется без нее
@@ -493,6 +487,14 @@ function buildCommonDiagrams(roundDiagram, exception, index) {
 // и изменения имени операции нагрузки и тд
 function build (stankiDataArray,  startContainer = 1, exception = [0])
 {
+    // Получение текущего времяни в формате toISO
+    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    // Преобразоавние времение в формат '2022-03-21 10:00:35'
+    time = time.slice(0, 10) + " " + time.slice(11, 19);
+
+    // время с календаря
+    var time_miss = $('#datepicker').data().datepicker.viewDate.toISOString();
+
     $.map(stankiDataArray, function (stanok, index) {
 
         // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
@@ -504,7 +506,7 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
         }
 
         // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-        timeReplace(stanok);
+        timeReplace(stanok, time, time_miss);
         // Функция вычисления и добавления станку количества операций
 
         getPush_kol_op(stanok[0]);
@@ -573,6 +575,14 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
 // Отдельная функция для разделов, с одним станком без общих диаграмм и количеств операций
 function buildShort (stankiDataArray,  startContainer = 1, exception = [0])
 {
+    // Получение текущего времяни в формате toISO
+    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+// Преобразоавние времение в формат '2022-03-21 10:00:35'
+    time = time.slice(0, 10) + " " + time.slice(11, 19);
+
+    // время с календаря
+    var time_miss = $('#datepicker').data().datepicker.viewDate.toISOString();
+
     $.map(stankiDataArray, function (stanok, index) {
 
         // Если текущий массив пустой, следующий цикл
@@ -582,7 +592,7 @@ function buildShort (stankiDataArray,  startContainer = 1, exception = [0])
         }
 
         // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-        timeReplace(stanok);
+        timeReplace(stanok, time, time_miss);
         // Функция вычисления и добавления станку количества операций
         // Функция формирования линейной диаграммы станка аргументы:
         // массив станка, массив исключений, индекс станка, номер стартого станка

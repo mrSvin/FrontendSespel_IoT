@@ -95,7 +95,7 @@ function pars(arrayParse, y, arrayName=null)
         lengh = lengh/2
     }
     else {
-        lengh = lengh/2-1
+        lengh = (lengh-1)/2
     }
 
     // Если имя программы не передано в функцию, то массив формируется без нее
