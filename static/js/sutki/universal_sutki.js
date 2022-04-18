@@ -504,7 +504,7 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
         }
 
         // Функция преобразования в дате сегодняшнего дня значений 23:59:59
-        timeReplace(stanok);
+        //timeReplace(stanok);
         // Функция вычисления и добавления станку количества операций
 
         getPush_kol_op(stanok[0]);
