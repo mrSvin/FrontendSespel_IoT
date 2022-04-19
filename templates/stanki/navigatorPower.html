@@ -81,6 +81,7 @@
             $('#GraphPower').on("click", function () {
 
                 signal = '_signal:A1'
+                $('#NameUl').html("Мощность ▼")
                 var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
                 date = new Date(datas); // some mock date
@@ -111,6 +112,8 @@
             $('#GraphKorek').on("click", function () {
 
                 signal = '_signal:A2'
+                $('#NameUl').html("Коррекция подачи ▼")
+
                 var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
                 date = new Date(datas); // some mock date
@@ -253,6 +256,9 @@
             border-radius: 2px;
             height: 35px;
             font-size: 17px;
+
+            width: 180px;
+            text-align: center;
         }
         #nav li div {
             margin-top: 10px;
@@ -712,7 +718,7 @@
         </div>
         <ul id="nav">
             <li>
-                <div>Режимы</div>
+                <div id="NameUl">Мощность▼</div>
                 <ul>
                     <li><button id="GraphPower">Мощность</button></li>
                     <li><button id="GraphKorek">Коррекция подачи</button></li>
