@@ -58,7 +58,7 @@
                 do_18 = [];
                 do_24 = [];
 
-                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd
+                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + sygnal
 
                 $.get( url,
                     function( data ) {
@@ -415,6 +415,8 @@
     var navigatorName
     var product
 
+    var sygnal = "_sygnal:A1"
+
     if(localStorage['local_data '] != null) {
         local_data  = window.localStorage['local_data '];
         navigatorName = Names[local_data][0]
@@ -438,7 +440,7 @@
     var do_18 = [];
     var do_24 = [];
 
-    var url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd
+    var url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + sygnal
 
 
     var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
