@@ -58,7 +58,7 @@
                 do_18 = [];
                 do_24 = [];
 
-                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + sygnal
+                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
                 $.get( url,
                     function( data ) {
@@ -67,6 +67,35 @@
                         Perebor();
                     });
             });
+        });
+
+        $('#button_changeGraph').on("click", function () {
+
+            signal = '_signal:A2'
+            var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+
+            date = new Date(datas); // some mock date
+            ms = date.getTime() + 86400000;
+
+            startTime = datas.slice(0, 10)
+            timeEnd = new Date(ms).toISOString().slice(0, 10)
+
+
+            massivArray = []
+
+            do_6 = [];
+            do_12 = [];
+            do_18 = [];
+            do_24 = [];
+
+            url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
+
+            $.get( url,
+                function( data ) {
+                    massivArray = data
+
+                    Perebor();
+                });
         });
 
     </script>   <!--Календарь js-->
@@ -397,6 +426,9 @@
             <button class="follow" id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
                 Обновить
             </button>
+            <button class="follow" id="button_changeGraph" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                Коррекция подачи
+            </button>
         </div>
     </div>      <!--Календарь html-->
 
@@ -415,7 +447,7 @@
     var navigatorName
     var product
 
-    var sygnal = "_signal:A1"
+    var signal = "_signal:A1"
 
     if(localStorage['local_data '] != null) {
         local_data  = window.localStorage['local_data '];
@@ -440,7 +472,7 @@
     var do_18 = [];
     var do_24 = [];
 
-    var url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + sygnal
+    var url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
 
     var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
