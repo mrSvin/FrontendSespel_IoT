@@ -224,120 +224,64 @@
     </style>
 
     <style>
-        /*------------------------------------*\
-            НАВИГАЦИЯ
-        \*------------------------------------*/
-
-        #nav {
-            float: left;
-            list-style: none;
-            font-weight: bold;
-            margin-bottom: 10px;
+        select {
+            /* Reset Select */
+            appearance: none;
+            outline: 0;
+            border: 0;
+            box-shadow: none;
+            /* Personalize */
+            flex: 1;
+            padding: 0 1em;
+            color: #fff;
+            background-color: #2c3e50;;
+            background-image: none;
+            cursor: pointer;
         }
-
-        #nav li {
-            float: left;
-            margin-right: 10px;
+        /* Remove IE arrow */
+        select::-ms-expand {
+            display: none;
+        }
+        /* Custom Select wrapper */
+        .select {
             position: relative;
-            display: block;
+            display: flex;
+            width: 20em;
+            height: 3em;
+            border-radius: .25em;
+            overflow: hidden;
         }
-
-        #nav li div, #nav li button {
-            display: block;
-            padding: 5px;
-            color: #fff;
-            background: #767e87;
-            text-decoration: none;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
-            /* Тень текста, чтобы приподнять его на немного */
-
-            -moz-border-radius: 2px;
-            -webkit-border-radius: 2px;
-            border-radius: 2px;
-            height: 35px;
-            font-size: 17px;
-
-            width: 180px;
-            text-align: center;
-        }
-        #nav li div {
-            margin-top: 10px;
-        }
-
-        #nav li button:hover {
-            color: #fff;
-            background: #6b0c36;
-            background: rgba(107, 12, 54, 0.75);
-            /* Выглядит полупрозрачным */
-
-            text-decoration: underline;
-        }
-        /*--- ВЫПАДАЮЩИЕ ПУНКТЫ ---*/
-
-        #nav ul {
-            list-style: none;
+        /* Arrow */
+        .select::after {
+            content: '\25BC';
             position: absolute;
-            left: -9999px;
-            /* Скрываем за экраном, когда не нужно (данный метод лучше, чем display:none;) */
-
-            opacity: 0;
-            /* Устанавливаем начальное состояние прозрачности */
-
-            -webkit-transition: 0.25s linear opacity;
-            /* В Webkit выпадающие пункты будут проявляться */
+            top: 0;
+            right: 0;
+            padding: 1em;
+            background-color: #34495e;
+            transition: .25s all ease;
+            pointer-events: none;
+        }
+        /* Transition */
+        .select:hover::after {
+            color: #f39c12;
         }
 
-        #nav ul li {
-            padding-top: 1px;
-            /* Вводим отступ между li чтобы создать иллюзию разделенных пунктов меню */
-
-            float: none;
+        /* Other styles*/
+        body {
+            color: #fff;
+            background: linear-gradient(30deg, #f39c12 30%, #f1c40f);
         }
-
-        #nav ul button {
-            white-space: nowrap;
-            /* Останавливаем перенос текста и создаем многострочный выпадающий пункт */
-
-            display: block;
+        h1 {
+            margin: 0 0 0.25em;
         }
-
-        #nav li:hover ul {
-            /* Выводим выпадающий пункт при наведении курсора */
-
-            left: -40px;
-            /* Приносим его обратно на экран, когда нужно */
-
-            opacity: 1;
-            /* Делаем непрозрачным */
-        }
-
-        #nav li:hover button {
-            /* Устанавливаем стили для верхнего уровня, когда выводится выпадающий список */
-
-            background: #6b0c36;
-            background: rgba(107, 12, 54, 0.75);
-            /* Выглядит полупрозрачным */
-
-            text-decoration: underline;
-        }
-
-        #nav li:hover ul button {
-            /* Изменяем некоторые стили верхнего уровня при выводе выпадающего пункта */
-
+        a {
+            font-weight: bold;
+            color: #34495e;
             text-decoration: none;
-            -webkit-transition: -webkit-transform 0.075s linear;
-        }
-
-        #nav li:hover ul li button:hover {
-            /* Устанавливаем стили для выпадающих пунктов, когда курсор наводится на конкретный пункт */
-
-            background: #333;
-            background: rgba(51, 51, 51, 0.75);
-            /* Будет полупрозрачным */
-
-            text-decoration: underline;
-            -moz-transform: scale(1.05);
-            -webkit-transform: scale(1.05);
+            padding: .25em;
+            border-radius: .25em;
+            background: white;
         }
     </style>
 
@@ -716,15 +660,14 @@
                 Обновить
             </button>
         </div>
-        <ul id="nav">
-            <li>
-                <div id="NameUl">Мощность▼</div>
-                <ul>
-                    <li><button id="GraphPower">Мощность</button></li>
-                    <li><button id="GraphKorek">Коррекция подачи</button></li>
-                </ul>
-            </li>
-        </ul>
+
+        <div class="select">
+            <select>
+                <option id="GraphPower">Мощность</option>
+                <option id="GraphKorek">Коррекция подачи</option>
+            </select>
+        </div>
+
     </div>      <!--Календарь html-->
 
 </header>
