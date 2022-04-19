@@ -209,6 +209,24 @@
         }
     </style>
 
+    <style>
+        #button_changeGraph {
+            font-family: "Open Sans", sans-serif;
+            color: #ffffff;
+            background: #4f759b;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+            border: none;
+            border-radius: 15px;
+            min-height: 35px;
+            width: 145px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            margin: 17px 0!important;
+        }
+    </style>
+
     <script>
         Highcharts.setOptions({
             lang: {
@@ -583,7 +601,7 @@
             <button class="follow" id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
                 Обновить
             </button>
-            <button class="follow" id="button_changeGraph" style="float: left; margin: 1.5%; margin-left: 5%;  font-size: 150%; text-align: center; width: 140px;">
+            <button id="button_changeGraph">
                 Коррекция подачи
             </button>
         </div>
