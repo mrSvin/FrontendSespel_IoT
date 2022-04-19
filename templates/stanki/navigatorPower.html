@@ -70,11 +70,10 @@
 
             $('#button_changeGraph').on("click", function () {
 
-
-
-                signal = '_signal:A2'
-
-                console.log("Yeeeees,", signal)
+                if( signal == '_signal:A1'){
+                    signal = '_signal:A2'
+                }
+                else signal = '_signal:A1'
 
                 var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
@@ -98,7 +97,7 @@
                     function( data ) {
                         massivArray = data
 
-                        Perebor();
+                        Perebor2();
                     });
             });
         });
@@ -322,6 +321,75 @@
             );
         }
 
+        function highcharts2(id, dataArray, NameGraph) {
+
+            Highcharts.getJSON(
+                'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+                function (data) {
+
+                    Highcharts.chart(id, {
+                        chart: {
+                            polar: true,
+                            zoomType: 'x',
+                            backgroundColor: 'none',
+                        },
+                        time: {
+                            timezoneOffset: timezone
+                        },
+                        title: {
+                            text: NameGraph,
+                            style: {
+                                color: '#83addd'
+                            }
+                        },
+                        xAxis: {
+                            type: 'datetime'
+                        },
+                        yAxis: {
+                            title: {
+                                text: '%'
+                            }
+                        },
+                        plotOptions: {
+                            area: {
+                                fillColor: {
+                                    linearGradient: {
+                                        x1: 0,
+                                        y1: 0
+                                    },
+                                    stops: [
+                                        [0, Highcharts.getOptions().colors[0]],
+                                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                    ]
+                                },
+                                marker: {
+                                    radius: 2
+                                },
+                                lineWidth: 1,
+                                states: {
+                                    hover: {
+                                        lineWidth: 1
+                                    }
+                                },
+                                threshold: null
+                            }
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        series: [{
+                            name: 'Мощность, кВт',
+                            data: dataArray
+                        },
+                        ]
+                    });
+                }
+            );
+        }
+
         // Функция перебора массива из запроса с разложением на 4 массива по времени
         function Perebor() {
             for (let i = 0; massivArray.length > i; i++) {
@@ -372,6 +440,62 @@
             $.map(arraysTime, function (data){
                 data[0] = ZeroTime(data[0])
                 highcharts(data[1], data[0], data[2])
+            })
+
+            setTimeout(document.body.classList.add('loaded'),1000);
+            setTimeout(document.body.classList.remove('loaded_hiding'),1000);
+        }
+
+        // Функция перебора массива из запроса с разложением на 4 массива по времени
+        function Perebor2() {
+            for (let i = 0; massivArray.length > i; i++) {
+
+                if (new Date(startTime + ' 06:00:00').getTime() > (massivArray[i].time)) {
+                    do_6.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
+                    console.log(massivArray[i].time, parseFloat(massivArray[i].value))
+                    continue
+                }
+                if (new Date(startTime + ' 12:00:00').getTime() > (massivArray[i].time)) {
+                    do_12.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
+                    continue
+                }
+                if (new Date(startTime + ' 18:00:00').getTime() > (massivArray[i].time)) {
+                    do_18.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
+                    continue
+                }
+                if (new Date(startTime + ' 23:59:59').getTime() > (massivArray[i].time)) {
+                    do_24.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
+                    continue
+                }
+            }
+
+            // Добавление в начало и конец массивов, переменную начала и конца с нулевыми значением
+            if(do_6.length > 0){
+                do_6.unshift(Array(new Date(startTime + ' 00:00:00').getTime(),0))
+                do_6.push(Array(new Date(startTime + ' 06:00:00').getTime(), 0))
+            }
+
+            if(do_12.length > 0) {
+                do_12.unshift(Array(new Date(startTime + ' 06:00:00').getTime(), 0))
+                do_12.push(Array(new Date(startTime + ' 12:00:00').getTime(), 0))
+            }
+
+            if(do_18.length > 0) {
+                do_18.unshift(Array(new Date(startTime + ' 12:00:00').getTime(), 0))
+                do_18.push(Array(new Date(startTime + ' 18:00:00').getTime(), 0))
+            }
+
+            if(do_24.length > 0) {
+                do_24.unshift(Array(new Date(startTime + ' 18:00:00').getTime(), 0))
+                do_24.push(Array(new Date(startTime + ' 23:59:59').getTime(), 0))
+            }
+
+
+            var arraysTime = [[do_6, 'container_do6','00:00 - 06:00'], [do_12, 'container_do12','06:00 - 12:00'], [do_18, 'container_do18','12:00 - 18:00'], [do_24, 'container_do24','18:00 - 23:59'],];
+
+            $.map(arraysTime, function (data){
+                data[0] = ZeroTime(data[0])
+                highcharts2(data[1], data[0], data[2])
             })
 
             setTimeout(document.body.classList.add('loaded'),1000);
