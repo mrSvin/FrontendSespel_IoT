@@ -86,16 +86,19 @@ function pars(arrayParse, y, arrayName=null)
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
     var lengh = arrayParse.length
-    if (lengh <= 0){
+    if (lengh <= 1){
         return
     }
-    if(lengh % 2 == 1) lengh -=2
 
-    lengh /= 2
+    if(lengh > 4){
+        if(lengh % 2 == 1) lengh -=2
+        lengh = (lengh - lengh % 2) / 2
+    }
+    else lengh = 1
 
     // Если имя программы не передано в функцию, то массив формируется без нее
     if (arrayName == null){
-        while(index_pars <= lengh)
+        while(index_pars < lengh)
         {   // Парсинг
             arraySave.push({x:(new Date(arrayParse[index_pars*2])).getTime(), x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(), y:y})
             index_pars += 1;
@@ -103,7 +106,7 @@ function pars(arrayParse, y, arrayName=null)
     }
     // Иначе в массив парсится переданный массив с именем программы
     else {
-        while(index_pars <= lengh)
+        while(index_pars < lengh)
         {   // Парсинг
             arraySave.push({x:(new Date(arrayParse[index_pars*2])).getTime(), x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(), y:y, programname:arrayName[index_pars]})
             index_pars += 1;
@@ -632,6 +635,10 @@ const sendRequest = url => {
     return new Promise((resolve, reject) => {$.ajax({url, type: 'GET'}).done(resolve).fail(reject)})
 }
 
+// function getRoundDiagramData(smen1, smen2){
+//
+// }
+
 // Функция формирует запрос по массиву имен и дате и передает его в объект
 function GetAllData(ArrayNames, Object) {
 
@@ -750,6 +757,9 @@ function twoWorkTime() {
                 }
             }
         }
+
+        getRoundDiagramData()
+
         console.log('19:00 - 7:00', smena_1)
         console.log('7:00 - 19:00', smena_2)
         Diagram.push(smena_1, smena_2)
