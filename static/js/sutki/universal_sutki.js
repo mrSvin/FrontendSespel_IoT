@@ -130,7 +130,6 @@ function pars(arrayParse, y, arrayName=null)
         }
     }
     // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
-    console.log(arraySave)
     return arraySave
 }
 
@@ -435,7 +434,6 @@ function buildRoundDiagram(roundDiagram, exception, index, startContainer) {
             roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
             // Если работа оказалась меньше нуля предупредить
             if (0 > roundDiagram[0]) {
-                console.log("Неверное значение работы на станке", index + 1)
             }
             setDataRound("container" + (index + startContainer), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
         }
@@ -503,7 +501,6 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
         // С помощью exception учитываются исключения
         if (pushZero(stanok, exception)) {
             // Если массив оказался пустым, то переходим к следующему циклу $.map
-            console.log("Пустой вообще", index + 1)
             return
         }
 
@@ -581,7 +578,6 @@ function buildShort (stankiDataArray,  startContainer = 1, exception = [0])
 
         // Если текущий массив пустой, следующий цикл
         if ((stanok === null) || (stanok == 0)){
-            console.log("Пустой вообще", index + 1)
             return
         }
 

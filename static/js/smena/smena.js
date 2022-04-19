@@ -86,17 +86,12 @@ function pars(arrayParse, y, arrayName=null)
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
     var lengh = arrayParse.length
-
     if (lengh <= 0){
         return
     }
+    if(lengh % 2 == 1) lengh -=2
 
-    if(lengh%2 == 0) {
-        lengh = lengh/2
-    }
-    else {
-        lengh = lengh/2-1
-    }
+    lengh /= 2
 
     // Если имя программы не передано в функцию, то массив формируется без нее
     if (arrayName == null){
