@@ -221,6 +221,9 @@
     </style>
 
     <style>
+        /*------------------------------------*\
+            НАВИГАЦИЯ
+        \*------------------------------------*/
 
         #nav {
             float: left;
@@ -237,7 +240,7 @@
             display: block;
         }
 
-        #nav li button {
+        #nav li div, #nav li button {
             display: block;
             padding: 5px;
             color: #fff;
@@ -279,6 +282,7 @@
             /* Вводим отступ между li чтобы создать иллюзию разделенных пунктов меню */
 
             float: none;
+            background: url(dot.gif);
         }
 
         #nav ul button {
@@ -703,21 +707,16 @@
                 Обновить
             </button>
 
-            <button class="follow" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
-                Режимы
-                <ul id="#nav">
-                    <li>
-                        <button class="follow" id="GraphPower" style="float: left; margin: 1.5%; margin-left: 5%;  font-size: 150%; text-align: center; width: 160px!important;">
-                        Мощность
-                        </button>
-                    </li>
-                    <li>
-                        <button class="follow" id="GraphKorek" style="float: left; margin: 1.5%; margin-left: 5%;  font-size: 150%; text-align: center; width: 160px!important;">
-                            Коррекция подачи
-                        </button>
-                    </li>
-                </ul>
-            </button>
+            <ul id="#nav">
+                <li>
+                    <div href="#" title="Режимы">О нас</div>
+                    <ul>
+                        <li><button id="GraphPower">Мощность</button></li>
+                        <li><button id="GraphKorek">Коррекция подачи</button></li>
+                    </ul>
+                </li>
+            </ul>
+
         </div>
     </div>      <!--Календарь html-->
 
