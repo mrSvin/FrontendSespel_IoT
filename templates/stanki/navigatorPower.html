@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Анализ работы навигаторов</title>
+    <title>Анализ режимов работы навигаторов</title>
     <link rel="shortcut icon" type="image/ico"/>
 
     <link rel="stylesheet" type="text/css" href="../../css/styles_stanki.css"/>
@@ -78,17 +78,9 @@
                 }
             });
 
-            $('#button_changeGraph').on("click", function () {
+            $('#GraphPower').on("click", function () {
 
-                if( signal == '_signal:A1'){
-                    signal = '_signal:A2'
-                    $("#button_changeGraph").html("Мощность")
-                }
-                else {
-                    signal = '_signal:A1'
-                    $("#button_changeGraph").html("Коррекция подачи")
-                }
-
+                signal = '_signal:A1'
                 var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
                 date = new Date(datas); // some mock date
@@ -107,23 +99,42 @@
 
                 url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
-                if( signal == '_signal:A1'){
                     $.get( url,
                         function( data ) {
                             massivArray = data
 
                             Perebor();
                         });
-                }
-                else {
-                    $.get( url,
-                        function( data ) {
-                            massivArray = data
 
-                            Perebor2();
-                        });
-                }
+            });
 
+            $('#GraphKorek').on("click", function () {
+
+                signal = '_signal:A2'
+                var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+
+                date = new Date(datas); // some mock date
+                ms = date.getTime() + 86400000;
+
+                startTime = datas.slice(0, 10)
+                timeEnd = new Date(ms).toISOString().slice(0, 10)
+
+
+                massivArray = []
+
+                do_6 = [];
+                do_12 = [];
+                do_18 = [];
+                do_24 = [];
+
+                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
+
+                $.get( url,
+                    function( data ) {
+                        massivArray = data
+
+                        Perebor2();
+                    });
 
             });
         });
@@ -206,6 +217,114 @@
 
         .loaded .preloader {
             display: none;
+        }
+    </style>
+
+    <style>
+
+        #nav {
+            float: left;
+            width: 100%;
+            list-style: none;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #nav li {
+            float: left;
+            margin-right: 10px;
+            position: relative;
+            display: block;
+        }
+
+        #nav li button {
+            display: block;
+            padding: 5px;
+            color: #fff;
+            background: #333;
+            text-decoration: none;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
+            /* Тень текста, чтобы приподнять его на немного */
+
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+        }
+
+        #nav li button:hover {
+            color: #fff;
+            background: #6b0c36;
+            background: rgba(107, 12, 54, 0.75);
+            /* Выглядит полупрозрачным */
+
+            text-decoration: underline;
+        }
+        /*--- ВЫПАДАЮЩИЕ ПУНКТЫ ---*/
+
+        #nav ul {
+            list-style: none;
+            position: absolute;
+            left: -9999px;
+            /* Скрываем за экраном, когда не нужно (данный метод лучше, чем display:none;) */
+
+            opacity: 0;
+            /* Устанавливаем начальное состояние прозрачности */
+
+            -webkit-transition: 0.25s linear opacity;
+            /* В Webkit выпадающие пункты будут проявляться */
+        }
+
+        #nav ul li {
+            padding-top: 1px;
+            /* Вводим отступ между li чтобы создать иллюзию разделенных пунктов меню */
+
+            float: none;
+        }
+
+        #nav ul button {
+            white-space: nowrap;
+            /* Останавливаем перенос текста и создаем многострочный выпадающий пункт */
+
+            display: block;
+        }
+
+        #nav li:hover ul {
+            /* Выводим выпадающий пункт при наведении курсора */
+
+            left: -40px;
+            /* Приносим его обратно на экран, когда нужно */
+
+            opacity: 1;
+            /* Делаем непрозрачным */
+        }
+
+        #nav li:hover button {
+            /* Устанавливаем стили для верхнего уровня, когда выводится выпадающий список */
+
+            background: #6b0c36;
+            background: rgba(107, 12, 54, 0.75);
+            /* Выглядит полупрозрачным */
+
+            text-decoration: underline;
+        }
+
+        #nav li:hover ul button {
+            /* Изменяем некоторые стили верхнего уровня при выводе выпадающего пункта */
+
+            text-decoration: none;
+            -webkit-transition: -webkit-transform 0.075s linear;
+        }
+
+        #nav li:hover ul li button:hover {
+            /* Устанавливаем стили для выпадающих пунктов, когда курсор наводится на конкретный пункт */
+
+            background: #333;
+            background: rgba(51, 51, 51, 0.75);
+            /* Будет полупрозрачным */
+
+            text-decoration: underline;
+            -moz-transform: scale(1.05);
+            -webkit-transform: scale(1.05);
         }
     </style>
 
@@ -583,8 +702,21 @@
             <button class="follow" id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
                 Обновить
             </button>
-            <button class="follow" id="button_changeGraph" style="float: left; margin: 1.5%; margin-left: 5%;  font-size: 150%; text-align: center; width: 160px!important;">
-                Коррекция подачи
+
+            <button class="follow" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                Режимы
+                <ul id="#nav">
+                    <li>
+                        <button class="follow" id="GraphPower" style="float: left; margin: 1.5%; margin-left: 5%;  font-size: 150%; text-align: center; width: 160px!important;">
+                        Мощность
+                        </button>
+                    </li>
+                    <li>
+                        <button class="follow" id="GraphKorek" style="float: left; margin: 1.5%; margin-left: 5%;  font-size: 150%; text-align: center; width: 160px!important;">
+                            Коррекция подачи
+                        </button>
+                    </li>
+                </ul>
             </button>
         </div>
     </div>      <!--Календарь html-->
