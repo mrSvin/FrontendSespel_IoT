@@ -635,9 +635,35 @@ const sendRequest = url => {
     return new Promise((resolve, reject) => {$.ajax({url, type: 'GET'}).done(resolve).fail(reject)})
 }
 
-// function getRoundDiagramData(smen1, smen2){
-//
-// }
+function getRoundDiagramData(smena){
+    let array1 = []
+
+    if (smena !== undefined)
+    {
+        smena.map((arraySmena)=>{
+
+            let delta = 0
+
+            if(arraySmena == null || arraySmena.length <= 1 || arraySmena == undefined)
+            {
+                array1.push(delta)
+                return
+            }
+            else{
+                for(let i = 1; i < arraySmena.length; i+=2)
+                {
+                    if(i==0) continue
+
+                    delta = delta + ((new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i-1]).getTime()))
+                }
+            }
+            array1.push(delta)
+        })
+        smena.push(Array())
+        smena.push(array1)
+    }
+
+}
 
 // Функция формирует запрос по массиву имен и дате и передает его в объект
 function GetAllData(ArrayNames, Object) {
@@ -758,7 +784,8 @@ function twoWorkTime() {
             }
         }
 
-        getRoundDiagramData()
+        getRoundDiagramData(smena_1)
+        getRoundDiagramData(smena_2)
 
         console.log('19:00 - 7:00', smena_1)
         console.log('7:00 - 19:00', smena_2)
