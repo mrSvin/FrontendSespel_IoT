@@ -67,36 +67,43 @@
                         Perebor();
                     });
             });
+
+            $('#button_changeGraph').on("click", function () {
+
+
+
+                signal = '_signal:A2'
+
+                console.log("Yeeeees,", signal)
+
+                var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+
+                date = new Date(datas); // some mock date
+                ms = date.getTime() + 86400000;
+
+                startTime = datas.slice(0, 10)
+                timeEnd = new Date(ms).toISOString().slice(0, 10)
+
+
+                massivArray = []
+
+                do_6 = [];
+                do_12 = [];
+                do_18 = [];
+                do_24 = [];
+
+                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
+
+                $.get( url,
+                    function( data ) {
+                        massivArray = data
+
+                        Perebor();
+                    });
+            });
         });
 
-        $('#button_changeGraph').on("click", function () {
 
-            signal = '_signal:A2'
-            var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
-
-            date = new Date(datas); // some mock date
-            ms = date.getTime() + 86400000;
-
-            startTime = datas.slice(0, 10)
-            timeEnd = new Date(ms).toISOString().slice(0, 10)
-
-
-            massivArray = []
-
-            do_6 = [];
-            do_12 = [];
-            do_18 = [];
-            do_24 = [];
-
-            url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
-
-            $.get( url,
-                function( data ) {
-                    massivArray = data
-
-                    Perebor();
-                });
-        });
 
     </script>   <!--Календарь js-->
 
