@@ -82,8 +82,12 @@
 
                 if( signal == '_signal:A1'){
                     signal = '_signal:A2'
+                    $("#button_changeGraph").html("Мощность")
                 }
-                else signal = '_signal:A1'
+                else {
+                    signal = '_signal:A1'
+                    $("#button_changeGraph").html("Коррекция подачи")
+                }
 
                 var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
@@ -579,7 +583,7 @@
             <button class="follow" id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
                 Обновить
             </button>
-            <button class="follow" id="button_changeGraph" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+            <button class="follow" id="button_changeGraph" style="float: left; margin: 1.5%; margin-left: 5%;  font-size: 150%; text-align: center; width: 140px;">
                 Коррекция подачи
             </button>
         </div>
