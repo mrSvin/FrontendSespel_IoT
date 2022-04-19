@@ -60,12 +60,22 @@
 
                 url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
-                $.get( url,
-                    function( data ) {
-                        massivArray = data
+                if( signal == '_signal:A1'){
+                    $.get( url,
+                        function( data ) {
+                            massivArray = data
 
-                        Perebor();
-                    });
+                            Perebor();
+                        });
+                }
+                else {
+                    $.get( url,
+                        function( data ) {
+                            massivArray = data
+
+                            Perebor2();
+                        });
+                }
             });
 
             $('#button_changeGraph').on("click", function () {
@@ -93,12 +103,24 @@
 
                 url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
-                $.get( url,
-                    function( data ) {
-                        massivArray = data
+                if( signal == '_signal:A1'){
+                    $.get( url,
+                        function( data ) {
+                            massivArray = data
 
-                        Perebor2();
-                    });
+                            Perebor();
+                        });
+                }
+                else {
+                    $.get( url,
+                        function( data ) {
+                            massivArray = data
+
+                            Perebor2();
+                        });
+                }
+
+
             });
         });
 
@@ -347,7 +369,7 @@
                         },
                         yAxis: {
                             title: {
-                                text: '%'
+                                text: 'Коррекция подачи, %'
                             }
                         },
                         plotOptions: {
@@ -381,7 +403,7 @@
                             enabled: false
                         },
                         series: [{
-                            name: 'Мощность, кВт',
+                            name: 'Коррекция подачи, %',
                             data: dataArray
                         },
                         ]
