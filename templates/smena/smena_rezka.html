@@ -69,6 +69,25 @@
             $('#button_obnovit').on("click", function () {
                 var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
+                linear_rabota = [];
+                linear_pause = [];
+                linear_off = [];
+                linear_avar = [];
+                linear_nagruzka = [];
+
+                kol_op = [];
+                kol_long_operations = [];
+
+                linear_rabota_2 = [];
+                linear_pause_2 = [];
+                linear_off_2 = [];
+                linear_avar_2 = [];
+                linear_nagruzka_2 = [];
+
+                kol_op_2 = [];
+                kol_long_operations_2 = [];
+
+
                 date = new Date(datas); // some mock date
                 ms = date.getTime() - 86400000;
 
@@ -268,12 +287,12 @@
 <div style="display: flex; justify-content: space-between;">
     <div id="container_sum_zagruzka" style="height: 400px; width: 800px"></div>
     <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
-
-    <div id="container_sum_zagruzka_2" style="height: 400px; width: 800px"></div>
-
-    <div id="container_kol_operations_2" style="height: 400px; width: 50%"></div>
-
 </div>  <!--Общая загрузка  html-->
+<div style="display: flex; justify-content: space-between;">
+    <div id="container_sum_zagruzka_2" style="height: 400px; width: 800px"></div>
+    <div id="container_kol_operations_2" style="height: 400px; width: 50%"></div>
+</div>  <!--Общая загрузка  html-->
+
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">

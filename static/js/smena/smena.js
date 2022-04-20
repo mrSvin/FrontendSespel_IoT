@@ -679,7 +679,7 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
 
         }
         else {
-            if(index%2 == 0) {
+            if(index%2 != 0) {
                 // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
                 // С помощью exception учитываются исключения
                 if (pushZero_2(stanok, exception)) {
@@ -715,12 +715,12 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
                     $.each(exception, function (i) {
                         // Если в исключении найден ручной режим, то записываем нули c ручным режимом
                         if ((exception[i][4]) == 'ruchnoi') {
-                            linear_rabota.push(0);
-                            linear_pause.push(0);
-                            linear_off.push(0);
-                            linear_avar.push(0);
-                            linear_nagruzka.push(0);
-                            linear_ruchnoi.push(0);
+                            linear_rabota_2.push(0);
+                            linear_pause_2.push(0);
+                            linear_off_2.push(0);
+                            linear_avar_2.push(0);
+                            linear_nagruzka_2.push(0);
+                            linear_ruchnoi_2.push(0);
 
                             // Меняем состояние исключения
                             exceptionGoted = 1
@@ -731,11 +731,11 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
 
                     // Если исключения не было найдено, то записываем нули без ручного режима
                     if (exceptionGoted === 0) {
-                        linear_rabota.push(0);
-                        linear_pause.push(0);
-                        linear_off.push(0);
-                        linear_avar.push(0);
-                        linear_nagruzka.push(0);
+                        linear_rabota_2.push(0);
+                        linear_pause_2.push(0);
+                        linear_off_2.push(0);
+                        linear_avar_2.push(0);
+                        linear_nagruzka_2.push(0);
 
                         // Возвращаем единицу, что произошла запись пустого станка
                         return
@@ -1006,7 +1006,7 @@ function twoWorkTime() {
                     fontSize: '18px',
                 }
             },
-            categories: Names,
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3'],
         },
         credits: {
             enabled: false
@@ -1057,7 +1057,7 @@ function twoWorkTime() {
                     fontSize: '15px',
                 }
             },
-            categories: Names,
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3'],
             title: {
                 text: null
             }
@@ -1094,107 +1094,107 @@ function twoWorkTime() {
         }]
     });
 
-    Highcharts.chart('container_sum_zagruzka', {
-        chart: {
-            type: 'column'
-        },
-        colors:colorsLine,
-        title: {
-            text: 'Общая загрузка оборудования'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: Names,
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Авария',
-            data: linear_avar_2
-        }, {
-            name: 'Выключен',
-            data: linear_off_2
-        }, {
-            name: 'Ожидание',
-            data: linear_pause_2
-        }, {
-            name: 'Под нагрузкой',
-            data: linear_nagruzka_2
-        }, {
-            name: 'Работа',
-            data: linear_rabota_2
-        }, ]
-    });
-
-    Highcharts.chart('container_kol_operations', {
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Количество операций'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '15px',
-                }
-            },
-            categories: Names,
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Количество',
-                align: 'high'
-            },
-            labels: {
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: ' операций'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Общее количество операций',
-            data: kol_op_2,
-        }, {
-            name: 'Количество операций более 3 минут',
-            data: kol_long_operations_2,
-        }]
-    });
+    // Highcharts.chart('container_sum_zagruzka', {
+    //     chart: {
+    //         type: 'column'
+    //     },
+    //     colors:colorsLine,
+    //     title: {
+    //         text: 'Общая загрузка оборудования'
+    //     },
+    //     xAxis: {
+    //         labels: {
+    //             style: {
+    //                 fontSize: '18px',
+    //             }
+    //         },
+    //         categories: Names,
+    //     },
+    //     credits: {
+    //         enabled: false
+    //     },
+    //     yAxis: {
+    //         min: 0,
+    //         title: {
+    //             text: '%'
+    //         }
+    //     },
+    //     tooltip: {
+    //         pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+    //         shared: true
+    //     },
+    //     plotOptions: {
+    //         column: {
+    //             stacking: 'percent'
+    //         }
+    //     },
+    //     series: [{
+    //         name: 'Авария',
+    //         data: linear_avar_2
+    //     }, {
+    //         name: 'Выключен',
+    //         data: linear_off_2
+    //     }, {
+    //         name: 'Ожидание',
+    //         data: linear_pause_2
+    //     }, {
+    //         name: 'Под нагрузкой',
+    //         data: linear_nagruzka_2
+    //     }, {
+    //         name: 'Работа',
+    //         data: linear_rabota_2
+    //     }, ]
+    // });
+    //
+    // Highcharts.chart('container_kol_operations', {
+    //     chart: {
+    //         type: 'bar'
+    //     },
+    //     title: {
+    //         text: 'Количество операций'
+    //     },
+    //     xAxis: {
+    //         labels: {
+    //             style: {
+    //                 fontSize: '15px',
+    //             }
+    //         },
+    //         categories: Names,
+    //         title: {
+    //             text: null
+    //         }
+    //     },
+    //     yAxis: {
+    //         min: 0,
+    //         title: {
+    //             text: 'Количество',
+    //             align: 'high'
+    //         },
+    //         labels: {
+    //             overflow: 'justify'
+    //         }
+    //     },
+    //     tooltip: {
+    //         valueSuffix: ' операций'
+    //     },
+    //     plotOptions: {
+    //         bar: {
+    //             dataLabels: {
+    //                 enabled: true
+    //             }
+    //         }
+    //     },
+    //     credits: {
+    //         enabled: false
+    //     },
+    //     series: [{
+    //         name: 'Общее количество операций',
+    //         data: kol_op_2,
+    //     }, {
+    //         name: 'Количество операций более 3 минут',
+    //         data: kol_long_operations_2,
+    //     }]
+    // });
 
 }
 
