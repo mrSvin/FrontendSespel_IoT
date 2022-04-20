@@ -76,6 +76,43 @@ function getPush_kol_op(arrayWork)
     kol_long_operations.push(array_kol_op[1])
 }
 
+// Функция вычисляет количества операций, аргумент массив работы
+function getPush_kol_op_2(arrayWork)
+{
+
+    var index_pars = 0; // Индекс по одному из циклов
+    var array_kol_op = [0,0];
+
+    // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
+    var lengh = (arrayWork.length)/2-2
+    // Если длина меньше нуля, выйти из функции
+    if (lengh <= 0){
+        kol_op_2.push(0)
+        kol_long_operations_2.push(0)
+        return
+    }
+
+    while(index_pars <= lengh)
+    {   // Условие обычной операции
+        if (new Date(arrayWork[index_pars*2]).getTime() !== (new Date(arrayWork[index_pars * 2 + 1])).getTime())
+        {
+            array_kol_op[0] += 1;
+        }
+
+        // Условие обычной больше 180 секунд(3 минуты)
+        if ((new Date(arrayWork[index_pars*2 + 1])).getTime() - (new Date(arrayWork[index_pars * 2])).getTime() > 180000)
+        {
+            array_kol_op[1] += 1;
+        }
+
+        index_pars += 1;
+    }
+
+    // После выхода из цикла происходит запись количества операция для текущего станка
+    kol_op_2.push(array_kol_op[0])
+    kol_long_operations_2.push(array_kol_op[1])
+}
+
 // Функция парсит линейные диаграммы в массив объектов
 // Аргументы: массив со станками, y на графики, имя программы опционально
 function pars(arrayParse, y, arrayName=null)
@@ -309,7 +346,53 @@ function pushZero (StanokElement, exception) {
     else return 0
 }
 
+function pushZero_2 (StanokElement, exception) {
+    // Если массив пустой или нулевой, то
+    if ((StanokElement === null) || (StanokElement == 0)) {
 
+        // Переменная выполненности исключения, меняется на 1 если произошло исключение
+        var exceptionGoted = 0
+
+        // Пробегаемся по массиву с исключениями
+        $.each(exception, function (i) {
+            // Если в исключении найден ручной режим, то записываем нули c ручным режимом
+            if ((exception[i][4]) == 'ruchnoi') {
+                linear_rabota_2.push(0);
+                linear_pause_2.push(0);
+                linear_off_2.push(0);
+                linear_avar_2.push(0);
+                linear_nagruzka_2.push(0);
+                linear_ruchnoi_2.push(0);
+
+                kol_op_2.push(0)
+                kol_long_operations_2.push(0)
+
+                // Меняем состояние исключения
+                exceptionGoted = 1
+                // Выходим из цикла
+                return
+            }
+        });
+
+        // Если исключения не было найдено, то записываем нули без ручного режима
+        if (exceptionGoted === 0) {
+            linear_rabota_2.push(0);
+            linear_pause_2.push(0);
+            linear_off_2.push(0);
+            linear_avar_2.push(0);
+            linear_nagruzka_2.push(0);
+
+            kol_op_2.push(0)
+            kol_long_operations_2.push(0)
+            // Возвращаем единицу, что произошла запись пустого станка
+            return 1
+        }
+        // Если и второе условие не было выполнено, то возвращаем единицу, произошла запись пустого станка но с ручным режимом
+        return 1
+    }
+    // Если массив не был пустым, возвращаем ноль
+    else return 0
+}
 
 // Функция парсит линейные суточные диаграммы и отправляет их
 // В Highcharts. Аргументы: stanok - массив переменных станка
@@ -473,6 +556,51 @@ function buildCommonDiagrams(roundDiagram, exception, index) {
     }
 }
 
+function buildCommonDiagrams_2(roundDiagram, exception, index) {
+
+    if ((roundDiagram == 0) || (roundDiagram === null)) {
+        return
+    }
+
+    else {
+        // Переменная выполненности исключения, меняется на 1 если произошло исключение
+        var exceptionGoted = 0
+
+
+        $.each(exception, function (i) {
+            if ((exception[i][4]) == 'ruchnoi') {
+                linear_rabota_2.push(roundDiagram[0]);
+                linear_pause_2.push(roundDiagram[1]);
+                linear_off_2.push(roundDiagram[2]);
+                linear_avar_2.push(roundDiagram[3]);
+                if (index == exception[i][0]) {
+
+                    linear_nagruzka_2.push(0);
+                    linear_ruchnoi_2.push(roundDiagram[4]);
+
+                    exceptionGoted = 1
+                    return
+                } else {
+                    linear_nagruzka_2.push(roundDiagram[4]);
+                    linear_ruchnoi_2.push(0);
+
+                    exceptionGoted = 1
+                    return
+                }
+            }
+        });
+
+        if (exceptionGoted === 0) {
+            linear_rabota_2.push(roundDiagram[0]);
+            linear_pause_2.push(roundDiagram[1]);
+            linear_off_2.push(roundDiagram[2]);
+            linear_avar_2.push(roundDiagram[3]);
+            linear_nagruzka_2.push(roundDiagram[4]);
+        }
+
+    }
+}
+
 // Универсальная функция сборки и формирования данных для графиков аргументы
 // Массив со станками, стартовый контейнер, если какие-то станки нужно пропустить
 // Массив с исключениями, для добавления отдельной переменной ручного режима
@@ -480,77 +608,148 @@ function buildCommonDiagrams(roundDiagram, exception, index) {
 function build (stankiDataArray,  startContainer = 1, exception = [0])
 {
     $.map(stankiDataArray, function (stanok, index) {
-
-        // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
-        // С помощью exception учитываются исключения
-        if (pushZero(stanok, exception)) {
-            // Если массив оказался пустым, то переходим к следующему циклу $.map
-            console.log("Пустой вообще", index + 1)
-            return
-        }
-
-        // Функция вычисления и добавления станку количества операций
-
-        getPush_kol_op(stanok[0]);
-        // Функция формирования линейной диаграммы станка аргументы:
-        // массив станка, массив исключений, индекс станка, номер стартого станка
-        buildLinearDiagram(stanok, exception, index, startContainer)
-
-        // Условие проверки является ли stanok[6] вообще массивом
-        if (Array.isArray(stanok[6]))
-        {
-            // Объявляем массив круговой диаграммы из 6-го массива станка.
-            var roundDiagram = stanok[6];
-
-            // Функция формирования круговой диаграммы станка аргументы:
-            // круговой массив станка, массив исключений, индекс станка, номер стартого станка
-            // функция выполнится, только если массив не пустой
-            if (roundDiagram !== 0){
-                buildRoundDiagram(roundDiagram, exception, index, startContainer)
+        if(index%2 == 0) {
+            // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
+            // С помощью exception учитываются исключения
+            if (pushZero(stanok, exception)) {
+                // Если массив оказался пустым, то переходим к следующему циклу $.map
+                console.log("Пустой вообще", index + 1)
+                return
             }
-        }
-        // Если stanok[6] не оказался массивом, то заполняем нулями и переходим к следующему станку
-        else
-        {
-            var exceptionGoted = 0
 
-            // Пробегаемся по массиву с исключениями
-            $.each(exception, function (i) {
-                // Если в исключении найден ручной режим, то записываем нули c ручным режимом
-                if ((exception[i][4]) == 'ruchnoi') {
+            // Функция вычисления и добавления станку количества операций
+
+            getPush_kol_op(stanok[0]);
+            // Функция формирования линейной диаграммы станка аргументы:
+            // массив станка, массив исключений, индекс станка, номер стартого станка
+            buildLinearDiagram(stanok, exception, index, startContainer)
+
+            // Условие проверки является ли stanok[6] вообще массивом
+            if (Array.isArray(stanok[6])) {
+                // Объявляем массив круговой диаграммы из 6-го массива станка.
+                var roundDiagram = stanok[6];
+
+                // Функция формирования круговой диаграммы станка аргументы:
+                // круговой массив станка, массив исключений, индекс станка, номер стартого станка
+                // функция выполнится, только если массив не пустой
+                if (roundDiagram !== 0) {
+                    buildRoundDiagram(roundDiagram, exception, index, startContainer)
+                }
+            }
+            // Если stanok[6] не оказался массивом, то заполняем нулями и переходим к следующему станку
+            else {
+                var exceptionGoted = 0
+
+                // Пробегаемся по массиву с исключениями
+                $.each(exception, function (i) {
+                    // Если в исключении найден ручной режим, то записываем нули c ручным режимом
+                    if ((exception[i][4]) == 'ruchnoi') {
+                        linear_rabota.push(0);
+                        linear_pause.push(0);
+                        linear_off.push(0);
+                        linear_avar.push(0);
+                        linear_nagruzka.push(0);
+                        linear_ruchnoi.push(0);
+
+                        // Меняем состояние исключения
+                        exceptionGoted = 1
+                        // Выходим из цикла
+                        return
+                    }
+                });
+
+                // Если исключения не было найдено, то записываем нули без ручного режима
+                if (exceptionGoted === 0) {
                     linear_rabota.push(0);
                     linear_pause.push(0);
                     linear_off.push(0);
                     linear_avar.push(0);
                     linear_nagruzka.push(0);
-                    linear_ruchnoi.push(0);
 
-                    // Меняем состояние исключения
-                    exceptionGoted = 1
-                    // Выходим из цикла
+                    // Возвращаем единицу, что произошла запись пустого станка
                     return
                 }
-            });
-
-            // Если исключения не было найдено, то записываем нули без ручного режима
-            if (exceptionGoted === 0) {
-                linear_rabota.push(0);
-                linear_pause.push(0);
-                linear_off.push(0);
-                linear_avar.push(0);
-                linear_nagruzka.push(0);
-
-                // Возвращаем единицу, что произошла запись пустого станка
+                // Если и второе условие не было выполнено, то выходим из функции, произошла запись пустого станка но с ручным режимом
                 return
             }
-            // Если и второе условие не было выполнено, то выходим из функции, произошла запись пустого станка но с ручным режимом
-            return
+
+            // Функция формирования заполнение данных для общей диаграммы аргументы:
+            // круговой массив станка, массив исключений, индекс станка
+            buildCommonDiagrams(roundDiagram, exception, index)
+
         }
+        else {
+            if(index%2 == 0) {
+                // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
+                // С помощью exception учитываются исключения
+                if (pushZero_2(stanok, exception)) {
+                    // Если массив оказался пустым, то переходим к следующему циклу $.map
+                    console.log("Пустой вообще", index + 1)
+                    return
+                }
 
-        // Функция формирования заполнение данных для общей диаграммы аргументы:
-        // круговой массив станка, массив исключений, индекс станка
-        buildCommonDiagrams(roundDiagram, exception, index)
+                // Функция вычисления и добавления станку количества операций
 
+                getPush_kol_op_2(stanok[0]);
+                // Функция формирования линейной диаграммы станка аргументы:
+                // массив станка, массив исключений, индекс станка, номер стартого станка
+                buildLinearDiagram(stanok, exception, index, startContainer)
+
+                // Условие проверки является ли stanok[6] вообще массивом
+                if (Array.isArray(stanok[6])) {
+                    // Объявляем массив круговой диаграммы из 6-го массива станка.
+                    var roundDiagram = stanok[6];
+
+                    // Функция формирования круговой диаграммы станка аргументы:
+                    // круговой массив станка, массив исключений, индекс станка, номер стартого станка
+                    // функция выполнится, только если массив не пустой
+                    if (roundDiagram !== 0) {
+                        buildRoundDiagram(roundDiagram, exception, index, startContainer)
+                    }
+                }
+                // Если stanok[6] не оказался массивом, то заполняем нулями и переходим к следующему станку
+                else {
+                    var exceptionGoted = 0
+
+                    // Пробегаемся по массиву с исключениями
+                    $.each(exception, function (i) {
+                        // Если в исключении найден ручной режим, то записываем нули c ручным режимом
+                        if ((exception[i][4]) == 'ruchnoi') {
+                            linear_rabota.push(0);
+                            linear_pause.push(0);
+                            linear_off.push(0);
+                            linear_avar.push(0);
+                            linear_nagruzka.push(0);
+                            linear_ruchnoi.push(0);
+
+                            // Меняем состояние исключения
+                            exceptionGoted = 1
+                            // Выходим из цикла
+                            return
+                        }
+                    });
+
+                    // Если исключения не было найдено, то записываем нули без ручного режима
+                    if (exceptionGoted === 0) {
+                        linear_rabota.push(0);
+                        linear_pause.push(0);
+                        linear_off.push(0);
+                        linear_avar.push(0);
+                        linear_nagruzka.push(0);
+
+                        // Возвращаем единицу, что произошла запись пустого станка
+                        return
+                    }
+                    // Если и второе условие не было выполнено, то выходим из функции, произошла запись пустого станка но с ручным режимом
+                    return
+                }
+
+                // Функция формирования заполнение данных для общей диаграммы аргументы:
+                // круговой массив станка, массив исключений, индекс станка
+                buildCommonDiagrams_2(roundDiagram, exception, index)
+
+            }
+        }
     }); // Конец функции $.map(Diagram)
 }
 
@@ -792,6 +991,211 @@ function twoWorkTime() {
         Diagram.push(smena_1, smena_2)
     })
     build(Diagram)
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors:colorsLine,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: Names,
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Авария',
+            data: linear_avar
+        }, {
+            name: 'Выключен',
+            data: linear_off
+        }, {
+            name: 'Ожидание',
+            data: linear_pause
+        }, {
+            name: 'Под нагрузкой',
+            data: linear_nagruzka
+        }, {
+            name: 'Работа',
+            data: linear_rabota
+        }, ]
+    });
+
+    Highcharts.chart('container_kol_operations', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Количество операций'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '15px',
+                }
+            },
+            categories: Names,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: kol_op,
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: kol_long_operations,
+        }]
+    });
+
+    Highcharts.chart('container_sum_zagruzka', {
+        chart: {
+            type: 'column'
+        },
+        colors:colorsLine,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: Names,
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Авария',
+            data: linear_avar_2
+        }, {
+            name: 'Выключен',
+            data: linear_off_2
+        }, {
+            name: 'Ожидание',
+            data: linear_pause_2
+        }, {
+            name: 'Под нагрузкой',
+            data: linear_nagruzka_2
+        }, {
+            name: 'Работа',
+            data: linear_rabota_2
+        }, ]
+    });
+
+    Highcharts.chart('container_kol_operations', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Количество операций'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '15px',
+                }
+            },
+            categories: Names,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: kol_op_2,
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: kol_long_operations_2,
+        }]
+    });
+
 }
 
 // Функция проверяет все ли станки загрузились из запроса использует глобальную
