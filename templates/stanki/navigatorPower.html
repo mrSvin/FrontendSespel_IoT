@@ -79,72 +79,46 @@
                         });
                 }
             });
+        });
 
-            $('#GraphPower').on("click", function () {
+        function selectedNewValue(){
+            var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
-                signal = '_signal:A1'
+            date = new Date(datas); // some mock date
+            ms = date.getTime() + 86400000;
 
-                var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
-
-                date = new Date(datas); // some mock date
-                ms = date.getTime() + 86400000;
-
-                startTime = datas.slice(0, 10)
-                timeEnd = new Date(ms).toISOString().slice(0, 10)
+            startTime = datas.slice(0, 10)
+            timeEnd = new Date(ms).toISOString().slice(0, 10)
 
 
-                massivArray = []
+            massivArray = []
 
-                do_6 = [];
-                do_12 = [];
-                do_18 = [];
-                do_24 = [];
+            do_6 = [];
+            do_12 = [];
+            do_18 = [];
+            do_24 = [];
 
-                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
+            url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
-                    $.get( url,
-                        function( data ) {
-                            massivArray = data
+            signal = $( "#selectValue" ).val();
 
-                            Perebor();
-                        });
+            if( signal == '_signal:A1'){
+                $.get( url,
+                    function( data ) {
+                        massivArray = data
 
-            });
-
-            $('#GraphKorek').on("click", function () {
-
-                signal = '_signal:A2'
-
-                var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
-
-                date = new Date(datas); // some mock date
-                ms = date.getTime() + 86400000;
-
-                startTime = datas.slice(0, 10)
-                timeEnd = new Date(ms).toISOString().slice(0, 10)
-
-
-                massivArray = []
-
-                do_6 = [];
-                do_12 = [];
-                do_18 = [];
-                do_24 = [];
-
-                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
-
+                        Perebor();
+                    });
+            }
+            else {
                 $.get( url,
                     function( data ) {
                         massivArray = data
 
                         Perebor2();
                     });
-
-            });
-        });
-
-
-
+            }
+        }
     </script>   <!--Календарь js-->
 
     <!--Календарь -->
@@ -590,9 +564,6 @@
             setTimeout(document.body.classList.remove('loaded_hiding'),1000);
         }
 
-        function check() {
-            console.log("work?")
-        }
     </script>
 
 </head>
@@ -652,7 +623,7 @@
         </div>
 
         <div class="select">
-            <select id="selectValue" onchange="check()">
+            <select id="selectValue" onchange="selectedNewValue()">
                 <option id="GraphPower" value="_signal:A1">Мощность</option>
                 <option id="GraphKorek" value="_signal:A2">Коррекция подачи</option>
             </select>
