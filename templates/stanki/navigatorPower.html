@@ -82,6 +82,20 @@
         });
 
         function selectedNewValue(){
+
+            $('#datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+
             var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
             date = new Date(datas); // some mock date
@@ -610,7 +624,7 @@
         <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
 
             <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
-                <input type='text' class="form-control" value=""/>
+                <input type='text' class="form-control" value="" onchange="selectedNewValue()"/>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
