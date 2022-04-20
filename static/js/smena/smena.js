@@ -47,15 +47,20 @@ function getPush_kol_op(arrayWork)
     var array_kol_op = [0,0];
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = (arrayWork.length)/2-2
-    // Если длина меньше нуля, выйти из функции
-    if (lengh <= 0){
+    var lengh = arrayWork.length
+    if (lengh <= 1){
         kol_op.push(0)
         kol_long_operations.push(0)
         return
     }
 
-    while(index_pars <= lengh)
+    if(lengh > 4){
+        if(lengh % 2 == 1) lengh -=2
+        lengh = (lengh - lengh % 2) / 2
+    }
+    else lengh = 1
+
+    while(index_pars < lengh)
     {   // Условие обычной операции
         if (new Date(arrayWork[index_pars*2]).getTime() !== (new Date(arrayWork[index_pars * 2 + 1])).getTime())
         {
@@ -84,15 +89,20 @@ function getPush_kol_op_2(arrayWork)
     var array_kol_op = [0,0];
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = (arrayWork.length)/2-2
-    // Если длина меньше нуля, выйти из функции
-    if (lengh <= 0){
+    var lengh = arrayWork.length
+    if (lengh <= 1){
         kol_op_2.push(0)
         kol_long_operations_2.push(0)
         return
     }
 
-    while(index_pars <= lengh)
+    if(lengh > 4){
+        if(lengh % 2 == 1) lengh -=2
+        lengh = (lengh - lengh % 2) / 2
+    }
+    else lengh = 1
+
+    while(index_pars < lengh)
     {   // Условие обычной операции
         if (new Date(arrayWork[index_pars*2]).getTime() !== (new Date(arrayWork[index_pars * 2 + 1])).getTime())
         {
@@ -992,7 +1002,7 @@ function twoWorkTime() {
     })
     build(Diagram)
 
-    Highcharts.chart('container_sum_zagruzka', {
+    Highcharts.chart('container_sum_zagruzka',{
         chart: {
             type: 'column'
         },
@@ -1094,107 +1104,107 @@ function twoWorkTime() {
         }]
     });
 
-    // Highcharts.chart('container_sum_zagruzka', {
-    //     chart: {
-    //         type: 'column'
-    //     },
-    //     colors:colorsLine,
-    //     title: {
-    //         text: 'Общая загрузка оборудования'
-    //     },
-    //     xAxis: {
-    //         labels: {
-    //             style: {
-    //                 fontSize: '18px',
-    //             }
-    //         },
-    //         categories: Names,
-    //     },
-    //     credits: {
-    //         enabled: false
-    //     },
-    //     yAxis: {
-    //         min: 0,
-    //         title: {
-    //             text: '%'
-    //         }
-    //     },
-    //     tooltip: {
-    //         pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-    //         shared: true
-    //     },
-    //     plotOptions: {
-    //         column: {
-    //             stacking: 'percent'
-    //         }
-    //     },
-    //     series: [{
-    //         name: 'Авария',
-    //         data: linear_avar_2
-    //     }, {
-    //         name: 'Выключен',
-    //         data: linear_off_2
-    //     }, {
-    //         name: 'Ожидание',
-    //         data: linear_pause_2
-    //     }, {
-    //         name: 'Под нагрузкой',
-    //         data: linear_nagruzka_2
-    //     }, {
-    //         name: 'Работа',
-    //         data: linear_rabota_2
-    //     }, ]
-    // });
-    //
-    // Highcharts.chart('container_kol_operations', {
-    //     chart: {
-    //         type: 'bar'
-    //     },
-    //     title: {
-    //         text: 'Количество операций'
-    //     },
-    //     xAxis: {
-    //         labels: {
-    //             style: {
-    //                 fontSize: '15px',
-    //             }
-    //         },
-    //         categories: Names,
-    //         title: {
-    //             text: null
-    //         }
-    //     },
-    //     yAxis: {
-    //         min: 0,
-    //         title: {
-    //             text: 'Количество',
-    //             align: 'high'
-    //         },
-    //         labels: {
-    //             overflow: 'justify'
-    //         }
-    //     },
-    //     tooltip: {
-    //         valueSuffix: ' операций'
-    //     },
-    //     plotOptions: {
-    //         bar: {
-    //             dataLabels: {
-    //                 enabled: true
-    //             }
-    //         }
-    //     },
-    //     credits: {
-    //         enabled: false
-    //     },
-    //     series: [{
-    //         name: 'Общее количество операций',
-    //         data: kol_op_2,
-    //     }, {
-    //         name: 'Количество операций более 3 минут',
-    //         data: kol_long_operations_2,
-    //     }]
-    // });
+    Highcharts.chart('container_sum_zagruzka_2', {
+        chart: {
+            type: 'column'
+        },
+        colors:colorsLine,
+        title: {
+            text: 'Общая загрузка оборудования'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: Names,
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Авария',
+            data: linear_avar_2
+        }, {
+            name: 'Выключен',
+            data: linear_off_2
+        }, {
+            name: 'Ожидание',
+            data: linear_pause_2
+        }, {
+            name: 'Под нагрузкой',
+            data: linear_nagruzka_2
+        }, {
+            name: 'Работа',
+            data: linear_rabota_2
+        }, ]
+    });
+
+    Highcharts.chart('container_kol_operations_2', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Количество операций'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '15px',
+                }
+            },
+            categories: Names,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: kol_op_2,
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: kol_long_operations_2,
+        }]
+    });
 
 }
 
