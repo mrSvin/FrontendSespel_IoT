@@ -1360,7 +1360,7 @@ function checkerTodayYesterday (arrayToday, arrayYesterday,check)
     if(check.length === 2)
     {   // То запустиль логику объедения массивов вчерашнего и сегодняшнего дня
         let arrayFull = []
-        for (let i=0; 5 > i; i++)
+        for (let i=0; 6 > i; i++)
         {   // метод concat объединяет массивы
             if(arrayToday[i] != undefined && arrayYesterday[i] != undefined) {
                 arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
