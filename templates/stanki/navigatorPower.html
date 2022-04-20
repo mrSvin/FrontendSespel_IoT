@@ -60,6 +60,8 @@
 
                 url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
+                signal = $( "#selectValue" ).val();
+
                 if( signal == '_signal:A1'){
                     $.get( url,
                         function( data ) {
@@ -81,7 +83,7 @@
             $('#GraphPower').on("click", function () {
 
                 signal = '_signal:A1'
-                $('#NameUl').html("Мощность ▼")
+
                 var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
                 date = new Date(datas); // some mock date
@@ -112,7 +114,6 @@
             $('#GraphKorek').on("click", function () {
 
                 signal = '_signal:A2'
-                $('#NameUl').html("Коррекция подачи ▼")
 
                 var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
@@ -588,6 +589,10 @@
             setTimeout(document.body.classList.add('loaded'),1000);
             setTimeout(document.body.classList.remove('loaded_hiding'),1000);
         }
+
+        function check() {
+            console.log("work?")
+        }
     </script>
 
 </head>
@@ -647,7 +652,7 @@
         </div>
 
         <div class="select">
-            <select id="selectValue">
+            <select id="selectValue" onclick="check()">
                 <option id="GraphPower" value="_signal:A1">Мощность</option>
                 <option id="GraphKorek" value="_signal:A2">Коррекция подачи</option>
             </select>
