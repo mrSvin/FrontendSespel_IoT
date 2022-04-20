@@ -243,11 +243,11 @@
         }
         /* Arrow */
         .selectAfter {
-            content: '\25BC';
             position: absolute;
             top: 0;
             right: 0;
-            padding: 1em;
+            height: 100%;
+            padding: 5%;
             background-color: #34495e;
             transition: .25s all ease;
             pointer-events: none;
@@ -635,7 +635,7 @@
                 <option id="GraphPower" value="_signal:A1">Мощность</option>
                 <option id="GraphKorek" value="_signal:A2">Коррекция подачи</option>
             </select>
-            <span class="selectAfter"></span>
+            <span class="selectAfter">▼</span>
         </div>
         <div class="form-actions">
             <button class="follow" id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
