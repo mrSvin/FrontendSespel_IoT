@@ -5,6 +5,9 @@ var drop_down_line = '#c9cbd0'; // цвет линии разделения в �
 var calen_3_color = '#cccccc'; // рамка вокруг кнопки календаря +
 var calen_4_color = '#eeeeee'; // фон вокруг кнопки календаря +
 
+var select_color_2 = '#2c3e50'
+var select_color_3 = '#34495e'
+
 var text_color = "#333333"; // основной цвет текста +
 var calen_1_color = '#756e6e'; // текст в календаре +
 
@@ -162,6 +165,12 @@ function calendar(calen_1_color ,back_color, calen_3_color, calen_4_color){
     $('.input-group-addon').attr('style','color:' + calen_1_color +'; background:' + calen_4_color +'; border: 1px solid ' + calen_3_color +';'); // кнопка календаря
 }
 
+function selectPower(select_1_color, select_2_color, select_3_color)
+{
+    $('.select select').attr('style','color:' + select_1_color +'; background-color:' + select_2_color + ';'); // форма заполнения даты
+    $('.select::after').attr('style','background-color:' + select_3_color +';'); // кнопка select
+}
+
 function hightcharts_colors(back_color, text_color, calen_1_color, calen_3_color, legend_color, line_special)
 {
     $('.highcharts-background').attr('style','fill:' + back_color +';'); // цвет фона графиков
@@ -237,6 +246,7 @@ function dark_theme(){
         backgroundes(back_color, text_color, knopki); // Вызов функции для основных фонов
         drop_content_colors(text_color, drop_down_line, back_color, text_color); // Вызов функции для выпадающих меню
         calendar(calen_1_color, back_color, calen_3_color,calen_4_color); // Вызов функции для календаря
+        selectPower(calen_1_color, back_color,calen_4_color)
         hightcharts_colors(back_color, text_color, calen_1_color, calen_3_color, back_color, back_color_black); // Вызов функции для графиков
         mesto_personal(calen_1_color, back_color); // Вызов функции для надписей место и персонал
         nav_menu(nav_menu_col1, nav_menu_col2, back_color_black, nav_menu_col2 ); // навигационное меню
@@ -256,6 +266,7 @@ function dark_theme(){
         backgroundes(back_color_black, text_color_black, text_color_black); // Вызов функции для основных фонов
         drop_content_colors(text_color_black, calen_3_color, back_color_black, mesto_personal_color_black); // Вызов функции для выпадающих меню
         calendar(back_color, back_color_black, text_color_black, text_color_black); // Вызов функции для календаря
+        selectPower(back_color,select_color_2, select_color_3)
         hightcharts_colors(back_color_black, text_color_black, mesto_personal_color_black, text_color_black, mesto_personal_color_black, back_color); // Вызов функции для графиков
         mesto_personal(mesto_personal_color_black, back_color_black); // Вызов функции для надписей место и персонал
         nav_menu(nav_menu_col1, nav_menu_col2, back_color); // навигационное меню
