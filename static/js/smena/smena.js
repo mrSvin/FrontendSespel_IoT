@@ -127,6 +127,7 @@ function getPush_kol_op_2(arrayWork)
 // Аргументы: массив со станками, y на графики, имя программы опционально
 function pars(arrayParse, y, arrayName=null)
 {
+    if(arrayParse === undefined) return
 
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
