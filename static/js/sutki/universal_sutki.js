@@ -67,15 +67,20 @@ function getPush_kol_op(arrayWork)
     var array_kol_op = [0,0];
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
-    var lengh = (arrayWork.length)/2-2
-    // Если длина меньше нуля, выйти из функции
-    if (lengh <= 0){
+    var lengh = arrayWork.length
+    if (lengh <= 1){
         kol_op.push(0)
         kol_long_operations.push(0)
         return
     }
 
-    while(index_pars <= lengh)
+    if(lengh > 4){
+        if(lengh % 2 == 1) lengh -=1
+        lengh = (lengh - lengh % 2) / 2
+    }
+    else lengh = 1
+
+    while(index_pars < lengh)
     {   // Условие обычной операции
         if (new Date(arrayWork[index_pars*2]).getTime() !== (new Date(arrayWork[index_pars * 2 + 1])).getTime())
         {
@@ -111,7 +116,7 @@ function pars(arrayParse, y, arrayName=null)
     }
 
     if(lengh > 4){
-        if(lengh % 2 == 1) lengh -=2
+        if(lengh % 2 == 1) lengh -=1
         lengh = (lengh - lengh % 2) / 2
     }
      else lengh = 1

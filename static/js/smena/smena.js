@@ -55,7 +55,7 @@ function getPush_kol_op(arrayWork)
     }
 
     if(lengh > 4){
-        if(lengh % 2 == 1) lengh -=2
+        if(lengh % 2 == 1) lengh -=1
         lengh = (lengh - lengh % 2) / 2
     }
     else lengh = 1
@@ -97,7 +97,7 @@ function getPush_kol_op_2(arrayWork)
     }
 
     if(lengh > 4){
-        if(lengh % 2 == 1) lengh -=2
+        if(lengh % 2 == 1) lengh -=1
         lengh = (lengh - lengh % 2) / 2
     }
     else lengh = 1
@@ -138,7 +138,7 @@ function pars(arrayParse, y, arrayName=null)
     }
 
     if(lengh > 4){
-        if(lengh % 2 == 1) lengh -=2
+        if(lengh % 2 == 1) lengh -=1
         lengh = (lengh - lengh % 2) / 2
     }
     else lengh = 1
@@ -1001,6 +1001,7 @@ function twoWorkTime() {
         Diagram.push(smena_1, smena_2)
     })
     build(Diagram)
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
     Highcharts.chart('container_sum_zagruzka',{
         chart: {
