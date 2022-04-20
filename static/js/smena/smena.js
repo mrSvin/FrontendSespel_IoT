@@ -770,6 +770,9 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
                 if (roundDiagram !== 0) {
                     buildRoundDiagram(roundDiagram, exception, index, startContainer)
                 }
+                else {
+                    buildRoundDiagram(roundDiagram, exception, index, startContainer)
+                }
             }
             // Если stanok[6] не оказался массивом, то заполняем нулями и переходим к следующему станку
             else {
@@ -992,7 +995,6 @@ function getRoundDiagramData(smena){
             }
             array1.push(delta)
         })
-        smena.push(Array())
         smena.push(array1)
     }
 
@@ -1020,6 +1022,7 @@ function GetAllData(ArrayNames, Object) {
             Object[name]['today'].push(data.off)
             Object[name]['today'].push(data.avar)
             Object[name]['today'].push(data.nagruzka)
+            Object[name]['today'].push(data.programName)
 
             // Переменная checkerData будет записана только если для одного станка обработались оба запроса
             // Иначе в нее будет записан null
@@ -1042,6 +1045,7 @@ function GetAllData(ArrayNames, Object) {
             Object[name]['yesterday'].push(data.off)
             Object[name]['yesterday'].push(data.avar)
             Object[name]['yesterday'].push(data.nagruzka)
+            Object[name]['yesterday'].push(data.programName)
 
             // Переменная checkerData будет записана только если для одного станка обработались оба запроса
             // Иначе в нее будет записан null
