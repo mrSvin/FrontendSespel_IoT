@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Анализ работы навигаторов</title>
+    <title>Отчет по сменам</title>
     <link rel="shortcut icon" type="image/ico"/>
 
     <link rel="stylesheet" type="text/css" href="../../css/styles_stanki.css"/>
@@ -185,7 +185,7 @@
 
 <header>
     <div style="display: flex; width: 100vw; justify-content: space-between; flex-wrap: nowrap; width: 100%;">
-        <a href="../../home" style="display: flex; align-items: flex-start;" ><img src="../../images/logo_black.png" class="icon-logo"/></a>
+        <a href="../../home" style="display: flex; align-items: flex-start;" ><img src="../images/logo_black.png" class="icon-logo"/></a>
         <ul id="menu_ul">
             <li id="menu_li"><a id="menu_a" href="../displayStanki">Мех.уч.2 пл.</a></li>
             <li id="menu_li1"><a id="menu_a1" href="../kim">ОТК</a></li>
@@ -229,11 +229,32 @@
     </div>
     <div style="display:flex; justify-content: center;">
         <form>
-            <button  formaction="navigators" class="button_color button_color_active">Суточный отчет</button>
-            <button formaction="navigators_month" class="button_color">Месячный отчет</button>
-            <button formaction="smena/smena_rezka" class="button_color">Отчет по сменам<div class="neo-line"></div></button>
+            <button  formaction="../navigators" class="button_color">Суточный отчет</button>
+            <button formaction="../navigators_month" class="button_color">Месячный отчет</button>
+            <button formaction="smena_rezka" class="button_color button_color_active">Отчет по сменам<div class="neo-line"></div></button>
         </form>
     </div>  <!-- Меню -->
+
+    <div class="container" style="display: flex; justify-content: center; align-items: center;">
+        <div style="width: 250px; float: left">
+            <h2 class="choose_month">Выберите дату:</h2>
+        </div>
+        <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
+
+            <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+                <input type='text' class="form-control" value=""/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </form>
+        <div class="form-actions">
+            <button class="follow" id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                Обновить
+            </button>
+        </div>
+    </div>      <!--Календарь html-->
+
 </header>       <!--Шапка html-->
 
 <body>
