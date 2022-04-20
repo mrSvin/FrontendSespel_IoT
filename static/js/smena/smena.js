@@ -175,7 +175,7 @@ function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar,
             type: 'xrange'
         },
         title: {
-            text: 'Работа оборудования'
+            text: 'Работа оборудования смены 19:00 - 07:00'
         },
         colors:colorsLine,
 
@@ -259,6 +259,102 @@ function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar,
     });
 
 }
+
+function setDataLine2(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, nagruzkaName='Под нагрузкой', nagruzkaColor = '#24621d') {
+    Highcharts.chart(containerLine, {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            plotBorderColor: 'gray',
+            type: 'xrange'
+        },
+        title: {
+            text: 'Работа оборудования смены 07:00 - 19:00'
+        },
+        colors:colorsLine,
+
+
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            categories: [nagruzkaName, 'Работа', 'Ожидание', 'Выключен', 'В аварии'],
+            reversed: true
+        },
+        credits: {
+            enabled: false
+        },
+
+        series: [
+            {
+                name: 'Работа',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#38e817',
+                tooltip: {
+                    pointFormat: '<b>Программа: {point.programname}</b>'
+                },
+                data: arrayWork,
+            },
+            {
+                name: 'Ожидание',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#ffea32',
+                tooltip: {
+                    pointFormat: ''
+                },
+                data: arrayPass,
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
+                name: 'Выключен',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#000000',
+                data: arrayFail,
+                dataLabels: {
+                    enabled: true,
+                }
+            },
+            {
+                name: 'В аварии',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#e81e1d',
+                data: arrayAvar,
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
+                name: nagruzkaName,
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: nagruzkaColor,
+                data: arrayNagruzka,
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        ]
+
+
+    });
+
+}
+
 
 // Функция загоняет массивы с данными в Highcharts круговой суточной
 // можно в качестве параметра передать имя нагрузки и новый цвет
@@ -434,6 +530,34 @@ function buildLinearDiagram(stanok, exception, index, startContainer){
     // Если исключения не случилось, обычная запись
     if (exceptionGoted === 0) {
         setDataLine("container_work" + (index + startContainer), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
+    }
+}
+
+function buildLinearDiagram2(stanok, exception, index, startContainer){
+    // Функция парсинга массивов с точками начала и конца
+    var pars_nagruzka = pars(stanok[4], 0)
+    var pars_rabota = pars(stanok[0], 1, stanok[5])
+    var pars_pause = pars(stanok[1], 2)
+    var pars_off = pars(stanok[2], 3)
+    var pars_avar = pars(stanok[3], 4)
+
+    // Переменная выполненности исключения, меняется на 1 если произошло исключение
+    var exceptionGoted = 0
+
+
+    // Пробегаемся по массиву исключений, если текущий станок будет найдет в исключениях, то выполним условие
+    $.each(exception, function (i) {
+        if(index == exception[i][0]) {
+            setDataLine2("container_work" + (index + startContainer), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka, exception[i][1], exception[i][2]);
+            // Меняем состояение переменной на 1, т.к. произошло исключение
+            exceptionGoted = 1
+            return
+        }
+    });
+
+    // Если исключения не случилось, обычная запись
+    if (exceptionGoted === 0) {
+        setDataLine2("container_work" + (index + startContainer), pars_rabota, pars_pause, pars_off, pars_avar, pars_nagruzka);
     }
 }
 
@@ -703,7 +827,7 @@ function build (stankiDataArray,  startContainer = 1, exception = [0])
                 getPush_kol_op_2(stanok[0]);
                 // Функция формирования линейной диаграммы станка аргументы:
                 // массив станка, массив исключений, индекс станка, номер стартого станка
-                buildLinearDiagram(stanok, exception, index, startContainer)
+                buildLinearDiagram2(stanok, exception, index, startContainer)
 
                 // Условие проверки является ли stanok[6] вообще массивом
                 if (Array.isArray(stanok[6])) {
@@ -834,7 +958,6 @@ function buildShort (stankiDataArray,  startContainer = 1, exception = [0])
 
     }); // Конец функции $.map(Diagram)
 }
-
 
 /// Остальные для смены
 
@@ -1009,7 +1132,7 @@ function twoWorkTime() {
         },
         colors:colorsLine,
         title: {
-            text: 'Общая загрузка оборудования'
+            text: 'Общая загрузка смены 19:00 - 07:00'
         },
         xAxis: {
             labels: {
@@ -1060,7 +1183,7 @@ function twoWorkTime() {
             type: 'bar'
         },
         title: {
-            text: 'Количество операций'
+            text: 'Количество операций смены 19:00 - 07:00'
         },
         xAxis: {
             labels: {
@@ -1111,7 +1234,7 @@ function twoWorkTime() {
         },
         colors:colorsLine,
         title: {
-            text: 'Общая загрузка оборудования'
+            text: 'Общая загрузка смены 07:00 - 19:00'
         },
         xAxis: {
             labels: {
@@ -1119,7 +1242,7 @@ function twoWorkTime() {
                     fontSize: '18px',
                 }
             },
-            categories: Names,
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3'],
         },
         credits: {
             enabled: false
@@ -1162,7 +1285,7 @@ function twoWorkTime() {
             type: 'bar'
         },
         title: {
-            text: 'Количество операций'
+            text: 'Количество операций смены 07:00 - 19:00'
         },
         xAxis: {
             labels: {
@@ -1170,7 +1293,7 @@ function twoWorkTime() {
                     fontSize: '15px',
                 }
             },
-            categories: Names,
+            categories: ['Навигатор #1', 'Навигатор #2 - голова 1', 'Навигатор #2 - голова 2', 'Навигатор #3'],
             title: {
                 text: null
             }
@@ -1207,6 +1330,7 @@ function twoWorkTime() {
         }]
     });
 
+    dark_theme()
 }
 
 // Функция проверяет все ли станки загрузились из запроса использует глобальную
