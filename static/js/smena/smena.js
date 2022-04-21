@@ -39,7 +39,7 @@ time = time.slice(0, 10) + " " + time.slice(11, 19);
 time_miss = time.slice(0, 10) + " " + "23:59:59";
 
 function ActiveButton() {
-    $('#button_obnovit').attr('disabled', 'null')
+    $('#button_obnovit').attr('disabled', null)
 }
 
 // Функция вычисляет количества операций, аргумент массив работы
@@ -1100,7 +1100,7 @@ function twoWorkTime() {
                         break
                     }
 
-                    if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (i % 2 == 0)) {
+                    if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (j % 2 == 0)) {
                         //console.log("Вставка", index)
                         stanok_change[i].push(stanok[i][j])
                         stanok_change[i].push(pastTime + ' 23:59:59')
