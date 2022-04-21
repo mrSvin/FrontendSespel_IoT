@@ -741,7 +741,7 @@ function buildCommonDiagrams_2(roundDiagram, exception, index) {
 // Массив с исключениями, для добавления отдельной переменной ручного режима
 // и изменения имени операции нагрузки и тд
 function build (stankiDataArray,  startContainer = 1, exception = [0])
-{
+{   console.log(stankiDataArray)
     $.map(stankiDataArray, function (stanok, index) {
         if(index%2 == 0) {
             // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
@@ -997,8 +997,7 @@ function getRoundDiagramData(smena){
             }
             array1.push(delta)
         })
-
-        console.log(array1)
+        console.log("Правильный массив круговой", array1)
         return array1
     }
 
@@ -1147,24 +1146,41 @@ function twoWorkTime() {
             }
         }
 
-        smena_1.push(programName1)
-        smena_2.push(programName2)
-
-        console.log("Смена 1 до", smena_1)
-        console.log("Смена 2 до", smena_2)
-
         let round_smena1 = getRoundDiagramData(smena_1)
         let round_smena2 = getRoundDiagramData(smena_2)
 
-        smena_1.push(round_smena1)
-        smena_2.push(round_smena2)
+        smena_1.push(Array())
+        smena_2.push(Array())
+
+        for(let i = 0; i < 5; i++) {
+            smena_1[5].push(programName1[i])
+        }
+
+        for(let i = 0; i < 5; i++) {
+            smena_2[5].push(programName2[i])
+        }
+
+        smena_1.push(Array())
+        smena_2.push(Array())
+
+        for(let i = 0; i < 5; i++) {
+            smena_1[6].push(round_smena1[i])
+
+        }
+
+        for(let i = 0; i < 5; i++) {
+            smena_2[6].push(round_smena2[i])
+
+        }
 
         console.log('19:00 - 7:00', smena_1)
         console.log('7:00 - 19:00', smena_2)
+
         Diagram.push(smena_1, smena_2)
     })
-    build(Diagram)
+
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+    build(Diagram)
 
     Highcharts.chart('container_sum_zagruzka',{
         chart: {
