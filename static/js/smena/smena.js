@@ -1150,6 +1150,9 @@ function twoWorkTime() {
         smena_1.push(programName1)
         smena_2.push(programName2)
 
+        console.log("Смена 1 до", smena_1)
+        console.log("Смена 2 до", smena_2)
+
         getRoundDiagramData(smena_1)
         getRoundDiagramData(smena_2)
 
