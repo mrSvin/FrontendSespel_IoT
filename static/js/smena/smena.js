@@ -636,6 +636,7 @@ function buildRoundDiagram(roundDiagram, exception, index, startContainer) {
             // Если работа оказалась меньше нуля предупредить
             if (0 > roundDiagram[0]) {
                 console.log("Неверное значение работы на станке", index + 1)
+                roundDiagram[0] = 0
             }
             setDataRound("container" + (index + startContainer), roundDiagram[0], roundDiagram[1], roundDiagram[2], roundDiagram[3], roundDiagram[4]);
         }
@@ -741,7 +742,7 @@ function buildCommonDiagrams_2(roundDiagram, exception, index) {
 // Массив с исключениями, для добавления отдельной переменной ручного режима
 // и изменения имени операции нагрузки и тд
 function build (stankiDataArray,  startContainer = 1, exception = [0])
-{   console.log('Внутри build',stankiDataArray)
+{
     $.map(stankiDataArray, function (stanok, index) {
         if(index%2 == 0) {
             // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
@@ -993,12 +994,13 @@ function getRoundDiagramData(smena){
                     if(i==0) continue
 
                     delta = delta + (new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i-1]).getTime())
-                    delta /= 10000
                 }
             }
             array1.push(delta)
         })
-        return array1
+
+        console.log(array1)
+        smena.push(array1)
     }
 
 }
@@ -1146,44 +1148,18 @@ function twoWorkTime() {
             }
         }
 
-        let round_smena1 = getRoundDiagramData(smena_1)
-        let round_smena2 = getRoundDiagramData(smena_2)
+        smena_1.push(programName1)
+        smena_2.push(programName2)
 
-        console.log("Правильный массив круговой", round_smena1)
-        console.log("Правильный массив круговой", round_smena2)
-
-        smena_1.push(Array())
-        smena_2.push(Array())
-
-        for(let i = 0; i < 5; i++) {
-            smena_1[5].push(programName1[i])
-        }
-
-        for(let i = 0; i < 5; i++) {
-            smena_2[5].push(programName2[i])
-        }
-
-        smena_1.push(Array())
-        smena_2.push(Array())
-
-        for(let i = 0; i < 5; i++) {
-            smena_1[6].push(round_smena1[i])
-
-        }
-
-        for(let i = 0; i < 5; i++) {
-            smena_2[6].push(round_smena2[i])
-
-        }
+        getRoundDiagramData(smena_1)
+        getRoundDiagramData(smena_2)
 
         console.log('19:00 - 7:00', smena_1)
         console.log('7:00 - 19:00', smena_2)
-
         Diagram.push(smena_1, smena_2)
     })
-
-    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
     build(Diagram)
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
     Highcharts.chart('container_sum_zagruzka',{
         chart: {
