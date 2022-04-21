@@ -632,7 +632,7 @@ function buildRoundDiagram(roundDiagram, exception, index, startContainer) {
         // Если ручной режим не соответсвовал текущему станку, то обычная запись
         if (exceptionGoted === 0) {
             // Вычисление работы без нагрузки для круговой диаграммы
-            roundDiagram[0] = roundDiagram[0] - roundDiagram[4];
+            roundDiagram[4] = 0;
             // Если работа оказалась меньше нуля предупредить
             if (0 > roundDiagram[0]) {
                 console.log("Неверное значение работы на станке", index + 1)
