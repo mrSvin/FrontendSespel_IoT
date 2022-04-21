@@ -38,6 +38,9 @@ time = time.slice(0, 10) + " " + time.slice(11, 19);
 // Время, которое будет переписано в массивах 'текущая дата 23:59:59'
 time_miss = time.slice(0, 10) + " " + "23:59:59";
 
+function ActiveButton() {
+    $('#button_obnovit').attr('disabled', 'null')
+}
 
 // Функция вычисляет количества операций, аргумент массив работы
 function getPush_kol_op(arrayWork)
