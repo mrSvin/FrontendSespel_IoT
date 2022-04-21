@@ -999,7 +999,7 @@ function getRoundDiagramData(smena){
         })
 
         console.log(array1)
-        smena.push(array1)
+        return array1
     }
 
 }
@@ -1153,8 +1153,11 @@ function twoWorkTime() {
         console.log("Смена 1 до", smena_1)
         console.log("Смена 2 до", smena_2)
 
-        getRoundDiagramData(smena_1)
-        getRoundDiagramData(smena_2)
+        let round_smena1 = getRoundDiagramData(smena_1)
+        let round_smena2 = getRoundDiagramData(smena_2)
+
+        smena_1.push(round_smena1)
+        smena_2.push(round_smena2)
 
         console.log('19:00 - 7:00', smena_1)
         console.log('7:00 - 19:00', smena_2)
