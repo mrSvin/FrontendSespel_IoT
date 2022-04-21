@@ -96,6 +96,50 @@ td {
 }
 
 /*Кнопка выход профиля*/
+button:focus {
+    outline: none;
+}
+
+.follow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+
+    padding: 15px 0;
+    background: #3957ea;
+    border: none;
+    font: 14px 'Varela Round';
+    color: #fff;
+    border-radius: 100px;
+    cursor: pointer;
+    -webkit-transition: .3s ease;
+    -moz-transition: .3s ease;
+    -o-transition: .3s ease;
+    transition: .3s ease;
+    width: 200px
+}
+
+.follow:after {
+    content: '';
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: solid 2px;
+    border-color: #fff transparent transparent transparent;
+    border-radius: 100%;
+    -webkit-transition: .3s ease;
+    -moz-transition: .3s ease;
+    -o-transition: .3s ease;
+    transition: .3s ease;
+    animation: spin 1s infinite;
+    transform-origin: 0 0;
+}
+
+/*Кнопка выход профиля*/
 .follow {
     font-family: "Open Sans", sans-serif;
     color: #ffffff;
@@ -114,6 +158,26 @@ td {
 
 .follow:hover {
     box-shadow: 0px 0px 5px 0px #14B2E9, inset 0px 0px 0px 0px#14b2f3!important;
+}
+
+
+.follow.load {
+    padding: 15px 6px;
+}
+
+.follow.load span {
+    opacity: 0;
+}
+
+.follow.load:after {
+    display: block;
+}
+
+
+
+@keyframes spin {
+    from { transform: rotate(0) translate(-50%, -50%) }
+    to { transform: rotate(360deg) translate(-50%, -50%) }
 }
 
 #admin{

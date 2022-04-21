@@ -40,8 +40,7 @@ time_miss = time.slice(0, 10) + " " + "23:59:59";
 
 function ActiveButton() {
     $('#button_obnovit').attr('disabled', null)
-    $(".fa.fa-spinner.fa-spin").remove()
-    $('#button_obnovit').html('   Обновить')
+    $('#button_obnovit').removeClass('load');
 }
 
 // Функция вычисляет количества операций, аргумент массив работы
