@@ -138,7 +138,7 @@ function pars(arrayParse, y, arrayName=null)
         return
     }
 
-    if(lengh > 4){
+    if(lengh >= 4){
         if(lengh % 2 == 1) lengh -=1
         lengh = (lengh - lengh % 2) / 2
     }
@@ -976,7 +976,9 @@ function getRoundDiagramData(smena){
 
     if (smena !== undefined)
     {
-        smena.map((arraySmena)=>{
+        smena.map((arraySmena, index)=>{
+
+            if(index == 5) return;
 
             let delta = 0
 
@@ -990,11 +992,13 @@ function getRoundDiagramData(smena){
                 {
                     if(i==0) continue
 
-                    delta = delta + ((new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i-1]).getTime()))
+                    delta = delta + (new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i-1]).getTime())
                 }
             }
             array1.push(delta)
         })
+
+        console.log(array1)
         smena.push(array1)
     }
 
@@ -1070,6 +1074,8 @@ function twoWorkTime() {
 
         let smena_1 = [];
         let smena_2 = [];
+        let programName1 = []
+        let programName2 = []
 
         let stanok = clone[name]['complete']
         //console.log(stanok)
@@ -1080,46 +1086,69 @@ function twoWorkTime() {
 
         let stanok_change = []
 
-        stanok.map((little, index) => {
+        for (let i = 0; i < 5; i++) {
             stanok_change.push(Array())
-            for (let i = 0; i < little.length; i++) {
-                if (i == little.length) {
-                    stanok_change[index].push(little[i])
-                    break
+
+            if (stanok[i] !== undefined) {
+                for (let j = 0; i < stanok[i].length; j++) {
+                    if (j == stanok[i].length) {
+                        stanok_change[i].push(stanok[i][j])
+                        break
+                    }
+
+                    if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (i % 2 == 0)) {
+                        //console.log("Вставка", index)
+                        stanok_change[i].push(stanok[i][j])
+                        stanok_change[i].push(pastTime + ' 23:59:59')
+                    } else stanok_change[i].push(stanok[i][j])
+
                 }
-
-                if ((new Date(startTime + ' 00:00:00') < new Date(little[i + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(little[i]).getTime()) && (i % 2 == 0)) {
-                    //console.log("Вставка", index)
-                    stanok_change[index].push(little[i])
-                    stanok_change[index].push(pastTime + ' 23:59:59')
-                } else stanok_change[index].push(little[i])
             }
-        })
 
-        for (let i = 0; stanok_change.length > i; i++) {
+        }
+
+        for (let i = 0; i < 5; i++) {
             smena_1.push(Array())
             smena_2.push(Array())
-            for (let j = 0; stanok_change[i].length > j; j++) {
 
-                if ((new Date(stanok_change[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok_change[i][j]).getTime())) {
-                    if ((smena_1[i].length == 0) && (j % 2 != 0)) {
-                        //console.log("Грязная запись 18:00 - 19:00 ", i, stanok_change[i][j - 1], "Начало, а", stanok_change[i][j], "конец")
-                        smena_1[i].push(pastTime + ' 19:00:00')
-                        smena_1[i].push(stanok_change[i][j])
-                    } else {
-                        smena_1[i].push(stanok_change[i][j])
-                    }
-                } else if ((new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok_change[i][j]).getTime())) {
-                    if ((smena_2[i].length == 0) && (j % 2 != 0)) {
-                        //console.log("Грязная запись 06:00 - 07:00", i, stanok_change[i][j - 1], "Начало, а", stanok_change[i][j], "конец")
-                        smena_2[i].push(startTime + ' 07:00:00')
-                        smena_2[i].push(stanok_change[i][j])
-                    } else {
-                        smena_2[i].push(stanok_change[i][j])
+            if (stanok_change[i] !== undefined) {
+                for (let j = 0; stanok_change[i].length > j; j++) {
+
+                    if ((new Date(stanok_change[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok_change[i][j]).getTime())) {
+                        if ((smena_1[i].length == 0) && (j % 2 != 0)) {
+                            //console.log("Грязная запись 18:00 - 19:00 ", i, stanok_change[i][j - 1], "Начало, а", stanok_change[i][j], "конец")
+                            smena_1[i].push(pastTime + ' 19:00:00')
+                            smena_1[i].push(stanok_change[i][j])
+                            if (i == 0) {
+                                programName1.push(stanok[5][j])
+                            }
+                        } else {
+                            smena_1[i].push(stanok_change[i][j])
+                            if (i == 0) {
+                                programName1.push(stanok[5][j])
+                            }
+                        }
+                    } else if ((new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok_change[i][j]).getTime())) {
+                        if ((smena_2[i].length == 0) && (j % 2 != 0)) {
+                            //console.log("Грязная запись 06:00 - 07:00", i, stanok_change[i][j - 1], "Начало, а", stanok_change[i][j], "конец")
+                            smena_2[i].push(startTime + ' 07:00:00')
+                            smena_2[i].push(stanok_change[i][j])
+                            if (i == 0) {
+                                programName2.push(stanok[5][j])
+                            }
+                        } else {
+                            smena_2[i].push(stanok_change[i][j])
+                            if (i == 0) {
+                                programName2.push(stanok[5][j])
+                            }
+                        }
                     }
                 }
             }
         }
+
+        smena_1.push(programName1)
+        smena_2.push(programName2)
 
         getRoundDiagramData(smena_1)
         getRoundDiagramData(smena_2)
