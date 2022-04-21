@@ -741,7 +741,7 @@ function buildCommonDiagrams_2(roundDiagram, exception, index) {
 // Массив с исключениями, для добавления отдельной переменной ручного режима
 // и изменения имени операции нагрузки и тд
 function build (stankiDataArray,  startContainer = 1, exception = [0])
-{   console.log(stankiDataArray)
+{   console.log('Внутри build',stankiDataArray)
     $.map(stankiDataArray, function (stanok, index) {
         if(index%2 == 0) {
             // Функция pushZero возвращает единицу если массив пустой и заполняет его нулями
@@ -993,11 +993,11 @@ function getRoundDiagramData(smena){
                     if(i==0) continue
 
                     delta = delta + (new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i-1]).getTime())
+                    delta /= 10000
                 }
             }
             array1.push(delta)
         })
-        console.log("Правильный массив круговой", array1)
         return array1
     }
 
@@ -1148,6 +1148,9 @@ function twoWorkTime() {
 
         let round_smena1 = getRoundDiagramData(smena_1)
         let round_smena2 = getRoundDiagramData(smena_2)
+
+        console.log("Правильный массив круговой", round_smena1)
+        console.log("Правильный массив круговой", round_smena2)
 
         smena_1.push(Array())
         smena_2.push(Array())
