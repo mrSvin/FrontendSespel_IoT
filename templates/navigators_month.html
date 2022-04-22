@@ -29,6 +29,49 @@
     <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
     <script src="/js/navigatorPower.js"></script>
 
+    <script >
+        function ActiveButton() {
+            $('.follow').removeClass('load');
+        }
+
+
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "yyyy-mm",
+                language: 'ru',
+                viewMode: "months",
+                minViewMode: "months",
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+
+            $('#button_obnovit').on("click", function() {
+
+                $('.follow').addClass('load')
+                setTimeout(ActiveButton,1500)
+
+
+                var datas = $('#datepicker').data().datepicker.viewDate;
+
+                var mes = datas.getMonth()+1;
+                var year = datas.getFullYear();
+
+                name_data = mes+"-" + year;
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
 
     <style>
         .preloader {
@@ -101,50 +144,6 @@
             display: none;
         }
     </style>
-    <script >
-        function ActiveButton() {
-            $('.follow').removeClass('load');
-        }
-
-
-        $(function () {
-            $('#datepicker').datepicker({
-                format: "yyyy-mm",
-                language: 'ru',
-                viewMode: "months",
-                minViewMode: "months",
-                autoclose: true,
-                todayHighlight: true,
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                orientation: "button"
-            });
-            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
-
-
-
-            $('#button_obnovit').on("click", function() {
-
-                $('.follow').addClass('load')
-                setTimeout(ActiveButton,1500)
-
-
-                var datas = $('#datepicker').data().datepicker.viewDate;
-
-                var mes = datas.getMonth()+1;
-                var year = datas.getFullYear();
-
-                name_data = mes+"-" + year;
-            });
-
-
-        });
-
-    </script>   <!--Календарь js-->
-
 
 </head>
 <header>
@@ -442,7 +441,7 @@
     const linearDiagram = [navigator_1_array_linear, navigator_2_golova_1_array_linear,
         navigator_2_golova_2_array_linear, navigator_3_array_linear, trulaser_array_linear,
         kometa_1_array_linear, kometa_2_array_linear, kometa_3_array_linear];
-    
+
     const roundDiagram = [navigator_1_array_round, navigator_2_golova_1_array_round, navigator_2_golova_2_array_round,
         navigator_3_array_round, trulaser_array_round, kometa_1_array_round,
         kometa_2_array_round, kometa_3_array_round];

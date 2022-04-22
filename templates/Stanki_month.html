@@ -23,8 +23,17 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap-3.3.0.min.js"></script>
 
+    <!--Календарь -->
+    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
+    <!--Календарь Русский язык-->
+    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
 
     <script >
+        function ActiveButton() {
+            $('.follow').removeClass('load');
+        }
+
+
         $(function () {
             $('#datepicker').datepicker({
                 format: "yyyy-mm",
@@ -45,24 +54,23 @@
 
 
             $('#button_obnovit').on("click", function() {
+
+                $('.follow').addClass('load')
+                setTimeout(ActiveButton,1500)
+
+
                 var datas = $('#datepicker').data().datepicker.viewDate;
 
                 var mes = datas.getMonth()+1;
                 var year = datas.getFullYear();
 
                 name_data = mes+"-" + year;
-                <!--console.log(name_data);-->
             });
 
 
         });
 
     </script>   <!--Календарь js-->
-
-    <!--Календарь -->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
-    <!--Календарь Русский язык-->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
 
     <style>
         .preloader {
@@ -135,16 +143,6 @@
             display: none;
         }
     </style>
-    <script>
-        window.onload = function () {
-            document.body.classList.add('loaded_hiding');
-            window.setTimeout(function () {
-                document.body.classList.add('loaded');
-                document.body.classList.remove('loaded_hiding');
-            }, 500);
-        }
-    </script>
-
 
 </head>
 
@@ -238,29 +236,24 @@
 <script src="/js/dark_theme.js"></script>
 
 <body>
-<div class="container">
+<div class="container" style="display: flex; justify-content: center; align-items: center;">
     <div style="width: 250px; float: left">
-        <h2>Выберите месяц:</h2>
+        <h2 class="choose_month">Выберите дату:</h2>
     </div>
-
-
-    <form  action="#" th:action="@{/displayStankiMonth}" th:object="${calendar_month}" method="post" >
+    <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
 
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
-            <input type='text' class="form-control" th:field="*{content_month}"/>
+            <input type='text' class="form-control" value=""/>
             <span class="input-group-addon">
-		                        <span class="glyphicon glyphicon-calendar"></span>
-		                    </span>
-        </div>
-
-        <div class="form-actions" >
-            <button type="submit"
-                    class="follow"
-                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
-            </button>
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
         </div>
     </form>
-
+    <div class="form-actions">
+        <button class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+            <span>Обновить</span>
+        </button>
+    </div>
 </div>      <!--Календарь html-->
 
 <div style="display: flex; justify-content: space-between">

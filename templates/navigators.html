@@ -27,9 +27,51 @@
     <script src="/js/mesto.js"></script>
     <script src="/js/navigatorPower.js"></script>
 
-    <!--  Календарь  -->
+    <!--Календарь -->
     <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+    <!--Календарь Русский язык-->
     <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
+
+    <script >
+        function ActiveButton() {
+            $('.follow').removeClass('load');
+        }
+
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+
+            $('#button_obnovit').on("click", function() {
+
+                setTimeout(ActiveButton,1500)
+                $('.follow').addClass('load')
+
+                var datas = $('#datepicker').data().datepicker.viewDate;
+                var day = datas.getDate();
+                var mes = datas.getMonth()+1;
+                var year = datas.getFullYear();
+
+                name_data = year+"-" +mes+"-" +day;
+                <!--console.log(name_data);-->
+            });
+
+
+        });
+
+    </script>   <!--Календарь js-->
 
     <!--preloader style-->
     <style>
@@ -157,6 +199,7 @@
     </div>  <!-- Меню -->
 </header>       <!--Шапка html-->
 <!-- Загрузка страницы -->
+
 <div class="preloader">
     <div class="preloader__row">
         <div class="preloader__item"></div>
@@ -526,9 +569,6 @@
 
 <!--Скрипт кнопки выпадающего меню-->
 <script src="/js/dropdown_menu.js"></script>
-
-<!--Скрипт для календаря-->
-<script src="/js/sutki/calendar_sutki.js"></script>
 
 </body>
 </html>
