@@ -101,6 +101,10 @@ button:focus {
 }
 
 
+.follow span {
+    font-size: 85%
+}
+
 .follow:after {
     content: '';
     display: none;
@@ -116,26 +120,25 @@ button:focus {
     -moz-transition: .3s ease;
     -o-transition: .3s ease;
     transition: .3s ease;
-    animation: spin 1s infinite;
+    animation: fin 1s infinite;
     transform-origin: 0 0;
 }
 
 /*Кнопка выход профиля*/
 .follow {
+    position: relative;
     font-family: "Open Sans", sans-serif;
     color: #ffffff;
     background: #4f759b;
-    font-size: 18px;
     font-weight: 600;
     letter-spacing: 0.025em;
     border: none;
     border-radius: 15px;
     min-height: 35px;
-    width: 150px;
+    width: 115px;
     transition: all 0.2s ease;
     cursor: pointer;
     margin: 17px 0!important;
-    padding: 15px 0;
 }
 
 .follow:hover {
@@ -144,7 +147,7 @@ button:focus {
 
 
 .follow.load {
-    padding: 15px 6px;
+    padding: 3px 6px;
 }
 
 .follow.load span {
@@ -155,11 +158,11 @@ button:focus {
     display: block;
 }
 
-
-@keyframes spin {
+@keyframes fin {
     from { transform: rotate(0) translate(-50%, -50%) }
     to { transform: rotate(360deg) translate(-50%, -50%) }
 }
+
 
 #admin{
     display: none;
