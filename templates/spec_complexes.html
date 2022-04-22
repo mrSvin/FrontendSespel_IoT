@@ -28,42 +28,10 @@
     <script src="/js/mesto.js"></script>
     <script src="/js/dark_theme.js"></script>
 
-    <script>
-        $(function () {
-            $('#datepicker').datepicker({
-                format: "dd/mm/yyyy",
-                language: 'ru',
-                autoclose: true,
-                todayHighlight: true,
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                orientation: "button"
-            });
-            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
-
-
-            $('#button_obnovit').on("click", function () {
-                var datas = $('#datepicker').data().datepicker.viewDate;
-                var day = datas.getDate();
-                var mes = datas.getMonth() + 1;
-                var year = datas.getFullYear();
-
-                name_data = year + "-" + mes + "-" + day;
-                <!--console.log(name_data);-->
-            });
-
-
-        });
-
-    </script>   <!--Календарь js-->
-
     <!--Календарь -->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
-    <!--Календарь Русский язык-->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
+    <script src="/js/sutki/calendar_sutki.js"></script>
 
     <!--preloader style-->
     <style>
@@ -230,29 +198,25 @@
 </script>
 
 <body>
-<div class="container">
-    <div style="width: 220px; float: left">
-        <h2>Выберите дату:</h2>
+<!--Календарь html-->
+<div class="container" style="display: flex; justify-content: center; align-items: center;">
+    <div style="width: 250px; float: left">
+        <h2 class="choose_month">Выберите дату:</h2>
     </div>
-
-    <form action="#" th:action="@{/spec_complexes}" th:object="${calendar_date}" method="post">
-
+    <form action="#" th:action="@{/spec_complexes}" th:object="${calendar_date}" method="post" style="margin: 0 20px; display: flex; align-items: center;">
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
             <input type='text' class="form-control" th:field="*{content_date}"/>
             <span class="input-group-addon">
-		                        <span class="glyphicon glyphicon-calendar"></span>
-		                    </span>
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
         </div>
-
-        <div class="form-actions">
-            <button type="submit"
-                    class="follow"
-                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
+        <div class="form-actions" style="margin-left: 20px">
+            <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                <span>Обновить</span>
             </button>
         </div>
     </form>
-
-</div>      <!--Календарь html-->
+</div>
 
 <div style="display: flex; justify-content: space-between">
 
@@ -520,7 +484,6 @@
     var stp13m_data = [[${stp13m_data}]];
 
     </script>
-
 <script>
     // Массив с массивами
     const Diagram = [press_data, epp_data,  stp13m_data]
