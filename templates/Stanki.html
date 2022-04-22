@@ -194,11 +194,12 @@
 </script>
 
 <body>
+<!--Календарь html-->
 <div class="container" style="display: flex; justify-content: center; align-items: center;">
     <div style="width: 250px; float: left">
         <h2 class="choose_month">Выберите дату:</h2>
     </div>
-    <form action="#" th:action="@{/Stanki}" th:object="${calendar_date}" method="post" style="margin: 0 20px; display: flex; align-items: center;">
+    <form action="#" th:action="@{/displayStanki}" th:object="${calendar_date}" method="post" style="margin: 0 20px; display: flex; align-items: center;">
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
             <input type='text' class="form-control" th:field="*{content_date}"/>
             <span class="input-group-addon">
@@ -211,7 +212,7 @@
             </button>
         </div>
     </form>
-</div>      <!--Календарь html-->
+</div>
 
 
 <div style="display: flex; justify-content: space-between">
