@@ -5,29 +5,144 @@
     <title>Анализ режимов работы навигаторов</title>
     <link rel="shortcut icon" type="image/ico"/>
 
-    <link rel="stylesheet" type="text/css" href="../../css/styles_stanki.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/menu_buttons.css"/> <!-- Меню -->
-    <link rel="stylesheet" type="text/css" href="../../css/styles_header.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/userscontrol.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/styles_energy.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/alarm_styles.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/menu_buttons.css"/> <!-- Меню -->
+    <link rel="stylesheet" type="text/css" href="/css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/userscontrol.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/styles_energy.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/alarm_styles.css"/>
 
-    <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-    <script src="../../js/highcharts.js"></script>
-    <script src="../../js/exporting.js"></script>
-    <script src="../../js/export-data.js"></script>
-    <script src="../../js/accessibility.js"></script>
-    <script src="../../js/xrange.js"></script>
+    <script src="/js/highcharts.js"></script>
+    <script src="/js/exporting.js"></script>
+    <script src="/js/export-data.js"></script>
+    <script src="/js/accessibility.js"></script>
+    <script src="/js/xrange.js"></script>
 
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script src="../../js/bootstrap-3.3.0.min.js"></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap-3.3.0.min.js"></script>
 
     <!--Календарь -->
-    <script type="text/javascript" src="../../js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="../../js/bootstrap-datepicker.ru.min.js"></script>
-    <script src="../../js/sutki/calendar_sutki.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
+    <script src="/js/calendar_smena.js"></script>
+    <script>
+
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+            $('#button_obnovit').on("click", function () {
+
+                setTimeout(ActiveButton,1500)
+                $('.follow').addClass('load')
+
+                var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+
+                date = new Date(datas); // some mock date
+                ms = date.getTime() + 86400000;
+
+                startTime = datas.slice(0, 10)
+                timeEnd = new Date(ms).toISOString().slice(0, 10)
+
+
+                massivArray = []
+
+                do_6 = [];
+                do_12 = [];
+                do_18 = [];
+                do_24 = [];
+
+                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
+
+                signal = $( "#selectValue" ).val();
+
+                if( signal == '_signal:A1'){
+                    $.get( url,
+                        function( data ) {
+                            massivArray = data
+
+                            Perebor();
+                        });
+                }
+                else {
+                    $.get( url,
+                        function( data ) {
+                            massivArray = data
+
+                            Perebor2();
+                        });
+                }
+            });
+        });
+
+        function selectedNewValue(){
+
+            $('#datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+
+            var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+
+            date = new Date(datas); // some mock date
+            ms = date.getTime() + 86400000;
+
+            startTime = datas.slice(0, 10)
+            timeEnd = new Date(ms).toISOString().slice(0, 10)
+
+
+            massivArray = []
+
+            do_6 = [];
+            do_12 = [];
+            do_18 = [];
+            do_24 = [];
+
+            signal = $( "#selectValue" ).val();
+
+            url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
+
+            if( signal == '_signal:A1'){
+                $.get( url,
+                    function( data ) {
+                        massivArray = data
+
+                        Perebor();
+                    });
+            }
+            else {
+                $.get( url,
+                    function( data ) {
+                        massivArray = data
+
+                        Perebor2();
+                    });
+            }
+        }
+    </script>   <!--Календарь js-->
 
     <!--preloader style-->
     <style>
