@@ -126,10 +126,6 @@
 
             $('#button_obnovit').on("click", function() {
 
-                $('#button_obnovit').attr('disabled', 'true')
-                setTimeout(ActiveButton,1500)
-                $('.follow').addClass('load')
-
                 var datas = $('#datepicker').data().datepicker.viewDate;
                 var day = datas.getDate();
                 var mes = datas.getMonth()+1;
@@ -137,6 +133,10 @@
 
                 name_data = year+"-" +mes+"-" +day;
                 <!--console.log(name_data);-->
+
+                $('#button_obnovit').attr('disabled', 'true')
+                setTimeout(ActiveButton,1500)
+                $('.follow').addClass('load')
             });
 
 
@@ -246,13 +246,11 @@
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
         </div>
-        <div class="form-actions" >
             <div class="form-actions" >
                 <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
                     <span>Обновить</span>
                 </button>
             </div>
-        </div>
     </form>
 </div>      <!--Календарь html-->
 
