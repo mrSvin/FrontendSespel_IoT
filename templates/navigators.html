@@ -247,9 +247,8 @@
         </div>
 
         <div class="form-actions" >
-            <button type="submit"
-                    class="follow"
-                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
+            <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                <span>Обновить</span>
             </button>
         </div>
     </form>
@@ -257,6 +256,11 @@
 </div>      <!--Календарь html-->
 
 <script >
+    function ActiveButton() {
+        $('#button_obnovit').attr('disabled', null)
+        $('.follow').removeClass('load');
+    }
+
     $(function () {
         $('#datepicker').datepicker({
             format: "dd/mm/yyyy",
@@ -275,6 +279,11 @@
 
 
         $('#button_obnovit').on("click", function() {
+
+            $('#button_obnovit').attr('disabled', 'true')
+            setTimeout(ActiveButton,1500)
+            $('.follow').addClass('load')
+
             var datas = $('#datepicker').data().datepicker.viewDate;
             var day = datas.getDate();
             var mes = datas.getMonth()+1;

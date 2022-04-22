@@ -29,7 +29,6 @@
     <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
     <script src="/js/navigatorPower.js"></script>
 
-
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -101,13 +100,17 @@
             display: none;
         }
     </style>
+
     <script >
+        function ActiveButton() {
+            $('#button_obnovit').attr('disabled', null)
+            $('.follow').removeClass('load');
+        }
+
         $(function () {
             $('#datepicker').datepicker({
-                format: "yyyy-mm",
+                format: "dd/mm/yyyy",
                 language: 'ru',
-                viewMode: "months",
-                minViewMode: "months",
                 autoclose: true,
                 todayHighlight: true,
                 showOtherMonths: true,
@@ -122,29 +125,24 @@
 
 
             $('#button_obnovit').on("click", function() {
-                var datas = $('#datepicker').data().datepicker.viewDate;
 
+                $('#button_obnovit').attr('disabled', 'true')
+                setTimeout(ActiveButton,1500)
+                $('.follow').addClass('load')
+
+                var datas = $('#datepicker').data().datepicker.viewDate;
+                var day = datas.getDate();
                 var mes = datas.getMonth()+1;
                 var year = datas.getFullYear();
 
-                name_data = mes+"-" + year;
+                name_data = year+"-" +mes+"-" +day;
+                <!--console.log(name_data);-->
             });
 
 
         });
 
     </script>   <!--Календарь js-->
-    <script>
-        window.onload = function () {
-            document.body.classList.add('loaded_hiding');
-            window.setTimeout(function () {
-                document.body.classList.add('loaded');
-                document.body.classList.remove('loaded_hiding');
-            }, 500);
-        }
-    </script>
-
-
 
 </head>
 <header>
@@ -249,10 +247,11 @@
             </span>
         </div>
         <div class="form-actions" >
-            <button type="submit"
-                    class="follow"
-                    id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">Обновить
-            </button>
+            <div class="form-actions" >
+                <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                    <span>Обновить</span>
+                </button>
+            </div>
         </div>
     </form>
 </div>      <!--Календарь html-->
