@@ -23,97 +23,17 @@
 
     <script src="../../js/jquery-3.6.0.min.js"></script>
     <script src="../../js/bootstrap-3.3.0.min.js"></script>
+
     <script src="../../js/smena/smena.js"></script>
-
-    <script>
-
-        // Функция получение пользовательских данных
-        function SetUserSetting() {
-            $.post("/api/userInfo", function( data ) {
-
-                $('.avatar').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
-                $('.dropdown-content img').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
-                $('.div_login_mail li').html(data.userName); // картинка лого для папок на уровень ниже
-                $('.div_login_mail p').html(data.userMail); // картинка лого для папок на уровень ниже
-
-                var role_status = data.userRole;
-
-                if (role_status === "ROLE_ADMIN") {
-                    document.getElementById("role_vision").innerHTML = "Роль: Админ";
-                    document.getElementById("admin").style.display = "inline";
-
-                } else if (role_status === "ROLE_USER") {
-                    document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
-                    document.getElementById("admin").style.display = "none";
-                }
-            })
-        }
-
-
-        $(function () {
-            $('#datepicker').datepicker({
-                format: "yyyy-mm-dd",
-                language: 'ru',
-                autoclose: true,
-                todayHighlight: true,
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                orientation: "button"
-            });
-            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
-
-
-            $('#button_obnovit').on("click", function () {
-
-                $('#button_obnovit').attr('disabled', 'true')
-                setTimeout(ActiveButton,1500)
-                $('.follow').addClass('load')
-
-                var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
-
-                linear_rabota = [];
-                linear_pause = [];
-                linear_off = [];
-                linear_avar = [];
-                linear_nagruzka = [];
-
-                kol_op = [];
-                kol_long_operations = [];
-
-                linear_rabota_2 = [];
-                linear_pause_2 = [];
-                linear_off_2 = [];
-                linear_avar_2 = [];
-                linear_nagruzka_2 = [];
-
-                kol_op_2 = [];
-                kol_long_operations_2 = [];
-
-
-                date = new Date(datas); // some mock date
-                ms = date.getTime() - 86400000;
-
-                startTime = datas.slice(0, 10)
-                pastTime = new Date(ms).toISOString().slice(0, 10)
-
-                clone = JSON.parse(JSON.stringify(objectStankov))
-                allStanki = Names.length
-
-                Diagram = []
-                GetAllData(Names, clone)
-            });
-        });
-
-    </script>   <!--Календарь js-->
+    <script src="../../js/mesto.js"></script>
+    <script src="../../js/dark_theme.js"></script>
 
     <!--Календарь -->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
-    <!--Календарь Русский язык-->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap-datepicker.ru.min.js"></script>
+    <script src="../../js/sutki/calendar_sutki.js"></script>
 
+    <!--preloader style-->
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -302,9 +222,6 @@
         });
     }
 </script>
-<script src="/js/dark_theme.js"></script>
-<!-- Скрипт вызова функции для выпадающего меню -->
-<script src="/js/dropdown_menu.js"></script>
 
 <div style="display: flex; justify-content: space-between;">
     <div id="container_sum_zagruzka" style="height: 400px; width: 800px"></div>
@@ -485,14 +402,6 @@
     </div>  <!--kometa 1 html-->
 </div> <!--kometa 3 html-->
 
-<!--Скипт с объявлением функций получения данных из запросов и рисования из них графиков-->
-<script>
-    //<![CDATA[
-    // Спец коммент для знаков && и < в xhtml
-
-    // Конец спец. коммента
-    // ]]>
-</script>
 
 <!--Скрипт объявления переменных и запуска основного скрипта-->
 <script>
@@ -554,6 +463,8 @@
     GetAllData(Names, clone)
 </script>
 
+<!-- Скрипт вызова функции для выпадающего меню -->
+<script src="/js/dropdown_menu.js"></script>
 
 </body>
 </html>

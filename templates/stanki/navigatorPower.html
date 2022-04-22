@@ -24,122 +24,12 @@
     <script src="../../js/jquery-3.6.0.min.js"></script>
     <script src="../../js/bootstrap-3.3.0.min.js"></script>
 
-    <script>
-        $(function () {
-            $('#datepicker').datepicker({
-                format: "yyyy-mm-dd",
-                language: 'ru',
-                autoclose: true,
-                todayHighlight: true,
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                orientation: "button"
-            });
-            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
-
-
-            $('#button_obnovit').on("click", function () {
-                var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
-
-                date = new Date(datas); // some mock date
-                ms = date.getTime() + 86400000;
-
-                startTime = datas.slice(0, 10)
-                timeEnd = new Date(ms).toISOString().slice(0, 10)
-
-
-                massivArray = []
-
-                do_6 = [];
-                do_12 = [];
-                do_18 = [];
-                do_24 = [];
-
-                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
-
-                signal = $( "#selectValue" ).val();
-
-                if( signal == '_signal:A1'){
-                    $.get( url,
-                        function( data ) {
-                            massivArray = data
-
-                            Perebor();
-                        });
-                }
-                else {
-                    $.get( url,
-                        function( data ) {
-                            massivArray = data
-
-                            Perebor2();
-                        });
-                }
-            });
-        });
-
-        function selectedNewValue(){
-
-            $('#datepicker').datepicker({
-                format: "yyyy-mm-dd",
-                language: 'ru',
-                autoclose: true,
-                todayHighlight: true,
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                orientation: "button"
-            });
-
-            var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
-
-            date = new Date(datas); // some mock date
-            ms = date.getTime() + 86400000;
-
-            startTime = datas.slice(0, 10)
-            timeEnd = new Date(ms).toISOString().slice(0, 10)
-
-
-            massivArray = []
-
-            do_6 = [];
-            do_12 = [];
-            do_18 = [];
-            do_24 = [];
-
-            signal = $( "#selectValue" ).val();
-
-            url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
-
-            if( signal == '_signal:A1'){
-                $.get( url,
-                    function( data ) {
-                        massivArray = data
-
-                        Perebor();
-                    });
-            }
-            else {
-                $.get( url,
-                    function( data ) {
-                        massivArray = data
-
-                        Perebor2();
-                    });
-            }
-        }
-    </script>   <!--Календарь js-->
-
     <!--Календарь -->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
-    <!--Календарь Русский язык-->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap-datepicker.ru.min.js"></script>
+    <script src="../../js/sutki/calendar_sutki.js"></script>
 
+    <!--preloader style-->
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -637,9 +527,9 @@
             </select>
             <span class="selectAfter">▼</span>
         </div>
-        <div class="form-actions">
-            <button class="follow" id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
-                Обновить
+        <div class="form-actions" style="margin-left: 20px">
+            <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                <span>Обновить</span>
             </button>
         </div>
 
