@@ -1,7 +1,12 @@
+$.getScript("js/bootstrap-datepicker.min.js", function(){console.log("Загружено1.");
+});
+
+$.getScript("js/bootstrap-datepicker.ru.min.js", function(){console.log("Загружено2.");
+});
+
 function ActiveButton() {
     $('.follow').removeClass('load');
 }
-
 
 $(function () {
     $('#datepicker').datepicker({
