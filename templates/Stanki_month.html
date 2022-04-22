@@ -8,6 +8,9 @@
     <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
     <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/>
 
+    <!-- Optional theme -->
+
+
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css" />
 
@@ -20,16 +23,11 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/bootstrap-3.3.0.min.js"></script>
 
-    <script src="/js/month/universal_month.js"></script>
-    <script src="/js/mesto.js"></script>
-    <script src="/js/dark_theme.js"></script>
-
     <!--Календарь -->
     <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
-    <script src="/js/month/calendar_month.js"></script>
+    <script src="/js/sutki/calendar_month.js"></script>
 
-    <!--preloader  style-->
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -191,6 +189,7 @@
         });
     }
 </script>
+<script src="/js/dark_theme.js"></script>
 
 <body>
 <div class="container" style="display: flex; justify-content: center; align-items: center;">
@@ -689,12 +688,12 @@
                 setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4], 'Ручной режим');
             }
             else {
-                    colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
-                    $.each(element[0], function (i){
-                        element[0][i] = element[0][i] - element[4][i];
-                    });
-                    setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4]);
-                 }
+                colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+                $.each(element[0], function (i){
+                    element[0][i] = element[0][i] - element[4][i];
+                });
+                setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4]);
+            }
         }
 
     });
@@ -831,15 +830,15 @@
             data: linear_ruchnoi
         },
             {
-            name: 'Ожидание',
-            data: linear_pause
-        }, {
-            name: 'Под нагрузкой',
-            data: linear_nagruzka
-        }, {
-            name: 'Работа',
-            data: linear_rabota
-        }, ]
+                name: 'Ожидание',
+                data: linear_pause
+            }, {
+                name: 'Под нагрузкой',
+                data: linear_nagruzka
+            }, {
+                name: 'Работа',
+                data: linear_rabota
+            }, ]
     });
 
     Highcharts.chart('container_sum_zagruzka_krug', {
@@ -900,6 +899,16 @@
     }
 </script>
 <!--Скрипт отображения в header  кнопки администрирование-->
+
+<script>
+    var mar_top = localStorage.getItem('mar_top');
+    var mar_left = localStorage.getItem('mar_left');
+    var bground = localStorage.getItem('bground');
+    var place_img = localStorage.getItem('place_img');
+    var bwidth = localStorage.getItem('bwidth');
+</script>
+<script src="/js/mesto.js"></script>
+<!--Скрипт с вызовом функций для изменения места-->
 
 <script src="/js/dropdown_menu.js"></script>
 <!--Скрипт для выпадающего меню-->
