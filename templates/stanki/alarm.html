@@ -24,43 +24,14 @@
     <script src="../../js/jquery-3.6.0.min.js"></script>
     <script src="../../js/bootstrap-3.3.0.min.js"></script>
 
-    <script>
-        $(function () {
-            $('#datepicker').datepicker({
-                format: "dd/mm/yyyy",
-                language: 'ru',
-                autoclose: true,
-                todayHighlight: true,
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                orientation: "button"
-            });
-            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
-
-
-            $('#button_obnovit').on("click", function () {
-                var datas = $('#datepicker').data().datepicker.viewDate;
-                var day = datas.getDate();
-                var mes = datas.getMonth() + 1;
-                var year = datas.getFullYear();
-
-                name_data = year + "-" + mes + "-" + day;
-                <!--console.log(name_data);-->
-            });
-
-
-        });
-
-    </script>   <!--Календарь js-->
+    <script src="../../js/dark_theme.js"></script>
 
     <!--Календарь -->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
-    <!--Календарь Русский язык-->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap-datepicker.ru.min.js"></script>
+    <script src="../../js/sutki/calendar_sutki.js"></script>
 
+    <!--preloader style-->
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -184,7 +155,7 @@
 		                    </span>
             </div>
 
-            <div class="form-actions">
+            <div class="form-actions" style="margin-left: 20px">
                 <button type="submit"
                         class="follow"
                         id="button_obnovit" style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
@@ -239,7 +210,6 @@
         });
     }
 </script>
-<script src="/js/dark_theme.js"></script>
 
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
@@ -394,7 +364,6 @@
     });
 </script> <!--JS таблица-->
 
-
 <script>
     var form_path = document.location.pathname;
     $('#form_update').attr('action', form_path);
@@ -433,6 +402,5 @@
     $('img.stanok_img').attr('src', stanki[index].src);
 
 </script> <!-- Скрипт присваивания пути в запрос -->
-
 </body>
 </html>
