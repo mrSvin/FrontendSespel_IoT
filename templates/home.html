@@ -35,7 +35,7 @@
                 <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
                 <div class="dropdown-content">
                     <p id="role_vision"></p>
-                    <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
+                    <a href="navigators" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; " /></a>
                     <li th:text="${user_name}"></li>
                     <p th:text="${user_mail}"></p>
                     <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
