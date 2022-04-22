@@ -29,6 +29,7 @@
     <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
     <script src="/js/navigatorPower.js"></script>
 
+
     <style>
         .preloader {
             /*фиксированное позиционирование*/
@@ -100,17 +101,18 @@
             display: none;
         }
     </style>
-
     <script >
         function ActiveButton() {
-            $('#button_obnovit').attr('disabled', null)
             $('.follow').removeClass('load');
         }
 
+
         $(function () {
             $('#datepicker').datepicker({
-                format: "dd/mm/yyyy",
+                format: "yyyy-mm",
                 language: 'ru',
+                viewMode: "months",
+                minViewMode: "months",
                 autoclose: true,
                 todayHighlight: true,
                 showOtherMonths: true,
@@ -126,23 +128,23 @@
 
             $('#button_obnovit').on("click", function() {
 
+                $('.follow').addClass('load')
+                setTimeout(ActiveButton,1500)
+
+
                 var datas = $('#datepicker').data().datepicker.viewDate;
-                var day = datas.getDate();
+
                 var mes = datas.getMonth()+1;
                 var year = datas.getFullYear();
 
-                name_data = year+"-" +mes+"-" +day;
-                <!--console.log(name_data);-->
-
-                $('#button_obnovit').attr('disabled', 'true')
-                setTimeout(ActiveButton,1500)
-                $('.follow').addClass('load')
+                name_data = mes+"-" + year;
             });
 
 
         });
 
     </script>   <!--Календарь js-->
+
 
 </head>
 <header>
@@ -246,11 +248,11 @@
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
         </div>
-            <div class="form-actions" >
-                <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
-                    <span>Обновить</span>
-                </button>
-            </div>
+        <div class="form-actions" >
+            <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                <span>Обновить</span>
+            </button>
+        </div>
     </form>
 </div>      <!--Календарь html-->
 
