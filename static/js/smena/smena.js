@@ -89,7 +89,7 @@ function getPush_kol_op_2(arrayWork)
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
     var lengh = arrayWork.length
-    if (lengh <= 1){
+    if (lengh < 1){
         kol_op_2.push(0)
         kol_long_operations_2.push(0)
         return
@@ -133,7 +133,7 @@ function pars(arrayParse, y, arrayName=null)
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
     var lengh = arrayParse.length
-    if (lengh <= 1){
+    if (lengh < 1){
         return
     }
 
@@ -982,7 +982,7 @@ function getRoundDiagramData(smena){
 
             let delta = 0
 
-            if(arraySmena == null || arraySmena.length <= 1 || arraySmena == undefined)
+            if(arraySmena == null || arraySmena.length < 1 || arraySmena == undefined)
             {
                 array1.push(delta)
                 return
