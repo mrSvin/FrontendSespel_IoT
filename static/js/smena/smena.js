@@ -1083,7 +1083,7 @@ function twoWorkTime() {
         }
         else {
             // иначе текущему времени
-            thisTime = time.slice(11, 19)
+            thisTime = " " + time.slice(11, 19)
         }
 
     }
@@ -1094,8 +1094,8 @@ function twoWorkTime() {
     console.log('This time', thisTime)
 
 
-    //Names.map((name) => {
-        let name = Names[0]
+    Names.map((name) => {
+        //let name = Names[0]
 
         let smena_1 = [];
         let smena_2 = [];
@@ -1251,7 +1251,7 @@ function twoWorkTime() {
                                 }
                             }
                             // заполнить вторую смену 07:00 - текущее время
-                            smena_2[i].push(pastTime + ' 07:00:00')
+                            smena_2[i].push(startTime + ' 07:00:00')
                             smena_2[i].push(stanok[i][j])
                             if (i == 0) {
                                 programName2.push(stanok[5][j])
@@ -1343,7 +1343,7 @@ function twoWorkTime() {
         console.log('19:00 - 7:00', smena_1)
         console.log('7:00 - 19:00', smena_2)
         Diagram.push(smena_1, smena_2)
-   // })
+    })
     build(Diagram)
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
