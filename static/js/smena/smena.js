@@ -89,7 +89,7 @@ function getPush_kol_op_2(arrayWork)
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
     var lengh = arrayWork.length
-    if (lengh < 1){
+    if (lengh <= 1){
         kol_op_2.push(0)
         kol_long_operations_2.push(0)
         return
@@ -133,7 +133,7 @@ function pars(arrayParse, y, arrayName=null)
 
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
     var lengh = arrayParse.length
-    if (lengh < 1){
+    if (lengh <= 1){
         return
     }
 
@@ -982,7 +982,7 @@ function getRoundDiagramData(smena){
 
             let delta = 0
 
-            if(arraySmena == null || arraySmena.length < 1 || arraySmena == undefined)
+            if(arraySmena == null || arraySmena.length <= 1 || arraySmena == undefined)
             {
                 array1.push(delta)
                 return
@@ -1069,8 +1069,33 @@ function GetAllData(ArrayNames, Object) {
 function twoWorkTime() {
     // Массив с заполненными данными
 
-    Names.map((name) => {
-        //let name = Names[0]
+    // переменная хранящая время для второй смены
+    let thisTime
+
+    // если текущая дата, равна установленной
+    if (startTime == time.slice(0, 10))
+    {
+        // но время меньше 7 утра
+        if(new Date(time).getTime() < new Date(time.slice(0, 10) + ' 07:00:00').getTime())
+        {
+            // то время равно 7 утра
+            thisTime = ' 07:00:00'
+        }
+        else {
+            // иначе текущему времени
+            thisTime = time.slice(11, 19)
+        }
+
+    }
+    else{ // иначе время конца смены для других дат
+        thisTime = ' 18:59:59'
+    }
+
+    console.log('This time', thisTime)
+
+
+    //Names.map((name) => {
+        let name = Names[0]
 
         let smena_1 = [];
         let smena_2 = [];
@@ -1078,67 +1103,229 @@ function twoWorkTime() {
         let programName2 = []
 
         let stanok = clone[name]['complete']
-        //console.log(stanok)
 
         if (stanok === null) {
             return
         }
 
-        let stanok_change = []
-
-        for (let i = 0; i < 5; i++) {
-            stanok_change.push(Array())
-
-            if (stanok[i] !== undefined) {
-                for (let j = 0; i < stanok[i].length; j++) {
-                    if (j == stanok[i].length) {
-                        stanok_change[i].push(stanok[i][j])
-                        break
-                    }
-
-                    if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (j % 2 == 0)) {
-                        //console.log("Вставка", index)
-                        stanok_change[i].push(stanok[i][j])
-                        stanok_change[i].push(pastTime + ' 23:59:59')
-                    } else stanok_change[i].push(stanok[i][j])
-
-                }
-            }
-
-        }
-
+        ////////////
+        // Начало цикла
         for (let i = 0; i < 5; i++) {
             smena_1.push(Array())
             smena_2.push(Array())
 
-            if (stanok_change[i] !== undefined) {
-                for (let j = 0; stanok_change[i].length > j; j++) {
-
-                    if ((new Date(stanok_change[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok_change[i][j]).getTime())) {
-                        if ((smena_1[i].length == 0) && (j % 2 != 0)) {
-                            //console.log("Грязная запись 18:00 - 19:00 ", i, stanok_change[i][j - 1], "Начало, а", stanok_change[i][j], "конец")
+            if (stanok[i] !== undefined) {
+                for (let j = 0; j <= stanok[i].length; j++) {
+                    // Если дата входит в диапазон от 19:00 до 7:00
+                    if ((new Date(stanok[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00').getTime() > new Date(stanok[i][j]).getTime())) {
+                        // Если элемент не четный и первая смена еще пустая
+                        if (j % 2 == 1 && smena_1[i].length == 0) {	// добавляем 19:00 т.к. начало было до этого
                             smena_1[i].push(pastTime + ' 19:00:00')
-                            smena_1[i].push(stanok_change[i][j])
                             if (i == 0) {
                                 programName1.push(stanok[5][j])
                             }
-                        } else {
-                            smena_1[i].push(stanok_change[i][j])
+                            // если время после полуночи, то добавляем промежуто 23:59 - 00:00
+                            if (new Date(stanok[i][j]).getTime() > new Date(startTime + ' 00:00:00').getTime()) {
+                                smena_1[i].push(pastTime + ' 23:59:59')
+                                smena_1[i].push(startTime + ' 00:00:00')
+                                if (i == 0) {
+                                    programName1.push(stanok[5][j])
+                                    programName1.push(stanok[5][j])
+                                }
+                            }
+                            // записываем само число
+                            smena_1[i].push(stanok[i][j])
                             if (i == 0) {
                                 programName1.push(stanok[5][j])
                             }
                         }
-                    } else if ((new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok_change[i][j]).getTime())) {
-                        if ((smena_2[i].length == 0) && (j % 2 != 0)) {
-                            //console.log("Грязная запись 06:00 - 07:00", i, stanok_change[i][j - 1], "Начало, а", stanok_change[i][j], "конец")
-                            smena_2[i].push(startTime + ' 07:00:00')
-                            smena_2[i].push(stanok_change[i][j])
+
+                        // иначе если это не последний элемент массива и он четный.
+                        else if (j !== stanok[i].length - 1 && j % 2 == 0) {
+                            // если время меньше полуночи, а следующее время больше полуночи
+                            if ((new Date( stanok[i][j]).getTime() < new Date(startTime + ' 00:00:00').getTime()) && (new Date(stanok[i][j][j + 1]).getTime() > new Date(startTime + ' 00:00:00').getTime())) {	// то если следующее время до 7 утра
+                                if (new Date(stanok[i][j + 1]).getTime() < new Date(startTime + ' 07:00:00').getTime()) {
+                                    // то записываем так: текущее время - 23:59, 00:00 - затем будет следующее время
+                                    smena_1[i].push(stanok[i][j])
+                                    smena_1[i].push(pastTime + ' 23:59:59')
+                                    smena_1[i].push(startTime + ' 00:00:00')
+                                    if (i == 0) {
+                                        programName1.push(stanok[5][j])
+                                        programName1.push(stanok[5][j])
+                                        programName1.push(stanok[5][j])
+                                    }
+                                } else {
+                                    // иначе: текущее время - 23:59, 00:00 - 06:59, а следующие время уже начинается с 7 утра
+                                    smena_1[i].push(stanok[i][j])
+                                    smena_1[i].push(pastTime + ' 23:59:59')
+                                    smena_1[i].push(startTime + ' 00:00:00')
+                                    smena_1[i].push(startTime + ' 06:59:59')
+                                    if (i == 0) {
+                                        programName1.push(stanok[5][j])
+                                        programName1.push(stanok[5][j])
+                                        programName1.push(stanok[5][j])
+                                        programName1.push(stanok[5][j])
+                                    }
+                                }
+
+
+                            } else { // иначе просто записать текущее время в первую смену
+                                smena_1[i].push(stanok[i][j])
+                                if (i == 0) {
+                                    programName1.push(stanok[5][j])
+                                }
+                                // если следующий элемент меньше 7 утра следующей смены,
+                                if (new Date(stanok[i][j + 1]).getTime() > new Date(startTime + ' 07:00:00').getTime()) {
+                                    // то закрыть 06:59
+                                    smena_1[i].push(startTime + ' 06:59:59')
+                                    if (i == 0) {
+                                        programName1.push(stanok[5][j])
+                                    }
+                                }
+                            }
+                        }
+
+                        // если это последний элемент массива и он четный
+                        else if (j == stanok[i].length - 1 && j % 2 == 0) {
+                            // если элемент после полуночи, то: элемент - 06:59; и вторую смену: 07:00 - 18:59
+                            if ((new Date(startTime + ' 00:00:00').getTime() < new Date(stanok[i][j]).getTime())) {
+                                smena_1[i].push(stanok[i][j])
+                                smena_1[i].push(startTime + ' 06:59:59')
+                                if (i == 0) {
+                                    programName1.push(stanok[5][j])
+                                    programName1.push(stanok[5][j])
+                                }
+
+                                smena_2[i].push(startTime + ' 07:00:00')
+                                smena_2[i].push(startTime + thisTime)
+                                console.log("eeeeeeeee")
+                                if (i == 0) {
+                                    programName2.push(stanok[5][j])
+                                    programName2.push(stanok[5][j])
+                                }
+                            }
+                            // иначе записываем: текущее время - 23:59, 00:00 - 06:59, 07:00 - 18:59
+                            else {
+                                smena_1[i].push(stanok[i][j])
+                                smena_1[i].push(pastTime + ' 23:59:59')
+                                smena_1[i].push(startTime + ' 00:00:00')
+                                smena_1[i].push(startTime + ' 06:59:59')
+                                if (i == 0) {
+                                    programName1.push(stanok[5][j])
+                                    programName1.push(stanok[5][j])
+                                    programName1.push(stanok[5][j])
+                                    programName1.push(stanok[5][j])
+                                }
+
+                                smena_2[i].push(startTime + ' 07:00:00')
+                                smena_2[i].push(startTime + thisTime)
+                                console.log("aaaaaa")
+                                if (i == 0) {
+                                    programName2.push(stanok[5][j])
+                                    programName2.push(stanok[5][j])
+                                }
+                            }
+                        } else {	// иначе просто записать текущее время в первую смену
+                            smena_1[i].push(stanok[i][j])
+                            if (i == 0) {
+                                programName1.push(stanok[5][j])
+                            }
+                        }
+
+                    }
+
+                    // Если дата входит в диапазон от 7:00 до 19:00
+                    else if ((new Date(stanok[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00').getTime() > new Date(stanok[i][j]).getTime())) {
+                        // Если элемент не четный и вторая смена еще пустая
+                        if (j % 2 == 1 && smena_2[i].length == 0) {	// если первая смена смена тоже пустая, то заполнить и ее
+                            if (smena_1[i].length == 0) {
+                                smena_1[i].push(pastTime + ' 19:00:00')
+                                smena_1[i].push(pastTime + ' 23:59:59')
+                                smena_1[i].push(startTime + ' 00:00:00')
+                                smena_1[i].push(startTime + ' 06:59:59')
+                                if (i == 0) {
+                                    programName1.push(stanok[5][j])
+                                    programName1.push(stanok[5][j])
+                                    programName1.push(stanok[5][j])
+                                    programName1.push(stanok[5][j])
+                                }
+                            }
+                            // заполнить вторую смену 07:00 - текущее время
+                            smena_2[i].push(pastTime + ' 07:00:00')
+                            smena_2[i].push(stanok[i][j])
+                            if (i == 0) {
+                                programName2.push(stanok[5][j])
+                                programName2.push(stanok[5][j])
+                            }
+                        }
+
+                        // иначе если i последний элемент массива и он четный
+                        else if (j == stanok[i].length - 1 && j % 2 == 0) {
+                            // текущий элемент - 18:59
+                            smena_2[i].push(stanok[i][j])
+                            smena_2[i].push(startTime + thisTime)
+                            console.log("bbbbbbbbbbb")
+                            if (i == 0) {
+                                programName2.push(stanok[5][j])
+                                programName2.push(stanok[5][j])
+                            }
+
+                        }
+                        // иначе просто записать текущее время во вторую смену
+                        else {
+                            smena_2[i].push(stanok[i][j])
                             if (i == 0) {
                                 programName2.push(stanok[5][j])
                             }
-                        } else {
-                            smena_2[i].push(stanok_change[i][j])
+                        }
+
+                    }
+
+                    // Иначе если это последний элемент массива, он четный и меньше первой смены
+                    else if (j % 2 == 0 && stanok[i].length - 1 == i && new Date(stanok[i][j]).getTime() < new Date('2022-04-18 19:00:00').getTime()) {
+                        // то заполняем обе смены
+                        smena_1[i].push(pastTime + ' 19:00:00')
+                        smena_1[i].push(pastTime + ' 23:59:59')
+                        smena_1[i].push(startTime + ' 00:00:00')
+                        smena_1[i].push(startTime + ' 06:59:59')
+                        if (i == 0) {
+                            programName1.push(stanok[5][j])
+                            programName1.push(stanok[5][j])
+                            programName1.push(stanok[5][j])
+                            programName1.push(stanok[5][j])
+                        }
+
+                        smena_2[i].push(startTime + ' 07:00:00')
+                        smena_2[i].push(startTime + thisTime)
+                        console.log("cccccccc")
+                        if (i == 0) {
+                            programName2.push(stanok[5][j])
+                            programName2.push(stanok[5][j])
+                        }
+                    }
+
+                    // если это последний элемент, он нечетный и идет после 19:00 следующей смены
+                    else if (j % 2 == 1 && stanok[i].length - 1 == i && new Date(stanok[i][j]).getTime() > new Date('2022-04-19 19:00:00').getTime()) {
+                        // если смены пустые, заполняем их
+                        if (smena_1[i].length == 0) {
+                            smena_1[i].push(pastTime + ' 19:00:00')
+                            smena_1[i].push(pastTime + ' 23:59:59')
+                            smena_1[i].push(startTime + ' 00:00:00')
+                            smena_1[i].push(startTime + ' 06:59:59')
                             if (i == 0) {
+                                programName1.push(stanok[5][j])
+                                programName1.push(stanok[5][j])
+                                programName1.push(stanok[5][j])
+                                programName1.push(stanok[5][j])
+                            }
+                        }
+
+                        if (smena_2[i].length == 0) {
+                            smena_2[i].push(startTime + ' 07:00:00')
+                            smena_2[i].push(startTime + thisTime)
+                            console.log("ddddddd")
+                            if (i == 0) {
+                                programName2.push(stanok[5][j])
                                 programName2.push(stanok[5][j])
                             }
                         }
@@ -1156,7 +1343,7 @@ function twoWorkTime() {
         console.log('19:00 - 7:00', smena_1)
         console.log('7:00 - 19:00', smena_2)
         Diagram.push(smena_1, smena_2)
-    })
+   // })
     build(Diagram)
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
