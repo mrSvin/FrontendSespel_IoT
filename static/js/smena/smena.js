@@ -1096,11 +1096,14 @@ function twoWorkTime() {
                         break
                     }
 
-                    if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (i == 1 || i == 2)) {
-                        //console.log("Вставка", index)
-                        stanok_change[i].push(stanok[i][j])
+                    if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (i == 1 || i == 2) && j % 2 == 1) {
                         stanok_change[i].push(pastTime + ' 23:59:59')
-                    } else stanok_change[i].push(stanok[i][j])
+                    }
+                        else if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (i == 1 || i == 2) && j % 2 == 0) {
+                            stanok_change[i].push(pastTime + ' 23:59:59')
+                            stanok_change[i].push(startTime + ' 00:00:00')
+                        }
+                     else stanok_change[i].push(stanok[i][j])
                 }
             }
 
@@ -1122,11 +1125,15 @@ function twoWorkTime() {
                                 if (new Date(stanok_change[i][j]).getTime() < new Date(startTime + ' 00:00:00').getTime()) {
                                     if (smena_1[i].length == 0 && j % 2 == 1) {
                                         smena_1[i].push(pastTime + ' 19:00:00')
+                                        smena_1[i].push(stanok_change[i][j])
                                     }
-                                    smena_1[i].push(stanok_change[i][j])
+                                    else {
+                                        smena_1[i].push(stanok_change[i][j])
+                                    }
+
                                 }
                                 else if (new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 00:00:00').getTime()) {
-                                    if (new Date(stanok_change[i][j+1]).getTime() > new Date(startTime + ' 07:00:00').getTime()){
+                                    if (new Date(stanok_change[i][j+1]).getTime() > new Date(startTime + ' 07:00:00').getTime() && j % 2 == 0){
                                         smena_1[i].push(stanok_change[i][j])
                                         smena_1[i].push(startTime + ' 06:59:00')
                                         smena_2[i].push(startTime + ' 07:00:00')
@@ -1138,7 +1145,6 @@ function twoWorkTime() {
                                 }
                                 else if (new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 00:00:00').getTime() && new Date(stanok_change[i][j + 1]).getTime() > new Date(startTime + ' 07:00:00')) {
                                     smena_1[i].push(stanok_change[i][j])
-                                    smena_2[i].push(startTime + ' 07:00:00')
                                 }
 
                                 else {
