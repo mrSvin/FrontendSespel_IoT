@@ -1068,6 +1068,9 @@ function GetAllData(ArrayNames, Object) {
 // Функция запускается после обработки всех станков, делит время на две смены
 function twoWorkTime() {
     // Массив с заполненными данными
+    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    // Преобразоавние времение в формат '2022-03-21 10:00:35'
+    time = time.slice(0, 10) + " " + time.slice(11, 19);
 
     Names.map((name) => {
         //let name = Names[0]
@@ -1096,14 +1099,15 @@ function twoWorkTime() {
                         break
                     }
 
-                    if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (i == 1 || i == 2) && j % 2 == 1) {
+                    if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (i != 1 && i != 2) && j % 2 == 0) {
+                        stanok_change[i].push(stanok[i][j])
                         stanok_change[i].push(pastTime + ' 23:59:59')
                     }
-                        else if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (i == 1 || i == 2) && j % 2 == 0) {
-                            stanok_change[i].push(pastTime + ' 23:59:59')
-                            stanok_change[i].push(startTime + ' 00:00:00')
-                        }
-                     else stanok_change[i].push(stanok[i][j])
+                    else if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && (i == 1 || i == 2) && j % 2 == 0) {
+                        stanok_change[i].push(stanok[i][j])
+                        stanok_change[i].push(pastTime + ' 23:59:59')
+                    }
+                    else stanok_change[i].push(stanok[i][j])
                 }
             }
 
@@ -1120,57 +1124,61 @@ function twoWorkTime() {
                 for (let j = 0; stanok_change[i].length > j; j++) {
 
                     if ((new Date(stanok_change[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok_change[i][j]).getTime())) {
-                            if ((i == 1 || i == 2))
-                            {
-                                if (new Date(stanok_change[i][j]).getTime() < new Date(startTime + ' 00:00:00').getTime()) {
-                                    if (smena_1[i].length == 0 && j % 2 == 1) {
-                                        smena_1[i].push(pastTime + ' 19:00:00')
-                                        smena_1[i].push(stanok_change[i][j])
-                                    }
-                                    else {
-                                        smena_1[i].push(stanok_change[i][j])
-                                    }
-
-                                }
-                                else if (new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 00:00:00').getTime()) {
-                                    if (new Date(stanok_change[i][j+1]).getTime() > new Date(startTime + ' 07:00:00').getTime() && j % 2 == 0){
-                                        smena_1[i].push(stanok_change[i][j])
-                                        smena_1[i].push(startTime + ' 06:59:00')
-                                        smena_2[i].push(startTime + ' 07:00:00')
-                                    }
-                                    else {
-                                        smena_1[i].push(stanok_change[i][j])
-                                    }
-
-                                }
-                                else if (new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 00:00:00').getTime() && new Date(stanok_change[i][j + 1]).getTime() > new Date(startTime + ' 07:00:00')) {
-                                    smena_1[i].push(stanok_change[i][j])
-                                }
-
-                                else {
-                                    smena_1[i].push(stanok_change[i][j])
-                                }
-
+                        if((i == 1 || i == 2))
+                        {
+                            if(smena_1[i].length == 0 && j % 2 == 1) {
+                                smena_1[i].push(pastTime + ' 19:00:00')
                             }
-
-                            else
-                            {
-                                smena_1[i].push(stanok_change[i][j])
-                                if (i == 0) {
-                                    programName1.push(stanok[5][j])
-                                }
+                            smena_1[i].push(stanok_change[i][j])
+                            if (i == 0) {
+                                programName1.push(stanok[5][j])
                             }
                         }
 
-                    else if ((new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok_change[i][j]).getTime())) {
-                            smena_2[i].push(stanok_change[i][j])
+                        else {
+
+                            if(smena_1[i].length == 0 && j % 2 == 1) {
+                                smena_1[i].push(pastTime + ' 19:00:00')
+                            }
+                            smena_1[i].push(stanok_change[i][j])
                             if (i == 0) {
-                                programName2.push(stanok[5][j])
+                                programName1.push(stanok[5][j])
                             }
                         }
                     }
+                     else if ((new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok_change[i][j]).getTime())) {
+                        if((i == 1 || i == 2))
+                        {
+                            if(smena_2[i].length == 0 && j % 2 == 1){
+                                smena_2[i].push(startTime + ' 07:00:00')
+                            }
+                            smena_2[i].push(stanok_change[i][j])
+                        }
+                        else {
+                            if(smena_2[i].length == 0 && j % 2 == 1){
+                                smena_2[i].push(startTime + ' 07:00:00')
+                            }
+                            smena_2[i].push(stanok_change[i][j])
+                        }
+
+                    }
+                }
+
+                if(smena_1[i].length % 2 == 1)
+                {
+                    smena_1[i].push(startTime + ' 06:59:00')
+                }
+                if(smena_2[i].length % 2 == 1)
+                {   if(startTime == time.slice(0, 10))
+                    {
+                        smena_2[i].push(startTime + " " + time.slice(11, 19))
+                    }
+                    else{
+                        smena_2[i].push(startTime + ' 18:59:00')
+                    }
                 }
             }
+        }
 
         smena_1.push(programName1)
         smena_2.push(programName2)

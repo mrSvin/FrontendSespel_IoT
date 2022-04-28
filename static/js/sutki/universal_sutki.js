@@ -115,7 +115,7 @@ function pars(arrayParse, y, arrayName=null)
         return
     }
 
-    if(lengh > 4){
+    if(lengh >= 4){
         if(lengh % 2 == 1) lengh -=1
         lengh = (lengh - lengh % 2) / 2
     }
