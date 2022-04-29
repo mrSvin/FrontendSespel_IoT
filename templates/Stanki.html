@@ -955,6 +955,30 @@
 
 <script>
 
+    function convertTime(roundArray) {
+
+        let hourArray = roundArray[6]
+        let sumArray = hourArray.reduce((acc, num) => acc + num, 0);
+
+        let arrayPercent = hourArray.map(function (num, index) {
+            return num / sumArray
+        });
+
+        let arrayTime = arrayPercent.map(function (num, index) {
+            // Возведение числа в степень соответсвующую его индексу в массиве
+            let out = num * 86400
+
+            if (Math.floor(out / 3600) > 0) return `${Math.floor(out / 3600)} часов, ${(out / 3600 % 1 * 60).toFixed(1)} минут `;
+
+            else return `${(out / 3600 % 1 * 60).toFixed(1)} минут `;
+        });
+        console.log(arrayTime);
+    }
+
+</script>
+
+<script>
+
     // Массив с данными станков
     const Diagram = [sk50_data, apec_data, dmu50_3_data,
         dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data, dmu50_5_data,dmu50_6_data, dmu50_7_data, ar55_data]
