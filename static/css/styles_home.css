@@ -23,6 +23,16 @@ caption {
     text-align: center;
 }
 
+.iconPhoto {
+    position: absolute;
+    right: 30px;
+    opacity: 0%;
+    transition: 0.5s;
+}
+
+.iconPhoto:hover {
+    opacity: 50%;
+}
 
 /*New styles from home.html */
 
@@ -108,7 +118,7 @@ caption {
     position: absolute;
     width: 200px;
     height: 200px;
-    background-color: url(../images/UVF_5220.png) no-repeat;
+    background: url(../images/UVF_5220.png) no-repeat;
     background-size: 200px 200px;
 }
 
