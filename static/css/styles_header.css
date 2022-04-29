@@ -60,7 +60,13 @@ td {
     object-fit: cover;
     border-radius: 360px;
     margin: 8px 0 0 0!important;
+    transition: 0.5s;
 }
+
+.dropdown-content a:hover img:first-of-type{
+     filter: brightness(50%);
+ }
+
 
 .dropdown-content li {
     font-weight: 400;
