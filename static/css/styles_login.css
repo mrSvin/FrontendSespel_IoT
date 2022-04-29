@@ -203,5 +203,12 @@ body {
     pointer-events: none;
 }
 
-
+/*Затычка, полей логина для Chrome*/
+.login-box input:-webkit-autofill,
+.login-box input:-webkit-autofill:hover,
+.login-box input:-webkit-autofill:focus,
+.login-box input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff;
+}
 
