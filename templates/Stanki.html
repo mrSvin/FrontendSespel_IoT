@@ -650,6 +650,7 @@
                            onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
                             <div class='label_personal'>Персонал</div>
                         </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" id="apecTimeTable" href="table_time/tableTime"><div class='label_personal'>Время</div></a>
                     </div>
                 </div>
             </div>
@@ -955,6 +956,7 @@
 
 <script>
 
+    // Функция принимает массив и возвращает время в минутах и часах, создавая локальную переменную массива
     function convertTime(roundArray) {
 
         let hourArray = roundArray[6]
@@ -968,12 +970,30 @@
             // Возведение числа в степень соответсвующую его индексу в массиве
             let out = num * 86400
 
-            if (Math.floor(out / 3600) > 0) return `${Math.floor(out / 3600)} часов, ${(out / 3600 % 1 * 60).toFixed(1)} минут `;
+            if (Math.floor(out / 3600) > 0) return `${Math.floor(out / 3600)} часов ${(out / 3600 % 1 * 60).toFixed(1)} минут `;
 
             else return `${(out / 3600 % 1 * 60).toFixed(1)} минут `;
         });
-        console.log(arrayTime);
+
+        let local_time = arrayTime;
+        window.localStorage['local_time'] = local_time;
+        console.log(local_time);
     }
+
+    // Функция в определенное id добавляет добавляет функцию с именем массива, который передается.
+    function addOnclick(arrayName, id) {
+        $(id).attr('onclick', `convertTime(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;`)
+    }
+
+    let allNames = {'sk50_data':'sk50TimeTable', 'apec_data':'apecTimeTable', 'dmu50_3_data':'',
+        'dmu50_4_data':'', 'ctx310_2_data':'', 'ctx510_2_data':'',
+        'ctx510_3_data':'',  'ctx310_3_data':'', 'ctx510_4_data':'',
+        'ctx510_5_data':'', 'dmc1035_2_data':'', 'dmu50_5_data':'',
+        'dmu50_6_data':'', 'dmu50_7_data':'', 'ar55_data':''};
+
+
+    let getKey = Object.keys(allNames)[1]
+    addOnclick(getKey, allNames[getKey])
 
 </script>
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    th, td {
+        text-align: center;
+    }
+</style>
+
+<table class="table" style="width: 50%; margin: 0 auto">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Работа</th>
+        <th scope="col">Ожидание</th>
+        <th scope="col">Выключен</th>
+        <th scope="col">В аварии</th>
+        <th scope="col">Под нагрузкой</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>5 часов 12 минут</td>
+        <td>5 часов 12 минут</td>
+        <td>5 часов 12 минут</td>
+        <td>5 часов 12 минут</td>
+        <td>5 часов 12 минут</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<script>
+    let local_time = null
+
+    if (localStorage['local_time'] != null) {
+        local_time = window.localStorage['local_time']; // Если она уже локально задана сохраняем
+    }
+    window.localStorage['local_time'] = local_time;
+
+    console.log(local_time);
+</script>
+</body>
+</html>
