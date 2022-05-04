@@ -5,22 +5,22 @@
     <title>Электроэнергия</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
 
-    <link rel="stylesheet" type="text/css" href="../../css/styles_stanki.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/menu_buttons.css"/> <!-- Меню -->
-    <link rel="stylesheet" type="text/css" href="../../css/styles_header.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/userscontrol.css"/>
+    <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/> <!-- Меню -->
+    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="css/userscontrol.css"/>
 
-    <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-    <script src="../../js/highcharts.js"></script>
-    <script src="../../js/exporting.js"></script>
-    <script src="../../js/export-data.js"></script>
-    <script src="../../js/accessibility.js"></script>
-    <script src="../../js/xrange.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
+    <script src="js/export-data.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script src="js/xrange.js"></script>
 
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script src="../../js/bootstrap-3.3.0.min.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap-3.3.0.min.js"></script>
 
     <script >
         $(function () {
@@ -58,9 +58,9 @@
     </script>   <!--Календарь js-->
 
     <!--Календарь -->
-    <script type="text/javascript" src="../../js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
     <!--Календарь Русский язык-->
-    <script type="text/javascript" src="../../js/bootstrap-datepicker.ru.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
 
 </head>
 
@@ -190,10 +190,97 @@
 <script src="/js/mesto.js"></script>
 <!--Скрипт с вызовом функций для изменения места-->
 
-<script th:inline="javascript">
-    let energyArray = [[${energyArray}]];
-    console.log(energyArray)
+<!--Получить количество дней в текущем месяце-->
+<script>
+    function getDaysInMonth (month,year) {
+        return new Date(year, month, 0).getDate();
+    };
+
+    var daysThisMonth = getDaysInMonth(content_month.value.slice(5, 7), content_month.value.slice(0, 4));
 </script>
+
+<div style="border: 1px solid #333;">
+    <div style="overflow: hidden;">
+        <div style="width: 100%;   margin: 2%;">
+            <div class="img" style="float: left; min-height: 600px;"> <!--Вставляем изображение станка 1-->
+                <div class="parent_image">
+                    <img src="../images/nasos.png" class="stanok_img"/>
+                    <figcaption style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">ВРС1
+                    </figcaption>
+                    <div>
+                        <a style="text-decoration: none; float: left" class="icon_mesto" href="../mesto/mesto"
+                           onclick="vrs1(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1002, screen.availWidth)); return false;">
+                            <div class='label_mesto'>Место</div>
+                        </a>
+                        <a style="text-decoration: none; float: left" class="icon_personal"
+                           href="../personal/personal_vrs"
+                           onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+                            <div class='label_personal'>Персонал</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="container_days1" style="float: left; height: 400px; width: 75%"></div>
+        <table class="table_energy" id="vrs_1_days">
+            <thead>
+            <tr>
+                <th>Дни</th>
+            </tr>
+            </thead>
+            <tbody style="margin-top: 100px">
+            <tr>
+                <td>Кубов</td>
+            </tr>
+            </tbody>
+        </table>    <!--Таблица изменений-->
+    </div>
+</div> <!--ВРС1 html-->
+
+<script th:inline="javascript">
+    let allArray = [[${energyArray}]];
+
+    energyArray = energyArray[0]
+
+    var sumEnergy = 0
+
+    var energyArrayNew = []
+
+    // Цикл преобразования изначального массива
+    for(let i = 1; daysThisMonth + 1>i; i++)
+    {
+        let delta = energyArray[i] - energyArray[i-1];
+
+        if (delta > 0) {
+            delta= parseFloat(delta.toFixed(2));
+        } else {
+            delta = 0;
+        }
+
+        if (delta>120) {
+            delta = 0;
+        }
+
+        energyArrayNew.push(delta)
+
+    }
+
+    $.each( energyArrayNew, function( index ){
+        sumEnergy = sumEnergy + energyArrayNew[index];
+    }); // Сумма всех элементов преобразованного массива
+    sumEnergy = parseFloat(sumEnergy.toFixed(2));
+
+    $.each( energyArrayNew, function( index ){
+        if (index == daysThisMonth ) {
+            return false;
+        }
+        $("#vrs_1_days > thead > tr").append("<th>" + (index + 1) + "</th>");
+        $("#vrs_1_days > tbody > tr").append("<td>" + energyArrayNew[index] + "</td>");
+    }); // формирование таблицы ежемесячного расхода
+
+    $("#vrs_1_days > thead > tr").append("<th>Итого</th>"); // формирование последней ячейки таблицы
+    $("#vrs_1_days > tbody > tr").append("<td>" + sumEnergy + "</td>"); // с общей суммой
+</script> <!--JS таблица-->
 
 </body>
 </html>
