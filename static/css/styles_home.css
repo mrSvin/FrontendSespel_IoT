@@ -23,17 +23,6 @@ caption {
     text-align: center;
 }
 
-.iconPhoto {
-    position: absolute;
-    right: 30px;
-    opacity: 0%;
-    transition: 0.5s;
-}
-
-.iconPhoto:hover {
-    opacity: 50%;
-}
-
 /*New styles from home.html */
 
 /*Фон*/

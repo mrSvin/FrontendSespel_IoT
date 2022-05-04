@@ -63,9 +63,21 @@ td {
     transition: 0.5s;
 }
 
+.iconPhoto {
+    position: absolute;
+    right: 30px;
+    opacity: 0%;
+    transition: 0.5s;
+}
+
 .dropdown-content a:hover img:first-of-type{
      filter: brightness(50%);
  }
+
+.dropdown-content a:hover .iconPhoto{
+    opacity: 50%;
+}
+
 
 
 .dropdown-content li {
