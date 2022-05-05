@@ -4,15 +4,15 @@
     <meta charset="utf-8" />
     <title>wialon</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
-    <link rel="stylesheet" type="text/css" href="css/styles_home.css"/>
-    <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
-    <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/> <!-- Меню -->
+    <link rel="stylesheet" type="text/css" href="/css/styles_home.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/menu_buttons.css"/> <!-- Меню -->
 
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/bootstrap-3.3.0.min.js"></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap-3.3.0.min.js"></script>
 
     <style>
               /* Таблица с текущими параметрами */
@@ -47,7 +47,7 @@
 
 <header>
     <div style="display: flex; width: 100vw; justify-content: space-between; flex-wrap: nowrap; width: 100%;">
-        <a href="home" style="display: flex; align-items: flex-start;" ><img src="images/logo_black.png" class="icon-logo"/></a>
+        <a href="../home" style="display: flex; align-items: flex-start;" ><img src="images/logo_black.png" class="icon-logo"/></a>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
                 <li th:text="${user_name}"></li>
