@@ -52,6 +52,7 @@ td {
     color: black;
     padding: 40px 20px;
     display: block;
+    cursor: pointer;
 }
 
 .dropdown-content img {
