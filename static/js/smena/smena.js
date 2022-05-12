@@ -1326,9 +1326,9 @@ function twoWorkTime() {
             // отказ от работы с неопределенным массивом
             if (stanok[i] !== undefined) {
                 // Цикл внутри массива
-                for (let j = 0; i < stanok[i].length-1; j++) {
+                for (let j = 0; j < stanok[i].length; j++) {
                     // если этот элемент последний, то записать его и выйти из цикла
-                    if (j == stanok[i].length-1) {
+                    if (j == stanok[i].length) {
                         stanok_change[i].push(stanok[i][j])
                         break
                     }
@@ -1346,6 +1346,7 @@ function twoWorkTime() {
             }
 
         }
+
 
         // Цикл для разбиения массива stanok_change на массивы smena_1, smena_2
         for (let i = 0; i < 5; i++) {
