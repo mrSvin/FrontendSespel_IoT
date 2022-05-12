@@ -46,7 +46,13 @@
 
     let timeTable = document.getElementById('timeTable')
     local_time = local_time.split(',')
-    for (let i = 0; i < local_time.length; i++)
+
+    if(local_time.length == 6)
+    {
+        timeTable.rows[0].cells[4].innerHTML = "Ручной режим";
+    }
+
+    for (let i = 0; i < 5; i++)
     {
         timeTable.rows[1].cells[i].innerHTML = local_time[i];
     }
