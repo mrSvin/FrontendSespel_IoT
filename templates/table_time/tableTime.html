@@ -14,7 +14,7 @@
     }
 </style>
 
-<table class="table" style="width: 50%; margin: 0 auto">
+<table class="table" style="width: 50%; margin: 0 auto" id="timeTable">
     <thead class="thead-dark">
     <tr>
         <th scope="col">Работа</th>
@@ -26,11 +26,11 @@
     </thead>
     <tbody>
     <tr>
-        <td>5 часов 12 минут</td>
-        <td>5 часов 12 минут</td>
-        <td>5 часов 12 минут</td>
-        <td>5 часов 12 минут</td>
-        <td>5 часов 12 минут</td>
+        <td>0 минут</td>
+        <td>0 минут</td>
+        <td>0 минут</td>
+        <td>0 минут</td>
+        <td>0 минут</td>
     </tr>
     </tbody>
 </table>
@@ -44,7 +44,13 @@
     }
     window.localStorage['local_time'] = local_time;
 
-    console.log(local_time);
+    let timeTable = document.getElementById('timeTable')
+    local_time = local_time.split(',')
+    for (let i = 0; i < local_time.length; i++)
+    {
+        timeTable.rows[1].cells[i].innerHTML = local_time[i];
+    }
+
 </script>
 </body>
 </html>

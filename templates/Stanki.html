@@ -982,7 +982,7 @@
 
     // Функция в определенное id добавляет добавляет функцию с именем массива, который передается.
     function addOnclick(arrayName, id) {
-        $(id).attr('onclick', `convertTime(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;`)
+        $(id).attr('onclick', `convertTime(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(80, screen.availHeight)+',width='+Math.min(1000, screen.availWidth)); return false;`)
     }
 
     let allNames = {'sk50_data':'sk50TimeTable', 'apec_data':'apecTimeTable', 'dmu50_3_data':'',
