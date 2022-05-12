@@ -957,7 +957,7 @@
 <script>
 
     // Функция принимает массив и возвращает время в минутах и часах, создавая локальную переменную массива
-    function convertTime(roundArray, ruch=null) {
+    function convertTime(roundArray) {
 
         let hourArray = roundArray[6]
         let sumArray = hourArray.reduce((acc, num) => acc + num, 0);
@@ -975,24 +975,14 @@
             else return `${(out / 3600 % 1 * 60).toFixed(1)} минут `;
         });
 
-        if (ruch == 'ruch') {
-            arrayTime.push('ruch')
-        }
-
         let local_time = arrayTime;
         window.localStorage['local_time'] = local_time;
-
+        console.log(local_time);
     }
 
     // Функция в определенное id добавляет добавляет функцию с именем массива, который передается.
-    function addOnclick(arrayName, id, ruch = null) {
-        if(ruch == null){
-            $('#' + id).attr('onclick', `convertTime(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(80, screen.availHeight)+',width='+Math.min(835, screen.availWidth)); return false;`)
-        }
-       else if(ruch == 'ruch')
-        {
-            $('#' + id).attr('onclick', `convertTime(${arrayName}, ruch); window.open(this.href, '', 'scrollbars=1,height='+Math.min(80, screen.availHeight)+',width='+Math.min(835, screen.availWidth)); return false;`)
-        }
+    function addOnclick(arrayName, id) {
+        $('#' + id).attr('onclick', `convertTime(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(80, screen.availHeight)+',width='+Math.min(835, screen.availWidth)); return false;`)
     }
 
     let allNames = {'sk50_data':'sk50TimeTable', 'apec_data':'apecTimeTable', 'dmu50_3_data':'',
@@ -1002,7 +992,7 @@
         'dmu50_6_data':'', 'dmu50_7_data':'', 'ar55_data':''};
 
     let getKey = Object.keys(allNames)[1]
-    addOnclick(getKey, allNames[getKey],'ruch')
+    addOnclick(getKey, allNames[getKey])
 
 
 </script>
