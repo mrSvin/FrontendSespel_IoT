@@ -982,7 +982,7 @@
 
     // Функция в определенное id добавляет добавляет функцию с именем массива, который передается.
     function addOnclick(arrayName, id) {
-        $(id).attr('onclick', `convertTime(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(80, screen.availHeight)+',width='+Math.min(1000, screen.availWidth)); return false;`)
+        $('#' + id).attr('onclick', `convertTime(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(80, screen.availHeight)+',width='+Math.min(835, screen.availWidth)); return false;`)
     }
 
     let allNames = {'sk50_data':'sk50TimeTable', 'apec_data':'apecTimeTable', 'dmu50_3_data':'',
@@ -991,9 +991,9 @@
         'ctx510_5_data':'', 'dmc1035_2_data':'', 'dmu50_5_data':'',
         'dmu50_6_data':'', 'dmu50_7_data':'', 'ar55_data':''};
 
-
     let getKey = Object.keys(allNames)[1]
     addOnclick(getKey, allNames[getKey])
+
 
 </script>
 
