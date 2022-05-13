@@ -17,6 +17,7 @@
 <table class="table" style="width: 100%; margin: 0 auto" id="timeTable">
     <thead class="thead-dark">
     <tr>
+        <th scope="col">Оборудование</th>
         <th scope="col">Работа</th>
         <th scope="col">Ожидание</th>
         <th scope="col">Выключен</th>
@@ -37,19 +38,58 @@
 
 
 <script>
+    // Получение таблицы по id
+    let timeTable = document.getElementById('timeTable')
+
+    // объявление локальной переменной часов
     let local_time = null
 
+    // Переменная для кратной записи
+    let tableRow = null
+
+    // индекс последней строки
+    let lastRow = null
+
+    // индекс последней ячейки
+    let lastCell = null
+
+    // переменная для краткой записи к телу таблицы
+    let tbody = timeTable.querySelector('tbody')
+
+    // Если она уже локально задана сохраняем
     if (localStorage['local_time'] != null) {
-        local_time = window.localStorage['local_time']; // Если она уже локально задана сохраняем
+        local_time = window.localStorage['local_time'];
     }
     window.localStorage['local_time'] = local_time;
 
-    let timeTable = document.getElementById('timeTable')
+    // Преобразование строки в массив
     local_time = local_time.split(',')
-    for (let i = 0; i < local_time.length; i++)
-    {
-        timeTable.rows[1].cells[i].innerHTML = local_time[i];
-    }
+
+    // Пробегаемся по всем элементам массива
+    local_time.forEach((elem, index) => {
+
+        // новая строка создается в начале и каждый 6 раз
+        if(index == 0 || index % 6 == 0)
+        {
+            // добавляем новую строку
+            tbody.appendChild(document.createElement('tr'));
+
+            // считываем длины строк и ячеек
+            tableRow = tbody.querySelectorAll('tr')
+            lastRow = tbody.rows.length -1
+            lastCell = tableRow[tbody.rows.length -1].cells.length - 1
+        }
+
+        // добавляем в последнюю строку новую ячейку
+        tableRow[lastRow].appendChild(document.createElement('td'))
+
+        // обновляем индекс последней ячейки
+        lastCell = tableRow[tbody.rows.length -1].cells.length - 1
+
+        // записываем в последюю ячейку элемент массива
+        tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem
+
+    })
 
 </script>
 </body>
