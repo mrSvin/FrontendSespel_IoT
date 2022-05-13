@@ -74,17 +74,19 @@
             // добавляем новую строку
             tbody.appendChild(document.createElement('tr'));
 
-            // считываем длины строк и ячеек
+            // Получаем все строки в теле
             tableRow = tbody.querySelectorAll('tr')
+
+            // считываем длины строк и ячеек
             lastRow = tbody.rows.length -1
-            lastCell = tableRow[tbody.rows.length -1].cells.length - 1
+            lastCell = tableRow[lastRow].cells.length - 1
         }
 
         // добавляем в последнюю строку новую ячейку
         tableRow[lastRow].appendChild(document.createElement('td'))
 
         // обновляем индекс последней ячейки
-        lastCell = tableRow[tbody.rows.length -1].cells.length - 1
+        lastCell = tableRow[lastRow].cells.length - 1
 
         // записываем в последюю ячейку элемент массива
         tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem
