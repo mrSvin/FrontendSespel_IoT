@@ -109,10 +109,6 @@ caption {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
 }
 
-.icon_clock:hover > div {
-    color: #000000;
-}
-
 .icon_clock{
     position: relative;
     background: url(../images/iconClock.png) no-repeat;
