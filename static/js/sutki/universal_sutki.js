@@ -378,10 +378,6 @@ function buildRoundDiagram(roundDiagram, exception, index, startContainer) {
     // Если массив пустой или нулевой, то
     if ((roundDiagram == 0) || (roundDiagram === null)) {
 
-        roundDiagram.forEach((elem, index)=>{
-            roundDiagram[index] = +elem
-        })
-
         // Переменная выполненности исключения, меняется на 1 если произошло исключение
         var exceptionGoted = 0
 
