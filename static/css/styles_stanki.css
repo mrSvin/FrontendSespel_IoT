@@ -111,23 +111,21 @@ caption {
 
 .icon_clock:hover > div {
     color: #000000;
-    margin-top: 70px;
 }
 
 .icon_clock{
+    position: relative;
     background: url(../images/iconClock.png) no-repeat;
-    background-size: 60px 60px;
-    margin-top: 10px;
-    margin-left: 30px;
+    background-size: 90px 43px;
     width: 60px;
+    padding-right: 50px;
+    padding-left: 50px;
+    right: 5%;
+    top: 13px;
+
 }
 .icon_clock:hover {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
-}
-
-.icon_clock:hover > div {
-    color: #000000;
-    margin-top: 70px;
 }
 
 .label_mesto{
@@ -156,8 +154,10 @@ caption {
 
 .label_clock{
     color: #756e6e;
-    margin-top: 65px;
-    margin-left: -4px;
+    margin-top: 45px;
+    position: relative;
+    top: -60px;
+    right: 26px;
 }
 
 .choose_month {
