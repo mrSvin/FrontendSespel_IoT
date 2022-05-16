@@ -332,23 +332,6 @@
         </center>
     </form><!--Таблица Текущие параметры комплекса УФ 5220-->
 </div> <!--УФ 5220 html-->
-<script th:inline="javascript">
-    var uf5220_array_rabota = [[${uf5220_array_rabota}]];
-    var uf5220_array_pause = [[${uf5220_array_pause}]];
-    var uf5220_array_off = [[${uf5220_array_off}]];
-    var uf5220_array_programname = [[${uf5220_array_programname}]];
-
-    var uf5220_kol_op = [[${uf5220_kol_op}]];
-    var kol_long_operations_uf5220 = [[${kol_long_operations_uf5220}]];
-</script>   <!--УФ 5220 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var uf5220_work = [[${work}]];
-    var uf5220_pass = [[${pass}]];
-    var uf5220_fail = [[${fail}]];
-    var uf5220_avar = [[${avar}]];
-    var uf5220_nagruzka = [[${nagruzka}]];
-</script>   <!--УФ 5220 js круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/stanki/data_uf5220.js"></script>
 
 <div style="border: 1px solid #333;">   <!--Прогресс html-->
     <div style="overflow: hidden;">
@@ -457,23 +440,6 @@
         </center>
     </form><!--Таблица Текущие параметры комплекса УФ 5220-->
 </div> <!--Прогресс html-->
-<script th:inline="javascript">
-    var progress_array_rabota = [[${progress_array_rabota}]];
-    var progress_array_pause = [[${progress_array_pause}]];
-    var progress_array_off = [[${progress_array_off}]];
-    var progress_array_programname = [[${progress_array_programname}]];
-
-    var progress_kol_op = [[${progress_kol_op}]];
-    var kol_long_operations_progress = [[${kol_long_operations_progress}]];
-</script>   <!--Прогресс js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var progress_work = [[${progress_work}]];
-    var progress_pass = [[${progress_pass}]];
-    var progress_fail = [[${progress_fail}]];
-    var progress_avar = [[${progress_avar}]];
-    var progress_nagruzka = [[${progress_nagruzka}]];
-</script>   <!--Прогресс круговая диагрмма загрузки оборудования-->
-<script src="/js/sutki/stanki/data_progress.js"></script>
 
 <div style="border: 1px solid #333;">   <!--NTX1000 html-->
     <div style="overflow: hidden;">
@@ -583,27 +549,6 @@
         </center>
     </form><!--Таблица Текущие параметры комплекса УФ 5220-->
 </div> <!--NTX1000 html-->
-<script th:inline="javascript">
-    var ntx1000_array_rabota = [[${ntx1000_array_rabota}]];
-    var ntx1000_array_pause = [[${ntx1000_array_pause}]];
-    var ntx1000_array_off = [[${ntx1000_array_off}]];
-    var ntx1000_array_avar = [[${ntx1000_array_avar}]];
-    var ntx1000_array_nagruzka = [[${ntx1000_array_nagruzka}]];
-    var ntx1000_array_programname = [[${ntx1000_array_programname}]];
-
-    //var ntx1000_kol_op = [[${ntx1000_kol_op}]];
-    //var kol_long_operations_ntx1000 = [[${kol_long_operations_ntx1000}]];
-</script>   <!--NTX1000 js линейная диагрмма работы оборудования-->
-<script th:inline="javascript">
-    var ntx1000_work = [[${ntx1000_work}]];
-    var ntx1000_pass = [[${ntx1000_pass}]];
-    var ntx1000_fail = [[${ntx1000_fail}]];
-    var ntx1000_avar = [[${ntx1000_avar}]];
-    var ntx1000_nagruzka = [[${ntx1000_nagruzka}]];
-
-    //let ntx1000_data = [ntx1000_array_rabota, ntx1000_array_pause, ntx1000_array_off, ntx1000_array_avar, ntx1000_array_nagruzka,ntx1000_array_programname,[ntx1000_work, ntx1000_pass, ntx1000_fail, ntx1000_avar, ntx1000_nagruzka]]
-</script>   <!--NTX1000 круговая диагрмма загрузки оборудования-->
-<!--<script src="/js/sutki/stanki/data_ntx1000.js"></script>-->
 
 <div style="border: 1px solid #333;">   <!--sk50 html-->
     <div style="overflow: hidden;">
@@ -924,21 +869,13 @@
     var linear_nagruzka = [];
     var linear_ruchnoi = [];
 
-    linear_rabota.push(uf5220_work, progress_work);
-    linear_pause.push(uf5220_pass, progress_pass);
-    linear_off.push(uf5220_fail, progress_fail);
-    linear_avar.push(0, 0);
-    linear_nagruzka.push(0, 0);
-    linear_ruchnoi.push(0, 0);
-
     var kol_op = [];
     var kol_long_operations = [];
 
-    kol_op.push(uf5220_kol_op, progress_kol_op)
-    kol_long_operations.push(kol_long_operations_uf5220, kol_long_operations_progress)
-
     //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
 
+    var uf5220_data = [[${uf5220_data}]];
+    var progress_data = [[${progress_data}]];
     var ntx1000_data = [[${ntx1000_data}]];
     var sk50_data = [[${sk50_data}]];
     var apec_data = [[${apec_data}]];
@@ -1006,9 +943,6 @@
         window.localStorage['local_time'] = local_time;
     }
 
-    let uf5220_data = [[],[],[],[],[],[],[uf5220_work, uf5220_pass, uf5220_fail, uf5220_avar, uf5220_nagruzka],]
-    let progress_data = [[],[],[],[],[],[],[progress_work, progress_pass, progress_fail, progress_avar, progress_nagruzka],]
-
     let names = ['УФ5220', 'Прогресс', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5','DMU50 #6','DMU50 #7', 'AR55']
     let datas = [uf5220_data, progress_data, ntx1000_data, sk50_data, apec_data, dmu50_3_data,
         dmu50_4_data, ctx310_2_data, ctx510_2_data,
@@ -1023,18 +957,18 @@
 <script>
 
     // Массив с данными станков
-    const Diagram = [ntx1000_data, sk50_data, apec_data, dmu50_3_data,
+    const Diagram = [uf5220_data, progress_data, ntx1000_data, sk50_data, apec_data, dmu50_3_data,
         dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data, dmu50_5_data,dmu50_6_data, dmu50_7_data, ar55_data]
 
     // Массив с исключениями. Аргументы: индекс станка в массиве Diagram где нужно записать исключение, остальные параметры опциональны
     // Новый цвет для линейной диаграммы, массив с цветами для круговой, переменная для создания отдельной от нагрузки переменной
     // либо ruchnoi, либо что угодно или ничего
-    var exception = [[2,'Ручной режим','#5c7ed0', ['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'],'ruchnoi'],];
+    var exception = [[4,'Ручной режим','#5c7ed0', ['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'],'ruchnoi'],];
 
     // Функция сборщик, аргументы:
     // Массив со станками, с какого станка начать, исключения если имеются,
     // 2-ой и 3-ий аргументы опциональны
-    build(Diagram, 3, exception)
+    build(Diagram, 5, exception)
 
     // Формирование графиков для общих круговой и линейной диаграммы
     colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
