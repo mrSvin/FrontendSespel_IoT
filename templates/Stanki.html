@@ -215,11 +215,13 @@
 </div>
 
 
-<div style="display: flex; justify-content: space-between">
+<div style="display: flex; justify-content: space-between; align-items: flex-end;">
 
-    <div id="container_sum_zagruzka" style="min-height: 420px; width: 45%"></div>
+    <div id="container_sum_zagruzka" style="min-height: 420px; width: 40%"></div>
     <!--Общая загрузка html-->
-
+    <a style="text-decoration: none; padding: 5px;" class="icon_clock" href="table_time/tableTime" onclick="sendTime(names, datas); window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
+        <div class='label_clock'>Время</div>
+    </a>
     <div id="container_kol_operations" style="height: 420px; width: 50%"></div>
     <!--Количество операций html-->
 </div>  <!--Общая загрузка и количество операций html-->
@@ -650,9 +652,6 @@
                            onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
                             <div class='label_personal'>Персонал</div>
                         </a>
-                        <a style="text-decoration: none; float: left" class="icon_personal" href="table_time/tableTime" onclick="sendTime(names, datas); window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-                            <div class='label_personal'>Время</div>
-                       </a>
                     </div>
                 </div>
             </div>
