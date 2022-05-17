@@ -215,32 +215,9 @@
   var linear_nagruzka = [];
   var linear_kalibrovka = [];
 
-  var work_uf5220 = [[${work}]];
-  var pass_uf5220 = [[${pass}]];
-  var fail_uf5220 = [[${fail}]];
-
-  var work_progress = [[${progress_work}]];
-  var pass_progress = [[${progress_pass}]];
-  var fail_progress = [[${progress_fail}]];
-
-  var work_ntx1000 = [[${ntx1000_work}]];
-  var pass_ntx1000 = [[${ntx1000_pass}]];
-  var fail_ntx1000 = [[${ntx1000_fail}]];
-  var avar_ntx1000 = [[${ntx1000_avar}]];
-  var nagruzka_ntx1000 = [[${ntx1000_nagruzka}]];
-
-  linear_rabota.push(work_uf5220, work_progress,work_ntx1000);
-  linear_pause.push(pass_uf5220, pass_progress, pass_ntx1000);
-  linear_off.push(fail_uf5220, fail_progress, fail_ntx1000);
-  linear_avar.push(0, 0, avar_ntx1000);
-  linear_nagruzka.push(0, 0, nagruzka_ntx1000);
-  linear_kalibrovka.push(0, 0 ,0);
-
-  var uf5220_koef = (work_uf5220 + pass_uf5220 + fail_uf5220)/100;
-  var progress_koef = (work_progress + pass_progress + fail_progress)/100;
-  var ntx1000_koef = (work_ntx1000 + nagruzka_ntx1000 + pass_ntx1000 + avar_ntx1000 + fail_ntx1000)/100;
-
-
+  var uf5220_data = [[${uf5220_data}]];
+  var progress_data = [[${progress_data}]];
+  var ntx1000_data = [[${ntx1000_data}]];
   var sk50_data = [[${sk50_data}]];
   var apec_data = [[${apec_data}]];
   var dmu50_3_data = [[${dmg_dmu50_3_data}]];
@@ -258,27 +235,12 @@
   var ar55_data = [[${ar55_data}]];
 
   // Массив с массивами
-  const Diagram = [sk50_data, apec_data, dmu50_3_data,
+  const Diagram = [uf5220_data, progress_data, ntx1000_data, sk50_data, apec_data, dmu50_3_data,
     dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data, dmu50_5_data, dmu50_6_data, dmu50_7_data, ar55_data]
 
   // Запись в таблицу станков, которые не записываются в массив Diagram
   table = document.getElementById('myTable').rows; // Обращение к таблице по ID
   // older
-  table[1].cells[1].innerHTML = Math.round(work_uf5220/uf5220_koef * 10) / 10 + "%";
-  table[2].cells[1].innerHTML = Math.round(work_progress/progress_koef * 10) / 10 + "%";
-  table[3].cells[1].innerHTML = Math.round(work_ntx1000/ntx1000_koef * 10) / 10 + "%";
-
-  table[3].cells[5].innerHTML = Math.round(nagruzka_ntx1000/ntx1000_koef * 10) / 10 + "%";
-
-  table[1].cells[2].innerHTML = Math.round(pass_uf5220/uf5220_koef * 10) / 10 + "%";
-  table[2].cells[2].innerHTML = Math.round(pass_progress/progress_koef * 10) / 10 + "%";
-  table[3].cells[2].innerHTML = Math.round(pass_ntx1000/ntx1000_koef * 10) / 10 + "%";
-
-  table[3].cells[4].innerHTML = Math.round(avar_ntx1000/ntx1000_koef * 10) / 10 + "%";
-
-  table[1].cells[3].innerHTML = Math.round(fail_uf5220/uf5220_koef * 10) / 10 + "%";
-  table[2].cells[3].innerHTML = Math.round(fail_progress/progress_koef * 10) / 10 + "%";
-  table[3].cells[3].innerHTML = Math.round(fail_ntx1000/ntx1000_koef * 10) / 10 + "%";
 
   // Коэффициент для вычисления записей в таблице
   var koef = []
@@ -357,16 +319,16 @@
             // Если столбец - нагрузка
             if (i === 4) {
               // То, вместо столбца нагрузка записать значение в следующий столбец - Ручной режим(i + 2)
-              table[index + 4].cells[i + 2].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
+              table[index + 1].cells[i + 2].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
             }
             else {
               // Иначе записывать в таблицу без изменений(i + 1)
-              table[index + 4].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
+              table[index + 1].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
             }
           }
           else {
             // Иначе, если станок не APEC, записывать в таблицу без изменений(i + 1)
-            table[index + 4].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
+            table[index + 1].cells[i + 1].innerHTML = Math.round(roundDiagram[i] / koef[index] * 10) / 10 + "%";
           }
         }); // Конец цикла записи в таблицу
 
