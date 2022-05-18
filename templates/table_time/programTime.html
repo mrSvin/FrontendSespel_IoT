@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    th, td {
+        text-align: center;
+    }
+</style>
+
+<table class="table" style="width: 100%; margin: 0 auto" id="timeTable">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Имя программы</th>
+        <th scope="col">Время выполнения</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+<script>
+    // Получение таблицы по id
+    let timeTable = document.getElementById('timeTable')
+
+    // объявление локальной переменной часов
+    let local_time = null
+
+    // Переменная для кратной записи
+    let tableRow = null
+
+    // индекс последней строки
+    let lastRow = null
+
+    // индекс последней ячейки
+    let lastCell = null
+
+    // переменная для краткой записи к телу таблицы
+    let tbody = timeTable.querySelector('tbody')
+
+    // Если она уже локально задана сохраняем
+    if (localStorage['local_time'] != null) {
+        local_time = window.localStorage['local_time'];
+    }
+    window.localStorage['local_time'] = local_time;
+
+    // Преобразование строки в массив
+    // local_time = local_time.split(',')
+
+
+    if(local_time !== null) {
+        local_time.forEach((elem, index) => {
+
+            // добавляем новую строку
+            tbody.appendChild(document.createElement('tr'));
+
+            // Получаем все строки в теле
+            tableRow = tbody.querySelectorAll('tr')
+
+            // считываем длины строк и ячеек
+            lastRow = tbody.rows.length -1
+            lastCell = tableRow[lastRow].cells.length - 1
+
+
+            // добавляем в последнюю строку новую ячейку
+            tableRow[lastRow].appendChild(document.createElement('td'))
+
+            // обновляем индекс последней ячейки
+            lastCell = tableRow[lastRow].cells.length - 1
+
+            // записываем в последюю ячейку первый элемент  массива
+            tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[0]
+
+
+            // добавляем в последнюю строку новую ячейку
+            tableRow[lastRow].appendChild(document.createElement('td'))
+
+            // обновляем индекс последней ячейки
+            lastCell = tableRow[lastRow].cells.length - 1
+
+            // записываем в последюю ячейку второй элемент массива
+            tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[1]
+
+        })
+    }
+    // Пробегаемся по всем элементам массива
+
+
+
+</script>
+</body>
+</html>
