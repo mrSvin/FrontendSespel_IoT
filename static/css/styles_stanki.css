@@ -61,9 +61,14 @@ caption {
     -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
 }
 
-.icon_mesto:hover > div {
+.icon_mesto:hover > div,
+.icon_personal:hover > div,
+.icon_error:hover > div,
+.icon_power:hover > div,
+.icon_clock:hover > div{
     color: #000000;
-    margin-top: 70px;
+    position: relative;
+    top: 5px;
 }
 
 
@@ -77,11 +82,6 @@ caption {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
 }
 
-.icon_personal:hover > div {
-    color: #000000;
-    margin-top: 70px;
-}
-
 .icon_error{
     background: url(../images/error.png) no-repeat;
     background-size: 60px 60px;
@@ -93,11 +93,6 @@ caption {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
 }
 
-.icon_error:hover > div {
-    color: #000000;
-    margin-top: 70px;
-}
-
 .icon_power{
     background: url(../images/iconPower.png) no-repeat;
     background-size: 60px 60px;
@@ -105,6 +100,7 @@ caption {
     margin-left: 30px;
     width: 60px;
 }
+
 .icon_power:hover {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
 }
