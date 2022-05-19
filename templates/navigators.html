@@ -237,6 +237,7 @@
                         <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="navigator_1(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
                         <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_navigator_1" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                         <a style="text-decoration: none; float: left" class="icon_power" href="stanki/navigatorPower" onclick="navigator_1_power(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_power'>Излучение</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_personal" id="navigator_1_programTable" href="table_time/programTime"><div class='label_personal'>Время</div></a>
                     </div>
                 </div>
             </div>
@@ -393,6 +394,85 @@
     var kometa_1_data = [[${kometa_1_data}]];
     var kometa_2_data = [[${kometa_2_data}]];
     var kometa_3_data = [[${kometa_3_data}]];
+</script>
+
+<script>
+    function msToTime(duration) {
+        let seconds = parseInt((duration / 1000) % 60),
+            minutes = parseInt((duration / (1000 * 60)) % 60),
+            hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return hours + ":" + minutes + ":" + seconds;
+    }
+
+    function getTimeProgramName(arrayData)
+    {
+        let timer = 0;
+        let programTimeArray = [];
+
+        arrayData? console.log("yes"):0;
+
+        for(let i = 0; i<arrayData[0].length; i+=2)
+        {
+
+            if(arrayData[5][i/2] == arrayData[5][(i/2)+1])
+            {
+                if(arrayData[5][i/2] !== arrayData[5][(i/2)-1])
+                {
+                    console.log("Одинаковые начало")
+                }
+
+                timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
+                arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
+
+            }
+
+            else
+            {
+
+                if(arrayData[5][i/2] == arrayData[5][(i/2)-1])
+                {
+                    timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
+                    arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
+                    console.log("Одинаковые конец")
+                    programTimeArray.push([arrayData[5][i/2],  msToTime(timer)])
+                }
+                else {
+                    timer = (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
+                    arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
+                    programTimeArray.push([arrayData[5][i/2],  msToTime(timer)])
+                    timer = 0
+                }
+
+
+            }
+
+        }
+        console.log(programTimeArray)
+        let local_time = programTimeArray;
+        window.localStorage['local_time'] = local_time;
+        
+        //return programTimeArray
+    }
+    
+    // Функция в определенное id добавляет добавляет функцию с именем массива, который передается.
+    function addOnclick(arrayName, id) {
+        $(id).attr('onclick', `getTimeProgramName(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(80, screen.availHeight)+',width='+Math.min(1000, screen.availWidth)); return false;`)
+    }
+
+    let allNames = {'navigator_1_data':'navigator_1_programTable', 'navigator_2_golova_1_data':'', 'navigator_2_golova_2_data':'',
+        'navigator_3_data':'', 'trulaser_data':'', 'kometa_1_data':'',
+        'kometa_2_data':'',  'kometa_3_data':''}
+
+
+    let getKey = Object.keys(allNames)[0]
+    addOnclick(getKey, allNames[getKey])
+
+    
 </script>
 
 <script>
