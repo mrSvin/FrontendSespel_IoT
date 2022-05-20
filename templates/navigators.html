@@ -396,7 +396,9 @@
     var kometa_3_data = [[${kometa_3_data}]];
 </script>
 
+
 <script>
+//<![CDATA[
     function msToTime(duration) {
         let seconds = parseInt((duration / 1000) % 60),
             minutes = parseInt((duration / (1000 * 60)) % 60),
@@ -471,9 +473,9 @@
 
     let getKey = Object.keys(allNames)[0]
     addOnclick(getKey, allNames[getKey])
-
-    
+// ]]>
 </script>
+
 
 <script>
     // Массив с массивами
