@@ -462,9 +462,11 @@
     }
     
     // Функция в определенное id добавляет добавляет функцию с именем массива, который передается.
-    function addOnclick(arrayName, id) {
-        $(id).attr('onclick', `getTimeProgramName(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(80, screen.availHeight)+',width='+Math.min(1000, screen.availWidth)); return false;`)
-    }
+
+
+function addOnclick(arrayName, id) {
+    $('#' + id).attr('onclick', `getTimeProgramName(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(80, screen.availHeight)+',width='+Math.min(835, screen.availWidth)); return false;`)
+}
 
     let allNames = {'navigator_1_data':'navigator_1_programTable', 'navigator_2_golova_1_data':'', 'navigator_2_golova_2_data':'',
         'navigator_3_data':'', 'trulaser_data':'', 'kometa_1_data':'',
