@@ -65,7 +65,8 @@ caption {
 .icon_personal:hover > div,
 .icon_error:hover > div,
 .icon_power:hover > div,
-.icon_clock:hover > div{
+.icon_clock:hover > div,
+.icon_programTime:hover > div {
     color: #000000;
     position: relative;
     top: 5px;
@@ -150,6 +151,23 @@ caption {
     position: relative;
     top: -60px;
     right: 26px;
+}
+
+.icon_programTime{
+    background: url(../images/programTime.png) no-repeat;
+    background-size: 60px 60px;
+    margin-top: 10px;
+    margin-left: 30px;
+    padding-right: 20px;
+}
+.icon_programTime:hover {
+    -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+}
+
+.label_programTime{
+    color: #756e6e;
+    margin-top: 65px;
+    margin-left: 2px;
 }
 
 .choose_month {
