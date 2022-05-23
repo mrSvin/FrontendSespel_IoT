@@ -162,7 +162,6 @@ caption {
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;
-    padding-right: 20px;
 }
 .icon_programTime:hover {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
@@ -171,7 +170,7 @@ caption {
 .label_programTime{
     color: #756e6e;
     margin-top: 65px;
-    margin-left: 2px;
+    margin-left: -10px;
 }
 
 .choose_month {
