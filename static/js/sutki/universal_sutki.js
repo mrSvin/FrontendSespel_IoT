@@ -670,7 +670,7 @@ function getTimeProgramName(arrayData)
     let programTimeArray = [];
     let startSame = null
 
-    arrayData? console.log("yes"):0;
+    arrayData? console.log("FormTable"):0;
 
     for(let i = 0; i<arrayData[0].length; i+=2)
     {
@@ -679,12 +679,12 @@ function getTimeProgramName(arrayData)
         {
             if(arrayData[5][i/2] !== arrayData[5][i/2-1])
             {
-                console.log("Одинаковые начало")
+                //console.log("Одинаковые начало")
                 startSame = arrayData[0][i]
             }
 
             timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
-            arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
+            //arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
 
         }
 
@@ -694,14 +694,14 @@ function getTimeProgramName(arrayData)
             if(arrayData[5][i/2] == arrayData[5][i/2-1])
             {
                 timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
-                arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
-                console.log("Одинаковые конец")
+                //arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
+                //console.log("Одинаковые конец")
                 programTimeArray.push([arrayData[5][i/2], startSame.slice(11), arrayData[0][i+1].slice(11), msToTime(timer), msToTime(new Date(arrayData[0][i+1]) - new Date(startSame))])
                 timer = 0
             }
             else {
                 timer = (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
-                arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
+                //arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
                 programTimeArray.push([arrayData[5][i/2], arrayData[0][i].slice(11), arrayData[0][i+1].slice(11), msToTime(timer), msToTime(timer)])
                 timer = 0
             }
@@ -710,7 +710,7 @@ function getTimeProgramName(arrayData)
         }
 
     }
-    console.log(programTimeArray)
+    //console.log(programTimeArray)
 
     // Фильтрация массива на наличие запятых
     programTimeArray.map((elem)=>{
