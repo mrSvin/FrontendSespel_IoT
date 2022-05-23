@@ -65,12 +65,16 @@ caption {
 .icon_personal:hover > div,
 .icon_error:hover > div,
 .icon_power:hover > div,
-.icon_clock:hover > div,
 .icon_programTime:hover > div {
-    color: #000000;
     position: relative;
     top: 5px;
 }
+
+.icon_clock:hover > div {
+    position: relative;
+    top: -65px;
+}
+
 
 
 .icon_personal{
@@ -118,7 +122,7 @@ caption {
 
 }
 .icon_clock:hover {
-    -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+    filter: brightness(200%);
 }
 
 .label_mesto{

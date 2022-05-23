@@ -199,6 +199,7 @@ function mesto_personal(calen_1_color, back_color){
     $('.label_personal').attr('style','color:' + calen_1_color + ';'); // надпись персонал
     $('.label_error').attr('style','color:' + calen_1_color + ';'); // надпись персонал
     $('.label_power').attr('style','color:' + calen_1_color + ';'); // надпись персонал
+    $('.label_programTime').attr('style','color:' + calen_1_color + ';'); // надпись персонал
 
     $(".icon_mesto").hover(function() { // свечение при наведении на место
         $(this).css('-webkit-box-shadow', 'inset 0px 0px 12px 12px' + back_color);
@@ -219,6 +220,12 @@ function mesto_personal(calen_1_color, back_color){
     });
 
     $(".icon_power").hover(function() { // свечение при наведении на персонад
+        $(this).css('-webkit-box-shadow', 'inset 0px 0px 12px 12px' + back_color);
+    }, function(){
+        $(this).css('-webkit-box-shadow', 'none');
+    });
+
+    $(".icon_programTime").hover(function() { // свечение при наведении на место
         $(this).css('-webkit-box-shadow', 'inset 0px 0px 12px 12px' + back_color);
     }, function(){
         $(this).css('-webkit-box-shadow', 'none');
