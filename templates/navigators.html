@@ -470,7 +470,7 @@
     
 
 // Функция по id элемента и имени массива добавляет в элемент атрибут
-// onclick с вызовом функции с определенным массивом.
+// onclick с вызовом функции с определенным массивом .
 function addOnclick(id, arrayName) {
     let button = document.getElementById(id)
     button.setAttribute('onclick', `getTimeProgramName(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1200,screen.availHeight)+',width='+Math.min(835, screen.availWidth)); return false;`)
