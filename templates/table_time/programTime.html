@@ -51,15 +51,20 @@
     }
     window.localStorage['local_time'] = local_time;
 
-
-    console.log('Проверка, что пришло', local_time)
-
     // Преобразование строки в массив
      local_time = local_time.split(',')
 
+    // Преобразование массива после получения локальной переменной
+    let tableArray = [];
+    for(let i=0; i<local_time.length; i+=2)
+    {
+        tableArray.push([])
+        tableArray[i/2][0] = local_time[i]
+        tableArray[i/2][1] = local_time[i+1]
+    }
 
-    if(local_time !== null) {
-        local_time.forEach((elem, index) => {
+    if(tableArray !== null) {
+        tableArray.forEach((elem, index) => {
 
             // добавляем новую строку
             tbody.appendChild(document.createElement('tr'));
