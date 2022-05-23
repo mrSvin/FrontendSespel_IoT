@@ -9,24 +9,47 @@
 <body>
 
 <style>
+
     th, td {
         text-align: center;
     }
+
+    th:nth-child(4),th:nth-child(5),th:nth-child(1)
+    {
+        border: 1px solid #dee2e6;
+    }
+
+    tr>td:nth-of-type(4),tr>td:nth-of-type(5),tr>td:nth-of-type(1)
+    {
+        border: 1px solid #dee2e6;
+    }
+
+    .tableFixHead          { overflow: auto; height: 100px; }
+    .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+    /* Just common table stuff. Really. */
+    table  { border-collapse: collapse; width: 100%; }
+    th, td { padding: 8px 16px; }
+    th     { background:#eee; }
+
+
 </style>
 
-<table class="table" style="width: 100%; margin: 0 auto" id="timeTable">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Имя программы</th>
-        <th scope="col">Время начала</th>
-        <th scope="col">Время окончания</th>
-        <th scope="col">Время выполнения</th>
-        <th scope="col">Время с учетом пауз</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div class="tableFixHead">
+    <table class="table table-striped" style="width: 100%; margin: 0 auto" id="timeTable">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Имя программы</th>
+            <th scope="col">Время начала</th>
+            <th scope="col">Время окончания</th>
+            <th scope="col">Время выполнения</th>
+            <th scope="col">Время с учетом пауз</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 
 
 <script>
