@@ -917,9 +917,12 @@
             // Возведение числа в степень соответсвующую его индексу в массиве
             let out = num * 86400
 
-            if (Math.floor(out / 3600) > 0) return `${Math.floor(out / 3600)} ч. ${(out / 3600 % 1 * 60).toFixed(0)} мин. ${(out / 3600 % 60).toFixed(0)} сек.`;
+            console.log(msToTime(out*1000))
 
-            else return `${(out / 3600 % 1 * 60).toFixed(0)} мин. ${(out / 3600 % 60).toFixed(0)} сек`;
+            out = msToTime(out.toFixed(0)*1000)
+
+            if (+out.slice(0,2) > 0) return `${+out.slice(0,2)} ч. ${+out.slice(3,5)} мин. ${+out.slice(6,8)} сек.`;
+            else return `${+out.slice(3,5)} мин. ${+out.slice(6,8)} сек`;
         });
 
         //let local_time = arrayTime;
