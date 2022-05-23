@@ -650,4 +650,85 @@ function buildShort (stankiDataArray,  startContainer = 1, exception = [0])
     }); // Конец функции $.map(Diagram)
 }
 
+// Функция перевода миллисекунд в часы в формате 00:00:00
+function msToTime(duration) {
+    let seconds = parseInt((duration / 1000) % 60),
+        minutes = parseInt((duration / (1000 * 60)) % 60),
+        hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return hours + ":" + minutes + ":" + seconds;
+}
+
+// Функция формирования массивов с именами программы и их выполнением, локальные переменные
+function getTimeProgramName(arrayData)
+{
+    let timer = 0;
+    let programTimeArray = [];
+    let startSame = null
+
+    arrayData? console.log("yes"):0;
+
+    for(let i = 0; i<arrayData[0].length; i+=2)
+    {
+
+        if(arrayData[5][i/2] == arrayData[5][i/2+1])
+        {
+            if(arrayData[5][i/2] !== arrayData[5][i/2-1])
+            {
+                console.log("Одинаковые начало")
+                startSame = arrayData[0][i]
+            }
+
+            timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
+            arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
+
+        }
+
+        else
+        {
+
+            if(arrayData[5][i/2] == arrayData[5][i/2-1])
+            {
+                timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
+                arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
+                console.log("Одинаковые конец")
+                programTimeArray.push([arrayData[5][i/2], startSame.slice(11), arrayData[0][i+1].slice(11), msToTime(timer), new Date(startSame) - new Date(arrayData[0][i+1])])
+                timer = 0
+            }
+            else {
+                timer = (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
+                arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
+                programTimeArray.push([arrayData[5][i/2], arrayData[0][i].slice(11), arrayData[0][i+1].slice(11), msToTime(timer), msToTime(timer)])
+                timer = 0
+            }
+
+
+        }
+
+    }
+    console.log(programTimeArray)
+
+    // Фильтрация массива на наличие запятых
+    programTimeArray.map((elem)=>{
+        elem[0] = elem[0].split(',').join('_');
+        return elem
+    })
+
+    let local_time = programTimeArray;
+    window.localStorage['local_time'] = local_time;
+
+    //return programTimeArray
+}
+
+
+// Функция по id элемента и имени массива добавляет в элемент атрибут
+// onclick с вызовом функции с определенным массивом .
+function addOnclick(id, arrayName) {
+    let button = document.getElementById(id)
+    button.setAttribute('onclick', `getTimeProgramName(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1200,screen.availHeight)+',width='+Math.min(835, screen.availWidth)); return false;`)
+}
 

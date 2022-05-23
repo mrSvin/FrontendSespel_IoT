@@ -18,9 +18,10 @@
     <thead class="thead-dark">
     <tr>
         <th scope="col">Имя программы</th>
-        <th scope="col">Начало программы</th>
-        <th scope="col">Конец программы</th>
-        <th scope="col">Общее время выполнения</th>
+        <th scope="col">Время начала</th>
+        <th scope="col">Время окончания</th>
+        <th scope="col">Время выполнения</th>
+        <th scope="col">Время с учетом пауз</th>
     </tr>
     </thead>
     <tbody>
@@ -58,13 +59,14 @@
 
     // Преобразование массива после получения локальной переменной
     let tableArray = [];
-    for(let i=0; i<local_time.length; i+=4)
+    for(let i=0; i<local_time.length; i+=5)
     {
         tableArray.push([])
         tableArray[i/4][0] = local_time[i]
         tableArray[i/4][1] = local_time[i+1]
         tableArray[i/4][2] = local_time[i+2]
         tableArray[i/4][3] = local_time[i+3]
+        tableArray[i/4][4] = local_time[i+4]
     }
 
     if(tableArray !== null) {
@@ -80,44 +82,17 @@
             lastRow = tbody.rows.length -1
             lastCell = tableRow[lastRow].cells.length - 1
 
+            for(let i=0; i<=4; i++)
+            {
+                // добавляем в последнюю строку новую ячейку
+                tableRow[lastRow].appendChild(document.createElement('td'))
 
-            // добавляем в последнюю строку новую ячейку
-            tableRow[lastRow].appendChild(document.createElement('td'))
+                // обновляем индекс последней ячейки
+                lastCell = tableRow[lastRow].cells.length - 1
 
-            // обновляем индекс последней ячейки
-            lastCell = tableRow[lastRow].cells.length - 1
-
-            // записываем в последюю ячейку первый элемент  массива
-            tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[0]
-
-
-            // добавляем в последнюю строку новую ячейку
-            tableRow[lastRow].appendChild(document.createElement('td'))
-
-            // обновляем индекс последней ячейки
-            lastCell = tableRow[lastRow].cells.length - 1
-
-            // записываем в последюю ячейку второй элемент массива
-            tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[1]
-
-            // добавляем в последнюю строку новую ячейку
-            tableRow[lastRow].appendChild(document.createElement('td'))
-
-            // обновляем индекс последней ячейки
-            lastCell = tableRow[lastRow].cells.length - 1
-
-            // записываем в последюю ячейку второй элемент массива
-            tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[2]
-
-            // добавляем в последнюю строку новую ячейку
-            tableRow[lastRow].appendChild(document.createElement('td'))
-
-            // обновляем индекс последней ячейки
-            lastCell = tableRow[lastRow].cells.length - 1
-
-            // записываем в последюю ячейку второй элемент массива
-            tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[3]
-
+                // записываем в последюю ячейку первый элемент  массива
+                tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[i]
+            }
 
         })
     }
