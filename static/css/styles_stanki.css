@@ -122,7 +122,7 @@ caption {
 
 }
 .icon_clock:hover {
-    filter: brightness(200%);
+    filter: brightness(150%);
 }
 
 .label_mesto{
