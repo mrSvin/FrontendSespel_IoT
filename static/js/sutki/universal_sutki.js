@@ -696,7 +696,7 @@ function getTimeProgramName(arrayData)
                 timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
                 arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
                 console.log("Одинаковые конец")
-                programTimeArray.push([arrayData[5][i/2], startSame.slice(11), arrayData[0][i+1].slice(11), msToTime(timer), new Date(startSame) - new Date(arrayData[0][i+1])])
+                programTimeArray.push([arrayData[5][i/2], startSame.slice(11), arrayData[0][i+1].slice(11), msToTime(timer), msToTime(new Date(arrayData[0][i+1]) - new Date(startSame))])
                 timer = 0
             }
             else {
