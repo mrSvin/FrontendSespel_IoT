@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Станки</title>
-    <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+    <title>Отчет по сменам</title>
+    <link rel="shortcut icon" type="image/ico"/>
 
     <link rel="stylesheet" type="text/css" href="/css/styles_stanki.css"/>
     <link rel="stylesheet" type="text/css" href="/css/menu_buttons.css"/> <!-- Меню -->
     <link rel="stylesheet" type="text/css" href="/css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/userscontrol.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/styles_energy.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/alarm_styles.css"/>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
@@ -22,14 +24,97 @@
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap-3.3.0.min.js"></script>
 
-    <script src="/js/sutki/universal_sutki.js"></script>
+    <script src="/js/smena/smena.js"></script>
     <script src="/js/mesto.js"></script>
     <script src="/js/dark_theme.js"></script>
 
     <!--Календарь -->
-    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-datepicker.ru.min.js"></script>
-    <script src="/js/sutki/calendar_sutki.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
+    <script src="/js/smena/calendar_smena.js"></script>
+    <script>
+
+        // Функция получение пользовательских данных
+        function SetUserSetting() {
+            $.post("/api/userInfo", function( data ) {
+
+                $('.avatar').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
+                $('.dropdown-content img').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
+                $('.div_login_mail li').html(data.userName); // картинка лого для папок на уровень ниже
+                $('.div_login_mail p').html(data.userMail); // картинка лого для папок на уровень ниже
+
+                var role_status = data.userRole;
+
+                if (role_status === "ROLE_ADMIN") {
+                    document.getElementById("role_vision").innerHTML = "Роль: Админ";
+                    document.getElementById("admin").style.display = "inline";
+
+                } else if (role_status === "ROLE_USER") {
+                    document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
+                    document.getElementById("admin").style.display = "none";
+                }
+            })
+        }
+
+
+        $(function () {
+            $('#datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
+
+
+            $('#button_obnovit').on("click", function () {
+
+                $('#button_obnovit').attr('disabled', 'true')
+                setTimeout(ActiveButton,1500)
+                $('.follow').addClass('load')
+
+                var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+
+                linear_rabota = [];
+                linear_pause = [];
+                linear_off = [];
+                linear_avar = [];
+                linear_nagruzka = [];
+
+                kol_op = [];
+                kol_long_operations = [];
+
+                linear_rabota_2 = [];
+                linear_pause_2 = [];
+                linear_off_2 = [];
+                linear_avar_2 = [];
+                linear_nagruzka_2 = [];
+
+                kol_op_2 = [];
+                kol_long_operations_2 = [];
+
+
+                date = new Date(datas); // some mock date
+                ms = date.getTime() - 86400000;
+
+                startTime = datas.slice(0, 10)
+                pastTime = new Date(ms).toISOString().slice(0, 10)
+
+                clone = JSON.parse(JSON.stringify(objectStankov))
+                allStanki = Names.length
+
+                Diagram = []
+                GetAllData(Names, clone)
+            });
+        });
+
+    </script>   <!--Календарь js-->
 
     <!--preloader style-->
     <style>
@@ -105,39 +190,43 @@
     </style>
 
 </head>
+
 <header>
     <div style="display: flex; width: 100vw; justify-content: space-between; flex-wrap: nowrap; width: 100%;">
-        <a href="home" style="display: flex; align-items: flex-start;" ><img src="images/logo_black.png" class="icon-logo"/></a>
+        <a href="../../home" style="display: flex; align-items: flex-start;" ><img src="../../images/logo_black.png" class="icon-logo icon-alarm"/></a>
         <ul id="menu_ul">
-            <li id="menu_li"><a id="menu_a" href="displayStanki" class="menu-color">Мех.уч.2 пл.</a><div class="neo-line"></div></li>
-            <li id="menu_li1"><a id="menu_a1" href="kim">ОТК</a></li>
-            <li id="menu_li2"><a id="menu_a2" href="navigators">Резка</a></li>
-            <li id="menu_li3"><a id="menu_a3" href="stanki_meh">Мех.уч.1 пл.</a></li>
-            <li id="menu_li4"><a id="menu_a4" href="robots">Роботы</a></li>
-            <li id="menu_li5"><a id="menu_a5" href="spec_complexes">Спец. комплексы</a></li>
-            <li id="menu_li6"><a id="menu_a6" href="sclads">Склады</a></li>
-            <li id="menu_li7"><a id="menu_a7" href="liteyka">Литьё</a></li>
-            <li id="menu_li8"><a id="menu_a8" href="gibka">Гибка</a></li>
+            <li id="menu_li"><a id="menu_a" href="../displayStanki">Мех.уч.2 пл.</a></li>
+            <li id="menu_li1"><a id="menu_a1" href="../kim">ОТК</a></li>
+            <li id="menu_li2"><a id="menu_a2" href="../navigators" class="menu-color">Резка</a><div class="neo-line"></div></li>
+            <li id="menu_li3"><a id="menu_a3" href="../stanki_meh">Мех.уч.1 пл.</a></li>
+            <li id="menu_li4"><a id="menu_a4" href="../robots">Роботы</a></li>
+            <li id="menu_li5"><a id="menu_a5" href="../spec_complexes">Спец. комплексы</a></li>
+            <li id="menu_li6"><a id="menu_a6" href="../sclads">Склады</a></li>
+            <li id="menu_li7"><a id="menu_a7" href="../liteyka">Литьё</a></li>
+            <li id="menu_li8"><a id="menu_a8" href="../gibka">Гибка</a></li>
         </ul>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
-                <li th:text="${user_name}"></li>
-                <p th:text="${user_mail}"></p>
+                <li></li>
+                <p></p>
             </div>
             <div method="post" class="dropdown">
-                <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+                <input type="image" alt="Avatar" class="avatar"/>
                 <div class="dropdown-content">
                     <p id="role_vision"></p>
-                    <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
-                    <li th:text="${user_name}"></li>
-                    <p th:text="${user_mail}"></p>
-                    <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
-                    <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
+                    <p><img width="100" style="border-radius: 360px; margin-top:0; "/></p>
+                    <div class="div_login_mail">
+                        <li></li>
+                        <p></p>
+                    </div>
+                    <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование
+                    </button>
                     <label class="switch">
                         <p>Светлая Темная</p>
-                        <span class="slider round"><input type="checkbox" id='dark_button'/><span class="slider_before round_before"></span></span>
+                        <span class="slider round"><input type="checkbox" id='dark_button'/><span
+                                class="slider_before round_before"></span></span>
                     </label>
-                    <form th:action="@{/logout}" method="post">
+                    <form action="/logout" method="post">
                         <button class="follow" type="submit">
                             Выход
                         </button>
@@ -148,13 +237,35 @@
     </div>
     <div style="display:flex; justify-content: center;">
         <form>
-            <button  formaction="displayStanki" class="button_color button_color_active">Суточный отчет<div class="neo-line"></div></button>
-            <button formaction="displayStankiMonth" class="button_color">Месячный отчет</button>
-            <button formaction="smena/smena_meh2" class="button_color">Отчет по сменам</button>
+            <button  formaction="../displayStanki" class="button_color">Суточный отчет</button>
+            <button formaction="../displayStankiMonth" class="button_color">Месячный отчет</button>
+            <button formaction="smena_meh2" class="button_color button_color_active">Отчет по сменам<div class="neo-line"></div></button>
         </form>
     </div>  <!-- Меню -->
+
+    <div class="container" style="display: flex; justify-content: center; align-items: center;">
+        <div style="width: 250px; float: left">
+            <h2 class="choose_month">Выберите дату:</h2>
+        </div>
+        <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
+
+            <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+                <input type='text' class="form-control" value=""/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </form>
+        <div class="form-actions">
+            <button class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+                <span>Обновить</span>
+            </button>
+        </div>
+    </div>      <!--Календарь html-->
+
 </header>       <!--Шапка html-->
-<!-- Загрузка страницы -->
+
+<body>
 <div class="preloader">
     <div class="preloader__row">
         <div class="preloader__item"></div>
@@ -163,6 +274,7 @@
 </div>
 <!-- Загрузка страницы и темная тема-->
 <script>
+    SetUserSetting()
     var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
 
     if(localStorage['dark_theme_state'] != null) {
@@ -194,38 +306,14 @@
     }
 </script>
 
-<body>
-<!--Календарь html-->
-<div class="container" style="display: flex; justify-content: center; align-items: center;">
-    <div style="width: 250px; float: left">
-        <h2 class="choose_month">Выберите дату:</h2>
-    </div>
-    <form action="#" th:action="@{/displayStanki}" th:object="${calendar_date}" method="post" style="margin: 0 20px; display: flex; align-items: center;">
-        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
-            <input type='text' class="form-control" th:field="*{content_date}"/>
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-        </div>
-        <div class="form-actions" style="margin-left: 20px">
-            <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
-                <span>Обновить</span>
-            </button>
-        </div>
-    </form>
-</div>
-
-
-<div style="display: flex; justify-content: space-between; align-items: flex-end;">
-
-    <div id="container_sum_zagruzka" style="min-height: 420px; width: 40%"></div>
-    <!--Общая загрузка html-->
-    <a style="text-decoration: none;" class="icon_clock" href="table_time/tableTime" onclick="sendTime(names, Diagram); window.open(this.href, '', 'scrollbars=1,height='+Math.min(705, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-        <div class='label_clock'>Время</div>
-    </a>
-    <div id="container_kol_operations" style="height: 420px; width: 50%"></div>
-    <!--Количество операций html-->
-</div>  <!--Общая загрузка и количество операций html-->
+<div style="display: flex; justify-content: space-between;">
+    <div id="container_sum_zagruzka" style="height: 400px; width: 800px"></div>
+    <div id="container_kol_operations" style="height: 400px; width: 50%"></div>
+</div>  <!--Общая загрузка  html-->
+<div style="display: flex; justify-content: space-between;">
+    <div id="container_sum_zagruzka_2" style="height: 400px; width: 800px"></div>
+    <div id="container_kol_operations_2" style="height: 400px; width: 50%"></div>
+</div>  <!--Общая загрузка  html-->
 
 <div style="border: 1px solid #333;">
     <div style="overflow: hidden;">
@@ -249,89 +337,13 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work1" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container1" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work1" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container1" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--УФ 5220 html-->
-    <form method="post" style="margin: 1%;">
-        <center>
-            <table width="98%">
-
-                <text class="first">Текущие параметры комплекса</text>
-                <tr>
-                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
-                    <th colspan="2" style="text-align:center">Технология</th>
-                    <th colspan="2" style="text-align:center">Координаты</th>
-                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
-                </tr>
-                <tr>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Номер инструмента</td>
-                    <td>
-                        <li th:text="${nomer_inst}"></li>
-                    </td>
-                    <td>Имя УП</td>
-                    <td><small th:text="${name_program}"></small></td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${pos_x}"></li>
-                    </td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${nagr_x}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор подачи</td>
-                    <td>
-                        <li th:text="${kor_podach}"></li>
-                    </td>
-                    <td>Номер кадра</td>
-                    <td>
-                        <li th:text="${nomer_kadr}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${pos_y}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${nagr_y}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор скорости</td>
-                    <td>
-                        <li th:text="${kor_speed}"></li>
-                    </td>
-                    <td>Статус программы</td>
-                    <td>
-                        <li th:text="${status_work}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${pos_z}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${nagr_z}"></li>
-                    </td>
-                </tr>
-
-            </table>
-        </center>
-    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
 </div> <!--УФ 5220 html-->
 
 <div style="border: 1px solid #333;">   <!--Прогресс html-->
@@ -357,89 +369,13 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work2" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container2" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work3" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container3" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work4" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container4" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--Прогресс html-->
-    <form method="post" style="margin: 1%;">
-        <center>
-            <table width="98%">
-
-                <text class="first">Текущие параметры комплекса</text>
-                <tr>
-                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
-                    <th colspan="2" style="text-align:center">Технология</th>
-                    <th colspan="2" style="text-align:center">Координаты</th>
-                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
-                </tr>
-                <tr>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Номер инструмента</td>
-                    <td>
-                        <li th:text="${progress_nomer_inst}"></li>
-                    </td>
-                    <td>Имя УП</td>
-                    <td><small th:text="${progress_name_program}"></small></td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${progress_pos_x}"></li>
-                    </td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${progress_nagr_x}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор подачи</td>
-                    <td>
-                        <li th:text="${progress_kor_podach}"></li>
-                    </td>
-                    <td>Номер кадра</td>
-                    <td>
-                        <li th:text="${progress_nomer_kadr}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${progress_pos_y}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${progress_nagr_y}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор скорости</td>
-                    <td>
-                        <li th:text="${progress_kor_speed}"></li>
-                    </td>
-                    <td>Статус программы</td>
-                    <td>
-                        <li th:text="${progress_status_work}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${progress_pos_z}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${progress_nagr_z}"></li>
-                    </td>
-                </tr>
-
-            </table>
-        </center>
-    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
 </div> <!--Прогресс html-->
 
 <div style="border: 1px solid #333;">   <!--NTX1000 html-->
@@ -464,91 +400,13 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work3" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container3" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work5" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container5" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--NTX1000 html-->
-    <form method="post" style="margin: 1%;">
-        <center>
-            <table width="98%">
-
-                <text class="first">Текущие параметры комплекса</text>
-                <tr>
-                    <th colspan="2" style="padding:5px 35px; text-align:center">Шпиндель</th>
-                    <th colspan="2" style="text-align:center">Технология</th>
-                    <th colspan="2" style="text-align:center">Координаты</th>
-                    <th colspan="2" style="text-align:center">Нагрузки по осям</th>
-                </tr>
-                <tr>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Наименование</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                    <td class="first">Ось</td>
-                    <td class="first">Значение</td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Номер инструмента</td>
-                    <td>
-                        <li th:text="${ntx1000_nomer_inst}"></li>
-                    </td>
-                    <td>Имя УП</td>
-                    <td>
-                        <li th:text="${ntx1000_name_program}"></li>
-                    </td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${ntx1000_pos_x}"></li>
-                    </td>
-                    <td>X</td>
-                    <td>
-                        <li th:text="${ntx1000_nagr_x}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор подачи</td>
-                    <td>
-                        <li th:text="${ntx1000_kor_podach}"></li>
-                    </td>
-                    <td>Номер кадра</td>
-                    <td>
-                        <li th:text="${ntx1000_nomer_kadr}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${ntx1000_pos_y}"></li>
-                    </td>
-                    <td>Y</td>
-                    <td>
-                        <li th:text="${ntx1000_nagr_y}"></li>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:5px 5px;">Корректор скорости</td>
-                    <td>
-                        <li th:text="${ntx1000_kor_speed}"></li>
-                    </td>
-                    <td>Статус программы</td>
-                    <td>
-                        <li th:text="${ntx1000_status_work}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${ntx1000_pos_z}"></li>
-                    </td>
-                    <td>Z</td>
-                    <td>
-                        <li th:text="${ntx1000_nagr_z}"></li>
-                    </td>
-                </tr>
-
-            </table>
-        </center>
-    </form><!--Таблица Текущие параметры комплекса УФ 5220-->
 </div> <!--NTX1000 html-->
 
 <div style="border: 1px solid #333;">   <!--sk50 html-->
@@ -573,10 +431,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work4" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container4" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work7" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container7" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work8" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container8" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--sk50 html-->
 </div> <!--sk50 html-->
@@ -603,10 +462,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work5" style="float: left; height: 400px; width: 55%"></div>
-            <!--Вставляем линейную гистограмму работы-->
-            <div id="container5" style="float: left; height: 400px; width: 25%"></div>
-            <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work9" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container9" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work10" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container10" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--apec html-->
 </div> <!--apec html-->
@@ -624,8 +484,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work6" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container6" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work11" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container11" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work12" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container12" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>
 </div> <!--DMU50-3 html-->
@@ -643,8 +506,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work7" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container7" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work13" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container13" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work14" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container14" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>
 </div> <!--DMU50-4 html-->
@@ -662,8 +528,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work8" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container8" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work15" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container15" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work16" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container16" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--ctx310_2 html-->
 </div> <!--ctx310_2 html-->
@@ -681,8 +550,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work9" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container9" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work17" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container17" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work18" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container18" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--ctx510_2 html-->
 </div> <!--ctx510_2 html-->
@@ -700,8 +572,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work10" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container10" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work19" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container19" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work20" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container20" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--ctx510_3 html-->
 </div> <!--ctx510_3 html-->
@@ -719,8 +594,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work11" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container11" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work21" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container21" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work22" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container22" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--ctx310_3 html-->
 </div> <!--ctx310_3 html-->
@@ -738,8 +616,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work12" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container12" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work23" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container23" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work24" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container24" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--ctx510_4 html-->
 </div> <!--ctx510_4 html-->
@@ -757,8 +638,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work13" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container13" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work25" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container25" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work26" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container26" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>  <!--ctx510_5 html-->
 </div> <!--ctx510_5 html-->
@@ -776,8 +660,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work14" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container14" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work27" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container27" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work28" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container28" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>
 
@@ -796,8 +683,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work15" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container15" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work29" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container29" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work30" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container30" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>
 </div> <!--DMU50-5 html-->
@@ -815,8 +705,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work16" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container16" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work31" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container31" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work32" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container32" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>
 </div> <!--DMU50-6 html-->
@@ -834,8 +727,11 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work17" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
-            <div id="container17" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work33" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container33" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work34" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container34" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>
 </div> <!--DMU50-7 html-->
@@ -853,192 +749,91 @@
                     </div>
                 </div>
             </div>
-            <div id="container_work18" style="float: left; height: 400px; width: 55%"></div><!--Вставляем линейную гистограмму работы-->
-            <div id="container18" style="float: left; height: 400px; width: 25%"></div><!--Вставляем круговую диаграмму загрузки-->
+            <div id="container_work35" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container35" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+
+            <div id="container_work36" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+            <div id="container36" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
         </div>
     </div>
 </div> <!--AR55 html-->
 
-<!--Скрипт парсинга и заполнения диаграмм-->
-<script th:inline="javascript">
-    // Переменные для общих диаграмм.
+
+<!--Скрипт объявления переменных и запуска основного скрипта-->
+<script>
+    // Переменная с именами станков для общих диаграмм
+    let generalDiagramNames = ['УФ5220', 'СТП Сеспель', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5','DMU50 #6','DMU50 #7', 'AR55']
 
     var linear_rabota = [];
     var linear_pause = [];
     var linear_off = [];
     var linear_avar = [];
     var linear_nagruzka = [];
-    var linear_ruchnoi = [];
 
     var kol_op = [];
     var kol_long_operations = [];
 
-    //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
+    var linear_rabota_2 = [];
+    var linear_pause_2 = [];
+    var linear_off_2 = [];
+    var linear_avar_2 = [];
+    var linear_nagruzka_2 = [];
 
-    var uf5220_data = [[${uf5220_data}]];
-    var progress_data = [[${progress_data}]];
-    var ntx1000_data = [[${ntx1000_data}]];
-    var sk50_data = [[${sk50_data}]];
-    var apec_data = [[${apec_data}]];
-    var dmu50_3_data = [[${dmg_dmu50_3_data}]];
-    var dmu50_4_data = [[${dmg_dmu50_4_data}]];
-    var ctx310_2_data = [[${dmg_ctx310_2_data}]];
-    var ctx510_2_data = [[${dmg_ctx510_2_data}]];
-    var ctx510_3_data = [[${dmg_ctx510_3_data}]];
-    var ctx310_3_data = [[${dmg_ctx310_3_data}]];
-    var ctx510_4_data = [[${dmg_ctx510_4_data}]];
-    var ctx510_5_data = [[${dmg_ctx510_5_data}]];
-    var dmc1035_2_data = [[${dmg_dmc1035_2_data}]];
-    var dmu50_5_data = [[${dmg_dmu50_5_data}]];
-    var dmu50_6_data = [[${dmg_dmu50_6_data}]];
-    var dmu50_7_data = [[${dmg_dmu50_7_data}]];
-    var ar55_data = [[${ar55_data}]];
-</script>
+    var kol_op_2 = [];
+    var kol_long_operations_2 = [];
 
-<script>
-    // переменные для формирования таблицы времени работы станков
-    let names = ['УФ5220', 'СТП Сеспель', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5','DMU50 #6','DMU50 #7', 'AR55']
+    // Переменные настройка текущей и предыдущей даты
+    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    var date = new Date(time); // some mock date
+    var ms = date.getTime() - 86400000;
+    // Текущая и предыдущая даты. Глобальные переменные, видные из функций
+    var startTime = time.slice(0, 10)
+    var pastTime = new Date(ms).toISOString().slice(0, 10)
+    $('.form-control').attr('value', startTime)
 
-    // Массив с данными станков
-    const Diagram = [uf5220_data, progress_data, ntx1000_data, sk50_data, apec_data, dmu50_3_data,
-        dmu50_4_data, ctx310_2_data, ctx510_2_data, ctx510_3_data,  ctx310_3_data, ctx510_4_data, ctx510_5_data, dmc1035_2_data, dmu50_5_data,dmu50_6_data, dmu50_7_data, ar55_data]
 
-    // Массив с исключениями. Аргументы: индекс станка в массиве Diagram где нужно записать исключение, остальные параметры опциональны
-    // Новый цвет для линейной диаграммы, массив с цветами для круговой, переменная для создания отдельной от нагрузки переменной
-    // либо ruchnoi, либо что угодно или ничего
-    var exception = [[4,'Ручной режим','#5c7ed0', ['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'],'ruchnoi'],];
-
-    // Функция сборщик, аргументы:
-    // Массив со станками, с какого станка начать, исключения если имеются,
-    // 2-ой и 3-ий аргументы опциональны
-    build(Diagram, 1, exception)
-
-    // Формирование графиков для общих круговой и линейной диаграммы
-    colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
-    Highcharts.chart('container_sum_zagruzka', {
-        chart: {
-            type: 'column'
-        },
-        colors:colorsLine,
-        title: {
-            text: 'Общая загрузка оборудования'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: ['УФ5220', 'СТП Сеспель', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5','DMU50 #6','DMU50 #7', 'AR55']
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Авария',
-            data: linear_avar
-        }, {
-            name: 'Выключен',
-            data: linear_off
-        },{
-            name: 'Ручной',
-            data: linear_ruchnoi
-        }, {
-            name: 'Ожидание',
-            data: linear_pause
-        }, {
-            name: 'Под нагрузкой',
-            data: linear_nagruzka
-        }, {
-            name: 'Работа',
-            data: linear_rabota
-        }, ]
-    });
-
-    Highcharts.chart('container_kol_operations', {
-        chart: {
-            type: 'bar',
-            marginLeft: 110
-        },
-        title: {
-            text: 'Количество операций'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '10px',
-                }
-            },
-            categories: ['УФ5220', 'СТП Сеспель', 'NTX1000', 'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2', 'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4', 'CTX510 #5', 'DMC1035 #2', 'DMU50 #5', 'DMU50 #6', 'DMU50 #7', 'AR55'],
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Количество',
-                align: 'high'
-            },
-            labels: {
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: ' операций'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Общее количество операций',
-            data: kol_op,
-        }, {
-            name: 'Количество операций более 3 минут',
-            data: kol_long_operations,
-        }]
-    });
-</script>
-
-<script th:inline="javascript">
-    var role_status = [[${user_role}]];
-
-    if(role_status === "ROLE_ADMIN")
-    {
-        document.getElementById("role_vision").innerHTML = "Роль: Админ";
-        document.getElementById("admin").style.display = "inline";
-
+    // Функция назначения объектам свойств
+    function objectStatus() {return {'today':[], 'yesterday': [], 'ready': [], 'complete':[]}}
+    // Назанечение объекту полей.
+    const objectStankov = {
+        'uf5220_data': objectStatus(),
+        'progress_data': objectStatus(),
+        'ntx1000_data': objectStatus(),
+        'sk50_data': objectStatus(),
+        'trulaser': objectStatus(),
+        'apec_data': objectStatus(),
+        'dmu50_3_data': objectStatus(),
+        'dmu50_4_data': objectStatus(),
+        'ctx310_2_data': objectStatus(),
+        'ctx510_2_data': objectStatus(),
+        'ctx510_3_data': objectStatus(),
+        'ctx310_3_data': objectStatus(),
+        'ctx510_4_data': objectStatus(),
+        'ctx510_5_data': objectStatus(),
+        'dmc1035_2_data': objectStatus(),
+        'dmu50_5_data': objectStatus(),
+        'dmu50_6_data': objectStatus(),
+        'dmu50_7_data': objectStatus(),
+        'ar55_data': objectStatus(),
     }
-    else if (role_status === "ROLE_USER")
-    {
-        document.getElementById("role_vision").innerHTML = "Роль: Пользователь";
-        document.getElementById("admin").style.display = "none";
-    }
-</script>
-<!--Скрипт отображения в header  кнопки администрирование-->
 
+    // Клон объекта станков, чтобы не изменять оригинальный объект
+    var clone = JSON.parse(JSON.stringify(objectStankov))
+
+    // Имена берутся из ключей названий
+    var Names = Object.keys(clone)
+
+    // Переменная хранящая количество станков, работает в функции checkerAllReady()
+    var allStanki = Names.length
+
+    // Переменная в которую запишутся данные всех смен.
+    var Diagram = []
+
+    // Функция получения и отправки данных из запросов в clone и вызовом функции рисования графиков.
+    GetAllData(Names, clone)
+</script>
+
+<!-- Скрипт вызова функции для выпадающего меню -->
 <script src="/js/dropdown_menu.js"></script>
 
 </body>
