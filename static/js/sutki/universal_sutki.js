@@ -732,3 +732,50 @@ function addOnclick(id, arrayName) {
     button.setAttribute('onclick', `getTimeProgramName(${arrayName}); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1200,screen.availHeight)+',width='+Math.min(835, screen.availWidth)); return false;`)
 }
 
+// Функция принимает массив и возвращает время в минутах и часах, создавая локальную переменную массива
+// с общей таблицей работы станков
+function convertTime(roundArray, name) {
+
+    if(roundArray == roundArray.length)
+    {
+        return [name, '0 минут','0 минут','0 минут','0 минут','0 минут',]
+    }
+
+    let hourArray = roundArray[6]
+    let sumArray = hourArray.reduce((acc, num) => acc + num, 0);
+
+    let arrayPercent = hourArray.map(function (num, index) {
+        return num / sumArray
+    });
+
+    let arrayTime = arrayPercent.map(function (num, index) {
+        // Возведение числа в степень соответсвующую его индексу в массиве
+        let out = num * 86400
+
+        out = msToTime(out.toFixed(0)*1000)
+
+        if (+out.slice(0,2) > 0) return `${+out.slice(0,2)} ч. ${+out.slice(3,5)} мин. ${+out.slice(6,8)} сек.`;
+        else return `${+out.slice(3,5)} мин. ${+out.slice(6,8)} сек`;
+    });
+
+    //let local_time = arrayTime;
+    //window.localStorage['local_time'] = local_time;
+    arrayTime.unshift(name)
+    return arrayTime
+}
+
+function sendTime(names, datas){
+
+    let array = []
+
+    for(let i=0; datas.length > i; i++)
+    {
+        array.push(convertTime(datas[i], names[i]))
+    }
+
+    console.log(array)
+
+    let local_time = array;
+    window.localStorage['local_time'] = local_time;
+}
+
