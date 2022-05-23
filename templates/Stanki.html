@@ -917,9 +917,9 @@
             // Возведение числа в степень соответсвующую его индексу в массиве
             let out = num * 86400
 
-            if (Math.floor(out / 3600) > 0) return `${Math.floor(out / 3600)} часов ${(out / 3600 % 1 * 60).toFixed(1)} минут `;
+            if (Math.floor(out / 3600) > 0) return `${Math.floor(out / 3600)} ч. ${(out / 3600 % 1 * 60).toFixed(0)} мин. ${(out / 3600 % 60).toFixed(0)} сек.`;
 
-            else return `${(out / 3600 % 1 * 60).toFixed(1)} минут `;
+            else return `${(out / 3600 % 1 * 60).toFixed(0)} мин. ${(out / 3600 % 60).toFixed(0)} сек`;
         });
 
         //let local_time = arrayTime;
