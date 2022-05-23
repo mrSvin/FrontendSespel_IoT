@@ -455,6 +455,13 @@
 
         }
         console.log(programTimeArray)
+
+        // Фильтрация массива на наличие запятых
+        programTimeArray.map((elem)=>{
+            elem[0] = elem[0].split(',').join('_');
+            return elem
+        })
+
         let local_time = programTimeArray;
         window.localStorage['local_time'] = local_time;
         
