@@ -257,6 +257,8 @@
                     <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="navigator_2(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
                     <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_navigator_2" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                     <a style="text-decoration: none; float: left" class="icon_power" href="stanki/navigatorPower" onclick="navigator_2_golova_2_power(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_power'>Излучение</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_programTime" id="navigator_2_golova_1_programTable" href="table_time/programTime"><div class='label_programTime'>Время</div></a>
+                    <a style="text-decoration: none; float: left" class="icon_programTime" id="navigator_2_golova_2_programTable" href="table_time/programTime"><div class='label_programTime'>Время</div></a>
                 </div>
             </div>
         </div>
@@ -287,6 +289,7 @@
                         <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="navigator_3(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
                         <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_navigator_3" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
                         <a style="text-decoration: none; float: left" class="icon_power" href="stanki/navigatorPower" onclick="navigator_3_power(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_power'>Излучение</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_programTime" id="navigator_3_programTable" href="table_time/programTime"><div class='label_programTime'>Время</div></a>
                     </div>
                 </div>
             </div>
@@ -306,6 +309,7 @@
                     <div>
                         <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="trulaser(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(1320, screen.availHeight)+',width='+Math.min(1200, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
                         <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_trulaser" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+                        <a style="text-decoration: none; float: left" class="icon_programTime" id="trulaser_programTable" href="table_time/programTime"><div class='label_programTime'>Время</div></a>
                     </div>
                 </div>
             </div>
@@ -401,15 +405,21 @@
 //<![CDATA[
 
 
-    let allNames = {'navigator_1_data':'navigator_1_programTable', 'navigator_2_golova_1_data':'', 'navigator_2_golova_2_data':'',
-        'navigator_3_data':'', 'trulaser_data':'', 'kometa_1_data':'',
+    let allNames = {'navigator_1_data':'navigator_1_programTable', 'navigator_2_golova_1_data':'navigator_2_golova_1_programTable', 'navigator_2_golova_2_data':'navigator_2_golova_2_programTable',
+        'navigator_3_data':'navigator_3_programTable', 'trulaser_data':'trulaser_programTable', 'kometa_1_data':'',
         'kometa_2_data':'',  'kometa_3_data':''}
 
+    for(let i=0; i<=4; i++)
+    {
+        let getKey = Object.keys(allNames)[i]
+        addOnclick(allNames[getKey],getKey)
+    }
+
     // Получаем название массива данных
-    let getKey = Object.keys(allNames)[0]
+    //let getKey = Object.keys(allNames)[0]
 
     // Отправляет id и название массива
-    addOnclick(allNames[getKey],getKey)
+    //addOnclick(allNames[getKey],getKey)
 // ]]>
 </script>
 
