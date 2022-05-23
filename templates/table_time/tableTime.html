@@ -9,12 +9,24 @@
 <body>
 
 <style>
+
     th, td {
         text-align: center;
     }
+
+
+    th:nth-child(n)
+    {
+        border: 1px solid #dee2e6;
+    }
+
+    tr>td:nth-of-type(n)
+    {
+        border: 1px solid #dee2e6;
+    }
 </style>
 
-<table class="table" style="width: 100%; margin: 0 auto" id="timeTable">
+<table class="table table-striped" style="width: 100%; margin: 0 auto" id="timeTable">
     <thead class="thead-dark">
     <tr>
         <th scope="col">Оборудование</th>
