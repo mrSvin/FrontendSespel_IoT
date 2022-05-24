@@ -5,46 +5,12 @@
     <title>Таблица работы станков</title>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/tables.css" rel="stylesheet"/>
     <script src="/js/table-to-excel@v1.0.4.js"></script>
 </head>
 <body>
 
-<style>
-
-    th, td {
-        text-align: center;
-    }
-
-
-    th:nth-child(n)
-    {
-        border: 1px solid #dee2e6;
-    }
-
-    tr>td:nth-of-type(n)
-    {
-        border: 1px solid #dee2e6;
-    }
-
-    .excelIcon {
-        float: right;
-        height: 10vh;
-        margin: 5px;
-        cursor: pointer;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        opacity: 40%;
-        transition: 1s;
-    }
-
-    .excelIcon:hover {
-        filter: brightness(90%);
-        opacity: 100%;
-    }
-</style>
-
-<table class="table table-striped" style="width: 100%; margin: 0 auto" id="timeTable">
+<table class="table table-striped" id="timeTable">
     <thead class="thead-dark">
     <tr>
         <th scope="col">Оборудование</th>
@@ -59,8 +25,6 @@
     </tbody>
 </table>
 <img class="excelIcon" id="button-excel" src="../images/excel_icon.png">
-
-<!--<button id="button-excel" style="margin-top: 2%;margin-left: 50%;">Экспорт в Excel</button>-->
 
 <script>
     // кнопка для экспорта в Excel

@@ -10,12 +10,8 @@
 </head>
 <body>
 
-<style>
-
-</style>
-
 <div class="tableFixHead">
-    <table class="tableProgram table-striped" style="" id="timeTable">
+    <table class="table table-striped" id="programTimeTable">
         <thead class="thead-dark">
         <tr>
             <th scope="col">Имя программы</th>
@@ -36,10 +32,10 @@
     let buttonExcel = document.querySelector("#button-excel");
 
     // Получение таблицы по id
-    let timeTable = document.getElementById('timeTable')
+    let programTimeTable = document.getElementById('programTimeTable')
 
     buttonExcel.addEventListener("click", e => {
-        TableToExcel.convert(timeTable);
+        TableToExcel.convert(programTimeTable);
     });
 
     // объявление локальной переменной часов
@@ -55,7 +51,7 @@
     let lastCell = null
 
     // переменная для краткой записи к телу таблицы
-    let tbody = timeTable.querySelector('tbody')
+    let tbody = programTimeTable.querySelector('tbody')
 
     // Если она уже локально задана сохраняем
     if (localStorage['local_time'] != null) {
