@@ -977,12 +977,12 @@ function paintGeneralDiagram(generalDiagramNames){
     let fSize;
 
     if(Diagram.length/2 < 10) {
-        marLeft = 0;
-        fSize = '10px';
+        marLeft = null;
+        fSize = '15px';
     }
     else {
         marLeft = 110;
-        fSize = '15px';
+        fSize = '10px';
     }
 
     Highcharts.chart('container_sum_zagruzka',{
