@@ -1,23 +1,23 @@
-#timeTable {
+#programTimeTable {
     width: 100%;
     margin: 0 auto;
 }
 
-#timeTable th,
-#timeTable td {
+#programTimeTable th,
+#programTimeTable td {
     text-align: center;
 }
 
-#timeTable tr>td:nth-of-type(4),
-#timeTable tr>td:nth-of-type(5),
-#timeTable tr>td:nth-of-type(1)
+#programTimeTable tr>td:nth-of-type(4),
+#programTimeTable tr>td:nth-of-type(5),
+#programTimeTable tr>td:nth-of-type(1)
 {
     border: 1px solid #dee2e6;
 }
 
-#timeTable tr>td:nth-of-type(2),
-#timeTable tr>td:nth-of-type(3),
-#timeTable tr>td:nth-of-type(1)
+#programTimeTable tr>td:nth-of-type(2),
+#programTimeTable tr>td:nth-of-type(3),
+#programTimeTable tr>td:nth-of-type(1)
 {
     border-bottom: 1px solid #dee2e6;
 }
@@ -26,29 +26,9 @@
 .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
 
 /* Just common table stuff. Really. */
-#timeTable  { border-collapse: collapse; width: 100%; }
-#timeTable th, #timeTable td { padding: 8px 16px; }
-#timeTable th     { background:#eee; }
-
-#timeTable {
-    width: 100%;
-    margin: 0 auto;
-}
-
-#timeTable th, td {
-    text-align: center;
-}
-
-
-#timeTable th:nth-child(n)
-{
-    border: 1px solid #dee2e6;
-}
-
-#timeTable tr>td:nth-of-type(n)
-{
-    border: 1px solid #dee2e6;
-}
+#programTimeTable  { border-collapse: collapse; width: 100%; }
+#programTimeTable th, #programTimeTable td { padding: 8px 16px; }
+#programTimeTable th     { background:#eee; }
 
 #programTimeTable {
     width: 100%;
@@ -66,6 +46,27 @@
 }
 
 #programTimeTable tr>td:nth-of-type(n)
+{
+    border: 1px solid #dee2e6;
+}
+
+
+#timeTable {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#timeTable th, td {
+    text-align: center;
+}
+
+
+#timeTable th:nth-child(n)
+{
+    border: 1px solid #dee2e6;
+}
+
+#timeTable tr>td:nth-of-type(n)
 {
     border: 1px solid #dee2e6;
 }
