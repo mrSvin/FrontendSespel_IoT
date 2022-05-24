@@ -41,10 +41,13 @@ td {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: 5px; /* Уголки */
     margin: 8%;
-    opacity: 0;
+    opacity: 1;
     float: right;
     text-align: center;
-    background-color: whitesmoke
+    background-color: whitesmoke;
+    z-index: 5;
+    top: 50px;
+    right: 10px;
 
 }
 
@@ -60,7 +63,7 @@ td {
     height: 100px;
     object-fit: cover;
     border-radius: 360px;
-    margin: 8px 0 0 0!important;
+    margin: 8px 0 0 0 !important;
     transition: 0.5s;
 }
 
@@ -71,32 +74,31 @@ td {
     transition: 0.5s;
 }
 
-.dropdown-content a:hover img:first-of-type{
-     filter: brightness(50%);
- }
-
-.dropdown-content a:hover .iconPhoto{
-    opacity: 50%;
+.dropdown-content a:hover img:first-of-type {
+    filter: brightness(50%);
 }
 
+.dropdown-content a:hover .iconPhoto {
+    opacity: 50%;
+}
 
 
 .dropdown-content li {
     font-weight: 400;
     font-size: 18px;
-    margin: 7px 0 0 0!important;
+    margin: 7px 0 0 0 !important;
 }
 
 .dropdown-content > p {
-    margin: 10px 0 0 0!important;
+    margin: 10px 0 0 0 !important;
 }
 
 .dropdown-content > div {
-    margin: 13px 0 0 0!important;
+    margin: 13px 0 0 0 !important;
 }
 
 #role_vision {
-    margin: 12px 0 0 0!important;
+    margin: 12px 0 0 0 !important;
 }
 
 .avatar {
@@ -156,11 +158,11 @@ button:focus {
     width: 115px;
     transition: all 0.2s ease;
     cursor: pointer;
-    margin: 17px 0!important;
+    margin: 17px 0 !important;
 }
 
 .follow:hover {
-    box-shadow: 0px 0px 5px 0px #14B2E9, inset 0px 0px 0px 0px#14b2f3!important;
+    box-shadow: 0px 0px 5px 0px #14B2E9, inset 0px 0px 0px 0px #14b2f3 !important;
 }
 
 
@@ -177,12 +179,16 @@ button:focus {
 }
 
 @keyframes fin {
-    from { transform: rotate(0) translate(-50%, -50%) }
-    to { transform: rotate(360deg) translate(-50%, -50%) }
+    from {
+        transform: rotate(0) translate(-50%, -50%)
+    }
+    to {
+        transform: rotate(360deg) translate(-50%, -50%)
+    }
 }
 
 
-#admin{
+#admin {
     display: none;
     background: #ff3b3b;
     width: 135px;
@@ -197,7 +203,7 @@ button:focus {
     margin-bottom: 25px;
     transition: all 0.2s ease;
     cursor: pointer;
-    margin: 17px 0 0 0!important;
+    margin: 17px 0 0 0 !important;
 
 }
 
@@ -215,7 +221,7 @@ button:focus {
     width: 120px;
     height: 25px;
     cursor: pointer;
-    margin: 17px 0 0 0!important;
+    margin: 17px 0 0 0 !important;
 
     -moz-user-select: none;
     -khtml-user-select: none;
@@ -223,7 +229,9 @@ button:focus {
     user-select: none;
 }
 
-.switch input {display:none;}
+.switch input {
+    display: none;
+}
 
 .switch p {
     z-index: 2;
@@ -235,14 +243,13 @@ button:focus {
 }
 
 
-
 .neo-line {
     display: block;
     margin: 0 auto;
     height: 2px;
     background: #e0f7fe;
     width: 95%;
-    box-shadow: 0px 0px 5px 3px #4A9BB5, inset 0px 0px 0px 0px #4a9bb2!important;
+    box-shadow: 0px 0px 5px 3px #4A9BB5, inset 0px 0px 0px 0px #4a9bb2 !important;
 }
 
 .div_login_mail {
@@ -253,7 +260,7 @@ button:focus {
     margin-top: 5%;
 }
 
-.div_login_mail > p{
+.div_login_mail > p {
     color: #b3b8be;
     font-size: 12px;
 }
@@ -282,9 +289,9 @@ button:focus,
 .btn:active.focus,
 .btn:active:focus,
 .btn:focus {
-    outline: 0!important;
-    outline-color: transparent!important;
-    outline-width: 0!important;
-    outline-style: none!important;
-    box-shadow: 0 0 0 0 rgba(0,123,255,0)!important;
+    outline: 0 !important;
+    outline-color: transparent !important;
+    outline-width: 0 !important;
+    outline-style: none !important;
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
 }
