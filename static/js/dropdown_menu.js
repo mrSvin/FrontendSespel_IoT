@@ -24,12 +24,9 @@ function hide_dropdown_content_outside_click() {
 
 function click_avatar() {
     $( ".dropdown>input" ).click(function() { // кликаем изображению
-        if($('.dropdown-content').css('display') == 'none') { // если выпадающее меню скрыто
-            show_dropdown_content(); // показать меню
-        }
-        else if($('.dropdown-content').css('display') == 'block') { // если уже открыто
-            hide_dropdown_content(); // скрыть меню
-        }
+
+        ($('.dropdown-content').css('display') == 'none') ?  show_dropdown_content() : hide_dropdown_content();
+
         hide_dropdown_content_outside_click(); // функция для закрытия меню при клике вне меню
     });
 
@@ -37,7 +34,3 @@ function click_avatar() {
 }
 
 click_avatar();
-
-
-
-
