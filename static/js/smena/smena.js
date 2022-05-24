@@ -969,7 +969,7 @@ const sendRequest = url => {
 }
 
 // Функция рисования общих диаграмм с 5-ю обычными цветами
-function paintGeneralDiagram(generalDiagramNames, arg1, arg2){
+function paintGeneralDiagram(generalDiagramNames){
     // Рисование общих диаграмм. Нужно это перенести.
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
@@ -1484,7 +1484,7 @@ function twoWorkTime() {
     build(Diagram)
 
     // Вызов функции рисования общей
-    paintGeneralDiagram(generalDiagramNames, arg1, arg2)
+    paintGeneralDiagram(generalDiagramNames)
 }
 
 // Функция проверяет все ли станки загрузились из запроса использует глобальную
