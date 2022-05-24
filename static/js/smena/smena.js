@@ -969,9 +969,21 @@ const sendRequest = url => {
 }
 
 // Функция рисования общих диаграмм с 5-ю обычными цветами
-function paintGeneralDiagram(generalDiagramNames){
+function paintGeneralDiagram(generalDiagramNames, arg1, arg2){
     // Рисование общих диаграмм. Нужно это перенести.
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+
+    let marLeft;
+    let fSize;
+
+    if(Diagram.length/2 < 10) {
+        marLeft = 0;
+        fSize = '10px';
+    }
+    else {
+        marLeft = 110;
+        fSize = '15px';
+    }
 
     Highcharts.chart('container_sum_zagruzka',{
         chart: {
@@ -1027,7 +1039,8 @@ function paintGeneralDiagram(generalDiagramNames){
 
     Highcharts.chart('container_kol_operations', {
         chart: {
-            type: 'bar'
+            type: 'bar',
+            marginLeft: marLeft
         },
         title: {
             text: 'Количество операций смены 19:00 - 07:00'
@@ -1035,7 +1048,7 @@ function paintGeneralDiagram(generalDiagramNames){
         xAxis: {
             labels: {
                 style: {
-                    fontSize: '15px',
+                    fontSize: fSize,
                 }
             },
             categories: generalDiagramNames,
@@ -1129,7 +1142,8 @@ function paintGeneralDiagram(generalDiagramNames){
 
     Highcharts.chart('container_kol_operations_2', {
         chart: {
-            type: 'bar'
+            type: 'bar',
+            marginLeft:  marLeft
         },
         title: {
             text: 'Количество операций смены 07:00 - 19:00'
@@ -1137,7 +1151,7 @@ function paintGeneralDiagram(generalDiagramNames){
         xAxis: {
             labels: {
                 style: {
-                    fontSize: '15px',
+                    fontSize: fSize,
                 }
             },
             categories: generalDiagramNames,
@@ -1470,7 +1484,7 @@ function twoWorkTime() {
     build(Diagram)
 
     // Вызов функции рисования общей
-    paintGeneralDiagram(generalDiagramNames)
+    paintGeneralDiagram(generalDiagramNames, arg1, arg2)
 }
 
 // Функция проверяет все ли станки загрузились из запроса использует глобальную
