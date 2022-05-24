@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<link href="/css/bootstrap.min.css" rel="stylesheet"/>
-
 <head>
     <meta charset="UTF-8">
     <title>Таблица работы станков</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="/js/table-to-excel@v1.0.4.js"></script>
 </head>
 <body>
 
@@ -40,11 +41,18 @@
     <tbody>
     </tbody>
 </table>
-
+<button id="button-excel" style="margin-top: 2%;margin-left: 50%;">Экспорт в Excel</button>
 
 <script>
+    // кнопка для экспорта в Excel
+    let buttonExcel = document.querySelector("#button-excel");
+
     // Получение таблицы по id
     let timeTable = document.getElementById('timeTable')
+
+    buttonExcel.addEventListener("click", e => {
+        TableToExcel.convert(timeTable);
+    });
 
     // объявление локальной переменной часов
     let local_time = null
