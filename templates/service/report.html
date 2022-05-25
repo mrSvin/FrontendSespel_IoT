@@ -27,7 +27,7 @@
         function SetUserSetting() {
             $.post("/api/userInfo", function( data ) {
 
-                $('.avatar').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
+                $('.avatar').attr("src", data.imageUser); // карт инка лого для папок на уровень ниже
                 $('.dropdown-content img').attr("src", data.imageUser); // картинка лого для папок на уровень ниже
                 $('.div_login_mail li').html(data.userName); // картинка лого для папок на уровень ниже
                 $('.div_login_mail p').html(data.userMail); // картинка лого для папок на уровень ниже
@@ -144,7 +144,7 @@
                         <span class="slider round"><input type="checkbox" id='dark_button'/><span
                                 class="slider_before round_before"></span></span>
                     </label>
-                    <form th:action="/logout" method="post">
+                    <form action="/logout" method="post">
                         <button class="follow" type="submit">
                             Выход
                         </button>
