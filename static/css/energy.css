@@ -310,5 +310,10 @@
 }
 
 .complexInfoAll {
-    margin-bottom: 200px;
+}
+
+.complete {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

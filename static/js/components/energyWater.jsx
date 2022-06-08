@@ -422,7 +422,7 @@ function VrsInfo() {
 function EnergyWater() {
 
     return (
-        <div>
+        <div className='complete'>
 
             <Header/>
 
