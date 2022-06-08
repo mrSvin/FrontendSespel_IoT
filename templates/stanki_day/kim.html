@@ -322,10 +322,21 @@
 
   let urlNow = `/api/complexData/nk600_days_date:${time.slice(0,10)}`
 
-  var colorsKalibrovka = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
+  let colorsKalibrovka = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
 
   //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
-  var kim_data = [[${kim_data}]];
+
+  let kim_data = [[${kim_data}]];
+
+  let linear_rabota = [];
+  let linear_pause = [];
+  let linear_off = [];
+  let linear_avar = [];
+  let linear_nagruzka = [];
+  let linear_ruchnoi = [];
+
+  let kol_op = [];
+  let kol_long_operations = [];
 
 </script>
 
