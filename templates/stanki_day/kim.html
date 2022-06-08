@@ -219,9 +219,7 @@
 
   <div id="container_sum_zagruzka" style="min-height: 420px; width: 40%"></div>
   <!--Общая загрузка html-->
-  <a style="text-decoration: none;" class="icon_clock" href="table_time/tableTime" onclick="sendTime(names, Diagram); window.open(this.href, '', 'scrollbars=1,height='+Math.min(770, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;">
-    <div class='label_clock'>Время</div>
-  </a>
+
   <div id="container_kol_operations" style="height: 420px; width: 50%"></div>
   <!--Количество операций html-->
 </div>  <!--Общая загрузка и количество операций html-->
@@ -346,11 +344,11 @@
     const Diagram = [kim_data, nk600_data]
 
 
-    var exception = [[0,'Ручной режим','#5c7ed0', ['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'],'ruchnoi'],];
+
     // Функция сборщик, аргументы:
     // Массив со станками, с какого станка начать, исключения если имеются,
     // 2-ой и 3-ий аргументы опциональны
-    build(Diagram, 1, exception)
+    build(Diagram)//, 1, exception)
 
     colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
     Highcharts.chart('container_sum_zagruzka', {
