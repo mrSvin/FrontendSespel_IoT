@@ -202,4 +202,5 @@
     overflow-x:hidden;
     overflow-y:hidden;
     background:url(../images/loader.gif) center center no-repeat;
+    position: fixed;
 }
