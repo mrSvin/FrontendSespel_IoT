@@ -270,6 +270,18 @@ button:focus {
     font-size: 18px;
 }
 
+.emailLogo {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0 0 10px;
+}
+
+.usernameLogo {
+    font-weight: 400;
+    font-size: 18px;
+    color: #83addd !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 /*Специальный css для контуров в mozilla*/
 a.active.focus,
 a.active:focus,

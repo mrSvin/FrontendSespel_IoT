@@ -6,20 +6,22 @@
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" href="css/styles_home.css"/>
     <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
-    <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/> <!-- Меню -->
 
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
 
-    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/lib/jquery-3.6.0.min.js"></script>
+
+    <script src="/js/dark_theme.js"></script>
 </head>
 
 <header>
     <div style="display: flex; width: 100vw; justify-content: space-between; flex-wrap: nowrap; width: 100%;">
-        <a href="home" style="display: flex; align-items: flex-start;" ><img src="images/logo_black.png" class="icon-logo"/></a>
+        <a href="/" style="display: flex; align-items: flex-start;" >
+            <img src="images/logo_black.png" class="icon-logo"/>
+        </a>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
-                <li th:text="${user_name}"></li>
-                <p th:text="${user_mail}"></p>
+                <p class="usernameLogo" th:text="${user_name}"></p>
+                <p class="emailLogo" th:text="${user_mail}"></p>
             </div>
             <div method="post" class="dropdown">
                 <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
@@ -53,29 +55,14 @@
 </header>       <!--Шапка html-->
 
 <body class="home-body">
-<div class="preloader">
-    <div class="preloader__row">
-        <div class="preloader__item"></div>
-        <div class="preloader__item"></div>
-    </div>
-</div>
-<!-- Загрузка страницы и темная тема-->
+
+<!-- Темная тема-->
 <script>
     var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
 
     if(localStorage['dark_theme_state'] != null) {
         dark_theme_state = parseInt(window.localStorage['dark_theme_state']); // Если она уже локально задана сохраняем
     }
-
-    if (dark_theme_state == 0) {$('.preloader').attr("style", `background: #f2f6f8`);} // присвоение цвета загрузочного меню
-    else if (dark_theme_state == 1) {$('.preloader').attr("style", `background: #161821`);} // в двух цветах
-
-    window.onload = function () { // прелоудер
-        document.body.classList.add('loaded_hiding');
-        window.setTimeout(function () {
-            document.body.classList.add('loaded');
-            document.body.classList.remove('loaded_hiding');
-        }, 500);
 
         dark_theme(); // Вызов функции
         // Смена цвета по кнопке
@@ -89,63 +76,62 @@
             // Условия для смены цвета после нажатия на кнопку
             dark_theme();
         });
-    }
+
 </script>
-<script src="/js/dark_theme.js"></script>
+
 
 <!--Кнопки меню-->
 <div class="main-container-home">
-    <a href="displayStanki" class="container-home" style="text-decoration: none">
+    <a href="displayStanki" class="container-home">
         <div class="icon-container">
             <p>Суточные и месячные отчеты работы оборудования</p>
             <div class="stanki"></div>
         </div>
         <h2>Станки</h2>
     </a>
-    <a href="/energy/energy_water" class="container-home" style="text-decoration: none">
+    <a href="/energy/energy_water" class="container-home">
         <div class="icon-container">
             <p>Показатели расхода газа, воды, электроэнергии</p>
             <div class="energy"></div>
         </div>
         <h2>Энергоресурсы</h2>
     </a>
-    <a href="/menubar/sklad" class="container-home" style="text-decoration: none">
+    <a href="/menubar/sklad" class="container-home" >
         <div class="icon-container">
             <p>Учет комплектующих склада Мех. цеха II площадки</p>
             <div class="envelope"></div>
         </div>
         <h2>Склад</h2>
     </a>
-    <a href="/menubar/winnum" class="container-home" style="text-decoration: none">
+    <a href="/menubar/winnum" class="container-home">
         <div class="icon-container">
             <p>Интегрированная платформа мониторинга оборудования</p>
             <div class="winnum"></div>
         </div>
         <h2>Winnum</h2>
     </a>
-    <a href="/menubar/owencloud" class="container-home" style="text-decoration: none">
+    <a href="/menubar/owencloud" class="container-home">
         <div class="icon-container">
             <p>Облачная платформа мониторинга оборудования</p>
             <div class="owencloud"></div>
         </div>
         <h2>Owencloud</h2>
     </a>
-    <a href="/menubar/intra" class="container-home" style="text-decoration: none;">
+    <a href="/menubar/intra" class="container-home">
         <div class="icon-container">
             <p>SCADA система Intrahouse для диспетчеризации</p>
             <div class="intra"></div>
         </div>
         <h2>Умный дом</h2>
     </a>
-    <a href="/menubar/wialon" class="container-home" style="text-decoration: none; margin-right: 0;
-    margin-left: 140px;">
+    <a href="/menubar/wialon" class="container-home">
         <div class="icon-container">
             <p>Облачная платформа мониторинга производимых ППЦ</p>
             <div class="wialon"></div>
         </div>
         <h2>Wialon</h2>
     </a>
-    <a href="/menubar/teamcenter" class="container-home" style="text-decoration: none;  margin-left: 0; margin-right: 140px;">
+    <a href="/menubar/teamcenter" class="container-home">
         <div class="icon-container">
             <p>Платформа для работы с конструкторской документацией</p>
             <div class="teamcenter"></div>
@@ -153,6 +139,8 @@
         <h2>Teamcenter</h2>
     </a>
 </div>
+
+<!--Скрипт отображения в header кнопки администрирование-->
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
 
@@ -170,49 +158,7 @@
 
 
 </script>
-
-<script th:inline="javascript">
-    var role_status = [[${user_role}]];
-
-    if(role_status === "ROLE_ADMIN")
-    {
-        document.getElementById("role_vision").innerHTML = "Роль: Админ";
-        document.getElementById("admin").style.display = "inline";
-
-    }
-    else if (role_status === "ROLE_USER")
-    {
-        document.getElementById("role_vision").innerHTML = "Роль: Пользователь";
-        document.getElementById("admin").style.display = "none";
-    }
-</script>
-<!--Скрипт отображения в header  кнопки администрирование-->
-
 <script src="/js/dropdown_menu.js"></script>
-
-<script>
-    function sumbitForm() {
-        $('#formElem :nth-of-type(2)')[0].click()
-    }
-
-    function imgClick() {
-        $('#formElem :nth-of-type(1)')[0].click()
-    }
-
-    formElem.onsubmit = async (e) => {
-        e.preventDefault();
-
-        let response = await fetch('/api/addImage', {
-            method: 'POST',
-            body: new FormData(formElem)
-        });
-
-        location.reload();
-
-        //let result = await response.json();
-        //alert(result.message);
-    };
-</script>
 
 </body>
 </html>

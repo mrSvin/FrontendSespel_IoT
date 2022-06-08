@@ -1,0 +1,77 @@
+.menuButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    margin: 0 0 4px 0;
+    margin-top: 0px;
+    padding-left: 0;
+    margin-top: 0px;
+}
+
+.menuNoSelect {
+    color: #f2f6f8 !important;
+    text-shadow: none;
+    font-size: 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.menuNoSelect:hover {
+    color: #1aaae5 !important;
+    transition: 0.5s;
+}
+
+.menuSelect {
+    color: #e51a83 !important;
+    text-shadow: 0 0 5px #e51a83,
+    0 0 25px #e51a83;
+    font-size: 30px;
+    text-align: center;
+}
+
+.calenarMonth {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.choose_month {
+    color: #83addd !important;
+    margin: 0 !important;
+    font-size: 30px;
+}
+
+.parent_image {
+    float: left;
+    min-height: 600px;
+    width: 18%;
+    max-width: 300px;
+}
+
+.stanok_img {
+    max-width: 100%;
+    margin-left: 15px;
+}
+
+.comlexInfo {
+    font-size: 150%;
+    text-align: center;
+    color: #83addd;
+    font-weight: bold;
+}
+
+.vrsHighSchart {
+    width: 1425px;
+    height: 400px;
+    margin-left: 30px;
+    float: left;
+}
+
+.highcharts-background {
+    fill: #252734;
+}
+
+

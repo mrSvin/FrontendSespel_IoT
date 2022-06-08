@@ -15,20 +15,19 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-    <script src="/js/highcharts.js"></script>
-    <script src="/js/exporting.js"></script>
-    <script src="/js/export-data.js"></script>
-    <script src="/js/accessibility.js"></script>
-    <script src="/js/xrange.js"></script>
-
-    <script src="/js/jquery-3.6.0.min.js"></script>
-    <script src="/js/bootstrap-3.3.0.min.js"></script>
+    <script src="/js/lib/highcharts.js"></script>
+    <script src="/js/lib/exporting.js"></script>
+    <script src="/js/lib/export-data.js"></script>
+    <script src="/js/lib/accessibility.js"></script>
+    <script src="/js/lib/xrange.js"></script>
+    <script src="/js/lib/jquery-3.6.0.min.js"></script>
+    <script src="/js/lib/bootstrap-3.3.0.min.js"></script>
+    <!--Календарь -->
+    <script src="/js/lib/bootstrap-datepicker.min.js"></script>
+    <script src="/js/lib/bootstrap-datepicker.ru.min.js"></script>
 
     <script src="/js/dark_theme.js"></script>
 
-    <!--Календарь -->
-    <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap-datepicker.ru.min.js"></script>
     <script src="/js/sutki/calendar_sutki.js"></script>
 
     <!--preloader style-->
@@ -382,12 +381,12 @@
     const Dmu50_1 = {name:"DMU50 #1", src:"../../images/dmg_dmu50.png", ip:"192.168.17.69"};
     const Dmu50_2 = {name:"DMU50 #2", src:"../../images/dmg_dmu50.png", ip:"192.168.17.70"};
     const Nlx3000 = {name:"NLX3000", src:"../../images/NLX3000.png", ip:"192.168.17.20"};
-    const Ntx1000_1 = {name:"NTX1000 #1", src:"../../images/ntx1000.png", ip:"192.168.17.41"};
-    const Ntx1000_2 = {name:"NTX1000 #2", src:"../../images/ntx1000.png", ip:"192.168.17.91"};
+    const Ntx1000_2 = {name:"NTX1000 #2", src:"../../images/ntx1000.png", ip:"192.168.17.41"};
+    const Ntx1000_1 = {name:"NTX1000 #1", src:"../../images/ntx1000.png", ip:"192.168.17.91"};
 
 
     var stanki = [ null, Gamma2000, Ctx310_1, Ctx310_2, Ctx310_3, Ctx510_1, Ctx510_2, Ctx510_3, Ctx510_4, Ctx510_5,
-        Ctx650, Dmc1035, Dmf260, Dmu50_1, Dmu50_2, Nlx3000, Ntx1000_1,Ntx1000_2];
+        Ctx650, Dmc1035, Dmf260, Dmu50_1, Dmu50_2, Nlx3000,Ntx1000_2, Ntx1000_1];
 
     //Парсим текущий открытый индекс станка
     form_path.lastIndexOf("/")

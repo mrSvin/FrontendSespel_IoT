@@ -18,3 +18,25 @@ function click_avatar() {
     });
 }
 click_avatar();
+
+function sumbitForm() {
+    $('#formElem :nth-of-type(2)')[0].click()
+}
+
+function imgClick() {
+    $('#formElem :nth-of-type(1)')[0].click()
+}
+
+formElem.onsubmit = async (e) => {
+    e.preventDefault();
+
+    let response = await fetch('/api/addImage', {
+        method: 'POST',
+        body: new FormData(formElem)
+    });
+
+    location.reload();
+
+    //let result = await response.json();
+    //alert(result.message);
+};

@@ -5,68 +5,37 @@
     <title>Газ</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
 
-    <link rel="stylesheet" type="text/css" href="../../css/styles_stanki.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/menu_buttons.css"/> <!-- Меню -->
-    <link rel="stylesheet" type="text/css" href="../../css/styles_header.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/userscontrol.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/menu_buttons.css"/> <!-- Меню -->
+    <link rel="stylesheet" type="text/css" href="/css/styles_header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/userscontrol.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/styles_energy.css"/>
 
-    <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-    <script src="../../js/highcharts.js"></script>
-    <script src="../../js/exporting.js"></script>
-    <script src="../../js/export-data.js"></script>
-    <script src="../../js/accessibility.js"></script>
-    <script src="../../js/xrange.js"></script>
-
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script src="../../js/bootstrap-3.3.0.min.js"></script>
-
-    <script >
-        $(function () {
-            $('#datepicker').datepicker({
-                format: "yyyy-mm",
-                language: 'ru',
-                viewMode: "months",
-                minViewMode: "months",
-                autoclose: true,
-                todayHighlight: true,
-                showOtherMonths: true,
-                selectOtherMonths: true,
-                autoclose: true,
-                changeMonth: true,
-                changeYear: true,
-                orientation: "button"
-            });
-            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
-
-
-
-            $('#button_obnovit').on("click", function() {
-                var datas = $('#datepicker').data().datepicker.viewDate;
-
-                var mes = datas.getMonth()+1;
-                var year = datas.getFullYear();
-
-                name_data = mes+"-" + year;
-                <!--console.log(name_data);-->
-            });
-
-
-        });
-
-    </script>   <!--Календарь js-->
-
+    <script src="/js/lib/highcharts.js"></script>
+    <script src="/js/lib/exporting.js"></script>
+    <script src="/js/lib/export-data.js"></script>
+    <script src="/js/lib/accessibility.js"></script>
+    <script src="/js/lib/xrange.js"></script>
+    <script src="/js/lib/jquery-3.6.0.min.js"></script>
+    <script src="/js/lib/bootstrap-3.3.0.min.js"></script>
     <!--Календарь -->
-    <script type="text/javascript" src="../../js/bootstrap-datepicker.min.js"></script>
-    <!--Календарь Русский язык-->
-    <script type="text/javascript" src="../../js/bootstrap-datepicker.ru.min.js"></script>
+    <script src="/js/lib/bootstrap-datepicker.min.js"></script>
+    <script src="/js/lib/bootstrap-datepicker.ru.min.js"></script>
+
+    <script src="/js/mesto.js"></script>
+    <script src="/js/dark_theme.js"></script>
+
+
+    <script src="/js/month/calendar_month.js"></script>
 
 </head>
 
 <header>
     <div class="header-div">
-        <a href="../home" style="display: flex; align-items: flex-start;" ><img src="../images/logo_black.png" class="icon-logo-admin"/></a>
+        <a href="../" style="display: flex; align-items: flex-start;" ><img src="../images/logo_black.png" class="icon-logo-admin"/></a>
         <ul id="menu_ul">
             <li id="menu_li"><a id="menu_a" href="energy_water">Водоснабжение</a></li>
             <li id="menu_li1"><a id="menu_a1" href="energy_gaz" class="menu-color">Газ</a><div class="neo-line"></div></li>

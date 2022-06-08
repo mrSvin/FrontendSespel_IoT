@@ -1,0 +1,209 @@
+#main-app {
+    background: #252734;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.card {
+    padding: 20px;
+    margin: 15px;
+    border-radius: 10px;
+    width: 360px;
+    height: 200px;
+    background: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em;
+    flex-flow: row wrap;
+    cursor: pointer;
+    z-index: 1;
+    position: relative;
+    transition: all ease 0.45s;
+}
+
+.card:hover {
+    background: #8cd54b;
+}
+
+
+.card-number {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", sans-serif;
+    font-size: 30px;
+    color: #FFF;
+    width: 100%;
+    cursor: pointer;
+}
+
+.card_holder {
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", sans-serif;
+    cursor: pointer;
+}
+
+.ng-binding {
+    font-size: 30px;
+    color: #FFF;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", sans-serif;
+    cursor: pointer;
+}
+
+.cash-binding {
+    font-size: 30px;
+    color: #c22d2d;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", sans-serif;
+    cursor: pointer;
+}
+
+.card_icon {
+    width: 20%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", sans-serif;
+    cursor: pointer;
+}
+
+.wallet {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", sans-serif;
+}
+
+.info {
+    margin: 15px;
+    color: #FFF;
+    text-align: center;
+}
+
+.add_a_card {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    margin: 4.5em auto;
+    cursor: pointer;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", sans-serif;
+}
+
+.add_a_card:hover {
+    color: #8cd54b;
+}
+
+aside {
+    background: #292C3A;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", sans-serif;
+}
+
+main {
+    background: #252734;
+    flex: 1 1 480px;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", sans-serif;
+}
+
+.app_inner {
+    background: #FFF;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Muli", sans-serif;
+}
+
+.fa_fa-plus {
+    font-size: 60px;
+    display: inline-block;
+    text-rendering: auto;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.info_add_a_card {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    box-sizing: border-box;
+}
+
+.inputAddCard {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.015);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 85%;
+    font-size: 24px;
+    outline: none;
+    color: #FFF;
+    margin: 50px;
+}
+
+.buttonAddCard {
+    background: #1a1c25;
+    color: #FFF;
+    border: none;
+    padding: 1em;
+    width: 85%;
+    font-size: 18px;
+    outline: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all ease 0.15s;
+    margin: 50px;
+}
+
+.buttonAddCard:hover {
+    background: #c22d2d;
+}
+
+.choiceTypeContent {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.choiceType {
+    margin: 0 1em;
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+    padding: 0.6em;
+    border-radius: 7px;
+    transition: all ease 0.45s;
+    background: none;
+}
+
+.error-msg {
+    color: #ff6d6d;
+    text-align: center;
+    font-size: 30px;
+}

@@ -1,0 +1,186 @@
+.loginTheme {
+    background: url(../images/background_login_dark.jpg)no-repeat center center fixed;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+.loginLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 7%;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+#login-app {
+    background: #252734;
+    min-height: 100vh;
+    overflow: auto;
+}
+
+.box {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 7px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
+    max-width: 300px;
+    margin: 50px auto;
+    padding: 50px;
+    opacity: 0;
+    transition: all 10s ease-in;
+}
+
+.login, .registration {
+    opacity: 1;
+}
+
+.error-msg {
+    color: #ff6d6d;
+}
+
+.inputBtn[type=text], .inputBtn[type=password], .inputBtn[type=number] {
+    display: block;
+    width: calc(100% - 22px);
+    background: none;
+    color: white;
+    border: 0;
+    border-bottom: 1px solid #d0d0d0;
+    height: 25px;
+    margin-bottom: 15px;
+    padding: 5px 7px 0;
+    outline: none;
+}
+
+.inputBtn[type=text]::placeholder, .inputBtn[type=password]::placeholder, .inputBtn[type=number]::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.inputBtn[type=text]:hover::placeholder, .inputBtn[type=password]:hover::placeholder, .inputBtn[type=number]:hover::placeholder {
+    text-decoration: underline;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.inputBtn[type=text]:focus, .inputBtn[type=password]:focus, .inputBtn[type=number]:focus {
+    border-bottom: 1px solid #879aca;
+}
+
+.inputBtn[type=text]:focus::placeholder, .inputBtn[type=password]:focus::placeholder, .inputBtn[type=number]:focus::placeholder {
+    visibility: hidden;
+}
+
+.inputBtn[type=checkbox] + .label-block {
+    font-size: 1em;
+    color: white;
+    margin-bottom: 10px;
+    position: relative;
+    user-select: none;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.inputBtn[type=checkbox] + .label-block:before {
+    display: none !important;
+    background: white;
+    border: 1px solid #1c3c50;
+    border-radius: 3px;
+    content: "check_box_outline_blank";
+    display: inline-block;
+    font-size: 14px;
+    font-family: "Material Icons";
+    line-height: 1;
+    margin-right: 10px;
+    position: relative;
+    top: 3px;
+}
+
+.inputBtn[type=checkbox]:checked + .label-block:after {
+    display: none !important;
+    border-radius: 3px;
+    content: "close";
+    font-weight: bold;
+    color: #19289e;
+    display: block;
+    font-size: 16px;
+    font-family: "Material Icons";
+    line-height: 1;
+    position: absolute;
+    top: 3px;
+}
+
+.btn {
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 15px 10px;
+    text-align: center;
+    user-select: none;
+    margin-top: 20px;
+
+}
+
+.btn-login {
+    background: rgba(26, 34, 99, 0.5);
+    color: white;
+}
+
+.btn-login:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+    0 0 25px #03e9f4,
+    0 0 50px #03e9f4,
+    0 0 100px #03e9f4;
+    transition: .5s;
+}
+
+.btn-registration {
+    background: rgba(89, 186, 36, 0.5);
+    color: white;
+}
+
+.btn-registration:hover {
+    background: rgba(89, 186, 36, 0.3);
+}
+
+.display-inline-block {
+    display: inline-block !important;
+}
+
+.display-block {
+    display: block !important;
+}
+
+.display-inline {
+    display: inline !important;
+}
+
+h2 {
+    width: 100%;
+    text-align:center;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+.captcha {
+    width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+

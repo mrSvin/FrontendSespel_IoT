@@ -1,0 +1,65 @@
+.master-container{
+    border-radius:30px;
+    width:350px;
+    height:380px;
+    background-color:white;
+    overflow:hidden;
+    z-index: 999999;
+    position: absolute;
+}
+.year{
+    background-color:#2ECC71;
+    color:white;
+    text-align:center;
+    font-size:78px;
+    padding: 20px 0px;
+}
+#month{
+    font-size:38px;
+}
+.calendarMonth{
+    padding: 10px 50px;
+    width:100%;
+    height:200px;
+}
+.tdMonth{
+    text-align:center;
+    cursor: pointer;
+    border-radius:10px;
+}
+.tdMonth:hover{
+    background-color:lightblue;
+}
+
+.forw:hover,
+.prev:hover{
+    cursor: pointer;
+    color:lightgreen;
+}
+
+.calendarMonthForm {
+    width: 200px;
+}
+
+.inputCalendarMonth {
+    width: 200px;
+    font-size: 24px;
+    text-align: center;
+    border: 1px solid #83addd;
+    border-radius: 4px;
+    background-color: #252734;
+    color: white;
+    margin-top: 24px;
+    cursor: pointer;
+}
+
+.energyCalendarContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.infoChange {
+    color: #83addd !important;
+    font-size: 30px;
+    margin-right: 15px;
+}
