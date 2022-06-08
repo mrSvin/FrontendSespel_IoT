@@ -187,8 +187,6 @@
     border-color:#f2f6f8!important;
 }
 
-
-
 .tableEnergy {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -268,7 +266,48 @@
     padding: 9px!important;
 }
 
+.icon_mesto {
+    float: left;
+    width: 60px;
+    height: 60px;
+    background: url(../images/iconMesto.png) no-repeat;
+    background-size: auto;
+    background-size: 60px 60px;
+    margin-top: 10px;
+    margin-left: 30px;
+    cursor: pointer;
+}
 
+.icon_mesto:hover {
+    -webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;
+}
 
+.label_mesto {
+    margin-top: 65px;
+    margin-left: 8px;
+    color: #83addd;
+}
 
+.icon_personal {
+    float: left;
+    background: url(../images/iconPersonal.png) no-repeat;
+    background-size: auto;
+    background-size: 60px 60px;
+    margin-top: 10px;
+    margin-left: 30px;
+    cursor: pointer;
+}
 
+.icon_personal:hover {
+    -webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;
+}
+
+.label_personal {
+    margin-top: 65px;
+    margin-left: -5px;
+    color: #83addd;
+}
+
+.complexInfoAll {
+    margin-bottom: 200px;
+}
