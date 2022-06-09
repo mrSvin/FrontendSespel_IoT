@@ -779,3 +779,446 @@ function sendTime(names, datas){
     window.localStorage['local_time'] = local_time;
 }
 
+
+// Стрелочная функция отправляющая запрос по url
+const sendRequest = url => {
+    // работаем с промисами для удобства, если ок, вызовем resolve, иначе reject у промиса
+    return new Promise((resolve, reject) => {$.ajax({url, type: 'GET'}).done(resolve).fail(reject)})
+}
+
+// Функция рисования общих диаграмм с 5-ю обычными цветами
+function paintGeneralDiagram(generalDiagramNames){
+    // Рисование общих диаграмм. Нужно это перенести.
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+
+    let marLeft;
+    let fSize;
+
+    if(Diagram.length/2 < 10) {
+        marLeft = null;
+        fSize = '15px';
+    }
+    else {
+        marLeft = 110;
+        fSize = '10px';
+    }
+
+    Highcharts.chart('container_sum_zagruzka',{
+        chart: {
+            type: 'column'
+        },
+        colors:colorsLine,
+        title: {
+            text: 'Общая загрузка смены 19:00 - 07:00'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: generalDiagramNames,
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Авария',
+            data: linear_avar
+        }, {
+            name: 'Выключен',
+            data: linear_off
+        }, {
+            name: 'Ожидание',
+            data: linear_pause
+        }, {
+            name: 'Под нагрузкой',
+            data: linear_nagruzka
+        }, {
+            name: 'Работа',
+            data: linear_rabota
+        }, ]
+    });
+
+    Highcharts.chart('container_kol_operations', {
+        chart: {
+            type: 'bar',
+            marginLeft: marLeft
+        },
+        title: {
+            text: 'Количество операций смены 19:00 - 07:00'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: fSize,
+                }
+            },
+            categories: generalDiagramNames,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: kol_op,
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: kol_long_operations,
+        }]
+    });
+
+    Highcharts.chart('container_sum_zagruzka_2', {
+        chart: {
+            type: 'column'
+        },
+        colors:colorsLine,
+        title: {
+            text: 'Общая загрузка смены 07:00 - 19:00'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                }
+            },
+            categories: generalDiagramNames,
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        series: [{
+            name: 'Авария',
+            data: linear_avar_2
+        }, {
+            name: 'Выключен',
+            data: linear_off_2
+        }, {
+            name: 'Ожидание',
+            data: linear_pause_2
+        }, {
+            name: 'Под нагрузкой',
+            data: linear_nagruzka_2
+        }, {
+            name: 'Работа',
+            data: linear_rabota_2
+        }, ]
+    });
+
+    Highcharts.chart('container_kol_operations_2', {
+        chart: {
+            type: 'bar',
+            marginLeft:  marLeft
+        },
+        title: {
+            text: 'Количество операций смены 07:00 - 19:00'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: fSize,
+                }
+            },
+            categories: generalDiagramNames,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: kol_op_2,
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: kol_long_operations_2,
+        }]
+    });
+
+    dark_theme()
+}
+
+// Функция вычисления часов работы для круговой диаграммы.
+function getRoundDiagramData(smena){
+    // Создаем пустой массив
+    let array1 = []
+
+    // если массив смены не undefined, то
+    if (smena !== undefined)
+    {
+        // Через map пробегаемся по элементам
+        smena.map((arraySmena, index)=>{
+
+            // Нет смысла пробегаться по массиву с именами программ
+            if(index == 5) return;
+
+            // Переменная, которая будет хранить текущую переменную для состояния:
+            // работы, паузы, выключен, аварии, нагрузки
+            let delta = 0
+
+            // Если массив, оказался пустым или подобным, то в массив запишется ноль.
+            if(arraySmena == null || arraySmena.length <= 1 || arraySmena == undefined)
+            {
+                array1.push(delta)
+                return
+            }
+            // Иначе
+            else
+            {   // Начиная с первого элемента с шагом 2
+                for(let i = 1; i < arraySmena.length; i+=2)
+                {
+                    // старая заглушка
+                    if(i==0) continue
+
+                    // Вычисления дельты, сумма всех разниц между началом работы и концом.
+                    delta = delta + (new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i-1]).getTime())
+                }
+            }
+            // После вычисления добавить в массив
+            array1.push(delta)
+        })
+
+        // После вычисления всех состояний, записать текущий массив в смену
+        smena.push(array1)
+    }
+}
+
+// Функция формирует запрос по массиву имен и дате и передает его в объект
+function GetAllData(ArrayNames, Object) {
+
+    // Через map пробегаемся по массиву имен
+    ArrayNames.map((name) => {
+        // Формируем для каждого станка url для запроса
+        var urlNow = `/api/complexData/${name}_days_date:${startTime}`
+        var urlPast = `/api/complexData/${name}_days_date:${pastTime}`
+
+
+        // Запрос на текущий день для одного станка
+        sendRequest(urlNow).then((data) => {
+
+            // В массив обработки запроса добавляем ноль
+            Object[name]['ready'].push(0)
+
+            // В массив текущего дня добавляем данные по запросу
+            Object[name]['today'].push(data.work)
+            Object[name]['today'].push(data.pause)
+            Object[name]['today'].push(data.off)
+            Object[name]['today'].push(data.avar)
+            Object[name]['today'].push(data.nagruzka)
+            Object[name]['today'].push(data.programName)
+
+            // Переменная checkerData будет записана только если для одного станка обработались оба запроса
+            // Иначе в нее будет записан null
+            var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
+            // Если в переменную не записался null
+            if (checkerData !== null){
+                checkerData.map((check) => {
+                    Object[name]['complete'].push(check)
+                })
+            }
+        })
+
+
+        // Запрос на вчера
+        sendRequest(urlPast).then((data) => {
+            Object[name]['ready'].push(0)
+
+            Object[name]['yesterday'].push(data.work)
+            Object[name]['yesterday'].push(data.pause)
+            Object[name]['yesterday'].push(data.off)
+            Object[name]['yesterday'].push(data.avar)
+            Object[name]['yesterday'].push(data.nagruzka)
+            Object[name]['yesterday'].push(data.programName)
+
+            // Переменная checkerData будет записана только если для одного станка обработались оба запроса
+            // Иначе в нее будет записан null
+            var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
+            // Если в переменную не записался null
+            if (checkerData !== null){
+                checkerData.map((check) => {
+                    Object[name]['complete'].push(check)
+                })
+            }
+        })
+
+    })
+}
+
+// Функция запускается после обработки всех станков, делит время на две смены
+function twoWorkTime() {
+    // Массив с заполненными данными
+    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    // Преобразоавние времение в формат '2022-03-21 10:00:35'
+    time = time.slice(0, 10) + " " + time.slice(11, 19);
+
+    Names.map((name) => {
+
+        // Переменные массивов для двух смен
+        let smena_1 = [];
+
+        // Переменные массивов для имен программ двух смен
+        let programName1 = []
+
+        // Получении объекта с именем текущего станка
+        // Хранящий объедененные массивы текущего и предыдущего дня
+        let stanok = clone[name]['complete']
+
+        // Отказ от работы с пустым объектом
+        if (stanok === null) {
+            return
+        }
+
+        // Переменная с массивом, который является копией объекта, но со вставкой 23:59
+        // в нечетных массивах
+        let stanok_change = []
+
+        // Цикл вставки значения 23:59 в массивы работы, паузы, выключен, авария, нагрузка.
+        for (let i = 0; i < 5; i++) {
+            stanok_change.push(Array())
+
+            // отказ от работы с неопределенным массивом
+            if (stanok[i] !== undefined) {
+                // Цикл внутри массива
+                for (let j = 0; j < stanok[i].length; j++) {
+                    // если этот элемент последний, то записать его и выйти из цикла
+                    if (j == stanok[i].length) {
+                        stanok_change[i].push(stanok[i][j])
+                        break
+                    }
+
+                    // Если время 00:00 текущего дня меньше следующей переменной и текущая переменная меньше 00:00 текущего дня, и j четная, то
+                    if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && j % 2 == 0) {
+                        // Вставить в измененный массив переменную
+                        stanok_change[i].push(stanok[i][j])
+                        // и 23:59
+                        stanok_change[i].push(pastTime + ' 23:59:59')
+                    }
+                    // Иначе  просто записать.
+                    else stanok_change[i].push(stanok[i][j])
+                }
+            }
+
+        }
+
+        // Записываем в смены массивы для круговых диаграмм
+        getRoundDiagramData(stanok_change)
+
+        // Добавляем обе готовые смены в массив Diagram
+        Diagram.push(stanok_change)
+    }) // Конец функции map с именами станков
+
+    // Когда все станки готовы, вызывается функция рисования линейной и круговой диаграм
+    build(Diagram)
+
+    // Вызов функции рисования общей
+    paintGeneralDiagram(generalDiagramNames)
+}
+
+// Функция проверяет все ли станки загрузились из запроса использует глобальную
+// переменную allStanki, при каждом вызове вычитается. Когда все станки готовы, начать обработку.
+function checkerAllReady(){
+    allStanki--
+    if(allStanki === 0) {
+        // Запуск дальнейшей логики
+        //console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
+        setTimeout(twoWorkTime, 1)
+    }
+}
+
+
+// Функция проверки, объеденяет входные массивы, если они оба готовы
+// Аргументы: массив текущего дня, массив предыдущего дня, переменная готовности
+function checkerTodayYesterday (arrayToday, arrayYesterday,check)
+{
+    // Если массив готовности имеет две переменные
+    if(check.length === 2)
+    {   // То запустиль логику объедения массивов вчерашнего и сегодняшнего дня
+        let arrayFull = []
+        for (let i=0; 6 > i; i++)
+        {   // метод concat объединяет массивы
+            if(arrayToday[i] != undefined && arrayYesterday[i] != undefined) {
+                arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
+            }
+        }
+        checkerAllReady()
+        return arrayFull
+    }
+    // Иначе вывести сообщение еще не готов
+    else {
+        return null
+    }
+}

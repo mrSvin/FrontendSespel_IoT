@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title>ОТК</title>
-  <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
+  <link rel="shortcut icon" type="image/ico"/>
 
   <link rel="stylesheet" type="text/css" href="css/styles_stanki.css"/>
   <link rel="stylesheet" type="text/css" href="css/menu_buttons.css"/> <!-- Меню -->
@@ -25,11 +25,12 @@
 
 
   <script src="/js/sutki/universal_sutki.js"></script>
+  <script src="/js/sutki/calendar_sutki_rest.js"></script>
   <script src="/js/mesto.js"></script>
   <script src="/js/dark_theme.js"></script>
 
 
-  <script src="/js/sutki/calendar_sutki.js"></script>
+
 
   <!--preloader style-->
   <style>
@@ -122,23 +123,23 @@
     </ul>
     <div style="display: flex; flex-direction: row;">
       <div class="div_login_mail">
-        <li th:text="${user_name}"></li>
-        <p th:text="${user_mail}"></p>
+        <li></li>
+        <p></p>
       </div>
       <div method="post" class="dropdown">
-        <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar"/>
+        <input type="image" alt="Avatar" class="avatar"/>
         <div class="dropdown-content">
           <p id="role_vision"></p>
-          <p><img th:src="@{${image_user}}" width="100" style="border-radius: 360px; margin-top:0; "/></p>
-          <li th:text="${user_name}"></li>
-          <p th:text="${user_mail}"></p>
+          <p><img width="100" style="border-radius: 360px; margin-top:0; "/></p>
+          <li></li>
+          <p></p>
           <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
           <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
           <label class="switch">
             <p>Светлая Темная</p>
             <span class="slider round"><input type="checkbox" id='dark_button'/><span class="slider_before round_before"></span></span>
           </label>
-          <form th:action="@{/logout}" method="post">
+          <form action="/logout" method="post">
             <button class="follow" type="submit">
               Выход
             </button>
@@ -163,6 +164,7 @@
 </div>
 <!-- Загрузка страницы и темная тема-->
 <script>
+  SetUserSetting()
   var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
 
   if(localStorage['dark_theme_state'] != null) {
@@ -200,20 +202,21 @@
   <div style="width: 250px; float: left">
     <h2 class="choose_month">Выберите дату:</h2>
   </div>
-  <form action="#" th:action="@{/kim}" th:object="${calendar_date}" method="post" style="margin: 0 20px; display: flex; align-items: center;">
+  <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
+
     <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
-      <input type='text' class="form-control" th:field="*{content_date}"/>
+      <input type='text' class="form-control" value=""/>
       <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-    </div>
-    <div class="form-actions" style="margin-left: 20px">
-      <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
-        <span>Обновить</span>
-      </button>
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
     </div>
   </form>
-</div>
+  <div class="form-actions">
+    <button class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+      <span>Обновить</span>
+    </button>
+  </div>
+</div>      <!--Календарь html-->
 
 <div style="display: flex; justify-content: space-between; align-items: flex-end;">
 
@@ -264,231 +267,52 @@
   </div>  <!--КИМ html-->
 </div>
 
-<!--Скрипт парсинга и заполнения диаграмм-->
-<script th:inline="javascript">
-  const sendRequest = url => {
-    // работаем с промисами для удобства, если ок, вызовем resolve, иначе reject у промиса
-    return new Promise((resolve, reject) => {$.ajax({url, type: 'GET'}).done(resolve).fail(reject)})
-  }
 
-  function getRoundDiagramData(smena){
-    // Создаем пустой массив
-    let array1 = []
-
-    // если массив смены не undefined, то
-    if (smena !== undefined)
-    {
-      // Через map пробегаемся по элементам
-      smena.map((arraySmena, index)=>{
-
-        // Нет смысла пробегаться по массиву с именами программ
-        if(index == 5) return;
-
-        // Переменная, которая будет хранить текущую переменную для состояния:
-        // работы, паузы, выключен, аварии, нагрузки
-        let delta = 0
-
-        // Если массив, оказался пустым или подобным, то в массив запишется ноль.
-        if(arraySmena == null || arraySmena.length < 1 || arraySmena == undefined)
-        {
-          array1.push(delta)
-          return
-        }
-        if (arraySmena.length === 1)
-        {
-          array1.push(index)
-          return
-        }
-        // Иначе
-        else
-        {   // Начиная с первого элемента с шагом 2
-          for(let i = 1; i < arraySmena.length; i+=2)
-          {
-            // старая заглушка
-            if(i==0) continue
-
-            // Вычисления дельты, сумма всех разниц между началом работы и концом.
-            delta = delta + (new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i-1]).getTime())
-          }
-        }
-        // После вычисления добавить в массив
-        array1.push(delta)
-      })
-
-      // После вычисления всех состояний, записать текущий массив в смену
-      smena.push(array1)
-    }
-  }
-
-  let urlNow = `/api/complexData/nk600_days_date:${time.slice(0,10)}`
-
-  let colorsKalibrovka = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
-
-  //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
-
-  let kim_data = [[${kim_data}]];
+<script>
+  // Переменная с именами станков для общих диаграмм
+  let generalDiagramNames = ['CRYSTA-Apex S9168', 'NK600']
 
   let linear_rabota = [];
   let linear_pause = [];
   let linear_off = [];
   let linear_avar = [];
   let linear_nagruzka = [];
-  let linear_ruchnoi = [];
 
   let kol_op = [];
   let kol_long_operations = [];
 
-</script>
-
-<script>
-  // <![CDATA[
-
-  let names = ['CRYSTA-Apex S9168', 'NK600']
-
-  sendRequest(urlNow).then((data) => {
-    console.log(data)
-
-    let nk600_data = [data.work, data.pause, data.off, data.avar, data.nagruzka, data.programName]
-    getRoundDiagramData(nk600_data)
-    console.log(nk600_data)
-
-    const Diagram = [kim_data, nk600_data]
+  // Переменные настройка текущей и предыдущей даты
+  let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+  let date = new Date(time); // some mock date
+  // Текущая и предыдущая даты. Глобальные переменные, видные из функций
+  let startTime = time.slice(0, 10)
+  $('.form-control').attr('value', startTime)
 
 
-
-    // Функция сборщик, аргументы:
-    // Массив со станками, с какого станка начать, исключения если имеются,
-    // 2-ой и 3-ий аргументы опциональны
-    build(Diagram)//, 1, exception)
-
-    colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
-    Highcharts.chart('container_sum_zagruzka', {
-      chart: {
-        type: 'column'
-      },
-      colors:colorsLine,
-      title: {
-        text: 'Общая загрузка оборудования'
-      },
-      xAxis: {
-        labels: {
-          style: {
-            fontSize: '18px',
-          }
-        },
-        categories: names
-      },
-      credits: {
-        enabled: false
-      },
-      yAxis: {
-        min: 0,
-        title: {
-          text: '%'
-        }
-      },
-      tooltip: {
-        pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-        shared: true
-      },
-      plotOptions: {
-        column: {
-          stacking: 'percent'
-        }
-      },
-      series: [{
-        name: 'Авария',
-        data: linear_avar
-      }, {
-        name: 'Выключен',
-        data: linear_off
-      },{
-        name: 'Ручной',
-        data: linear_ruchnoi
-      }, {
-        name: 'Ожидание',
-        data: linear_pause
-      }, {
-        name: 'Под нагрузкой',
-        data: linear_nagruzka
-      }, {
-        name: 'Работа',
-        data: linear_rabota
-      }, ]
-    });
-
-    Highcharts.chart('container_kol_operations', {
-      chart: {
-        type: 'bar',
-        marginLeft: 110
-      },
-      title: {
-        text: 'Количество операций'
-      },
-      xAxis: {
-        labels: {
-          style: {
-            fontSize: '10px',
-          }
-        },
-        categories: names,
-        title: {
-          text: null
-        }
-      },
-      yAxis: {
-        min: 0,
-        title: {
-          text: 'Количество',
-          align: 'high'
-        },
-        labels: {
-          overflow: 'justify'
-        }
-      },
-      tooltip: {
-        valueSuffix: ' операций'
-      },
-      plotOptions: {
-        bar: {
-          dataLabels: {
-            enabled: true
-          }
-        }
-      },
-      credits: {
-        enabled: false
-      },
-      series: [{
-        name: 'Общее количество операций',
-        data: kol_op,
-      }, {
-        name: 'Количество операций более 3 минут',
-        data: kol_long_operations,
-      }]
-    });
-  })
-
-  //]]>
-</script>
-
-<!--Скрипт отображения в header  кнопки администрирование-->
-<script th:inline="javascript">
-  var role_status = [[${user_role}]];
-
-  if(role_status === "ROLE_ADMIN")
-  {
-    document.getElementById("role_vision").innerHTML = "Роль: Админ";
-    document.getElementById("admin").style.display = "inline";
-
+  // Функция назначения объектам свойств
+  function objectStatus() {return {'today':[], 'yesterday': [], 'ready': [], 'complete':[]}}
+  // Назанечение объекту полей.
+  const objectStankov = {
+    'kim': objectStatus(),
+    'nk600': objectStatus()
   }
-  else if (role_status === "ROLE_USER")
-  {
-    document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
-    document.getElementById("admin").style.display = "none";
-  }
-</script>
 
+  // Клон объекта станков, чтобы не изменять оригинальный объект
+  let clone = JSON.parse(JSON.stringify(objectStankov))
+
+  // Имена берутся из ключей названий
+  let Names = Object.keys(clone)
+
+  // Переменная хранящая количество станков, работает в функции checkerAllReady()
+  let allStanki = Names.length
+
+  // Переменная в которую запишутся данные всех смен.
+  let Diagram = []
+
+  // Функция получения и отправки данных из запросов в clone и вызовом функции рисования графиков.
+  GetAllData(Names, clone)
+
+</script>
 <!--Скрипт кнопки выпадающего меню-->
 <script src="/js/dropdown_menu.js"></script>
 
