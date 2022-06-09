@@ -282,10 +282,10 @@
   let kol_long_operations = [];
 
   // Переменные настройка текущей и предыдущей даты
-  let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
-  let date = new Date(time); // some mock date
+  var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+  var date = new Date(time); // some mock date
   // Текущая и предыдущая даты. Глобальные переменные, видные из функций
-  let startTime = time.slice(0, 10)
+  var startTime = time.slice(0, 10)
   $('.form-control').attr('value', startTime)
 
 
