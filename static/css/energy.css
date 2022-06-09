@@ -312,7 +312,7 @@
 .complexInfoAll {
 }
 
-.complete {
+.VrsInfoAlign {
     display: flex;
     justify-content: center;
     flex-direction: column;

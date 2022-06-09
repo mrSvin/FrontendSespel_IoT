@@ -386,7 +386,7 @@ function VrsInfo() {
     }, [])
 
     return (
-        <div>
+        <div className='VrsInfoAlign'>
 
             <MonthCalendar onClick={newDate} dateMonth={dateMonth}/>
 
@@ -422,7 +422,7 @@ function VrsInfo() {
 function EnergyWater() {
 
     return (
-        <div className='complete'>
+        <div>
 
             <Header/>
 
