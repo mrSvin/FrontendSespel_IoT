@@ -350,8 +350,6 @@ const MonthCalendar = ({newDate, updateData}) => {
 
 function ComplexInfo({complexName, complexImg, complexMesto}) {
 
-
-
     return (
         <div className="parent_image">
 
@@ -528,8 +526,13 @@ function VrsInfo() {
     }
 
     useEffect(() => {
+        let yearNow = new Date().getFullYear()
+        let monthNow = new Date().getMonth()+1
+        if (monthNow<10) {
+            monthNow = '0' + monthNow
+        }
 
-        fetch('/api/energy/vrs/date:06-2022', {method: 'GET'})
+        fetch(`/api/energy/vrs/date:${yearNow}-${monthNow}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 setDataVrs1(data[0].vrs1)
@@ -574,7 +577,7 @@ const UpdateData = ({updateData}) => {
 
 
     function buttonLoading() {
-        document.getElementsByClassName('buttonUpdateMonth')[0].setAttribute('disabled', 'disabled')
+        document.getElementsByClassName('buttonUpdateMonth')[0].setAttribute('disabled', 'true')
         document.getElementsByClassName('buttonUpdateMonth')[0].classList.add('load')
         timeOut = setTimeout(buttonLoaded,500)
     }
