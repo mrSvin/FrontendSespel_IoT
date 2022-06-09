@@ -372,7 +372,7 @@ function ComplexButtons() {
     let mesto = (parameter) => (event) => {
 
         window.localStorage['mestoParams'] = parameter
-        window.open("../mesto/mesto", '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+
+        window.open("../mesto/mestoNew", '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+
             ',width='+Math.min(1002, screen.availWidth))
     }
 
@@ -380,7 +380,7 @@ function ComplexButtons() {
 
         <div className='parentIcons'>
             <a className="icon_mesto"
-               onClick={mesto([-80,608,'url(../images/nasos.png) no-repeat',"../images/1_ploshadka_outside.png",60,"unset"])}>
+               onClick={mesto([-80,608,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/1_ploshadka_outside.png",60,"unset"])}>
                 <div className="label_mesto">Место</div>
             </a>
             <a className="icon_personal"
