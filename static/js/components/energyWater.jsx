@@ -378,7 +378,7 @@ function ComplexButtons() {
 
     return (
 
-        <div>
+        <div className='parentIcons'>
             <a className="icon_mesto"
                onClick={mesto([-80,608,'url(../images/nasos.png) no-repeat',"../images/1_ploshadka_outside.png",60,"unset"])}>
                 <div className="label_mesto">Место</div>

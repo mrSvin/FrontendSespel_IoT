@@ -266,46 +266,61 @@
     padding: 9px!important;
 }
 
+.parentIcons {
+    display: flex;
+    justify-content: center;
+}
+
 .icon_mesto {
     float: left;
     width: 60px;
     height: 60px;
     background: url(../images/iconMesto.png) no-repeat;
     background-size: auto;
-    background-size: 60px 60px;
-    margin-top: 10px;
-    margin-left: 30px;
+    margin: 10px 25px 0 25px;
     cursor: pointer;
 }
 
 .icon_mesto:hover {
-    -webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;
+    /*-webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;*/
+    box-shadow: #252734 0px 0px 12px 12px inset;
+}
+
+.icon_mesto:hover > div {
+    position: relative;
+    top: 5px;
 }
 
 .label_mesto {
     margin-top: 65px;
     margin-left: 8px;
-    color: #83addd;
+    color: #b3b8be;
 }
 
 .icon_personal {
-    float: left;
+    float: right;
     background: url(../images/iconPersonal.png) no-repeat;
     background-size: auto;
-    background-size: 60px 60px;
-    margin-top: 10px;
-    margin-left: 30px;
+    width: 60px;
+    height: 60px;
+    margin: 10px 25px 0 25px;
     cursor: pointer;
 }
 
 .icon_personal:hover {
-    -webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;
+    /*-webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;*/
+    box-shadow: #252734 0px 0px 12px 12px inset;
+}
+
+.icon_personal:hover > div {
+    position: relative;
+    top: 5px;
 }
 
 .label_personal {
+    color: #b3b8be;
     margin-top: 65px;
     margin-left: -5px;
-    color: #83addd;
 }
 
 .vrsInfoAlign {
@@ -313,3 +328,5 @@
     justify-content: center;
     flex-direction: column;
 }
+
+
