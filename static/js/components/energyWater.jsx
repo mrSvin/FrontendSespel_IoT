@@ -1,4 +1,94 @@
-const MonthCalendar = ({onClick, dateMonth}) => {
+function TableDays(data) {
+
+
+    var total = 0;
+    for (var i in data.data) {
+        total += data.data[i];
+    }
+    total = total.toFixed(2)
+
+    return (
+        <table className="tableEnergy" id="vrs_1_days"
+        >
+            <thead>
+            <tr>
+                <th>Дни</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>10</th>
+                <th>11</th>
+                <th>12</th>
+                <th>13</th>
+                <th>14</th>
+                <th>15</th>
+                <th>16</th>
+                <th>17</th>
+                <th>18</th>
+                <th>19</th>
+                <th>20</th>
+                <th>21</th>
+                <th>22</th>
+                <th>23</th>
+                <th>24</th>
+                <th>25</th>
+                <th>26</th>
+                <th>27</th>
+                <th>28</th>
+                <th>29</th>
+                <th>30</th>
+                <th>31</th>
+                <th>Итого</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Кубов</td>
+                <td>{data.data[0]}</td>
+                <td>{data.data[1]}</td>
+                <td>{data.data[2]}</td>
+                <td>{data.data[3]}</td>
+                <td>{data.data[4]}</td>
+                <td>{data.data[5]}</td>
+                <td>{data.data[6]}</td>
+                <td>{data.data[7]}</td>
+                <td>{data.data[8]}</td>
+                <td>{data.data[9]}</td>
+                <td>{data.data[10]}</td>
+                <td>{data.data[11]}</td>
+                <td>{data.data[12]}</td>
+                <td>{data.data[13]}</td>
+                <td>{data.data[14]}</td>
+                <td>{data.data[15]}</td>
+                <td>{data.data[16]}</td>
+                <td>{data.data[17]}</td>
+                <td>{data.data[18]}</td>
+                <td>{data.data[19]}</td>
+                <td>{data.data[20]}</td>
+                <td>{data.data[21]}</td>
+                <td>{data.data[22]}</td>
+                <td>{data.data[23]}</td>
+                <td>{data.data[24]}</td>
+                <td>{data.data[25]}</td>
+                <td>{data.data[26]}</td>
+                <td>{data.data[27]}</td>
+                <td>{data.data[28]}</td>
+                <td>{data.data[29]}</td>
+                <td>{data.data[30]}</td>
+                <td>{total}</td>
+            </tr>
+            </tbody>
+        </table>
+    )
+}
+
+const MonthCalendar = ({newDate, updateData}) => {
 
     const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
     const monthsNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
@@ -28,9 +118,9 @@ const MonthCalendar = ({onClick, dateMonth}) => {
         if (param == "янв") {
             setMonth("Январь")
             setMonthNumber("01")
-            monthsNumber
             changeBackground("Январь")
             setDropdown("none")
+
         }
         if (param == "фев") {
             setMonth("Февраль")
@@ -149,7 +239,7 @@ const MonthCalendar = ({onClick, dateMonth}) => {
 
                     <div className="months">
                         <table className="calendarMonth">
-                            <tbody onClick={onClick(`${monthNumber}-${year}`)}>
+                            <tbody onClick={newDate(`${monthNumber}-${year}`)}>
                             <tr>
                                 <td
                                     className="tdMonth"
@@ -250,8 +340,55 @@ const MonthCalendar = ({onClick, dateMonth}) => {
 
             </div>
 
+            <UpdateData updateData={updateData}/>
+
         </div>
 
+
+    )
+}
+
+function ComplexInfo({complexName, complexImg}) {
+
+    return (
+        <div className="parent_image">
+
+            <img
+                className="stanok_img"
+                src={complexImg}/>
+
+            <figcaption className="comlexInfo">
+                {complexName}
+            </figcaption>
+
+            <ComplexButtons/>
+
+        </div>
+    )
+}
+
+function ComplexButtons() {
+
+    let mesto = (parameter) => (event) => {
+
+        window.localStorage['mestoParams'] = parameter
+        window.open("../mesto/mesto", '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+
+            ',width='+Math.min(1002, screen.availWidth))
+    }
+
+    return (
+
+        <div>
+            <a className="icon_mesto"
+               onClick={mesto([-80,608,'url(../images/nasos.png) no-repeat',"../images/1_ploshadka_outside.png",60,"unset"])}>
+                <div className="label_mesto">Место</div>
+            </a>
+            <a className="icon_personal"
+               href="../personal/personal_vrs"
+            >
+                <div className="label_personal">Персонал</div>
+            </a>
+        </div>
 
     )
 }
@@ -259,26 +396,37 @@ const MonthCalendar = ({onClick, dateMonth}) => {
 function VrsInfo() {
 
     let [dateMonth, setDateMonth] = useState(0);
+    let complexName = ["ВРС1", "ВРС2"]
+    let complexImg = ["../images/nasos.png", "../images/nasos_vrs2.png"]
+
+    let [dataVrs1, setDataVrs1] = useState(0);
+    let [dataVrs2, setDataVrs2] = useState(0);
 
     function newDate(input) {
         useEffect(() => {
             setDateMonth(input)
 
-            if (dateMonth != "0") {
-                console.log(dateMonth)
 
-                fetch(`/api/energy/vrs/date:${dateMonth}`, {method: 'GET'})
-                    .then((response) => response.json())
-                    .then((data) => {
-                        highChartData(data[0].vrs1)
-                    })
-            }
         })
     }
 
+    function updateData() {
+        if (dateMonth != "0") {
+            console.log(dateMonth)
 
-    function highChartData(inputData) {
-        Highcharts.chart('container',
+            fetch(`/api/energy/vrs/date:${dateMonth}`, {method: 'GET'})
+                .then((response) => response.json())
+                .then((data) => {
+                    setDataVrs1(data[0].vrs1)
+                    setDataVrs2(data[0].vrs2)
+                    highChartData(data[0].vrs1, "container")
+                    highChartData(data[0].vrs2, "container2")
+                })
+        }
+    }
+
+    function highChartData(inputData, containerName) {
+        Highcharts.chart(containerName,
             {
                 lang: {
                     loading: 'Загрузка...',
@@ -379,45 +527,54 @@ function VrsInfo() {
         fetch('/api/energy/vrs/date:06-2022', {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
-                highChartData(data[0].vrs1)
+                setDataVrs1(data[0].vrs1)
+                setDataVrs2(data[0].vrs2)
+                highChartData(data[0].vrs1, "container")
+                highChartData(data[0].vrs2, "container2")
             })
 
 
     }, [])
 
     return (
-        <div className='VrsInfoAlign'>
+        <div className='vrsInfoAlign'>
 
-            <MonthCalendar onClick={newDate} dateMonth={dateMonth}/>
+            <MonthCalendar newDate={newDate} updateData={updateData}/>
 
-            <div className="parent_image">
-
-                <img
-                    className="stanok_img"
-                    src='../images/nasos.png'/>
-
-                <figcaption className="comlexInfo">
-                    ВРС1
-                </figcaption>
-
-            </div>
-
-            <div className="vrsHighSchart">
-
-                <div>
-                    <div
-                        id="container"
-                    >
-                    </div>
+            <div>
+                <ComplexInfo complexName={complexName[0]} complexImg ={complexImg[0]} />
+                <div className="vrsHighChart" id="container">
                 </div>
-
+                <TableDays data={dataVrs1}/>
             </div>
 
+            <div>
+                <ComplexInfo complexName={complexName[1]} complexImg ={complexImg[1]} />
+                <div className="vrsHighChart" id="container2">
+                </div>
+                <TableDays data={dataVrs2}/>
+            </div>
         </div>
 
     )
 }
 
+const UpdateData = ({updateData}) => {
+
+    return (
+
+        <div>
+            <button
+                className="buttonUpdateMonth"
+                onClick={updateData}
+            >
+                Обновить
+            </button>
+        </div>
+
+    )
+
+}
 
 function EnergyWater() {
 
