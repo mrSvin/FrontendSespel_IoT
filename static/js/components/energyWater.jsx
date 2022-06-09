@@ -569,7 +569,7 @@ function VrsInfo() {
 
 const UpdateData = ({updateData}) => {
     function buttonLoaded() {
-        document.getElementsByClassName('buttonUpdateMonth')[0].setAttribute('disabled', 'disabled')
+        document.getElementsByClassName('buttonUpdateMonth')[0].setAttribute('disabled', null)
         document.getElementsByClassName('buttonUpdateMonth')[0].classList.remove('load')
         console.log(timeOut)
         clearInterval(timeOut)
@@ -577,9 +577,9 @@ const UpdateData = ({updateData}) => {
 
 
     function buttonLoading() {
-        document.getElementsByClassName('buttonUpdateMonth')[0].setAttribute('disabled', 'true')
+        document.getElementsByClassName('buttonUpdateMonth')[0].setAttribute('disabled', 'disabled')
         document.getElementsByClassName('buttonUpdateMonth')[0].classList.add('load')
-        timeOut = setTimeout(buttonLoaded,3000)
+        timeOut = setTimeout(buttonLoaded,3500)
     }
 
     let timeOut = null
