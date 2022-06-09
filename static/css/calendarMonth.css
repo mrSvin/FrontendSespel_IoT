@@ -72,10 +72,53 @@
     letter-spacing: 0.025em;
     border: none;
     border-radius: 15px;
-    min-height: 35px;
+    max-height: 35px;
     width: 115px;
     transition: all 0.2s ease;
     cursor: pointer;
     margin-left: 25px;
     margin-top: 22px;
+}
+
+
+.buttonUpdateMonth:hover {
+    box-shadow: 0px 0px 5px 0px #14B2E9, inset 0px 0px 0px 0px #14b2f3 !important;
+}
+
+
+.buttonUpdateMonth.load {
+    padding: 3px 6px;
+}
+
+.buttonUpdateMonth.load span {
+    opacity: 0;
+}
+
+.buttonUpdateMonth.load:after {
+    display: block;
+}
+
+
+.buttonUpdateMonth:after {
+    content: '';
+    position: relative;
+    top: -3px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: solid 2px;
+    border-color: #fff transparent transparent transparent;
+    border-radius: 100%;
+    transition: .3s ease;
+    animation: fin 1s infinite;
+    transform-origin: 0 0;
+}
+
+@keyframes fin {
+    from {
+        transform: rotate(0) translate(-50%, -50%)
+    }
+    to {
+        transform: rotate(360deg) translate(-50%, -50%)
+    }
 }
