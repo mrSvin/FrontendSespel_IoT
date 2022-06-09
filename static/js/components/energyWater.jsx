@@ -574,7 +574,7 @@ const UpdateData = ({updateData}) => {
 
 
     function buttonLoading() {
-        document.getElementsByClassName('buttonUpdateMonth')[0].setAttribute('disabled', 'true')
+        document.getElementsByClassName('buttonUpdateMonth')[0].setAttribute('disabled', 'disabled')
         document.getElementsByClassName('buttonUpdateMonth')[0].classList.add('load')
         timeOut = setTimeout(buttonLoaded,500)
     }

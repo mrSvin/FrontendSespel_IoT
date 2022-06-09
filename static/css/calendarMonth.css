@@ -72,7 +72,7 @@
     letter-spacing: 0.025em;
     border: none;
     border-radius: 15px;
-    max-height: 35px;
+    height: 35px;
     width: 115px;
     transition: all 0.2s ease;
     cursor: pointer;
@@ -100,9 +100,10 @@
 
 
 .buttonUpdateMonth:after {
+    display: none;
     content: '';
     position: relative;
-    top: -3px;
+    top: -6px;
     left: 50%;
     width: 20px;
     height: 20px;
