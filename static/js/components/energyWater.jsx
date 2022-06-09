@@ -402,7 +402,7 @@ function VrsInfo() {
     let complexImg = ["../images/nasos.png", "../images/nasos_vrs2.png"]
 
     let buttonsVrs1 = [-80,608,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/1_ploshadka_outside.png",60,"unset"]
-    let buttonsVrs2 = [-100,608,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/1_ploshadka_outside.png",60,"unset"]
+    let buttonsVrs2 = [-1000,308,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/2_ploshadka_outside.png",60,"unset"]
 
     let [dataVrs1, setDataVrs1] = useState(0);
     let [dataVrs2, setDataVrs2] = useState(0);
