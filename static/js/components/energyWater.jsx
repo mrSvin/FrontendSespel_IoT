@@ -88,7 +88,7 @@ function TableDays(data) {
     )
 }
 
-const MonthCalendar = ({newDate, updateData}) => {
+const MonthCalendar = ({newDate, updateData, stateButtonUpdate}) => {
 
     const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
     const monthsNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
@@ -340,7 +340,7 @@ const MonthCalendar = ({newDate, updateData}) => {
 
             </div>
 
-            <UpdateData updateData={updateData}/>
+            <UpdateData updateData={updateData} stateButtonUpdate ={stateButtonUpdate}/>
 
         </div>
 
@@ -405,12 +405,20 @@ function VrsInfo() {
     let [dataVrs1, setDataVrs1] = useState(0);
     let [dataVrs2, setDataVrs2] = useState(0);
 
+    let [stateButtonUpdate, setStateButtonUpdate] = useState([false,"buttonUpdateMonth"])
+    let timeout=null;
+
     function newDate(input) {
         useEffect(() => {
             setDateMonth(input)
 
 
         })
+    }
+
+    function disabledButton() {
+        setStateButtonUpdate([false, "buttonUpdateMonth"])
+        clearInterval(timeout)
     }
 
     function updateData() {
@@ -426,6 +434,11 @@ function VrsInfo() {
                     highChartData(data[0].vrs2, "container2")
                 })
         }
+
+        setStateButtonUpdate([true,"buttonUpdateMonth load"])
+        timeout= setTimeout(disabledButton, 1000)
+
+
     }
 
     function highChartData(inputData, containerName) {
@@ -547,7 +560,7 @@ function VrsInfo() {
     return (
         <div className='vrsInfoAlign'>
 
-            <MonthCalendar newDate={newDate} updateData={updateData}/>
+            <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate = {stateButtonUpdate}/>
 
             <div>
                 <ComplexInfo complexName={complexName[0]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs1} />
@@ -567,29 +580,15 @@ function VrsInfo() {
     )
 }
 
-const UpdateData = ({updateData}) => {
-    function buttonLoaded() {
-        document.getElementsByClassName('buttonUpdateMonth')[0].setAttribute('disabled', 'disabled')
-        document.getElementsByClassName('buttonUpdateMonth')[0].classList.remove('load')
-        console.log(timeOut)
-        clearInterval(timeOut)
-    }
-
-
-    function buttonLoading() {
-        document.getElementsByClassName('buttonUpdateMonth')[0].setAttribute('disabled', 'true')
-        document.getElementsByClassName('buttonUpdateMonth')[0].classList.add('load')
-        timeOut = setTimeout(buttonLoaded,3000)
-    }
-
-    let timeOut = null
+const UpdateData = ({updateData, stateButtonUpdate}) => {
 
     return (
 
         <div>
             <button
-                className="buttonUpdateMonth"
-                onClick={function(event){ updateData(); buttonLoading()}}
+                className={stateButtonUpdate[1]}
+                disabled={stateButtonUpdate[0]}
+                onClick={updateData}
             >
                 <span>Обновить</span>
             </button>
