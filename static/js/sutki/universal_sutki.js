@@ -906,109 +906,6 @@ function paintGeneralDiagram(generalDiagramNames){
         }]
     });
 
-    Highcharts.chart('container_sum_zagruzka_2', {
-        chart: {
-            type: 'column'
-        },
-        colors:colorsLine,
-        title: {
-            text: 'Общая загрузка смены 07:00 - 19:00'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: generalDiagramNames,
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Авария',
-            data: linear_avar_2
-        }, {
-            name: 'Выключен',
-            data: linear_off_2
-        }, {
-            name: 'Ожидание',
-            data: linear_pause_2
-        }, {
-            name: 'Под нагрузкой',
-            data: linear_nagruzka_2
-        }, {
-            name: 'Работа',
-            data: linear_rabota_2
-        }, ]
-    });
-
-    Highcharts.chart('container_kol_operations_2', {
-        chart: {
-            type: 'bar',
-            marginLeft:  marLeft
-        },
-        title: {
-            text: 'Количество операций смены 07:00 - 19:00'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: fSize,
-                }
-            },
-            categories: generalDiagramNames,
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Количество',
-                align: 'high'
-            },
-            labels: {
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: ' операций'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Общее количество операций',
-            data: kol_op_2,
-        }, {
-            name: 'Количество операций более 3 минут',
-            data: kol_long_operations_2,
-        }]
-    });
-
     dark_theme()
 }
 
@@ -1064,14 +961,9 @@ function GetAllData(ArrayNames, Object) {
     ArrayNames.map((name) => {
         // Формируем для каждого станка url для запроса
         var urlNow = `/api/complexData/${name}_days_date:${startTime}`
-        var urlPast = `/api/complexData/${name}_days_date:${pastTime}`
-
 
         // Запрос на текущий день для одного станка
         sendRequest(urlNow).then((data) => {
-
-            // В массив обработки запроса добавляем ноль
-            Object[name]['ready'].push(0)
 
             // В массив текущего дня добавляем данные по запросу
             Object[name]['today'].push(data.work)
@@ -1081,38 +973,7 @@ function GetAllData(ArrayNames, Object) {
             Object[name]['today'].push(data.nagruzka)
             Object[name]['today'].push(data.programName)
 
-            // Переменная checkerData будет записана только если для одного станка обработались оба запроса
-            // Иначе в нее будет записан null
-            var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
-            // Если в переменную не записался null
-            if (checkerData !== null){
-                checkerData.map((check) => {
-                    Object[name]['complete'].push(check)
-                })
-            }
-        })
-
-
-        // Запрос на вчера
-        sendRequest(urlPast).then((data) => {
-            Object[name]['ready'].push(0)
-
-            Object[name]['yesterday'].push(data.work)
-            Object[name]['yesterday'].push(data.pause)
-            Object[name]['yesterday'].push(data.off)
-            Object[name]['yesterday'].push(data.avar)
-            Object[name]['yesterday'].push(data.nagruzka)
-            Object[name]['yesterday'].push(data.programName)
-
-            // Переменная checkerData будет записана только если для одного станка обработались оба запроса
-            // Иначе в нее будет записан null
-            var checkerData = checkerTodayYesterday(Object[name]['today'],Object[name]['yesterday'],Object[name]['ready'])
-            // Если в переменную не записался null
-            if (checkerData !== null){
-                checkerData.map((check) => {
-                    Object[name]['complete'].push(check)
-                })
-            }
+            checkerAllReady()
         })
 
     })
@@ -1127,15 +988,11 @@ function twoWorkTime() {
 
     Names.map((name) => {
 
-        // Переменные массивов для двух смен
-        let smena_1 = [];
-
-        // Переменные массивов для имен программ двух смен
-        let programName1 = []
-
         // Получении объекта с именем текущего станка
         // Хранящий объедененные массивы текущего и предыдущего дня
-        let stanok = clone[name]['complete']
+        let stanok = clone[name]['today']
+
+        console.log(stanok)
 
         // Отказ от работы с пустым объектом
         if (stanok === null) {
@@ -1147,38 +1004,39 @@ function twoWorkTime() {
         let stanok_change = []
 
         // Цикл вставки значения 23:59 в массивы работы, паузы, выключен, авария, нагрузка.
-        for (let i = 0; i < 5; i++) {
-            stanok_change.push(Array())
-
-            // отказ от работы с неопределенным массивом
-            if (stanok[i] !== undefined) {
-                // Цикл внутри массива
-                for (let j = 0; j < stanok[i].length; j++) {
-                    // если этот элемент последний, то записать его и выйти из цикла
-                    if (j == stanok[i].length) {
-                        stanok_change[i].push(stanok[i][j])
-                        break
-                    }
-
-                    // Если время 00:00 текущего дня меньше следующей переменной и текущая переменная меньше 00:00 текущего дня, и j четная, то
-                    if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && j % 2 == 0) {
-                        // Вставить в измененный массив переменную
-                        stanok_change[i].push(stanok[i][j])
-                        // и 23:59
-                        stanok_change[i].push(pastTime + ' 23:59:59')
-                    }
-                    // Иначе  просто записать.
-                    else stanok_change[i].push(stanok[i][j])
-                }
-            }
-
-        }
+        // for (let i = 0; i < 5; i++) {
+        //     stanok_change.push(Array())
+        //
+        //     // отказ от работы с неопределенным массивом
+        //     if (stanok[i] !== undefined) {
+        //         // Цикл внутри массива
+        //         for (let j = 0; j < stanok[i].length; j++) {
+        //             // если этот элемент последний, то записать его и выйти из цикла
+        //             if (j == stanok[i].length) {
+        //                 stanok_change[i].push(stanok[i][j])
+        //                 break
+        //             }
+        //
+        //             // Если время 00:00 текущего дня меньше следующей переменной и текущая переменная меньше 00:00 текущего дня, и j четная, то
+        //             if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && j % 2 == 0) {
+        //                 // Вставить в измененный массив переменную
+        //                 stanok_change[i].push(stanok[i][j])
+        //                 // и 23:59
+        //                 stanok_change[i].push(pastTime + ' 23:59:59')
+        //             }
+        //             // Иначе  просто записать.
+        //             else stanok_change[i].push(stanok[i][j])
+        //         }
+        //     }
+        //
+        // }
 
         // Записываем в смены массивы для круговых диаграмм
-        getRoundDiagramData(stanok_change)
+        getRoundDiagramData(stanok)
 
         // Добавляем обе готовые смены в массив Diagram
-        Diagram.push(stanok_change)
+        Diagram.push(stanok)
+
     }) // Конец функции map с именами станков
 
     // Когда все станки готовы, вызывается функция рисования линейной и круговой диаграм
@@ -1196,29 +1054,5 @@ function checkerAllReady(){
         // Запуск дальнейшей логики
         //console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
         setTimeout(twoWorkTime, 1)
-    }
-}
-
-
-// Функция проверки, объеденяет входные массивы, если они оба готовы
-// Аргументы: массив текущего дня, массив предыдущего дня, переменная готовности
-function checkerTodayYesterday (arrayToday, arrayYesterday,check)
-{
-    // Если массив готовности имеет две переменные
-    if(check.length === 2)
-    {   // То запустиль логику объедения массивов вчерашнего и сегодняшнего дня
-        let arrayFull = []
-        for (let i=0; 6 > i; i++)
-        {   // метод concat объединяет массивы
-            if(arrayToday[i] != undefined && arrayYesterday[i] != undefined) {
-                arrayFull.push(arrayYesterday[i].concat(arrayToday[i]))
-            }
-        }
-        checkerAllReady()
-        return arrayFull
-    }
-    // Иначе вывести сообщение еще не готов
-    else {
-        return null
     }
 }
