@@ -26,6 +26,8 @@
         -webkit-border-radius: 99px;
         -moz-border-radius: 99px;
         border-radius: 99px;
+
+        background-size: 40px 40px;
         /* border-radius: 50% has issues on some mobile browsers1 */
     }
 
@@ -263,14 +265,7 @@
 <!--Скрипт полигон для подбора координат-->
 
 
--80,608,url(../images/nasos.png) no-repeat,../images/1_ploshadka_outside.png,60,unset
-
 <script>
-    //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
-    if(localStorage['mestoParams'] != null) {
-        mar_top = parseInt(window.localStorage['mar_top']);
-    }
-
     if(localStorage['mestoParams'] != null) {
         mestoParams = window.localStorage['mestoParams'];
         mestoParams = mestoParams.split(',')
@@ -279,48 +274,30 @@
             if(i == 0 || i == 1 || i == 4) elem = parseInt(elem)
             return elem
         })
-        console.log(mestoParams)
     }
 
 
     document.addEventListener("DOMContentLoaded", function() {
+
+        let margin_top = mestoParams[0]
+        let margin_left = mestoParams[1]
+        let background = mestoParams[2]
+        let src = mestoParams[3]
+        let size = mestoParams[4]
+        let mapWidth = mestoParams[5]
+
         let icon = document.querySelector(".icon")
         let map = document.querySelector('.place_img')
         let pulse = document.querySelector('.pulse2')
 
-        icon.style = `margin-top: ${mestoParams[0]}px; margin-left:${mestoParams[1]}px; background:${mestoParams[2]}; background-size:${mestoParams[4]};width: ${mestoParams[4]}px; height: ${mestoParams[4]}px;`
+        icon.style = `margin-top: ${margin_top}px; margin-left:${margin_left}px; background:${background}; background-size:${size};width: ${size}px; height: ${size}px;`
 
-        map.setAttribute('src', mestoParams[3])
-        map.style = `width: ${mestoParams[5]}px;`
+        map.setAttribute('src', src)
+        map.style = `width: ${mapWidth}px;`
 
-        pulse.style = `margin-top: ${mestoParams[0]-10}px; margin-left: ${mestoParams[1]-10}px; width: ${mestoParams[4] + 20}px; height: ${mestoParams[4] + 20}px;`
-    });
-
-    $(document).ready(function(){
-        $(".icon").css('marginTop', mar_top);
-        $(".icon").css('marginLeft', mar_left);
-        $('.icon').css('background', bground);
-        $('.icon').css('backgroundSize', size)
-        $('.icon').css('width', size)
-        $('.icon').css('height', size)
-
-        $(".place_img").attr("src", place_img);
-        $(".place_img").css("width", bwidth);
-
-        $(".pulse2").css('marginTop', mar_top - 10);
-        $(".pulse2").css('marginLeft', mar_left - 10);
-        $('.pulse2').css('width', size + 20)
-        $('.pulse2').css('height', size + 20)
+        pulse.style = `margin-top: ${margin_top-10}px; margin-left: ${margin_left-10}px; width: ${size + 20}px; height: ${size + 20}px;`
     });
 </script>
 <!--Скрипт прототип для будущего места для станков-->
-
-
-
-<style>
-    .icon{
-        background-size: 40px 40px;
-    }
-</style>
 
 </html>
