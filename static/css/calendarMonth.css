@@ -63,3 +63,19 @@
     font-size: 30px;
     margin-right: 15px;
 }
+
+.buttonUpdateMonth {
+    color: #161821;
+    background: #83addd;
+    font-size: 120%;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    border: none;
+    border-radius: 15px;
+    min-height: 35px;
+    width: 115px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin-left: 25px;
+    margin-top: 22px;
+}
