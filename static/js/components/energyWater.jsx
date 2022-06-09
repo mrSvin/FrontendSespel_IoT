@@ -239,7 +239,7 @@ const MonthCalendar = ({newDate, updateData}) => {
 
                     <div className="months">
                         <table className="calendarMonth">
-                            <tbody onClick={newDate(`${monthNumber}-${year}`)}>
+                            <tbody onClick={newDate(`${year}-${monthNumber}`)}>
                             <tr>
                                 <td
                                     className="tdMonth"
