@@ -581,8 +581,6 @@ const UpdateData = ({updateData}) => {
 
     let timeOut = null
 
-
-
     return (
 
         <div>
