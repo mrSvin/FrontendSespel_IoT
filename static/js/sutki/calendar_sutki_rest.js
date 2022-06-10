@@ -54,6 +54,7 @@ $(function () {
         linear_off = [];
         linear_avar = [];
         linear_nagruzka = [];
+        linear_ruchnoi = [];
 
         kol_op = [];
         kol_long_operations = [];
