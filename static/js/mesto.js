@@ -301,6 +301,22 @@ function crystal_apex (){
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
+
+function nk600(){
+    mar_top = -145;
+    mar_left = 680;
+    bground = 'url(../images/nk600.png) no-repeat';
+    place_img = "../images/ceh2.png";
+    size = 40;
+    bwidth = "unset";
+
+    window.localStorage['mar_top'] = mar_top;
+    window.localStorage['mar_left'] = mar_left;
+    window.localStorage['bground'] = bground;
+    window.localStorage['place_img'] = place_img;
+    window.localStorage['bwidth'] = bwidth;
+    window.localStorage['size'] = size;
+};
 // конец мест ОТК
 
 // Начало мест навигаторы

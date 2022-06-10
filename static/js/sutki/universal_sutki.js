@@ -1044,7 +1044,7 @@ function GetAllData(ArrayNames, Object, exception=null) {
 // Функция запускается после обработки всех станков, делит время на две смены
 function twoWorkTime(exception=null) {
 
-    console.log('номера исключений', exception)
+
 
     // Массив с заполненными данными
     var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
@@ -1066,7 +1066,7 @@ function twoWorkTime(exception=null) {
 
         stanok = stanok.map((elem, i)=>{
             if(i == 5) {
-                return
+                return elem
             }
 
             if(elem.length % 2 == 1)
@@ -1084,25 +1084,17 @@ function twoWorkTime(exception=null) {
 
         })
 
-        console.log(stanok)
-
         // Записываем в смены массивы для круговых диаграмм
         getRoundDiagramData(stanok)
+
 
         // Добавляем обе готовые смены в массив Diagram
         Diagram.push(stanok)
 
+
     }) // Конец функции map с именами станков
 
-        if(exception !== null) {
-            build(Diagram,1, exception)
-        }
-        else
-        {
-            build(Diagram)
-        }
-
-    // (exception !== null) ? build(Diagram,1, exception) : build(Diagram);
+     exception !== null? build(Diagram,1, exception) : build(Diagram);
 
     // Вызов функции рисования общей
     paintGeneralDiagram(generalDiagramNames, exception)
@@ -1114,7 +1106,6 @@ function checkerAllReady(exception=null){
     allStanki--
     if(allStanki === 0) {
         // Запуск дальнейшей логики
-        //console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
         twoWorkTime(exception)
     }
 }
