@@ -955,7 +955,7 @@ function getRoundDiagramData(smena){
 }
 
 // Функция формирует запрос по массиву имен и дате и передает его в объект
-function GetAllData(ArrayNames, Object) {
+function GetAllData(ArrayNames, Object, exceptionNumbers=null) {
 
     // Через map пробегаемся по массиву имен
     ArrayNames.map((name) => {
@@ -973,14 +973,17 @@ function GetAllData(ArrayNames, Object) {
             Object[name]['today'].push(data.nagruzka)
             Object[name]['today'].push(data.programName)
 
-            checkerAllReady()
+            checkerAllReady(exceptionNumbers)
         })
 
     })
 }
 
 // Функция запускается после обработки всех станков, делит время на две смены
-function twoWorkTime() {
+function twoWorkTime(exceptionNumbers=null) {
+
+    console.log('номера исключений', exceptionNumbers)
+
     // Массив с заполненными данными
     var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     // Преобразоавние времение в формат '2022-03-21 10:00:35'
@@ -999,7 +1002,7 @@ function twoWorkTime() {
         // Переменная с массивом, который является копией объекта, но со вставкой 23:59
         // в нечетных массивах
 
-        stanok = stanok.map((elem, i, array)=>{
+        stanok = stanok.map((elem, i)=>{
             if(i == 5) {
                 return
             }
@@ -1038,11 +1041,11 @@ function twoWorkTime() {
 
 // Функция проверяет все ли станки загрузились из запроса использует глобальную
 // переменную allStanki, при каждом вызове вычитается. Когда все станки готовы, начать обработку.
-function checkerAllReady(){
+function checkerAllReady(exceptionNumbers=null){
     allStanki--
     if(allStanki === 0) {
         // Запуск дальнейшей логики
         //console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
-        setTimeout(twoWorkTime, 1)
+        twoWorkTime(exceptionNumbers)
     }
 }
