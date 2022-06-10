@@ -66,6 +66,6 @@ $(function () {
         allStanki = Names.length
 
         Diagram = []
-        GetAllData(Names, clone)
+        GetAllData(Names, clone, exception)
     });
 });

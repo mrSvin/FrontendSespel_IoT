@@ -955,7 +955,7 @@ function getRoundDiagramData(smena){
 }
 
 // Функция формирует запрос по массиву имен и дате и передает его в объект
-function GetAllData(ArrayNames, Object, exceptionNumbers=null) {
+function GetAllData(ArrayNames, Object, exception=null) {
 
     // Через map пробегаемся по массиву имен
     ArrayNames.map((name) => {
@@ -973,16 +973,16 @@ function GetAllData(ArrayNames, Object, exceptionNumbers=null) {
             Object[name]['today'].push(data.nagruzka)
             Object[name]['today'].push(data.programName)
 
-            checkerAllReady(exceptionNumbers)
+            checkerAllReady(exception)
         })
 
     })
 }
 
 // Функция запускается после обработки всех станков, делит время на две смены
-function twoWorkTime(exceptionNumbers=null) {
+function twoWorkTime(exception=null) {
 
-    console.log('номера исключений', exceptionNumbers)
+    console.log('номера исключений', exception)
 
     // Массив с заполненными данными
     var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
@@ -1032,8 +1032,10 @@ function twoWorkTime(exceptionNumbers=null) {
 
     }) // Конец функции map с именами станков
 
+    (exception !== null)? build(Diagram,1, exception): build(Diagram)
+
     // Когда все станки готовы, вызывается функция рисования линейной и круговой диаграм
-    build(Diagram)
+
 
     // Вызов функции рисования общей
     paintGeneralDiagram(generalDiagramNames)
@@ -1041,11 +1043,11 @@ function twoWorkTime(exceptionNumbers=null) {
 
 // Функция проверяет все ли станки загрузились из запроса использует глобальную
 // переменную allStanki, при каждом вызове вычитается. Когда все станки готовы, начать обработку.
-function checkerAllReady(exceptionNumbers=null){
+function checkerAllReady(exception=null){
     allStanki--
     if(allStanki === 0) {
         // Запуск дальнейшей логики
         //console.log(clone.navigator_1.complete, clone.navigator_2_golova_1.complete, clone.navigator_2_golova_2.complete, clone.navigator_3.complete)
-        twoWorkTime(exceptionNumbers)
+        twoWorkTime(exception)
     }
 }
