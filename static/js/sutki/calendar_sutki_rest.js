@@ -61,7 +61,6 @@ $(function () {
         date = new Date(datas); // some mock date
 
         startTime = datas.slice(0, 10)
-        pastTime = new Date(ms).toISOString().slice(0, 10)
 
         clone = JSON.parse(JSON.stringify(objectStankov))
         allStanki = Names.length

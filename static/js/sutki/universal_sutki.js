@@ -773,7 +773,7 @@ function sendTime(names, datas){
         array.push(convertTime(datas[i], names[i]))
     }
 
-    console.log(array)
+   // console.log(array)
 
     let local_time = array;
     window.localStorage['local_time'] = local_time;
@@ -992,44 +992,31 @@ function twoWorkTime() {
         // Хранящий объедененные массивы текущего и предыдущего дня
         let stanok = clone[name]['today']
 
-        console.log(stanok)
-
         // Отказ от работы с пустым объектом
         if (stanok === null) {
             return
         }
-
         // Переменная с массивом, который является копией объекта, но со вставкой 23:59
         // в нечетных массивах
-        let stanok_change = []
 
-        // Цикл вставки значения 23:59 в массивы работы, паузы, выключен, авария, нагрузка.
-        // for (let i = 0; i < 5; i++) {
-        //     stanok_change.push(Array())
-        //
-        //     // отказ от работы с неопределенным массивом
-        //     if (stanok[i] !== undefined) {
-        //         // Цикл внутри массива
-        //         for (let j = 0; j < stanok[i].length; j++) {
-        //             // если этот элемент последний, то записать его и выйти из цикла
-        //             if (j == stanok[i].length) {
-        //                 stanok_change[i].push(stanok[i][j])
-        //                 break
-        //             }
-        //
-        //             // Если время 00:00 текущего дня меньше следующей переменной и текущая переменная меньше 00:00 текущего дня, и j четная, то
-        //             if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && j % 2 == 0) {
-        //                 // Вставить в измененный массив переменную
-        //                 stanok_change[i].push(stanok[i][j])
-        //                 // и 23:59
-        //                 stanok_change[i].push(pastTime + ' 23:59:59')
-        //             }
-        //             // Иначе  просто записать.
-        //             else stanok_change[i].push(stanok[i][j])
-        //         }
-        //     }
-        //
-        // }
+        stanok.forEach((elem, i, array)=>{
+            if(i == 5) {
+                return
+            }
+            if(elem.length % 2 == 1)
+            {
+                if(startTime == time.slice(0, 10))
+                {   // То добавить во вторую смену текущее время
+                    array[i].push(startTime + " " + time.slice(11, 19))
+                }
+                else {
+                    array[i].push(startTime + ' 23:59:59')
+                }
+            }
+
+        })
+
+        console.log(stanok)
 
         // Записываем в смены массивы для круговых диаграмм
         getRoundDiagramData(stanok)
