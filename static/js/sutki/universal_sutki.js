@@ -789,7 +789,7 @@ const sendRequest = url => {
 }
 
 // Функция рисования общих диаграмм с 5-ю обычными цветами
-function paintGeneralDiagram(generalDiagramNames){
+function paintGeneralDiagram(generalDiagramNames, exception=null){
     // Рисование общих диаграмм. Нужно это перенести.
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
@@ -805,57 +805,117 @@ function paintGeneralDiagram(generalDiagramNames){
         fSize = '10px';
     }
 
-    Highcharts.chart('container_sum_zagruzka',{
-        chart: {
-            type: 'column'
-        },
-        colors:colorsLine,
-        title: {
-            text: 'Общая загрузка смены 19:00 - 07:00'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
+    if(exception==null) {
+        Highcharts.chart('container_sum_zagruzka',{
+            chart: {
+                type: 'column'
+            },
+            colors:colorsLine,
+            title: {
+                text: 'Общая загрузка оборудования'
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        fontSize: '18px',
+                    }
+                },
+                categories: generalDiagramNames,
+            },
+            credits: {
+                enabled: false
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '%'
                 }
             },
-            categories: generalDiagramNames,
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent'
+                }
+            },
+            series: [{
+                name: 'Авария',
+                data: linear_avar
+            }, {
+                name: 'Выключен',
+                data: linear_off
+            }, {
+                name: 'Ожидание',
+                data: linear_pause
+            }, {
+                name: 'Под нагрузкой',
+                data: linear_nagruzka
+            }, {
+                name: 'Работа',
+                data: linear_rabota
+            }, ]
+        });
+    }
+    else {
+        colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
+
+        Highcharts.chart('container_sum_zagruzka',{
+            chart: {
+                type: 'column'
+            },
+            colors:colorsLine,
             title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Авария',
-            data: linear_avar
-        }, {
-            name: 'Выключен',
-            data: linear_off
-        }, {
-            name: 'Ожидание',
-            data: linear_pause
-        }, {
-            name: 'Под нагрузкой',
-            data: linear_nagruzka
-        }, {
-            name: 'Работа',
-            data: linear_rabota
-        }, ]
-    });
+                text: 'Общая загрузка оборудования'
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        fontSize: '18px',
+                    }
+                },
+                categories: generalDiagramNames,
+            },
+            credits: {
+                enabled: false
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '%'
+                }
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent'
+                }
+            },
+            series: [{
+                name: 'Авария',
+                data: linear_avar
+            }, {
+                name: 'Выключен',
+                data: linear_off
+            },{
+                name: 'Ручной',
+                data: linear_ruchnoi
+            }, {
+                name: 'Ожидание',
+                data: linear_pause
+            }, {
+                name: 'Под нагрузкой',
+                data: linear_nagruzka
+            }, {
+                name: 'Работа',
+                data: linear_rabota
+            }, ]
+        });
+    }
 
     Highcharts.chart('container_kol_operations', {
         chart: {
@@ -863,7 +923,7 @@ function paintGeneralDiagram(generalDiagramNames){
             marginLeft: marLeft
         },
         title: {
-            text: 'Количество операций смены 19:00 - 07:00'
+            text: 'Количество операций'
         },
         xAxis: {
             labels: {
@@ -1045,7 +1105,7 @@ function twoWorkTime(exception=null) {
     // (exception !== null) ? build(Diagram,1, exception) : build(Diagram);
 
     // Вызов функции рисования общей
-    paintGeneralDiagram(generalDiagramNames)
+    paintGeneralDiagram(generalDiagramNames, exception)
 }
 
 // Функция проверяет все ли станки загрузились из запроса использует глобальную
