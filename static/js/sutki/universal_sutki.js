@@ -999,20 +999,23 @@ function twoWorkTime() {
         // Переменная с массивом, который является копией объекта, но со вставкой 23:59
         // в нечетных массивах
 
-        stanok.forEach((elem, i, array)=>{
+        stanok = stanok.map((elem, i, array)=>{
             if(i == 5) {
                 return
             }
+
             if(elem.length % 2 == 1)
             {
                 if(startTime == time.slice(0, 10))
                 {   // То добавить во вторую смену текущее время
-                    array[i].push(startTime + " " + time.slice(11, 19))
+                    elem.push(startTime + " " + time.slice(11, 19))
                 }
                 else {
-                    array[i].push(startTime + ' 23:59:59')
+                    elem.push(startTime + ' 23:59:59')
                 }
             }
+
+            return elem;
 
         })
 
