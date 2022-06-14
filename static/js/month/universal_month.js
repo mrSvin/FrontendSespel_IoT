@@ -467,7 +467,7 @@ console.log('got it', exeption)
                 setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
             }
             else {
-                if(exeption[index][0] == index){
+                if(exeption[index] !== undefined && exeption[index][0] == index){
                     setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], exeption[index]);
                 }
                 else {
@@ -484,7 +484,7 @@ console.log('got it', exeption)
                 setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4]);
             }
             else {
-                if(exeption[index][0] == index){
+                if(exeption[index] !== undefined && exeption[index][0] == index){
                     setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4], exeption[index]);
                 }
                 else {
