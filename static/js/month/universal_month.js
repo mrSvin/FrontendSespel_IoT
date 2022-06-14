@@ -441,6 +441,8 @@ function twoWorkTime(exception=null) {
 
     exception !== null? build(Diagram, exception) : build(Diagram);
 
+    exception !== null? build(Diagram, exception) : build(Diagram);
+
 }
 
 // Функция проверяет все ли станки загрузились из запроса использует глобальную
