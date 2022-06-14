@@ -387,10 +387,10 @@
     var prans_array_linear = [[${prans_month_linear}]]
     var prans_array_round = [[${prans_month_round}]]
 
-    const linearDiagram = [maks_1_array_linear, maks_2_array_linear, m710_array_linear,
+    let linearDiagram = [maks_1_array_linear, maks_2_array_linear, m710_array_linear,
         rtk12c_array_linear, p250_array_linear, krot_array_linear, prans_array_linear];
 
-    const roundDiagram = [maks_1_array_round,maks_2_array_round, m710_array_round,
+    let roundDiagram = [maks_1_array_round,maks_2_array_round, m710_array_round,
         rtk12c_array_round,  p250_array_round, krot_array_round, prans_array_round];
 
 
@@ -405,14 +405,14 @@
             });
             if(index == 4)
             {
-                setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], 'Покраска');
+                setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], [4,'Покраска',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]);
             }
             else if(index == 6)
             {
-                setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], 'Обработка');
+                setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], [6,'Обработка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]);
             }
             else {
-                setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], 'Сварка');
+                setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], [0,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]);
             }
 
         }
