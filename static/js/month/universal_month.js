@@ -156,7 +156,7 @@ function exceptionHasRuchnoi(exc) {
     let trigger = false;
     for(let i = 0; i<exc.length; i++)
     {
-        if(exc[i].includes('ruchnoi')) b = true;
+        if(exc[i].includes('ruchnoi')) trigger = true;
     }
     return trigger;
 }
@@ -169,6 +169,8 @@ const sendRequest = url => {
 
 // Функция рисования общих диаграмм с 5-ю обычными цветами
 function paintGeneralDiagram(Names, exception=null){
+
+    console.log('Вызов',exception[0][4], Array.isArray(exception), exceptionHasRuchnoi(exception))
 
     // Рисование общих диаграмм. Нужно это перенести.
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
@@ -309,6 +311,7 @@ function paintGeneralDiagram(Names, exception=null){
         colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
         colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210', '#5c7ed0'];
 
+
         sumKrug = [0,0,0,0,0,0];
 
         linear_ruchnoi.forEach(item=>{
@@ -432,8 +435,6 @@ function paintGeneralDiagram(Names, exception=null){
         });
     }
 
-    console.log(sumKrug)
-
     dark_theme()
 }
 
@@ -514,8 +515,6 @@ function twoWorkTime(exception=null) {
         // Хранящий объедененные массивы текущего и предыдущего дня
         let stanok = clone[name]['month']
 
-        console.log(stanok)
-
         // Отказ от работы с пустым объектом
         if (stanok === null ) {
             return
@@ -540,7 +539,7 @@ function twoWorkTime(exception=null) {
 
     }) // Конец функции map с именами станков
 
-    exception !== null? build(Diagram, exception) : build(Diagram);
+    // exception !== null? build(Diagram, exception) : build(Diagram);
 
     exception !== null? build(Diagram, exception) : build(Diagram);
 
