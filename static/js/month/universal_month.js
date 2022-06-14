@@ -170,8 +170,6 @@ const sendRequest = url => {
 // Функция рисования общих диаграмм с 5-ю обычными цветами
 function paintGeneralDiagram(Names, exception=null){
 
-    console.log('Вызов',exception[0][4], Array.isArray(exception), exceptionHasRuchnoi(exception))
-
     // Рисование общих диаграмм. Нужно это перенести.
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
@@ -429,8 +427,8 @@ function paintGeneralDiagram(Names, exception=null){
             series : [ {
                 type : 'pie',
                 name : 'Показатель',
-                data : [ [ 'По программе', sumKrug[0] ], [ 'Включен', sumKrug[1] ],
-                    [ 'Выключен', sumKrug[2] ],  [ 'В аварии', sumKrug[3]],  [ 'Под нагрузкой', sumKrug[4]], [ 'Ручной', sumKrug[5]]   ]
+                data : [ [ 'Работа', sumKrug[0] ], [ 'Ожидание', sumKrug[1] ],
+                    [ 'Выключен', sumKrug[2] ],  [ 'Авария', sumKrug[3]],  [ 'Под нагрузкой', sumKrug[4]], [ 'Ручной', sumKrug[5]]   ]
             }]
         });
     }
@@ -627,7 +625,7 @@ function build(Diagram, exeption=null) {
 
     });
 
-    paintGeneralDiagram(Names, exeption)
+    paintGeneralDiagram(generalDiagramNames, exeption)
 
     dark_theme()
 }
