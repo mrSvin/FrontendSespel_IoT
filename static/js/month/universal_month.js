@@ -1,5 +1,12 @@
 const timezone = new Date().getTimezoneOffset()
 
+// Получение текущего времяни в формате toISO
+var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+// Преобразоавние времение в формат '2022-03-21 10:00:35'
+time = time.slice(0, 10) + " " + time.slice(11, 19);
+// Время, которое будет переписано в массивах 'текущая дата 23:59:59'
+time_miss = time.slice(0, 10) + " " + "23:59:59";
+
 let startTime = time.slice(0, 7)
 
 $('.form-control').attr('value', startTime)
@@ -32,12 +39,12 @@ Highcharts.setOptions({
     }
 });
 
-function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, nagruzkaName='Под нагрузкой') {
+function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, exception=[0,'Нагрузка',['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]) {
     Highcharts.chart(containerLine, {
         chart: {
             type: 'column'
         },
-        colors: colorsLine,
+        colors: exception[2],
         title: {
             text: 'Загрузка оборудования по дням'
         },
@@ -82,7 +89,7 @@ function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar,
             name: 'Ожидание',
             data: arrayPass
         }, {
-            name: nagruzkaName,
+            name: exception[1],
             data: arrayNagruzka
         }, {
             name: 'Работа',
@@ -92,7 +99,7 @@ function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar,
 
 }
 
-function setDataRound(containerRound, work, pass,fail, avar, nagruzka, nagruzkaName='Нагрузка') {
+function setDataRound(containerRound, work, pass,fail, avar, nagruzka, exception=[0,'Нагрузка',['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]) {
     Highcharts.chart(containerRound, {
         chart: {
             plotBackgroundColor: null,
@@ -123,14 +130,14 @@ function setDataRound(containerRound, work, pass,fail, avar, nagruzka, nagruzkaN
                 showInLegend: true
             }
         },
-        colors:colorsRound,
+        colors:exception[2],
         credits: {
             enabled: false
         },
         series : [ {
             type : 'pie',
             name : 'Показатель',
-            data : [[ 'Работа', work ], [ 'Включен', pass ], [ 'Выключен', fail],  [ 'В аварии', avar ], [ nagruzkaName, nagruzka ] ]
+            data : [[ 'Работа', work ], [ 'Включен', pass ], [ 'Выключен', fail],  [ 'В аварии', avar ], [ exception[1], nagruzka ] ]
         }]
     });
 }
@@ -432,7 +439,7 @@ function twoWorkTime(exception=null) {
 
     }) // Конец функции map с именами станков
 
-    build(Diagram)
+    exception !== null? build(Diagram,1, exception) : build(Diagram);
 
 }
 
@@ -447,7 +454,6 @@ function checkerAllReady(exception=null){
 }
 
 function build(Diagram, exeption=null) {
-    console.log(Diagram)
 
     Diagram.map(function (element, index) {
         // Вычисление работы без нагрузки для линейной диаграммы
@@ -457,16 +463,35 @@ function build(Diagram, exeption=null) {
                     element[0][index] = element[0][index] - element[4][index];
                 });
             }
-            setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], "Ручной режим");
+            if(exeption==null){
+                setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
+            }
+            else {
+                if(exeption[index][0] = index){
+                    setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], exeption[index]);
+                }
+                else {
+                    setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
+                }
+            }
         }
 
         if (element[5] != null) {
             if (index != 0) { // Иссключение для станка без нагрузки
                 element[5][0] = element[5][0] - element[5][4];
             }
+            if(exeption==null) {
+                setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4]);
+            }
+            else {
+                if(exeption[index][0] = index){
+                    setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4], exeption[index]);
+                }
+                else {
+                    setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4]);
+                }
 
-            setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4], "Ручной режим");
-
+            }
         }
     });
 }

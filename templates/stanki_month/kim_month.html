@@ -205,12 +205,12 @@
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
     </div>
-    <div class="form-actions" style="margin-left: 20px">
-      <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
-        <span>Обновить</span>
-      </button>
-    </div>
   </form>
+  <div class="form-actions">
+    <button class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+      <span>Обновить</span>
+    </button>
+  </div>
 
 </div>
 
@@ -254,20 +254,10 @@
 
 </div> <!--КИМ html-->
 
-<script th:inline="javascript">
+<script>
   // Цвета для линейной и круговой диаграмм
-  var colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'];
-  var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
-
-  // Переменные с массивами линейных и круговых диаграмм с сервера
-  var kim_array_linear = [[${kim_month_linear}]]
-  var kim_array_round = [[${kim_month_round}]]
-
-  const linearDiagram = [kim_array_linear];
-  const roundDiagram = [kim_array_round];
-
-
-  let startTime = time.slice(0, 7)
+  //var colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'];
+  //var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
 
   // Функция назначения объектам свойств
   function objectStatus() {return {'month':[]}}
@@ -289,7 +279,10 @@
   // Переменная в которую запишутся данные всех смен.
   let Diagram = []
 
-  GetAllData(Names, clone)
+  let exception = [[0,'Ручной режим',['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0']],];
+
+
+  GetAllData(Names, clone, exception)
 
  </script> <!--Скрипт для диаграмм станков-->
 
