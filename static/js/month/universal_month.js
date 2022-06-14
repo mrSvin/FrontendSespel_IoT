@@ -173,6 +173,8 @@ function paintGeneralDiagram(Names, exception=null){
     // Рисование общих диаграмм. Нужно это перенести.
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
+    var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210', '#5c7ed0'];
+
     let marLeft;
     let fSize;
 
@@ -185,7 +187,30 @@ function paintGeneralDiagram(Names, exception=null){
         fSize = '10px';
     }
 
+    let sumKrug = []
+
     if(exception==null) {
+        sumKrug = [0,0,0,0,0];
+
+        linear_nagruzka.forEach(item=>{
+            sumKrug[4] = sumKrug[4] + item;
+        })
+
+        linear_avar.forEach(item=>{
+            sumKrug[3] = sumKrug[3] + item;
+        })
+
+        linear_off.forEach(item=>{
+            sumKrug[2] = sumKrug[2] + item;
+        })
+
+        linear_pause.forEach(item=>{
+            sumKrug[1] = sumKrug[1] + item;
+        })
+
+        linear_rabota.forEach(item=>{
+            sumKrug[0] = sumKrug[0] + item;
+        })
 
         Highcharts.chart('container_sum_zagruzka',{
             chart: {
@@ -238,9 +263,77 @@ function paintGeneralDiagram(Names, exception=null){
                 data: linear_rabota
             }, ]
         });
+
+        Highcharts.chart('container_sum_zagruzka_krug', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+
+            title: {
+                text: 'Суммарная загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors:colorsRound,
+            credits: {
+                enabled: false
+            },
+            series : [ {
+                type : 'pie',
+                name : 'Показатель',
+                data : [ [ 'По программе', sumKrug[0] ], [ 'Включен', sumKrug[1] ],
+                    [ 'Выключен', sumKrug[2] ],  [ 'В аварии', sumKrug[3]],  [ 'Под нагрузкой', sumKrug[4]]   ]
+            }]
+        });
     }
     else if(Array.isArray(exception) && exceptionHasRuchnoi(exception)){
         colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
+        colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210', '#5c7ed0'];
+
+        sumKrug = [0,0,0,0,0,0];
+
+        linear_ruchnoi.forEach(item=>{
+            sumKrug[5] = sumKrug[5] + item;
+        })
+
+        linear_nagruzka.forEach(item=>{
+            sumKrug[4] = sumKrug[4] + item;
+        })
+
+        linear_avar.forEach(item=>{
+            sumKrug[3] = sumKrug[3] + item;
+        })
+
+        linear_off.forEach(item=>{
+            sumKrug[2] = sumKrug[2] + item;
+        })
+
+        linear_pause.forEach(item=>{
+            sumKrug[1] = sumKrug[1] + item;
+        })
+
+        linear_rabota.forEach(item=>{
+            sumKrug[0] = sumKrug[0] + item;
+        })
 
         Highcharts.chart('container_sum_zagruzka',{
             chart: {
@@ -296,7 +389,50 @@ function paintGeneralDiagram(Names, exception=null){
                 data: linear_rabota
             }, ]
         });
+
+        Highcharts.chart('container_sum_zagruzka_krug', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+
+            title: {
+                text: 'Суммарная загрузка оборудования'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            colors:colorsRound,
+            credits: {
+                enabled: false
+            },
+            series : [ {
+                type : 'pie',
+                name : 'Показатель',
+                data : [ [ 'По программе', sumKrug[0] ], [ 'Включен', sumKrug[1] ],
+                    [ 'Выключен', sumKrug[2] ],  [ 'В аварии', sumKrug[3]],  [ 'Под нагрузкой', sumKrug[4]], [ 'Ручной', sumKrug[5]]   ]
+            }]
+        });
     }
+
+    console.log(sumKrug)
 
     dark_theme()
 }
@@ -449,15 +585,15 @@ function build(Diagram, exeption=null) {
             }
             if(exeption==null) {
                 linear_rabota.push(element[5][0])
-                linear_pause .push(element[5][0])
-                linear_off.push(element[5][0])
-                linear_avar.push(element[5][0])
-                linear_nagruzka.push(element[5][0])
+                linear_pause.push(element[5][1])
+                linear_off.push(element[5][2])
+                linear_avar.push(element[5][3])
+                linear_nagruzka.push(element[5][4])
                 setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4]);
             }
             else {
                 if(exeption[index] !== undefined && exeption[index][0] == index){
-                    if(exeption[index][4] == 'ruchnoi'){
+                    if(exceptionHasRuchnoi(exeption)){
                         linear_rabota.push(element[5][0])
                         linear_pause.push(element[5][1])
                         linear_off.push(element[5][2])
@@ -467,10 +603,10 @@ function build(Diagram, exeption=null) {
                     }
                     else {
                         linear_rabota.push(element[5][0])
-                        linear_pause .push(element[5][0])
-                        linear_off.push(element[5][0])
-                        linear_avar.push(element[5][0])
-                        linear_nagruzka.push(element[5][0])
+                        linear_pause.push(element[5][1])
+                        linear_off.push(element[5][2])
+                        linear_avar.push(element[5][3])
+                        linear_nagruzka.push(element[5][4])
                         linear_ruchnoi.push(0)
                     }
                     setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4], exeption[index]);
@@ -478,10 +614,10 @@ function build(Diagram, exeption=null) {
                 }
                 else {
                     linear_rabota.push(element[5][0])
-                    linear_pause .push(element[5][0])
-                    linear_off.push(element[5][0])
-                    linear_avar.push(element[5][0])
-                    linear_nagruzka.push(element[5][0])
+                    linear_pause .push(element[5][1])
+                    linear_off.push(element[5][2])
+                    linear_avar.push(element[5][3])
+                    linear_nagruzka.push(element[5][4])
                     linear_ruchnoi.push(0)
                     setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4]);
                 }
@@ -493,6 +629,8 @@ function build(Diagram, exeption=null) {
     });
 
     paintGeneralDiagram(Names, exeption)
+
+    dark_theme()
 }
 
 

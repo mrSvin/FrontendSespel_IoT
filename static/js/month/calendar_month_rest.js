@@ -49,7 +49,6 @@ $(function () {
     linear_ruchnoi = [];
 
         GetAllData(Names, clone, exception)
-        dark_theme()
 
     });
 
