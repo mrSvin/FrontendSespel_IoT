@@ -473,15 +473,8 @@ function build(Diagram, exeption=null) {
 
 
 // Цвета для линейной и круговой диаграмм
-var colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'];
-var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
-
-// Переменные с массивами линейных и круговых диаграмм с сервера
-var kim_array_linear = [[${kim_month_linear}]]
-var kim_array_round = [[${kim_month_round}]]
-
-const linearDiagram = [kim_array_linear];
-const roundDiagram = [kim_array_round];
+// var colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'];
+// var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
 
 // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
 // Функция заполнения линейной диаграммы
