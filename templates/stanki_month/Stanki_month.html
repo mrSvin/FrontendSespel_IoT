@@ -685,8 +685,7 @@
         if(element != null) {
             // Спец. условия для ручного режима на APEC
             if(index == 1) {
-                colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'];
-                setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4], 'Ручной режим');
+                setDataLine("container_days" + (index + 4),  element[0], element[1], element[2], element[3], element[4], [1,'Ручной режим',['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'],'ruchnoi']);
             }
             else {
                 colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
@@ -707,8 +706,12 @@
             if(index != 4)
             {
                 element[0] = element[0] - element[4];
+                setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
             }
-            setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4]);
+            else {
+                setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4], [1,'Ручной режим',['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'],'ruchnoi']);
+            }
+
         }
     });
 </script> <!--Скрипт для диаграмм станков-->
