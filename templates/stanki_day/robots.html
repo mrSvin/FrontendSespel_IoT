@@ -27,7 +27,7 @@
     <script src="/js/mesto.js"></script>
     <script src="/js/dark_theme.js"></script>
 
-    <script src="/js/sutki/calendar_sutki.js"></script>
+    <script src="/js/sutki/calendar_sutki_rest.js"></script>
 
     <!--preloader style-->
     <style>
@@ -198,53 +198,21 @@
     <div style="width: 250px; float: left">
         <h2 class="choose_month">Выберите дату:</h2>
     </div>
-    <form action="#" th:action="@{/robots}" th:object="${calendar_date}" method="post" style="margin: 0 20px; display: flex; align-items: center;">
+    <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
+
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
-            <input type='text' class="form-control" th:field="*{content_date}"/>
+            <input type='text' class="form-control" value=""/>
             <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-        </div>
-        <div class="form-actions" style="margin-left: 20px">
-            <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
-                <span>Обновить</span>
-            </button>
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
         </div>
     </form>
-</div>
-
-<script >
-    $(function () {
-        $('#datepicker').datepicker({
-            format: "dd/mm/yyyy",
-            language: 'ru',
-            autoclose: true,
-            todayHighlight: true,
-            showOtherMonths: true,
-            selectOtherMonths: true,
-            autoclose: true,
-            changeMonth: true,
-            changeYear: true,
-            orientation: "button"
-        });
-        <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
-
-
-
-        $('#button_obnovit').on("click", function() {
-            var datas = $('#datepicker').data().datepicker.viewDate;
-            var day = datas.getDate();
-            var mes = datas.getMonth()+1;
-            var year = datas.getFullYear();
-
-            name_data = year+"-" +mes+"-" +day;
-            <!--console.log(name_data);-->
-        });
-
-
-    });
-
-</script>   <!--Календарь js-->
+    <div class="form-actions">
+        <button class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+            <span>Обновить</span>
+        </button>
+    </div>
+</div>      <!--Календарь html-->
 
 <div style="display: flex; justify-content: space-between;">
     <div id="container_sum_zagruzka" style="height: 400px; width: 800px"></div>
@@ -387,142 +355,65 @@
     </div>  <!--prans html-->
 </div> <!--prans html-->
 
-<!--Скрипт парсинга и заполнения диаграмм-->
-<script th:inline="javascript">
-    // Переменные для общих диаграмм.
 
-    var linear_rabota = [];
-    var linear_pause = [];
-    var linear_off = [];
-    var linear_avar = [];
-    var linear_nagruzka = [];
-
-    var kol_op = [];
-    var kol_long_operations = [];
-
-    //rabota[0], pause[1], off[2], avar[3], nagruzka[4], programname[5], roundArray[6]
-    var maks_1_data = [[${maks_1_data}]];
-    var maks_2_data = [[${maks_2_data}]];
-    var m710_data = [[${m710_data}]];
-    var ptk12c_data = [[${rtk12c_data}]];
-    var p250_data = [[${p250_data}]];
-    var krot_data = [[${krot_data}]];
-    var prans_data = [[${prans_data}]];
-</script>
 <script>
-    // Массив с массивами
-    const Diagram = [maks_1_data, maks_2_data, m710_data,
-        ptk12c_data, p250_data, krot_data, prans_data]
 
-    var exception = [[0,'Сварка'],[1,'Сварка'],[2,'Сварка'],[3,'Сварка'],[4,'Покраска'],[5,'Сварка'],[6,'Обработка'],];
+    // Переменная с именами станков для общих диаграмм
+    let generalDiagramNames = ['МАКС #1', 'МАКС #2', 'М710', 'РТК12С', 'Р250', 'КРОТ', 'ПРАНС']
 
-    // Функция сборщик, аргументы:
-    // Массив со станками, с какого станка начать, исключения если имеются
-    build(Diagram, 1, exception)
+    let linear_rabota = [];
+    let linear_pause = [];
+    let linear_off = [];
+    let linear_avar = [];
+    let linear_nagruzka = [];
+    let linear_ruchnoi = [];
 
-    // Формирование графиков для общих круговой и линейной диаграммы
-    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
-    Highcharts.chart('container_sum_zagruzka', {
-        chart: {
-            type: 'column'
-        },
-        colors:colorsLine,
-        title: {
-            text: 'Общая загрузка оборудования'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
-                }
-            },
-            categories: ['МАКС #1', 'МАКС #2', 'М710', 'РТК12С', 'Р250', 'КРОТ', 'ПРАНС']
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        series: [{
-            name: 'Авария',
-            data: linear_avar
-        }, {
-            name: 'Выключен',
-            data: linear_off
-        }, {
-            name: 'Ожидание',
-            data: linear_pause
-        }, {
-            name: 'Под нагрузкой',
-            data: linear_nagruzka
-        }, {
-            name: 'Работа',
-            data: linear_rabota
-        }, ]
-    });
+    let kol_op = [];
+    let kol_long_operations = [];
 
-    Highcharts.chart('container_kol_operations', {
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Количество операций'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '15px',
-                }
-            },
-            categories: ['МАКС #1', 'МАКС #2', 'М710', 'РТК12С', 'Р250', 'КРОТ', 'ПРАНС'],
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Количество',
-                align: 'high'
-            },
-            labels: {
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: ' операций'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Общее количество операций',
-            data: kol_op,
-        }, {
-            name: 'Количество операций более 3 минут',
-            data: kol_long_operations,
-        }]
-    });
+    // Переменные настройка текущей и предыдущей даты
+    var time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    var date = new Date(time); // some mock date
+    // Текущая и предыдущая даты. Глобальные переменные, видные из функций
+    var startTime = time.slice(0, 10)
+    $('.form-control').attr('value', startTime)
+
+
+    // Функция назначения объектам свойств
+    function objectStatus() {return {'today':[]}}
+    // Назанечение объекту полей.
+    const objectStankov = {
+        'maks_1': objectStatus(),
+        'maks_2': objectStatus(),
+        'm710': objectStatus(),
+        'ptk12c': objectStatus(),
+        'p250': objectStatus(),
+        'krot': objectStatus(),
+        'prans': objectStatus(),
+    }
+
+    // Клон объекта станков, чтобы не изменять оригинальный объект
+    let clone = JSON.parse(JSON.stringify(objectStankov))
+
+    // Имена берутся из ключей названий
+    let Names = Object.keys(clone)
+
+    // Переменная хранящая количество станков, работает в функции checkerAllReady()
+    let allStanki = Names.length
+
+    // Переменная в которую запишутся данные всех смен.
+    let Diagram = []
+
+    let exception = [[0,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]
+        [1,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']],
+        [2,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]
+        [3,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']],
+        [4,'Покраска',['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0']],
+        [5,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']],
+        [6,'Обработка',['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0']]];
+
+    // Функция получения и отправки данных из запросов в clone и вызовом функции рисования графиков.
+    GetAllData(Names, clone, exception)
 </script>
 
 <!--Скрипт отображения в header  кнопки администрирование-->

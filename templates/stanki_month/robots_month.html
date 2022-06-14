@@ -27,7 +27,7 @@
     <script src="/js/mesto.js"></script>
     <script src="/js/dark_theme.js"></script>
 
-    <script src="/js/month/calendar_month.js"></script>
+    <script src="/js/month/calendar_month_rest.js"></script>
 
     <!--preloader  style-->
     <style>
@@ -199,19 +199,21 @@
     <div style="width: 250px; float: left">
         <h2 class="choose_month">Выберите дату:</h2>
     </div>
-    <form action="#" th:action="@{/robots_month}" th:object="${calendar_month}" method="post" style="margin: 0 20px; display: flex; align-items: center;">
+
+    <form action="#" th:action="@{/kim_month}" th:object="${calendar_month}" method="post" style="margin: 0 20px; display: flex; align-items: center;">
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
             <input type='text' class="form-control" th:field="*{content_month}"/>
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
         </div>
-        <div class="form-actions" style="margin-left: 20px">
-            <button type="submit" class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
-                <span>Обновить</span>
-            </button>
-        </div>
     </form>
+    <div class="form-actions">
+        <button class="follow" id="button_obnovit"  style="float: left; margin: 1.5%;  font-size: 150%; text-align: center">
+            <span>Обновить</span>
+        </button>
+    </div>
+
 </div>
 
 <div style="display: flex; justify-content: space-between">
@@ -362,82 +364,52 @@
 
 <script th:inline="javascript">
     // Цвета для линейной и круговой диаграмм
-    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
-    var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#207210'];
 
-    // Переменные с массивами линейных и круговых диаграмм с сервера
-    var maks_1_array_linear = [[${maks_1_month_linear}]]
-    var maks_1_array_round = [[${maks_1_month_round}]]
+    let linear_rabota = [];
+    let linear_pause = [];
+    let linear_off = [];
+    let linear_avar = [];
+    let linear_nagruzka = [];
+    let linear_ruchnoi = [];
 
-    var maks_2_array_linear = [[${maks_2_month_linear}]]
-    var maks_2_array_round = [[${maks_2_month_round}]]
-
-    var m710_array_linear = [[${m710_month_linear}]]
-    var m710_array_round = [[${m710_month_round}]]
-
-    var rtk12c_array_linear = [[${rtk12c_month_linear}]]
-    var rtk12c_array_round = [[${rtk12c_month_round}]]
-
-    var p250_array_linear = [[${p250_month_linear}]]
-    var p250_array_round = [[${p250_month_round}]]
-
-    var krot_array_linear = [[${krot_month_linear}]]
-    var krot_array_round = [[${krot_month_round}]]
-
-    var prans_array_linear = [[${prans_month_linear}]]
-    var prans_array_round = [[${prans_month_round}]]
-
-    let linearDiagram = [maks_1_array_linear, maks_2_array_linear, m710_array_linear,
-        rtk12c_array_linear, p250_array_linear, krot_array_linear, prans_array_linear];
-
-    let roundDiagram = [maks_1_array_round,maks_2_array_round, m710_array_round,
-        rtk12c_array_round,  p250_array_round, krot_array_round, prans_array_round];
+    let generalDiagramNames = ['CRYSTA-Apex S9168', 'NK600']
 
 
-    // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
+    // Функция назначения объектам свойств
+    function objectStatus() {return {'month':[]}}
+    // Назанечение объекту полей.
+    const objectStankov = {
+        'maks_1': objectStatus(),
+        'maks_2': objectStatus(),
+        'm710': objectStatus(),
+        'ptk12c': objectStatus(),
+        'p250': objectStatus(),
+        'krot': objectStatus(),
+        'prans': objectStatus(),
+    }
 
-    // Функция заполнения линейной диаграммы
-    $.map(linearDiagram, function (element, index) {
-        // Вычисление работы без нагрузки для линейной диаграммы
-        if(element != null) {
-            $.each(element[0], function (index){
-                element[0][index] = element[0][index] - element[4][index];
-            });
-            if(index == 4)
-            {
-                setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], [4,'Покраска',['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0']]);
-            }
-            else if(index == 6)
-            {
-                setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], [6,'Обработка',['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0']]);
-            }
-            else {
-                setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], [0,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]);
-            }
+    // Клон объекта станков, чтобы не изменять оригинальный объект
+    let clone = JSON.parse(JSON.stringify(objectStankov))
 
-        }
+    // Имена берутся из ключей названий
+    let Names = Object.keys(clone)
 
-    });
+    // Переменная хранящая количество станков, работает в функции checkerAllReady()
+    let allStanki = Names.length
 
-    // Функция заполнения круговой диаграммы
-    $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
-        // Вычисление работы без нагрузки для линейной диаграммы
-        if(element != null) {
-            element[0] = element[0] - element[4];
-            if(index == 4)
-            {
-                setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4], [4,'Покраска', ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0']]);
-            }
-            else if(index == 6)
-            {
-                setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4], [6,'Обработка', ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0']]);
-            }
-            else {
-                setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4], [0,'Сварка', ['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]);
-            }
+    // Переменная в которую запишутся данные всех смен.
+    let Diagram = []
 
-        }
-    });
+    let exception = [[0,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]
+        [1,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']],
+        [2,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]
+            [3,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']],
+        [4,'Покраска',['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0']],
+        [5,'Сварка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']],
+        [6,'Обработка',['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0']]];
+
+    GetAllData(Names, clone, exception)
+
 </script> <!--Скрипт для диаграмм станков-->
 <script th:inline="javascript">
     // Переменные для общих диаграмм.
