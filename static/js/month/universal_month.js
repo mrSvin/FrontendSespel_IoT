@@ -39,7 +39,7 @@ Highcharts.setOptions({
     }
 });
 
-function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, exception=[0,'Нагрузка',['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]) {
+function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, exception=[0,'Нагрузка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]) {
     Highcharts.chart(containerLine, {
         chart: {
             type: 'column'
@@ -439,7 +439,7 @@ function twoWorkTime(exception=null) {
 
     }) // Конец функции map с именами станков
 
-    exception !== null? build(Diagram,1, exception) : build(Diagram);
+    exception !== null? build(Diagram, exception) : build(Diagram);
 
 }
 
@@ -454,7 +454,7 @@ function checkerAllReady(exception=null){
 }
 
 function build(Diagram, exeption=null) {
-console.log('got it')
+console.log('got it', exeption)
     Diagram.map(function (element, index) {
         // Вычисление работы без нагрузки для линейной диаграммы
         if(element != null) {
