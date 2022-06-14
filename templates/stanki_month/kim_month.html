@@ -234,6 +234,26 @@
 
 </div> <!--КИМ html-->
 
+<div style="border: 1px solid #333;">
+  <div style="overflow: hidden;">
+    <div style="width: 100%;   margin: 2%;">
+      <div class="img"  style="float: left;"> <!--Вставляем изображение станка 1-->
+        <div class="parent_image">
+          <img src="images/nk600.png" class="stanok_img"/>
+          <figcaption  style="margin: 1.5%; font-weight: bold; font-size: 150%; text-align: center">NK600</figcaption>
+          <div>
+            <a style="text-decoration: none; float: left" class="icon_mesto" href="mesto/mesto" onclick="nk600(); window.open(this.href, '', 'scrollbars=1,height='+Math.min(920, screen.availHeight)+',width='+Math.min(920, screen.availWidth)); return false;"><div class='label_mesto'>Место</div></a>
+            <a style="text-decoration: none; float: left" class="icon_personal" href="personal/personal_kim" onclick="window.open(this.href, '', 'scrollbars=1,height='+Math.min(900, screen.availHeight)+',width='+Math.min(1600, screen.availWidth)); return false;"><div class='label_personal'>Персонал</div></a>
+          </div>
+        </div>
+      </div>
+      <div id="container_days2" style="float: left; height: 400px; width: 55%"></div> <!--Вставляем линейную гистограмму работы-->
+      <div id="container2" style="float: left; height: 400px; width: 25%"></div> <!--Вставляем круговую диаграмму загрузки-->
+    </div>
+  </div>  <!--УФ 5220 html-->
+
+</div> <!--КИМ html-->
+
 <script th:inline="javascript">
   // Цвета для линейной и круговой диаграмм
   var colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'];
@@ -246,32 +266,32 @@
   const linearDiagram = [kim_array_linear];
   const roundDiagram = [kim_array_round];
 
-  // Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
-  // Функция заполнения линейной диаграммы
-  $.map(linearDiagram, function (element, index) {
-    // Вычисление работы без нагрузки для линейной диаграммы
-    if(element != null) {
-      if(index != 0) { // Иссключение для станка без нагрузки
-        $.each(element[0], function (index){
-          element[0][index] = element[0][index] - element[4][index];
-        });
-      }
-      setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], "Ручной режим");
-    }
 
-  });
+  let startTime = time.slice(0, 7)
 
-  // Функция заполнения круговой диаграммы
-  $.map(roundDiagram, function (element, index) { // итерируем выполнение setData для всех объектов массива element
-    // Вычисление работы без нагрузки для линейной диаграммы
-    if(element != null) {
-      if(index != 0) { // Иссключение для станка без нагрузки
-        element[0] = element[0] - element[4];
-      }
-      setDataRound("container" + (index + 1), element[0], element[1], element[2], element[3], element[4], "Ручной режим");
-    }
-  });
-</script> <!--Скрипт для диаграмм станков-->
+  // Функция назначения объектам свойств
+  function objectStatus() {return {'month':[]}}
+  // Назанечение объекту полей.
+  const objectStankov = {
+    'kim': objectStatus(),
+    'nk600': objectStatus()
+  }
+
+  // Клон объекта станков, чтобы не изменять оригинальный объект
+  let clone = JSON.parse(JSON.stringify(objectStankov))
+
+  // Имена берутся из ключей названий
+  let Names = Object.keys(clone)
+
+  // Переменная хранящая количество станков, работает в функции checkerAllReady()
+  let allStanki = Names.length
+
+  // Переменная в которую запишутся данные всех смен.
+  let Diagram = []
+
+  GetAllData(Names, clone)
+
+ </script> <!--Скрипт для диаграмм станков-->
 
 <script th:inline="javascript">
   var role_status = [[${user_role}]];

@@ -1,5 +1,9 @@
 const timezone = new Date().getTimezoneOffset()
 
+let startTime = time.slice(0, 7)
+
+$('.form-control').attr('value', startTime)
+
 Highcharts.setOptions({
     lang: {
         loading: 'Загрузка...',
@@ -130,3 +134,354 @@ function setDataRound(containerRound, work, pass,fail, avar, nagruzka, nagruzkaN
         }]
     });
 }
+
+
+
+
+
+
+// Стрелочная функция отправляющая запрос по url
+const sendRequest = url => {
+    // работаем с промисами для удобства, если ок, вызовем resolve, иначе reject у промиса
+    return new Promise((resolve, reject) => {$.ajax({url, type: 'GET'}).done(resolve).fail(reject)})
+}
+
+// Функция рисования общих диаграмм с 5-ю обычными цветами
+function paintGeneralDiagram(generalDiagramNames, exception=null){
+    // Рисование общих диаграмм. Нужно это перенести.
+    var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
+
+    let marLeft;
+    let fSize;
+
+    if(Diagram.length/2 < 10) {
+        marLeft = null;
+        fSize = '15px';
+    }
+    else {
+        marLeft = 110;
+        fSize = '10px';
+    }
+
+    if(exception==null) {
+        Highcharts.chart('container_sum_zagruzka',{
+            chart: {
+                type: 'column'
+            },
+            colors:colorsLine,
+            title: {
+                text: 'Общая загрузка оборудования'
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        fontSize: '18px',
+                    }
+                },
+                categories: generalDiagramNames,
+            },
+            credits: {
+                enabled: false
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '%'
+                }
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent'
+                }
+            },
+            series: [{
+                name: 'Авария',
+                data: linear_avar
+            }, {
+                name: 'Выключен',
+                data: linear_off
+            }, {
+                name: 'Ожидание',
+                data: linear_pause
+            }, {
+                name: 'Под нагрузкой',
+                data: linear_nagruzka
+            }, {
+                name: 'Работа',
+                data: linear_rabota
+            }, ]
+        });
+    }
+    else {
+        colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
+
+        Highcharts.chart('container_sum_zagruzka',{
+            chart: {
+                type: 'column'
+            },
+            colors:colorsLine,
+            title: {
+                text: 'Общая загрузка оборудования'
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        fontSize: '18px',
+                    }
+                },
+                categories: generalDiagramNames,
+            },
+            credits: {
+                enabled: false
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '%'
+                }
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+                shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'percent'
+                }
+            },
+            series: [{
+                name: 'Авария',
+                data: linear_avar
+            }, {
+                name: 'Выключен',
+                data: linear_off
+            },{
+                name: 'Ручной',
+                data: linear_ruchnoi
+            }, {
+                name: 'Ожидание',
+                data: linear_pause
+            }, {
+                name: 'Под нагрузкой',
+                data: linear_nagruzka
+            }, {
+                name: 'Работа',
+                data: linear_rabota
+            }, ]
+        });
+    }
+
+    Highcharts.chart('container_kol_operations', {
+        chart: {
+            type: 'bar',
+            marginLeft: marLeft
+        },
+        title: {
+            text: 'Количество операций'
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: fSize,
+                }
+            },
+            categories: generalDiagramNames,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Количество',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ' операций'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Общее количество операций',
+            data: kol_op,
+        }, {
+            name: 'Количество операций более 3 минут',
+            data: kol_long_operations,
+        }]
+    });
+
+    dark_theme()
+}
+
+// Функция вычисления часов работы для круговой диаграммы.
+function getRoundDiagramData(smena){
+    // Создаем пустой массив
+    let array1 = []
+
+    // если массив смены не undefined, то
+    if (smena !== undefined)
+    {
+        // Через map пробегаемся по элементам
+        smena.map((arraySmena, index)=>{
+
+            // Нет смысла пробегаться по массиву с именами программ
+            if(index == 5) return;
+
+            // Переменная, которая будет хранить текущую переменную для состояния:
+            // работы, паузы, выключен, аварии, нагрузки
+            let delta = 0
+
+            // Если массив, оказался пустым или подобным, то в массив запишется ноль.
+            if(arraySmena == null || arraySmena.length <= 1 || arraySmena == undefined)
+            {
+                array1.push(delta)
+                return
+            }
+            // Иначе
+            else
+            {   // Начиная с первого элемента с шагом 2
+                for(let i = 1; i < arraySmena.length; i+=2)
+                {
+                    // старая заглушка
+                    if(i==0) continue
+
+                    // Вычисления дельты, сумма всех разниц между началом работы и концом.
+                    delta = delta + (new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i-1]).getTime())
+                }
+            }
+            // После вычисления добавить в массив
+            array1.push(delta)
+        })
+
+        // После вычисления всех состояний, записать текущий массив в смену
+        smena.push(array1)
+    }
+}
+
+// Функция формирует запрос по массиву имен и дате и передает его в объект
+function GetAllData(ArrayNames, Object, exception=null) {
+
+    // Через map пробегаемся по массиву имен
+    ArrayNames.map((name) => {
+        // Формируем для каждого станка url для запроса
+        var urlNow = `/api/monthData/${name}_month_date:${startTime}`
+
+        // Запрос на текущий день для одного станка
+        sendRequest(urlNow).then((data) => {
+            // В массив текущего дня добавляем данные по запросу
+            Object[name]['month'].push(data.work)
+            Object[name]['month'].push(data.pause)
+            Object[name]['month'].push(data.off)
+            Object[name]['month'].push(data.avar)
+            Object[name]['month'].push(data.nagruzka)
+
+            checkerAllReady(exception)
+        })
+
+    })
+}
+
+// Функция запускается после обработки всех станков, делит время на две смены
+function twoWorkTime(exception=null) {
+
+    Names.map((name) => {
+
+        // Получении объекта с именем текущего станка
+        // Хранящий объедененные массивы текущего и предыдущего дня
+        let stanok = clone[name]['month']
+
+        console.log(stanok)
+
+        // Отказ от работы с пустым объектом
+        if (stanok === null ) {
+            return
+        }
+        // Переменная с массивом, который является копией объекта, но со вставкой 23:59
+        // в нечетных массивах
+
+        let roundData = []
+
+        for(let i=0; i<stanok.length; i++)
+        {
+            roundData[i] = stanok[i].reduce((val1, val2)=> {
+                return val1 + val2
+            })
+        }
+
+        stanok.push(roundData)
+
+        // Добавляем обе готовые смены в массив Diagram
+        Diagram.push(stanok)
+
+
+    }) // Конец функции map с именами станков
+
+    build(Diagram)
+
+}
+
+// Функция проверяет все ли станки загрузились из запроса использует глобальную
+// переменную allStanki, при каждом вызове вычитается. Когда все станки готовы, начать обработку.
+function checkerAllReady(exception=null){
+    allStanki--
+    if(allStanki === 0) {
+        // Запуск дальнейшей логики
+        twoWorkTime(exception)
+    }
+}
+
+function build(Diagram, exeption=null) {
+    console.log(Diagram)
+
+    Diagram.map(function (element, index) {
+        // Вычисление работы без нагрузки для линейной диаграммы
+        if(element != null) {
+            if(index != 0) { // Иссключение для станка без нагрузки
+                $.each(element[0], function (index){
+                    element[0][index] = element[0][index] - element[4][index];
+                });
+            }
+            setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], "Ручной режим");
+        }
+
+        if (element[5] != null) {
+            if (index != 0) { // Иссключение для станка без нагрузки
+                element[5][0] = element[5][0] - element[5][4];
+            }
+
+            setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4], "Ручной режим");
+
+        }
+    });
+}
+
+
+// Цвета для линейной и круговой диаграмм
+var colorsLine = ['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'];
+var colorsRound = ['#38e817', '#ffea32', '#000000', '#e81e1d','#5c7ed0'];
+
+// Переменные с массивами линейных и круговых диаграмм с сервера
+var kim_array_linear = [[${kim_month_linear}]]
+var kim_array_round = [[${kim_month_round}]]
+
+const linearDiagram = [kim_array_linear];
+const roundDiagram = [kim_array_round];
+
+// Порядок по индексам work[0], pass[1], fail[2], avar[3], nagruzka[4]
+// Функция заполнения линейной диаграммы
