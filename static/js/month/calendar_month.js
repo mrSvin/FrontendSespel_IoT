@@ -36,5 +36,4 @@ $(function () {
         name_data = mes+"-" + year;
     });
 
-
 });
