@@ -39,7 +39,7 @@ Highcharts.setOptions({
     }
 });
 
-function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, exception=[0,'Нагрузка',['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]) {
+function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, exception=[0,'Нагрузка',['#e81e1d','#000000', '#ffea32','#5c7ed0','#38e817'],['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]) {
     Highcharts.chart(containerLine, {
         chart: {
             type: 'column'
@@ -99,7 +99,7 @@ function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar,
 
 }
 
-function setDataRound(containerRound, work, pass,fail, avar, nagruzka, exception=[0,'Нагрузка',['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]) {
+function setDataRound(containerRound, work, pass,fail, avar, nagruzka, exception=[0,'Нагрузка',['#e81e1d','#000000', '#ffea32','#207210','#38e817'], ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']]) {
     Highcharts.chart(containerRound, {
         chart: {
             plotBackgroundColor: null,
@@ -130,7 +130,7 @@ function setDataRound(containerRound, work, pass,fail, avar, nagruzka, exception
                 showInLegend: true
             }
         },
-        colors:exception[2],
+        colors:exception[3],
         credits: {
             enabled: false
         },
@@ -454,7 +454,7 @@ function checkerAllReady(exception=null){
 }
 
 function build(Diagram, exeption=null) {
-
+console.log('got it')
     Diagram.map(function (element, index) {
         // Вычисление работы без нагрузки для линейной диаграммы
         if(element != null) {
@@ -467,7 +467,7 @@ function build(Diagram, exeption=null) {
                 setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4]);
             }
             else {
-                if(exeption[index][0] = index){
+                if(exeption[index][0] == index){
                     setDataLine("container_days" + (index + 1),  element[0], element[1], element[2], element[3], element[4], exeption[index]);
                 }
                 else {
@@ -484,7 +484,7 @@ function build(Diagram, exeption=null) {
                 setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4]);
             }
             else {
-                if(exeption[index][0] = index){
+                if(exeption[index][0] == index){
                     setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4], exeption[index]);
                 }
                 else {
