@@ -27,11 +27,11 @@ $(function () {
         $('.follow').addClass('load')
         setTimeout(ActiveButton,1500)
 
-        var datas = $('#datepicker').data().datepicker.viewDate;
+        datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
         date = new Date(datas); // some mock date
 
-        startTime = time.slice(0, 7)
+        startTime = datas.slice(0, 7)
 
         $('.form-control').attr('value', startTime)
 
@@ -41,7 +41,15 @@ $(function () {
 
         Diagram = []
 
+    linear_rabota = [];
+    linear_pause = [];
+    linear_off = [];
+    linear_avar = [];
+    linear_nagruzka = [];
+    linear_ruchnoi = [];
+
         GetAllData(Names, clone, exception)
+        dark_theme()
 
     });
 

@@ -9,6 +9,13 @@ time_miss = time.slice(0, 10) + " " + "23:59:59";
 
 let startTime = time.slice(0, 7)
 
+// let linear_rabota = [];
+// let linear_pause = [];
+// let linear_off = [];
+// let linear_avar = [];
+// let linear_nagruzka = [];
+// let linear_ruchnoi = [];
+
 $('.form-control').attr('value', startTime)
 
 Highcharts.setOptions({
@@ -144,8 +151,15 @@ function setDataRound(containerRound, work, pass,fail, avar, nagruzka, exception
 
 
 
-
-
+// Функция проверки наличия ручного режима в исключениях
+function exceptionHasRuchnoi(exc) {
+    let trigger = false;
+    for(let i = 0; i<exc.length; i++)
+    {
+        if(exc[i].includes('ruchnoi')) b = true;
+    }
+    return trigger;
+}
 
 // Стрелочная функция отправляющая запрос по url
 const sendRequest = url => {
@@ -154,7 +168,8 @@ const sendRequest = url => {
 }
 
 // Функция рисования общих диаграмм с 5-ю обычными цветами
-function paintGeneralDiagram(generalDiagramNames, exception=null){
+function paintGeneralDiagram(Names, exception=null){
+
     // Рисование общих диаграмм. Нужно это перенести.
     var colorsLine = ['#e81e1d','#000000', '#ffea32','#207210','#38e817'];
 
@@ -171,6 +186,7 @@ function paintGeneralDiagram(generalDiagramNames, exception=null){
     }
 
     if(exception==null) {
+
         Highcharts.chart('container_sum_zagruzka',{
             chart: {
                 type: 'column'
@@ -185,7 +201,7 @@ function paintGeneralDiagram(generalDiagramNames, exception=null){
                         fontSize: '18px',
                     }
                 },
-                categories: generalDiagramNames,
+                categories: Names,
             },
             credits: {
                 enabled: false
@@ -223,7 +239,7 @@ function paintGeneralDiagram(generalDiagramNames, exception=null){
             }, ]
         });
     }
-    else {
+    else if(Array.isArray(exception) && exceptionHasRuchnoi(exception)){
         colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
 
         Highcharts.chart('container_sum_zagruzka',{
@@ -240,7 +256,7 @@ function paintGeneralDiagram(generalDiagramNames, exception=null){
                         fontSize: '18px',
                     }
                 },
-                categories: generalDiagramNames,
+                categories: Names,
             },
             credits: {
                 enabled: false
@@ -281,57 +297,6 @@ function paintGeneralDiagram(generalDiagramNames, exception=null){
             }, ]
         });
     }
-
-    Highcharts.chart('container_kol_operations', {
-        chart: {
-            type: 'bar',
-            marginLeft: marLeft
-        },
-        title: {
-            text: 'Количество операций'
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: fSize,
-                }
-            },
-            categories: generalDiagramNames,
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Количество',
-                align: 'high'
-            },
-            labels: {
-                overflow: 'justify'
-            }
-        },
-        tooltip: {
-            valueSuffix: ' операций'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Общее количество операций',
-            data: kol_op,
-        }, {
-            name: 'Количество операций более 3 минут',
-            data: kol_long_operations,
-        }]
-    });
 
     dark_theme()
 }
@@ -456,7 +421,7 @@ function checkerAllReady(exception=null){
 }
 
 function build(Diagram, exeption=null) {
-console.log('got it', exeption)
+
     Diagram.map(function (element, index) {
         // Вычисление работы без нагрузки для линейной диаграммы
         if(element != null) {
@@ -483,19 +448,51 @@ console.log('got it', exeption)
                 element[5][0] = element[5][0] - element[5][4];
             }
             if(exeption==null) {
+                linear_rabota.push(element[5][0])
+                linear_pause .push(element[5][0])
+                linear_off.push(element[5][0])
+                linear_avar.push(element[5][0])
+                linear_nagruzka.push(element[5][0])
                 setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4]);
             }
             else {
                 if(exeption[index] !== undefined && exeption[index][0] == index){
+                    if(exeption[index][4] == 'ruchnoi'){
+                        linear_rabota.push(element[5][0])
+                        linear_pause.push(element[5][1])
+                        linear_off.push(element[5][2])
+                        linear_avar.push(element[5][3])
+                        linear_ruchnoi.push(element[5][4])
+                        linear_nagruzka.push(0)
+                    }
+                    else {
+                        linear_rabota.push(element[5][0])
+                        linear_pause .push(element[5][0])
+                        linear_off.push(element[5][0])
+                        linear_avar.push(element[5][0])
+                        linear_nagruzka.push(element[5][0])
+                        linear_ruchnoi.push(0)
+                    }
                     setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4], exeption[index]);
+
                 }
                 else {
+                    linear_rabota.push(element[5][0])
+                    linear_pause .push(element[5][0])
+                    linear_off.push(element[5][0])
+                    linear_avar.push(element[5][0])
+                    linear_nagruzka.push(element[5][0])
+                    linear_ruchnoi.push(0)
                     setDataRound("container" + (index + 1), element[5][0], element[5][1], element[5][2], element[5][3], element[5][4]);
                 }
 
             }
         }
+
+
     });
+
+    paintGeneralDiagram(Names, exeption)
 }
 
 
