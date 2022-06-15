@@ -529,7 +529,7 @@ function twoWorkTime(exception=null) {
                     return val1 + val2
                 })
             }
-            else roundData[i].push(0)
+            else roundData.push(0)
         }
 
         stanok.push(roundData)
