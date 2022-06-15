@@ -524,9 +524,12 @@ function twoWorkTime(exception=null) {
 
         for(let i=0; i<stanok.length; i++)
         {
-            roundData[i] = stanok[i].reduce((val1, val2)=> {
-                return val1 + val2
-            })
+            if(stanok[i] !== undefined){
+                roundData[i] = stanok[i].reduce((val1, val2)=> {
+                    return val1 + val2
+                })
+            }
+            else roundData[i].push(0)
         }
 
         stanok.push(roundData)
