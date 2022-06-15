@@ -781,6 +781,15 @@ function sendTime(names, datas){
     window.localStorage['local_time'] = local_time;
 }
 
+// Функция проверки наличия ручного режима в исключениях
+function exceptionHasRuchnoi(exc) {
+    let trigger = false;
+    for(let i = 0; i<exc.length; i++)
+    {
+        if(exc[i].includes('ruchnoi')) trigger = true;
+    }
+    return trigger;
+}
 
 // Стрелочная функция отправляющая запрос по url
 const sendRequest = url => {
@@ -804,6 +813,8 @@ function paintGeneralDiagram(generalDiagramNames, exception=null){
         marLeft = 110;
         fSize = '10px';
     }
+
+
 
     if(exception==null) {
         Highcharts.chart('container_sum_zagruzka',{
@@ -858,7 +869,7 @@ function paintGeneralDiagram(generalDiagramNames, exception=null){
             }, ]
         });
     }
-    else {
+    else if(Array.isArray(exception) && exceptionHasRuchnoi(exception)){
         colorsLine = ['#e81e1d', '#000000','#5c7ed0', '#ffea32', '#207210', '#38e817'];
 
         Highcharts.chart('container_sum_zagruzka',{
