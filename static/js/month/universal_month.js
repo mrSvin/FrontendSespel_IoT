@@ -514,7 +514,7 @@ function twoWorkTime(exception=null) {
         let stanok = clone[name]['month']
 
         // Отказ от работы с пустым объектом
-        if (stanok === null ) {
+        if (stanok === null || stanok === undefined) {
             return
         }
         // Переменная с массивом, который является копией объекта, но со вставкой 23:59

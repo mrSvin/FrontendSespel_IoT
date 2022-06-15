@@ -814,9 +814,7 @@ function paintGeneralDiagram(generalDiagramNames, exception=null){
         fSize = '10px';
     }
 
-
-
-    if(exception==null) {
+    if(exception==null || !exceptionHasRuchnoi(exception) ) {
         Highcharts.chart('container_sum_zagruzka',{
             chart: {
                 type: 'column'
@@ -1069,7 +1067,7 @@ function twoWorkTime(exception=null) {
         let stanok = clone[name]['today']
 
         // Отказ от работы с пустым объектом
-        if (stanok === null) {
+        if (stanok === null || stanok === undefined) {
             return
         }
         // Переменная с массивом, который является копией объекта, но со вставкой 23:59
