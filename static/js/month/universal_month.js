@@ -189,7 +189,7 @@ function paintGeneralDiagram(Names, exception=null){
 
     let sumKrug = []
 
-    if(exception==null) {
+    if(exception==null || !exceptionHasRuchnoi(exception)) {
         sumKrug = [0,0,0,0,0];
 
         linear_nagruzka.forEach(item=>{
