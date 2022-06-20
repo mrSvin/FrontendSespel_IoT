@@ -49,7 +49,7 @@ function TableDays(data) {
             </thead>
             <tbody>
             <tr>
-                <td>Кубов</td>
+                <td>Расход</td>
                 <td>{data.data[0]}</td>
                 <td>{data.data[1]}</td>
                 <td>{data.data[2]}</td>
@@ -376,6 +376,12 @@ function ComplexButtons({complexMesto}) {
             ',width='+Math.min(1002, screen.availWidth))
     }
 
+    function personal() {
+
+        window.open("../personal/personal_vrs", '', 'scrollbars=1,height='+Math.min(700, screen.availHeight)+
+            ',width='+Math.min(1200, screen.availWidth))
+    }
+
     return (
 
         <div className='parentIcons'>
@@ -384,7 +390,7 @@ function ComplexButtons({complexMesto}) {
                 <div className="label_mesto">Место</div>
             </a>
             <a className="icon_personal"
-               href="../personal/personal_vrs"
+               onClick={personal}
             >
                 <div className="label_personal">Персонал</div>
             </a>
@@ -411,8 +417,6 @@ function VrsInfo() {
     function newDate(input) {
         useEffect(() => {
             setDateMonth(input)
-
-
         })
     }
 
