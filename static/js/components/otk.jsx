@@ -318,7 +318,7 @@ function OtkInfo() {
             series: [
                 {
                     name: 'Работа',
-                    borderColor: 'gray',
+                    // borderColor: 'gray',
                     pointWidth: 30,
                     colorByPoint: false,
                     color: '#38e817',
@@ -329,7 +329,7 @@ function OtkInfo() {
                 },
                 {
                     name: 'Ожидание',
-                    borderColor: 'gray',
+                    // borderColor: 'gray',
                     pointWidth: 30,
                     colorByPoint: false,
                     color: '#ffea32',
@@ -343,7 +343,7 @@ function OtkInfo() {
                 },
                 {
                     name: 'Выключен',
-                    borderColor: 'gray',
+                    // borderColor: 'gray',
                     pointWidth: 30,
                     colorByPoint: false,
                     color: '#000000',
@@ -354,7 +354,7 @@ function OtkInfo() {
                 },
                 {
                     name: 'В аварии',
-                    borderColor: 'gray',
+                    // borderColor: 'gray',
                     pointWidth: 30,
                     colorByPoint: false,
                     color: '#e81e1d',
@@ -365,7 +365,7 @@ function OtkInfo() {
                 },
                 {
                     name: 'ручной',
-                    borderColor: 'gray',
+                    // borderColor: 'gray',
                     pointWidth: 30,
                     colorByPoint: false,
                     color: '#1d3fe8',
