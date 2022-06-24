@@ -41,12 +41,12 @@ $(function () {
 
         Diagram = []
 
-    linear_rabota = [];
-    linear_pause = [];
-    linear_off = [];
-    linear_avar = [];
-    linear_nagruzka = [];
-    linear_ruchnoi = [];
+        linear_rabota = [];
+        linear_pause = [];
+        linear_off = [];
+        linear_avar = [];
+        linear_nagruzka = [];
+        linear_ruchnoi = [];
 
         GetAllData(Names, clone, exception)
 

@@ -1,10 +1,9 @@
-function OtkInfo() {
+function LiteykaInfo() {
 
-    let complexName = ["CRYSTA-Apex S9168", "НК600"]
-    let complexImg = ["../images/crystal_apex.png", "../images/nk600.png"]
+    let complexName = ["Печь Индукционная"]
+    let complexImg = ["../images/pech.png"]
 
-    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/1_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs2 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat']
 
     let [kimData, setKimData] = useState({
         workArray: [],
@@ -14,16 +13,6 @@ function OtkInfo() {
         ruchnoyArray: [],
         roundArray: []
     });
-
-    let [nk600Data, setNk600Data] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
 
     let [date, setDate] = useState(0);
 
@@ -41,29 +30,21 @@ function OtkInfo() {
         setDate(`${yearNow}-${monthNow}-${dayNow}`)
 
 
-        let roundKim = fetchRequest(`${yearNow}-${monthNow}-${dayNow}`, kimData, 'kim', 1)
-        let roundNK600 = fetchRequest(`${yearNow}-${monthNow}-${dayNow}`, nk600Data, 'nk600', 2)
-
+        let roundKim = fetchRequest(`${yearNow}-${monthNow}-${dayNow}`, kimData, 'pech_nerg', 1)
 
         let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
+
         //Общая загрузка
         promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                let intKimArray = value.roundArray.map(Number)
-                let intNK600Array = value1.roundArray.map(Number)
+            let intKimArray = value.roundArray.map(Number)
 
-                highChartTotal(complexName, [intKimArray[0], intNK600Array[0]], [intKimArray[1], intNK600Array[1]],
-                    [intKimArray[2], intNK600Array[2]], [intKimArray[3], intNK600Array[3]], [intKimArray[4], intNK600Array[4]], 'ручной')
-            })
+            highChartTotal(complexName, [intKimArray[0]], [intKimArray[1]],
+                [intKimArray[2]], [intKimArray[3]], [intKimArray[4]])
         })
         //Количество операций
         promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                let kolKim = kolOperations(value.workArray)
-                let kolNK600 = kolOperations(value1.workArray)
-                highChartCountOperations(complexName, [kolKim[0], kolNK600[0]], [kolKim[1], kolNK600[1]])
-            })
+            let kolKim = kolOperations(value.workArray)
+            highChartCountOperations(complexName, [kolKim[0]], [kolKim[1]])
         })
 
     }, [])
@@ -72,28 +53,21 @@ function OtkInfo() {
         setDate(dateInput)
         console.log(dateInput)
 
-        let roundKim = fetchRequest(`${dateInput}`, kimData, 'kim', 1)
-        let roundNK600 = fetchRequest(`${dateInput}`, nk600Data, 'nk600', 2)
+        let roundKim = fetchRequest(`${dateInput}`, kimData, 'pech_nerg', 1)
 
         let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
+
         //Общая загрузка
         promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                let intKimArray = value.roundArray.map(Number)
-                let intNK600Array = value1.roundArray.map(Number)
+            let intKimArray = value.roundArray.map(Number)
 
-                highChartTotal(complexName, [intKimArray[0], intNK600Array[0]], [intKimArray[1], intNK600Array[1]],
-                    [intKimArray[2], intNK600Array[2]], [intKimArray[3], intNK600Array[3]], [intKimArray[4], intNK600Array[4]])
-            })
+            highChartTotal(complexName, [intKimArray[0]], [intKimArray[1]],
+                [intKimArray[2]], [intKimArray[3]], [intKimArray[4]])
         })
         //Количество операций
         promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                let kolKim = kolOperations(value.workArray)
-                let kolNK600 = kolOperations(value1.workArray)
-                highChartCountOperations(complexName, [kolKim[0], kolNK600[0]], [kolKim[1], kolNK600[1]])
-            })
+            let kolKim = kolOperations(value.workArray)
+            highChartCountOperations(complexName, [kolKim[0]], [kolKim[1]])
         })
 
     }
@@ -122,7 +96,7 @@ function OtkInfo() {
                 let offRound = parseInt(complexObject.roundArray[2]);
                 let avarRound = parseInt(complexObject.roundArray[3]);
                 let nagruzkaRound = parseInt(complexObject.roundArray[4]);
-                highChartSutkiRound(workRound, passRound, offRound, avarRound, nagruzkaRound, 'Ручной', idContainer)
+                highChartSutkiRound(workRound, passRound, offRound, avarRound, nagruzkaRound, 'Нагрзука', idContainer)
 
                 return complexObject
             })
@@ -281,7 +255,7 @@ function OtkInfo() {
                 title: {
                     text: ''
                 },
-                categories: ['Работа', 'Ожидание', 'Выключен', 'В аварии', 'Ручной'],
+                categories: ['Работа', 'Ожидание', 'Выключен', 'В аварии', 'Нагрзука'],
                 reversed: true,
                 labels: {
                     style: {
@@ -342,11 +316,11 @@ function OtkInfo() {
                     }
                 },
                 {
-                    name: 'ручной',
+                    name: 'Нагрзука',
                     // borderColor: 'gray',
                     pointWidth: 30,
                     colorByPoint: false,
-                    color: '#5c7ed0',
+                    color: '#207210',
                     data: arrayRuchnoi,
                     dataLabels: {
                         enabled: true
@@ -397,7 +371,7 @@ function OtkInfo() {
                     showInLegend: true
                 }
             },
-            colors: ['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'],
+            colors: ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'],
             credits: {
                 enabled: false
             },
@@ -472,9 +446,9 @@ function OtkInfo() {
                 data: off,
                 color: '#000000'
             }, {
-                name: 'Ручной',
+                name: 'Нагрзука',
                 data: nagruzka,
-                color: '#5c7ed0'
+                color: '#207210'
             }, {
                 name: 'Ожидание',
                 color: '#ffea32',
@@ -575,39 +549,34 @@ function OtkInfo() {
                 <div className="roundSukiHighChart" id="containerRound1"></div>
             </div>
 
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}/>
-                <div className="lineSukiHighChart" id="containerLine2"></div>
-                <div className="roundSukiHighChart" id="containerRound2"></div>
-            </div>
 
         </div>
     )
 
 }
 
-function Otk() {
+function Liteyka() {
 
     return (
         <div>
 
             <Header/>
 
-            <MenuStanki menuSelected="otk"/>
+            <MenuStanki menuSelected="liteyka"/>
 
             <div className="buttons-otchet">
 
-                <Link to="/stanki/otk">
+                <Link to="/stanki/liteyka">
                     <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to="/stanki/otkMonth">
+                <Link to="/stanki/liteykaMonth">
                     <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
             </div>
 
-            <OtkInfo/>
+            <LiteykaInfo/>
 
         </div>
     )

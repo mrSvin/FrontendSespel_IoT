@@ -204,3 +204,14 @@
     background:url(../images/loader.gif) center center no-repeat;
     position: fixed;
 }
+
+.beacon {
+    position: absolute;
+    filter: contrast(90%);
+    transition: 1s;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+    background: url(../images/intra.png) no-repeat;
+    background-size: 150px 150px;
+}

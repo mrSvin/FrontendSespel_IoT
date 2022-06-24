@@ -18,7 +18,7 @@ function uf5220 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
     // Сохранение значений
@@ -35,7 +35,7 @@ function progress (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -51,7 +51,7 @@ function ntx1000_1 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -67,7 +67,7 @@ function sk50 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -83,7 +83,7 @@ function apec (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -99,7 +99,7 @@ function dmg_dmu50_3 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -115,7 +115,7 @@ function dmg_dmu50_4 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -131,7 +131,7 @@ function dmg_ctx310_2 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -147,7 +147,7 @@ function dmg_ctx510_2 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -163,7 +163,7 @@ function dmg_ctx510_3 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -180,7 +180,7 @@ function dmg_ctx310_3 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -196,7 +196,7 @@ function dmg_ctx510_4 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -297,7 +297,7 @@ function crystal_apex (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -331,7 +331,7 @@ function navigator_1(){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -347,7 +347,7 @@ function navigator_2(){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -363,7 +363,7 @@ function navigator_3(){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -379,7 +379,7 @@ function trulaser(){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -395,7 +395,7 @@ function kometa_1(){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -463,7 +463,7 @@ function uvf_1(){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -479,7 +479,7 @@ function uvf_2(){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -495,7 +495,7 @@ function ntx1000_2 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -511,7 +511,7 @@ function nlx3000 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -527,7 +527,7 @@ function dmg_gamma2000 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -543,7 +543,7 @@ function dmg_ctx650 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -559,7 +559,7 @@ function dmg_dmf260 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -576,7 +576,7 @@ function dmg_dmu50_1 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -592,7 +592,7 @@ function dmg_dmu50_2 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -608,7 +608,7 @@ function dmg_dmc1035 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -624,7 +624,7 @@ function dmg_ctx310_1 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -640,7 +640,7 @@ function dmg_ctx510_1 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -659,7 +659,7 @@ function maks_1 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -675,7 +675,7 @@ function maks_2 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -691,7 +691,7 @@ function m710 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -707,7 +707,7 @@ function rtk12c (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -723,7 +723,7 @@ function p250 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -739,7 +739,7 @@ function krot (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -755,7 +755,7 @@ function prans (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -774,7 +774,7 @@ function press (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -790,7 +790,7 @@ function epp (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -824,7 +824,7 @@ function sklad (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -842,7 +842,7 @@ function pech_nerg (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -860,7 +860,7 @@ function faccin_1 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };
@@ -876,7 +876,7 @@ function faccin_2 (){
     window.localStorage['mar_top'] = mar_top;
     window.localStorage['mar_left'] = mar_left;
     window.localStorage['bground'] = bground;
-    window.localStorage['place_img'] = place_img;    
+    window.localStorage['place_img'] = place_img;
     window.localStorage['bwidth'] = bwidth;
     window.localStorage['size'] = size;
 };

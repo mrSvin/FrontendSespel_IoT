@@ -119,7 +119,7 @@ function pars(arrayParse, y, arrayName=null)
         if(lengh % 2 == 1) lengh -=1
         lengh = (lengh - lengh % 2) / 2
     }
-     else lengh = 1
+    else lengh = 1
 
     // Если имя программы не передано в функцию, то массив формируется без нее
     if (arrayName == null){
@@ -144,6 +144,7 @@ function pars(arrayParse, y, arrayName=null)
 // Функция загоняет массивы с данными в Highcharts линейной суточной,
 // можно в качестве параметра передать имя нагрузки и новый цвет
 function setDataLine(containerLine, arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, nagruzkaName='Под нагрузкой', nagruzkaColor = '#24621d') {
+
     Highcharts.chart(containerLine, {
         chart: {
             plotBackgroundColor: null,
@@ -775,7 +776,7 @@ function sendTime(names, datas){
         array.push(convertTime(datas[i], names[i]))
     }
 
-   // console.log(array)
+    // console.log(array)
 
     let local_time = array;
     window.localStorage['local_time'] = local_time;
@@ -1103,7 +1104,7 @@ function twoWorkTime(exception=null) {
 
     }) // Конец функции map с именами станков
 
-     exception !== null? build(Diagram,1, exception) : build(Diagram);
+    exception !== null? build(Diagram,1, exception) : build(Diagram);
 
     // Вызов функции рисования общей
     paintGeneralDiagram(generalDiagramNames, exception)

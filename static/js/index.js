@@ -53,6 +53,34 @@ const App = () => (
                 <EnergyGas/>
             </Route>
 
+            <Route path="/stanki/otk">
+                <Otk/>
+            </Route>
+
+            <Route path="/stanki/otkMonth">
+                <OtkMonth/>
+            </Route>
+
+            <Route path="/stanki/liteyka">
+                <Liteyka/>
+            </Route>
+
+            <Route path="/stanki/liteykaMonth">
+                <LiteykaMonth/>
+            </Route>
+
+            <Route path="/stanki/gibka">
+                <Gibka/>
+            </Route>
+
+            <Route path="/stanki/gibkaMonth">
+                <GibkaMonth/>
+            </Route>
+
+            <Route path="/beacon">
+                <Beacon/>
+            </Route>
+
             <Route path="/">
                 <Home/>
             </Route>

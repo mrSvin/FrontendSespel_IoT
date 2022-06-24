@@ -1,7 +1,7 @@
-function OtkInfo() {
+function GibkaInfo() {
 
-    let complexName = ["CRYSTA-Apex S9168", "НК600"]
-    let complexImg = ["../images/crystal_apex.png", "../images/nk600.png"]
+    let complexName = ["FACCIN 4", "FACCIN 10"]
+    let complexImg = ["../images/faccin.png", "../images/faccin_2.png"]
 
     let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/1_ploshadka_outside.png", 60, "unset"]
     let buttonsVrs2 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
@@ -41,8 +41,8 @@ function OtkInfo() {
         setDate(`${yearNow}-${monthNow}-${dayNow}`)
 
 
-        let roundKim = fetchRequest(`${yearNow}-${monthNow}-${dayNow}`, kimData, 'kim', 1)
-        let roundNK600 = fetchRequest(`${yearNow}-${monthNow}-${dayNow}`, nk600Data, 'nk600', 2)
+        let roundKim = fetchRequest(`${yearNow}-${monthNow}-${dayNow}`, kimData, 'faccin_1', 1)
+        let roundNK600 = fetchRequest(`${yearNow}-${monthNow}-${dayNow}`, nk600Data, 'faccin_2', 2)
 
 
         let promiseDataKim = Promise.resolve(roundKim);
@@ -72,8 +72,8 @@ function OtkInfo() {
         setDate(dateInput)
         console.log(dateInput)
 
-        let roundKim = fetchRequest(`${dateInput}`, kimData, 'kim', 1)
-        let roundNK600 = fetchRequest(`${dateInput}`, nk600Data, 'nk600', 2)
+        let roundKim = fetchRequest(`${dateInput}`, kimData, 'faccin_1', 1)
+        let roundNK600 = fetchRequest(`${dateInput}`, nk600Data, 'faccin_2', 2)
 
         let promiseDataKim = Promise.resolve(roundKim);
         let promiseDataNK600 = Promise.resolve(roundNK600);
@@ -586,28 +586,28 @@ function OtkInfo() {
 
 }
 
-function Otk() {
+function Gibka() {
 
     return (
         <div>
 
             <Header/>
 
-            <MenuStanki menuSelected="otk"/>
+            <MenuStanki menuSelected="gibka"/>
 
             <div className="buttons-otchet">
 
-                <Link to="/stanki/otk">
+                <Link to="/stanki/gibka">
                     <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to="/stanki/otkMonth">
+                <Link to="/stanki/gibkaMonth">
                     <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
             </div>
 
-            <OtkInfo/>
+            <GibkaInfo/>
 
         </div>
     )

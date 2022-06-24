@@ -94,13 +94,13 @@ function Menubar() {
     return (
         <div className="main-container-home">
 
-            <a href="displayStanki" className="container-home">
+            <Link to="/stanki/otk" className="container-home">
                 <div className="icon-container">
                     <p>Суточные и месячные отчеты работы оборудования</p>
                     <div className="stanki"></div>
                 </div>
                 <h2 className="buttonName">Станки</h2>
-            </a>
+            </Link>
 
             <Link to="/energyWater" className="container-home">
                 <div className="icon-container">
@@ -108,6 +108,14 @@ function Menubar() {
                     <div className="energy"></div>
                 </div>
                 <h2 className="buttonName">Энергоресурсы</h2>
+            </Link>
+
+            <Link to="/beacon" className="container-home">
+                <div className="icon-container">
+                    <p>Отслеживание объектов</p>
+                    <div className="beacon"></div>
+                </div>
+                <h2 className="buttonName">Beacon</h2>
             </Link>
 
             <a href="/menubar/sklad" className="container-home">
