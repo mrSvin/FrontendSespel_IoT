@@ -3,7 +3,7 @@ function MapBeacon() {
         <div className="divMap">
             <img
                 src="https://sun9-64.userapi.com/impf/iptmjsWQr9JrTI20JbltbW7oFptzABRqWiacHQ/o93yMeNF_Jk.jpg?size=399x732&amp;quality=96&amp;sign=d36fcd3df2efc9b7893eaf1acbec6097&amp;type=album"/>
-            <div className="pointBeacon" style={divStyle}>
+            <div className="pointBeacon">
                 <ul className="beaconList">
                     <li><a href="#">Чел1</a></li>
                     <li><a href="#">Чел2</a></li>
@@ -91,15 +91,19 @@ function Beacon() {
     }
 
 
-    let divStyle = {
-        transform: `translate(${left}px, ${top}px)`
-    }
+    // let divStyle = {
+    //     transform: `translate(${left}px, ${top}px)`
+    // }
 
 
     return (
-        <div className="beaconPage">
+        <div>
+
+            <Header/>
+
             <MapBeacon/>
             <TableBeacon/>
+
         </div>
     )
 }
