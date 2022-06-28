@@ -200,7 +200,6 @@ li:hover > .beaconList {
     flex-direction: column;
     justify-content: space-evenly;
     transition: 0.5s;
-    background-color: #bfbbbb;
 }
 
 .beaconMenuButton:hover {
