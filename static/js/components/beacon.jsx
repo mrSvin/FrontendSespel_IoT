@@ -37,7 +37,7 @@ function TableBeacon() {
                     <tr>
                         <th>№</th>
                         <th>ФИО</th>
-                        <th>Таб.номер</th>
+                        <th>Табель</th>
                         <th>Должность</th>
                         <th>Статус</th>
                     </tr>
