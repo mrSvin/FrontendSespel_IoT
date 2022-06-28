@@ -1,15 +1,24 @@
+function BeaconIcon() {
+    return (
+        <div className="pointBeacon">
+            <table className="tableIcon">
+                <tbody>
+                <tr>
+                    <td>Буклов А.В</td>
+                    <td>1234</td>
+                    <td>Инженер программист</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    )
+}
+
 function MapBeacon() {
     return (
         <div className="divMap">
-            <img
-                src="../images/beaconOffice.png"/>
-            <div className="pointBeacon">
-                <ul className="beaconList">
-                    <li><a href="#">Чел1</a></li>
-                    <li><a href="#">Чел2</a></li>
-                    <li><a href="#">Чел3</a></li>
-                </ul>
-            </div>
+            <img src="../images/beaconOffice.png"/>
+            <BeaconIcon/>
         </div>
     )
 }
