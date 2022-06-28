@@ -1,50 +1,50 @@
 function PointBeacon() {
-    // let [top, setTop] = useState(100);
-    // let [left, setLeft] = useState(200);
-    //
-    // useEffect(() => {
-    //
-    //     for (var i = 0; i < 1; i += 1) {
-    //         (function (i) {
-    //             setInterval(function () {
-    //
-    //                 let beacon = fetchRequestBeacon()
-    //                 let promiseBeacon = Promise.resolve(beacon);
-    //                 promiseBeacon.then(value => {
-    //                     // console.log(value.location)
-    //                     if (value.location == 109) {
-    //                         setTop(645)
-    //                         setLeft(-318)
-    //                     }
-    //                     if (value.location == 128) {
-    //                         setTop(30)
-    //                         setLeft(-358)
-    //                     }
-    //                     if (value.location == 144) {
-    //                         setTop(400)
-    //                         setLeft(1200)
-    //                     }
-    //                 })
-    //
-    //
-    //             }, 2000)
-    //         })(i);
-    //     }
-    //
-    // }, []);
+    let [top, setTop] = useState(100);
+    let [left, setLeft] = useState(200);
 
-    // function fetchRequestBeacon() {
-    //     return fetch(`http://192.168.3.41:8085/api/beaconData`, {method: 'GET'})
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             return data[0]
-    //         })
-    // }
-    //
-    //
-    // let divStyle = {
-    //     transform: `translate(${left}px, ${top}px)`
-    // }
+    useEffect(() => {
+
+        for (var i = 0; i < 1; i += 1) {
+            (function (i) {
+                setInterval(function () {
+
+                    let beacon = fetchRequestBeacon()
+                    let promiseBeacon = Promise.resolve(beacon);
+                    promiseBeacon.then(value => {
+                        // console.log(value.location)
+                        if (value.location == 109) {
+                            setTop(645)
+                            setLeft(-318)
+                        }
+                        if (value.location == 128) {
+                            setTop(30)
+                            setLeft(-358)
+                        }
+                        if (value.location == 144) {
+                            setTop(400)
+                            setLeft(1200)
+                        }
+                    })
+
+
+                }, 2000)
+            })(i);
+        }
+
+    }, []);
+
+    function fetchRequestBeacon() {
+        return fetch(`http://192.168.3.41:8085/api/beaconData`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data[0]
+            })
+    }
+
+
+    let divStyle = {
+        transform: `translate(${left}px, ${top}px)`
+    }
     //
     // function dropList(listClassName) {
     //     document.addEventListener('click', function (e) { // событие клика по веб-документу
