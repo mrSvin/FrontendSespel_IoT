@@ -17,6 +17,11 @@ function MapBeacon() {
 function TableBeacon() {
     return (
         <div className="divTable ">
+            <div className="beaconMenuButton">
+                <span className="beaconMenuButtonInside"></span>
+                <span className="beaconMenuButtonInside"></span>
+                <span className="beaconMenuButtonInside"></span>
+            </div>
             <div className="searchField">
                 <input type="text" placeholder="Поиск сотрудника..."/>
             </div>
@@ -26,7 +31,7 @@ function TableBeacon() {
                     <tr>
                         <th>№</th>
                         <th>ФИО</th>
-                        <th>Табельный номер</th>
+                        <th>Таб.номер</th>
                         <th>Должность</th>
                         <th>Статус</th>
                     </tr>
