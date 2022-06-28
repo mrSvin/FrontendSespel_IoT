@@ -2,7 +2,7 @@ function MapBeacon() {
     return (
         <div className="divMap">
             <img
-                src="https://sun9-64.userapi.com/impf/iptmjsWQr9JrTI20JbltbW7oFptzABRqWiacHQ/o93yMeNF_Jk.jpg?size=399x732&amp;quality=96&amp;sign=d36fcd3df2efc9b7893eaf1acbec6097&amp;type=album"/>
+                src="../images/"/>
             <div className="pointBeacon">
                 <ul className="beaconList">
                     <li><a href="#">Чел1</a></li>
@@ -58,8 +58,8 @@ function TableBeacon() {
 }
 
 function Beacon() {
-    let [top, setTop] = useState(645);
-    let [left, setLeft] = useState(-318);
+    let [top, setTop] = useState(659);
+    let [left, setLeft] = useState(-331);
 
     useEffect(() => {
 
