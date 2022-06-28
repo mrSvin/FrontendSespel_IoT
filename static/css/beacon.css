@@ -3,3 +3,127 @@
     -moz-transition: all 2s ease-in-out; /** Firefox **/
     -o-transition: all 2s ease-in-out; /** Opera **/
 }
+
+.tableBeacon {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width:97%;
+}
+
+.tableBeacon > thead > tr > th,
+.tableBeacon > tbody > tr > th,
+.tableBeacon > thead > tr > td,
+.tableBeacon > tbody > tr > td {
+    padding: 4px;
+    line-height: 1.42857143;
+    vertical-align: center;
+    text-align: center;
+    border: 1px solid #ddd;
+
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+}
+
+.tableBeacon > tbody > tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.tableBeacon > tbody > tr:hover {
+    cursor: pointer;
+    background: #2c5275;
+}
+
+.beaconPage {
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+}
+
+.divMap {
+    display: flex;
+    width: 50%;
+    margin-left: 10%;
+}
+
+.divTable {
+    width: 50%;
+    margin-right: 1%;
+}
+
+.searchField {
+    display: flex;
+    justify-content: center;
+    margin: 2%;
+}
+
+/*Добавляемые классы*/
+.selectedTr {
+    background: #0c66c1 !important;
+}
+
+.visible {
+    display: block!important;
+}
+
+.beaconList {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+
+    display: none;
+    position: absolute;
+    top: 100%;
+}
+
+/* применяем inline-block позиционирование к элементам навигации */
+.beaconList li {
+    margin: 0px -7px 0 0;
+    display: inline-block;
+    background-color: #0c66c1;
+    min-width: 90px;
+    float: none;
+    display: list-item;
+    position: relative;
+    border-radius: 20%;
+    border: 1px #000000 solid;
+
+}
+
+/* стилизуем ссылки */
+.beaconList a {
+    display: block;
+    padding: 0 1px;
+    color: #FFF;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* изменяем цвет фона при наведении курсора */
+.beaconList a:hover {
+    background-color: #2c5275;
+}
+
+/* отображаем выпадающий список при наведении */
+li:hover > .beaconList {
+    display: inherit;
+}
+
+.pointBeacon {
+    margin: 0px -7px 0 0;
+    display: inline-block;
+    background-color: #0c66c1;
+    width: 50px;
+    height: 50px;
+    float: none;
+    position: relative;
+    border-radius: 100%;
+    cursor: pointer;
+
+    -webkit-transition: all 2s ease-in-out; /** Chrome & Safari **/
+    -moz-transition: all 2s ease-in-out; /** Firefox **/
+    -o-transition: all 2s ease-in-out; /** Opera **/
+}
