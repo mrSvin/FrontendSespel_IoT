@@ -36,8 +36,9 @@
 
 .beaconPage {
     display: flex;
-    width: 100vw;
+    width: 99vw;
     justify-content: space-between;
+    overflow-x: hidden;
 }
 
 .divMap {
