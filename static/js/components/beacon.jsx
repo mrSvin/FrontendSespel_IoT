@@ -1,19 +1,11 @@
 function BeaconIcon() {
     return (
         <div className="pointBeacon">
-            <table className="tableIcon">
-                <tbody>
-                <tr>
-                    <td>Буклов А.В</td>
-                </tr>
-                <tr>
-                    <td>Таб.№ 1234</td>
-                </tr>
-                <tr>
-                    <td>Инженер-программист</td>
-                </tr>
-                </tbody>
-            </table>
+            <div className="menuIcon">
+                <span>Буклов А.В</span>
+                <span>Таб.№ 1234</span>
+                <span>Инженер-программист</span>
+            </div>
             <div className="pulse"></div>
         </div>
     )
