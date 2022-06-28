@@ -46,6 +46,11 @@
     margin-left: 10%;
 }
 
+.divMap > img {
+    margin-top:10%;
+    width: 100%;
+}
+
 .divTable {
     width: 50%;
     margin-right: 1%;
