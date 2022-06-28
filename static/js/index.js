@@ -78,7 +78,7 @@ const App = () => (
             </Route>
 
             <Route path="/beacon">
-                <BeaconPage/>
+                <Beacon/>
             </Route>
 
             <Route path="/">
