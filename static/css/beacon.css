@@ -9,13 +9,14 @@
     border-collapse: collapse;
     width:100%;
     color: white;
+    margin: 1%;
 }
 
 .tableBeacon > tbody > tr {
     padding: 4px;
     line-height: 1.42857143;
     vertical-align: center;
-    text-align: center;
+    text-align: left;
     border-bottom: 1px solid #979595;
 
     font-family: sans-serif;
@@ -27,6 +28,16 @@
 
 .tableBeacon > thead  {
     border-bottom: 1px solid #979595;
+    text-align: left;
+}
+
+.tableBeacon > thead > th  {
+    margin: 10px;
+    padding: 5px 5px 5px 0px;
+}
+
+.tableBeacon > thead > th:nth-child(5)  {
+    text-align: center;
 }
 
 .tableBeacon > tbody > tr:hover {
@@ -54,8 +65,7 @@
 }
 
 .divTable {
-    width: 30%;
-    margin-right: 4%;
+    width: 35%;
     background: #282a38;
 }
 
@@ -86,8 +96,7 @@
 
 .searchField > input {
     display: flex;
-    /* justify-content: center; */
-    margin: 2% 0% 2% 0;
+    margin: 1% 1% 1% 1%;
     width: 95%;
     height: 25px;
 }

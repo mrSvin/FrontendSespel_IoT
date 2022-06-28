@@ -23,11 +23,13 @@ function TableBeacon() {
 
             <table className="tableBeacon">
                 <thead>
-                <th>№</th>
-                <th>ФИО</th>
-                <th>Табельный номер</th>
-                <th>Должность</th>
-                <th>Статус</th>
+                    <tr>
+                        <th>№</th>
+                        <th>ФИО</th>
+                        <th>Табельный номер</th>
+                        <th>Должность</th>
+                        <th>Статус</th>
+                    </tr>
                 </thead>
                 <tbody>
                 <tr>
