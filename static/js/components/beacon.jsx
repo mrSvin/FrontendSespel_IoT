@@ -5,11 +5,16 @@ function BeaconIcon() {
                 <tbody>
                 <tr>
                     <td>Буклов А.В</td>
-                    <td>1234</td>
-                    <td>Инженер программист</td>
+                </tr>
+                <tr>
+                    <td>Таб.№ 1234</td>
+                </tr>
+                <tr>
+                    <td>Инженер-программист</td>
                 </tr>
                 </tbody>
             </table>
+            <div className="pulse"></div>
         </div>
     )
 }
@@ -50,7 +55,7 @@ function TableBeacon() {
                     <td>1</td>
                     <td>Буклов А.В</td>
                     <td>1234</td>
-                    <td>Инженер программист</td>
+                    <td>Инженер-программист</td>
                     <td><span className="statusActive"></span></td>
                 </tr>
                 <tr>
