@@ -27,6 +27,7 @@ function TableBeacon() {
                 <th>ФИО</th>
                 <th>Табельный номер</th>
                 <th>Должность</th>
+                <th>Статус</th>
                 </thead>
                 <tbody>
                 <tr>
@@ -34,12 +35,14 @@ function TableBeacon() {
                     <td>Буклов А.В</td>
                     <td>1234</td>
                     <td>Инженер программист</td>
+                    <td><span className="statusActive"></span></td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>Васильев А.В</td>
                     <td>1432</td>
                     <td>Начальник КБ5</td>
+                    <td><span className="statusNoActive"></span></td>
                 </tr>
                 </tbody>
             </table>
