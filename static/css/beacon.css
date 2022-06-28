@@ -11,10 +11,7 @@
     color: white;
 }
 
-.tableBeacon > thead > tr > th,
-.tableBeacon > tbody > tr > th,
-.tableBeacon > thead > tr > td,
-.tableBeacon > tbody > tr > td {
+.tableBeacon > tbody > tr {
     padding: 4px;
     line-height: 1.42857143;
     vertical-align: center;
@@ -23,11 +20,14 @@
 
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%
+    -ms-text-size-adjust: 100%;
+    margin-right:100000px;
 }
 
-.tableBeacon > thead > th {
-//background-color: #f9f9f9;
+
+
+.tableBeacon > thead  {
+    border: 1px solid #ddd;
 }
 
 .tableBeacon > tbody > tr:hover {
@@ -65,9 +65,22 @@
 
 .searchField {
     display: flex;
-    /* justify-content: center; */
     margin: 0%;
 
+}
+
+.searchField > input {
+    display: flex;
+    margin: 2% 2% 2% 0;
+    width: 100%;
+    color: white;
+    background-color: #252734;
+}
+
+
+
+::placeholder {
+    color: white;
 }
 
 .searchField > input {

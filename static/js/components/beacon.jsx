@@ -98,12 +98,11 @@ function Beacon() {
 
     return (
         <div>
-
             <Header/>
-
-            <MapBeacon/>
-            <TableBeacon/>
-
+            <div className="beaconPage">
+                <MapBeacon/>
+                <TableBeacon/>
+            </div>
         </div>
     )
 }
