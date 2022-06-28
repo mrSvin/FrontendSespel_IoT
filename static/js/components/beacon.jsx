@@ -2,7 +2,7 @@ function MapBeacon() {
     return (
         <div className="divMap">
             <img
-                src="../images/"/>
+                src="../images/beaconOffice.png"/>
             <div className="pointBeacon">
                 <ul className="beaconList">
                     <li><a href="#">Чел1</a></li>
