@@ -61,7 +61,7 @@
 }
 
 .divTable {
-    width: 30%;
+    width: 35%;
     background: #282a38;
     padding: 5px;
     margin: 5px;
@@ -240,6 +240,7 @@ li:hover > .beaconList {
 
 .menuIcon > span {
     margin: 2%;
+    text-align: center;
 }
 
 
