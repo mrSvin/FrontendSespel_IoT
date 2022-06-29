@@ -739,7 +739,10 @@ function addOnclick(id, arrayName) {
 // с общей таблицей работы станков
 function convertTime(roundArray, name) {
 
-    if(roundArray == roundArray.length)
+    if (roundArray == null) {
+        return [name, '0 минут','0 минут','0 минут','0 минут','0 минут',]
+    }
+    else if(roundArray == roundArray.length)
     {
         return [name, '0 минут','0 минут','0 минут','0 минут','0 минут',]
     }
