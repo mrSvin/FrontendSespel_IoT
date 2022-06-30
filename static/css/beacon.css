@@ -166,7 +166,7 @@ li:hover > .beaconList {
     -o-transition: all 2s ease-in-out; /** Opera **/
 }
 
-.pointBeacon:hover .menuIcon{
+.pointBeacon:hover .tableIcon{
     visibility: visible;
     opacity: 1;
 }
@@ -216,32 +216,36 @@ li:hover > .beaconList {
     border-radius: 18%;
 }
 
-.menuIcon {
-    display: flex;
-    flex-direction: column;
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    max-height: 75px;
-    color: white;
-    font-size: 12px;
-    background-color: #373545;
-    white-space: normal;
-    border: 1px #787171 solid;
+.tableIcon {
     position: relative;
-    top: 50px;
-    left: -21px;
+    top:50px;
+    right: 25px;
+    width: 90px;
+    transition: 2.5s;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0.5s, opacity 0.5s linear;
 }
 
-.menuIcon > span {
-    margin: 2%;
+.tableIcon > tbody > tr > td {
+    padding: 1px;
+    line-height: 1.42857143;
+    vertical-align: center;
+    text-align: center;
+    border: 1px solid #646970;
+    font-size: 14px;
+}
+
+.tableIcon > tbody > tr >td {
+    background-color: #373545;
+    color: #fff;
+    border-radius: 5px;
     text-align: center;
 }
 
+.tableIcon > tbody > tr:hover {
+    cursor: pointer;
+}
 
 .pulse {
     position: absolute;

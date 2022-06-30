@@ -37,29 +37,29 @@ function MenuStanki(menuSelected) {
                 <div className={menuSelect[0]}>ОТК</div>
             </Link>
 
-            <a href="/displayStanki">
+            <Link to="/stanki/meh2">
                 <div className={menuSelect[1]}>Мех.уч.2 пл.</div>
-            </a>
+            </Link>
 
-            <a href="/navigators">
+            <Link to="/stanki/rezka">
                 <div className={menuSelect[2]}>Резка</div>
-            </a>
+            </Link>
 
-            <a href="/stanki_meh">
+            <Link to="/stanki/meh1">
                 <div className={menuSelect[3]}>Мех.уч.1 пл.</div>
-            </a>
+            </Link>
 
-            <a href="/robots">
+            <Link to="/stanki/robots">
                 <div className={menuSelect[4]}>Роботы</div>
-            </a>
+            </Link>
 
-            <a href="/spec_complexes">
+            <Link to="/stanki/specComplexes">
                 <div className={menuSelect[5]}>Спец. комплексы</div>
-            </a>
+            </Link>
 
-            <a href="/sclads">
+            <Link to="/stanki/sclads">
                 <div className={menuSelect[6]}>Склады</div>
-            </a>
+            </Link>
 
             <Link to="/stanki/liteyka">
                 <div className={menuSelect[7]}>Литьё</div>

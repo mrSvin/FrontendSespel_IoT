@@ -34,18 +34,17 @@ function LiteykaInfo() {
 
         let promiseDataKim = Promise.resolve(roundKim);
 
-        //Общая загрузка
+        //Общая загрузка и Количество операций
         promiseDataKim.then(value => {
             let intKimArray = value.roundArray.map(Number)
 
             highChartTotal(complexName, [intKimArray[0]], [intKimArray[1]],
                 [intKimArray[2]], [intKimArray[3]], [intKimArray[4]])
-        })
-        //Количество операций
-        promiseDataKim.then(value => {
+
             let kolKim = kolOperations(value.workArray)
             highChartCountOperations(complexName, [kolKim[0]], [kolKim[1]])
         })
+
 
     }, [])
 
@@ -57,15 +56,13 @@ function LiteykaInfo() {
 
         let promiseDataKim = Promise.resolve(roundKim);
 
-        //Общая загрузка
+        //Общая загрузка и Количество операций
         promiseDataKim.then(value => {
             let intKimArray = value.roundArray.map(Number)
 
             highChartTotal(complexName, [intKimArray[0]], [intKimArray[1]],
                 [intKimArray[2]], [intKimArray[3]], [intKimArray[4]])
-        })
-        //Количество операций
-        promiseDataKim.then(value => {
+
             let kolKim = kolOperations(value.workArray)
             highChartCountOperations(complexName, [kolKim[0]], [kolKim[1]])
         })
@@ -96,7 +93,7 @@ function LiteykaInfo() {
                 let offRound = parseInt(complexObject.roundArray[2]);
                 let avarRound = parseInt(complexObject.roundArray[3]);
                 let nagruzkaRound = parseInt(complexObject.roundArray[4]);
-                highChartSutkiRound(workRound, passRound, offRound, avarRound, nagruzkaRound, 'Нагрзука', idContainer)
+                highChartSutkiRound(workRound, passRound, offRound, avarRound, nagruzkaRound, 'Нагрузка', idContainer)
 
                 return complexObject
             })
@@ -195,340 +192,6 @@ function LiteykaInfo() {
             index_pars += 1;
         }
         return [array_kol_op[0], array_kol_op[1]];
-    }
-
-    function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuchnoi, idContainer) {
-        Highcharts.setOptions({
-            lang: {
-                loading: 'Загрузка...',
-                months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-                weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-                shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-                exportButtonTitle: "Экспорт",
-                printButtonTitle: "Печать",
-                rangeSelectorFrom: "С",
-                rangeSelectorTo: "По",
-                rangeSelectorZoom: "Период",
-                downloadPNG: 'Скачать PNG',
-                downloadJPEG: 'Скачать JPEG',
-                downloadPDF: 'Скачать PDF',
-                downloadSVG: 'Скачать SVG',
-                printChart: 'Напечатать график',
-                viewFullscreen: 'На весь экран'
-            },
-            plotOptions: {
-                xrange: {
-                    grouping: false
-                }
-            },
-            global: {
-                timezoneOffset: new Date().getTimezoneOffset()
-            }
-        });
-
-        Highcharts.chart(`containerLine${idContainer}`, {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                plotBorderColor: 'gray',
-                type: 'xrange'
-            },
-            title: {
-                text: 'Работа оборудования',
-                style: {
-                    color: '#FFF'
-                }
-            },
-            colors: ['#e81e1d', '#000000', '#ffea32', '#207210', '#38e817'],
-
-
-            xAxis: {
-                type: 'datetime',
-                labels: {
-                    style: {
-                        color: '#FFF'
-                    }
-                },
-            },
-            yAxis: {
-                title: {
-                    text: ''
-                },
-                categories: ['Работа', 'Ожидание', 'Выключен', 'В аварии', 'Нагрзука'],
-                reversed: true,
-                labels: {
-                    style: {
-                        color: '#FFF'
-                    },
-                }
-            },
-            credits: {
-                enabled: false
-            },
-
-            series: [
-                {
-                    name: 'Работа',
-                    // borderColor: 'gray',
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: '#38e817',
-                    tooltip: {
-                        pointFormat: '<b>Программа: {point.programname}</b>'
-                    },
-                    data: arrayWork,
-                },
-                {
-                    name: 'Ожидание',
-                    // borderColor: 'gray',
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: '#ffea32',
-                    tooltip: {
-                        pointFormat: ''
-                    },
-                    data: arrayPause,
-                    dataLabels: {
-                        enabled: true
-                    }
-                },
-                {
-                    name: 'Выключен',
-                    // borderColor: 'gray',
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: '#000000',
-                    data: arrayOff,
-                    dataLabels: {
-                        enabled: true,
-                    }
-                },
-                {
-                    name: 'В аварии',
-                    // borderColor: 'gray',
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: '#e81e1d',
-                    data: arrayAvar,
-                    dataLabels: {
-                        enabled: true
-                    }
-                },
-                {
-                    name: 'Нагрзука',
-                    // borderColor: 'gray',
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: '#207210',
-                    data: arrayRuchnoi,
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            ],
-            legend: {
-                itemStyle: {
-                    color: '#FFF'
-                }
-            }
-
-
-        });
-    }
-
-    function highChartSutkiRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Нагрузка', idContainer) {
-        Highcharts.chart(`containerRound${idContainer}`, {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-            },
-
-            title: {
-                text: 'Загрузка оборудования',
-                style: {
-                    color: '#FFF'
-                }
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-
-            accessibility: {
-                point: {
-                    valueSuffix: '%'
-                }
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
-                }
-            },
-            colors: ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210'],
-            credits: {
-                enabled: false
-            },
-            legend: {
-                itemStyle: {
-                    color: '#FFF'
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Показатель',
-                data: [['Работа', work], ['Включен', pass], ['Выключен', off], ['В аварии', avar], [nagruzkaName, nagruzka]]
-            }]
-        });
-    }
-
-    function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka) {
-
-        Highcharts.chart('containerTotal', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Общая загрузка оборудования',
-                style: {
-                    color: '#FFF'
-                }
-            },
-            xAxis: {
-                labels: {
-                    style: {
-                        fontSize: '18px',
-                        color: '#FFF'
-                    }
-                },
-                categories: generalDiagramNames,
-            },
-            credits: {
-                enabled: false
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: '%'
-                },
-                labels: {
-                    style: {
-                        color: '#FFF'
-                    },
-                }
-            },
-            tooltip: {
-                pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-                shared: true
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'percent'
-                }
-            },
-            legend: {
-                itemStyle: {
-                    color: '#FFF'
-                }
-            },
-            series: [{
-                name: 'Авария',
-                data: avar,
-                color: '#e81e1d'
-            }, {
-                name: 'Выключен',
-                data: off,
-                color: '#000000'
-            }, {
-                name: 'Нагрзука',
-                data: nagruzka,
-                color: '#207210'
-            }, {
-                name: 'Ожидание',
-                color: '#ffea32',
-                data: pause
-            }, {
-                name: 'Работа',
-                color: '#38e817',
-                data: work,
-
-            },]
-        });
-
-    }
-
-    function highChartCountOperations(generalDiagramNames, countOperation, countLongOperation) {
-        Highcharts.chart('containerOperations', {
-            chart: {
-                type: 'bar',
-                marginLeft: 110
-            },
-            title: {
-                text: 'Количество операций',
-                style: {
-                    color: '#FFF'
-                }
-            },
-            xAxis: {
-                labels: {
-                    style: {
-                        fontSize: '16px',
-                        color: '#FFF'
-                    }
-                },
-                categories: generalDiagramNames,
-                title: {
-                    text: null
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Количество',
-                    style: {
-                        color: '#FFF'
-                    },
-                    align: 'high'
-                },
-                labels: {
-                    overflow: 'justify',
-                    style: {
-                        color: '#FFF'
-                    }
-                }
-            },
-            tooltip: {
-                valueSuffix: ' операций'
-            },
-            plotOptions: {
-                bar: {
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            },
-            credits: {
-                enabled: false
-            },
-            legend: {
-                itemStyle: {
-                    color: '#FFF'
-                }
-            },
-            series: [{
-                name: 'Общее количество операций',
-                data: countOperation,
-            }, {
-                name: 'Количество операций более 3 минут',
-                data: countLongOperation,
-            }]
-        });
     }
 
     return (

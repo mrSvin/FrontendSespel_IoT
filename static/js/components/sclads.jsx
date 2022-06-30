@@ -1,10 +1,10 @@
-function GibkaInfo() {
+function ScladsInfo() {
 
-    let complexName = ["FACCIN 4", "FACCIN 10"]
-    let complexImg = ["../images/faccin.png", "../images/faccin_2.png"]
+    let complexName = ["CRYSTA-Apex S9168"]
+    let complexImg = ["../images/sklad.png"]
 
-    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/1_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs2 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat']
+    let buttonsVrs2 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat']
 
     let [kimData, setKimData] = useState({
         workArray: [],
@@ -41,26 +41,21 @@ function GibkaInfo() {
         setDate(`${yearNow}-${monthNow}-${dayNow}`)
 
 
-        let roundKim = fetchRequest(`${yearNow}-${monthNow}-${dayNow}`, kimData, 'faccin_1', 1)
-        let roundNK600 = fetchRequest(`${yearNow}-${monthNow}-${dayNow}`, nk600Data, 'faccin_2', 2)
-
+        let roundKim = fetchRequest(`${yearNow}-${monthNow}-${dayNow}`, kimData, 'sclad_meh', 1)
 
         let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
-        //Общая загрузка и Количество операций
+
+        //Общая загрузка и количество операций
         promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                let intKimArray = value.roundArray.map(Number)
-                let intNK600Array = value1.roundArray.map(Number)
+            let intKimArray = value.roundArray.map(Number)
 
-                highChartTotal(complexName, [intKimArray[0], intNK600Array[0]], [intKimArray[1], intNK600Array[1]],
-                    [intKimArray[2], intNK600Array[2]], [intKimArray[3], intNK600Array[3]], [intKimArray[4], intNK600Array[4]], 'ручной')
+            highChartTotal(complexName, [intKimArray[0]], [intKimArray[1]],
+                [intKimArray[2]], [intKimArray[3]], [intKimArray[4]])
 
-                let kolKim = kolOperations(value.workArray)
-                let kolNK600 = kolOperations(value1.workArray)
-                highChartCountOperations(complexName, [kolKim[0], kolNK600[0]], [kolKim[1], kolNK600[1]])
+            let kolKim = kolOperations(value.workArray)
 
-            })
+            highChartCountOperations(complexName, [kolKim[0]], [kolKim[1]])
+
         })
 
     }, [])
@@ -69,25 +64,21 @@ function GibkaInfo() {
         setDate(dateInput)
         console.log(dateInput)
 
-        let roundKim = fetchRequest(`${dateInput}`, kimData, 'faccin_1', 1)
-        let roundNK600 = fetchRequest(`${dateInput}`, nk600Data, 'faccin_2', 2)
+        let roundKim = fetchRequest(`${dateInput}`, kimData, 'sclad_meh', 1)
 
         let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
-        //Общая загрузка и Количество операций
+
+        //Общая загрузка и количество операций
         promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                let intKimArray = value.roundArray.map(Number)
-                let intNK600Array = value1.roundArray.map(Number)
+            let intKimArray = value.roundArray.map(Number)
 
-                highChartTotal(complexName, [intKimArray[0], intNK600Array[0]], [intKimArray[1], intNK600Array[1]],
-                    [intKimArray[2], intNK600Array[2]], [intKimArray[3], intNK600Array[3]], [intKimArray[4], intNK600Array[4]], 'ручной')
+            highChartTotal(complexName, [intKimArray[0]], [intKimArray[1]],
+                [intKimArray[2]], [intKimArray[3]], [intKimArray[4]])
 
-                let kolKim = kolOperations(value.workArray)
-                let kolNK600 = kolOperations(value1.workArray)
-                highChartCountOperations(complexName, [kolKim[0], kolNK600[0]], [kolKim[1], kolNK600[1]])
+            let kolKim = kolOperations(value.workArray)
 
-            })
+            highChartCountOperations(complexName, [kolKim[0]], [kolKim[1]])
+
         })
 
     }
@@ -235,39 +226,33 @@ function GibkaInfo() {
                 <div className="roundSukiHighChart" id="containerRound1"></div>
             </div>
 
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}/>
-                <div className="lineSukiHighChart" id="containerLine2"></div>
-                <div className="roundSukiHighChart" id="containerRound2"></div>
-            </div>
-
         </div>
     )
 
 }
 
-function Gibka() {
+function Sclads() {
 
     return (
         <div>
 
             <Header/>
 
-            <MenuStanki menuSelected="gibka"/>
+            <MenuStanki menuSelected="sclads"/>
 
             <div className="buttons-otchet">
 
-                <Link to="/stanki/gibka">
+                <Link to="/stanki/sclads">
                     <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to="/stanki/gibkaMonth">
+                <Link to="/stanki/scladsMonth">
                     <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
             </div>
 
-            <GibkaInfo/>
+            <ScladsInfo/>
 
         </div>
     )

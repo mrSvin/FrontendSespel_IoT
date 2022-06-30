@@ -1,7 +1,7 @@
 function GazInfo() {
 
     let [dateMonth, setDateMonth] = useState(0);
-    let complexName = ["Котельная #1,#2", "Котельная #7,#8,#10,ОСК#2", "Котельная 2 площадки"]
+    let complexName = ["Котельная 2 площадки", "Котельная #1,#2", "Котельная #7,#8,#10,ОСК#2"]
     let complexImg = ["../images/gazStation.png"]
 
     let buttonsVrs1 = [-80,608,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/1_ploshadka_outside.png",60,"unset"]

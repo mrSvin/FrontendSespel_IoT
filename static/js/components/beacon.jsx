@@ -1,6 +1,28 @@
-function BeaconIcon() {
+function BeaconIcon(location) {
+
+    let divStyle;
+
+    if (location.location == 109) {
+        console.log(location.location)
+        divStyle = {
+            transform: `translate(${-200}px, ${380}px)`
+        }
+    } else if (location.location == 128) {
+        console.log(location.location)
+        divStyle = {
+            transform: `translate(${-400}px, ${700}px)`
+        }
+
+    } else if (location.location == 144) {
+        console.log(location.location)
+        divStyle = {
+            transform: `translate(${-400}px, ${80}px)`
+        }
+
+    }
+
     return (
-        <div className="pointBeacon">
+        <div className="pointBeacon" style={divStyle}>
             <div className="menuIcon">
                 <span>Буклов А.В</span>
                 <span>Таб.№ 1234</span>
@@ -11,11 +33,12 @@ function BeaconIcon() {
     )
 }
 
-function MapBeacon() {
+function MapBeacon(location) {
+
     return (
         <div className="divMap">
             <img src="../images/beaconOffice.png"/>
-            <BeaconIcon/>
+            <BeaconIcon location={location.location}/>
         </div>
     )
 }
@@ -34,13 +57,13 @@ function TableBeacon() {
 
             <table className="tableBeacon">
                 <thead>
-                    <tr>
-                        <th>№</th>
-                        <th>ФИО</th>
-                        <th>Табель</th>
-                        <th>Должность</th>
-                        <th>Статус</th>
-                    </tr>
+                <tr>
+                    <th>№</th>
+                    <th>ФИО</th>
+                    <th>Табель</th>
+                    <th>Должность</th>
+                    <th>Статус</th>
+                </tr>
                 </thead>
                 <tbody>
                 <tr>
@@ -64,8 +87,7 @@ function TableBeacon() {
 }
 
 function Beacon() {
-    let [top, setTop] = useState(659);
-    let [left, setLeft] = useState(-331);
+    let [location, setLocation] = useState(109);
 
     useEffect(() => {
 
@@ -78,16 +100,13 @@ function Beacon() {
                     promiseBeacon.then(value => {
                         // console.log(value.location)
                         if (value.location == 109) {
-                            setTop(645)
-                            setLeft(-318)
+                            setLocation(109)
                         }
                         if (value.location == 128) {
-                            setTop(30)
-                            setLeft(-358)
+                            setLocation(128)
                         }
                         if (value.location == 144) {
-                            setTop(400)
-                            setLeft(1200)
+                            setLocation(144)
                         }
                     })
 
@@ -106,17 +125,11 @@ function Beacon() {
             })
     }
 
-
-    // let divStyle = {
-    //     transform: `translate(${left}px, ${top}px)`
-    // }
-
-
     return (
         <div>
             <Header/>
             <div className="beaconPage">
-                <MapBeacon/>
+                <MapBeacon location={location}/>
                 <TableBeacon/>
             </div>
         </div>
