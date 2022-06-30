@@ -111,18 +111,60 @@ function ComplexButtons({complexMesto,size}) {
     let hight = null
     let width = null
 
-    if (size == '1_ploshadka_outside') {
-        hight = 1030
-        width = 1030
-    }
-    if (size == 'meh1') {
-        hight = 920
-        width = 920
-    }
+    switch (size) {
+        case '1_ploshadka_outside':
+        {
+            hight = 1030
+            width = 1030
+            break;
+        }
+        case '2_ploshadka_outside':
+        {
+            hight = 1030
+            width = 1030
+            break;
+        }
+        case 'II_ploshadka':
+        {
+            hight = 690
+            width = 1510
+            break;
+        }
+        case 'meh1 ':
+        {
+            hight = 920
+            width = 920
+            break;
+        }
+        case 'ceh_6 ':
+        {
+            hight = 910
+            width = 1010
+            break;
+        }
+        case 'sbor_ceh ':
+        {
+            hight = 1320
+            width = 1200
+            break;
+        }
+        case 'ceh_5  ':
+        {
+            hight = 895
+            width = 1020
+            break;
+        }
+        case 'ceh_1  ':
+        {
+            hight = 660
+            width = 1920
 
-    if (size == '2ploshadka') {
-        hight = 1510
-        width = 690
+            break;
+        }
+        default: {
+            hight = 1030
+            width = 1030
+        }
     }
 
     let mesto = (parameter) => (event) => {
