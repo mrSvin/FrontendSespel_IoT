@@ -230,13 +230,13 @@ function GibkaInfo() {
             </div>
 
             <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}/>
+                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"sborCeh"}/>
                 <div className="lineSukiHighChart" id="containerLine1"></div>
                 <div className="roundSukiHighChart" id="containerRound1"></div>
             </div>
 
             <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}/>
+                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"sborCeh"}/>
                 <div className="lineSukiHighChart" id="containerLine2"></div>
                 <div className="roundSukiHighChart" id="containerRound2"></div>
             </div>

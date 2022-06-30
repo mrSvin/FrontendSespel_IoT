@@ -112,19 +112,19 @@ function ComplexButtons({complexMesto,size}) {
     let width = null
 
     switch (size) {
-        case '1_ploshadka_outside':
+        case '1ploshadkaOutside':
         {
             hight = 1030
             width = 1030
             break;
         }
-        case '2_ploshadka_outside':
+        case '2ploshadkaOutside':
         {
             hight = 1030
             width = 1030
             break;
         }
-        case 'II_ploshadka':
+        case '2ploshadka':
         {
             hight = 690
             width = 1510
@@ -136,25 +136,25 @@ function ComplexButtons({complexMesto,size}) {
             width = 920
             break;
         }
-        case 'ceh_6 ':
+        case 'ceh6 ':
         {
             hight = 910
             width = 1010
             break;
         }
-        case 'sbor_ceh ':
+        case 'sborCeh ':
         {
             hight = 1320
             width = 1200
             break;
         }
-        case 'ceh_5  ':
+        case 'ceh5  ':
         {
             hight = 895
             width = 1020
             break;
         }
-        case 'ceh_1  ':
+        case 'ceh1  ':
         {
             hight = 660
             width = 1920

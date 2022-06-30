@@ -207,7 +207,7 @@ function LiteykaInfo() {
             </div>
 
             <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}/>
+                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh1"}/>
                 <div className="lineSukiHighChart" id="containerLine1"></div>
                 <div className="roundSukiHighChart" id="containerRound1"></div>
             </div>
