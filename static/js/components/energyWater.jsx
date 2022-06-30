@@ -88,8 +88,7 @@ function TableDays(data) {
     )
 }
 
-function ComplexInfo({complexName, complexImg, complexMesto}) {
-
+function ComplexInfo({complexName, complexImg, complexMesto, size}) {
     return (
         <div className="parent_image">
 
@@ -101,25 +100,36 @@ function ComplexInfo({complexName, complexImg, complexMesto}) {
                 {complexName}
             </figcaption>
 
-            <ComplexButtons complexMesto ={complexMesto}/>
+            <ComplexButtons complexMesto={complexMesto} size={size}/>
 
         </div>
     )
 }
 
-function ComplexButtons({complexMesto}) {
+function ComplexButtons({complexMesto,size}) {
+
+    let hight = 1000
+    let width = 1002
+    if (size == '2ploshadka') {
+        hight = 680
+        width = 1510
+    }
+    if (size == 'meh1 ') {
+        hight = 680
+        width = 1510
+    }
 
     let mesto = (parameter) => (event) => {
 
         window.localStorage['mestoParams'] = parameter
-        window.open("../mesto/mestoNew", '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+
-            ',width='+Math.min(1002, screen.availWidth))
+        window.open("../mesto/mestoNew", '', 'scrollbars=1,height=' + Math.min(hight, screen.availHeight) +
+            ',width=' + Math.min(width, screen.availWidth))
     }
 
     function personal() {
 
-        window.open("../personal/personal_vrs", '', 'scrollbars=1,height='+Math.min(700, screen.availHeight)+
-            ',width='+Math.min(1200, screen.availWidth))
+        window.open("../personal/personal_vrs", '', 'scrollbars=1,height=' + Math.min(700, screen.availHeight) +
+            ',width=' + Math.min(1200, screen.availWidth))
     }
 
     return (
@@ -145,14 +155,14 @@ function VrsInfo() {
     let complexName = ["ВРС1", "ВРС2"]
     let complexImg = ["../images/nasos.png", "../images/nasos_vrs2.png"]
 
-    let buttonsVrs1 = [-80,608,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/1_ploshadka_outside.png",60,"unset"]
-    let buttonsVrs2 = [-1000,308,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/2_ploshadka_outside.png",60,"unset"]
+    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/1_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs2 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
 
     let [dataVrs1, setDataVrs1] = useState(0);
     let [dataVrs2, setDataVrs2] = useState(0);
 
-    let [stateButtonUpdate, setStateButtonUpdate] = useState([false,"buttonUpdateMonth"])
-    let timeout=null;
+    let [stateButtonUpdate, setStateButtonUpdate] = useState([false, "buttonUpdateMonth"])
+    let timeout = null;
 
     function newDate(input) {
         useEffect(() => {
@@ -179,8 +189,8 @@ function VrsInfo() {
                 })
         }
 
-        setStateButtonUpdate([true,"buttonUpdateMonth load"])
-        timeout= setTimeout(disabledButton, 1000)
+        setStateButtonUpdate([true, "buttonUpdateMonth load"])
+        timeout = setTimeout(disabledButton, 1000)
 
 
     }
@@ -284,8 +294,8 @@ function VrsInfo() {
 
     useEffect(() => {
         let yearNow = new Date().getFullYear()
-        let monthNow = new Date().getMonth()+1
-        if (monthNow<10) {
+        let monthNow = new Date().getMonth() + 1
+        if (monthNow < 10) {
             monthNow = '0' + monthNow
         }
 
@@ -304,17 +314,17 @@ function VrsInfo() {
     return (
         <div className='vrsInfoAlign'>
 
-            <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate = {stateButtonUpdate}/>
+            <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate={stateButtonUpdate}/>
 
             <div>
-                <ComplexInfo complexName={complexName[0]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs1} />
+                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}/>
                 <div className="vrsHighChart" id="container">
                 </div>
                 <TableDays data={dataVrs1}/>
             </div>
 
             <div>
-                <ComplexInfo complexName={complexName[1]} complexImg ={complexImg[1]} complexMesto = {buttonsVrs2} />
+                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}/>
                 <div className="vrsHighChart" id="container2">
                 </div>
                 <TableDays data={dataVrs2}/>
