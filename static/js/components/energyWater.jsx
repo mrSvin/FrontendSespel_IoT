@@ -108,15 +108,21 @@ function ComplexInfo({complexName, complexImg, complexMesto, size}) {
 
 function ComplexButtons({complexMesto,size}) {
 
-    let hight = 1000
-    let width = 1002
-    if (size == '2ploshadka') {
-        hight = 680
-        width = 1510
+    let hight = null
+    let width = null
+
+    if (size == '1_ploshadka_outside') {
+        hight = 1030
+        width = 1030
     }
-    if (size == 'meh1 ') {
-        hight = 680
-        width = 1510
+    if (size == 'meh1') {
+        hight = 920
+        width = 920
+    }
+
+    if (size == '2ploshadka') {
+        hight = 1510
+        width = 690
     }
 
     let mesto = (parameter) => (event) => {
