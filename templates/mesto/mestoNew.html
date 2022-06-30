@@ -289,7 +289,8 @@
         let map = document.querySelector('.place_img')
         let pulse = document.querySelector('.pulse2')
 
-        icon.style = `margin-top: ${margin_top}px; margin-left:${margin_left}px; background:${background}; background-size:${size};width: ${size}px; height: ${size}px;`
+        icon.style = `margin-top: ${margin_top}px; margin-left:${margin_left}px; background:${background};width: ${size}px; height: ${size}px;`
+        icon.style.backgroundSize = `${size}px`
 
         map.setAttribute('src', src)
         map.style = `width: ${mapWidth}px;`
