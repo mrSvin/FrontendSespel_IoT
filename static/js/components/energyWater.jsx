@@ -154,7 +154,7 @@ function ComplexButtons({complexMesto,size}) {
             width = 1020
             break;
         }
-        case 'ceh1  ':
+        case 'ceh1':
         {
             hight = 660
             width = 1920
