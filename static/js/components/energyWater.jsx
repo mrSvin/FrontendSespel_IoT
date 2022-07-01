@@ -130,25 +130,25 @@ function ComplexButtons({complexMesto,size}) {
             width = 1510
             break;
         }
-        case 'meh1 ':
+        case 'meh1':
         {
             hight = 920
             width = 920
             break;
         }
-        case 'ceh6 ':
+        case 'ceh6':
         {
             hight = 910
             width = 1010
             break;
         }
-        case 'sborCeh ':
+        case 'sborCeh':
         {
             hight = 1320
             width = 1200
             break;
         }
-        case 'ceh5  ':
+        case 'ceh5':
         {
             hight = 895
             width = 1020
@@ -160,6 +160,12 @@ function ComplexButtons({complexMesto,size}) {
             width = 1920
 
             break;
+        }
+        case 'ceh2':
+        {
+            hight = 630
+            width = 1270
+
         }
         default: {
             hight = 1030
