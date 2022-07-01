@@ -1,4 +1,4 @@
-function Service(stanokName = 'Навигатор 1', complexImg = '../images/navigator.png') {
+function Service() {
 
         function msToTimeDays(duration) {
         let seconds = parseInt((duration / 1000) % 60),
@@ -265,8 +265,8 @@ function Service(stanokName = 'Навигатор 1', complexImg = '../images/na
         <div>
             <Header/>
             <div className='serviceContainer'>
-                <h1>Тех. обслуживания станка {stanokName}</h1>
-                <img className="serviceImg" src={complexImg}/>
+                <h1>Тех. обслуживания станка Навигатор 1</h1>
+                <img className="serviceImg" src='../images/navigator.png'/>
                 <div className="oneLineGraph" id="allService"></div>
                 <div className="oneLineGraph" id="timeToLastService"></div>
                 <table className="serviceTable">
