@@ -1,4 +1,53 @@
 .pageTitle {
     margin: 0 auto;
     text-align: center;
+    color: #83addd;
+}
+
+.serviceContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.serviceImg {
+    max-height: 400px;
+    width: auto;
+    max-width: 100%;
+}
+
+.oneLineGraph {
+    height: 200px;
+    overflow: hidden;
+}
+
+.serviceTable {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    border-collapse: collapse;
+    width: 85%;
+}
+
+.serviceTable th:nth-child(n) {
+    border: 1px solid #dee2e6;
+    text-align: center;
+}
+
+.serviceTable > thead > tr > th, .serviceTable > thead > tr > td, .serviceTable > tbody > tr > td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.buttonTehno {
+    margin: 15px auto;
+    display: block;
+    font-size: 150%;
+    text-align: center;
+    padding: 15px;
+    border-radius: 5px;
+    background: #71a2cc;
+    color: white;
 }
