@@ -158,14 +158,13 @@ function ComplexButtons({complexMesto,size}) {
         {
             hight = 660
             width = 1920
-
             break;
         }
         case 'ceh2':
         {
-            hight = 630
-            width = 1270
-
+            hight = 616
+            width = 1272
+            break;
         }
         default: {
             hight = 1030
