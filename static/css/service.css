@@ -11,8 +11,14 @@
     align-items: center;
 }
 
+.serviceContainer > h1 {
+    color: #83addd;
+    position: absolute;
+    top: 40px;
+}
+
 .serviceImg {
-    max-height: 400px;
+    max-height: 260px;
     width: auto;
     max-width: 100%;
 }
@@ -20,6 +26,7 @@
 .oneLineGraph {
     height: 200px;
     overflow: hidden;
+    width: 95%;
 }
 
 

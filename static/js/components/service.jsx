@@ -288,7 +288,8 @@ function Service() {
         // массив со всеми обслуживаниями
         let allServiceArray = ['2020-06-12 13:52:03', '2021-01-05 18:00:09', '2021-12-17 12:33:18']
 
-         // DrawHigcharts(allServiceArray, ONE_YEAR_MS)
+          // DrawHigcharts(allServiceArray, ONE_YEAR_MS)
+        //MakeTeh(allServiceArray, ONE_YEAR_MS)
 
 
     return (
