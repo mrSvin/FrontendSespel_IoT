@@ -139,18 +139,33 @@ function Service() {
         type: 'xrange'
     },
         title: {
-        text: 'Проведенные тех. обсуживания'
+        text: 'Проведенные тех. обсуживания',
+            style: {
+                color: '#FFF',
+                fontWeight: 'bold',
+                fontSize: '22px',
+            }
     },
 
         xAxis: {
-        type: 'datetime'
-    },
+            type: 'datetime',
+            labels: {
+                style: {
+                    color: '#FFF'
+                }
+            },
+        },
         yAxis: {
         title: {
         text: ''
     },
         categories: ['Время'],
-        reversed: true
+        reversed: true,
+            labels: {
+                style: {
+                    color: '#FFF'
+                },
+            }
     },
         credits: {
         enabled: false
@@ -188,18 +203,33 @@ function Service() {
         type: 'xrange'
     },
         title: {
-        text: 'Времени  до следующего тех. обслуживания'
+        text: 'Времени  до следующего тех. обслуживания',
+            style: {
+                color: '#FFF',
+                fontWeight: 'bold',
+                fontSize: '22px',
+            }
     },
 
         xAxis: {
         type: 'datetime',
+            labels: {
+                style: {
+                    color: '#FFF'
+                }
+            },
     },
         yAxis: {
         title: {
-        text: ''
+        text: '',
     },
         categories: ['Время'],
-        reversed: true
+        reversed: true,
+            labels: {
+                style: {
+                    color: '#FFF'
+                },
+            }
     },
         credits: {
         enabled: false
@@ -258,7 +288,7 @@ function Service() {
         // массив со всеми обслуживаниями
         let allServiceArray = ['2020-06-12 13:52:03', '2021-01-05 18:00:09', '2021-12-17 12:33:18']
 
-        // DrawHigcharts(allServiceArray, ONE_YEAR_MS)
+         // DrawHigcharts(allServiceArray, ONE_YEAR_MS)
 
 
     return (
@@ -269,7 +299,10 @@ function Service() {
                 <img className="serviceImg" src='../images/navigator.png'/>
                 <div className="oneLineGraph" id="allService"></div>
                 <div className="oneLineGraph" id="timeToLastService"></div>
-                <table className="serviceTable">
+                <button className='buttonTehno' id='startTehno'>
+                    <span>Провести тех.обслуживание</span>
+                </button>
+                <table className="tableService">
                     <thead>
                     <tr>
                         <th>Ответственный за обслуживание</th>
@@ -283,7 +316,11 @@ function Service() {
                         <td>Иванов И.И.</td>
                         <td>2020-06-12 13:52:03</td>
                         <td>0</td>
-                        <td>Установка осей на гранулы станка</td>
+                        <td>Текст (от лат. textus — ткань; сплетение, сочетание) — зафиксированная на каком-либо материальном носителе человеческая мысль; в общем плане связная и полная последовательность символов.
+
+                            Существуют две основные трактовки понятия «текст»: имманентная (расширенная, философски нагруженная) и репрезентативная (более частная). Имманентный подход подразумевает отношение к тексту как к автономной реальности, нацеленность на выявление его внутренней структуры. Репрезентативный — рассмотрение текста как особой формы представления информации о внешней тексту действительности.
+
+                            В лингвистике термин «текст» используется в широком значении, включая и образцы устной речи. Восприятие текста изучается в рамках лингвистики текста и психолингвистики. Так, например, И. Р. Гальперин определяет текст следующим образом: «Это письменное сообщение, объективированное в виде письменного документа, состоящее из ряда высказываний, объединённых разными типами лексической, грамматической и логической связи, имеющее определённый моральный характер, прагматическую установку и соответственно литературно обработанное»[1].</td>
                     </tr>
                     <tr>
                         <td>Сумкин К.И.</td>
@@ -299,9 +336,6 @@ function Service() {
                     </tr>
                     </tbody>
                 </table>
-                <button className='buttonTehno' id='startTehno'>
-                    <span>Провести тех.обслуживание</span>
-                </button>
             </div>
         </div>
     )

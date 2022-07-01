@@ -22,23 +22,65 @@
     overflow: hidden;
 }
 
-.serviceTable {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+
+.tableService {
+    border-spacing: 0;
     border-collapse: collapse;
-    width: 85%;
+    width: 95%;
+    color: white;
+    margin: 2%;
 }
 
-.serviceTable th:nth-child(n) {
-    border: 1px solid #dee2e6;
+.tableService > tbody > tr {
+    padding: 4px;
+    line-height: 1.42857143;
+    vertical-align: center;
+    text-align: left;
+    border-bottom: 1px solid #979595;
+
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+
+
+.tableService > thead  {
+    border-bottom: 1px solid #979595;
+    text-align: left;
+}
+
+.tableService > thead > tr > th  {
+    margin: 10px;
+    padding: 5px 5px 5px 0px;
+    color: white;
+}
+
+.tableService > thead > tr > th:nth-child(odd)  {
     text-align: center;
 }
 
-.serviceTable > thead > tr > th, .serviceTable > thead > tr > td, .serviceTable > tbody > tr > td {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid #ddd;
+
+
+
+.tableService > thead > tr >th:nth-of-type(-n+3) {
+    background: #2c5275;
+    width: 10%;
+}
+
+.tableService  > tbody > tr >td:nth-of-type(-n+3) {
+    text-align: center
+}
+
+
+.tableService > thead > tr >th:nth-of-type(4) {
+    background: #2c5275;
+    text-align: center;
+}
+
+.tableService > tbody > tr >td:nth-of-type(4) {
+    max-width:85%;
+    padding-right: 15px;
 }
 
 .buttonTehno {
