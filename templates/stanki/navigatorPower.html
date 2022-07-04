@@ -43,37 +43,35 @@
                 changeYear: true,
                 orientation: "button"
             });
+            document.getElementById('button_obnovit').onclick = function () {
+                document.getElementById('button_obnovit').disabled = true
+                setTimeout(ActiveButton, 1500)
+                document.getElementsByClassName('follow')
+                document.getElementsByClassName('follow')[0].classList.add('load')
 
+                let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
-                document.getElementById('button_obnovit').onclick = function (){
-                    document.getElementById('button_obnovit').disabled = true
-                    setTimeout(ActiveButton,1500)
-                    document.getElementsByClassName('follow')
-                    document.getElementsByClassName('follow')[0].classList.add('load')
+                date = new Date(datas); // some mock date
+                ms = date.getTime() + 86400000;
 
-                    let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+                startTime = datas.slice(0, 10)
+                timeEnd = new Date(ms).toISOString().slice(0, 10)
 
-                    date = new Date(datas); // some mock date
-                    ms = date.getTime() + 86400000;
+                massivArray = []
 
-                    startTime = datas.slice(0, 10)
-                    timeEnd = new Date(ms).toISOString().slice(0, 10)
+                do_6 = [];
+                do_12 = [];
+                do_18 = [];
+                do_24 = [];
 
-                    massivArray = []
+                url = "/api/complex/powerNavigator/product_uuid:" + product + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
-                    do_6 = [];
-                    do_12 = [];
-                    do_18 = [];
-                    do_24 = [];
+                signal = document.getElementById('selectValue').value;
 
-                    url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
-
-                    signal = document.getElementById('selectValue').value;
-
-                    if( signal == '_signal:A1'){
-                        fetch(url, {
-                            method: 'GET'
-                        })
+                if (signal == '_signal:A1') {
+                    fetch(url, {
+                        method: 'GET'
+                    })
 
                         .then((response) => response.json())
                         .then((data) => {
@@ -84,22 +82,22 @@
                                 return data
                             }
                         })
-                    }
-                    else {
-                        fetch(url, {
-                            method: 'GET'
-                        })
+                } else {
+                    fetch(url, {
+                        method: 'GET'
+                    })
 
-                            .then((response) => response.json())
-                            .then((data) => {
-                                if (data) {
-                                    massivArray = data
-                                    Perebor(1);
-                                    dark_theme()
-                                    return data
-                                }
-                            })
-            };
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if (data) {
+                                massivArray = data
+                                Perebor(1);
+                                dark_theme()
+                                return data
+                            }
+                        })
+                }
+            }
         });
 
         function selectedNewValue(){
@@ -317,7 +315,6 @@
                     newArray.push(Array(arrayTime[i+1][0] - 1000, 0))
                 }
             }
-            console.log(newArray)
             return newArray
         }
 
@@ -421,7 +418,6 @@
 
                 if (new Date(startTime + ' 06:00:00').getTime() > (massivArray[i].time)) {
                     do_6.push(Array(massivArray[i].time, parseFloat(massivArray[i].value)));
-                    console.log(massivArray[i].time, parseFloat(massivArray[i].value))
                     continue
                 }
                 if (new Date(startTime + ' 12:00:00').getTime() > (massivArray[i].time)) {
@@ -613,7 +609,6 @@
     window.onload = function () { // прелоудер
 
         document.getElementById('dark_button').onclick = function (){
-            console.log('dark')
             dark_theme_state++; // увеличиваем счетчик
             if (dark_theme_state > 1) // если он больше 1, меняем на ноль
             {
