@@ -266,31 +266,6 @@
     </style>
 
     <script>
-        Highcharts.setOptions({
-            lang: {
-                loading: 'Загрузка...',
-                months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-                weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-                shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-                exportButtonTitle: "Экспорт",
-                printButtonTitle: "Печать",
-                rangeSelectorFrom: "С",
-                rangeSelectorTo: "По",
-                rangeSelectorZoom: "Период",
-                downloadPNG: 'Скачать PNG',
-                downloadJPEG: 'Скачать JPEG',
-                downloadPDF: 'Скачать PDF',
-                downloadSVG: 'Скачать SVG',
-                printChart: 'Напечатать график',
-                viewFullscreen: 'На весь экран'
-            },
-            plotOptions: {
-                xrange: {
-                    grouping: false
-                }
-            },
-        });
-
         // Функция получение пользовательских данных
         function SetUserSetting() {
             fetch('/api/userInfo', {method: 'POST'})
@@ -337,6 +312,30 @@
 
         // Функция для рисования графиков. Аргументы: id графика, массив данных
         function highcharts(id, dataArray, NameGraph, params='Мощность, кВт') {
+            Highcharts.setOptions({
+                lang: {
+                    loading: 'Загрузка...',
+                    months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                    weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+                    shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+                    exportButtonTitle: "Экспорт",
+                    printButtonTitle: "Печать",
+                    rangeSelectorFrom: "С",
+                    rangeSelectorTo: "По",
+                    rangeSelectorZoom: "Период",
+                    downloadPNG: 'Скачать PNG',
+                    downloadJPEG: 'Скачать JPEG',
+                    downloadPDF: 'Скачать PDF',
+                    downloadSVG: 'Скачать SVG',
+                    printChart: 'Напечатать график',
+                    viewFullscreen: 'На весь экран'
+                },
+                plotOptions: {
+                    xrange: {
+                        grouping: false
+                    }
+                },
+            });
 
             Highcharts.getJSON(
                 'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
@@ -397,75 +396,6 @@
                         },
                         series: [{
                             name: params,
-                            data: dataArray
-                        },
-                        ]
-                    });
-                }
-            );
-        }
-
-        function highcharts2(id, dataArray, NameGraph) {
-
-            Highcharts.getJSON(
-                'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
-                function (data) {
-
-                    Highcharts.chart(id, {
-                        chart: {
-                            polar: true,
-                            zoomType: 'x',
-                            backgroundColor: 'none',
-                        },
-                        time: {
-                            timezoneOffset: timezone
-                        },
-                        title: {
-                            text: NameGraph,
-                            style: {
-                                color: '#83addd'
-                            }
-                        },
-                        xAxis: {
-                            type: 'datetime'
-                        },
-                        yAxis: {
-                            title: {
-                                text: 'Коррекция подачи, %'
-                            }
-                        },
-                        plotOptions: {
-                            area: {
-                                fillColor: {
-                                    linearGradient: {
-                                        x1: 0,
-                                        y1: 0
-                                    },
-                                    stops: [
-                                        [0, Highcharts.getOptions().colors[0]],
-                                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                                    ]
-                                },
-                                marker: {
-                                    radius: 2
-                                },
-                                lineWidth: 1,
-                                states: {
-                                    hover: {
-                                        lineWidth: 1
-                                    }
-                                },
-                                threshold: null
-                            }
-                        },
-                        credits: {
-                            enabled: false
-                        },
-                        legend: {
-                            enabled: false
-                        },
-                        series: [{
-                            name: 'Коррекция подачи, %',
                             data: dataArray
                         },
                         ]
@@ -670,31 +600,7 @@
     } // в двух цветах
 
     window.onload = function () { // прелоудер
-        document.body.classList.add('loaded_hiding');
 
-        // Привязываем навигатору имя.
-        document.getElementById('navigatorName').innerHTML = navigatorName
-
-        SetUserSetting()
-        let fetchMassiveArray = fetch(url, {
-            method: 'GET'
-        })
-
-        return fetchMassiveArray
-            .then((response) => response.json())
-            .then((data) => {
-                if (data) {
-                    massivArray = data
-                    Perebor();
-                    return data
-                }
-            })
-            .catch(err => {
-                console.error(err);
-            });
-
-        dark_theme(); // Вызов функции
-        // Смена цвета по кнопке
         document.getElementById('dark_button').onclick = function (){
             console.log('dark')
             dark_theme_state++; // увеличиваем счетчик
@@ -706,6 +612,28 @@
             // Условия для смены цвета после нажатия на кнопку
             dark_theme();
         }
+
+        document.body.classList.add('loaded_hiding');
+
+        // Привязываем навигатору имя.
+        document.getElementById('navigatorName').innerHTML = navigatorName
+
+        SetUserSetting()
+        fetch(url, {
+            method: 'GET'
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    massivArray = data
+                    Perebor();
+                    dark_theme()
+                    return data
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
     }
 </script>
 <script src="/js/dark_theme.js"></script>
