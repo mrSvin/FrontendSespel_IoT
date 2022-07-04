@@ -77,7 +77,7 @@
                         .then((data) => {
                             if (data) {
                                 massivArray = data
-                                Perebor();
+                                Perebor(massivArray);
                                 dark_theme()
                                 return data
                             }
@@ -91,7 +91,7 @@
                         .then((data) => {
                             if (data) {
                                 massivArray = data
-                                Perebor(1);
+                                Perebor(massivArray, 1);
                                 dark_theme()
                                 return data
                             }
@@ -413,7 +413,7 @@
         }
 
         // Функция перебора массива из запроса с разложением на 4 массива по времени
-        function Perebor(param = null) {
+        function Perebor(massivArray, param = null) {
             for (let i = 0; massivArray.length > i; i++) {
 
                 if (new Date(startTime + ' 06:00:00').getTime() > (massivArray[i].time)) {
@@ -455,7 +455,6 @@
                 do_24.push(Array(new Date(startTime + ' 23:59:59').getTime(), 0))
             }
 
-
             let arraysTime = [[do_6, 'container_do6','00:00 - 06:00'], [do_12, 'container_do12','06:00 - 12:00'], [do_18, 'container_do18','12:00 - 18:00'], [do_24, 'container_do24','18:00 - 23:59'],];
 
             if(param == null) {
@@ -470,7 +469,6 @@
                     highcharts(elem[1], elem[0], elem[2], 'Коррекция подачи, %')
                 })
             }
-
             setTimeout(document.body.classList.add('loaded'),1000);
             setTimeout(document.body.classList.remove('loaded_hiding'),1000);
         }
@@ -651,7 +649,7 @@
 <div style="display: flex; justify-content: center">
         <div class="parent_image">
             <h2 id="navigatorName" style="margin: 0">Навигатор X</h2>
-            <img src="../images/navigator.png" class="stanok_img" style="max-height: 300px;"/>
+            <img src="../../images/navigator.png" class="stanok_img" style="max-height: 300px;"/>
         </div>
 </div>
 
