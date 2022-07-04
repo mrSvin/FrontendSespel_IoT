@@ -139,7 +139,7 @@
                     function( data ) {
                         massivArray = data
 
-                        Perebor2();
+                        Perebor(1);
                     });
             }
         }
@@ -693,18 +693,10 @@
                 console.error(err);
             });
 
-
-
-        // $.get( url,
-        //     function( data ) {
-        //         massivArray = data
-        //
-        //         Perebor();
-        //     });
-
         dark_theme(); // Вызов функции
         // Смена цвета по кнопке
-        document.getElementById('dark_button').addEventListener('click', ()=> {
+        document.getElementById('dark_button').onclick = function (){
+            console.log('dark')
             dark_theme_state++; // увеличиваем счетчик
             if (dark_theme_state > 1) // если он больше 1, меняем на ноль
             {
@@ -713,7 +705,7 @@
             window.localStorage['dark_theme_state'] = dark_theme_state; // сохраняем переменную в локальном хранилище
             // Условия для смены цвета после нажатия на кнопку
             dark_theme();
-        })
+        }
     }
 </script>
 <script src="/js/dark_theme.js"></script>

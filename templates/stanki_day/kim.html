@@ -184,6 +184,7 @@
     dark_theme(); // Вызов функции
     // Смена цвета по кнопке
     $("#dark_button").on("click", function() {
+      console.log('hey')
       dark_theme_state++; // увеличиваем счетчик
       if(dark_theme_state > 1) // если он больше 1, меняем на ноль
       {
