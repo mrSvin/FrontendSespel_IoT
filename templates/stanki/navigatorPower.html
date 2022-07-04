@@ -135,21 +135,34 @@
 
             url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
-            if( signal == '_signal:A1'){
-                $.get( url,
-                    function( data ) {
-                        massivArray = data
+            if (signal == '_signal:A1') {
+                fetch(url, {
+                    method: 'GET'
+                })
 
-                        Perebor();
-                    });
-            }
-            else {
-                $.get( url,
-                    function( data ) {
-                        massivArray = data
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data) {
+                            massivArray = data
+                            Perebor(massivArray);
+                            dark_theme()
+                            return data
+                        }
+                    })
+            } else {
+                fetch(url, {
+                    method: 'GET'
+                })
 
-                        Perebor(1);
-                    });
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data) {
+                            massivArray = data
+                            Perebor(massivArray, 1);
+                            dark_theme()
+                            return data
+                        }
+                    })
             }
         }
     </script>   <!--Календарь js-->
@@ -630,7 +643,7 @@
             .then((data) => {
                 if (data) {
                     massivArray = data
-                    Perebor();
+                    Perebor(massivArray);
                     dark_theme()
                     return data
                 }
