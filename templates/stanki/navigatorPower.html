@@ -30,7 +30,7 @@
     <script src="/js/smena/calendar_smena.js"></script>
     <script>
 
-        $(function () {
+        document.addEventListener("DOMContentLoaded", function(event) {
             $('#datepicker').datepicker({
                 format: "yyyy-mm-dd",
                 language: 'ru',
@@ -43,52 +43,63 @@
                 changeYear: true,
                 orientation: "button"
             });
-            <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
 
 
-            $('#button_obnovit').on("click", function () {
+                document.getElementById('button_obnovit').onclick = function (){
+                    document.getElementById('button_obnovit').disabled = true
+                    setTimeout(ActiveButton,1500)
+                    document.getElementsByClassName('follow')
+                    document.getElementsByClassName('follow')[0].classList.add('load')
 
-                $('#button_obnovit').attr('disabled', 'true')
-                setTimeout(ActiveButton,1500)
-                $('.follow').addClass('load')
+                    let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
-                var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+                    date = new Date(datas); // some mock date
+                    ms = date.getTime() + 86400000;
 
-                date = new Date(datas); // some mock date
-                ms = date.getTime() + 86400000;
+                    startTime = datas.slice(0, 10)
+                    timeEnd = new Date(ms).toISOString().slice(0, 10)
 
-                startTime = datas.slice(0, 10)
-                timeEnd = new Date(ms).toISOString().slice(0, 10)
+                    massivArray = []
 
+                    do_6 = [];
+                    do_12 = [];
+                    do_18 = [];
+                    do_24 = [];
 
-                massivArray = []
+                    url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
-                do_6 = [];
-                do_12 = [];
-                do_18 = [];
-                do_24 = [];
+                    signal = document.getElementById('selectValue').value;
 
-                url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
+                    if( signal == '_signal:A1'){
+                        fetch(url, {
+                            method: 'GET'
+                        })
 
-                signal = $( "#selectValue" ).val();
+                        .then((response) => response.json())
+                        .then((data) => {
+                            if (data) {
+                                massivArray = data
+                                Perebor();
+                                dark_theme()
+                                return data
+                            }
+                        })
+                    }
+                    else {
+                        fetch(url, {
+                            method: 'GET'
+                        })
 
-                if( signal == '_signal:A1'){
-                    $.get( url,
-                        function( data ) {
-                            massivArray = data
-
-                            Perebor();
-                        });
-                }
-                else {
-                    $.get( url,
-                        function( data ) {
-                            massivArray = data
-
-                            Perebor(1);
-                        });
-                }
-            });
+                            .then((response) => response.json())
+                            .then((data) => {
+                                if (data) {
+                                    massivArray = data
+                                    Perebor(1);
+                                    dark_theme()
+                                    return data
+                                }
+                            })
+            };
         });
 
         function selectedNewValue(){
@@ -106,7 +117,7 @@
                 orientation: "button"
             });
 
-            var datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+            let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
             date = new Date(datas); // some mock date
             ms = date.getTime() + 86400000;
@@ -122,7 +133,7 @@
             do_18 = [];
             do_24 = [];
 
-            signal = $( "#selectValue" ).val();
+            signal = document.getElementById('selectValue').value;
 
             url = "/api/complex/powerNavigator/product_uuid:" + product  + "_startTime:" + startTime + "_endTime:" + timeEnd + signal
 
@@ -571,10 +582,10 @@
     let date = new Date(time); // some mock date
     let ms = date.getTime() + 86400000;
 
-    var startTime = time.slice(0, 10)
-    var timeEnd = new Date(ms).toISOString().slice(0, 10)
+    let startTime = time.slice(0, 10)
+    let timeEnd = new Date(ms).toISOString().slice(0, 10)
 
-    $('.form-control').attr('value', startTime)
+    document.getElementsByClassName('form-control')[0].value = startTime
 
     let massivArray
 
@@ -591,7 +602,7 @@
     if (localStorage['dark_theme_state'] != null) {
         dark_theme_state = parseInt(window.localStorage['dark_theme_state']); // Если она уже локально задана сохраняем
     }
-    let preloader = document.getElementsByClassName('preloader')
+    let preloader = document.getElementsByClassName('preloader')[0]
     if (dark_theme_state == 0) {
         preloader.style = 'background: #f2f6f8'
             } // присвоение цвета загрузочного меню
