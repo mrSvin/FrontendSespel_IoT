@@ -44,20 +44,20 @@
 
 <script>
     // Загрузка datapicker при загрузке страницы
-    // document.addEventListener("DOMContentLoaded", function(event) {
-    //     $('#datepicker').datepicker({
-    //         format: "yyyy-mm-dd",
-    //         language: 'ru',
-    //         autoclose: true,
-    //         todayHighlight: true,
-    //         showOtherMonths: true,
-    //         selectOtherMonths: true,
-    //         autoclose: true,
-    //         changeMonth: true,
-    //         changeYear: true,
-    //         orientation: "button"
-    //     });
-    // })
+    document.addEventListener("DOMContentLoaded", function(event) {
+        $('#datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            language: 'ru',
+            autoclose: true,
+            todayHighlight: true,
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            orientation: "button"
+        });
+    })
 
     function selectedNewValue(){
         $('#datepicker').datepicker({
