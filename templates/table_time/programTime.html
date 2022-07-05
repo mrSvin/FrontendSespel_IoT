@@ -84,6 +84,9 @@
 
             .then((response) => response.json())
             .then((data) => {
+                for (let i = document.getElementById('programTimeTable').getElementsByTagName('tr').length -1; i; i--) {
+                    document.getElementById('programTimeTable').deleteRow(i);
+                }
                 if (data) {
                     let tableArray = getTimeProgramName(data)
                     // Переменная для кратной записи
@@ -243,6 +246,9 @@
     })
         .then((response) => response.json())
         .then((data) => {
+            for (let i = document.getElementById('programTimeTable').getElementsByTagName('tr').length -1; i; i--) {
+                document.getElementById('programTimeTable').deleteRow(i);
+            }
             if (data) {
                 let tableArray = getTimeProgramName(data)
                 // Переменная для кратной записи
