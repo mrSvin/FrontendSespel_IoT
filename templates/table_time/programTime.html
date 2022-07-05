@@ -221,7 +221,6 @@
     buttonExcel.addEventListener("click", e => {
         TableToExcel.convert(programTimeTable);
     });
-    document.getElementsByClassName('form-control')[0].value = startTime
 
     // Переменные нахождения последнего слова в адресной строке
     let form_path = document.location.pathname;
@@ -232,6 +231,7 @@
     // Переменные даты и времяни
     let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     let startTime = time.slice(0, 10)
+    document.getElementsByClassName('form-control')[0].value = startTime
 
     // url для запроса
     let url = `/api/complexData/${stanok}_days_date:${startTime}`
