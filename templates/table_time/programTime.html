@@ -43,20 +43,21 @@
 <img class="excelIcon" id="button-excel" src="../images/excel_icon.png">
 
 <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-        $('#datepicker').datepicker({
-            format: "yyyy-mm-dd",
-            language: 'ru',
-            autoclose: true,
-            todayHighlight: true,
-            showOtherMonths: true,
-            selectOtherMonths: true,
-            autoclose: true,
-            changeMonth: true,
-            changeYear: true,
-            orientation: "button"
-        });
-    })
+    // Загрузка datapicker при загрузке страницы
+    // document.addEventListener("DOMContentLoaded", function(event) {
+    //     $('#datepicker').datepicker({
+    //         format: "yyyy-mm-dd",
+    //         language: 'ru',
+    //         autoclose: true,
+    //         todayHighlight: true,
+    //         showOtherMonths: true,
+    //         selectOtherMonths: true,
+    //         autoclose: true,
+    //         changeMonth: true,
+    //         changeYear: true,
+    //         orientation: "button"
+    //     });
+    // })
 
     function selectedNewValue(){
         $('#datepicker').datepicker({
@@ -76,7 +77,7 @@
         date = new Date(datas); // some mock date
         startTime = datas.slice(0, 10)
 
-        url = `/api/complexData/${product}_days_date:${startTime}`
+        url = `/api/complexData/${stanok}_days_date:${startTime}`
 
         fetch(url, {
             method: 'GET'
@@ -131,7 +132,9 @@
                     // Пробегаемся по всем элементам массива
                 }
             })
-
+            .catch(err => {
+                alert('Слишком частое количество запросов',err)
+            });
     }
 
     // Функция перевода миллисекунд в часы в формате 00:00:00
@@ -149,13 +152,15 @@
         return hours + ":" + minutes + ":" + seconds;
     }
 
+    // Функция принимает данные с запроса работы станка и возвращает
+    // структуру для таблицы
     function getTimeProgramName(arrayData)
     {
         let timer = 0;
         let programTimeArray = [];
         let startSame = null
 
-        arrayData? console.log("FormTable"):0;
+        arrayData? console.log(""):0;
 
             if(arrayData['work'].length % 2 == 1)
             {
@@ -176,13 +181,10 @@
             {
                 if(arrayData['programName'][i/2] !== arrayData['programName'][i/2-1])
                 {
-                    //console.log("Одинаковые начало")
                     startSame = arrayData['work'][i]
                 }
 
                 timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-                //arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
-
             }
 
             else
@@ -191,16 +193,11 @@
                 if(arrayData['programName'][i/2] == arrayData['programName'][i/2-1])
                 {
                     timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-                    //arrayData[0][i+1]? console.log(arrayData[0][i].slice(11), '-', arrayData[0][i+1].slice(11), arrayData[5][i/2], timer):console.log('last')
-                    console.log(arrayData['work'][i], arrayData['work'][i+1])
-                    // console.log(arrayData['programName'][i/2], startSame.slice(11), arrayData['work'][i+1], msToTime(timer), msToTime(new Date(arrayData['work'][i+1]) - new Date(startSame)))
                     programTimeArray.push([arrayData['programName'][i/2], startSame.slice(11), arrayData['work'][i+1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i+1]) - new Date(startSame))])
                     timer = 0
                 }
                 else {
                     timer = (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-                    console.log(arrayData['work'][i], arrayData['work'][i+1])
-                    // console.log(arrayData['programName'][i/2], arrayData['work'][i], arrayData['work'][i+1], startSame.slice(11), msToTime(timer), msToTime(timer))
                     programTimeArray.push([arrayData['programName'][i/2], arrayData['work'][i].slice(11), arrayData['work'][i+1].slice(11), msToTime(timer), msToTime(timer)])
                     timer = 0
                 }
@@ -217,29 +214,27 @@
         return programTimeArray
     }
 
-    let form_path = document.location.pathname;
-    // $('#form_update').attr('action', form_path);
-
-    form_path.lastIndexOf("/")
-    const searchIndex= form_path.lastIndexOf("/")+1;
-    const index = form_path.substr(searchIndex, form_path.length)
-
-    let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
-    let startTime = time.slice(0, 10)
-
+    // Переменные экспорта таблицы в Excel
     let buttonExcel = document.querySelector("#button-excel");
     // Получение таблицы по id
     let programTimeTable = document.getElementById('programTimeTable')
     buttonExcel.addEventListener("click", e => {
         TableToExcel.convert(programTimeTable);
     });
-
     document.getElementsByClassName('form-control')[0].value = startTime
-    //
-    // let Names = {'navigator_1':['navigator_1'], 'navigator_2_1':['navigator_2_1'], 'navigator_2_2':['navigator_2_2'],'navigator_3':['navigator_3'],'trulaser':['trulaser']};
-    // let product = Names[index][0]
-    product = 'navigator_1'
-    let url = `/api/complexData/${product}_days_date:${startTime}`
+
+    // Переменные нахождения последнего слова в адресной строке
+    let form_path = document.location.pathname;
+    form_path.lastIndexOf("/")
+    const searchIndex= form_path.lastIndexOf("/")+1;
+    const stanok = form_path.substr(searchIndex, form_path.length)
+
+    // Переменные даты и времяни
+    let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    let startTime = time.slice(0, 10)
+
+    // url для запроса
+    let url = `/api/complexData/${stanok}_days_date:${startTime}`
 
     fetch(url, {
         method: 'GET'
@@ -293,22 +288,9 @@
                 // Пробегаемся по всем элементам массива
             }
         })
-
-
-    // объявление локальной переменной часов
-    // let local_time = null
-    //
-    // // Если она уже локально задана сохраняем
-    // if (localStorage['local_time'] != null) {
-    //     local_time = window.localStorage['local_time'];
-    // }
-    // window.localStorage['local_time'] = local_time;
-    //
-    // // Преобразование строки в массив
-    // local_time = local_time.split(',')
-
-    // кнопка для экспорта в Excel
-
+        .catch(err => {
+            alert('Слишком частое количество запросов',err)
+        });
 
 </script>
 </body>
