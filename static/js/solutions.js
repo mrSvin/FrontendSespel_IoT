@@ -65,3 +65,9 @@ function pars(arrayParse, y, difference=null) {
     // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
     return arraySave
 }
+
+function convertDaysToSmena(day1, day2) {
+    let smena1
+    let smena2
+    return [smena1, smena2]
+}
