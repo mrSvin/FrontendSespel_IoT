@@ -8,7 +8,6 @@ function Service() {
 
     return (
         <div>
-            <Header/>
             <div className='serviceContainer'>
                 <h1>Тех. обслуживания станка Навигатор 1</h1>
                 <img className="serviceImg" src='../images/navigator.png'/>
@@ -58,7 +57,7 @@ function Service() {
                     <h2 className="formServiceName">Проведение тех. обслуживания</h2>
                     <div className='divWorksPass'>
                         <h3>Проведенные работы</h3>
-                        <textarea id="story" name="story" placeholder="Введите список проведенных работ.."/>
+                        <textarea id="story" name="story" placeholder="Введите список проведенных работ"/>
                     </div>
                     <div className="divPeriod">
                         <h3>Период до следующего тех. обслуживания</h3>
