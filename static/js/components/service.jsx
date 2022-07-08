@@ -58,7 +58,7 @@ function Service() {
                     <h2 className="formServiceName">Проведение тех. обслуживания</h2>
                     <div className='divWorksPass'>
                         <h3>Проведенные работы</h3>
-                        <textarea id="story" name="story" rows="5" cols="33" placeholder="Введите список проведенных работ..."></textarea>
+                        <textarea id="story" name="story" placeholder="Введите список проведенных работ..."></textarea>
                     </div>
                     <div className="divPeriod">
                         <h3>Период до следующего тех. обслуживания</h3>
