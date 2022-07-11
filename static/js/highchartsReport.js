@@ -85,6 +85,17 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
 
         series: [
             {
+                name: nagruzkaName,
+                // borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: colorNagruzka,
+                data: arrayRuchnoi,
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
                 name: 'Работа',
                 // borderColor: 'gray',
                 pointWidth: 30,
@@ -127,17 +138,6 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
                 colorByPoint: false,
                 color: '#e81e1d',
                 data: arrayAvar,
-                dataLabels: {
-                    enabled: true
-                }
-            },
-            {
-                name: nagruzkaName,
-                // borderColor: 'gray',
-                pointWidth: 30,
-                colorByPoint: false,
-                color: colorNagruzka,
-                data: arrayRuchnoi,
                 dataLabels: {
                     enabled: true
                 }
@@ -430,13 +430,13 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
             data: off,
             color: '#000000'
         }, {
-            name: nagruzkaName,
-            data: nagruzka,
-            color: colorNagruzka
-        }, {
             name: 'Ожидание',
             color: '#ffea32',
             data: pause
+        }, {
+            name: nagruzkaName,
+            data: nagruzka,
+            color: colorNagruzka
         }, {
             name: 'Работа',
             color: '#38e817',
