@@ -5,7 +5,7 @@ function Service() {
     useEffect(() => {
         let allServiceArray = ['2020-06-12 13:52:03', '2021-01-05 18:00:09', '2021-12-17 12:33:18']
         highChartServiceHistory(allServiceArray)
-        highChartServiceNow(31536000000)
+        highChartServiceNow(allServiceArray,31536000000)
     }, [])
 
 

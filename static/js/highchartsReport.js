@@ -621,7 +621,7 @@ function highChartServiceHistory(ArrayTeh) {
     });
 }
 
-function highChartServiceNow(timeNext) {
+function highChartServiceNow(ArrayTeh,timeNext) {
     let timeToday = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     // Преобразоавние времение в формат '2022-03-21 10:00:35'
     timeToday = timeToday.slice(0, 10) + " " + timeToday.slice(11, 19);
