@@ -3,7 +3,31 @@ function Service() {
     let [formAddService, setFormAddService] = useState(false);
 
     useEffect(() => {
+
+        // Получения имени станка из адресной строки
+        let form_path = document.location.pathname;
+        form_path.lastIndexOf("/")
+        let searchIndex= form_path.lastIndexOf("/")+1;
+
+        // имя станка для запроса
+        let nameToFetch = form_path.substr(searchIndex, form_path.length)
+
+        // Имя заголовка страницы
+        let h1 = null
+
+        // Вставка пробела при необходимости
+        if(!isNaN(nameToFetch[nameToFetch.length-1])){
+             h1 = nameToFetch.slice(0, nameToFetch.length-1) + ' ' + nameToFetch.slice(nameToFetch.length-1)
+        }
+        else  h1 = nameToFetch
+
+        // Заголовок с именем станка на странице
+        document.getElementsByClassName('serviceContainer')[0].getElementsByTagName('h1')[0].innerHTML = `Тех. обслуживания станка ${h1}`
+
+        console.log('Заголовочные данные',nameToFetch, h1)
+
         let allServiceArray = ['2020-06-12 13:52:03', '2021-01-05 18:00:09', '2021-12-17 12:33:18']
+
         highChartServiceHistory(allServiceArray)
         highChartServiceNow(allServiceArray,31536000000)
     }, [])
@@ -15,7 +39,7 @@ function Service() {
         <div>
 
             <div className='serviceContainer'>
-                <h1>Тех. обслуживания станка Навигатор 1</h1>
+                <h1>Тех. обслуживания станка...</h1>
                 <img className="serviceImg" src='../images/navigator.png'/>
                 <div className="oneLineGraph" id="timeToLastService"></div>
                 <div className="oneLineGraph" id="allService"></div>
