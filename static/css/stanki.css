@@ -1,3 +1,8 @@
+/*Отключить скрол по горизонтали*/
+body {
+    overflow-x:hidden;
+}
+
 .menu-stanki {
     position: relative;
     width: 200px;
