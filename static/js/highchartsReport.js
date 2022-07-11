@@ -1,5 +1,14 @@
 //Сутки
-function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuchnoi, idContainer) {
+function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuchnoi, nagruzkaName = 'Нагрузка', idContainer) {
+
+    let colorNagruzka;
+    if (nagruzkaName == 'Нагрузка') {
+        colorNagruzka = '#207210'
+    } else {
+        colorNagruzka = '#5c7ed0'
+    }
+
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -16,7 +25,12 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
             downloadPDF: 'Скачать PDF',
             downloadSVG: 'Скачать SVG',
             printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
+            viewFullscreen: 'На весь экран',
+
+            downloadCSV: "Скачать CSV",
+            downloadXLS:"Скачать XLS",
+            viewData: 'Режим таблицы',
+            hideData: "Скрыть таблицу"
         },
         plotOptions: {
             xrange: {
@@ -118,11 +132,11 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
                 }
             },
             {
-                name: 'ручной',
+                name: nagruzkaName,
                 // borderColor: 'gray',
                 pointWidth: 30,
                 colorByPoint: false,
-                color: '#5c7ed0',
+                color: colorNagruzka,
                 data: arrayRuchnoi,
                 dataLabels: {
                     enabled: true
@@ -137,140 +151,6 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
 
 
     });
-}
-
-function highChartSutkiRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Нагрузка', idContainer) {
-
-    let colorNagruzka;
-    if (nagruzkaName == 'Нагрузка') {
-        colorNagruzka = '#207210'
-    } else {
-        colorNagruzka = '#5c7ed0'
-    }
-
-    Highcharts.chart(`containerRound${idContainer}`, {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-
-        title: {
-            text: 'Загрузка оборудования',
-            style: {
-                color: '#FFF'
-            }
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors: ['#38e817', '#ffea32', '#000000', '#e81e1d', colorNagruzka],
-        credits: {
-            enabled: false
-        },
-        legend: {
-            itemStyle: {
-                color: '#FFF'
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Показатель',
-            data: [['Работа', work], ['Включен', pass], ['Выключен', off], ['В аварии', avar], [nagruzkaName, nagruzka]]
-        }]
-    });
-}
-
-function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka) {
-
-    Highcharts.chart('containerTotal', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Общая загрузка оборудования',
-            style: {
-                color: '#FFF'
-            }
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
-                    color: '#FFF'
-                }
-            },
-            categories: generalDiagramNames,
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            },
-            labels: {
-                style: {
-                    color: '#FFF'
-                },
-            }
-        },
-        tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        legend: {
-            itemStyle: {
-                color: '#FFF'
-            }
-        },
-        series: [{
-            name: 'Авария',
-            data: avar,
-            color: '#e81e1d'
-        }, {
-            name: 'Выключен',
-            data: off,
-            color: '#000000'
-        }, {
-            name: 'Ручной',
-            data: nagruzka,
-            color: '#5c7ed0'
-        }, {
-            name: 'Ожидание',
-            color: '#ffea32',
-            data: pause
-        }, {
-            name: 'Работа',
-            color: '#38e817',
-            data: work,
-
-        },]
-    });
-
 }
 
 function highChartCountOperations(generalDiagramNames, countOperation, countLongOperation) {
@@ -351,7 +231,21 @@ function highChartCountOperations(generalDiagramNames, countOperation, countLong
 }
 
 //Месячный
-function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, idContainer) {
+function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, nagruzkaName = 'Нагрузка', idContainer) {
+
+    let colorNagruzka;
+    let workNoNagruzka = arrayWork;
+    if (nagruzkaName == 'Нагрузка') {
+        colorNagruzka = '#207210'
+
+        for (var i = 0; i < arrayWork.length; i++) {
+            workNoNagruzka[i]=workNoNagruzka[i]-arrayNagruzka[i]
+        }
+
+    } else {
+        colorNagruzka = '#5c7ed0'
+    }
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -368,7 +262,12 @@ function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNa
             downloadPDF: 'Скачать PDF',
             downloadSVG: 'Скачать SVG',
             printChart: 'Напечатать график',
-            viewFullscreen: 'На весь экран'
+            viewFullscreen: 'На весь экран',
+
+            downloadCSV: "Скачать CSV",
+            downloadXLS:"Скачать XLS",
+            viewData: 'Режим таблицы',
+            hideData: "Скрыть таблицу"
         },
         plotOptions: {
             xrange: {
@@ -445,13 +344,13 @@ function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNa
             color: '#ffea32',
             data: arrayPass
         }, {
-            name: 'Ручной',
-            color: '#5c7ed0',
+            name: nagruzkaName,
+            color: colorNagruzka,
             data: arrayNagruzka
         }, {
             name: 'Работа',
             color: '#38e817',
-            data: arrayWork
+            data: workNoNagruzka
         }],
         legend: {
             itemStyle: {
@@ -461,58 +360,19 @@ function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNa
     });
 }
 
-function highChartMonthRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Нагрузка', idContainer) {
-    Highcharts.chart(`containerRound${idContainer}`, {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
+//Суточный и месячный
+function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, nagruzkaName = 'Нагрузка') {
+    let colorNagruzka;
+    let workNoNagruzka = work;
+    if (nagruzkaName == 'Нагрузка') {
+        colorNagruzka = '#207210'
+        for (var i = 0; i < work.length; i++) {
+            workNoNagruzka[i]=workNoNagruzka[i]-nagruzka[i]
+        }
+    } else {
+        colorNagruzka = '#5c7ed0'
+    }
 
-        title: {
-            text: 'Загрузка оборудования',
-            style: {
-                color: '#FFF'
-            }
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        colors: ['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'],
-        credits: {
-            enabled: false
-        },
-        legend: {
-            itemStyle: {
-                color: '#FFF'
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Показатель',
-            data: [['Работа', work], ['Включен', pass], ['Выключен', off], ['В аварии', avar], [nagruzkaName, nagruzka]]
-        }]
-    });
-}
-
-function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka) {
 
     Highcharts.chart('containerTotal', {
         chart: {
@@ -570,9 +430,9 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka) {
             data: off,
             color: '#000000'
         }, {
-            name: 'Ручной',
+            name: nagruzkaName,
             data: nagruzka,
-            color: '#5c7ed0'
+            color: colorNagruzka
         }, {
             name: 'Ожидание',
             color: '#ffea32',
@@ -580,15 +440,32 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka) {
         }, {
             name: 'Работа',
             color: '#38e817',
-            data: work,
+            data: workNoNagruzka
 
         },]
     });
 
 }
 
-function highChartTotalRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Нагрузка') {
-    Highcharts.chart(`containerRoundTotal`, {
+function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Нагрузка', idContainer) {
+
+    let colorNagruzka;
+    let workNoNagruzka = work;
+    if (nagruzkaName == 'Нагрузка') {
+        colorNagruzka = '#207210'
+        workNoNagruzka=workNoNagruzka-nagruzka
+    } else {
+        colorNagruzka = '#5c7ed0'
+    }
+
+    let titleInfo
+    if (idContainer=='Total') {
+        titleInfo='Суммарная загрузка оборудования'
+    } else {
+        titleInfo='Загрузка оборудования'
+    }
+
+    Highcharts.chart(`containerRound${idContainer}`, {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -597,7 +474,7 @@ function highChartTotalRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Н
         },
 
         title: {
-            text: 'Суммарная загрузка оборудования',
+            text: titleInfo,
             style: {
                 color: '#FFF'
             }
@@ -621,7 +498,7 @@ function highChartTotalRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Н
                 showInLegend: true
             }
         },
-        colors: ['#38e817', '#ffea32', '#000000', '#e81e1d', '#5c7ed0'],
+        colors: ['#38e817', '#ffea32', '#000000', '#e81e1d', colorNagruzka],
         credits: {
             enabled: false
         },
@@ -633,9 +510,282 @@ function highChartTotalRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Н
         series: [{
             type: 'pie',
             name: 'Показатель',
-            data: [['Работа', work], ['Включен', pass], ['Выключен', off], ['В аварии', avar], [nagruzkaName, nagruzka]]
+            data: [['Работа', workNoNagruzka], ['Включен', pass], ['Выключен', off], ['В аварии', avar], [nagruzkaName, nagruzka]]
         }]
     });
 }
 
 //Сервис
+function highChartServiceHistory(ArrayTeh, timeNext) {
+
+    let timeToday = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    // Преобразоавние времение в формат '2022-03-21 10:00:35'
+    timeToday = timeToday.slice(0, 10) + " " + timeToday.slice(11, 19);
+
+    // Дата последнего обслуживания
+    let lastServiceTime = new Date(ArrayTeh[ArrayTeh.length-1])
+
+    // Крайняя дата следующего обслуживания
+    let nextServiceTime = new Date(lastServiceTime.getTime() + timeNext)
+
+    // Время последнего обслуживания в формате ISO
+    let lastServiceIso = new Date(new Date(lastServiceTime).toString().split('GMT')[0] + ' UTC').toISOString();
+    // Время следующего запланированного обслуживания в формате ISO
+    let nextServiceIso = new Date(new Date(nextServiceTime).toString().split('GMT')[0] + ' UTC').toISOString();
+
+    lastServiceIso = lastServiceIso.slice(0, 10) + " " + lastServiceIso.slice(11, 19);
+    nextServiceIso = nextServiceIso.slice(0, 10) + " " + nextServiceIso.slice(11, 19);
+
+    // Копирования массива со всеми тех. обслуживаниями
+    let arrayTeh = ArrayTeh.slice()
+
+    // Массив со временем последнего обслуживания и запланированным временем.
+    let timePastArray = [lastServiceIso, nextServiceIso]
+
+    // Переменная отображающаяся на графики планируемого обслуживания.
+    let percent = +((new Date(timeToday).getTime() - new Date(lastServiceIso).getTime())/timeNext).toFixed(2)
+
+    //Массив со всеми тех. обслуживаниями.
+    arrayTeh = pars(arrayTeh, 0)
+    timePastArray = pars(timePastArray, 0, percent)
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран',
+
+            downloadCSV: "Скачать CSV",
+            downloadXLS:"Скачать XLS",
+            viewData: 'Режим таблицы',
+            hideData: "Скрыть таблицу"
+        },
+        plotOptions: {
+            xrange: {
+                grouping: false
+            }
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('allService', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            plotBorderColor: 'gray',
+            type: 'xrange'
+        },
+        title: {
+            text: 'Проведенные тех. обсуживания',
+            style: {
+                color: '#FFF',
+                fontWeight: 'bold',
+                fontSize: '22px',
+            }
+        },
+
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                style: {
+                    color: '#FFF'
+                }
+            },
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            categories: ['Время'],
+            reversed: true,
+            labels: {
+                style: {
+                    color: '#FFF'
+                },
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        legend: {
+            enabled: false
+        },
+
+        series: [
+            {
+                name: 'Обслуживания',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#d8e523',
+                tooltip: {
+                    pointFormatter: function () {
+                        let timer = msToTimeDays(this.x2 - this.x)
+                        let per = this.partialFill
+                        return '<b>Времени между обслуживанием:</b> ' + timer;
+                    },
+                },
+                data: arrayTeh,
+            },
+        ],
+
+    });
+}
+
+function highChartServiceNow(ArrayTeh, timeNext) {
+
+
+    let timeToday = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    // Преобразоавние времение в формат '2022-03-21 10:00:35'
+    timeToday = timeToday.slice(0, 10) + " " + timeToday.slice(11, 19);
+
+    // Дата последнего обслуживания
+    let lastServiceTime = new Date(ArrayTeh[ArrayTeh.length-1])
+
+    // Крайняя дата следующего обслуживания
+    let nextServiceTime = new Date(lastServiceTime.getTime() + timeNext)
+
+    // Время последнего обслуживания в формате ISO
+    let lastServiceIso = new Date(new Date(lastServiceTime).toString().split('GMT')[0] + ' UTC').toISOString();
+    // Время следующего запланированного обслуживания в формате ISO
+    let nextServiceIso = new Date(new Date(nextServiceTime).toString().split('GMT')[0] + ' UTC').toISOString();
+
+    lastServiceIso = lastServiceIso.slice(0, 10) + " " + lastServiceIso.slice(11, 19);
+    nextServiceIso = nextServiceIso.slice(0, 10) + " " + nextServiceIso.slice(11, 19);
+
+    // Копирования массива со всеми тех. обслуживаниями
+    let arrayTeh = ArrayTeh.slice()
+
+    // Массив со временем последнего обслуживания и запланированным временем.
+    let timePastArray = [lastServiceIso, nextServiceIso]
+
+    // Переменная отображающаяся на графики планируемого обслуживания.
+    let percent = +((new Date(timeToday).getTime() - new Date(lastServiceIso).getTime())/timeNext).toFixed(2)
+
+    //Массив со всеми тех. обслуживаниями.
+    arrayTeh = pars(arrayTeh, 0)
+    timePastArray = pars(timePastArray, 0, percent)
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран',
+
+            downloadCSV: "Скачать CSV",
+            downloadXLS:"Скачать XLS",
+            viewData: 'Режим таблицы',
+            hideData: "Скрыть таблицу"
+        },
+        plotOptions: {
+            xrange: {
+                grouping: false
+            }
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('timeToLastService', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            plotBorderColor: 'gray',
+            type: 'xrange'
+        },
+        title: {
+            text: 'Времени  до следующего тех. обслуживания',
+            style: {
+                color: '#FFF',
+                fontWeight: 'bold',
+                fontSize: '22px',
+            }
+        },
+
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                style: {
+                    color: '#FFF'
+                }
+            },
+        },
+        yAxis: {
+            title: {
+                text: '',
+            },
+            categories: ['Время'],
+            reversed: true,
+            labels: {
+                style: {
+                    color: '#FFF'
+                },
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        legend: {
+            enabled: false
+        },
+
+        series: [
+            {
+                name: 'Прошло времени',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#3c61da',
+                tooltip: {
+                    pointFormatter: function () {
+                        let timer = msToTimeDays(this.x2 - this.x)
+
+                        let TodayTime = (new Date(timeToday)).getTime()
+
+                        let pastTime = msToTimeDays(TodayTime - this.x)
+                        //let per = this.partialFill
+
+                        let leftTime = msToTimeDays(this.x2 - TodayTime)
+
+                        return '<b>Прошло:</b> ' + pastTime + '<br>' +
+                            '<b>Осталось:</b> ' + leftTime;
+                    },
+                    pointFormat: '<b>Прошло времени: {timer}</b>'
+                },
+                data: timePastArray,
+                dataLabels: {
+                    enabled: true
+                }
+            },
+        ]
+    });
+}
