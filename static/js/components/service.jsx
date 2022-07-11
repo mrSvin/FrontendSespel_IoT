@@ -51,7 +51,7 @@ function Service() {
                     </tbody>
                 </table>
             </div>
-            <form className="formService" method="get" action="" id="form_teh">
+            <form className="formService" method="post" action="javascript:void(0);" id="form_teh">
                 <span id="formClose">ₓ</span>
                 <div className="formFill">
                     <h2 className="formServiceName">Проведение тех. обслуживания</h2>
@@ -62,12 +62,12 @@ function Service() {
                     <div className="divPeriod">
                         <h3>Период до следующего тех. обслуживания</h3>
                         <select id="listPeriods" name="addPeriod">
-                            <option label="3 месяца" value="3"></option>
-                            <option label="6 месяцев" value="6"></option>
-                            <option label="1 год" value="12"></option>
+                            <option label="3 месяца" value="7884000"></option>
+                            <option label="6 месяцев" value="15768000"></option>
+                            <option label="1 год" value="31536000"></option>
                         </select>
                     </div>
-                    <input id="submit" type="submit" value="Подтвердить"/>
+                    <input id="submit" type="button" value="Подтвердить"/>
                 </div>
             </form>
             <div id="overlay_add"></div>
