@@ -62,7 +62,7 @@ function Service() {
                 </table>
             </div>
             {formAddService==true ?
-                <form className="formService" method="get" action="" id="form_teh">
+                <form className="formService" method="post" action="" id="form_teh">
                     <span id="formClose"
                           onClick={() => {
                               setFormAddService(false)
@@ -82,7 +82,11 @@ function Service() {
                                 <option label="1 год" value="31536000"></option>
                             </select>
                         </div>
-                        <input id="submit" type="button" value="Подтвердить"/>
+                        <input id="submit" type="button" value="Подтвердить"
+                               onClick={() => {
+                                   console.log('Проверка')
+                               }}
+                        />
                     </div>
 
                     <div id="overlay_add"
