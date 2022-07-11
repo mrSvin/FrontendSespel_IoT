@@ -516,38 +516,12 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
 }
 
 //Сервис
-function highChartServiceHistory(ArrayTeh, timeNext) {
-
-    let timeToday = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
-    // Преобразоавние времение в формат '2022-03-21 10:00:35'
-    timeToday = timeToday.slice(0, 10) + " " + timeToday.slice(11, 19);
-
-    // Дата последнего обслуживания
-    let lastServiceTime = new Date(ArrayTeh[ArrayTeh.length-1])
-
-    // Крайняя дата следующего обслуживания
-    let nextServiceTime = new Date(lastServiceTime.getTime() + timeNext)
-
-    // Время последнего обслуживания в формате ISO
-    let lastServiceIso = new Date(new Date(lastServiceTime).toString().split('GMT')[0] + ' UTC').toISOString();
-    // Время следующего запланированного обслуживания в формате ISO
-    let nextServiceIso = new Date(new Date(nextServiceTime).toString().split('GMT')[0] + ' UTC').toISOString();
-
-    lastServiceIso = lastServiceIso.slice(0, 10) + " " + lastServiceIso.slice(11, 19);
-    nextServiceIso = nextServiceIso.slice(0, 10) + " " + nextServiceIso.slice(11, 19);
-
+function highChartServiceHistory(ArrayTeh) {
     // Копирования массива со всеми тех. обслуживаниями
     let arrayTeh = ArrayTeh.slice()
 
-    // Массив со временем последнего обслуживания и запланированным временем.
-    let timePastArray = [lastServiceIso, nextServiceIso]
-
-    // Переменная отображающаяся на графики планируемого обслуживания.
-    let percent = +((new Date(timeToday).getTime() - new Date(lastServiceIso).getTime())/timeNext).toFixed(2)
-
     //Массив со всеми тех. обслуживаниями.
     arrayTeh = parseLinearService(arrayTeh, 0)
-    timePastArray = parseLinearService(timePastArray, 0, percent)
 
     Highcharts.setOptions({
         lang: {
@@ -647,9 +621,7 @@ function highChartServiceHistory(ArrayTeh, timeNext) {
     });
 }
 
-function highChartServiceNow(ArrayTeh, timeNext) {
-
-
+function highChartServiceNow(timeNext) {
     let timeToday = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     // Преобразоавние времение в формат '2022-03-21 10:00:35'
     timeToday = timeToday.slice(0, 10) + " " + timeToday.slice(11, 19);
@@ -668,17 +640,12 @@ function highChartServiceNow(ArrayTeh, timeNext) {
     lastServiceIso = lastServiceIso.slice(0, 10) + " " + lastServiceIso.slice(11, 19);
     nextServiceIso = nextServiceIso.slice(0, 10) + " " + nextServiceIso.slice(11, 19);
 
-    // Копирования массива со всеми тех. обслуживаниями
-    let arrayTeh = ArrayTeh.slice()
-
     // Массив со временем последнего обслуживания и запланированным временем.
     let timePastArray = [lastServiceIso, nextServiceIso]
 
     // Переменная отображающаяся на графики планируемого обслуживания.
     let percent = +((new Date(timeToday).getTime() - new Date(lastServiceIso).getTime())/timeNext).toFixed(2)
 
-    //Массив со всеми тех. обслуживаниями.
-    arrayTeh = parseLinearService(arrayTeh, 0)
     timePastArray = parseLinearService(timePastArray, 0, percent)
 
     Highcharts.setOptions({
