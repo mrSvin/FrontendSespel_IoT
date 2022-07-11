@@ -124,6 +124,10 @@ function convertDaysToSmena(today, yesterday, calendarDate=null) {
         startTime = calendarDate
     }
 
+    // Перевод в иной формат
+    today = [today.workArray, today.pauseArray, today.offArray, today.avarArray, today.ruchnoyArray, today.programName, today.roundArray]
+    yesterday = [yesterday.workArray, yesterday.pauseArray, yesterday.offArray, yesterday.avarArray, yesterday.ruchnoyArray, yesterday.programName, yesterday.roundArray]
+
 
     // дата предыдущего дня
     let pastTime  = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
