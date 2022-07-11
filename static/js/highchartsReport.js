@@ -546,8 +546,8 @@ function highChartServiceHistory(ArrayTeh, timeNext) {
     let percent = +((new Date(timeToday).getTime() - new Date(lastServiceIso).getTime())/timeNext).toFixed(2)
 
     //Массив со всеми тех. обслуживаниями.
-    arrayTeh = pars(arrayTeh, 0)
-    timePastArray = pars(timePastArray, 0, percent)
+    arrayTeh = parseLinearService(arrayTeh, 0)
+    timePastArray = parseLinearService(timePastArray, 0, percent)
 
     Highcharts.setOptions({
         lang: {
@@ -678,8 +678,8 @@ function highChartServiceNow(ArrayTeh, timeNext) {
     let percent = +((new Date(timeToday).getTime() - new Date(lastServiceIso).getTime())/timeNext).toFixed(2)
 
     //Массив со всеми тех. обслуживаниями.
-    arrayTeh = pars(arrayTeh, 0)
-    timePastArray = pars(timePastArray, 0, percent)
+    arrayTeh = parseLinearService(arrayTeh, 0)
+    timePastArray = parseLinearService(timePastArray, 0, percent)
 
     Highcharts.setOptions({
         lang: {
