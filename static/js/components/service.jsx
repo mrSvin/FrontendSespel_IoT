@@ -1,19 +1,29 @@
 function Service() {
 
+    let [formAddService, setFormAddService] = useState(false);
+
     useEffect(() => {
         let allServiceArray = ['2020-06-12 13:52:03', '2021-01-05 18:00:09', '2021-12-17 12:33:18']
         highChartServiceHistory(allServiceArray, 31536000000)
         highChartServiceNow(allServiceArray, 31536000000)
     }, [])
 
+
+
+
     return (
         <div>
+
             <div className='serviceContainer'>
                 <h1>Тех. обслуживания станка Навигатор 1</h1>
                 <img className="serviceImg" src='../images/navigator.png'/>
                 <div className="oneLineGraph" id="timeToLastService"></div>
                 <div className="oneLineGraph" id="allService"></div>
-                <button className='buttonTehno' id='startTehno'>
+                <button className='buttonTehno' id='startTehno'
+                        onClick={() => {
+                            setFormAddService(true)
+                        }}
+                >
                     <span>Провести тех.обслуживание</span>
                 </button>
                 <table className="tableService">
@@ -51,26 +61,38 @@ function Service() {
                     </tbody>
                 </table>
             </div>
-            <form className="formService" method="get" action="" id="form_teh">
-                <span id="formClose">ₓ</span>
-                <div className="formFill">
-                    <h2 className="formServiceName">Проведение тех. обслуживания</h2>
-                    <div className='divWorksPass'>
-                        <h3>Проведенные работы</h3>
-                        <textarea id="story" name="story" placeholder="Введите список проведенных работ"/>
+            {formAddService==true ?
+                <form className="formService" method="get" action="" id="form_teh">
+                    <span id="formClose"
+                          onClick={() => {
+                              setFormAddService(false)
+                          }}
+                    >ₓ</span>
+                    <div className="formFill">
+                        <h2 className="formServiceName">Проведение тех. обслуживания</h2>
+                        <div className='divWorksPass'>
+                            <h3>Проведенные работы</h3>
+                            <textarea id="story" name="story" placeholder="Введите список проведенных работ.."/>
+                        </div>
+                        <div className="divPeriod">
+                            <h3>Период до следующего тех. обслуживания</h3>
+                            <select id="listPeriods" name="addPeriod">
+                                <option label="3 месяца" value="3"></option>
+                                <option label="6 месяцев" value="6"></option>
+                                <option label="1 год" value="12"></option>
+                            </select>
+                        </div>
+                        <input id="submit" type="submit" value="Подтвердить"/>
                     </div>
-                    <div className="divPeriod">
-                        <h3>Период до следующего тех. обслуживания</h3>
-                        <select id="listPeriods" name="addPeriod">
-                            <option label="3 месяца" value="3"></option>
-                            <option label="6 месяцев" value="6"></option>
-                            <option label="1 год" value="12"></option>
-                        </select>
-                    </div>
-                    <input id="submit" type="submit" value="Подтвердить"/>
-                </div>
-            </form>
-            <div id="overlay_add"></div>
+
+                    <div id="overlay_add"
+                    ></div>
+                </form>
+                : null}
+
+
+
         </div>
     )
+
 }
