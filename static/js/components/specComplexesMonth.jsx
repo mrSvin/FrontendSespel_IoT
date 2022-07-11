@@ -3,9 +3,9 @@ function SpecComplexesMonth() {
     let complexName = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М"]
     let complexImg = ["../images/press.png", "../images/epp.png", "../images/stp13m.png"]
 
-    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/1_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs2 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs3 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs1 = [-480, 765, 'url(../images/press.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"]
+    let buttonsVrs2 = [-825, 220, 'url(../images/epp.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
+    let buttonsVrs3 = [-310, 550, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
 
     let [dateMonth, setDateMonth] = useState(0);
     let [stateButtonUpdate, setStateButtonUpdate] = useState([false, "buttonUpdateMonth"])
@@ -18,9 +18,9 @@ function SpecComplexesMonth() {
             monthNow = '0' + monthNow
         }
 
-        let roundKim = fetchHighCharts('press', `${yearNow}-${monthNow}`, 1)
-        let roundNK600 = fetchHighCharts('epp', `${yearNow}-${monthNow}`, 2)
-        let roundStp13m = fetchHighCharts('stp13m', `${yearNow}-${monthNow}`, 3)
+        let roundKim = fetchMonthHighCharts('press', `${yearNow}-${monthNow}`, 1)
+        let roundNK600 = fetchMonthHighCharts('epp', `${yearNow}-${monthNow}`, 2)
+        let roundStp13m = fetchMonthHighCharts('stp13m', `${yearNow}-${monthNow}`, 3)
 
         let promiseDataKim = Promise.resolve(roundKim);
         let promiseDataNK600 = Promise.resolve(roundNK600);
@@ -53,11 +53,11 @@ function SpecComplexesMonth() {
                         [pauseKimArray, pauseNK600Array, pauseStp13mArray],
                         [offKimArray, offNK600Array, offStp13mArray],
                         [avarKimArray, avarNK600Array, avarStp13mArray],
-                        [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray], 'ручной')
+                        [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray], 'Нагрузка')
 
-                    highChartTotalRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray]), averageMonthdata([pauseKimArray, pauseNK600Array, pauseStp13mArray]),
+                    highChartRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray]), averageMonthdata([pauseKimArray, pauseNK600Array, pauseStp13mArray]),
                         averageMonthdata([offKimArray, offNK600Array, offStp13mArray]), averageMonthdata([avarKimArray, avarNK600Array, avarStp13mArray]),
-                        averageMonthdata([nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray]), 'Ручной')
+                        averageMonthdata([nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray]), 'Ручной','Total')
 
                 })
             })
@@ -80,9 +80,9 @@ function SpecComplexesMonth() {
         if (dateMonth != "0") {
             console.log(dateMonth)
 
-            let roundKim = fetchHighCharts('kim', dateMonth, 1)
-            let roundNK600 = fetchHighCharts('nk600', dateMonth, 2)
-            let roundStp13m = fetchHighCharts('stp13m', dateMonth, 3)
+            let roundKim = fetchMonthHighCharts('kim', dateMonth, 1)
+            let roundNK600 = fetchMonthHighCharts('nk600', dateMonth, 2)
+            let roundStp13m = fetchMonthHighCharts('stp13m', dateMonth, 3)
 
             let promiseDataKim = Promise.resolve(roundKim);
             let promiseDataNK600 = Promise.resolve(roundNK600);
@@ -115,11 +115,11 @@ function SpecComplexesMonth() {
                             [pauseKimArray, pauseNK600Array, pauseStp13mArray],
                             [offKimArray, offNK600Array, offStp13mArray],
                             [avarKimArray, avarNK600Array, avarStp13mArray],
-                            [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray], 'ручной')
+                            [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray], 'Нагрузка')
 
-                        highChartTotalRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray]), averageMonthdata([pauseKimArray, pauseNK600Array, pauseStp13mArray]),
+                        highChartRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray]), averageMonthdata([pauseKimArray, pauseNK600Array, pauseStp13mArray]),
                             averageMonthdata([offKimArray, offNK600Array, offStp13mArray]), averageMonthdata([avarKimArray, avarNK600Array, avarStp13mArray]),
-                            averageMonthdata([nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray]), 'Ручной')
+                            averageMonthdata([nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray]), 'Нагрузка','Total')
 
                     })
                 })
@@ -132,28 +132,8 @@ function SpecComplexesMonth() {
 
     }
 
-    function fetchHighCharts(complexName, dateInput, idContainer) {
-        return fetch(`../api/monthData/${complexName}_month_date:${dateInput}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                highChartMonthLine(data.work, data.pause, data.off, data.avar, data.nagruzka, idContainer)
-                highChartMonthRound(averageMonthdata(data.work), averageMonthdata(data.pause), averageMonthdata(data.off),
-                    averageMonthdata(data.avar), averageMonthdata(data.nagruzka), 'Ручной', idContainer)
-                return data
-            })
-    }
-
-
-    function averageMonthdata(inputArray) {
-        let sum = inputArray.reduce((a, b) => a + b, 0);
-        return (sum / inputArray.length) || 0;
-
-    }
-
     return (
         <div>
-
-            <Header/>
 
             <MenuStanki menuSelected="specComplexes"/>
 
@@ -177,19 +157,19 @@ function SpecComplexesMonth() {
             </div>
 
             <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}/>
+                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"}/>
                 <div className="lineSukiHighChart" id="containerLine1"></div>
                 <div className="roundSukiHighChart" id="containerRound1"></div>
             </div>
 
             <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}/>
+                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"}/>
                 <div className="lineSukiHighChart" id="containerLine2"></div>
                 <div className="roundSukiHighChart" id="containerRound2"></div>
             </div>
 
             <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3}/>
+                <ComplexInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"}/>
                 <div className="lineSukiHighChart" id="containerLine3"></div>
                 <div className="roundSukiHighChart" id="containerRound3"></div>
             </div>

@@ -7,7 +7,7 @@ function msToTimeDays(duration) {
     return days + " дней " + hours + " ч. " + minutes + " мин. " + seconds + ' с.';
 }
 
-function pars(arrayParse, y, difference=null) {
+function parseLinearService(arrayParse, y, difference=null) {
 
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
@@ -308,7 +308,7 @@ function convertDaysToSmena(today, yesterday, calendarDate=null) {
     return [smena_1, smena_2]
 }
 
-function pars(arrayParse, y, date, arrayName = null) {
+function parseLinearSutki(arrayParse, y, date, arrayName = null) {
 
     arrayParse = addLastTime(arrayParse, date)
 
@@ -401,4 +401,10 @@ function kolOperations(arrayWork) {
         index_pars += 1;
     }
     return [array_kol_op[0], array_kol_op[1]];
+}
+
+function averageMonthdata(inputArray) {
+    let sum = inputArray.reduce((a, b) => a + b, 0);
+    return (sum / inputArray.length) || 0;
+
 }

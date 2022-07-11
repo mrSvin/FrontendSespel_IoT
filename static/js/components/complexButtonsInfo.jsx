@@ -1,0 +1,215 @@
+function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, programs, laser}) {
+    return (
+        <div className="parent_image">
+
+            <img
+                className="stanok_img"
+                src={complexImg}/>
+
+            <figcaption className="comlexInfo">
+                {complexName}
+            </figcaption>
+
+            <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser}/>
+
+        </div>
+    )
+}
+
+function ComplexButtons({complexMesto, size, alarm = null, programs = null, laser = null}) {
+
+    let hight = null
+    let width = null
+
+    switch (size) {
+        case '1ploshadkaOutside': {
+            hight = 1030
+            width = 1030
+            break;
+        }
+        case '2ploshadkaOutside': {
+            hight = 1030
+            width = 1030
+            break;
+        }
+        case '2ploshadka': {
+            hight = 690
+            width = 1510
+            break;
+        }
+        case 'meh1': {
+            hight = 920
+            width = 920
+            break;
+        }
+        case 'ceh6': {
+            hight = 910
+            width = 1010
+            break;
+        }
+        case 'sborCeh': {
+            hight = 1320
+            width = 1200
+            break;
+        }
+        case 'ceh5': {
+            hight = 895
+            width = 1020
+            break;
+        }
+        case 'ceh1': {
+            hight = 660
+            width = 1920
+            break;
+        }
+        case 'ceh2': {
+            hight = 616
+            width = 1272
+            break;
+        }
+        default: {
+            hight = 1030
+            width = 1030
+        }
+    }
+
+    let mesto = (parameter) => (event) => {
+
+        window.localStorage['mestoParams'] = parameter
+        window.open("../mesto/mestoNew", '', 'scrollbars=1,height=' + Math.min(hight, screen.availHeight) +
+            ',width=' + Math.min(width, screen.availWidth))
+    }
+
+    function personal() {
+
+        window.open("../personal/personal_vrs", '', 'scrollbars=1,height=' + Math.min(700, screen.availHeight) +
+            ',width=' + Math.min(1200, screen.availWidth))
+    }
+
+    let error = (complexName) => (event) => {
+        let href;
+        switch (complexName) {
+            case "CTX310 #2":
+                href = "../stanki/alarm/3"
+                break
+            case 'NTX1000':
+                href = "../stanki/alarm/16"
+                break
+            case 'NLX3000':
+                href = "../stanki/alarm/15"
+                break
+            case 'GAMMA2000':
+                href = "../stanki/alarm/1"
+                break
+            case 'CTX650':
+                href = "../stanki/alarm/10"
+                break
+            case 'DMF260':
+                href = "../stanki/alarm/12"
+                break
+            case 'DMU50 #1':
+                href = "../stanki/alarm/13"
+                break
+            case 'DMU50 #2':
+                href = "../stanki/alarm/14"
+                break
+            case 'DMC1035':
+                href = "../stanki/alarm/11"
+                break
+            case 'CTX310 #1':
+                href = "../stanki/alarm/2"
+                break
+            case 'CTX510 #1':
+                href = "../stanki/alarm/5"
+                break
+            default:
+                href = "../stanki/alarm/1"
+        }
+
+        window.open(href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth))
+    }
+
+    let program = (complexName) => (event) => {
+        let href;
+        switch (complexName) {
+            case "Навигатор #1":
+                href = "../stanki/programTime/navigator_1"
+                break
+            case 'Навигатор #2':
+                href = "../stanki/programTime/navigator_2_2"
+                break
+            case 'Навигатор #3':
+                href = "../stanki/programTime/navigator_3"
+                break
+            case 'TruLaser':
+                href = "../stanki/programTime/trulaser"
+                break
+            default:
+                href = "../stanki/programTime/navigator_1"
+        }
+
+        window.open(href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth))
+    }
+
+    let laserButton = (complexName) => (event) => {
+        let href;
+        switch (complexName) {
+            case "Навигатор #1":
+                href = "../stanki/navigatorPower/navigator_1"
+                break
+            case 'Навигатор #2':
+                href = "../stanki/navigatorPower/navigator_2_2"
+                break
+            case 'Навигатор #3':
+                href = "../stanki/navigatorPower/navigator_3"
+                break
+
+            default:
+                href = "../stanki/navigator_1"
+        }
+
+        window.open(href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth))
+    }
+
+    return (
+
+        <div className='parentIcons'>
+
+            <a className="icon_mesto"
+               onClick={mesto(complexMesto)}>
+                <div className="label_mesto">Место</div>
+            </a>
+
+            <a className="icon_personal"
+               onClick={personal}>
+                <div className="label_personal">Персонал</div>
+            </a>
+
+            {alarm != null ?
+                <a className="icon_error"
+                   onClick={error(alarm)}>
+                    <div className="label_error">Ошибки</div>
+                </a> :
+                <div></div>
+            }
+
+            {programs != null ?
+                <a className="icon_program"
+                   onClick={program(programs)}>
+                    <div className="label_program">Программы</div>
+                </a> :
+                <div></div>
+            }
+
+            {laser != null ?
+                <a className="icon_laser"
+                   onClick={laserButton(laser)}>
+                    <div className="label_laser">Излучание</div>
+                </a> :
+                <div></div>
+            }
+
+        </div>
+
+    )
+}

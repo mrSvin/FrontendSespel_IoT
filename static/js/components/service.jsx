@@ -2,6 +2,8 @@ function Service() {
 
     let [formAddService, setFormAddService] = useState(false);
 
+    let [nameComplex, setNameComplex] = useState("null");
+
     useEffect(() => {
 
         // Получения имени станка из адресной строки
@@ -17,12 +19,12 @@ function Service() {
 
         // Вставка пробела при необходимости
         if(!isNaN(nameToFetch[nameToFetch.length-1])){
-             h1 = nameToFetch.slice(0, nameToFetch.length-1) + ' ' + nameToFetch.slice(nameToFetch.length-1)
+            h1 = nameToFetch.slice(0, nameToFetch.length-1) + ' ' + nameToFetch.slice(nameToFetch.length-1)
         }
         else  h1 = nameToFetch
 
         // Заголовок с именем станка на странице
-        document.getElementsByClassName('serviceContainer')[0].getElementsByTagName('h1')[0].innerHTML = `Тех. обслуживания станка ${h1}`
+        setNameComplex('---- 1')
 
         console.log('Заголовочные данные',nameToFetch, h1)
 
@@ -39,7 +41,7 @@ function Service() {
         <div>
 
             <div className='serviceContainer'>
-                <h1>Тех. обслуживания станка...</h1>
+                <h1>Тех. обслуживания станка ${nameComplex}</h1>
                 <img className="serviceImg" src='../images/navigator.png'/>
                 <div className="oneLineGraph" id="timeToLastService"></div>
                 <div className="oneLineGraph" id="allService"></div>

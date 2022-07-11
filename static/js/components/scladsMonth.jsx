@@ -3,7 +3,7 @@ function ScladsMonth() {
     let complexName = ["CRYSTA-Apex S9168"]
     let complexImg = ["../images/sklad.png"]
 
-    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/1_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs1 = [-485, 680, 'url(../images/sklad.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
 
     let [dateMonth, setDateMonth] = useState(0);
     let [stateButtonUpdate, setStateButtonUpdate] = useState([false,"buttonUpdateMonth"])
@@ -16,7 +16,7 @@ function ScladsMonth() {
             monthNow = '0' + monthNow
         }
 
-        let roundKim = fetchHighCharts('sclad_meh', `${yearNow}-${monthNow}`,1)
+        let roundKim = fetchMonthHighCharts('sclad_meh', `${yearNow}-${monthNow}`,1)
 
         let promiseDataKim = Promise.resolve(roundKim);
 
@@ -33,11 +33,11 @@ function ScladsMonth() {
                     [pauseKimArray],
                     [offKimArray],
                     [avarKimArray],
-                    [nagruzkaKimArray], 'ручной')
+                    [nagruzkaKimArray], 'Нагрузка')
 
-                highChartTotalRound(averageMonthdata([workKimArray]),averageMonthdata([pauseKimArray]),
+                highChartRound(averageMonthdata([workKimArray]),averageMonthdata([pauseKimArray]),
                     averageMonthdata([offKimArray]),averageMonthdata([avarKimArray]),
-                    averageMonthdata([nagruzkaKimArray]),'Ручной')
+                    averageMonthdata([nagruzkaKimArray]),'Нагрузка','Total')
 
         })
 
@@ -58,7 +58,7 @@ function ScladsMonth() {
         if (dateMonth != "0") {
             console.log(dateMonth)
 
-            let roundKim = fetchHighCharts('sclad_meh', dateMonth,1)
+            let roundKim = fetchMonthHighCharts('sclad_meh', dateMonth,1)
 
             let promiseDataKim = Promise.resolve(roundKim);
 
@@ -75,11 +75,11 @@ function ScladsMonth() {
                     [pauseKimArray],
                     [offKimArray],
                     [avarKimArray],
-                    [nagruzkaKimArray], 'ручной')
+                    [nagruzkaKimArray], 'Нагрузка')
 
-                highChartTotalRound(averageMonthdata([workKimArray]),averageMonthdata([pauseKimArray]),
+                highChartRound(averageMonthdata([workKimArray]),averageMonthdata([pauseKimArray]),
                     averageMonthdata([offKimArray]),averageMonthdata([avarKimArray]),
-                    averageMonthdata([nagruzkaKimArray]),'Ручной')
+                    averageMonthdata([nagruzkaKimArray]),'Нагрузка','Total')
 
             })
 
@@ -90,28 +90,8 @@ function ScladsMonth() {
 
     }
 
-    function fetchHighCharts(complexName, dateInput, idContainer) {
-        return fetch(`../api/monthData/${complexName}_month_date:${dateInput}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                highChartMonthLine(data.work, data.pause, data.off, data.avar, data.nagruzka, idContainer)
-                highChartMonthRound(averageMonthdata(data.work), averageMonthdata(data.pause), averageMonthdata(data.off),
-                    averageMonthdata(data.avar),  averageMonthdata(data.nagruzka), 'Ручной', idContainer)
-                return data
-            })
-    }
-
-
-    function averageMonthdata(inputArray) {
-        let sum = inputArray.reduce((a, b) => a + b, 0);
-        return (sum / inputArray.length) || 0;
-
-    }
-
     return (
         <div>
-
-            <Header/>
 
             <MenuStanki menuSelected="sclads"/>
 
@@ -135,7 +115,7 @@ function ScladsMonth() {
             </div>
 
             <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}/>
+                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"}/>
                 <div className="lineSukiHighChart" id="containerLine1"></div>
                 <div className="roundSukiHighChart" id="containerRound1"></div>
             </div>

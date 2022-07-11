@@ -3,8 +3,6 @@ function Winnum() {
     return (
         <div>
 
-            <Header/>
-
             <iframe
                 className="iframeInput"
                 src="http://winnum-serv/Winnum/views/navigation/home/list.jsp"
@@ -20,8 +18,6 @@ function Owencloud() {
 
     return (
         <div>
-
-            <Header/>
 
             <iframe
                 className="iframeInput"
@@ -39,8 +35,6 @@ function Intra() {
     return (
         <div>
 
-            <Header/>
-
             <iframe
                 className="iframeInput"
                 src="http://89.151.134.234:46088/"
@@ -57,8 +51,6 @@ function Wialon() {
     return (
         <div>
 
-            <Header/>
-
             <iframe
                 className="iframeInput"
                 src="https://hosting.wialon.com/"
@@ -74,8 +66,6 @@ function Teamcenter() {
 
     return (
         <div>
-
-            <Header/>
 
             <iframe
                 className="iframeInput"

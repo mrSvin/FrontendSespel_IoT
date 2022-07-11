@@ -88,120 +88,6 @@ function TableDays(data) {
     )
 }
 
-function ComplexInfo({complexName, complexImg, complexMesto, size}) {
-    return (
-        <div className="parent_image">
-
-            <img
-                className="stanok_img"
-                src={complexImg}/>
-
-            <figcaption className="comlexInfo">
-                {complexName}
-            </figcaption>
-
-            <ComplexButtons complexMesto={complexMesto} size={size}/>
-
-        </div>
-    )
-}
-
-function ComplexButtons({complexMesto,size}) {
-
-    let hight = null
-    let width = null
-
-    switch (size) {
-        case '1ploshadkaOutside':
-        {
-            hight = 1030
-            width = 1030
-            break;
-        }
-        case '2ploshadkaOutside':
-        {
-            hight = 1030
-            width = 1030
-            break;
-        }
-        case '2ploshadka':
-        {
-            hight = 690
-            width = 1510
-            break;
-        }
-        case 'meh1':
-        {
-            hight = 920
-            width = 920
-            break;
-        }
-        case 'ceh6':
-        {
-            hight = 910
-            width = 1010
-            break;
-        }
-        case 'sborCeh':
-        {
-            hight = 1320
-            width = 1200
-            break;
-        }
-        case 'ceh5':
-        {
-            hight = 895
-            width = 1020
-            break;
-        }
-        case 'ceh1':
-        {
-            hight = 660
-            width = 1920
-            break;
-        }
-        case 'ceh2':
-        {
-            hight = 616
-            width = 1272
-            break;
-        }
-        default: {
-            hight = 1030
-            width = 1030
-        }
-    }
-
-    let mesto = (parameter) => (event) => {
-
-        window.localStorage['mestoParams'] = parameter
-        window.open("../mesto/mestoNew", '', 'scrollbars=1,height=' + Math.min(hight, screen.availHeight) +
-            ',width=' + Math.min(width, screen.availWidth))
-    }
-
-    function personal() {
-
-        window.open("../personal/personal_vrs", '', 'scrollbars=1,height=' + Math.min(700, screen.availHeight) +
-            ',width=' + Math.min(1200, screen.availWidth))
-    }
-
-    return (
-
-        <div className='parentIcons'>
-            <a className="icon_mesto"
-               onClick={mesto(complexMesto)}>
-                <div className="label_mesto">Место</div>
-            </a>
-            <a className="icon_personal"
-               onClick={personal}
-            >
-                <div className="label_personal">Персонал</div>
-            </a>
-        </div>
-
-    )
-}
-
 function VrsInfo() {
 
     let [dateMonth, setDateMonth] = useState(0);
@@ -409,8 +295,6 @@ function EnergyWater() {
 
     return (
         <div>
-
-            <Header/>
 
             <div className="menuButtons">
 

@@ -127,7 +127,6 @@ function Beacon() {
 
     return (
         <div>
-            <Header/>
             <div className="beaconPage">
                 <MapBeacon location={location}/>
                 <TableBeacon/>

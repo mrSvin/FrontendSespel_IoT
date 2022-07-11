@@ -3,13 +3,13 @@ function RobotsMonth() {
     let complexName = ["МАКС #1", "МАКС #2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
 
-    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/1_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs2 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs3 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs4 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs5 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs6 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs7 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs1 = [-255, 620, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
+    let buttonsVrs2 = [-450, 210, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
+    let buttonsVrs3 = [-920, 800, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 40, "unset"]
+    let buttonsVrs4 = [-750, 800, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
+    let buttonsVrs5 = [-820, 270, 'url(../images/robot_p250.png) no-repeat', "../images/ceh_5.png", 60, "unset"]
+    let buttonsVrs6 = [-920, 890, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 40, "unset"]
+    let buttonsVrs7 = [-655, 820, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
 
     let [dateMonth, setDateMonth] = useState(0);
     let [stateButtonUpdate, setStateButtonUpdate] = useState([false, "buttonUpdateMonth"])
@@ -22,13 +22,13 @@ function RobotsMonth() {
             monthNow = '0' + monthNow
         }
 
-        let roundKim = fetchHighCharts('maks_1', `${yearNow}-${monthNow}`, 1)
-        let roundNK600 = fetchHighCharts('maks_2', `${yearNow}-${monthNow}`, 2)
-        let roundStp13m = fetchHighCharts('m710', `${yearNow}-${monthNow}`, 3)
-        let roundComplex4 = fetchHighCharts('rtk12c', `${yearNow}-${monthNow}`, 4)
-        let roundComplex5 = fetchHighCharts('p250', `${yearNow}-${monthNow}`, 5)
-        let roundComplex6 = fetchHighCharts('krot', `${yearNow}-${monthNow}`, 6)
-        let roundComplex7 = fetchHighCharts('prans', `${yearNow}-${monthNow}`, 7)
+        let roundKim = fetchMonthHighCharts('maks_1', `${yearNow}-${monthNow}`, 1)
+        let roundNK600 = fetchMonthHighCharts('maks_2', `${yearNow}-${monthNow}`, 2)
+        let roundStp13m = fetchMonthHighCharts('m710', `${yearNow}-${monthNow}`, 3)
+        let roundComplex4 = fetchMonthHighCharts('rtk12c', `${yearNow}-${monthNow}`, 4)
+        let roundComplex5 = fetchMonthHighCharts('p250', `${yearNow}-${monthNow}`, 5)
+        let roundComplex6 = fetchMonthHighCharts('krot', `${yearNow}-${monthNow}`, 6)
+        let roundComplex7 = fetchMonthHighCharts('prans', `${yearNow}-${monthNow}`, 7)
 
         let promiseDataKim = Promise.resolve(roundKim);
         let promiseDataNK600 = Promise.resolve(roundNK600);
@@ -93,13 +93,14 @@ function RobotsMonth() {
                                         [pauseKimArray, pauseNK600Array, pauseStp13mArray,pauseComplex4Array,pauseComplex5Array,pauseComplex6Array,pauseComplex7Array],
                                         [offKimArray, offNK600Array, offStp13mArray,offComplex4Array,offComplex5Array,offComplex6Array,offComplex7Array],
                                         [avarKimArray, avarNK600Array, avarStp13mArray,avarComplex4Array,avarComplex5Array,avarComplex6Array,avarComplex7Array],
-                                        [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray,nagruzkaComplex4Array,nagruzkaComplex5Array,nagruzkaComplex6Array,nagruzkaComplex7Array], 'ручной')
+                                        [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray,nagruzkaComplex4Array,nagruzkaComplex5Array,nagruzkaComplex6Array,nagruzkaComplex7Array], 'Нагрузка')
 
-                                    highChartTotalRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray,workComplex4Array,workComplex5Array,workComplex6Array,workComplex7Array]),
+                                    highChartRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray,workComplex4Array,workComplex5Array,workComplex6Array,workComplex7Array]),
                                         averageMonthdata([pauseKimArray, pauseNK600Array, pauseStp13mArray,pauseComplex4Array,pauseComplex5Array,pauseComplex6Array,pauseComplex7Array]),
                                         averageMonthdata([offKimArray, offNK600Array, offStp13mArray,offComplex4Array,offComplex5Array,offComplex6Array,offComplex7Array]),
                                         averageMonthdata([avarKimArray, avarNK600Array, avarStp13mArray,avarComplex4Array,avarComplex5Array,avarComplex6Array,avarComplex7Array]),
-                                        averageMonthdata([nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray, nagruzkaStp13mArray,nagruzkaComplex4Array,nagruzkaComplex5Array,nagruzkaComplex6Array,nagruzkaComplex7Array]), 'Ручной')
+                                        averageMonthdata([nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray, nagruzkaStp13mArray,nagruzkaComplex4Array,nagruzkaComplex5Array,nagruzkaComplex6Array,nagruzkaComplex7Array]),
+                                        'Нагрузка','Total')
 
                                 })
                             })
@@ -126,13 +127,13 @@ function RobotsMonth() {
         if (dateMonth != "0") {
             console.log(dateMonth)
 
-            let roundKim = fetchHighCharts('maks_1', dateMonth, 1)
-            let roundNK600 = fetchHighCharts('maks_2', dateMonth, 2)
-            let roundStp13m = fetchHighCharts('m710', dateMonth, 3)
-            let roundComplex4 = fetchHighCharts('rtk12c', dateMonth, 4)
-            let roundComplex5 = fetchHighCharts('p250', dateMonth, 5)
-            let roundComplex6 = fetchHighCharts('krot', dateMonth, 6)
-            let roundComplex7 = fetchHighCharts('prans', dateMonth, 7)
+            let roundKim = fetchMonthHighCharts('maks_1', dateMonth, 1)
+            let roundNK600 = fetchMonthHighCharts('maks_2', dateMonth, 2)
+            let roundStp13m = fetchMonthHighCharts('m710', dateMonth, 3)
+            let roundComplex4 = fetchMonthHighCharts('rtk12c', dateMonth, 4)
+            let roundComplex5 = fetchMonthHighCharts('p250', dateMonth, 5)
+            let roundComplex6 = fetchMonthHighCharts('krot', dateMonth, 6)
+            let roundComplex7 = fetchMonthHighCharts('prans', dateMonth, 7)
 
             let promiseDataKim = Promise.resolve(roundKim);
             let promiseDataNK600 = Promise.resolve(roundNK600);
@@ -197,13 +198,14 @@ function RobotsMonth() {
                                             [pauseKimArray, pauseNK600Array, pauseStp13mArray,pauseComplex4Array,pauseComplex5Array,pauseComplex6Array,pauseComplex7Array],
                                             [offKimArray, offNK600Array, offStp13mArray,offComplex4Array,offComplex5Array,offComplex6Array,offComplex7Array],
                                             [avarKimArray, avarNK600Array, avarStp13mArray,avarComplex4Array,avarComplex5Array,avarComplex6Array,avarComplex7Array],
-                                            [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray,nagruzkaComplex4Array,nagruzkaComplex5Array,nagruzkaComplex6Array,nagruzkaComplex7Array], 'ручной')
+                                            [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray,nagruzkaComplex4Array,nagruzkaComplex5Array,nagruzkaComplex6Array,nagruzkaComplex7Array], 'Нагрузка')
 
-                                        highChartTotalRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray,workComplex4Array,workComplex5Array,workComplex6Array,workComplex7Array]),
+                                        highChartRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray,workComplex4Array,workComplex5Array,workComplex6Array,workComplex7Array]),
                                             averageMonthdata([pauseKimArray, pauseNK600Array, pauseStp13mArray,pauseComplex4Array,pauseComplex5Array,pauseComplex6Array,pauseComplex7Array]),
                                             averageMonthdata([offKimArray, offNK600Array, offStp13mArray,offComplex4Array,offComplex5Array,offComplex6Array,offComplex7Array]),
                                             averageMonthdata([avarKimArray, avarNK600Array, avarStp13mArray,avarComplex4Array,avarComplex5Array,avarComplex6Array,avarComplex7Array]),
-                                            averageMonthdata([nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray, nagruzkaStp13mArray,nagruzkaComplex4Array,nagruzkaComplex5Array,nagruzkaComplex6Array,nagruzkaComplex7Array]), 'Ручной')
+                                            averageMonthdata([nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray, nagruzkaStp13mArray,nagruzkaComplex4Array,nagruzkaComplex5Array,nagruzkaComplex6Array,nagruzkaComplex7Array]),
+                                            'Нагрузка','Total')
 
                                     })
                                 })
@@ -220,28 +222,8 @@ function RobotsMonth() {
 
     }
 
-    function fetchHighCharts(complexName, dateInput, idContainer) {
-        return fetch(`../api/monthData/${complexName}_month_date:${dateInput}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                highChartMonthLine(data.work, data.pause, data.off, data.avar, data.nagruzka, idContainer)
-                highChartMonthRound(averageMonthdata(data.work), averageMonthdata(data.pause), averageMonthdata(data.off),
-                    averageMonthdata(data.avar), averageMonthdata(data.nagruzka), 'Ручной', idContainer)
-                return data
-            })
-    }
-
-    function averageMonthdata(inputArray) {
-        let sum = inputArray.reduce((a, b) => a + b, 0);
-        return (sum / inputArray.length) || 0;
-
-    }
-
-
     return (
         <div>
-
-            <Header/>
 
             <MenuStanki menuSelected="robots"/>
 
@@ -265,43 +247,43 @@ function RobotsMonth() {
             </div>
 
             <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}/>
+                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh6"}/>
                 <div className="lineSukiHighChart" id="containerLine1"></div>
                 <div className="roundSukiHighChart" id="containerRound1"></div>
             </div>
 
             <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}/>
+                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"}/>
                 <div className="lineSukiHighChart" id="containerLine2"></div>
                 <div className="roundSukiHighChart" id="containerRound2"></div>
             </div>
 
             <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3}/>
+                <ComplexInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"}/>
                 <div className="lineSukiHighChart" id="containerLine3"></div>
                 <div className="roundSukiHighChart" id="containerRound3"></div>
             </div>
 
             <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs4}/>
+                <ComplexInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs4} size={"sborCeh"}/>
                 <div className="lineSukiHighChart" id="containerLine4"></div>
                 <div className="roundSukiHighChart" id="containerRound4"></div>
             </div>
 
             <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[4]} complexImg={complexImg[4]} complexMesto={buttonsVrs5}/>
+                <ComplexInfo complexName={complexName[4]} complexImg={complexImg[4]} complexMesto={buttonsVrs5} size={"ceh5"}/>
                 <div className="lineSukiHighChart" id="containerLine5"></div>
                 <div className="roundSukiHighChart" id="containerRound5"></div>
             </div>
 
             <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[5]} complexImg={complexImg[5]} complexMesto={buttonsVrs6}/>
+                <ComplexInfo complexName={complexName[5]} complexImg={complexImg[5]} complexMesto={buttonsVrs6} size={"sborCeh"}/>
                 <div className="lineSukiHighChart" id="containerLine6"></div>
                 <div className="roundSukiHighChart" id="containerRound6"></div>
             </div>
 
             <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[6]} complexImg={complexImg[6]} complexMesto={buttonsVrs7}/>
+                <ComplexInfo complexName={complexName[6]} complexImg={complexImg[6]} complexMesto={buttonsVrs7} size={"ceh6"}/>
                 <div className="lineSukiHighChart" id="containerLine7"></div>
                 <div className="roundSukiHighChart" id="containerRound7"></div>
             </div>

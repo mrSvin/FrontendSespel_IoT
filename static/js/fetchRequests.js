@@ -1,0 +1,57 @@
+function fetchRequest(dateCalendar, complexObject, complexName) {
+    return fetch(`/api/complexData/${complexName}_days_date:${dateCalendar}`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            complexObject.workArray = data.work
+            complexObject.pauseArray = data.pause
+            complexObject.offArray = data.off
+            complexObject.avarArray = data.avar
+            complexObject.ruchnoyArray = data.nagruzka
+            complexObject.roundArray = data.roundData
+            complexObject.programName = data.programName
+
+            return complexObject
+        })
+}
+
+function fetchRequestBuildHC(dateCalendar, complexObject, complexName, idContainer) {
+    return fetch(`/api/complexData/${complexName}_days_date:${dateCalendar}`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            complexObject.workArray = data.work
+            complexObject.pauseArray = data.pause
+            complexObject.offArray = data.off
+            complexObject.avarArray = data.avar
+            complexObject.ruchnoyArray = data.nagruzka
+            complexObject.roundArray = data.roundData
+            complexObject.programName = data.programName
+
+            let convertDataRuchnoi = parseLinearSutki(complexObject.ruchnoyArray, 0, dateCalendar)
+            let convertDataWork = parseLinearSutki(complexObject.workArray, 1, dateCalendar,complexObject.programName)
+            let convertDataPause = parseLinearSutki(complexObject.pauseArray, 2, dateCalendar)
+            let convertDataOff = parseLinearSutki(complexObject.offArray, 3, dateCalendar)
+            let convertDataAvar = parseLinearSutki(complexObject.avarArray, 4, dateCalendar)
+            highChartSutkiLine(convertDataWork, convertDataPause, convertDataOff, convertDataAvar, convertDataRuchnoi, "Нагрузка",idContainer)
+
+            let workRound = parseInt(complexObject.roundArray[0]);
+            let passRound = parseInt(complexObject.roundArray[1]);
+            let offRound = parseInt(complexObject.roundArray[2]);
+            let avarRound = parseInt(complexObject.roundArray[3]);
+            let nagruzkaRound = parseInt(complexObject.roundArray[4]);
+            highChartRound(workRound, passRound, offRound, avarRound, nagruzkaRound, 'Нагрузка', idContainer)
+
+            return complexObject
+        })
+}
+
+function fetchMonthHighCharts(complexName, dateInput, idContainer) {
+        return fetch(`../api/monthData/${complexName}_month_date:${dateInput}`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                    highChartMonthLine(data.work, data.pause, data.off, data.avar, data.nagruzka, 'Нагрузка', idContainer)
+                    highChartRound(averageMonthdata(data.work), averageMonthdata(data.pause), averageMonthdata(data.off),
+                        averageMonthdata(data.avar),  averageMonthdata(data.nagruzka), 'Нагрузка', idContainer)
+                    return data
+            })
+}
+

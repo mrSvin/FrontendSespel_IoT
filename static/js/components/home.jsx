@@ -3,9 +3,7 @@ function Home() {
     return (
         <div className="homeBody">
 
-            <Header/>
-
-            <Menubar/>
+                <Menubar/>
 
         </div>
     )

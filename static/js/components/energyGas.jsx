@@ -206,8 +206,6 @@ function EnergyGas() {
     return (
         <div>
 
-            <Header/>
-
             <div className="menuButtons">
 
                 <Link to="/energyWater" className="container-home">

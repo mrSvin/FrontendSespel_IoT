@@ -10,13 +10,15 @@ const {
     useState,
     useEffect,
     useRef,
+    Suspense,
+    lazy
 } = React
 
-
 const App = () => (
-    <BrowserRouter>
-        <Switch>
 
+    <BrowserRouter>
+        <Header/>
+        <Switch>
             <Route path="/login">
                 <Login/>
             </Route>
@@ -42,7 +44,9 @@ const App = () => (
             </Route>
 
             <Route path="/energyWater">
-                <EnergyWater/>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <EnergyWater/>
+                </Suspense>
             </Route>
 
             <Route path="/energyElectro">
@@ -77,11 +81,67 @@ const App = () => (
                 <GibkaMonth/>
             </Route>
 
+            <Route path="/stanki/sclads">
+                <Sclads/>
+            </Route>
+
+            <Route path="/stanki/scladsMonth">
+                <ScladsMonth/>
+            </Route>
+
+            <Route path="/stanki/specComplexes">
+                <SpecComplexes/>
+            </Route>
+
+            <Route path="/stanki/specComplexesMonth">
+                <SpecComplexesMonth/>
+            </Route>
+
+            <Route path="/stanki/robots">
+                <Robots/>
+            </Route>
+
+            <Route path="/stanki/robotsMonth">
+                <RobotsMonth/>
+            </Route>
+
+            <Route path="/stanki/meh1">
+                <Meh1/>
+            </Route>
+
+            <Route path="/stanki/meh1Month">
+                <Meh1Month/>
+            </Route>
+
+            <Route path="/stanki/rezka">
+                <Rezka/>
+            </Route>
+
+            <Route path="/stanki/rezkaMonth">
+                <RezkaMonth/>
+            </Route>
+
+            <Route path="/stanki/rezkaSmena">
+                <RezkaSmena/>
+            </Route>
+
+            <Route path="/stanki/meh2">
+                <Meh2/>
+            </Route>
+
+            <Route path="/stanki/meh2Month">
+                <Meh2Month/>
+            </Route>
+
+            <Route path="/stanki/service">
+                <Service/>
+            </Route>
+
             <Route path="/beacon">
                 <Beacon/>
             </Route>
 
-            <Route path="/">
+            <Route exact path="/">
                 <Home/>
             </Route>
 
@@ -91,3 +151,4 @@ const App = () => (
 );
 
 ReactDOM.render(<App/>, document.getElementById('main-app'));
+

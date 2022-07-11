@@ -3,8 +3,8 @@ function OtkMonth() {
     let complexName = ["CRYSTA-Apex S9168", "НК600"]
     let complexImg = ["../images/crystal_apex.png", "../images/nk600.png"]
 
-    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/1_ploshadka_outside.png", 60, "unset"]
-    let buttonsVrs2 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs1 = [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
+    let buttonsVrs2 = [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"]
 
     let [dateMonth, setDateMonth] = useState(0);
     let [stateButtonUpdate, setStateButtonUpdate] = useState([false,"buttonUpdateMonth"])
@@ -17,8 +17,38 @@ function OtkMonth() {
             monthNow = '0' + monthNow
         }
 
-        let roundKim = fetchHighCharts('kim', `${yearNow}-${monthNow}`,1)
-        let roundNK600 = fetchHighCharts('nk600', `${yearNow}-${monthNow}`,2)
+        updateLoadData(`${yearNow}-${monthNow}`)
+
+    }, [])
+
+    function newDate(input) {
+        useEffect(() => {
+            setDateMonth(input)
+        })
+    }
+
+    function disabledButton() {
+        setStateButtonUpdate([false, "buttonUpdateMonth"])
+        clearInterval(timeout)
+    }
+
+    function updateData() {
+        if (dateMonth != "0") {
+            console.log(dateMonth)
+
+            updateLoadData(dateMonth)
+
+        }
+
+        setStateButtonUpdate([true,"buttonUpdateMonth load"])
+        timeout= setTimeout(disabledButton, 1000)
+
+    }
+
+    function updateLoadData(dateInput) {
+
+        let roundKim = fetchMonthHighCharts('kim', dateInput,1)
+        let roundNK600 = fetchMonthHighCharts('nk600', dateInput,2)
 
         let promiseDataKim = Promise.resolve(roundKim);
         let promiseDataNK600 = Promise.resolve(roundNK600);
@@ -45,92 +75,16 @@ function OtkMonth() {
                     [avarKimArray,avarNK600Array],
                     [nagruzkaKimArray,nagruzkaNK600Array], 'ручной')
 
-                highChartTotalRound(averageMonthdata([workKimArray,workNK600Array]),averageMonthdata([pauseKimArray,pauseNK600Array]),
+                highChartRound(averageMonthdata([workKimArray,workNK600Array]),averageMonthdata([pauseKimArray,pauseNK600Array]),
                     averageMonthdata([offKimArray,offNK600Array]),averageMonthdata([avarKimArray,avarNK600Array]),
-                        averageMonthdata([nagruzkaKimArray,nagruzkaNK600Array]),'Ручной')
+                    averageMonthdata([nagruzkaKimArray,nagruzkaNK600Array]),'Ручной','Total')
             })
         })
-
-    }, [])
-
-    function newDate(input) {
-        useEffect(() => {
-            setDateMonth(input)
-        })
-    }
-
-    function disabledButton() {
-        setStateButtonUpdate([false, "buttonUpdateMonth"])
-        clearInterval(timeout)
-    }
-
-    function updateData() {
-        if (dateMonth != "0") {
-            console.log(dateMonth)
-
-            let roundKim = fetchHighCharts('kim', dateMonth,1)
-            let roundNK600 = fetchHighCharts('nk600', dateMonth,2)
-
-            let promiseDataKim = Promise.resolve(roundKim);
-            let promiseDataNK600 = Promise.resolve(roundNK600);
-
-            //Общая загрузка
-            promiseDataKim.then(value => {
-                promiseDataNK600.then(value1 => {
-                    let workKimArray = averageMonthdata(value.work.map(Number))
-                    let pauseKimArray = averageMonthdata(value.pause.map(Number))
-                    let offKimArray = averageMonthdata(value.off.map(Number))
-                    let avarKimArray = averageMonthdata(value.avar.map(Number))
-                    let nagruzkaKimArray = averageMonthdata(value.nagruzka.map(Number))
-
-                    let workNK600Array = averageMonthdata(value1.work.map(Number))
-                    let pauseNK600Array = averageMonthdata(value1.pause.map(Number))
-                    let offNK600Array = averageMonthdata(value1.off.map(Number))
-                    let avarNK600Array = averageMonthdata(value1.avar.map(Number))
-                    let nagruzkaNK600Array = averageMonthdata(value1.nagruzka.map(Number))
-
-
-                    highChartTotal(complexName, [workKimArray,workNK600Array],
-                        [pauseKimArray,pauseNK600Array],
-                        [offKimArray,offNK600Array],
-                        [avarKimArray,avarNK600Array],
-                        [nagruzkaKimArray,nagruzkaNK600Array], 'ручной')
-
-                    highChartTotalRound(averageMonthdata([workKimArray,workNK600Array]),averageMonthdata([pauseKimArray,pauseNK600Array]),
-                        averageMonthdata([offKimArray,offNK600Array]),averageMonthdata([avarKimArray,avarNK600Array]),
-                        averageMonthdata([nagruzkaKimArray,nagruzkaNK600Array]),'Ручной')
-                })
-            })
-
-        }
-
-        setStateButtonUpdate([true,"buttonUpdateMonth load"])
-        timeout= setTimeout(disabledButton, 1000)
-
-    }
-
-    function fetchHighCharts(complexName, dateInput, idContainer) {
-        return fetch(`../api/monthData/${complexName}_month_date:${dateInput}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                highChartMonthLine(data.work, data.pause, data.off, data.avar, data.nagruzka, idContainer)
-                highChartMonthRound(averageMonthdata(data.work), averageMonthdata(data.pause), averageMonthdata(data.off),
-                    averageMonthdata(data.avar),  averageMonthdata(data.nagruzka), 'Ручной', idContainer)
-                return data
-            })
-    }
-
-
-    function averageMonthdata(inputArray) {
-        let sum = inputArray.reduce((a, b) => a + b, 0);
-        return (sum / inputArray.length) || 0;
 
     }
 
     return (
         <div>
-
-            <Header/>
 
             <MenuStanki menuSelected="otk"/>
 
@@ -154,13 +108,13 @@ function OtkMonth() {
             </div>
 
             <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}/>
+                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"}/>
                 <div className="lineSukiHighChart" id="containerLine1"></div>
                 <div className="roundSukiHighChart" id="containerRound1"></div>
             </div>
 
             <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}/>
+                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh2"}/>
                 <div className="lineSukiHighChart" id="containerLine2"></div>
                 <div className="roundSukiHighChart" id="containerRound2"></div>
             </div>

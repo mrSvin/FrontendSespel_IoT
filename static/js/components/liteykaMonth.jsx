@@ -3,7 +3,7 @@ function LiteykaMonth() {
     let complexName = ["Печь Индукционная"]
     let complexImg = ["../images/pech.png"]
 
-    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/1_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs1 = [-125, 180, 'url(../images/pech.png) no-repeat', "../images/ceh_1.png", 70, "100%"]
 
     let [dateMonth, setDateMonth] = useState(0);
     let [stateButtonUpdate, setStateButtonUpdate] = useState([false, "buttonUpdateMonth"])
@@ -16,30 +16,7 @@ function LiteykaMonth() {
             monthNow = '0' + monthNow
         }
 
-        let roundKim = fetchHighCharts('pech_nerg', `${yearNow}-${monthNow}`, 1)
-
-        let promiseDataKim = Promise.resolve(roundKim);
-
-        //Общая загрузка
-        promiseDataKim.then(value => {
-
-            let workKimArray = averageMonthdata(value.work.map(Number))
-            let pauseKimArray = averageMonthdata(value.pause.map(Number))
-            let offKimArray = averageMonthdata(value.off.map(Number))
-            let avarKimArray = averageMonthdata(value.avar.map(Number))
-            let nagruzkaKimArray = averageMonthdata(value.nagruzka.map(Number))
-
-            highChartTotal(complexName, [workKimArray],
-                [pauseKimArray],
-                [offKimArray],
-                [avarKimArray],
-                [nagruzkaKimArray], 'Нагрзука')
-
-            highChartTotalRound(averageMonthdata([workKimArray]), averageMonthdata([pauseKimArray]),
-                averageMonthdata([offKimArray]), averageMonthdata([avarKimArray]),
-                averageMonthdata([nagruzkaKimArray]), 'Нагрзука')
-
-        })
+        updateLoadDataMonth(`${yearNow}-${monthNow}`)
 
     }, [])
 
@@ -58,30 +35,7 @@ function LiteykaMonth() {
         if (dateMonth != "0") {
             console.log(dateMonth)
 
-            let roundKim = fetchHighCharts('pech_nerg', `${dateMonth}`, 1)
-
-            let promiseDataKim = Promise.resolve(roundKim);
-
-            //Общая загрузка
-            promiseDataKim.then(value => {
-
-                let workKimArray = averageMonthdata(value.work.map(Number))
-                let pauseKimArray = averageMonthdata(value.pause.map(Number))
-                let offKimArray = averageMonthdata(value.off.map(Number))
-                let avarKimArray = averageMonthdata(value.avar.map(Number))
-                let nagruzkaKimArray = averageMonthdata(value.nagruzka.map(Number))
-
-                highChartTotal(complexName, [workKimArray],
-                    [pauseKimArray],
-                    [offKimArray],
-                    [avarKimArray],
-                    [nagruzkaKimArray], 'Нагрзука')
-
-                highChartTotalRound(averageMonthdata([workKimArray]), averageMonthdata([pauseKimArray]),
-                    averageMonthdata([offKimArray]), averageMonthdata([avarKimArray]),
-                    averageMonthdata([nagruzkaKimArray]), 'Нагрзука')
-
-            })
+            updateLoadDataMonth(dateMonth)
 
         }
 
@@ -90,28 +44,37 @@ function LiteykaMonth() {
 
     }
 
-    function fetchHighCharts(complexName, dateInput, idContainer) {
-        return fetch(`../api/monthData/${complexName}_month_date:${dateInput}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                highChartMonthLine(data.work, data.pause, data.off, data.avar, data.nagruzka, idContainer)
-                highChartMonthRound(averageMonthdata(data.work), averageMonthdata(data.pause), averageMonthdata(data.off),
-                    averageMonthdata(data.avar), averageMonthdata(data.nagruzka), 'Нагрзука', idContainer)
-                return data
-            })
-    }
+    function updateLoadDataMonth(dateInput) {
 
+        let roundKim = fetchMonthHighCharts('pech_nerg', dateInput, 1)
 
-    function averageMonthdata(inputArray) {
-        let sum = inputArray.reduce((a, b) => a + b, 0);
-        return (sum / inputArray.length) || 0;
+        let promiseDataKim = Promise.resolve(roundKim);
+
+        //Общая загрузка
+        promiseDataKim.then(value => {
+
+            let workKimArray = averageMonthdata(value.work.map(Number))
+            let pauseKimArray = averageMonthdata(value.pause.map(Number))
+            let offKimArray = averageMonthdata(value.off.map(Number))
+            let avarKimArray = averageMonthdata(value.avar.map(Number))
+            let nagruzkaKimArray = averageMonthdata(value.nagruzka.map(Number))
+
+            highChartTotal(complexName, [workKimArray],
+                [pauseKimArray],
+                [offKimArray],
+                [avarKimArray],
+                [nagruzkaKimArray], 'Нагрузка')
+
+            highChartRound(averageMonthdata([workKimArray]), averageMonthdata([pauseKimArray]),
+                averageMonthdata([offKimArray]), averageMonthdata([avarKimArray]),
+                averageMonthdata([nagruzkaKimArray]), 'Нагрузка', 'Total')
+
+        })
 
     }
 
     return (
         <div>
-
-            <Header/>
 
             <MenuStanki menuSelected="liteyka"/>
 
@@ -135,7 +98,7 @@ function LiteykaMonth() {
             </div>
 
             <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}/>
+                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh1"}/>
                 <div className="lineSukiHighChart" id="containerLine1"></div>
                 <div className="roundSukiHighChart" id="containerRound1"></div>
             </div>
