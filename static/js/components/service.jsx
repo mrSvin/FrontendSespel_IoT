@@ -51,7 +51,7 @@ function Service() {
                     </tbody>
                 </table>
             </div>
-            <form className="formService" method="post" action="" id="form_teh">
+            <form className="formService" method="get" action="" id="form_teh">
                 <span id="formClose">ₓ</span>
                 <div className="formFill">
                     <h2 className="formServiceName">Проведение тех. обслуживания</h2>
