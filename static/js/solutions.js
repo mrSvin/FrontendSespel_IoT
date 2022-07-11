@@ -307,3 +307,98 @@ function convertDaysToSmena(today, yesterday, calendarDate=null) {
 
     return [smena_1, smena_2]
 }
+
+function pars(arrayParse, y, date, arrayName = null) {
+
+    arrayParse = addLastTime(arrayParse, date)
+
+    var index_pars = 0; // Индекс по одному из циклов
+    var arraySave = [] // Массив, который будет заполняться
+
+    // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
+    var lengh = arrayParse.length
+    if (lengh <= 1) {
+        return
+    }
+
+    if (lengh >= 4) {
+        if (lengh % 2 == 1) lengh -= 1
+        lengh = (lengh - lengh % 2) / 2
+    } else lengh = 1
+
+    // Если имя программы не передано в функцию, то массив формируется без нее
+    if (arrayName == null) {
+        while (index_pars < lengh) {   // Парсинг
+            arraySave.push({
+                x: (new Date(arrayParse[index_pars * 2])).getTime(),
+                x2: (new Date(arrayParse[index_pars * 2 + 1])).getTime(),
+                y: y
+            })
+            index_pars += 1;
+        }
+    }
+    // Иначе в массив парсится переданный массив с именем программы
+    else {
+        while (index_pars < lengh) {   // Парсинг
+            arraySave.push({
+                x: (new Date(arrayParse[index_pars * 2])).getTime(),
+                x2: (new Date(arrayParse[index_pars * 2 + 1])).getTime(),
+                y: y,
+                programname: arrayName[index_pars]
+            })
+            index_pars += 1;
+        }
+    }
+    // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
+    arraySave = addLastTime(arraySave, date)
+
+    return arraySave
+}
+
+function addLastTime(stanok, calendarDate) {
+
+    let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    time = time.slice(0, 10) + " " + time.slice(11, 19);
+
+    if (stanok.length % 2 == 1) {
+        if (calendarDate == time.slice(0, 10)) {   // То добавить во вторую смену текущее время
+            stanok.push(calendarDate + " " + time.slice(11, 19))
+        } else {
+            stanok.push(calendarDate + ' 23:59:59')
+        }
+    }
+
+    return stanok
+}
+
+// Функция вычисляет количества операций, аргумент массив работы
+function kolOperations(arrayWork) {
+
+    let index_pars = 0; // Индекс по одному из циклов
+    let array_kol_op = [0, 0];
+
+    // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
+    let lengh = arrayWork.length
+    if (lengh <= 1) {
+        return [0, 0]
+    }
+
+    if (lengh >= 4) {
+        if (lengh % 2 == 1) lengh -= 1
+        lengh = (lengh - lengh % 2) / 2
+    } else lengh = 1
+
+    while (index_pars < lengh) {   // Условие обычной операции
+        if (new Date(arrayWork[index_pars * 2]).getTime() !== (new Date(arrayWork[index_pars * 2 + 1])).getTime()) {
+            array_kol_op[0] += 1;
+        }
+
+        // Условие обычной больше 180 секунд(3 минуты)
+        if ((new Date(arrayWork[index_pars * 2 + 1])).getTime() - (new Date(arrayWork[index_pars * 2])).getTime() > 180000) {
+            array_kol_op[1] += 1;
+        }
+
+        index_pars += 1;
+    }
+    return [array_kol_op[0], array_kol_op[1]];
+}
