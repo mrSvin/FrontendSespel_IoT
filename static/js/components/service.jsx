@@ -62,7 +62,7 @@ function Service() {
                 </table>
             </div>
             {formAddService==true ?
-                <form className="formService" method="get" action="" id="form_teh">
+                <form className="formService" method="get" action="javascript:void(0);" id="form_teh">
                     <span id="formClose"
                           onClick={() => {
                               setFormAddService(false)
@@ -77,9 +77,9 @@ function Service() {
                         <div className="divPeriod">
                             <h3>Период до следующего тех. обслуживания</h3>
                             <select id="listPeriods" name="addPeriod">
-                                <option label="3 месяца" value="3"></option>
-                                <option label="6 месяцев" value="6"></option>
-                                <option label="1 год" value="12"></option>
+                                <option label="3 месяца" value="7884000"></option>
+                                <option label="6 месяцев" value="15768000"></option>
+                                <option label="1 год" value="31536000"></option>
                             </select>
                         </div>
                         <input id="submit" type="submit" value="Подтвердить"/>
