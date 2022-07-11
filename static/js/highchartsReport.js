@@ -71,7 +71,7 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
             title: {
                 text: ''
             },
-            categories: ['Работа', 'Ожидание', 'Выключен', 'В аварии', 'Ручной'],
+            categories: ['Работа', 'Ожидание', 'Выключен', 'В аварии', nagruzkaName],
             reversed: true,
             labels: {
                 style: {
@@ -591,7 +591,7 @@ function highChartServiceHistory(ArrayTeh, timeNext) {
             type: 'xrange'
         },
         title: {
-            text: 'Проведенные тех. обсуживания',
+            text: 'История проведенных тех. обслуживаний',
             style: {
                 color: '#FFF',
                 fontWeight: 'bold',
@@ -723,7 +723,7 @@ function highChartServiceNow(ArrayTeh, timeNext) {
             type: 'xrange'
         },
         title: {
-            text: 'Времени  до следующего тех. обслуживания',
+            text: 'Текущее состояние до следующего тех обслуживания',
             style: {
                 color: '#FFF',
                 fontWeight: 'bold',
