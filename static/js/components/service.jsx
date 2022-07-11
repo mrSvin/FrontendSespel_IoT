@@ -67,7 +67,7 @@ function Service() {
                             <option label="1 год" value="31536000"></option>
                         </select>
                     </div>
-                    <input id="submit" type="button" value="Подтвердить"/>
+                    <input id="submit" type="submit" value="Подтвердить"/>
                 </div>
             </form>
             <div id="overlay_add"></div>
