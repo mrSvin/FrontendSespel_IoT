@@ -71,7 +71,7 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
             title: {
                 text: ''
             },
-            categories: ['Работа', 'Ожидание', 'Выключен', 'В аварии', nagruzkaName],
+            categories: [nagruzkaName, 'Работа', 'Ожидание', 'Выключен', 'В аварии'],
             reversed: true,
             labels: {
                 style: {
