@@ -80,8 +80,9 @@ function Service() {
         // Вставка пробела при необходимости
         if(!isNaN(nameToFetch[nameToFetch.length-1])){
             h1 = nameToFetch.slice(0, nameToFetch.length-1) + ' ' + nameToFetch.slice(nameToFetch.length-1)
+            h1 = decodeURI(h1)
         }
-        else  h1 = nameToFetch
+        else  h1 = decodeURI(nameToFetch)
 
         // Заголовок с именем станка на странице
         setNameComplex(h1)
