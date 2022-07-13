@@ -4,7 +4,7 @@ function Service() {
 
     let [nameComplex, setNameComplex] = useState("null");
 
-    let [infoWorks, setInfoWorks] = useState("null");
+    const [infoWorks, setInfoWorks] = useState(''); // '' is the initial state value
 
     useEffect(() => {
 
@@ -28,8 +28,6 @@ function Service() {
         // Заголовок с именем станка на странице
         setNameComplex(h1)
         setInfoWorks('Какое-то слово')
-
-        console.log('Имя профиля',dataProfile.userName)
 
         console.log(nameComplex)
 
@@ -104,9 +102,11 @@ function Service() {
                         <div className='divWorksPass'>
                             <h3>Проведенные работы</h3>
                             <textarea id="story" name="story" placeholder="Введите список проведенных работ.."
-                                      onChange={() => {
-                                          console.log('Проверка')
-                                      }}/>
+                                      value={infoWorks} onChange={e => {
+                                console.log(e.target.value)
+                                setInfoWorks(e.target.value)
+                                      }}
+                            />
                         </div>
                         <div className="divPeriod">
                             <h3>Период до следующего тех. обслуживания</h3>
