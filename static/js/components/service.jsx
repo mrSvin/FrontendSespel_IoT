@@ -1,10 +1,68 @@
 function Service() {
 
+    function getDataTehWork(complexName) {
+        let url = `http://192.168.3.41:8086/api/serviceInfo/${complexName}`
+
+        return fetch(url, {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            // Получение массива с полями
+            .then(response => {
+                let allServiceArray = response.map(item => {
+                        return item.time_service.slice(0, 10) + ' ' + item.time_service.slice(11,19)
+                    }
+                )
+                let lastPeriod = response[response.length-1].period_service
+                console.log(allServiceArray, lastPeriod)
+                highChartServiceHistory(allServiceArray)
+                highChartServiceNow(allServiceArray, lastPeriod*1000)
+            })
+    }
+
+    function makeTehWork(complexName, userName, infoWorks, periodService) {
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let raw = JSON.stringify({
+            "complexName": complexName,
+            "userName": userName,
+            "infoWorks": infoWorks,
+            "periodSrvice": periodService
+        });
+
+        let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+
+        fetch("http://192.168.3.41:8086/api/addService", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                console.log('Запрос прошел', result)
+                if(result==='ok') {
+                    getDataTehWork(complexName)
+                }
+            })
+            .catch(error => console.log('Ошибка, недостаточно прав', error));
+
+    }
+
+
+    let userName = 'buklov_av'
+    let complexName = 'Навигатор1'
+
+
     let [formAddService, setFormAddService] = useState(false);
 
     let [nameComplex, setNameComplex] = useState("null");
 
-    const [infoWorks, setInfoWorks] = useState(''); // '' is the initial state value
+    const [infoWorks, setInfoWorks] = useState('');
+
+    const [periodService, setPeriodService] = useState('7884000');
 
     useEffect(() => {
 
@@ -27,14 +85,8 @@ function Service() {
 
         // Заголовок с именем станка на странице
         setNameComplex(h1)
-        setInfoWorks('Какое-то слово')
 
-        console.log(nameComplex)
-
-        let allServiceArray = ['2020-06-12 13:52:03', '2021-01-05 18:00:09', '2021-12-17 12:33:18']
-
-        highChartServiceHistory(allServiceArray)
-        highChartServiceNow(allServiceArray,31536000000)
+        getDataTehWork(complexName)
     }, [])
 
 
@@ -110,7 +162,11 @@ function Service() {
                         </div>
                         <div className="divPeriod">
                             <h3>Период до следующего тех. обслуживания</h3>
-                            <select id="listPeriods" name="addPeriod">
+                            <select id="listPeriods" name="addPeriod"
+                                    value={periodService} onChange={e => {
+                                console.log(e.target.value)
+                                setPeriodService(e.target.value)
+                            }}>
                                 <option label="3 месяца" value="7884000"></option>
                                 <option label="6 месяцев" value="15768000"></option>
                                 <option label="1 год" value="31536000"></option>
@@ -118,7 +174,8 @@ function Service() {
                         </div>
                         <input id="submit" type="button" value="Подтвердить"
                                onClick={() => {
-                                   console.log('Проверка')
+                                   console.log('Пуск')
+                                   makeTehWork(complexName, userName, infoWorks, periodService)
                                }}
                         />
                     </div>
