@@ -408,3 +408,68 @@ function averageMonthdata(inputArray) {
     return (sum / inputArray.length) || 0;
 
 }
+
+// Эта функция вызывается сразу внутри makeTehWork()
+// она опрашивает данные о комплексе и перерисовывает графики с новыми данными
+function getDataTehWork(complexName) {
+    let url = `http://192.168.3.41:8086/api/serviceInfo/${complexName}`
+
+    return fetch(url, {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        // Получение массива с полями
+        .then(response => {
+            let allServiceArray = response.map(item => {
+                    return item.time_service.slice(0, 10) + ' ' + item.time_service.slice(11,19)
+                }
+            )
+            let lastPeriod = response[response.length-1].period_service
+            console.log(allServiceArray, lastPeriod)
+            highChartServiceHistory(allServiceArray)
+            highChartServiceNow(allServiceArray, lastPeriod*1000)
+        })
+}
+
+// Проведение тех осмотра при нажатии кнопки
+function makeTehWork() {
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    // В функцию нужно передать имя комплекса для запроса, как его получить из React?
+    let complexName = document.getElementsByClassName('serviceContainer')[0].getElementsByTagName('h1')[0].innerHTML.slice(25)
+
+    // Имя пользователя, у меня тут все получено через чистый JS, а через react
+    let userName = document.getElementsByClassName('nameInfo')[0].innerHTML
+
+    // Информация о проделанной работе
+    let infoWorks = document.getElementById('story').value
+    // Выбранный период
+    let periodService = document.getElementById('listPeriods').value
+
+    let raw = JSON.stringify({
+        "complexName": complexName,
+        "userName": userName,
+        "infoWorks": infoWorks,
+        "periodSrvice": periodService
+    });
+
+    let requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+
+    fetch("http://192.168.3.41:8086/api/addService", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            console.log('Запрос прошел', result)
+            if(result==='ok') {
+                getDataTehWork(complexName)
+            }
+        })
+        .catch(error => console.log('Ошибка, недостаточно прав', error));
+
+}
