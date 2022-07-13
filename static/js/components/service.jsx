@@ -86,7 +86,7 @@ function Service() {
         // Заголовок с именем станка на странице
         setNameComplex(h1)
 
-        getDataTehWork(complexName)
+        getDataTehWork(nameToFetch)
     }, [])
 
 
@@ -97,7 +97,7 @@ function Service() {
 
             <div className='serviceContainer'>
                 <h1>Тех. обслуживания станка {nameComplex}</h1>
-                <img className="serviceImg" src='../images/navigator.png'/>
+                <img className="serviceImg" src='/images/navigator.png'/>
                 <div className="oneLineGraph" id="timeToLastService"></div>
                 <div className="oneLineGraph" id="allService"></div>
                 <button className='buttonTehno' id='startTehno'
