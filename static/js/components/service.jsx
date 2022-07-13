@@ -24,9 +24,9 @@ function Service() {
         else  h1 = nameToFetch
 
         // Заголовок с именем станка на странице
-        setNameComplex('---- 1')
+        setNameComplex(h1)
 
-        console.log('Заголовочные данные',nameToFetch, h1)
+        console.log(nameComplex)
 
         let allServiceArray = ['2020-06-12 13:52:03', '2021-01-05 18:00:09', '2021-12-17 12:33:18']
 
@@ -41,7 +41,7 @@ function Service() {
         <div>
 
             <div className='serviceContainer'>
-                <h1>Тех. обслуживания станка ${nameComplex}</h1>
+                <h1>Тех. обслуживания станка {nameComplex}</h1>
                 <img className="serviceImg" src='../images/navigator.png'/>
                 <div className="oneLineGraph" id="timeToLastService"></div>
                 <div className="oneLineGraph" id="allService"></div>
