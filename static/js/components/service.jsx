@@ -4,6 +4,8 @@ function Service() {
 
     let [nameComplex, setNameComplex] = useState("null");
 
+    let [infoWorks, setInfoWorks] = useState("null");
+
     useEffect(() => {
 
         // Получения имени станка из адресной строки
@@ -25,6 +27,9 @@ function Service() {
 
         // Заголовок с именем станка на странице
         setNameComplex(h1)
+        setInfoWorks('Какое-то слово')
+
+        console.log('Имя профиля',dataProfile.userName)
 
         console.log(nameComplex)
 
@@ -98,7 +103,10 @@ function Service() {
                         <h2 className="formServiceName">Проведение тех. обслуживания</h2>
                         <div className='divWorksPass'>
                             <h3>Проведенные работы</h3>
-                            <textarea id="story" name="story" placeholder="Введите список проведенных работ.."/>
+                            <textarea id="story" name="story" placeholder="Введите список проведенных работ.."
+                                      onChange={() => {
+                                          console.log('Проверка')
+                                      }}/>
                         </div>
                         <div className="divPeriod">
                             <h3>Период до следующего тех. обслуживания</h3>
