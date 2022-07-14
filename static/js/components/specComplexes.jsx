@@ -7,50 +7,16 @@ function SpecComplexesInfo() {
     let buttonsVrs2 = [-825, 220, 'url(../images/epp.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
     let buttonsVrs3 = [-310, 550, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
 
-    let [kimData, setKimData] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [nk600Data, setNk600Data] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [stp13m, setStp13m] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
+    let bufferData = bufferDataArrays(3)
 
 
     let [date, setDate] = useState(0);
 
     useEffect(() => {
-        let dateNow = new Date()
-        let dayNow = dateNow.getDate()
-        let monthNow = dateNow.getMonth() + 1
-        let yearNow = dateNow.getFullYear()
-        if (dayNow < 10) {
-            dayNow = "0" + dayNow
-        }
-        if (monthNow < 10) {
-            monthNow = "0" + monthNow
-        }
-        setDate(`${yearNow}-${monthNow}-${dayNow}`)
 
-        updateLoadData(`${yearNow}-${monthNow}-${dayNow}`)
+        setDate(dayNow())
+
+        updateLoadData(dayNow())
 
     }, [])
 
@@ -64,9 +30,9 @@ function SpecComplexesInfo() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, kimData, 'press', 1)
-        let roundNK600 = fetchRequestBuildHC(dateInput, nk600Data, 'epp', 2)
-        let roundStp13m = fetchRequestBuildHC(dateInput, stp13m, 'stp13m', 3)
+        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'press', 1)
+        let roundNK600 = fetchRequestBuildHC(dateInput, bufferData[1], 'epp', 2)
+        let roundStp13m = fetchRequestBuildHC(dateInput, bufferData[2], 'stp13m', 3)
 
 
         let promiseDataKim = Promise.resolve(roundKim);
@@ -115,30 +81,11 @@ function SpecComplexesInfo() {
 
             <DayCalendar newDate={newDate} date={date}/>
 
-            <div className='complexAllInfo'>
-                <div className='totalRound' id="containerTotal"></div>
+            <ComplexTotalSutkiInfo/>
 
-                <div className='countOperations' id='containerOperations'></div>
-
-            </div>
-
-            <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine1"></div>
-                <div className="roundSukiHighChart" id="containerRound1"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"}/>
-                <div className="lineSukiHighChart" id="containerLine2"></div>
-                <div className="roundSukiHighChart" id="containerRound2"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"}/>
-                <div className="lineSukiHighChart" id="containerLine3"></div>
-                <div className="roundSukiHighChart" id="containerRound3"></div>
-            </div>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1}/>
+            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"} idContainer = {2}/>
+            <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {3}/>
 
         </div>
     )
@@ -152,17 +99,7 @@ function SpecComplexes() {
 
             <MenuStanki menuSelected="specComplexes"/>
 
-            <div className="buttons-otchet">
-
-                <Link to="/stanki/specComplexes">
-                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/specComplexesMonth">
-                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-            </div>
+            <MenuOtchet select="sutki" page='specComplexes'/>
 
             <SpecComplexesInfo/>
 

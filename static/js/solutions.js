@@ -409,67 +409,55 @@ function averageMonthdata(inputArray) {
 
 }
 
-// Эта функция вызывается сразу внутри makeTehWork()
-// она опрашивает данные о комплексе и перерисовывает графики с новыми данными
-function getDataTehWork(complexName) {
-    let url = `http://192.168.3.41:8086/api/serviceInfo/${complexName}`
+function dayNow() {
 
-    return fetch(url, {
-        method: 'GET'
-    })
-        .then(response => response.json())
-        // Получение массива с полями
-        .then(response => {
-            let allServiceArray = response.map(item => {
-                    return item.time_service.slice(0, 10) + ' ' + item.time_service.slice(11,19)
-                }
-            )
-            let lastPeriod = response[response.length-1].period_service
-            console.log(allServiceArray, lastPeriod)
-            highChartServiceHistory(allServiceArray)
-            highChartServiceNow(allServiceArray, lastPeriod*1000)
-        })
+    let dateNow = new Date()
+    let dayNow = dateNow.getDate()
+    let monthNow = dateNow.getMonth() + 1
+    let yearNow = dateNow.getFullYear()
+    if (dayNow < 10) {
+        dayNow = "0" + dayNow
+    }
+    if (monthNow < 10) {
+        monthNow = "0" + monthNow
+    }
+
+    return `${yearNow}-${monthNow}-${dayNow}`
 }
 
-// Проведение тех осмотра при нажатии кнопки
-function makeTehWork() {
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+function dayYesterday(startTime) {
 
-    // В функцию нужно передать имя комплекса для запроса, как его получить из React?
-    let complexName = document.getElementsByClassName('serviceContainer')[0].getElementsByTagName('h1')[0].innerHTML.slice(25)
+    return  new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
+}
 
-    // Имя пользователя, у меня тут все получено через чистый JS, а через react
-    let userName = document.getElementsByClassName('nameInfo')[0].innerHTML
+function monthNow() {
+    let yearNow = new Date().getFullYear()
+    let monthNow = new Date().getMonth()+1
+    if (monthNow<10) {
+        monthNow = '0' + monthNow
+    }
+    return `${yearNow}-${monthNow}`
+}
 
-    // Информация о проделанной работе
-    let infoWorks = document.getElementById('story').value
-    // Выбранный период
-    let periodService = document.getElementById('listPeriods').value
-
-    let raw = JSON.stringify({
-        "complexName": complexName,
-        "userName": userName,
-        "infoWorks": infoWorks,
-        "periodSrvice": periodService
-    });
-
-    let requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-
-
-    fetch("http://192.168.3.41:8086/api/addService", requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            console.log('Запрос прошел', result)
-            if(result==='ok') {
-                getDataTehWork(complexName)
-            }
+function bufferDataArrays(count) {
+    let arraysData = []
+    for (var i = 0; i <= count; i++) {
+        arraysData.push({
+            workArray: [],
+            pauseArray: [],
+            offArray: [],
+            avarArray: [],
+            ruchnoyArray: [],
+            roundArray: []
         })
-        .catch(error => console.log('Ошибка, недостаточно прав', error));
 
+    }
+    return arraysData
+}
+
+function parseNameUrl(url) {
+    let form_path = decodeURIComponent(url);
+    form_path.lastIndexOf("/")
+    let searchIndex= form_path.lastIndexOf("/")+1;
+    return  form_path.substr(searchIndex, form_path.length)
 }

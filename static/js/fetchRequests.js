@@ -55,3 +55,13 @@ function fetchMonthHighCharts(complexName, dateInput, idContainer) {
             })
 }
 
+function fetchRequestServiceInfo(complexName) {
+
+    let url = `http://192.168.3.41:8086/api/serviceInfo/${complexName}`
+
+    return fetch(url, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}

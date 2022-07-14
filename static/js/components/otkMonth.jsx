@@ -11,13 +11,8 @@ function OtkMonth() {
     let timeout=null;
 
     useEffect(() => {
-        let yearNow = new Date().getFullYear()
-        let monthNow = new Date().getMonth()+1
-        if (monthNow<10) {
-            monthNow = '0' + monthNow
-        }
 
-        updateLoadData(`${yearNow}-${monthNow}`)
+        updateLoadDataMonth( monthNow())
 
     }, [])
 
@@ -45,7 +40,7 @@ function OtkMonth() {
 
     }
 
-    function updateLoadData(dateInput) {
+    function updateLoadDataMonth(dateInput) {
 
         let roundKim = fetchMonthHighCharts('kim', dateInput,1)
         let roundNK600 = fetchMonthHighCharts('nk600', dateInput,2)
@@ -88,36 +83,14 @@ function OtkMonth() {
 
             <MenuStanki menuSelected="otk"/>
 
-            <div className="buttons-otchet">
-
-                <Link to="/stanki/otk">
-                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/otkMonth">
-                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-            </div>
+            <MenuOtchet select="month" page='otk'/>
 
             <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate = {stateButtonUpdate}/>
 
-            <div className='complexAllInfo'>
-                <div className='totalRound' id="containerTotal"></div>
-                <div className="totalRound" id="containerRoundTotal"></div>
-            </div>
+            <ComplexTotalMonthInfo/>
 
-            <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"}/>
-                <div className="lineSukiHighChart" id="containerLine1"></div>
-                <div className="roundSukiHighChart" id="containerRound1"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh2"}/>
-                <div className="lineSukiHighChart" id="containerLine2"></div>
-                <div className="roundSukiHighChart" id="containerRound2"></div>
-            </div>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1} programs={complexName[0]}/>
+            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh2"} idContainer = {2}/>
 
         </div>
     )

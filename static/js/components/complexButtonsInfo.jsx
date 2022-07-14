@@ -1,3 +1,15 @@
+function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser}) {
+    let idLine = `containerLine${idContainer}`
+    let idRound = `containerRound${idContainer}`
+    return (
+        <div className='complexAllInfo'>
+            <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs ={programs} laser ={laser}/>
+            <div className="lineSukiHighChart" id={idLine}></div>
+            <div className="roundSukiHighChart" id={idRound}></div>
+        </div>
+    )
+}
+
 function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, programs, laser}) {
     return (
         <div className="parent_image">
@@ -12,6 +24,32 @@ function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, progra
 
             <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser}/>
 
+        </div>
+    )
+}
+
+function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser}) {
+    let idLine = `containerLine${idContainer}`
+    let idRound = `containerRound${idContainer}`
+
+    let idLine2 = `containerLine${idContainer+1}`
+    let idRound2 = `containerRound${idContainer+1}`
+    return (
+        <div className='complexAllInfo' id={'containerTotal'}>
+            <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto}
+                         size={size} programs={programs} laser={laser} alarm={alarm}/>
+            <div className='twoDayDiv'>
+                <h1 className="timeInfoSmena">Работа II смены 19:00 - 07:00</h1>
+                <div className='oneDay'>
+                    <div className="lineSukiHighChart" id={idLine}></div>
+                    <div className="roundSukiHighChart" id={idRound}></div>
+                </div>
+                <h1 className="timeInfoSmena">Работа I смены 07:00 - 19:00</h1>
+                <div className='oneDay'>
+                    <div className="lineSukiHighChart" id={idLine2}></div>
+                    <div className="roundSukiHighChart" id={idRound2}></div>
+                </div>
+            </div>
         </div>
     )
 }
@@ -144,6 +182,9 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             case 'TruLaser':
                 href = "../stanki/programTime/trulaser"
                 break
+            case 'CRYSTA-Apex S9168':
+                href = "../stanki/programTime/kim"
+                break
             default:
                 href = "../stanki/programTime/navigator_1"
         }
@@ -211,5 +252,23 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
 
         </div>
 
+    )
+}
+
+function ComplexTotalSutkiInfo() {
+    return (
+        <div className='complexAllInfo'>
+            <div className='totalRound' id="containerTotal"></div>
+            <div className='countOperations' id='containerOperations'></div>
+        </div>
+    )
+}
+
+function ComplexTotalMonthInfo() {
+    return (
+        <div className='complexAllInfo'>
+            <div className='totalRound' id="containerTotal"></div>
+            <div className="totalRound" id="containerRoundTotal"></div>
+        </div>
     )
 }

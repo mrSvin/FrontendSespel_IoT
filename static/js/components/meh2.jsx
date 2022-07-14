@@ -25,185 +25,15 @@ function Meh2Info() {
     let buttonsVrs17 = [-102, 143, 'url(../images/dmg_dmu50.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"]
     let buttonsVrs18 = [-98, 268, 'url(../images/ar50.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"]
 
-    let [kimData, setKimData] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [nk600Data, setNk600Data] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [stp13m, setStp13m] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [rtk12c, setRtk12c] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [p250, setP250] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [krot, setKrot] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [prans, setPrans] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex8, setComplex8] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex9, setComplex9] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex10, setComplex10] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex11, setComplex11] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex12, setComplex12] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex13, setComplex13] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex14, setComplex14] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex15, setComplex15] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex16, setComplex16] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex17, setComplex17] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
-    let [complex18, setComplex18] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
-
+    let bufferData = bufferDataArrays(18)
 
     let [date, setDate] = useState(0);
 
     useEffect(() => {
-        let dateNow = new Date()
-        let dayNow = dateNow.getDate()
-        let monthNow = dateNow.getMonth() + 1
-        let yearNow = dateNow.getFullYear()
-        if (dayNow < 10) {
-            dayNow = "0" + dayNow
-        }
-        if (monthNow < 10) {
-            monthNow = "0" + monthNow
-        }
-        setDate(`${yearNow}-${monthNow}-${dayNow}`)
 
-        updateLoadData(`${yearNow}-${monthNow}-${dayNow}`)
+        setDate(dayNow())
+
+        updateLoadData(dayNow())
 
     }, [])
 
@@ -216,25 +46,24 @@ function Meh2Info() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, kimData, 'uvf5220', 1)
-        let roundNK600 = fetchRequestBuildHC(dateInput, nk600Data, 'progress',2)
-        let roundStp13m = fetchRequestBuildHC(dateInput, stp13m, 'ntx1000_2', 3)
-        let roundRtc12c = fetchRequestBuildHC(dateInput, rtk12c, 'sk50', 4)
-        let roundP250 = fetchRequestBuildHC(dateInput, p250, 'apec',5)
-        let roundKrot = fetchRequestBuildHC(dateInput, krot, 'dmg_dmu50_3', 6)
-        let roundPrans = fetchRequestBuildHC(dateInput, prans, 'dmg_dmu50_4', 7)
-        let roundComplex8 = fetchRequestBuildHC(dateInput, complex8, 'dmg_ctx310_2', 8)
-        let roundComplex9 = fetchRequestBuildHC(dateInput, complex9, 'dmg_ctx510_2', 9)
-        let roundComplex10 = fetchRequestBuildHC(dateInput, complex10, 'dmg_ctx510_3', 10)
-        let roundComplex11 = fetchRequestBuildHC(dateInput, complex11, 'dmg_ctx310_3', 11)
-        let roundComplex12 = fetchRequestBuildHC(dateInput, complex12, 'dmg_ctx510_4', 12)
-        let roundComplex13 = fetchRequestBuildHC(dateInput, complex13, 'dmg_ctx510_5', 13)
-        let roundComplex14 = fetchRequestBuildHC(dateInput, complex14, 'dmg_dmc1035_2', 14)
-        let roundComplex15 = fetchRequestBuildHC(dateInput, complex15, 'dmg_dmu50_5', 15)
-        let roundComplex16 = fetchRequestBuildHC(dateInput, complex16, 'dmg_dmu50_6', 16)
-        let roundComplex17 = fetchRequestBuildHC(dateInput, complex17, 'dmg_dmu50_7', 17)
-        let roundComplex18 = fetchRequestBuildHC(dateInput, complex18, 'ar55', 18)
-
+        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'uvf5220', 1)
+        let roundNK600 = fetchRequestBuildHC(dateInput, bufferData[1], 'progress',2)
+        let roundStp13m = fetchRequestBuildHC(dateInput, bufferData[2], 'ntx1000_2', 3)
+        let roundRtc12c = fetchRequestBuildHC(dateInput, bufferData[3], 'sk50', 4)
+        let roundP250 = fetchRequestBuildHC(dateInput, bufferData[4], 'apec',5)
+        let roundKrot = fetchRequestBuildHC(dateInput, bufferData[5], 'dmg_dmu50_3', 6)
+        let roundPrans = fetchRequestBuildHC(dateInput, bufferData[6], 'dmg_dmu50_4', 7)
+        let roundComplex8 = fetchRequestBuildHC(dateInput, bufferData[7], 'dmg_ctx310_2', 8)
+        let roundComplex9 = fetchRequestBuildHC(dateInput, bufferData[8], 'dmg_ctx510_2', 9)
+        let roundComplex10 = fetchRequestBuildHC(dateInput, bufferData[9], 'dmg_ctx510_3', 10)
+        let roundComplex11 = fetchRequestBuildHC(dateInput, bufferData[10], 'dmg_ctx310_3', 11)
+        let roundComplex12 = fetchRequestBuildHC(dateInput, bufferData[11], 'dmg_ctx510_4', 12)
+        let roundComplex13 = fetchRequestBuildHC(dateInput, bufferData[12], 'dmg_ctx510_5', 13)
+        let roundComplex14 = fetchRequestBuildHC(dateInput, bufferData[13], 'dmg_dmc1035_2', 14)
+        let roundComplex15 = fetchRequestBuildHC(dateInput, bufferData[14], 'dmg_dmu50_5', 15)
+        let roundComplex16 = fetchRequestBuildHC(dateInput, bufferData[15], 'dmg_dmu50_6', 16)
+        let roundComplex17 = fetchRequestBuildHC(dateInput, bufferData[16], 'dmg_dmu50_7', 17)
+        let roundComplex18 = fetchRequestBuildHC(dateInput, bufferData[17], 'ar55', 18)
 
         let promiseDataKim = Promise.resolve(roundKim);
         let promiseDataNK600 = Promise.resolve(roundNK600);
@@ -408,120 +237,26 @@ function Meh2Info() {
 
             <DayCalendar newDate={newDate} date={date}/>
 
-            <div className='complexAllInfo'>
-                <div className='totalRound' id="containerTotal"></div>
+            <ComplexTotalSutkiInfo/>
 
-                <div className='countOperations' id='containerOperations'></div>
-
-            </div>
-
-            <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine1"></div>
-                <div className="roundSukiHighChart" id="containerRound1"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine2"></div>
-                <div className="roundSukiHighChart" id="containerRound2"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine3"></div>
-                <div className="roundSukiHighChart" id="containerRound3"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs4} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine4"></div>
-                <div className="roundSukiHighChart" id="containerRound4"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[4]} complexImg={complexImg[4]} complexMesto={buttonsVrs5} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine5"></div>
-                <div className="roundSukiHighChart" id="containerRound5"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[5]} complexImg={complexImg[5]} complexMesto={buttonsVrs6} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine6"></div>
-                <div className="roundSukiHighChart" id="containerRound6"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[6]} complexImg={complexImg[6]} complexMesto={buttonsVrs7} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine7"></div>
-                <div className="roundSukiHighChart" id="containerRound7"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[7]} complexImg={complexImg[7]} complexMesto={buttonsVrs8} size={"2ploshadka"}  alarm={complexName[7]}/>
-                <div className="lineSukiHighChart" id="containerLine8"></div>
-                <div className="roundSukiHighChart" id="containerRound8"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[8]} complexImg={complexImg[8]} complexMesto={buttonsVrs9} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine9"></div>
-                <div className="roundSukiHighChart" id="containerRound9"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[9]} complexImg={complexImg[9]} complexMesto={buttonsVrs10} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine10"></div>
-                <div className="roundSukiHighChart" id="containerRound10"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[10]} complexImg={complexImg[10]} complexMesto={buttonsVrs11} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine11"></div>
-                <div className="roundSukiHighChart" id="containerRound11"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[11]} complexImg={complexImg[11]} complexMesto={buttonsVrs12} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine12"></div>
-                <div className="roundSukiHighChart" id="containerRound12"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[12]} complexImg={complexImg[12]} complexMesto={buttonsVrs13} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine13"></div>
-                <div className="roundSukiHighChart" id="containerRound13"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[13]} complexImg={complexImg[13]} complexMesto={buttonsVrs14} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine14"></div>
-                <div className="roundSukiHighChart" id="containerRound14"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[14]} complexImg={complexImg[14]} complexMesto={buttonsVrs15} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine15"></div>
-                <div className="roundSukiHighChart" id="containerRound15"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[15]} complexImg={complexImg[15]} complexMesto={buttonsVrs16} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine16"></div>
-                <div className="roundSukiHighChart" id="containerRound16"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[16]} complexImg={complexImg[16]} complexMesto={buttonsVrs17} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine17"></div>
-                <div className="roundSukiHighChart" id="containerRound17"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[17]} complexImg={complexImg[17]} complexMesto={buttonsVrs18} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine18"></div>
-                <div className="roundSukiHighChart" id="containerRound18"></div>
-            </div>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1}/>
+            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"2ploshadka"} idContainer = {2}/>
+            <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"2ploshadka"} idContainer = {3}/>
+            <ComplexSutkiAllInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs4} size={"2ploshadka"} idContainer = {4}/>
+            <ComplexSutkiAllInfo complexName={complexName[4]} complexImg={complexImg[4]} complexMesto={buttonsVrs5} size={"2ploshadka"} idContainer = {5}/>
+            <ComplexSutkiAllInfo complexName={complexName[5]} complexImg={complexImg[5]} complexMesto={buttonsVrs6} size={"2ploshadka"} idContainer = {6}/>
+            <ComplexSutkiAllInfo complexName={complexName[6]} complexImg={complexImg[6]} complexMesto={buttonsVrs7} size={"2ploshadka"} idContainer = {7}/>
+            <ComplexSutkiAllInfo complexName={complexName[7]} complexImg={complexImg[7]} complexMesto={buttonsVrs8} size={"2ploshadka"} idContainer = {8} alarm={complexName[7]}/>
+            <ComplexSutkiAllInfo complexName={complexName[8]} complexImg={complexImg[8]} complexMesto={buttonsVrs9} size={"2ploshadka"} idContainer = {9}/>
+            <ComplexSutkiAllInfo complexName={complexName[9]} complexImg={complexImg[9]} complexMesto={buttonsVrs10} size={"2ploshadka"} idContainer = {10}/>
+            <ComplexSutkiAllInfo complexName={complexName[10]} complexImg={complexImg[10]} complexMesto={buttonsVrs11} size={"2ploshadka"} idContainer = {11}/>
+            <ComplexSutkiAllInfo complexName={complexName[11]} complexImg={complexImg[11]} complexMesto={buttonsVrs12} size={"2ploshadka"} idContainer = {12}/>
+            <ComplexSutkiAllInfo complexName={complexName[12]} complexImg={complexImg[12]} complexMesto={buttonsVrs13} size={"2ploshadka"} idContainer = {13}/>
+            <ComplexSutkiAllInfo complexName={complexName[13]} complexImg={complexImg[13]} complexMesto={buttonsVrs14} size={"2ploshadka"} idContainer = {14}/>
+            <ComplexSutkiAllInfo complexName={complexName[14]} complexImg={complexImg[14]} complexMesto={buttonsVrs15} size={"2ploshadka"} idContainer = {15}/>
+            <ComplexSutkiAllInfo complexName={complexName[15]} complexImg={complexImg[15]} complexMesto={buttonsVrs16} size={"2ploshadka"} idContainer = {16}/>
+            <ComplexSutkiAllInfo complexName={complexName[16]} complexImg={complexImg[16]} complexMesto={buttonsVrs17} size={"2ploshadka"} idContainer = {17}/>
+            <ComplexSutkiAllInfo complexName={complexName[17]} complexImg={complexImg[17]} complexMesto={buttonsVrs18} size={"2ploshadka"} idContainer = {18}/>
 
         </div>
     )
@@ -535,17 +270,7 @@ function Meh2() {
 
             <MenuStanki menuSelected="meh2"/>
 
-            <div className="buttons-otchet">
-
-                <Link to="/stanki/meh2">
-                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/meh2Month">
-                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-            </div>
+            <MenuOtchet select="sutki" page='meh2'/>
 
             <Meh2Info/>
 

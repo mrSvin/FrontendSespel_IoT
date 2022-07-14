@@ -30,13 +30,8 @@ function Meh2Month() {
     let timeout = null;
 
     useEffect(() => {
-        let yearNow = new Date().getFullYear()
-        let monthNow = new Date().getMonth() + 1
-        if (monthNow < 10) {
-            monthNow = '0' + monthNow
-        }
 
-        updateLoadDataMonth(`${yearNow}-${monthNow}`)
+        updateLoadDataMonth( monthNow())
 
     }, [])
 
@@ -272,132 +267,30 @@ function Meh2Month() {
 
             <MenuStanki menuSelected="meh2"/>
 
-            <div className="buttons-otchet">
-
-                <Link to="/stanki/meh2">
-                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/meh2Month">
-                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-            </div>
+            <MenuOtchet select="month" page='meh2'/>
 
             <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate={stateButtonUpdate}/>
 
-            <div className='complexAllInfo'>
-                <div className='totalRound' id="containerTotal"></div>
-                <div className="totalRound" id="containerRoundTotal"></div>
-            </div>
+            <ComplexTotalMonthInfo/>
 
-            <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine1"></div>
-                <div className="roundSukiHighChart" id="containerRound1"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine2"></div>
-                <div className="roundSukiHighChart" id="containerRound2"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine3"></div>
-                <div className="roundSukiHighChart" id="containerRound3"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs4} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine4"></div>
-                <div className="roundSukiHighChart" id="containerRound4"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[4]} complexImg={complexImg[4]} complexMesto={buttonsVrs5} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine5"></div>
-                <div className="roundSukiHighChart" id="containerRound5"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[5]} complexImg={complexImg[5]} complexMesto={buttonsVrs6} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine6"></div>
-                <div className="roundSukiHighChart" id="containerRound6"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[6]} complexImg={complexImg[6]} complexMesto={buttonsVrs7} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine7"></div>
-                <div className="roundSukiHighChart" id="containerRound7"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[7]} complexImg={complexImg[7]} complexMesto={buttonsVrs8} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine8"></div>
-                <div className="roundSukiHighChart" id="containerRound8"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[8]} complexImg={complexImg[8]} complexMesto={buttonsVrs9} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine9"></div>
-                <div className="roundSukiHighChart" id="containerRound9"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[9]} complexImg={complexImg[9]} complexMesto={buttonsVrs10} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine10"></div>
-                <div className="roundSukiHighChart" id="containerRound10"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[10]} complexImg={complexImg[10]} complexMesto={buttonsVrs11} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine11"></div>
-                <div className="roundSukiHighChart" id="containerRound11"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[11]} complexImg={complexImg[11]} complexMesto={buttonsVrs12} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine12"></div>
-                <div className="roundSukiHighChart" id="containerRound12"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[12]} complexImg={complexImg[12]} complexMesto={buttonsVrs13} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine13"></div>
-                <div className="roundSukiHighChart" id="containerRound13"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[13]} complexImg={complexImg[13]} complexMesto={buttonsVrs14} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine14"></div>
-                <div className="roundSukiHighChart" id="containerRound14"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[14]} complexImg={complexImg[14]} complexMesto={buttonsVrs15} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine15"></div>
-                <div className="roundSukiHighChart" id="containerRound15"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[15]} complexImg={complexImg[15]} complexMesto={buttonsVrs16} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine16"></div>
-                <div className="roundSukiHighChart" id="containerRound16"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[16]} complexImg={complexImg[16]} complexMesto={buttonsVrs17} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine17"></div>
-                <div className="roundSukiHighChart" id="containerRound17"></div>
-            </div>
-
-            <div className='complexAllInfo'>
-                <ComplexInfo complexName={complexName[17]} complexImg={complexImg[17]} complexMesto={buttonsVrs18} size={"2ploshadka"}/>
-                <div className="lineSukiHighChart" id="containerLine18"></div>
-                <div className="roundSukiHighChart" id="containerRound18"></div>
-            </div>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1}/>
+            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"2ploshadka"} idContainer = {2}/>
+            <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"2ploshadka"} idContainer = {3}/>
+            <ComplexSutkiAllInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs4} size={"2ploshadka"} idContainer = {4}/>
+            <ComplexSutkiAllInfo complexName={complexName[4]} complexImg={complexImg[4]} complexMesto={buttonsVrs5} size={"2ploshadka"} idContainer = {5}/>
+            <ComplexSutkiAllInfo complexName={complexName[5]} complexImg={complexImg[5]} complexMesto={buttonsVrs6} size={"2ploshadka"} idContainer = {6}/>
+            <ComplexSutkiAllInfo complexName={complexName[6]} complexImg={complexImg[6]} complexMesto={buttonsVrs7} size={"2ploshadka"} idContainer = {7}/>
+            <ComplexSutkiAllInfo complexName={complexName[7]} complexImg={complexImg[7]} complexMesto={buttonsVrs8} size={"2ploshadka"} idContainer = {8} alarm={complexName[7]}/>
+            <ComplexSutkiAllInfo complexName={complexName[8]} complexImg={complexImg[8]} complexMesto={buttonsVrs9} size={"2ploshadka"} idContainer = {9}/>
+            <ComplexSutkiAllInfo complexName={complexName[9]} complexImg={complexImg[9]} complexMesto={buttonsVrs10} size={"2ploshadka"} idContainer = {10}/>
+            <ComplexSutkiAllInfo complexName={complexName[10]} complexImg={complexImg[10]} complexMesto={buttonsVrs11} size={"2ploshadka"} idContainer = {11}/>
+            <ComplexSutkiAllInfo complexName={complexName[11]} complexImg={complexImg[11]} complexMesto={buttonsVrs12} size={"2ploshadka"} idContainer = {12}/>
+            <ComplexSutkiAllInfo complexName={complexName[12]} complexImg={complexImg[12]} complexMesto={buttonsVrs13} size={"2ploshadka"} idContainer = {13}/>
+            <ComplexSutkiAllInfo complexName={complexName[13]} complexImg={complexImg[13]} complexMesto={buttonsVrs14} size={"2ploshadka"} idContainer = {14}/>
+            <ComplexSutkiAllInfo complexName={complexName[14]} complexImg={complexImg[14]} complexMesto={buttonsVrs15} size={"2ploshadka"} idContainer = {15}/>
+            <ComplexSutkiAllInfo complexName={complexName[15]} complexImg={complexImg[15]} complexMesto={buttonsVrs16} size={"2ploshadka"} idContainer = {16}/>
+            <ComplexSutkiAllInfo complexName={complexName[16]} complexImg={complexImg[16]} complexMesto={buttonsVrs17} size={"2ploshadka"} idContainer = {17}/>
+            <ComplexSutkiAllInfo complexName={complexName[17]} complexImg={complexImg[17]} complexMesto={buttonsVrs18} size={"2ploshadka"} idContainer = {18}/>
 
         </div>
     )

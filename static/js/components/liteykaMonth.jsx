@@ -10,13 +10,8 @@ function LiteykaMonth() {
     let timeout = null;
 
     useEffect(() => {
-        let yearNow = new Date().getFullYear()
-        let monthNow = new Date().getMonth() + 1
-        if (monthNow < 10) {
-            monthNow = '0' + monthNow
-        }
 
-        updateLoadDataMonth(`${yearNow}-${monthNow}`)
+        updateLoadDataMonth( monthNow())
 
     }, [])
 
@@ -78,30 +73,13 @@ function LiteykaMonth() {
 
             <MenuStanki menuSelected="liteyka"/>
 
-            <div className="buttons-otchet">
-
-                <Link to="/stanki/liteyka">
-                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/liteykaMonth">
-                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-            </div>
+            <MenuOtchet select="month" page='liteyka'/>
 
             <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate={stateButtonUpdate}/>
 
-            <div className='complexAllInfo'>
-                <div className='totalRound' id="containerTotal"></div>
-                <div className="totalRound" id="containerRoundTotal"></div>
-            </div>
+            <ComplexTotalMonthInfo/>
 
-            <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh1"}/>
-                <div className="lineSukiHighChart" id="containerLine1"></div>
-                <div className="roundSukiHighChart" id="containerRound1"></div>
-            </div>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh1"} idContainer = {1}/>
 
         </div>
     )

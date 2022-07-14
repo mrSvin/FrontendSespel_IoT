@@ -10,36 +10,8 @@ function ScladsMonth() {
     let timeout=null;
 
     useEffect(() => {
-        let yearNow = new Date().getFullYear()
-        let monthNow = new Date().getMonth()+1
-        if (monthNow<10) {
-            monthNow = '0' + monthNow
-        }
 
-        let roundKim = fetchMonthHighCharts('sclad_meh', `${yearNow}-${monthNow}`,1)
-
-        let promiseDataKim = Promise.resolve(roundKim);
-
-        //Общая загрузка
-        promiseDataKim.then(value => {
-
-                let workKimArray = averageMonthdata(value.work.map(Number))
-                let pauseKimArray = averageMonthdata(value.pause.map(Number))
-                let offKimArray = averageMonthdata(value.off.map(Number))
-                let avarKimArray = averageMonthdata(value.avar.map(Number))
-                let nagruzkaKimArray = averageMonthdata(value.nagruzka.map(Number))
-
-                highChartTotal(complexName, [workKimArray],
-                    [pauseKimArray],
-                    [offKimArray],
-                    [avarKimArray],
-                    [nagruzkaKimArray], 'Нагрузка')
-
-                highChartRound(averageMonthdata([workKimArray]),averageMonthdata([pauseKimArray]),
-                    averageMonthdata([offKimArray]),averageMonthdata([avarKimArray]),
-                    averageMonthdata([nagruzkaKimArray]),'Нагрузка','Total')
-
-        })
+        updateLoadDataMonth( monthNow())
 
     }, [])
 
@@ -58,30 +30,7 @@ function ScladsMonth() {
         if (dateMonth != "0") {
             console.log(dateMonth)
 
-            let roundKim = fetchMonthHighCharts('sclad_meh', dateMonth,1)
-
-            let promiseDataKim = Promise.resolve(roundKim);
-
-            //Общая загрузка
-            promiseDataKim.then(value => {
-
-                let workKimArray = averageMonthdata(value.work.map(Number))
-                let pauseKimArray = averageMonthdata(value.pause.map(Number))
-                let offKimArray = averageMonthdata(value.off.map(Number))
-                let avarKimArray = averageMonthdata(value.avar.map(Number))
-                let nagruzkaKimArray = averageMonthdata(value.nagruzka.map(Number))
-
-                highChartTotal(complexName, [workKimArray],
-                    [pauseKimArray],
-                    [offKimArray],
-                    [avarKimArray],
-                    [nagruzkaKimArray], 'Нагрузка')
-
-                highChartRound(averageMonthdata([workKimArray]),averageMonthdata([pauseKimArray]),
-                    averageMonthdata([offKimArray]),averageMonthdata([avarKimArray]),
-                    averageMonthdata([nagruzkaKimArray]),'Нагрузка','Total')
-
-            })
+            updateLoadData(dateMonth)
 
         }
 
@@ -90,35 +39,47 @@ function ScladsMonth() {
 
     }
 
+    function updateLoadDataMonth(dateInput) {
+
+        let roundKim = fetchMonthHighCharts('sclad_meh', dateInput,1)
+
+        let promiseDataKim = Promise.resolve(roundKim);
+
+        //Общая загрузка
+        promiseDataKim.then(value => {
+
+            let workKimArray = averageMonthdata(value.work.map(Number))
+            let pauseKimArray = averageMonthdata(value.pause.map(Number))
+            let offKimArray = averageMonthdata(value.off.map(Number))
+            let avarKimArray = averageMonthdata(value.avar.map(Number))
+            let nagruzkaKimArray = averageMonthdata(value.nagruzka.map(Number))
+
+            highChartTotal(complexName, [workKimArray],
+                [pauseKimArray],
+                [offKimArray],
+                [avarKimArray],
+                [nagruzkaKimArray], 'Нагрузка')
+
+            highChartRound(averageMonthdata([workKimArray]),averageMonthdata([pauseKimArray]),
+                averageMonthdata([offKimArray]),averageMonthdata([avarKimArray]),
+                averageMonthdata([nagruzkaKimArray]),'Нагрузка','Total')
+
+        })
+
+    }
+
     return (
         <div>
 
             <MenuStanki menuSelected="sclads"/>
 
-            <div className="buttons-otchet">
-
-                <Link to="/stanki/sclads">
-                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/scladsMonth">
-                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-            </div>
+            <MenuOtchet select="month" page='sclads'/>
 
             <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate = {stateButtonUpdate}/>
 
-            <div className='complexAllInfo'>
-                <div className='totalRound' id="containerTotal"></div>
-                <div className="totalRound" id="containerRoundTotal"></div>
-            </div>
+            <ComplexTotalMonthInfo/>
 
-            <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"}/>
-                <div className="lineSukiHighChart" id="containerLine1"></div>
-                <div className="roundSukiHighChart" id="containerRound1"></div>
-            </div>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1}/>
 
         </div>
     )

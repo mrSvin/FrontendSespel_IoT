@@ -5,31 +5,15 @@ function ScladsInfo() {
 
     let buttonsVrs1 = [-485, 680, 'url(../images/sklad.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
 
-    let [kimData, setKimData] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
+    let bufferData = bufferDataArrays(1)
 
     let [date, setDate] = useState(0);
 
     useEffect(() => {
-        let dateNow = new Date()
-        let dayNow = dateNow.getDate()
-        let monthNow = dateNow.getMonth() + 1
-        let yearNow = dateNow.getFullYear()
-        if (dayNow < 10) {
-            dayNow = "0" + dayNow
-        }
-        if (monthNow < 10) {
-            monthNow = "0" + monthNow
-        }
-        setDate(`${yearNow}-${monthNow}-${dayNow}`)
 
-        updateLoadData(`${yearNow}-${monthNow}-${dayNow}`)
+        setDate(dayNow())
+
+        updateLoadData(dayNow())
 
     }, [])
 
@@ -43,7 +27,7 @@ function ScladsInfo() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, kimData, 'sclad_meh', 1)
+        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'sclad_meh', 1)
 
         let promiseDataKim = Promise.resolve(roundKim);
 
@@ -67,18 +51,9 @@ function ScladsInfo() {
 
             <DayCalendar newDate={newDate} date={date}/>
 
-            <div className='complexAllInfo'>
-                <div className='totalRound' id="containerTotal"></div>
+            <ComplexTotalSutkiInfo/>
 
-                <div className='countOperations' id='containerOperations'></div>
-
-            </div>
-
-            <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"}/>
-                <div className="lineSukiHighChart" id="containerLine1"></div>
-                <div className="roundSukiHighChart" id="containerRound1"></div>
-            </div>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1}/>
 
         </div>
     )
@@ -92,17 +67,7 @@ function Sclads() {
 
             <MenuStanki menuSelected="sclads"/>
 
-            <div className="buttons-otchet">
-
-                <Link to="/stanki/sclads">
-                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/scladsMonth">
-                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-            </div>
+            <MenuOtchet select="sutki" page='sclads'/>
 
             <ScladsInfo/>
 

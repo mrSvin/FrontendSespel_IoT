@@ -5,31 +5,16 @@ function LiteykaInfo() {
 
     let buttonsVrs1 = [-125, 180, 'url(../images/pech.png) no-repeat', "../images/ceh_1.png", 70, "100%"]
 
-    let [kimData, setKimData] = useState({
-        workArray: [],
-        pauseArray: [],
-        offArray: [],
-        avarArray: [],
-        ruchnoyArray: [],
-        roundArray: []
-    });
+    let bufferData = bufferDataArrays(1)
+
 
     let [date, setDate] = useState(0);
 
     useEffect(() => {
-        let dateNow = new Date()
-        let dayNow = dateNow.getDate()
-        let monthNow = dateNow.getMonth() + 1
-        let yearNow = dateNow.getFullYear()
-        if (dayNow < 10) {
-            dayNow = "0" + dayNow
-        }
-        if (monthNow < 10) {
-            monthNow = "0" + monthNow
-        }
-        setDate(`${yearNow}-${monthNow}-${dayNow}`)
 
-        updateLoadData(`${yearNow}-${monthNow}-${dayNow}`)
+        setDate(dayNow())
+
+        updateLoadData(dayNow())
 
     }, [])
 
@@ -43,7 +28,7 @@ function LiteykaInfo() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, kimData, 'pech_nerg', 1)
+        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'pech_nerg', 1)
 
         let promiseDataKim = Promise.resolve(roundKim);
 
@@ -65,18 +50,9 @@ function LiteykaInfo() {
 
             <DayCalendar newDate={newDate} date={date}/>
 
-            <div className='complexAllInfo'>
-                <div className='totalRound' id="containerTotal"></div>
+            <ComplexTotalSutkiInfo/>
 
-                <div className='countOperations' id='containerOperations'></div>
-
-            </div>
-
-            <div className='complexAllInfo' id={'containerTotal'}>
-                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh1"}/>
-                <div className="lineSukiHighChart" id="containerLine1"></div>
-                <div className="roundSukiHighChart" id="containerRound1"></div>
-            </div>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh1"} idContainer = {1}/>
 
 
         </div>
@@ -91,17 +67,7 @@ function Liteyka() {
 
             <MenuStanki menuSelected="liteyka"/>
 
-            <div className="buttons-otchet">
-
-                <Link to="/stanki/liteyka">
-                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/liteykaMonth">
-                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-            </div>
+            <MenuOtchet select="sutki" page='liteyka'/>
 
             <LiteykaInfo/>
 

@@ -14,6 +14,7 @@ const {
     lazy
 } = React
 
+
 const App = () => (
 
     <BrowserRouter>
@@ -133,7 +134,7 @@ const App = () => (
                 <Meh2Month/>
             </Route>
 
-            <Route path="/stanki/service">
+            <Route path="/service">
                 <Service/>
             </Route>
 
@@ -146,7 +147,6 @@ const App = () => (
             </Route>
 
         </Switch>
-
     </BrowserRouter>
 );
 

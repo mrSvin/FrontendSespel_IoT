@@ -1,10 +1,11 @@
 function Header() {
     const [dataProfile, setDataProfile] = useState([]);
 
-
     useEffect(() => {
 
-        fetch('/api/userInfo', {method: 'POST'})
+        fetch('/api/userInfo', {
+            method: 'POST'
+        })
             .then((response) => response.json())
             .then((data) => {
                 setDataProfile(data)

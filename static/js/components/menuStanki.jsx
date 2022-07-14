@@ -72,3 +72,32 @@ function MenuStanki(menuSelected) {
         </div>
     )
 }
+
+function MenuOtchet(select) {
+
+    let menuSelect
+
+    let pageSutki = `/stanki/${select.page}`
+    let pageMonth = `/stanki/${select.page}Month`
+
+    if (select.select == 'sutki') {
+        menuSelect = ["menuSelect", "menuNoSelect"]
+    } else {
+        menuSelect = ["menuNoSelect", "menuSelect"]
+    }
+
+
+    return (
+        <div className="buttons-otchet">
+
+            <Link to={pageSutki}>
+                <div className={menuSelect[0]}>СУТОЧНЫЙ ОТЧЕТ</div>
+            </Link>
+
+            <Link to={pageMonth}>
+                <div className={menuSelect[1]}>МЕСЯЧНЫЙ ОТЧЕТ</div>
+            </Link>
+
+        </div>
+    )
+}
