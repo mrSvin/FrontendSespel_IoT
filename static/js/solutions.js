@@ -499,6 +499,6 @@ function getArrayPeriodsBetween(arrayTime) {
 }
 
 function convertTimeToISO(time) {
-    time.slice(0,10) + ' ' +  time.slice(11, 19)
+    time = time.slice(0,10) + ' ' +  time.slice(11, 19)
     return time
 }
