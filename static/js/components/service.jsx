@@ -119,7 +119,7 @@ function FormAddService(setFormAddService) {
                 <h2 className="formServiceName">Проведение тех. обслуживания</h2>
                 <div className='divWorksPass'>
                     <h3>Проведенные работы</h3>
-                    <textarea id="story" name="story" placeholder="Введите список проведенных работ.."
+                    <textarea maxlength="499" id="story" name="story" placeholder="Введите список проведенных работ.."
                               value={infoWorks} onChange={e => {
                         setInfoWorks(e.target.value)
                     }}
