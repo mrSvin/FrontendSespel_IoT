@@ -622,6 +622,7 @@ function highChartServiceHistory(ArrayTeh) {
 }
 
 function highChartServiceNow(ArrayTeh,timeNext) {
+    timeNext *= 1000
     let timeToday = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     // Преобразоавние времение в формат '2022-03-21 10:00:35'
     timeToday = timeToday.slice(0, 10) + " " + timeToday.slice(11, 19);
@@ -630,7 +631,7 @@ function highChartServiceNow(ArrayTeh,timeNext) {
     let lastServiceTime = new Date(ArrayTeh[0])
 
     // Крайняя дата следующего обслуживания
-    let nextServiceTime = new Date(lastServiceTime.getTime() + timeNext * 1000)
+    let nextServiceTime = new Date(lastServiceTime.getTime() + timeNext)
 
     // Время последнего обслуживания в формате ISO
     let lastServiceIso = new Date(new Date(lastServiceTime).toString().split('GMT')[0] + ' UTC').toISOString();
