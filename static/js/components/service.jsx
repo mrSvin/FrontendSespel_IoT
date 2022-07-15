@@ -18,7 +18,8 @@ function Service() {
             // console.log(value)
 
             let ArrayPeriod = value.map(e=> {
-                return convertTimeToISO(e.time_service)
+                e.time_service = convertTimeToISO(e.time_service)
+                return e.time_service
             })
 
             let lastPeriod = value.map(e=> {
