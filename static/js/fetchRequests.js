@@ -91,7 +91,7 @@ function fetchRequestAddService(userName, userRole,complexName, infoWorks, perio
             if (result === 'ok') {
                 let newDataTable = setFormAddService.dataService;
 
-                newDataTable.unshift({info_works: infoWorks, user_name:userName, time_service:getTimeToday(), period_service:periodService})
+                newDataTable.unshift({info_works: infoWorks, user_name:userName, time_service:getTimeToday(), period_service:convertTimeToISO(getTimeToday()-newDataTable[0].time_service)})
                 console.log(newDataTable)
                 setFormAddService.setDataService(newDataTable)
                 setFormAddService.setFormAddService(false)

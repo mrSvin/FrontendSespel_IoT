@@ -630,7 +630,7 @@ function highChartServiceNow(ArrayTeh,timeNext) {
     let lastServiceTime = new Date(ArrayTeh[0])
 
     // Крайняя дата следующего обслуживания
-    let nextServiceTime = new Date(lastServiceTime.getTime() + timeNext)
+    let nextServiceTime = new Date(lastServiceTime.getTime() + timeNext * 1000)
 
     // Время последнего обслуживания в формате ISO
     let lastServiceIso = new Date(new Date(lastServiceTime).toString().split('GMT')[0] + ' UTC').toISOString();
