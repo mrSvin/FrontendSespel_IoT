@@ -520,8 +520,16 @@ function highChartServiceHistory(ArrayTeh) {
     // Копирования массива со всеми тех. обслуживаниями
     let arrayTeh = ArrayTeh.slice()
 
+    let chet = []
+    let nechet = []
+
     //Массив со всеми тех. обслуживаниями.
     arrayTeh = parseLinearService(arrayTeh, 0)
+
+    arrayTeh.forEach((e,i)=>{
+        if(i%2==0) chet.push(e)
+        else nechet.push(e)
+    })
 
     Highcharts.setOptions({
         lang: {
@@ -614,7 +622,22 @@ function highChartServiceHistory(ArrayTeh) {
                         return '<b>Времени между обслуживанием:</b> ' + timer;
                     },
                 },
-                data: arrayTeh,
+                data: chet,
+            },
+            {
+                name: 'Обслуживания',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#76d739',
+                tooltip: {
+                    pointFormatter: function () {
+                        let timer = msToTimeDays(this.x2 - this.x)
+                        let per = this.partialFill
+                        return '<b>Времени между обслуживанием:</b> ' + timer;
+                    },
+                },
+                data: nechet,
             },
         ],
 
