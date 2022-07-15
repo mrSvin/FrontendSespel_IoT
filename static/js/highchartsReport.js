@@ -627,7 +627,7 @@ function highChartServiceNow(ArrayTeh,timeNext) {
     timeToday = timeToday.slice(0, 10) + " " + timeToday.slice(11, 19);
 
     // Дата последнего обслуживания
-    let lastServiceTime = new Date(ArrayTeh[ArrayTeh.length-1])
+    let lastServiceTime = new Date(ArrayTeh[0])
 
     // Крайняя дата следующего обслуживания
     let nextServiceTime = new Date(lastServiceTime.getTime() + timeNext)

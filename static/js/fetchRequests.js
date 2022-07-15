@@ -99,7 +99,7 @@ function fetchRequestAddService(userName, userRole,complexName, infoWorks, perio
                 let lastPeriod = newDataTable.map(e=> {
                     return e.period_service
                 })
-                lastPeriod = lastPeriod[lastPeriod.length - 1];
+                lastPeriod = lastPeriod[0];
 
                 let allServiceArray = newDataTable.map(e=> {
                     return e.time_service
