@@ -486,13 +486,13 @@ function getTimeToday(date=null) {
 // из массива времен возвращает массив времени между периодами
 function getArrayPeriodsBetween(arrayTime) {
     let ArrayPeriod = arrayTime
-    ArrayPeriod.map((e,i,array)=>{
-        if(i==0) {
+    ArrayPeriod = ArrayPeriod.map((e,i,array)=>{
+        if(i==(array.length)-1) {
             return '-'
         }
         else {
-            console.log(new Date(array[i]) - new Date(array[i-1]))
-            return msToTimeDays(new Date(array[i]) - new Date(array[i-1]))
+
+            return msToTimeDays(new Date(array[i]) - new Date(array[i+1]))
         }
     })
     return ArrayPeriod
