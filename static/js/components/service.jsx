@@ -41,8 +41,8 @@ function Service() {
             let allServiceArray = []
             value.forEach(element => allServiceArray.push(element.time_service) )
 
-            highChartServiceHistory(allServiceArray)
-            highChartServiceNow(allServiceArray,lastPeriod)
+            highChartServiceHistory(allServiceArray.reverse())
+            highChartServiceNow(allServiceArray.reverse(),lastPeriod)
         })
 
 
