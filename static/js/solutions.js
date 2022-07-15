@@ -4,7 +4,21 @@ function msToTimeDays(duration) {
         hours = parseInt((duration / (1000 * 60 * 60)) % 24),
         days = parseInt((duration / (1000 * 60 * 60 * 24 )))
 
-    return days + " дней " + hours + " ч. " + minutes + " мин. " + seconds + ' с.';
+    if(days == 0) days = ''
+    else { days = days + " дней "}
+
+    if(hours == 0) hours = ''
+    else { hours = hours + " ч. "}
+
+    if(minutes == 0) minutes = ''
+    else { minutes = minutes + " мин. "}
+
+    if(seconds == 0) seconds = ''
+    else { seconds = seconds + ' с.'}
+
+
+
+    return days + hours + minutes + seconds;
 }
 
 function parseLinearService(arrayParse, y, difference=null) {
@@ -460,4 +474,26 @@ function parseNameUrl(url) {
     form_path.lastIndexOf("/")
     let searchIndex= form_path.lastIndexOf("/")+1;
     return  form_path.substr(searchIndex, form_path.length)
+}
+
+function getTimeToday(date=null) {
+    let time = new Date(new Date(date).toString().split('GMT')[0] + ' UTC').toISOString();
+    // Преобразоавние текущего времение в формат '2022-03-21 10:00:35'
+    time = time.slice(0, 10) + " " + time.slice(11, 19);
+    return time
+}
+
+// из массива времен возвращает массив времени между периодами
+function getArrayPeriodsBetween(arrayTime) {
+    let ArrayPeriod = arrayTime
+    ArrayPeriod.map((e,i,array)=>{
+        if(i==0) {
+            return '-'
+        }
+        else {
+            console.log(new Date(array[i]) - new Date(array[i-1]))
+            return msToTimeDays(new Date(array[i]) - new Date(array[i-1]))
+        }
+    })
+    return ArrayPeriod
 }

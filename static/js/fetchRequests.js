@@ -90,7 +90,8 @@ function fetchRequestAddService(userName, userRole,complexName, infoWorks, perio
             console.log('Запрос прошел', result)
             if (result === 'ok') {
                 let newDataTable = setFormAddService.dataService;
-                newDataTable.push({info_works: infoWorks, user_name:userName, time_service:new Date().toDateString(), period_service:periodService})
+
+                newDataTable.push({info_works: infoWorks, user_name:userName, time_service:getTimeToday(), period_service:periodService})
                 console.log(newDataTable)
                 setFormAddService.setDataService(newDataTable)
                 setFormAddService.setFormAddService(false)

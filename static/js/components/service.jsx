@@ -16,14 +16,32 @@ function Service() {
 
         promiseDataComplex1.then(value => {
             // console.log(value)
+
+            let ArrayPeriod = value.map(e=> {
+                return e.time_service
+            })
+
+            let lastPeriod = value.map(e=> {
+                return e.period_service
+            })
+
+            lastPeriod = lastPeriod[lastPeriod.length - 1];
+
+            ArrayPeriod = getArrayPeriodsBetween(ArrayPeriod)
+
             let dataTable = [];
-            value.forEach(e => dataTable.push(e))
+            value.forEach((e,i) => {
+                e.period_service = ArrayPeriod[i]
+                dataTable.push(e)
+            })
+
             setDataService(dataTable)
 
             let allServiceArray = []
             value.forEach(element => allServiceArray.push(element.time_service) )
+
             highChartServiceHistory(allServiceArray)
-            highChartServiceNow(allServiceArray,31536000000)
+            highChartServiceNow(allServiceArray,lastPeriod)
         })
 
 
