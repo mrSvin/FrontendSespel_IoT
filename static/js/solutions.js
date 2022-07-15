@@ -476,8 +476,8 @@ function parseNameUrl(url) {
     return  form_path.substr(searchIndex, form_path.length)
 }
 
-function getTimeToday(date=null) {
-    let time = new Date(new Date(date).toString().split('GMT')[0] + ' UTC').toISOString();
+function getTimeToday() {
+    let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     // Преобразоавние текущего времение в формат '2022-03-21 10:00:35'
     time = time.slice(0, 10) + " " + time.slice(11, 19);
     return time
@@ -496,4 +496,9 @@ function getArrayPeriodsBetween(arrayTime) {
         }
     })
     return ArrayPeriod
+}
+
+function convertTimeToISO(time) {
+    time.slice(0,10) + ' ' +  time.slice(11, 19)
+    return time
 }
