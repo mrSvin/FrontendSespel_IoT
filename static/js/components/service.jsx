@@ -74,38 +74,18 @@ function FormAddService(setFormAddService) {
     const [periodService, setPeriodService] = useState('7884000');
 
 
-    function makeTehWork(complexName, userName, infoWorks, periodService) {
-        let myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        let raw = JSON.stringify({
-            "complexName": complexName,
-            "userName": userName,
-            "infoWorks": infoWorks,
-            "periodSrvice": periodService
-        });
-
-        let requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
+    function makeTehWork(complexName, infoWorks, periodService) {
 
 
-        fetch("http://192.168.3.41:8086/api/addService", requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                console.log('Запрос прошел', result)
-                if (result === 'ok') {
-                    let newDataTable = setFormAddService.dataService;
-                    newDataTable.push({info_works: infoWorks, user_name:"pyatachok", time_service:new Date().toDateString(), period_service:periodService})
-                    console.log(newDataTable)
-                    setFormAddService.setDataService(newDataTable)
-                    setFormAddService.setFormAddService(false)
-                }
+        fetch('/api/userInfo', {
+            method: 'POST'
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                fetchRequestAddService(data.userName, data.userRole,complexName, infoWorks, periodService,setFormAddService)
             })
-            .catch(error => console.log('Ошибка, недостаточно прав', error));
+
 
     }
 
@@ -140,7 +120,7 @@ function FormAddService(setFormAddService) {
                 </div>
                 <input id="submit" type="button" value="Подтвердить"
                        onClick={() => {
-                           makeTehWork(setFormAddService.nameComplex, "pyatachok", infoWorks, periodService)
+                           makeTehWork(setFormAddService.nameComplex, infoWorks, periodService)
                        }}
                 />
             </div>

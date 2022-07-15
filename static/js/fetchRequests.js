@@ -45,14 +45,14 @@ function fetchRequestBuildHC(dateCalendar, complexObject, complexName, idContain
 }
 
 function fetchMonthHighCharts(complexName, dateInput, idContainer) {
-        return fetch(`../api/monthData/${complexName}_month_date:${dateInput}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                    highChartMonthLine(data.work, data.pause, data.off, data.avar, data.nagruzka, 'Нагрузка', idContainer)
-                    highChartRound(averageMonthdata(data.work), averageMonthdata(data.pause), averageMonthdata(data.off),
-                        averageMonthdata(data.avar),  averageMonthdata(data.nagruzka), 'Нагрузка', idContainer)
-                    return data
-            })
+    return fetch(`../api/monthData/${complexName}_month_date:${dateInput}`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            highChartMonthLine(data.work, data.pause, data.off, data.avar, data.nagruzka, 'Нагрузка', idContainer)
+            highChartRound(averageMonthdata(data.work), averageMonthdata(data.pause), averageMonthdata(data.off),
+                averageMonthdata(data.avar),  averageMonthdata(data.nagruzka), 'Нагрузка', idContainer)
+            return data
+        })
 }
 
 function fetchRequestServiceInfo(complexName) {
@@ -64,4 +64,37 @@ function fetchRequestServiceInfo(complexName) {
         .then((data) => {
             return data
         })
+}
+
+function fetchRequestAddService(userName, userRole,complexName, infoWorks, periodService,setFormAddService) {
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    let raw = JSON.stringify({
+        "complexName": complexName,
+        "userName": userName,
+        "infoWorks": infoWorks,
+        "periodSrvice": periodService
+    });
+
+    let requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch("http://192.168.3.41:8086/api/addService", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            console.log('Запрос прошел', result)
+            if (result === 'ok') {
+                let newDataTable = setFormAddService.dataService;
+                newDataTable.push({info_works: infoWorks, user_name:userName, time_service:new Date().toDateString(), period_service:periodService})
+                console.log(newDataTable)
+                setFormAddService.setDataService(newDataTable)
+                setFormAddService.setFormAddService(false)
+            }
+        })
+        .catch(error => console.log('Ошибка, недостаточно прав', error));
 }
