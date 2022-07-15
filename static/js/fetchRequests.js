@@ -98,17 +98,12 @@ function fetchRequestAddService(userName, userRole,complexName, infoWorks, perio
                 setFormAddService.setDataService(newDataTable)
                 setFormAddService.setFormAddService(false)
 
-                let lastPeriod = newDataTable.map(e=> {
-                    return e.period_service
-                })
-                lastPeriod = lastPeriod[0];
-
                 let allServiceArray = newDataTable.map(e=> {
                     return e.time_service
                 })
 
                 highChartServiceHistory(allServiceArray.reverse())
-                highChartServiceNow(allServiceArray.reverse(),lastPeriod)
+                highChartServiceNow(allServiceArray.reverse(),periodService)
             }
         })
         .catch(error => console.log('Ошибка, недостаточно прав', error));

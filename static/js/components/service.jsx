@@ -26,7 +26,7 @@ function Service() {
                 return e.period_service
             })
 
-            lastPeriod = lastPeriod[lastPeriod.length - 1];
+            lastPeriod = lastPeriod[0];
 
             ArrayPeriod = getArrayPeriodsBetween(ArrayPeriod)
 
