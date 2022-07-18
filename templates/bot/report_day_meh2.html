@@ -56,7 +56,7 @@
     'CTX510 #5', 'DMC1035 #2', 'DMU50 #5', 'DMU50 #6',
     'DMU50 #7','AR55']
   let data = []
-  let exception = [[4,'Ручной режим','#5c7ed0', 'ruchnoi']];
+  let exception = [[4,'Ручной режим','#5c7ed0', 'ruchnoi'],];
   let stankiRequest = Promise.all(namesToFetch.map(item=>{
     return makeRequest(item)
   }));
