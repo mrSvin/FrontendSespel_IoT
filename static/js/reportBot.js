@@ -189,8 +189,8 @@ function buildReportBot(stankiDataArray, names, exception = null)
                 }
 
                 if(exceptionTrigger == false){
-                    // Работа без нагрузки
-                    stanok.roundData[0] = stanok.roundData[0] - stanok.roundData[4];
+                    // Работа без нагрузки пока закомменчено
+                   // stanok.roundData[0] = stanok.roundData[0] - stanok.roundData[4];
 
                     linear_rabota.push(parseInt(stanok.roundData[0]))
                     linear_pause.push(parseInt(stanok.roundData[1]))
@@ -209,7 +209,6 @@ function buildReportBot(stankiDataArray, names, exception = null)
                 linear_avar.push(parseInt(stanok.roundData[3]))
                 linear_nagruzka.push(parseInt(stanok.roundData[4]))
             }
-        }
         koef.push((parseInt(stanok.roundData[0]) + parseInt(stanok.roundData[1]) + parseInt(stanok.roundData[2]) + parseInt(stanok.roundData[3]) + parseInt(stanok.roundData[4])) / 100);
         stanok.roundData.forEach((item,i)=>{
 
@@ -236,6 +235,7 @@ function buildReportBot(stankiDataArray, names, exception = null)
                 }
             }
         })
+    }
         exceptionTrigger = false
     })
 
