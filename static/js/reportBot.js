@@ -190,7 +190,8 @@ function buildReportBot(stankiDataArray, names, exception = null)
 
                 if(exceptionTrigger == false){
                     // Работа без нагрузки пока закомменчено
-                   // stanok.roundData[0] = stanok.roundData[0] - stanok.roundData[4];
+                    stanok.roundData[0] = stanok.roundData[0] - stanok.roundData[4];
+                    if(stanok.roundData[0] < 0) stanok.roundData[0] = 0
 
                     linear_rabota.push(parseInt(stanok.roundData[0]))
                     linear_pause.push(parseInt(stanok.roundData[1]))
@@ -203,6 +204,8 @@ function buildReportBot(stankiDataArray, names, exception = null)
             // обычный режим
             else {
                 stanok.roundData[0] = stanok.roundData[0] - stanok.roundData[4]
+                if(stanok.roundData[0] < 0) stanok.roundData[0] = 0
+
                 linear_rabota.push(parseInt(stanok.roundData[0]))
                 linear_pause.push(parseInt(stanok.roundData[1]))
                 linear_off.push(parseInt(stanok.roundData[2]))
