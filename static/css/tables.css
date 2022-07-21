@@ -45,7 +45,7 @@
 
 .table td:nth-child(1){
     width: 50%;
-    text-align:start;
+    text-align:end;
 }
 
 .table th:nth-child(n)

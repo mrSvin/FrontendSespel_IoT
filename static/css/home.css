@@ -1,3 +1,4 @@
+
 .homeBody {
     min-height: 100%;
     background: url(../images/line.jpg);
@@ -209,9 +210,9 @@
     position: absolute;
     filter: contrast(90%);
     transition: 1s;
-    width: 150px;
+    width: 230px;
     height: 150px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     background: url(../images/beacon_logo.png) no-repeat;
-    background-size: 150px 150px;
+    background-size: contain;
 }
