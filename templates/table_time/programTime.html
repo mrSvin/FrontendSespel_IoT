@@ -214,13 +214,7 @@
         return programTimeArray
     }
 
-    // Переменные экспорта таблицы в Excel
-    let buttonExcel = document.querySelector("#button-excel");
-    // Получение таблицы по id
-    let programTimeTable = document.getElementById('programTimeTable')
-    buttonExcel.addEventListener("click", e => {
-        TableToExcel.convert(programTimeTable);
-    });
+
 
     // Переменные нахождения последнего слова в адресной строке
     let form_path = document.location.pathname;
@@ -232,6 +226,18 @@
     let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     let startTime = time.slice(0, 10)
     document.getElementsByClassName('form-control')[0].value = startTime
+
+    // Переменные экспорта таблицы в Excel
+    let buttonExcel = document.querySelector("#button-excel");
+    // Получение таблицы по id
+    buttonExcel.addEventListener("click", e => {
+        TableToExcel.convert(document.getElementById('programTimeTable'), {
+            name: `${stanok}_${startTime}.xlsx`,
+            sheet: {
+                name: "Sheet 1"
+            }
+        });
+    });
 
     // url для запроса
     let url = `/api/complexData/${stanok}_days_date:${startTime}`
