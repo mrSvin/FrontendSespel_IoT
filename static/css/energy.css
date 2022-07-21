@@ -44,16 +44,13 @@
     font-size: 30px;
 }
 
-.parent_image {
-    float: left;
-    min-height: 600px;
-    width: 18%;
-    max-width: 300px;
-}
-
 .stanok_img {
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 400px;
+    width: auto;
     max-width: 100%;
-    margin-left: 15px;
+    display: block;
 }
 
 .comlexInfo {
@@ -125,6 +122,16 @@
     min-height: 550px;
     width: 18%;
     max-width: 300px;
+}
+
+.parent_image a {
+    margin: 15px 30px;
+}
+
+.parent_image a > div {
+    /* margin: 65px auto; */
+    display: flex;
+    justify-content: center;
 }
 
 .stanok_img {
@@ -269,15 +276,18 @@
 .parentIcons {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    margin-left: 15px;
+    padding-bottom: 10px;
 }
 
 .icon_mesto {
-    float: left;
+    /* float: left; */
     width: 60px;
     height: 60px;
     background: url(../images/iconMesto.png) no-repeat;
     background-size: auto;
-    margin: 10px 25px 0 25px;
+    /* margin: 10px 5px 0 5px; */
     cursor: pointer;
 }
 
@@ -293,17 +303,16 @@
 
 .label_mesto {
     margin-top: 65px;
-    margin-left: 8px;
     color: #b3b8be;
 }
 
 .icon_personal {
-    float: right;
+    /* float: right; */
     background: url(../images/iconPersonal.png) no-repeat;
     background-size: auto;
     width: 60px;
     height: 60px;
-    margin: 10px 25px 0 25px;
+    /* margin: 10px 5px 0 25px; */
     cursor: pointer;
 }
 
@@ -320,7 +329,7 @@
 .label_personal {
     color: #b3b8be;
     margin-top: 65px;
-    margin-left: -5px;
+    /* margin-left: -15px; */
 }
 
 .vrsInfoAlign {
@@ -329,4 +338,106 @@
     flex-direction: column;
 }
 
+.icon_error {
+    float: left;
+    background: url(../images/error.png) no-repeat;
+    background-size: contain;
+    width: 60px;
+    height: 60px;
+    margin: 10px 25px 0 25px;
+    cursor: pointer;
+}
 
+.icon_error:hover {
+    /*-webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;*/
+    box-shadow: #252734 0px 0px 12px 12px inset;
+}
+
+.icon_error:hover > div {
+    position: relative;
+    top: 5px;
+}
+
+.label_error {
+    color: #b3b8be;
+    margin-top: 65px;
+    margin-left: -5px;
+}
+
+.icon_program {
+    /* float: left; */
+    background: url(../images/programTime.png) no-repeat;
+    background-size: contain;
+    width: 60px;
+    height: 60px;
+    /* margin: 10px 25px 0 35px; */
+    cursor: pointer;
+}
+
+.icon_program:hover {
+    /*-webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;*/
+    box-shadow: #252734 0px 0px 12px 12px inset;
+}
+
+.icon_program:hover > div {
+    position: relative;
+    top: 5px;
+}
+
+.label_program {
+    color: #b3b8be;
+    margin-top: 65px;
+    /* margin-left: -25px; */
+}
+
+.icon_laser {
+    /* float: left; */
+    background: url(../images/iconPower.png) no-repeat;
+    background-size: contain;
+    width: 60px;
+    height: 60px;
+    /* margin: 30px 25px 0 25px; */
+    cursor: pointer;
+}
+
+.icon_laser:hover {
+    /*-webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;*/
+    box-shadow: #252734 0px 0px 12px 12px inset;
+}
+
+.icon_laser:hover > div {
+    position: relative;
+    top: 5px;
+}
+
+.label_laser {
+    color: #b3b8be;
+    margin-top: 65px;
+    /* margin-left: -15px; */
+}
+
+.icon_service {
+    float: left;
+    background: url(../images/iconService.png) no-repeat;
+    background-size: contain;
+    width: 60px;
+    height: 60px;
+    margin: 30px 25px 0 25px;
+    cursor: pointer;
+}
+
+.icon_service:hover {
+    /*-webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;*/
+    box-shadow: #252734 0px 0px 12px 12px inset;
+}
+
+.icon_service:hover > div {
+    position: relative;
+    top: 5px;
+}
+
+.label_service {
+    color: #b3b8be;
+    margin-top: 65px;
+    /* margin-left: 0px; */
+}
