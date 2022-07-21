@@ -1,23 +1,23 @@
-#programTimeTable {
+.table {
     width: 100%;
     margin: 0 auto;
 }
 
-#programTimeTable th,
-#programTimeTable td {
+.table th,
+.table td {
     text-align: center;
 }
 
-#programTimeTable tr>td:nth-of-type(4),
-#programTimeTable tr>td:nth-of-type(5),
-#programTimeTable tr>td:nth-of-type(1)
+.table tr>td:nth-of-type(4),
+.table tr>td:nth-of-type(5),
+.table tr>td:nth-of-type(1)
 {
     border: 1px solid #dee2e6;
 }
 
-#programTimeTable tr>td:nth-of-type(2),
-#programTimeTable tr>td:nth-of-type(3),
-#programTimeTable tr>td:nth-of-type(1)
+.table tr>td:nth-of-type(2),
+.table tr>td:nth-of-type(3),
+.table tr>td:nth-of-type(1)
 {
     border-bottom: 1px solid #dee2e6;
 }
@@ -25,27 +25,31 @@
 .tableFixHead          {overflow: auto;height: 90vh;position: relative;top: -1px;}
 .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
 
-/* Just common table stuff. Really. */
-#programTimeTable  { border-collapse: collapse; width: 100%; }
-#programTimeTable th, #programTimeTable td { padding: 8px 16px; }
-#programTimeTable th     { background:#eee; }
+.tableFixHeadSmena          {overflow: auto;height: 45vh;position: relative;top: -1px;}
+.tableFixHeadSmena thead th { position: sticky; top: 0; z-index: 1; }
 
-#programTimeTable {
+
+/* Just common table stuff. Really. */
+.table  { border-collapse: collapse; width: 100%; }
+.table th, #programTimeTable td { padding: 8px 16px; }
+.table th     { background:#eee; }
+
+.table {
     width: 100%;
     margin: 0 auto;
 }
 
-#programTimeTable th, td {
+.table th, td {
     text-align: center;
 }
 
 
-#programTimeTable th:nth-child(n)
+.table th:nth-child(n)
 {
     border: 1px solid #dee2e6;
 }
 
-#programTimeTable tr>td:nth-of-type(n)
+.table tr>td:nth-of-type(n)
 {
     border: 1px solid #dee2e6;
 }
@@ -87,3 +91,5 @@
     filter: brightness(90%);
     opacity: 100%;
 }
+
+

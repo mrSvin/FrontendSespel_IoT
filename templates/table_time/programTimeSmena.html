@@ -18,7 +18,7 @@
 
 <form style="display: flex;align-items: center;justify-content: center;height: 5vh;position: relative;background: #dee2e6;top: 0px;z-index: 2;" action="" method="post" id="form_update">
     <div class="input-group date" id="datepicker" style="width: 200px; float: left;  margin: 1.7%">
-        <input type="text" class="form-control" value="" onchange="selectedNewValue()" style="color:#756e6e; background:#f2f6f8; border: 1px solid#cccccc;">
+        <input type="text" class="form-control" value="" onchange="selectedNewValueProgramTimeSmena()" style="color:#756e6e; background:#f2f6f8; border: 1px solid#cccccc;">
         <span class="input-group-addon" style="color:#756e6e; background:#eeeeee; border: 1px solid #cccccc;">
             <span class="glyphicon glyphicon-calendar"></span>
         </span>
@@ -26,7 +26,7 @@
 </form>
 
 <div style="position: relative;top: -1px;padding: 1px;">
-    <div class="tableFixHead">
+    <div class="tableFixHeadSmena">
         <table class="table table-striped" id="programTimeTableSmena1">
         <thead class="thead-dark" style="">
         <tr>
@@ -48,7 +48,7 @@
     top: 0px;
     padding: 1px;
 "></div>
-    <div class="tableFixHead">
+    <div class="tableFixHeadSmena">
         <table class="table table-striped" id="programTimeTableSmena2">
             <thead class="thead-dark">
             <tr>
@@ -82,7 +82,7 @@
         });
     })
 
-    function selectedNewValue(){
+    function selectedNewValueProgramTimeSmena(){
         $('#datepicker').datepicker({
             format: "yyyy-mm-dd",
             language: 'ru',
@@ -97,70 +97,12 @@
         });
 
         let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
-        date = new Date(datas); // some mock date
-        startTime = datas.slice(0, 10)
+        let startTime = datas.slice(0, 10)
+        let pastTime  = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
 
-        url = `/api/complexData/${stanok}_days_date:${startTime}`
-
-        fetch(url, {
-            method: 'GET'
-        })
-
-            .then((response) => response.json())
-            .then((data) => {
-                for (let i = document.getElementById('programTimeTableSmena1').getElementsByTagName('tr').length -1; i; i--) {
-                    document.getElementById('programTimeTableSmena1').deleteRow(i);
-                }
-                if (data) {
-                    let tableArray = getTimeProgramName(data)
-                    // Переменная для кратной записи
-                    let tableRow = null
-
-                    // индекс последней строки
-                    let lastRow = null
-
-                    // индекс последней ячейки
-                    let lastCell = null
-
-                    // переменная для краткой записи к телу таблицы
-                    let tbody = programTimeTableSmena1.querySelector('tbody')
-
-                    if(tableArray !== null) {
-                        tableArray.forEach((elem, index) => {
-
-                            // добавляем новую строку
-                            tbody.appendChild(document.createElement('tr'));
-
-                            // Получаем все строки в теле
-                            tableRow = tbody.querySelectorAll('tr')
-
-                            // считываем длины строк и ячеек
-                            lastRow = tbody.rows.length -1
-                            lastCell = tableRow[lastRow].cells.length - 1
-
-                            for(let i=0; i<=4; i++)
-                            {
-                                // добавляем в последнюю строку новую ячейку
-                                tableRow[lastRow].appendChild(document.createElement('td'))
-
-                                // обновляем индекс последней ячейки
-                                lastCell = tableRow[lastRow].cells.length - 1
-
-                                // записываем в последюю ячейку первый элемент  массива
-                                tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[i]
-                            }
-
-                        })
-                    }
-                    // Пробегаемся по всем элементам массива
-                }
-            })
-            .catch(err => {
-                alert('Слишком частое количество запросов',err)
-            });
+        stankiRequest = Promise.all([programTimeSmenaRequest(pastTime), programTimeSmenaRequest(startTime)]);
+        activatePromise(stankiRequest)
     }
-
-    // Функция перевода миллисекунд в часы в формате 00:00:00
     function msToTime(duration) {
         let seconds = parseInt((duration / 1000) % 60),
             minutes = parseInt((duration / (1000 * 60)) % 60),
@@ -174,60 +116,39 @@
 
         return hours + ":" + minutes + ":" + seconds;
     }
-
-    // Функция принимает данные с запроса работы станка и возвращает
-    // структуру для таблицы
-    function getTimeProgramName(arrayData)
-    {
+    function getTimeProgramNameSmena(arrayData){
         let timer = 0;
         let programTimeArray = [];
         let startSame = null
 
-        arrayData? console.log(""):0;
-
-            if(arrayData['work'].length % 2 == 1)
-            {
-                if(startTime == time.slice(0, 10))
-                {   // То добавить во вторую смену текущее время
-                    arrayData['work'].push(startTime + " " + time.slice(11, 19))
-                }
-                else {
-                    arrayData['work'].push(startTime + ' 23:59:59')
-                }
-            }
-
-
-        for(let i = 0; i<arrayData['work'].length; i+=2)
+        for(let i = 0; i<arrayData[0].length; i+=2)
         {
 
-            if(arrayData['programName'][i/2] == arrayData['programName'][i/2+1])
+            if(arrayData[1][i/2] == arrayData[1][i/2+1])
             {
-                if(arrayData['programName'][i/2] !== arrayData['programName'][i/2-1])
+                if(arrayData[1][i/2] !== arrayData[1][i/2-1])
                 {
-                    startSame = arrayData['work'][i]
+                    startSame = arrayData[0][i]
                 }
 
-                timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
+                timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
             }
 
             else
             {
 
-                if(arrayData['programName'][i/2] == arrayData['programName'][i/2-1])
+                if(arrayData[1][i/2] == arrayData[1][i/2-1])
                 {
-                    timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-                    programTimeArray.push([arrayData['programName'][i/2], startSame.slice(11), arrayData['work'][i+1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i+1]) - new Date(startSame))])
+                    timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
+                    programTimeArray.push([arrayData[1][i/2], startSame.slice(11), arrayData[0][i+1].slice(11), msToTime(timer), msToTime(new Date(arrayData[0][i+1]) - new Date(startSame))])
                     timer = 0
                 }
                 else {
-                    timer = (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-                    programTimeArray.push([arrayData['programName'][i/2], arrayData['work'][i].slice(11), arrayData['work'][i+1].slice(11), msToTime(timer), msToTime(timer)])
+                    timer = (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
+                    programTimeArray.push([arrayData[1][i/2], arrayData[0][i].slice(11), arrayData[0][i+1].slice(11), msToTime(timer), msToTime(timer)])
                     timer = 0
                 }
-
-
             }
-
         }
         // Фильтрация массива на наличие запятых
         programTimeArray.map((elem)=>{
@@ -236,85 +157,266 @@
         })
         return programTimeArray
     }
+    function printTable(tableID, data){
+        let programTimeTable = document.getElementById(tableID)
+
+        for (let i = programTimeTable.getElementsByTagName('tr').length -1; i; i--) {
+            document.getElementById(tableID).deleteRow(i);
+        }
+        if (data) {
+            let tableArray = data
+            // Переменная для кратной записи
+            let tableRow = null
+
+            // индекс последней строки
+            let lastRow = null
+
+            // индекс последней ячейки
+            let lastCell = null
+
+            // переменная для краткой записи к телу таблицы
+            let tbody = programTimeTable.querySelector('tbody')
+
+            if(tableArray !== null) {
+                tableArray.forEach((elem, index) => {
+
+                    // добавляем новую строку
+                    tbody.appendChild(document.createElement('tr'));
+
+                    // Получаем все строки в теле
+                    tableRow = tbody.querySelectorAll('tr')
+
+                    // считываем длины строк и ячеек
+                    lastRow = tbody.rows.length -1
+                    lastCell = tableRow[lastRow].cells.length - 1
+
+                    for(let i=0; i<=4; i++)
+                    {
+                        // добавляем в последнюю строку новую ячейку
+                        tableRow[lastRow].appendChild(document.createElement('td'))
+
+                        // обновляем индекс последней ячейки
+                        lastCell = tableRow[lastRow].cells.length - 1
+
+                        // записываем в последюю ячейку первый элемент  массива
+                        tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[i]
+                    }
+
+                })
+            }
+            // Пробегаемся по всем элементам массива
+        }
+    }
+    function programTimeSmenaRequest(date) {
+        let form_path = document.location.pathname;
+        form_path.lastIndexOf("/")
+        let searchIndex= form_path.lastIndexOf("/")+1;
+        let Name = form_path.substr(searchIndex, form_path.length)
+
+        let url = `/api/complexData/${Name}_days_date:${date}`
+
+        return fetch(url, {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            // Получение массива с полями
+            .then((elem) => {
+                    return elem
+                }
+            )
+    }
+    function activatePromise(promiseVariable) {
+        promiseVariable
+            .then(result => {
+
+                let complete = []
+                complete.push(result[0]['work'].concat(result[1]['work']))
+                complete.push(result[0]['programName'].concat(result[1]['programName']))
+
+                // MAPSTART
+                let smena_1 = [[]];
+                let smena_2 = [[]];
+
+                // Переменные массивов для имен программ двух смен
+                let programName1 = []
+                let programName2 = []
+
+                // Получении объекта с именем текущего станка
+                // Хранящий объедененные массивы текущего и предыдущего дня
+                let stanok = complete
+
+                // Переменная с индексом первого элемента следующего дня имени программы
+                let programName2Index = 600
+
+                // Отказ от работы с пустым объектом
+                if (stanok === null) {
+                    return
+                }
+
+                // Переменная с массивом, который является копией объекта, но со вставкой 23:59
+                // в нечетных массивах
+                let stanok_change = []
+
+                // Цикл вставки значения 23:59 в массивы работы, паузы, выключен, авария, нагрузка.
+                    // отказ от работы с неопределенным массивом
+                    if (stanok[0] !== undefined) {
+                        // Цикл внутри массива
+                        for (let j = 0; j < stanok[0].length; j++) {
+                            // если этот элемент последний, то записать его и выйти из цикла
+                            if (j == stanok[0].length) {
+                                stanok_change.push(stanok[0][j])
+                                break
+                            }
+
+                            // Если время 00:00 текущего дня меньше следующей переменной и текущая переменная меньше 00:00 текущего дня, и j четная, то
+                            if ((new Date(startTime + ' 00:00:00') < new Date(stanok[0][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[0][j]).getTime()) && j % 2 == 0) {
+                                // Вставить в измененный массив переменную
+                                stanok_change.push(stanok[0][j])
+                                // и 23:59
+                                stanok_change.push(pastTime + ' 23:59:59')
+                            }
+                            // Иначе  просто записать.
+                            else stanok_change.push(stanok[0][j])
+                        }
+                    }
+
+
+                    // Каждый новый цикл, это: работа, пауза, выключен, авария, нагрузка
+                    // Поэтому в каждом новом цикле добавляем в смену новый пустой массив,
+                    // который будет заполняться
+
+                    // Отказ от работы с неопределенным массивом
+                    if (stanok_change !== undefined) {
+                        // цикл пробежки по всему массиву
+                        for (let j = 0; stanok_change.length > j; j++) {
+                            // Если время больше 19:00 прошлого дня и меньше 7 утра следующего дня то:
+                            if ((new Date(stanok_change[j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok_change[j]).getTime())) {
+
+                                // Если j нечетный, а смена все еще пустая
+                                if(smena_1[0].length == 0 && j % 2 == 1) {
+                                    // добавить в смену 19:00
+                                    smena_1[0].push(pastTime + ' 19:00:00')
+                                    // Если это массив с работой и j нечетный
+                                    if (i == 0 && j % 2 == 1) {
+                                        // То добавить ПРОШЛУЮ(-1) программу, которая началась до 19:00
+                                        programName1.push(stanok[1][(j-1)/2])
+                                    }
+                                }
+                                // Затем в любом случае записать элемент в смену 1
+                                smena_1[0].push(stanok_change[j])
+
+                                // Если время больше 00:00 текущей даты
+                                if (new Date(stanok_change[j]).getTime() > new Date(startTime + ' 00:00:00').getTime())
+                                {
+                                    // И данный массив работа и j четный
+                                    if (j % 2 == 0) {
+                                        // То пишем имя программы в массив программ для первой смены
+                                        // по индексу текущего дня для имен программ
+                                        programName1.push(stanok[1][programName2Index])
+                                        programName2Index++
+                                    }
+                                }
+                                else
+                                {   // Иначе записываем имя программы в массив программ для первой смены из массива прошлого дня
+                                    if (j % 2 == 0) {
+                                        programName1.push(stanok[1][j/2])
+                                    }
+                                }
+                            }
+                            // Иначе если время входит в промежоток от 07:00 до 19:00 теккущего дня
+                            else if ((new Date(stanok_change[j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok_change[j]).getTime())) {
+                                // Если массив второй смены пустой, но j нечетный
+                                if(smena_2[0].length == 0 && j % 2 == 1){
+                                    // то записать 07:00
+                                    smena_2[0].push(startTime + ' 07:00:00')
+                                    // если это индекс работы и j нечетный
+                                    if (j % 2 == 1) {
+                                        // записываем ПРОШЛОЕ(-1) имя программы в массив программ для второй смены
+                                        programName2.push(stanok[1][(programName2Index-1)])
+                                    }
+                                }
+                                // Затем в любому случае пишем текущий элемент в массив второй смены
+                                smena_2[0].push(stanok_change[j])
+
+                                // если работа и j четный
+                                if (j % 2 == 0) {
+                                    // записываем имя программы в массив программ для второй смены
+                                    programName2.push(stanok[1][programName2Index])
+                                    programName2Index++
+                                }
+                            }
+                        } // Конец цилка обработки j
+
+                        // Если длина массива первой смены нечетная
+                        if(smena_1[0].length % 2 == 1)
+                        {   // То добавить в смену 06:59
+                            smena_1[0].push(startTime + ' 06:59:00')
+                        }
+                        // Если длина массива второй смены нечетная
+                        if(smena_2[0].length % 2 == 1)
+                        {   // Если дата равна сегодняшней
+                            if(startTime == time.slice(0, 10))
+                            {   // То добавить во вторую смену текущее время
+                                smena_2[0].push(startTime + " " + time.slice(11, 19))
+                            }
+                            else{
+                                // Иначе добавить во вторую смену 18:59
+                                smena_2[0].push(startTime + ' 18:59:00')
+                            }
+                        }
+
+                        // Если смена 2 пустая, а первая смена не пустая и ее последнее значение 06:59
+                        if(smena_2[0].length == 0 && smena_1[0][(smena_1[0].length-1)] == startTime + ' 06:59:00')
+                        {
+                            // то добавить во вторую смену 07:00
+                            smena_2[0].push(startTime + ' 07:00:00')
+                            // И в зависимости от текущей даты вставить 18:59 или текущее время
+                            if(startTime == time.slice(0, 10))
+                            {   // То добавить во вторую смену текущее время
+                                smena_2[0].push(startTime + " " + time.slice(11, 19))
+                            }
+                            else{
+                                // Иначе добавить во вторую смену 18:59
+                                smena_2[0].push(startTime + ' 18:59:00')
+                            }
+                        }
+                    }
+
+                // Добавляем в получившиеся массивы, массивы с именами программ
+                smena_1.push(programName1)
+                smena_2.push(programName2)
+
+                smena_1 = getTimeProgramNameSmena(smena_1)
+                smena_2 = getTimeProgramNameSmena(smena_2)
+
+                printTable('programTimeTableSmena1', smena_1)
+                printTable('programTimeTableSmena2', smena_2)
+                // MAPEND
+
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
 
     // Переменные экспорта таблицы в Excel
     let buttonExcel = document.querySelector("#button-excel");
     // Получение таблицы по id
-    let programTimeTableSmena1 = document.getElementById('programTimeTableSmena1')
-    buttonExcel.addEventListener("click", e => {
-        TableToExcel.convert(programTimeTableSmena1);
-    });
 
-    // Переменные нахождения последнего слова в адресной строке
-    let form_path = document.location.pathname;
-    form_path.lastIndexOf("/")
-    const searchIndex= form_path.lastIndexOf("/")+1;
-    const stanok = form_path.substr(searchIndex, form_path.length)
+    buttonExcel.addEventListener("click", e => {
+        TableToExcel.convert(document.getElementById('programTimeTableSmena1'));
+        TableToExcel.convert(document.getElementById('programTimeTableSmena2'));
+    });
 
     // Переменные даты и времяни
     let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     let startTime = time.slice(0, 10)
+    let pastTime  = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
     document.getElementsByClassName('form-control')[0].value = startTime
 
-    // url для запроса
-    let url = `/api/complexData/${stanok}_days_date:${startTime}`
-
-    fetch(url, {
-        method: 'GET'
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            for (let i = document.getElementById('programTimeTableSmena1').getElementsByTagName('tr').length -1; i; i--) {
-                document.getElementById('programTimeTableSmena1').deleteRow(i);
-            }
-            if (data) {
-                let tableArray = getTimeProgramName(data)
-                // Переменная для кратной записи
-                let tableRow = null
-
-                // индекс последней строки
-                let lastRow = null
-
-                // индекс последней ячейки
-                let lastCell = null
-
-                // переменная для краткой записи к телу таблицы
-                let tbody = programTimeTableSmena1.querySelector('tbody')
-
-                if(tableArray !== null) {
-                    tableArray.forEach((elem, index) => {
-
-                        // добавляем новую строку
-                        tbody.appendChild(document.createElement('tr'));
-
-                        // Получаем все строки в теле
-                        tableRow = tbody.querySelectorAll('tr')
-
-                        // считываем длины строк и ячеек
-                        lastRow = tbody.rows.length -1
-                        lastCell = tableRow[lastRow].cells.length - 1
-
-                        for(let i=0; i<=4; i++)
-                        {
-                            // добавляем в последнюю строку новую ячейку
-                            tableRow[lastRow].appendChild(document.createElement('td'))
-
-                            // обновляем индекс последней ячейки
-                            lastCell = tableRow[lastRow].cells.length - 1
-
-                            // записываем в последюю ячейку первый элемент  массива
-                            tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[i]
-                        }
-
-                    })
-                }
-                // Пробегаемся по всем элементам массива
-            }
-        })
-        .catch(err => {
-            alert('Слишком частое количество запросов',err)
-        });
-
+    let stankiRequest = Promise.all([programTimeSmenaRequest(pastTime), programTimeSmenaRequest(startTime)]);
+    activatePromise(stankiRequest)
 </script>
+
 </body>
 </html>
