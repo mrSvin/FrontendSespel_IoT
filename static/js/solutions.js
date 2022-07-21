@@ -155,7 +155,7 @@ function convertDaysToSmena(today, yesterday, calendarDate=null) {
     let programName2 = []
 
     // Переменная с индексом первого элемента следующего дня имени программы
-    let programName2Index = 600
+    let programName2Index = today.programName.length
 
     // Получении объекта с именем текущего станка
     // Хранящий объедененные массивы текущего и предыдущего дня
