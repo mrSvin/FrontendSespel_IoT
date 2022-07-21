@@ -99,11 +99,33 @@
         let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
         startTime = datas.slice(0, 10)
         pastTime  = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
+
         document.getElementById('programTimeTableSmena1').querySelector('th').innerHTML = `Имена программ первой смены (19:00 - 07:00) ${pastTime} — ${startTime}`
         document.getElementById('programTimeTableSmena2').querySelector('th').innerHTML = `Имена программ второй смены (07:00 - 19:00) ${startTime}`
 
         stankiRequest = Promise.all([programTimeSmenaRequest(pastTime), programTimeSmenaRequest(startTime)]);
         activatePromise(stankiRequest)
+    }
+    function ExcelConvert() {
+        let form_path = document.location.pathname;
+        form_path.lastIndexOf("/")
+        let searchIndex= form_path.lastIndexOf("/")+1;
+        let Name = form_path.substr(searchIndex, form_path.length)
+
+        TableToExcel.convert(document.getElementById("programTimeTableSmena1"), {
+            name: `${Name}_${pastTime}—${startTime}.xlsx`,
+            sheet: {
+                name: "Sheet 1"
+            }
+        });
+
+        TableToExcel.convert(document.getElementById("programTimeTableSmena2"), {
+            name: `${Name}_${startTime}.xlsx`,
+            sheet: {
+                name: "Sheet 1"
+            }
+        });
+
     }
     function msToTime(duration) {
         let seconds = parseInt((duration / 1000) % 60),
@@ -402,21 +424,19 @@
     }
 
     // Переменные экспорта таблицы в Excel
-    let buttonExcel = document.querySelector("#button-excel");
-    // Получение таблицы по id
 
-    buttonExcel.addEventListener("click", e => {
-        TableToExcel.convert(document.getElementById('programTimeTableSmena1'));
-        TableToExcel.convert(document.getElementById('programTimeTableSmena2'));
-    });
+
 
     // Переменные даты и времяни
+    let buttonExcel = document.querySelector("#button-excel");
+
     let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     let startTime = time.slice(0, 10)
     let pastTime  = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
     document.getElementsByClassName('form-control')[0].value = startTime
     document.getElementById('programTimeTableSmena1').querySelector('th').innerHTML = `Имена программ первой смены (19:00 - 07:00) ${pastTime} — ${startTime}`
     document.getElementById('programTimeTableSmena2').querySelector('th').innerHTML = `Имена программ второй смены (07:00 - 19:00) ${startTime}`
+    buttonExcel.addEventListener("click", ExcelConvert);
 
     let stankiRequest = Promise.all([programTimeSmenaRequest(pastTime), programTimeSmenaRequest(startTime)]);
     activatePromise(stankiRequest)
