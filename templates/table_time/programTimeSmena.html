@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Таблица времяни выполнения программ станка</title>
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+    <script src="/js/lib/jquery-3.6.0.min.js"></script>
+    <script src="/js/lib/bootstrap-datepicker.min.js"></script>
+    <script src="/js/lib/bootstrap-datepicker.ru.min.js"></script>
+
+    <link href="/css/tables.css" rel="stylesheet"/>
+    <script src="/js/lib/table-to-excel@v1.0.4.js"></script>
+</head>
+<body>
+
+<form style="display: flex;align-items: center;justify-content: center;height: 5vh;position: relative;background: #dee2e6;top: 0px;z-index: 2;" action="" method="post" id="form_update">
+    <div class="input-group date" id="datepicker" style="width: 200px; float: left;  margin: 1.7%">
+        <input type="text" class="form-control" value="" onchange="selectedNewValue()" style="color:#756e6e; background:#f2f6f8; border: 1px solid#cccccc;">
+        <span class="input-group-addon" style="color:#756e6e; background:#eeeeee; border: 1px solid #cccccc;">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+</form>
+
+<div style="position: relative;top: -1px;padding: 1px;">
+    <div class="tableFixHead">
+        <table class="table table-striped" id="programTimeTableSmena1">
+        <thead class="thead-dark" style="">
+        <tr>
+            <th scope="col">Имена программ первой смены(19:00 - 07:00)</th>
+            <th scope="col">Время начала</th>
+            <th scope="col">Время окончания</th>
+            <th scope="col">Время выполнения</th>
+            <th scope="col">Время с учетом пауз</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    </div>
+    <div style="
+    height: 7px;
+    z-index: 1;
+    background: #8dbeef;
+    position: relative;
+    top: 0px;
+    padding: 1px;
+"></div>
+    <div class="tableFixHead">
+        <table class="table table-striped" id="programTimeTableSmena2">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Имена программ второй смены(07:00 - 19:00)</th>
+                <th scope="col">Время начала</th>
+                <th scope="col">Время окончания</th>
+                <th scope="col">Время выполнения</th>
+                <th scope="col">Время с учетом пауз</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<img class="excelIcon" id="button-excel" src="../../images/excel_icon.png">
+
+<script>
+    // Загрузка datapicker при загрузке страницы
+    document.addEventListener("DOMContentLoaded", function(event) {
+        $('#datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            language: 'ru',
+            autoclose: true,
+            todayHighlight: true,
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            orientation: "button"
+        });
+    })
+
+    function selectedNewValue(){
+        $('#datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            language: 'ru',
+            autoclose: true,
+            todayHighlight: true,
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            orientation: "button"
+        });
+
+        let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+        date = new Date(datas); // some mock date
+        startTime = datas.slice(0, 10)
+
+        url = `/api/complexData/${stanok}_days_date:${startTime}`
+
+        fetch(url, {
+            method: 'GET'
+        })
+
+            .then((response) => response.json())
+            .then((data) => {
+                for (let i = document.getElementById('programTimeTableSmena1').getElementsByTagName('tr').length -1; i; i--) {
+                    document.getElementById('programTimeTableSmena1').deleteRow(i);
+                }
+                if (data) {
+                    let tableArray = getTimeProgramName(data)
+                    // Переменная для кратной записи
+                    let tableRow = null
+
+                    // индекс последней строки
+                    let lastRow = null
+
+                    // индекс последней ячейки
+                    let lastCell = null
+
+                    // переменная для краткой записи к телу таблицы
+                    let tbody = programTimeTableSmena1.querySelector('tbody')
+
+                    if(tableArray !== null) {
+                        tableArray.forEach((elem, index) => {
+
+                            // добавляем новую строку
+                            tbody.appendChild(document.createElement('tr'));
+
+                            // Получаем все строки в теле
+                            tableRow = tbody.querySelectorAll('tr')
+
+                            // считываем длины строк и ячеек
+                            lastRow = tbody.rows.length -1
+                            lastCell = tableRow[lastRow].cells.length - 1
+
+                            for(let i=0; i<=4; i++)
+                            {
+                                // добавляем в последнюю строку новую ячейку
+                                tableRow[lastRow].appendChild(document.createElement('td'))
+
+                                // обновляем индекс последней ячейки
+                                lastCell = tableRow[lastRow].cells.length - 1
+
+                                // записываем в последюю ячейку первый элемент  массива
+                                tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[i]
+                            }
+
+                        })
+                    }
+                    // Пробегаемся по всем элементам массива
+                }
+            })
+            .catch(err => {
+                alert('Слишком частое количество запросов',err)
+            });
+    }
+
+    // Функция перевода миллисекунд в часы в формате 00:00:00
+    function msToTime(duration) {
+        let seconds = parseInt((duration / 1000) % 60),
+            minutes = parseInt((duration / (1000 * 60)) % 60),
+            hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+
+
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+        return hours + ":" + minutes + ":" + seconds;
+    }
+
+    // Функция принимает данные с запроса работы станка и возвращает
+    // структуру для таблицы
+    function getTimeProgramName(arrayData)
+    {
+        let timer = 0;
+        let programTimeArray = [];
+        let startSame = null
+
+        arrayData? console.log(""):0;
+
+            if(arrayData['work'].length % 2 == 1)
+            {
+                if(startTime == time.slice(0, 10))
+                {   // То добавить во вторую смену текущее время
+                    arrayData['work'].push(startTime + " " + time.slice(11, 19))
+                }
+                else {
+                    arrayData['work'].push(startTime + ' 23:59:59')
+                }
+            }
+
+
+        for(let i = 0; i<arrayData['work'].length; i+=2)
+        {
+
+            if(arrayData['programName'][i/2] == arrayData['programName'][i/2+1])
+            {
+                if(arrayData['programName'][i/2] !== arrayData['programName'][i/2-1])
+                {
+                    startSame = arrayData['work'][i]
+                }
+
+                timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
+            }
+
+            else
+            {
+
+                if(arrayData['programName'][i/2] == arrayData['programName'][i/2-1])
+                {
+                    timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
+                    programTimeArray.push([arrayData['programName'][i/2], startSame.slice(11), arrayData['work'][i+1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i+1]) - new Date(startSame))])
+                    timer = 0
+                }
+                else {
+                    timer = (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
+                    programTimeArray.push([arrayData['programName'][i/2], arrayData['work'][i].slice(11), arrayData['work'][i+1].slice(11), msToTime(timer), msToTime(timer)])
+                    timer = 0
+                }
+
+
+            }
+
+        }
+        // Фильтрация массива на наличие запятых
+        programTimeArray.map((elem)=>{
+            elem[0] = elem[0].split(',').join('_');
+            return elem
+        })
+        return programTimeArray
+    }
+
+    // Переменные экспорта таблицы в Excel
+    let buttonExcel = document.querySelector("#button-excel");
+    // Получение таблицы по id
+    let programTimeTableSmena1 = document.getElementById('programTimeTableSmena1')
+    buttonExcel.addEventListener("click", e => {
+        TableToExcel.convert(programTimeTableSmena1);
+    });
+
+    // Переменные нахождения последнего слова в адресной строке
+    let form_path = document.location.pathname;
+    form_path.lastIndexOf("/")
+    const searchIndex= form_path.lastIndexOf("/")+1;
+    const stanok = form_path.substr(searchIndex, form_path.length)
+
+    // Переменные даты и времяни
+    let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    let startTime = time.slice(0, 10)
+    document.getElementsByClassName('form-control')[0].value = startTime
+
+    // url для запроса
+    let url = `/api/complexData/${stanok}_days_date:${startTime}`
+
+    fetch(url, {
+        method: 'GET'
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            for (let i = document.getElementById('programTimeTableSmena1').getElementsByTagName('tr').length -1; i; i--) {
+                document.getElementById('programTimeTableSmena1').deleteRow(i);
+            }
+            if (data) {
+                let tableArray = getTimeProgramName(data)
+                // Переменная для кратной записи
+                let tableRow = null
+
+                // индекс последней строки
+                let lastRow = null
+
+                // индекс последней ячейки
+                let lastCell = null
+
+                // переменная для краткой записи к телу таблицы
+                let tbody = programTimeTableSmena1.querySelector('tbody')
+
+                if(tableArray !== null) {
+                    tableArray.forEach((elem, index) => {
+
+                        // добавляем новую строку
+                        tbody.appendChild(document.createElement('tr'));
+
+                        // Получаем все строки в теле
+                        tableRow = tbody.querySelectorAll('tr')
+
+                        // считываем длины строк и ячеек
+                        lastRow = tbody.rows.length -1
+                        lastCell = tableRow[lastRow].cells.length - 1
+
+                        for(let i=0; i<=4; i++)
+                        {
+                            // добавляем в последнюю строку новую ячейку
+                            tableRow[lastRow].appendChild(document.createElement('td'))
+
+                            // обновляем индекс последней ячейки
+                            lastCell = tableRow[lastRow].cells.length - 1
+
+                            // записываем в последюю ячейку первый элемент  массива
+                            tableRow[lastRow].querySelectorAll('td')[lastCell].textContent = elem[i]
+                        }
+
+                    })
+                }
+                // Пробегаемся по всем элементам массива
+            }
+        })
+        .catch(err => {
+            alert('Слишком частое количество запросов',err)
+        });
+
+</script>
+</body>
+</html>
