@@ -21,18 +21,19 @@ function msToTimeDays(duration) {
     return days + hours + minutes + seconds;
 }
 
-function parseLinearService(arrayParse, y, difference=null) {
-
+function parseLinearServiceHistory(arrayParse, y, difference) {
+console.log(difference)
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
 
     // Если имя программы не передано в функцию, то массив формируется без нее
-    if (difference == null){
         if(arrayParse.length == 1){
             arraySave.push({
                 x:(new Date(arrayParse[0])).getTime(),
                 x2:((new Date(arrayParse[0])).getTime()+86400000),
-                y:y
+                y:y,
+                login: difference[0][0],
+                work: difference[0][1]
             })
         }
         else if(arrayParse.length % 2 == 0){
@@ -40,7 +41,9 @@ function parseLinearService(arrayParse, y, difference=null) {
                 arraySave.push({
                     x:(new Date(arrayParse[i])).getTime(),
                     x2:(new Date(arrayParse[i+1])).getTime(),
-                    y:y
+                    y:y,
+                    login: difference[i][0],
+                    work: difference[i][1]
                 })
             }
         }
@@ -51,21 +54,33 @@ function parseLinearService(arrayParse, y, difference=null) {
                     arraySave.push({
                         x:(new Date(arrayParse[i])).getTime(),
                         x2:(new Date(arrayParse[i])).getTime(),
-                        y:y
+                        y:y,
+                        login: difference[i][0],
+                        work: difference[i][1]
                     })
                 }
                 else {
                     arraySave.push({
                         x: (new Date(arrayParse[i])).getTime(),
                         x2: (new Date(arrayParse[i + 1])).getTime(),
-                        y: y
+                        y: y,
+                        login: difference[i][0],
+                        work: difference[i][1]
                     })
                 }
             }
         }
-    }
     // Иначе в массив парсится переданный массив с именем программы
-    else {
+
+    // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
+    return arraySave
+}
+
+function parseLinearServiceNow(arrayParse, y, difference=null) {
+
+    var index_pars = 0; // Индекс по одному из циклов
+    var arraySave = [] // Массив, который будет заполняться
+
         while(index_pars < arrayParse.length)
         {   // Парсинг
             arraySave.push({
@@ -75,7 +90,6 @@ function parseLinearService(arrayParse, y, difference=null) {
                 partialFill: difference})
             index_pars += 1;
         }
-    }
     // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
     return arraySave
 }

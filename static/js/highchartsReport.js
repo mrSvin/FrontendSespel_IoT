@@ -516,7 +516,7 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
 }
 
 //Сервис
-function highChartServiceHistory(ArrayTeh) {
+function highChartServiceHistory(ArrayTeh, info=null) {
     // Копирования массива со всеми тех. обслуживаниями
     let arrayTeh = ArrayTeh.slice()
 
@@ -524,7 +524,7 @@ function highChartServiceHistory(ArrayTeh) {
     let nechet = []
 
     //Массив со всеми тех. обслуживаниями.
-    arrayTeh = parseLinearService(arrayTeh, 0)
+    arrayTeh = parseLinearServiceHistory(arrayTeh, 0, info)
 
     arrayTeh.forEach((e,i)=>{
         if(i%2==0) chet.push(e)
@@ -618,8 +618,9 @@ function highChartServiceHistory(ArrayTeh) {
                 tooltip: {
                     pointFormatter: function () {
                         let timer = msToTimeDays(this.x2 - this.x)
-                        let per = this.partialFill
-                        return '<b>Времени между обслуживанием:</b> ' + timer;
+                        return '<b>Времени между обслуживанием:</b> ' + timer +
+                            '<br>' + '<b>Ответственный:</b> ' + this.login +
+                            '<br>' + '<b>Проведенные работы:</b> ' + this.work;
                     },
                 },
                 data: chet,
@@ -633,8 +634,9 @@ function highChartServiceHistory(ArrayTeh) {
                 tooltip: {
                     pointFormatter: function () {
                         let timer = msToTimeDays(this.x2 - this.x)
-                        let per = this.partialFill
-                        return '<b>Времени между обслуживанием:</b> ' + timer;
+                        return '<b>Времени между обслуживанием:</b> ' + timer +
+                            '<br>' + '<b>Ответственный:</b> ' + this.login +
+                            '<br>' + '<b>Проведенные работы:</b> ' + this.work;
                     },
                 },
                 data: nechet,
@@ -674,7 +676,7 @@ function highChartServiceNow(ArrayTeh,timeNext=null) {
     // Переменная отображающаяся на графики планируемого обслуживания.
     let percent = +((new Date(timeToday).getTime() - new Date(lastServiceIso).getTime())/timeNext).toFixed(2)
 
-    timePastArray = parseLinearService(timePastArray, 0, percent)
+    timePastArray = parseLinearServiceNow(timePastArray, 0, percent)
 
     Highcharts.setOptions({
         lang: {
