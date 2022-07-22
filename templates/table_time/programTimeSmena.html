@@ -434,8 +434,8 @@
     let startTime = time.slice(0, 10)
     let pastTime  = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
     document.getElementsByClassName('form-control')[0].value = startTime
-    document.getElementById('programTimeTableSmena1').querySelector('th').innerHTML = `Имена программ первой смены (19:00 - 07:00) ${pastTime} — ${startTime}`
-    document.getElementById('programTimeTableSmena2').querySelector('th').innerHTML = `Имена программ второй смены (07:00 - 19:00) ${startTime}`
+    document.getElementById('programTimeTableSmena1').querySelector('th').innerHTML = `Имена программ второй смены (19:00 - 07:00) ${pastTime} — ${startTime}`
+    document.getElementById('programTimeTableSmena2').querySelector('th').innerHTML = `Имена программ первой смены (07:00 - 19:00) ${startTime}`
     buttonExcel.addEventListener("click", ExcelConvert);
 
     let stankiRequest = Promise.all([programTimeSmenaRequest(pastTime), programTimeSmenaRequest(startTime)]);
