@@ -1,10 +1,11 @@
-
 .homeBody {
-    min-height: 100%;
-    background: url(../images/line.jpg);
+    background: url(/images/line.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    position: relative;
+    padding-top: 75px;
+    top: -75px;
+    height: 100%;
+    overflow-y: hidden;
 }
 
 .main-container-home {
@@ -42,7 +43,8 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    background-color: #ececec;
+    background: url(/images/white_lines.jpg);
+    background-size: cover;
     position: relative;
     opacity: 90%;
     transition: 0.5s;
