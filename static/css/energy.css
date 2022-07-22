@@ -45,12 +45,6 @@
 }
 
 .stanok_img {
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 400px;
-    width: auto;
-    max-width: 100%;
-    display: block;
 }
 
 .comlexInfo {
@@ -118,10 +112,13 @@
 }
 
 .parent_image {
-    float: left;
     min-height: 550px;
-    width: 18%;
     max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin-left: 15px;
 }
 
 .parent_image a {
@@ -135,8 +132,9 @@
 }
 
 .stanok_img {
-    max-width: 100%;
-    margin-left: 15px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .comlexInfo {
@@ -277,7 +275,6 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-left: 15px;
     padding-bottom: 10px;
 }
 
@@ -440,4 +437,10 @@
     color: #b3b8be;
     margin-top: 65px;
     /* margin-left: 0px; */
+}
+
+.blockImage {
+    width: 250px;
+    height: 250px;
+    display: flex;
 }
