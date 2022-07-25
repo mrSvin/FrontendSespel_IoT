@@ -1,10 +1,9 @@
 .headerBody {
     display: flex;
+    width: 100vw;
     justify-content: space-between;
     flex-wrap: nowrap;
     width: 100%;
-    position: absolute;
-    z-index: 1;
 }
 
 .icon-logo {
@@ -211,9 +210,4 @@
 
 .buttonLogout:hover {
     box-shadow: 0px 0px 5px 0px #14B2E9, inset 0px 0px 0px 0px #14b2f3 !important;
-}
-
-.headerPadding {
-    padding-top: 75px;
-    height: 92%;
 }

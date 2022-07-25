@@ -1,12 +1,10 @@
+
 .homeBody {
-    /*! background: url(/images/line.jpg); */
-    background-size: auto;
+    min-height: 100%;
+// background: url(../images/line.jpg);
     background-size: cover;
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    display: block;
-    /*! height: 100%; */
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .main-container-home {
@@ -15,7 +13,6 @@
     flex-wrap: wrap;
     margin: 0px auto 50px auto;
     justify-content: space-evenly;
-    padding-top: 75px;
 }
 
 .container-home {
@@ -45,8 +42,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    background: url(/images/white_lines.jpg);
-    background-size: cover;
+    background-color: #ececec;
     position: relative;
     opacity: 90%;
     transition: 0.5s;
