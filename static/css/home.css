@@ -1,11 +1,12 @@
 .homeBody {
     background: url(/images/line.jpg);
+    background-size: auto;
     background-size: cover;
-    position: relative;
+    position: absolute;
     padding-top: 75px;
-    top: -75px;
-    height: 100%;
-    overflow-y: hidden;
+    top: 0px;
+    height: 92%;
+    width: 100%;
 }
 
 .main-container-home {
