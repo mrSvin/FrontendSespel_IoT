@@ -85,6 +85,17 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
 
         series: [
             {
+                name: nagruzkaName,
+                // borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: colorNagruzka,
+                data: arrayRuchnoi,
+                dataLabels: {
+                    enabled: true
+                }
+            },
+            {
                 name: 'Работа',
                 // borderColor: 'gray',
                 pointWidth: 30,
@@ -130,24 +141,15 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
                 dataLabels: {
                     enabled: true
                 }
-            },
-            {
-                name: nagruzkaName,
-                // borderColor: 'gray',
-                pointWidth: 30,
-                colorByPoint: false,
-                color: colorNagruzka,
-                data: arrayRuchnoi,
-                dataLabels: {
-                    enabled: true
-                }
-            },
+            }
         ],
         legend: {
             itemStyle: {
                 color: '#FFF'
             }
         }
+
+
     });
 }
 
@@ -228,11 +230,108 @@ function highChartCountOperations(generalDiagramNames, countOperation, countLong
     });
 }
 
+function highChartEnergy(inputData, containerName) {
+    Highcharts.chart(containerName,
+        {
+            lang: {
+                loading: 'Загрузка...',
+                months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+                shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+                exportButtonTitle: "Экспорт",
+                printButtonTitle: "Печать",
+                rangeSelectorFrom: "С",
+                rangeSelectorTo: "По",
+                rangeSelectorZoom: "Период",
+                downloadPNG: 'Скачать PNG',
+                downloadJPEG: 'Скачать JPEG',
+                downloadPDF: 'Скачать PDF',
+                downloadSVG: 'Скачать SVG',
+                printChart: 'Напечатать график',
+                viewFullscreen: 'На весь экран'
+            },
+            plotOptions: {
+                xrange: {
+                    grouping: false
+                }
+            },
+            global: {
+                timezoneOffset: new Date().getTimezoneOffset()
+            },
+
+            chart: {
+                type: 'column'
+            },
+            colors: ['#5c7ed0'],
+
+            title: {
+                text: 'Расход воды по дням',
+                style: {
+                    color: '#FFF',
+                    fontWeight: 'bold',
+                    fontSize: '22px',
+                }
+            },
+            xAxis: {
+                title: {
+                    text: 'Дни месяца',
+                    align: 'high',
+                    style: {
+                        color: '#FFF'
+                    }
+                },
+                labels: {
+                    style: {
+                        color: '#FFF',
+                        fontSize: '18px',
+                    }
+                },
+                categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+            },
+            credits: {
+                enabled: false
+            },
+            yAxis: {
+                labels: {
+                    style: {
+                        color: '#FFF'
+                    },
+                },
+                min: 0,
+                title: {
+                    text: 'кубов',
+                    style: {
+                        color: '#FFF'
+                    }
+                }
+            },
+            tooltip: {
+                valueSuffix: ' кубов'
+            },
+            plotOptions: {
+                column: {
+                    dataLabels: {
+                        enabled: false
+                    }
+                }
+            },
+            legend: {
+                enabled: false
+            },
+
+            series: [{
+                name: 'Расход',
+                data: inputData
+            }]
+        }
+    );
+}
+
 //Месячный
 function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, nagruzkaName = 'Нагрузка', idContainer) {
 
     let colorNagruzka;
-    let workNoNagruzka = arrayWork;
+    let workNoNagruzka = arrayWork.slice();
     if (nagruzkaName == 'Нагрузка') {
         colorNagruzka = '#207210'
 
@@ -371,17 +470,6 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
         colorNagruzka = '#5c7ed0'
     }
 
-    let totalData = generalDiagramNames.map((e,i)=>{
-        return [avar[i], off[i], pause[i], nagruzka[i], workNoNagruzka[i],]
-    })
-
-    let totalSum = totalData.map(e=>{
-        e.reduce((val1, val2)=>{
-            return val1+val2
-        })
-    })
-
-    console.log(totalData,totalSum, 'Тут')
 
     Highcharts.chart('containerTotal', {
         chart: {
@@ -417,24 +505,8 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
             }
         },
         tooltip: {
-            pointFormatter: function () {
-                //let timer = msToTimeDays(this.x2 - this.x)
-                let abba = [avar[this.index], off[this.index], pause[this.index], nagruzka[this.index], workNoNagruzka[this.index],]
-                let abbaSum = abba.reduce((val1, val2)=>{
-                    return val1+val2
-                })
-
-                let abbaPercent = convertTime(abba)
-
-                console.log()
-                return `<span style="color: #e81e1d;">Авария</span>: ${(abba[0]/abbaSum*100).toFixed(1)}% ${abbaPercent[0]}<br/>` +
-                    `<span style="color: #000000;">Выключен</span>: ${(abba[1]/abbaSum*100).toFixed(1)}% ${abbaPercent[1]}<br/>` +
-                    `<span style="color: #ffea32;">Ожидание</span>: ${(abba[2]/abbaSum*100).toFixed(1)}% ${abbaPercent[2]}<br/>` +
-                    `<span style="color: #207210;">Нагрузка</span>: ${(abba[3]/abbaSum*100).toFixed(1)}% ${abbaPercent[3]}<br/>` +
-                    `<span style="color: #38e817;">Работа</span>: ${(abba[4]/abbaSum*100).toFixed(1)}% ${abbaPercent[4]}<br/>`
-            },
-            //pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>'
-
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
+            shared: true
         },
         plotOptions: {
             column: {
@@ -541,7 +613,7 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
 }
 
 //Сервис
-function highChartServiceHistory(ArrayTeh, info=null) {
+function highChartServiceHistory(ArrayTeh) {
     // Копирования массива со всеми тех. обслуживаниями
     let arrayTeh = ArrayTeh.slice()
 
@@ -549,7 +621,7 @@ function highChartServiceHistory(ArrayTeh, info=null) {
     let nechet = []
 
     //Массив со всеми тех. обслуживаниями.
-    arrayTeh = parseLinearServiceHistory(arrayTeh, 0, info)
+    arrayTeh = parseLinearService(arrayTeh, 0)
 
     arrayTeh.forEach((e,i)=>{
         if(i%2==0) chet.push(e)
@@ -643,9 +715,8 @@ function highChartServiceHistory(ArrayTeh, info=null) {
                 tooltip: {
                     pointFormatter: function () {
                         let timer = msToTimeDays(this.x2 - this.x)
-                        return '<b>Времени между обслуживанием:</b> ' + timer +
-                            '<br>' + '<b>Ответственный:</b> ' + this.login +
-                            '<br>' + '<b>Проведенные работы:</b> ' + this.work;
+                        let per = this.partialFill
+                        return '<b>Времени между обслуживанием:</b> ' + timer;
                     },
                 },
                 data: chet,
@@ -659,9 +730,8 @@ function highChartServiceHistory(ArrayTeh, info=null) {
                 tooltip: {
                     pointFormatter: function () {
                         let timer = msToTimeDays(this.x2 - this.x)
-                        return '<b>Времени между обслуживанием:</b> ' + timer +
-                            '<br>' + '<b>Ответственный:</b> ' + this.login +
-                            '<br>' + '<b>Проведенные работы:</b> ' + this.work;
+                        let per = this.partialFill
+                        return '<b>Времени между обслуживанием:</b> ' + timer;
                     },
                 },
                 data: nechet,
@@ -701,7 +771,7 @@ function highChartServiceNow(ArrayTeh,timeNext=null) {
     // Переменная отображающаяся на графики планируемого обслуживания.
     let percent = +((new Date(timeToday).getTime() - new Date(lastServiceIso).getTime())/timeNext).toFixed(2)
 
-    timePastArray = parseLinearServiceNow(timePastArray, 0, percent)
+    timePastArray = parseLinearService(timePastArray, 0, percent)
 
     Highcharts.setOptions({
         lang: {
