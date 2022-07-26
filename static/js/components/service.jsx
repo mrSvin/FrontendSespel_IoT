@@ -38,23 +38,10 @@ function Service() {
 
             setDataService(dataTable)
 
-            let allServiceArray = ['2022-07-22 07:08:41', '2022-07-22 07:12:41', '2022-07-22 07:17:40', '2022-07-22 07:21:51', '2022-07-22 08:33:03', '2022-07-22 09:36:36', '2022-07-22 09:57:11', '2022-07-22 09:58:52']
-                //value.forEach(element => allServiceArray.push(element.time_service) )
+            let allServiceArray = []
+            value.forEach(element => allServiceArray.push(element.time_service) )
 
-            let info = value.map(e=> {
-                return [e.user_name, e.info_works]
-            })
-
-           // let info = [['Алексей','Длинная работа, много текста' +
-           // 'много текста много текста много текста много текста много текста' +
-           // 'много текста много текста много текста' +
-           // 'много текста много текста много текста'],['Василий','Эффективная работа мало текста'],
-           //     ['1','Эффективная работа мало текста'],['2','Эффективная работа мало текста'],
-           //     ['3','Эффективная работа мало текста'],['4','Эффективная работа мало текста'],
-           //     ['5','Эффективная работа мало текста'],['6','Эффективная работа мало текста']
-           // ]
-
-            highChartServiceHistory(allServiceArray.reverse(), info.reverse())
+            highChartServiceHistory(allServiceArray.reverse())
             highChartServiceNow(allServiceArray.reverse(),lastPeriod)
         })
 
@@ -101,10 +88,11 @@ function Service() {
 
 function FormAddService(setFormAddService) {
 
-    const [infoWorks, setInfoWorks] = useState('');
+    let [infoWorks, setInfoWorks] = useState('');
 
-    const [periodService, setPeriodService] = useState('7884000');
+    let [periodService, setPeriodService] = useState('7884000');
 
+    let [errorService, setErrorService] = useState("")
 
     function makeTehWork(complexName, infoWorks, periodService) {
 
@@ -115,7 +103,7 @@ function FormAddService(setFormAddService) {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                fetchRequestAddService(data.userName, data.userRole,complexName, infoWorks, periodService,setFormAddService)
+                fetchRequestAddService(data.userName, data.userRole,complexName, infoWorks, periodService,setFormAddService, errorService, setErrorService)
             })
 
 
@@ -132,7 +120,7 @@ function FormAddService(setFormAddService) {
                 <h2 className="formServiceName">Проведение тех. обслуживания</h2>
                 <div className='divWorksPass'>
                     <h3>Проведенные работы</h3>
-                    <textarea maxlength="499" id="story" name="story" placeholder="Введите список проведенных работ.."
+                    <textarea maxLength="499" id="story" name="story" placeholder="Введите список проведенных работ.."
                               value={infoWorks} onChange={e => {
                         setInfoWorks(e.target.value)
                     }}
@@ -150,11 +138,11 @@ function FormAddService(setFormAddService) {
                         <option label="1 год" value="31536000"></option>
                     </select>
                 </div>
-                <input id="submit" type="button" value="Подтвердить"
-                       onClick={() => {
-                           makeTehWork(setFormAddService.nameComplex, infoWorks, periodService)
-                       }}
-                />
+                <p className="error-msg">{errorService}</p>
+                <button id="submit" type="button"
+                        onClick={() => {makeTehWork(setFormAddService.nameComplex, infoWorks, periodService)}}
+                >Подтвердить
+                </button>
             </div>
 
             <div id="overlay_add"
