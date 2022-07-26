@@ -111,7 +111,11 @@ function fetchRequestAddService(userName, userRole,complexName, infoWorks, perio
                         return e.time_service
                     })
 
-                    highChartServiceHistory(allServiceArray.reverse())
+                    let info = newDataTable.map(e=> {
+                        return [e.user_name, e.info_works]
+                    })
+
+                    highChartServiceHistory(allServiceArray.reverse(), info.reverse())
                     highChartServiceNow(allServiceArray.reverse(),periodService)
                 }
             })

@@ -38,10 +38,14 @@ function Service() {
 
             setDataService(dataTable)
 
-            let allServiceArray = []
-            value.forEach(element => allServiceArray.push(element.time_service) )
+            let allServiceArray = ['2022-07-22 07:08:41', '2022-07-22 07:12:41', '2022-07-22 07:17:40', '2022-07-22 07:21:51', '2022-07-22 08:33:03', '2022-07-22 09:36:36', '2022-07-22 09:57:11', '2022-07-22 09:58:52']
+            //value.forEach(element => allServiceArray.push(element.time_service) )
 
-            highChartServiceHistory(allServiceArray.reverse())
+            let info = value.map(e=> {
+                return [e.user_name, e.info_works]
+            })
+
+            highChartServiceHistory(allServiceArray.reverse(), info.reverse())
             highChartServiceNow(allServiceArray.reverse(),lastPeriod)
         })
 

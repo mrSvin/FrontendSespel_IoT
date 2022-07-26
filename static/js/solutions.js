@@ -2,82 +2,93 @@ function msToTimeDays(duration) {
     let seconds = parseInt((duration / 1000) % 60),
         minutes = parseInt((duration / (1000 * 60)) % 60),
         hours = parseInt((duration / (1000 * 60 * 60)) % 24),
-        days = parseInt((duration / (1000 * 60 * 60 * 24)))
+        days = parseInt((duration / (1000 * 60 * 60 * 24 )))
 
-    if (days == 0) days = ''
-    else {
-        days = days + " дней "
-    }
+    if(days == 0) days = ''
+    else { days = days + " дней "}
 
-    if (hours == 0) hours = ''
-    else {
-        hours = hours + " ч. "
-    }
+    if(hours == 0) hours = ''
+    else { hours = hours + " ч. "}
 
-    if (minutes == 0) minutes = ''
-    else {
-        minutes = minutes + " мин. "
-    }
+    if(minutes == 0) minutes = ''
+    else { minutes = minutes + " мин. "}
 
-    if (seconds == 0) seconds = ''
-    else {
-        seconds = seconds + ' с.'
-    }
+    if(seconds == 0) seconds = ''
+    else { seconds = seconds + ' с.'}
+
 
 
     return days + hours + minutes + seconds;
 }
 
-function parseLinearService(arrayParse, y, difference = null) {
-
+function parseLinearServiceHistory(arrayParse, y, difference) {
+    console.log(difference)
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
 
     // Если имя программы не передано в функцию, то массив формируется без нее
-    if (difference == null) {
-        if (arrayParse.length == 1) {
+    if(arrayParse.length == 1){
+        arraySave.push({
+            x:(new Date(arrayParse[0])).getTime(),
+            x2:((new Date(arrayParse[0])).getTime()+86400000),
+            y:y,
+            login: difference[0][0],
+            work: difference[0][1]
+        })
+    }
+    else if(arrayParse.length % 2 == 0){
+        for(let i = 0; i<arrayParse.length-1; i++){
             arraySave.push({
-                x: (new Date(arrayParse[0])).getTime(),
-                x2: ((new Date(arrayParse[0])).getTime() + 86400000),
-                y: y
+                x:(new Date(arrayParse[i])).getTime(),
+                x2:(new Date(arrayParse[i+1])).getTime(),
+                y:y,
+                login: difference[i][0],
+                work: difference[i][1]
             })
-        } else if (arrayParse.length % 2 == 0) {
-            for (let i = 0; i < arrayParse.length - 1; i++) {
+        }
+    }
+    else {
+        for(let i = 0; i<arrayParse.length-1; i++){
+            if(i == arrayParse.length-1)
+            {
+                arraySave.push({
+                    x:(new Date(arrayParse[i])).getTime(),
+                    x2:(new Date(arrayParse[i])).getTime(),
+                    y:y,
+                    login: difference[i][0],
+                    work: difference[i][1]
+                })
+            }
+            else {
                 arraySave.push({
                     x: (new Date(arrayParse[i])).getTime(),
                     x2: (new Date(arrayParse[i + 1])).getTime(),
-                    y: y
+                    y: y,
+                    login: difference[i][0],
+                    work: difference[i][1]
                 })
-            }
-        } else {
-            for (let i = 0; i < arrayParse.length - 1; i++) {
-                if (i == arrayParse.length - 1) {
-                    arraySave.push({
-                        x: (new Date(arrayParse[i])).getTime(),
-                        x2: (new Date(arrayParse[i])).getTime(),
-                        y: y
-                    })
-                } else {
-                    arraySave.push({
-                        x: (new Date(arrayParse[i])).getTime(),
-                        x2: (new Date(arrayParse[i + 1])).getTime(),
-                        y: y
-                    })
-                }
             }
         }
     }
     // Иначе в массив парсится переданный массив с именем программы
-    else {
-        while (index_pars < arrayParse.length) {   // Парсинг
-            arraySave.push({
-                x: (new Date(arrayParse[index_pars * 2])).getTime(),
-                x2: (new Date(arrayParse[index_pars * 2 + 1])).getTime(),
-                y: y,
-                partialFill: difference
-            })
-            index_pars += 1;
-        }
+
+    // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
+    return arraySave
+}
+
+function parseLinearServiceNow(arrayParse, y, difference=null) {
+
+    var index_pars = 0; // Индекс по одному из циклов
+    var arraySave = [] // Массив, который будет заполняться
+
+    while(index_pars < arrayParse.length)
+    {   // Парсинг
+        arraySave.push({
+            x:(new Date(arrayParse[index_pars*2])).getTime(),
+            x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(),
+            y:y,
+            partialFill: difference})
+        index_pars += 1;
     }
     // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
     return arraySave
