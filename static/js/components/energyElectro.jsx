@@ -195,53 +195,68 @@ function ElectroInfo() {
 
             <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate = {stateButtonUpdate}/>
 
-            <div>
+            <div className='flex'>
                 <ComplexInfo complexName={complexName[0]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs1} />
-                <div className="vrsHighChart" id="container">
+                <div className='energyGraphTable'>
+                    <div className="vrsHighChart" id="container">
+                    </div>
+                    <TableDays data={dataVrs1}/>
                 </div>
-                <TableDays data={dataVrs1}/>
             </div>
 
-            <div>
+            <div className='flex'>
                 <ComplexInfo complexName={complexName[1]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs2} />
-                <div className="vrsHighChart" id="container2">
+                <div className='energyGraphTable'>
+                    <div className="vrsHighChart" id="container2">
+                    </div>
+                    <TableDays data={dataVrs2}/>
                 </div>
-                <TableDays data={dataVrs2}/>
             </div>
 
-            <div>
+            <div className='flex'>
                 <ComplexInfo complexName={complexName[2]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs3} />
-                <div className="vrsHighChart" id="container3">
+                <div className='energyGraphTable'>
+                    <div className="vrsHighChart" id="container3">
+                    </div>
+                    <TableDays data={dataVrs3}/>
                 </div>
-                <TableDays data={dataVrs3}/>
+
             </div>
 
-            <div>
+            <div className='flex'>
                 <ComplexInfo complexName={complexName[3]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs4} />
-                <div className="vrsHighChart" id="container4">
+                <div className='energyGraphTable'>
+                    <div className="vrsHighChart" id="container4">
+                    </div>
+                    <TableDays data={dataVrs4}/>
                 </div>
-                <TableDays data={dataVrs4}/>
             </div>
 
-            <div>
+            <div className='flex'>
                 <ComplexInfo complexName={complexName[4]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs5} />
-                <div className="vrsHighChart" id="container5">
+                <div className='energyGraphTable'>
+                    <div className="vrsHighChart" id="container5">
+                    </div>
+                    <TableDays data={dataVrs5}/>
                 </div>
-                <TableDays data={dataVrs5}/>
             </div>
 
-            <div>
+            <div className='flex'>
                 <ComplexInfo complexName={complexName[5]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs6} />
-                <div className="vrsHighChart" id="container6">
+                <div className='energyGraphTable'>
+                    <div className="vrsHighChart" id="container6">
+                    </div>
+                    <TableDays data={dataVrs6}/>
                 </div>
-                <TableDays data={dataVrs6}/>
             </div>
 
-            <div>
+            <div className='flex'>
                 <ComplexInfo complexName={complexName[6]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs7} />
-                <div className="vrsHighChart" id="container7">
+                <div className='energyGraphTable'>
+                    <div className="vrsHighChart" id="container7">
+                    </div>
+                    <TableDays data={dataVrs7}/>
                 </div>
-                <TableDays data={dataVrs7}/>
             </div>
 
 

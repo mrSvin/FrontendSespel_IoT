@@ -85,17 +85,6 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
 
         series: [
             {
-                name: nagruzkaName,
-                // borderColor: 'gray',
-                pointWidth: 30,
-                colorByPoint: false,
-                color: colorNagruzka,
-                data: arrayRuchnoi,
-                dataLabels: {
-                    enabled: true
-                }
-            },
-            {
                 name: 'Работа',
                 // borderColor: 'gray',
                 pointWidth: 30,
@@ -141,15 +130,24 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
                 dataLabels: {
                     enabled: true
                 }
-            }
+            },
+            {
+                name: nagruzkaName,
+                // borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: colorNagruzka,
+                data: arrayRuchnoi,
+                dataLabels: {
+                    enabled: true
+                }
+            },
         ],
         legend: {
             itemStyle: {
                 color: '#FFF'
             }
         }
-
-
     });
 }
 
@@ -373,6 +371,17 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
         colorNagruzka = '#5c7ed0'
     }
 
+    let totalData = generalDiagramNames.map((e,i)=>{
+        return [avar[i], off[i], pause[i], nagruzka[i], workNoNagruzka[i],]
+    })
+
+    let totalSum = totalData.map(e=>{
+        e.reduce((val1, val2)=>{
+            return val1+val2
+        })
+    })
+
+    console.log(totalData,totalSum, 'Тут')
 
     Highcharts.chart('containerTotal', {
         chart: {
@@ -408,8 +417,24 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
             }
         },
         tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
+            pointFormatter: function () {
+                //let timer = msToTimeDays(this.x2 - this.x)
+                let abba = [avar[this.index], off[this.index], pause[this.index], nagruzka[this.index], workNoNagruzka[this.index],]
+                let abbaSum = abba.reduce((val1, val2)=>{
+                    return val1+val2
+                })
+
+                let abbaPercent = convertTime(abba)
+
+                console.log()
+                return `<span style="color: #e81e1d;">Авария</span>: ${(abba[0]/abbaSum*100).toFixed(1)}% ${abbaPercent[0]}<br/>` +
+                    `<span style="color: #000000;">Выключен</span>: ${(abba[1]/abbaSum*100).toFixed(1)}% ${abbaPercent[1]}<br/>` +
+                    `<span style="color: #ffea32;">Ожидание</span>: ${(abba[2]/abbaSum*100).toFixed(1)}% ${abbaPercent[2]}<br/>` +
+                    `<span style="color: #207210;">Нагрузка</span>: ${(abba[3]/abbaSum*100).toFixed(1)}% ${abbaPercent[3]}<br/>` +
+                    `<span style="color: #38e817;">Работа</span>: ${(abba[4]/abbaSum*100).toFixed(1)}% ${abbaPercent[4]}<br/>`
+            },
+            //pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>'
+
         },
         plotOptions: {
             column: {
