@@ -257,16 +257,20 @@ function VrsInfo() {
 
             <div>
                 <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}/>
-                <div className="vrsHighChart" id="container">
+                <div className='energyGraphTable'>
+                    <div className="vrsHighChart" id="container">
+                    </div>
+                    <TableDays data={dataVrs1}/>
                 </div>
-                <TableDays data={dataVrs1}/>
             </div>
 
             <div>
                 <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}/>
-                <div className="vrsHighChart" id="container2">
+                <div className='energyGraphTable'>
+                    <div className="vrsHighChart" id="container2">
+                    </div>
+                    <TableDays data={dataVrs2}/>
                 </div>
-                <TableDays data={dataVrs2}/>
             </div>
         </div>
 
