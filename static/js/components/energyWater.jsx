@@ -255,7 +255,7 @@ function VrsInfo() {
 
             <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate={stateButtonUpdate}/>
 
-            <div>
+            <div className='flex'>
                 <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container">
@@ -264,7 +264,7 @@ function VrsInfo() {
                 </div>
             </div>
 
-            <div>
+            <div className='flex'>
                 <ComplexInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container2">
