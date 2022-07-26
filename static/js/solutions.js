@@ -365,7 +365,7 @@ function parseLinearSutki(arrayParse, y, date, arrayName = null) {
         }
     }
     // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
-    arraySave = addLastTime(arraySave, date)
+    //arraySave = addLastTime(arraySave, date)
 
     return arraySave
 }

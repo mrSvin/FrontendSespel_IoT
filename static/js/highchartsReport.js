@@ -61,11 +61,11 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
 
         xAxis: {
             type: 'datetime',
-            labels: {
-                style: {
-                    color: '#FFF'
-                }
-            },
+            // labels: {
+            //     style: {
+            //         color: '#FFF'
+            //     }
+            // },
         },
         yAxis: {
             title: {
@@ -73,28 +73,17 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
             },
             categories: [nagruzkaName, 'Работа', 'Ожидание', 'Выключен', 'В аварии'],
             reversed: true,
-            labels: {
-                style: {
-                    color: '#FFF'
-                },
-            }
+            // labels: {
+            //     style: {
+            //         color: '#FFF'
+            //     },
+            // }
         },
         credits: {
             enabled: false
         },
 
         series: [
-            {
-                name: nagruzkaName,
-                // borderColor: 'gray',
-                pointWidth: 30,
-                colorByPoint: false,
-                color: colorNagruzka,
-                data: arrayRuchnoi,
-                dataLabels: {
-                    enabled: true
-                }
-            },
             {
                 name: 'Работа',
                 // borderColor: 'gray',
@@ -141,7 +130,18 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
                 dataLabels: {
                     enabled: true
                 }
-            }
+            },
+            {
+                name: nagruzkaName,
+                // borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: colorNagruzka,
+                data: arrayRuchnoi,
+                dataLabels: {
+                    enabled: true
+                }
+            },
         ],
         legend: {
             itemStyle: {
