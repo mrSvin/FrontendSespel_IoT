@@ -2,129 +2,117 @@ function msToTimeDays(duration) {
     let seconds = parseInt((duration / 1000) % 60),
         minutes = parseInt((duration / (1000 * 60)) % 60),
         hours = parseInt((duration / (1000 * 60 * 60)) % 24),
-        days = parseInt((duration / (1000 * 60 * 60 * 24 )))
+        days = parseInt((duration / (1000 * 60 * 60 * 24)))
 
-    if(days == 0) days = ''
-    else { days = days + " дней "}
+    if (days == 0) days = ''
+    else {
+        days = days + " дней "
+    }
 
-    if(hours == 0) hours = ''
-    else { hours = hours + " ч. "}
+    if (hours == 0) hours = ''
+    else {
+        hours = hours + " ч. "
+    }
 
-    if(minutes == 0) minutes = ''
-    else { minutes = minutes + " мин. "}
+    if (minutes == 0) minutes = ''
+    else {
+        minutes = minutes + " мин. "
+    }
 
-    if(seconds == 0) seconds = ''
-    else { seconds = seconds + ' с.'}
-
+    if (seconds == 0) seconds = ''
+    else {
+        seconds = seconds + ' с.'
+    }
 
 
     return days + hours + minutes + seconds;
 }
 
-function parseLinearServiceHistory(arrayParse, y, difference) {
-console.log(difference)
+function parseLinearService(arrayParse, y, difference = null) {
+
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
 
     // Если имя программы не передано в функцию, то массив формируется без нее
-        if(arrayParse.length == 1){
+    if (difference == null) {
+        if (arrayParse.length == 1) {
             arraySave.push({
-                x:(new Date(arrayParse[0])).getTime(),
-                x2:((new Date(arrayParse[0])).getTime()+86400000),
-                y:y,
-                login: difference[0][0],
-                work: difference[0][1]
+                x: (new Date(arrayParse[0])).getTime(),
+                x2: ((new Date(arrayParse[0])).getTime() + 86400000),
+                y: y
             })
-        }
-        else if(arrayParse.length % 2 == 0){
-            for(let i = 0; i<arrayParse.length-1; i++){
+        } else if (arrayParse.length % 2 == 0) {
+            for (let i = 0; i < arrayParse.length - 1; i++) {
                 arraySave.push({
-                    x:(new Date(arrayParse[i])).getTime(),
-                    x2:(new Date(arrayParse[i+1])).getTime(),
-                    y:y,
-                    login: difference[i][0],
-                    work: difference[i][1]
+                    x: (new Date(arrayParse[i])).getTime(),
+                    x2: (new Date(arrayParse[i + 1])).getTime(),
+                    y: y
                 })
             }
-        }
-        else {
-            for(let i = 0; i<arrayParse.length-1; i++){
-                if(i == arrayParse.length-1)
-                {
+        } else {
+            for (let i = 0; i < arrayParse.length - 1; i++) {
+                if (i == arrayParse.length - 1) {
                     arraySave.push({
-                        x:(new Date(arrayParse[i])).getTime(),
-                        x2:(new Date(arrayParse[i])).getTime(),
-                        y:y,
-                        login: difference[i][0],
-                        work: difference[i][1]
+                        x: (new Date(arrayParse[i])).getTime(),
+                        x2: (new Date(arrayParse[i])).getTime(),
+                        y: y
                     })
-                }
-                else {
+                } else {
                     arraySave.push({
                         x: (new Date(arrayParse[i])).getTime(),
                         x2: (new Date(arrayParse[i + 1])).getTime(),
-                        y: y,
-                        login: difference[i][0],
-                        work: difference[i][1]
+                        y: y
                     })
                 }
             }
         }
+    }
     // Иначе в массив парсится переданный массив с именем программы
-
-    // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
-    return arraySave
-}
-
-function parseLinearServiceNow(arrayParse, y, difference=null) {
-
-    var index_pars = 0; // Индекс по одному из циклов
-    var arraySave = [] // Массив, который будет заполняться
-
-        while(index_pars < arrayParse.length)
-        {   // Парсинг
+    else {
+        while (index_pars < arrayParse.length) {   // Парсинг
             arraySave.push({
-                x:(new Date(arrayParse[index_pars*2])).getTime(),
-                x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(),
-                y:y,
-                partialFill: difference})
+                x: (new Date(arrayParse[index_pars * 2])).getTime(),
+                x2: (new Date(arrayParse[index_pars * 2 + 1])).getTime(),
+                y: y,
+                partialFill: difference
+            })
             index_pars += 1;
         }
+    }
     // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
     return arraySave
 }
 
 // Функция вычисления часов работы для круговой диаграммы.
-function getRoundDiagramData(smena){
+function getRoundDiagramData(smena) {
     // Создаем пустой массив
     let arrayRound = []
 
     // если массив смены не undefined, то
-    if (smena !== undefined)
-    {
+    if (smena !== undefined) {
         // Через map пробегаемся по элементам
-        smena.map((arraySmena, index)=>{
+        smena.map((arraySmena, index) => {
 
             // Нет смысла пробегаться по массиву с именами программ
-            if(index == 5) return;
+            if (index == 5) return;
 
             // Переменная, которая будет хранить текущую переменную для состояния:
             // работы, паузы, выключен, аварии, нагрузки
             let delta = 0
 
             // Если массив, оказался пустым или подобным, то в массив запишется ноль.
-            if(arraySmena == null || arraySmena.length <= 1 || arraySmena == undefined){
+            if (arraySmena == null || arraySmena.length <= 1 || arraySmena == undefined) {
                 arrayRound.push(delta)
                 return
             }
             // Иначе
-            else{   // Начиная с первого элемента с шагом 2
-                for(let i = 1; i < arraySmena.length; i+=2){
+            else {   // Начиная с первого элемента с шагом 2
+                for (let i = 1; i < arraySmena.length; i += 2) {
                     // старая заглушка
-                    if(i==0) continue
+                    if (i == 0) continue
 
                     // Вычисления дельты, сумма всех разниц между началом работы и концом.
-                    delta = delta + (new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i-1]).getTime())
+                    delta = delta + (new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i - 1]).getTime())
                 }
             }
             // После вычисления добавить в массив
@@ -136,7 +124,7 @@ function getRoundDiagramData(smena){
     }
 }
 
-function convertDaysToSmena(today, yesterday, calendarDate=null) {
+function convertDaysToSmena(today, yesterday, calendarDate = null) {
     // Массив с заполненными данными
     let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     // Преобразоавние текущего времение в формат '2022-03-21 10:00:35'
@@ -145,10 +133,9 @@ function convertDaysToSmena(today, yesterday, calendarDate=null) {
     let startTime = null
 
     // Дата с календаря(В данный момент, просто текущая дата)
-    if(calendarDate == null) {
+    if (calendarDate == null) {
         startTime = time.slice(0, 10)
-    }
-    else {
+    } else {
         startTime = calendarDate
     }
 
@@ -158,7 +145,7 @@ function convertDaysToSmena(today, yesterday, calendarDate=null) {
 
 
     // дата предыдущего дня
-    let pastTime  = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
+    let pastTime = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
 
     // Переменные массивов для двух смен
     let smena_1 = [];
@@ -175,9 +162,8 @@ function convertDaysToSmena(today, yesterday, calendarDate=null) {
     // Хранящий объедененные массивы текущего и предыдущего дня
 
     let stanok = []
-    for (let i=0; 6 > i; i++)
-    {   // метод concat объединяет массивы
-        if(today[i] != undefined && yesterday[i] != undefined) {
+    for (let i = 0; 6 > i; i++) {   // метод concat объединяет массивы
+        if (today[i] != undefined && yesterday[i] != undefined) {
             stanok.push(yesterday[i].concat(today[i]))
         }
     }
@@ -235,21 +221,20 @@ function convertDaysToSmena(today, yesterday, calendarDate=null) {
                 if ((new Date(stanok_change[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok_change[i][j]).getTime())) {
 
                     // Если j нечетный, а смена все еще пустая
-                    if(smena_1[i].length == 0 && j % 2 == 1) {
+                    if (smena_1[i].length == 0 && j % 2 == 1) {
                         // добавить в смену 19:00
                         smena_1[i].push(pastTime + ' 19:00:00')
                         // Если это массив с работой и j нечетный
                         if (i == 0 && j % 2 == 1) {
                             // То добавить ПРОШЛУЮ(-1) программу, которая началась до 19:00
-                            programName1.push(stanok[5][(j-1)/2])
+                            programName1.push(stanok[5][(j - 1) / 2])
                         }
                     }
                     // Затем в любом случае записать элемент в смену 1
                     smena_1[i].push(stanok_change[i][j])
 
                     // Если время больше 00:00 текущей даты
-                    if (new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 00:00:00').getTime())
-                    {
+                    if (new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 00:00:00').getTime()) {
                         // И данный массив работа и j четный
                         if (i == 0 && j % 2 == 0) {
                             // То пишем имя программы в массив программ для первой смены
@@ -257,24 +242,22 @@ function convertDaysToSmena(today, yesterday, calendarDate=null) {
                             programName1.push(stanok[5][programName2Index])
                             programName2Index++
                         }
-                    }
-                    else
-                    {   // Иначе записываем имя программы в массив программ для первой смены из массива прошлого дня
+                    } else {   // Иначе записываем имя программы в массив программ для первой смены из массива прошлого дня
                         if (i == 0 && j % 2 == 0) {
-                            programName1.push(stanok[5][j/2])
+                            programName1.push(stanok[5][j / 2])
                         }
                     }
                 }
                 // Иначе если время входит в промежоток от 07:00 до 19:00 теккущего дня
                 else if ((new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok_change[i][j]).getTime())) {
                     // Если массив второй смены пустой, но j нечетный
-                    if(smena_2[i].length == 0 && j % 2 == 1){
+                    if (smena_2[i].length == 0 && j % 2 == 1) {
                         // то записать 07:00
                         smena_2[i].push(startTime + ' 07:00:00')
                         // если это индекс работы и j нечетный
                         if (i == 0 && j % 2 == 1) {
                             // записываем ПРОШЛОЕ(-1) имя программы в массив программ для второй смены
-                            programName2.push(stanok[5][(programName2Index-1)])
+                            programName2.push(stanok[5][(programName2Index - 1)])
                         }
                     }
                     // Затем в любому случае пишем текущий элемент в массив второй смены
@@ -290,34 +273,27 @@ function convertDaysToSmena(today, yesterday, calendarDate=null) {
             } // Конец цилка обработки j
 
             // Если длина массива первой смены нечетная
-            if(smena_1[i].length % 2 == 1)
-            {   // То добавить в смену 06:59
+            if (smena_1[i].length % 2 == 1) {   // То добавить в смену 06:59
                 smena_1[i].push(startTime + ' 06:59:00')
             }
             // Если длина массива второй смены нечетная
-            if(smena_2[i].length % 2 == 1)
-            {   // Если дата равна сегодняшней
-                if(startTime == time.slice(0, 10))
-                {   // То добавить во вторую смену текущее время
+            if (smena_2[i].length % 2 == 1) {   // Если дата равна сегодняшней
+                if (startTime == time.slice(0, 10)) {   // То добавить во вторую смену текущее время
                     smena_2[i].push(startTime + " " + time.slice(11, 19))
-                }
-                else{
+                } else {
                     // Иначе добавить во вторую смену 18:59
                     smena_2[i].push(startTime + ' 18:59:00')
                 }
             }
 
             // Если смена 2 пустая, а первая смена не пустая и ее последнее значение 06:59
-            if(smena_2[i].length == 0 && smena_1[i][(smena_1[i].length-1)] == startTime + ' 06:59:00')
-            {
+            if (smena_2[i].length == 0 && smena_1[i][(smena_1[i].length - 1)] == startTime + ' 06:59:00') {
                 // то добавить во вторую смену 07:00
                 smena_2[i].push(startTime + ' 07:00:00')
                 // И в зависимости от текущей даты вставить 18:59 или текущее время
-                if(startTime == time.slice(0, 10))
-                {   // То добавить во вторую смену текущее время
+                if (startTime == time.slice(0, 10)) {   // То добавить во вторую смену текущее время
                     smena_2[i].push(startTime + " " + time.slice(11, 19))
-                }
-                else{
+                } else {
                     // Иначе добавить во вторую смену 18:59
                     smena_2[i].push(startTime + ' 18:59:00')
                 }
@@ -455,13 +431,13 @@ function dayNow() {
 
 function dayYesterday(startTime) {
 
-    return  new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
+    return new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
 }
 
 function monthNow() {
     let yearNow = new Date().getFullYear()
-    let monthNow = new Date().getMonth()+1
-    if (monthNow<10) {
+    let monthNow = new Date().getMonth() + 1
+    if (monthNow < 10) {
         monthNow = '0' + monthNow
     }
     return `${yearNow}-${monthNow}`
@@ -486,8 +462,8 @@ function bufferDataArrays(count) {
 function parseNameUrl(url) {
     let form_path = decodeURIComponent(url);
     form_path.lastIndexOf("/")
-    let searchIndex= form_path.lastIndexOf("/")+1;
-    return  form_path.substr(searchIndex, form_path.length)
+    let searchIndex = form_path.lastIndexOf("/") + 1;
+    return form_path.substr(searchIndex, form_path.length)
 }
 
 function getTimeToday() {
@@ -500,19 +476,54 @@ function getTimeToday() {
 // из массива времен возвращает массив времени между периодами
 function getArrayPeriodsBetween(arrayTime) {
     let ArrayPeriod = arrayTime
-    ArrayPeriod = ArrayPeriod.map((e,i,array)=>{
-        if(i==(array.length)-1) {
+    ArrayPeriod = ArrayPeriod.map((e, i, array) => {
+        if (i == (array.length) - 1) {
             return '-'
-        }
-        else {
+        } else {
 
-            return msToTimeDays(new Date(array[i]) - new Date(array[i+1]))
+            return msToTimeDays(new Date(array[i]) - new Date(array[i + 1]))
         }
     })
     return ArrayPeriod
 }
 
 function convertTimeToISO(time) {
-    time = time.slice(0,10) + ' ' +  time.slice(11, 19)
+    time = time.slice(0, 10) + ' ' + time.slice(11, 19)
     return time
+}
+
+function changeTypeLine(date, stateLineHC, setStateLineHC, bufferData, complexRequest) {
+    if (stateLineHC == 'line') {
+        setStateLineHC('multiline')
+        for (let i = 0; i < complexRequest.length; i++) {
+            fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
+        }
+    } else {
+        setStateLineHC('line')
+        for (let i = 0; i < complexRequest.length; i++) {
+            fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]) )
+        }
+    }
+}
+
+function exceptionManualNagruzka(name) {
+    if (name =='kim' || name=='apec') {
+        return 'Ручной'
+    } else {
+        return 'Нагрузка'
+    }
+}
+
+function switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData) {
+    let roundComplex =[]
+    if (stateLineHC == 'line') {
+        for (let i = 0; i < complexRequest.length; i++) {
+            roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]))
+        }
+    } else {
+        for (let i = 0; i < complexRequest.length; i++) {
+            roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
+        }
+    }
+    return roundComplex
 }
