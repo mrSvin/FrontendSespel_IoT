@@ -61,11 +61,11 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
 
         xAxis: {
             type: 'datetime',
-            // labels: {
-            //     style: {
-            //         color: '#FFF'
-            //     }
-            // },
+            labels: {
+                style: {
+                    color: '#FFF'
+                }
+            },
         },
         yAxis: {
             title: {
@@ -73,11 +73,11 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
             },
             categories: [nagruzkaName, 'Работа', 'Ожидание', 'Выключен', 'В аварии'],
             reversed: true,
-            // labels: {
-            //     style: {
-            //         color: '#FFF'
-            //     },
-            // }
+            labels: {
+                style: {
+                    color: '#FFF'
+                },
+            }
         },
         credits: {
             enabled: false
