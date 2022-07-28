@@ -1,10 +1,8 @@
-
 .homeBody {
-    min-height: 100%;
-// background: url(../images/line.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    background: linear-gradient(181deg, rgba(38,39,52,1) 6%, rgba(49,53,81, 1) 77%, rgb(37, 39, 52,1) 98%);
 }
 
 .main-container-home {
@@ -42,7 +40,8 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    background-color: #ececec;
+    background: url('/images/background_login_light.jpg');
+    background-size: cover;
     position: relative;
     opacity: 90%;
     transition: 0.5s;
