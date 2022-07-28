@@ -4,12 +4,44 @@ function Service() {
 
     let [nameComplex, setNameComplex] = useState("null");
 
+    let [imgComplex, setImgComplex] = useState('../images/navigator.png');
+
     let [dataService, setDataService] = useState([]);
 
     useEffect(() => {
 
+        let objectImg = {
+            'apec':'apec.png', 'ar55':'arr55.png', 'crysta-apex':'crystal_apex',
+            '?***?':'dmf.png', 'ctx310':'dmg_ctx310.png', 'ctx510':'dmg_ctx510.png',
+            'ctx650':'dmg_ctx650.png', 'dmc1035':'dmg_dmc1035.png', 'dmf260':'dmg_dmf260.png',
+            'dmu50':'dmg_dmu50.png', 'epp':'epp.png', 'faccin':'faccin.png',
+            '?? faccin ??':'faccin_2.png', 'gamma2000':'gamma2000.png', 'kometa':'kometa.png',
+            'навигатор':'navigator.png', 'nk600':'nk600.png', 'nlx3000':'NLX3000.png',
+            'ntx1000':'ntx1000.png', 'печь':'pech.png', 'press':'press.png',
+            'стп':'progress.png', 'макс':'robot.png', 'm710':'robot.png',
+            'rtk12C':'robot.png', 'крот':'robot.png', 'пранс':'robot.png',
+            'p250':'robot_p250.png', 'sk50':'sk50.png', 'склад':'sklad.png',
+            'stp13m':'stp13m.png', 'trulaser':'trulaser.png',
+            'uvf':'uvf_1_2.png', 'uvf5220':'UVF_5220.png',
+        }
+
         let nameToFetch = parseNameUrl(document.location.pathname);
         setNameComplex(nameToFetch)
+
+        let keys = Object.keys(objectImg)
+
+        let img = '../images/navigator.png'
+
+        keys.forEach(e=>{
+            let inUrl = nameToFetch
+            inUrl = (inUrl.split(' ')[0]).toLowerCase();
+            if (e.includes(inUrl)){
+                img = objectImg[inUrl];
+                img = `../images/${img}`
+            }
+        })
+
+        setImgComplex(img)
 
         let complex1day1 = fetchRequestServiceInfo(nameToFetch)
         let promiseDataComplex1 = Promise.resolve(complex1day1);
@@ -58,7 +90,7 @@ function Service() {
 
             <div className='serviceContainer'>
                 <h1>Тех. обслуживания станка {nameComplex}</h1>
-                <img className="serviceImg" src='../images/navigator.png'/>
+                <img className="serviceImg" src={imgComplex}/>
                 <div className="oneLineGraph" id="timeToLastService"></div>
                 <div className="oneLineGraph" id="allService"></div>
                 <button className='buttonTehno' id='startTehno'
