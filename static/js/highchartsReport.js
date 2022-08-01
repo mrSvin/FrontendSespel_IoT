@@ -458,7 +458,7 @@ function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNa
 }
 
 //Суточный и месячный
-function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, nagruzkaName = 'Нагрузка') {
+function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, nagruzkaName = 'Нагрузка', date=24) {
     let colorNagruzka;
     let workNoNagruzka = work;
     if (nagruzkaName == 'Нагрузка') {
@@ -469,7 +469,12 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
     } else {
         colorNagruzka = '#5c7ed0'
     }
+	
+	//date= '2022-03'
+	//  date = document.getElementsByClassName('inputCalendarDay')[0].value
 
+    // Данные для
+    let graphData= highchartsPercentTime(generalDiagramNames, workNoNagruzka,pause, off, avar,nagruzka, date)
 
     Highcharts.chart('containerTotal', {
         chart: {
@@ -505,8 +510,13 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
             }
         },
         tooltip: {
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: {point.percentage:.1f}%<br/>',
-            shared: true
+            pointFormatter: function () {
+                return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
+                    `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
+                    `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
+                    `<span style="color: #207210;">Нагрузка</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
+                    `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
+            },
         },
         plotOptions: {
             column: {
