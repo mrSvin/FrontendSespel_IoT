@@ -161,9 +161,12 @@ function RezkaSmena() {
 
             <div className='complexAllInfo'>
                 <div className='totalRound' id="containerTotal"></div>
-
                 <div className='countOperations' id='containerOperations'></div>
+            </div>
 
+            <div className='complexAllInfo'>
+                <div className='totalRound' id="containerTotal2"></div>
+                <div className='countOperations' id='containerOperations2'></div>
             </div>
 
             <ComplexSmenaAllIngo complexName={complexName[0]} complexImg={complexImg[0]}
