@@ -1,13 +1,77 @@
-function msToTimeDays(duration) {
+// Функция формирования массива времени и процентов для общей диаграммы
+// Аргументы: круговая диаграмма, текущая дата или месяц
+function getTimeTotalArray(roundArray, date) {
+
+    if (roundArray == null) {
+        return ['0 с.','0 с.','0 с.','0 с.','0 с.',]
+    }
+    else if(roundArray == roundArray.length)
+    {
+        return ['0 с.','0 с.','0 с.','0 с.','0 с.',]
+    }
+		
+
+    let sumArray = roundArray.reduce((acc, num) => acc + num, 0);
+
+    let arrayPercent = roundArray.map(function (num, index) {
+        return num / sumArray
+    });
+	
+	let pageName = parseNameUrl(document.location.pathname);
+	
+	if(typeof(date) == 'string') {
+		// Дата формата 2022-02
+		if(date.length == 7){
+			let timeNow = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+			// Если текущий год и месяц совпадают
+			if(timeNow.slice(0,7)==date) {
+				// то используем текущий день как 100%
+				date = timeNow.slice(8,10)
+			}
+			else date = new Date(date.slice(0,4), date.slice(5,7), 0).getDate()
+		}
+		// Дата формата 2022-02-22
+		else if(date.length == 10){
+			let timeNow = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+			// Если текущая дата совпадает
+			if(timeNow.slice(0,10)==date) {
+				// то используем текущий час как 100%
+				date = +timeNow.slice(11, 13) + (timeNow.slice(14, 16)/60)
+			}
+			else date = 24
+		}
+
+	}
+	
+	else if(pageName.includes('Month')) date = 30
+
+    let arrayTime = arrayPercent.map(function (num, index) {
+		//Если это страница несодержит в название месяц
+		if(!pageName.includes('Month')) {	
+			let out = num * 3600 * date
+			return msToTime(out.toFixed(0)*1000, date)
+		}
+		else {	
+		let out = num * 86400 * date
+        return msToTimeDays(out.toFixed(0)*1000, date)
+		}	
+
+    });
+    return arrayTime
+}
+
+// Функция перевода миллисекунд в дни в формате  - 1 д. 1.ч. 1м. 1.с
+function msToTimeDays(duration, date) {
+
     let seconds = parseInt((duration / 1000) % 60),
         minutes = parseInt((duration / (1000 * 60)) % 60),
-        hours = parseInt((duration / (1000 * 60 * 60)) % 24),
-        days = parseInt((duration / (1000 * 60 * 60 * 24 )))
+        hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+		days = parseInt((duration / (1000 * 60 * 60 * 24)) % date);
 
-    if(days == 0) days = ''
-    else { days = days + " дней "}
-
-    if(hours == 0) hours = ''
+	if(days == 0) days = ''
+    else { days = days + " д. "}
+		
+	if(hours == 0) hours = ''
     else { hours = hours + " ч. "}
 
     if(minutes == 0) minutes = ''
@@ -16,11 +80,48 @@ function msToTimeDays(duration) {
     if(seconds == 0) seconds = ''
     else { seconds = seconds + ' с.'}
 
-
-
-    return days + hours + minutes + seconds;
+	if((hours + minutes + seconds) != '') {
+	 return '— ' + days + hours + minutes + seconds;
+	}	
+	
+	else if((days + hours + minutes + seconds) == '' && duration !=0) {
+	 return `— ${date} д.`
+	}
+			
+	else return '— 0 с.'
+   
 }
 
+// Функция перевода миллисекунд в часы в формате  - 1.ч. 1м. 1.с
+function msToTime(duration, date=24) {
+
+    let seconds = parseInt((duration / 1000) % 60),
+        minutes = parseInt((duration / (1000 * 60)) % 60),
+        hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+		
+	    if(hours == 0) hours = ''
+    else { hours = hours + " ч. "}
+
+    if(minutes == 0) minutes = ''
+    else { minutes = minutes + " мин. "}
+
+    if(seconds == 0) seconds = ''
+    else { seconds = seconds + ' с.'}
+
+	if((hours + minutes + seconds) != '') {
+	 return '— ' + hours + minutes + seconds;
+	}	
+	
+	else if((hours + minutes + seconds) == '' && duration !=0) {
+	 return `— ${date} ч.`
+	}
+			
+	else return '— 0 с.'
+   
+}
+
+// Парсинг массива со свойствами x, x2, y для истории проведенных обслуживаний
 function parseLinearServiceHistory(arrayParse, y, difference) {
     console.log(difference)
     var index_pars = 0; // Индекс по одному из циклов
@@ -76,6 +177,7 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
     return arraySave
 }
 
+// Парсинг массива со свойствами x, x2, y для последнего проведенного обслуживания
 function parseLinearServiceNow(arrayParse, y, difference=null) {
 
     var index_pars = 0; // Индекс по одному из циклов
@@ -135,6 +237,7 @@ function getRoundDiagramData(smena) {
     }
 }
 
+// Функция формирования массивов для смен
 function convertDaysToSmena(today, yesterday, calendarDate = null) {
     // Массив с заполненными данными
     let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
@@ -167,7 +270,8 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
     let programName2 = []
 
     // Переменная с индексом первого элемента следующего дня имени программы
-    let programName2Index = today[5].length
+    let programName2Index = 400;
+    if(today[5] !== undefined) programName2Index = today[5].length
 
     // Получении объекта с именем текущего станка
     // Хранящий объедененные массивы текущего и предыдущего дня
@@ -323,6 +427,7 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
     return [smena_1, smena_2]
 }
 
+// Парсинг массива со свойствами x, x2, y для highcharts
 function parseLinearSutki(arrayParse, y, date, arrayName = null) {
 
     arrayParse = addLastTime(arrayParse, date)
@@ -370,6 +475,7 @@ function parseLinearSutki(arrayParse, y, date, arrayName = null) {
     return arraySave
 }
 
+// Функия добавления в конец нечетного массива 23:59 или текущего времени
 function addLastTime(stanok, calendarDate) {
 
     let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
@@ -418,45 +524,47 @@ function kolOperations(arrayWork) {
     return [array_kol_op[0], array_kol_op[1]];
 }
 
+// функция получения среднего арифмитического значения для месяцев
 function averageMonthdata(inputArray) {
     let sum = inputArray.reduce((a, b) => a + b, 0);
     return (sum / inputArray.length) || 0;
 
 }
 
+// Функция получения текущей даты
 function dayNow() {
-
-    let dateNow = new Date()
-    let dayNow = dateNow.getDate()
-    let monthNow = dateNow.getMonth() + 1
-    let yearNow = dateNow.getFullYear()
-    if (dayNow < 10) {
-        dayNow = "0" + dayNow
-    }
-    if (monthNow < 10) {
-        monthNow = "0" + monthNow
-    }
-
-    return `${yearNow}-${monthNow}-${dayNow}`
+    let calendarDate = new Date().toLocaleString()
+    return `${calendarDate.slice(6,10)}-${calendarDate.slice(3,5)}-${calendarDate.slice(0,2)}`
 }
 
+// Функция получения текущего времени
+function timeNow() {
+    let calendarDate = new Date().toLocaleString()
+    return calendarDate.slice(12)
+}
+
+// Функция получения текущей даты и времени
+function dayTimeNow() {
+    let calendarDate = new Date().toLocaleString()
+    return `${calendarDate.slice(6,10)}-${calendarDate.slice(3,5)}-${calendarDate.slice(0,2)} ${calendarDate.slice(12)}`
+}
+
+// Функция получения текущего дня из предыдущего
 function dayYesterday(startTime) {
 
     return new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
 }
 
+// Функция получения текущего года и месяца
 function monthNow() {
-    let yearNow = new Date().getFullYear()
-    let monthNow = new Date().getMonth() + 1
-    if (monthNow < 10) {
-        monthNow = '0' + monthNow
-    }
-    return `${yearNow}-${monthNow}`
+    let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
+    // Преобразоавние текущего времение в формат '2022-03-21 10:00:35'
+    return time.slice(0, 7)
 }
 
 function bufferDataArrays(count) {
     let arraysData = []
-    for (var i = 0; i <= count; i++) {
+    for (let i = 0; i <= count; i++) {
         arraysData.push({
             workArray: [],
             pauseArray: [],
@@ -470,18 +578,12 @@ function bufferDataArrays(count) {
     return arraysData
 }
 
+// Функция возвращает последнее слово в url
 function parseNameUrl(url) {
     let form_path = decodeURIComponent(url);
     form_path.lastIndexOf("/")
     let searchIndex = form_path.lastIndexOf("/") + 1;
     return form_path.substr(searchIndex, form_path.length)
-}
-
-function getTimeToday() {
-    let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
-    // Преобразоавние текущего времение в формат '2022-03-21 10:00:35'
-    time = time.slice(0, 10) + " " + time.slice(11, 19);
-    return time
 }
 
 // из массива времен возвращает массив времени между периодами
@@ -498,10 +600,7 @@ function getArrayPeriodsBetween(arrayTime) {
     return ArrayPeriod
 }
 
-function convertTimeToISO(time) {
-    time = time.slice(0, 10) + ' ' + time.slice(11, 19)
-    return time
-}
+
 
 function changeTypeLine(date, stateLineHC, setStateLineHC, bufferData, complexRequest) {
     if (stateLineHC == 'line') {
@@ -538,3 +637,37 @@ function switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData) {
     }
     return roundComplex
 }
+
+// Функция получения из массивов времени и общего процента
+function highchartsPercentTime(generalDiagramNames, workNoNagruzka,pause, off, avar,nagruzka, date){
+   
+    let data = []
+    generalDiagramNames.forEach((e,i)=>{
+        data.push([workNoNagruzka[i],pause[i], off[i], avar[i],nagruzka[i]])
+    })
+
+    let dataSumArray = data.map(e => {
+        let red = e.reduce((val1, val2)=>{
+            return val1+val2
+        })
+        return red
+    })
+
+    let dataTime =data.map(e=>{
+        return getTimeTotalArray(e, date)
+    })
+
+    let dataPercent = data.map((e,i)=>{
+        return [(e[0]/dataSumArray[i]*100).toFixed(1),
+            (e[1]/dataSumArray[i]*100).toFixed(1),
+            (e[2]/dataSumArray[i]*100).toFixed(1),
+            (e[3]/dataSumArray[i]*100).toFixed(1),
+            (e[4]/dataSumArray[i]*100).toFixed(1),]
+    })
+
+    return  dataPercent.map((e,i)=>{
+        return [e, dataTime[i],]
+    })
+}
+
+
