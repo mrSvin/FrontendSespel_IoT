@@ -153,7 +153,7 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
     });
 }
 
-function highChartCountOperations(generalDiagramNames, countOperation, countLongOperation) {
+function highChartCountOperations(generalDiagramNames, countOperation, countLongOperation, chartName ='') {
 
     let mariginBottomX;
     if (generalDiagramNames.length>12) {
@@ -162,7 +162,7 @@ function highChartCountOperations(generalDiagramNames, countOperation, countLong
         mariginBottomX = 20;
     }
 
-    Highcharts.chart('containerOperations', {
+    Highcharts.chart(`containerOperations${chartName}`, {
         chart: {
             type: 'bar',
             marginLeft: 110,
@@ -458,7 +458,7 @@ function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNa
 }
 
 //Суточный и месячный
-function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, nagruzkaName = 'Нагрузка', date=24) {
+function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, nagruzkaName = 'Нагрузка', date=24, chartName ='') {
     let colorNagruzka;
     let workNoNagruzka = work;
     if (nagruzkaName == 'Нагрузка') {
@@ -476,7 +476,7 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
     // Данные для
     let graphData= highchartsPercentTime(generalDiagramNames, workNoNagruzka,pause, off, avar,nagruzka, date)
 
-    Highcharts.chart('containerTotal', {
+    Highcharts.chart(`containerTotal${chartName}`, {
         chart: {
             type: 'column'
         },
@@ -514,7 +514,7 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
                 return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
                     `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
                     `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
-                    `<span style="color: #207210;">Нагрузка</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
+                    `<span style="color: #207210;">${nagruzkaName}</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
                     `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
             },
         },

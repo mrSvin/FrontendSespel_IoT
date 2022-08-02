@@ -1,5 +1,3 @@
-// Функция формирования массива времени и процентов для общей диаграммы
-// Аргументы: круговая диаграмма, текущая дата или месяц
 function getTimeTotalArray(roundArray, date) {
 
     if (roundArray == null) {
@@ -37,6 +35,9 @@ function getTimeTotalArray(roundArray, date) {
 			if(timeNow.slice(0,10)==date) {
 				// то используем текущий час как 100%
 				date = +timeNow.slice(11, 13) + (timeNow.slice(14, 16)/60)
+                // Если дата текущая и это страница со сменной, то отчет начинаем на 7 часов позже
+                if(pageName.includes('Smena')) date = date - 7
+                if(date < 0) date = 0
 			}
 			else date = 24
 		}
@@ -45,7 +46,7 @@ function getTimeTotalArray(roundArray, date) {
 	
 	else if(pageName.includes('Month')) date = 30
 
-    let arrayTime = arrayPercent.map(function (num, index) {
+    let arrayTime = arrayPercent.map(function (num) {
 		//Если это страница несодержит в название месяц
 		if(!pageName.includes('Month')) {	
 			let out = num * 3600 * date
@@ -58,6 +59,35 @@ function getTimeTotalArray(roundArray, date) {
 
     });
     return arrayTime
+}
+
+// Функция перевода миллисекунд в часы в формате  - 1.ч. 1м. 1.с
+function msToTime(duration, date=24) {
+
+    let seconds = parseInt((duration / 1000) % 60),
+        minutes = parseInt((duration / (1000 * 60)) % 60),
+        hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+		
+	    if(hours == 0) hours = ''
+    else { hours = hours + " ч. "}
+
+    if(minutes == 0) minutes = ''
+    else { minutes = minutes + " мин. "}
+
+    if(seconds == 0) seconds = ''
+    else { seconds = seconds + ' с.'}
+
+	if((hours + minutes + seconds) != '') {
+	 return '— ' + hours + minutes + seconds;
+	}	
+	
+	else if((hours + minutes + seconds) == '' && duration !=0) {
+	 return `— ${date} ч.`
+	}
+			
+	else return '— 0 с.'
+   
 }
 
 // Функция перевода миллисекунд в дни в формате  - 1 д. 1.ч. 1м. 1.с
@@ -86,35 +116,6 @@ function msToTimeDays(duration, date) {
 	
 	else if((days + hours + minutes + seconds) == '' && duration !=0) {
 	 return `— ${date} д.`
-	}
-			
-	else return '— 0 с.'
-   
-}
-
-// Функция перевода миллисекунд в часы в формате  - 1.ч. 1м. 1.с
-function msToTime(duration, date=24) {
-
-    let seconds = parseInt((duration / 1000) % 60),
-        minutes = parseInt((duration / (1000 * 60)) % 60),
-        hours = parseInt((duration / (1000 * 60 * 60)) % 24);
-
-		
-	    if(hours == 0) hours = ''
-    else { hours = hours + " ч. "}
-
-    if(minutes == 0) minutes = ''
-    else { minutes = minutes + " мин. "}
-
-    if(seconds == 0) seconds = ''
-    else { seconds = seconds + ' с.'}
-
-	if((hours + minutes + seconds) != '') {
-	 return '— ' + hours + minutes + seconds;
-	}	
-	
-	else if((hours + minutes + seconds) == '' && duration !=0) {
-	 return `— ${date} ч.`
 	}
 			
 	else return '— 0 с.'
@@ -271,6 +272,7 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
 
     // Переменная с индексом первого элемента следующего дня имени программы
     let programName2Index = 400;
+    // защита на случай неудачного запроса
     if(today[5] !== undefined) programName2Index = today[5].length
 
     // Получении объекта с именем текущего станка
