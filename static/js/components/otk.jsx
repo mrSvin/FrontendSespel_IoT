@@ -2,6 +2,7 @@ function OtkInfo() {
 
     let complexName = ["CRYSTA-Apex S9168", "НК600"]
     let complexImg = ["../images/crystal_apex.png", "../images/nk600.png"]
+    let complexRequest = ['kim', 'nk600']
 
     let buttonsVrs1 = [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
     let buttonsVrs2 = [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"]
@@ -9,6 +10,8 @@ function OtkInfo() {
     let bufferData = bufferDataArrays(2)
 
     let [date, setDate] = useState(0);
+
+    let [stateLineHC, setStateLineHC] = useState("line");
 
     useEffect(() => {
 
@@ -28,12 +31,10 @@ function OtkInfo() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'kim', 1)
-        let roundNK600 = fetchRequestBuildHC(dateInput, bufferData[1], 'nk600', 2)
+        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
 
-
-        let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
+        let promiseDataKim = Promise.resolve(roundComplex[0]);
+        let promiseDataNK600 = Promise.resolve(roundComplex[1]);
         //Общая загрузка и Количество операций
         promiseDataKim.then(value => {
             promiseDataNK600.then(value1 => {
@@ -46,11 +47,12 @@ function OtkInfo() {
                 let kolKim = kolOperations(value.workArray)
                 let kolNK600 = kolOperations(value1.workArray)
                 highChartCountOperations(complexName, [kolKim[0], kolNK600[0]], [kolKim[1], kolNK600[1]])
-
             })
         })
 
     }
+
+
 
     return (
         <div>
@@ -59,8 +61,12 @@ function OtkInfo() {
 
             <ComplexTotalSutkiInfo/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1} programs={complexName[0]}/>
-            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh2"} idContainer = {2}/>
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
+
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}
+                                 size={"meh1"} idContainer={1} programs={complexName[0]}/>
+            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}
+                                 size={"ceh2"} idContainer={2}/>
 
         </div>
     )

@@ -2,6 +2,7 @@ function RobotsInfo() {
 
     let complexName = ["МАКС #1", "МАКС #2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
+    let complexRequest = ['maks_1', 'maks_2', 'm710', 'rtk12c', 'p250', 'krot', 'prans']
 
     let buttonsVrs1 = [-255, 620, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
     let buttonsVrs2 = [-450, 210, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
@@ -13,8 +14,9 @@ function RobotsInfo() {
 
     let bufferData = bufferDataArrays(6)
 
-
     let [date, setDate] = useState(0);
+
+    let [stateLineHC, setStateLineHC] = useState("line");
 
     useEffect(() => {
 
@@ -34,23 +36,15 @@ function RobotsInfo() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'maks_1', 1)
-        let roundNK600 = fetchRequestBuildHC(dateInput, bufferData[1], 'maks_2', 2)
-        let roundStp13m = fetchRequestBuildHC(dateInput, bufferData[2], 'm710', 3)
-        let roundRtc12c = fetchRequestBuildHC(dateInput, bufferData[3], 'rtk12c', 4)
-        let roundP250 = fetchRequestBuildHC(dateInput, bufferData[4], 'p250', 5)
-        let roundKrot = fetchRequestBuildHC(dateInput, bufferData[5], 'krot', 6)
-        let roundPrans = fetchRequestBuildHC(dateInput, bufferData[6], 'prans', 7)
+        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
 
-
-        let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
-        let promiseDataStp13m = Promise.resolve(roundStp13m);
-        let promiseComplex4 = Promise.resolve(roundRtc12c);
-        let promiseComplex5 = Promise.resolve(roundP250);
-        let promiseComplex6 = Promise.resolve(roundKrot);
-        let promiseComplex7 = Promise.resolve(roundPrans);
-
+        let promiseDataKim = Promise.resolve(roundComplex[0]);
+        let promiseDataNK600 = Promise.resolve(roundComplex[1]);
+        let promiseDataStp13m = Promise.resolve(roundComplex[2]);
+        let promiseComplex4 = Promise.resolve(roundComplex[3]);
+        let promiseComplex5 = Promise.resolve(roundComplex[4]);
+        let promiseComplex6 = Promise.resolve(roundComplex[5]);
+        let promiseComplex7 = Promise.resolve(roundComplex[6]);
 
         //Общая загрузка
         promiseDataKim.then(value => {
@@ -127,6 +121,8 @@ function RobotsInfo() {
             <DayCalendar newDate={newDate} date={date}/>
 
             <ComplexTotalSutkiInfo/>
+
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh6"} idContainer = {1}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"} idContainer = {2}/>

@@ -31,7 +31,7 @@ function OtkMonth() {
         if (dateMonth != "0") {
             console.log(dateMonth)
 
-            updateLoadData(dateMonth)
+            updateLoadDataMonth(dateMonth)
 
         }
 

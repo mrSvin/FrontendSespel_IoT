@@ -38,24 +38,7 @@ function ElectroInfo() {
         if (dateMonth != "0") {
             console.log(dateMonth)
 
-            fetch(`/api/energy/electro/date:${dateMonth}`, {method: 'GET'})
-                .then((response) => response.json())
-                .then((data) => {
-                    setDataVrs1(data[0].ktp400)
-                    setDataVrs2(data[0].ktp630_2)
-                    setDataVrs3(data[0].ktp630_3)
-                    setDataVrs4(data[0].ktp630_4)
-                    setDataVrs5(data[0].ktp630_5)
-                    setDataVrs6(data[0].ktp2500)
-                    setDataVrs7(data[0].ktp630_7)
-                    highChartData(data[0].ktp400, "container")
-                    highChartData(data[0].ktp630_2, "container2")
-                    highChartData(data[0].ktp630_3, "container3")
-                    highChartData(data[0].ktp630_4, "container4")
-                    highChartData(data[0].ktp630_5, "container5")
-                    highChartData(data[0].ktp2500, "container6")
-                    highChartData(data[0].ktp630_7, "container7")
-                })
+            updateLoadData(dateMonth)
         }
 
         setStateButtonUpdate([true,"buttonUpdateMonth load"])
@@ -64,111 +47,9 @@ function ElectroInfo() {
 
     }
 
-    function highChartData(inputData, containerName) {
-        Highcharts.chart(containerName,
-            {
-                lang: {
-                    loading: 'Загрузка...',
-                    months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-                    weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-                    shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-                    exportButtonTitle: "Экспорт",
-                    printButtonTitle: "Печать",
-                    rangeSelectorFrom: "С",
-                    rangeSelectorTo: "По",
-                    rangeSelectorZoom: "Период",
-                    downloadPNG: 'Скачать PNG',
-                    downloadJPEG: 'Скачать JPEG',
-                    downloadPDF: 'Скачать PDF',
-                    downloadSVG: 'Скачать SVG',
-                    printChart: 'Напечатать график',
-                    viewFullscreen: 'На весь экран'
-                },
-                plotOptions: {
-                    xrange: {
-                        grouping: false
-                    }
-                },
-                global: {
-                    timezoneOffset: new Date().getTimezoneOffset()
-                },
+    function updateLoadData(dateInput) {
 
-                chart: {
-                    type: 'column'
-                },
-                colors: ['#5c7ed0'],
-
-                title: {
-                    text: 'Расход энергии по дням',
-                    style: {
-                        color: '#FFF',
-                        fontWeight: 'bold',
-                        fontSize: '22px',
-                    }
-                },
-                xAxis: {
-                    title: {
-                        text: 'Дни месяца',
-                        align: 'high',
-                        style: {
-                            color: '#FFF'
-                        }
-                    },
-                    labels: {
-                        style: {
-                            color: '#FFF',
-                            fontSize: '18px',
-                        }
-                    },
-                    categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
-                },
-                credits: {
-                    enabled: false
-                },
-                yAxis: {
-                    labels: {
-                        style: {
-                            color: '#FFF'
-                        },
-                    },
-                    min: 0,
-                    title: {
-                        text: 'кВт/ч',
-                        style: {
-                            color: '#FFF'
-                        }
-                    }
-                },
-                tooltip: {
-                    valueSuffix: ' кВт/ч'
-                },
-                plotOptions: {
-                    column: {
-                        dataLabels: {
-                            enabled: false
-                        }
-                    }
-                },
-                legend: {
-                    enabled: false
-                },
-
-                series: [{
-                    name: 'Расход',
-                    data: inputData
-                }]
-            }
-        );
-    }
-
-    useEffect(() => {
-        let yearNow = new Date().getFullYear()
-        let monthNow = new Date().getMonth()+1
-        if (monthNow<10) {
-            monthNow = '0' + monthNow
-        }
-
-        fetch(`/api/energy/electro/date:${yearNow}-${monthNow}`, {method: 'GET'})
+        fetch(`/api/energy/electro/date:${dateInput}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 setDataVrs1(data[0].ktp400)
@@ -178,15 +59,25 @@ function ElectroInfo() {
                 setDataVrs5(data[0].ktp630_5)
                 setDataVrs6(data[0].ktp2500)
                 setDataVrs7(data[0].ktp630_7)
-                highChartData(data[0].ktp400, "container")
-                highChartData(data[0].ktp630_2, "container2")
-                highChartData(data[0].ktp630_3, "container3")
-                highChartData(data[0].ktp630_4, "container4")
-                highChartData(data[0].ktp630_5, "container5")
-                highChartData(data[0].ktp2500, "container6")
-                highChartData(data[0].ktp630_7, "container7")
+                highChartEnergy(data[0].ktp400, "container")
+                highChartEnergy(data[0].ktp630_2, "container2")
+                highChartEnergy(data[0].ktp630_3, "container3")
+                highChartEnergy(data[0].ktp630_4, "container4")
+                highChartEnergy(data[0].ktp630_5, "container5")
+                highChartEnergy(data[0].ktp2500, "container6")
+                highChartEnergy(data[0].ktp630_7, "container7")
             })
 
+    }
+
+    useEffect(() => {
+        let yearNow = new Date().getFullYear()
+        let monthNow = new Date().getMonth()+1
+        if (monthNow<10) {
+            monthNow = '0' + monthNow
+        }
+
+        updateLoadData(`${yearNow}-${monthNow}`)
 
     }, [])
 
@@ -270,21 +161,7 @@ function EnergyElectro() {
     return (
         <div>
 
-            <div className="menuButtons">
-
-                <Link to="/energyWater" className="container-home">
-                    <div className="menuNoSelect">ВОДОСНАБЖЕНИЕ</div>
-                </Link>
-
-                <Link to="/energyGas" className="container-home">
-                    <div className="menuNoSelect">ГАЗ</div>
-                </Link>
-
-                <Link to="/energyElectro" className="container-home">
-                    <div className="menuSelect">ЭЛЕКТРОЭНЕРГИЯ</div>
-                </Link>
-
-            </div>
+            <MenuEnergy select="electro"/>
 
             <ElectroInfo/>
 

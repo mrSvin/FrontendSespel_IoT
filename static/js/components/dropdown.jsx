@@ -1,4 +1,4 @@
-function LogoutButton() {
+function LogoutButton({setDropdown}) {
     const history = useHistory();
 
     function handleClick() {
@@ -6,6 +6,7 @@ function LogoutButton() {
             method: 'GET',
         })
         history.push("/login?logout");
+        setDropdown("none")
     }
 
     return (
@@ -125,10 +126,27 @@ function Dropdown(props) {
                 <p
                     className="userRole"
                 >
-                    {props.dataProfile.userRole == "ROLE_ADMIN"? "Администратор" : "Пользователь"}
+                    {/*{props.dataProfile.userRole == "ROLE_ADMIN"? "Администратор" : "Пользователь"}{props.dataProfile.userRole == "ROLE_ADMIN"? "Администратор" : "Пользователь"}*/}
+                    {(() => {
+                        if (props.dataProfile.userRole == "ROLE_ADMIN") {
+                            return (
+                                "Администратор"
+                            )
+                        } else if (props.dataProfile.userRole == "ROLE_SERVICE") {
+                            return (
+                                "Сервис"
+                            )
+                        } else {
+                            return (
+                                "Пользователь"
+                            )
+                        }
+                    })()}
                 </p>
-
-                <LogoutButton/>
+                {props.dataProfile.userRole == "ROLE_ADMIN" ?
+                    <button className="buttonAdmin" onClick={() => window.location.href = '/adminpanel/userscontrol'}>Администрирование</button> :
+                    null}
+                <LogoutButton setDropdown = {setDropdown}/>
 
             </div>
         </div>

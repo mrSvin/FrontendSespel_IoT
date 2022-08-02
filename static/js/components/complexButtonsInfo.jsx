@@ -1,34 +1,36 @@
-function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser}) {
+function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service}) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
     return (
         <div className='complexAllInfo'>
-            <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs ={programs} laser ={laser}/>
+            <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service}/>
             <div className="lineSukiHighChart" id={idLine}></div>
             <div className="roundSukiHighChart" id={idRound}></div>
         </div>
     )
 }
 
-function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, programs, laser}) {
+function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, programs, laser, service}) {
     return (
         <div className="parent_image">
 
+            <div className="blockImage">
             <img
                 className="stanok_img"
                 src={complexImg}/>
+            </div>
 
             <figcaption className="comlexInfo">
                 {complexName}
             </figcaption>
 
-            <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser}/>
+            <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service}/>
 
         </div>
     )
 }
 
-function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser}) {
+function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service}) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
 
@@ -37,7 +39,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
     return (
         <div className='complexAllInfo' id={'containerTotal'}>
             <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto}
-                         size={size} programs={programs} laser={laser} alarm={alarm}/>
+                         size={size} programs={programs} laser={laser} alarm={alarm} service={service}/>
             <div className='twoDayDiv'>
                 <h1 className="timeInfoSmena">Работа II смены 19:00 - 07:00</h1>
                 <div className='oneDay'>
@@ -54,10 +56,12 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
     )
 }
 
-function ComplexButtons({complexMesto, size, alarm = null, programs = null, laser = null}) {
+function ComplexButtons({complexMesto, size, alarm = null, programs = null, laser = null, service = null}) {
 
     let hight = null
     let width = null
+
+    let linkService = `/service/${service}`
 
     switch (size) {
         case '1ploshadkaOutside': {
@@ -174,13 +178,25 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
                 href = "../stanki/programTime/navigator_1"
                 break
             case 'Навигатор #2':
-                href = "../stanki/programTime/navigator_2_2"
+                href = "../stanki/programTime/navigator_2_golova_2"
                 break
             case 'Навигатор #3':
                 href = "../stanki/programTime/navigator_3"
                 break
+            case "Навигатор #1smena":
+                href = "../stanki/programTimeSmena/navigator_1"
+                break
+            case 'Навигатор #2smena':
+                href = "../stanki/programTimeSmena/navigator_2_golova_2"
+                break
+            case 'Навигатор #3smena':
+                href = "../stanki/programTimeSmena/navigator_3"
+                break
             case 'TruLaser':
                 href = "../stanki/programTime/trulaser"
+                break
+            case 'TruLasersmena':
+                href = "../stanki/programTimeSmena/trulaser"
                 break
             case 'CRYSTA-Apex S9168':
                 href = "../stanki/programTime/kim"
@@ -245,8 +261,14 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             {laser != null ?
                 <a className="icon_laser"
                    onClick={laserButton(laser)}>
-                    <div className="label_laser">Излучание</div>
+                    <div className="label_laser">Излучение</div>
                 </a> :
+                <div></div>
+            }
+            {service != null ?
+                <Link to={linkService} className="icon_service">
+                    <div className="label_service">Сервис</div>
+                </Link> :
                 <div></div>
             }
 
@@ -271,4 +293,18 @@ function ComplexTotalMonthInfo() {
             <div className="totalRound" id="containerRoundTotal"></div>
         </div>
     )
+}
+
+function SwitchLineHC({date,stateLineHC, setStateLineHC,bufferData,complexRequest}) {
+    return (
+        <div className="energyCalendarContainer">
+            <label className="switch">
+                <input type="checkbox" onChange={() => {
+                    changeTypeLine(date,stateLineHC, setStateLineHC,bufferData,complexRequest)
+                }}/>
+                <span className="slider round"></span>
+            </label>
+        </div>
+    )
+
 }

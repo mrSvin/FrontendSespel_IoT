@@ -2,6 +2,7 @@ function RezkaInfo() {
 
     let complexName = ["Навигатор #1", "Навигатор #2", "Навигатор #3", "TruLaser", "Комета #1", "Комета #2", "Комета #3"]
     let complexImg = ["../images/navigator.png", "../images/navigator.png", "../images/navigator.png", "../images/trulaser.png", "../images/kometa.png", "../images/kometa.png", "../images/kometa.png"]
+    let complexRequest = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
 
     let buttonsVrs1 = [-110, 900, 'url(../images/navigator.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
     let buttonsVrs2 = [-100, 540, 'url(../images/navigator.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
@@ -14,6 +15,8 @@ function RezkaInfo() {
     let bufferData = bufferDataArrays(6)
 
     let [date, setDate] = useState(0);
+
+    let [stateLineHC, setStateLineHC] = useState("line");
 
     useEffect(() => {
 
@@ -33,22 +36,25 @@ function RezkaInfo() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'navigator_1', 1)
-        let roundNK600 = fetchRequestBuildHC(dateInput, bufferData[1], 'navigator_2_golova_2', 2)
-        let roundStp13m = fetchRequestBuildHC(dateInput, bufferData[2], 'navigator_3', 3)
-        let roundRtc12c = fetchRequestBuildHC(dateInput, bufferData[3], 'trulaser', 4)
-        let roundP250 = fetchRequestBuildHC(dateInput, bufferData[4], 'kometa_1', 5)
-        let roundKrot = fetchRequestBuildHC(dateInput, bufferData[5], 'kometa_2', 6)
-        let roundPrans = fetchRequestBuildHC(dateInput, bufferData[6], 'kometa_3', 7)
+        let roundComplex =[]
 
+        if (stateLineHC == 'line') {
+            for (let i = 0; i < complexRequest.length; i++) {
+                roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]))
+            }
+        } else {
+            for (let i = 0; i < complexRequest.length; i++) {
+                roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
+            }
+        }
 
-        let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
-        let promiseDataStp13m = Promise.resolve(roundStp13m);
-        let promiseComplex4 = Promise.resolve(roundRtc12c);
-        let promiseComplex5 = Promise.resolve(roundP250);
-        let promiseComplex6 = Promise.resolve(roundKrot);
-        let promiseComplex7 = Promise.resolve(roundPrans);
+        let promiseDataKim = Promise.resolve(roundComplex[0]);
+        let promiseDataNK600 = Promise.resolve(roundComplex[1]);
+        let promiseDataStp13m = Promise.resolve(roundComplex[2]);
+        let promiseComplex4 = Promise.resolve(roundComplex[3]);
+        let promiseComplex5 = Promise.resolve(roundComplex[4]);
+        let promiseComplex6 = Promise.resolve(roundComplex[5]);
+        let promiseComplex7 = Promise.resolve(roundComplex[6]);
 
 
         //Общая загрузка
@@ -127,9 +133,11 @@ function RezkaInfo() {
 
             <ComplexTotalSutkiInfo/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"sborCeh"} idContainer={1} programs={complexName[0]} laser={complexName[0]}/>
-            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"sborCeh"} idContainer = {2} programs={complexName[1]} laser={complexName[1]}/>
-            <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {3} programs={complexName[2]} laser={complexName[2]}/>
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
+
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"sborCeh"} idContainer={1} programs={complexName[0]} laser={complexName[0]} service={"Навигатор 1"}/>
+            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"sborCeh"} idContainer = {2} programs={complexName[1]} laser={complexName[1]} service={"Навигатор 2"}/>
+            <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {3} programs={complexName[2]} laser={complexName[2]} service={"Навигатор 3"}/>
             <ComplexSutkiAllInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs4} size={"sborCeh"} idContainer = {4} programs={complexName[3]}/>
             <ComplexSutkiAllInfo complexName={complexName[4]} complexImg={complexImg[4]} complexMesto={buttonsVrs5} size={"ceh5"} idContainer = {5}/>
             <ComplexSutkiAllInfo complexName={complexName[5]} complexImg={complexImg[5]} complexMesto={buttonsVrs6} size={"sborCeh"} idContainer = {6}/>

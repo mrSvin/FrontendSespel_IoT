@@ -5,6 +5,8 @@ function Meh2Info() {
     let complexImg = ["../images/UVF_5220.png", "../images/progress.png", "../images/ntx1000.png", "../images/sk50.png", "../images/apec.png", "../images/dmg_dmu50.png",
         "../images/dmg_dmu50.png", "../images/dmg_dmu50.png", "../images/dmg_ctx310.png", "../images/dmg_ctx510.png", "../images/dmg_ctx510.png", "../images/dmg_ctx310.png",
         "../images/dmg_ctx510.png", "../images/dmg_ctx510.png", "../images/dmg_dmc1035.png", "../images/dmg_dmu50.png", "../images/dmg_dmu50.png", "../images/ar55.png"]
+    let complexRequest = ['uvf5220', 'progress', 'ntx1000_2', 'sk50', 'apec', 'dmg_dmu50_3', 'dmg_dmu50_4', 'dmg_ctx310_2', 'dmg_ctx510_2', 'dmg_ctx510_3', 'dmg_ctx310_3',
+        'dmg_ctx510_4', 'dmg_ctx510_5', 'dmg_dmc1035_2', 'dmg_dmu50_5', 'dmg_dmu50_6', 'dmg_dmu50_7', 'ar55']
 
     let buttonsVrs1 =  [-115, 875, 'url(../images/UVF_5220.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"]
     let buttonsVrs2 = [-105, 494, 'url(../images/progress.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"]
@@ -29,6 +31,8 @@ function Meh2Info() {
 
     let [date, setDate] = useState(0);
 
+    let [stateLineHC, setStateLineHC] = useState("line");
+
     useEffect(() => {
 
         setDate(dayNow())
@@ -46,63 +50,32 @@ function Meh2Info() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'uvf5220', 1)
-        let roundNK600 = fetchRequestBuildHC(dateInput, bufferData[1], 'progress',2)
-        let roundStp13m = fetchRequestBuildHC(dateInput, bufferData[2], 'ntx1000_2', 3)
-        let roundRtc12c = fetchRequestBuildHC(dateInput, bufferData[3], 'sk50', 4)
-        let roundP250 = fetchRequestBuildHC(dateInput, bufferData[4], 'apec',5)
-        let roundKrot = fetchRequestBuildHC(dateInput, bufferData[5], 'dmg_dmu50_3', 6)
-        let roundPrans = fetchRequestBuildHC(dateInput, bufferData[6], 'dmg_dmu50_4', 7)
-        let roundComplex8 = fetchRequestBuildHC(dateInput, bufferData[7], 'dmg_ctx310_2', 8)
-        let roundComplex9 = fetchRequestBuildHC(dateInput, bufferData[8], 'dmg_ctx510_2', 9)
-        let roundComplex10 = fetchRequestBuildHC(dateInput, bufferData[9], 'dmg_ctx510_3', 10)
-        let roundComplex11 = fetchRequestBuildHC(dateInput, bufferData[10], 'dmg_ctx310_3', 11)
-        let roundComplex12 = fetchRequestBuildHC(dateInput, bufferData[11], 'dmg_ctx510_4', 12)
-        let roundComplex13 = fetchRequestBuildHC(dateInput, bufferData[12], 'dmg_ctx510_5', 13)
-        let roundComplex14 = fetchRequestBuildHC(dateInput, bufferData[13], 'dmg_dmc1035_2', 14)
-        let roundComplex15 = fetchRequestBuildHC(dateInput, bufferData[14], 'dmg_dmu50_5', 15)
-        let roundComplex16 = fetchRequestBuildHC(dateInput, bufferData[15], 'dmg_dmu50_6', 16)
-        let roundComplex17 = fetchRequestBuildHC(dateInput, bufferData[16], 'dmg_dmu50_7', 17)
-        let roundComplex18 = fetchRequestBuildHC(dateInput, bufferData[17], 'ar55', 18)
+        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
 
-        let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
-        let promiseDataStp13m = Promise.resolve(roundStp13m);
-        let promiseComplex4 = Promise.resolve(roundRtc12c);
-        let promiseComplex5 = Promise.resolve(roundP250);
-        let promiseComplex6 = Promise.resolve(roundKrot);
-        let promiseComplex7 = Promise.resolve(roundPrans);
-        let promiseComplex8 = Promise.resolve(roundComplex8);
-        let promiseComplex9 = Promise.resolve(roundComplex9);
-        let promiseComplex10 = Promise.resolve(roundComplex10);
-        let promiseComplex11 = Promise.resolve(roundComplex11);
-        let promiseComplex12 = Promise.resolve(roundComplex12);
-        let promiseComplex13 = Promise.resolve(roundComplex13);
-        let promiseComplex14 = Promise.resolve(roundComplex14);
-        let promiseComplex15 = Promise.resolve(roundComplex15);
-        let promiseComplex16 = Promise.resolve(roundComplex16);
-        let promiseComplex17 = Promise.resolve(roundComplex17);
-        let promiseComplex18 = Promise.resolve(roundComplex18);
+        let promiseComplex =[]
+        for (let i=0;i<roundComplex.length; i++) {
+            promiseComplex[i]=Promise.resolve(roundComplex[i])
+        }
 
         //Общая загрузка
-        promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                promiseDataStp13m.then(value2 => {
-                    promiseComplex4.then(value3 => {
-                        promiseComplex5.then(value4 => {
-                            promiseComplex6.then(value5 => {
-                                promiseComplex7.then(value6 => {
-                                    promiseComplex8.then(value7 => {
-                                        promiseComplex9.then(value8 => {
-                                            promiseComplex10.then(value9 => {
-                                                promiseComplex11.then(value10 => {
-                                                    promiseComplex12.then(value11 => {
-                                                        promiseComplex13.then(value12 => {
-                                                            promiseComplex14.then(value13 => {
-                                                                promiseComplex15.then(value14 => {
-                                                                    promiseComplex16.then(value15 => {
-                                                                        promiseComplex17.then(value16 => {
-                                                                            promiseComplex18.then(value17 => {
+        promiseComplex[0].then(value => {
+            promiseComplex[1].then(value1 => {
+                promiseComplex[2].then(value2 => {
+                    promiseComplex[3].then(value3 => {
+                        promiseComplex[4].then(value4 => {
+                            promiseComplex[5].then(value5 => {
+                                promiseComplex[6].then(value6 => {
+                                    promiseComplex[7].then(value7 => {
+                                        promiseComplex[8].then(value8 => {
+                                            promiseComplex[9].then(value9 => {
+                                                promiseComplex[10].then(value10 => {
+                                                    promiseComplex[11].then(value11 => {
+                                                        promiseComplex[12].then(value12 => {
+                                                            promiseComplex[13].then(value13 => {
+                                                                promiseComplex[14].then(value14 => {
+                                                                    promiseComplex[15].then(value15 => {
+                                                                        promiseComplex[16].then(value16 => {
+                                                                            promiseComplex[17].then(value17 => {
 
                                                                                 let intKimArray = value.roundArray.map(Number)
                                                                                 let intNK600Array = value1.roundArray.map(Number)
@@ -230,14 +203,14 @@ function Meh2Info() {
 
     }
 
-
-
     return (
         <div>
 
             <DayCalendar newDate={newDate} date={date}/>
 
             <ComplexTotalSutkiInfo/>
+
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"2ploshadka"} idContainer = {2}/>

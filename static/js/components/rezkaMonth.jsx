@@ -116,7 +116,7 @@ function RezkaMonth() {
                                         [pauseKimArray, pauseNK600Array, pauseStp13mArray,pauseComplex4Array,pauseComplex5Array,pauseComplex6Array,pauseComplex7Array],
                                         [offKimArray, offNK600Array, offStp13mArray,offComplex4Array,offComplex5Array,offComplex6Array,offComplex7Array],
                                         [avarKimArray, avarNK600Array, avarStp13mArray,avarComplex4Array,avarComplex5Array,avarComplex6Array,avarComplex7Array],
-                                        [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray,nagruzkaComplex4Array,nagruzkaComplex5Array,nagruzkaComplex6Array,nagruzkaComplex7Array], 'ручной')
+                                        [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray,nagruzkaComplex4Array,nagruzkaComplex5Array,nagruzkaComplex6Array,nagruzkaComplex7Array], 'Нагрузка')
 
                                     highChartRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray,workComplex4Array,workComplex5Array,workComplex6Array,workComplex7Array]),
                                         averageMonthdata([pauseKimArray, pauseNK600Array, pauseStp13mArray,pauseComplex4Array,pauseComplex5Array,pauseComplex6Array,pauseComplex7Array]),

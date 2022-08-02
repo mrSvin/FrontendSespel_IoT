@@ -2,6 +2,7 @@ function SpecComplexesInfo() {
 
     let complexName = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М"]
     let complexImg = ["../images/press.png", "../images/epp.png", "../images/stp13m.png"]
+    let complexRequest = ['press', 'epp', 'stp13m']
 
     let buttonsVrs1 = [-480, 765, 'url(../images/press.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"]
     let buttonsVrs2 = [-825, 220, 'url(../images/epp.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
@@ -9,8 +10,9 @@ function SpecComplexesInfo() {
 
     let bufferData = bufferDataArrays(3)
 
-
     let [date, setDate] = useState(0);
+
+    let [stateLineHC, setStateLineHC] = useState("line");
 
     useEffect(() => {
 
@@ -30,14 +32,11 @@ function SpecComplexesInfo() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'press', 1)
-        let roundNK600 = fetchRequestBuildHC(dateInput, bufferData[1], 'epp', 2)
-        let roundStp13m = fetchRequestBuildHC(dateInput, bufferData[2], 'stp13m', 3)
+        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
 
-
-        let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
-        let promiseDataStp13m = Promise.resolve(roundStp13m);
+        let promiseDataKim = Promise.resolve(roundComplex[0]);
+        let promiseDataNK600 = Promise.resolve(roundComplex[1]);
+        let promiseDataStp13m = Promise.resolve(roundComplex[2]);
         //Общая загрузка
         promiseDataKim.then(value => {
             promiseDataNK600.then(value1 => {
@@ -82,6 +81,8 @@ function SpecComplexesInfo() {
             <DayCalendar newDate={newDate} date={date}/>
 
             <ComplexTotalSutkiInfo/>
+
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"} idContainer = {2}/>

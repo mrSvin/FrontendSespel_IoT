@@ -4,6 +4,9 @@ function Meh1Info() {
     let complexImg = ["../images/uvf_1_2.png", "../images/uvf_1_2.png", "../images/ntx1000.png", "../images/NLX3000.png", "../images/gamma2000.png", "../images/dmg_ctx650.png",
         "../images/dmg_dmf260.png", "../images/dmg_dmu50.png", "../images/dmg_dmu50.png", "../images/dmg_dmc1035.png", "../images/dmg_ctx310.png", "../images/dmg_ctx510.png"]
 
+    let complexRequest = ['uvf_1', 'uvf_2', 'ntx1000', 'nlx3000', 'dmg_gamma2000', 'dmg_ctx650', 'dmg_dmf260', 'dmg_dmu50_1', 'dmg_dmu50_2', 'dmg_dmc1035', 'dmg_ctx310_1',
+        'dmg_ctx510_1']
+
     let buttonsVrs1 = [-340, 280, 'url(../images/uvf_1_2.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
     let buttonsVrs2 =  [-180, 280, 'url(../images/uvf_1_2.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
     let buttonsVrs3 = [-670, 490, 'url(../images/ntx1000.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
@@ -20,6 +23,8 @@ function Meh1Info() {
     let bufferData = bufferDataArrays(11)
 
     let [date, setDate] = useState(0);
+
+    let [stateLineHC, setStateLineHC] = useState("line");
 
     useEffect(() => {
 
@@ -39,31 +44,20 @@ function Meh1Info() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'uvf_1', 1)
-        let roundNK600 = fetchRequestBuildHC(dateInput, bufferData[1], 'uvf_2',2)
-        let roundStp13m = fetchRequestBuildHC(dateInput, bufferData[2], 'ntx1000',3)
-        let roundRtc12c = fetchRequestBuildHC(dateInput, bufferData[3], 'nlx3000',4)
-        let roundP250 = fetchRequestBuildHC(dateInput, bufferData[4], 'dmg_gamma2000', 5)
-        let roundKrot = fetchRequestBuildHC(dateInput, bufferData[5], 'dmg_ctx650',6)
-        let roundPrans = fetchRequestBuildHC(dateInput, bufferData[6], 'dmg_dmf260', 7)
-        let roundComplex8 = fetchRequestBuildHC(dateInput, bufferData[7], 'dmg_dmu50_1', 8)
-        let roundComplex9 = fetchRequestBuildHC(dateInput, bufferData[8], 'dmg_dmu50_2', 9)
-        let roundComplex10 = fetchRequestBuildHC(dateInput, bufferData[9], 'dmg_dmc1035', 10)
-        let roundComplex11 = fetchRequestBuildHC(dateInput, bufferData[10], 'dmg_ctx310_1', 11)
-        let roundComplex12 = fetchRequestBuildHC(dateInput, bufferData[11], 'dmg_ctx510_1',12)
+        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
 
-        let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
-        let promiseDataStp13m = Promise.resolve(roundStp13m);
-        let promiseComplex4 = Promise.resolve(roundRtc12c);
-        let promiseComplex5 = Promise.resolve(roundP250);
-        let promiseComplex6 = Promise.resolve(roundKrot);
-        let promiseComplex7 = Promise.resolve(roundPrans);
-        let promiseComplex8 = Promise.resolve(roundComplex8);
-        let promiseComplex9 = Promise.resolve(roundComplex9);
-        let promiseComplex10 = Promise.resolve(roundComplex10);
-        let promiseComplex11 = Promise.resolve(roundComplex11);
-        let promiseComplex12 = Promise.resolve(roundComplex12);
+        let promiseDataKim = Promise.resolve(roundComplex[0]);
+        let promiseDataNK600 = Promise.resolve(roundComplex[1]);
+        let promiseDataStp13m = Promise.resolve(roundComplex[2]);
+        let promiseComplex4 = Promise.resolve(roundComplex[3]);
+        let promiseComplex5 = Promise.resolve(roundComplex[4]);
+        let promiseComplex6 = Promise.resolve(roundComplex[5]);
+        let promiseComplex7 = Promise.resolve(roundComplex[6]);
+        let promiseComplex8 = Promise.resolve(roundComplex[7]);
+        let promiseComplex9 = Promise.resolve(roundComplex[8]);
+        let promiseComplex10 = Promise.resolve(roundComplex[9]);
+        let promiseComplex11 = Promise.resolve(roundComplex[10]);
+        let promiseComplex12 = Promise.resolve(roundComplex[11]);
 
         //Общая загрузка
         promiseDataKim.then(value => {
@@ -169,14 +163,14 @@ function Meh1Info() {
 
     }
 
-
-
     return (
         <div>
 
             <DayCalendar newDate={newDate} date={date}/>
 
             <ComplexTotalSutkiInfo/>
+
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"meh1"} idContainer = {2}/>

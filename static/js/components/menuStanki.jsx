@@ -101,3 +101,37 @@ function MenuOtchet(select) {
         </div>
     )
 }
+
+function MenuEnergy(select) {
+
+    let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect"]
+
+    if (select.select == "water") {
+        menuSelect[0] = "menuSelect"
+    }
+    if (select.select == "gas") {
+        menuSelect[1] = "menuSelect"
+    }
+    if (select.select == "electro") {
+        menuSelect[2] = "menuSelect"
+    }
+
+    return (
+        <div className="menuButtons">
+
+            <Link to="/energyWater" className="container-home">
+                <div className={menuSelect[0]}>ВОДОСНАБЖЕНИЕ</div>
+            </Link>
+
+            <Link to="/energyGas" className="container-home">
+                <div className={menuSelect[1]}>ГАЗ</div>
+            </Link>
+
+            <Link to="/energyElectro" className="container-home">
+                <div className={menuSelect[2]}>ЭЛЕКТРОЭНЕРГИЯ</div>
+            </Link>
+
+        </div>
+    )
+
+}

@@ -2,12 +2,15 @@ function ScladsInfo() {
 
     let complexName = ["Склад Мех. цеха"]
     let complexImg = ["../images/sklad.png"]
+    let complexRequest = ['sclad_meh']
 
     let buttonsVrs1 = [-485, 680, 'url(../images/sklad.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
 
     let bufferData = bufferDataArrays(1)
 
     let [date, setDate] = useState(0);
+
+    let [stateLineHC, setStateLineHC] = useState("line");
 
     useEffect(() => {
 
@@ -27,9 +30,9 @@ function ScladsInfo() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'sclad_meh', 1)
+        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
 
-        let promiseDataKim = Promise.resolve(roundKim);
+        let promiseDataKim = Promise.resolve(roundComplex[0]);
 
         //Общая загрузка и количество операций
         promiseDataKim.then(value => {
@@ -52,6 +55,8 @@ function ScladsInfo() {
             <DayCalendar newDate={newDate} date={date}/>
 
             <ComplexTotalSutkiInfo/>
+
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1}/>
 

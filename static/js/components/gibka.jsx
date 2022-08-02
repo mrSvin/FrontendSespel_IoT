@@ -2,6 +2,7 @@ function GibkaInfo() {
 
     let complexName = ["FACCIN 4", "FACCIN 10"]
     let complexImg = ["../images/faccin.png", "../images/faccin_2.png"]
+    let complexRequest = ['faccin_1','faccin_2']
 
     let buttonsVrs1 = [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
     let buttonsVrs2 = [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
@@ -9,6 +10,8 @@ function GibkaInfo() {
     let bufferData = bufferDataArrays(2)
 
     let [date, setDate] = useState(0);
+
+    let [stateLineHC, setStateLineHC] = useState("line");
 
     useEffect(() => {
 
@@ -27,11 +30,11 @@ function GibkaInfo() {
     }
 
     function updateLoadData(dateInput) {
-        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'faccin_1', 1)
-        let roundNK600 = fetchRequestBuildHC(dateInput, bufferData[1], 'faccin_2', 2)
 
-        let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
+        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
+
+        let promiseDataKim = Promise.resolve(roundComplex[0]);
+        let promiseDataNK600 = Promise.resolve(roundComplex[1]);
         //Общая загрузка и Количество операций
         promiseDataKim.then(value => {
             promiseDataNK600.then(value1 => {
@@ -55,6 +58,8 @@ function GibkaInfo() {
             <DayCalendar newDate={newDate} date={date}/>
 
             <ComplexTotalSutkiInfo/>
+
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"sborCeh"} idContainer = {1}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"sborCeh"} idContainer = {2}/>

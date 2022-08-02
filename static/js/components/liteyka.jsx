@@ -2,6 +2,7 @@ function LiteykaInfo() {
 
     let complexName = ["Печь Индукционная"]
     let complexImg = ["../images/pech.png"]
+    let complexRequest = ['pech_nerg']
 
     let buttonsVrs1 = [-125, 180, 'url(../images/pech.png) no-repeat', "../images/ceh_1.png", 70, "100%"]
 
@@ -9,6 +10,8 @@ function LiteykaInfo() {
 
 
     let [date, setDate] = useState(0);
+
+    let [stateLineHC, setStateLineHC] = useState("line");
 
     useEffect(() => {
 
@@ -28,9 +31,9 @@ function LiteykaInfo() {
 
     function updateLoadData(dateInput) {
 
-        let roundKim = fetchRequestBuildHC(dateInput, bufferData[0], 'pech_nerg', 1)
+        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
 
-        let promiseDataKim = Promise.resolve(roundKim);
+        let promiseDataKim = Promise.resolve(roundComplex[0]);
 
         //Общая загрузка и Количество операций
         promiseDataKim.then(value => {
@@ -51,6 +54,8 @@ function LiteykaInfo() {
             <DayCalendar newDate={newDate} date={date}/>
 
             <ComplexTotalSutkiInfo/>
+
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh1"} idContainer = {1}/>
 

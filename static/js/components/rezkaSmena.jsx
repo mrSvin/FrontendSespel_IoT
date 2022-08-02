@@ -167,19 +167,19 @@ function RezkaSmena() {
             </div>
 
             <ComplexSmenaAllIngo complexName={complexName[0]} complexImg={complexImg[0]}
-                                 complexMesto={buttonsVrs1}
+                                 complexMesto={buttonsVrs1} programs={complexName[0]+'smena'}
                                  size={"sborCeh"} idContainer={1} laser={complexName[0]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[1]} complexImg={complexImg[1]}
-                                 complexMesto={buttonsVrs2}
+                                 complexMesto={buttonsVrs2} programs={complexName[1]+'smena'}
                                  size={"sborCeh"} idContainer={3} laser={complexName[1]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[2]} complexImg={complexImg[2]}
-                                 complexMesto={buttonsVrs3}
+                                 complexMesto={buttonsVrs3} programs={complexName[2]+'smena'}
                                  size={"sborCeh"} idContainer={5} laser={complexName[2]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[3]} complexImg={complexImg[3]}
-                                 complexMesto={buttonsVrs4}
+                                 complexMesto={buttonsVrs4} programs={complexName[3]+'smena'}
                                  size={"sborCeh"} idContainer={7} laser={complexName[3]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[4]} complexImg={complexImg[4]}
