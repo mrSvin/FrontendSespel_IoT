@@ -13,7 +13,7 @@ function RezkaSmena() {
 
     let [date, setDate] = useState(0);
 
-    let bufferData = bufferDataArrays(13)
+   // let bufferData = bufferDataArrays(13)
 
     useEffect(() => {
 
@@ -25,108 +25,114 @@ function RezkaSmena() {
 
     }, [])
 
+    // Функция для изменения даты в календаре
     function newDate(dateInput) {
         setDate(dateInput)
+        let namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
+        let complexName = ["Навигатор #1", "Навигатор #2", "Навигатор #3", "TruLaser", "Комета #1", "Комета #2", "Комета #3"]
 
-        updateLoadSmenaData(dateInput, dayYesterday(dateInput))
+        let stankiRequest = Promise.all(namesToFetch.map((item,i)=>{
+            return [fetchRequest(dateInput, item), fetchRequest(dayYesterday(dateInput), item)]    
+        }));
 
+        updateLoadSmenaData(stankiRequest, dateInput, complexName)
     }
 
-    function updateLoadSmenaData(day1, day2) {
+    // Функия обработки массива обещаний для смен
+    function updateLoadSmenaData(promiseVariable, day1, complexName) {
+        promiseVariable
+            .then(result => {
+                // получение предыдуего дня
+                let day2 = dayYesterday(day1)
+                let trigger = result.length
+                // переменные для отрисовки общих диаграм
+                let totalArray = [[Array(trigger)],[Array(trigger)],]
+                let kolOpArray = [[Array(trigger)],[Array(trigger)],]
 
-        let complex1day1 = fetchRequest(day1, bufferData[0], 'navigator_1')
-        let complex1day2 = fetchRequest(day2, bufferData[1], 'navigator_1')
-
-        let complex2day1 = fetchRequest(day1, bufferData[2], 'navigator_2_golova_2')
-        let complex2day2 = fetchRequest(day2, bufferData[3], 'navigator_2_golova_2')
-
-        let complex3day1 = fetchRequest(day1, bufferData[4], 'navigator_3')
-        let complex3day2 = fetchRequest(day2, bufferData[5], 'navigator_3')
-
-        let complex4day1 = fetchRequest(day1, bufferData[6], 'trulaser')
-        let complex4day2 = fetchRequest(day2, bufferData[7], 'trulaser')
-
-        let complex5day1 = fetchRequest(day1, bufferData[8], 'kometa_1')
-        let complex5day2 = fetchRequest(day2, bufferData[9], 'kometa_1')
-
-        let complex6day1 = fetchRequest(day1, bufferData[10], 'kometa_2')
-        let complex6day2 = fetchRequest(day2, bufferData[11], 'kometa_2')
-
-        let complex7day1 = fetchRequest(day1, bufferData[12], 'kometa_3')
-        let complex7day2 = fetchRequest(day2, bufferData[13], 'kometa_3')
-
-        let promiseDataComplex1 = Promise.resolve(complex1day1);
-        let promiseDataComplex2 = Promise.resolve(complex1day2);
-
-        let promiseDataComplex3 = Promise.resolve(complex2day1);
-        let promiseDataComplex4 = Promise.resolve(complex2day2);
-
-        let promiseDataComplex5 = Promise.resolve(complex3day1);
-        let promiseDataComplex6 = Promise.resolve(complex3day2);
-
-        let promiseDataComplex7 = Promise.resolve(complex4day1);
-        let promiseDataComplex8 = Promise.resolve(complex4day2);
-
-        let promiseDataComplex9 = Promise.resolve(complex5day1);
-        let promiseDataComplex10 = Promise.resolve(complex5day2);
-
-        let promiseDataComplex11 = Promise.resolve(complex6day1);
-        let promiseDataComplex12 = Promise.resolve(complex6day2);
-
-        let promiseDataComplex13 = Promise.resolve(complex7day1);
-        let promiseDataComplex14 = Promise.resolve(complex7day2);
-
-        promiseDataComplex1.then(value => {
-            promiseDataComplex2.then(value1 => {
-                promiseDataComplex3.then(value3 => {
-                    promiseDataComplex4.then(value4 => {
-                        promiseDataComplex5.then(value5 => {
-                            promiseDataComplex6.then(value6 => {
-                                promiseDataComplex7.then(value7 => {
-                                    promiseDataComplex8.then(value8 => {
-                                        promiseDataComplex9.then(value9 => {
-                                            promiseDataComplex10.then(value10 => {
-                                                promiseDataComplex11.then(value11 => {
-                                                    promiseDataComplex12.then(value12 => {
-                                                        promiseDataComplex13.then(value13 => {
-                                                            promiseDataComplex14.then(value14 => {
-
-                                                                smenaBuildHighcharts(value, value1, day1, day2, 1)
-                                                                smenaBuildHighcharts(value3, value4, day1, day2, 3)
-                                                                smenaBuildHighcharts(value5, value6, day1, day2, 5)
-                                                                smenaBuildHighcharts(value7, value8, day1, day2, 7)
-                                                                smenaBuildHighcharts(value9, value10, day1, day2, 9)
-                                                                smenaBuildHighcharts(value11, value12, day1, day2, 11)
-                                                                smenaBuildHighcharts(value13, value14, day1, day2, 13)
-
-                                                            })
-                                                        })
-                                                    })
-                                                })
-                                            })
-                                        })
-                                    })
-                                })
-                            })
+                // пробег по всем обещаниям с отрисовкой диаграмм для каждого станка
+                result.map((smena, i) => {                 
+                    smena[0].then(value => {
+                        smena[1].then(value1 => {
+                            smenaBuildHighcharts(value, value1, day1, day2, i, complexName, totalArray,kolOpArray, trigger)
                         })
                     })
                 })
             })
-        })
-
+                .catch(err => {
+                console.error(err);
+            });
     }
 
-    function smenaBuildHighcharts(value, value1, day1, day2, idContainer) {
+    // Функция рисования сменных графиков, аргументов конечно очень много, но все крайне необходимы
+    function smenaBuildHighcharts(value, value1, day1, day2, idContainer, complexName, total, kolOp, trigger) {
+
+        // получение данных для обеих смен
         let complex1Smena = convertDaysToSmena(value, value1, day1)
+
+        // сохранение данных для общих диаграмм и количества операций
+        total[0][idContainer] = complex1Smena[0][6].slice()
+        total[1][idContainer] = complex1Smena[1][6].slice()
+        kolOp[0][idContainer] = kolOperations(complex1Smena[0][0]).slice()
+        kolOp[1][idContainer] = kolOperations(complex1Smena[1][0]).slice()
+
+        //индексация для имен контейнеров: 1, 3, 5...
+        idContainer = (idContainer * 2) + 1
+        
+        // если это последний цикл то рисуются общие диаграммы
+        if(idContainer == (trigger*2)-1){
+
+            // переменные для переформирования данных 2-х смен
+            let work = [[],[],]
+            let pause = [[],[],]
+            let off = [[],[],]
+            let avar = [[],[],]
+            let nagruzka = [[],[],]
+            let shortOp = [[],[],]
+            let longOp = [[],[],]
+
+            // переформирования данных 
+            total[0].forEach(e => {
+                work[0].push(e[0])
+                pause[0].push(e[1])
+                off[0].push(e[2])
+                avar[0].push(e[3])
+                nagruzka[0].push(e[4])
+            })        
+            total[1].forEach(e => {
+                work[1].push(e[0])
+                pause[1].push(e[1])
+                off[1].push(e[2])
+                avar[1].push(e[3])
+                nagruzka[1].push(e[4])
+            })
+            kolOp[0].forEach(e => {
+                shortOp[0].push(e[0])
+                longOp[0].push(e[1])
+            })
+            kolOp[1].forEach(e => {
+                shortOp[1].push(e[0])
+                longOp[1].push(e[1])
+            })
+                
+            // вторая смена, всегда за предыдущий день, date всегда 12 часов
+            highChartTotal(complexName, work[0], pause[0], off[0], avar[0], nagruzka[0], 'Нагрузка', 12)
+            highChartCountOperations(complexName, shortOp[0], longOp[0])
+
+        // первая смена в date передается текущая дата с календаря
+            highChartTotal(complexName, work[1], pause[1], off[1], avar[1], nagruzka[1], 'Нагрузка', day1, '2')
+            highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
+        }
+
+        // парсинг данных и отрисовка графиков первой смены текущего станка
         let convertDataRuchnoi = parseLinearSutki(complex1Smena[0][4], 0, day1)
         let convertDataWork = parseLinearSutki(complex1Smena[0][0], 1, day1, complex1Smena[0][5])
         let convertDataPause = parseLinearSutki(complex1Smena[0][1], 2, day1)
         let convertDataOff = parseLinearSutki(complex1Smena[0][2], 3, day1)
         let convertDataAvar = parseLinearSutki(complex1Smena[0][3], 4, day1)
-
         highChartSutkiLine(convertDataWork, convertDataPause, convertDataOff, convertDataAvar, convertDataRuchnoi, 'Нагрузка', idContainer)
         highChartRound(complex1Smena[0][6][0], complex1Smena[0][6][1], complex1Smena[0][6][2], complex1Smena[0][6][3], complex1Smena[0][6][4], 'Нагрузка', idContainer)
-
+        
+        // парсинг данных и отрисовка графиков второй смены текущего станка
         let convertDataRuchnoi2 = parseLinearSutki(complex1Smena[1][4], 0, day2)
         let convertDataWork2 = parseLinearSutki(complex1Smena[1][0], 1, day2, complex1Smena[1][5])
         let convertDataPause2 = parseLinearSutki(complex1Smena[1][1], 2, day2)
