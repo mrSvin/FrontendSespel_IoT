@@ -557,6 +557,11 @@ function dayYesterday(startTime) {
     return new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
 }
 
+function convertTimeToISO(time) {
+    time = time.slice(0, 10) + ' ' + time.slice(11, 19)
+    return time
+}
+
 // Функция получения текущего года и месяца
 function monthNow() {
     let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
