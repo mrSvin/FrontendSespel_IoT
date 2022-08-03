@@ -724,7 +724,7 @@ function highChartServiceHistory(ArrayTeh, info=null) {
                 color: '#d8e523',
                 tooltip: {
                     pointFormatter: function () {
-                        let timer = msToTimeDays(this.x2 - this.x)
+                        let timer = msToTimeDays(this.x2 - this.x, 365)
                         return '<b>Времени между обслуживанием:</b> ' + timer +
                             '<br>' + '<b>Ответственный:</b> ' + this.login +
                             '<br>' + '<b>Проведенные работы:</b> ' + this.work;
@@ -740,7 +740,7 @@ function highChartServiceHistory(ArrayTeh, info=null) {
                 color: '#76d739',
                 tooltip: {
                     pointFormatter: function () {
-                        let timer = msToTimeDays(this.x2 - this.x)
+                        let timer = msToTimeDays(this.x2 - this.x, 365)
                         return '<b>Времени между обслуживанием:</b> ' + timer +
                             '<br>' + '<b>Ответственный:</b> ' + this.login +
                             '<br>' + '<b>Проведенные работы:</b> ' + this.work;

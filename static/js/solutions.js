@@ -145,7 +145,7 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
                 x2:(new Date(arrayParse[i+1])).getTime(),
                 y:y,
                 login: difference[i][0],
-                work: difference[i][1]
+                work: difference[++i][1]
             })
         }
     }
@@ -158,7 +158,7 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
                     x2:(new Date(arrayParse[i])).getTime(),
                     y:y,
                     login: difference[i][0],
-                    work: difference[i][1]
+                    work: difference[++i][1]
                 })
             }
             else {
@@ -167,7 +167,7 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
                     x2: (new Date(arrayParse[i + 1])).getTime(),
                     y: y,
                     login: difference[i][0],
-                    work: difference[i][1]
+                    work: difference[++i][1]
                 })
             }
         }
