@@ -91,7 +91,7 @@ function msToTime(duration, date=24) {
 }
 
 // Функция перевода миллисекунд в дни в формате  - 1 д. 1.ч. 1м. 1.с
-function msToTimeDays(duration, date) {
+function msToTimeDays(duration, date=31) {
     date = +date
     let seconds = parseInt((duration / 1000) % 60),
         minutes = parseInt((duration / (1000 * 60)) % 60),

@@ -195,7 +195,7 @@ function TableServiceData({dataService}) {
             return (
                 <tr key={key}>
                     <td>{val.user_name}</td>
-                    <td>{val.time_service}</td>
+                    <td>{val.time_service.replace('—', '')}</td>
                     <td>{val.period_service}</td>
                     <td>{val.info_works}</td>
                 </tr>

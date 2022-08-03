@@ -875,10 +875,10 @@ function highChartServiceNow(ArrayTeh,timeNext=null) {
 
                         let TodayTime = (new Date(timeToday)).getTime()
 
-                        let pastTime = msToTimeDays(TodayTime - this.x)
+                        let pastTime = msToTimeDays(TodayTime - this.x, 365)
                         //let per = this.partialFill
 
-                        let leftTime = msToTimeDays(this.x2 - TodayTime)
+                        let leftTime = msToTimeDays(this.x2 - TodayTime, 365)
 
                         return '<b>Прошло:</b> ' + pastTime + '<br>' +
                             '<b>Осталось:</b> ' + leftTime;
