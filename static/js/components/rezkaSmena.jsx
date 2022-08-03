@@ -16,12 +16,19 @@ function RezkaSmena() {
    // let bufferData = bufferDataArrays(13)
 
     useEffect(() => {
+        let dateInput = dayNow()
+        setDate(dateInput)
 
+        let namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
+        let complexName = ["Навигатор #1", "Навигатор #2", "Навигатор #3", "TruLaser", "Комета #1", "Комета #2", "Комета #3"]
 
-        setDate(dayNow())
-        let date1 = dayNow()
-        let date2 = dayYesterday(new Date())
-        updateLoadSmenaData(date1, date2)
+        console.log("Начало")
+
+        let stankiRequest = Promise.all(namesToFetch.map((item,i)=>{
+            return [fetchRequest(dateInput, item), fetchRequest(dayYesterday(dateInput), item)]    
+        }));
+
+        updateLoadSmenaData(stankiRequest, dateInput, complexName)
 
     }, [])
 
@@ -30,6 +37,8 @@ function RezkaSmena() {
         setDate(dateInput)
         let namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
         let complexName = ["Навигатор #1", "Навигатор #2", "Навигатор #3", "TruLaser", "Комета #1", "Комета #2", "Комета #3"]
+
+        console.log("Смена даты")
 
         let stankiRequest = Promise.all(namesToFetch.map((item,i)=>{
             return [fetchRequest(dateInput, item), fetchRequest(dayYesterday(dateInput), item)]    
@@ -42,12 +51,14 @@ function RezkaSmena() {
     function updateLoadSmenaData(promiseVariable, day1, complexName) {
         promiseVariable
             .then(result => {
+                console.log('Внутри функции')
+
                 // получение предыдуего дня
                 let day2 = dayYesterday(day1)
                 let trigger = result.length
                 // переменные для отрисовки общих диаграм
-                let totalArray = [[Array(trigger)],[Array(trigger)],]
-                let kolOpArray = [[Array(trigger)],[Array(trigger)],]
+                let totalArray = [Array(trigger).fill(0),Array(trigger).fill(0),]
+                let kolOpArray = [Array(trigger).fill(0),Array(trigger).fill(0),]
 
                 // пробег по всем обещаниям с отрисовкой диаграмм для каждого станка
                 result.map((smena, i) => {                 
