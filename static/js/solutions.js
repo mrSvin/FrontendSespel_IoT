@@ -129,7 +129,7 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
     if(arrayParse.length == 1){
         arraySave.push({
             x:(new Date(arrayParse[0])).getTime(),
-            x2:((new Date(arrayParse[0])).getTime()+86400000),
+            x2:(new Date(dayTimeNow())).getTime()+10000,
             y:y,
             login: difference[0][0],
             work: difference[0][1]
@@ -141,7 +141,7 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
             {
                 arraySave.push({
                     x:(new Date(arrayParse[i])).getTime(),
-                    x2:(new Date(dayTimeNow())).getTime(),
+                    x2:(new Date(dayTimeNow())).getTime()+10000,
                     y:y,
                     login: difference[i][0],
                     work: difference[i][1]
