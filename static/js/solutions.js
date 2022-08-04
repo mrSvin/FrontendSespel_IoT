@@ -124,10 +124,8 @@ function msToTimeDays(duration, date=31) {
 
 // Парсинг массива со свойствами x, x2, y для истории проведенных обслуживаний
 function parseLinearServiceHistory(arrayParse, y, difference) {
-    var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
 
-    // Если имя программы не передано в функцию, то массив формируется без нее
     if(arrayParse.length == 1){
         arraySave.push({
             x:(new Date(arrayParse[0])).getTime(),
@@ -137,24 +135,13 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
             work: difference[0][1]
         })
     }
-    else if(arrayParse.length % 2 == 0){
-        for(let i = 0; i<arrayParse.length-1; i++){
-            arraySave.push({
-                x:(new Date(arrayParse[i])).getTime(),
-                x2:(new Date(arrayParse[i+1])).getTime(),
-                y:y,
-                login: difference[i][0],
-                work: difference[i][1]
-            })
-        }
-    }
     else {
-        for(let i = 0; i<arrayParse.length-1; i++){
+        for(let i = 0; i<arrayParse.length; i++){
             if(i == arrayParse.length-1)
             {
                 arraySave.push({
                     x:(new Date(arrayParse[i])).getTime(),
-                    x2:(new Date(arrayParse[i])).getTime(),
+                    x2:(new Date(dayTimeNow())).getTime(),
                     y:y,
                     login: difference[i][0],
                     work: difference[i][1]
