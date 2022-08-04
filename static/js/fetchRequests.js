@@ -95,16 +95,15 @@ function fetchRequestAddService(userName, userRole,complexName, infoWorks, perio
         fetch(`http://${serverDomain}:8086/api/addService`, requestOptions)
             .then(response => response.text())
             .then(result => {
-                console.log('Запрос прошел', result)
                 if (result === 'ok') {
                     let newDataTable = setFormAddService.dataService;
 
                     if (newDataTable.length !== 0) {
-                        newDataTable.unshift({info_works: infoWorks, user_name:userName, time_service:getTimeToday(), period_service:msToTimeDays(new Date(getTimeToday()) - new Date(newDataTable[0].time_service))})
+                        newDataTable.unshift({info_works: infoWorks, user_name:userName, time_service:dayTimeNow(), period_service:msToTimeDays(new Date(dayTimeNow()) - new Date(newDataTable[0].time_service)), timeNext:periodService})
                     }
-                    else newDataTable.unshift({info_works: infoWorks, user_name:userName, time_service:getTimeToday(), period_service:'-'})
+                    else newDataTable.unshift({info_works: infoWorks, user_name:userName, time_service:dayTimeNow(), period_service:'-', timeNext:periodService})
 
-                    console.log(newDataTable)
+                    
                     setFormAddService.setDataService(newDataTable)
                     setFormAddService.setFormAddService(false)
 
@@ -120,7 +119,7 @@ function fetchRequestAddService(userName, userRole,complexName, infoWorks, perio
                     highChartServiceNow(allServiceArray.reverse(),periodService)
                 }
             })
-            .catch(error => alert('Ошибка при отправке запроса', error));
+            .catch(error =>console.log('Ошибка при отправке запроса', error));
     } else if (infoWorks.length<=10) {
         setErrorService("Сообщение о проведенных работах слишком короткое.")
     } else {

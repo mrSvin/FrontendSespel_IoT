@@ -47,7 +47,6 @@ function Service() {
         let promiseDataComplex1 = Promise.resolve(complex1day1);
 
         promiseDataComplex1.then(value => {
-            // console.log(value)
 
             let ArrayPeriod = value.map(e=> {
                 e.time_service = convertTimeToISO(e.time_service)
@@ -55,7 +54,7 @@ function Service() {
             })
 
             let lastPeriod = value.map(e=> {
-                return e.period_service
+                return e.timeNext
             })
 
             lastPeriod = lastPeriod[0];
@@ -64,13 +63,13 @@ function Service() {
 
             let dataTable = [];
             value.forEach((e,i) => {
-                e.period_service = ArrayPeriod[i]
+                //e.period_service = ArrayPeriod[i]
                 dataTable.push(e)
             })
 
-            setDataService(dataTable)
+           setDataService(dataTable)
 
-            let allServiceArray = [ ] //'2022-07-22 07:08:41', '2022-07-22 07:12:41', '2022-07-22 07:17:40', '2022-07-22 07:21:51', '2022-07-22 08:33:03', '2022-07-22 09:36:36', '2022-07-22 09:57:11', '2022-07-22 09:58:52']
+            let allServiceArray = [] //'2022-07-22 07:08:41', '2022-07-22 07:12:41', '2022-07-22 07:17:40', '2022-07-22 07:21:51', '2022-07-22 08:33:03', '2022-07-22 09:36:36', '2022-07-22 09:57:11', '2022-07-22 09:58:52']
             value.forEach(element => allServiceArray.push(element.time_service) )
 
             let info = value.map(e=> {
@@ -138,7 +137,6 @@ function FormAddService(setFormAddService) {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 fetchRequestAddService(data.userName, data.userRole,complexName, infoWorks, periodService,setFormAddService, errorService, setErrorService)
             })
 
@@ -166,7 +164,6 @@ function FormAddService(setFormAddService) {
                     <h3>Период до следующего тех. обслуживания</h3>
                     <select id="listPeriods" name="addPeriod"
                             value={periodService} onChange={e => {
-                        console.log(e.target.value)
                         setPeriodService(e.target.value)
                     }}>
                         <option label="3 месяца" value="7884000"></option>

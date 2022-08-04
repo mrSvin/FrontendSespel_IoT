@@ -124,7 +124,6 @@ function msToTimeDays(duration, date=31) {
 
 // Парсинг массива со свойствами x, x2, y для истории проведенных обслуживаний
 function parseLinearServiceHistory(arrayParse, y, difference) {
-    console.log(difference)
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
 
@@ -145,7 +144,7 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
                 x2:(new Date(arrayParse[i+1])).getTime(),
                 y:y,
                 login: difference[i][0],
-                work: difference[++i][1]
+                work: difference[i][1]
             })
         }
     }
@@ -158,7 +157,7 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
                     x2:(new Date(arrayParse[i])).getTime(),
                     y:y,
                     login: difference[i][0],
-                    work: difference[++i][1]
+                    work: difference[i][1]
                 })
             }
             else {
@@ -167,7 +166,7 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
                     x2: (new Date(arrayParse[i + 1])).getTime(),
                     y: y,
                     login: difference[i][0],
-                    work: difference[++i][1]
+                    work: difference[i][1]
                 })
             }
         }
