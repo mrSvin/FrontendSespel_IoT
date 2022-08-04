@@ -2,6 +2,7 @@ function RezkaSmena() {
 
     let complexName = ["Навигатор #1", "Навигатор #2", "Навигатор #3", "TruLaser", "Комета #1", "Комета #2", "Комета #3"]
     let complexImg = ["../images/navigator.png", "../images/navigator.png", "../images/navigator.png", "../images/trulaser.png", "../images/kometa.png", "../images/kometa.png", "../images/kometa.png"]
+    let namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
 
     let buttonsVrs1 = [-110, 900, 'url(../images/navigator.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
     let buttonsVrs2 = [-100, 540, 'url(../images/navigator.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
@@ -13,19 +14,14 @@ function RezkaSmena() {
 
     let [date, setDate] = useState(0);
 
-   // let bufferData = bufferDataArrays(13)
+    // let bufferData = bufferDataArrays(13)
 
     useEffect(() => {
         let dateInput = dayNow()
         setDate(dateInput)
 
-        let namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
-        let complexName = ["Навигатор #1", "Навигатор #2", "Навигатор #3", "TruLaser", "Комета #1", "Комета #2", "Комета #3"]
-
-        console.log("Начало")
-
         let stankiRequest = Promise.all(namesToFetch.map((item,i)=>{
-            return [fetchRequest(dateInput, item), fetchRequest(dayYesterday(dateInput), item)]    
+            return [fetchRequest(dateInput, item), fetchRequest(dayYesterday(dateInput), item)]
         }));
 
         updateLoadSmenaData(stankiRequest, dateInput, complexName)
@@ -35,13 +31,9 @@ function RezkaSmena() {
     // Функция для изменения даты в календаре
     function newDate(dateInput) {
         setDate(dateInput)
-        let namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
-        let complexName = ["Навигатор #1", "Навигатор #2", "Навигатор #3", "TruLaser", "Комета #1", "Комета #2", "Комета #3"]
-
-        console.log("Смена даты")
 
         let stankiRequest = Promise.all(namesToFetch.map((item,i)=>{
-            return [fetchRequest(dateInput, item), fetchRequest(dayYesterday(dateInput), item)]    
+            return [fetchRequest(dateInput, item), fetchRequest(dayYesterday(dateInput), item)]
         }));
 
         updateLoadSmenaData(stankiRequest, dateInput, complexName)
@@ -61,7 +53,7 @@ function RezkaSmena() {
                 let kolOpArray = [Array(trigger).fill(0),Array(trigger).fill(0),]
 
                 // пробег по всем обещаниям с отрисовкой диаграмм для каждого станка
-                result.map((smena, i) => {                 
+                result.map((smena, i) => {
                     smena[0].then(value => {
                         smena[1].then(value1 => {
                             smenaBuildHighcharts(value, value1, day1, day2, i, complexName, totalArray,kolOpArray, trigger)
@@ -69,7 +61,7 @@ function RezkaSmena() {
                     })
                 })
             })
-                .catch(err => {
+            .catch(err => {
                 console.error(err);
             });
     }
@@ -88,7 +80,7 @@ function RezkaSmena() {
 
         //индексация для имен контейнеров: 1, 3, 5...
         idContainer = (idContainer * 2) + 1
-        
+
         // если это последний цикл то рисуются общие диаграммы
         if(idContainer == (trigger*2)-1){
 
@@ -101,14 +93,14 @@ function RezkaSmena() {
             let shortOp = [[],[],]
             let longOp = [[],[],]
 
-            // переформирования данных 
+            // переформирования данных
             total[0].forEach(e => {
                 work[0].push(e[0])
                 pause[0].push(e[1])
                 off[0].push(e[2])
                 avar[0].push(e[3])
                 nagruzka[0].push(e[4])
-            })        
+            })
             total[1].forEach(e => {
                 work[1].push(e[0])
                 pause[1].push(e[1])
@@ -124,12 +116,12 @@ function RezkaSmena() {
                 shortOp[1].push(e[0])
                 longOp[1].push(e[1])
             })
-                
+
             // вторая смена, всегда за предыдущий день, date всегда 12 часов
             highChartTotal(complexName, work[0], pause[0], off[0], avar[0], nagruzka[0], 'Нагрузка', 12)
             highChartCountOperations(complexName, shortOp[0], longOp[0])
 
-        // первая смена в date передается текущая дата с календаря
+            // первая смена в date передается текущая дата с календаря
             highChartTotal(complexName, work[1], pause[1], off[1], avar[1], nagruzka[1], 'Нагрузка', day1, '2')
             highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
         }
@@ -142,7 +134,7 @@ function RezkaSmena() {
         let convertDataAvar = parseLinearSutki(complex1Smena[0][3], 4, day1)
         highChartSutkiLine(convertDataWork, convertDataPause, convertDataOff, convertDataAvar, convertDataRuchnoi, 'Нагрузка', idContainer)
         highChartRound(complex1Smena[0][6][0], complex1Smena[0][6][1], complex1Smena[0][6][2], complex1Smena[0][6][3], complex1Smena[0][6][4], 'Нагрузка', idContainer)
-        
+
         // парсинг данных и отрисовка графиков второй смены текущего станка
         let convertDataRuchnoi2 = parseLinearSutki(complex1Smena[1][4], 0, day2)
         let convertDataWork2 = parseLinearSutki(complex1Smena[1][0], 1, day2, complex1Smena[1][5])
