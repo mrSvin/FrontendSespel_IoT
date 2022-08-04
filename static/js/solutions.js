@@ -587,7 +587,7 @@ function getArrayPeriodsBetween(arrayTime) {
             return '-'
         } else {
 
-            return msToTimeDays(new Date(array[i]) - new Date(array[i + 1]))
+            return msToTimeDays(new Date(array[i]) - new Date(array[i + 1]),365)
         }
     })
     return ArrayPeriod
