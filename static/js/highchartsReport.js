@@ -873,9 +873,9 @@ function highChartServiceNow(ArrayTeh,timeNext=null) {
                     pointFormatter: function () {
                         let timer = msToTimeDays(this.x2 - this.x)
 
-                        let TodayTime = (new Date(timeToday)).getTime()
+                        let TodayTime = (new Date(timeToday)).getTime() 
 
-                        let pastTime = msToTimeDays(TodayTime - this.x, 365)
+                        let pastTime = msToTimeDays(TodayTime - this.x + 10000, 365)
                         //let per = this.partialFill
 
                         let leftTime = msToTimeDays(this.x2 - TodayTime, 365)
