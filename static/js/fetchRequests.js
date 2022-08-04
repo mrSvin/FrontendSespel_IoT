@@ -99,7 +99,7 @@ function fetchRequestAddService(userName, userRole,complexName, infoWorks, perio
                     let newDataTable = setFormAddService.dataService;
 
                     if (newDataTable.length !== 0) {
-                        newDataTable.unshift({info_works: infoWorks, user_name:userName, time_service:dayTimeNow(), period_service:msToTimeDays(new Date(dayTimeNow()) - new Date(newDataTable[0].time_service,365)), timeNext:periodService})
+                        newDataTable.unshift({info_works: infoWorks, user_name:userName, time_service:dayTimeNow(), period_service:msToTimeDays(new Date(dayTimeNow()) - new Date(newDataTable[0].time_service),365), timeNext:periodService})
                     }
                     else newDataTable.unshift({info_works: infoWorks, user_name:userName, time_service:dayTimeNow(), period_service:'-', timeNext:periodService})
 
