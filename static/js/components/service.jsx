@@ -28,7 +28,7 @@ function Service() {
         let exceptions = ['faccin']
 
         let nameToFetch = parseNameUrl(document.location.pathname);
-       // setNameComplex(nameToFetch)
+        setNameComplex(nameToFetch)
 
         let keys = Object.keys(objectImg)
 
