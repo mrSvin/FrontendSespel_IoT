@@ -28,7 +28,7 @@ function Service() {
         let exceptions = ['faccin']
 
         let nameToFetch = parseNameUrl(document.location.pathname);
-        setNameComplex(nameToFetch)
+       // setNameComplex(nameToFetch)
 
         let keys = Object.keys(objectImg)
 
@@ -41,11 +41,13 @@ function Service() {
                 img = objectImg[inUrl];
                 img = `../images/${img}`
             }
-             else if (e.includes(inUrl) && exceptions.includes(inUrl)){
+             else if (exceptions.includes(inUrl)){
                 img = objectImg[nameToFetch];
                 img = `../images/${img}`
             }
         })
+
+        console.log(img)
 
         setImgComplex(img)
 
