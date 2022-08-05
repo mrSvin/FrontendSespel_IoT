@@ -127,3 +127,12 @@ function fetchRequestAddService(userName, userRole,complexName, infoWorks, perio
     }
 
 }
+
+// fetch запрос объекта в форме объектов
+function fetchRequestSmena(dateCalendar, complexName) {
+    return fetch(`/api/smenaData/${complexName}_days_date:${dateCalendar}`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}

@@ -39,7 +39,10 @@ function getTimeTotalArray(roundArray, date) {
                 if(pageName.includes('Smena')) date = date - 7
                 if(date < 0) date = 0
 			}
-			else date = 24
+			else if(pageName.includes('Smena')){
+                date = 12
+            }
+            else date = 24
 		}
 
 	}
@@ -241,8 +244,8 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
     }
 
     // Перевод в иной формат
-    today = [today.workArray, today.pauseArray, today.offArray, today.avarArray, today.ruchnoyArray, today.programName, today.roundArray]
-    yesterday = [yesterday.workArray, yesterday.pauseArray, yesterday.offArray, yesterday.avarArray, yesterday.ruchnoyArray, yesterday.programName, yesterday.roundArray]
+   // today = [today.workArray, today.pauseArray, today.offArray, today.avarArray, today.ruchnoyArray, today.programName]
+  //  yesterday = [yesterday.workArray, yesterday.pauseArray, yesterday.offArray, yesterday.avarArray, yesterday.ruchnoyArray, yesterday.programName]
 
 
     // дата предыдущего дня
@@ -426,7 +429,7 @@ function parseLinearSutki(arrayParse, y, date, arrayName = null) {
     // Определение длины цикла. Длина парсящего массива делить на 2 - 2. 300 = 148
     var lengh = arrayParse.length
     if (lengh <= 1) {
-        return
+        return [0]
     }
 
     if (lengh >= 4) {
