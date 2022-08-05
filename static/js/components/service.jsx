@@ -47,8 +47,6 @@ function Service() {
             }
         })
 
-        console.log(img)
-
         setImgComplex(img)
 
         let complex1day1 = fetchRequestServiceInfo(nameToFetch)
