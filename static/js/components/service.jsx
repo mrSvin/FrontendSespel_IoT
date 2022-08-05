@@ -37,7 +37,7 @@ function Service() {
         keys.forEach(e=>{
             let inUrl = nameToFetch
             inUrl = (inUrl.split(' ')[0]).toLowerCase();
-            if(e.includes(inUrl) && exceptions.includes(!inUrl)){
+            if(e.includes(inUrl) && !exceptions.includes(inUrl)){
                 img = objectImg[inUrl];
                 img = `../images/${img}`
             }
