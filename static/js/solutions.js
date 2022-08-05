@@ -596,8 +596,6 @@ function getArrayPeriodsBetween(arrayTime) {
     return ArrayPeriod
 }
 
-
-
 function changeTypeLine(date, stateLineHC, setStateLineHC, bufferData, complexRequest) {
     if (stateLineHC == 'line') {
         setStateLineHC('multiline')
@@ -665,5 +663,3 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka,pause, off, a
         return [e, dataTime[i],]
     })
 }
-
-
