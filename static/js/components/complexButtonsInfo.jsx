@@ -15,9 +15,9 @@ function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, progra
         <div className="parent_image">
 
             <div className="blockImage">
-            <img
-                className="stanok_img"
-                src={complexImg}/>
+                <img
+                    className="stanok_img"
+                    src={complexImg}/>
             </div>
 
             <figcaption className="comlexInfo">
@@ -200,6 +200,9 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
                 break
             case 'CRYSTA-Apex S9168':
                 href = "../stanki/programTime/kim"
+                break
+            case 'МАКС #1smena':
+                href = "../stanki/programTimeSmena/maks_1"
                 break
             default:
                 href = "../stanki/programTime/navigator_1"
