@@ -143,8 +143,22 @@ function Robots() {
         <div>
 
             <MenuStanki menuSelected="robots"/>
+            
+            <div className="buttons-otchet">
 
-            <MenuOtchet select="sutki" page='robots'/>
+                <Link to="/stanki/robots">
+                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/robotsMonth">
+                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/robotsSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <RobotsInfo/>
 

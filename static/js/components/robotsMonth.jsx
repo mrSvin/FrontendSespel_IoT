@@ -122,7 +122,21 @@ function RobotsMonth() {
 
             <MenuStanki menuSelected="robots"/>
 
-            <MenuOtchet select="month" page='robots'/>
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/robots">
+                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/robotsMonth">
+                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/robotsSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 
