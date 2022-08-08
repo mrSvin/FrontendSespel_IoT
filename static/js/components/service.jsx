@@ -95,7 +95,7 @@ function Service() {
 
             <div className='serviceContainer'>
                 <h1>Тех. обслуживания станка {nameComplex}</h1>
-                <div className='blockImg'>
+                <div className='blockImage'>
                     <img className="serviceImg " src={imgComplex}/>
                 </div>
                 <div className="oneLineGraph" id="timeToLastService"></div>

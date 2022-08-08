@@ -18,9 +18,9 @@
 }
 
 .serviceImg {
-    max-height: 260px;
-    width: auto;
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     margin-top: 15px;
 }
 
