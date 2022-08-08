@@ -21,6 +21,7 @@
     max-height: 260px;
     width: auto;
     max-width: 100%;
+    margin-top: 15px;
 }
 
 .oneLineGraph {
@@ -258,7 +259,7 @@ textarea#story:focus {
     width: 34%;
     transition: all 0.2s ease;
     cursor: pointer;
-    margin-top: 10%;
+    margin-top: 1%;
     min-width: 180px;
 }
 
