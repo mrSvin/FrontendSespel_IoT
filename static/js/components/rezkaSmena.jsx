@@ -1,5 +1,5 @@
 // Функия обработки массива обещаний для смен
-function updateLoadSmenaData(promiseVariable, day1, complexName) {
+function updateLoadSmenaData(promiseVariable, day1, complexName, complexRequest) {
     promiseVariable
         .then(result => {
             let data = result.map(e=>{
@@ -142,7 +142,7 @@ function RezkaSmena() {
             return fetchRequestSmena(dateInput, item)
         }));
 
-        updateLoadSmenaData(stankiRequest, dateInput, complexName)
+        updateLoadSmenaData(stankiRequest, dateInput, complexName, namesToFetch)
 
     }, [])
 
@@ -154,7 +154,7 @@ function RezkaSmena() {
             return fetchRequestSmena(dateInput, item)
         }));
 
-        updateLoadSmenaData(stankiRequest, dateInput, complexName)
+        updateLoadSmenaData(stankiRequest, dateInput, complexName, namesToFetch)
     }
 
     return (
