@@ -22,7 +22,9 @@ function Service() {
             'ртк12c':'robot.png', 'крот':'robot.png', 'пранс':'robot.png',
             'p250':'robot_p250.png', 'sk50':'sk50.png', 'склад':'sklad.png',
             'стп13м':'stp13m.png', 'trulaser':'trulaser.png',
-            'увф-1':'uvf_1_2.png', 'уф5220':'UVF_5220.png',
+            'увф-1':'uvf_1_2.png', 'уф5220':'UVF_5220.png', 'врс1':'nasos.png',
+            'врс2':'nasos_vrs2.png', 'котельная': 'gazStation.png','ктп400':'electroStation.png',
+            'ктп630':'electroStation.png','ктп2500':'electroStation.png','ктп400':'electroStation.png',
         }
 
         let exceptions = ['faccin']
@@ -42,7 +44,7 @@ function Service() {
                 img = `../images/${img}`
             }
              else if (exceptions.includes(inUrl)){
-                img = objectImg[nameToFetch];
+                img = objectImg[nameToFetch.toLowerCase()];
                 img = `../images/${img}`
             }
         })
