@@ -40,7 +40,7 @@ function LiteykaInfo() {
             let intKimArray = value.roundArray.map(Number)
 
             highChartTotal(complexName, [intKimArray[0]], [intKimArray[1]],
-                [intKimArray[2]], [intKimArray[3]], [intKimArray[4]], 'Нагрузка')
+                [intKimArray[2]], [intKimArray[3]], [intKimArray[4]], 'Нагрузка', dateInput)
 
             let kolKim = kolOperations(value.workArray)
             highChartCountOperations(complexName, [kolKim[0]], [kolKim[1]])
@@ -57,7 +57,7 @@ function LiteykaInfo() {
 
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh1"} idContainer = {1}/>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh1"} idContainer = {1} service={"Печь Индукционная"}/>
 
 
         </div>

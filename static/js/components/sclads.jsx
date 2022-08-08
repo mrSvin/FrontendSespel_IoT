@@ -39,7 +39,7 @@ function ScladsInfo() {
             let intKimArray = value.roundArray.map(Number)
 
             highChartTotal(complexName, [intKimArray[0]], [intKimArray[1]],
-                [intKimArray[2]], [intKimArray[3]], [intKimArray[4]],'Нагрузка')
+                [intKimArray[2]], [intKimArray[3]], [intKimArray[4]],'Нагрузка', dateInput)
 
             let kolKim = kolOperations(value.workArray)
 
@@ -58,7 +58,7 @@ function ScladsInfo() {
 
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1}/>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1} service={"Склад Мех. цеха"}/>
 
         </div>
     )

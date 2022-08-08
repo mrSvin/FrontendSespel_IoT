@@ -18,8 +18,6 @@ function Meh1Month() {
     let buttonsVrs12 = [-490, 470, 'url(../images/dmg_ctx510.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
 
     let [dateMonth, setDateMonth] = useState(0);
-    let [stateButtonUpdate, setStateButtonUpdate] = useState([false, "buttonUpdateMonth"])
-    let timeout = null;
 
     useEffect(() => {
 
@@ -27,28 +25,10 @@ function Meh1Month() {
 
     }, [])
 
-    function newDate(input) {
-        useEffect(() => {
-            setDateMonth(input)
-        })
-    }
-
-    function disabledButton() {
-        setStateButtonUpdate([false, "buttonUpdateMonth"])
-        clearInterval(timeout)
-    }
-
-    function updateData() {
-        if (dateMonth != "0") {
-            console.log(dateMonth)
-
-            updateLoadDataMonth(dateMonth)
-
-        }
-
-        setStateButtonUpdate([true, "buttonUpdateMonth load"])
-        timeout = setTimeout(disabledButton, 1000)
-
+    function newDate(dateInput) {
+        console.log(dateInput)
+        setDateMonth(dateInput)
+        updateLoadDataMonth(dateInput)
     }
 
     function updateLoadDataMonth(dateInput) {
@@ -171,7 +151,7 @@ function Meh1Month() {
                                                             [offKimArray, offNK600Array, offStp13mArray, offComplex4Array, offComplex5Array, offComplex6Array, offComplex7Array, offComplex8Array, offComplex9Array, offComplex10Array, offComplex11Array, offComplex12Array],
                                                             [avarKimArray, avarNK600Array, avarStp13mArray, avarComplex4Array, avarComplex5Array, avarComplex6Array, avarComplex7Array, avarComplex8Array, avarComplex9Array, avarComplex10Array, avarComplex11Array, avarComplex12Array],
                                                             [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray, nagruzkaComplex4Array, nagruzkaComplex5Array, nagruzkaComplex6Array, nagruzkaComplex7Array, nagruzkaComplex8Array, nagruzkaComplex9Array, nagruzkaComplex10Array, nagruzkaComplex11Array, nagruzkaComplex12Array],
-                                                            'Нагрузка')
+                                                            'Нагрузка', dateInput)
 
                                                         highChartRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray, workComplex4Array, workComplex5Array, workComplex6Array, workComplex7Array, workComplex8Array, workComplex9Array, workComplex10Array, workComplex11Array, workComplex12Array]),
                                                             averageMonthdata([pauseKimArray, pauseNK600Array, pauseStp13mArray, pauseComplex4Array, pauseComplex5Array, pauseComplex6Array, pauseComplex7Array, pauseComplex8Array, pauseComplex9Array, pauseComplex10Array, pauseComplex11Array, pauseComplex12Array]),
@@ -202,22 +182,22 @@ function Meh1Month() {
 
             <MenuOtchet select="month" page='meh1'/>
 
-            <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate={stateButtonUpdate}/>
+            <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 
             <ComplexTotalMonthInfo/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1}/>
-            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"meh1"} idContainer = {2}/>
-            <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"meh1"} idContainer = {3} alarm={complexName[2]}/>
-            <ComplexSutkiAllInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs4} size={"meh1"} idContainer = {4} alarm={complexName[3]}/>
-            <ComplexSutkiAllInfo complexName={complexName[4]} complexImg={complexImg[4]} complexMesto={buttonsVrs5} size={"meh1"} idContainer = {5} alarm={complexName[4]}/>
-            <ComplexSutkiAllInfo complexName={complexName[5]} complexImg={complexImg[5]} complexMesto={buttonsVrs6} size={"meh1"} idContainer = {6} alarm={complexName[5]}/>
-            <ComplexSutkiAllInfo complexName={complexName[6]} complexImg={complexImg[6]} complexMesto={buttonsVrs7} size={"meh1"} idContainer = {7} alarm={complexName[6]}/>
-            <ComplexSutkiAllInfo complexName={complexName[7]} complexImg={complexImg[7]} complexMesto={buttonsVrs8} size={"meh1"} idContainer = {8} alarm={complexName[7]}/>
-            <ComplexSutkiAllInfo complexName={complexName[8]} complexImg={complexImg[8]} complexMesto={buttonsVrs9} size={"meh1"} idContainer = {9} alarm={complexName[8]}/>
-            <ComplexSutkiAllInfo complexName={complexName[9]} complexImg={complexImg[9]} complexMesto={buttonsVrs10} size={"meh1"} idContainer = {10} alarm={complexName[9]}/>
-            <ComplexSutkiAllInfo complexName={complexName[10]} complexImg={complexImg[10]} complexMesto={buttonsVrs11} size={"meh1"} idContainer = {11} alarm={complexName[10]}/>
-            <ComplexSutkiAllInfo complexName={complexName[11]} complexImg={complexImg[11]} complexMesto={buttonsVrs12} size={"meh1"} idContainer = {12} alarm={complexName[11]}/>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1} service={"УВФ-1 1"}/>
+            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"meh1"} idContainer = {2} service={"УВФ-1 2"}/>
+            <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"meh1"} idContainer = {3} alarm={complexName[2]} service={"NTX1000"}/>
+            <ComplexSutkiAllInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs4} size={"meh1"} idContainer = {4} alarm={complexName[3]} service={"NLX3000"}/>
+            <ComplexSutkiAllInfo complexName={complexName[4]} complexImg={complexImg[4]} complexMesto={buttonsVrs5} size={"meh1"} idContainer = {5} alarm={complexName[4]} service={"GAMMA2000"}/>
+            <ComplexSutkiAllInfo complexName={complexName[5]} complexImg={complexImg[5]} complexMesto={buttonsVrs6} size={"meh1"} idContainer = {6} alarm={complexName[5]} service={"CTX650"}/>
+            <ComplexSutkiAllInfo complexName={complexName[6]} complexImg={complexImg[6]} complexMesto={buttonsVrs7} size={"meh1"} idContainer = {7} alarm={complexName[6]} service={"DMF260"}/>
+            <ComplexSutkiAllInfo complexName={complexName[7]} complexImg={complexImg[7]} complexMesto={buttonsVrs8} size={"meh1"} idContainer = {8} alarm={complexName[7]} service={"DMU50 1"}/>
+            <ComplexSutkiAllInfo complexName={complexName[8]} complexImg={complexImg[8]} complexMesto={buttonsVrs9} size={"meh1"} idContainer = {9} alarm={complexName[8]} service={"DMU50 2"}/>
+            <ComplexSutkiAllInfo complexName={complexName[9]} complexImg={complexImg[9]} complexMesto={buttonsVrs10} size={"meh1"} idContainer = {10} alarm={complexName[9]} service={"DMC1035"}/>
+            <ComplexSutkiAllInfo complexName={complexName[10]} complexImg={complexImg[10]} complexMesto={buttonsVrs11} size={"meh1"} idContainer = {11} alarm={complexName[10]} service={"CTX310 1"}/>
+            <ComplexSutkiAllInfo complexName={complexName[11]} complexImg={complexImg[11]} complexMesto={buttonsVrs12} size={"meh1"} idContainer = {12} alarm={complexName[11]} service={"CTX510 1"}/>
 
         </div>
     )

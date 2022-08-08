@@ -8,8 +8,6 @@ function SpecComplexesMonth() {
     let buttonsVrs3 = [-310, 550, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
 
     let [dateMonth, setDateMonth] = useState(0);
-    let [stateButtonUpdate, setStateButtonUpdate] = useState([false, "buttonUpdateMonth"])
-    let timeout = null;
 
     useEffect(() => {
 
@@ -17,28 +15,10 @@ function SpecComplexesMonth() {
 
     }, [])
 
-    function newDate(input) {
-        useEffect(() => {
-            setDateMonth(input)
-        })
-    }
-
-    function disabledButton() {
-        setStateButtonUpdate([false, "buttonUpdateMonth"])
-        clearInterval(timeout)
-    }
-
-    function updateData() {
-        if (dateMonth != "0") {
-            console.log(dateMonth)
-
-            updateLoadData(dateMonth)
-
-        }
-
-        setStateButtonUpdate([true, "buttonUpdateMonth load"])
-        timeout = setTimeout(disabledButton, 1000)
-
+    function newDate(dateInput) {
+        console.log(dateInput)
+        setDateMonth(dateInput)
+        updateLoadDataMonth(dateInput)
     }
 
     function updateLoadDataMonth(dateInput) {
@@ -78,7 +58,7 @@ function SpecComplexesMonth() {
                         [pauseKimArray, pauseNK600Array, pauseStp13mArray],
                         [offKimArray, offNK600Array, offStp13mArray],
                         [avarKimArray, avarNK600Array, avarStp13mArray],
-                        [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray], 'Нагрузка')
+                        [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray], 'Нагрузка', dateInput)
 
                     highChartRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray]), averageMonthdata([pauseKimArray, pauseNK600Array, pauseStp13mArray]),
                         averageMonthdata([offKimArray, offNK600Array, offStp13mArray]), averageMonthdata([avarKimArray, avarNK600Array, avarStp13mArray]),
@@ -97,13 +77,13 @@ function SpecComplexesMonth() {
 
             <MenuOtchet select="month" page='specComplexes'/>
 
-            <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate={stateButtonUpdate}/>
+            <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 
             <ComplexTotalMonthInfo/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1}/>
-            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"} idContainer = {2}/>
-            <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {3}/>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1} service={"Пресс ЧПУ для ступиц"}/>
+            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"} idContainer = {2} service={"ЭПП"}/>
+            <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {3} service={"СТП13М"}/>
 
         </div>
     )

@@ -7,8 +7,6 @@ function GibkaMonth() {
     let buttonsVrs2 = [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
 
     let [dateMonth, setDateMonth] = useState(0);
-    let [stateButtonUpdate, setStateButtonUpdate] = useState([false,"buttonUpdateMonth"])
-    let timeout=null;
 
     useEffect(() => {
 
@@ -16,28 +14,10 @@ function GibkaMonth() {
 
     }, [])
 
-    function newDate(input) {
-        useEffect(() => {
-            setDateMonth(input)
-        })
-    }
-
-    function disabledButton() {
-        setStateButtonUpdate([false, "buttonUpdateMonth"])
-        clearInterval(timeout)
-    }
-
-    function updateData() {
-        if (dateMonth != "0") {
-            console.log(dateMonth)
-
-            updateLoadDataMonth(dateMonth)
-
-        }
-
-        setStateButtonUpdate([true,"buttonUpdateMonth load"])
-        timeout= setTimeout(disabledButton, 1000)
-
+    function newDate(dateInput) {
+        console.log(dateInput)
+        setDateMonth(dateInput)
+        updateLoadDataMonth(dateInput)
     }
 
     function updateLoadDataMonth(dateInput) {
@@ -68,7 +48,7 @@ function GibkaMonth() {
                     [pauseKimArray,pauseNK600Array],
                     [offKimArray,offNK600Array],
                     [avarKimArray,avarNK600Array],
-                    [nagruzkaKimArray,nagruzkaNK600Array], 'Нагрузка')
+                    [nagruzkaKimArray,nagruzkaNK600Array], 'Нагрузка', dateInput)
 
                 highChartRound(averageMonthdata([workKimArray,workNK600Array]),averageMonthdata([pauseKimArray,pauseNK600Array]),
                     averageMonthdata([offKimArray,offNK600Array]),averageMonthdata([avarKimArray,avarNK600Array]),
@@ -85,12 +65,12 @@ function GibkaMonth() {
 
             <MenuOtchet select="month" page='gibka'/>
 
-            <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate = {stateButtonUpdate}/>
+            <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 
             <ComplexTotalMonthInfo/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"sborCeh"} idContainer = {1}/>
-            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"sborCeh"} idContainer = {2}/>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"sborCeh"} idContainer = {1} service={"FACCIN 4"}/>
+            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"sborCeh"} idContainer = {2} service={"FACCIN 10"}/>
 
         </div>
     )

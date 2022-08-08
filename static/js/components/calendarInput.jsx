@@ -17,7 +17,7 @@ function DayCalendar(dateInput) {
 
 }
 
-const MonthCalendar = ({newDate, updateData, stateButtonUpdate}) => {
+const MonthCalendar = ({newDate, dateMonth}) => {
 
     const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
     const monthsNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
@@ -38,21 +38,14 @@ const MonthCalendar = ({newDate, updateData, stateButtonUpdate}) => {
         }
     }
 
-    function changeBackground(month) {
-        for (var i = 0; i < months.length; i++) {
-            document.getElementById(months[i]).style.backgroundColor = 'white'
-        }
-        document.getElementById(month).style.backgroundColor = 'red'
-    }
 
     function changeMonth(e, param) {
-
         for (var i = 0; i < months.length; i++) {
             if (param == params[i]) {
                 setMonth(months[i])
                 setMonthNumber(monthsNumber[i])
-                changeBackground(months[i])
                 setDropdown("none")
+                newDate(`${year}-${monthsNumber[i]}`)
             }
         }
 
@@ -60,20 +53,6 @@ const MonthCalendar = ({newDate, updateData, stateButtonUpdate}) => {
 
     function changeDropdown() {
         dropDown == "none" ? setDropdown("block") : setDropdown("none")
-        changeBackground(month)
-    }
-
-    function ComponentCalendarMonth({month, param}) {
-        return (
-            <td
-                className="tdMonth"
-                id={month}
-                onClick={(e) => {
-                    changeMonth(e, param)
-                }}
-            >{param}
-            </td>
-        )
     }
 
     //Закрытие dropdown на клик вне поля
@@ -119,32 +98,96 @@ const MonthCalendar = ({newDate, updateData, stateButtonUpdate}) => {
 
                     <div className="months">
                         <table className="calendarMonth">
-                            <tbody onClick={newDate(`${year}-${monthNumber}`)}>
-
+                            <tbody>
                             <tr>
-
-                                <ComponentCalendarMonth month={months[0]} param={params[0]}/>
-                                <ComponentCalendarMonth month={months[1]} param={params[1]}/>
-                                <ComponentCalendarMonth month={months[2]} param={params[2]}/>
-                                <ComponentCalendarMonth month={months[3]} param={params[3]}/>
-
+                                <td
+                                    className={month==months[0] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Янв")
+                                    }}
+                                >Янв
+                                </td>
+                                <td
+                                    className={month==months[1] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Фев")
+                                    }}
+                                >Фев
+                                </td>
+                                <td
+                                    className={month==months[2] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Мар")
+                                    }}
+                                >Мар
+                                </td>
+                                <td
+                                    className={month==months[3] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Апр")
+                                    }}
+                                >Апр
+                                </td>
                             </tr>
-
                             <tr>
-
-                                <ComponentCalendarMonth month={months[4]} param={params[4]}/>
-                                <ComponentCalendarMonth month={months[5]} param={params[5]}/>
-                                <ComponentCalendarMonth month={months[6]} param={params[6]}/>
-                                <ComponentCalendarMonth month={months[7]} param={params[7]}/>
-
+                                <td
+                                    className={month==months[4] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Май")
+                                    }}
+                                >Май
+                                </td>
+                                <td
+                                    className={month==months[5] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Июн")
+                                    }}
+                                >Июн
+                                </td>
+                                <td
+                                    className={month==months[6] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Июл")
+                                    }}
+                                >Июл
+                                </td>
+                                <td
+                                    className={month==months[7] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Авг")
+                                    }}
+                                >Авг
+                                </td>
                             </tr>
                             <tr>
-
-                                <ComponentCalendarMonth month={months[8]} param={params[8]}/>
-                                <ComponentCalendarMonth month={months[9]} param={params[9]}/>
-                                <ComponentCalendarMonth month={months[10]} param={params[10]}/>
-                                <ComponentCalendarMonth month={months[11]} param={params[11]}/>
-
+                                <td
+                                    className={month==months[8] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Сен")
+                                    }}
+                                >Сен
+                                </td>
+                                <td
+                                    className={month==months[9] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Окт")
+                                    }}
+                                >Окт
+                                </td>
+                                <td
+                                    className={month==months[10] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Ноя")
+                                    }}
+                                >Ноя
+                                </td>
+                                <td
+                                    className={month==months[11] ? "tdMonthRed" : "tdMonth"}
+                                    onClick={(e) => {
+                                        changeMonth(e, "Дек")
+                                    }}
+                                >Дек
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -154,11 +197,8 @@ const MonthCalendar = ({newDate, updateData, stateButtonUpdate}) => {
 
             </div>
 
-            <UpdateData updateData={updateData} stateButtonUpdate ={stateButtonUpdate}/>
-
         </div>
 
 
     )
 }
-

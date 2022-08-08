@@ -7,43 +7,25 @@ function OtkMonth() {
     let buttonsVrs2 = [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"]
 
     let [dateMonth, setDateMonth] = useState(0);
-    let [stateButtonUpdate, setStateButtonUpdate] = useState([false,"buttonUpdateMonth"])
-    let timeout=null;
+
 
     useEffect(() => {
 
-        updateLoadDataMonth( monthNow())
+        updateLoadDataMonth(monthNow())
 
     }, [])
 
-    function newDate(input) {
-        useEffect(() => {
-            setDateMonth(input)
-        })
+    function newDate(dateInput) {
+        console.log(dateInput)
+        setDateMonth(dateInput)
+        updateLoadDataMonth(dateInput)
     }
 
-    function disabledButton() {
-        setStateButtonUpdate([false, "buttonUpdateMonth"])
-        clearInterval(timeout)
-    }
-
-    function updateData() {
-        if (dateMonth != "0") {
-            console.log(dateMonth)
-
-            updateLoadDataMonth(dateMonth)
-
-        }
-
-        setStateButtonUpdate([true,"buttonUpdateMonth load"])
-        timeout= setTimeout(disabledButton, 1000)
-
-    }
 
     function updateLoadDataMonth(dateInput) {
 
-        let roundKim = fetchMonthHighCharts('kim', dateInput,1)
-        let roundNK600 = fetchMonthHighCharts('nk600', dateInput,2)
+        let roundKim = fetchMonthHighCharts('kim', dateInput, 1, 'Ручной')
+        let roundNK600 = fetchMonthHighCharts('nk600', dateInput, 2)
 
         let promiseDataKim = Promise.resolve(roundKim);
         let promiseDataNK600 = Promise.resolve(roundNK600);
@@ -64,15 +46,15 @@ function OtkMonth() {
                 let nagruzkaNK600Array = averageMonthdata(value1.nagruzka.map(Number))
 
 
-                highChartTotal(complexName, [workKimArray,workNK600Array],
-                    [pauseKimArray,pauseNK600Array],
-                    [offKimArray,offNK600Array],
-                    [avarKimArray,avarNK600Array],
-                    [nagruzkaKimArray,nagruzkaNK600Array], 'ручной')
+                highChartTotal(complexName, [workKimArray, workNK600Array],
+                    [pauseKimArray, pauseNK600Array],
+                    [offKimArray, offNK600Array],
+                    [avarKimArray, avarNK600Array],
+                    [nagruzkaKimArray, nagruzkaNK600Array], 'ручной', dateInput)
 
-                highChartRound(averageMonthdata([workKimArray,workNK600Array]),averageMonthdata([pauseKimArray,pauseNK600Array]),
-                    averageMonthdata([offKimArray,offNK600Array]),averageMonthdata([avarKimArray,avarNK600Array]),
-                    averageMonthdata([nagruzkaKimArray,nagruzkaNK600Array]),'Ручной','Total')
+                highChartRound(averageMonthdata([workKimArray, workNK600Array]), averageMonthdata([pauseKimArray, pauseNK600Array]),
+                    averageMonthdata([offKimArray, offNK600Array]), averageMonthdata([avarKimArray, avarNK600Array]),
+                    averageMonthdata([nagruzkaKimArray, nagruzkaNK600Array]), 'Ручной', 'Total')
             })
         })
 
@@ -85,12 +67,14 @@ function OtkMonth() {
 
             <MenuOtchet select="month" page='otk'/>
 
-            <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate = {stateButtonUpdate}/>
+            <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 
             <ComplexTotalMonthInfo/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1} programs={complexName[0]}/>
-            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh2"} idContainer = {2}/>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}
+                                 size={"meh1"} idContainer={1} programs={complexName[0]}/>
+            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}
+                                 size={"ceh2"} idContainer={2}/>
 
         </div>
     )

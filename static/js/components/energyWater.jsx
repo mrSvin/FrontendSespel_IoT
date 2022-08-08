@@ -119,23 +119,7 @@ function VrsInfo() {
         )
     }
 
-    const UpdateData = ({updateData, stateButtonUpdate}) => {
 
-        return (
-
-            <div>
-                <button
-                    className={stateButtonUpdate[1]}
-                    disabled={stateButtonUpdate[0]}
-                    onClick={updateData}
-                >
-                    <span>Обновить</span>
-                </button>
-            </div>
-
-        )
-
-    }
 
     function EnergyWater() {
 

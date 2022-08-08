@@ -4,13 +4,13 @@ function updateLoadSmenaData(promiseVariable, day1, complexName) {
         .then(result => {
             let data = result.map(e=>{
                 return [[e.work.slice(), e.pause.slice(), e.off.slice(), e.avar.slice(), e.nagruzka.slice(), e.programName.slice()],
-                [e.work2.slice(), e.pause2.slice(), e.off2.slice(), e.avar2.slice(), e.nagruzka2.slice(),  e.programName2.slice()]]
+                    [e.work2.slice(), e.pause2.slice(), e.off2.slice(), e.avar2.slice(), e.nagruzka2.slice(),  e.programName2.slice()]]
             })
-            
+
             let smenaArrays = data.map(e=>{
                 return convertDaysToSmena(e[0], e[1], day1)
-            })   
-            
+            })
+
             let totalArray = []
             let kolOpArray = []
 
@@ -40,25 +40,25 @@ function updateLoadSmenaData(promiseVariable, day1, complexName) {
                 kolOpArray.push(kolOperations(smena[1][0]).slice())
 
                 return [[convertDataWork, convertDataPause, convertDataOff, convertDataAvar, convertDataRuchnoi, roundArray],
-                [convertDataWork2, convertDataPause2, convertDataOff2, convertDataAvar2, convertDataRuchnoi2, roundArray2]]
-                
+                    [convertDataWork2, convertDataPause2, convertDataOff2, convertDataAvar2, convertDataRuchnoi2, roundArray2]]
+
             })
 
-            highChartSmenaTotalKolOp(totalArray, kolOpArray, complexName, day1)    
-            
-           // console.log('Проверка, два массивая с данными',parserDataArray)
+            highChartSmenaTotalKolOp(totalArray, kolOpArray, complexName, day1)
+
+            // console.log('Проверка, два массивая с данными',parserDataArray)
 
             parserDataArray.forEach((e, i)=>{
                 let idContainer = (i * 2) + 1
 
                 // Первая смена
-               highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], 'Нагрузка', idContainer)
-               highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], 'Нагрузка', idContainer)
+                highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], 'Нагрузка', idContainer)
+                highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], 'Нагрузка', idContainer)
 
                 // Первая вторая
-               highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], 'Нагрузка', idContainer + 1)
-               highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], 'Нагрузка', idContainer + 1)
-        
+                highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], 'Нагрузка', idContainer + 1)
+                highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], 'Нагрузка', idContainer + 1)
+
             })
         })
         .catch(err => {
@@ -85,7 +85,7 @@ function highChartSmenaTotalKolOp(total, kolOp, complexName, day1){
             pause[i%2].push(0)
             off[i%2].push(0)
             avar[i%2].push(0)
-            nagruzka[i%2].push(0) 
+            nagruzka[i%2].push(0)
         }
         else{
             work[i%2].push(e[0])
@@ -141,7 +141,7 @@ function RezkaSmena() {
         let stankiRequest = Promise.all(namesToFetch.map((item)=>{
             return fetchRequestSmena(dateInput, item)
         }));
-        
+
         updateLoadSmenaData(stankiRequest, dateInput, complexName)
 
     }, [])
@@ -153,7 +153,7 @@ function RezkaSmena() {
         let stankiRequest = Promise.all(namesToFetch.map((item)=>{
             return fetchRequestSmena(dateInput, item)
         }));
-        
+
         updateLoadSmenaData(stankiRequest, dateInput, complexName)
     }
 

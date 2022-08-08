@@ -6,8 +6,6 @@ function ScladsMonth() {
     let buttonsVrs1 = [-485, 680, 'url(../images/sklad.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
 
     let [dateMonth, setDateMonth] = useState(0);
-    let [stateButtonUpdate, setStateButtonUpdate] = useState([false,"buttonUpdateMonth"])
-    let timeout=null;
 
     useEffect(() => {
 
@@ -15,28 +13,10 @@ function ScladsMonth() {
 
     }, [])
 
-    function newDate(input) {
-        useEffect(() => {
-            setDateMonth(input)
-        })
-    }
-
-    function disabledButton() {
-        setStateButtonUpdate([false, "buttonUpdateMonth"])
-        clearInterval(timeout)
-    }
-
-    function updateData() {
-        if (dateMonth != "0") {
-            console.log(dateMonth)
-
-            updateLoadData(dateMonth)
-
-        }
-
-        setStateButtonUpdate([true,"buttonUpdateMonth load"])
-        timeout= setTimeout(disabledButton, 1000)
-
+    function newDate(dateInput) {
+        console.log(dateInput)
+        setDateMonth(dateInput)
+        updateLoadDataMonth(dateInput)
     }
 
     function updateLoadDataMonth(dateInput) {
@@ -58,7 +38,7 @@ function ScladsMonth() {
                 [pauseKimArray],
                 [offKimArray],
                 [avarKimArray],
-                [nagruzkaKimArray], 'Нагрузка')
+                [nagruzkaKimArray], 'Нагрузка', dateInput)
 
             highChartRound(averageMonthdata([workKimArray]),averageMonthdata([pauseKimArray]),
                 averageMonthdata([offKimArray]),averageMonthdata([avarKimArray]),
@@ -75,11 +55,11 @@ function ScladsMonth() {
 
             <MenuOtchet select="month" page='sclads'/>
 
-            <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate = {stateButtonUpdate}/>
+            <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 
             <ComplexTotalMonthInfo/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1}/>
+            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"meh1"} idContainer = {1} service={"Склад Мех. цеха"}/>
 
         </div>
     )
