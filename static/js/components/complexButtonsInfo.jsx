@@ -201,9 +201,48 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             case 'CRYSTA-Apex S9168':
                 href = "../stanki/programTime/kim"
                 break
+            case 'МАКС #1':
+                href = "../stanki/programTime/maks_1"
+                break
             case 'МАКС #1smena':
                 href = "../stanki/programTimeSmena/maks_1"
                 break
+            case 'МАКС #2':
+                href = "../stanki/programTime/maks_2"
+                break
+            case 'МАКС #1smena':
+                href = "../stanki/programTimeSmena/maks_2"
+                break
+            case 'М710':
+                href = "../stanki/programTime/maks_1"
+                break
+            case 'М710smena':
+                href = "../stanki/programTimeSmena/m710"
+                break
+            case 'РТК12C':
+                href = "../stanki/programTime/rtk12c"
+                break
+            case 'РТК12Csmena':
+                href = "../stanki/programTimeSmena/rtk12c"
+                break
+            case 'P250':
+                href = "../stanki/programTime/p250"
+                break
+            case 'P250smena':
+                href = "../stanki/programTimeSmena/p250"
+                break
+            case 'КРОТ':
+                href = "../stanki/programTime/krot"
+                break
+            case 'КРОТsmena':
+                href = "../stanki/programTimeSmena/krot"
+                break
+            case 'ПРАНС':
+                href = "../stanki/programTime/prans"
+                break
+            case 'ПРАНСsmena':
+                href = "../stanki/programTimeSmena/prans"
+                break                
             default:
                 href = "../stanki/programTime/navigator_1"
         }
