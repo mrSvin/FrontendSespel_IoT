@@ -52,12 +52,12 @@ function updateLoadSmenaData(promiseVariable, day1, complexName) {
                 let idContainer = (i * 2) + 1
 
                 // Первая смена
-                highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], 'Нагрузка', idContainer)
-                highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], 'Нагрузка', idContainer)
+                highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], exceptionManualNagruzka(complexRequest[i]), idContainer)
+                highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], exceptionManualNagruzka(complexRequest[i]), idContainer)
 
                 // Первая вторая
-                highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], 'Нагрузка', idContainer + 1)
-                highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], 'Нагрузка', idContainer + 1)
+                highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], exceptionManualNagruzka(complexRequest[i]), idContainer + 1)
+                highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], exceptionManualNagruzka(complexRequest[i]), idContainer + 1)
 
             })
         })
