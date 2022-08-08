@@ -210,11 +210,11 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             case 'МАКС #2':
                 href = "../stanki/programTime/maks_2"
                 break
-            case 'МАКС #1smena':
+            case 'МАКС #2smena':
                 href = "../stanki/programTimeSmena/maks_2"
                 break
             case 'М710':
-                href = "../stanki/programTime/maks_1"
+                href = "../stanki/programTime/m710"
                 break
             case 'М710smena':
                 href = "../stanki/programTimeSmena/m710"
