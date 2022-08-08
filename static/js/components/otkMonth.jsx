@@ -50,7 +50,7 @@ function OtkMonth() {
                     [pauseKimArray, pauseNK600Array],
                     [offKimArray, offNK600Array],
                     [avarKimArray, avarNK600Array],
-                    [nagruzkaKimArray, nagruzkaNK600Array], 'ручной', dateInput)
+                    [nagruzkaKimArray, nagruzkaNK600Array], 'Ручной', dateInput)
 
                 highChartRound(averageMonthdata([workKimArray, workNK600Array]), averageMonthdata([pauseKimArray, pauseNK600Array]),
                     averageMonthdata([offKimArray, offNK600Array]), averageMonthdata([avarKimArray, avarNK600Array]),
