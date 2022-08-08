@@ -44,14 +44,7 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, complexRequest)
 
             })
 
-            let totalName = namesToFetch.map(e=>{
-                return exceptionManualNagruzka(e) 
-            })
-            
-            if(totalName.includes('Ручной')) totalName = 'Ручной'
-            else totalName = 'Нагрузка'
-
-            highChartSmenaTotalKolOp(totalArray, kolOpArray, complexName, day1, totalName)
+            highChartSmenaTotalKolOp(totalArray, kolOpArray, complexName, day1)
 
             // console.log('Проверка, два массивая с данными',parserDataArray)
 
@@ -73,7 +66,7 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, complexRequest)
         });
 }
 
-function highChartSmenaTotalKolOp(total, kolOp, complexName, day1, totalName='Нагрузка'){
+function highChartSmenaTotalKolOp(total, kolOp, complexName, day1){
 
     // переменные для переформирования данных 2-х смен
     let work = [[],[],]
@@ -115,11 +108,11 @@ function highChartSmenaTotalKolOp(total, kolOp, complexName, day1, totalName='Н
     })
 
     // вторая смена, всегда за предыдущий день, date всегда 12 часов
-    highChartTotal(complexName, work[0], pause[0], off[0], avar[0], nagruzka[0], totalName, 12)
+    highChartTotal(complexName, work[0], pause[0], off[0], avar[0], nagruzka[0], 'Нагрузка', 12)
     highChartCountOperations(complexName, shortOp[0], longOp[0])
 
     // первая смена в date передается текущая дата с календаря
-    highChartTotal(complexName, work[1], pause[1], off[1], avar[1], nagruzka[1], totalName, day1, '2')
+    highChartTotal(complexName, work[1], pause[1], off[1], avar[1], nagruzka[1], 'Нагрузка', day1, '2')
     highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
 }
 
