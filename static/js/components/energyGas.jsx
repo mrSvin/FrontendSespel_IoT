@@ -12,31 +12,10 @@ function GazInfo() {
     let [dataVrs2, setDataVrs2] = useState(0);
     let [dataVrs3, setDataVrs3] = useState(0);
 
-    let [stateButtonUpdate, setStateButtonUpdate] = useState([false,"buttonUpdateMonth"])
-    let timeout=null;
-
-    function newDate(input) {
-        useEffect(() => {
-            setDateMonth(input)
-        })
-    }
-
-    function disabledButton() {
-        setStateButtonUpdate([false, "buttonUpdateMonth"])
-        clearInterval(timeout)
-    }
-
-    function updateData() {
-        if (dateMonth != "0") {
-            console.log(dateMonth)
-
-            updateLoadData(dateMonth)
-        }
-
-        setStateButtonUpdate([true,"buttonUpdateMonth load"])
-        timeout= setTimeout(disabledButton, 1000)
-
-
+    function newDate(dateInput) {
+        console.log(dateInput)
+        setDateMonth(dateInput)
+        updateLoadData(dateInput)
     }
 
     function updateLoadData(dateInput) {
@@ -68,10 +47,10 @@ function GazInfo() {
     return (
         <div className='vrsInfoAlign'>
 
-            <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate = {stateButtonUpdate}/>
+            <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[0]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs1} />
+                <ComplexInfo complexName={complexName[0]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs1} service={"Котельная 2 площадки"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container">
                     </div>
@@ -80,7 +59,7 @@ function GazInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[1]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs2} />
+                <ComplexInfo complexName={complexName[1]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs2} service={"Котельная 1,2"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container2">
                     </div>
@@ -89,7 +68,7 @@ function GazInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[2]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs3} />
+                <ComplexInfo complexName={complexName[2]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs3} service={"Котельная 7,8,10,ОСК2"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container3">
                     </div>

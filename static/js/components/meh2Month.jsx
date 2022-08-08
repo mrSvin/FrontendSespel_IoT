@@ -2,7 +2,7 @@ function Meh2Month() {
 
     let complexName = ["УФ5220", "СТП Сеспель", "NTX1000 #2", "SK50", "APEC", "DMU50 #3", "DMU50 #4", "CTX310 #2", "CTX510 #2", "CTX510 #3", "CTX310 #3", "CTX510 #4", "CTX510 #5",
         "DMC1035 #2", "DMU50 #5", "DMU50 #6", "DMU50 #7", "AR55"]
-        let complexImg = ["../images/UVF_5220.png", "../images/progress.png", "../images/ntx1000.png", "../images/sk50.png", "../images/apec.png", "../images/dmg_dmu50.png",
+    let complexImg = ["../images/UVF_5220.png", "../images/progress.png", "../images/ntx1000.png", "../images/sk50.png", "../images/apec.png", "../images/dmg_dmu50.png",
         "../images/dmg_dmu50.png", "../images/dmg_ctx310.png", "../images/dmg_ctx510.png", "../images/dmg_ctx510.png", "../images/dmg_ctx310.png",
         "../images/dmg_ctx510.png", "../images/dmg_ctx510.png", "../images/dmg_dmc1035.png", "../images/dmg_dmu50.png", "../images/dmg_dmu50.png","../images/dmg_dmu50.png", "../images/ar55.png"]
 
@@ -46,7 +46,7 @@ function Meh2Month() {
         let roundNK600 = fetchMonthHighCharts('progress', dateInput, 2)
         let roundStp13m = fetchMonthHighCharts('ntx1000_2', dateInput, 3)
         let roundComplex4 = fetchMonthHighCharts('sk50', dateInput, 4)
-        let roundComplex5 = fetchMonthHighCharts('apec', dateInput, 5)
+        let roundComplex5 = fetchMonthHighCharts('apec', dateInput, 5, 'Ручной')
         let roundComplex6 = fetchMonthHighCharts('dmg_dmu50_3', dateInput, 6)
         let roundComplex7 = fetchMonthHighCharts('dmg_dmu50_4', dateInput, 7)
         let roundComplex8 = fetchMonthHighCharts('dmg_dmu50_1', dateInput, 8)

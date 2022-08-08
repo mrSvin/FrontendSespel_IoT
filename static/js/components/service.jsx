@@ -43,7 +43,7 @@ function Service() {
                 img = objectImg[inUrl];
                 img = `../images/${img}`
             }
-             else if (exceptions.includes(inUrl)){
+            else if (exceptions.includes(inUrl)){
                 img = objectImg[nameToFetch.toLowerCase()];
                 img = `../images/${img}`
             }
@@ -56,7 +56,7 @@ function Service() {
 
         promiseDataComplex1.then(value => {
             if(value.length == 0) return 0
-            
+
             let ArrayPeriod = value.map(e=> {
                 e.time_service = convertTimeToISO(e.time_service)
                 return e.time_service

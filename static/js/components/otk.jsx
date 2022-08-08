@@ -41,7 +41,7 @@ function OtkInfo() {
                 let intNK600Array = value1.roundArray.map(Number)
 
                 highChartTotal(complexName, [intKimArray[0], intNK600Array[0]], [intKimArray[1], intNK600Array[1]],
-                    [intKimArray[2], intNK600Array[2]], [intKimArray[3], intNK600Array[3]], [intKimArray[4], intNK600Array[4]], 'ручной', dateInput)
+                    [intKimArray[2], intNK600Array[2]], [intKimArray[3], intNK600Array[3]], [intKimArray[4], intNK600Array[4]], 'Ручной', dateInput)
 
                 let kolKim = kolOperations(value.workArray)
                 let kolNK600 = kolOperations(value1.workArray)
@@ -64,7 +64,7 @@ function OtkInfo() {
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}
                                  size={"meh1"} idContainer={1} programs={complexName[0]} service={"CRYSTA-Apex S9168"}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}
-                                 size={"ceh2"} idContainer={2} service={"CRYSTA-Apex S9168"}/>
+                                 size={"ceh2"} idContainer={2} service={"НК600"}/>
 
         </div>
     )

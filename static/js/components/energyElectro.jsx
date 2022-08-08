@@ -20,31 +20,10 @@ function ElectroInfo() {
     let [dataVrs6, setDataVrs6] = useState(0);
     let [dataVrs7, setDataVrs7] = useState(0);
 
-    let [stateButtonUpdate, setStateButtonUpdate] = useState([false,"buttonUpdateMonth"])
-    let timeout=null;
-
-    function newDate(input) {
-        useEffect(() => {
-            setDateMonth(input)
-        })
-    }
-
-    function disabledButton() {
-        setStateButtonUpdate([false, "buttonUpdateMonth"])
-        clearInterval(timeout)
-    }
-
-    function updateData() {
-        if (dateMonth != "0") {
-            console.log(dateMonth)
-
-            updateLoadData(dateMonth)
-        }
-
-        setStateButtonUpdate([true,"buttonUpdateMonth load"])
-        timeout= setTimeout(disabledButton, 1000)
-
-
+    function newDate(dateInput) {
+        console.log(dateInput)
+        setDateMonth(dateInput)
+        updateLoadData(dateInput)
     }
 
     function updateLoadData(dateInput) {
@@ -84,10 +63,10 @@ function ElectroInfo() {
     return (
         <div className='vrsInfoAlign'>
 
-            <MonthCalendar newDate={newDate} updateData={updateData} stateButtonUpdate = {stateButtonUpdate}/>
+            <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[0]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs1} />
+                <ComplexInfo complexName={complexName[0]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs1} service={"КТП400"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container">
                     </div>
@@ -96,7 +75,7 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[1]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs2} />
+                <ComplexInfo complexName={complexName[1]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs2} service={"КТП630 2"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container2">
                     </div>
@@ -105,7 +84,7 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[2]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs3} />
+                <ComplexInfo complexName={complexName[2]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs3} service={"КТП630 3"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container3">
                     </div>
@@ -115,7 +94,7 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[3]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs4} />
+                <ComplexInfo complexName={complexName[3]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs4} service={"КТП630 4"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container4">
                     </div>
@@ -124,7 +103,7 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[4]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs5} />
+                <ComplexInfo complexName={complexName[4]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs5} service={"КТП630 5"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container5">
                     </div>
@@ -133,7 +112,7 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[5]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs6} />
+                <ComplexInfo complexName={complexName[5]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs6} service={"КТП2500"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container6">
                     </div>
@@ -142,7 +121,7 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[6]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs7} />
+                <ComplexInfo complexName={complexName[6]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs7} service={"КТП630 7"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container7">
                     </div>
