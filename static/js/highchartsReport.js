@@ -265,7 +265,7 @@ function highChartEnergy(inputData, containerName) {
             colors: ['#5c7ed0'],
 
             title: {
-                text: 'Расход воды по дням',
+                text: 'Расход',
                 style: {
                     color: '#FFF',
                     fontWeight: 'bold',
@@ -469,9 +469,9 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
     } else {
         colorNagruzka = '#5c7ed0'
     }
-	
-	//date= '2022-03'
-	//  date = document.getElementsByClassName('inputCalendarDay')[0].value
+
+    //date= '2022-03'
+    //  date = document.getElementsByClassName('inputCalendarDay')[0].value
 
     // Данные для
     let graphData= highchartsPercentTime(generalDiagramNames, workNoNagruzka,pause, off, avar,nagruzka, date)
@@ -873,7 +873,7 @@ function highChartServiceNow(ArrayTeh,timeNext=null) {
                     pointFormatter: function () {
                         let timer = msToTimeDays(this.x2 - this.x)
 
-                        let TodayTime = (new Date(timeToday)).getTime() 
+                        let TodayTime = (new Date(timeToday)).getTime()
 
                         let pastTime = msToTimeDays(TodayTime - this.x + 10000, 365)
                         //let per = this.partialFill
