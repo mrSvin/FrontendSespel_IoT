@@ -197,7 +197,21 @@ function Meh1() {
 
             <MenuStanki menuSelected="meh1"/>
 
-            <MenuOtchet select="sutki" page='meh1'/>
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/meh1">
+                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/meh1Month">
+                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/meh1Smena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <Meh1Info/>
 

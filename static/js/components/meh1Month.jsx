@@ -180,7 +180,21 @@ function Meh1Month() {
 
             <MenuStanki menuSelected="meh1"/>
 
-            <MenuOtchet select="month" page='meh1'/>
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/meh1">
+                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/meh1Month">
+                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/meh1Smena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 

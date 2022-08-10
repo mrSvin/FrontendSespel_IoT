@@ -125,11 +125,11 @@ function RobotsMonth() {
             <div className="buttons-otchet">
 
                 <Link to="/stanki/robots">
-                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
                 <Link to="/stanki/robotsMonth">
-                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
                 <Link to="/stanki/robotsSmena">
