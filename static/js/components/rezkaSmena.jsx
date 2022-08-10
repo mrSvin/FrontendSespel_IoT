@@ -192,31 +192,31 @@ function RezkaSmena() {
 
             <ComplexSmenaAllIngo complexName={complexName[0]} complexImg={complexImg[0]}
                                  complexMesto={buttonsVrs1} programs={complexName[0]+'smena'}
-                                 size={"sborCeh"} idContainer={1} laser={complexName[0]}/>
+                                 size={"sborCeh"} idContainer={1} laser={complexName[0]} service={"Навигатор 1"}/>
 
             <ComplexSmenaAllIngo complexName={complexName[1]} complexImg={complexImg[1]}
                                  complexMesto={buttonsVrs2} programs={complexName[1]+'smena'}
-                                 size={"sborCeh"} idContainer={3} laser={complexName[1]}/>
+                                 size={"sborCeh"} idContainer={3} laser={complexName[1]} service={"Навигатор 2"}/>
 
             <ComplexSmenaAllIngo complexName={complexName[2]} complexImg={complexImg[2]}
                                  complexMesto={buttonsVrs3} programs={complexName[2]+'smena'}
-                                 size={"sborCeh"} idContainer={5} laser={complexName[2]}/>
+                                 size={"sborCeh"} idContainer={5} laser={complexName[2]} service={"Навигатор 3"}/>
 
             <ComplexSmenaAllIngo complexName={complexName[3]} complexImg={complexImg[3]}
                                  complexMesto={buttonsVrs4} programs={complexName[3]+'smena'}
-                                 size={"sborCeh"} idContainer={7} laser={complexName[3]}/>
+                                 size={"sborCeh"} idContainer={7} service={"TruLaser"}/>
 
             <ComplexSmenaAllIngo complexName={complexName[4]} complexImg={complexImg[4]}
                                  complexMesto={buttonsVrs5}
-                                 size={"ceh5"} idContainer={9} laser={complexName[4]}/>
+                                 size={"ceh5"} idContainer={9} service={"Комета 1"}/>
 
             <ComplexSmenaAllIngo complexName={complexName[5]} complexImg={complexImg[5]}
                                  complexMesto={buttonsVrs6}
-                                 size={"sborCeh"} idContainer={11} laser={complexName[5]}/>
+                                 size={"sborCeh"} idContainer={11} service={"Комета 2"}/>
 
             <ComplexSmenaAllIngo complexName={complexName[6]} complexImg={complexImg[6]}
                                  complexMesto={buttonsVrs7}
-                                 size={"sborCeh"} idContainer={13} laser={complexName[6]}/>
+                                 size={"sborCeh"} idContainer={13} service={"Комета 3"}/>
 
         </div>
     )
