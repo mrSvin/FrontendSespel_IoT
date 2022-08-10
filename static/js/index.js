@@ -126,6 +126,10 @@ function App({ hideLoader }) {
                         <Meh1Month/>
                     </Route>
 
+                    <Route path="/stanki/meh1Smena">
+                        <Meh1Smena/>
+                    </Route>
+
                     <Route path="/stanki/rezka">
                         <Rezka/>
                     </Route>
