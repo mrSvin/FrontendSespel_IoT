@@ -131,7 +131,7 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
     let error = (complexName) => (event) => {
         let href;
         switch (complexName) {
-            case "CTX310 #2":
+            case "CTX310 2":
                 href = "../stanki/alarm/3"
                 break
             case 'NTX1000':
@@ -149,19 +149,19 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             case 'DMF260':
                 href = "../stanki/alarm/12"
                 break
-            case 'DMU50 #1':
+            case 'DMU50 1':
                 href = "../stanki/alarm/13"
                 break
-            case 'DMU50 #2':
+            case 'DMU50 2':
                 href = "../stanki/alarm/14"
                 break
             case 'DMC1035':
                 href = "../stanki/alarm/11"
                 break
-            case 'CTX310 #1':
+            case 'CTX310 1':
                 href = "../stanki/alarm/2"
                 break
-            case 'CTX510 #1':
+            case 'CTX510 1':
                 href = "../stanki/alarm/5"
                 break
             default:
@@ -253,13 +253,13 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
     let laserButton = (complexName) => (event) => {
         let href;
         switch (complexName) {
-            case "Навигатор #1":
+            case "Навигатор 1":
                 href = "../stanki/navigatorPower/navigator_1"
                 break
-            case 'Навигатор #2':
+            case 'Навигатор 2':
                 href = "../stanki/navigatorPower/navigator_2_2"
                 break
-            case 'Навигатор #3':
+            case 'Навигатор 3':
                 href = "../stanki/navigatorPower/navigator_3"
                 break
 
