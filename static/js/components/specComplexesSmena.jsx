@@ -193,7 +193,7 @@ function SpecComplexesSmena() {
                                  size={"ceh6"} idContainer={3} service={complexName[1]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[2]} complexImg={complexImg[2]}
-                                 complexMesto={buttonsVrs3} alarm={complexName[2]}
+                                 complexMesto={buttonsVrs3}
                                  size={"sborCeh"} idContainer={5} service={complexName[2]}/>
         </div>
     )
