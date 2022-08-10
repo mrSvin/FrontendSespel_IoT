@@ -174,22 +174,22 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
     let program = (complexName) => (event) => {
         let href;
         switch (complexName) {
-            case "Навигатор #1":
+            case "Навигатор 1":
                 href = "../stanki/programTime/navigator_1"
                 break
-            case 'Навигатор #2':
+            case 'Навигатор 2':
                 href = "../stanki/programTime/navigator_2_golova_2"
                 break
-            case 'Навигатор #3':
+            case 'Навигатор 3':
                 href = "../stanki/programTime/navigator_3"
                 break
-            case "Навигатор #1smena":
+            case "Навигатор 1smena":
                 href = "../stanki/programTimeSmena/navigator_1"
                 break
-            case 'Навигатор #2smena':
+            case 'Навигатор 2smena':
                 href = "../stanki/programTimeSmena/navigator_2_golova_2"
                 break
-            case 'Навигатор #3smena':
+            case 'Навигатор 3smena':
                 href = "../stanki/programTimeSmena/navigator_3"
                 break
             case 'TruLaser':
@@ -201,16 +201,16 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             case 'CRYSTA-Apex S9168':
                 href = "../stanki/programTime/kim"
                 break
-            case 'МАКС #1':
+            case 'МАКС 1':
                 href = "../stanki/programTime/maks_1"
                 break
-            case 'МАКС #1smena':
+            case 'МАКС 1smena':
                 href = "../stanki/programTimeSmena/maks_1"
                 break
-            case 'МАКС #2':
+            case 'МАКС 2':
                 href = "../stanki/programTime/maks_2"
                 break
-            case 'МАКС #2smena':
+            case 'МАКС 2smena':
                 href = "../stanki/programTimeSmena/maks_2"
                 break
             case 'М710':

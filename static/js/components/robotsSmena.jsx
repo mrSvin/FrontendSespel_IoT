@@ -118,7 +118,7 @@ function highChartSmenaTotalKolOp(total, kolOp, complexName, day1){
 
 function RobotsSmena() {
 
-    let complexName = ["МАКС #1", "МАКС #2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
+    let complexName = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
     let namesToFetch = ['maks_1', 'maks_2', 'm710', 'rtk12c', 'p250', 'krot', 'prans']
 
