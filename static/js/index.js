@@ -98,6 +98,10 @@ function App({ hideLoader }) {
                         <ScladsMonth/>
                     </Route>
 
+                    <Route path="/stanki/scladsSmena">
+                        <ScladsSmena/>
+                    </Route>
+
                     <Route path="/stanki/specComplexes">
                         <SpecComplexes/>
                     </Route>

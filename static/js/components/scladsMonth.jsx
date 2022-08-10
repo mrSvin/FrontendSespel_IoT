@@ -53,7 +53,21 @@ function ScladsMonth() {
 
             <MenuStanki menuSelected="sclads"/>
 
-            <MenuOtchet select="month" page='sclads'/>
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/sclads">
+                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/scladsMonth">
+                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/scladsSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 

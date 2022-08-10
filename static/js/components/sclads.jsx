@@ -72,7 +72,21 @@ function Sclads() {
 
             <MenuStanki menuSelected="sclads"/>
 
-            <MenuOtchet select="sutki" page='sclads'/>
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/sclads">
+                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/scladsMonth">
+                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/scladsSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <ScladsInfo/>
 
