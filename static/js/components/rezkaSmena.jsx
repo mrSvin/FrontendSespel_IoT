@@ -118,7 +118,7 @@ function highChartSmenaTotalKolOp(total, kolOp, complexName, day1){
 
 function RezkaSmena() {
 
-    let complexName = ["Навигатор #1", "Навигатор #2", "Навигатор #3", "TruLaser", "Комета #1", "Комета #2", "Комета #3"]
+    let complexName = ["Навигатор 1", "Навигатор 2", "Навигатор 3", "TruLaser", "Комета 1", "Комета 2", "Комета 3"]
     let complexImg = ["../images/navigator.png", "../images/navigator.png", "../images/navigator.png", "../images/trulaser.png", "../images/kometa.png", "../images/kometa.png", "../images/kometa.png"]
     let namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
 
@@ -192,31 +192,31 @@ function RezkaSmena() {
 
             <ComplexSmenaAllIngo complexName={complexName[0]} complexImg={complexImg[0]}
                                  complexMesto={buttonsVrs1} programs={complexName[0]+'smena'}
-                                 size={"sborCeh"} idContainer={1} laser={complexName[0]} service={"Навигатор 1"}/>
+                                 size={"sborCeh"} idContainer={1} laser={complexName[0]} service={complexName[0]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[1]} complexImg={complexImg[1]}
                                  complexMesto={buttonsVrs2} programs={complexName[1]+'smena'}
-                                 size={"sborCeh"} idContainer={3} laser={complexName[1]} service={"Навигатор 2"}/>
+                                 size={"sborCeh"} idContainer={3} laser={complexName[1]} service={complexName[1]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[2]} complexImg={complexImg[2]}
                                  complexMesto={buttonsVrs3} programs={complexName[2]+'smena'}
-                                 size={"sborCeh"} idContainer={5} laser={complexName[2]} service={"Навигатор 3"}/>
+                                 size={"sborCeh"} idContainer={5} laser={complexName[2]} service={complexName[2]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[3]} complexImg={complexImg[3]}
                                  complexMesto={buttonsVrs4} programs={complexName[3]+'smena'}
-                                 size={"sborCeh"} idContainer={7} service={"TruLaser"}/>
+                                 size={"sborCeh"} idContainer={7} service={complexName[3]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[4]} complexImg={complexImg[4]}
                                  complexMesto={buttonsVrs5}
-                                 size={"ceh5"} idContainer={9} service={"Комета 1"}/>
+                                 size={"ceh5"} idContainer={9} service={complexName[4]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[5]} complexImg={complexImg[5]}
                                  complexMesto={buttonsVrs6}
-                                 size={"sborCeh"} idContainer={11} service={"Комета 2"}/>
+                                 size={"sborCeh"} idContainer={11} service={complexName[5]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[6]} complexImg={complexImg[6]}
                                  complexMesto={buttonsVrs7}
-                                 size={"sborCeh"} idContainer={13} service={"Комета 3"}/>
+                                 size={"sborCeh"} idContainer={13} service={complexName[6]}/>
 
         </div>
     )
