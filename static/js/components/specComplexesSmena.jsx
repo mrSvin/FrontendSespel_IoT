@@ -126,6 +126,8 @@ function SpecComplexesSmena() {
     let buttonsVrs2 = [-825, 220, 'url(../images/epp.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
     let buttonsVrs3 = [-310, 550, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
 
+    let [date, setDate] = useState(0);
+
     useEffect(() => {
         let dateInput = dayNow()
         setDate(dateInput)
