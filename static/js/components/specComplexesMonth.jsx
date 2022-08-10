@@ -75,7 +75,21 @@ function SpecComplexesMonth() {
 
             <MenuStanki menuSelected="specComplexes"/>
 
-            <MenuOtchet select="month" page='specComplexes'/>
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/specComplexes">
+                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/specComplexesMonth">
+                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/specComplexesSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 

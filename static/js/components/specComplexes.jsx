@@ -100,7 +100,21 @@ function SpecComplexes() {
 
             <MenuStanki menuSelected="specComplexes"/>
 
-            <MenuOtchet select="sutki" page='specComplexes'/>
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/specComplexes">
+                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/specComplexesMonth">
+                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/specComplexesSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <SpecComplexesInfo/>
 

@@ -105,6 +105,10 @@ function App({ hideLoader }) {
                     <Route path="/stanki/specComplexesMonth">
                         <SpecComplexesMonth/>
                     </Route>
+                    
+                    <Route path="/stanki/specComplexesSmena">
+                        <SpecComplexesSmena/>
+                    </Route>
 
                     <Route path="/stanki/robots">
                         <Robots/>
