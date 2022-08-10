@@ -172,8 +172,9 @@
     </div>
 </div>
 <!-- Загрузка страницы и темная тема-->
+ <!--    переменная состояния темы страницы-->
 <script>
-    var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
+    var dark_theme_state = 0;
 
     if (localStorage['dark_theme_state'] != null) {
         dark_theme_state = parseInt(window.localStorage['dark_theme_state']); // Если она уже локально задана сохраняем
