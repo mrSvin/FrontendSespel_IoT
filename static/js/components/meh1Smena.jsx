@@ -116,7 +116,7 @@ function highChartSmenaTotalKolOp(total, kolOp, complexName, day1){
     highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
 }
 
-function Meh1mena() {
+function Meh1Smena() {
 
 
     let complexName = ["УВФ-1 1", "УВФ-1 2", "NTX1000", "NLX3000", "GAMMA2000", "CTX650", "DMF260", "DMU50 1", "DMU50 2", "DMC1035", "CTX310 1", "CTX510 1"]
