@@ -1,6 +1,6 @@
 function ScladsMonth() {
 
-    let complexName = ["CRYSTA-Apex S9168"]
+    let complexName = ["Склад Мех. цеха"]
     let complexImg = ["../images/sklad.png"]
 
     let buttonsVrs1 = [-485, 680, 'url(../images/sklad.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
