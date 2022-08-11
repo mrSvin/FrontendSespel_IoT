@@ -77,7 +77,7 @@ let stankiRequest = Promise.all(namesToFetch.map(item=>{
 function changePlace(place){
 
     data = []
-    
+
     switch(place){
         case "ОТК":
         namesToFetch = ['kim', 'nk600']
@@ -146,8 +146,11 @@ function changePlace(place){
 
     document.getElementsByTagName('h1')[0].innerHTML = place
 
+    datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+    date = new Date(datas); // some mock date
+    startTime = datas.slice(0, 10)
     stankiRequest = Promise.all(namesToFetch.map(item=>{
-    return makeRequest(item, date)
+    return makeRequest(item, startTime)
   }));
 
   // Это тот же .then, просто обернутый в функцию
