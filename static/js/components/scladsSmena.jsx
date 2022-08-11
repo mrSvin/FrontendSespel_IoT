@@ -116,7 +116,7 @@ function highChartSmenaTotalKolOp(total, kolOp, complexName, day1){
     highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
 }
 
-function LiteykaSmena() {
+function ScladsSmena() {
 
     let complexName = ["Склад Мех. цеха"]
     let complexImg = ["../images/sklad.png"]
