@@ -66,7 +66,7 @@ function OtkMonth() {
             <MenuStanki menuSelected="otk"/>
 
             <div className="buttons-otchet">
-                
+
             <Link to="/stanki/otk">
                     <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
@@ -86,9 +86,9 @@ function OtkMonth() {
             <ComplexTotalMonthInfo/>
 
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}
-                                 size={"meh1"} idContainer={1} programs={complexName[0]}/>
+                                 size={"meh1"} idContainer={1} programs={complexName[0]} service={complexName[0]}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}
-                                 size={"ceh2"} idContainer={2}/>
+                                 size={"ceh2"} idContainer={2} service={complexName[1]}/>
 
         </div>
     )

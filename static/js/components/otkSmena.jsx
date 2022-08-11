@@ -184,7 +184,7 @@ function OtkSmena() {
             </div>
 
             <ComplexSmenaAllIngo complexName={complexName[0]} complexImg={complexImg[0]}
-                                 complexMesto={buttonsVrs1} 
+                                 complexMesto={buttonsVrs1} programs={complexName[0]+'smena'}
                                  size={"meh1"} idContainer={1} service={complexName[0]}/>
 
             <ComplexSmenaAllIngo complexName={complexName[1]} complexImg={complexImg[1]}
