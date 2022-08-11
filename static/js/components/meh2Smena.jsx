@@ -232,7 +232,7 @@ function Meh2Smena() {
                                  size={"2ploshadka"} idContainer={13} service={complexName[6]}/>
    
             <ComplexSmenaAllIngo complexName={complexName[7]} complexImg={complexImg[7]}
-                                 complexMesto={buttonsVrs8}
+                                 complexMesto={buttonsVrs8} alarm = {complexName[7]}
                                  size={"2ploshadka"} idContainer={15} service={complexName[7]}/>
                                  
             <ComplexSmenaAllIngo complexName={complexName[8]} complexImg={complexImg[8]}
