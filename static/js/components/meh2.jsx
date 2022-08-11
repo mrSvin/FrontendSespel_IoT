@@ -1,7 +1,7 @@
 function Meh2Info() {
 
-    let complexName = ["УФ5220", "СТП Сеспель", "NTX1000 #2", "SK50", "APEC", "DMU50 #3", "DMU50 #4", "CTX310 #2", "CTX510 #2", "CTX510 #3", "CTX310 #3", "CTX510 #4", "CTX510 #5",
-        "DMC1035 #2", "DMU50 #5", "DMU50 #6", "DMU50 #7", "AR55"]
+    let complexName = ["УФ5220", "СТП Сеспель", "NTX1000 2", "SK50", "APEC", "DMU50 3", "DMU50 4", "CTX310 2", "CTX510 2", "CTX510 3", "CTX310 3", "CTX510 4", "CTX510 5",
+        "DMC1035 2", "DMU50 5", "DMU50 6", "DMU50 7", "AR55"]
     let complexImg = ["../images/UVF_5220.png", "../images/progress.png", "../images/ntx1000.png", "../images/sk50.png", "../images/apec.png", "../images/dmg_dmu50.png",
         "../images/dmg_dmu50.png", "../images/dmg_ctx310.png", "../images/dmg_ctx510.png", "../images/dmg_ctx510.png", "../images/dmg_ctx310.png",
         "../images/dmg_ctx510.png", "../images/dmg_ctx510.png", "../images/dmg_dmc1035.png", "../images/dmg_dmu50.png", "../images/dmg_dmu50.png","../images/dmg_dmu50.png", "../images/ar55.png"]
@@ -243,7 +243,21 @@ function Meh2() {
 
             <MenuStanki menuSelected="meh2"/>
 
-            <MenuOtchet select="sutki" page='meh2'/>
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/meh2">
+                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/meh2Month">
+                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/meh2Smena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <Meh2Info/>
 
