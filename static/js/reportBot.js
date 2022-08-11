@@ -62,9 +62,9 @@ function FormTable(tableID='myTable', names=[], ruch=5) {
 }
 
 // fetch запрос объекта в форме объектов
-function makeRequest(Name) {
-    let DateCalendar = (new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString()).slice(0, 10);
-    let url = `/api/complexData/${Name}_days_date:${DateCalendar}`
+function makeRequest(Name, date) {
+    //let DateCalendar = (new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString()).slice(0, 10);
+    let url = `/api/complexData/${Name}_days_date:${date}`
 
     return fetch(url, {
         method: 'GET'

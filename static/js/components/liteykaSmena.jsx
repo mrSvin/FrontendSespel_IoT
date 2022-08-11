@@ -116,13 +116,13 @@ function highChartSmenaTotalKolOp(total, kolOp, complexName, day1){
     highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
 }
 
-function LiteykaSmena() {
+function ScladsSmena() {
 
-    let complexName = ["Склад Мех. цеха"]
-    let complexImg = ["../images/sklad.png"]
-    let namesToFetch = ['sclad_meh']
+    let complexName = ["Печь Индукционная"]
+    let complexImg = ["../images/pech.png"]
+    let namesToFetch = ['pech_nerg']
 
-    let buttonsVrs1 = [-485, 680, 'url(../images/sklad.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
+    let buttonsVrs1 = [-125, 180, 'url(../images/pech.png) no-repeat', "../images/ceh_1.png", 70, "100%"]
 
     let [date, setDate] = useState(0);
 
@@ -152,19 +152,19 @@ function LiteykaSmena() {
     return (
         <div>
 
-            <MenuStanki menuSelected="sclads"/>
+            <MenuStanki menuSelected="liteyka"/>
 
             <div className="buttons-otchet">
 
-                <Link to="/stanki/sclads">
+                <Link to="/stanki/liteyka">
                     <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to="/stanki/scladsMonth">
+                <Link to="/stanki/liteykaMonth">
                     <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to="/stanki/scladsSmena">
+                <Link to="/stanki/liteykaSmena">
                     <div className="menuSelect">СМЕННЫЙ ОТЧЕТ</div>
                 </Link>
 
@@ -184,7 +184,7 @@ function LiteykaSmena() {
 
             <ComplexSmenaAllIngo complexName={complexName[0]} complexImg={complexImg[0]}
                                  complexMesto={buttonsVrs1} 
-                                 size={"meh1"} idContainer={1} service={complexName[0]}/>
+                                 size={"2ploshadka"} idContainer={1} service={complexName[0]}/>
         </div>
     )
 

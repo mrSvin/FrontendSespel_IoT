@@ -72,7 +72,21 @@ function Liteyka() {
 
             <MenuStanki menuSelected="liteyka"/>
 
-            <MenuOtchet select="sutki" page='liteyka'/>
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/liteyka">
+                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/liteykaMonth">
+                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/liteykaSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <LiteykaInfo/>
 

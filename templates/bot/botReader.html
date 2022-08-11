@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Станки Мех.участок 2 площадка </title>
+  <link rel="shortcut icon" type="image/ico"/>
+
+  <link rel="stylesheet" type="text/css" href="/css/styles_stanki.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/report_day_style.css"/>
+
+  <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+
+  <script src="/js/lib/highcharts.js"></script>
+  <script src="/js/lib/exporting.js"></script>
+  <script src="/js/lib/export-data.js"></script>
+  <script src="/js/lib/accessibility.js"></script>
+  <script src="/js/lib/xrange.js"></script>
+  <script src="/js/reportBot.js"></script>
+  <script src="/js/smena/calendar_smena.js"></script>
+
+ <script src="/js/lib/jquery-3.6.0.min.js"></script>
+ <script src="/js/lib/bootstrap-3.3.0.min.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(event) {
+            $('#datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+
+        });
+
+function selectedNewValue(){
+
+$('#datepicker').datepicker({
+    format: "yyyy-mm-dd",
+    language: 'ru',
+    autoclose: true,
+    todayHighlight: true,
+    showOtherMonths: true,
+    selectOtherMonths: true,
+    autoclose: true,
+    changeMonth: true,
+    changeYear: true,
+    orientation: "button"
+});
+
+let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+
+date = new Date(datas); // some mock date
+ms = date.getTime() + 86400000;
+
+startTime = datas.slice(0, 10)
+
+data = []
+
+let stankiRequest = Promise.all(namesToFetch.map(item=>{
+    return makeRequest(item, startTime)
+  }));
+
+  // Это тот же .then, просто обернутый в функцию
+  rewriteData(stankiRequest, data, stankiNames, exception)
+}
+</script>
+
+</head>
+<body>
+
+    <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
+        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+            <input type='text' class="form-control" value="" onchange="selectedNewValue()"/>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </form>
+
+
+<h1>Станки Мех.участок 2 площадка </h1>
+<div style="display: flex; justify-content: space-around; min-height: 80vh;">
+  <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
+  <table id='myTable' style="min-height: 400px; width: 45%">
+    <thead>
+    <tr>
+      <th>Станки</th>
+      <th>Работа</th>
+      <th>Пауза</th>
+      <th>Выключен</th>
+      <th>Авария</th>
+      <th>Нагрузка</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>    <!--Таблица изменений-->
+  <!--Общая загрузка html-->
+</div>  <!--Общая загрузка и количество операций html-->
+
+<script>
+
+  let namesToFetch = ['uvf5220', 'progress', 'ntx1000_2',
+    'sk50', 'apec', 'dmg_dmu50_3', 'dmg_dmu50_4',
+    'dmg_ctx310_2', 'dmg_ctx510_2', 'dmg_ctx510_3',
+    'dmg_ctx310_3', 'dmg_ctx510_4', 'dmg_ctx510_5',
+    'dmg_dmc1035_2', 'dmg_dmu50_5', 'dmg_dmu50_6',
+    'dmg_dmu50_7', 'ar55']
+  let stankiNames = ['УФ5220', 'СТП Сеспель', 'NTX1000',
+    'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2',
+    'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4',
+    'CTX510 #5', 'DMC1035 #2', 'DMU50 #5', 'DMU50 #6',
+    'DMU50 #7','AR55']
+  let data = []
+  let date = (new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString()).slice(0, 10);
+ 
+  let exception = [[4,'Ручной режим','#5c7ed0', 'ruchnoi'],];
+  let stankiRequest = Promise.all(namesToFetch.map(item=>{
+    return makeRequest(item, date)
+  }));
+
+  // Это тот же .then, просто обернутый в функцию
+  rewriteData(stankiRequest, data, stankiNames, exception)
+
+</script> 
+</body>
+</html>

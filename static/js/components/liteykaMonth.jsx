@@ -53,7 +53,21 @@ function LiteykaMonth() {
 
             <MenuStanki menuSelected="liteyka"/>
 
-            <MenuOtchet select="month" page='liteyka'/>
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/liteyka">
+                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/liteykaMonth">
+                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/liteykaSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
 
             <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 
