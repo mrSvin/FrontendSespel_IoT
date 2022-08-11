@@ -22,7 +22,13 @@ function FormTable(tableID='myTable', names=[], ruch=5) {
     let tbody = programTimeTable.querySelector('tbody')
 
     if(ruch == 6) {
-        thead.querySelector('tr').appendChild(document.createElement('th')).textContent = 'Ручной'
+        if(programTimeTable.querySelectorAll('th').length<7){
+            thead.querySelector('tr').appendChild(document.createElement('th')).textContent = 'Ручной'
+        }
+
+    }
+    else if(programTimeTable.querySelectorAll('th').length == 7){
+        programTimeTable.rows[0].deleteCell(-1);
     }
 
     categories.forEach((elem, index) => {

@@ -21,7 +21,7 @@
 
  <script src="/js/lib/jquery-3.6.0.min.js"></script>
  <script src="/js/lib/bootstrap-3.3.0.min.js"></script>
- 
+
  <script src="/js/lib/bootstrap-datepicker.min.js"></script>
  <script src="/js/lib/bootstrap-datepicker.ru.min.js"></script>
 
@@ -74,11 +74,92 @@ let stankiRequest = Promise.all(namesToFetch.map(item=>{
   // Это тот же .then, просто обернутый в функцию
   rewriteData(stankiRequest, data, stankiNames, exception)
 }
+function changePlace(place){
+
+    data = []
+    
+    switch(place){
+        case "ОТК":
+        namesToFetch = ['kim', 'nk600']
+        stankiNames = ["CRYSTA-Apex S9168", "НК600"]
+        exception = [[1,'Ручной режим','#5c7ed0', 'ruchnoi'],];
+        break;
+
+        case "Мех.уч.2 пл.":
+        namesToFetch = ['uvf5220', 'progress', 'ntx1000_2',
+    'sk50', 'apec', 'dmg_dmu50_3', 'dmg_dmu50_4',
+    'dmg_ctx310_2', 'dmg_ctx510_2', 'dmg_ctx510_3',
+    'dmg_ctx310_3', 'dmg_ctx510_4', 'dmg_ctx510_5',
+    'dmg_dmc1035_2', 'dmg_dmu50_5', 'dmg_dmu50_6',
+    'dmg_dmu50_7', 'ar55']
+        stankiNames = ['УФ5220', 'СТП Сеспель', 'NTX1000',
+    'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2',
+    'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4',
+    'CTX510 #5', 'DMC1035 #2', 'DMU50 #5', 'DMU50 #6',
+    'DMU50 #7','AR55']
+        exception = [[4,'Ручной режим','#5c7ed0', 'ruchnoi'],];
+        break;  
+
+        case "Резка":
+        namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
+        stankiNames = ["Навигатор 1", "Навигатор 2", "Навигатор 3", "TruLaser", "Комета 1", "Комета 2", "Комета 3"]
+        exception = null;
+        break;
+
+        case "Мех.уч.1 пл.":
+        namesToFetch = ['uvf_1', 'uvf_2', 'ntx1000', 'nlx3000', 'dmg_gamma2000', 'dmg_ctx650', 'dmg_dmf260', 'dmg_dmu50_1', 'dmg_dmu50_2', 'dmg_dmc1035', 'dmg_ctx310_1',
+        'dmg_ctx510_1']
+        stankiNames = ["УВФ-1 1", "УВФ-1 2", "NTX1000", "NLX3000", "GAMMA2000", "CTX650", "DMF260", "DMU50 1", "DMU50 2", "DMC1035", "CTX310 1", "CTX510 1"]
+        exception = null;
+        break;
+        
+        case "Роботы":
+        namesToFetch = ['maks_1', 'maks_2', 'm710', 'rtk12c', 'p250', 'krot', 'prans']
+        stankiNames = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
+        exception = null;
+        break;
+
+        case "Спец. комплексы":
+        namesToFetch = ['press', 'epp', 'stp13m']
+        stankiNames = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М"]
+        exception = null;
+        break;  
+
+        case "Склады":
+        namesToFetch = ['sclad_meh']
+        stankiNames = ["Склад Мех. цеха"]
+        exception = null;
+        break;
+
+        case "Литьё":
+        namesToFetch = ['pech_nerg']
+        stankiNames = ["Печь Индукционная"]
+        exception = null;
+        break;    
+
+        case "Гибка":
+        namesToFetch = ['faccin_1','faccin_2']
+        stankiNames = ["FACCIN 4", "FACCIN 10"]
+        exception = null;
+        break;    
+}
+
+    document.getElementsByTagName('h1')[0].innerHTML = place
+
+    stankiRequest = Promise.all(namesToFetch.map(item=>{
+    return makeRequest(item, date)
+  }));
+
+  // Это тот же .then, просто обернутый в функцию
+    rewriteData(stankiRequest, data, stankiNames, exception)
+
+}
+
 </script>
 
 </head>
 <body>
-
+<div style="display: flex;">
     <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
             <input type='text' class="form-control" value="" onchange="selectedNewValue()"/>
@@ -87,7 +168,16 @@ let stankiRequest = Promise.all(namesToFetch.map(item=>{
             </span>
         </div>
     </form>
-
+<button value="ОТК" onclick="changePlace(value)">ОТК</button>
+<button value="Мех.уч.2 пл." onclick="changePlace(value)">Мех.уч.2 пл.</button>
+<button value="Резка" onclick="changePlace(value)">Резка</button>
+<button value="Мех.уч.1 пл." onclick="changePlace(value)">Мех.уч.1 пл.</button>
+<button value="Роботы" onclick="changePlace(value)">Роботы</button>
+<button value="Спец. комплексы" onclick="changePlace(value)">Спец. комплексы</button>
+<button value="Склады" onclick="changePlace(value)">Склады</button>
+<button value="Литьё" onclick="changePlace(value)">Литьё</button>
+<button value="Гибка" onclick="changePlace(value)">Гибка</button>
+</div>
 
 <h1>Станки Мех.участок 2 площадка </h1>
 <div style="display: flex; justify-content: space-around; min-height: 80vh;">
