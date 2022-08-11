@@ -62,9 +62,9 @@ function OtkInfo() {
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}
-                                 size={"meh1"} idContainer={1} programs={complexName[0]} service={"CRYSTA-Apex S9168"}/>
+                                 size={"meh1"} idContainer={1} programs={complexName[0]} service={complexName[0]}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2}
-                                 size={"ceh2"} idContainer={2} service={"НК600"}/>
+                                 size={"ceh2"} idContainer={2} service={complexName[1]}/>
 
         </div>
     )
