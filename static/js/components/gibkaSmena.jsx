@@ -116,13 +116,14 @@ function highChartSmenaTotalKolOp(total, kolOp, complexName, day1){
     highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
 }
 
-function LiteykaSmena() {
+function GibkaSmena() {
 
-    let complexName = ["Печь Индукционная"]
-    let complexImg = ["../images/pech.png"]
-    let namesToFetch = ['pech_nerg']
+    let complexName = ["FACCIN 4", "FACCIN 10"]
+    let complexImg = ["../images/faccin.png", "../images/faccin_2.png"]
+    let namesToFetch = ['faccin_1','faccin_2']
 
-    let buttonsVrs1 = [-125, 180, 'url(../images/pech.png) no-repeat', "../images/ceh_1.png", 70, "100%"]
+    let buttonsVrs1 = [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
+    let buttonsVrs2 = [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
 
     let [date, setDate] = useState(0);
 
@@ -152,19 +153,19 @@ function LiteykaSmena() {
     return (
         <div>
 
-            <MenuStanki menuSelected="liteyka"/>
+            <MenuStanki menuSelected="gibka"/>
 
             <div className="buttons-otchet">
 
-                <Link to="/stanki/liteyka">
+                <Link to="/stanki/gibka">
                     <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to="/stanki/liteykaMonth">
+                <Link to="/stanki/gibkaMonth">
                     <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to="/stanki/liteykaSmena">
+                <Link to="/stanki/gibkaSmena">
                     <div className="menuSelect">СМЕННЫЙ ОТЧЕТ</div>
                 </Link>
 
@@ -184,7 +185,12 @@ function LiteykaSmena() {
 
             <ComplexSmenaAllIngo complexName={complexName[0]} complexImg={complexImg[0]}
                                  complexMesto={buttonsVrs1} 
-                                 size={"ceh1"} idContainer={1} service={complexName[0]}/>
+                                 size={"sborCeh"} idContainer={1} service={complexName[0]}/>
+
+            <ComplexSmenaAllIngo complexName={complexName[1]} complexImg={complexImg[1]}
+                                 complexMesto={buttonsVrs2} 
+                                 size={"sborCeh"} idContainer={3} service={complexName[1]}/>
+
         </div>
     )
 
