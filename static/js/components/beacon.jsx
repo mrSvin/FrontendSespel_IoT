@@ -91,29 +91,28 @@ function Beacon() {
 
     useEffect(() => {
 
-        for (var i = 0; i < 1; i += 1) {
-            (function (i) {
-                setInterval(function () {
+        let intervalKill = setInterval(function () {
 
-                    let beacon = fetchRequestBeacon()
-                    let promiseBeacon = Promise.resolve(beacon);
-                    promiseBeacon.then(value => {
-                        // console.log(value.location)
-                        if (value.location == 109) {
-                            setLocation(109)
-                        }
-                        if (value.location == 128) {
-                            setLocation(128)
-                        }
-                        if (value.location == 144) {
-                            setLocation(144)
-                        }
-                    })
+            if(window.location.pathname!=='/beacon'){
+                clearInterval(intervalKill)
+            }
 
-
-                }, 2000)
-            })(i);
-        }
+            let beacon = fetchRequestBeacon()
+            let promiseBeacon = Promise.resolve(beacon);
+            promiseBeacon.then(value => {
+                // console.log(value.location)
+                if (value.location == 109) {
+                    setLocation(109)
+                }
+                if (value.location == 128) {
+                    setLocation(128)
+                }
+                if (value.location == 144) {
+                    setLocation(144)
+                }
+                console.log("update...")
+            })
+        }, 2000)
 
     }, []);
 
