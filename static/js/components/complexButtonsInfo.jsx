@@ -201,6 +201,9 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             case 'CRYSTA-Apex S9168':
                 href = "../stanki/programTime/kim"
                 break
+            case 'CRYSTA-Apex S9168smena':
+                href = "../stanki/programTimeSmena/kim"
+                break
             case 'МАКС 1':
                 href = "../stanki/programTime/maks_1"
                 break
