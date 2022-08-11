@@ -56,12 +56,14 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
     )
 }
 
-function ComplexButtons({complexMesto, size, alarm = null, programs = null, laser = null, service = null}) {
+function ComplexButtons({complexMesto, size, alarm = null, programs = null, laser = null, service = null, report = null}) {
 
     let hight = null
     let width = null
 
     let linkService = `/service/${service}`
+
+    let linkReport = `/report/${report}`
 
     switch (size) {
         case '1ploshadkaOutside': {
@@ -273,6 +275,19 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
         window.open(href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth))
     }
 
+    let report = (complexName) => (event) => {
+        let href;
+        switch (complexName) {
+            case "Стенд":
+                href = "../stanki/reportApi/Стенд"
+                break
+                
+            default:
+                href = "../stanki/navigator_1"
+        }
+        window.open(href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth))
+    }
+
     return (
 
         <div className='parentIcons'>
@@ -316,6 +331,13 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
                 </Link> :
                 <div></div>
             }
+
+            {report != null ?
+                <Link to={linkReport} className="icon_program">
+                    <div className="label_service">Отчеты</div>
+                </Link> :
+                <div></div>
+            }       
 
         </div>
 
