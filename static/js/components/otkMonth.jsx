@@ -65,7 +65,17 @@ function OtkMonth() {
 
             <MenuStanki menuSelected="otk"/>
 
-            <MenuOtchet select="month" page='otk'/>
+            <Link to="/stanki/otk">
+                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/otkMonth">
+                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/otkSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
 
             <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
 

@@ -78,7 +78,17 @@ function Otk() {
 
             <MenuStanki menuSelected="otk"/>
 
-            <MenuOtchet select="sutki" page='otk'/>
+            <Link to="/stanki/otk">
+                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/otkMonth">
+                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/otkSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
 
             <OtkInfo/>
 

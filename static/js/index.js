@@ -74,6 +74,10 @@ function App({ hideLoader }) {
                         <OtkMonth/>
                     </Route>
 
+                    <Route path="/stanki/otkSmena">
+                        <OtkSmena/>
+                    </Route>
+
                     <Route path="/stanki/liteyka">
                         <Liteyka/>
                     </Route>
