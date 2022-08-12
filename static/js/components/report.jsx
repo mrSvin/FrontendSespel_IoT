@@ -16,11 +16,10 @@ function Report() {
     let [dataReportState, setDataReportState] = useState([])
 
     function fetchRequestReport(dataReport) {
-        let serverDomain=window.location.hostname
-        fetch(`http://${serverDomain}:8086/api/addService`, {method: 'GET'})
+        fetch('/api/userInfo', {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
-                console.log('Данные с запроса', data)
+                console.log('Данные с запроса', data.userName, data.userMail)
                 setDataReportState(dataReport)
             })
     }
