@@ -73,7 +73,7 @@ function Report() {
              src="../../images/excel_icon.png"
              onClick={() => {
                  TableToExcel.convert(document.getElementById('tableReport'), {
-                     name: `Отчет_${timeNow()}.xlsx`,
+                     name: `Отчет_${timeNow().slice(2).replaceAll(':','')}.xlsx`,
                      sheet: {
                          name: "Sheet 1"
                      }
