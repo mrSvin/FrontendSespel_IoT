@@ -1,7 +1,7 @@
 function SpecComplexesInfo() {
 
     let complexName = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М"]
-    let complexImg = ["../images/press.png", "../images/epp.png", "../images/stp13m.png"]
+    let complexImg = ["../images/press.png", "../images/epp.png", "../images/stp13m.png", "../images/stendResource.png"]
     let complexRequest = ['press', 'epp', 'stp13m']
 
     let buttonsVrs1 = [-480, 765, 'url(../images/press.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"]
@@ -87,7 +87,7 @@ function SpecComplexesInfo() {
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1} service={"Пресс ЧПУ для ступиц"}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"} idContainer = {2} service={"ЭПП"}/>
             <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {3} service={"СТП13М"}/>
-            <ComplexSutkiAllInfo complexName={'Стенд для ресурсных испытаний...'} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"sborCeh"} idContainer = {4} report={'Стенд'}/>
+            <ComplexSutkiAllInfo complexName={'Стенд для ресурсных испытаний'} complexImg={complexImg[3]} complexMesto={buttonsVrs1} size={"sborCeh"} idContainer = {4} report={'Стенда'}/>
 
         </div>
     )
