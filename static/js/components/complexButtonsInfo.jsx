@@ -275,19 +275,6 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
         window.open(href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth))
     }
 
-    let report = (complexName) => (event) => {
-        let href;
-        switch (complexName) {
-            case "Стенд":
-                href = "../stanki/reportApi/Стенд"
-                break
-                
-            default:
-                href = "../stanki/navigator_1"
-        }
-        window.open(href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth))
-    }
-
     return (
 
         <div className='parentIcons'>
@@ -334,7 +321,7 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
 
             {report != null ?
                 <Link to={linkReport} className="icon_program">
-                    <div className="label_service">Отчеты</div>
+                    <div className="label_program">Отчеты</div>
                 </Link> :
                 <div></div>
             }       
