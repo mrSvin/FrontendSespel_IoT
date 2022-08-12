@@ -34,7 +34,11 @@ function Report() {
     return(
     <div className='serviceContainer'>
         <h1>Отчеты о ресурсных испытаниях {stendName}</h1>
-        <button onClick={changeData()}>
+        <button
+            onClick={() => {
+                changeData()
+            }}
+        >
             Обновить данные
         </button>
         <table className="tableReport" id='tableReport'>
