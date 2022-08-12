@@ -16,11 +16,11 @@ function Report() {
     let [dataReportState, setDataReportState] = useState([])
 
     function fetchRequestReport(dataReport) {
-        fetch('/api/userInfo', {method: 'GET'})
+        fetch('/api/userInfo', {method: 'POST'})
             .then((response) => response.json())
             .then((data) => {
                 console.log('Данные с запроса', data.userName, data.userMail)
-                setDataReportState(dataReport)
+               // setDataReportState(dataReport)
             })
     }
 
@@ -44,13 +44,13 @@ function Report() {
     return(
     <div className='serviceContainer'>
         <h1>Отчеты о ресурсных испытаниях {nameToFetch}</h1>
-        <button
-            onClick={() => {
-                changeData()
-            }}
-        >
-            Обновить данные
-        </button>
+        {/*<button*/}
+        {/*    onClick={() => {*/}
+        {/*        changeData()*/}
+        {/*    }}*/}
+        {/*>*/}
+        {/*    Обновить данные*/}
+        {/*</button>*/}
         <table className="tableReport" id='tableReport'>
         <thead>
         <tr>
