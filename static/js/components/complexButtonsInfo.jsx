@@ -1,16 +1,16 @@
-function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service}) {
+function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service, report}) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
     return (
         <div className='complexAllInfo'>
-            <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service}/>
+            <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report}/>
             <div className="lineSukiHighChart" id={idLine}></div>
             <div className="roundSukiHighChart" id={idRound}></div>
         </div>
     )
 }
 
-function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, programs, laser, service}) {
+function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, programs, laser, service, report}) {
     return (
         <div className="parent_image">
 
@@ -24,13 +24,13 @@ function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, progra
                 {complexName}
             </figcaption>
 
-            <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service}/>
+            <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report}/>
 
         </div>
     )
 }
 
-function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service}) {
+function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service, report}) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
 
@@ -39,7 +39,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
     return (
         <div className='complexAllInfo' id={'containerTotal'}>
             <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto}
-                         size={size} programs={programs} laser={laser} alarm={alarm} service={service}/>
+                         size={size} programs={programs} laser={laser} alarm={alarm} service={service} report={report}/>
             <div className='twoDayDiv'>
                 <h1 className="timeInfoSmena">Работа II смены 19:00 - 07:00</h1>
                 <div className='oneDay'>
