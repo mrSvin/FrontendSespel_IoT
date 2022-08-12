@@ -69,6 +69,17 @@ function Report() {
         </thead>
             <TableReportBody dataReportState={dataReportState}/>
     </table>
+        <img className="excelIcon" id="button-excel"
+             src="../../images/excel_icon.png"
+             onClick={() => {
+                 TableToExcel.convert(document.getElementById('tableReport'), {
+                     name: `Отчет_${timeNow()}.xlsx`,
+                     sheet: {
+                         name: "Sheet 1"
+                     }
+                 });
+             }}
+        />
     </div>
     )
 }

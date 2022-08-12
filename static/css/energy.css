@@ -449,17 +449,17 @@
     cursor: pointer;
 }
 
-.icon_service:hover {
+.icon_report:hover {
     /*-webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;*/
     box-shadow: #252734 0px 0px 12px 12px inset;
 }
 
-.icon_service:hover > div {
+.icon_report:hover > div {
     position: relative;
     top: 5px;
 }
 
-.label_service {
+.label_report {
     color: #b3b8be;
     margin-top: 65px;
     /* margin-left: 0px; */
