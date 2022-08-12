@@ -275,3 +275,49 @@ textarea#story:focus {
     cursor: pointer;
     display: none;
 }
+
+
+.tableReport {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 95%;
+    color: white;
+    margin: 2%;
+}
+
+.tableReport > tbody > tr {
+    padding: 4px;
+    line-height: 1.42857143;
+    vertical-align: center;
+    text-align: left;
+    border-bottom: 1px solid #979595;
+
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+.tableReport  > tbody > tr > td {
+    text-align: center;
+    max-width:85%;
+    border: solid 1px;
+    font-size: 20px
+}
+
+
+.tableReport > thead  {
+    border-bottom: 1px solid #979595;
+    text-align: left;
+}
+
+.tableReport > thead > tr > th  {
+    margin: 10px;
+    padding: 5px 5px 5px 0px;
+    color: white;
+    text-align: center;
+    background: #2c5275;
+    border: solid 1px;
+}
+
+
+

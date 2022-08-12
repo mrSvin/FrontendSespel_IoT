@@ -9,15 +9,18 @@ function Report() {
             'leftDeform':0.2, 'godnost':'Не годен', 'author':'Иванов И.И.', 'date':'11.10.2021'}
         ]
 
+    let [stendName, setStendName] = useState('неизвестно')
+
     useEffect(() => {
-        console.log('Ну привет')
+        let nameToFetch = parseNameUrl(document.location.pathname);
+        setStendName(nameToFetch)
         })
 
 
     return(
-    <div>
-        <h2>Отчеты о ресурсных испытаниях</h2>
-        <table className="tableService">
+    <div className='serviceContainer'>
+        <h1>Отчеты о ресурсных испытаниях {stendName}</h1>
+        <table className="tableReport">
         <thead>
         <tr>
             <th>Номер акта</th>
