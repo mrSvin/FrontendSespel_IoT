@@ -20,7 +20,7 @@ function Report() {
             .then((response) => response.json())
             .then((data) => {
                 console.log('Данные с запроса', data.userName, data.userMail)
-               // setDataReportState(dataReport)
+                setDataReportState(dataReport)
             })
     }
 
