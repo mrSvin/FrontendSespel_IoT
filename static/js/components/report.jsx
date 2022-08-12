@@ -10,7 +10,7 @@ function Report() {
 
     let [stendName, setStendName] = useState('неизвестно')
 
-    let [dataReportState, setDataReportState] = useState('1')
+    let [dataReportState, setDataReportState] = useState([])
 
     useEffect(() => {
         let nameToFetch = parseNameUrl(document.location.pathname);
@@ -34,7 +34,7 @@ function Report() {
     return(
     <div className='serviceContainer'>
         <h1>Отчеты о ресурсных испытаниях {stendName}</h1>
-        <button onClick={changeData(true)}>
+        <button onClick={changeData()}>
             Обновить данные
         </button>
         <table className="tableReport" id='tableReport'>
@@ -53,17 +53,17 @@ function Report() {
             <th>Дата/время</th>
         </tr>
         </thead>
-            <TableReportBody data={dataReportState}/>
+            <TableReportBody dataReportState={dataReportState}/>
     </table>
     </div>
     )
 }
 
-function TableReportBody({data}) {
+function TableReportBody({dataReportState}) {
     console.log('Логика для длины...')
     return (
     <tbody>
-    {data.map((val,i) => {
+    {dataReportState.map((val,i) => {
         return (
             <tr key={i}>
                 <td>{val.number}</td>
