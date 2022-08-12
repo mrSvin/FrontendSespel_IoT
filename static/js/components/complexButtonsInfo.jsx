@@ -10,7 +10,7 @@ function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idCon
     )
 }
 
-function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, programs, laser, service, report}) {
+function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, programs, laser, service, report, current}) {
     return (
         <div className="parent_image">
 
