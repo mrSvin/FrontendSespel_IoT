@@ -1,3 +1,15 @@
+function changeData(){
+    let dataReport = [
+        {'number':2,'numChertIz':'495123525001','numIz':121350,
+            'needForce':353333, 'factForce1':22, 'factForce2':3531, 'maxDeform':93.5,
+            'leftDeform':12.1, 'godnost':'Годен', 'author':'Буклов А.В.', 'date':'10.08.2022'},
+        {'number':3,'numChertIz':'C435064S-5.0301','numIz':41,
+            'needForce':24, 'factForce1':11.3, 'factForce2':33.2, 'maxDeform':100.0,
+            'leftDeform':0.9, 'godnost':'Не годен', 'author':'Буклов А.В.', 'date':'11.08.2022'}
+    ]
+    setDataReportState(dataReport)
+}
+
 function Report() {
 
     let dataReport = [
@@ -11,16 +23,22 @@ function Report() {
 
     let [stendName, setStendName] = useState('неизвестно')
 
+    let [dataReportState, setDataReportState] = useState('неизвестно')
+
     useEffect(() => {
         let nameToFetch = parseNameUrl(document.location.pathname);
         setStendName(nameToFetch)
+        setDataReportState(dataReport)
         })
 
 
     return(
     <div className='serviceContainer'>
         <h1>Отчеты о ресурсных испытаниях {stendName}</h1>
-        <table className="tableReport">
+        <button onClick={changeData(true)}>
+            Обновить данные
+        </button>
+        <table className="tableReport" id='tableReport'>
         <thead>
         <tr>
             <th>Номер акта</th>
@@ -36,26 +54,32 @@ function Report() {
             <th>Дата/время</th>
         </tr>
         </thead>
-        <tbody>
-        {dataReport.map((val,i) => {
-            return (
-                <tr key={i}>
-                    <td>{val.number}</td>
-                    <td>{val.numChertIz}</td>
-                    <td>{val.numIz}</td>
-                    <td>{val.needForce}</td>
-                    <td>{val.factForce1}</td>
-                    <td>{val.factForce2}</td>
-                    <td>{val.maxDeform}</td>
-                    <td>{val.leftDeform}</td>
-                    <td>{val.godnost}</td>
-                    <td>{val.author}</td>
-                    <td>{val.date}</td>
-                </tr>
-            )
-        })}
-        </tbody>
+            <TableReportBody data={dataReportState}/>
     </table>
     </div>
+    )
+}
+
+function TableReportBody({data}) {
+    return (
+    <tbody>
+    {data.map((val,i) => {
+        return (
+            <tr key={i}>
+                <td>{val.number}</td>
+                <td>{val.numChertIz}</td>
+                <td>{val.numIz}</td>
+                <td>{val.needForce}</td>
+                <td>{val.factForce1}</td>
+                <td>{val.factForce2}</td>
+                <td>{val.maxDeform}</td>
+                <td>{val.leftDeform}</td>
+                <td>{val.godnost}</td>
+                <td>{val.author}</td>
+                <td>{val.date}</td>
+            </tr>
+        )
+    })}
+    </tbody>
     )
 }
