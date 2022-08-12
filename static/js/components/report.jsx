@@ -1,4 +1,9 @@
+
+
+
 function Report() {
+    let nameToFetch = parseNameUrl(document.location.pathname);
+
     let dataReport = [
         {'number':0,'numChertIz':'4977.06.008-5001','numIz':10,
             'needForce':3.333, 'factForce1':3.2, 'factForce2':3.1, 'maxDeform':99.5,
@@ -8,14 +13,20 @@ function Report() {
             'leftDeform':0.2, 'godnost':'Не годен', 'author':'Иванов И.И.', 'date':'11.10.2021'}
         ]
 
-    let [stendName, setStendName] = useState('неизвестно')
-
     let [dataReportState, setDataReportState] = useState([])
 
+    function fetchRequestReport(dataReport) {
+        let serverDomain=window.location.hostname
+        fetch(`http://${serverDomain}:8086/api/addService`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Данные с запроса', data)
+                setDataReportState(dataReport)
+            })
+    }
+
     useEffect(() => {
-        let nameToFetch = parseNameUrl(document.location.pathname);
-        setStendName(nameToFetch)
-        setDataReportState(dataReport)
+        fetchRequestReport(dataReport)
         },[])
 
     function changeData(){
@@ -27,13 +38,13 @@ function Report() {
                 'needForce':24, 'factForce1':11.3, 'factForce2':33.2, 'maxDeform':100.0,
                 'leftDeform':0.9, 'godnost':'Не годен', 'author':'Буклов А.В.', 'date':'11.08.2022'}
         ]
-        setDataReportState(dataReport)
+        fetchRequestReport(dataReport)
     }
 
 
     return(
     <div className='serviceContainer'>
-        <h1>Отчеты о ресурсных испытаниях {stendName}</h1>
+        <h1>Отчеты о ресурсных испытаниях {nameToFetch}</h1>
         <button
             onClick={() => {
                 changeData()
@@ -64,7 +75,7 @@ function Report() {
 }
 
 function TableReportBody({dataReportState}) {
-    console.log('Логика для длины...')
+
     return (
     <tbody>
     {dataReportState.map((val,i) => {
