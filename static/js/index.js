@@ -178,6 +178,10 @@ function App({ hideLoader }) {
                         <Service/>
                     </Route>
 
+                    <Route path="/report">
+                        <Report/>
+                    </Route>
+
                     <Route path="/beacon">
                         <Beacon/>
                     </Route>
