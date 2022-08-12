@@ -439,6 +439,32 @@
     /* margin-left: 0px; */
 }
 
+.icon_report {
+    float: left;
+    background: url(../images/reports.png) no-repeat;
+    background-size: contain;
+    width: 60px;
+    height: 60px;
+    margin: 30px 25px 0 25px;
+    cursor: pointer;
+}
+
+.icon_service:hover {
+    /*-webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;*/
+    box-shadow: #252734 0px 0px 12px 12px inset;
+}
+
+.icon_service:hover > div {
+    position: relative;
+    top: 5px;
+}
+
+.label_service {
+    color: #b3b8be;
+    margin-top: 65px;
+    /* margin-left: 0px; */
+}
+
 .blockImage {
     width: 250px;
     height: 250px;

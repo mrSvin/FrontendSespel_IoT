@@ -320,7 +320,7 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             }
 
             {report != null ?
-                <Link to={linkReport} className="icon_program">
+                <Link to={linkReport} className="icon_report">
                     <div className="label_program">Отчеты</div>
                 </Link> :
                 <div></div>
