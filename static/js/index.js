@@ -182,6 +182,10 @@ function App({ hideLoader }) {
                         <Report/>
                     </Route>
 
+                    <Route path="/currentParams">
+                        <CurrentParams/>
+                    </Route>
+
                     <Route path="/beacon">
                         <Beacon/>
                     </Route>

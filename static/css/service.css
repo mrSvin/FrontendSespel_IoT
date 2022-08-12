@@ -324,7 +324,7 @@ textarea#story:focus {
     height: 10vh;
     margin: 5px;
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     opacity: 40%;

@@ -44,7 +44,7 @@ function Report() {
 
     return(
     <div className='serviceContainer'>
-        <h1>Отчеты о ресурсных испытаниях {nameToFetch}</h1>
+        <h1>Отчеты о ресурсных испытаниях {nameToFetch + 'а'}</h1>
         <div className='blockImage'>
             <img className="serviceImg " src={imgComplex}/>
         </div>

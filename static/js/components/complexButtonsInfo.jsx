@@ -1,9 +1,9 @@
-function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service, report}) {
+function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service, report, current}) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
     return (
         <div className='complexAllInfo'>
-            <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report}/>
+            <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report} current={current}/>
             <div className="lineSukiHighChart" id={idLine}></div>
             <div className="roundSukiHighChart" id={idRound}></div>
         </div>
@@ -24,13 +24,13 @@ function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, progra
                 {complexName}
             </figcaption>
 
-            <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report}/>
+            <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report} current={current}/>
 
         </div>
     )
 }
 
-function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service, report}) {
+function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service, report, current} ) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
 
@@ -39,7 +39,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
     return (
         <div className='complexAllInfo' id={'containerTotal'}>
             <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto}
-                         size={size} programs={programs} laser={laser} alarm={alarm} service={service} report={report}/>
+                         size={size} programs={programs} laser={laser} alarm={alarm} service={service} report={report} current={current}/>
             <div className='twoDayDiv'>
                 <h1 className="timeInfoSmena">Работа II смены 19:00 - 07:00</h1>
                 <div className='oneDay'>
@@ -56,14 +56,14 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
     )
 }
 
-function ComplexButtons({complexMesto, size, alarm = null, programs = null, laser = null, service = null, report = null}) {
+function ComplexButtons({complexMesto, size, alarm = null, programs = null, laser = null, service = null, report = null, current = null}) {
 
     let hight = null
     let width = null
 
     let linkService = `/service/${service}`
-
     let linkReport = `/report/${report}`
+    let linkCurrent = `/currentParams/${current}`
 
     switch (size) {
         case '1ploshadkaOutside': {
@@ -324,7 +324,14 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
                     <div className="label_program">Отчеты</div>
                 </Link> :
                 <div></div>
-            }       
+            }
+
+            {current != null ?
+                <Link to={linkReport} className="label_program">
+                    <div className="label_program">Текущее состояние</div>
+                </Link> :
+                <div></div>
+            }
 
         </div>
 
