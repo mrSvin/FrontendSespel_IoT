@@ -3,6 +3,7 @@
 
 function Report() {
     let nameToFetch = parseNameUrl(document.location.pathname);
+    let imgComplex = ["../images/stendResource.png"]
 
     let dataReport = [
         {'number':0,'numChertIz':'4977.06.008-5001','numIz':10,
@@ -44,6 +45,9 @@ function Report() {
     return(
     <div className='serviceContainer'>
         <h1>Отчеты о ресурсных испытаниях {nameToFetch}</h1>
+        <div className='blockImage'>
+            <img className="serviceImg " src={imgComplex}/>
+        </div>
         {/*<button*/}
         {/*    onClick={() => {*/}
         {/*        changeData()*/}
