@@ -16,12 +16,15 @@ function Report() {
 
     let [dataReportState, setDataReportState] = useState([])
 
-    function fetchRequestReport(dataReport) {
-        fetch('/api/userInfo', {method: 'POST'})
+    function fetchRequestReport() {
+        fetch('http://192.168.3.41:8087/api/modbusData', {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
-                console.log('Данные с запроса', data.userName, data.userMail)
-                setDataReportState(dataReport)
+                let dataReport = data.map(e=>{
+                       let fix = e.numberDrawing == '1'? '4977.06.008-5001': 'C435064S-5.0301'
+                    return [e.numberAct, fix, e.numberProduct, e.requiredForce, e.actualForce, e.maxDeformation, e.ostDeformation, e.valid, e.author, e.dateTime]
+                })
+                console.log(dataReport)
             })
     }
 
@@ -95,17 +98,16 @@ function TableReportBody({dataReportState}) {
     {dataReportState.map((val,i) => {
         return (
             <tr key={i}>
-                <td>{val.number}</td>
-                <td>{val.numChertIz}</td>
-                <td>{val.numIz}</td>
-                <td>{val.needForce}</td>
-                <td>{val.factForce1}</td>
-                <td>{val.factForce2}</td>
-                <td>{val.maxDeform}</td>
-                <td>{val.leftDeform}</td>
-                <td>{val.godnost}</td>
+                <td>{val.numberAct}</td>
+                <td>{val.numberDrawing}</td>
+                <td>{val.numberProduct}</td>
+                <td>{val.requiredForce}</td>
+                <td>{val.actualForce}</td>
+                <td>{val.maxDeformation}</td>
+                <td>{val.ostDeformation}</td>
+                <td>{val.valid}</td>
                 <td>{val.author}</td>
-                <td>{val.date}</td>
+                <td>{val.dateTime}</td>
             </tr>
         )
     })}

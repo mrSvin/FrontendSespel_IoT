@@ -663,3 +663,68 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka,pause, off, a
         return [e, dataTime[i],]
     })
 }
+
+function getTimeProgramNameGraph(arrayData)
+{
+    let timer = 0;
+    let programTimeArray = [];
+    let startSame = null
+
+    arrayData? console.log(""):0;
+
+    if(arrayData['work'].length % 2 == 1)
+    {
+        if(startTime == time.slice(0, 10))
+        {   // То добавить во вторую смену текущее время
+            arrayData['work'].push(startTime + " " + time.slice(11, 19))
+        }
+        else {
+            arrayData['work'].push(startTime + ' 23:59:59')
+        }
+    }
+
+
+    for(let i = 0; i<arrayData['work'].length; i+=2)
+    {
+
+        if(arrayData['programName'][i/2] == arrayData['programName'][i/2+1])
+        {
+            if(arrayData['programName'][i/2] !== arrayData['programName'][i/2-1])
+            {
+                startSame = arrayData['work'][i]
+            }
+
+            timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
+        }
+
+        else
+        {
+
+            if(arrayData['programName'][i/2] == arrayData['programName'][i/2-1])
+            {
+                timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
+                programTimeArray.push([arrayData['programName'][i/2], startSame, arrayData['work'][i+1]])
+                timer = 0
+            }
+            else {
+                timer = (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
+                programTimeArray.push([arrayData['programName'][i/2], arrayData['work'][i], arrayData['work'][i+1]])
+                timer = 0
+            }
+
+
+        }
+
+    }
+
+    let programName = []
+    let date = []
+
+    programTimeArray.forEach(e=>{
+        programName.push(e[0])
+        date.push(e[1])
+        date.push(e[2])
+    })
+
+    return [programName, date]
+}

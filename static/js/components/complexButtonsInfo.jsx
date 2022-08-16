@@ -327,7 +327,7 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             }
 
             {current != null ?
-                <Link to={linkReport} className="label_program">
+                <Link to={linkCurrent} className="icon_program">
                     <div className="label_program">Текущее состояние</div>
                 </Link> :
                 <div></div>
