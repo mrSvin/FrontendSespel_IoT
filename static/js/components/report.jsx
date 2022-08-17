@@ -24,7 +24,7 @@ function Report() {
                        let fix = e.numberDrawing == '1'? '4977.06.008-5001': 'C435064S-5.0301'
                     return [e.numberAct, fix, e.numberProduct, e.requiredForce, e.actualForce, e.maxDeformation, e.ostDeformation, e.valid, e.author, e.dateTime]
                 })
-                console.log(dataReport)
+                setDataReportState(dataReport)
             })
     }
 
