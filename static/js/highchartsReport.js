@@ -893,3 +893,128 @@ function highChartServiceNow(ArrayTeh,timeNext=null) {
         ]
     });
 }
+
+function highChartProgram(arrayProgram, idContainer=1) {
+
+    let arrayTeh = arrayProgram.slice()
+    let chet = []
+    let nechet = []
+
+    arrayTeh.forEach((e,i)=>{
+        if(i%2==0) chet.push(e)
+        else nechet.push(e)
+    })
+
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран',
+
+            downloadCSV: "Скачать CSV",
+            downloadXLS:"Скачать XLS",
+            viewData: 'Режим таблицы',
+            hideData: "Скрыть таблицу"
+        },
+        plotOptions: {
+            xrange: {
+                grouping: false
+            }
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart(`containerProgram${idContainer}`, {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            plotBorderColor: 'gray',
+            type: 'xrange'
+        },
+        title: {
+            text: 'Программы',
+            style: {
+                color: '#FFF'
+            }
+        },
+
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                style: {
+                    color: '#FFF'
+                }
+            },
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            categories: ['Программы'],
+            reversed: true,
+            labels: {
+                style: {
+                    color: '#FFF'
+                },
+            }
+        },
+        credits: {
+            enabled: false
+        },
+
+        legend: {
+            itemStyle: {
+                color: '#FFF'
+            }
+        },
+        series: [
+            {
+                name: 'Четные',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#76d739',
+                tooltip: {
+                    pointFormatter: function () {
+                        let timer = msToTimeDays(this.x2 - this.x, 365)
+                        return '<b>Программа:</b> ' + this.partialFill + '<br>' +
+                            '<b>Длительность</b> ' + timer
+                    },
+                },
+                data: chet,
+            },
+            {
+                name: 'Нечетные',
+                borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#d8e523',
+                tooltip: {
+                    pointFormatter: function () {
+                        let timer = msToTimeDays(this.x2 - this.x, 365)
+                        return '<b>Программа:</b> ' + this.partialFill + '<br>' +
+                            '<b>Длительность</b> ' + timer
+                    },
+                },
+                data: nechet,
+            },
+        ],
+
+
+    });
+}

@@ -1,10 +1,14 @@
-function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service, report, current}) {
+function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer=null, alarm, programs, laser, service, report, current}) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
+    let idProgram = `containerProgram${idContainer}`
     return (
         <div className='complexAllInfo'>
             <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report} current={current}/>
-            <div className="lineSukiHighChart" id={idLine}></div>
+            <div>
+                <div className="lineSukiHighChart" id={idLine}></div>
+                <div className="lineSukiHighChart" id={idProgram}></div>
+            </div>
             <div className="roundSukiHighChart" id={idRound}></div>
         </div>
     )

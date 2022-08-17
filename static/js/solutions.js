@@ -664,8 +664,8 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka,pause, off, a
     })
 }
 
-function getTimeProgramNameGraph(arrayData)
-{
+// Функция подгатавливает данные из fetch и рисует граффик.
+function getTimeProgramNameGraph(arrayData){
     let timer = 0;
     let programTimeArray = [];
     let startSame = null
@@ -674,12 +674,14 @@ function getTimeProgramNameGraph(arrayData)
 
     if(arrayData['work'].length % 2 == 1)
     {
-        if(startTime == time.slice(0, 10))
-        {   // То добавить во вторую смену текущее время
-            arrayData['work'].push(startTime + " " + time.slice(11, 19))
+        console.log('Нечетная')
+        let timeNow = dayTimeNow()
+
+        if(timeNow.slice(0,10) == arrayData['work'][0].slice(0,10)){
+            arrayData['work'].push(timeNow)
         }
         else {
-            arrayData['work'].push(startTime + ' 23:59:59')
+            arrayData['work'].push(arrayData['work'][0].slice(0,10) + ' 23:59:59')
         }
     }
 
@@ -717,14 +719,36 @@ function getTimeProgramNameGraph(arrayData)
 
     }
 
-    let programName = []
-    let date = []
+    let parset = []
 
     programTimeArray.forEach(e=>{
-        programName.push(e[0])
-        date.push(e[1])
-        date.push(e[2])
+        parset.push({
+            x:new Date(e[1]).getTime(),
+            x2:new Date(e[2]).getTime(),
+            y:0,
+            partialFill: e[0]
+        })
     })
-
-    return [programName, date]
+    return parset
 }
+
+// function fetchRequest(dateCalendar, complexName, complexObject = {} ) {
+//     return fetch(`/api/complexData/rtk12c_days_date:2022-08-16`, {method: 'GET'})
+//         .then((response) => response.json())
+//         .then((data) => {
+//             complexObject.workArray = data.work
+//             complexObject.pauseArray = data.pause
+//             complexObject.offArray = data.off
+//             complexObject.avarArray = data.avar
+//             complexObject.ruchnoyArray = data.nagruzka
+//             complexObject.roundArray = data.roundData
+//             complexObject.programName = data.programName
+//
+//             highChartProgram(getTimeProgramNameGraph(data))
+//
+//           //  console.log(tableArray)
+//             return complexObject
+//         })
+// }
+//
+// fetchRequest()

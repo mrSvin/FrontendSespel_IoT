@@ -27,6 +27,8 @@ function fetchRequestBuildHC(dateCalendar, complexObject, complexName, idContain
             complexObject.roundArray = data.roundData
             complexObject.programName = data.programName
 
+            highChartProgram(getTimeProgramNameGraph(data), idContainer)
+
             let arrayLine;
             if (typeLine == 'multiLine') {
                 arrayLine =[0,1,2,3,4]
