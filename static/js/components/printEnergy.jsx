@@ -4,27 +4,137 @@ function PrintEnergy() {
 
         let objectImg = {
             'apec':'apec.png', 'ar55':'ar55.png', 'crysta-apex':'crystal_apex.png',
-            '?***?':'dmf.png', 'ctx310':'dmg_ctx310.png', 'ctx510':'dmg_ctx510.png',
-            'ctx650':'dmg_ctx650.png', 'dmc1035':'dmg_dmc1035.png', 'dmf260':'dmg_dmf260.png',
-            'dmu50':'dmg_dmu50.png', 'эпп':'epp.png', 'faccin 4':'faccin.png',
-            'faccin 10':'faccin_2.png', 'gamma2000':'gamma2000.png', 'комета':'kometa.png',
-            'навигатор':'navigator.png', 'нк600':'nk600.png', 'nlx3000':'NLX3000.png',
-            'ntx1000':'ntx1000.png', 'печь':'pech.png', 'пресс':'press.png',
-            'стп':'progress.png', 'макс':'robot.png', 'м710':'robot.png',
-            'ртк12c':'robot.png', 'крот':'robot.png', 'пранс':'robot.png',
-            'p250':'robot_p250.png', 'sk50':'sk50.png', 'склад':'sklad.png',
-            'стп13м':'stp13m.png', 'trulaser':'trulaser.png',
-            'увф-1':'uvf_1_2.png', 'уф5220':'UVF_5220.png', 'врс1':'nasos.png',
-            'врс2':'nasos_vrs2.png', 'котельная': 'gazStation.png','ктп400':'electroStation.png',
-            'ктп630':'electroStation.png','ктп2500':'electroStation.png','ктп400':'electroStation.png',
-        }
+         }
         let nameToFetch = parseNameUrl(document.location.pathname);
+        'energyWater'
+
+        let data = {"vrs2":[14.01,16.42,13.51,14.12,0.0,0.0,0.0,0.0,14.72,0.0,15.92,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.97,1.07,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+            "vrs1":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]}
+
+        let keys = Object.keys(data)
+
+        let table = document.getElementById('printEnergy')
+
+        for(let i=0; i<keys.length; i++){
+            table.querySelector('thead').querySelector('tr').appendChild(document.createElement('th')).textContent = keys[i]
+
+            let sum = 0;
+            for(let j=0; j<data[keys[i]].length; j++){
+                table.querySelector('tbody').querySelectorAll('tr')[j].appendChild(document.createElement('td')).textContent = data[keys[i]][j]
+                sum += data[keys[i]][j]
+            }
+            table.querySelector('tbody').querySelectorAll('tr')[data[keys[i]].length].appendChild(document.createElement('td')).textContent = sum
+        }
 
     }, [])
 
     return (
         <div>
-            <h1>Версия для печати</h1>
+            <table id='printEnergy' className='tablePrintEnergy'>
+                <thead>
+                    <tr>
+                        <th>Дни</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                </tr>
+                <tr>
+                    <td>Итого</td>
+                </tr>
+                </tbody>
+            </table>
          </div>
     )
 }
