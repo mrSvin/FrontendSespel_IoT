@@ -66,6 +66,10 @@ function App({ hideLoader }) {
                         <EnergyGas/>
                     </Route>
 
+                    <Route path="/printEnergy">
+                        <PrintEnergy/>
+                    </Route>
+
                     <Route path="/stanki/otk">
                         <Otk/>
                     </Route>
