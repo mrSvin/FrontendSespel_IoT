@@ -42,6 +42,8 @@ function VrsInfo() {
     let [dataVrs1, setDataVrs1] = useState(0);
     let [dataVrs2, setDataVrs2] = useState(0);
 
+    let [printTable, setPrintTable] = useState(0);
+
     function newDate(dateInput) {
         console.log(dateInput)
         setDateMonth(dateInput)
@@ -53,8 +55,10 @@ function VrsInfo() {
         fetch(`/api/energy/vrs/date:${dateInput}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
+                setPrintTable(data)
                 setDataVrs1(data.vrs1)
                 setDataVrs2(data.vrs2)
+
                 highChartEnergy(data.vrs1, "container")
                 highChartEnergy(data.vrs2, "container2")
             })
@@ -78,8 +82,8 @@ function VrsInfo() {
 
             <div>
             <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
-                <PrintEnergy/>
-                <button id='print'
+                <PrintEnergy printTable={printTable}/>
+                <button id='printEnergy'
                         onClick={() => {
                             let table = document.getElementById('printEnergy')
                             TableToExcel.convert(table);
