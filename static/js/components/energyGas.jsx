@@ -1,3 +1,35 @@
+function FormExcel(data, date) {
+    date = date == 0? dayNow().slice(0,7) : date
+
+    let keys = Object.keys(data)
+    let table = document.getElementById('printEnergy')
+
+    for (let i = 0; i < keys.length; i++) {
+        table.querySelector('thead').querySelector('tr').appendChild(document.createElement('th')).textContent = keys[i]
+
+        let sum = 0;
+        for (let j = 0; j < data[keys[i]].length; j++) {
+            table.querySelector('tbody').querySelectorAll('tr')[j].appendChild(document.createElement('td')).textContent = data[keys[i]][j]
+            sum += data[keys[i]][j]
+        }
+        table.querySelector('tbody').querySelectorAll('tr')[data[keys[i]].length].appendChild(document.createElement('td')).textContent = sum
+    }
+    // TableToExcel.convert(table);
+
+    TableToExcel.convert(table, {
+        name: `${keys[0].slice(0,3)}_${date.slice(0,4) + '_' + date.slice(5,7)}.xlsx`,
+        sheet: {
+            name: "Sheet 1"
+        }
+    });
+
+    for(let i=0; i<keys.length; i++){
+        for(let j=0; j<33; j++) {
+            table.rows[j].deleteCell(-1);
+        }
+    }
+}
+
 function GazInfo() {
 
     let [dateMonth, setDateMonth] = useState(0);
@@ -12,6 +44,8 @@ function GazInfo() {
     let [dataVrs2, setDataVrs2] = useState(0);
     let [dataVrs3, setDataVrs3] = useState(0);
 
+    let [printTable, setPrintTable] = useState(0);
+
     function newDate(dateInput) {
         console.log(dateInput)
         setDateMonth(dateInput)
@@ -22,6 +56,7 @@ function GazInfo() {
         fetch(`/api/energy/gaz/date:${dateInput}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
+                setPrintTable(data)
                 setDataVrs1(data.kot_1_2)
                 setDataVrs2(data.kot_7_8_10)
                 setDataVrs3(data.kot_2_ploshadka)
@@ -46,9 +81,15 @@ function GazInfo() {
 
     return (
         <div className='vrsInfoAlign'>
-
-            <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
-
+            <div className='calendarEnergyFlex'>
+                <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
+                <PrintEnergy/>
+                <img className="printEnergy" src="../../images/excel_icon.png"
+                     onClick={() => {
+                         FormExcel(printTable, dateMonth)
+                     }}
+                />
+            </div>
             <div className='flex'>
                 <ComplexInfo complexName={complexName[0]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs1} service={"Котельная 2 площадки"}/>
                 <div className='energyGraphTable'>
