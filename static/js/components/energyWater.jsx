@@ -1,4 +1,6 @@
 function FormExcel(data, date) {
+    date = date == 0? dayNow().slice(0,7) : date
+
     let keys = Object.keys(data)
     let table = document.getElementById('printEnergy')
 
