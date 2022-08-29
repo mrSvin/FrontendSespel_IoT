@@ -17,7 +17,7 @@ function RobotsInfo() {
 
     let size = ['ceh6', 'ceh6', 'sborCeh', 'sborCeh', 'ceh5', 'sborCeh', 'ceh6']
 
-    let selectedObjects = complexName.map((e,i)=> i)
+    let selectedObjects = complexName.map((e, i) => i)
 
     let bufferData = bufferDataArrays(6)
 
@@ -27,7 +27,7 @@ function RobotsInfo() {
 
     useEffect(() => {
         setDate(dayNow())
-        selectedObjects = [0,2,4,6]
+        selectedObjects = [0, 2, 4, 6]
         updateLoadData(dayNow())
 
     }, [])
@@ -42,7 +42,7 @@ function RobotsInfo() {
 
     function updateLoadData(dateInput) {
 
-        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
+        let roundComplex = switchLineSutki(stateLineHC, complexRequest, dateInput, bufferData)
 
         let promiseDataKim = Promise.resolve(roundComplex[0]);
         let promiseDataNK600 = Promise.resolve(roundComplex[1]);
@@ -107,8 +107,8 @@ function RobotsInfo() {
                                     let kolComplex6 = kolOperations(value5.workArray)
                                     let kolComplex7 = kolOperations(value6.workArray)
 
-                                    highChartCountOperations(complexName, [kolKim[0], kolNK600[0], kolStp13m[0],kolComplex4[0],kolComplex5[0],kolComplex6[0],kolComplex7[0]],
-                                        [kolKim[1], kolNK600[1], kolStp13m[1],kolComplex4[1],kolComplex5[1],kolComplex6[1],kolComplex7[1]])
+                                    highChartCountOperations(complexName, [kolKim[0], kolNK600[0], kolStp13m[0], kolComplex4[0], kolComplex5[0], kolComplex6[0], kolComplex7[0]],
+                                        [kolKim[1], kolNK600[1], kolStp13m[1], kolComplex4[1], kolComplex5[1], kolComplex6[1], kolComplex7[1]])
 
                                 })
                             })
@@ -128,12 +128,13 @@ function RobotsInfo() {
 
             <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData}
+                          complexRequest={complexRequest}/>
 
             {selectedObjects.map((e, i) => {
-                console.log('Информация ',e,i)
-                let nameId = `complexSutkiAll${i+1}`
-                    return  <ComplexSutkiAllInfo id={nameId} complexName={complexName[e]} complexImg={complexImg[e]} complexMesto={buttonsVrs[e]} size={size[e]} idContainer = {i+1} programs={complexNameProgram[e]} service={complexName[e]}/>
+                return <ComplexSutkiAllInfo key={i} complexName={complexName[e]} complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                                            programs={complexNameProgram[e]} service={complexName[e]}/>
             })}
         </div>
     )
@@ -146,7 +147,7 @@ function Robots() {
         <div>
 
             <MenuStanki menuSelected="robots"/>
-            
+
             <div className="buttons-otchet">
 
                 <Link to="/stanki/robots">
