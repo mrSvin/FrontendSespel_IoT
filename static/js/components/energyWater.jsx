@@ -12,7 +12,20 @@ function FormExcel(data) {
         }
         table.querySelector('tbody').querySelectorAll('tr')[data[keys[i]].length].appendChild(document.createElement('td')).textContent = sum
     }
-    TableToExcel.convert(table);
+    // TableToExcel.convert(table);
+
+    TableToExcel.convert(table, {
+        name: `${keys[0].slice(0,3)}.xlsx`,
+        sheet: {
+            name: "Sheet 1"
+        }
+    });
+
+    for(let i=0; i<keys.length; i++){
+        for(let j=0; j<33; j++) {
+            table.rows[j].deleteCell(-1);
+        }
+    }
 }
 
 function TableDays(data) {
