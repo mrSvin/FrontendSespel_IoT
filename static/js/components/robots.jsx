@@ -131,7 +131,8 @@ function RobotsInfo() {
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
 
             {selectedObjects.map((e, i) => {
-                    return  <ComplexSutkiAllInfo key=i complexName={complexName[e]} complexImg={complexImg[e]} complexMesto={buttonsVrs[e]} size={size[e]} idContainer = {i+1} programs={complexNameProgram[e]} service={complexName[e]}/>
+                console.log('Информация ',e,i)
+                    return  <ComplexSutkiAllInfo complexName={complexName[e]} complexImg={complexImg[e]} complexMesto={buttonsVrs[e]} size={size[e]} idContainer = {i+1} programs={complexNameProgram[e]} service={complexName[e]}/>
             })}
         </div>
     )
