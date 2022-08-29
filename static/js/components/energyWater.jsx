@@ -82,7 +82,7 @@ function VrsInfo() {
 
             <div>
             <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
-                <PrintEnergy printTable={printTable}/>
+                <PrintEnergy dataPrint={printTable}/>
                 <button id='printEnergy'
                         onClick={() => {
                             let table = document.getElementById('printEnergy')

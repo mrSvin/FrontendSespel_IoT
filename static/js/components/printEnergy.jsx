@@ -1,12 +1,14 @@
-function PrintEnergy({printTable}) {
+function PrintEnergy(dataPrint) {
 
-    let abba = printTable
-    console.log('Вот, данные ',abba)
+    let printTable = dataPrint
+    console.log('Вот, данные ',printTable)
 
     useEffect(() => {
-        console.log(printTable)
+        // console.log(printTable)
 
         let data = printTable
+
+        console.log('Вот, данные 2',data)
 
             data = {"vrs2":[14.01,16.42,13.51,14.12,0.0,0.0,0.0,0.0,14.72,0.0,15.92,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.97,1.07,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
             "vrs1":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]}
@@ -37,6 +39,15 @@ function PrintEnergy({printTable}) {
                     </tr>
                 </thead>
                 <tbody>
+
+                {/*<tr>*/}
+                {/*    <td>Расход</td>*/}
+                {/*    {Array(31).fill(1).map((el, i) =>*/}
+                {/*        <td key={i}>{data.data[i]}</td>*/}
+                {/*    )}*/}
+                {/*    <td>{total}</td>*/}
+                {/*</tr>*/}
+
                 <tr>
                     <td>1</td>
                 </tr>
