@@ -113,7 +113,7 @@ function VrsInfo() {
             <div className='calendarEnergyFlex'>
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
                 <PrintEnergy/>
-                <img className="printEnergy" id="printEnergy" src="../../images/excel_icon.png"
+                <img className="printEnergy" src="../../images/excel_icon.png"
                      onClick={() => {
                          FormExcel(printTable, dateMonth)
                      }}
