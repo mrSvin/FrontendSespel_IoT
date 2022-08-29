@@ -88,27 +88,27 @@ function CurrentParams() {
     )
 }
 
-function TableReportBody({dataReportState}) {
-
-    return (
-        <tbody>
-        {dataReportState.map((val,i) => {
-            return (
-                <tr key={i}>
-                    <td>{val.number}</td>
-                    <td>{val.numChertIz}</td>
-                    <td>{val.numIz}</td>
-                    <td>{val.needForce}</td>
-                    <td>{val.factForce1}</td>
-                    <td>{val.factForce2}</td>
-                    <td>{val.maxDeform}</td>
-                    <td>{val.leftDeform}</td>
-                    <td>{val.godnost}</td>
-                    <td>{val.author}</td>
-                    <td>{val.date}</td>
-                </tr>
-            )
-        })}
-        </tbody>
-    )
-}
+// function TableReportBody({dataReportState}) {
+//
+//     return (
+//         <tbody>
+//         {dataReportState.map((val,i) => {
+//             return (
+//                 <tr key={i}>
+//                     <td>{val.number}</td>
+//                     <td>{val.numChertIz}</td>
+//                     <td>{val.numIz}</td>
+//                     <td>{val.needForce}</td>
+//                     <td>{val.factForce1}</td>
+//                     <td>{val.factForce2}</td>
+//                     <td>{val.maxDeform}</td>
+//                     <td>{val.leftDeform}</td>
+//                     <td>{val.godnost}</td>
+//                     <td>{val.author}</td>
+//                     <td>{val.date}</td>
+//                 </tr>
+//             )
+//         })}
+//         </tbody>
+//     )
+// }
