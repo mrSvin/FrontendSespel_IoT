@@ -1,5 +1,8 @@
 function PrintEnergy({printTable}) {
 
+    let abba = printTable
+    console.log('Вот, данные ',abba)
+
     useEffect(() => {
         console.log(printTable)
 
