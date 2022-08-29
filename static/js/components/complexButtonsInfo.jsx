@@ -8,6 +8,7 @@ function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idCon
     return (
         <div className='complexAllInfo'>
             <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report} current={current}/>
+          <div className='highChartsLineRound'>
             <div className='lineComplex'>
                 <div className="lineSukiHighChart" id={idLine}></div>
                 {idProgram != null ?
@@ -16,6 +17,7 @@ function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idCon
                 }
             </div>
             <div className="roundSukiHighChart" id={idRound}></div>
+          </div>
         </div>
     )
 }
