@@ -98,16 +98,16 @@ function TableReportBody({dataReportState}) {
     {dataReportState.map((val,i) => {
         return (
             <tr key={i}>
-                <td>{val.numberAct}</td>
-                <td>{val.numberDrawing}</td>
-                <td>{val.numberProduct}</td>
-                <td>{val.requiredForce}</td>
-                <td>{val.actualForce}</td>
-                <td>{val.maxDeformation}</td>
-                <td>{val.ostDeformation}</td>
-                <td>{val.valid}</td>
-                <td>{val.author}</td>
-                <td>{val.dateTime}</td>
+                <td>{val[0]}</td>
+                <td>{val[1]}</td>
+                <td>{val[2]}</td>
+                <td>{val[3]}</td>
+                <td>{val[4]}</td>
+                <td>{val[5]}</td>
+                <td>{val[6]}</td>
+                <td>{val[7]}</td>
+                <td>{val[8]}</td>
+                <td>{val[9]}</td>
             </tr>
         )
     })}
