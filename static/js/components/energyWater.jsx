@@ -78,9 +78,8 @@ function VrsInfo() {
 
             <div>
             <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
-                <Link to={'printEnergy/energyWater'} className="icon_service">
-                    <div className="label_service">Показать версию для печати</div>
-                </Link>
+                <PrintEnergy/>
+                <button>Печать</button>
             </div>
             <div className='flex'>
                 <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}
