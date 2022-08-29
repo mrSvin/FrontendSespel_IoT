@@ -1,4 +1,4 @@
-function FormExcel(data) {
+function FormExcel(data, date) {
     let keys = Object.keys(data)
     let table = document.getElementById('printEnergy')
 
@@ -15,7 +15,7 @@ function FormExcel(data) {
     // TableToExcel.convert(table);
 
     TableToExcel.convert(table, {
-        name: `${keys[0].slice(0,3)}.xlsx`,
+        name: `${keys[0].slice(0,3)}_${date.slice(0,4) + '_' + date.slice(5,7)}.xlsx`,
         sheet: {
             name: "Sheet 1"
         }
@@ -110,15 +110,14 @@ function VrsInfo() {
     return (
         <div className='vrsInfoAlign'>
 
-            <div>
+            <div className='calendarEnergyFlex'>
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
+                <img className="printEnergy" id="printEnergy" src="../../images/excel_icon.png"
+                     onClick={() => {
+                         FormExcel(printTable, dateMonth)
+                     }}
+                />
                 <PrintEnergy/>
-                <button id='printEnergy'
-                        onClick={() => {
-                            FormExcel(printTable)
-                        }}
-                >Печать
-                </button>
             </div>
             <div className='flex'>
                 <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}
