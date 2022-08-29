@@ -93,9 +93,11 @@ function Report() {
 
 function TableReportBody({dataReportState}) {
 
+    console.log(dataReportState)
     return (
     <tbody>
     {dataReportState.map((val,i) => {
+        console.log(val, i)
         return (
             <tr key={i}>
                 <td>{val[0]}</td>
