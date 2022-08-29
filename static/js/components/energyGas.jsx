@@ -22,13 +22,13 @@ function GazInfo() {
         fetch(`/api/energy/gaz/date:${dateInput}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
-                setDataVrs1(data[0].kot_1_2)
-                setDataVrs2(data[0].kot_7_8_10)
-                setDataVrs3(data[0].kot_2_ploshadka)
+                setDataVrs1(data.kot_1_2)
+                setDataVrs2(data.kot_7_8_10)
+                setDataVrs3(data.kot_2_ploshadka)
 
-                highChartEnergy(data[0].kot_1_2, "container")
-                highChartEnergy(data[0].kot_7_8_10, "container2")
-                highChartEnergy(data[0].kot_2_ploshadka, "container3")
+                highChartEnergy(data.kot_1_2, "container")
+                highChartEnergy(data.kot_7_8_10, "container2")
+                highChartEnergy(data.kot_2_ploshadka, "container3")
 
             })
     }

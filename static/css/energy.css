@@ -482,23 +482,6 @@
     display: flex;
 }
 
-.tablePrintEnergy{
-    width: auto
-}
-
-.tablePrintEnergy tr {
-    background:white;
-}
-
-.tablePrintEnergy td:nth-child(n) {
-    width: auto;
-}
-
-.tablePrintEnergy tr:nth-last-child(1)>td {
-    width: auto;
-    font-weight: bold;
-}
-
 .tablePrintEnergy {
-    /* display:none; */
+     display:none;
 }

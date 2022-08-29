@@ -53,10 +53,10 @@ function VrsInfo() {
         fetch(`/api/energy/vrs/date:${dateInput}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
-                setDataVrs1(data[0].vrs1)
-                setDataVrs2(data[0].vrs2)
-                highChartEnergy(data[0].vrs1, "container")
-                highChartEnergy(data[0].vrs2, "container2")
+                setDataVrs1(data.vrs1)
+                setDataVrs2(data.vrs2)
+                highChartEnergy(data.vrs1, "container")
+                highChartEnergy(data.vrs2, "container2")
             })
 
     }
@@ -79,7 +79,12 @@ function VrsInfo() {
             <div>
             <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
                 <PrintEnergy/>
-                <button>Печать</button>
+                <button id='print'
+                        onClick={() => {
+                            let table = document.getElementById('printEnergy')
+                            TableToExcel.convert(table);
+                        }}
+                >Печать</button>
             </div>
             <div className='flex'>
                 <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}
