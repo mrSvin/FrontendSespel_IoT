@@ -132,7 +132,8 @@ function RobotsInfo() {
 
             {selectedObjects.map((e, i) => {
                 console.log('Информация ',e,i)
-                    return  <ComplexSutkiAllInfo complexName={complexName[e]} complexImg={complexImg[e]} complexMesto={buttonsVrs[e]} size={size[e]} idContainer = {i+1} programs={complexNameProgram[e]} service={complexName[e]}/>
+                let nameId = `complexSutkiAll${i+1}`
+                    return  <ComplexSutkiAllInfo id=nameId complexName={complexName[e]} complexImg={complexImg[e]} complexMesto={buttonsVrs[e]} size={size[e]} idContainer = {i+1} programs={complexNameProgram[e]} service={complexName[e]}/>
             })}
         </div>
     )
