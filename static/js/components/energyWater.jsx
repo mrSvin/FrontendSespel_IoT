@@ -112,12 +112,12 @@ function VrsInfo() {
 
             <div className='calendarEnergyFlex'>
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
+                <PrintEnergy/>
                 <img className="printEnergy" id="printEnergy" src="../../images/excel_icon.png"
                      onClick={() => {
                          FormExcel(printTable, dateMonth)
                      }}
                 />
-                <PrintEnergy/>
             </div>
             <div className='flex'>
                 <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}
