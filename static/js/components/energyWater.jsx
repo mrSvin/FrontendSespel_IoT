@@ -1,25 +1,18 @@
-function FormExcel(printTable) {
-
-    let data = printTable
-    console.log('Формирование 2',data)
-
-    data = {"vrs2":[14.01,16.42,13.51,14.12,0.0,0.0,0.0,0.0,14.72,0.0,15.92,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.97,1.07,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
-        "vrs1":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]}
-
+function FormExcel(data) {
     let keys = Object.keys(data)
-
     let table = document.getElementById('printEnergy')
 
-    for(let i=0; i<keys.length; i++){
+    for (let i = 0; i < keys.length; i++) {
         table.querySelector('thead').querySelector('tr').appendChild(document.createElement('th')).textContent = keys[i]
 
         let sum = 0;
-        for(let j=0; j<data[keys[i]].length; j++){
+        for (let j = 0; j < data[keys[i]].length; j++) {
             table.querySelector('tbody').querySelectorAll('tr')[j].appendChild(document.createElement('td')).textContent = data[keys[i]][j]
             sum += data[keys[i]][j]
         }
         table.querySelector('tbody').querySelectorAll('tr')[data[keys[i]].length].appendChild(document.createElement('td')).textContent = sum
     }
+    TableToExcel.convert(table);
 }
 
 function TableDays(data) {
@@ -105,15 +98,14 @@ function VrsInfo() {
         <div className='vrsInfoAlign'>
 
             <div>
-            <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
-                <PrintEnergy dataPrint={printTable}/>
+                <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
+                <PrintEnergy/>
                 <button id='printEnergy'
                         onClick={() => {
                             FormExcel(printTable)
-                            let table = document.getElementById('printEnergy')
-                            TableToExcel.convert(table);
                         }}
-                >Печать</button>
+                >Печать
+                </button>
             </div>
             <div className='flex'>
                 <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1}

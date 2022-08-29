@@ -1,7 +1,4 @@
-function PrintEnergy(dataPrint) {
-    let printTable = dataPrint
-    console.log('Вот, данные ',printTable)
-
+function PrintEnergy() {
     return (
         <div>
             <table id='printEnergy' className='tablePrintEnergy'>
@@ -11,15 +8,6 @@ function PrintEnergy(dataPrint) {
                     </tr>
                 </thead>
                 <tbody>
-
-                {/*<tr>*/}
-                {/*    <td>Расход</td>*/}
-                {/*    {Array(31).fill(1).map((el, i) =>*/}
-                {/*        <td key={i}>{data.data[i]}</td>*/}
-                {/*    )}*/}
-                {/*    <td>{total}</td>*/}
-                {/*</tr>*/}
-
                 <tr>
                     <td>1</td>
                 </tr>
