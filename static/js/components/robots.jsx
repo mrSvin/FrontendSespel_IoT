@@ -1,3 +1,284 @@
+// Суточные переделываю
+function updateLoadData(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
+    promiseVariable
+        .then(result => {
+            let data = result.map(e => {
+                return [e.work.slice(), e.pause.slice(), e.off.slice(), e.avar.slice(), e.nagruzka.slice(), e.programName.slice(), e.roundData.slice()]
+            })
+            let arrayLine;
+            if (typeLine == 'multiLine') {
+                arrayLine = [0, 1, 2, 3, 4]
+            } else {
+                arrayLine = [0, 0, 0, 0, 0]
+            }
+
+            let totalArray = []
+            let kolOpArray = []
+
+            let parserDataArray = data.map(value => {
+                let convertDataWork = parseLinearSutki(value[0], arrayLine[1], day1, value[5])
+                let convertDataPause = parseLinearSutki(value[1], arrayLine[2], day1)
+                let convertDataOff = parseLinearSutki(value[2], arrayLine[3], day1)
+                let convertDataAvar = parseLinearSutki(value[3], arrayLine[4], day1)
+                let convertDataRuchnoi = parseLinearSutki(value[4], arrayLine[0], day1)
+                let roundArray = value[6].map(Number)
+
+                totalArray.push(roundArray.slice())
+                kolOpArray.push(kolOperations(value[0]).slice())
+
+                return [convertDataWork, convertDataPause, convertDataOff, convertDataAvar, convertDataRuchnoi, roundArray]
+            })
+
+            let nagruzkaName = fetchNames.map(e => {
+                return exceptionManualNagruzka(e)
+            })
+
+            highChartTotalKolOp(totalArray, kolOpArray, complexName, day1, nagruzkaName)
+
+            parserDataArray.forEach((e, i) => {
+                // Первая смена
+                highChartSutkiLine(e[0], e[1], e[2], e[3], e[4], nagruzkaName[i], i + 1)
+                highChartRound(e[5][0], e[5][1], e[5][2], e[5][3], e[5][4], nagruzkaName[i], i + 1)
+
+            })
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
+
+// fetch запрос объекта в форме объектов
+function fetchRequest(dateCalendar, complexName) {
+    return fetch(`/api/complexData/${complexName}_days_date:${dateCalendar}`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}
+
+function highChartTotalKolOp(total, kolOp, complexName, day1, nagruzkaName) {
+
+    // переменные для переформирования данных 2-х смен
+    let work = []
+    let pause = []
+    let off = []
+    let avar = []
+    let nagruzka = []
+
+    let shortOp = []
+    let longOp = []
+
+    // переформирования данных
+    total.forEach((e, i) => {
+        if (!Array.isArray(e) || e.includes(undefined)) {
+            work.push(0)
+            pause.push(0)
+            off.push(0)
+            avar.push(0)
+            nagruzka.push(0)
+        } else {
+            e = e.map(Number)
+            work.push(e[0])
+            pause.push(e[1])
+            off.push(e[2])
+            avar.push(e[3])
+            nagruzka.push(e[4])
+        }
+    })
+
+    kolOp.forEach((e, i) => {
+        if (!Array.isArray(e) || e.includes(undefined)) {
+            shortOp.push(0)
+            longOp.push(0)
+        } else {
+            e = e.map(Number)
+            shortOp.push(e[0])
+            longOp.push(e[1])
+        }
+    })
+
+    // вторая смена, всегда за предыдущий день, date всегда 12 часов
+    highChartTotal(complexName, work, pause, off, avar, nagruzka, nagruzkaName, day1)
+    highChartCountOperations(complexName, shortOp, longOp)
+}
+
+//Суточный и месячный
+function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, fetchNames, date = 24, chartName = '') {
+    let colorNagruzka;
+    let workNoNagruzka = work.slice();
+
+    let ruchoi = null
+
+    let seriesArray = [{
+        name: 'Авария',
+        data: avar,
+        color: '#e81e1d'
+    }, {
+        name: 'Выключен',
+        data: off,
+        color: '#000000'
+    }, {
+        name: 'Ожидание',
+        color: '#ffea32',
+        data: pause
+    }, {
+        name: 'Нагрузка',
+        data: nagruzka,
+        color: '#207210'
+    }, {
+        name: 'Работа',
+        color: '#38e817',
+        data: workNoNagruzka
+
+    },]
+
+    if (fetchNames.includes('Ручной')) {
+        ruchoi = []
+        fetchNames.forEach((e, i) => {
+            if (e == 'Ручной') {
+                ruchoi.push(nagruzka[i])
+                nagruzka[i] = 0
+            } else {
+                ruchoi.push(0)
+            }
+        })
+
+        seriesArray.splice(4, 0, {
+            name: 'Ручной',
+            color: '#5c7ed0',
+            data: ruchoi
+
+        })
+    }
+
+    fetchNames.forEach((e, i) => {
+        if (e == 'Нагрузка') {
+            workNoNagruzka[i] = workNoNagruzka[i] - nagruzka[i]
+        }
+    })
+
+
+    if (fetchNames == 'Нагрузка') {
+        colorNagruzka = '#207210'
+        for (var i = 0; i < work.length; i++) {
+            workNoNagruzka[i] = workNoNagruzka[i] - nagruzka[i]
+        }
+    }
+
+    // Данные для
+    let graphData = highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, avar, nagruzka, ruchoi, date)
+
+    Highcharts.chart(`containerTotal${chartName}`, {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Общая загрузка оборудования',
+            style: {
+                color: '#FFF'
+            }
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                    color: '#FFF'
+                }
+            },
+            categories: generalDiagramNames,
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            },
+            labels: {
+                style: {
+                    color: '#FFF'
+                },
+            }
+        },
+        tooltip: {
+            pointFormatter: function () {
+                if (ruchoi == null) {
+                    return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
+                        `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
+                        `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
+                        `<span style="color: #207210;">Нагрузка</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
+                        `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
+                } else {
+                    return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
+                        `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
+                        `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
+                        `<span style="color: #207210;">Нагрузка</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
+                        `<span style="color: #5c7ed0;">Ручной</span>: ${graphData[this.index][0][5]}%   <b>${graphData[this.index][1][5]}</b><br/>` +
+                        `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
+                }
+            },
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        legend: {
+            itemStyle: {
+                color: '#FFF'
+            }
+        },
+        series: seriesArray
+    });
+
+}
+
+// Функция получения из массивов времени и общего процента
+function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, avar, nagruzka, ruchoi = null, date) {
+
+    let data = []
+    generalDiagramNames.forEach((e, i) => {
+        if (ruchoi == null) {
+            data.push([workNoNagruzka[i], pause[i], off[i], avar[i], nagruzka[i]])
+        } else data.push([workNoNagruzka[i], pause[i], off[i], avar[i], nagruzka[i], ruchoi[i]])
+
+    })
+
+    let dataSumArray = data.map(e => {
+        let red = e.reduce((val1, val2) => {
+            return val1 + val2
+        })
+        return red
+    })
+
+    let dataTime = data.map(e => {
+        return getTimeTotalArray(e, date)
+    })
+
+    let dataPercent = data.map((e, i) => {
+        if (ruchoi == null) {
+            return [(e[0] / dataSumArray[i] * 100).toFixed(1),
+                (e[1] / dataSumArray[i] * 100).toFixed(1),
+                (e[2] / dataSumArray[i] * 100).toFixed(1),
+                (e[3] / dataSumArray[i] * 100).toFixed(1),
+                (e[4] / dataSumArray[i] * 100).toFixed(1),]
+        } else {
+            return [(e[0] / dataSumArray[i] * 100).toFixed(1),
+                (e[1] / dataSumArray[i] * 100).toFixed(1),
+                (e[2] / dataSumArray[i] * 100).toFixed(1),
+                (e[3] / dataSumArray[i] * 100).toFixed(1),
+                (e[4] / dataSumArray[i] * 100).toFixed(1),
+                (e[5] / dataSumArray[i] * 100).toFixed(1),
+            ]
+        }
+    })
+
+    return dataPercent.map((e, i) => {
+        return [e, dataTime[i],]
+    })
+}
+
 function RobotsInfo() {
 
     let complexName = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
@@ -34,96 +315,13 @@ function RobotsInfo() {
 
     function newDate(dateInput) {
         setDate(dateInput)
-        console.log(dateInput)
 
         updateLoadData(dateInput)
 
     }
 
-    function updateLoadData(dateInput) {
-
-        let roundComplex = switchLineSutki(stateLineHC, complexRequest, dateInput, bufferData)
-
-        let promiseDataKim = Promise.resolve(roundComplex[0]);
-        let promiseDataNK600 = Promise.resolve(roundComplex[1]);
-        let promiseDataStp13m = Promise.resolve(roundComplex[2]);
-        let promiseComplex4 = Promise.resolve(roundComplex[3]);
-        let promiseComplex5 = Promise.resolve(roundComplex[4]);
-        let promiseComplex6 = Promise.resolve(roundComplex[5]);
-        let promiseComplex7 = Promise.resolve(roundComplex[6]);
-
-        //Общая загрузка
-        promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                promiseDataStp13m.then(value2 => {
-                    promiseComplex4.then(value3 => {
-                        promiseComplex5.then(value4 => {
-                            promiseComplex6.then(value5 => {
-                                promiseComplex7.then(value6 => {
-
-                                    let intKimArray = value.roundArray.map(Number)
-                                    let intNK600Array = value1.roundArray.map(Number)
-                                    let intStp13mArray = value2.roundArray.map(Number)
-                                    let intComplex4 = value3.roundArray.map(Number)
-                                    let intComplex5 = value4.roundArray.map(Number)
-                                    let intComplex6 = value5.roundArray.map(Number)
-                                    let intComplex7 = value6.roundArray.map(Number)
-
-                                    if (value.roundArray.length == 0) {
-                                        intKimArray = [0, 0, 0, 0, 0, 0]
-                                    }
-                                    if (value1.roundArray.length == 0) {
-                                        intNK600Array = [0, 0, 0, 0, 0, 0]
-                                    }
-                                    if (value2.roundArray.length == 0) {
-                                        intStp13mArray = [0, 0, 0, 0, 0, 0]
-                                    }
-                                    if (value3.roundArray.length == 0) {
-                                        intComplex4 = [0, 0, 0, 0, 0, 0]
-                                    }
-                                    if (value4.roundArray.length == 0) {
-                                        intComplex5 = [0, 0, 0, 0, 0, 0]
-                                    }
-                                    if (value5.roundArray.length == 0) {
-                                        intComplex6 = [0, 0, 0, 0, 0, 0]
-                                    }
-                                    if (value6.roundArray.length == 0) {
-                                        intComplex7 = [0, 0, 0, 0, 0, 0]
-                                    }
-
-                                    highChartTotal(complexName, [intKimArray[0], intNK600Array[0], intStp13mArray[0], intComplex4[0], intComplex5[0], intComplex6[0], intComplex7[0]],
-                                        [intKimArray[1], intNK600Array[1], intStp13mArray[1], intComplex4[1], intComplex5[1], intComplex6[1], intComplex7[1]],
-                                        [intKimArray[2], intNK600Array[2], intStp13mArray[2], intComplex4[2], intComplex5[2], intComplex6[2], intComplex7[2]],
-                                        [intKimArray[3], intNK600Array[3], intStp13mArray[3], intComplex4[3], intComplex5[3], intComplex6[3], intComplex7[3]],
-                                        [intKimArray[4], intNK600Array[4], intStp13mArray[4], intComplex4[4], intComplex5[4], intComplex6[4], intComplex7[4]],
-                                        'Нагрузка', dateInput)
-
-                                    //Количество операций
-                                    let kolKim = kolOperations(value.workArray)
-                                    let kolNK600 = kolOperations(value1.workArray)
-                                    let kolStp13m = kolOperations(value2.workArray)
-                                    let kolComplex4 = kolOperations(value3.workArray)
-                                    let kolComplex5 = kolOperations(value4.workArray)
-                                    let kolComplex6 = kolOperations(value5.workArray)
-                                    let kolComplex7 = kolOperations(value6.workArray)
-
-                                    highChartCountOperations(complexName, [kolKim[0], kolNK600[0], kolStp13m[0], kolComplex4[0], kolComplex5[0], kolComplex6[0], kolComplex7[0]],
-                                        [kolKim[1], kolNK600[1], kolStp13m[1], kolComplex4[1], kolComplex5[1], kolComplex6[1], kolComplex7[1]])
-
-                                })
-                            })
-                        })
-                    })
-                })
-
-            })
-        })
-
-    }
-
     return (
         <div>
-
             <DayCalendar newDate={newDate} date={date}/>
 
             <ComplexTotalSutkiInfo/>
