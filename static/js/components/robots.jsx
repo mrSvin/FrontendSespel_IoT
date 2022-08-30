@@ -345,6 +345,11 @@ function RobotsInfo() {
 
     };
 
+    // const style = {
+    //     display: 'block',
+    //     opacity: '100%',
+    // };
+
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -390,7 +395,8 @@ function RobotsInfo() {
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
                 <div className="listComplex"><span onClick={toggleClass}>Станки</span>
-                    <ul className={isActive ? "toppings-list toppings-list-visible" : 'toppings-list'}>
+                    <ul className='toppings-list'
+                    style={isActive ? "display: block; opacity: 100%;" : ''}>
                         {complexName.map((name, index) => {
                             return (
                                 <li key={index}>

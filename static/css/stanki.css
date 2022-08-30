@@ -169,15 +169,12 @@ input:checked + .slider:before {
     padding: 0px;
     margin: auto;
     display: none;
+    transition: 0.5s;
     position: absolute;
     flex-direction: column;
     background-color: #83addd;
     width: 162px;
 }
-.toppings-list-visible {
-    display: block;
-}
-
 
 .toppings-list li {
     margin: 0px 0px 0px 0px;
