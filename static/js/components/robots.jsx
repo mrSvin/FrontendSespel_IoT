@@ -104,6 +104,12 @@ function highChartTotalKolOp(total, kolOp, complexName, day1, nagruzkaName) {
 
 //Суточный и месячный
 function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, fetchNames, date = 24, chartName = '') {
+    work = Array.isArray(work)? work : [work]
+    pause = Array.isArray(pause)? pause : [pause]
+    off = Array.isArray(off)? off : [off]
+    avar = Array.isArray(avar)? avar : [avar]
+    nagruzka = Array.isArray(nagruzka)? nagruzka : [nagruzka]
+
     let colorNagruzka;
     let workNoNagruzka = work.slice();
 
@@ -160,7 +166,7 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, f
 
     if (fetchNames == 'Нагрузка') {
         colorNagruzka = '#207210'
-        for (var i = 0; i < work.length; i++) {
+        for (var i = 0; i < work.length-1; i++) {
             workNoNagruzka[i] = workNoNagruzka[i] - nagruzka[i]
         }
     }
