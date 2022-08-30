@@ -8,16 +8,16 @@ function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idCon
     return (
         <div className='complexAllInfo'>
             <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report} current={current}/>
-          <div className='highChartsLineRound'>
-            <div className='lineComplex'>
-                <div className="lineSukiHighChart" id={idLine}></div>
-                {idProgram != null ?
-                    <div className="lineProgramHighChart" id={idProgram}></div>
-                    :<div></div>
-                }
+            <div className='highChartsLineRound'>
+                <div className='lineComplex'>
+                    <div className="lineSukiHighChart" id={idLine}></div>
+                    {idProgram != null ?
+                        <div className="lineProgramHighChart" id={idProgram}></div>
+                        :<div></div>
+                    }
+                </div>
+                <div className="roundSukiHighChart" id={idRound}></div>
             </div>
-            <div className="roundSukiHighChart" id={idRound}></div>
-          </div>
         </div>
     )
 }
@@ -259,7 +259,7 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
                 break
             case 'ПРАНСsmena':
                 href = "../stanki/programTimeSmena/prans"
-                break                
+                break
             default:
                 href = "../stanki/programTime/navigator_1"
         }
@@ -368,12 +368,12 @@ function ComplexTotalMonthInfo() {
     )
 }
 
-function SwitchLineHC({date,stateLineHC, setStateLineHC}) {
+function SwitchLineHC({date,stateLineHC, setStateLineHC,bufferData,complexRequest}) {
     return (
         <div className="energyCalendarContainer">
             <label className="switch">
                 <input type="checkbox" onChange={() => {
-                    changeTypeLine(date,stateLineHC, setStateLineHC)
+                    changeTypeLine(date,stateLineHC, setStateLineHC,bufferData,complexRequest)
                 }}/>
                 <span className="slider round"></span>
             </label>
