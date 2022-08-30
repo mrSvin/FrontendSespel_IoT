@@ -384,7 +384,7 @@ function RobotsInfo() {
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
                 <div onClick={toggleClass} className="listComplex"><span>Станки</span>
-                    <ul className={isActive ? "toppings-list toppings-list-visible" : 'toppings-list'} className="toppings-list">
+                    <ul className={isActive ? "toppings-list toppings-list-visible" : 'toppings-list'}>
                         {complexName.map((name, index) => {
                             return (
                                 <li key={index}>
