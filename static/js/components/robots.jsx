@@ -332,7 +332,6 @@ function RobotsInfo() {
     };
 
 
-
     useEffect(() => {
         let dateInput = dayNow()
         setDate(dateInput)
@@ -374,27 +373,29 @@ function RobotsInfo() {
     return (
         <div>
             <DayCalendar newDate={newDate} date={date}/>
-            <ul className="toppings-list">
-                {complexName.map((name, index) => {
-                    return (
-                        <li key={index}>
-                            <div className="toppings-list-item">
-                                <div className="left-section">
-                                    <input
-                                        type="checkbox"
-                                        id={`custom-checkbox-${index}`}
-                                        name={name}
-                                        value={index}
-                                        checked={selectedObjects[index]}
-                                        onChange={() => handleOnChange(index)}
-                                    />
-                                    <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+            <div className="listComplex"><span>Станки</span>
+                <ul className="toppings-list">
+                    {complexName.map((name, index) => {
+                        return (
+                            <li key={index}>
+                                <div className="toppings-list-item">
+                                    <div className="left-section">
+                                        <input
+                                            type="checkbox"
+                                            id={`custom-checkbox-${index}`}
+                                            name={name}
+                                            value={index}
+                                            checked={selectedObjects[index]}
+                                            onChange={() => handleOnChange(index)}
+                                        />
+                                        <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    );
-                })}
-            </ul>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
             <ComplexTotalSutkiInfo/>
 
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData}
@@ -406,36 +407,35 @@ function RobotsInfo() {
                                             programs={complexNameProgram[e]} service={complexName[e]}/>
             })}
         </div>
-)
+    )
 
 }
 
-function Robots()
-    {
+function Robots() {
 
-        return (
-            <div>
+    return (
+        <div>
 
-                <MenuStanki menuSelected="robots"/>
+            <MenuStanki menuSelected="robots"/>
 
-                <div className="buttons-otchet">
+            <div className="buttons-otchet">
 
-                    <Link to="/stanki/robots">
-                        <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                    </Link>
+                <Link to="/stanki/robots">
+                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
 
-                    <Link to="/stanki/robotsMonth">
-                        <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                    </Link>
+                <Link to="/stanki/robotsMonth">
+                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
 
-                    <Link to="/stanki/robotsSmena">
-                        <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
-                    </Link>
-
-                </div>
-
-                <RobotsInfo/>
+                <Link to="/stanki/robotsSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
 
             </div>
-        )
-    }
+
+            <RobotsInfo/>
+
+        </div>
+    )
+}
