@@ -349,14 +349,17 @@ function RobotsInfo() {
         <div>
             <DayCalendar newDate={newDate} date={date}/>
 
-            <form>
-                <input type="checkbox" checked="true"/>
-                <input type="checkbox" checked="true"/>
-                <input type="checkbox" checked="true"/>
-                <input type="checkbox" checked="true"/>
-                <input type="checkbox" checked="true"/>
-                <input type="checkbox" checked="true"/>
-                <input type="checkbox" checked="true"/>
+            <form
+                onChange={() => {
+                    console.log('Изменение')
+                }}>
+                <input type="checkbox" checked/>
+                <input type="checkbox" checked/>
+                <input type="checkbox" checked/>
+                <input type="checkbox" checked/>
+                <input type="checkbox" checked/>
+                <input type="checkbox" checked/>
+                <input type="checkbox" checked/>
             </form>
 
             <ComplexTotalSutkiInfo/>
