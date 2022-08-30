@@ -285,6 +285,14 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
     })
 }
 
+function changeTypeLine(stateLineHC, setStateLineHC) {
+    if (stateLineHC == 'line') {
+        setStateLineHC('multiline')
+    } else {
+        setStateLineHC('line')
+    }
+}
+
 function RobotsInfo() {
 
     let complexName = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
@@ -304,17 +312,22 @@ function RobotsInfo() {
 
     let size = ['ceh6', 'ceh6', 'sborCeh', 'sborCeh', 'ceh5', 'sborCeh', 'ceh6']
 
-    let bufferData = bufferDataArrays(6)
-
-    let [date, setDate] = useState(0);
-
-    let [stateLineHC, setStateLineHC] = useState("multiLine");
-
+    // Массив номеров всех станков
     let values = complexName.map((e, i) => i)
 
+    let bufferData = bufferDataArrays(6)
+
+    // Состояние даты
+    let [date, setDate] = useState(0);
+
+    // Состояние переменной мульти Диаграммы
+    let [stateLineHC, setStateLineHC] = useState("multiLine");
+
+    // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
         new Array(complexName.length).fill(true)
     );
+
 
     let [valuesState, setValuesState] = useState(values)
 
@@ -425,8 +438,7 @@ function RobotsInfo() {
             </div>
             <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData}
-                          complexRequest={complexRequest}/>
+            <SwitchLineHC stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}/>
 
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e]} complexImg={complexImg[e]}
