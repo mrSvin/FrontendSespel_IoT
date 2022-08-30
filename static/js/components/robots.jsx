@@ -353,13 +353,13 @@ function RobotsInfo() {
                 onChange={() => {
                     console.log('Изменение')
                 }}>
-                <input type="checkbox" defaultChecked={'checked'} value={1}/>
-                <input type="checkbox" defaultChecked={'checked'} value={2}/>
-                <input type="checkbox" defaultChecked={'checked'} value={3}/>
-                <input type="checkbox" defaultChecked={'checked'} value={4}/>
-                <input type="checkbox" defaultChecked={'checked'} value={5}/>
-                <input type="checkbox" defaultChecked={'checked'} value={6}/>
-                <input type="checkbox" defaultChecked={'checked'} value={7}/>
+                <input type="checkbox" defaultChecked={true} value={1}/>
+                <input type="checkbox" defaultChecked={true} value={2}/>
+                <input type="checkbox" defaultChecked={true} value={3}/>
+                <input type="checkbox" defaultChecked={true} value={4}/>
+                <input type="checkbox" defaultChecked={true} value={5}/>
+                <input type="checkbox" defaultChecked={true} value={6}/>
+                <input type="checkbox" defaultChecked={true} value={7}/>
             </form>
 
             <ComplexTotalSutkiInfo/>
