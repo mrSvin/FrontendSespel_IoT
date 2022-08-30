@@ -313,14 +313,14 @@ function RobotsInfo() {
     let [valuesState, setValuesState] = useState(values)
 
     const handleOnChange = (position) => {
-        const MyUpdatedCheckedState = selectedObjects.map((item, index) => {
+        const updatedCheckedState = selectedObjects.map((item, index) => {
             return index === position ? !item : item;
         });
 
-        setSelectedObjects(MyUpdatedCheckedState)
+        setSelectedObjects(updatedCheckedState)
 
         const activeValues = []
-        MyUpdatedCheckedState.forEach(
+        updatedCheckedState.forEach(
             (currentState, index) => {
                 if (currentState) {
                     activeValues.push(values[index]);
@@ -400,7 +400,7 @@ function RobotsInfo() {
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData}
                           complexRequest={complexRequest}/>
 
-            {selectedObjects.map((e, i) => {
+            {valuesState.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
                                             programs={complexNameProgram[e]} service={complexName[e]}/>
