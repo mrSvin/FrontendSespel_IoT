@@ -324,6 +324,7 @@ function RobotsInfo() {
 
     const toggleClass = () => {
         setActive(!isActive);
+        if(!isActive) newDate(dateInput)
     };
 
     const handleOnChange = (position) => {
@@ -345,9 +346,14 @@ function RobotsInfo() {
 
     };
 
-    const style = {
+    const styleVisible = {
         display: 'block',
         opacity: '100%',
+    };
+
+    const styleHidden = {
+        display: 'none',
+        opacity: '0%',
     };
 
 
@@ -396,7 +402,7 @@ function RobotsInfo() {
                 <DayCalendar newDate={newDate} date={date}/>
                 <div className="listComplex"><span onClick={toggleClass}>Станки</span>
                     <ul className='toppings-list'
-                    style={style}>
+                    style={isActive? styleVisible: styleHidden}>
                         {complexName.map((name, index) => {
                             return (
                                 <li key={index}>
