@@ -310,16 +310,19 @@ function RobotsInfo() {
         let dateInput = dayNow()
         setDate(dateInput)
 
-
         let fetchNames = selectedObjects.map(i =>{
             return complexRequest[i]
         })
 
-        let stankiRequest = Promise.all(complexRequest.map((item)=>{
+        let complexNames = selectedObjects.map(i =>{
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item)=>{
             return fetchRequest(dateInput, item)
         }));
 
-        updateLoadData(stankiRequest, dateInput, complexName, fetchNames, stateLineHC)
+        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }, [])
 
@@ -331,10 +334,14 @@ function RobotsInfo() {
             return complexRequest[i]
         })
 
+        let complexNames = selectedObjects.map(i =>{
+            return complexName[i]
+        })
+
         let stankiRequest = Promise.all(fetchNames.map((item)=>{
             return fetchRequest(dateInput, item)
         }));
-        updateLoadData(stankiRequest, dateInput, complexName, fetchNames, stateLineHC)
+        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }
 
