@@ -168,6 +168,8 @@ input:checked + .slider:before {
     list-style: none;
     padding: 0px;
     margin: auto;
+    /* display: none; */
+    /* display: block; */
 }
 
 .toppings-list li {
@@ -175,6 +177,7 @@ input:checked + .slider:before {
     background-color: white;
     user-select: none;
     height: 28px;
+    padding: 0 10px;
 }
 
 .listComplex {
@@ -182,11 +185,11 @@ input:checked + .slider:before {
     background: #83addd;
     border-radius: 9px 9px 0px 0px;
     min-height: 20px;
-    width: 124px;
+    width: fit-content;
     position: absolute;
     z-index: 1;
     margin-left: 670px;
-    margin-top: 21px;
+    margin-top: 220px;
     font-size: 25px;
     cursor: pointer;
 }
@@ -196,4 +199,13 @@ input:checked + .slider:before {
     text-align: center;
     font-weight: 600;
     user-select: none;
+}
+
+.listComplex label {
+    cursor: pointer;
+}
+
+.left-section > input {
+    height: 17px;
+    width: 17px;
 }

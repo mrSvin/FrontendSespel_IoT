@@ -312,6 +312,8 @@ function RobotsInfo() {
 
     let [valuesState, setValuesState] = useState(values)
 
+    let [valuesStateWait, setValuesStateWait] = useState(values)
+
     const handleOnChange = (position) => {
         const updatedCheckedState = selectedObjects.map((item, index) => {
             return index === position ? !item : item;
@@ -354,6 +356,7 @@ function RobotsInfo() {
 
     function newDate(dateInput) {
         setDate(dateInput)
+        setValuesStateWait(valuesState)
 
         let fetchNames = valuesState.map(i => {
             return complexRequest[i]
@@ -372,36 +375,38 @@ function RobotsInfo() {
 
     return (
         <div>
-            <DayCalendar newDate={newDate} date={date}/>
-            <div className="listComplex"><span>Станки</span>
-                <ul className="toppings-list">
-                    {complexName.map((name, index) => {
-                        return (
-                            <li key={index}>
-                                <div className="toppings-list-item">
-                                    <div className="left-section">
-                                        <input
-                                            type="checkbox"
-                                            id={`custom-checkbox-${index}`}
-                                            name={name}
-                                            value={index}
-                                            checked={selectedObjects[index]}
-                                            onChange={() => handleOnChange(index)}
-                                        />
-                                        <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+            <div className="energyCalendarContainer">
+                <DayCalendar newDate={newDate} date={date}/>
+                <div className="listComplex"><span>Станки</span>
+                    <ul className="toppings-list">
+                        {complexName.map((name, index) => {
+                            return (
+                                <li key={index}>
+                                    <div className="toppings-list-item">
+                                        <div className="left-section">
+                                            <input
+                                                type="checkbox"
+                                                id={`custom-checkbox-${index}`}
+                                                name={name}
+                                                value={index}
+                                                checked={selectedObjects[index]}
+                                                onChange={() => handleOnChange(index)}
+                                            />
+                                            <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        );
-                    })}
-                </ul>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
             </div>
             <ComplexTotalSutkiInfo/>
 
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData}
                           complexRequest={complexRequest}/>
 
-            {valuesState.map((e, i) => {
+            {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
                                             programs={complexNameProgram[e]} service={complexName[e]}/>
