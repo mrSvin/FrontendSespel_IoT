@@ -285,11 +285,27 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
     })
 }
 
-function changeTypeLine(stateLineHC, setStateLineHC) {
+function SwitchLineHC({date,stateLineHC, setStateLineHC}) {
+    return (
+        <div className="energyCalendarContainer">
+            <label className="switch">
+                <input type="checkbox" onChange={() => {
+                    changeTypeLine(date,stateLineHC, setStateLineHC)
+                }}/>
+                <span className="slider round"></span>
+            </label>
+        </div>
+    )
+
+}
+
+function changeTypeLine(date, stateLineHC, setStateLineHC) {
     if (stateLineHC == 'line') {
         setStateLineHC('multiline')
+        newDate(date)
     } else {
         setStateLineHC('line')
+        newDate(date)
     }
 }
 
@@ -358,15 +374,6 @@ function RobotsInfo() {
         setValuesState(activeValues);
 
     };
-
-    const styleVisible = {
-        opacity: '100%',
-    };
-
-    const styleHidden = {
-        opacity: '0%',
-    };
-
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -438,7 +445,7 @@ function RobotsInfo() {
             </div>
             <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}/>
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}/>
 
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e]} complexImg={complexImg[e]}
