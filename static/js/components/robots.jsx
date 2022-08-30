@@ -345,10 +345,10 @@ function RobotsInfo() {
 
     };
 
-    // const style = {
-    //     display: 'block',
-    //     opacity: '100%',
-    // };
+    const style = {
+        display: 'block',
+        opacity: '100%',
+    };
 
 
     useEffect(() => {
@@ -396,7 +396,7 @@ function RobotsInfo() {
                 <DayCalendar newDate={newDate} date={date}/>
                 <div className="listComplex"><span onClick={toggleClass}>Станки</span>
                     <ul className='toppings-list'
-                    style={isActive ? "display: block; opacity: 100%;" : ''}>
+                    style={isActive ? style:''}>
                         {complexName.map((name, index) => {
                             return (
                                 <li key={index}>
