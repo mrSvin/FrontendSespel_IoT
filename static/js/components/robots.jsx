@@ -307,24 +307,34 @@ function RobotsInfo() {
     let [selectedObjects, setselectedObjects] = useState(complexName.map((e, i) => i))
 
     useEffect(() => {
-        setDate(dayNow())
-
         let dateInput = dayNow()
+        setDate(dateInput)
+
+
+        let fetchNames = selectedObjects.map(i =>{
+            return complexRequest[i]
+        })
+
         let stankiRequest = Promise.all(complexRequest.map((item)=>{
             return fetchRequest(dateInput, item)
         }));
-        updateLoadData(stankiRequest, dateInput, complexName, complexRequest, stateLineHC)
+
+        updateLoadData(stankiRequest, dateInput, complexName, fetchNames, stateLineHC)
 
     }, [])
 
     function newDate(dateInput) {
         setDate(dateInput)
-
         setselectedObjects([0, 2, 4, 6])
-        let stankiRequest = Promise.all(complexRequest.map((item)=>{
+
+        let fetchNames = selectedObjects.map(i =>{
+            return complexRequest[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item)=>{
             return fetchRequest(dateInput, item)
         }));
-        updateLoadData(stankiRequest, dateInput, complexName, complexRequest, stateLineHC)
+        updateLoadData(stankiRequest, dateInput, complexName, fetchNames, stateLineHC)
 
     }
 
