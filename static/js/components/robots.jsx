@@ -310,15 +310,15 @@ function RobotsInfo() {
         let dateInput = dayNow()
         setDate(dateInput)
 
-        let fetchNames = selectedObjects.map(i =>{
+        let fetchNames = selectedObjects.map(i => {
             return complexRequest[i]
         })
 
-        let complexNames = selectedObjects.map(i =>{
+        let complexNames = selectedObjects.map(i => {
             return complexName[i]
         })
 
-        let stankiRequest = Promise.all(fetchNames.map((item)=>{
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
             return fetchRequest(dateInput, item)
         }));
 
@@ -330,15 +330,15 @@ function RobotsInfo() {
         setDate(dateInput)
         setselectedObjects([0, 2, 4, 6])
 
-        let fetchNames = selectedObjects.map(i =>{
+        let fetchNames = selectedObjects.map(i => {
             return complexRequest[i]
         })
 
-        let complexNames = selectedObjects.map(i =>{
+        let complexNames = selectedObjects.map(i => {
             return complexName[i]
         })
 
-        let stankiRequest = Promise.all(fetchNames.map((item)=>{
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
             return fetchRequest(dateInput, item)
         }));
         updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
@@ -348,6 +348,16 @@ function RobotsInfo() {
     return (
         <div>
             <DayCalendar newDate={newDate} date={date}/>
+
+            <form>
+                <input type="checkbox" checked="true"/>
+                <input type="checkbox" checked="true"/>
+                <input type="checkbox" checked="true"/>
+                <input type="checkbox" checked="true"/>
+                <input type="checkbox" checked="true"/>
+                <input type="checkbox" checked="true"/>
+                <input type="checkbox" checked="true"/>
+            </form>
 
             <ComplexTotalSutkiInfo/>
 
@@ -360,35 +370,36 @@ function RobotsInfo() {
                                             programs={complexNameProgram[e]} service={complexName[e]}/>
             })}
         </div>
-    )
+)
 
 }
 
-function Robots() {
+function Robots()
+    {
 
-    return (
-        <div>
+        return (
+            <div>
 
-            <MenuStanki menuSelected="robots"/>
+                <MenuStanki menuSelected="robots"/>
 
-            <div className="buttons-otchet">
+                <div className="buttons-otchet">
 
-                <Link to="/stanki/robots">
-                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
+                    <Link to="/stanki/robots">
+                        <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                    </Link>
 
-                <Link to="/stanki/robotsMonth">
-                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
+                    <Link to="/stanki/robotsMonth">
+                        <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                    </Link>
 
-                <Link to="/stanki/robotsSmena">
-                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
-                </Link>
+                    <Link to="/stanki/robotsSmena">
+                        <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                    </Link>
+
+                </div>
+
+                <RobotsInfo/>
 
             </div>
-
-            <RobotsInfo/>
-
-        </div>
-    )
-}
+        )
+    }
