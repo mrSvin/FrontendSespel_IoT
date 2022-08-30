@@ -299,16 +299,6 @@ function SwitchLineHC({date,stateLineHC, setStateLineHC}) {
 
 }
 
-function changeTypeLine(date, stateLineHC, setStateLineHC) {
-    if (stateLineHC == 'line') {
-        setStateLineHC('multiline')
-        newDate(date)
-    } else {
-        setStateLineHC('line')
-        newDate(date)
-    }
-}
-
 function RobotsInfo() {
 
     let complexName = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
@@ -414,11 +404,21 @@ function RobotsInfo() {
 
     }
 
+    function changeTypeLine(date, stateLineHC, setStateLineHC) {
+        if (stateLineHC == 'line') {
+            setStateLineHC('multiline')
+            newDate(date)
+        } else {
+            setStateLineHC('line')
+            newDate(date)
+        }
+    }
+
     return (
         <div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <div className="listComplex"><span onClick={toggleClass}>Станки</span>
+                <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
                     <ul className='toppings-list'
                         className={isActive? 'toppings-list toppings-list-visible': 'toppings-list'}>
                         {complexName.map((name, index) => {
@@ -434,7 +434,7 @@ function RobotsInfo() {
                                                 checked={selectedObjects[index]}
                                                 onChange={() => handleOnChange(index)}
                                             />
-                                            <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                                            <label htmlFor={`custom-checkbox-${index}`}></label><span className='spanList'>{name}</span>
                                         </div>
                                     </div>
                                 </li>
