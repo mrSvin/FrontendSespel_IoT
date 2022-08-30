@@ -368,12 +368,12 @@ function ComplexTotalMonthInfo() {
     )
 }
 
-function SwitchLineHC({date,stateLineHC, setStateLineHC,bufferData,complexRequest}) {
+function SwitchLineHC({date,stateLineHC, setStateLineHC}) {
     return (
         <div className="energyCalendarContainer">
             <label className="switch">
                 <input type="checkbox" onChange={() => {
-                    changeTypeLine(date,stateLineHC, setStateLineHC,bufferData,complexRequest)
+                    changeTypeLine(date,stateLineHC, setStateLineHC)
                 }}/>
                 <span className="slider round"></span>
             </label>

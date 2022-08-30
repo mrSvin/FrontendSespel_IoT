@@ -596,17 +596,13 @@ function getArrayPeriodsBetween(arrayTime) {
     return ArrayPeriod
 }
 
-function changeTypeLine(date, stateLineHC, setStateLineHC, bufferData, complexRequest) {
+function changeTypeLine(date, stateLineHC, setStateLineHC) {
     if (stateLineHC == 'line') {
         setStateLineHC('multiline')
-        for (let i = 0; i < complexRequest.length; i++) {
-            fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
-        }
+        newDate(date)
     } else {
         setStateLineHC('line')
-        for (let i = 0; i < complexRequest.length; i++) {
-            fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]) )
-        }
+        newDate(date)
     }
 }
 
