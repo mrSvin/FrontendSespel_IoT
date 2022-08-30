@@ -168,12 +168,22 @@ input:checked + .slider:before {
     list-style: none;
     padding: 0px;
     margin: auto;
-    display: none;
-    transition: 0.5s;
     position: absolute;
     flex-direction: column;
     background-color: #83addd;
     width: 162px;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1s, opacity 0.5s linear;
+
+
+}
+
+.toppings-list-visible {
+    visibility: visible;
+    transition: visibility 1s, opacity 0.5s linear;
+    opacity: 1;
 }
 
 .toppings-list li {
