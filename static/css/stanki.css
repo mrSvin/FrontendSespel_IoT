@@ -163,3 +163,12 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+.toppings-list {
+    list-style: none;
+    padding: 0;
+}
+
+.toppings-list li {
+    margin-bottom: 0.5rem;
+}

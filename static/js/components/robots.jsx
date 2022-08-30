@@ -304,17 +304,44 @@ function RobotsInfo() {
 
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    let [selectedObjects, setselectedObjects] = useState(complexName.map((e, i) => i))
+    let values = complexName.map((e, i) => i)
+
+    let [selectedObjects, setSelectedObjects] = useState(
+        new Array(complexName.length).fill(true)
+    );
+
+    let [valuesState, setValuesState] = useState(values)
+
+    const handleOnChange = (position) => {
+        const MyUpdatedCheckedState = selectedObjects.map((item, index) => {
+            return index === position ? !item : item;
+        });
+
+        setSelectedObjects(MyUpdatedCheckedState)
+
+        const activeValues = []
+        MyUpdatedCheckedState.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(values[index]);
+                }
+            }
+        );
+        setValuesState(activeValues);
+
+    };
+
+
 
     useEffect(() => {
         let dateInput = dayNow()
         setDate(dateInput)
 
-        let fetchNames = selectedObjects.map(i => {
+        let fetchNames = valuesState.map(i => {
             return complexRequest[i]
         })
 
-        let complexNames = selectedObjects.map(i => {
+        let complexNames = valuesState.map(i => {
             return complexName[i]
         })
 
@@ -328,13 +355,12 @@ function RobotsInfo() {
 
     function newDate(dateInput) {
         setDate(dateInput)
-        setselectedObjects([0, 2, 4, 6])
 
-        let fetchNames = selectedObjects.map(i => {
+        let fetchNames = valuesState.map(i => {
             return complexRequest[i]
         })
 
-        let complexNames = selectedObjects.map(i => {
+        let complexNames = valuesState.map(i => {
             return complexName[i]
         })
 
@@ -348,20 +374,27 @@ function RobotsInfo() {
     return (
         <div>
             <DayCalendar newDate={newDate} date={date}/>
-
-            <form
-                onChange={() => {
-                    console.log('Изменение')
-                }}>
-                <input type="checkbox" defaultChecked={true} value={1}/>
-                <input type="checkbox" defaultChecked={true} value={2}/>
-                <input type="checkbox" defaultChecked={true} value={3}/>
-                <input type="checkbox" defaultChecked={true} value={4}/>
-                <input type="checkbox" defaultChecked={true} value={5}/>
-                <input type="checkbox" defaultChecked={true} value={6}/>
-                <input type="checkbox" defaultChecked={true} value={7}/>
-            </form>
-
+            <ul className="toppings-list">
+                {complexName.map((name, index) => {
+                    return (
+                        <li key={index}>
+                            <div className="toppings-list-item">
+                                <div className="left-section">
+                                    <input
+                                        type="checkbox"
+                                        id={`custom-checkbox-${index}`}
+                                        name={name}
+                                        value={index}
+                                        checked={selectedObjects[index]}
+                                        onChange={() => handleOnChange(index)}
+                                    />
+                                    <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                                </div>
+                            </div>
+                        </li>
+                    );
+                })}
+            </ul>
             <ComplexTotalSutkiInfo/>
 
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData}
