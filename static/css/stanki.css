@@ -168,30 +168,44 @@ input:checked + .slider:before {
     list-style: none;
     padding: 0px;
     margin: auto;
-    /* display: none; */
-    /* display: block; */
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    background-color: #83addd;
+    width: 162px;
+}
+.toppings-list-visible {
+    display: block;
 }
 
+
 .toppings-list li {
-    margin: 0px 0px 2px 0px;
+    margin: 0px 0px 0px 0px;
     background-color: white;
     user-select: none;
-    height: 28px;
-    padding: 0 10px;
+    height: fit-content;
+    padding: 0 5px;
+    border: 1px solid #83addd;
 }
 
 .listComplex {
     display: block;
     background: #83addd;
-    border-radius: 9px 9px 0px 0px;
-    min-height: 20px;
-    width: fit-content;
-    position: absolute;
+    border-radius: 4px;
+    height: max-content;
+    padding: 5px 0;
+    width: 162px;
+    position: relative;
     z-index: 1;
-    margin-left: 670px;
-    margin-top: 220px;
+    margin-left: 30px;
+    margin-top: 20px;
     font-size: 25px;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.listComplex:hover {
+    box-shadow: 0px 0px 5px 0px #14b2f3, inset 0px 0px 0px 0px #14b2f3;
 }
 
 .listComplex > span {

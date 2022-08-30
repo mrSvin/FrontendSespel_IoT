@@ -314,6 +314,12 @@ function RobotsInfo() {
 
     let [valuesStateWait, setValuesStateWait] = useState(values)
 
+    const [isActive, setActive] = useState(false);
+
+    const toggleClass = () => {
+        setActive(!isActive);
+    };
+
     const handleOnChange = (position) => {
         const updatedCheckedState = selectedObjects.map((item, index) => {
             return index === position ? !item : item;
@@ -377,8 +383,8 @@ function RobotsInfo() {
         <div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <div className="listComplex"><span>Станки</span>
-                    <ul className="toppings-list">
+                <div onClick={toggleClass} className="listComplex"><span>Станки</span>
+                    <ul className={isActive ? "toppings-list toppings-list-visible" : 'toppings-list'} className="toppings-list">
                         {complexName.map((name, index) => {
                             return (
                                 <li key={index}>
