@@ -1,4 +1,4 @@
-/*Отключить скрол по горизонтали*/
+/*ÐžÑ‚ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ ÑÐºÑ€Ð¾Ð» Ð¿Ð¾ Ð³Ð¾Ñ€Ð¸Ð·Ð¾Ð½Ñ‚Ð°Ð»Ð¸*/
 body {
     overflow-x:hidden;
 }
@@ -224,7 +224,7 @@ input:checked + .slider:before {
 
 .listComplex label {
     cursor: pointer;
-    padding-right: 75px;
+    padding-right: 175px;
 }
 
 .listComplex li:hover {
@@ -239,4 +239,5 @@ input:checked + .slider:before {
 .spanList {
     position: absolute;
     left: 38px;
+    pointer-events: none;
 }
