@@ -383,7 +383,6 @@ function ComplexTotalMonthInfo() {
 // }
 
 function SwitchLineHC({date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState}) {
-    console.log('Что передал:',)
     return (
         <div className="energyCalendarContainer">
             <label className="switch">

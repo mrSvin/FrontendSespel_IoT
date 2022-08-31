@@ -606,25 +606,26 @@ function getArrayPeriodsBetween(arrayTime) {
 // }
 
 function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
-    console.log('Что получил', date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
-    if (stateLineHC == 'line') {
-        setStateLineHC('multiline')
-    } else {
-        setStateLineHC('line')
-    }
 
     let fetchNames = valuesState.map(i => {
         return complexRequest[i]
     })
-
     let complexNames = valuesState.map(i => {
         return complexName[i]
     })
-
     let stankiRequest = Promise.all(fetchNames.map((item) => {
         return fetchRequest(date, item)
     }));
-    updateLoadData(stankiRequest, date, complexNames, fetchNames, stateLineHC)
+
+    if (stateLineHC == 'line') {
+        setStateLineHC('multiline')
+        updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiline')
+    } else {
+        setStateLineHC('line')
+        updateLoadData(stankiRequest, date, complexNames, fetchNames, 'line')
+    }
+
+
 }
 
 function exceptionManualNagruzka(name) {
