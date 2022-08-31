@@ -39,7 +39,7 @@ function updateLoadData(promiseVariable, day1, complexName, fetchNames, typeLine
             parserDataArray.forEach((e, i) => {
                 // Первая смена
                 highChartSutkiLine(e[0], e[1], e[2], e[3], e[4], nagruzkaName[i], i + 1)
-                highChartProgram(getTimeProgramNameGraph(data),i + 1)
+                highChartProgram(getTimeProgramNameGraph(data[i]),i + 1)
                 highChartRound(e[5][0], e[5][1], e[5][2], e[5][3], e[5][4], nagruzkaName[i], i + 1)
 
             })
