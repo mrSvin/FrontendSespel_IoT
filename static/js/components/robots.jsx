@@ -293,13 +293,13 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
 
 function RobotsInfo() {
     let complexName = [
-            ["МАКС 1", null],
+            ["МАКС 1", "МАКС 1"],
             ["МАКС 2", 'МАКС 2'],
-            ["М710", null],
+            ["М710", "МАКС 1"],
             ["РТК12C", 'РТК12C'],
-            ["P250", null],
+            ["P250", "МАКС 1"],
             ["КРОТ", 'КРОТ'],
-            ["ПРАНС", null],
+            ["ПРАНС", "МАКС 1"],
     ]
 
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
@@ -415,7 +415,7 @@ function RobotsInfo() {
                                             <input
                                                 type="checkbox"
                                                 id={`custom-checkbox-${index}`}
-                                                name={name}
+                                                name={name[0]}
                                                 value={index}
                                                 checked={selectedObjects[index]}
                                                 onChange={() => handleOnChange(index)}
