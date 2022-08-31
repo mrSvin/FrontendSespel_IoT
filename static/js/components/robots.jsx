@@ -104,11 +104,11 @@ function highChartTotalKolOp(total, kolOp, complexName, day1, nagruzkaName) {
 
 //Суточный и месячный
 function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, fetchNames, date = 24, chartName = '') {
-    work = Array.isArray(work)? work : [work]
-    pause = Array.isArray(pause)? pause : [pause]
-    off = Array.isArray(off)? off : [off]
-    avar = Array.isArray(avar)? avar : [avar]
-    nagruzka = Array.isArray(nagruzka)? nagruzka : [nagruzka]
+    work = Array.isArray(work) ? work : [work]
+    pause = Array.isArray(pause) ? pause : [pause]
+    off = Array.isArray(off) ? off : [off]
+    avar = Array.isArray(avar) ? avar : [avar]
+    nagruzka = Array.isArray(nagruzka) ? nagruzka : [nagruzka]
 
     let colorNagruzka;
     let workNoNagruzka = work.slice();
@@ -166,7 +166,7 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, f
 
     if (fetchNames == 'Нагрузка') {
         colorNagruzka = '#207210'
-        for (var i = 0; i < work.length-1; i++) {
+        for (var i = 0; i < work.length - 1; i++) {
             workNoNagruzka[i] = workNoNagruzka[i] - nagruzka[i]
         }
     }
@@ -285,39 +285,18 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
     })
 }
 
-function SwitchLineHC({date,stateLineHC, setStateLineHC, complexName, complexRequest, valuesState}) {
+function SwitchLineHC({date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState}) {
+    console.log('Что передал:',)
     return (
         <div className="energyCalendarContainer">
             <label className="switch">
                 <input type="checkbox" onChange={() => {
-                    changeTypeLine(date,stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
+                    changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
                 }}/>
                 <span className="slider round"></span>
             </label>
         </div>
     )
-}
-
-function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
-    if (stateLineHC == 'line') {
-        setStateLineHC('multiline')
-    } else {
-        setStateLineHC('line')
-    }
-    console.log('Это новая функция')
-
-    let fetchNames = valuesState.map(i => {
-        return complexRequest[i]
-    })
-
-    let complexNames = valuesState.map(i => {
-        return complexName[i]
-    })
-
-    let stankiRequest = Promise.all(fetchNames.map((item) => {
-        return fetchRequest(date, item)
-    }));
-    updateLoadData(stankiRequest, date, complexNames, fetchNames, stateLineHC)
 }
 
 function RobotsInfo() {
@@ -364,7 +343,7 @@ function RobotsInfo() {
 
     const toggleClass = () => {
         setActive(!isActive);
-        if(isActive) newDate(date)
+        if (isActive) newDate(date)
     };
 
     const handleOnChange = (position) => {
@@ -385,6 +364,28 @@ function RobotsInfo() {
         setValuesState(activeValues);
 
     };
+
+    function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
+        console.log('Что получил', date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
+        if (stateLineHC == 'line') {
+            setStateLineHC('multiline')
+        } else {
+            setStateLineHC('line')
+        }
+
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
+
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(date, item)
+        }));
+        updateLoadData(stankiRequest, date, complexNames, fetchNames, stateLineHC)
+    }
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -431,7 +432,7 @@ function RobotsInfo() {
                 <DayCalendar newDate={newDate} date={date}/>
                 <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
                     <ul className='toppings-list'
-                        className={isActive? 'toppings-list toppings-list-visible': 'toppings-list'}>
+                        className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
                         {complexName.map((name, index) => {
                             return (
                                 <li key={index}>
@@ -445,7 +446,8 @@ function RobotsInfo() {
                                                 checked={selectedObjects[index]}
                                                 onChange={() => handleOnChange(index)}
                                             />
-                                            <label htmlFor={`custom-checkbox-${index}`}></label><span className='spanList'>{name}</span>
+                                            <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                            className='spanList'>{name}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -456,7 +458,8 @@ function RobotsInfo() {
             </div>
             <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} complexName={complexName} complexRequest={complexRequest} valuesState={valuesState}/>
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesState}/>
 
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e]} complexImg={complexImg[e]}
