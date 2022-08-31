@@ -596,19 +596,19 @@ function getArrayPeriodsBetween(arrayTime) {
     return ArrayPeriod
 }
 
-function changeTypeLine(date, stateLineHC, setStateLineHC, bufferData, complexRequest) {
-    if (stateLineHC == 'line') {
-        setStateLineHC('multiline')
-        for (let i = 0; i < complexRequest.length; i++) {
-            fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
-        }
-    } else {
-        setStateLineHC('line')
-        for (let i = 0; i < complexRequest.length; i++) {
-            fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]) )
-        }
-    }
-}
+// function changeTypeLine(date, stateLineHC, setStateLineHC, bufferData, complexRequest) {
+//     if (stateLineHC == 'line') {
+//         setStateLineHC('multiline')
+//         for (let i = 0; i < complexRequest.length; i++) {
+//             fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
+//         }
+//     } else {
+//         setStateLineHC('line')
+//         for (let i = 0; i < complexRequest.length; i++) {
+//             fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]) )
+//         }
+//     }
+// }
 
 function exceptionManualNagruzka(name) {
     if (name =='kim' || name=='apec') {
@@ -618,19 +618,19 @@ function exceptionManualNagruzka(name) {
     }
 }
 
-function switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData) {
-    let roundComplex =[]
-    if (stateLineHC == 'line') {
-        for (let i = 0; i < complexRequest.length; i++) {
-            roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]))
-        }
-    } else {
-        for (let i = 0; i < complexRequest.length; i++) {
-            roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
-        }
-    }
-    return roundComplex
-}
+// function switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData) {
+//     let roundComplex =[]
+//     if (stateLineHC == 'line') {
+//         for (let i = 0; i < complexRequest.length; i++) {
+//             roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]))
+//         }
+//     } else {
+//         for (let i = 0; i < complexRequest.length; i++) {
+//             roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
+//         }
+//     }
+//     return roundComplex
+// }
 
 // Функция получения из массивов времени и общего процента
 function highchartsPercentTime(generalDiagramNames, workNoNagruzka,pause, off, avar,nagruzka, date){
