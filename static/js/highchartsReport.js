@@ -988,7 +988,7 @@ function highChartProgram(arrayProgram, idContainer=1) {
                 borderColor: 'gray',
                 pointWidth: 30,
                 colorByPoint: false,
-                color: '#76d739',
+                color: '#ea6732',
                 tooltip: {
                     pointFormatter: function () {
                         let timer = msToTimeDays(this.x2 - this.x, 365)
@@ -1003,7 +1003,7 @@ function highChartProgram(arrayProgram, idContainer=1) {
                 borderColor: 'gray',
                 pointWidth: 30,
                 colorByPoint: false,
-                color: '#d8e523',
+                color: '#2938cb',
                 tooltip: {
                     pointFormatter: function () {
                         let timer = msToTimeDays(this.x2 - this.x, 365)
