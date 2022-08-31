@@ -295,11 +295,11 @@ function RobotsInfo() {
     let complexName = [
             ["МАКС 1", "МАКС 1"],
             ["МАКС 2", 'МАКС 2'],
-            ["М710", "МАКС 1"],
+            ["М710", "М710"],
             ["РТК12C", 'РТК12C'],
-            ["P250", "МАКС 1"],
+            ["P250", "P250"],
             ["КРОТ", 'КРОТ'],
-            ["ПРАНС", "МАКС 1"],
+            ["ПРАНС", "ПРАНС"],
     ]
 
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
@@ -421,7 +421,7 @@ function RobotsInfo() {
                                                 onChange={() => handleOnChange(index)}
                                             />
                                             <label htmlFor={`custom-checkbox-${index}`}></label><span
-                                            className='spanList'>{name}</span>
+                                            className='spanList'>{name[0]}</span>
                                         </div>
                                     </div>
                                 </li>
