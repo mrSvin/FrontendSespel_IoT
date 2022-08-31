@@ -618,8 +618,8 @@ function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexR
     }));
 
     if (stateLineHC == 'line') {
-        setStateLineHC('multiline')
-        updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiline')
+        setStateLineHC('multiLine')
+        updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
     } else {
         setStateLineHC('line')
         updateLoadData(stankiRequest, date, complexNames, fetchNames, 'line')
