@@ -34,12 +34,16 @@ function updateLoadData(promiseVariable, day1, complexName, fetchNames, typeLine
                 return exceptionManualNagruzka(e)
             })
 
-            highChartTotalKolOp(totalArray, kolOpArray, complexName, day1, nagruzkaName)
+            let names = complexName.map(e => {
+                return e[0]
+            })
+
+            highChartTotalKolOp(totalArray, kolOpArray, names, day1, nagruzkaName)
 
             parserDataArray.forEach((e, i) => {
                 // Первая смена
                 highChartSutkiLine(e[0], e[1], e[2], e[3], e[4], nagruzkaName[i], i + 1)
-                highChartProgram(getTimeProgramNameGraph(data[i]),i + 1)
+                complexName[i][1] == 'program'? highChartProgram(getTimeProgramNameGraph(data[i]),i + 1) :
                 highChartRound(e[5][0], e[5][1], e[5][2], e[5][3], e[5][4], nagruzkaName[i], i + 1)
 
             })
@@ -288,9 +292,16 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
 }
 
 function RobotsInfo() {
+    let complexName = [
+            ["МАКС 1",['program']],
+            ["МАКС 2",['1program']],
+            ["М710",['1program']],
+            ["РТК12C",['1program']],
+            ["P250",['1program']],
+            ["КРОТ",['program']],
+            ["ПРАНС",['1program']],
+    ]
 
-    let complexName = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
-    let complexNameProgram = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
     let complexRequest = ['maks_1', 'maks_2', 'm710', 'rtk12c', 'p250', 'krot', 'prans']
 
@@ -307,7 +318,7 @@ function RobotsInfo() {
     let size = ['ceh6', 'ceh6', 'sborCeh', 'sborCeh', 'ceh5', 'sborCeh', 'ceh6']
 
     // Массив номеров всех станков
-    let values = complexName.map((e, i) => i)
+    let values = complexRequest.map((e, i) => i)
 
     // Состояние даты
     let [date, setDate] = useState(0);
@@ -317,9 +328,8 @@ function RobotsInfo() {
 
     // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
-        new Array(complexName.length).fill(true)
+        new Array(complexRequest.length).fill(true)
     );
-
 
     let [valuesState, setValuesState] = useState(values)
 
@@ -428,7 +438,7 @@ function RobotsInfo() {
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                            programs={complexNameProgram[e]} service={complexName[e]}/>
+                                            programs={complexName[e][1]} service={complexName[e]}/>
             })}
         </div>
     )
