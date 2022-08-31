@@ -690,41 +690,37 @@ function getTimeProgramNameGraph(arrayData) {
 
     arrayData ? console.log("") : 0;
 
-    if (arrayData['work'].length % 2 == 1) {
-        console.log('Нечетная')
+    if (arrayData[0].length % 2 == 1) {
         let timeNow = dayTimeNow()
 
-        if (timeNow.slice(0, 10) == arrayData['work'][0].slice(0, 10)) {
-            arrayData['work'].push(timeNow)
+        if (timeNow.slice(0, 10) == arrayData[0][0].slice(0, 10)) {
+            arrayData[0].push(timeNow)
         } else {
-            arrayData['work'].push(arrayData['work'][0].slice(0, 10) + ' 23:59:59')
+            arrayData[0].push(arrayData[0][0].slice(0, 10) + ' 23:59:59')
         }
     }
 
 
-    for (let i = 0; i < arrayData['work'].length; i += 2) {
+    for (let i = 0; i < arrayData[0].length; i += 2) {
 
-        if (arrayData['programName'][i / 2] == arrayData['programName'][i / 2 + 1]) {
-            if (arrayData['programName'][i / 2] !== arrayData['programName'][i / 2 - 1]) {
+        if (arrayData[5][i / 2] == arrayData[5][i / 2 + 1]) {
+            if (arrayData[5][i / 2] !== arrayData[5][i / 2 - 1]) {
                 startSame = arrayData['work'][i]
             }
 
-            timer = timer + (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
+            timer = timer + (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
         } else {
 
-            if (arrayData['programName'][i / 2] == arrayData['programName'][i / 2 - 1]) {
-                timer = timer + (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
-                programTimeArray.push([arrayData['programName'][i / 2], startSame, arrayData['work'][i + 1]])
+            if (arrayData[5][i / 2] == arrayData[5][i / 2 - 1]) {
+                timer = timer + (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
+                programTimeArray.push([arrayData[5][i / 2], startSame, arrayData[0][i + 1]])
                 timer = 0
             } else {
-                timer = (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
-                programTimeArray.push([arrayData['programName'][i / 2], arrayData['work'][i], arrayData['work'][i + 1]])
+                timer = (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
+                programTimeArray.push([arrayData[5][i / 2], arrayData[0][i], arrayData[0][i + 1]])
                 timer = 0
             }
-
-
         }
-
     }
 
     let parset = []
