@@ -688,7 +688,7 @@ function getTimeProgramNameGraph(arrayData) {
     let programTimeArray = [];
     let startSame = null
 
-    arrayData ? console.log("") : 0;
+    if(!arrayData) return 0
 
     if (arrayData[0].length % 2 == 1) {
         let timeNow = dayTimeNow()
