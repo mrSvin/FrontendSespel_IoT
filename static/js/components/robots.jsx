@@ -285,18 +285,39 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
     })
 }
 
-function SwitchLineHC({date,stateLineHC, setStateLineHC}) {
+function SwitchLineHC({date,stateLineHC, setStateLineHC, complexName, complexRequest, valuesState}) {
     return (
         <div className="energyCalendarContainer">
             <label className="switch">
                 <input type="checkbox" onChange={() => {
-                    changeTypeLine(date,stateLineHC, setStateLineHC)
+                    changeTypeLine(date,stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
                 }}/>
                 <span className="slider round"></span>
             </label>
         </div>
     )
+}
 
+function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
+    if (stateLineHC == 'line') {
+        setStateLineHC('multiline')
+    } else {
+        setStateLineHC('line')
+    }
+    console.log('Это новая функция')
+
+    let fetchNames = valuesState.map(i => {
+        return complexRequest[i]
+    })
+
+    let complexNames = valuesState.map(i => {
+        return complexName[i]
+    })
+
+    let stankiRequest = Promise.all(fetchNames.map((item) => {
+        return fetchRequest(date, item)
+    }));
+    updateLoadData(stankiRequest, date, complexNames, fetchNames, stateLineHC)
 }
 
 function RobotsInfo() {
@@ -404,16 +425,6 @@ function RobotsInfo() {
 
     }
 
-    function changeTypeLine(date, stateLineHC, setStateLineHC) {
-        if (stateLineHC == 'line') {
-            setStateLineHC('multiline')
-            newDate(date)
-        } else {
-            setStateLineHC('line')
-            newDate(date)
-        }
-    }
-
     return (
         <div>
             <div className="energyCalendarContainer">
@@ -445,7 +456,7 @@ function RobotsInfo() {
             </div>
             <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}/>
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} complexName={complexName} complexRequest={complexRequest} valuesState={valuesState}/>
 
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e]} complexImg={complexImg[e]}
