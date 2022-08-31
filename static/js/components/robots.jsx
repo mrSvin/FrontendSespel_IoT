@@ -285,42 +285,6 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
     })
 }
 
-function SwitchLineHC({date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState}) {
-    console.log('Что передал:',)
-    return (
-        <div className="energyCalendarContainer">
-            <label className="switch">
-                <input type="checkbox" onChange={() => {
-                    changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
-                }}/>
-                <span className="slider round"></span>
-            </label>
-        </div>
-    )
-}
-
-function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
-    console.log('Что получил', date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
-    if (stateLineHC == 'line') {
-        setStateLineHC('multiline')
-    } else {
-        setStateLineHC('line')
-    }
-
-    let fetchNames = valuesState.map(i => {
-        return complexRequest[i]
-    })
-
-    let complexNames = valuesState.map(i => {
-        return complexName[i]
-    })
-
-    let stankiRequest = Promise.all(fetchNames.map((item) => {
-        return fetchRequest(date, item)
-    }));
-    updateLoadData(stankiRequest, date, complexNames, fetchNames, stateLineHC)
-}
-
 function RobotsInfo() {
 
     let complexName = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
