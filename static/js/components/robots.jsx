@@ -43,7 +43,7 @@ function updateLoadData(promiseVariable, day1, complexName, fetchNames, typeLine
             parserDataArray.forEach((e, i) => {
                 // Первая смена
                 highChartSutkiLine(e[0], e[1], e[2], e[3], e[4], nagruzkaName[i], i + 1)
-                complexName[i][1]['program'] !== null? highChartProgram(getTimeProgramNameGraph(data[i]),i + 1) :
+                complexName[i][1] !== null? highChartProgram(getTimeProgramNameGraph(data[i]),i + 1) :
                 highChartRound(e[5][0], e[5][1], e[5][2], e[5][3], e[5][4], nagruzkaName[i], i + 1)
 
             })
@@ -293,13 +293,13 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
 
 function RobotsInfo() {
     let complexName = [
-            ["МАКС 1",{'program':null}],
-            ["МАКС 2",{'program':'МАКС 2'}],
-            ["М710",{'program':null}],
-            ["РТК12C",{'program':'РТК12C'}],
-            ["P250",{'program':null}],
-            ["КРОТ",{'program':'КРОТ'}],
-            ["ПРАНС",{'program':null}],
+            ["МАКС 1", null],
+            ["МАКС 2", 'МАКС 2'],
+            ["М710", null],
+            ["РТК12C", 'РТК12C'],
+            ["P250", null],
+            ["КРОТ", 'КРОТ'],
+            ["ПРАНС", null],
     ]
 
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
@@ -438,7 +438,7 @@ function RobotsInfo() {
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                            programs={complexName[e][1]['program']} service={complexName[e][0]}/>
+                                            programs={complexName[e][1]} service={complexName[e][0]}/>
             })}
         </div>
     )
