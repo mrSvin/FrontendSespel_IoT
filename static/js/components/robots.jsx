@@ -436,9 +436,9 @@ function RobotsInfo() {
                           complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSutkiAllInfo key={i} complexName={complexName[e]} complexImg={complexImg[e]}
+                return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                            programs={complexName[e][1]['program']} service={complexName[e]}/>
+                                            programs={complexName[e][1]['program']} service={complexName[e][0]}/>
             })}
         </div>
     )
