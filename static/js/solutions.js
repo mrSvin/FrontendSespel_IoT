@@ -1,11 +1,9 @@
 function getTimeTotalArray(roundArray, date) {
 
     if (roundArray == null) {
-        return ['0 с.','0 с.','0 с.','0 с.','0 с.',]
-    }
-    else if(roundArray == roundArray.length)
-    {
-        return ['0 с.','0 с.','0 с.','0 с.','0 с.',]
+        return ['0 с.', '0 с.', '0 с.', '0 с.', '0 с.',]
+    } else if (roundArray == roundArray.length) {
+        return ['0 с.', '0 с.', '0 с.', '0 с.', '0 с.',]
     }
 
 
@@ -17,47 +15,41 @@ function getTimeTotalArray(roundArray, date) {
 
     let pageName = parseNameUrl(document.location.pathname);
 
-    if(typeof(date) == 'string') {
+    if (typeof (date) == 'string') {
         // Дата формата 2022-02
-        if(date.length == 7){
+        if (date.length == 7) {
             let timeNow = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
             // Если текущий год и месяц совпадают
-            if(timeNow.slice(0,7)==date) {
+            if (timeNow.slice(0, 7) == date) {
                 // то используем текущий день как 100%
-                date = timeNow.slice(8,10)
-            }
-            else date = new Date(date.slice(0,4), date.slice(5,7), 0).getDate()
+                date = timeNow.slice(8, 10)
+            } else date = new Date(date.slice(0, 4), date.slice(5, 7), 0).getDate()
         }
         // Дата формата 2022-02-22
-        else if(date.length == 10){
+        else if (date.length == 10) {
             let timeNow = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
             // Если текущая дата совпадает
-            if(timeNow.slice(0,10)==date) {
+            if (timeNow.slice(0, 10) == date) {
                 // то используем текущий час как 100%
-                date = +timeNow.slice(11, 13) + (timeNow.slice(14, 16)/60)
+                date = +timeNow.slice(11, 13) + (timeNow.slice(14, 16) / 60)
                 // Если дата текущая и это страница со сменной, то отчет начинаем на 7 часов позже
-                if(pageName.includes('Smena')) date = date - 7
-                if(date < 0) date = 0
-            }
-            else if(pageName.includes('Smena')){
+                if (pageName.includes('Smena')) date = date - 7
+                if (date < 0) date = 0
+            } else if (pageName.includes('Smena')) {
                 date = 12
-            }
-            else date = 24
+            } else date = 24
         }
 
-    }
-
-    else if(pageName.includes('Month')) date = 30
+    } else if (pageName.includes('Month')) date = 30
 
     let arrayTime = arrayPercent.map(function (num) {
         //Если это страница несодержит в название месяц
-        if(!pageName.includes('Month')) {
+        if (!pageName.includes('Month')) {
             let out = num * 3600 * date
-            return msToTime(out.toFixed(0)*1000, date)
-        }
-        else {
+            return msToTime(out.toFixed(0) * 1000, date)
+        } else {
             let out = num * 86400 * date
-            return msToTimeDays(out.toFixed(0)*1000, date)
+            return msToTimeDays(out.toFixed(0) * 1000, date)
         }
 
     });
@@ -65,63 +57,69 @@ function getTimeTotalArray(roundArray, date) {
 }
 
 // Функция перевода миллисекунд в часы в формате  - 1.ч. 1м. 1.с
-function msToTime(duration, date=24) {
+function msToTime(duration, date = 24) {
 
     let seconds = parseInt((duration / 1000) % 60),
         minutes = parseInt((duration / (1000 * 60)) % 60),
         hours = parseInt((duration / (1000 * 60 * 60)) % 24);
 
 
-    if(hours == 0) hours = ''
-    else { hours = hours + " ч. "}
+    if (hours == 0) hours = ''
+    else {
+        hours = hours + " ч. "
+    }
 
-    if(minutes == 0) minutes = ''
-    else { minutes = minutes + " мин. "}
+    if (minutes == 0) minutes = ''
+    else {
+        minutes = minutes + " мин. "
+    }
 
-    if(seconds == 0) seconds = ''
-    else { seconds = seconds + ' с.'}
+    if (seconds == 0) seconds = ''
+    else {
+        seconds = seconds + ' с.'
+    }
 
-    if((hours + minutes + seconds) != '') {
+    if ((hours + minutes + seconds) != '') {
         return '— ' + hours + minutes + seconds;
-    }
-
-    else if((hours + minutes + seconds) == '' && duration !=0) {
+    } else if ((hours + minutes + seconds) == '' && duration != 0) {
         return `— ${date} ч.`
-    }
-
-    else return '— 0 с.'
+    } else return '— 0 с.'
 
 }
 
 // Функция перевода миллисекунд в дни в формате  - 1 д. 1.ч. 1м. 1.с
-function msToTimeDays(duration, date=31) {
+function msToTimeDays(duration, date = 31) {
     date = +date
     let seconds = parseInt((duration / 1000) % 60),
         minutes = parseInt((duration / (1000 * 60)) % 60),
         hours = parseInt((duration / (1000 * 60 * 60)) % 24);
     days = parseInt((duration / (1000 * 60 * 60 * 24)) % date);
 
-    if(days == 0) days = ''
-    else { days = days + " д. "}
+    if (days == 0) days = ''
+    else {
+        days = days + " д. "
+    }
 
-    if(hours == 0) hours = ''
-    else { hours = hours + " ч. "}
+    if (hours == 0) hours = ''
+    else {
+        hours = hours + " ч. "
+    }
 
-    if(minutes == 0) minutes = ''
-    else { minutes = minutes + " мин. "}
+    if (minutes == 0) minutes = ''
+    else {
+        minutes = minutes + " мин. "
+    }
 
-    if(seconds == 0) seconds = ''
-    else { seconds = seconds + ' с.'}
+    if (seconds == 0) seconds = ''
+    else {
+        seconds = seconds + ' с.'
+    }
 
-    if((hours + minutes + seconds) != '') {
+    if ((hours + minutes + seconds) != '') {
         return '— ' + days + hours + minutes + seconds;
-    }
-
-    else if((days + hours + minutes + seconds) == '' && duration !=0) {
+    } else if ((days + hours + minutes + seconds) == '' && duration != 0) {
         return `— ${date} д.`
-    }
-
-    else return '— 0 с.'
+    } else return '— 0 с.'
 
 }
 
@@ -129,28 +127,25 @@ function msToTimeDays(duration, date=31) {
 function parseLinearServiceHistory(arrayParse, y, difference) {
     var arraySave = [] // Массив, который будет заполняться
 
-    if(arrayParse.length == 1){
+    if (arrayParse.length == 1) {
         arraySave.push({
-            x:(new Date(arrayParse[0])).getTime(),
-            x2:(new Date(dayTimeNow())).getTime()+10000,
-            y:y,
+            x: (new Date(arrayParse[0])).getTime(),
+            x2: (new Date(dayTimeNow())).getTime() + 10000,
+            y: y,
             login: difference[0][0],
             work: difference[0][1]
         })
-    }
-    else {
-        for(let i = 0; i<arrayParse.length; i++){
-            if(i == arrayParse.length-1)
-            {
+    } else {
+        for (let i = 0; i < arrayParse.length; i++) {
+            if (i == arrayParse.length - 1) {
                 arraySave.push({
-                    x:(new Date(arrayParse[i])).getTime(),
-                    x2:(new Date(dayTimeNow())).getTime()+10000,
-                    y:y,
+                    x: (new Date(arrayParse[i])).getTime(),
+                    x2: (new Date(dayTimeNow())).getTime() + 10000,
+                    y: y,
                     login: difference[i][0],
                     work: difference[i][1]
                 })
-            }
-            else {
+            } else {
                 arraySave.push({
                     x: (new Date(arrayParse[i])).getTime(),
                     x2: (new Date(arrayParse[i + 1])).getTime(),
@@ -168,18 +163,18 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
 }
 
 // Парсинг массива со свойствами x, x2, y для последнего проведенного обслуживания
-function parseLinearServiceNow(arrayParse, y, difference=null) {
+function parseLinearServiceNow(arrayParse, y, difference = null) {
 
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
 
-    while(index_pars < arrayParse.length)
-    {   // Парсинг
+    while (index_pars < arrayParse.length) {   // Парсинг
         arraySave.push({
-            x:(new Date(arrayParse[index_pars*2])).getTime(),
-            x2:(new Date(arrayParse[index_pars * 2 + 1])).getTime(),
-            y:y,
-            partialFill: difference})
+            x: (new Date(arrayParse[index_pars * 2])).getTime(),
+            x2: (new Date(arrayParse[index_pars * 2 + 1])).getTime(),
+            y: y,
+            partialFill: difference
+        })
         index_pars += 1;
     }
     // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
@@ -262,7 +257,7 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
     // Переменная с индексом первого элемента следующего дня имени программы
     let programName2Index = 400;
     // защита на случай неудачного запроса
-    if(today[5] !== undefined) programName2Index = today[5].length
+    if (today[5] !== undefined) programName2Index = today[5].length
 
     // Получении объекта с именем текущего станка
     // Хранящий объедененные массивы текущего и предыдущего дня
@@ -525,7 +520,7 @@ function averageMonthdata(inputArray) {
 // Функция получения текущей даты
 function dayNow() {
     let calendarDate = new Date().toLocaleString()
-    return `${calendarDate.slice(6,10)}-${calendarDate.slice(3,5)}-${calendarDate.slice(0,2)}`
+    return `${calendarDate.slice(6, 10)}-${calendarDate.slice(3, 5)}-${calendarDate.slice(0, 2)}`
 }
 
 // Функция получения текущего времени
@@ -537,7 +532,7 @@ function timeNow() {
 // Функция получения текущей даты и времени
 function dayTimeNow() {
     let calendarDate = new Date().toLocaleString()
-    return `${calendarDate.slice(6,10)}-${calendarDate.slice(3,5)}-${calendarDate.slice(0,2)} ${calendarDate.slice(12)}`
+    return `${calendarDate.slice(6, 10)}-${calendarDate.slice(3, 5)}-${calendarDate.slice(0, 2)} ${calendarDate.slice(12)}`
 }
 
 // Функция получения текущего дня из предыдущего
@@ -590,7 +585,7 @@ function getArrayPeriodsBetween(arrayTime) {
             return '-'
         } else {
 
-            return msToTimeDays(new Date(array[i]) - new Date(array[i + 1]),365)
+            return msToTimeDays(new Date(array[i]) - new Date(array[i + 1]), 365)
         }
     })
     return ArrayPeriod
@@ -600,117 +595,129 @@ function getArrayPeriodsBetween(arrayTime) {
 //     if (stateLineHC == 'line') {
 //         setStateLineHC('multiline')
 //         for (let i = 0; i < complexRequest.length; i++) {
-//             fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
+//             fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i + 1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
 //         }
 //     } else {
 //         setStateLineHC('line')
 //         for (let i = 0; i < complexRequest.length; i++) {
-//             fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]) )
+//             fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i + 1, exceptionManualNagruzka(complexRequest[i]))
 //         }
 //     }
 // }
 
+function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
+    console.log('Что получил', date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
+    if (stateLineHC == 'line') {
+        setStateLineHC('multiline')
+    } else {
+        setStateLineHC('line')
+    }
+
+    let fetchNames = valuesState.map(i => {
+        return complexRequest[i]
+    })
+
+    let complexNames = valuesState.map(i => {
+        return complexName[i]
+    })
+
+    let stankiRequest = Promise.all(fetchNames.map((item) => {
+        return fetchRequest(date, item)
+    }));
+    updateLoadData(stankiRequest, date, complexNames, fetchNames, stateLineHC)
+}
+
 function exceptionManualNagruzka(name) {
-    if (name =='kim' || name=='apec') {
+    if (name == 'kim' || name == 'apec') {
         return 'Ручной'
     } else {
         return 'Нагрузка'
     }
 }
 
-// function switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData) {
-//     let roundComplex =[]
-//     if (stateLineHC == 'line') {
-//         for (let i = 0; i < complexRequest.length; i++) {
-//             roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]))
-//         }
-//     } else {
-//         for (let i = 0; i < complexRequest.length; i++) {
-//             roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i+1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
-//         }
-//     }
-//     return roundComplex
-// }
+function switchLineSutki(stateLineHC, complexRequest, dateInput, bufferData) {
+    let roundComplex = []
+    if (stateLineHC == 'line') {
+        for (let i = 0; i < complexRequest.length; i++) {
+            roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i + 1, exceptionManualNagruzka(complexRequest[i]))
+        }
+    } else {
+        for (let i = 0; i < complexRequest.length; i++) {
+            roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i + 1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
+        }
+    }
+    return roundComplex
+}
 
 // Функция получения из массивов времени и общего процента
-function highchartsPercentTime(generalDiagramNames, workNoNagruzka,pause, off, avar,nagruzka, date){
+function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, avar, nagruzka, date) {
 
     let data = []
-    generalDiagramNames.forEach((e,i)=>{
-        data.push([workNoNagruzka[i],pause[i], off[i], avar[i],nagruzka[i]])
+    generalDiagramNames.forEach((e, i) => {
+        data.push([workNoNagruzka[i], pause[i], off[i], avar[i], nagruzka[i]])
     })
 
     let dataSumArray = data.map(e => {
-        let red = e.reduce((val1, val2)=>{
-            return val1+val2
+        let red = e.reduce((val1, val2) => {
+            return val1 + val2
         })
         return red
     })
 
-    let dataTime =data.map(e=>{
+    let dataTime = data.map(e => {
         return getTimeTotalArray(e, date)
     })
 
-    let dataPercent = data.map((e,i)=>{
-        return [(e[0]/dataSumArray[i]*100).toFixed(1),
-            (e[1]/dataSumArray[i]*100).toFixed(1),
-            (e[2]/dataSumArray[i]*100).toFixed(1),
-            (e[3]/dataSumArray[i]*100).toFixed(1),
-            (e[4]/dataSumArray[i]*100).toFixed(1),]
+    let dataPercent = data.map((e, i) => {
+        return [(e[0] / dataSumArray[i] * 100).toFixed(1),
+            (e[1] / dataSumArray[i] * 100).toFixed(1),
+            (e[2] / dataSumArray[i] * 100).toFixed(1),
+            (e[3] / dataSumArray[i] * 100).toFixed(1),
+            (e[4] / dataSumArray[i] * 100).toFixed(1),]
     })
 
-    return  dataPercent.map((e,i)=>{
+    return dataPercent.map((e, i) => {
         return [e, dataTime[i],]
     })
 }
 
 // Функция подгатавливает данные из fetch и рисует граффик.
-function getTimeProgramNameGraph(arrayData){
+function getTimeProgramNameGraph(arrayData) {
     let timer = 0;
     let programTimeArray = [];
     let startSame = null
 
-    arrayData? console.log(""):0;
+    arrayData ? console.log("") : 0;
 
-    if(arrayData['work'].length % 2 == 1)
-    {
+    if (arrayData['work'].length % 2 == 1) {
         console.log('Нечетная')
         let timeNow = dayTimeNow()
 
-        if(timeNow.slice(0,10) == arrayData['work'][0].slice(0,10)){
+        if (timeNow.slice(0, 10) == arrayData['work'][0].slice(0, 10)) {
             arrayData['work'].push(timeNow)
-        }
-        else {
-            arrayData['work'].push(arrayData['work'][0].slice(0,10) + ' 23:59:59')
+        } else {
+            arrayData['work'].push(arrayData['work'][0].slice(0, 10) + ' 23:59:59')
         }
     }
 
 
-    for(let i = 0; i<arrayData['work'].length; i+=2)
-    {
+    for (let i = 0; i < arrayData['work'].length; i += 2) {
 
-        if(arrayData['programName'][i/2] == arrayData['programName'][i/2+1])
-        {
-            if(arrayData['programName'][i/2] !== arrayData['programName'][i/2-1])
-            {
+        if (arrayData['programName'][i / 2] == arrayData['programName'][i / 2 + 1]) {
+            if (arrayData['programName'][i / 2] !== arrayData['programName'][i / 2 - 1]) {
                 startSame = arrayData['work'][i]
             }
 
-            timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-        }
+            timer = timer + (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
+        } else {
 
-        else
-        {
-
-            if(arrayData['programName'][i/2] == arrayData['programName'][i/2-1])
-            {
-                timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-                programTimeArray.push([arrayData['programName'][i/2], startSame, arrayData['work'][i+1]])
+            if (arrayData['programName'][i / 2] == arrayData['programName'][i / 2 - 1]) {
+                timer = timer + (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
+                programTimeArray.push([arrayData['programName'][i / 2], startSame, arrayData['work'][i + 1]])
                 timer = 0
-            }
-            else {
-                timer = (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-                programTimeArray.push([arrayData['programName'][i/2], arrayData['work'][i], arrayData['work'][i+1]])
+            } else {
+                timer = (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
+                programTimeArray.push([arrayData['programName'][i / 2], arrayData['work'][i], arrayData['work'][i + 1]])
                 timer = 0
             }
 
@@ -721,11 +728,11 @@ function getTimeProgramNameGraph(arrayData){
 
     let parset = []
 
-    programTimeArray.forEach(e=>{
+    programTimeArray.forEach(e => {
         parset.push({
-            x:new Date(e[1]).getTime(),
-            x2:new Date(e[2]).getTime(),
-            y:0,
+            x: new Date(e[1]).getTime(),
+            x2: new Date(e[2]).getTime(),
+            y: 0,
             partialFill: e[0]
         })
     })

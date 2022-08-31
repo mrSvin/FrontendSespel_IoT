@@ -368,16 +368,30 @@ function ComplexTotalMonthInfo() {
     )
 }
 
-function SwitchLineHC({date,stateLineHC, setStateLineHC,bufferData,complexRequest}) {
+// function SwitchLineHC({date,stateLineHC, setStateLineHC,bufferData,complexRequest}) {
+//     return (
+//         <div className="energyCalendarContainer">
+//             <label className="switch">
+//                 <input type="checkbox" onChange={() => {
+//                     changeTypeLine(date,stateLineHC, setStateLineHC,bufferData,complexRequest)
+//                 }}/>
+//                 <span className="slider round"></span>
+//             </label>
+//         </div>
+//     )
+//
+// }
+
+function SwitchLineHC({date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState}) {
+    console.log('Что передал:',)
     return (
         <div className="energyCalendarContainer">
             <label className="switch">
                 <input type="checkbox" onChange={() => {
-                    changeTypeLine(date,stateLineHC, setStateLineHC,bufferData,complexRequest)
+                    changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
                 }}/>
                 <span className="slider round"></span>
             </label>
         </div>
     )
-
 }
