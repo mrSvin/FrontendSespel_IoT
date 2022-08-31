@@ -705,7 +705,7 @@ function getTimeProgramNameGraph(arrayData) {
 
         if (arrayData[5][i / 2] == arrayData[5][i / 2 + 1]) {
             if (arrayData[5][i / 2] !== arrayData[5][i / 2 - 1]) {
-                startSame = arrayData['work'][i]
+                startSame = arrayData[0][i]
             }
 
             timer = timer + (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
