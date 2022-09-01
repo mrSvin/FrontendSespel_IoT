@@ -84,17 +84,17 @@
 </div>
 
 <h1>Показатели навигаторов</h1>
-<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+<div style="border: 1px solid #333; height: 30vw; width: 40%; margin: 0 auto"
      id="container1"></div>
-<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+<div style="border: 1px solid #333; height: 30vw; width: 40%; margin: 0 auto"
      id="container2"></div>
-<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+<div style="border: 1px solid #333; height: 30vw; width: 40%; margin: 0 auto"
      id="container3"></div>
-<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+<div style="border: 1px solid #333; height: 30vw; width: 40%; margin: 0 auto"
      id="container4"></div>
-<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+<div style="border: 1px solid #333; height: 30vw; width: 40%; margin: 0 auto"
      id="container5"></div>
-<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+<div style="border: 1px solid #333; height: 30vw; width: 40%; margin: 0 auto"
      id="container6"></div>
 
 <script>
@@ -324,7 +324,7 @@
         }
 
         if (Jindex >= mods.length) {
-            shit(Name, date, mods, requestArray, Index + 1, 0)
+            buildNavigators(Name, date, mods, requestArray, Index + 1, 0)
             return 0
         }
 
@@ -336,7 +336,7 @@
         setTimeout(() => {
 
             requestArray.push(fetchNavigators(Name[rIndex], date, mods[rJindex]))
-            shit(Name, date, mods, requestArray, rIndex, Jindex + 1)
+            buildNavigators(Name, date, mods, requestArray, rIndex, Jindex + 1)
         }, 1000)
     }
 
