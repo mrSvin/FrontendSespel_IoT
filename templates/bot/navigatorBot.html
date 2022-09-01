@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Станки Мех.участок 2 площадка </title>
+    <link rel="shortcut icon" type="image/ico"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/styles_stanki.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/report_day_style.css"/>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+
+    <script src="/js/lib/highcharts.js"></script>
+    <script src="/js/lib/exporting.js"></script>
+    <script src="/js/lib/export-data.js"></script>
+    <script src="/js/lib/accessibility.js"></script>
+    <script src="/js/lib/xrange.js"></script>
+    <script src="/js/reportBot.js"></script>
+    <script src="/js/smena/calendar_smena.js"></script>
+
+    <script src="/js/lib/jquery-3.6.0.min.js"></script>
+    <script src="/js/lib/bootstrap-3.3.0.min.js"></script>
+
+    <script src="/js/lib/bootstrap-datepicker.min.js"></script>
+    <script src="/js/lib/bootstrap-datepicker.ru.min.js"></script>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            $('#datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+
+        });
+
+        function selectedNewValue() {
+
+            $('#datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
+
+            let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+
+            date = new Date(datas); // some mock date
+            ms = date.getTime() + 86400000;
+
+            startTime = datas.slice(0, 10)
+
+            buildNavigators(Namesx, startTime, modx, navigator1Request)
+        }
+
+    </script>
+
+</head>
+<body>
+<div style="display: flex;">
+    <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
+        <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
+            <input type='text' class="form-control" value="" onchange="selectedNewValue()"/>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </form>
+</div>
+
+<h1>Показатели навигаторов</h1>
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+     id="container1"></div>
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+     id="container2"></div>
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+     id="container3"></div>
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+     id="container4"></div>
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+     id="container5"></div>
+<div style="border: 1px solid #333; display: flex; justify-content: center; height: 400px; width: 80%; margin: 0 auto"
+     id="container6"></div>
+
+<script>
+
+    function ZeroTime(arrayTime) {
+        let newArray = []
+
+        for(let i=0; arrayTime.length > i; i++)
+        {
+            newArray.push(arrayTime[i])
+            if (i == arrayTime.length - 1)
+            {
+                break
+            }
+            if(arrayTime[i+1][0] - arrayTime[i][0]  > 60000) {
+                newArray.push(Array(arrayTime[i][0] + 1000, 0))
+                newArray.push(Array(arrayTime[i+1][0] - 1000, 0))
+            }
+        }
+        return newArray
+    }
+
+    // Функция для рисования графиков. Аргументы: id графика, массив данных
+    function highcharts(id, NameGraph, params, dataArray, dataArray2 = null) {
+        let series = []
+
+        if(dataArray2 == null) {
+            series = [{
+                name: params,
+                data: dataArray,
+                color: '#fffd1f'
+            }]
+
+        }
+        else {
+            series = [{
+                name: params[0],
+                data: dataArray,
+                color: '#83addd'
+            },
+            {
+                name: params[1],
+                data: dataArray2,
+                color: '#f31e1e'
+            }]
+        }
+
+        Highcharts.setOptions({
+            lang: {
+                loading: 'Загрузка...',
+                months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+                shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+                exportButtonTitle: "Экспорт",
+                printButtonTitle: "Печать",
+                rangeSelectorFrom: "С",
+                rangeSelectorTo: "По",
+                rangeSelectorZoom: "Период",
+                downloadPNG: 'Скачать PNG',
+                downloadJPEG: 'Скачать JPEG',
+                downloadPDF: 'Скачать PDF',
+                downloadSVG: 'Скачать SVG',
+                printChart: 'Напечатать график',
+                viewFullscreen: 'На весь экран'
+            },
+            plotOptions: {
+                xrange: {
+                    grouping: false
+                }
+            },
+        });
+
+        Highcharts.getJSON(
+            'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+            function (data) {
+
+                Highcharts.chart(id, {
+                    chart: {
+                        polar: true,
+                        zoomType: 'x',
+                        backgroundColor: 'none',
+                    },
+                    time: {
+                        timezoneOffset: timezone
+                    },
+                    title: {
+                        text: NameGraph,
+                        style: {
+                            color: '#83addd'
+                        }
+                    },
+                    xAxis: {
+                        type: 'datetime'
+                    },
+                    yAxis: {
+                        title: {
+                            text: params
+                        }
+                    },
+                    plotOptions: {
+                        area: {
+                            fillColor: {
+                                linearGradient: {
+                                    x1: 0,
+                                    y1: 0
+                                },
+                                stops: [
+                                    [0, Highcharts.getOptions().colors[0]],
+                                    [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                                ]
+                            },
+                            marker: {
+                                radius: 2
+                            },
+                            lineWidth: 1,
+                            states: {
+                                hover: {
+                                    lineWidth: 1
+                                }
+                            },
+                            threshold: null
+                        }
+                    },
+                    legend: {
+                        itemStyle: {
+                            color: '#FFF'
+                        }
+                    },
+                    series: series
+                });
+            }
+        );
+    }
+
+    // Функция перебора массива из запроса с разложением на 4 массива по времени
+    function Perebor(massivArray, date, names) {
+
+        let allData = [];
+
+        for (let i = 0; massivArray.length > i; i++) {
+            let arrayI = []
+            for (let j = 0; massivArray[i].length > j; j++) {
+                arrayI.push(Array(massivArray[i][j].time, parseFloat(massivArray[i][j].value)));
+            }
+            allData.push(arrayI)
+        }
+
+        // for (let i = 0; allData.length > i; i++) {
+        //     if (allData[i].length > 0) {
+        //         allData[i].unshift(Array(new Date(date + ' 00:00:00').getTime(), 0))
+        //         allData[i].push(Array(new Date(date + ' 23:59:59').getTime(), 0))
+        //     }
+        // }
+
+        console.log('После парсинга', allData)
+
+        for (let i = 0; i < allData.length; i += 3) {
+            console.log('Имя - ', names[Math.floor(i / 3)][1])
+            if (i == 0) {
+                console.log(`container_do${(Math.floor(i / 3) + 1) * 6}`)
+                console.log(`container_do${(Math.floor(i / 3) + 2) * 6}`)
+
+                console.log('True', `container${(Math.floor(i / 3) + 1)}`)
+                console.log('True', `container${(Math.floor(i / 3) + 2)}`)
+
+                highcharts(`container${(Math.floor(i / 3) + 1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, кВт', ZeroTime(allData[i]))
+                highcharts(`container${(Math.floor(i / 3) + 2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i+1]), ZeroTime(allData[i+2]))
+            } else {
+                console.log(`container_do${i * 6}`)
+                console.log(`container_do${(i + 1) * 6}`)
+
+                console.log('True', `container${i}`)
+                console.log('True', `container${i + 1}`)
+
+                highcharts(`container${i}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, кВт', ZeroTime(allData[i]))
+                highcharts(`container${i + 1}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i+1]), ZeroTime(allData[i+2]))
+            }
+
+
+            // console.log('Данные',allData[i], allData[i+1], allData[i+2])
+        }
+
+        // let arraysTime = [[allData, 'container_do6', 'Навигатор 1'],];
+
+        // highcharts(arraysTime[0][1], arraysTime[0][0], arraysTime[0][2])
+
+        // if(param == null) {
+        //     arraysTime.forEach(elem => {
+        //         elem[0] = ZeroTime(elem[0])
+        //         highcharts(elem[1], elem[0], elem[2])
+        //     })
+        // }
+        // else {
+        //     arraysTime.forEach(elem => {
+        //         elem[0] = ZeroTime(elem[0])
+        //         highcharts(elem[1], elem[0], elem[2], 'Коррекция подачи, %')
+        //     })
+        // }
+        // setTimeout(document.body.classList.add('loaded'),1000);
+        // setTimeout(document.body.classList.remove('loaded_hiding'),1000);
+    }
+
+    // fetch запрос объекта в форме объектов
+    function fetchNavigators(Name, date, mod) {
+        let timeEnd = new Date(new Date(date).getTime() + 86400000).toISOString().slice(0, 10)
+        let url = `/api/complex/powerNavigator/product_uuid:${Name[2]}_startTime:${date}_endTime:${timeEnd}_signal:${mod}`
+
+        return fetch(url, {
+            method: 'GET'
+        })
+            .then(response => response.json())
+            // Получение массива с полями
+            .then((elem) => {
+                    return elem
+                }
+            )
+    }
+
+    function buildNavigators(Name, date, mods, requestArray, Index = 0, Jindex = 0) {
+
+        if (Index >= Name.length) {
+            let readyPromise = Promise.all(requestArray)
+            readyPromise.then(result => {
+                Perebor(result, date, Name);
+            })
+            return 0
+        }
+
+        if (Jindex >= mods.length) {
+            shit(Name, date, mods, requestArray, Index + 1, 0)
+            return 0
+        }
+
+        let rIndex = Index
+        let rJindex = Jindex
+
+        console.log('rIndex = ', rIndex, 'rJndex = ', rJindex)
+
+        setTimeout(() => {
+
+            requestArray.push(fetchNavigators(Name[rIndex], date, mods[rJindex]))
+            shit(Name, date, mods, requestArray, rIndex, Jindex + 1)
+        }, 1000)
+    }
+
+    let Names = [
+        ['navigator_1', 'Навигатор #1', '4919A2A3-290F-419F-A45C-E0DC75F91DB3'],
+        ['navigator_2_2', 'Навигатор #2 - голова 2', 'DB62A4CC-EF9E-4D98-B7F8-7A278BBD5064'],
+        ['navigator_3','Навигатор #3', 'D6755ECA-B2CC-49FE-9E15-559141A159C7'],
+    ];
+
+    let startTime = (new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString()).slice(0, 10);
+
+    let mod = ['A1', 'A2', 'A3']
+
+    // let navigator1Request = [0,0,0]
+
+    let navigator1Request = [];
+
+    buildNavigators(Names, startTime, mod, navigator1Request)
+
+</script>
+</body>
+</html>
