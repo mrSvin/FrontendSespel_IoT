@@ -210,15 +210,30 @@
                     title: {
                         text: NameGraph,
                         style: {
-                            color: '#83addd'
+                            color: '#FFF'
                         }
                     },
                     xAxis: {
+                        labels: {
+                            style: {
+                                fontSize: '18px',
+                                color: '#FFF'
+                            }
+                        },
                         type: 'datetime'
                     },
                     yAxis: {
+                        min: 0,
                         title: {
-                            text: params
+                            text: params,
+                            style: {
+                                color: '#FFF'
+                            }
+                        },
+                        labels: {
+                            style: {
+                                color: '#FFF'
+                            },
                         }
                     },
                     plotOptions: {
