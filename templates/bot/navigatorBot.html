@@ -65,14 +65,22 @@
 
             startTime = datas.slice(0, 10)
 
+            navigator1Request = [];
+
             buildNavigators(Names, startTime, mod, navigator1Request)
         }
 
     </script>
 
+    <style>
+        .highcharts-button-box {
+            fill: #252734;
+        }
+    </style>
+
 </head>
-<body>
-<div style="display: flex;">
+<body style="background: #252734;">
+<div style="display: flex; opacity: 2%;">
     <form style="margin: 0 20px; display: flex; align-items: center;" action="" method="post" id="form_update">
         <div class='input-group date' id='datepicker' style="width: 200px; float: left;  margin: 1.7%">
             <input type='text' class="form-control" value="" onchange="selectedNewValue()"/>
@@ -83,7 +91,7 @@
     </form>
 </div>
 
-<h1>Показатели навигаторов</h1>
+<h1 style="color: #83addd">Показатели навигаторов</h1>
 <div style="display: flex; flex-direction:column; width: 95vw; height: 95vh">
     <div style="display: flex; width: 100%; height: 30%;">
         <div style="border: 1px solid #333; width: 40%; margin: 0 auto"
@@ -260,49 +268,12 @@
         console.log('После парсинга', allData)
 
         for (let i = 0; i < allData.length; i += 3) {
-            console.log('Имя - ', names[Math.floor(i / 3)][1])
-            if (i == 0) {
-                console.log(`container_do${(Math.floor(i / 3) + 1) * 6}`)
-                console.log(`container_do${(Math.floor(i / 3) + 2) * 6}`)
+                console.log('True', `container${(i-(Math.floor(i / 3))+1)}`)
+                console.log('True', `container${(i-(Math.floor(i / 3))+2)}`)
 
-                console.log('True', `container${(Math.floor(i / 3) + 1)}`)
-                console.log('True', `container${(Math.floor(i / 3) + 2)}`)
-
-                highcharts(`container${(Math.floor(i / 3) + 1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, кВт', ZeroTime(allData[i]))
-                highcharts(`container${(Math.floor(i / 3) + 2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i+1]), ZeroTime(allData[i+2]))
-            } else {
-                console.log(`container_do${i * 6}`)
-                console.log(`container_do${(i + 1) * 6}`)
-
-                console.log('True', `container${i}`)
-                console.log('True', `container${i + 1}`)
-
-                highcharts(`container${i}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, кВт', ZeroTime(allData[i]))
-                highcharts(`container${i + 1}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i+1]), ZeroTime(allData[i+2]))
+                highcharts(`container${(i-(Math.floor(i / 3))+1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, кВт', ZeroTime(allData[i]))
+                highcharts(`container${(i-(Math.floor(i / 3))+2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i+1]), ZeroTime(allData[i+2]))
             }
-
-
-            // console.log('Данные',allData[i], allData[i+1], allData[i+2])
-        }
-
-        // let arraysTime = [[allData, 'container_do6', 'Навигатор 1'],];
-
-        // highcharts(arraysTime[0][1], arraysTime[0][0], arraysTime[0][2])
-
-        // if(param == null) {
-        //     arraysTime.forEach(elem => {
-        //         elem[0] = ZeroTime(elem[0])
-        //         highcharts(elem[1], elem[0], elem[2])
-        //     })
-        // }
-        // else {
-        //     arraysTime.forEach(elem => {
-        //         elem[0] = ZeroTime(elem[0])
-        //         highcharts(elem[1], elem[0], elem[2], 'Коррекция подачи, %')
-        //     })
-        // }
-        // setTimeout(document.body.classList.add('loaded'),1000);
-        // setTimeout(document.body.classList.remove('loaded_hiding'),1000);
     }
 
     // fetch запрос объекта в форме объектов
