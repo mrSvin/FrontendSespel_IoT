@@ -300,7 +300,7 @@
                 console.log('True', `container${(i-(Math.floor(i / 3))+1)}`)
                 console.log('True', `container${(i-(Math.floor(i / 3))+2)}`)
 
-                highcharts(`container${(i-(Math.floor(i / 3))+1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, кВт', ZeroTime(allData[i]))
+                highcharts(`container${(i-(Math.floor(i / 3))+1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, Вт', ZeroTime(allData[i]))
                 highcharts(`container${(i-(Math.floor(i / 3))+2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i+1]), ZeroTime(allData[i+2]))
             }
     }
@@ -345,7 +345,7 @@
 
             requestArray.push(fetchNavigators(Name[rIndex], date, mods[rJindex]))
             buildNavigators(Name, date, mods, requestArray, rIndex, Jindex + 1)
-        }, 1000)
+        }, 1500)
     }
 
     let Names = [
