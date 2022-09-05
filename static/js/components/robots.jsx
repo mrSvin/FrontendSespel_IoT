@@ -1,12 +1,12 @@
 function RobotsInfo() {
     let complexName = [
-            ["МАКС 1", "МАКС 1"],
-            ["МАКС 2", 'МАКС 2'],
-            ["М710", "М710"],
-            ["РТК12C", 'РТК12C'],
-            ["P250", "P250"],
-            ["КРОТ", 'КРОТ'],
-            ["ПРАНС", "ПРАНС"],
+        ["МАКС 1", "МАКС 1"],
+        ["МАКС 2", 'МАКС 2'],
+        ["М710", "М710"],
+        ["РТК12C", 'РТК12C'],
+        ["P250", "P250"],
+        ["КРОТ", 'КРОТ'],
+        ["ПРАНС", "ПРАНС"],
     ]
 
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
@@ -27,13 +27,46 @@ function RobotsInfo() {
     // Массив номеров всех станков
     let values = complexRequest.map((e, i) => i)
 
+    // Состояние даты
+    let [date, setDate] = useState(0);
+
+    // Состояние переменной мульти Диаграммы
+    let [stateLineHC, setStateLineHC] = useState("multiLine");
+
     // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
         new Array(complexRequest.length).fill(true)
     );
 
     let [valuesState, setValuesState] = useState(values)
+
     let [valuesStateWait, setValuesStateWait] = useState(values)
+
+    const [isActive, setActive] = useState(false);
+
+    const toggleClass = () => {
+        setActive(!isActive);
+        if (isActive) newDate(date)
+    };
+
+    const handleOnChange = (position) => {
+        const updatedCheckedState = selectedObjects.map((item, index) => {
+            return index === position ? !item : item;
+        });
+
+        setSelectedObjects(updatedCheckedState)
+
+        const activeValues = []
+        updatedCheckedState.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(values[index]);
+                }
+            }
+        );
+        setValuesState(activeValues);
+
+    };
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -55,11 +88,13 @@ function RobotsInfo() {
 
     }, [])
 
+
+
     return (
         <div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDateSutki} date={date}/>
-                <div className="listComplex"><span onClick={toggleClassSutki}>Выбор оборудования</span>
+                <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
                     <ul className='toppings-list'
                         className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
                         {complexName.map((name, index) => {

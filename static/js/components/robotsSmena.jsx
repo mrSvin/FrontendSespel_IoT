@@ -28,13 +28,46 @@ function RobotsSmena() {
     // Массив номеров всех станков
     let values = complexRequest.map((e, i) => i)
 
+    // Состояние даты
+    let [date, setDate] = useState(0);
+
+    // Состояние переменной мульти Диаграммы
+    let [stateLineHC, setStateLineHC] = useState("multiLine");
+
     // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
         new Array(complexRequest.length).fill(true)
     );
 
     let [valuesState, setValuesState] = useState(values)
+
     let [valuesStateWait, setValuesStateWait] = useState(values)
+
+    const [isActive, setActive] = useState(false);
+
+    const toggleClass = () => {
+        setActive(!isActive);
+        if (isActive) newDate(date)
+    };
+
+    const handleOnChange = (position) => {
+        const updatedCheckedState = selectedObjects.map((item, index) => {
+            return index === position ? !item : item;
+        });
+
+        setSelectedObjects(updatedCheckedState)
+
+        const activeValues = []
+        updatedCheckedState.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(values[index]);
+                }
+            }
+        );
+        setValuesState(activeValues);
+
+    };
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -55,6 +88,9 @@ function RobotsSmena() {
         updateLoadSmenaData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }, [])
+
+    // Функция для изменения даты в календаре
+
 
     return (
         <div>
@@ -79,7 +115,7 @@ function RobotsSmena() {
 
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDateSmena} date={date}/>
-                <div className="listComplex"><span onClick={toggleClassSmena}>Выбор оборудования</span>
+                <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
                     <ul className='toppings-list'
                         className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
                         {complexName.map((name, index) => {
@@ -117,12 +153,12 @@ function RobotsSmena() {
             </div>
 
             <SwitchLineSmenaHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
+                               complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
-                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
-                                            programs={complexName[e][1]+'smena'} service={complexName[e][0]}/>
+                    return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                                                complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
+                                                programs={complexName[e][1]+'smena'} service={complexName[e][0]}/>
                 }
             )}
         </div>
