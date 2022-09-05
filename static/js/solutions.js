@@ -650,6 +650,8 @@ function getTimeProgramNameGraph(arrayData, type, date) {
     let programTimeArray = [];
     let startSame = null
 
+    let day = dayNow()
+
     if (!arrayData) return 0
 
     if (arrayData[0].length % 2 == 1) {
@@ -687,9 +689,19 @@ function getTimeProgramNameGraph(arrayData, type, date) {
     let parset = []
 
     if (type == 'sutki'){
-
+        parset.push({
+            x: new Date(date + ' 00:00').getTime(),
+            x2: new Date(date + ' 00:00').getTime()+2000,
+            y: 0,
+            partialFill: null
+        })
     }else {
-        console.log('Контрольная точка',date)
+        parset.push({
+                x: new Date(date).getTime(),
+                x2: new Date(date).getTime()+2000,
+                y: 0,
+                partialFill: null
+            })
     }
 
     programTimeArray.forEach(e => {
@@ -700,5 +712,53 @@ function getTimeProgramNameGraph(arrayData, type, date) {
             partialFill: e[0]
         })
     })
+
+    if(type == 'sutki'){
+        if(day == date.slice(0,10)){
+            parset.push({
+                x: new Date(dayTimeNow()).getTime(),
+                x2: new Date(dayTimeNow()).getTime() + 2000,
+                y: 0,
+                partialFill: null
+            })
+        }
+        else {
+            parset.push({
+                x: new Date(date + ' 23:59:55').getTime(),
+                x2: new Date(date + ' 23:59:55').getTime() + 2000,
+                y: 0,
+                partialFill: null
+            })
+        }
+    }
+    else {
+        if(date.slice(11) == '19:00'){
+            parset.push({
+                x: new Date(date).getTime() + 3600000 * 11 + 60000*59 + 55000,
+                x2: new Date(date).getTime() + 3600000 * 11 + 60000*59 + 57000,
+                y: 0,
+                partialFill: null
+            })
+        }
+        else {
+            if(day == date.slice(0,10)){
+                parset.push({
+                    x: new Date(dayTimeNow()).getTime(),
+                    x2: new Date(dayTimeNow()).getTime() + 2000,
+                    y: 0,
+                    partialFill: null
+                })
+            }
+            else {
+                parset.push({
+                    x: new Date(date).getTime() + 3600000 * 11 + 60000*59 + 55000,
+                    x2: new Date(date).getTime() + 3600000 * 11 + 60000*59 + 57000,
+                    y: 0,
+                    partialFill: null
+                })
+            }
+        }
+    }
+
     return parset
 }

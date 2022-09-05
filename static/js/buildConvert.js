@@ -160,12 +160,12 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typ
 
                 // Первая смена
                 highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], nagruzkaName[i], idContainer)
-                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0], 'smena',day2),idContainer)
+                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0], 'smena',day2+' 19:00'),idContainer)
                 highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], nagruzkaName[i], idContainer)
 
                 // Первая вторая
                 highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], nagruzkaName[i], idContainer + 1)
-                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1], 'smena', day1),idContainer + 1)
+                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1], 'smena', day1 + ' 07:00'),idContainer + 1)
                 highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], nagruzkaName[i], idContainer + 1)
 
             })
