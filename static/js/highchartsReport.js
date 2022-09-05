@@ -458,23 +458,76 @@ function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNa
 }
 
 //Суточный и месячный
-function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, nagruzkaName = 'Нагрузка', date=24, chartName ='') {
+function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, fetchNames, date = 24, chartName = '') {
+    work = Array.isArray(work) ? work : [work]
+    pause = Array.isArray(pause) ? pause : [pause]
+    off = Array.isArray(off) ? off : [off]
+    avar = Array.isArray(avar) ? avar : [avar]
+    nagruzka = Array.isArray(nagruzka) ? nagruzka : [nagruzka]
+
     let colorNagruzka;
-    let workNoNagruzka = work;
-    if (nagruzkaName == 'Нагрузка') {
-        colorNagruzka = '#207210'
-        for (var i = 0; i < work.length; i++) {
-            workNoNagruzka[i]=workNoNagruzka[i]-nagruzka[i]
-        }
-    } else {
-        colorNagruzka = '#5c7ed0'
+    let workNoNagruzka = work.slice();
+
+    let ruchoi = null
+
+    let seriesArray = [{
+        name: 'Авария',
+        data: avar,
+        color: '#e81e1d'
+    }, {
+        name: 'Выключен',
+        data: off,
+        color: '#000000'
+    }, {
+        name: 'Ожидание',
+        color: '#ffea32',
+        data: pause
+    }, {
+        name: 'Нагрузка',
+        data: nagruzka,
+        color: '#207210'
+    }, {
+        name: 'Работа',
+        color: '#38e817',
+        data: workNoNagruzka
+
+    },]
+
+    if (fetchNames.includes('Ручной')) {
+        ruchoi = []
+        fetchNames.forEach((e, i) => {
+            if (e == 'Ручной') {
+                ruchoi.push(nagruzka[i])
+                nagruzka[i] = 0
+            } else {
+                ruchoi.push(0)
+            }
+        })
+
+        seriesArray.splice(4, 0, {
+            name: 'Ручной',
+            color: '#5c7ed0',
+            data: ruchoi
+
+        })
     }
 
-    //date= '2022-03'
-    //  date = document.getElementsByClassName('inputCalendarDay')[0].value
+    fetchNames.forEach((e, i) => {
+        if (e == 'Нагрузка') {
+            workNoNagruzka[i] = workNoNagruzka[i] - nagruzka[i]
+        }
+    })
+
+
+    if (fetchNames == 'Нагрузка') {
+        colorNagruzka = '#207210'
+        for (var i = 0; i < work.length - 1; i++) {
+            workNoNagruzka[i] = workNoNagruzka[i] - nagruzka[i]
+        }
+    }
 
     // Данные для
-    let graphData= highchartsPercentTime(generalDiagramNames, workNoNagruzka,pause, off, avar,nagruzka, date)
+    let graphData = highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, avar, nagruzka, ruchoi, date)
 
     Highcharts.chart(`containerTotal${chartName}`, {
         chart: {
@@ -511,11 +564,20 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
         },
         tooltip: {
             pointFormatter: function () {
-                return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
-                    `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
-                    `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
-                    `<span style="color: ${colorNagruzka};">${nagruzkaName}</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
-                    `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
+                if (ruchoi == null) {
+                    return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
+                        `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
+                        `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
+                        `<span style="color: #207210;">Нагрузка</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
+                        `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
+                } else {
+                    return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
+                        `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
+                        `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
+                        `<span style="color: #207210;">Нагрузка</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
+                        `<span style="color: #5c7ed0;">Ручной</span>: ${graphData[this.index][0][5]}%   <b>${graphData[this.index][1][5]}</b><br/>` +
+                        `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
+                }
             },
         },
         plotOptions: {
@@ -528,28 +590,7 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
                 color: '#FFF'
             }
         },
-        series: [{
-            name: 'Авария',
-            data: avar,
-            color: '#e81e1d'
-        }, {
-            name: 'Выключен',
-            data: off,
-            color: '#000000'
-        }, {
-            name: 'Ожидание',
-            color: '#ffea32',
-            data: pause
-        }, {
-            name: nagruzkaName,
-            data: nagruzka,
-            color: colorNagruzka
-        }, {
-            name: 'Работа',
-            color: '#38e817',
-            data: workNoNagruzka
-
-        },]
+        series: seriesArray
     });
 
 }
