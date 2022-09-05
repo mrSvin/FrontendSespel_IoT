@@ -64,6 +64,11 @@ body {
     width: 80%;
 }
 
+.highChartsLineSmena{
+    display: flex;
+    width: 100%;
+}
+
 .complexAllInfo {
     display: flex;
     border-bottom: 1px solid #333;

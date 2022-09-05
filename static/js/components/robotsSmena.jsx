@@ -21,10 +21,10 @@ function changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, com
 
     if (stateLineHC == 'line') {
         setStateLineHC('multiLine')
-        updateLoadSmenaData(stankiRequest, date, complexNames, fetchNames, stateLineHC)
+        updateLoadSmenaData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
     } else {
         setStateLineHC('line')
-        updateLoadSmenaData(stankiRequest, date, complexNames, fetchNames, stateLineHC)
+        updateLoadSmenaData(stankiRequest, date, complexNames, fetchNames, 'line')
     }
 }
 

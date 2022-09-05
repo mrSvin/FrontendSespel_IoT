@@ -64,7 +64,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
             <div className='twoDayDiv'>
                 <h1 className="timeInfoSmena">Работа II смены 19:00 - 07:00</h1>
                 <div className='oneDay'>
-                    <div className='highChartsLineRound'>
+                    <div className='highChartsLineSmena'>
                         <div className='lineComplex'>
                             <div className="lineSukiHighChart" id={idLine}></div>
                             {idProgram != null ?
@@ -77,7 +77,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
                 </div>
                 <h1 className="timeInfoSmena">Работа I смены 07:00 - 19:00</h1>
                 <div className='oneDay'>
-                    <div className='highChartsLineRound'>
+                    <div className='highChartsLineSmena'>
                         <div className='lineComplex'>
                             <div className="lineSukiHighChart" id={idLine2}></div>
                             {idProgram2 != null ?
