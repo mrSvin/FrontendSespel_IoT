@@ -1,4 +1,47 @@
 // Функия обработки массива обещаний для смен
+function changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
+
+    // valuesState = valuesState.map((e,i, array)=>{
+    //     let save = [e,e]
+    //     return save
+    // }).flat()
+    //
+   // console.log('Тут',valuesState)
+
+
+    let fetchNames = valuesState.map(i => {
+        return complexRequest[i]
+    })
+    let complexNames = valuesState.map(i => {
+        return complexName[i]
+    })
+    let stankiRequest = Promise.all(fetchNames.map((item) => {
+        return fetchRequest(date, item)
+    }));
+
+    if (stateLineHC == 'line') {
+        setStateLineHC('multiLine')
+        updateLoadSmenaData(stankiRequest, date, complexNames, fetchNames, stateLineHC)
+    } else {
+        setStateLineHC('line')
+        updateLoadSmenaData(stankiRequest, date, complexNames, fetchNames, stateLineHC)
+    }
+}
+
+function SwitchLineSmenaHC({date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState}) {
+    return (
+        <div className="energyCalendarContainer">
+            <label className="switch">
+                <input type="checkbox" onChange={() => {
+                    changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
+                }}/>
+                <span className="slider round"></span>
+            </label>
+        </div>
+    )
+}
+
+
 function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
     promiseVariable
         .then(result => {
@@ -56,21 +99,21 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typ
                 return e[0]
             })
 
-            highChartSmenaTotalKolOp(totalArray, kolOpArray, names, complexName, day1, nagruzkaName)
+            highChartSmenaTotalKolOp(totalArray, kolOpArray, names, day1, nagruzkaName)
 
-            // console.log('Проверка, два массивая с данными',parserDataArray)
+             console.log('Проверка, два массивая с данными',smenaArrays)
 
             parserDataArray.forEach((e, i)=>{
                 let idContainer = (i * 2) + 1
 
                 // Первая смена
                 highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], nagruzkaName[i], idContainer)
-                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(e[0]),i + 1)
+                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0]),i + 1)
                 highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], nagruzkaName[i], idContainer)
 
                 // Первая вторая
                 highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], nagruzkaName[i], idContainer + 1)
-                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(e[1]),i + 2)
+                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1]),i + 2)
                 highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], nagruzkaName[i], idContainer + 1)
 
             })
@@ -79,145 +122,6 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typ
             console.error(err);
         });
 }
-
-//Суточный и месячный
-function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, fetchNames, date = 24, chartName = '') {
-    work = Array.isArray(work) ? work : [work]
-    pause = Array.isArray(pause) ? pause : [pause]
-    off = Array.isArray(off) ? off : [off]
-    avar = Array.isArray(avar) ? avar : [avar]
-    nagruzka = Array.isArray(nagruzka) ? nagruzka : [nagruzka]
-
-    let colorNagruzka;
-    let workNoNagruzka = work.slice();
-
-    let ruchoi = null
-
-    let seriesArray = [{
-        name: 'Авария',
-        data: avar,
-        color: '#e81e1d'
-    }, {
-        name: 'Выключен',
-        data: off,
-        color: '#000000'
-    }, {
-        name: 'Ожидание',
-        color: '#ffea32',
-        data: pause
-    }, {
-        name: 'Нагрузка',
-        data: nagruzka,
-        color: '#207210'
-    }, {
-        name: 'Работа',
-        color: '#38e817',
-        data: workNoNagruzka
-
-    },]
-
-    if (fetchNames.includes('Ручной')) {
-        ruchoi = []
-        fetchNames.forEach((e, i) => {
-            if (e == 'Ручной') {
-                ruchoi.push(nagruzka[i])
-                nagruzka[i] = 0
-            } else {
-                ruchoi.push(0)
-            }
-        })
-
-        seriesArray.splice(4, 0, {
-            name: 'Ручной',
-            color: '#5c7ed0',
-            data: ruchoi
-
-        })
-    }
-
-    fetchNames.forEach((e, i) => {
-        if (e == 'Нагрузка') {
-            workNoNagruzka[i] = workNoNagruzka[i] - nagruzka[i]
-        }
-    })
-
-
-    if (fetchNames == 'Нагрузка') {
-        colorNagruzka = '#207210'
-        for (var i = 0; i < work.length - 1; i++) {
-            workNoNagruzka[i] = workNoNagruzka[i] - nagruzka[i]
-        }
-    }
-
-    // Данные для
-    let graphData = highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, avar, nagruzka, ruchoi, date)
-
-    Highcharts.chart(`containerTotal${chartName}`, {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Общая загрузка оборудования',
-            style: {
-                color: '#FFF'
-            }
-        },
-        xAxis: {
-            labels: {
-                style: {
-                    fontSize: '18px',
-                    color: '#FFF'
-                }
-            },
-            categories: generalDiagramNames,
-        },
-        credits: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '%'
-            },
-            labels: {
-                style: {
-                    color: '#FFF'
-                },
-            }
-        },
-        tooltip: {
-            pointFormatter: function () {
-                if (ruchoi == null) {
-                    return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
-                        `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
-                        `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
-                        `<span style="color: #207210;">Нагрузка</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
-                        `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
-                } else {
-                    return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
-                        `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
-                        `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
-                        `<span style="color: #207210;">Нагрузка</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
-                        `<span style="color: #5c7ed0;">Ручной</span>: ${graphData[this.index][0][5]}%   <b>${graphData[this.index][1][5]}</b><br/>` +
-                        `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
-                }
-            },
-        },
-        plotOptions: {
-            column: {
-                stacking: 'percent'
-            }
-        },
-        legend: {
-            itemStyle: {
-                color: '#FFF'
-            }
-        },
-        series: seriesArray
-    });
-
-}
-
 
 function RobotsSmena() {
 
@@ -390,8 +294,8 @@ function RobotsSmena() {
                 <div className='countOperations' id='containerOperations2'></div>
             </div>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
+            <SwitchLineSmenaHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait.concat(valuesStateWait)}/>
 
             {valuesStateWait.map((e, i) => {
                 return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
