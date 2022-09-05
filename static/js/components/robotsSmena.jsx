@@ -1,35 +1,39 @@
 // Функия обработки массива обещаний для смен
-function updateLoadSmenaData(promiseVariable, day1, complexName, complexRequest) {
+function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
     promiseVariable
         .then(result => {
             let data = result.map(e=>{
                 return [[e.work.slice(), e.pause.slice(), e.off.slice(), e.avar.slice(), e.nagruzka.slice(), e.programName.slice()],
                     [e.work2.slice(), e.pause2.slice(), e.off2.slice(), e.avar2.slice(), e.nagruzka2.slice(),  e.programName2.slice()]]
             })
-
             let smenaArrays = data.map(e=>{
-                return convertDaysToSmena(e[0], e[1], day1)
+                return convertDaysToSmena(e[0], e[1], day1, typeLine)
             })
 
             let totalArray = []
             let kolOpArray = []
+            let arrayLine;
+
+            if (typeLine == 'multiLine') {
+                arrayLine =[0,1,2,3,4]
+            } else {
+                arrayLine =[0,0,0,0,0]
+            }
 
             let day2 = dayYesterday(day1)
 
             let parserDataArray =  smenaArrays.map(smena=>{
+                let convertDataWork = parseLinearSutki(smena[0][0], arrayLine[1], day1, smena[0][5])
+                let convertDataPause = parseLinearSutki(smena[0][1], arrayLine[2], day1)
+                let convertDataOff = parseLinearSutki(smena[0][2], arrayLine[3], day1)
+                let convertDataAvar = parseLinearSutki(smena[0][3], arrayLine[4], day1)
+                let convertDataRuchnoi = parseLinearSutki(smena[0][4], arrayLine[0], day1)
 
-                let convertDataWork = parseLinearSutki(smena[0][0], 1, day1, smena[0][5])
-                let convertDataPause = parseLinearSutki(smena[0][1], 2, day1)
-                let convertDataOff = parseLinearSutki(smena[0][2], 3, day1)
-                let convertDataAvar = parseLinearSutki(smena[0][3], 4, day1)
-                let convertDataRuchnoi = parseLinearSutki(smena[0][4], 0, day1)
-
-                let convertDataWork2 = parseLinearSutki(smena[1][0], 1, day2, smena[1][5])
-                let convertDataPause2 = parseLinearSutki(smena[1][1], 2, day2)
-                let convertDataOff2 = parseLinearSutki(smena[1][2], 3, day2)
-                let convertDataAvar2 = parseLinearSutki(smena[1][3], 4, day2)
-                let convertDataRuchnoi2 = parseLinearSutki(smena[1][4], 0, day2)
-
+                let convertDataWork2 = parseLinearSutki(smena[1][0], arrayLine[1], day2, smena[1][5])
+                let convertDataPause2 = parseLinearSutki(smena[1][1], arrayLine[2], day2)
+                let convertDataOff2 = parseLinearSutki(smena[1][2], arrayLine[3], day2)
+                let convertDataAvar2 = parseLinearSutki(smena[1][3], arrayLine[4], day2)
+                let convertDataRuchnoi2 = parseLinearSutki(smena[1][4], arrayLine[0], day2)
 
                 let roundArray = smena[0][6]
                 let roundArray2 = smena[1][6]
@@ -44,7 +48,15 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, complexRequest)
 
             })
 
-            highChartSmenaTotalKolOp(totalArray, kolOpArray, complexName, day1)
+            let nagruzkaName = fetchNames.map(e=>{
+                return exceptionManualNagruzka(e)
+            })
+
+            let names = complexName.map(e => {
+                return e[0]
+            })
+
+            highChartSmenaTotalKolOp(totalArray, kolOpArray, names, complexName, day1, nagruzkaName)
 
             // console.log('Проверка, два массивая с данными',parserDataArray)
 
@@ -52,12 +64,14 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, complexRequest)
                 let idContainer = (i * 2) + 1
 
                 // Первая смена
-                highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], exceptionManualNagruzka(complexRequest[i]), idContainer)
-                highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], exceptionManualNagruzka(complexRequest[i]), idContainer)
+                highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], nagruzkaName[i], idContainer)
+                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(e[0]),i + 1)
+                highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], nagruzkaName[i], idContainer)
 
                 // Первая вторая
-                highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], exceptionManualNagruzka(complexRequest[i]), idContainer + 1)
-                highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], exceptionManualNagruzka(complexRequest[i]), idContainer + 1)
+                highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], nagruzkaName[i], idContainer + 1)
+                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(e[1]),i + 2)
+                highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], nagruzkaName[i], idContainer + 1)
 
             })
         })
@@ -66,95 +80,254 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, complexRequest)
         });
 }
 
-function highChartSmenaTotalKolOp(total, kolOp, complexName, day1){
+//Суточный и месячный
+function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, fetchNames, date = 24, chartName = '') {
+    work = Array.isArray(work) ? work : [work]
+    pause = Array.isArray(pause) ? pause : [pause]
+    off = Array.isArray(off) ? off : [off]
+    avar = Array.isArray(avar) ? avar : [avar]
+    nagruzka = Array.isArray(nagruzka) ? nagruzka : [nagruzka]
 
-    // переменные для переформирования данных 2-х смен
-    let work = [[],[],]
-    let pause = [[],[],]
-    let off = [[],[],]
-    let avar = [[],[],]
-    let nagruzka = [[],[],]
+    let colorNagruzka;
+    let workNoNagruzka = work.slice();
 
-    let shortOp = [[],[],]
-    let longOp = [[],[],]
+    let ruchoi = null
 
-    // переформирования данных
-    total.forEach((e,i) => {
-        if(!Array.isArray(e) || e.includes(undefined)){
-            work[i%2].push(0)
-            pause[i%2].push(0)
-            off[i%2].push(0)
-            avar[i%2].push(0)
-            nagruzka[i%2].push(0)
-        }
-        else{
-            work[i%2].push(e[0])
-            pause[i%2].push(e[1])
-            off[i%2].push(e[2])
-            avar[i%2].push(e[3])
-            nagruzka[i%2].push(e[4])
+    let seriesArray = [{
+        name: 'Авария',
+        data: avar,
+        color: '#e81e1d'
+    }, {
+        name: 'Выключен',
+        data: off,
+        color: '#000000'
+    }, {
+        name: 'Ожидание',
+        color: '#ffea32',
+        data: pause
+    }, {
+        name: 'Нагрузка',
+        data: nagruzka,
+        color: '#207210'
+    }, {
+        name: 'Работа',
+        color: '#38e817',
+        data: workNoNagruzka
+
+    },]
+
+    if (fetchNames.includes('Ручной')) {
+        ruchoi = []
+        fetchNames.forEach((e, i) => {
+            if (e == 'Ручной') {
+                ruchoi.push(nagruzka[i])
+                nagruzka[i] = 0
+            } else {
+                ruchoi.push(0)
+            }
+        })
+
+        seriesArray.splice(4, 0, {
+            name: 'Ручной',
+            color: '#5c7ed0',
+            data: ruchoi
+
+        })
+    }
+
+    fetchNames.forEach((e, i) => {
+        if (e == 'Нагрузка') {
+            workNoNagruzka[i] = workNoNagruzka[i] - nagruzka[i]
         }
     })
 
-    kolOp.forEach((e,i) => {
-        if(!Array.isArray(e) || e.includes(undefined)){
-            shortOp[i%2].push(0)
-            longOp[i%2].push(0)
-        }
-        else{
-            shortOp[i%2].push(e[0])
-            longOp[i%2].push(e[1])
-        }
-    })
 
-    // вторая смена, всегда за предыдущий день, date всегда 12 часов
-    highChartTotal(complexName, work[0], pause[0], off[0], avar[0], nagruzka[0], 'Нагрузка', 12)
-    highChartCountOperations(complexName, shortOp[0], longOp[0])
+    if (fetchNames == 'Нагрузка') {
+        colorNagruzka = '#207210'
+        for (var i = 0; i < work.length - 1; i++) {
+            workNoNagruzka[i] = workNoNagruzka[i] - nagruzka[i]
+        }
+    }
 
-    // первая смена в date передается текущая дата с календаря
-    highChartTotal(complexName, work[1], pause[1], off[1], avar[1], nagruzka[1], 'Нагрузка', day1, '2')
-    highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
+    // Данные для
+    let graphData = highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, avar, nagruzka, ruchoi, date)
+
+    Highcharts.chart(`containerTotal${chartName}`, {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Общая загрузка оборудования',
+            style: {
+                color: '#FFF'
+            }
+        },
+        xAxis: {
+            labels: {
+                style: {
+                    fontSize: '18px',
+                    color: '#FFF'
+                }
+            },
+            categories: generalDiagramNames,
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%'
+            },
+            labels: {
+                style: {
+                    color: '#FFF'
+                },
+            }
+        },
+        tooltip: {
+            pointFormatter: function () {
+                if (ruchoi == null) {
+                    return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
+                        `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
+                        `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
+                        `<span style="color: #207210;">Нагрузка</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
+                        `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
+                } else {
+                    return `<span style="color: #e81e1d;">Авария</span>: ${graphData[this.index][0][3]}%   <b>${graphData[this.index][1][3]}</b><br/>` +
+                        `<span style="color: #000000;">Выключен</span>: ${graphData[this.index][0][2]}%   <b>${graphData[this.index][1][2]}</b><br/>` +
+                        `<span style="color: #ffea32;">Ожидание</span>: ${graphData[this.index][0][1]}%   <b>${graphData[this.index][1][1]}</b><br/>` +
+                        `<span style="color: #207210;">Нагрузка</span>: ${graphData[this.index][0][4]}%   <b>${graphData[this.index][1][4]}</b><br/>` +
+                        `<span style="color: #5c7ed0;">Ручной</span>: ${graphData[this.index][0][5]}%   <b>${graphData[this.index][1][5]}</b><br/>` +
+                        `<span style="color: #38e817;">Работа</span>: ${graphData[this.index][0][0]}%   <b>${graphData[this.index][1][0]}</b><br/>`
+                }
+            },
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        legend: {
+            itemStyle: {
+                color: '#FFF'
+            }
+        },
+        series: seriesArray
+    });
+
 }
+
 
 function RobotsSmena() {
 
-    let complexName = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
+    let complexName = [
+        ["МАКС 1", "МАКС 1"],
+        ["МАКС 2", 'МАКС 2'],
+        ["М710", "М710"],
+        ["РТК12C", 'РТК12C'],
+        ["P250", "P250"],
+        ["КРОТ", 'КРОТ'],
+        ["ПРАНС", "ПРАНС"],
+    ]
+
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
-    let namesToFetch = ['maks_1', 'maks_2', 'm710', 'rtk12c', 'p250', 'krot', 'prans']
+    let complexRequest = ['maks_1', 'maks_2', 'm710', 'rtk12c', 'p250', 'krot', 'prans']
 
-    let buttonsVrs1 = [-255, 620, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
-    let buttonsVrs2 = [-450, 210, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
-    let buttonsVrs3 = [-920, 800, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 40, "unset"]
-    let buttonsVrs4 = [-750, 800, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
-    let buttonsVrs5 = [-820, 270, 'url(../images/robot_p250.png) no-repeat', "../images/ceh_5.png", 60, "unset"]
-    let buttonsVrs6 = [-920, 890, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 40, "unset"]
-    let buttonsVrs7 = [-655, 820, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
+    let buttonsVrs = [
+        [-255, 620, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"],
+        [-450, 210, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"],
+        [-920, 800, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 40, "unset"],
+        [-750, 800, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        [-820, 270, 'url(../images/robot_p250.png) no-repeat', "../images/ceh_5.png", 60, "unset"],
+        [-920, 890, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 40, "unset"],
+        [-655, 820, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"],
+    ]
 
+    let size = ['ceh6', 'ceh6', 'sborCeh', 'sborCeh', 'ceh5', 'sborCeh', 'ceh6']
+
+    // Массив номеров всех станков
+    let values = complexRequest.map((e, i) => i)
+
+    // Состояние даты
     let [date, setDate] = useState(0);
 
-    // let bufferData = bufferDataArrays(13)
+    // Состояние переменной мульти Диаграммы
+    let [stateLineHC, setStateLineHC] = useState("multiLine");
+
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        new Array(complexRequest.length).fill(true)
+    );
+
+    let [valuesState, setValuesState] = useState(values)
+
+    let [valuesStateWait, setValuesStateWait] = useState(values)
+
+    const [isActive, setActive] = useState(false);
+
+    const toggleClass = () => {
+        setActive(!isActive);
+        if (isActive) newDate(date)
+    };
+
+    const handleOnChange = (position) => {
+        const updatedCheckedState = selectedObjects.map((item, index) => {
+            return index === position ? !item : item;
+        });
+
+        setSelectedObjects(updatedCheckedState)
+
+        const activeValues = []
+        updatedCheckedState.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(values[index]);
+                }
+            }
+        );
+        setValuesState(activeValues);
+
+    };
 
     useEffect(() => {
         let dateInput = dayNow()
         setDate(dateInput)
 
-        let stankiRequest = Promise.all(namesToFetch.map((item)=>{
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
+
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item)=>{
             return fetchRequestSmena(dateInput, item)
         }));
 
-        updateLoadSmenaData(stankiRequest, dateInput, complexName, namesToFetch)
+        updateLoadSmenaData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }, [])
 
     // Функция для изменения даты в календаре
     function newDate(dateInput) {
         setDate(dateInput)
+        setValuesStateWait(valuesState)
 
-        let stankiRequest = Promise.all(namesToFetch.map((item)=>{
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
+
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item)=>{
             return fetchRequestSmena(dateInput, item)
         }));
 
-        updateLoadSmenaData(stankiRequest, dateInput, complexName, namesToFetch)
+        updateLoadSmenaData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
     }
 
     return (
@@ -178,7 +351,34 @@ function RobotsSmena() {
 
             </div>
 
-            <DayCalendar newDate={newDate} date={date}/>
+            <div className="energyCalendarContainer">
+                <DayCalendar newDate={newDate} date={date}/>
+                <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
+                    <ul className='toppings-list'
+                        className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
+                        {complexName.map((name, index) => {
+                            return (
+                                <li key={index}>
+                                    <div className="toppings-list-item">
+                                        <div className="left-section">
+                                            <input
+                                                type="checkbox"
+                                                id={`custom-checkbox-${index}`}
+                                                name={name[0]}
+                                                value={index}
+                                                checked={selectedObjects[index]}
+                                                onChange={() => handleOnChange(index)}
+                                            />
+                                            <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                            className='spanList'>{name[0]}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            </div>
 
             <div className='complexAllInfo'>
                 <div className='totalRound' id="containerTotal"></div>
@@ -190,34 +390,15 @@ function RobotsSmena() {
                 <div className='countOperations' id='containerOperations2'></div>
             </div>
 
-            <ComplexSmenaAllIngo complexName={complexName[0]} complexImg={complexImg[0]}
-                                 complexMesto={buttonsVrs1} programs={complexName[0]+'smena'}
-                                 size={"ceh6"} idContainer={1} service={complexName[0]}/>
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
-            <ComplexSmenaAllIngo complexName={complexName[1]} complexImg={complexImg[1]}
-                                 complexMesto={buttonsVrs2} programs={complexName[1]+'smena'}
-                                 size={"ceh6"} idContainer={3} service={complexName[1]}/>
-
-            <ComplexSmenaAllIngo complexName={complexName[2]} complexImg={complexImg[2]}
-                                 complexMesto={buttonsVrs3} programs={complexName[2]+'smena'}
-                                 size={"sborCeh"} idContainer={5} service={complexName[2]}/>
-
-            <ComplexSmenaAllIngo complexName={complexName[3]} complexImg={complexImg[3]}
-                                 complexMesto={buttonsVrs4} programs={complexName[3]+'smena'}
-                                 size={"sborCeh"} idContainer={7} service={complexName[3]}/>
-
-            <ComplexSmenaAllIngo complexName={complexName[4]} complexImg={complexImg[4]}
-                                 complexMesto={buttonsVrs5} programs={complexName[4]+'smena'}
-                                 size={"ceh5"} idContainer={9} service={complexName[4]}/>
-
-            <ComplexSmenaAllIngo complexName={complexName[5]} complexImg={complexImg[5]}
-                                 complexMesto={buttonsVrs6} programs={complexName[5]+'smena'}
-                                 size={"sborCeh"} idContainer={11} service={complexName[5]}/>
-
-            <ComplexSmenaAllIngo complexName={complexName[6]} complexImg={complexImg[6]}
-                                 complexMesto={buttonsVrs7} programs={complexName[6]+'smena'}
-                                 size={"ceh6"} idContainer={13} service={complexName[6]}/>
-
+            {valuesStateWait.map((e, i) => {
+                return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
+                                            programs={complexName[e][1]+'smena'} service={complexName[e][0]}/>
+                }
+            )}
         </div>
     )
 

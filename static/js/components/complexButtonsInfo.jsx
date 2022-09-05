@@ -42,12 +42,21 @@ function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, progra
     )
 }
 
-function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service, report, current} ) {
+function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs = null, laser, service, report, current} ) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
 
     let idLine2 = `containerLine${idContainer+1}`
     let idRound2 = `containerRound${idContainer+1}`
+
+    let idProgram = null;
+    let idProgram2 = null;
+
+    if(programs !== null){
+        idProgram = `containerProgram${idContainer}`
+        idProgram2 = `containerProgram${idContainer+1}`
+    }
+
     return (
         <div className='complexAllInfo' id={'containerTotal'}>
             <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto}
@@ -55,13 +64,29 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
             <div className='twoDayDiv'>
                 <h1 className="timeInfoSmena">Работа II смены 19:00 - 07:00</h1>
                 <div className='oneDay'>
-                    <div className="lineSukiHighChart" id={idLine}></div>
-                    <div className="roundSukiHighChart" id={idRound}></div>
+                    <div className='highChartsLineRound'>
+                        <div className='lineComplex'>
+                            <div className="lineSukiHighChart" id={idLine}></div>
+                            {idProgram != null ?
+                                <div className="lineProgramHighChart" id={idProgram}></div>
+                                :<div></div>
+                            }
+                        </div>
+                        <div className="roundSukiHighChart" id={idRound}></div>
+                    </div>
                 </div>
                 <h1 className="timeInfoSmena">Работа I смены 07:00 - 19:00</h1>
                 <div className='oneDay'>
-                    <div className="lineSukiHighChart" id={idLine2}></div>
-                    <div className="roundSukiHighChart" id={idRound2}></div>
+                    <div className='highChartsLineRound'>
+                        <div className='lineComplex'>
+                            <div className="lineSukiHighChart" id={idLine2}></div>
+                            {idProgram2 != null ?
+                                <div className="lineProgramHighChart" id={idProgram2}></div>
+                                :<div></div>
+                            }
+                        </div>
+                        <div className="roundSukiHighChart" id={idRound2}></div>
+                    </div>
                 </div>
             </div>
         </div>

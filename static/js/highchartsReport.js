@@ -554,6 +554,56 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, n
 
 }
 
+function highChartSmenaTotalKolOp(total, kolOp, complexName, day1, nagruzkaName){
+
+    // переменные для переформирования данных 2-х смен
+    let work = [[],[],]
+    let pause = [[],[],]
+    let off = [[],[],]
+    let avar = [[],[],]
+    let nagruzka = [[],[],]
+
+    let shortOp = [[],[],]
+    let longOp = [[],[],]
+
+    // переформирования данных
+    total.forEach((e,i) => {
+        if(!Array.isArray(e) || e.includes(undefined)){
+            work[i%2].push(0)
+            pause[i%2].push(0)
+            off[i%2].push(0)
+            avar[i%2].push(0)
+            nagruzka[i%2].push(0)
+        }
+        else{
+            work[i%2].push(e[0])
+            pause[i%2].push(e[1])
+            off[i%2].push(e[2])
+            avar[i%2].push(e[3])
+            nagruzka[i%2].push(e[4])
+        }
+    })
+
+    kolOp.forEach((e,i) => {
+        if(!Array.isArray(e) || e.includes(undefined)){
+            shortOp[i%2].push(0)
+            longOp[i%2].push(0)
+        }
+        else{
+            shortOp[i%2].push(e[0])
+            longOp[i%2].push(e[1])
+        }
+    })
+
+    // вторая смена, всегда за предыдущий день, date всегда 12 часов
+    highChartTotal(complexName, work[0], pause[0], off[0], avar[0], nagruzka[0], nagruzkaName, 12)
+    highChartCountOperations(complexName, shortOp[0], longOp[0])
+
+    // первая смена в date передается текущая дата с календаря
+    highChartTotal(complexName, work[1], pause[1], off[1], avar[1], nagruzka[1], nagruzkaName, day1, '2')
+    highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
+}
+
 function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Нагрузка', idContainer) {
 
     let colorNagruzka;
