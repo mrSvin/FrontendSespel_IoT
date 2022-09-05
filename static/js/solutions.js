@@ -645,12 +645,12 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
 }
 
 // Функция подгатавливает данные из fetch и рисует граффик.
-function getTimeProgramNameGraph(arrayData) {
+function getTimeProgramNameGraph(arrayData, type, date) {
     let timer = 0;
     let programTimeArray = [];
     let startSame = null
 
-    if(!arrayData) return 0
+    if (!arrayData) return 0
 
     if (arrayData[0].length % 2 == 1) {
         let timeNow = dayTimeNow()
@@ -661,7 +661,6 @@ function getTimeProgramNameGraph(arrayData) {
             arrayData[0].push(arrayData[0][0].slice(0, 10) + ' 23:59:59')
         }
     }
-
 
     for (let i = 0; i < arrayData[0].length; i += 2) {
 
@@ -686,6 +685,12 @@ function getTimeProgramNameGraph(arrayData) {
     }
 
     let parset = []
+
+    if (type == 'sutki'){
+
+    }else {
+        console.log('Контрольная точка',date)
+    }
 
     programTimeArray.forEach(e => {
         parset.push({
