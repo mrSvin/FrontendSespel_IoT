@@ -1,14 +1,6 @@
 // Функия обработки массива обещаний для смен
 function changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
 
-    // valuesState = valuesState.map((e,i, array)=>{
-    //     let save = [e,e]
-    //     return save
-    // }).flat()
-    //
-    console.log('Тут',valuesState)
-
-
     let fetchNames = valuesState.map(i => {
         return complexRequest[i]
     })
@@ -40,7 +32,6 @@ function SwitchLineSmenaHC({date, stateLineHC, setStateLineHC, complexName, comp
         </div>
     )
 }
-
 
 function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
     promiseVariable
@@ -101,19 +92,17 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typ
 
             highChartSmenaTotalKolOp(totalArray, kolOpArray, names, day1, nagruzkaName)
 
-             console.log('Проверка, два массивая с данными',smenaArrays)
-
             parserDataArray.forEach((e, i)=>{
                 let idContainer = (i * 2) + 1
 
                 // Первая смена
                 highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], nagruzkaName[i], idContainer)
-                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0]),i + 1)
+                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0]),idContainer)
                 highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], nagruzkaName[i], idContainer)
 
                 // Первая вторая
                 highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], nagruzkaName[i], idContainer + 1)
-                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1]),i + 2)
+                if(complexName[i][1] !== null) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1]),idContainer + 1)
                 highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], nagruzkaName[i], idContainer + 1)
 
             })
