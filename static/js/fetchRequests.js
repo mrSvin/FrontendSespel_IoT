@@ -1,17 +1,9 @@
 // fetch запрос объекта в форме объектов
-function fetchRequest(dateCalendar, complexName, complexObject = {} ) {
+function fetchRequest(dateCalendar, complexName) {
     return fetch(`/api/complexData/${complexName}_days_date:${dateCalendar}`, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
-            complexObject.workArray = data.work
-            complexObject.pauseArray = data.pause
-            complexObject.offArray = data.off
-            complexObject.avarArray = data.avar
-            complexObject.ruchnoyArray = data.nagruzka
-            complexObject.roundArray = data.roundData
-            complexObject.programName = data.programName
-
-            return complexObject
+            return data
         })
 }
 

@@ -591,43 +591,6 @@ function getArrayPeriodsBetween(arrayTime) {
     return ArrayPeriod
 }
 
-// function changeTypeLine(date, stateLineHC, setStateLineHC, bufferData, complexRequest) {
-//     if (stateLineHC == 'line') {
-//         setStateLineHC('multiline')
-//         for (let i = 0; i < complexRequest.length; i++) {
-//             fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i + 1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
-//         }
-//     } else {
-//         setStateLineHC('line')
-//         for (let i = 0; i < complexRequest.length; i++) {
-//             fetchRequestBuildHC(date, bufferData[i], complexRequest[i], i + 1, exceptionManualNagruzka(complexRequest[i]))
-//         }
-//     }
-// }
-
-function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
-
-    let fetchNames = valuesState.map(i => {
-        return complexRequest[i]
-    })
-    let complexNames = valuesState.map(i => {
-        return complexName[i]
-    })
-    let stankiRequest = Promise.all(fetchNames.map((item) => {
-        return fetchRequest(date, item)
-    }));
-
-    if (stateLineHC == 'line') {
-        setStateLineHC('multiLine')
-        updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
-    } else {
-        setStateLineHC('line')
-        updateLoadData(stankiRequest, date, complexNames, fetchNames, 'line')
-    }
-
-
-}
-
 function exceptionManualNagruzka(name) {
     if (name == 'kim' || name == 'apec') {
         return 'Ручной'
@@ -636,26 +599,15 @@ function exceptionManualNagruzka(name) {
     }
 }
 
-function switchLineSutki(stateLineHC, complexRequest, dateInput, bufferData) {
-    let roundComplex = []
-    if (stateLineHC == 'line') {
-        for (let i = 0; i < complexRequest.length; i++) {
-            roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i + 1, exceptionManualNagruzka(complexRequest[i]))
-        }
-    } else {
-        for (let i = 0; i < complexRequest.length; i++) {
-            roundComplex[i] = fetchRequestBuildHC(dateInput, bufferData[i], complexRequest[i], i + 1, exceptionManualNagruzka(complexRequest[i]), stateLineHC)
-        }
-    }
-    return roundComplex
-}
-
 // Функция получения из массивов времени и общего процента
-function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, avar, nagruzka, date) {
+function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, avar, nagruzka, ruchoi = null, date) {
 
     let data = []
     generalDiagramNames.forEach((e, i) => {
-        data.push([workNoNagruzka[i], pause[i], off[i], avar[i], nagruzka[i]])
+        if (ruchoi == null) {
+            data.push([workNoNagruzka[i], pause[i], off[i], avar[i], nagruzka[i]])
+        } else data.push([workNoNagruzka[i], pause[i], off[i], avar[i], nagruzka[i], ruchoi[i]])
+
     })
 
     let dataSumArray = data.map(e => {
@@ -670,11 +622,21 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
     })
 
     let dataPercent = data.map((e, i) => {
-        return [(e[0] / dataSumArray[i] * 100).toFixed(1),
-            (e[1] / dataSumArray[i] * 100).toFixed(1),
-            (e[2] / dataSumArray[i] * 100).toFixed(1),
-            (e[3] / dataSumArray[i] * 100).toFixed(1),
-            (e[4] / dataSumArray[i] * 100).toFixed(1),]
+        if (ruchoi == null) {
+            return [(e[0] / dataSumArray[i] * 100).toFixed(1),
+                (e[1] / dataSumArray[i] * 100).toFixed(1),
+                (e[2] / dataSumArray[i] * 100).toFixed(1),
+                (e[3] / dataSumArray[i] * 100).toFixed(1),
+                (e[4] / dataSumArray[i] * 100).toFixed(1),]
+        } else {
+            return [(e[0] / dataSumArray[i] * 100).toFixed(1),
+                (e[1] / dataSumArray[i] * 100).toFixed(1),
+                (e[2] / dataSumArray[i] * 100).toFixed(1),
+                (e[3] / dataSumArray[i] * 100).toFixed(1),
+                (e[4] / dataSumArray[i] * 100).toFixed(1),
+                (e[5] / dataSumArray[i] * 100).toFixed(1),
+            ]
+        }
     })
 
     return dataPercent.map((e, i) => {
@@ -735,24 +697,3 @@ function getTimeProgramNameGraph(arrayData) {
     })
     return parset
 }
-
-// function fetchRequest(dateCalendar, complexName, complexObject = {} ) {
-//     return fetch(`/api/complexData/rtk12c_days_date:2022-08-16`, {method: 'GET'})
-//         .then((response) => response.json())
-//         .then((data) => {
-//             complexObject.workArray = data.work
-//             complexObject.pauseArray = data.pause
-//             complexObject.offArray = data.off
-//             complexObject.avarArray = data.avar
-//             complexObject.ruchnoyArray = data.nagruzka
-//             complexObject.roundArray = data.roundData
-//             complexObject.programName = data.programName
-//
-//             highChartProgram(getTimeProgramNameGraph(data))
-//
-//           //  console.log(tableArray)
-//             return complexObject
-//         })
-// }
-//
-// fetchRequest()
