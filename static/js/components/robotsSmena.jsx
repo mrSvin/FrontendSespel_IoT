@@ -16,7 +16,7 @@ function changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, com
         return complexName[i]
     })
     let stankiRequest = Promise.all(fetchNames.map((item) => {
-        return fetchRequest(date, item)
+        return fetchRequestSmena(date, item)
     }));
 
     if (stateLineHC == 'line') {
