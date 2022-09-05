@@ -212,3 +212,40 @@ function newDateSmena(dateInput) {
 
     updateLoadSmenaData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 }
+
+// Состояние даты
+let [date, setDate] = useState(0);
+
+// Состояние переменной мульти Диаграммы
+let [stateLineHC, setStateLineHC] = useState("multiLine");
+
+const [isActive, setActive] = useState(false);
+
+const toggleClassSutki = () => {
+    setActive(!isActive);
+    if (isActive) newDateSutki(date)
+};
+
+const toggleClassSmena = () => {
+    setActive(!isActive);
+    if (isActive) newDateSmena(date)
+};
+
+const handleOnChange = (position) => {
+    const updatedCheckedState = selectedObjects.map((item, index) => {
+        return index === position ? !item : item;
+    });
+
+    setSelectedObjects(updatedCheckedState)
+
+    const activeValues = []
+    updatedCheckedState.forEach(
+        (currentState, index) => {
+            if (currentState) {
+                activeValues.push(values[index]);
+            }
+        }
+    );
+    setValuesState(activeValues);
+
+};
