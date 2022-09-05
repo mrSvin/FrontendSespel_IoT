@@ -6,7 +6,7 @@ function changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, com
     //     return save
     // }).flat()
     //
-   // console.log('Тут',valuesState)
+    console.log('Тут',valuesState)
 
 
     let fetchNames = valuesState.map(i => {
@@ -295,7 +295,7 @@ function RobotsSmena() {
             </div>
 
             <SwitchLineSmenaHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait.concat(valuesStateWait)}/>
+                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
                 return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
