@@ -645,6 +645,54 @@ function highChartSmenaTotalKolOp(total, kolOp, complexName, day1, nagruzkaName)
     highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
 }
 
+function highChartTotalKolOp(total, kolOp, complexName, day1, nagruzkaName){
+
+    // переменные для переформирования данных 2-х смен
+    let work = []
+    let pause = []
+    let off = []
+    let avar = []
+    let nagruzka = []
+
+    let shortOp = []
+    let longOp = []
+
+    // переформирования данных
+    total.forEach((e,i) => {
+        if(!Array.isArray(e) || e.includes(undefined)){
+            work.push(0)
+            pause.push(0)
+            off.push(0)
+            avar.push(0)
+            nagruzka.push(0)
+        }
+        else{
+            e = e.map(Number)
+            work.push(e[0])
+            pause.push(e[1])
+            off.push(e[2])
+            avar.push(e[3])
+            nagruzka.push(e[4])
+        }
+    })
+
+    kolOp.forEach((e,i) => {
+        if(!Array.isArray(e) || e.includes(undefined)){
+            shortOp.push(0)
+            longOp.push(0)
+        }
+        else{
+            e = e.map(Number)
+            shortOp.push(e[0])
+            longOp.push(e[1])
+        }
+    })
+
+    // вторая смена, всегда за предыдущий день, date всегда 12 часов
+    highChartTotal(complexName, work, pause, off, avar, nagruzka, nagruzkaName, day1)
+    highChartCountOperations(complexName, shortOp, longOp)
+}
+
 function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Нагрузка', idContainer) {
 
     let colorNagruzka;
