@@ -1124,7 +1124,7 @@ function highChartProgram(arrayProgram, idContainer=1) {
         series: [
             {
                 name: 'Четные',
-                borderColor: 'gray',
+                borderColor: 'white',
                 pointWidth: 30,
                 colorByPoint: false,
                 color: '#ff55d7',
@@ -1139,7 +1139,7 @@ function highChartProgram(arrayProgram, idContainer=1) {
             },
             {
                 name: 'Нечетные',
-                borderColor: 'gray',
+                borderColor: 'white',
                 pointWidth: 30,
                 colorByPoint: false,
                 color: '#ff531a',
