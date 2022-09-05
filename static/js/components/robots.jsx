@@ -88,12 +88,29 @@ function RobotsInfo() {
 
     }, [])
 
+    function newDate(dateInput) {
+        setDate(dateInput)
+        setValuesStateWait(valuesState)
 
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
+
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(dateInput, item)
+        }));
+        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
+
+    }
 
     return (
         <div>
             <div className="energyCalendarContainer">
-                <DayCalendar newDate={newDateSutki} date={date}/>
+                <DayCalendar newDate={newDate} date={date}/>
                 <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
                     <ul className='toppings-list'
                         className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
