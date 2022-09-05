@@ -47,7 +47,7 @@ function RobotsSmena() {
 
     const toggleClass = () => {
         setActive(!isActive);
-        if (isActive) newDate(date)
+        if (isActive) newDateSmena(date)
     };
 
     const handleOnChange = (position) => {

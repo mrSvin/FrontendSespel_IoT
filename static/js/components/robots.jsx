@@ -46,7 +46,7 @@ function RobotsInfo() {
 
     const toggleClass = () => {
         setActive(!isActive);
-        if (isActive) newDate(date)
+        if (isActive) newDateSutki(date)
     };
 
     const handleOnChange = (position) => {
