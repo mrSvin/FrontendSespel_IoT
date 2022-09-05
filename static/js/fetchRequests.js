@@ -79,6 +79,8 @@ function fetchRequestAddService(userName, userRole,complexName, infoWorks, perio
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
+    infoWorks = infoWorks.replaceAll(`'`, '').replaceAll(`"`,'')
+
     let raw = JSON.stringify({
         "complexName": complexName,
         "userName": userName,
