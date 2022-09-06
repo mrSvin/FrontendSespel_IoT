@@ -9,7 +9,7 @@ function TableReportBodyCurrent({dataReportState}) {
             {dataReportState[0].map((val,i) => {
                 return (
                     <tr key={i}>
-                        <td>{val[i]}</td>
+                        <td>{val}</td>
                         <td>{dataReportState[1][i]}</td>
                     </tr>
                 )
