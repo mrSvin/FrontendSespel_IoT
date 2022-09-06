@@ -1,9 +1,9 @@
-function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer=null, alarm, programs=null, laser, service, report, current}) {
+function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer=null,  service, alarm, programs, laser, report, current}) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
     let idProgram = null;
 
-    programs != null? idProgram = `containerProgram${idContainer}`:null
+    programs != undefined? idProgram = `containerProgram${idContainer}`:null
 
     return (
         <div className='complexAllInfo'>
