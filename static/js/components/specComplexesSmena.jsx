@@ -10,7 +10,7 @@ function SpecComplexesSmena() {
     ]
 
     let complexImg = ["../images/press.png", "../images/epp.png", "../images/stp13m.png", "../images/stendResource.png"]
-    let complexRequest = ['press', 'epp', 'stp13m']
+    let complexRequest = ['press', 'epp', 'stp13m', 'stp13m']
 
     let buttonsVrs = [
         [-480, 765, 'url(../images/press.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"],
