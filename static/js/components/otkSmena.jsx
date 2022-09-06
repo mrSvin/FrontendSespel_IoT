@@ -1,7 +1,10 @@
 function OtkSmena() {
+
+    //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
+    // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
     let complexName = [
-        ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168"],
-        ["НК600", null],
+        ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", "CRYSTA-Apex S9168"],
+        ["НК600", "НК600"],
     ]
 
     let complexImg = ["../images/crystal_apex.png", "../images/nk600.png"]
@@ -162,11 +165,12 @@ function OtkSmena() {
                                complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                    return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
-                                                complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
-                                                programs={complexName[e][1]+'smena'} service={complexName[e][0]}/>
-                }
-            )}
+                return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
+                                            service={complexName[e][1]} alarm={complexName[e][2]}
+                                            programs={complexName[e][3]} laser={complexName[e][4]}
+                                            report={complexName[e][5]} current={complexName[e][6]}/>
+            })}
         </div>
     )
 

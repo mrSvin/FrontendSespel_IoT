@@ -1,8 +1,10 @@
 function OtkInfo() {
 
+    //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
+    // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
     let complexName = [
-        ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168"],
-        ["НК600", null],
+        ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", "CRYSTA-Apex S9168"],
+        ["НК600", "НК600"],
     ]
 
     let complexImg = ["../images/crystal_apex.png", "../images/nk600.png"]
@@ -137,7 +139,9 @@ function OtkInfo() {
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                            programs={complexName[e][1]} service={complexName[e][0]}/>
+                                            service={complexName[e][1]} alarm={complexName[e][2]}
+                                            programs={complexName[e][3]} laser={complexName[e][4]}
+                                            report={complexName[e][5]} current={complexName[e][6]}/>
             })}
         </div>
     )

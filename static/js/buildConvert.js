@@ -86,7 +86,7 @@ function updateLoadData(promiseVariable, day1, complexName, fetchNames, typeLine
             parserDataArray.forEach((e, i) => {
                 // Первая смена
                 highChartSutkiLine(e[0], e[1], e[2], e[3], e[4], nagruzkaName[i], i + 1)
-                if(complexName[i][3] !== null || complexName[i][3] !== undefined) highChartProgram(getTimeProgramNameGraph(data[i], 'sutki', day1),i + 1)
+                if(complexName[i][3] !== null && complexName[i][3] !== undefined) highChartProgram(getTimeProgramNameGraph(data[i], 'sutki', day1),i + 1)
                 highChartRound(e[5][0], e[5][1], e[5][2], e[5][3], e[5][4], nagruzkaName[i], i + 1)
 
             })
@@ -160,12 +160,12 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typ
 
                 // Первая смена
                 highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], nagruzkaName[i], idContainer)
-                if(complexName[i][3] !== null || complexName[i][3] !== undefined)  highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0], 'smena',day2+' 19:00'),idContainer)
+                if(complexName[i][3] !== null && complexName[i][3] !== undefined)  highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0], 'smena',day2+' 19:00'),idContainer)
                 highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], nagruzkaName[i], idContainer)
 
                 // Первая вторая
                 highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], nagruzkaName[i], idContainer + 1)
-                if(complexName[i][3] !== null || complexName[i][3] !== undefined)  highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1], 'smena', day1 + ' 07:00'),idContainer + 1)
+                if(complexName[i][3] !== null && complexName[i][3] !== undefined)  highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1], 'smena', day1 + ' 07:00'),idContainer + 1)
                 highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], nagruzkaName[i], idContainer + 1)
 
             })
