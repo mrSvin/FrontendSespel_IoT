@@ -30,9 +30,17 @@ function CurrentParams() {
             .then((response) => response.json())
             .then((data) => {
                 console.log('Haha?',data)
-                let fix = data.actNum == '1'? '4977.06.008-5001': 'C435064S-5.0301'
-                let dataReport = [data.requestWriteDB, data.prodNum, data.actNum, data.resultR, fix, data.authorId, data.workMode, data.maxDeformation, data.ostDeformation, data.actForce1R, data.actForce2R, data.needForce, data.lastRequest]
-                setDataReportState([Object.keys(data),dataReport])
+                let Name = data.actNum == '1'? '4977.06.008-5001': 'C435064S-5.0301'
+                let date = data.lastRequest.slice(0,10) + ' ' + data.lastRequest.slice(11,19)
+                let dataReport = [data.requestWriteDB, data.prodNum, data.actNum, data.resultR, Name, data.authorId, data.workMode, data.maxDeformation, data.ostDeformation, data.actForce1R, data.actForce2R, data.needForce, date]
+                setDataReportState([
+                    [
+                    'Регистр состояния записи на сервер','Номер изделия', 'Номер акта', 'Результат',
+                    'Номер чертежа', 'ID автора', 'Состояние работы', 'Максимальная деформация',
+                    'Остаточная диформация','Фактическая сила (датчик 1), Т', 'Фактическая сила (датчик 2), Т',
+                    'Требуемая сила (датчик 2), Т', 'Последнее время получения данных с оборудования'
+                    ],
+                    dataReport])
             })
     }
 

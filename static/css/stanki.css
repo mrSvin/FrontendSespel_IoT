@@ -182,11 +182,11 @@ input:checked + .slider:before {
     max-height: 0;
     /* transition: max-height 0.15s ease-out; */
     transition: max-height 0.2s ease-in;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .toppings-list-visible {
-    max-height: 500px;
+    max-height: 400px;
     transition: max-height 0.5s ease-in;
 }
 
