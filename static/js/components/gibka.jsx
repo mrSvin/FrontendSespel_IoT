@@ -4,7 +4,7 @@ function GibkaInfo() {
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
     let complexName = [
         ["FACCIN 4","FACCIN 4"],
-        ["FACCIN 10","FACCIN 4"],
+        ["FACCIN 10","FACCIN 10"],
     ]
     let complexImg = ["../images/faccin.png", "../images/faccin_2.png"]
     let complexRequest = ['faccin_1','faccin_2']

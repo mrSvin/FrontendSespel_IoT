@@ -1,4 +1,4 @@
-/*ÃÅ¾Ã‘â€šÃÂºÃÂ»Ã‘Å½Ã‘â€¡ÃÂ¸Ã‘â€šÃ‘Å’ Ã‘ÂÃÂºÃ‘â‚¬ÃÂ¾ÃÂ» ÃÂ¿ÃÂ¾ ÃÂ³ÃÂ¾Ã‘â‚¬ÃÂ¸ÃÂ·ÃÂ¾ÃÂ½Ã‘â€šÃÂ°ÃÂ»ÃÂ¸*/
+/*ÃƒÂÃ…Â¾Ãƒâ€˜Ã¢â‚¬Å¡ÃƒÂÃ‚ÂºÃƒÂÃ‚Â»Ãƒâ€˜Ã…Â½Ãƒâ€˜Ã¢â‚¬Â¡ÃƒÂÃ‚Â¸Ãƒâ€˜Ã¢â‚¬Å¡Ãƒâ€˜Ã…â€™ Ãƒâ€˜Ã‚ÂÃƒÂÃ‚ÂºÃƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â» ÃƒÂÃ‚Â¿ÃƒÂÃ‚Â¾ ÃƒÂÃ‚Â³ÃƒÂÃ‚Â¾Ãƒâ€˜Ã¢â€šÂ¬ÃƒÂÃ‚Â¸ÃƒÂÃ‚Â·ÃƒÂÃ‚Â¾ÃƒÂÃ‚Â½Ãƒâ€˜Ã¢â‚¬Å¡ÃƒÂÃ‚Â°ÃƒÂÃ‚Â»ÃƒÂÃ‚Â¸*/
 body {
     overflow-x:hidden;
 }
@@ -174,18 +174,20 @@ input:checked + .slider:before {
     position: absolute;
     flex-direction: column;
     background-color: #83addd;
-    width: 212px;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 1s, opacity 0.5s linear;
+    width: 470px;
     color: black;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    max-height: 0;
+    /* transition: max-height 0.15s ease-out; */
+    transition: max-height 0.2s ease-in;
     overflow: hidden;
 }
 
 .toppings-list-visible {
-    visibility: visible;
-    transition: visibility 1s, opacity 0.5s linear;
-    opacity: 1;
+    max-height: 500px;
+    transition: max-height 0.5s ease-in;
 }
 
 .toppings-list li {
@@ -199,36 +201,39 @@ input:checked + .slider:before {
 
 .listComplex {
     display: block;
-    background: #83addd;
-    border-radius: 4px;
     height: max-content;
     padding: 5px 0;
-    width: 212px;
     position: relative;
     z-index: 1;
-    margin-left: 30px;
-    margin-top: 5px;
+    margin-left: 0px;
+    margin-top: 8px;
     font-size: 25px;
     cursor: pointer;
-    transition: 0.3s;
+    /* transition: 0.3s; */
     color: white;
+    position: relative;
 }
 
-.listComplex:hover {
-    box-shadow: 0px 0px 5px 0px #14b2f3, inset 0px 0px 0px 0px #14b2f3;
-}
+.listComplex:hover {/* color: #1aaae5; */}
 
 .listComplex > span {
-    display: block;
     text-align: center;
     font-weight: 600;
     user-select: none;
-    /* margin: 5px; */
+    margin: 5px;
+    width: max-content;
+    transition: 0.5s;
+    color: #83addd;
+    text-shadow: none;
+}
+
+.selectDevice:hover .listComplex > span {
+    color: #1aaae5;
 }
 
 .listComplex label {
     cursor: pointer;
-    padding-right: 175px;
+    padding-right: 90%;
 }
 
 .listComplex li:hover {
@@ -245,4 +250,22 @@ input:checked + .slider:before {
     left: 38px;
     pointer-events: none;
     white-space: nowrap;
+    text-shadow: none;
+}
+
+.selectDevice {
+    font-size: 25px;
+    margin-left: 15px;
+    cursor: pointer;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    text-shadow: none;
+    color: #83addd !important;
+    transition: 0.5s;
+}
+
+.selectDevice:hover {
+    color: #1aaae5!important;
+    transition: 0.5s;
 }
