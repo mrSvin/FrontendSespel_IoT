@@ -1,3 +1,24 @@
+function TableReportBodyCurrent({dataReportState}) {
+    console.log('Logs', dataReportState)
+    if(dataReportState.length == 0){
+        return <tbody></tbody>
+    }
+    else{
+        return (
+            <tbody>
+            {dataReportState[0].map((val,i) => {
+                return (
+                    <tr key={i}>
+                        <td>{val[i]}</td>
+                        <td>{dataReportState[1][i]}</td>
+                    </tr>
+                )
+            })}
+            </tbody>
+        )
+    }
+}
+
 function CurrentParams() {
     let nameToFetch = parseNameUrl(document.location.pathname);
     let imgComplex = ["../images/stendResource.png"]
@@ -49,18 +70,3 @@ function CurrentParams() {
     )
 }
 
-function TableReportBodyCurrent({dataReportState}) {
-    console.log('Logs', dataReportState)
-    return (
-        <tbody>
-        {dataReportState[0].map((val,i) => {
-            return (
-                <tr key={i}>
-                    <td>{val[i]}</td>
-                    <td>{dataReportState[1][i]}</td>
-                </tr>
-            )
-        })}
-        </tbody>
-    )
-}
