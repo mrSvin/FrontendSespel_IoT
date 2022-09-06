@@ -29,7 +29,7 @@ function Report() {
     }
 
     useEffect(() => {
-        fetchRequestReport(dataReport)
+        fetchRequestReport()
         },[])
 
     function changeData(){
@@ -51,13 +51,6 @@ function Report() {
         <div className='blockImage'>
             <img className="serviceImg " src={imgComplex}/>
         </div>
-        {/*<button*/}
-        {/*    onClick={() => {*/}
-        {/*        changeData()*/}
-        {/*    }}*/}
-        {/*>*/}
-        {/*    Обновить данные*/}
-        {/*</button>*/}
         <table className="tableReport" id='tableReport'>
         <thead>
         <tr>
