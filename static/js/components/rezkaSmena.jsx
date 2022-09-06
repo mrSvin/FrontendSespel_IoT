@@ -176,7 +176,7 @@ function RezkaSmena() {
                                complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSutkiAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
                                             service={complexName[e][1]} alarm={complexName[e][2]}
                                             programs={complexName[e][3]} laser={complexName[e][4]}
