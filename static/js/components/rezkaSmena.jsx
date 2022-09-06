@@ -8,8 +8,8 @@ function RezkaSmena() {
         ["Навигатор 3", "Навигатор 3", null, "Навигатор 3smena", "Навигатор 3"],
         ["TruLaser",  'TruLaser'],
         ["Комета 1", "Комета 1"],
-        ["Комета 2", "Комета 1"],
-        ["Комета 3", "Комета 1"],
+        ["Комета 2", "Комета 2"],
+        ["Комета 3", "Комета 3"],
     ]
 
     let complexImg = ["../images/navigator.png", "../images/navigator.png", "../images/navigator.png", "../images/trulaser.png", "../images/kometa.png", "../images/kometa.png", "../images/kometa.png"]

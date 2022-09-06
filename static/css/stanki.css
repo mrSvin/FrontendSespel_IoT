@@ -179,6 +179,7 @@ input:checked + .slider:before {
     opacity: 0;
     transition: visibility 1s, opacity 0.5s linear;
     color: black;
+    overflow: hidden;
 }
 
 .toppings-list-visible {
@@ -243,4 +244,5 @@ input:checked + .slider:before {
     position: absolute;
     left: 38px;
     pointer-events: none;
+    white-space: nowrap;
 }

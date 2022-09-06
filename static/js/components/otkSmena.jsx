@@ -3,7 +3,7 @@ function OtkSmena() {
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
     let complexName = [
-        ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", "CRYSTA-Apex S9168"],
+        ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", null, "CRYSTA-Apex S9168"],
         ["НК600", "НК600"],
     ]
 
