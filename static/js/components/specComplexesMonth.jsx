@@ -1,7 +1,12 @@
 function SpecComplexesMonth() {
 
-    let complexName = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М"]
-    let complexImg = ["../images/press.png", "../images/epp.png", "../images/stp13m.png"]
+    let complexName = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М", 'Стенд для ресурсных испытаний']
+    let complexImg = ["../images/press.png", "../images/epp.png", "../images/stp13m.png", "../images/stendResource.png"]
+
+    let complexRequest = ['press', 'epp', 'stp13m']
+    let nagruzkaName = complexRequest.map(e => {
+        return exceptionManualNagruzka(e)
+    })
 
     let buttonsVrs1 = [-480, 765, 'url(../images/press.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"]
     let buttonsVrs2 = [-825, 220, 'url(../images/epp.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
@@ -58,7 +63,7 @@ function SpecComplexesMonth() {
                         [pauseKimArray, pauseNK600Array, pauseStp13mArray],
                         [offKimArray, offNK600Array, offStp13mArray],
                         [avarKimArray, avarNK600Array, avarStp13mArray],
-                        [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray], 'Нагрузка', dateInput)
+                        [nagruzkaKimArray, nagruzkaNK600Array, nagruzkaStp13mArray], nagruzkaName, dateInput)
 
                     highChartRound(averageMonthdata([workKimArray, workNK600Array, workStp13mArray]), averageMonthdata([pauseKimArray, pauseNK600Array, pauseStp13mArray]),
                         averageMonthdata([offKimArray, offNK600Array, offStp13mArray]), averageMonthdata([avarKimArray, avarNK600Array, avarStp13mArray]),
@@ -98,6 +103,7 @@ function SpecComplexesMonth() {
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1} service={"Пресс ЧПУ для ступиц"}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"} idContainer = {2} service={"ЭПП"}/>
             <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {3} service={"СТП13М"}/>
+            <ComplexSutkiAllInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {4} service={"Стенд"} report={'Стенд'} current={'Стенд'}/>
 
         </div>
     )

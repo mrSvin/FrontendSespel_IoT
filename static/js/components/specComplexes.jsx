@@ -1,94 +1,152 @@
 function SpecComplexesInfo() {
 
-    let complexName = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М"]
+    //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
+    // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
+    let complexName = [
+        ["Пресс ЧПУ для ступиц","Пресс ЧПУ для ступиц"],
+        ["ЭПП","ЭПП"],
+        ["СТП13М","СТП13М"],
+        ['Стенд для ресурсных испытаний','Стенд для ресурсных испытаний', null, null, null, 'Стенд','Стенд'],
+    ]
+
     let complexImg = ["../images/press.png", "../images/epp.png", "../images/stp13m.png", "../images/stendResource.png"]
     let complexRequest = ['press', 'epp', 'stp13m']
 
-    let buttonsVrs1 = [-480, 765, 'url(../images/press.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"]
-    let buttonsVrs2 = [-825, 220, 'url(../images/epp.png) no-repeat', "../images/ceh_6.png", 40, "unset"]
-    let buttonsVrs3 = [-310, 550, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
+    let buttonsVrs = [
+        [-480, 765, 'url(../images/press.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"],
+        [-825, 220, 'url(../images/epp.png) no-repeat', "../images/ceh_6.png", 40, "unset"],
+        [-310, 550, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        [-310, 550, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+    ]
 
-    let bufferData = bufferDataArrays(3)
+    let size = ["2ploshadka", "ceh6", "sborCeh", "sborCeh"]
 
+
+    // Массив номеров всех станков
+    let values = complexRequest.map((e, i) => i)
+
+    // Состояние даты
     let [date, setDate] = useState(0);
 
-    let [stateLineHC, setStateLineHC] = useState("line");
+    // Состояние переменной мульти Диаграммы
+    let [stateLineHC, setStateLineHC] = useState("multiLine");
+
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        new Array(complexRequest.length).fill(true)
+    );
+
+    let [valuesState, setValuesState] = useState(values)
+
+    let [valuesStateWait, setValuesStateWait] = useState(values)
+
+    const [isActive, setActive] = useState(false);
+
+    const toggleClass = () => {
+        setActive(!isActive);
+        if (isActive) newDate(date)
+    };
+
+    const handleOnChange = (position) => {
+        const updatedCheckedState = selectedObjects.map((item, index) => {
+            return index === position ? !item : item;
+        });
+
+        setSelectedObjects(updatedCheckedState)
+
+        const activeValues = []
+        updatedCheckedState.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(values[index]);
+                }
+            }
+        );
+        setValuesState(activeValues);
+
+    };
 
     useEffect(() => {
+        let dateInput = dayNow()
+        setDate(dateInput)
 
-        setDate(dayNow())
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
 
-        updateLoadData(dayNow())
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(dateInput, item)
+        }));
+
+        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }, [])
 
     function newDate(dateInput) {
         setDate(dateInput)
-        console.log(dateInput)
+        setValuesStateWait(valuesState)
 
-        updateLoadData(dateInput)
-
-    }
-
-    function updateLoadData(dateInput) {
-
-        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
-
-        let promiseDataKim = Promise.resolve(roundComplex[0]);
-        let promiseDataNK600 = Promise.resolve(roundComplex[1]);
-        let promiseDataStp13m = Promise.resolve(roundComplex[2]);
-        //Общая загрузка
-        promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                promiseDataStp13m.then(value2 => {
-
-                    let intKimArray = value.roundArray.map(Number)
-                    let intNK600Array = value1.roundArray.map(Number)
-                    let intStp13mArray = value2.roundArray.map(Number)
-
-                    if (value.roundArray.length == 0) {
-                        intKimArray = [0, 0, 0, 0, 0, 0]
-                    }
-                    if (value1.roundArray.length == 0) {
-                        intNK600Array = [0, 0, 0, 0, 0, 0]
-                    }
-                    if (value2.roundArray.length == 0) {
-                        intStp13mArray = [0, 0, 0, 0, 0, 0]
-                    }
-
-                    highChartTotal(complexName, [intKimArray[0], intNK600Array[0], intStp13mArray[0]], [intKimArray[1], intNK600Array[1], intStp13mArray[1]],
-                        [intKimArray[2], intNK600Array[2], intStp13mArray[2]], [intKimArray[3], intNK600Array[3], intStp13mArray[3]],
-                        [intKimArray[4], intNK600Array[4], intStp13mArray[4]], 'Нагрузка', dateInput)
-
-
-                    //Количество операций
-                    let kolKim = kolOperations(value.workArray)
-                    let kolNK600 = kolOperations(value1.workArray)
-                    let kolStp13m = kolOperations(value2.workArray)
-                    highChartCountOperations(complexName, [kolKim[0], kolNK600[0], kolStp13m[0]], [kolKim[1], kolNK600[1], kolStp13m[1]])
-
-
-                })
-
-            })
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
         })
+
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(dateInput, item)
+        }));
+        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }
 
     return (
         <div>
-
-            <DayCalendar newDate={newDate} date={date}/>
-
+            <div className="energyCalendarContainer">
+                <DayCalendar newDate={newDate} date={date}/>
+                <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
+                    <ul className='toppings-list'
+                        className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
+                        {complexName.map((name, index) => {
+                            return (
+                                <li key={index}>
+                                    <div className="toppings-list-item">
+                                        <div className="left-section">
+                                            <input
+                                                type="checkbox"
+                                                id={`custom-checkbox-${index}`}
+                                                name={name[0]}
+                                                value={index}
+                                                checked={selectedObjects[index]}
+                                                onChange={() => handleOnChange(index)}
+                                            />
+                                            <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                            className='spanList'>{name[0]}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            </div>
             <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1} service={"Пресс ЧПУ для ступиц"}/>
-            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"} idContainer = {2} service={"ЭПП"}/>
-            <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {3} service={"СТП13М"}/>
-            <ComplexSutkiAllInfo complexName={'Стенд для ресурсных испытаний'} complexImg={complexImg[3]} complexMesto={buttonsVrs1} size={"sborCeh"} idContainer = {4} report={'Стенд'} current={'Стенд'}/>
-
+            {valuesStateWait.map((e, i) => {
+                return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                                            service={complexName[e][1]} alarm={complexName[e][2]}
+                                            programs={complexName[e][3]} laser={complexName[e][4]}
+                                            report={complexName[e][5]} current={complexName[e][6]}/>
+            })}
         </div>
     )
 
