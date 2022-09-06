@@ -3,6 +3,12 @@ function OtkMonth() {
     let complexName = ["CRYSTA-Apex S9168", "НК600"]
     let complexImg = ["../images/crystal_apex.png", "../images/nk600.png"]
 
+    let complexRequest = ['kim', 'nk600']
+
+    let nagruzkaName = complexRequest.map(e => {
+        return exceptionManualNagruzka(e)
+    })
+
     let buttonsVrs1 = [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
     let buttonsVrs2 = [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"]
 
@@ -50,7 +56,7 @@ function OtkMonth() {
                     [pauseKimArray, pauseNK600Array],
                     [offKimArray, offNK600Array],
                     [avarKimArray, avarNK600Array],
-                    [nagruzkaKimArray, nagruzkaNK600Array], 'Ручной', dateInput)
+                    [nagruzkaKimArray, nagruzkaNK600Array], nagruzkaName, dateInput)
 
                 highChartRound(averageMonthdata([workKimArray, workNK600Array]), averageMonthdata([pauseKimArray, pauseNK600Array]),
                     averageMonthdata([offKimArray, offNK600Array]), averageMonthdata([avarKimArray, avarNK600Array]),
