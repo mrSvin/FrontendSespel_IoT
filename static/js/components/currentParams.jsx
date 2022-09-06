@@ -4,18 +4,14 @@ function CurrentParams() {
 
     let [dataReportState, setDataReportState] = useState([])
 
-    function fetchRequestCurrent(dataReport) {
+    function fetchRequestCurrent() {
         fetch('http://192.168.3.41:8087/api/stendLastData', {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
-                let dataReport = data.map(e=>{
-                    let fix = e.drawNum == '1'? '4977.06.008-5001': 'C435064S-5.0301'
-                    return [
-                        Object.keys(e),
-                        [e.requestWriteDB, e.prodNum, e.actNum, e.resultR, fix, e.authorId, e.workMode, e.maxDeformation, e.ostDeformation, e.actForce1R, e.actForce2R, e.needForce, e.lastRequest]
-                    ]
-                })
-                setDataReportState(dataReport)
+                console.log('Haha?',data)
+                let fix = data.actNum == '1'? '4977.06.008-5001': 'C435064S-5.0301'
+                let dataReport = [data.requestWriteDB, data.prodNum, data.actNum, data.resultR, fix, data.authorId, data.workMode, data.maxDeformation, data.ostDeformation, data.actForce1R, data.actForce2R, data.needForce, data.lastRequest]
+                setDataReportState([Object.keys(data),dataReport])
             })
     }
 
