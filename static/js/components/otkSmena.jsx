@@ -124,30 +124,35 @@ function OtkSmena() {
 
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
-                    <ul className='toppings-list'
-                        className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
-                        {complexName.map((name, index) => {
-                            return (
-                                <li key={index}>
-                                    <div className="toppings-list-item">
-                                        <div className="left-section">
-                                            <input
-                                                type="checkbox"
-                                                id={`custom-checkbox-${index}`}
-                                                name={name[0]}
-                                                value={index}
-                                                checked={selectedObjects[index]}
-                                                onChange={() => handleOnChange(index)}
-                                            />
-                                            <label htmlFor={`custom-checkbox-${index}`}></label><span
-                                            className='spanList'>{name[0]}</span>
+                <div className='menuSelect selectDevice'>
+                    <span onClick={toggleClass}>Выбор оборудования</span>
+                    <div className="listComplex">
+                        <span>▼</span>
+                        <ul className='toppings-list'
+                            className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
+                            {complexName.map((name, index) => {
+                                return (
+                                    <li key={index}>
+                                        <div className="toppings-list-item">
+                                            <div className="left-section">
+                                                <input
+                                                    type="checkbox"
+                                                    id={`custom-checkbox-${index}`}
+                                                    name={name[0]}
+                                                    value={index}
+                                                    checked={selectedObjects[index]}
+                                                    onChange={() => handleOnChange(index)}
+                                                />
+                                                <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                                className='spanList'>{name[0]}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            );
-                        })}
-                    </ul>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+
+                    </div>
                 </div>
             </div>
 
