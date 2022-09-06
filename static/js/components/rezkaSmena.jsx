@@ -1,13 +1,15 @@
 function RezkaSmena() {
 
+    //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
+    // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
     let complexName = [
-        ["Навигатор 1", "Навигатор 1"],
-        ["Навигатор 2", 'Навигатор 2'],
-        ["Навигатор 3", "Навигатор 3"],
-        ["TruLaser", 'TruLaser'],
-        ["Комета 1", null],
-        ["Комета 2", null],
-        ["Комета 3", null],
+        ["Навигатор 1","Навигатор 1",  null,"Навигатор 1smena", "Навигатор 1"],
+        ["Навигатор 2", 'Навигатор 2', null, "Навигатор 2smena", "Навигатор 2"],
+        ["Навигатор 3", "Навигатор 3", null, "Навигатор 3smena", "Навигатор 3"],
+        ["TruLaser",  'TruLaser'],
+        ["Комета 1", "Комета 1"],
+        ["Комета 2", "Комета 1"],
+        ["Комета 3", "Комета 1"],
     ]
 
     let complexImg = ["../images/navigator.png", "../images/navigator.png", "../images/navigator.png", "../images/trulaser.png", "../images/kometa.png", "../images/kometa.png", "../images/kometa.png"]
@@ -174,11 +176,12 @@ function RezkaSmena() {
                                complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                    return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
-                                                complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
-                                                programs={complexName[e][1]+'smena'} service={complexName[e][0]}/>
-                }
-            )}
+                return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                                            service={complexName[e][1]} alarm={complexName[e][2]}
+                                            programs={complexName[e][3]} laser={complexName[e][4]}
+                                            report={complexName[e][5]} current={complexName[e][6]}/>
+            })}
         </div>
     )
 

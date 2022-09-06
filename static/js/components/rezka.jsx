@@ -12,6 +12,17 @@ function RezkaInfo() {
         ["Комета 3", "Комета 1"],
     ]
 
+    const Colors = Enum({ RED: 'red', GREEN: 'green', BLUE: 'blue' });
+    const color = Colors.RED;
+
+    console.log('color === Colors.RED: ',   color === Colors.RED)     // true
+    console.log('\'red\' === Colors.RED: ', 'red' === Colors.RED)   // false - строка не равна значению перечисления!!!
+    console.log('color === Colors.GREEN: ', color === Colors.GREEN)   // false
+
+    Colors.RED = 'red'; // не меняет значение в перечислении
+
+
+
     let complexImg = ["../images/navigator.png", "../images/navigator.png", "../images/navigator.png", "../images/trulaser.png", "../images/kometa.png", "../images/kometa.png", "../images/kometa.png"]
     let complexRequest = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
 
@@ -146,8 +157,6 @@ function RezkaInfo() {
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
                           complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
-            //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
-            // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
