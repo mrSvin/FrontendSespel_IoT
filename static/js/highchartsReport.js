@@ -28,7 +28,7 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
             viewFullscreen: 'На весь экран',
 
             downloadCSV: "Скачать CSV",
-            downloadXLS:"Скачать XLS",
+            downloadXLS: "Скачать XLS",
             viewData: 'Режим таблицы',
             hideData: "Скрыть таблицу"
         },
@@ -153,10 +153,10 @@ function highChartSutkiLine(arrayWork, arrayPause, arrayOff, arrayAvar, arrayRuc
     });
 }
 
-function highChartCountOperations(generalDiagramNames, countOperation, countLongOperation, chartName ='') {
+function highChartCountOperations(generalDiagramNames, countOperation, countLongOperation, chartName = '') {
 
     let mariginBottomX;
-    if (generalDiagramNames.length>12) {
+    if (generalDiagramNames.length > 12) {
         mariginBottomX = 0;
     } else {
         mariginBottomX = 20;
@@ -328,7 +328,7 @@ function highChartEnergy(inputData, containerName) {
 }
 
 //Месячный
-function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNagruzka, nagruzkaName = 'Нагрузка', idContainer) {
+function highChartMonthLine(arrayWork, arrayPass, arrayFail, arrayAvar, arrayNagruzka, nagruzkaName = 'Нагрузка', idContainer) {
 
     let colorNagruzka;
     let workNoNagruzka = arrayWork.slice();
@@ -336,7 +336,7 @@ function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNa
         colorNagruzka = '#207210'
 
         for (var i = 0; i < arrayWork.length; i++) {
-            workNoNagruzka[i]=workNoNagruzka[i]-arrayNagruzka[i]
+            workNoNagruzka[i] = workNoNagruzka[i] - arrayNagruzka[i]
         }
 
     } else {
@@ -362,7 +362,7 @@ function highChartMonthLine(arrayWork, arrayPass, arrayFail,  arrayAvar, arrayNa
             viewFullscreen: 'На весь экран',
 
             downloadCSV: "Скачать CSV",
-            downloadXLS:"Скачать XLS",
+            downloadXLS: "Скачать XLS",
             viewData: 'Режим таблицы',
             hideData: "Скрыть таблицу"
         },
@@ -464,6 +464,36 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, f
     off = Array.isArray(off) ? off : [off]
     avar = Array.isArray(avar) ? avar : [avar]
     nagruzka = Array.isArray(nagruzka) ? nagruzka : [nagruzka]
+
+    work = work.map(e => {
+        if (typeof (e) === "undefined") {
+            return 0;
+        } else return e
+    })
+
+    pause = pause.map(e => {
+        if (typeof (e) === "undefined") {
+            return 0;
+        } else return e
+    })
+
+    off = off.map(e => {
+        if (typeof (e) === "undefined") {
+            return 0;
+        } else return e
+    })
+
+    avar = avar.map(e => {
+        if (typeof (e) === "undefined") {
+            return 0;
+        } else return e
+    })
+
+    nagruzka = nagruzka.map(e => {
+        if (typeof (e) === "undefined") {
+            return 0;
+        } else return e
+    })
 
     let colorNagruzka;
     let workNoNagruzka = work.slice();
@@ -595,44 +625,42 @@ function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, f
 
 }
 
-function highChartSmenaTotalKolOp(total, kolOp, complexName, day1, nagruzkaName){
+function highChartSmenaTotalKolOp(total, kolOp, complexName, day1, nagruzkaName) {
 
     // переменные для переформирования данных 2-х смен
-    let work = [[],[],]
-    let pause = [[],[],]
-    let off = [[],[],]
-    let avar = [[],[],]
-    let nagruzka = [[],[],]
+    let work = [[], [],]
+    let pause = [[], [],]
+    let off = [[], [],]
+    let avar = [[], [],]
+    let nagruzka = [[], [],]
 
-    let shortOp = [[],[],]
-    let longOp = [[],[],]
+    let shortOp = [[], [],]
+    let longOp = [[], [],]
 
     // переформирования данных
-    total.forEach((e,i) => {
-        if(!Array.isArray(e) || e.includes(undefined)){
-            work[i%2].push(0)
-            pause[i%2].push(0)
-            off[i%2].push(0)
-            avar[i%2].push(0)
-            nagruzka[i%2].push(0)
-        }
-        else{
-            work[i%2].push(e[0])
-            pause[i%2].push(e[1])
-            off[i%2].push(e[2])
-            avar[i%2].push(e[3])
-            nagruzka[i%2].push(e[4])
+    total.forEach((e, i) => {
+        if (!Array.isArray(e) || e.includes(undefined)) {
+            work[i % 2].push(0)
+            pause[i % 2].push(0)
+            off[i % 2].push(0)
+            avar[i % 2].push(0)
+            nagruzka[i % 2].push(0)
+        } else {
+            work[i % 2].push(e[0])
+            pause[i % 2].push(e[1])
+            off[i % 2].push(e[2])
+            avar[i % 2].push(e[3])
+            nagruzka[i % 2].push(e[4])
         }
     })
 
-    kolOp.forEach((e,i) => {
-        if(!Array.isArray(e) || e.includes(undefined)){
-            shortOp[i%2].push(0)
-            longOp[i%2].push(0)
-        }
-        else{
-            shortOp[i%2].push(e[0])
-            longOp[i%2].push(e[1])
+    kolOp.forEach((e, i) => {
+        if (!Array.isArray(e) || e.includes(undefined)) {
+            shortOp[i % 2].push(0)
+            longOp[i % 2].push(0)
+        } else {
+            shortOp[i % 2].push(e[0])
+            longOp[i % 2].push(e[1])
         }
     })
 
@@ -645,7 +673,7 @@ function highChartSmenaTotalKolOp(total, kolOp, complexName, day1, nagruzkaName)
     highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
 }
 
-function highChartTotalKolOp(total, kolOp, complexName, day1, nagruzkaName){
+function highChartTotalKolOp(total, kolOp, complexName, day1, nagruzkaName) {
 
     // переменные для переформирования данных 2-х смен
     let work = []
@@ -658,15 +686,14 @@ function highChartTotalKolOp(total, kolOp, complexName, day1, nagruzkaName){
     let longOp = []
 
     // переформирования данных
-    total.forEach((e,i) => {
-        if(!Array.isArray(e) || e.includes(undefined)){
+    total.forEach((e, i) => {
+        if (!Array.isArray(e) || e.includes(undefined)) {
             work.push(0)
             pause.push(0)
             off.push(0)
             avar.push(0)
             nagruzka.push(0)
-        }
-        else{
+        } else {
             e = e.map(Number)
             work.push(e[0])
             pause.push(e[1])
@@ -676,12 +703,11 @@ function highChartTotalKolOp(total, kolOp, complexName, day1, nagruzkaName){
         }
     })
 
-    kolOp.forEach((e,i) => {
-        if(!Array.isArray(e) || e.includes(undefined)){
+    kolOp.forEach((e, i) => {
+        if (!Array.isArray(e) || e.includes(undefined)) {
             shortOp.push(0)
             longOp.push(0)
-        }
-        else{
+        } else {
             e = e.map(Number)
             shortOp.push(e[0])
             longOp.push(e[1])
@@ -699,16 +725,16 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
     let workNoNagruzka = work;
     if (nagruzkaName == 'Нагрузка') {
         colorNagruzka = '#207210'
-        workNoNagruzka=workNoNagruzka-nagruzka
+        workNoNagruzka = workNoNagruzka - nagruzka
     } else {
         colorNagruzka = '#5c7ed0'
     }
 
     let titleInfo
-    if (idContainer=='Total') {
-        titleInfo='Суммарная загрузка оборудования'
+    if (idContainer == 'Total') {
+        titleInfo = 'Суммарная загрузка оборудования'
     } else {
-        titleInfo='Загрузка оборудования'
+        titleInfo = 'Загрузка оборудования'
     }
 
     Highcharts.chart(`containerRound${idContainer}`, {
@@ -762,7 +788,7 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
 }
 
 //Сервис
-function highChartServiceHistory(ArrayTeh, info=null) {
+function highChartServiceHistory(ArrayTeh, info = null) {
     // Копирования массива со всеми тех. обслуживаниями
     let arrayTeh = ArrayTeh.slice()
 
@@ -772,8 +798,8 @@ function highChartServiceHistory(ArrayTeh, info=null) {
     //Массив со всеми тех. обслуживаниями.
     arrayTeh = parseLinearServiceHistory(arrayTeh, 0, info)
 
-    arrayTeh.forEach((e,i)=>{
-        if(i%2==0) chet.push(e)
+    arrayTeh.forEach((e, i) => {
+        if (i % 2 == 0) chet.push(e)
         else nechet.push(e)
     })
 
@@ -796,7 +822,7 @@ function highChartServiceHistory(ArrayTeh, info=null) {
             viewFullscreen: 'На весь экран',
 
             downloadCSV: "Скачать CSV",
-            downloadXLS:"Скачать XLS",
+            downloadXLS: "Скачать XLS",
             viewData: 'Режим таблицы',
             hideData: "Скрыть таблицу"
         },
@@ -892,8 +918,8 @@ function highChartServiceHistory(ArrayTeh, info=null) {
     });
 }
 
-function highChartServiceNow(ArrayTeh,timeNext=null) {
-    if (timeNext==undefined){
+function highChartServiceNow(ArrayTeh, timeNext = null) {
+    if (timeNext == undefined) {
         return
     }
 
@@ -920,7 +946,7 @@ function highChartServiceNow(ArrayTeh,timeNext=null) {
     let timePastArray = [lastServiceIso, nextServiceIso]
 
     // Переменная отображающаяся на графики планируемого обслуживания.
-    let percent = +((new Date(timeToday).getTime() - new Date(lastServiceIso).getTime())/timeNext).toFixed(2)
+    let percent = +((new Date(timeToday).getTime() - new Date(lastServiceIso).getTime()) / timeNext).toFixed(2)
 
     timePastArray = parseLinearServiceNow(timePastArray, 0, percent)
 
@@ -943,7 +969,7 @@ function highChartServiceNow(ArrayTeh,timeNext=null) {
             viewFullscreen: 'На весь экран',
 
             downloadCSV: "Скачать CSV",
-            downloadXLS:"Скачать XLS",
+            downloadXLS: "Скачать XLS",
             viewData: 'Режим таблицы',
             hideData: "Скрыть таблицу"
         },
@@ -1033,14 +1059,14 @@ function highChartServiceNow(ArrayTeh,timeNext=null) {
     });
 }
 
-function highChartProgram(arrayProgram, idContainer=1) {
+function highChartProgram(arrayProgram, idContainer = 1) {
 
     let arrayTeh = arrayProgram.slice()
     let chet = []
     let nechet = []
 
-    arrayTeh.forEach((e,i)=>{
-        if(i%2==0) chet.push(e)
+    arrayTeh.forEach((e, i) => {
+        if (i % 2 == 0) chet.push(e)
         else nechet.push(e)
     })
 
@@ -1063,7 +1089,7 @@ function highChartProgram(arrayProgram, idContainer=1) {
             viewFullscreen: 'На весь экран',
 
             downloadCSV: "Скачать CSV",
-            downloadXLS:"Скачать XLS",
+            downloadXLS: "Скачать XLS",
             viewData: 'Режим таблицы',
             hideData: "Скрыть таблицу"
         },
