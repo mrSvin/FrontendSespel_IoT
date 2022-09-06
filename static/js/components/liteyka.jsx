@@ -1,65 +1,141 @@
 function LiteykaInfo() {
 
-    let complexName = ["Печь Индукционная"]
+    //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
+    // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
+    let complexName = [["Печь Индукционная", "Печь Индукционная"],]
     let complexImg = ["../images/pech.png"]
     let complexRequest = ['pech_nerg']
 
-    let buttonsVrs1 = [-125, 180, 'url(../images/pech.png) no-repeat', "../images/ceh_1.png", 70, "100%"]
+    let buttonsVrs = [[-125, 180, 'url(../images/pech.png) no-repeat', "../images/ceh_1.png", 70, "100%"],]
+    let size = ["ceh1"]
 
-    let bufferData = bufferDataArrays(1)
 
 
+    // Массив номеров всех станков
+    let values = complexRequest.map((e, i) => i)
+
+    // Состояние даты
     let [date, setDate] = useState(0);
 
-    let [stateLineHC, setStateLineHC] = useState("line");
+    // Состояние переменной мульти Диаграммы
+    let [stateLineHC, setStateLineHC] = useState("multiLine");
+
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        new Array(complexRequest.length).fill(true)
+    );
+
+    let [valuesState, setValuesState] = useState(values)
+
+    let [valuesStateWait, setValuesStateWait] = useState(values)
+
+    const [isActive, setActive] = useState(false);
+
+    const toggleClass = () => {
+        setActive(!isActive);
+        if (isActive) newDate(date)
+    };
+
+    const handleOnChange = (position) => {
+        const updatedCheckedState = selectedObjects.map((item, index) => {
+            return index === position ? !item : item;
+        });
+
+        setSelectedObjects(updatedCheckedState)
+
+        const activeValues = []
+        updatedCheckedState.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(values[index]);
+                }
+            }
+        );
+        setValuesState(activeValues);
+
+    };
 
     useEffect(() => {
+        let dateInput = dayNow()
+        setDate(dateInput)
 
-        setDate(dayNow())
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
 
-        updateLoadData(dayNow())
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(dateInput, item)
+        }));
+
+        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }, [])
 
     function newDate(dateInput) {
         setDate(dateInput)
-        console.log(dateInput)
+        setValuesStateWait(valuesState)
 
-        updateLoadData(dateInput)
-
-    }
-
-    function updateLoadData(dateInput) {
-
-        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
-
-        let promiseDataKim = Promise.resolve(roundComplex[0]);
-
-        //Общая загрузка и Количество операций
-        promiseDataKim.then(value => {
-            let intKimArray = value.roundArray.map(Number)
-
-            highChartTotal(complexName, [intKimArray[0]], [intKimArray[1]],
-                [intKimArray[2]], [intKimArray[3]], [intKimArray[4]], 'Нагрузка', dateInput)
-
-            let kolKim = kolOperations(value.workArray)
-            highChartCountOperations(complexName, [kolKim[0]], [kolKim[1]])
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
         })
+
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(dateInput, item)
+        }));
+        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }
 
     return (
         <div>
-
-            <DayCalendar newDate={newDate} date={date}/>
-
+            <div className="energyCalendarContainer">
+                <DayCalendar newDate={newDate} date={date}/>
+                <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
+                    <ul className='toppings-list'
+                        className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
+                        {complexName.map((name, index) => {
+                            return (
+                                <li key={index}>
+                                    <div className="toppings-list-item">
+                                        <div className="left-section">
+                                            <input
+                                                type="checkbox"
+                                                id={`custom-checkbox-${index}`}
+                                                name={name[0]}
+                                                value={index}
+                                                checked={selectedObjects[index]}
+                                                onChange={() => handleOnChange(index)}
+                                            />
+                                            <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                            className='spanList'>{name[0]}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            </div>
             <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"ceh1"} idContainer = {1} service={complexName[0]}/>
-
-
+            {valuesStateWait.map((e, i) => {
+                return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                                            service={complexName[e][1]} alarm={complexName[e][2]}
+                                            programs={complexName[e][3]} laser={complexName[e][4]}
+                                            report={complexName[e][5]} current={complexName[e][6]}/>
+            })}
         </div>
     )
 

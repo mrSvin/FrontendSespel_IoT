@@ -1,153 +1,103 @@
-// // Функия обработки массива обещаний для смен
-// function updateLoadSmenaData(promiseVariable, day1, complexName, complexRequest) {
-//     promiseVariable
-//         .then(result => {
-//             let data = result.map(e=>{
-//                 return [[e.work.slice(), e.pause.slice(), e.off.slice(), e.avar.slice(), e.nagruzka.slice(), e.programName.slice()],
-//                     [e.work2.slice(), e.pause2.slice(), e.off2.slice(), e.avar2.slice(), e.nagruzka2.slice(),  e.programName2.slice()]]
-//             })
-//
-//             let smenaArrays = data.map(e=>{
-//                 return convertDaysToSmena(e[0], e[1], day1)
-//             })
-//
-//             let totalArray = []
-//             let kolOpArray = []
-//
-//             let day2 = dayYesterday(day1)
-//
-//             let parserDataArray =  smenaArrays.map(smena=>{
-//
-//                 let convertDataWork = parseLinearSutki(smena[0][0], 1, day1, smena[0][5])
-//                 let convertDataPause = parseLinearSutki(smena[0][1], 2, day1)
-//                 let convertDataOff = parseLinearSutki(smena[0][2], 3, day1)
-//                 let convertDataAvar = parseLinearSutki(smena[0][3], 4, day1)
-//                 let convertDataRuchnoi = parseLinearSutki(smena[0][4], 0, day1)
-//
-//                 let convertDataWork2 = parseLinearSutki(smena[1][0], 1, day2, smena[1][5])
-//                 let convertDataPause2 = parseLinearSutki(smena[1][1], 2, day2)
-//                 let convertDataOff2 = parseLinearSutki(smena[1][2], 3, day2)
-//                 let convertDataAvar2 = parseLinearSutki(smena[1][3], 4, day2)
-//                 let convertDataRuchnoi2 = parseLinearSutki(smena[1][4], 0, day2)
-//
-//
-//                 let roundArray = smena[0][6]
-//                 let roundArray2 = smena[1][6]
-//
-//                 totalArray.push(smena[0][6].slice())
-//                 totalArray.push(smena[1][6].slice())
-//                 kolOpArray.push(kolOperations(smena[0][0]).slice())
-//                 kolOpArray.push(kolOperations(smena[1][0]).slice())
-//
-//                 return [[convertDataWork, convertDataPause, convertDataOff, convertDataAvar, convertDataRuchnoi, roundArray],
-//                     [convertDataWork2, convertDataPause2, convertDataOff2, convertDataAvar2, convertDataRuchnoi2, roundArray2]]
-//
-//             })
-//
-//             highChartSmenaTotalKolOp(totalArray, kolOpArray, complexName, day1)
-//
-//             // console.log('Проверка, два массивая с данными',parserDataArray)
-//
-//             parserDataArray.forEach((e, i)=>{
-//                 let idContainer = (i * 2) + 1
-//
-//                 // Первая смена
-//                 highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], exceptionManualNagruzka(complexRequest[i]), idContainer)
-//                 highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], exceptionManualNagruzka(complexRequest[i]), idContainer)
-//
-//                 // Первая вторая
-//                 highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], exceptionManualNagruzka(complexRequest[i]), idContainer + 1)
-//                 highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], exceptionManualNagruzka(complexRequest[i]), idContainer + 1)
-//
-//             })
-//         })
-//         .catch(err => {
-//             console.error(err);
-//         });
-// }
-//
-// function highChartSmenaTotalKolOp(total, kolOp, complexName, day1){
-//
-//     // переменные для переформирования данных 2-х смен
-//     let work = [[],[],]
-//     let pause = [[],[],]
-//     let off = [[],[],]
-//     let avar = [[],[],]
-//     let nagruzka = [[],[],]
-//
-//     let shortOp = [[],[],]
-//     let longOp = [[],[],]
-//
-//     // переформирования данных
-//     total.forEach((e,i) => {
-//         if(!Array.isArray(e) || e.includes(undefined)){
-//             work[i%2].push(0)
-//             pause[i%2].push(0)
-//             off[i%2].push(0)
-//             avar[i%2].push(0)
-//             nagruzka[i%2].push(0)
-//         }
-//         else{
-//             work[i%2].push(e[0])
-//             pause[i%2].push(e[1])
-//             off[i%2].push(e[2])
-//             avar[i%2].push(e[3])
-//             nagruzka[i%2].push(e[4])
-//         }
-//     })
-//
-//     kolOp.forEach((e,i) => {
-//         if(!Array.isArray(e) || e.includes(undefined)){
-//             shortOp[i%2].push(0)
-//             longOp[i%2].push(0)
-//         }
-//         else{
-//             shortOp[i%2].push(e[0])
-//             longOp[i%2].push(e[1])
-//         }
-//     })
-//
-//     // вторая смена, всегда за предыдущий день, date всегда 12 часов
-//     highChartTotal(complexName, work[0], pause[0], off[0], avar[0], nagruzka[0], 'Нагрузка', 12)
-//     highChartCountOperations(complexName, shortOp[0], longOp[0])
-//
-//     // первая смена в date передается текущая дата с календаря
-//     highChartTotal(complexName, work[1], pause[1], off[1], avar[1], nagruzka[1], 'Нагрузка', day1, '2')
-//     highChartCountOperations(complexName, shortOp[1], longOp[1], '2')
-// }
-
 function GibkaSmena() {
 
-    let complexName = ["FACCIN 4", "FACCIN 10"]
+    //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
+    // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
+    let complexName = [
+        ["FACCIN 4","FACCIN 4"],
+        ["FACCIN 10","FACCIN 4"],
+    ]
     let complexImg = ["../images/faccin.png", "../images/faccin_2.png"]
-    let namesToFetch = ['faccin_1','faccin_2']
+    let complexRequest = ['faccin_1','faccin_2']
 
-    let buttonsVrs1 = [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
-    let buttonsVrs2 = [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
+    let buttonsVrs = [
+        [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+    ]
+    let size = ['sborCeh', 'sborCeh']
 
+
+    // Массив номеров всех станков
+    let values = complexRequest.map((e, i) => i)
+
+    // Состояние даты
     let [date, setDate] = useState(0);
+
+    // Состояние переменной мульти Диаграммы
+    let [stateLineHC, setStateLineHC] = useState("multiLine");
+
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        new Array(complexRequest.length).fill(true)
+    );
+
+    let [valuesState, setValuesState] = useState(values)
+
+    let [valuesStateWait, setValuesStateWait] = useState(values)
+
+    const [isActive, setActive] = useState(false);
+
+    const toggleClass = () => {
+        setActive(!isActive);
+        if (isActive) newDate(date)
+    };
+
+    const handleOnChange = (position) => {
+        const updatedCheckedState = selectedObjects.map((item, index) => {
+            return index === position ? !item : item;
+        });
+
+        setSelectedObjects(updatedCheckedState)
+
+        const activeValues = []
+        updatedCheckedState.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(values[index]);
+                }
+            }
+        );
+        setValuesState(activeValues);
+
+    };
 
     useEffect(() => {
         let dateInput = dayNow()
         setDate(dateInput)
 
-        let stankiRequest = Promise.all(namesToFetch.map((item)=>{
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
+
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item)=>{
             return fetchRequestSmena(dateInput, item)
         }));
 
-        updateLoadSmenaData(stankiRequest, dateInput, complexName, namesToFetch)
+        updateLoadSmenaData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }, [])
 
     // Функция для изменения даты в календаре
     function newDate(dateInput) {
         setDate(dateInput)
+        setValuesStateWait(valuesState)
 
-        let stankiRequest = Promise.all(namesToFetch.map((item)=>{
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
+
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item)=>{
             return fetchRequestSmena(dateInput, item)
         }));
 
-        updateLoadSmenaData(stankiRequest, dateInput, complexName, namesToFetch)
+        updateLoadSmenaData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
     }
 
     return (
@@ -171,7 +121,34 @@ function GibkaSmena() {
 
             </div>
 
-            <DayCalendar newDate={newDate} date={date}/>
+            <div className="energyCalendarContainer">
+                <DayCalendar newDate={newDate} date={date}/>
+                <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
+                    <ul className='toppings-list'
+                        className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
+                        {complexName.map((name, index) => {
+                            return (
+                                <li key={index}>
+                                    <div className="toppings-list-item">
+                                        <div className="left-section">
+                                            <input
+                                                type="checkbox"
+                                                id={`custom-checkbox-${index}`}
+                                                name={name[0]}
+                                                value={index}
+                                                checked={selectedObjects[index]}
+                                                onChange={() => handleOnChange(index)}
+                                            />
+                                            <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                            className='spanList'>{name[0]}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            </div>
 
             <div className='complexAllInfo'>
                 <div className='totalRound' id="containerTotal"></div>
@@ -183,14 +160,16 @@ function GibkaSmena() {
                 <div className='countOperations' id='containerOperations2'></div>
             </div>
 
-            <ComplexSmenaAllIngo complexName={complexName[0]} complexImg={complexImg[0]}
-                                 complexMesto={buttonsVrs1} 
-                                 size={"sborCeh"} idContainer={1} service={complexName[0]}/>
+            <SwitchLineSmenaHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                               complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
-            <ComplexSmenaAllIngo complexName={complexName[1]} complexImg={complexImg[1]}
-                                 complexMesto={buttonsVrs2} 
-                                 size={"sborCeh"} idContainer={3} service={complexName[1]}/>
-
+            {valuesStateWait.map((e, i) => {
+                return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
+                                            service={complexName[e][1]} alarm={complexName[e][2]}
+                                            programs={complexName[e][3]} laser={complexName[e][4]}
+                                            report={complexName[e][5]} current={complexName[e][6]}/>
+            })}
         </div>
     )
 

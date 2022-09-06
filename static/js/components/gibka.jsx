@@ -1,75 +1,150 @@
 function GibkaInfo() {
 
-    let complexName = ["FACCIN 4", "FACCIN 10"]
+    //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
+    // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
+    let complexName = [
+        ["FACCIN 4","FACCIN 4"],
+        ["FACCIN 10","FACCIN 4"],
+    ]
     let complexImg = ["../images/faccin.png", "../images/faccin_2.png"]
     let complexRequest = ['faccin_1','faccin_2']
 
-    let buttonsVrs1 = [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
-    let buttonsVrs2 = [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
+    let buttonsVrs = [
+        [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+    ]
+    let size = ['sborCeh', 'sborCeh']
 
-    let bufferData = bufferDataArrays(2)
+    // Массив номеров всех станков
+    let values = complexRequest.map((e, i) => i)
 
+    // Состояние даты
     let [date, setDate] = useState(0);
 
-    let [stateLineHC, setStateLineHC] = useState("line");
+    // Состояние переменной мульти Диаграммы
+    let [stateLineHC, setStateLineHC] = useState("multiLine");
+
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        new Array(complexRequest.length).fill(true)
+    );
+
+    let [valuesState, setValuesState] = useState(values)
+
+    let [valuesStateWait, setValuesStateWait] = useState(values)
+
+    const [isActive, setActive] = useState(false);
+
+    const toggleClass = () => {
+        setActive(!isActive);
+        if (isActive) newDate(date)
+    };
+
+    const handleOnChange = (position) => {
+        const updatedCheckedState = selectedObjects.map((item, index) => {
+            return index === position ? !item : item;
+        });
+
+        setSelectedObjects(updatedCheckedState)
+
+        const activeValues = []
+        updatedCheckedState.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(values[index]);
+                }
+            }
+        );
+        setValuesState(activeValues);
+
+    };
 
     useEffect(() => {
+        let dateInput = dayNow()
+        setDate(dateInput)
 
-        setDate(dayNow())
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
 
-        updateLoadData(dayNow())
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(dateInput, item)
+        }));
+
+        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }, [])
 
     function newDate(dateInput) {
         setDate(dateInput)
-        console.log(dateInput)
+        setValuesStateWait(valuesState)
 
-        updateLoadData(`${dateInput}`)
-
-    }
-
-    function updateLoadData(dateInput) {
-
-        let roundComplex =switchLineSutki(stateLineHC,complexRequest,dateInput,bufferData)
-
-        let promiseDataKim = Promise.resolve(roundComplex[0]);
-        let promiseDataNK600 = Promise.resolve(roundComplex[1]);
-        //Общая загрузка и Количество операций
-        promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                let intKimArray = value.roundArray.map(Number)
-                let intNK600Array = value1.roundArray.map(Number)
-
-                highChartTotal(complexName, [intKimArray[0], intNK600Array[0]], [intKimArray[1], intNK600Array[1]],
-                    [intKimArray[2], intNK600Array[2]], [intKimArray[3], intNK600Array[3]], [intKimArray[4], intNK600Array[4]], 'Нагрузка', dateInput)
-
-                let kolKim = kolOperations(value.workArray)
-                let kolNK600 = kolOperations(value1.workArray)
-                highChartCountOperations(complexName, [kolKim[0], kolNK600[0]], [kolKim[1], kolNK600[1]])
-
-            })
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
         })
+
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(dateInput, item)
+        }));
+        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
+
     }
 
     return (
         <div>
-
-            <DayCalendar newDate={newDate} date={date}/>
-
+            <div className="energyCalendarContainer">
+                <DayCalendar newDate={newDate} date={date}/>
+                <div className="listComplex"><span onClick={toggleClass}>Выбор оборудования</span>
+                    <ul className='toppings-list'
+                        className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
+                        {complexName.map((name, index) => {
+                            return (
+                                <li key={index}>
+                                    <div className="toppings-list-item">
+                                        <div className="left-section">
+                                            <input
+                                                type="checkbox"
+                                                id={`custom-checkbox-${index}`}
+                                                name={name[0]}
+                                                value={index}
+                                                checked={selectedObjects[index]}
+                                                onChange={() => handleOnChange(index)}
+                                            />
+                                            <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                            className='spanList'>{name[0]}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            </div>
             <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC} bufferData={bufferData} complexRequest={complexRequest}/>
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"sborCeh"} idContainer = {1} service={complexName[0]}/>
-            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"sborCeh"} idContainer = {2} service={complexName[1]}/>
-
-
-
+            {valuesStateWait.map((e, i) => {
+                return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                                            service={complexName[e][1]} alarm={complexName[e][2]}
+                                            programs={complexName[e][3]} laser={complexName[e][4]}
+                                            report={complexName[e][5]} current={complexName[e][6]}/>
+            })}
         </div>
     )
 
 }
+
 
 function Gibka() {
 

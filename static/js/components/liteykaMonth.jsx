@@ -3,6 +3,11 @@ function LiteykaMonth() {
     let complexName = ["Печь Индукционная"]
     let complexImg = ["../images/pech.png"]
 
+    let complexRequest = ['pech_nerg']
+    let nagruzkaName = complexRequest.map(e => {
+        return exceptionManualNagruzka(e)
+    })
+
     let buttonsVrs1 = [-125, 180, 'url(../images/pech.png) no-repeat', "../images/ceh_1.png", 70, "100%"]
 
     let [dateMonth, setDateMonth] = useState(0);
@@ -38,7 +43,7 @@ function LiteykaMonth() {
                 [pauseKimArray],
                 [offKimArray],
                 [avarKimArray],
-                [nagruzkaKimArray], 'Нагрузка', dateInput)
+                [nagruzkaKimArray], nagruzkaName, dateInput)
 
             highChartRound(averageMonthdata([workKimArray]), averageMonthdata([pauseKimArray]),
                 averageMonthdata([offKimArray]), averageMonthdata([avarKimArray]),

@@ -3,6 +3,11 @@ function GibkaMonth() {
     let complexName = ["FACCIN 4", "FACCIN 10"]
     let complexImg = ["../images/faccin.png", "../images/faccin_2.png"]
 
+    let complexRequest = ['faccin_1','faccin_2']
+    let nagruzkaName = complexRequest.map(e => {
+        return exceptionManualNagruzka(e)
+    })
+
     let buttonsVrs1 = [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
     let buttonsVrs2 = [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
 
@@ -48,7 +53,7 @@ function GibkaMonth() {
                     [pauseKimArray,pauseNK600Array],
                     [offKimArray,offNK600Array],
                     [avarKimArray,avarNK600Array],
-                    [nagruzkaKimArray,nagruzkaNK600Array], 'Нагрузка', dateInput)
+                    [nagruzkaKimArray,nagruzkaNK600Array], nagruzkaName, dateInput)
 
                 highChartRound(averageMonthdata([workKimArray,workNK600Array]),averageMonthdata([pauseKimArray,pauseNK600Array]),
                     averageMonthdata([offKimArray,offNK600Array]),averageMonthdata([avarKimArray,avarNK600Array]),

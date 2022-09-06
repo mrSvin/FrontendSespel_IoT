@@ -5,6 +5,11 @@ function ScladsMonth() {
 
     let buttonsVrs1 = [-485, 680, 'url(../images/sklad.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
 
+    let complexRequest = ['sclad_meh']
+    let nagruzkaName = complexRequest.map(e => {
+        return exceptionManualNagruzka(e)
+    })
+
     let [dateMonth, setDateMonth] = useState(0);
 
     useEffect(() => {
@@ -38,7 +43,7 @@ function ScladsMonth() {
                 [pauseKimArray],
                 [offKimArray],
                 [avarKimArray],
-                [nagruzkaKimArray], 'Нагрузка', dateInput)
+                [nagruzkaKimArray], nagruzkaName, dateInput)
 
             highChartRound(averageMonthdata([workKimArray]),averageMonthdata([pauseKimArray]),
                 averageMonthdata([offKimArray]),averageMonthdata([avarKimArray]),
