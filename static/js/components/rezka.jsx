@@ -116,9 +116,8 @@ function RezkaInfo() {
         <div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <div className='menuSelect selectDevice'
-                     onClick={toggleClass}>
-                    Выбор оборудования
+                <div className='menuSelect selectDevice'>
+                    <span onClick={toggleClass}>Выбор оборудования</span>
                     <div className="listComplex">
                         <span>▼</span>
                         <ul className='toppings-list'

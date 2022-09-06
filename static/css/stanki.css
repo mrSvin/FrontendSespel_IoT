@@ -231,6 +231,10 @@ input:checked + .slider:before {
     color: #1aaae5;
 }
 
+.selectDevice > span {
+    padding: 10px 30px 10px 0;
+}
+
 .listComplex label {
     cursor: pointer;
     padding-right: 90%;
