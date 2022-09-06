@@ -3,7 +3,7 @@ function SpecComplexesMonth() {
     let complexName = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М", 'Стенд для ресурсных испытаний']
     let complexImg = ["../images/press.png", "../images/epp.png", "../images/stp13m.png", "../images/stendResource.png"]
 
-    let complexRequest = ['press', 'epp', 'stp13m']
+    let complexRequest = ['press', 'epp', 'stp13m', 'trulaser']
     let nagruzkaName = complexRequest.map(e => {
         return exceptionManualNagruzka(e)
     })
