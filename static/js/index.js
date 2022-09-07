@@ -178,6 +178,10 @@ function App({ hideLoader }) {
                         <Meh2Smena/>
                     </Route>
 
+                    <Route path="/stanki/individualPage">
+                        <IndividualPage/>
+                    </Route>
+
                     <Route path="/service">
                         <Service/>
                     </Route>
