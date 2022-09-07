@@ -176,6 +176,10 @@ function IndividualPageInfo() {
         (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e=>{return Boolean(e)})
     );
 
+    if(localStorage['selectedObjects'] == undefined) {
+        localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
+    }
+
     let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
 
     let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
