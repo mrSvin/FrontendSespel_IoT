@@ -1070,6 +1070,24 @@ function highChartProgram(arrayProgram, idContainer = 1) {
         else nechet.push(e)
     })
 
+    let meries = arrayTeh.map((e,i)=>{
+        return {
+            name: `Программа ${i+1}`,
+            borderColor: 'white',
+            pointWidth: 30,
+            colorByPoint: false,
+            color: "#"+((1<<24)*Math.random()|0).toString(16),
+            tooltip: {
+                pointFormatter: function () {
+                    let timer = msToTimeDays(this.x2 - this.x, 365)
+                    return '<b>Программа:</b> ' + this.partialFill + '<br>' +
+                        '<b>Длительность</b> ' + timer
+                },
+            },
+            data: [e],
+        }
+    })
+
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -1143,43 +1161,11 @@ function highChartProgram(arrayProgram, idContainer = 1) {
         },
 
         legend: {
-            itemStyle: {
-                color: '#FFF'
-            }
+            enabled: false
         },
-        series: [
-            {
-                name: 'Четные',
-                borderColor: 'white',
-                pointWidth: 30,
-                colorByPoint: false,
-                color: '#ff55d7',
-                tooltip: {
-                    pointFormatter: function () {
-                        let timer = msToTimeDays(this.x2 - this.x, 365)
-                        return '<b>Программа:</b> ' + this.partialFill + '<br>' +
-                            '<b>Длительность</b> ' + timer
-                    },
-                },
-                data: chet,
-            },
-            {
-                name: 'Нечетные',
-                borderColor: 'white',
-                pointWidth: 30,
-                colorByPoint: false,
-                color: '#ff531a',
-                tooltip: {
-                    pointFormatter: function () {
-                        let timer = msToTimeDays(this.x2 - this.x, 365)
-                        return '<b>Программа:</b> ' + this.partialFill + '<br>' +
-                            '<b>Длительность</b> ' + timer
-                    },
-                },
-                data: nechet,
-            },
-        ],
+        series: meries,
 
 
     });
+
 }
