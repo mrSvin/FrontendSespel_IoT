@@ -23,30 +23,12 @@ function CurrentParams() {
     let nameToFetch = parseNameUrl(document.location.pathname);
     let imgComplex = ["../images/stendResource.png"]
 
+    let complexRequest = 'stendLastData'
+
     let [dataReportState, setDataReportState] = useState([])
 
-    function fetchRequestCurrent() {
-        fetch('http://192.168.3.41:8087/api/stendLastData', {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                let Name = data.actNum == '1'? '4977.06.008-5001': 'C435064S-5.0301'
-                let date = (new Date(data.lastRequest).getTime() + 10800000)
-                date = new Date(date).toISOString().slice(0, 10) + ' ' + new Date(date).toISOString().slice(11, 19)
-
-                let dataReport = [data.requestWriteDB, data.prodNum, data.actNum, data.resultR, Name, data.authorId, data.workMode, data.maxDeformation, data.ostDeformation, data.actForce1R, data.actForce2R, data.needForce, date]
-                setDataReportState([
-                    [
-                        'Регистр состояния записи на сервер','Номер изделия', 'Номер акта', 'Результат',
-                        'Номер чертежа', 'ID автора', 'Состояние работы', 'Максимальная деформация',
-                        'Остаточная деформация','Фактическая сила (датчик 1), Т', 'Фактическая сила (датчик 2), Т',
-                        'Требуемая сила (датчик 2), Т', 'Последнее время получения данных с оборудования'
-                    ],
-                    dataReport])
-            })
-    }
-
     useEffect(() => {
-        fetchRequestCurrent()
+        fetchRequestCurrent(complexRequest,setDataReportState)
     },[])
 
     return(
