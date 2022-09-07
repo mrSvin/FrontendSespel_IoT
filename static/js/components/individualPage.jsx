@@ -171,20 +171,18 @@ function IndividualPageInfo() {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    // Состояния чекбоксов станков
-    let [selectedObjects, setSelectedObjects] = useState(
-        (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e=>{return Boolean(e)})
-    );
-
     if(localStorage['selectedObjects'] == undefined) {
         localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
     }
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) :window.localStorage['selectedObjects'].split(',').map(e=>{return (e=='true')})
+    );
+
 
     let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
 
     let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
-
-    console.log('init', localStorage['selectedObjects'])
 
     const [isActive, setActive] = useState(false);
 
@@ -199,7 +197,6 @@ function IndividualPageInfo() {
         });
 
         window.localStorage['selectedObjects'] = updatedCheckedState
-        console.log('handle', localStorage['selectedObjects'])
         setSelectedObjects(updatedCheckedState)
 
         const activeValues = []
@@ -216,7 +213,6 @@ function IndividualPageInfo() {
     };
 
     useEffect(() => {
-        console.log('useEffect', localStorage['selectedObjects'])
         let dateInput = dayNow()
         setDate(dateInput)
 
