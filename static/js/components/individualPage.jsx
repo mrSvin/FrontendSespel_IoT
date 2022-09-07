@@ -173,10 +173,10 @@ function IndividualPageInfo() {
 
     // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
-        new Array(complexRequest.length).fill(false)
+        (localStorage['selectedObjects'] == null)? new Array(complexRequest.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e=>{return Boolean(e)})
     );
 
-    let [valuesState, setValuesState] = useState((localStorage['valuesState'] == null)? values : window.localStorage['valuesState'])
+    let [valuesState, setValuesState] = useState(values)
 
     let [valuesStateWait, setValuesStateWait] = useState(values)
 
@@ -192,6 +192,7 @@ function IndividualPageInfo() {
             return index === position ? !item : item;
         });
 
+        window.localStorage['selectedObjects'] = updatedCheckedState
         setSelectedObjects(updatedCheckedState)
 
         const activeValues = []
@@ -203,7 +204,6 @@ function IndividualPageInfo() {
             }
         );
 
-        window.localStorage['valuesState'] = activeValues
         setValuesState(activeValues);
 
     };
