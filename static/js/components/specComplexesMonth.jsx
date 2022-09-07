@@ -111,7 +111,7 @@ function SpecComplexesMonth() {
             <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"2ploshadka"} idContainer = {1} service={"Пресс ЧПУ для ступиц"}/>
             <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"ceh6"} idContainer = {2} service={"ЭПП"}/>
             <ComplexSutkiAllInfo complexName={complexName[2]} complexImg={complexImg[2]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {3} service={"СТП13М"}/>
-            <ComplexSutkiAllInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {4} service={"cтенд"} report={'cтенд'} current={'cтенд'}/>
+            <ComplexSutkiAllInfo complexName={complexName[3]} complexImg={complexImg[3]} complexMesto={buttonsVrs3} size={"sborCeh"} idContainer = {4} service={"cтенд для ресурсных испытаний"} report={'cтенд'} current={'cтенд'}/>
 
         </div>
     )
