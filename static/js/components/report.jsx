@@ -1,7 +1,6 @@
 function Report() {
     let nameToFetch = parseNameUrl(document.location.pathname);
     let imgComplex = ["../images/stendResource.png"]
-
     let complexRequest = 'stendLastData'
 
     let [dataReportState, setDataReportState] = useState([])
