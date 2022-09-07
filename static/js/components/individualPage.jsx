@@ -192,7 +192,7 @@ function IndividualPageInfo() {
             return index === position ? !item : item;
         });
 
-        window.localStorage['selectedObjects'] = updatedCheckedState
+        // window.localStorage['selectedObjects'] = updatedCheckedState
         setSelectedObjects(updatedCheckedState)
 
         const activeValues = []
