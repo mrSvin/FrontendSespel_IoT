@@ -180,10 +180,9 @@ function IndividualPageInfo() {
 
     let [valuesStateWait, setValuesStateWait] = useState(values)
 
-    if(localStorage['valuesState'] != null) {
-        setValuesState(parseInt(window.localStorage['valuesState'])); // Если она уже локально задана сохраняем
+    if(localStorage['valuesState'] == null) {
+        window.localStorage['valuesState'] = values
     }
-    else window.localStorage['valuesState'] = values
 
     const [isActive, setActive] = useState(false);
 
