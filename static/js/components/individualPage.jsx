@@ -328,7 +328,7 @@ function IndividualPage() {
 
             </div>
 
-            <OtkInfo/>
+            <IndividualPageInfo/>
 
         </div>
     )
