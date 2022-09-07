@@ -173,12 +173,14 @@ function IndividualPageInfo() {
 
     // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
-        (localStorage['selectedObjects'] == null)? new Array(complexRequest.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e=>{return Boolean(e)})
+        (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e=>{return Boolean(e)})
     );
 
     let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
 
     let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
+
+    console.log('init', localStorage['selectedObjects'])
 
     const [isActive, setActive] = useState(false);
 
@@ -192,7 +194,8 @@ function IndividualPageInfo() {
             return index === position ? !item : item;
         });
 
-        // window.localStorage['selectedObjects'] = updatedCheckedState
+        window.localStorage['selectedObjects'] = updatedCheckedState
+        console.log('handle', localStorage['selectedObjects'])
         setSelectedObjects(updatedCheckedState)
 
         const activeValues = []
@@ -209,6 +212,7 @@ function IndividualPageInfo() {
     };
 
     useEffect(() => {
+        console.log('useEffect', localStorage['selectedObjects'])
         let dateInput = dayNow()
         setDate(dateInput)
 
