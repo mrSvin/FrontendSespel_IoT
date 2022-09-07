@@ -176,13 +176,9 @@ function IndividualPageInfo() {
         new Array(complexRequest.length).fill(false)
     );
 
-    let [valuesState, setValuesState] = useState(values)
+    let [valuesState, setValuesState] = useState((localStorage['valuesState'] == null)? values : window.localStorage['valuesState'])
 
     let [valuesStateWait, setValuesStateWait] = useState(values)
-
-    if(localStorage['valuesState'] == null) {
-        window.localStorage['valuesState'] = values
-    }
 
     const [isActive, setActive] = useState(false);
 
