@@ -87,7 +87,7 @@ function IndividualPageInfo() {
         'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3', 'uvf_1', 'uvf_2',
         'ntx1000', 'nlx3000', 'dmg_gamma2000', 'dmg_ctx650', 'dmg_dmf260', 'dmg_dmu50_1',
         'dmg_dmu50_2', 'dmg_dmc1035', 'dmg_ctx310_1','dmg_ctx510_1','maks_1', 'maks_2', 'm710',
-        'rtk12c', 'p250', 'krot', 'prans', 'press', 'epp', 'stp13m', 'trulaser', 'sclad_meh',
+        'rtk12c', 'p250', 'krot', 'prans', 'press', 'epp', 'stp13m', 'stend_resources_days', 'sclad_meh',
         'pech_nerg', 'faccin_1','faccin_2',
     ]
 
