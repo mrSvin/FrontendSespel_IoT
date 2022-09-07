@@ -159,7 +159,7 @@ function fetchRequestCurrent(complexName, setDataReportState) {
 function fetchRequestReport(complexName, setDataReportState) {
 
     let serverDomain=window.location.hostname
-    let url = `http://${serverDomain}:8087/api/modbusData${complexName}`
+    let url = `http://${serverDomain}:8087/api/modbusData/${complexName}`
 
     fetch(url, {method: 'GET'})
         .then((response) => response.json())
