@@ -1,12 +1,15 @@
 function RobotsInfo() {
+
+    //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
+    // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
     let complexName = [
-        ["МАКС 1", "МАКС 1"],
-        ["МАКС 2", 'МАКС 2'],
-        ["М710", "М710"],
-        ["РТК12C", 'РТК12C'],
-        ["P250", "P250"],
-        ["КРОТ", 'КРОТ'],
-        ["ПРАНС", "ПРАНС"],
+        ["МАКС 1", "МАКС 1", null, "МАКС 1"],
+        ["МАКС 2", 'МАКС 2', null, 'МАКС 2'],
+        ["М710", "М710", null, "М710"],
+        ["РТК12C", 'РТК12C', null, 'РТК12C'],
+        ["P250", "P250", null, "P250"],
+        ["КРОТ", 'КРОТ', null, 'КРОТ'],
+        ["ПРАНС", "ПРАНС", null, "ПРАНС"],
     ]
 
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
@@ -150,7 +153,9 @@ function RobotsInfo() {
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                            programs={complexName[e][1]} service={complexName[e][0]}/>
+                                            service={complexName[e][1]} alarm={complexName[e][2]}
+                                            programs={complexName[e][3]} laser={complexName[e][4]}
+                                            report={complexName[e][5]} current={complexName[e][6]}/>
             })}
         </div>
     )
