@@ -58,7 +58,23 @@ function fetchMonthHighCharts(complexName, dateInput, idContainer) {
 
 function fetchRequestServiceInfo(complexName) {
     let serverDomain = window.location.hostname
-    let url = `http://${serverDomain}:8086/api/serviceInfo/${complexName}`
+    let serverPort = window.location.port
+    let port = 17086
+
+    if (serverDomain != 'iot.sespel.com') {
+        if(serverDomain == '89.151.134.234'){
+            if(serverPort == '16080'){
+                port = 16086
+            }
+            else port = 17086
+        }
+        else if(serverDomain == '192.168.3.41'){
+            port = 8086
+        }
+        else port = 8086
+    }
+
+    let url = `http://${serverDomain}:${port}/api/serviceInfo/${complexName}`
     console.log(url)
     return fetch(url, {method: 'GET'})
         .then((response) => response.json())
