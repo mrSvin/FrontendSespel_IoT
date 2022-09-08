@@ -1,5 +1,6 @@
 function useOutsideList(ref,isActive, setActive, foo, date) {
     useEffect(() => {
+        console.log('Test', ref,isActive, setActive, foo, date)
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
                 setActive(!isActive);
