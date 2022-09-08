@@ -64,7 +64,7 @@ function SpecComplexesMonth() {
 
     useEffect(() => {
         let dateInput = monthNow()
-        setDate(dateInput)
+        setDateMonth(dateInput)
 
         let fetchNames = valuesState.map(i => {
             return complexRequest[i]

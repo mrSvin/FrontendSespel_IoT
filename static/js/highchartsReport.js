@@ -766,7 +766,6 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
         }]
     }
 
-    console.log('Лог', seriesArray)
     Highcharts.chart(`containerRound${idContainer}`, {
         chart: {
             plotBackgroundColor: null,
