@@ -318,18 +318,18 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
 
             <a className="icon_mesto"
                onClick={mesto(complexMesto)}>
-                <div className="label_mesto">Место</div>
+                <div className="label">Место</div>
             </a>
 
             <a className="icon_personal"
                onClick={personal}>
-                <div className="label_personal">Персонал</div>
+                <div className="label">Персонал</div>
             </a>
 
             {alarm != null ?
                 <a className="icon_error"
                    onClick={error(alarm)}>
-                    <div className="label_error">Ошибки</div>
+                    <div className="label">Ошибки</div>
                 </a> :
                 <div></div>
             }
@@ -337,7 +337,7 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             {programs != null ?
                 <a className="icon_program"
                    onClick={program(programs)}>
-                    <div className="label_program">Программы</div>
+                    <div className="label">Программы</div>
                 </a> :
                 <div></div>
             }
@@ -345,27 +345,27 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
             {laser != null ?
                 <a className="icon_laser"
                    onClick={laserButton(laser)}>
-                    <div className="label_laser">Излучение</div>
+                    <div className="label">Излучение</div>
                 </a> :
                 <div></div>
             }
             {service != null ?
                 <Link to={linkService} className="icon_service">
-                    <div className="label_service">Сервис</div>
+                    <div className="label">Сервис</div>
                 </Link> :
                 <div></div>
             }
 
             {report != null ?
                 <Link to={linkReport} className="icon_report">
-                    <div className="label_program">Отчеты</div>
+                    <div className="label">Отчеты</div>
                 </Link> :
                 <div></div>
             }
 
             {current != null ?
-                <Link to={linkCurrent} className="icon_program">
-                    <div className="label_program">Текущее состояние</div>
+                <Link to={linkCurrent} className="iconJob">
+                    <div className="label">Сигналы</div>
                 </Link> :
                 <div></div>
             }

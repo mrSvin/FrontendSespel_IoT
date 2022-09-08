@@ -298,7 +298,7 @@
     top: 5px;
 }
 
-.label_mesto {
+.label {
     margin-top: 65px;
     color: #b3b8be;
 }
@@ -321,12 +321,6 @@
 .icon_personal:hover > div {
     position: relative;
     top: 5px;
-}
-
-.label_personal {
-    color: #b3b8be;
-    margin-top: 65px;
-    /* margin-left: -15px; */
 }
 
 .vrsInfoAlign {
@@ -355,12 +349,6 @@
     top: 5px;
 }
 
-.label_error {
-    color: #b3b8be;
-    margin-top: 65px;
-    margin-left: -5px;
-}
-
 .icon_program {
     /* float: left; */
     background: url(../images/programTime.png) no-repeat;
@@ -379,12 +367,6 @@
 .icon_program:hover > div {
     position: relative;
     top: 5px;
-}
-
-.label_program {
-    color: #b3b8be;
-    margin-top: 65px;
-    /* margin-left: -25px; */
 }
 
 .icon_laser {
@@ -407,12 +389,6 @@
     top: 5px;
 }
 
-.label_laser {
-    color: #b3b8be;
-    margin-top: 65px;
-    /* margin-left: -15px; */
-}
-
 .icon_service {
     float: left;
     background: url(../images/iconService.png) no-repeat;
@@ -431,12 +407,6 @@
 .icon_service:hover > div {
     position: relative;
     top: 5px;
-}
-
-.label_service {
-    color: #b3b8be;
-    margin-top: 65px;
-    /* margin-left: 0px; */
 }
 
 .icon_report {
@@ -459,10 +429,24 @@
     top: 5px;
 }
 
-.label_report {
-    color: #b3b8be;
-    margin-top: 65px;
-    /* margin-left: 0px; */
+.iconJob {
+    float: left;
+    background: url(../images/iconJob.png) no-repeat;
+    background-size: contain;
+    width: 60px;
+    height: 60px;
+    margin: 30px 25px 0 25px;
+    cursor: pointer;
+}
+
+.iconJob:hover {
+    /*-webkit-box-shadow: inset 0px 0px 12px 12px #f2f6f8;*/
+    box-shadow: #252734 0px 0px 12px 12px inset;
+}
+
+.iconJob:hover > div {
+    position: relative;
+    top: 5px;
 }
 
 .blockImage {

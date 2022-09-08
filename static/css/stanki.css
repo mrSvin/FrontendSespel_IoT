@@ -199,6 +199,7 @@ input:checked + .slider:before {
     padding: 0 5px;
     border: 1px solid #83addd;
     width: 100%;
+    position: relative;
 }
 
 .listComplex {
@@ -243,7 +244,10 @@ input:checked + .slider:before {
 
 .listComplex label {
     cursor: pointer;
-    padding-right: 90%;
+    padding-right: 85%;
+    padding-left: 15%;
+    position: relative;
+    right: 5px;
 }
 
 .listComplex li:hover {
@@ -253,11 +257,13 @@ input:checked + .slider:before {
 .left-section > input {
     height: 17px;
     width: 17px;
+    position: absolute;
+    top: 3px;
 }
 
 .spanList {
     position: absolute;
-    left: 47px;
+    left: 40px;
     pointer-events: none;
     white-space: nowrap;
     text-shadow: none;
