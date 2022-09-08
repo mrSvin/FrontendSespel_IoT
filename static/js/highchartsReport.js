@@ -459,6 +459,7 @@ function highChartMonthLine(arrayWork, arrayPass, arrayFail, arrayAvar, arrayNag
 
 //Суточный и месячный
 function highChartTotal(generalDiagramNames, work, pause, off, avar, nagruzka, fetchNames, date = 24, chartName = '') {
+
     work = Array.isArray(work) ? work : [work]
     pause = Array.isArray(pause) ? pause : [pause]
     off = Array.isArray(off) ? off : [off]
@@ -721,22 +722,51 @@ function highChartTotalKolOp(total, kolOp, complexName, day1, nagruzkaName) {
 
 function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Нагрузка', idContainer) {
 
-    let colorNagruzka;
-    let workNoNagruzka = work;
-    if (nagruzkaName == 'Нагрузка') {
-        colorNagruzka = '#207210'
-        workNoNagruzka = workNoNagruzka - nagruzka
-    } else {
-        colorNagruzka = '#5c7ed0'
-    }
+    let colorNagruzka
+    let workNoNagruzka
+    let colorArray
+    let seriesArray
 
     let titleInfo
     if (idContainer == 'Total') {
         titleInfo = 'Суммарная загрузка оборудования'
+
+        let ruchnoi = []
+        nagruzkaName.forEach((e, i) => {
+            if (e == 'Ручной')
+                ruchnoi.push(nagruzka.splice(1, i)[0])
+        })
+
+        nagruzka = averageMonthdata(nagruzka)
+        ruchnoi = averageMonthdata(ruchnoi)
+
+        workNoNagruzka = work - nagruzka
+        seriesArray = [{
+            type: 'pie',
+            name: 'Показатель',
+            data: [['Работа', workNoNagruzka], ['Включен', pass], ['Выключен', off], ['В аварии', avar], ['Нагрузка', nagruzka]]
+        }]
+        if (nagruzkaName.includes('Ручной')) {
+            seriesArray[0].data.push(['Ручной', ruchnoi])
+        }
     } else {
         titleInfo = 'Загрузка оборудования'
+        if (nagruzkaName == 'Нагрузка') {
+            colorNagruzka = '#207210'
+            workNoNagruzka = work - nagruzka
+        } else {
+            colorNagruzka = '#5c7ed0'
+            workNoNagruzka = work
+        }
+        colorArray = ['#38e817', '#ffea32', '#000000', '#e81e1d', colorNagruzka]
+        seriesArray = [{
+            type: 'pie',
+            name: 'Показатель',
+            data: [['Работа', workNoNagruzka], ['Включен', pass], ['Выключен', off], ['В аварии', avar], [nagruzkaName, nagruzka]]
+        }]
     }
 
+    console.log('Лог', seriesArray)
     Highcharts.chart(`containerRound${idContainer}`, {
         chart: {
             plotBackgroundColor: null,
@@ -770,7 +800,7 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
                 showInLegend: true
             }
         },
-        colors: ['#38e817', '#ffea32', '#000000', '#e81e1d', colorNagruzka],
+        colors: colorArray,
         credits: {
             enabled: false
         },
@@ -779,11 +809,7 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
                 color: '#FFF'
             }
         },
-        series: [{
-            type: 'pie',
-            name: 'Показатель',
-            data: [['Работа', workNoNagruzka], ['Включен', pass], ['Выключен', off], ['В аварии', avar], [nagruzkaName, nagruzka]]
-        }]
+        series: seriesArray
     });
 }
 

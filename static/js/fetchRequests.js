@@ -7,6 +7,23 @@ function fetchRequest(dateCalendar, complexName) {
         })
 }
 
+// fetch запрос объекта в форме объектов
+function fetchRequestSmena(dateCalendar, complexName) {
+    return fetch(`/api/smenaData/${complexName}_days_date:${dateCalendar}`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}
+
+function fetchRequestMonth(dateCalendar, complexName) {
+    return fetch(`../api/monthData/${complexName}_month_date:${dateCalendar}`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}
+
 function fetchRequestBuildHC(dateCalendar, complexObject, complexName, idContainer, nagruzkaType = 'Нагрузка', typeLine = "multiLine") {
     return fetch(`/api/complexData/${complexName}_days_date:${dateCalendar}`, {method: 'GET'})
         .then((response) => response.json())
@@ -132,15 +149,6 @@ function fetchRequestAddService(userName, userRole, complexName, infoWorks, peri
         setErrorService("Недостаточно прав. Для осуществления операции вы должны обладать правами \"Сервис\" или \"Администратор\".")
     }
 
-}
-
-// fetch запрос объекта в форме объектов
-function fetchRequestSmena(dateCalendar, complexName) {
-    return fetch(`/api/smenaData/${complexName}_days_date:${dateCalendar}`, {method: 'GET'})
-        .then((response) => response.json())
-        .then((data) => {
-            return data
-        })
 }
 
 function fetchRequestCurrent(complexName, setDataReportState) {
