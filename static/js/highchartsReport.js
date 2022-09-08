@@ -748,6 +748,7 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
         }]
         if (nagruzkaName.includes('Ручной')) {
             seriesArray[0].data.push(['Ручной', ruchnoi])
+            colorArray = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210', '#5c7ed0']
         }
     } else {
         titleInfo = 'Загрузка оборудования'
