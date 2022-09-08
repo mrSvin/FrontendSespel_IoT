@@ -99,9 +99,9 @@ function fetchRequestAddService(userName, userRole, complexName, infoWorks, peri
                 else port = 17086
             }
             else if(serverDomain == '192.168.3.41'){
-                port = 16086
+                port = 8086
             }
-            else port = 17086
+            else port = 8086
         }
 
 
