@@ -1,3 +1,20 @@
+function useOutsideList(ref,isActive, setActive, foo, date) {
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                setActive(!isActive);
+                if (isActive) foo(date)
+            }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [ref]);
+}
+
 function SpecComplexesMonth() {
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
@@ -100,6 +117,9 @@ function SpecComplexesMonth() {
         updateLoadDataMonth(stankiRequest, dateInput, complexNames, fetchNames)
     }
 
+    const wrapperRef = useRef(null);
+    useOutsideList(wrapperRef, isActive, setActive, newDate, dateMonth);
+
     return (
         <div>
             <MenuStanki menuSelected="specComplexes"/>
@@ -166,3 +186,6 @@ function SpecComplexesMonth() {
         </div>
     )
 }
+
+
+
