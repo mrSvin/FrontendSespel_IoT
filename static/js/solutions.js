@@ -688,20 +688,20 @@ function getTimeProgramNameGraph(arrayData, type, date) {
 
     let parset = []
 
-    if (type == 'sutki'){
+    if (type == 'sutki') {
         parset.push({
             x: new Date(date + ' 00:00').getTime(),
-            x2: new Date(date + ' 00:00').getTime()+2000,
+            x2: new Date(date + ' 00:00').getTime() + 2000,
             y: 0,
             partialFill: null
         })
-    }else {
+    } else {
         parset.push({
-                x: new Date(date).getTime(),
-                x2: new Date(date).getTime()+2000,
-                y: 0,
-                partialFill: null
-            })
+            x: new Date(date).getTime(),
+            x2: new Date(date).getTime() + 2000,
+            y: 0,
+            partialFill: null
+        })
     }
 
     programTimeArray.forEach(e => {
@@ -713,16 +713,15 @@ function getTimeProgramNameGraph(arrayData, type, date) {
         })
     })
 
-    if(type == 'sutki'){
-        if(day == date.slice(0,10)){
+    if (type == 'sutki') {
+        if (day == date.slice(0, 10)) {
             parset.push({
                 x: new Date(dayTimeNow()).getTime(),
                 x2: new Date(dayTimeNow()).getTime() + 2000,
                 y: 0,
                 partialFill: null
             })
-        }
-        else {
+        } else {
             parset.push({
                 x: new Date(date + ' 23:59:55').getTime(),
                 x2: new Date(date + ' 23:59:55').getTime() + 2000,
@@ -730,29 +729,26 @@ function getTimeProgramNameGraph(arrayData, type, date) {
                 partialFill: null
             })
         }
-    }
-    else {
-        if(date.slice(11) == '19:00'){
+    } else {
+        if (date.slice(11) == '19:00') {
             parset.push({
-                x: new Date(date).getTime() + 3600000 * 11 + 60000*59 + 55000,
-                x2: new Date(date).getTime() + 3600000 * 11 + 60000*59 + 57000,
+                x: new Date(date).getTime() + 3600000 * 11 + 60000 * 59 + 55000,
+                x2: new Date(date).getTime() + 3600000 * 11 + 60000 * 59 + 57000,
                 y: 0,
                 partialFill: null
             })
-        }
-        else {
-            if(day == date.slice(0,10)){
+        } else {
+            if (day == date.slice(0, 10)) {
                 parset.push({
                     x: new Date(dayTimeNow()).getTime(),
                     x2: new Date(dayTimeNow()).getTime() + 2000,
                     y: 0,
                     partialFill: null
                 })
-            }
-            else {
+            } else {
                 parset.push({
-                    x: new Date(date).getTime() + 3600000 * 11 + 60000*59 + 55000,
-                    x2: new Date(date).getTime() + 3600000 * 11 + 60000*59 + 57000,
+                    x: new Date(date).getTime() + 3600000 * 11 + 60000 * 59 + 55000,
+                    x2: new Date(date).getTime() + 3600000 * 11 + 60000 * 59 + 57000,
                     y: 0,
                     partialFill: null
                 })
@@ -761,4 +757,13 @@ function getTimeProgramNameGraph(arrayData, type, date) {
     }
 
     return parset
+}
+
+function getUrlService() {
+    let serverDomain = window.location.hostname
+    let serverPort = window.location.port
+
+    if (serverDomain == 'iot.sespel.com') {
+        return serverDomain + ':' + 17086
+    } else return serverDomain + ':' + serverPort.slice(0, -1) + 6
 }
