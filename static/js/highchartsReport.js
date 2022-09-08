@@ -744,7 +744,7 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
         seriesArray = [{
             type: 'pie',
             name: 'Показатель',
-            data: [['Работа', workNoNagruzka], ['Включен', pass], ['Выключен', off], ['В аварии', avar], ['Нагрузка', nagruzka]]
+            data: [['Работа', workNoNagruzka], ['Ожидание', pass], ['Выключен', off], ['В аварии', avar], ['Нагрузка', nagruzka]]
         }]
         colorArray = ['#38e817', '#ffea32', '#000000', '#e81e1d', '#207210']
         if (nagruzkaName.includes('Ручной')) {
@@ -764,7 +764,7 @@ function highChartRound(work, pass, off, avar, nagruzka, nagruzkaName = 'Наг�
         seriesArray = [{
             type: 'pie',
             name: 'Показатель',
-            data: [['Работа', workNoNagruzka], ['Включен', pass], ['Выключен', off], ['В аварии', avar], [nagruzkaName, nagruzka]]
+            data: [['Работа', workNoNagruzka], ['Ожидание', pass], ['Выключен', off], ['В аварии', avar], [nagruzkaName, nagruzka]]
         }]
     }
 

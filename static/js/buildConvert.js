@@ -201,7 +201,7 @@ function updateLoadDataMonth(promiseVariable, date, complexName, fetchNames) {
                 totalArray[4].push(averageMonthdata(e.nagruzka.map(Number)))
             })
 
-            highChartTotal(complexName, totalArray[0], totalArray[1], totalArray[2], totalArray[3], totalArray[4], names, date)
+            highChartTotal(names, totalArray[0], totalArray[1], totalArray[2], totalArray[3], totalArray[4], nagruzkaName, date)
             highChartRound(averageMonthdata(totalArray[0]), averageMonthdata(totalArray[1]), averageMonthdata(totalArray[2]),
                 averageMonthdata(totalArray[3]), totalArray[4], nagruzkaName, 'Total')
         })
