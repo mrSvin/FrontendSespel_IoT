@@ -1,10 +1,9 @@
-function useOutsideList(ref, isActive, setActive, foo, date) {
+function useOutsideList(ref, isActive, foo) {
     useEffect(() => {
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
-                console.log('clickOut')
-                setActive(!isActive);
-                if (isActive) foo(date)
+                console.log('clickaaaaaaaaOut', isActive)
+                foo()
             }
         }
 
@@ -120,7 +119,7 @@ function SpecComplexesMonth() {
     }
 
     const wrapperRef = useRef(null);
-    useOutsideList(wrapperRef, isActive, setActive, newDate, dateMonth);
+    useOutsideList(wrapperRef, isActive, toggleClass);
 
     return (
         <div>
