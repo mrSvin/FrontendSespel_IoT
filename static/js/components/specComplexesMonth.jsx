@@ -38,10 +38,17 @@ function SpecComplexesMonth() {
 
     const [isActive, setActive] = useState(false);
 
-    const toggleClass = () => {
+    function toggleClass() {
         setActive(!isActive);
         if (isActive) newDate(dateMonth)
     };
+
+    const innerRef = useOuterClick(ev => {
+        if (isActive) {
+            setActive(!isActive);
+            newDate(dateMonth)
+        }
+    });
 
     const handleOnChange = (position) => {
         const updatedCheckedState = selectedObjects.map((item, index) => {
@@ -146,7 +153,7 @@ function SpecComplexesMonth() {
             <div className="energyCalendarContainer">
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
                 <div
-                    ref={wrapperRef}
+                    ref={innerRef}
                     className='menuSelect selectDevice'>
                     <span onClick={toggleClass}>Выбор оборудования</span>
                     <div className="listComplex">
