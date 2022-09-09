@@ -1,12 +1,13 @@
-function useOutsideList(ref,isActive, setActive, foo, date) {
+function useOutsideList(ref, isActive, setActive, foo, date) {
     useEffect(() => {
-        console.log('Test', ref,isActive, setActive, foo, date)
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
+                console.log('clickOut')
                 setActive(!isActive);
                 if (isActive) foo(date)
             }
         }
+
         // Bind the event listener
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
@@ -21,10 +22,10 @@ function SpecComplexesMonth() {
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
     let complexName = [
-        ["Пресс ЧПУ для ступиц","Пресс ЧПУ для ступиц"],
-        ["ЭПП","ЭПП"],
-        ["СТП13М","СТП13М"],
-        ['Стенд для ресурсных испытаний','cтенд для ресурсных испытаний', null, null, null, 'cтенд','cтенд'],
+        ["Пресс ЧПУ для ступиц", "Пресс ЧПУ для ступиц"],
+        ["ЭПП", "ЭПП"],
+        ["СТП13М", "СТП13М"],
+        ['Стенд для ресурсных испытаний', 'cтенд для ресурсных испытаний', null, null, null, 'cтенд', 'cтенд'],
     ]
 
     let complexImg = ["../images/press.png", "../images/epp.png", "../images/stp13m.png", "../images/stendResource.png"]
@@ -142,7 +143,9 @@ function SpecComplexesMonth() {
 
             <div className="energyCalendarContainer">
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
-                <div className='menuSelect selectDevice'>
+                <div
+                    ref={wrapperRef}
+                    className='menuSelect selectDevice'>
                     <span onClick={toggleClass}>Выбор оборудования</span>
                     <div className="listComplex">
                         <span>▼</span>
