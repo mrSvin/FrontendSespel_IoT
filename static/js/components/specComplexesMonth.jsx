@@ -1,21 +1,3 @@
-function useOutsideList(ref, isActive, foo) {
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) {
-                console.log('clickaaaaaaaaOut', isActive)
-                foo()
-            }
-        }
-
-        // Bind the event listener
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            // Unbind the event listener on clean up
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [ref]);
-}
-
 function SpecComplexesMonth() {
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
@@ -118,8 +100,29 @@ function SpecComplexesMonth() {
         updateLoadDataMonth(stankiRequest, dateInput, complexNames, fetchNames)
     }
 
+    function useOutsideList(ref, isActive, setActive) {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    if (isActive) {
+                        setActive(!isActive);
+                        console.log('Закрыть', isActive)
+                        newDate(dateMonth)
+                    }
+                }
+            }
+
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
     const wrapperRef = useRef(null);
-    useOutsideList(wrapperRef, isActive, toggleClass);
+    useOutsideList(wrapperRef, isActive, setActive);
 
     return (
         <div>
