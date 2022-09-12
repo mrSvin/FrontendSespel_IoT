@@ -1,73 +1,109 @@
 function GibkaMonth() {
 
-    let complexName = ["FACCIN 4", "FACCIN 10"]
+    //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
+    // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
+    let complexName = [
+        ["FACCIN 4", "FACCIN 4"],
+        ["FACCIN 10", "FACCIN 10"],
+    ]
     let complexImg = ["../images/faccin.png", "../images/faccin_2.png"]
+    let complexRequest = ['faccin_1', 'faccin_2']
 
-    let complexRequest = ['faccin_1','faccin_2']
-    let nagruzkaName = complexRequest.map(e => {
-        return exceptionManualNagruzka(e)
-    })
+    let buttonsVrs = [
+        [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+    ]
+    let size = ['sborCeh', 'sborCeh']
 
-    let buttonsVrs1 = [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
-    let buttonsVrs2 = [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
+    // Массив номеров всех станков
+    let values = complexRequest.map((e, i) => i)
 
+    // Состояние даты
     let [dateMonth, setDateMonth] = useState(0);
 
-    useEffect(() => {
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        new Array(complexRequest.length).fill(true)
+    );
 
-        updateLoadDataMonth( monthNow())
+    let [valuesState, setValuesState] = useState(values)
+
+    let [valuesStateWait, setValuesStateWait] = useState(values)
+
+    const [isActive, setActive] = useState(false);
+
+    function toggleClass() {
+        setActive(!isActive);
+        if (isActive) newDate(dateMonth)
+    };
+
+    const innerRef = useOuterClick(ev => {
+        if (isActive) {
+            setActive(!isActive);
+            newDate(dateMonth)
+        }
+    });
+
+    const handleOnChange = (position) => {
+        const updatedCheckedState = selectedObjects.map((item, index) => {
+            return index === position ? !item : item;
+        });
+
+        setSelectedObjects(updatedCheckedState)
+
+        const activeValues = []
+        updatedCheckedState.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(values[index]);
+                }
+            }
+        );
+        setValuesState(activeValues);
+
+    };
+
+    useEffect(() => {
+        let dateInput = monthNow()
+        setDateMonth(dateInput)
+
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
+
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequestMonth(dateInput, item)
+        }));
+
+        updateLoadDataMonth(stankiRequest, dateInput, complexNames, fetchNames)
 
     }, [])
 
     function newDate(dateInput) {
-        console.log(dateInput)
         setDateMonth(dateInput)
-        updateLoadDataMonth(dateInput)
-    }
+        setValuesStateWait(valuesState)
 
-    function updateLoadDataMonth(dateInput) {
-
-        let roundKim = fetchMonthHighCharts('faccin_1', dateInput,1)
-        let roundNK600 = fetchMonthHighCharts('faccin_2', dateInput,2)
-
-        let promiseDataKim = Promise.resolve(roundKim);
-        let promiseDataNK600 = Promise.resolve(roundNK600);
-
-        //Общая загрузка
-        promiseDataKim.then(value => {
-            promiseDataNK600.then(value1 => {
-                let workKimArray = averageMonthdata(value.work.map(Number))
-                let pauseKimArray = averageMonthdata(value.pause.map(Number))
-                let offKimArray = averageMonthdata(value.off.map(Number))
-                let avarKimArray = averageMonthdata(value.avar.map(Number))
-                let nagruzkaKimArray = averageMonthdata(value.nagruzka.map(Number))
-
-                let workNK600Array = averageMonthdata(value1.work.map(Number))
-                let pauseNK600Array = averageMonthdata(value1.pause.map(Number))
-                let offNK600Array = averageMonthdata(value1.off.map(Number))
-                let avarNK600Array = averageMonthdata(value1.avar.map(Number))
-                let nagruzkaNK600Array = averageMonthdata(value1.nagruzka.map(Number))
-
-
-                highChartTotal(complexName, [workKimArray,workNK600Array],
-                    [pauseKimArray,pauseNK600Array],
-                    [offKimArray,offNK600Array],
-                    [avarKimArray,avarNK600Array],
-                    [nagruzkaKimArray,nagruzkaNK600Array], nagruzkaName, dateInput)
-
-                highChartRound(averageMonthdata([workKimArray,workNK600Array]),averageMonthdata([pauseKimArray,pauseNK600Array]),
-                    averageMonthdata([offKimArray,offNK600Array]),averageMonthdata([avarKimArray,avarNK600Array]),
-                    averageMonthdata([nagruzkaKimArray,nagruzkaNK600Array]),'Нагрузка', 'Total')
-            })
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
         })
 
+        let complexNames = valuesState.map(i => {
+            return complexName[i]
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequestMonth(dateInput, item)
+        }));
+        updateLoadDataMonth(stankiRequest, dateInput, complexNames, fetchNames)
     }
 
     return (
         <div>
-
             <MenuStanki menuSelected="gibka"/>
-
             <div className="buttons-otchet">
 
                 <Link to="/stanki/gibka">
@@ -84,13 +120,55 @@ function GibkaMonth() {
 
             </div>
 
-            <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
+            <div className="energyCalendarContainer">
+                <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
+                <div
+                    ref={innerRef}
+                    className='menuSelect selectDevice'>
+                    <span onClick={toggleClass}>Выбор оборудования</span>
+                    <div className="listComplex">
+                        <span>▼</span>
+                        <ul className='toppings-list'
+                            className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
+                            {complexName.map((name, index) => {
+                                return (
+                                    <li key={index}>
+                                        <div className="toppings-list-item">
+                                            <div className="left-section">
+                                                <input
+                                                    type="checkbox"
+                                                    id={`custom-checkbox-${index}`}
+                                                    name={name[0]}
+                                                    value={index}
+                                                    checked={selectedObjects[index]}
+                                                    onChange={() => handleOnChange(index)}
+                                                />
+                                                <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                                className='spanList'>{name[0]}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
 
             <ComplexTotalMonthInfo/>
 
-            <ComplexSutkiAllInfo complexName={complexName[0]} complexImg={complexImg[0]} complexMesto={buttonsVrs1} size={"sborCeh"} idContainer = {1} service={complexName[0]}/>
-            <ComplexSutkiAllInfo complexName={complexName[1]} complexImg={complexImg[1]} complexMesto={buttonsVrs2} size={"sborCeh"} idContainer = {2} service={complexName[1]}/>
+            {valuesStateWait.map((e, i) => {
+                return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                                            service={complexName[e][1]} alarm={complexName[e][2]}
+                                            programs={complexName[e][3]} laser={complexName[e][4]}
+                                            report={complexName[e][5]} current={complexName[e][6]}/>
+            })}
 
         </div>
     )
 }
+
+
+

@@ -52,6 +52,13 @@ function RobotsSmena() {
         if (isActive) newDate(date)
     };
 
+    const innerRef = useOuterClick(ev => {
+        if (isActive) {
+            setActive(!isActive);
+            newDate(date)
+        }
+    });
+
     const handleOnChange = (position) => {
         const updatedCheckedState = selectedObjects.map((item, index) => {
             return index === position ? !item : item;
@@ -134,7 +141,9 @@ function RobotsSmena() {
 
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <div className='menuSelect selectDevice'>
+                <div
+                    ref={innerRef}
+                    className='menuSelect selectDevice'>
                     <span onClick={toggleClass}>Выбор оборудования</span>
                     <div className="listComplex">
                         <span>▼</span>
