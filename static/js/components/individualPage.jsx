@@ -336,22 +336,24 @@ function IndividualPageInfo() {
                                             <ul>
                                                 {copy.map((stanok,i)=>{
                                                     console.log('     станок ', copy[i][0])
+                                                    let key_ = `${index}${i}`
                                                     return (
-                                                        <li key={`${index}${i}`}>
-                                                            <div className="toppings-list-item">
-                                                                <div className="left-section">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        id={`custom-checkbox-${index}${i}`}
-                                                                        name={stanok[0]}
-                                                                        value={`${index}${i}`}
-                                                                        // checked={selectedObjects[keyIndex]}
-                                                                        // onChange={() => handleOnChange(keyIndex)}
-                                                                    />
-                                                                    <label htmlFor={`custom-checkbox-${index}${i}`}></label><span
-                                                                    className='spanList'>{stanok[0]}</span>
-                                                                </div>
-                                                            </div>
+                                                        <li key={key_}>
+                                                            {/*<div className="toppings-list-item">*/}
+                                                            {/*    <div className="left-section">*/}
+                                                            {/*        <input*/}
+                                                            {/*            type="checkbox"*/}
+                                                            {/*            id={`custom-checkbox-${index}${i}`}*/}
+                                                            {/*            name={stanok[0]}*/}
+                                                            {/*            value={`${index}${i}`}*/}
+                                                            {/*            // checked={selectedObjects[keyIndex]}*/}
+                                                            {/*            // onChange={() => handleOnChange(keyIndex)}*/}
+                                                            {/*        />*/}
+                                                            {/*        <label htmlFor={`custom-checkbox-${index}${i}`}></label><span*/}
+                                                            {/*        className='spanList'>{stanok[0]}</span>*/}
+                                                            {/*    </div>*/}
+                                                            {/*</div>*/}
+                                                            <span>{stanok[0]}</span>
                                                         </li>
                                                     )
                                                 })}
