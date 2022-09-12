@@ -102,10 +102,11 @@ function ScladsInfo() {
     return (
         <div>
             <div
-                ref={innerRef}
                 className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <div className='menuSelect selectDevice'>
+                <div
+                    ref={innerRef}
+                    className='menuSelect selectDevice'>
                     <span onClick={toggleClass}>Выбор оборудования</span>
                     <div className="listComplex">
                         <span>▼</span>
