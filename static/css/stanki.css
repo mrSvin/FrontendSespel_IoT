@@ -226,6 +226,10 @@ input:checked + .slider:before {
     transition: 0.5s;
     color: #83addd;
     text-shadow: none;
+    white-space: normal;
+    pointer-events: none;
+    position: absolute;
+    top: -21px;
 }
 
 .selectDevice:hover .listComplex > span {
