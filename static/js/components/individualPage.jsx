@@ -1,27 +1,27 @@
 function IndividualPageInfo() {
 
-    function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
-
-        let fetchNames = valuesState.map(i => {
-            return complexRequest[i]
-        })
-        let complexNames = valuesState.map(i => {
-            return complexName[i][1]
-        })
-        let stankiRequest = Promise.all(fetchNames.map((item) => {
-            return fetchRequest(date, item)
-        }));
-
-        if (stateLineHC == 'line') {
-            setStateLineHC('multiLine')
-            updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
-        } else {
-            setStateLineHC('line')
-            updateLoadData(stankiRequest, date, complexNames, fetchNames, 'line')
-        }
-
-
-    }
+    // function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
+    //
+    //     let fetchNames = valuesState.map(i => {
+    //         return complexRequest[i]
+    //     })
+    //     let complexNames = valuesState.map(i => {
+    //         return complexName[i][1]
+    //     })
+    //     let stankiRequest = Promise.all(fetchNames.map((item) => {
+    //         return fetchRequest(date, item)
+    //     }));
+    //
+    //     if (stateLineHC == 'line') {
+    //         setStateLineHC('multiLine')
+    //         updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
+    //     } else {
+    //         setStateLineHC('line')
+    //         updateLoadData(stankiRequest, date, complexNames, fetchNames, 'line')
+    //     }
+    //
+    //
+    // }
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
@@ -269,18 +269,22 @@ function IndividualPageInfo() {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    if(localStorage['selectedObjects'] == undefined) {
-        localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
-    }
-    // Состояния чекбоксов станков
-    let [selectedObjects, setSelectedObjects] = useState(
-        (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) :window.localStorage['selectedObjects'].split(',').map(e=>{return (e=='true')})
-    );
+    // if(localStorage['selectedObjects'] == undefined) {
+    //     localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
+    // }
+    // // Состояния чекбоксов станков
+    // let [selectedObjects, setSelectedObjects] = useState(
+    //     (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) :window.localStorage['selectedObjects'].split(',').map(e=>{return (e=='true')})
+    // );
 
 
-    let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
+    // let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
+    //
+    // let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
 
-    let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
+    let [valuesState, setValuesState] = useState(values)
+
+    let [valuesStateWait, setValuesStateWait] = useState(values)
 
     const [isActive, setActive] = useState(false);
 
@@ -301,7 +305,7 @@ function IndividualPageInfo() {
             return index === position ? !item : item;
         });
 
-        window.localStorage['selectedObjects'] = updatedCheckedState
+        // window.localStorage['selectedObjects'] = updatedCheckedState
         setSelectedObjects(updatedCheckedState)
 
         const activeValues = []
@@ -450,7 +454,7 @@ function IndividualPageInfo() {
             <ComplexTotalSutkiInfo/>
 
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
+                          complexName={complexNameOld} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]} complexImg={complexImg[e]}
