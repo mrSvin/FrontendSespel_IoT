@@ -100,6 +100,63 @@ function IndividualPageInfo() {
         ],
     ]
 
+    let complexNameOld = [
+        ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", null, "CRYSTA-Apex S9168"],
+        ["НК600", "НК600"],
+        ["УФ5220","УФ5220"],
+        ["СТП Сеспель", 'СТП Сеспель'],
+        ["NTX1000 2", "NTX1000 2"],
+        ["SK50",  'SK50'],
+        ["APEC", "APEC"],
+        ["DMU50 3", "DMU50 3"],
+        ["DMU50 4", "DMU50 4"],
+        ["CTX310 2",  'CTX310 2', 'CTX310 2'],
+        ["CTX510 2", "CTX510 2"],
+        ["CTX510 3", "CTX510 3"],
+        ["CTX310 3", "CTX310 3"],
+        ["CTX510 4",  'CTX510 4'],
+        ["CTX510 5", "CTX510 5"],
+        ["DMC1035 2", "DMC1035 2"],
+        ["DMU50 5", "DMU50 5"],
+        ["DMU50 6", "DMU50 6"],
+        ["DMU50 7", "DMU50 7"],
+        ["AR55", "AR55"],
+        ["Навигатор 1","Навигатор 1",  null,"Навигатор 1", "Навигатор 1"],
+        ["Навигатор 2", 'Навигатор 2', null, "Навигатор 2", "Навигатор 2"],
+        ["Навигатор 3", "Навигатор 3", null, "Навигатор 3", "Навигатор 3"],
+        ["TruLaser",  'TruLaser'],
+        ["Комета 1", "Комета 1"],
+        ["Комета 2", "Комета 2"],
+        ["Комета 3", "Комета 3"],
+        ["УВФ-1 1","УВФ-1 1"],
+        ["УВФ-1 2","УВФ-1 2"],
+        ["NTX1000","NTX1000","NTX1000"],
+        ["NLX3000","NLX3000","NLX3000"],
+        ["GAMMA2000","GAMMA2000","GAMMA2000"],
+        ["CTX650","CTX650","CTX650"],
+        ["DMF260","DMF260","DMF260"],
+        ["DMU50 1","DMU50 1","DMU50 1"],
+        ["DMU50 2","DMU50 2","DMU50 2"],
+        ["DMC1035","DMC1035","DMC1035"],
+        ["CTX310 1","CTX310 1","CTX310 1"],
+        ["CTX510 1","CTX510 1","CTX510 1"],
+        ["МАКС 1", "МАКС 1", null, "МАКС 1"],
+        ["МАКС 2", 'МАКС 2', null, 'МАКС 2'],
+        ["М710", "М710", null, "М710"],
+        ["РТК12C", 'РТК12C', null, 'РТК12C'],
+        ["P250", "P250", null, "P250"],
+        ["КРОТ", 'КРОТ', null, 'КРОТ'],
+        ["ПРАНС", "ПРАНС", null, "ПРАНС"],
+        ["Пресс ЧПУ для ступиц","Пресс ЧПУ для ступиц"],
+        ["ЭПП","ЭПП"],
+        ["СТП13М","СТП13М"],
+        ['Стенд для ресурсных испытаний','Стенд для ресурсных испытаний', null, null, null, 'Стенд','Стенд'],
+        ["Склад Мех. цеха","Склад Мех. цеха"],
+        ["Печь Индукционная", "Печь Индукционная"],
+        ["FACCIN 4","FACCIN 4"],
+        ["FACCIN 10","FACCIN 10"],
+    ]
+
     let complexImg = [
         "../images/crystal_apex.png", "../images/nk600.png", "../images/UVF_5220.png",
         "../images/progress.png", "../images/ntx1000.png", "../images/sk50.png",
@@ -339,20 +396,20 @@ function IndividualPageInfo() {
                                                     let key_ = `${index}${i}`
                                                     return (
                                                         <li key={key_}>
-                                                            {/*<div className="toppings-list-item">*/}
-                                                            {/*    <div className="left-section">*/}
-                                                            {/*        <input*/}
-                                                            {/*            type="checkbox"*/}
-                                                            {/*            id={`custom-checkbox-${index}${i}`}*/}
-                                                            {/*            name={stanok[0]}*/}
-                                                            {/*            value={`${index}${i}`}*/}
-                                                            {/*            // checked={selectedObjects[keyIndex]}*/}
-                                                            {/*            // onChange={() => handleOnChange(keyIndex)}*/}
-                                                            {/*        />*/}
-                                                            {/*        <label htmlFor={`custom-checkbox-${index}${i}`}></label><span*/}
-                                                            {/*        className='spanList'>{stanok[0]}</span>*/}
-                                                            {/*    </div>*/}
-                                                            {/*</div>*/}
+                                                            <div className="toppings-list-item">
+                                                                <div className="left-section">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        id={`custom-checkbox-${index}${i}`}
+                                                                        name={stanok[0]}
+                                                                        value={`${index}${i}`}
+                                                                        // checked={selectedObjects[keyIndex]}
+                                                                        // onChange={() => handleOnChange(keyIndex)}
+                                                                    />
+                                                                    <label htmlFor={`custom-checkbox-${index}${i}`}></label><span
+                                                                    className='spanList'>{stanok[0]}</span>
+                                                                </div>
+                                                            </div>
                                                             <span>{stanok[0]}</span>
                                                         </li>
                                                     )
@@ -396,11 +453,11 @@ function IndividualPageInfo() {
                           complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSutkiAllInfo key={i} complexName={complexName[e][1][0]} complexImg={complexImg[e]}
+                return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                            service={complexName[e][1][1]} alarm={complexName[e][1][2]}
-                                            programs={complexName[e][1][3]} laser={complexName[e][1][4]}
-                                            report={complexName[e][1][5]} current={complexName[e][1][6]}/>
+                                            service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
+                                            programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}
+                                            report={complexNameOld[e][5]} current={complexNameOld[e][6]}/>
             })}
         </div>
     )
