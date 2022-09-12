@@ -1,26 +1,3 @@
-function useOuterClick(callback) {
-    const callbackRef = useRef(); // initialize mutable ref, which stores callback
-    const innerRef = useRef(); // returned to client, who marks "border" element
-
-    // update cb on each render, so second useEffect has access to current value
-    useEffect(() => {
-        callbackRef.current = callback;
-    });
-
-    useEffect(() => {
-        document.addEventListener("click", handleClick);
-        return () => document.removeEventListener("click", handleClick);
-
-        function handleClick(e) {
-            if (innerRef.current && callbackRef.current &&
-                !innerRef.current.contains(e.target)
-            ) callbackRef.current(e);
-        }
-    }, []); // no dependencies -> stable click listener
-
-    return innerRef; // convenience for client (doesn't need to init ref himself)
-}
-
 function SpecComplexesMonth() {
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
@@ -129,30 +106,6 @@ function SpecComplexesMonth() {
         }));
         updateLoadDataMonth(stankiRequest, dateInput, complexNames, fetchNames)
     }
-
-    function useOutsideList(ref, isActive, setActive) {
-        useEffect(() => {
-            function handleClickOutside(event) {
-                if (ref.current && !ref.current.contains(event.target)) {
-                    if (isActive) {
-                        setActive(!isActive);
-                        console.log('Закрыть', isActive)
-                        newDate(dateMonth)
-                    }
-                }
-            }
-
-            // Bind the event listener
-            document.addEventListener("mousedown", handleClickOutside);
-            return () => {
-                // Unbind the event listener on clean up
-                document.removeEventListener("mousedown", handleClickOutside);
-            };
-        }, [ref]);
-    }
-
-    const wrapperRef = useRef(null);
-    useOutsideList(wrapperRef, isActive, setActive);
 
     return (
         <div>

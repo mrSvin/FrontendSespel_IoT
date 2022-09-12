@@ -1,3 +1,4 @@
+// Изменение состояние линейных графиков из 5-ти строк в одну
 function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
 
     let fetchNames = valuesState.map(i => {
@@ -21,6 +22,7 @@ function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexR
 
 }
 
+// Изменение состояние линейных графиков из 5-ти строк в одну для смены
 function changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
 
     let fetchNames = valuesState.map(i => {
@@ -42,6 +44,7 @@ function changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, com
     }
 }
 
+// Обработка данных из запроса для отрисовки графиков
 function updateLoadData(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
     promiseVariable
         .then(result => {
@@ -96,6 +99,7 @@ function updateLoadData(promiseVariable, day1, complexName, fetchNames, typeLine
         });
 }
 
+// Обработка данных из запроса для отрисовки графиков для сменных отчетов
 function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
     promiseVariable
         .then(result => {
@@ -175,6 +179,7 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typ
         });
 }
 
+// Обработка данных из запроса для отрисовки графиков для месячных отчетов
 function updateLoadDataMonth(promiseVariable, date, complexName, fetchNames) {
     promiseVariable
         .then(result => {
@@ -208,4 +213,28 @@ function updateLoadDataMonth(promiseVariable, date, complexName, fetchNames) {
         .catch(err => {
             console.error(err);
         });
+}
+
+// Обработка нажатия вне компонента, аргумент функции функция callback c необходимой логикой
+function useOuterClick(callback) {
+    const callbackRef = useRef(); // initialize mutable ref, which stores callback
+    const innerRef = useRef(); // returned to client, who marks "border" element
+
+    // update cb on each render, so second useEffect has access to current value
+    useEffect(() => {
+        callbackRef.current = callback;
+    });
+
+    useEffect(() => {
+        document.addEventListener("click", handleClick);
+        return () => document.removeEventListener("click", handleClick);
+
+        function handleClick(e) {
+            if (innerRef.current && callbackRef.current &&
+                !innerRef.current.contains(e.target)
+            ) callbackRef.current(e);
+        }
+    }, []); // no dependencies -> stable click listener
+
+    return innerRef; // convenience for client (doesn't need to init ref himself)
 }
