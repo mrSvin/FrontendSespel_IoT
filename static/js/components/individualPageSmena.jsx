@@ -179,9 +179,9 @@ function IndividualPageSmena() {
         (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) :window.localStorage['selectedObjects'].split(',').map(e=>{return (e=='true')})
     );
 
-    let [valuesState, setValuesState] = useState(values)
+    let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
 
-    let [valuesStateWait, setValuesStateWait] = useState(values)
+    let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
 
     const [isActive, setActive] = useState(false);
 
