@@ -316,7 +316,6 @@ function IndividualPageInfo() {
                             {complexName.map((razdel, index)=>{
                                 console.log('Имя раздела', razdel[0])
                                 let copy = razdel.slice(1)
-                                let mainIndex = 0
 
                                     return (
                                         <li key={index}>
@@ -324,7 +323,7 @@ function IndividualPageInfo() {
                                                 <div className="left-section">
                                                     <input
                                                         type="checkbox"
-                                                        id={`custom-razdel-checkbox-${index}`}
+                                                        id={`custom-checkbox-${index}`}
                                                         name={razdel[0]}
                                                         value={index}
                                                         // checked={selectedObjects[index]}
@@ -336,22 +335,20 @@ function IndividualPageInfo() {
                                             </div>
                                             <ul>
                                                 {copy.map((stanok,i)=>{
-                                                    let keyIndex = mainIndex
-                                                    mainIndex++
                                                     console.log('     станок ', copy[i][0])
                                                     return (
-                                                        <li key={keyIndex}>
+                                                        <li key={`${index}${i}`}>
                                                             <div className="toppings-list-item">
                                                                 <div className="left-section">
                                                                     <input
                                                                         type="checkbox"
-                                                                        id={`custom-checkbox-${keyIndex}`}
+                                                                        id={`custom-checkbox-${index}${i}`}
                                                                         name={stanok[0]}
-                                                                        value={keyIndex}
-                                                                        checked={selectedObjects[keyIndex]}
-                                                                        onChange={() => handleOnChange(keyIndex)}
+                                                                        value={`${index}${i}`}
+                                                                        // checked={selectedObjects[keyIndex]}
+                                                                        // onChange={() => handleOnChange(keyIndex)}
                                                                     />
-                                                                    <label htmlFor={`custom-checkbox-${keyIndex}`}></label><span
+                                                                    <label htmlFor={`custom-checkbox-${index}${i}`}></label><span
                                                                     className='spanList'>{stanok[0]}</span>
                                                                 </div>
                                                             </div>
