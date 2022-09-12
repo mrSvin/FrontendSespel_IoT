@@ -1,4 +1,4 @@
-function IndividualPageInfo() {
+function IndividualPageMonth() {
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
@@ -166,10 +166,7 @@ function IndividualPageInfo() {
     let values = complexRequest.map((e, i) => i)
 
     // Состояние даты
-    let [date, setDate] = useState(0);
-
-    // Состояние переменной мульти Диаграммы
-    let [stateLineHC, setStateLineHC] = useState("multiLine");
+    let [dateMonth, setDateMonth] = useState(0);
 
     if(localStorage['selectedObjects'] == undefined) {
         localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
@@ -179,22 +176,21 @@ function IndividualPageInfo() {
         (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) :window.localStorage['selectedObjects'].split(',').map(e=>{return (e=='true')})
     );
 
+    let [valuesState, setValuesState] = useState(values)
 
-    let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
-
-    let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
+    let [valuesStateWait, setValuesStateWait] = useState(values)
 
     const [isActive, setActive] = useState(false);
 
-    const toggleClass = () => {
+    function toggleClass() {
         setActive(!isActive);
-        if (isActive) newDate(date)
+        if (isActive) newDate(dateMonth)
     };
 
     const innerRef = useOuterClick(ev => {
         if (isActive) {
             setActive(!isActive);
-            newDate(date)
+            newDate(dateMonth)
         }
     });
 
@@ -214,14 +210,13 @@ function IndividualPageInfo() {
                 }
             }
         );
-
         setValuesState(activeValues);
 
     };
 
     useEffect(() => {
-        let dateInput = dayNow()
-        setDate(dateInput)
+        let dateInput = monthNow()
+        setDateMonth(dateInput)
 
         let fetchNames = valuesState.map(i => {
             return complexRequest[i]
@@ -232,15 +227,15 @@ function IndividualPageInfo() {
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
-            return fetchRequest(dateInput, item)
+            return fetchRequestMonth(dateInput, item)
         }));
 
-        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
+        updateLoadDataMonth(stankiRequest, dateInput, complexNames, fetchNames)
 
     }, [])
 
     function newDate(dateInput) {
-        setDate(dateInput)
+        setDateMonth(dateInput)
         setValuesStateWait(valuesState)
 
         let fetchNames = valuesState.map(i => {
@@ -252,17 +247,35 @@ function IndividualPageInfo() {
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
-            return fetchRequest(dateInput, item)
+            return fetchRequestMonth(dateInput, item)
         }));
-        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
-
+        updateLoadDataMonth(stankiRequest, dateInput, complexNames, fetchNames)
     }
 
 
     return (
         <div>
+
+            <MenuStanki menuSelected=""/>
+
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/individualPage">
+                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/individualPageMonth">
+                    <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/individualPageSmena">
+                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
+
             <div className="energyCalendarContainer">
-                <DayCalendar newDate={newDate} date={date}/>
+                <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
                 <div
                     ref={innerRef}
                     className='menuSelect selectDevice'>
@@ -296,10 +309,8 @@ function IndividualPageInfo() {
                     </div>
                 </div>
             </div>
-            <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
+            <ComplexTotalMonthInfo/>
 
             {valuesStateWait.map((e, i) => {
                 return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
@@ -308,36 +319,10 @@ function IndividualPageInfo() {
                                             programs={complexName[e][3]} laser={complexName[e][4]}
                                             report={complexName[e][5]} current={complexName[e][6]}/>
             })}
-        </div>
-    )
-
-}
-
-function IndividualPage() {
-
-    return (
-        <div>
-
-            <MenuStanki menuSelected=""/>
-
-            <div className="buttons-otchet">
-
-                <Link to="/stanki/individualPage">
-                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/individualPageMonth">
-                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/individualPageSmena">
-                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
-                </Link>
-
-            </div>
-
-            <IndividualPageInfo/>
 
         </div>
     )
 }
+
+
+

@@ -45,7 +45,7 @@ function OtkSmena() {
     const innerRef = useOuterClick(ev => {
         if (isActive) {
             setActive(!isActive);
-            newDate(dateMonth)
+            newDate(date)
         }
     });
 

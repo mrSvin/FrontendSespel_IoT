@@ -1,4 +1,4 @@
-function IndividualPageInfo() {
+function IndividualPageSmena() {
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
@@ -179,10 +179,9 @@ function IndividualPageInfo() {
         (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) :window.localStorage['selectedObjects'].split(',').map(e=>{return (e=='true')})
     );
 
+    let [valuesState, setValuesState] = useState(values)
 
-    let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
-
-    let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
+    let [valuesStateWait, setValuesStateWait] = useState(values)
 
     const [isActive, setActive] = useState(false);
 
@@ -214,7 +213,6 @@ function IndividualPageInfo() {
                 }
             }
         );
-
         setValuesState(activeValues);
 
     };
@@ -231,14 +229,15 @@ function IndividualPageInfo() {
             return complexName[i]
         })
 
-        let stankiRequest = Promise.all(fetchNames.map((item) => {
-            return fetchRequest(dateInput, item)
+        let stankiRequest = Promise.all(fetchNames.map((item)=>{
+            return fetchRequestSmena(dateInput, item)
         }));
 
-        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
+        updateLoadSmenaData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }, [])
 
+    // Функция для изменения даты в календаре
     function newDate(dateInput) {
         setDate(dateInput)
         setValuesStateWait(valuesState)
@@ -251,16 +250,34 @@ function IndividualPageInfo() {
             return complexName[i]
         })
 
-        let stankiRequest = Promise.all(fetchNames.map((item) => {
-            return fetchRequest(dateInput, item)
+        let stankiRequest = Promise.all(fetchNames.map((item)=>{
+            return fetchRequestSmena(dateInput, item)
         }));
-        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
+        updateLoadSmenaData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
     }
-
 
     return (
         <div>
+
+            <MenuStanki menuSelected=""/>
+
+            <div className="buttons-otchet">
+
+                <Link to="/stanki/individualPage">
+                    <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/individualPageMonth">
+                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                </Link>
+
+                <Link to="/stanki/individualPageSmena">
+                    <div className="menuSelect">СМЕННЫЙ ОТЧЕТ</div>
+                </Link>
+
+            </div>
+
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
                 <div
@@ -296,14 +313,23 @@ function IndividualPageInfo() {
                     </div>
                 </div>
             </div>
-            <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                          complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
+            <div className='complexAllInfo'>
+                <div className='totalRound' id="containerTotal"></div>
+                <div className='countOperations' id='containerOperations'></div>
+            </div>
+
+            <div className='complexAllInfo'>
+                <div className='totalRound' id="containerTotal2"></div>
+                <div className='countOperations' id='containerOperations2'></div>
+            </div>
+
+            <SwitchLineSmenaHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                               complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
-                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
                                             service={complexName[e][1]} alarm={complexName[e][2]}
                                             programs={complexName[e][3]} laser={complexName[e][4]}
                                             report={complexName[e][5]} current={complexName[e][6]}/>
@@ -311,33 +337,4 @@ function IndividualPageInfo() {
         </div>
     )
 
-}
-
-function IndividualPage() {
-
-    return (
-        <div>
-
-            <MenuStanki menuSelected=""/>
-
-            <div className="buttons-otchet">
-
-                <Link to="/stanki/individualPage">
-                    <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/individualPageMonth">
-                    <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
-                </Link>
-
-                <Link to="/stanki/individualPageSmena">
-                    <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
-                </Link>
-
-            </div>
-
-            <IndividualPageInfo/>
-
-        </div>
-    )
 }
