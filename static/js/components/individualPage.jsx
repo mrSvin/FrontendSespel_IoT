@@ -1,62 +1,103 @@
 function IndividualPageInfo() {
 
+    function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
+
+        let fetchNames = valuesState.map(i => {
+            return complexRequest[i]
+        })
+        let complexNames = valuesState.map(i => {
+            return complexName[i][1]
+        })
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(date, item)
+        }));
+
+        if (stateLineHC == 'line') {
+            setStateLineHC('multiLine')
+            updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
+        } else {
+            setStateLineHC('line')
+            updateLoadData(stankiRequest, date, complexNames, fetchNames, 'line')
+        }
+
+
+    }
+
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
     let complexName = [
-        ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", null, "CRYSTA-Apex S9168"],
-        ["НК600", "НК600"],
-        ["УФ5220","УФ5220"],
-        ["СТП Сеспель", 'СТП Сеспель'],
-        ["NTX1000 2", "NTX1000 2"],
-        ["SK50",  'SK50'],
-        ["APEC", "APEC"],
-        ["DMU50 3", "DMU50 3"],
-        ["DMU50 4", "DMU50 4"],
-        ["CTX310 2",  'CTX310 2', 'CTX310 2'],
-        ["CTX510 2", "CTX510 2"],
-        ["CTX510 3", "CTX510 3"],
-        ["CTX310 3", "CTX310 3"],
-        ["CTX510 4",  'CTX510 4'],
-        ["CTX510 5", "CTX510 5"],
-        ["DMC1035 2", "DMC1035 2"],
-        ["DMU50 5", "DMU50 5"],
-        ["DMU50 6", "DMU50 6"],
-        ["DMU50 7", "DMU50 7"],
-        ["AR55", "AR55"],
-        ["Навигатор 1","Навигатор 1",  null,"Навигатор 1", "Навигатор 1"],
-        ["Навигатор 2", 'Навигатор 2', null, "Навигатор 2", "Навигатор 2"],
-        ["Навигатор 3", "Навигатор 3", null, "Навигатор 3", "Навигатор 3"],
-        ["TruLaser",  'TruLaser'],
-        ["Комета 1", "Комета 1"],
-        ["Комета 2", "Комета 2"],
-        ["Комета 3", "Комета 3"],
-        ["УВФ-1 1","УВФ-1 1"],
-        ["УВФ-1 2","УВФ-1 2"],
-        ["NTX1000","NTX1000","NTX1000"],
-        ["NLX3000","NLX3000","NLX3000"],
-        ["GAMMA2000","GAMMA2000","GAMMA2000"],
-        ["CTX650","CTX650","CTX650"],
-        ["DMF260","DMF260","DMF260"],
-        ["DMU50 1","DMU50 1","DMU50 1"],
-        ["DMU50 2","DMU50 2","DMU50 2"],
-        ["DMC1035","DMC1035","DMC1035"],
-        ["CTX310 1","CTX310 1","CTX310 1"],
-        ["CTX510 1","CTX510 1","CTX510 1"],
-        ["МАКС 1", "МАКС 1", null, "МАКС 1"],
-        ["МАКС 2", 'МАКС 2', null, 'МАКС 2'],
-        ["М710", "М710", null, "М710"],
-        ["РТК12C", 'РТК12C', null, 'РТК12C'],
-        ["P250", "P250", null, "P250"],
-        ["КРОТ", 'КРОТ', null, 'КРОТ'],
-        ["ПРАНС", "ПРАНС", null, "ПРАНС"],
-        ["Пресс ЧПУ для ступиц","Пресс ЧПУ для ступиц"],
-        ["ЭПП","ЭПП"],
-        ["СТП13М","СТП13М"],
-        ['Стенд для ресурсных испытаний','Стенд для ресурсных испытаний', null, null, null, 'Стенд','Стенд'],
-        ["Склад Мех. цеха","Склад Мех. цеха"],
-        ["Печь Индукционная", "Печь Индукционная"],
-        ["FACCIN 4","FACCIN 4"],
-        ["FACCIN 10","FACCIN 10"],
+        ['OTK',
+            ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", null, "CRYSTA-Apex S9168"],
+            ["НК600", "НК600"],
+        ],
+        ['Мех.уч.2.пл',
+            ["УФ5220","УФ5220"],
+            ["СТП Сеспель", 'СТП Сеспель'],
+            ["NTX1000 2", "NTX1000 2"],
+            ["SK50",  'SK50'],
+            ["APEC", "APEC"],
+            ["DMU50 3", "DMU50 3"],
+            ["DMU50 4", "DMU50 4"],
+            ["CTX310 2",  'CTX310 2', 'CTX310 2'],
+            ["CTX510 2", "CTX510 2"],
+            ["CTX510 3", "CTX510 3"],
+            ["CTX310 3", "CTX310 3"],
+            ["CTX510 4",  'CTX510 4'],
+            ["CTX510 5", "CTX510 5"],
+            ["DMC1035 2", "DMC1035 2"],
+            ["DMU50 5", "DMU50 5"],
+            ["DMU50 6", "DMU50 6"],
+            ["DMU50 7", "DMU50 7"],
+            ["AR55", "AR55"],
+        ],
+        ['Резка',
+            ["Навигатор 1","Навигатор 1",  null,"Навигатор 1", "Навигатор 1"],
+            ["Навигатор 2", 'Навигатор 2', null, "Навигатор 2", "Навигатор 2"],
+            ["Навигатор 3", "Навигатор 3", null, "Навигатор 3", "Навигатор 3"],
+            ["TruLaser",  'TruLaser'],
+            ["Комета 1", "Комета 1"],
+            ["Комета 2", "Комета 2"],
+            ["Комета 3", "Комета 3"],
+        ],
+        ['Мех.уч.1.пл',
+            ["УВФ-1 1","УВФ-1 1"],
+            ["УВФ-1 2","УВФ-1 2"],
+            ["NTX1000","NTX1000","NTX1000"],
+            ["NLX3000","NLX3000","NLX3000"],
+            ["GAMMA2000","GAMMA2000","GAMMA2000"],
+            ["CTX650","CTX650","CTX650"],
+            ["DMF260","DMF260","DMF260"],
+            ["DMU50 1","DMU50 1","DMU50 1"],
+            ["DMU50 2","DMU50 2","DMU50 2"],
+            ["DMC1035","DMC1035","DMC1035"],
+            ["CTX310 1","CTX310 1","CTX310 1"],
+            ["CTX510 1","CTX510 1","CTX510 1"],
+        ],
+        ['Роботы',
+            ["МАКС 1", "МАКС 1", null, "МАКС 1"],
+            ["МАКС 2", 'МАКС 2', null, 'МАКС 2'],
+            ["М710", "М710", null, "М710"],
+            ["РТК12C", 'РТК12C', null, 'РТК12C'],
+            ["P250", "P250", null, "P250"],
+            ["КРОТ", 'КРОТ', null, 'КРОТ'],
+            ["ПРАНС", "ПРАНС", null, "ПРАНС"],
+        ],
+        ['Спец. Комплексы',
+            ["Пресс ЧПУ для ступиц","Пресс ЧПУ для ступиц"],
+            ["ЭПП","ЭПП"],
+            ["СТП13М","СТП13М"],
+            ['Стенд для ресурсных испытаний','Стенд для ресурсных испытаний', null, null, null, 'Стенд','Стенд'],
+        ],
+        ['Склады',
+            ["Склад Мех. цеха","Склад Мех. цеха"],
+        ],
+        ['Литейка',
+            ["Печь Индукционная", "Печь Индукционная"],
+        ],
+        ['Гибка',
+            ["FACCIN 4","FACCIN 4"],
+            ["FACCIN 10","FACCIN 10"],
+        ],
     ]
 
     let complexImg = [
@@ -228,7 +269,7 @@ function IndividualPageInfo() {
         })
 
         let complexNames = valuesState.map(i => {
-            return complexName[i]
+            return complexName[i][1]
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
@@ -248,7 +289,7 @@ function IndividualPageInfo() {
         })
 
         let complexNames = valuesState.map(i => {
-            return complexName[i]
+            return complexName[i][1]
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
@@ -271,26 +312,80 @@ function IndividualPageInfo() {
                         <span>▼</span>
                         <ul className='toppings-list'
                             className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
-                            {complexName.map((name, index) => {
-                                return (
-                                    <li key={index}>
-                                        <div className="toppings-list-item">
-                                            <div className="left-section">
-                                                <input
-                                                    type="checkbox"
-                                                    id={`custom-checkbox-${index}`}
-                                                    name={name[0]}
-                                                    value={index}
-                                                    checked={selectedObjects[index]}
-                                                    onChange={() => handleOnChange(index)}
-                                                />
-                                                <label htmlFor={`custom-checkbox-${index}`}></label><span
-                                                className='spanList'>{name[0]}</span>
+
+                            {complexName.map((razdel, index)=>{
+                                console.log('Имя раздела', razdel[0])
+                                let copy = razdel.slice(1)
+                                let mainIndex = 0
+
+                                    return (
+                                        <li key={index}>
+                                            <div className="toppings-list-item">
+                                                <div className="left-section">
+                                                    <input
+                                                        type="checkbox"
+                                                        id={`custom-razdel-checkbox-${index}`}
+                                                        name={razdel[0]}
+                                                        value={index}
+                                                        // checked={selectedObjects[index]}
+                                                        // onChange={() => handleOnChange(index)}
+                                                    />
+                                                    <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                                    className='spanList'>{razdel[0]}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                );
-                            })}
+                                            <ul>
+                                                {copy.map((stanok,i)=>{
+                                                    let keyIndex = mainIndex
+                                                    mainIndex++
+                                                    console.log('     станок ', copy[i][0])
+                                                    return (
+                                                        <li key={keyIndex}>
+                                                            <div className="toppings-list-item">
+                                                                <div className="left-section">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        id={`custom-checkbox-${keyIndex}`}
+                                                                        name={stanok[0]}
+                                                                        value={keyIndex}
+                                                                        checked={selectedObjects[keyIndex]}
+                                                                        onChange={() => handleOnChange(keyIndex)}
+                                                                    />
+                                                                    <label htmlFor={`custom-checkbox-${keyIndex}`}></label><span
+                                                                    className='spanList'>{stanok[0]}</span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </li>
+                                    );
+
+                        })}
+
+                            {/*{complexName.map((name, index) => {*/}
+                            {/*    return (*/}
+                            {/*        <li key={index}>*/}
+                            {/*            <div className="toppings-list-item">*/}
+                            {/*                <div className="left-section">*/}
+                            {/*                    <input*/}
+                            {/*                        type="checkbox"*/}
+                            {/*                        id={`custom-checkbox-${index}`}*/}
+                            {/*                        name={name[0]}*/}
+                            {/*                        value={index}*/}
+                            {/*                        checked={selectedObjects[index]}*/}
+                            {/*                        onChange={() => handleOnChange(index)}*/}
+                            {/*                    />*/}
+                            {/*                    <label htmlFor={`custom-checkbox-${index}`}></label><span*/}
+                            {/*                    className='spanList'>{name[0]}</span>*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
+                            {/*        </li>*/}
+                            {/*    );*/}
+                            {/*})}*/}
+
+
                         </ul>
 
                     </div>
@@ -302,11 +397,11 @@ function IndividualPageInfo() {
                           complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSutkiAllInfo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                return <ComplexSutkiAllInfo key={i} complexName={complexName[e][1][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                            service={complexName[e][1]} alarm={complexName[e][2]}
-                                            programs={complexName[e][3]} laser={complexName[e][4]}
-                                            report={complexName[e][5]} current={complexName[e][6]}/>
+                                            service={complexName[e][1][1]} alarm={complexName[e][1][2]}
+                                            programs={complexName[e][1][3]} laser={complexName[e][1][4]}
+                                            report={complexName[e][1][5]} current={complexName[e][1][6]}/>
             })}
         </div>
     )
