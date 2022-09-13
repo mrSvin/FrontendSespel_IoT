@@ -3,13 +3,13 @@ function RobotsSmena() {
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
     let complexName = [
-        ["МАКС 1", "МАКС 1", null, "МАКС 1"],
-        ["МАКС 2", 'МАКС 2', null, 'МАКС 2'],
-        ["М710", "М710", null, "М710"],
-        ["РТК12C", 'РТК12C', null, 'РТК12C'],
-        ["P250", "P250", null, "P250"],
-        ["КРОТ", 'КРОТ', null, 'КРОТ'],
-        ["ПРАНС", "ПРАНС", null, "ПРАНС"],
+        ["МАКС 1", "МАКС 1", null, "МАКС 1smena"],
+        ["МАКС 2", 'МАКС 2', null, 'МАКС 2smena'],
+        ["М710", "М710", null, "М710smena"],
+        ["РТК12C", 'РТК12C', null, 'РТК12Csmena'],
+        ["P250", "P250", null, "P250smena"],
+        ["КРОТ", 'КРОТ', null, 'КРОТsmena'],
+        ["ПРАНС", "ПРАНС", null, "ПРАНСsmena"],
     ]
 
     let complexImg = ["../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot.png", "../images/robot_p250.png", "../images/robot.png", "../images/robot.png"]
