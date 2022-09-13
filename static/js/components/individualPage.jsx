@@ -361,7 +361,7 @@ function IndividualPageInfo() {
                                             <div className="left-section">
                                                 <input
                                                     type="checkbox"
-                                                    id={`custom-checkbox-${index}`}
+                                                    id={`custom-checkbox-category-${index}`}
                                                     name={razdel[0]}
                                                     value={index}
                                                     checked={selectedCategory[index]}
@@ -370,7 +370,7 @@ function IndividualPageInfo() {
                                                     }
                                                     }
                                                 />
-                                                <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                                <label htmlFor={`custom-checkbox-category${index}`}></label><span
                                                 className='spanList'>{razdel[0]}</span>
                                             </div>
                                         </div>
@@ -413,7 +413,7 @@ function IndividualPageInfo() {
                           complexName={complexNameOld} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]}
+                return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
                                             service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
                                             programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}

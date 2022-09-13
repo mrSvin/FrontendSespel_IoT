@@ -200,6 +200,7 @@ input:checked + .slider:before {
     border: 1px solid #83addd;
     width: 100%;
     position: relative;
+    list-style: none;
 }
 
 .listComplex {
