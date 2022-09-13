@@ -1,27 +1,14 @@
 function IndividualPageInfo() {
 
-    // function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
-    //
-    //     let fetchNames = valuesState.map(i => {
-    //         return complexRequest[i]
-    //     })
-    //     let complexNames = valuesState.map(i => {
-    //         return complexName[i][1]
-    //     })
-    //     let stankiRequest = Promise.all(fetchNames.map((item) => {
-    //         return fetchRequest(date, item)
-    //     }));
-    //
-    //     if (stateLineHC == 'line') {
-    //         setStateLineHC('multiLine')
-    //         updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
-    //     } else {
-    //         setStateLineHC('line')
-    //         updateLoadData(stankiRequest, date, complexNames, fetchNames, 'line')
-    //     }
-    //
-    //
-    // }
+    function changeMainList(mainList, selectedObjects) {
+        let index = 0
+        for(let i=0; i<mainList.length; i++){
+            for (let j=0; j<mainList[i][1]; j++){
+                selectedObjects[index] = mainList[i][0]
+                index++
+            }
+        }
+    }
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
@@ -99,63 +86,14 @@ function IndividualPageInfo() {
             ["FACCIN 10","FACCIN 10"],
         ],
     ]
+    let complexNameOld = []
 
-    let complexNameOld = [
-        ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", null, "CRYSTA-Apex S9168"],
-        ["НК600", "НК600"],
-        ["УФ5220","УФ5220"],
-        ["СТП Сеспель", 'СТП Сеспель'],
-        ["NTX1000 2", "NTX1000 2"],
-        ["SK50",  'SK50'],
-        ["APEC", "APEC"],
-        ["DMU50 3", "DMU50 3"],
-        ["DMU50 4", "DMU50 4"],
-        ["CTX310 2",  'CTX310 2', 'CTX310 2'],
-        ["CTX510 2", "CTX510 2"],
-        ["CTX510 3", "CTX510 3"],
-        ["CTX310 3", "CTX310 3"],
-        ["CTX510 4",  'CTX510 4'],
-        ["CTX510 5", "CTX510 5"],
-        ["DMC1035 2", "DMC1035 2"],
-        ["DMU50 5", "DMU50 5"],
-        ["DMU50 6", "DMU50 6"],
-        ["DMU50 7", "DMU50 7"],
-        ["AR55", "AR55"],
-        ["Навигатор 1","Навигатор 1",  null,"Навигатор 1", "Навигатор 1"],
-        ["Навигатор 2", 'Навигатор 2', null, "Навигатор 2", "Навигатор 2"],
-        ["Навигатор 3", "Навигатор 3", null, "Навигатор 3", "Навигатор 3"],
-        ["TruLaser",  'TruLaser'],
-        ["Комета 1", "Комета 1"],
-        ["Комета 2", "Комета 2"],
-        ["Комета 3", "Комета 3"],
-        ["УВФ-1 1","УВФ-1 1"],
-        ["УВФ-1 2","УВФ-1 2"],
-        ["NTX1000","NTX1000","NTX1000"],
-        ["NLX3000","NLX3000","NLX3000"],
-        ["GAMMA2000","GAMMA2000","GAMMA2000"],
-        ["CTX650","CTX650","CTX650"],
-        ["DMF260","DMF260","DMF260"],
-        ["DMU50 1","DMU50 1","DMU50 1"],
-        ["DMU50 2","DMU50 2","DMU50 2"],
-        ["DMC1035","DMC1035","DMC1035"],
-        ["CTX310 1","CTX310 1","CTX310 1"],
-        ["CTX510 1","CTX510 1","CTX510 1"],
-        ["МАКС 1", "МАКС 1", null, "МАКС 1"],
-        ["МАКС 2", 'МАКС 2', null, 'МАКС 2'],
-        ["М710", "М710", null, "М710"],
-        ["РТК12C", 'РТК12C', null, 'РТК12C'],
-        ["P250", "P250", null, "P250"],
-        ["КРОТ", 'КРОТ', null, 'КРОТ'],
-        ["ПРАНС", "ПРАНС", null, "ПРАНС"],
-        ["Пресс ЧПУ для ступиц","Пресс ЧПУ для ступиц"],
-        ["ЭПП","ЭПП"],
-        ["СТП13М","СТП13М"],
-        ['Стенд для ресурсных испытаний','Стенд для ресурсных испытаний', null, null, null, 'Стенд','Стенд'],
-        ["Склад Мех. цеха","Склад Мех. цеха"],
-        ["Печь Индукционная", "Печь Индукционная"],
-        ["FACCIN 4","FACCIN 4"],
-        ["FACCIN 10","FACCIN 10"],
-    ]
+    complexName.forEach(e=>{
+        let array = e.slice(1)
+        array.forEach(i=>{
+            complexNameOld.push(i)
+        })
+    })
 
     let complexImg = [
         "../images/crystal_apex.png", "../images/nk600.png", "../images/UVF_5220.png",
@@ -269,22 +207,29 @@ function IndividualPageInfo() {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    // if(localStorage['selectedObjects'] == undefined) {
-    //     localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
-    // }
-    // // Состояния чекбоксов станков
-    // let [selectedObjects, setSelectedObjects] = useState(
-    //     (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) :window.localStorage['selectedObjects'].split(',').map(e=>{return (e=='true')})
-    // );
+    if(localStorage['selectedObjects'] == undefined) {
+        localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
+    }
 
+    if(localStorage['selectedCategory'] == undefined) {
+        localStorage['selectedCategory'] = new Array(complexName.length).fill(false)
+    }
 
-    // let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
-    //
-    // let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
+    // Состояния чекбоксов станков
+    let [selectedCategory, setSelectedCategory] = useState(
+        (localStorage['selectedCategory'] == undefined)? new Array(complexName.length).fill(false) :window.localStorage['selectedCategory'].split(',').map(e=>{
+            return (e =='true')
+        })
+    );
 
-    let [valuesState, setValuesState] = useState(values)
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) :window.localStorage['selectedObjects'].split(',').map(e=>{return (e=='true')})
+    );
 
-    let [valuesStateWait, setValuesStateWait] = useState(values)
+    let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
+
+    let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
 
     const [isActive, setActive] = useState(false);
 
@@ -300,12 +245,41 @@ function IndividualPageInfo() {
         }
     });
 
+    const handleOnChangeCategory = (position) => {
+        const updatedCheckedState = selectedCategory.map((item, index) => {
+            return index === position ? !item : item;
+        });
+
+        window.localStorage['selectedCategory'] = updatedCheckedState
+        setSelectedCategory(updatedCheckedState)
+
+        let mainList = complexName.map((e, i)=>{
+            return [updatedCheckedState[i], e.length-1]
+        })
+
+        changeMainList(mainList, selectedObjects)
+
+        const activeValues = []
+        selectedObjects.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(index);
+                }
+            }
+        );
+
+        console.log('values in', activeValues)
+        window.localStorage['selectedObjects'] = selectedObjects
+        setValuesState(activeValues);
+    };
     const handleOnChange = (position) => {
         const updatedCheckedState = selectedObjects.map((item, index) => {
             return index === position ? !item : item;
         });
 
-        // window.localStorage['selectedObjects'] = updatedCheckedState
+        console.log('Внутри update', updatedCheckedState)
+
+        window.localStorage['selectedObjects'] = updatedCheckedState
         setSelectedObjects(updatedCheckedState)
 
         const activeValues = []
@@ -317,9 +291,13 @@ function IndividualPageInfo() {
             }
         );
 
+        console.log('values in', activeValues)
+
         setValuesState(activeValues);
 
     };
+
+    let keyIndex = 0
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -375,77 +353,55 @@ function IndividualPageInfo() {
                             className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
 
                             {complexName.map((razdel, index)=>{
-                                console.log('Имя раздела', razdel[0])
                                 let copy = razdel.slice(1)
 
-                                    return (
-                                        <li key={index}>
-                                            <div className="toppings-list-item">
-                                                <div className="left-section">
-                                                    <input
-                                                        type="checkbox"
-                                                        id={`custom-checkbox-${index}`}
-                                                        name={razdel[0]}
-                                                        value={index}
-                                                        // checked={selectedObjects[index]}
-                                                        // onChange={() => handleOnChange(index)}
-                                                    />
-                                                    <label htmlFor={`custom-checkbox-${index}`}></label><span
-                                                    className='spanList'>{razdel[0]}</span>
-                                                </div>
+                                return (
+                                    <li key={index}>
+                                        <div className="toppings-list-item">
+                                            <div className="left-section">
+                                                <input
+                                                    type="checkbox"
+                                                    id={`custom-checkbox-${index}`}
+                                                    name={razdel[0]}
+                                                    value={index}
+                                                    checked={selectedCategory[index]}
+                                                    onChange={() => {
+                                                        handleOnChangeCategory(index)
+                                                    }
+                                                    }
+                                                />
+                                                <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                                className='spanList'>{razdel[0]}</span>
                                             </div>
-                                            <ul>
-                                                {copy.map((stanok,i)=>{
-                                                    console.log('     станок ', copy[i][0])
-                                                    let key_ = `${index}${i}`
-                                                    return (
-                                                        <li key={key_}>
-                                                            <div className="toppings-list-item">
-                                                                <div className="left-section">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        id={`custom-checkbox-${index}${i}`}
-                                                                        name={stanok[0]}
-                                                                        value={`${index}${i}`}
-                                                                        // checked={selectedObjects[keyIndex]}
-                                                                        // onChange={() => handleOnChange(keyIndex)}
-                                                                    />
-                                                                    <label htmlFor={`custom-checkbox-${index}${i}`}></label><span
-                                                                    className='spanList'>{stanok[0]}</span>
-                                                                </div>
+                                        </div>
+                                        <ul>
+                                            {copy.map((stanok,i)=>{
+                                                let saveIndex = keyIndex++
+                                                return (
+                                                    <li key={saveIndex}>
+                                                        <div className="toppings-list-item">
+                                                            <div className="left-section">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    id={`custom-checkbox-${saveIndex}`}
+                                                                    name={stanok[0]}
+                                                                    value={`${saveIndex}`}
+                                                                    checked={selectedObjects[saveIndex]}
+                                                                    onChange={() => {
+                                                                        handleOnChange(saveIndex)}}
+                                                                />
+                                                                <label htmlFor={`custom-checkbox-${saveIndex}`}></label><span
+                                                                className='spanList'>{stanok[0]}</span>
                                                             </div>
-                                                            <span>{stanok[0]}</span>
-                                                        </li>
-                                                    )
-                                                })}
-                                            </ul>
-                                        </li>
-                                    );
+                                                        </div>
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </li>
+                                );
 
-                        })}
-
-                            {/*{complexName.map((name, index) => {*/}
-                            {/*    return (*/}
-                            {/*        <li key={index}>*/}
-                            {/*            <div className="toppings-list-item">*/}
-                            {/*                <div className="left-section">*/}
-                            {/*                    <input*/}
-                            {/*                        type="checkbox"*/}
-                            {/*                        id={`custom-checkbox-${index}`}*/}
-                            {/*                        name={name[0]}*/}
-                            {/*                        value={index}*/}
-                            {/*                        checked={selectedObjects[index]}*/}
-                            {/*                        onChange={() => handleOnChange(index)}*/}
-                            {/*                    />*/}
-                            {/*                    <label htmlFor={`custom-checkbox-${index}`}></label><span*/}
-                            {/*                    className='spanList'>{name[0]}</span>*/}
-                            {/*                </div>*/}
-                            {/*            </div>*/}
-                            {/*        </li>*/}
-                            {/*    );*/}
-                            {/*})}*/}
-
-
+                            })}
                         </ul>
 
                     </div>
@@ -457,7 +413,7 @@ function IndividualPageInfo() {
                           complexName={complexNameOld} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]} complexImg={complexImg[e]}
+                return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
                                             service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
                                             programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}
