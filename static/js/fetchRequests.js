@@ -163,7 +163,7 @@ function fetchRequestCurrent(complexName, setDataReportState) {
             date = new Date(date).toISOString().slice(0, 10) + ' ' + new Date(date).toISOString().slice(11, 19)
 
 
-            let dataReport = [data.requestWriteDB, data.prodNum, data.actNum, data.resultR, Name, data.authorId, data.workMode, data.maxDeformation, data.ostDeformation, data.actForce1R, data.actForce2R, data.needForce, date]
+            let dataReport = [data.requestWriteDB, data.numberProd, data.actNum, data.resultR, Name, data.authorId, data.workMode, data.maxDeformation, data.ostDeformation, data.actForce1R, data.actForce2R, data.needForce, date]
             setDataReportState([
                 [
                     'Регистр состояния записи на сервер', 'Номер изделия', 'Номер акта', 'Результат',
