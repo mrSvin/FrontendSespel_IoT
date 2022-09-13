@@ -362,7 +362,7 @@ function IndividualPageInfo() {
                                 console.log('Этот паддинг = ',paddingNow)
 
                                 // function HelloWorldComponent() {
-                                //     return <div style={divStyle}>Привет, мир!</div>;
+                                //     return <div style={paddingNow}>Привет, мир!</div>;
                                 // }
 
                                 return (
@@ -380,7 +380,7 @@ function IndividualPageInfo() {
                                                     }
                                                     }
                                                 />
-                                                <label htmlFor={`custom-checkbox-category-${index}`}></label><span
+                                                <label style={paddingNow} htmlFor={`custom-checkbox-category-${index}`}></label><span
                                                 className='spanList'>{razdel[0]}</span>
                                             </div>
                                         </div>
@@ -388,7 +388,7 @@ function IndividualPageInfo() {
                                             {copy.map((stanok,i)=>{
                                                 let saveIndex = keyIndex++
                                                 return (
-                                                    <li key={saveIndex}>
+                                                    <li key={saveIndex} className='individualLi'>
                                                         <div className="toppings-list-item">
                                                             <div className="left-section">
                                                                 <input

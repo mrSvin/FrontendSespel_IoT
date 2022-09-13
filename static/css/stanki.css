@@ -1,4 +1,3 @@
-/*ÃƒÆ’Ã‚ÂÃƒâ€¦Ã‚Â¾ÃƒÆ’Ã¢â‚¬ËœÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚ÂºÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â»ÃƒÆ’Ã¢â‚¬ËœÃƒâ€¦Ã‚Â½ÃƒÆ’Ã¢â‚¬ËœÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â¸ÃƒÆ’Ã¢â‚¬ËœÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬ËœÃƒâ€¦Ã¢â‚¬â„¢ ÃƒÆ’Ã¢â‚¬ËœÃƒâ€šÃ‚ÂÃƒÆ’Ã‚ÂÃƒâ€šÃ‚ÂºÃƒÆ’Ã¢â‚¬ËœÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â¾ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â» ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â¿ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â¾ ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â³ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â¾ÃƒÆ’Ã¢â‚¬ËœÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â¸ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â·ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â¾ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â½ÃƒÆ’Ã¢â‚¬ËœÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â°ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â»ÃƒÆ’Ã‚ÂÃƒâ€šÃ‚Â¸*/
 body {
     overflow-x:hidden;
 }
@@ -173,7 +172,7 @@ input:checked + .slider:before {
     margin: auto;
     position: absolute;
     flex-direction: column;
-    background-color: #83addd;
+    background-color: #ffffff;
     width: 500px;
     color: black;
     position: absolute;
@@ -184,10 +183,11 @@ input:checked + .slider:before {
     transition: max-height 0.2s ease-in;
     /* overflow-y: auto; */
     overflow-x: hidden;
+    padding-bottom: 0;
 }
 
 .toppings-list-visible {
-    max-height: 400px;
+    max-height: 360px;
     transition: max-height 0.5s ease-in;
 }
 
@@ -201,6 +201,7 @@ input:checked + .slider:before {
     width: 100%;
     position: relative;
     list-style: none;
+    overflow: hidden;
 }
 
 .listComplex {
@@ -259,6 +260,10 @@ input:checked + .slider:before {
     background: #bdd2ed;
 }
 
+.individualLi:hover {
+    background: #b1c9e7;
+}
+
 .left-section > input {
     height: 17px;
     width: 17px;
@@ -272,6 +277,7 @@ input:checked + .slider:before {
     pointer-events: none;
     white-space: nowrap;
     text-shadow: none;
+    padding-bottom: 66px;
 }
 
 .selectDevice {
