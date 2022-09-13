@@ -308,7 +308,7 @@ function IndividualPageInfo() {
         })
 
         let complexNames = valuesState.map(i => {
-            return complexName[i][1]
+            return complexNameOld[i]
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
@@ -328,7 +328,7 @@ function IndividualPageInfo() {
         })
 
         let complexNames = valuesState.map(i => {
-            return complexName[i][1]
+            return complexNameOld[i]
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
