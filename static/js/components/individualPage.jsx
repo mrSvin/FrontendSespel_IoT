@@ -268,7 +268,7 @@ function IndividualPageInfo() {
             }
         );
 
-        console.log('values in', activeValues)
+        // console.log('values in', activeValues)
         window.localStorage['selectedObjects'] = selectedObjects
         setValuesState(activeValues);
     };
@@ -277,7 +277,7 @@ function IndividualPageInfo() {
             return index === position ? !item : item;
         });
 
-        console.log('Внутри update', updatedCheckedState)
+        // console.log('Внутри update', updatedCheckedState)
 
         window.localStorage['selectedObjects'] = updatedCheckedState
         setSelectedObjects(updatedCheckedState)
@@ -291,7 +291,7 @@ function IndividualPageInfo() {
             }
         );
 
-        console.log('values in', activeValues)
+        // console.log('values in', activeValues)
 
         setValuesState(activeValues);
 
@@ -355,6 +355,16 @@ function IndividualPageInfo() {
                             {complexName.map((razdel, index)=>{
                                 let copy = razdel.slice(1)
 
+                                let paddingNow = {
+                                    paddingBottom:  30 * copy.length + 6
+                                };
+
+                                console.log('Этот паддинг = ',paddingNow)
+
+                                // function HelloWorldComponent() {
+                                //     return <div style={divStyle}>Привет, мир!</div>;
+                                // }
+
                                 return (
                                     <li key={index}>
                                         <div className="toppings-list-item">
@@ -370,7 +380,7 @@ function IndividualPageInfo() {
                                                     }
                                                     }
                                                 />
-                                                <label htmlFor={`custom-checkbox-category${index}`}></label><span
+                                                <label htmlFor={`custom-checkbox-category-${index}`}></label><span
                                                 className='spanList'>{razdel[0]}</span>
                                             </div>
                                         </div>
