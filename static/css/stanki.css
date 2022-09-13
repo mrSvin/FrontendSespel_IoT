@@ -261,7 +261,7 @@ input:checked + .slider:before {
 }
 
 .individualLi:hover {
-    background: #b1c9e7;
+    background: #88b3e9!important;
 }
 
 .left-section > input {
