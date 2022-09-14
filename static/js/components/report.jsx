@@ -86,7 +86,7 @@ function UsersMenuResource() {
     const [formID, setformID] = useState('');
     const [formTabel, setformTabel] = useState('');
 
-    const [usersData, setUsersData] = useState(['', ''])
+    const [usersData, setUsersData] = useState([])
 
     const toggleClass = () => {
         if (isActive) {
@@ -109,7 +109,7 @@ function UsersMenuResource() {
         let data = fetchGetReSourceUsers()
         let dataResolve = Promise.resolve(data);
         dataResolve.then(e => {
-            let idTableArray = e.map(i => {
+            let idTableArray = e.operators.map(i => {
                 return [i.authorId, i.tabel]
             })
             console.log(idTableArray)
