@@ -126,14 +126,14 @@ function UsersMenuResource() {
     }, [])
 
     return (
+        <div>
+        <button className='usersMenuResourceButton'
+                onClick={() => {
+                    toggleClass()
+                }}>Пользователи
+        </button>
         <div ref={innerRef} className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
-            <button className='usersMenuResourceButton'
-                    onClick={() => {
-                        toggleClass()
-                    }}>Пользователи
-            </button>
             <div className='divFormTable' style={{display: 'flex', position: 'relative', width: '100%'}}>
-
                 <form className={!formAdd ? 'formAddUser formAddUserHide' : 'formAddUser'}>
                     <label htmlFor="">ID оператора</label>
                     <input onChange={e => {
@@ -222,6 +222,7 @@ function UsersMenuResource() {
                  }}>
                 <span>+</span>
             </div>
+        </div>
         </div>
     )
 }
