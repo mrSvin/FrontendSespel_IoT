@@ -78,9 +78,10 @@ function TableReportBody({dataReportState}) {
 function UsersMenuResource() {
 
     const [userRole, setUserRole] = useState('user')
-
     const [isActive, setActive] = useState(false);
     const [formAdd, setFormAdd] = useState(false);
+
+    const [message, setMessage] = useState('Пустое сообщение');
 
     const [formID, setformID] = useState('');
     const [formTabel, setformTabel] = useState('');
@@ -170,8 +171,12 @@ function UsersMenuResource() {
                                         newUser.push([formID, formTabel])
                                         setUsersData(newUser)
                                         fetchAddReSourceUser(formID, formTabel, userRole)
+                                        setMessage('Пользователь успешно добавлен')
                                     }
-                                    else alert('Недостаточно прав для добавления пользователя')
+                                    else {
+                                        setMessage('Недостаточно прав')
+                                        alert('Недостаточно прав для добавления пользователя')
+                                    }
                                 }
 
 
@@ -202,13 +207,16 @@ function UsersMenuResource() {
                                         fetchDeleteReSourceUser(usersData[i][0], userRole)
                                         let deleteUser = usersData
                                         deleteUser.splice(i, 1)
+                                        setMessage('Пользователь успешно удален')
                                         setUsersData(deleteUser)
                                         toggleClass()
                                     } else {
                                         console.log('Ничего');
                                     }
                                 }
-                                else alert('Недостаточно прав для добавления пользователя')
+                                else {
+                                    setMessage('Недостаточно прав')
+                                }
                             }}>{'—'}</td>
                         </tr>)
                     })}
@@ -216,6 +224,7 @@ function UsersMenuResource() {
                     </tbody>
                 </table>
             </div>
+            <p>{message}</p>
             <div className={!isActive ? 'hiddenAddButton addButton' : 'addButton'}
                  onClick={() => {
                      toggleForm()
