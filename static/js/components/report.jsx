@@ -81,7 +81,7 @@ function UsersMenuResource() {
     const [isActive, setActive] = useState(false);
     const [formAdd, setFormAdd] = useState(false);
 
-    const [message, setMessage] = useState('Пустое сообщение');
+    const [message, setMessage] = useState('');
 
     const [formID, setformID] = useState('');
     const [formTabel, setformTabel] = useState('');
@@ -224,7 +224,7 @@ function UsersMenuResource() {
                     </tbody>
                 </table>
             </div>
-            <p>{message}</p>
+            <p className={!isActive ? 'hideMessage' : ''} >{message}</p>
             <div className={!isActive ? 'hiddenAddButton addButton' : 'addButton'}
                  onClick={() => {
                      toggleForm()

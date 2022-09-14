@@ -402,6 +402,7 @@ input:checked + .slider:before {
 .hiddenAddButton {
     max-height: 0 !important;
     transition: max-height 0.5s ease-in;
+    visibility: hidden;
     opacity: 0;
 }
 
@@ -457,6 +458,11 @@ input:checked + .slider:before {
 }
 
 .formAddUserHide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.hideMessage {
     opacity: 0;
     visibility: hidden;
 }
