@@ -241,11 +241,6 @@ function fetchGetReSourceUsers() {
 function fetchAddReSourceUser(authorId, tabel, userRole='user') {
     if (userRole == "ROLE_ADMIN") {
 
-        let raw = JSON.stringify({
-            "authorId": authorId,
-            "tabel": tabel,
-        });
-
         let serverDomain = window.location.hostname
         let serverPort = window.location.port
         let url = `http://${serverDomain}:${serverPort}/api/addOperator/authorId:${authorId}_tabel:${tabel}`
@@ -265,14 +260,9 @@ function fetchAddReSourceUser(authorId, tabel, userRole='user') {
 function fetchDeleteReSourceUser(authorId, tabel, userRole='user') {
     if (userRole == "ROLE_ADMIN") {
 
-        let raw = JSON.stringify({
-            "authorId": authorId,
-            "tabel": tabel,
-        });
-
         let serverDomain = window.location.hostname
         let serverPort = window.location.port
-        let url = `http://${serverDomain}:${serverPort}/api/addOperator/authorId:${authorId}_tabel:${tabel}`
+        let url = `http://${serverDomain}:${serverPort}/api/deleteOperator/authorId:${authorId}_tabel:${tabel}`
 
         fetch(url, {method: 'POST'})
             .then(response => response.text())
