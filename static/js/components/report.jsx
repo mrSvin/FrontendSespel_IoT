@@ -3,81 +3,82 @@ function Report() {
     let imgComplex = ["../images/stendResource.png"]
     let complexRequest = 'modbusData'
 
-    let bata = [[53276, 1234], [265754, 1432]]
+    // let bata = [[53276, 1234], [265754, 1432]]
 
     let [dataReportState, setDataReportState] = useState([])
 
     useEffect(() => {
         fetchRequestReport(complexRequest, setDataReportState)
-        },[])
+    }, [])
 
-    return(
-    <div className='serviceContainer'>
-        <h1>Отчеты о ресурсных испытаниях {nameToFetch + 'а'}</h1>
-        <UsersMenuResource data={bata}/>
-        <div className='blockImage'>
-            <img className="serviceImg " src={imgComplex}/>
+    return (
+        <div className='serviceContainer'>
+            <h1>Отчеты о ресурсных испытаниях {nameToFetch + 'а'}</h1>
+            <UsersMenuResource/>
+            <div className='blockImage'>
+                <img className="serviceImg " src={imgComplex}/>
+            </div>
+            <table className="tableReport" id='tableReport'>
+                <thead>
+                <tr>
+                    <th>Номер акта</th>
+                    <th>Номер чертежа изделия</th>
+                    <th>Номер изделия</th>
+                    <th>Требуемая сила воздействия, т</th>
+                    <th>Фактическая приложенная сила (датчик 1), т</th>
+                    <th>Фактическая приложенная сила (датчик 2), т</th>
+                    <th>Максимальная деформация, мкм</th>
+                    <th>Остаточная деформация, мкм</th>
+                    <th>Годность</th>
+                    <th>Автор испытания</th>
+                    <th>Дата/время</th>
+                </tr>
+                </thead>
+                <TableReportBody dataReportState={dataReportState}/>
+            </table>
+            <img className="excelIcon" id="button-excel"
+                 src="../../images/excel_icon.png"
+                 onClick={() => {
+                     TableToExcel.convert(document.getElementById('tableReport'), {
+                         name: `Отчет_${timeNow().slice(2).replaceAll(':', '')}.xlsx`,
+                         sheet: {
+                             name: "Sheet 1"
+                         }
+                     });
+                 }}
+            />
         </div>
-        <table className="tableReport" id='tableReport'>
-        <thead>
-        <tr>
-            <th>Номер акта</th>
-            <th>Номер чертежа изделия</th>
-            <th>Номер изделия</th>
-            <th>Требуемая сила воздействия, т</th>
-            <th>Фактическая приложенная сила (датчик 1), т</th>
-            <th>Фактическая приложенная сила (датчик 2), т</th>
-            <th>Максимальная деформация, мкм</th>
-            <th>Остаточная деформация, мкм</th>
-            <th>Годность</th>
-            <th>Автор испытания</th>
-            <th>Дата/время</th>
-        </tr>
-        </thead>
-            <TableReportBody dataReportState={dataReportState}/>
-    </table>
-        <img className="excelIcon" id="button-excel"
-             src="../../images/excel_icon.png"
-             onClick={() => {
-                 TableToExcel.convert(document.getElementById('tableReport'), {
-                     name: `Отчет_${timeNow().slice(2).replaceAll(':','')}.xlsx`,
-                     sheet: {
-                         name: "Sheet 1"
-                     }
-                 });
-             }}
-        />
-    </div>
     )
 }
 
 function TableReportBody({dataReportState}) {
     return (
-    <tbody>
-    {dataReportState.map((val,i) => {
-        return (
-            <tr key={i}>
-                <td>{val[0]}</td>
-                <td>{val[1]}</td>
-                <td>{val[2]}</td>
-                <td>{val[3]}</td>
-                <td>{val[4]}</td>
-                <td>{val[5]}</td>
-                <td>{val[6]}</td>
-                <td>{val[7]}</td>
-                <td>{val[8]}</td>
-                <td>{val[9]}</td>
-                <td>{val[10]}</td>
-            </tr>
-        )
-    })}
-    </tbody>
+        <tbody>
+        {dataReportState.map((val, i) => {
+            return (
+                <tr key={i}>
+                    <td>{val[0]}</td>
+                    <td>{val[1]}</td>
+                    <td>{val[2]}</td>
+                    <td>{val[3]}</td>
+                    <td>{val[4]}</td>
+                    <td>{val[5]}</td>
+                    <td>{val[6]}</td>
+                    <td>{val[7]}</td>
+                    <td>{val[8]}</td>
+                    <td>{val[9]}</td>
+                    <td>{val[10]}</td>
+                </tr>
+            )
+        })}
+        </tbody>
     )
 }
 
-function UsersMenuResource(data) {
+function UsersMenuResource() {
 
-    data = (data.data == undefined) ? ['', ''] : data.data
+    // data = (data.data == undefined) ? ['', ''] : data.data
+
 
     const [isActive, setActive] = useState(false);
     const [formAdd, setFormAdd] = useState(false);
@@ -85,7 +86,7 @@ function UsersMenuResource(data) {
     const [formID, setformID] = useState('');
     const [formTabel, setformTabel] = useState('');
 
-    const [usersData, setUsersData] = useState(data)
+    const [usersData, setUsersData] = useState(['', ''])
 
     const toggleClass = () => {
         if (isActive) {
@@ -103,6 +104,20 @@ function UsersMenuResource(data) {
             setActive(!isActive);
         }
     });
+
+    useEffect(() => {
+        let data = fetchGetReSourceUsers()
+        let dataResolve = Promise.resolve(data);
+        dataResolve.then(e => {
+            let idTableArray = e.map(i => {
+                return [i.authorId, i.tabel]
+            })
+            console.log(idTableArray)
+            setUsersData(idTableArray)
+        })
+
+
+    }, [])
 
     return (
         <div ref={innerRef} className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
@@ -173,7 +188,7 @@ function UsersMenuResource(data) {
                             <td onClick={() => {
                                 console.log(`Удалить ${i} пользователя`)
                                 let deleteUser = usersData
-                                deleteUser.splice(i,1)
+                                deleteUser.splice(i, 1)
                                 setUsersData(deleteUser)
                                 toggleClass()
                             }}>{'—'}</td>
@@ -191,4 +206,16 @@ function UsersMenuResource(data) {
             </div>
         </div>
     )
+}
+
+function fetchGetReSourceUsers() {
+    let serverDomain = window.location.hostname
+    let serverPort = window.location.port
+    let url = `http://${serverDomain}:${serverPort}/api/operatorInfo`
+
+    return fetch(url, {method: 'POST'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
 }
