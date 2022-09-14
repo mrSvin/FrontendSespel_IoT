@@ -199,7 +199,7 @@ function UsersMenuResource() {
                                 if(userRole=='ROLE_ADMIN'){
                                     if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
                                         console.log(`Удалить ${i} пользователя`)
-                                        fetchDeleteReSourceUser(usersData[i][0], usersData[i][1], userRole)
+                                        fetchDeleteReSourceUser(usersData[i][0], userRole)
                                         let deleteUser = usersData
                                         deleteUser.splice(i, 1)
                                         setUsersData(deleteUser)
@@ -257,13 +257,13 @@ function fetchAddReSourceUser(authorId, tabel, userRole='user') {
     else alert('Недостаточно прав')
 }
 
-function fetchDeleteReSourceUser(authorId, tabel, userRole='user') {
+function fetchDeleteReSourceUser(authorId, userRole='user') {
     console.log(authorId, tabel)
     if (userRole == "ROLE_ADMIN") {
 
         let serverDomain = window.location.hostname
         let serverPort = window.location.port
-        let url = `http://${serverDomain}:${serverPort}/api/deleteOperator/authorId:${authorId}_tabel:${tabel}`
+        let url = `http://${serverDomain}:${serverPort}/api/deleteOperator/authorId:${authorId}`
 
         fetch(url, {method: 'POST'})
             .then(response => response.text())
