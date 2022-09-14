@@ -258,14 +258,13 @@ function fetchAddReSourceUser(authorId, tabel, userRole='user') {
 }
 
 function fetchDeleteReSourceUser(authorId, userRole='user') {
-    console.log(authorId, tabel)
     if (userRole == "ROLE_ADMIN") {
 
         let serverDomain = window.location.hostname
         let serverPort = window.location.port
         let url = `http://${serverDomain}:${serverPort}/api/deleteOperator/authorId:${authorId}`
 
-        fetch(url, {method: 'POST'})
+        fetch(url, {method: 'DELETE'})
             .then(response => response.text())
             .then(result => {
                 if (result === 'ok') {
