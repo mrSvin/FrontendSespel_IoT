@@ -130,7 +130,7 @@ function UsersMenuResource() {
         <button className='usersMenuResourceButton'
                 onClick={() => {
                     toggleClass()
-                }}>Пользователи
+                }}>Управление доступом для фиксации отчетов
         </button>
         <div ref={innerRef} className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
             <div className='divFormTable' style={{display: 'flex', position: 'relative', width: '100%'}}>
