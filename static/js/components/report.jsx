@@ -75,9 +75,9 @@ function TableReportBody({dataReportState}) {
     )
 }
 
-function UsersMenuResource(data) {
+function UsersMenuResource() {
 
-    data = (data.data == undefined) ? ['', ''] : data.data
+    const [userRole, setUserRole] = useState('user')
 
     const [isActive, setActive] = useState(false);
     const [formAdd, setFormAdd] = useState(false);
@@ -85,7 +85,7 @@ function UsersMenuResource(data) {
     const [formID, setformID] = useState('');
     const [formTabel, setformTabel] = useState('');
 
-    const [usersData, setUsersData] = useState(data)
+    const [usersData, setUsersData] = useState([])
 
     const toggleClass = () => {
         if (isActive) {
@@ -103,6 +103,27 @@ function UsersMenuResource(data) {
             setActive(!isActive);
         }
     });
+
+    useEffect(() => {
+        fetch('/api/userInfo', {
+            method: 'POST'
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setUserRole(data.userRole)
+            })
+
+        let data = fetchGetReSourceUsers()
+        let dataResolve = Promise.resolve(data);
+        dataResolve.then(e => {
+            let idTableArray = e.operators.map(i => {
+                return [i.authorId, i.tabel]
+            })
+            setUsersData(idTableArray)
+        })
+
+
+    }, [])
 
     return (
         <div ref={innerRef} className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
@@ -142,11 +163,15 @@ function UsersMenuResource(data) {
                                 if (check.includes(true)) {
                                     alert('Такой пользователь уже зарегистрирован')
                                 } else {
-                                    console.log('Создается пользователь', formID, formTabel)
-                                    setFormAdd(false)
-                                    let newUser = usersData
-                                    newUser.push([formID, formTabel])
-                                    setUsersData(newUser)
+                                    if(userRole=='ROLE_ADMIN'){
+                                        console.log('Создается пользователь', formID, formTabel)
+                                        setFormAdd(false)
+                                        let newUser = usersData
+                                        newUser.push([formID, formTabel])
+                                        setUsersData(newUser)
+                                        fetchAddReSourceUser(formID, formTabel, userRole)
+                                    }
+                                    else alert('Недостаточно прав для добавления пользователя')
                                 }
 
 
@@ -171,11 +196,17 @@ function UsersMenuResource(data) {
                             <td>{e[0]}</td>
                             <td>{e[1]}</td>
                             <td onClick={() => {
-                                console.log(`Удалить ${i} пользователя`)
-                                let deleteUser = usersData
-                                deleteUser.splice(i, 1)
-                                setUsersData(deleteUser)
-                                toggleClass()
+                                if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
+                                    console.log(`Удалить ${i} пользователя`)
+                                    let deleteUser = usersData
+                                    deleteUser.splice(i, 1)
+                                    setUsersData(deleteUser)
+                                    toggleClass()
+                                } else {
+                                    console.log('Ничего');
+                                }
+
+
                             }}>{'—'}</td>
                         </tr>)
                     })}
