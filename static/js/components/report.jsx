@@ -138,11 +138,11 @@ function UsersMenuResource() {
                     <label htmlFor="">ID оператора</label>
                     <input onChange={e => {
                         setformID(e.target.value.replace(/[^0-9.]/g, ""))
-                    }} name='idAuthor' type="text" placeholder='ID оператора' maxLength="10" value={formID}/>
+                    }} name='idAuthor' type="text" placeholder='ID оператора' maxLength="9" value={formID}/>
                     <label htmlFor="">Табель</label>
                     <input onChange={e => {
                         setformTabel(e.target.value.replace(/[^0-9.]/g, ""))
-                    }} name='tabel' type="text" placeholder='Табель' maxLength="10" value={formTabel}/>
+                    }} name='tabel' type="text" placeholder='Табель' maxLength="9" value={formTabel}/>
                     <button type="submit"
                             onClick={() => {
 
@@ -196,17 +196,19 @@ function UsersMenuResource() {
                             <td>{e[0]}</td>
                             <td>{e[1]}</td>
                             <td onClick={() => {
-                                if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
-                                    console.log(`Удалить ${i} пользователя`)
-                                    let deleteUser = usersData
-                                    deleteUser.splice(i, 1)
-                                    setUsersData(deleteUser)
-                                    toggleClass()
-                                } else {
-                                    console.log('Ничего');
+                                if(userRole=='ROLE_ADMIN'){
+                                    if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
+                                        console.log(`Удалить ${i} пользователя`)
+                                        let deleteUser = usersData
+                                        deleteUser.splice(i, 1)
+                                        setUsersData(deleteUser)
+                                        toggleClass()
+                                        fetchDeleteReSourceUser(usersData[i][0], usersData[i][1], userRole)
+                                    } else {
+                                        console.log('Ничего');
+                                    }
                                 }
-
-
+                                else alert('Недостаточно прав для добавления пользователя')
                             }}>{'—'}</td>
                         </tr>)
                     })}
@@ -259,3 +261,28 @@ function fetchAddReSourceUser(authorId, tabel, userRole='user') {
     }
     else alert('Недостаточно прав')
 }
+
+function fetchDeleteReSourceUser(authorId, tabel, userRole='user') {
+    if (userRole == "ROLE_ADMIN") {
+
+        let raw = JSON.stringify({
+            "authorId": authorId,
+            "tabel": tabel,
+        });
+
+        let serverDomain = window.location.hostname
+        let serverPort = window.location.port
+        let url = `http://${serverDomain}:${serverPort}/api/addOperator/authorId:${authorId}_tabel:${tabel}`
+
+        fetch(url, {method: 'POST'})
+            .then(response => response.text())
+            .then(result => {
+                if (result === 'ok') {
+                    console.log('Пользователь удален')
+                }
+            })
+            .catch(error => console.log('Ошибка при отправке запроса', error));
+    }
+    else alert('Недостаточно прав')
+}
+
