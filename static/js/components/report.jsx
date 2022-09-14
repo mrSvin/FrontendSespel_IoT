@@ -236,10 +236,8 @@ function fetchAddReSourceUser(authorId, tabel, userRole='user') {
         myHeaders.append("Content-Type", "application/json");
 
         let raw = JSON.stringify({
-            "complexName": complexName,
-            "userName": userName,
-            "infoWorks": infoWorks,
-            "periodSrvice": periodService
+            "authorId": authorId,
+            "tabel": tabel,
         });
 
         let requestOptions = {
