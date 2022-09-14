@@ -232,26 +232,17 @@ function fetchGetReSourceUsers() {
 
 function fetchAddReSourceUser(authorId, tabel, userRole='user') {
     if (userRole == "ROLE_ADMIN") {
-        let myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
 
         let raw = JSON.stringify({
             "authorId": authorId,
             "tabel": tabel,
         });
 
-        let requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
         let serverDomain = window.location.hostname
         let serverPort = window.location.port
         let url = `http://${serverDomain}:${serverPort}/api/addOperator/authorId:${authorId}_tabel:${tabel}`
 
-        fetch(url, requestOptions)
+        fetch(url, {method: 'POST'})
             .then(response => response.text())
             .then(result => {
                 if (result === 'ok') {
