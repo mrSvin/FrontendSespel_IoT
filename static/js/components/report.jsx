@@ -77,8 +77,7 @@ function TableReportBody({dataReportState}) {
 
 function UsersMenuResource() {
 
-    // data = (data.data == undefined) ? ['', ''] : data.data
-
+    const [userRole, setUserRole] = useState('user')
 
     const [isActive, setActive] = useState(false);
     const [formAdd, setFormAdd] = useState(false);
@@ -106,13 +105,20 @@ function UsersMenuResource() {
     });
 
     useEffect(() => {
+        fetch('/api/userInfo', {
+            method: 'POST'
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setUserRole(data.userRole)
+            })
+
         let data = fetchGetReSourceUsers()
         let dataResolve = Promise.resolve(data);
         dataResolve.then(e => {
             let idTableArray = e.operators.map(i => {
                 return [i.authorId, i.tabel]
             })
-            console.log(idTableArray)
             setUsersData(idTableArray)
         })
 
@@ -157,11 +163,15 @@ function UsersMenuResource() {
                                 if (check.includes(true)) {
                                     alert('Такой пользователь уже зарегистрирован')
                                 } else {
-                                    console.log('Создается пользователь', formID, formTabel)
-                                    setFormAdd(false)
-                                    let newUser = usersData
-                                    newUser.push([formID, formTabel])
-                                    setUsersData(newUser)
+                                    if(userRole=='ROLE_ADMIN'){
+                                        console.log('Создается пользователь', formID, formTabel)
+                                        setFormAdd(false)
+                                        let newUser = usersData
+                                        newUser.push([formID, formTabel])
+                                        setUsersData(newUser)
+                                        fetchAddReSourceUser(formID, formTabel, userRole)
+                                    }
+                                    else alert('Недостаточно прав для добавления пользователя')
                                 }
 
 
@@ -218,4 +228,39 @@ function fetchGetReSourceUsers() {
         .then((data) => {
             return data
         })
+}
+
+function fetchAddReSourceUser(authorId, tabel, userRole='user') {
+    if (userRole == "ROLE_ADMIN") {
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let raw = JSON.stringify({
+            "complexName": complexName,
+            "userName": userName,
+            "infoWorks": infoWorks,
+            "periodSrvice": periodService
+        });
+
+        let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        let serverDomain = window.location.hostname
+        let serverPort = window.location.port
+        let url = `http://${serverDomain}:${serverPort}/api/addOperator/authorId:${authorId}_tabel:${tabel}`
+
+        fetch(url, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                if (result === 'ok') {
+                    console.log('Новый пользователь добавлен')
+                }
+            })
+            .catch(error => console.log('Ошибка при отправке запроса', error));
+    }
+    else alert('Недостаточно прав')
 }
