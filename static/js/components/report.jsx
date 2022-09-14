@@ -75,9 +75,9 @@ function TableReportBody({dataReportState}) {
     )
 }
 
-function UsersMenuResource() {
+function UsersMenuResource(data) {
 
-    const [userRole, setUserRole] = useState('user')
+    data = (data.data == undefined) ? ['', ''] : data.data
 
     const [isActive, setActive] = useState(false);
     const [formAdd, setFormAdd] = useState(false);
@@ -85,7 +85,7 @@ function UsersMenuResource() {
     const [formID, setformID] = useState('');
     const [formTabel, setformTabel] = useState('');
 
-    const [usersData, setUsersData] = useState([])
+    const [usersData, setUsersData] = useState(data)
 
     const toggleClass = () => {
         if (isActive) {
@@ -104,27 +104,6 @@ function UsersMenuResource() {
         }
     });
 
-    useEffect(() => {
-        fetch('/api/userInfo', {
-            method: 'POST'
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setUserRole(data.userRole)
-            })
-
-        let data = fetchGetReSourceUsers()
-        let dataResolve = Promise.resolve(data);
-        dataResolve.then(e => {
-            let idTableArray = e.operators.map(i => {
-                return [i.authorId, i.tabel]
-            })
-            setUsersData(idTableArray)
-        })
-
-
-    }, [])
-
     return (
         <div ref={innerRef} className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
             <button className='usersMenuResourceButton'
@@ -137,11 +116,11 @@ function UsersMenuResource() {
                 <form className={!formAdd ? 'formAddUser formAddUserHide' : 'formAddUser'}>
                     <label htmlFor="">ID оператора</label>
                     <input onChange={e => {
-                        setformID(e.target.value.replace(/[a-z]/gmi, ""))
+                        setformID(e.target.value.replace(/[^0-9.]/g, ""))
                     }} name='idAuthor' type="text" placeholder='ID оператора' maxLength="10" value={formID}/>
                     <label htmlFor="">Табель</label>
                     <input onChange={e => {
-                        setformTabel(e.target.value.replace(/[a-z]/gmi, ""))
+                        setformTabel(e.target.value.replace(/[^0-9.]/g, ""))
                     }} name='tabel' type="text" placeholder='Табель' maxLength="10" value={formTabel}/>
                     <button type="submit"
                             onClick={() => {
@@ -157,21 +136,17 @@ function UsersMenuResource() {
                                 }
 
                                 let check = usersData.map(e => {
-                                    return String(e[0]).includes(formID)
+                                    return (String(e[0]) == formID)? true: false
                                 })
 
                                 if (check.includes(true)) {
                                     alert('Такой пользователь уже зарегистрирован')
                                 } else {
-                                    if(userRole=='ROLE_ADMIN'){
-                                        console.log('Создается пользователь', formID, formTabel)
-                                        setFormAdd(false)
-                                        let newUser = usersData
-                                        newUser.push([formID, formTabel])
-                                        setUsersData(newUser)
-                                        fetchAddReSourceUser(formID, formTabel, userRole)
-                                    }
-                                    else alert('Недостаточно прав для добавления пользователя')
+                                    console.log('Создается пользователь', formID, formTabel)
+                                    setFormAdd(false)
+                                    let newUser = usersData
+                                    newUser.push([formID, formTabel])
+                                    setUsersData(newUser)
                                 }
 
 
