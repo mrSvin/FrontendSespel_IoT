@@ -199,11 +199,11 @@ function UsersMenuResource() {
                                 if(userRole=='ROLE_ADMIN'){
                                     if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
                                         console.log(`Удалить ${i} пользователя`)
+                                        fetchDeleteReSourceUser(usersData[i][0], usersData[i][1], userRole)
                                         let deleteUser = usersData
                                         deleteUser.splice(i, 1)
                                         setUsersData(deleteUser)
                                         toggleClass()
-                                        fetchDeleteReSourceUser(usersData[i][0], usersData[i][1], userRole)
                                     } else {
                                         console.log('Ничего');
                                     }
@@ -258,6 +258,7 @@ function fetchAddReSourceUser(authorId, tabel, userRole='user') {
 }
 
 function fetchDeleteReSourceUser(authorId, tabel, userRole='user') {
+    console.log(authorId, tabel)
     if (userRole == "ROLE_ADMIN") {
 
         let serverDomain = window.location.hostname
