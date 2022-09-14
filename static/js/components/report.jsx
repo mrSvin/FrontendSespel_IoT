@@ -106,12 +106,12 @@ function UsersMenuResource(data) {
 
     return (
         <div ref={innerRef} className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
-            <button
-                onClick={() => {
-                    toggleClass()
-                }}>Кнопка
+            <button className='usersMenuResourceButton'
+                    onClick={() => {
+                        toggleClass()
+                    }}>Пользователи
             </button>
-            <div style={{display: 'flex', position: 'relative', width: '100%'}}>
+            <div className='divFormTable' style={{display: 'flex', position: 'relative', width: '100%'}}>
 
                 <form className={!formAdd ? 'formAddUser formAddUserHide' : 'formAddUser'}>
                     <label htmlFor="">ID оператора</label>

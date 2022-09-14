@@ -297,7 +297,6 @@ input:checked + .slider:before {
     transition: 0.5s;
 }
 
-
 .tableResource {
     border-spacing: 0;
     border-collapse: collapse;
@@ -326,6 +325,8 @@ input:checked + .slider:before {
     text-align: left;
     border-bottom: 1px solid #979595;
     font-family: sans-serif;
+    display: block;
+    background: #252734;
 }
 
 
@@ -346,7 +347,6 @@ input:checked + .slider:before {
 
 .tableResource tr {
     width: 100%;
-    display: block;
 }
 
 .tableResource > thead > tr > th:last-child {
@@ -409,11 +409,21 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justifyContent: center;
+    justify-сontent: center;
     margin: 0 auto;
     width: 30%;
     transition: max-height 0.5s ease-out;
     transition: 0.3s;
+    position: absolute;
+    top: 128px;
+    left: 70%;
+    z-index: 3;
+}
+
+.divFormTable{
+    display: flex;
+    position: relative;
+    width: 85%;
 }
 
 .formAddUser {
@@ -449,6 +459,11 @@ input:checked + .slider:before {
 .formAddUserHide {
     opacity: 0;
     visibility: hidden;
+}
+
+.usersMenuResourceButton {
+    position: absolute;
+    top: -20px;
 }
 
 
