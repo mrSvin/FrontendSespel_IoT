@@ -93,7 +93,10 @@ function UsersMenuResource() {
         if (isActive) {
             setFormAdd(!isActive);
         }
-        setActive(!isActive);
+        else{
+            setActive(!isActive);
+        }
+
     };
 
     const toggleForm = () => {
@@ -220,7 +223,7 @@ function UsersMenuResource() {
                                     if (userRole == 'ROLE_ADMIN') {
                                         if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
                                             fetchDeleteReSourceUser(usersData[i][0], userRole)
-                                            let deleteUser = usersData
+                                            let deleteUser = usersData.slice()
                                             deleteUser.splice(i, 1)
                                             console.log('Массив неудаленных пользователей', i ,deleteUser)
                                             setMessage('Пользователь успешно удален')
