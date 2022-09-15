@@ -114,12 +114,6 @@ function UsersMenuResource() {
         }
     }
 
-    const innerRef = useOuterClick(ev => {
-        if (isActive && !formAdd) {
-            setActive(!isActive);
-        }
-    });
-
     useEffect(() => {
         fetch('/api/userInfo', {
             method: 'POST'
@@ -147,8 +141,9 @@ function UsersMenuResource() {
                     onClick={() => {
                         toggleClass()
                     }}>Управление доступом для фиксации отчетов
+                <span className={!isActive ? 'usersMenuResourceButtonSpanRotate' : null}>▼</span>
             </button>
-            <div ref={innerRef} className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
+            <div className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
                 <div className='divFormTable' style={{display: 'flex', position: 'relative', width: '100%'}}>
                     <form className={!formAdd ? 'formAddUser formAddUserHide' : 'formAddUser'}>
                         <label htmlFor="">ID оператора</label>

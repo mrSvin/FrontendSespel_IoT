@@ -490,6 +490,20 @@ input:checked + .slider:before {
     transition: all 0.2s ease;
     cursor: pointer;
     padding: 6px;
+    position: relative;
 }
 
+.usersMenuResourceButton > span{
+    position: absolute;
+    right: 0px;
+    top: 15px;
+    transition: 0.5s;
+}
 
+.usersMenuResourceButtonSpanRotate {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
