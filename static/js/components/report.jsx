@@ -165,7 +165,6 @@ function UsersMenuResource() {
                                         alert('Такой пользователь уже зарегистрирован')
                                     } else {
                                         if (userRole == 'ROLE_ADMIN') {
-                                            console.log('Создается пользователь', formID, formTabel)
                                             setFormAdd(false)
                                             let newUser = usersData
                                             newUser.push([formID, formTabel])
@@ -202,7 +201,6 @@ function UsersMenuResource() {
                                 <td onClick={() => {
                                     if (userRole == 'ROLE_ADMIN') {
                                         if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
-                                            console.log(`Удалить ${i} пользователя`)
                                             fetchDeleteReSourceUser(usersData[i][0], userRole)
                                             let deleteUser = usersData
                                             deleteUser.splice(i, 1)
@@ -210,7 +208,6 @@ function UsersMenuResource() {
                                             setUsersData(deleteUser)
                                             toggleClass()
                                         } else {
-                                            console.log('Ничего');
                                         }
                                     } else {
                                         setMessage('Недостаточно прав')

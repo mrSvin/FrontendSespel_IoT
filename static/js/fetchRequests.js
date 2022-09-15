@@ -113,12 +113,12 @@ function fetchRequestCurrent(complexName, setDataReportState) {
     fetch(url, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
-            let Name = data.actNum == '1' ? '4977.06.008-5001' : 'C435064S-5.0301'
+            let Name = data.actNum == 1 ? '4977.06.008-5001' : 'C435064S-5.0301'
             let date = (new Date(data.lastRequest).getTime() + 10800000)
             date = new Date(date).toISOString().slice(0, 10) + ' ' + new Date(date).toISOString().slice(11, 19)
 
 
-            let dataReport = [data.requestWriteDB, data.numberProd, data.actNum, data.resultR, Name, data.authorId, data.workMode, data.maxDeformation, data.ostDeformation, data.actForce1R, data.actForce2R, data.needForce, date]
+            let dataReport = [data.requestWriteDB, data.prodNum, data.actNum, data.resultR, Name, data.authorId, data.workMode, data.maxDeformation, data.ostDeformation, data.actForce1R, data.actForce2R, data.needForce, date]
             setDataReportState([
                 [
                     'Регистр состояния записи на сервер', 'Номер изделия', 'Номер акта', 'Результат',
