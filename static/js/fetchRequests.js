@@ -113,7 +113,7 @@ function fetchRequestCurrent(complexName, setDataReportState) {
     fetch(url, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
-            let Name = data.drawNum == '1' ? '4977.06.008-5001' : 'C435064S-5.0301'
+            let Name = data.drawNum == '2' ? '4977.06.008-5001' : 'C50L25RS-5.0001'
             let date = (new Date(data.lastRequest).getTime() + 10800000)
             date = new Date(date).toISOString().slice(0, 10) + ' ' + new Date(date).toISOString().slice(11, 19)
 
@@ -140,7 +140,7 @@ function fetchRequestReport(complexName, setDataReportState) {
         .then((response) => response.json())
         .then((data) => {
             let dataReport = data.map(e => {
-                let fix = e.numberDrawing == 1 ? '4977.06.008-5001' : 'C435064S-5.0301'
+                let fix = e.numberDrawing == 2 ? '4977.06.008-5001' : 'C50L25RS-5.0001'
                 let Goden = e.valid == 2 ? 'Годен' : 'Не годен'
                 return [e.numberAct, fix, e.numberProd, e.requiredForce, e.actualForce, e.actualForce2, e.maxDeformation, e.ostDeformation, Goden, e.authorId, e.dateTime]
             })
