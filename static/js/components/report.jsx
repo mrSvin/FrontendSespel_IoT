@@ -221,7 +221,7 @@ function UsersMenuResource() {
                                         if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
                                             fetchDeleteReSourceUser(usersData[i][0], userRole)
                                             let deleteUser = usersData
-                                            deleteUser = deleteUser.splice(i, 1)
+                                            deleteUser.splice(i, 1)
                                             setMessage('Пользователь успешно удален')
                                             setUsersData(deleteUser)
                                         } else {
