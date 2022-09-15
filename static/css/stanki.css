@@ -431,7 +431,7 @@ input:checked + .slider:before {
     position: absolute;
     background-color: #2c5275;
     width: 135px;
-    height: 144px;
+    height: 205px;
     border-radius: 15px;
     padding: 23px;
     display: flex;
