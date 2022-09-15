@@ -118,6 +118,7 @@ function OtkInfo() {
                     <span onClick={toggleClass}>Выбор оборудования</span>
                     <div className="listComplex">
                         <span>▼</span>
+                        <div className='containerStanokList'>
                         <ul className='toppings-list'
                             className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
                             {complexName.map((name, index) => {
@@ -141,6 +142,7 @@ function OtkInfo() {
                                 );
                             })}
                         </ul>
+                        </div>
 
                     </div>
                 </div>
