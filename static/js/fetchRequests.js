@@ -113,7 +113,7 @@ function fetchRequestCurrent(complexName, setDataReportState) {
     fetch(url, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
-            let Name = data.actNum == 1 ? '4977.06.008-5001' : 'C435064S-5.0301'
+            let Name = data.drawNum == 1 ? '4977.06.008-5001' : 'C435064S-5.0301'
             let date = (new Date(data.lastRequest).getTime() + 10800000)
             date = new Date(date).toISOString().slice(0, 10) + ' ' + new Date(date).toISOString().slice(11, 19)
 
