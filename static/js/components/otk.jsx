@@ -12,9 +12,9 @@ function OtkInfo() {
     let complexRequest = ['kim', 'nk600']
 
     let buttonsVrs = [
-            [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
-            [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"],
-        ]
+        [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"],
+    ]
 
     let size = ["meh1", "ceh1"]
 
@@ -119,30 +119,31 @@ function OtkInfo() {
                     <span onClick={toggleClass}>Выбор оборудования</span>
                     <div className="listComplex">
                         <span>▼</span>
-                        <div className='containerStanokList'>
-                        <ul className='toppings-list'
-                            className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
-                            {complexName.map((name, index) => {
-                                return (
-                                    <li key={index}>
-                                        <div className="toppings-list-item">
-                                            <div className="left-section">
-                                                <input
-                                                    type="checkbox"
-                                                    id={`custom-checkbox-${index}`}
-                                                    name={name[0]}
-                                                    value={index}
-                                                    checked={selectedObjects[index]}
-                                                    onChange={() => handleOnChange(index)}
-                                                />
-                                                <label htmlFor={`custom-checkbox-${index}`}></label><span
-                                                className='spanList'>{name[0]}</span>
+                        <div
+                            className={isActive ? 'containerStanokList' : 'containerStanokList containerStanokListHidden'}>
+                            <ul className='toppings-list'
+                                className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
+                                {complexName.map((name, index) => {
+                                    return (
+                                        <li key={index}>
+                                            <div className="toppings-list-item">
+                                                <div className="left-section">
+                                                    <input
+                                                        type="checkbox"
+                                                        id={`custom-checkbox-${index}`}
+                                                        name={name[0]}
+                                                        value={index}
+                                                        checked={selectedObjects[index]}
+                                                        onChange={() => handleOnChange(index)}
+                                                    />
+                                                    <label htmlFor={`custom-checkbox-${index}`}></label><span
+                                                    className='spanList'>{name[0]}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                );
-                            })}
-                        </ul>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
 
                     </div>
@@ -174,7 +175,7 @@ function Otk() {
 
             <div className="buttons-otchet">
 
-            <Link to="/stanki/otk">
+                <Link to="/stanki/otk">
                     <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 

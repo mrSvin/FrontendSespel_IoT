@@ -170,20 +170,17 @@ input:checked + .slider:before {
     list-style: none;
     padding: 0px;
     margin: auto;
-    position: absolute;
     flex-direction: column;
     background-color: #ffffff;
     width: 500px;
     color: black;
-    position: absolute;
     right: 0;
     top: 50px;
     max-height: 0;
-    /* transition: max-height 0.15s ease-out; */
     transition: max-height 0.2s ease-in;
-    /* overflow-y: auto; */
     overflow-x: hidden;
     padding-bottom: 0;
+
 }
 
 .toppings-list-visible {
@@ -193,15 +190,16 @@ input:checked + .slider:before {
 
 .toppings-list li {
     margin: 0px 0px 0px 0px;
-    background-color: white;
+    background-color: #34669f;
     user-select: none;
     height: fit-content;
     padding: 0 5px;
-    border: 1px solid #83addd;
+    border-bottom: 2px solid #29486a;
     width: 100%;
     position: relative;
     list-style: none;
     overflow: hidden;
+    color: white;
 }
 
 .listComplex {
@@ -257,7 +255,7 @@ input:checked + .slider:before {
 }
 
 .listComplex li:hover {
-    background: #bdd2ed;
+    background: #25589b;
 }
 
 .individualLi:hover {
@@ -543,35 +541,12 @@ input:checked + .slider:before {
     top: 40px;
     border: currentColor;
     min-height: 0px;
+    transition: 0.5s;
 }
 
-.toppings-list li {
-    margin: 0px 0px 0px 0px;
-    background-color: #34669f;
-    user-select: none;
-    height: fit-content;
-    padding: 0 5px;
-    border-bottom: 2px solid #29486a;
-    width: 100%;
-    position: relative;
-    list-style: none;
-    overflow: hidden;
-    color: white;
+.containerStanokListHidden {
+    padding: 0;
 }
 
-.toppings-list {
-    list-style: none;
-    padding: 0px;
-    margin: auto;
-    flex-direction: column;
-    background-color: #ffffff;
-    width: 500px;
-    color: black;
-    right: 0;
-    top: 50px;
-    max-height: 0;
-    transition: max-height 0.2s ease-in;
-    overflow-x: hidden;
-    padding-bottom: 0;
 
-}
+
