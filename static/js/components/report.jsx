@@ -225,6 +225,7 @@ function UsersMenuResource() {
                                         } else {
                                         }
                                     } else {
+                                        alert('Недостаточно прав для удаления пользователя')
                                         setMessage('Недостаточно прав')
                                     }
                                 }}>{'—'}</td>
