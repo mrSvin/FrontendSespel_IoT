@@ -100,6 +100,17 @@ function UsersMenuResource() {
         setFormAdd(!formAdd);
     };
 
+    function displayMessage(message){
+        switch (message) {
+            case 'Пользователь успешно удален':
+                return <p className={!isActive ? 'hideMessage' : 'redMessage'}>{message}</p>
+            case 'Пользователь успешно добавлен':
+                return <p className={!isActive ? 'hideMessage' : 'greenMessage'}>{message}</p>
+            default :
+                return null
+        }
+    }
+
     const innerRef = useOuterClick(ev => {
         if (isActive && !formAdd) {
             setActive(!isActive);
@@ -226,9 +237,7 @@ function UsersMenuResource() {
                         </tbody>
                     </table>
                 </div>
-                {({message} == '') ? <div></div> : ({message} == 'Пользователь успешно удален') ?
-                    <p className={!isActive ? 'hideMessage' : 'redMessage'}>{message}</p> :
-                    <p className={!isActive ? 'hideMessage' : 'greenMessage'}>{message}</p>}
+                {displayMessage(message)}
                 <div className={!isActive ? 'hiddenAddButton addButton' : 'addButton'}
                      onClick={() => {
                          toggleForm()
@@ -239,4 +248,5 @@ function UsersMenuResource() {
         </div>
     )
 }
+
 
