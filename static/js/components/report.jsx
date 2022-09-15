@@ -154,7 +154,7 @@ function UsersMenuResource() {
                         }} name='idAuthor' type="text" placeholder='ID оператора' maxLength="9" value={formID}/>
                         <label htmlFor="">ФИО</label>
                         <input onChange={e => {
-                            setFormFIO(e.target.value.replace(/[^a-zA-Z-а-яА-Я]+/g, ""))
+                            setFormFIO(e.target.value.replace(/[^a-zA-Z-а-яА-Я ]+/g, ""))
                         }} name='FIO' type="text" placeholder='ФИО' maxLength="18" value={formFIO}/>
                         <label htmlFor="">Табель</label>
                         <input onChange={e => {
