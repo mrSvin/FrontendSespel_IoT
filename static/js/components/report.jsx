@@ -225,6 +225,7 @@ function UsersMenuResource() {
                                             console.log('Массив неудаленных пользователей', i ,deleteUser)
                                             setMessage('Пользователь успешно удален')
                                             setUsersData(deleteUser)
+                                            setActive(true)
                                         } else {
                                         }
                                     } else {
