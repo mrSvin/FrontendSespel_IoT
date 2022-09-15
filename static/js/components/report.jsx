@@ -90,7 +90,11 @@ function UsersMenuResource() {
     const [usersData, setUsersData] = useState([])
 
     const toggleClass = () => {
+        if(isActive) {
+            setFormAdd(false)
+        }
             setActive(!isActive);
+
     };
 
     const toggleForm = () => {
@@ -135,7 +139,7 @@ function UsersMenuResource() {
                     onClick={() => {
                         toggleClass()
                     }}>Управление доступом для фиксации отчетов
-                <span className={!isActive ? 'usersMenuResourceButtonSpanRotate' : null}>▼</span>
+                <span className={!isActive ? 'usersMenuResourceButtonSpanRotate' : null}>▲</span>
             </button>
             <div className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
                 <div className='divFormTable' style={{display: 'flex', position: 'relative', width: '100%'}}>

@@ -451,6 +451,9 @@ input:checked + .slider:before {
 
 .formAddUser > input{
     width: 90%;
+    margin: 0 auto;
+    color: white;
+    background: #114360;
 }
 
 .formAddUser > button{
@@ -460,6 +463,23 @@ input:checked + .slider:before {
 .formAddUserHide {
     opacity: 0;
     visibility: hidden;
+}
+
+.formAddUser > button {
+    color: white;
+    background: #1e74bd;
+    font-size: 110%;
+    padding: 0 10%;
+    letter-spacing: 0.025em;
+    border: 1px solid #22475c;
+    border-radius: 15px;
+    min-height: 35px;
+    cursor: pointer;
+    margin: 15px auto;
+}
+
+.formAddUser > button:hover {
+    box-shadow: 0px 0px 5px 0px #507e8f, inset 0px 0px 0px 0px #8a9da5 !important;
 }
 
 .hideMessage {
