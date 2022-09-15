@@ -128,110 +128,108 @@ function UsersMenuResource() {
 
     return (
         <div>
-        <button className='usersMenuResourceButton'
-                onClick={() => {
-                    toggleClass()
-                }}>Управление доступом для фиксации отчетов
-        </button>
-        <div ref={innerRef} className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
-            <div className='divFormTable' style={{display: 'flex', position: 'relative', width: '100%'}}>
-                <form className={!formAdd ? 'formAddUser formAddUserHide' : 'formAddUser'}>
-                    <label htmlFor="">ID оператора</label>
-                    <input onChange={e => {
-                        setformID(e.target.value.replace(/[^0-9.]/g, ""))
-                    }} name='idAuthor' type="text" placeholder='ID оператора' maxLength="9" value={formID}/>
-                    <label htmlFor="">Табель</label>
-                    <input onChange={e => {
-                        setformTabel(e.target.value.replace(/[^0-9.]/g, ""))
-                    }} name='tabel' type="text" placeholder='Табель' maxLength="9" value={formTabel}/>
-                    <button type="submit"
-                            onClick={() => {
+            <button className='usersMenuResourceButton'
+                    onClick={() => {
+                        toggleClass()
+                    }}>Управление доступом для фиксации отчетов
+            </button>
+            <div ref={innerRef} className={!isActive ? 'usersMenuResource hiddenUsersMenu' : 'usersMenuResource'}>
+                <div className='divFormTable' style={{display: 'flex', position: 'relative', width: '100%'}}>
+                    <form className={!formAdd ? 'formAddUser formAddUserHide' : 'formAddUser'}>
+                        <label htmlFor="">ID оператора</label>
+                        <input onChange={e => {
+                            setformID(e.target.value.replace(/[^0-9.]/g, ""))
+                        }} name='idAuthor' type="text" placeholder='ID оператора' maxLength="9" value={formID}/>
+                        <label htmlFor="">Табель</label>
+                        <input onChange={e => {
+                            setformTabel(e.target.value.replace(/[^0-9.]/g, ""))
+                        }} name='tabel' type="text" placeholder='Табель' maxLength="9" value={formTabel}/>
+                        <button type="submit"
+                                onClick={() => {
 
-                                if (formID == '') {
-                                    alert('Заполните ID оператора')
-                                    return
-                                }
-
-                                if (formTabel == '') {
-                                    alert('Заполните Табель')
-                                    return
-                                }
-
-                                let check = usersData.map(e => {
-                                    return (String(e[0]) == formID)? true: false
-                                })
-
-                                if (check.includes(true)) {
-                                    alert('Такой пользователь уже зарегистрирован')
-                                } else {
-                                    if(userRole=='ROLE_ADMIN'){
-                                        console.log('Создается пользователь', formID, formTabel)
-                                        setFormAdd(false)
-                                        let newUser = usersData
-                                        newUser.push([formID, formTabel])
-                                        setUsersData(newUser)
-                                        fetchAddReSourceUser(formID, formTabel, userRole)
-                                        setMessage('Пользователь успешно добавлен')
+                                    if (formID == '') {
+                                        alert('Заполните ID оператора')
+                                        return
                                     }
-                                    else {
-                                        setMessage('Недостаточно прав')
-                                        alert('Недостаточно прав для добавления пользователя')
+
+                                    if (formTabel == '') {
+                                        alert('Заполните Табель')
+                                        return
                                     }
-                                }
 
+                                    let check = usersData.map(e => {
+                                        return (String(e[0]) == formID) ? true : false
+                                    })
 
-                            }} type="button">Добавить
-                    </button>
-                </form>
-
-
-                <table className={!isActive ? 'tableResource hiddenTable' : 'tableResource'}>
-                    <thead>
-                    <tr>
-                        <th>№</th>
-                        <th>ID оператора</th>
-                        <th>Табель</th>
-                        <th>Удалить</th>
-                    </tr>
-                    </thead>
-                    <tbody className={!isActive ? 'hiddenTableBody' : ''}>
-                    {usersData.map((e, i) => {
-                        return (<tr key={i}>
-                            <td>{i}</td>
-                            <td>{e[0]}</td>
-                            <td>{e[1]}</td>
-                            <td onClick={() => {
-                                if(userRole=='ROLE_ADMIN'){
-                                    if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
-                                        console.log(`Удалить ${i} пользователя`)
-                                        fetchDeleteReSourceUser(usersData[i][0], userRole)
-                                        let deleteUser = usersData
-                                        deleteUser.splice(i, 1)
-                                        setMessage('Пользователь успешно удален')
-                                        setUsersData(deleteUser)
-                                        toggleClass()
+                                    if (check.includes(true)) {
+                                        alert('Такой пользователь уже зарегистрирован')
                                     } else {
-                                        console.log('Ничего');
+                                        if (userRole == 'ROLE_ADMIN') {
+                                            console.log('Создается пользователь', formID, formTabel)
+                                            setFormAdd(false)
+                                            let newUser = usersData
+                                            newUser.push([formID, formTabel])
+                                            setUsersData(newUser)
+                                            fetchAddReSourceUser(formID, formTabel, userRole)
+                                            setMessage('Пользователь успешно добавлен')
+                                        } else {
+                                            setMessage('Недостаточно прав')
+                                            alert('Недостаточно прав для добавления пользователя')
+                                        }
                                     }
-                                }
-                                else {
-                                    setMessage('Недостаточно прав')
-                                }
-                            }}>{'—'}</td>
-                        </tr>)
-                    })}
 
-                    </tbody>
-                </table>
+
+                                }} type="button">Добавить
+                        </button>
+                    </form>
+
+
+                    <table className={!isActive ? 'tableResource hiddenTable' : 'tableResource'}>
+                        <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>ID оператора</th>
+                            <th>Табель</th>
+                            <th>Удалить</th>
+                        </tr>
+                        </thead>
+                        <tbody className={!isActive ? 'hiddenTableBody' : ''}>
+                        {usersData.map((e, i) => {
+                            return (<tr key={i}>
+                                <td>{i}</td>
+                                <td>{e[0]}</td>
+                                <td>{e[1]}</td>
+                                <td onClick={() => {
+                                    if (userRole == 'ROLE_ADMIN') {
+                                        if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
+                                            console.log(`Удалить ${i} пользователя`)
+                                            fetchDeleteReSourceUser(usersData[i][0], userRole)
+                                            let deleteUser = usersData
+                                            deleteUser.splice(i, 1)
+                                            setMessage('Пользователь успешно удален')
+                                            setUsersData(deleteUser)
+                                            toggleClass()
+                                        } else {
+                                            console.log('Ничего');
+                                        }
+                                    } else {
+                                        setMessage('Недостаточно прав')
+                                    }
+                                }}>{'—'}</td>
+                            </tr>)
+                        })}
+
+                        </tbody>
+                    </table>
+                </div>
+                {({message} == '') ? null : <p className={!isActive ? 'hideMessage' : ''}>{message}</p>}
+                <div className={!isActive ? 'hiddenAddButton addButton' : 'addButton'}
+                     onClick={() => {
+                         toggleForm()
+                     }}>
+                    <span>+</span>
+                </div>
             </div>
-            <p className={!isActive ? 'hideMessage' : ''} >{message}</p>
-            <div className={!isActive ? 'hiddenAddButton addButton' : 'addButton'}
-                 onClick={() => {
-                     toggleForm()
-                 }}>
-                <span>+</span>
-            </div>
-        </div>
         </div>
     )
 }
