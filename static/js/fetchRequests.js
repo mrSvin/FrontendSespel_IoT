@@ -140,7 +140,7 @@ function fetchRequestReport(complexName, setDataReportState) {
         .then((response) => response.json())
         .then((data) => {
             let dataReport = data.map(e => {
-                let fix = e.numberDrawing == '1' ? '4977.06.008-5001' : 'C435064S-5.0301'
+                let fix = e.numberDrawing == 1 ? '4977.06.008-5001' : 'C435064S-5.0301'
                 let Goden = e.valid == 2 ? 'Годен' : 'Негоден'
                 return [e.numberAct, fix, e.numberProd, e.requiredForce, e.actualForce, e.actualForce2, e.maxDeformation, e.ostDeformation, Goden, e.authorId, e.dateTime]
             })
