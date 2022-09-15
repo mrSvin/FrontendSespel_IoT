@@ -1,5 +1,5 @@
 body {
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 .menu-stanki {
@@ -56,12 +56,12 @@ body {
     float: left;
 }
 
-.highChartsLineRound{
+.highChartsLineRound {
     display: flex;
     width: 80%;
 }
 
-.highChartsLineSmena{
+.highChartsLineSmena {
     display: flex;
     width: 100%;
 }
@@ -202,6 +202,10 @@ input:checked + .slider:before {
     color: white;
 }
 
+.toppings-list li:last-child {
+    border-bottom: none;
+}
+
 .listComplex {
     display: block;
     z-index: 1;
@@ -215,7 +219,8 @@ input:checked + .slider:before {
     right: 33px;
 }
 
-.listComplex:hover {/* color: #1aaae5; */}
+.listComplex:hover { /* color: #1aaae5; */
+}
 
 .listComplex > span {
     text-align: center;
@@ -259,7 +264,7 @@ input:checked + .slider:before {
 }
 
 .individualLi:hover {
-    background: #88b3e9!important;
+    background: #88b3e9 !important;
 }
 
 .left-section > input {
@@ -291,7 +296,7 @@ input:checked + .slider:before {
 }
 
 .selectDevice:hover {
-    color: #1aaae5!important;
+    color: #1aaae5 !important;
     transition: 0.5s;
 }
 
@@ -419,7 +424,7 @@ input:checked + .slider:before {
     z-index: 3;
 }
 
-.divFormTable{
+.divFormTable {
     display: flex;
     position: relative;
     width: 85%;
@@ -440,21 +445,21 @@ input:checked + .slider:before {
     z-index: 3;
 }
 
-.formAddUser > label{
+.formAddUser > label {
     font-size: 18px;
     margin: 5px 0px;
     color: white;
 
 }
 
-.formAddUser > input{
+.formAddUser > input {
     width: 90%;
     margin: 0 auto;
     color: white;
     background: #114360;
 }
 
-.formAddUser > button{
+.formAddUser > button {
     margin-top: 10%;
 }
 
@@ -485,12 +490,12 @@ input:checked + .slider:before {
     visibility: hidden;
 }
 
-.redMessage{
+.redMessage {
     color: #ff1616;
     font-weight: bold;
 }
 
-.greenMessage{
+.greenMessage {
     color: #13e013;
     font-weight: bold;
 }
@@ -511,7 +516,7 @@ input:checked + .slider:before {
     position: relative;
 }
 
-.usersMenuResourceButton > span{
+.usersMenuResourceButton > span {
     position: absolute;
     right: 0px;
     top: 15px;
@@ -525,7 +530,6 @@ input:checked + .slider:before {
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
 }
-
 
 
 .containerStanokList {
