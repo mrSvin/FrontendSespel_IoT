@@ -573,4 +573,5 @@ input:checked + .slider:before {
     transition: max-height 0.2s ease-in;
     overflow-x: hidden;
     padding-bottom: 0;
+
 }
