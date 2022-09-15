@@ -85,6 +85,7 @@ function UsersMenuResource() {
 
     const [formID, setformID] = useState('');
     const [formTabel, setformTabel] = useState('');
+    const [formFIO, setFormFIO] = useState('');
 
     const [usersData, setUsersData] = useState([])
 
@@ -118,7 +119,7 @@ function UsersMenuResource() {
         let dataResolve = Promise.resolve(data);
         dataResolve.then(e => {
             let idTableArray = e.operators.map(i => {
-                return [i.authorId, i.tabel]
+                return [i.authorId, i.operator_name, i.tabel]
             })
             setUsersData(idTableArray)
         })
@@ -140,6 +141,10 @@ function UsersMenuResource() {
                         <input onChange={e => {
                             setformID(e.target.value.replace(/[^0-9.]/g, ""))
                         }} name='idAuthor' type="text" placeholder='ID оператора' maxLength="9" value={formID}/>
+                        <label htmlFor="">ФИО</label>
+                        <input onChange={e => {
+                            setFormFIO(e.target.value.replace(/[^a-zA-Z-а-яА-Я]+/g, ""))
+                        }} name='FIO' type="text" placeholder='ФИО' maxLength="18" value={formFIO}/>
                         <label htmlFor="">Табель</label>
                         <input onChange={e => {
                             setformTabel(e.target.value.replace(/[^0-9.]/g, ""))
@@ -167,9 +172,9 @@ function UsersMenuResource() {
                                         if (userRole == 'ROLE_ADMIN') {
                                             setFormAdd(false)
                                             let newUser = usersData
-                                            newUser.push([formID, formTabel])
+                                            newUser.push([formID, formFIO, formTabel])
                                             setUsersData(newUser)
-                                            fetchAddReSourceUser(formID, formTabel, userRole)
+                                            fetchAddReSourceUser(formID, formFIO, formTabel, userRole)
                                             setMessage('Пользователь успешно добавлен')
                                         } else {
                                             setMessage('Недостаточно прав')
@@ -188,6 +193,7 @@ function UsersMenuResource() {
                         <tr>
                             <th>№</th>
                             <th>ID оператора</th>
+                            <th>ФИО</th>
                             <th>Табель</th>
                             <th>Удалить</th>
                         </tr>
@@ -198,6 +204,7 @@ function UsersMenuResource() {
                                 <td>{i}</td>
                                 <td>{e[0]}</td>
                                 <td>{e[1]}</td>
+                                <td>{e[2]}</td>
                                 <td onClick={() => {
                                     if (userRole == 'ROLE_ADMIN') {
                                         if (confirm(`Вы уверены, что хотите удалить пользователя ${usersData[i][0]} ${usersData[i][1]}`)) {
@@ -219,7 +226,9 @@ function UsersMenuResource() {
                         </tbody>
                     </table>
                 </div>
-                {({message} == '') ? null : <p className={!isActive ? 'hideMessage' : ''}>{message}</p>}
+                {({message} == '') ? <div></div> : ({message} == 'Пользователь успешно удален') ?
+                    <p className={!isActive ? 'hideMessage' : 'redMessage'}>{message}</p> :
+                    <p className={!isActive ? 'hideMessage' : 'greenMessage'}>{message}</p>}
                 <div className={!isActive ? 'hiddenAddButton addButton' : 'addButton'}
                      onClick={() => {
                          toggleForm()

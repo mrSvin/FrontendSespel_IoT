@@ -467,8 +467,29 @@ input:checked + .slider:before {
     visibility: hidden;
 }
 
-.usersMenuResourceButton {
+.redMessage{
+    color: #ff1616;
+    font-weight: bold;
+}
 
+.greenMessage{
+    color: #13e013;
+    font-weight: bold;
+}
+
+.usersMenuResourceButton {
+    color: #ffffff;
+    background: #2574a3;
+    font-size: 82%;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    border: none;
+    border-radius: 11px;
+    min-height: 35px;
+    width: 190px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    padding: 6px;
 }
 
 

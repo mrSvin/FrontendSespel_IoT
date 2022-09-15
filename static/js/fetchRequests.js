@@ -162,12 +162,12 @@ function fetchGetReSourceUsers() {
 }
 
 // Добавить нового пользователя в админке стенда ресурсных испытаний
-function fetchAddReSourceUser(authorId, tabel, userRole = 'user') {
+function fetchAddReSourceUser(authorId, fio, tabel, userRole = 'user') {
     if (userRole == "ROLE_ADMIN") {
 
         let serverDomain = window.location.hostname
         let serverPort = window.location.port
-        let url = `http://${serverDomain}:${serverPort}/api/addOperator/authorId:${authorId}_tabel:${tabel}`
+        let url = `http://${serverDomain}:${serverPort}/api/addOperator/authorId:${authorId}_tabel:${tabel}_operatorName:${fio}`
 
         fetch(url, {method: 'POST'})
             .then(response => response.text())
