@@ -261,10 +261,13 @@ input:checked + .slider:before {
 
 .listComplex li:hover {
     background: #25589b;
+    color: #e51a83 !important;
+    text-shadow: 0 0 5px #e51a83, 0 0 25px #e51a83;
+    transition: 0.2s;
 }
 
 .individualLi:hover {
-    background: #88b3e9 !important;
+    background: #1f5293 !important;
 }
 
 .left-section > input {
