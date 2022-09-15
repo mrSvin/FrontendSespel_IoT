@@ -222,6 +222,7 @@ function UsersMenuResource() {
                                             fetchDeleteReSourceUser(usersData[i][0], userRole)
                                             let deleteUser = usersData
                                             deleteUser.splice(i, 1)
+                                            console.log('Массив неудаленных пользователей', i ,deleteUser)
                                             setMessage('Пользователь успешно удален')
                                             setUsersData(deleteUser)
                                         } else {
