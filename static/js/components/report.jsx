@@ -90,13 +90,7 @@ function UsersMenuResource() {
     const [usersData, setUsersData] = useState([])
 
     const toggleClass = () => {
-        if (isActive) {
-            setFormAdd(!isActive);
-        }
-        else{
             setActive(!isActive);
-        }
-
     };
 
     const toggleForm = () => {
