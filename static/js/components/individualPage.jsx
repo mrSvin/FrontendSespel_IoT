@@ -450,7 +450,7 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
                                             />
                                             <label style={paddingNow}
                                                    htmlFor={`custom-checkbox-category-${index}`}></label><span
-                                            className='spanList'>{razdel[0]}</span>
+                                            className='spanList spanListCategory'>{razdel[0]}</span>
                                         </div>
                                     </div>
                                     <ul>

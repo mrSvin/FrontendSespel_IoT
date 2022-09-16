@@ -230,7 +230,10 @@ function ListDevices({date, values, setValuesState, complexName, complexRequest,
                                                 name={name[0]}
                                                 value={index}
                                                 checked={selectedObjects[index]}
-                                                onChange={() => handleOnChange(index)}
+                                                onChange={() => {
+                                                    handleOnChange(index)
+                                                    setListChanged(true)
+                                                }}
                                             />
                                             <label htmlFor={`custom-checkbox-${index}`}></label><span
                                             className='spanList'>{name[0]}</span>
