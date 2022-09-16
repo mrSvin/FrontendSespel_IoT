@@ -376,7 +376,7 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
         window.localStorage['selectedCategory'] = updatedCheckedState
         setSelectedCategory(updatedCheckedState)
 
-        let mainList = complexName.map((e, i) => {
+        let mainList = Object.keys(complexName).map((e, i) => {
             return [updatedCheckedState[i], e.length - 1]
         })
 
