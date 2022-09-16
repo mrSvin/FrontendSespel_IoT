@@ -1,5 +1,5 @@
-function MenuStankiIndividual({page, setPage}) {
-
+function MenuStankiIndividual({page, setPage, complexNameOld}) {
+console.log('Выделенных станков', complexNameOld)
     let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
 
     menuSelect[page] = "menuSelect"
@@ -46,7 +46,8 @@ function MenuStankiIndividual({page, setPage}) {
     )
 }
 
-function IndividualPageInfo({page}) {
+function IndividualPage() {
+    let [page, setPage] = useState(0)
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
@@ -140,7 +141,9 @@ function IndividualPageInfo({page}) {
         return array
     })
 
-    let [selectedObjects, setSelectedObjects] = new Array(complexNameOld.length).fill(true)
+    let [selectedObjects, setSelectedObjects] = useState(
+        new Array(complexNameOld.length).fill(true)
+    );
 
     let complexImg = [
         "../images/crystal_apex.png", "../images/nk600.png", "../images/UVF_5220.png",
@@ -322,43 +325,10 @@ function IndividualPageInfo({page}) {
 
     }
 
-
-    return (
-        <div>
-            <div className="energyCalendarContainer">
-                <DayCalendar newDate={newDate} date={date}/>
-                <ListDevicesCategory date={date} values={values}
-                                     setValuesState={setValuesState} complexName={complexNameState}
-                                     newDate={newDate} selectedCategory={selectedCategory}
-                                     setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
-                                     setSelectedObjects={setSelectedObjects}/>
-            </div>
-            <ComplexTotalSutkiInfo/>
-
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                          complexName={complexNameOld} complexRequest={complexRequest}
-                          valuesState={valuesStateWait}/>
-
-            {valuesStateWait.map((e, i) => {
-                return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]}
-                                            complexImg={complexImg[e]}
-                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                            service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
-                                            programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}
-                                            report={complexNameOld[e][5]} current={complexNameOld[e][6]}/>
-            })}
-        </div>
-    )
-
-}
-
-function IndividualPage() {
-    let [page, setPage] = useState(0)
-
     return (
         <div>
 
-            <MenuStankiIndividual page={page} setPage={setPage}/>
+            <MenuStankiIndividual page={page} setPage={setPage} complexNameOld={complexNameOld}/>
 
             <div className="buttons-otchet">
 
@@ -376,7 +346,30 @@ function IndividualPage() {
 
             </div>
 
-            <IndividualPageInfo page={page}/>
+            <div>
+                <div className="energyCalendarContainer">
+                    <DayCalendar newDate={newDate} date={date}/>
+                    <ListDevicesCategory date={date} values={values}
+                                         setValuesState={setValuesState} complexName={complexNameState}
+                                         newDate={newDate} selectedCategory={selectedCategory}
+                                         setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
+                                         setSelectedObjects={setSelectedObjects}/>
+                </div>
+                <ComplexTotalSutkiInfo/>
+
+                <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                              complexName={complexNameOld} complexRequest={complexRequest}
+                              valuesState={valuesStateWait}/>
+
+                {valuesStateWait.map((e, i) => {
+                    return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]}
+                                                complexImg={complexImg[e]}
+                                                complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                                                service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
+                                                programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}
+                                                report={complexNameOld[e][5]} current={complexNameOld[e][6]}/>
+                })}
+            </div>
 
         </div>
     )
