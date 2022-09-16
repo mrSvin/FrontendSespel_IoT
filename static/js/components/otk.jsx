@@ -163,7 +163,7 @@ function Otk() {
     )
 }
 
-function listDevices(date, selectedObjects, setSelectedObjects, setValuesState, complexName){
+function listDevices({date, selectedObjects, setSelectedObjects, setValuesState, complexName}){
 
     const [isActive, setActive] = useState(false);
 
