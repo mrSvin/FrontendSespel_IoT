@@ -27,11 +27,6 @@ function OtkInfo() {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    // Состояния чекбоксов станков
-    let [selectedObjects, setSelectedObjects] = useState(
-        new Array(complexRequest.length).fill(true)
-    );
-
     let [valuesState, setValuesState] = useState(values)
 
     let [valuesStateWait, setValuesStateWait] = useState(values)
@@ -80,7 +75,8 @@ function OtkInfo() {
         <div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <listDevices date={date} selectedObjects={selectedObjects} setSelectedObjects={setSelectedObjects} setValuesState={setValuesState} complexName={complexName}/>
+                <ListDevices date={date} values={values} setValuesState={setValuesState} complexName={complexName}
+                             complexRequest={complexRequest} newDate={newDate}/>
                 {/*<div*/}
                 {/*    ref={innerRef}*/}
                 {/*    className='menuSelect selectDevice'>*/}
@@ -163,9 +159,14 @@ function Otk() {
     )
 }
 
-function listDevices({date, selectedObjects, setSelectedObjects, setValuesState, complexName}){
+function ListDevices({date, values, setValuesState, complexName, complexRequest, newDate}) {
 
     const [isActive, setActive] = useState(false);
+
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        new Array(complexRequest.length).fill(true)
+    );
 
     const toggleClass = () => {
         setActive(!isActive);
@@ -199,7 +200,7 @@ function listDevices({date, selectedObjects, setSelectedObjects, setValuesState,
     };
 
 
-    return(
+    return (
         <div
             ref={innerRef}
             className='menuSelect selectDevice'>
