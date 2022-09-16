@@ -125,7 +125,12 @@ function IndividualPageInfo(page) {
         ],
     ]
 
-    let [complexNameState, setComplexName] = useState(complexName[page])
+    let complexNameState = []
+
+    if(page == 10) {
+        complexNameState = complexName.slice()
+    }
+    else complexNameState = complexName.slice(page, page+1)
 
     let complexNameOld = []
 
