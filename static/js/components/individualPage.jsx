@@ -1,4 +1,4 @@
-function MenuStankiIndividual(page, setPage) {
+function MenuStankiIndividual({page, setPage}) {
 
     let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
 
@@ -46,7 +46,7 @@ function MenuStankiIndividual(page, setPage) {
     )
 }
 
-function IndividualPageInfo(page) {
+function IndividualPageInfo({page}) {
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
