@@ -341,14 +341,17 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
 
     const [isActive, setActive] = useState(false);
 
+    const [listChanged, setListChanged] = useState(false)
+
     const toggleClass = () => {
         setActive(!isActive);
         if (isActive) newDate(date)
     };
 
     const innerRef = useOuterClick(ev => {
-        if (isActive) {
+        if (isActive && listChanged) {
             setActive(!isActive);
+            setListChanged(false)
             newDate(date)
         }
     });
@@ -435,6 +438,7 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
                                                 checked={selectedCategory[index]}
                                                 onChange={() => {
                                                     handleOnChangeCategory(index)
+                                                    setListChanged(true)
                                                 }
                                                 }
                                             />
@@ -458,6 +462,7 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
                                                                 checked={selectedObjects[saveIndex]}
                                                                 onChange={() => {
                                                                     handleOnChange(saveIndex)
+                                                                    setListChanged(true)
                                                                 }}
                                                             />
                                                             <label
