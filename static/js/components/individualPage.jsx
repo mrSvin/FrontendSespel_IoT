@@ -132,14 +132,15 @@ function IndividualPageInfo({page}) {
     }
     else complexNameState = complexName.slice(page, page+1)
 
-    let complexNameOld = []
-
-    complexNameState.forEach(e => {
+    let complexNameOld = complexNameState.map(e => {
         let array = e.slice(1)
-        array.forEach(i => {
-            complexNameOld.push(i)
+        array.map(i => {
+            return(i)
         })
+        return array
     })
+
+    let [selectedObjects, setSelectedObjects] = new Array(complexNameOld.length).fill(true)
 
     let complexImg = [
         "../images/crystal_apex.png", "../images/nk600.png", "../images/UVF_5220.png",
@@ -254,10 +255,6 @@ function IndividualPageInfo({page}) {
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
     let [selectedCategory, setSelectedCategory] = useState([true]);
-
-    let [selectedObjects, setSelectedObjects] = useState(
-        new Array(complexNameOld.length).fill(true)
-    );
 
     if(page == 10) {
         if (localStorage['selectedObjects'] == undefined) {
