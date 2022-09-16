@@ -168,15 +168,23 @@ function ListDevices({date, values, setValuesState, complexName, complexRequest,
         new Array(complexRequest.length).fill(true)
     );
 
+    const [listChanged, setListChanged] = useState(false)
+
     const toggleClass = () => {
         setActive(!isActive);
-        if (isActive) newDate(date)
+        if(listChanged) {
+            newDate(date)
+            setListChanged(false)
+        }
     };
 
     const innerRef = useOuterClick(ev => {
         if (isActive) {
             setActive(!isActive);
-            newDate(date)
+            if(listChanged) {
+                newDate(date)
+                setListChanged(false)
+            }
         }
     });
 
