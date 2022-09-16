@@ -3,62 +3,87 @@ function IndividualPageSmena() {
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
     let complexName = [
-        ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", null, "CRYSTA-Apex S9168"],
-        ["НК600", "НК600"],
-        ["УФ5220","УФ5220"],
-        ["СТП Сеспель", 'СТП Сеспель'],
-        ["NTX1000 2", "NTX1000 2"],
-        ["SK50",  'SK50'],
-        ["APEC", "APEC"],
-        ["DMU50 3", "DMU50 3"],
-        ["DMU50 4", "DMU50 4"],
-        ["CTX310 2",  'CTX310 2', 'CTX310 2'],
-        ["CTX510 2", "CTX510 2"],
-        ["CTX510 3", "CTX510 3"],
-        ["CTX310 3", "CTX310 3"],
-        ["CTX510 4",  'CTX510 4'],
-        ["CTX510 5", "CTX510 5"],
-        ["DMC1035 2", "DMC1035 2"],
-        ["DMU50 5", "DMU50 5"],
-        ["DMU50 6", "DMU50 6"],
-        ["DMU50 7", "DMU50 7"],
-        ["AR55", "AR55"],
-        ["Навигатор 1","Навигатор 1",  null,"Навигатор 1", "Навигатор 1"],
-        ["Навигатор 2", 'Навигатор 2', null, "Навигатор 2", "Навигатор 2"],
-        ["Навигатор 3", "Навигатор 3", null, "Навигатор 3", "Навигатор 3"],
-        ["TruLaser",  'TruLaser'],
-        ["Комета 1", "Комета 1"],
-        ["Комета 2", "Комета 2"],
-        ["Комета 3", "Комета 3"],
-        ["УВФ-1 1","УВФ-1 1"],
-        ["УВФ-1 2","УВФ-1 2"],
-        ["NTX1000","NTX1000","NTX1000"],
-        ["NLX3000","NLX3000","NLX3000"],
-        ["GAMMA2000","GAMMA2000","GAMMA2000"],
-        ["CTX650","CTX650","CTX650"],
-        ["DMF260","DMF260","DMF260"],
-        ["DMU50 1","DMU50 1","DMU50 1"],
-        ["DMU50 2","DMU50 2","DMU50 2"],
-        ["DMC1035","DMC1035","DMC1035"],
-        ["CTX310 1","CTX310 1","CTX310 1"],
-        ["CTX510 1","CTX510 1","CTX510 1"],
-        ["МАКС 1", "МАКС 1", null, "МАКС 1"],
-        ["МАКС 2", 'МАКС 2', null, 'МАКС 2'],
-        ["М710", "М710", null, "М710"],
-        ["РТК12C", 'РТК12C', null, 'РТК12C'],
-        ["P250", "P250", null, "P250"],
-        ["КРОТ", 'КРОТ', null, 'КРОТ'],
-        ["ПРАНС", "ПРАНС", null, "ПРАНС"],
-        ["Пресс ЧПУ для ступиц","Пресс ЧПУ для ступиц"],
-        ["ЭПП","ЭПП"],
-        ["СТП13М","СТП13М"],
-        ['Стенд для ресурсных испытаний','Стенд для ресурсных испытаний', null, null, null, 'Стенд','Стенд'],
-        ["Склад Мех. цеха","Склад Мех. цеха"],
-        ["Печь Индукционная", "Печь Индукционная"],
-        ["FACCIN 4","FACCIN 4"],
-        ["FACCIN 10","FACCIN 10"],
+        ['OTK',
+            ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", null, "CRYSTA-Apex S9168"],
+            ["НК600", "НК600"],
+        ],
+        ['Мех.уч.2.пл',
+            ["УФ5220", "УФ5220"],
+            ["СТП Сеспель", 'СТП Сеспель'],
+            ["NTX1000 2", "NTX1000 2"],
+            ["SK50", 'SK50'],
+            ["APEC", "APEC"],
+            ["DMU50 3", "DMU50 3"],
+            ["DMU50 4", "DMU50 4"],
+            ["CTX310 2", 'CTX310 2', 'CTX310 2'],
+            ["CTX510 2", "CTX510 2"],
+            ["CTX510 3", "CTX510 3"],
+            ["CTX310 3", "CTX310 3"],
+            ["CTX510 4", 'CTX510 4'],
+            ["CTX510 5", "CTX510 5"],
+            ["DMC1035 2", "DMC1035 2"],
+            ["DMU50 5", "DMU50 5"],
+            ["DMU50 6", "DMU50 6"],
+            ["DMU50 7", "DMU50 7"],
+            ["AR55", "AR55"],
+        ],
+        ['Резка',
+            ["Навигатор 1", "Навигатор 1", null, "Навигатор 1", "Навигатор 1"],
+            ["Навигатор 2", 'Навигатор 2', null, "Навигатор 2", "Навигатор 2"],
+            ["Навигатор 3", "Навигатор 3", null, "Навигатор 3", "Навигатор 3"],
+            ["TruLaser", 'TruLaser'],
+            ["Комета 1", "Комета 1"],
+            ["Комета 2", "Комета 2"],
+            ["Комета 3", "Комета 3"],
+        ],
+        ['Мех.уч.1.пл',
+            ["УВФ-1 1", "УВФ-1 1"],
+            ["УВФ-1 2", "УВФ-1 2"],
+            ["NTX1000", "NTX1000", "NTX1000"],
+            ["NLX3000", "NLX3000", "NLX3000"],
+            ["GAMMA2000", "GAMMA2000", "GAMMA2000"],
+            ["CTX650", "CTX650", "CTX650"],
+            ["DMF260", "DMF260", "DMF260"],
+            ["DMU50 1", "DMU50 1", "DMU50 1"],
+            ["DMU50 2", "DMU50 2", "DMU50 2"],
+            ["DMC1035", "DMC1035", "DMC1035"],
+            ["CTX310 1", "CTX310 1", "CTX310 1"],
+            ["CTX510 1", "CTX510 1", "CTX510 1"],
+        ],
+        ['Роботы',
+            ["МАКС 1", "МАКС 1", null, "МАКС 1"],
+            ["МАКС 2", 'МАКС 2', null, 'МАКС 2'],
+            ["М710", "М710", null, "М710"],
+            ["РТК12C", 'РТК12C', null, 'РТК12C'],
+            ["P250", "P250", null, "P250"],
+            ["КРОТ", 'КРОТ', null, 'КРОТ'],
+            ["ПРАНС", "ПРАНС", null, "ПРАНС"],
+        ],
+        ['Спец. Комплексы',
+            ["Пресс ЧПУ для ступиц", "Пресс ЧПУ для ступиц"],
+            ["ЭПП", "ЭПП"],
+            ["СТП13М", "СТП13М"],
+            ['Стенд для ресурсных испытаний', 'Стенд для ресурсных испытаний', null, null, null, 'Стенд', 'Стенд'],
+        ],
+        ['Склады',
+            ["Склад Мех. цеха", "Склад Мех. цеха"],
+        ],
+        ['Литейка',
+            ["Печь Индукционная", "Печь Индукционная"],
+        ],
+        ['Гибка',
+            ["FACCIN 4", "FACCIN 4"],
+            ["FACCIN 10", "FACCIN 10"],
+        ],
     ]
+    let complexNameOld = []
 
+    complexName.forEach(e => {
+        let array = e.slice(1)
+        array.forEach(i => {
+            complexNameOld.push(i)
+        })
+    })
     let complexImg = [
         "../images/crystal_apex.png", "../images/nk600.png", "../images/UVF_5220.png",
         "../images/progress.png", "../images/ntx1000.png", "../images/sk50.png",
@@ -171,51 +196,32 @@ function IndividualPageSmena() {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    if(localStorage['selectedObjects'] == undefined) {
+    if (localStorage['selectedObjects'] == undefined) {
         localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
     }
+
+    if (localStorage['selectedCategory'] == undefined) {
+        localStorage['selectedCategory'] = new Array(complexName.length).fill(false)
+    }
+
+    // Состояния чекбоксов станков
+    let [selectedCategory, setSelectedCategory] = useState(
+        (localStorage['selectedCategory'] == undefined) ? new Array(complexName.length).fill(false) : window.localStorage['selectedCategory'].split(',').map(e => {
+            return (e == 'true')
+        })
+    );
+
     // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
-        (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) :window.localStorage['selectedObjects'].split(',').map(e=>{return (e=='true')})
+        (localStorage['selectedObjects'] == undefined) ? new Array(complexRequest.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
+            return (e == 'true')
+        })
     );
 
     let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
 
     let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
 
-    const [isActive, setActive] = useState(false);
-
-    const toggleClass = () => {
-        setActive(!isActive);
-        if (isActive) newDate(date)
-    };
-
-    const innerRef = useOuterClick(ev => {
-        if (isActive) {
-            setActive(!isActive);
-            newDate(date)
-        }
-    });
-
-    const handleOnChange = (position) => {
-        const updatedCheckedState = selectedObjects.map((item, index) => {
-            return index === position ? !item : item;
-        });
-
-        window.localStorage['selectedObjects'] = updatedCheckedState
-        setSelectedObjects(updatedCheckedState)
-
-        const activeValues = []
-        updatedCheckedState.forEach(
-            (currentState, index) => {
-                if (currentState) {
-                    activeValues.push(values[index]);
-                }
-            }
-        );
-        setValuesState(activeValues);
-
-    };
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -226,7 +232,7 @@ function IndividualPageSmena() {
         })
 
         let complexNames = valuesState.map(i => {
-            return complexName[i]
+            return complexNameOld[i]
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item)=>{
@@ -247,7 +253,7 @@ function IndividualPageSmena() {
         })
 
         let complexNames = valuesState.map(i => {
-            return complexName[i]
+            return complexNameOld[i]
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item)=>{
@@ -280,38 +286,11 @@ function IndividualPageSmena() {
 
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <div
-                    ref={innerRef}
-                    className='menuSelect selectDevice'>
-                    <span onClick={toggleClass}>Выбор оборудования</span>
-                    <div className="listComplex">
-                        <span>▼</span>
-                        <ul className='toppings-list'
-                            className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
-                            {complexName.map((name, index) => {
-                                return (
-                                    <li key={index}>
-                                        <div className="toppings-list-item">
-                                            <div className="left-section">
-                                                <input
-                                                    type="checkbox"
-                                                    id={`custom-checkbox-${index}`}
-                                                    name={name[0]}
-                                                    value={index}
-                                                    checked={selectedObjects[index]}
-                                                    onChange={() => handleOnChange(index)}
-                                                />
-                                                <label htmlFor={`custom-checkbox-${index}`}></label><span
-                                                className='spanList'>{name[0]}</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-
-                    </div>
-                </div>
+                <ListDevicesCategory date={date} values={values}
+                                     setValuesState={setValuesState} complexName={complexName}
+                                     newDate={newDate} selectedCategory={selectedCategory}
+                                     setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
+                                     setSelectedObjects={setSelectedObjects}/>
             </div>
 
             <div className='complexAllInfo'>
@@ -328,11 +307,11 @@ function IndividualPageSmena() {
                                complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                return <ComplexSmenaAllIngo key={i} complexName={complexNameOld[e][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
-                                            service={complexName[e][1]} alarm={complexName[e][2]}
-                                            programs={complexName[e][3]} laser={complexName[e][4]}
-                                            report={complexName[e][5]} current={complexName[e][6]}/>
+                                            service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
+                                            programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}
+                                            report={complexNameOld[e][5]} current={complexNameOld[e][6]}/>
             })}
         </div>
     )
