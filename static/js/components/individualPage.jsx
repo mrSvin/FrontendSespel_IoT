@@ -1,8 +1,56 @@
-function IndividualPageInfo() {
+function MenuStankiIndividual(page, setPage) {
+
+    let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
+
+    menuSelect[page] = "menuSelect"
+
+    return (
+        <div className="menuButtons">
+
+                <div className={menuSelect[0]} onClick={()=>{
+                    setPage(0)
+                }}>ОТК</div>
+
+                <div className={menuSelect[1]} onClick={()=>{
+                    setPage(1)
+                }}>Мех.уч.2 пл.</div>
+
+                <div className={menuSelect[2]} onClick={()=>{
+                    setPage(2)
+                }}>Резка</div>
+
+                <div className={menuSelect[3]} onClick={()=>{
+                    setPage(3)
+                }}>Мех.уч.1 пл.</div>
+
+                <div className={menuSelect[4]} onClick={()=>{
+                    setPage(4)
+                }}>Роботы</div>
+
+                <div className={menuSelect[5]} onClick={()=>{
+                    setPage(5)
+                }}>Спец. комплексы</div>
+
+                <div className={menuSelect[6]} onClick={()=>{
+                    setPage(6)
+                }}>Склады</div>
+
+                <div className={menuSelect[7]} onClick={()=>{
+                    setPage(7)
+                }}>Литьё</div>
+
+                <div className={menuSelect[8]} onClick={()=>{
+                    setPage(8)
+                }}>Гибка</div>
+        </div>
+    )
+}
+
+function IndividualPageInfo(page) {
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
-    let complexName = [
+    const complexName = [
         ['OTK',
             ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", null, "CRYSTA-Apex S9168"],
             ["НК600", "НК600"],
@@ -76,9 +124,12 @@ function IndividualPageInfo() {
             ["FACCIN 10", "FACCIN 10"],
         ],
     ]
+
+    let [complexNameState, setComplexName] = useState(complexName[page])
+
     let complexNameOld = []
 
-    complexName.forEach(e => {
+    complexNameState.forEach(e => {
         let array = e.slice(1)
         array.forEach(i => {
             complexNameOld.push(i)
@@ -202,19 +253,20 @@ function IndividualPageInfo() {
     }
 
     if (localStorage['selectedCategory'] == undefined) {
-        localStorage['selectedCategory'] = new Array(complexName.length).fill(false)
+        localStorage['selectedCategory'] = new Array(complexNameState.length).fill(false)
     }
+
 
     // Состояния чекбоксов станков
     let [selectedCategory, setSelectedCategory] = useState(
-        (localStorage['selectedCategory'] == undefined) ? new Array(complexName.length).fill(false) : window.localStorage['selectedCategory'].split(',').map(e => {
+        (localStorage['selectedCategory'] == undefined) ? new Array(complexNameState.length).fill(true) : window.localStorage['selectedCategory'].split(',').map(e => {
             return (e == 'true')
         })
     );
 
     // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
-        (localStorage['selectedObjects'] == undefined) ? new Array(complexRequest.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
+        (localStorage['selectedObjects'] == undefined) ? new Array(complexRequest.length).fill(true) : window.localStorage['selectedObjects'].split(',').map(e => {
             return (e == 'true')
         })
     );
@@ -273,7 +325,7 @@ function IndividualPageInfo() {
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
                 <ListDevicesCategory date={date} values={values}
-                                     setValuesState={setValuesState} complexName={complexName}
+                                     setValuesState={setValuesState} complexName={complexNameState}
                                      newDate={newDate} selectedCategory={selectedCategory}
                                      setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
                                      setSelectedObjects={setSelectedObjects}/>
@@ -298,11 +350,12 @@ function IndividualPageInfo() {
 }
 
 function IndividualPage() {
+    let [page, setPage] = useState(0)
 
     return (
         <div>
 
-            <MenuStanki menuSelected=""/>
+            <MenuStankiIndividual menuSelected="" page={page} setPage={setPage}/>
 
             <div className="buttons-otchet">
 
@@ -320,14 +373,16 @@ function IndividualPage() {
 
             </div>
 
-            <IndividualPageInfo/>
+            <IndividualPageInfo page={page}/>
 
         </div>
     )
 }
 
-function ListDevicesCategory({date, values, setValuesState, complexName, newDate, selectedCategory,
-                                 setSelectedCategory, selectedObjects, setSelectedObjects}) {
+function ListDevicesCategory({
+                                 date, values, setValuesState, complexName, newDate, selectedCategory,
+                                 setSelectedCategory, selectedObjects, setSelectedObjects
+                             }) {
 
     function changeMainList(mainList, selectedObjects) {
         let index = 0
@@ -345,7 +400,7 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
 
     const toggleClass = () => {
         setActive(!isActive);
-        if(listChanged) {
+        if (listChanged) {
             newDate(date)
             setListChanged(false)
         }
@@ -354,7 +409,7 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
     const innerRef = useOuterClick(ev => {
         if (isActive) {
             setActive(!isActive);
-            if(listChanged) {
+            if (listChanged) {
                 newDate(date)
                 setListChanged(false)
             }
