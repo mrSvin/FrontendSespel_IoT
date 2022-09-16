@@ -1,17 +1,4 @@
-function MenuStankiIndividual({page, setPage, complexNameState, setSelectedObjects, setComplexNameOld, complexNameOld}) {
-
-function change(){
-    setComplexNameOld(complexNameState.map(e => {
-        let array = e.slice(1)
-        array.map(i => {
-            return(i)
-        })
-        return array
-    }))
-
-    setSelectedObjects(new Array(complexNameOld.length).fill(true))
-}
-
+function MenuStankiIndividual({page, setPage}) {
 
     let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
 
@@ -20,56 +7,46 @@ function change(){
     return (
         <div className="menuButtons">
 
-                <div className={menuSelect[0]} onClick={()=>{
-                    setPage(0)
-                    change()
-                }}>ОТК</div>
+            <div className={menuSelect[0]} onClick={()=>{
+                setPage(0)
+            }}>ОТК</div>
 
-                <div className={menuSelect[1]} onClick={()=>{
-                    setPage(1)
-                    change()
-                }}>Мех.уч.2 пл.</div>
+            <div className={menuSelect[1]} onClick={()=>{
+                setPage(1)
+            }}>Мех.уч.2 пл.</div>
 
-                <div className={menuSelect[2]} onClick={()=>{
-                    setPage(2)
-                    change()
-                }}>Резка</div>
+            <div className={menuSelect[2]} onClick={()=>{
+                setPage(2)
+            }}>Резка</div>
 
-                <div className={menuSelect[3]} onClick={()=>{
-                    setPage(3)
-                    change()
-                }}>Мех.уч.1 пл.</div>
+            <div className={menuSelect[3]} onClick={()=>{
+                setPage(3)
+            }}>Мех.уч.1 пл.</div>
 
-                <div className={menuSelect[4]} onClick={()=>{
-                    setPage(4)
-                    change()
-                }}>Роботы</div>
+            <div className={menuSelect[4]} onClick={()=>{
+                setPage(4)
+            }}>Роботы</div>
 
-                <div className={menuSelect[5]} onClick={()=>{
-                    setPage(5)
-                    change()
-                }}>Спец. комплексы</div>
+            <div className={menuSelect[5]} onClick={()=>{
+                setPage(5)
+            }}>Спец. комплексы</div>
 
-                <div className={menuSelect[6]} onClick={()=>{
-                    setPage(6)
-                    change()
-                }}>Склады</div>
+            <div className={menuSelect[6]} onClick={()=>{
+                setPage(6)
+            }}>Склады</div>
 
-                <div className={menuSelect[7]} onClick={()=>{
-                    setPage(7)
-                    change()
-                }}>Литьё</div>
+            <div className={menuSelect[7]} onClick={()=>{
+                setPage(7)
+            }}>Литьё</div>
 
-                <div className={menuSelect[8]} onClick={()=>{
-                    setPage(8)
-                    change()
-                }}>Гибка</div>
+            <div className={menuSelect[8]} onClick={()=>{
+                setPage(8)
+            }}>Гибка</div>
         </div>
     )
 }
 
-function IndividualPage() {
-    let [page, setPage] = useState(0)
+function IndividualPageInfo({page}) {
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
@@ -155,14 +132,14 @@ function IndividualPage() {
     }
     else complexNameState = complexName.slice(page, page+1)
 
-    let [complexNameOld, setComplexNameOld] = useState(complexNameState.map(e => {
-        let array = e.slice(1)
-        array.map(i => {
-            return(i)
-        })
-        return array
-    }))
+    let complexNameOld = []
 
+    complexNameState.forEach(e => {
+        let array = e.slice(1)
+        array.forEach(i => {
+            complexNameOld.push(i)
+        })
+    })
 
     let complexImg = [
         "../images/crystal_apex.png", "../images/nk600.png", "../images/UVF_5220.png",
@@ -348,9 +325,43 @@ function IndividualPage() {
 
     }
 
+
     return (
         <div>
-            <MenuStankiIndividual page={page} setPage={setPage} complexNameState={complexNameState} setSelectedObjects={setSelectedObjects} setComplexNameOld={setComplexNameOld} complexNameOld={complexNameOld}/>
+            <div className="energyCalendarContainer">
+                <DayCalendar newDate={newDate} date={date}/>
+                <ListDevicesCategory date={date} values={values}
+                                     setValuesState={setValuesState} complexName={complexNameState}
+                                     newDate={newDate} selectedCategory={selectedCategory}
+                                     setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
+                                     setSelectedObjects={setSelectedObjects}/>
+            </div>
+            <ComplexTotalSutkiInfo/>
+
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                          complexName={complexNameOld} complexRequest={complexRequest}
+                          valuesState={valuesStateWait}/>
+
+            {valuesStateWait.map((e, i) => {
+                return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]}
+                                            complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                                            service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
+                                            programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}
+                                            report={complexNameOld[e][5]} current={complexNameOld[e][6]}/>
+            })}
+        </div>
+    )
+
+}
+
+function IndividualPage() {
+    let [page, setPage] = useState(0)
+
+    return (
+        <div>
+
+            <MenuStankiIndividual page={page} setPage={setPage}/>
 
             <div className="buttons-otchet">
 
@@ -368,30 +379,7 @@ function IndividualPage() {
 
             </div>
 
-            <div>
-                <div className="energyCalendarContainer">
-                    <DayCalendar newDate={newDate} date={date}/>
-                    <ListDevicesCategory date={date} values={values}
-                                         setValuesState={setValuesState} complexName={complexNameState}
-                                         newDate={newDate} selectedCategory={selectedCategory}
-                                         setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
-                                         setSelectedObjects={setSelectedObjects}/>
-                </div>
-                <ComplexTotalSutkiInfo/>
-
-                <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                              complexName={complexNameOld} complexRequest={complexRequest}
-                              valuesState={valuesStateWait}/>
-
-                {valuesStateWait.map((e, i) => {
-                    return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]}
-                                                complexImg={complexImg[e]}
-                                                complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                                service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
-                                                programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}
-                                                report={complexNameOld[e][5]} current={complexNameOld[e][6]}/>
-                })}
-            </div>
+            <IndividualPageInfo page={page}/>
 
         </div>
     )
