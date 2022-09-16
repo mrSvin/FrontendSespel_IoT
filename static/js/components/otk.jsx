@@ -31,7 +31,7 @@ function OtkInfo() {
 
     let [valuesStateWait, setValuesStateWait] = useState(values)
 
-    let [obj, setObj] = useState({'ОТК': 152, 'Мех.2': 144})
+    let obj = {'ОТК': 152, 'Мех.2': 144}
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -116,8 +116,8 @@ function OtkInfo() {
                 {/*</div>*/}
             </div>
             <ComplexTotalSutkiInfo/>
-            {Object.keys(obj).map(e => {
-                return <div>{e}<span>{obj[e]}</span></div>
+            {Object.keys(obj).map((e,i) => {
+                return <div key={i}>{e}<span>{obj[e]}</span></div>
             })}
 
             <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
