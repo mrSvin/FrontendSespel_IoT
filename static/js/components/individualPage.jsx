@@ -88,9 +88,9 @@ function IndividualPageInfo() {
 
     let [places, setPlaces] = useState(Object.keys(complexName))
 
-    let [buttonNames, setbuttonNames] = places.map(e=>{
+    let [buttonNames, setbuttonNames] = useState(places.map(e=>{
         return complexName[e]
-    })
+    }))
 
     let complexImg = [
         "../images/crystal_apex.png", "../images/nk600.png", "../images/UVF_5220.png",
