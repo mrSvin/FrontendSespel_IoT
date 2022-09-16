@@ -1,57 +1,8 @@
-function MenuStankiIndividual({page, setPage, complexNameOld}) {
-console.log('Выделенных станков', complexNameOld)
-    let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
-
-    menuSelect[page] = "menuSelect"
-
-    return (
-        <div className="menuButtons">
-
-            <div className={menuSelect[0]} onClick={()=>{
-                setPage(0)
-            }}>ОТК</div>
-
-            <div className={menuSelect[1]} onClick={()=>{
-                setPage(1)
-            }}>Мех.уч.2 пл.</div>
-
-            <div className={menuSelect[2]} onClick={()=>{
-                setPage(2)
-            }}>Резка</div>
-
-            <div className={menuSelect[3]} onClick={()=>{
-                setPage(3)
-            }}>Мех.уч.1 пл.</div>
-
-            <div className={menuSelect[4]} onClick={()=>{
-                setPage(4)
-            }}>Роботы</div>
-
-            <div className={menuSelect[5]} onClick={()=>{
-                setPage(5)
-            }}>Спец. комплексы</div>
-
-            <div className={menuSelect[6]} onClick={()=>{
-                setPage(6)
-            }}>Склады</div>
-
-            <div className={menuSelect[7]} onClick={()=>{
-                setPage(7)
-            }}>Литьё</div>
-
-            <div className={menuSelect[8]} onClick={()=>{
-                setPage(8)
-            }}>Гибка</div>
-        </div>
-    )
-}
-
 function IndividualPage() {
-    let [page, setPage] = useState(0)
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
-    const complexName = [
+    let complexName = [
         ['OTK',
             ["CRYSTA-Apex S9168", "CRYSTA-Apex S9168", null, "CRYSTA-Apex S9168"],
             ["НК600", "НК600"],
@@ -125,25 +76,13 @@ function IndividualPage() {
             ["FACCIN 10", "FACCIN 10"],
         ],
     ]
-
-    let complexNameState = []
-
-    if(page == 10) {
-        complexNameState = complexName.slice()
-    }
-    else complexNameState = complexName.slice(page, page+1)
-
-    let complexNameOld = complexNameState.map(e => {
+    let complexNameOld = complexName.map(e => {
         let array = e.slice(1)
         array.map(i => {
             return(i)
         })
         return array
     })
-
-    let [selectedObjects, setSelectedObjects] = useState(
-        new Array(complexNameOld.length).fill(true)
-    );
 
     let complexImg = [
         "../images/crystal_apex.png", "../images/nk600.png", "../images/UVF_5220.png",
@@ -257,25 +196,27 @@ function IndividualPage() {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    let [selectedCategory, setSelectedCategory] = useState([true]);
-
-    if(page == 10) {
-        if (localStorage['selectedObjects'] == undefined) {
-            localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
-        }
-
-        if (localStorage['selectedCategory'] == undefined) {
-            localStorage['selectedCategory'] = new Array(complexNameState.length).fill(false)
-        }
-
-        setSelectedCategory((localStorage['selectedCategory'] == undefined) ? new Array(complexNameState.length).fill(true) : window.localStorage['selectedCategory'].split(',').map(e => {
-            return (e == 'true')
-        }))
-
-        setSelectedObjects((localStorage['selectedObjects'] == undefined) ? new Array(complexRequest.length).fill(true) : window.localStorage['selectedObjects'].split(',').map(e => {
-            return (e == 'true')
-        }))
+    if (localStorage['selectedObjects'] == undefined) {
+        localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
     }
+
+    if (localStorage['selectedCategory'] == undefined) {
+        localStorage['selectedCategory'] = new Array(complexName.length).fill(false)
+    }
+
+    // Состояния чекбоксов станков
+    let [selectedCategory, setSelectedCategory] = useState(
+        (localStorage['selectedCategory'] == undefined) ? new Array(complexName.length).fill(false) : window.localStorage['selectedCategory'].split(',').map(e => {
+            return (e == 'true')
+        })
+    );
+
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        (localStorage['selectedObjects'] == undefined) ? new Array(complexRequest.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
+            return (e == 'true')
+        })
+    );
 
     let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {
         return true === item ? values[index] : null;
@@ -325,10 +266,11 @@ function IndividualPage() {
 
     }
 
+
     return (
         <div>
 
-            <MenuStankiIndividual page={page} setPage={setPage} complexNameOld={complexNameOld}/>
+            <MenuStanki menuSelected=""/>
 
             <div className="buttons-otchet">
 
@@ -346,198 +288,28 @@ function IndividualPage() {
 
             </div>
 
-            <div>
-                <div className="energyCalendarContainer">
-                    <DayCalendar newDate={newDate} date={date}/>
-                    <ListDevicesCategory date={date} values={values}
-                                         setValuesState={setValuesState} complexName={complexNameState}
-                                         newDate={newDate} selectedCategory={selectedCategory}
-                                         setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
-                                         setSelectedObjects={setSelectedObjects}/>
-                </div>
-                <ComplexTotalSutkiInfo/>
-
-                <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                              complexName={complexNameOld} complexRequest={complexRequest}
-                              valuesState={valuesStateWait}/>
-
-                {valuesStateWait.map((e, i) => {
-                    return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]}
-                                                complexImg={complexImg[e]}
-                                                complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                                service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
-                                                programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}
-                                                report={complexNameOld[e][5]} current={complexNameOld[e][6]}/>
-                })}
+            <div className="energyCalendarContainer">
+                <DayCalendar newDate={newDate} date={date}/>
+                <ListDevicesCategory date={date} values={values}
+                                     setValuesState={setValuesState} complexName={complexName}
+                                     newDate={newDate} selectedCategory={selectedCategory}
+                                     setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
+                                     setSelectedObjects={setSelectedObjects}/>
             </div>
+            <ComplexTotalSutkiInfo/>
 
-        </div>
-    )
-}
+            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                          complexName={complexNameOld} complexRequest={complexRequest}
+                          valuesState={valuesStateWait}/>
 
-function ListDevicesCategory({
-                                 date, values, setValuesState, complexName, newDate, selectedCategory,
-                                 setSelectedCategory, selectedObjects, setSelectedObjects
-                             }) {
-
-    function changeMainList(mainList, selectedObjects) {
-        let index = 0
-        for (let i = 0; i < mainList.length; i++) {
-            for (let j = 0; j < mainList[i][1]; j++) {
-                selectedObjects[index] = mainList[i][0]
-                index++
-            }
-        }
-    }
-
-    const [isActive, setActive] = useState(false);
-
-    const [listChanged, setListChanged] = useState(false)
-
-    const toggleClass = () => {
-        setActive(!isActive);
-        if (listChanged) {
-            newDate(date)
-            setListChanged(false)
-        }
-    };
-
-    const innerRef = useOuterClick(ev => {
-        if (isActive) {
-            setActive(!isActive);
-            if (listChanged) {
-                newDate(date)
-                setListChanged(false)
-            }
-
-        }
-    });
-
-    const handleOnChangeCategory = (position) => {
-        const updatedCheckedState = selectedCategory.map((item, index) => {
-            return index === position ? !item : item;
-        });
-
-        window.localStorage['selectedCategory'] = updatedCheckedState
-        setSelectedCategory(updatedCheckedState)
-
-        let mainList = complexName.map((e, i) => {
-            return [updatedCheckedState[i], e.length - 1]
-        })
-
-        changeMainList(mainList, selectedObjects)
-
-        const activeValues = []
-        selectedObjects.forEach(
-            (currentState, index) => {
-                if (currentState) {
-                    activeValues.push(index);
-                }
-            }
-        );
-
-        window.localStorage['selectedObjects'] = selectedObjects
-        setValuesState(activeValues);
-    };
-    const handleOnChange = (position) => {
-        const updatedCheckedState = selectedObjects.map((item, index) => {
-            return index === position ? !item : item;
-        });
-
-        // console.log('Внутри update', updatedCheckedState)
-
-        window.localStorage['selectedObjects'] = updatedCheckedState
-        setSelectedObjects(updatedCheckedState)
-
-        const activeValues = []
-        updatedCheckedState.forEach(
-            (currentState, index) => {
-                if (currentState) {
-                    activeValues.push(values[index]);
-                }
-            }
-        );
-
-        setValuesState(activeValues);
-
-    };
-
-    let keyIndex = 0
-
-    return (
-        <div
-            ref={innerRef}
-            className='menuSelect selectDevice'>
-            <span onClick={toggleClass}>Выбор оборудования</span>
-            <div className="listComplex">
-                <span>▼</span>
-                <div
-                    className={isActive ? 'containerStanokList' : 'containerStanokList containerStanokListHidden'}>
-                    <ul className='toppings-list'
-                        className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
-
-                        {complexName.map((razdel, index) => {
-                            let copy = razdel.slice(1)
-
-                            let paddingNow = {
-                                paddingBottom: 30 * copy.length + 6
-                            };
-
-                            return (
-                                <li key={index}>
-                                    <div className="toppings-list-item">
-                                        <div className="left-section">
-                                            <input
-                                                type="checkbox"
-                                                id={`custom-checkbox-category-${index}`}
-                                                name={razdel[0]}
-                                                value={index}
-                                                checked={selectedCategory[index]}
-                                                onChange={() => {
-                                                    handleOnChangeCategory(index)
-                                                    setListChanged(true)
-                                                }
-                                                }
-                                            />
-                                            <label style={paddingNow}
-                                                   htmlFor={`custom-checkbox-category-${index}`}></label><span
-                                            className='spanList spanListCategory'>{razdel[0]}</span>
-                                        </div>
-                                    </div>
-                                    <ul>
-                                        {copy.map((stanok, i) => {
-                                            let saveIndex = keyIndex++
-                                            return (
-                                                <li key={saveIndex} className='individualLi'>
-                                                    <div className="toppings-list-item">
-                                                        <div className="left-section">
-                                                            <input
-                                                                type="checkbox"
-                                                                id={`custom-checkbox-${saveIndex}`}
-                                                                name={stanok[0]}
-                                                                value={`${saveIndex}`}
-                                                                checked={selectedObjects[saveIndex]}
-                                                                onChange={() => {
-                                                                    handleOnChange(saveIndex)
-                                                                    setListChanged(true)
-                                                                }}
-                                                            />
-                                                            <label
-                                                                htmlFor={`custom-checkbox-${saveIndex}`}></label><span
-                                                            className='spanList'>{stanok[0]}</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                </li>
-                            );
-
-                        })}
-                    </ul>
-                </div>
-            </div>
+            {valuesStateWait.map((e, i) => {
+                return <ComplexSutkiAllInfo key={i} complexName={complexNameOld[e][0]}
+                                            complexImg={complexImg[e]}
+                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                                            service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
+                                            programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}
+                                            report={complexNameOld[e][5]} current={complexNameOld[e][6]}/>
+            })}
         </div>
     )
 }

@@ -58,6 +58,13 @@ function IndividualPageSmena() {
         ["FACCIN 4","FACCIN 4"],
         ["FACCIN 10","FACCIN 10"],
     ]
+    let complexNameOld = complexName.map(e => {
+        let array = e.slice(1)
+        array.map(i => {
+            return(i)
+        })
+        return array
+    })
 
     let complexImg = [
         "../images/crystal_apex.png", "../images/nk600.png", "../images/UVF_5220.png",
@@ -171,51 +178,31 @@ function IndividualPageSmena() {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    if(localStorage['selectedObjects'] == undefined) {
+    if (localStorage['selectedObjects'] == undefined) {
         localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
     }
+
+    if (localStorage['selectedCategory'] == undefined) {
+        localStorage['selectedCategory'] = new Array(complexName.length).fill(false)
+    }
+
+    // Состояния чекбоксов станков
+    let [selectedCategory, setSelectedCategory] = useState(
+        (localStorage['selectedCategory'] == undefined) ? new Array(complexName.length).fill(false) : window.localStorage['selectedCategory'].split(',').map(e => {
+            return (e == 'true')
+        })
+    );
+
     // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
-        (localStorage['selectedObjects'] == undefined)? new Array(complexRequest.length).fill(false) :window.localStorage['selectedObjects'].split(',').map(e=>{return (e=='true')})
+        (localStorage['selectedObjects'] == undefined) ? new Array(complexRequest.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
+            return (e == 'true')
+        })
     );
 
     let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
 
     let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {return true === item ? values[index] : null;}).filter(e=> e!=null))
-
-    const [isActive, setActive] = useState(false);
-
-    const toggleClass = () => {
-        setActive(!isActive);
-        if (isActive) newDate(date)
-    };
-
-    const innerRef = useOuterClick(ev => {
-        if (isActive) {
-            setActive(!isActive);
-            newDate(date)
-        }
-    });
-
-    const handleOnChange = (position) => {
-        const updatedCheckedState = selectedObjects.map((item, index) => {
-            return index === position ? !item : item;
-        });
-
-        window.localStorage['selectedObjects'] = updatedCheckedState
-        setSelectedObjects(updatedCheckedState)
-
-        const activeValues = []
-        updatedCheckedState.forEach(
-            (currentState, index) => {
-                if (currentState) {
-                    activeValues.push(values[index]);
-                }
-            }
-        );
-        setValuesState(activeValues);
-
-    };
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -226,7 +213,7 @@ function IndividualPageSmena() {
         })
 
         let complexNames = valuesState.map(i => {
-            return complexName[i]
+            return complexNameOld[i]
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item)=>{
@@ -247,7 +234,7 @@ function IndividualPageSmena() {
         })
 
         let complexNames = valuesState.map(i => {
-            return complexName[i]
+            return complexNameOld[i]
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item)=>{
@@ -280,38 +267,11 @@ function IndividualPageSmena() {
 
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <div
-                    ref={innerRef}
-                    className='menuSelect selectDevice'>
-                    <span onClick={toggleClass}>Выбор оборудования</span>
-                    <div className="listComplex">
-                        <span>▼</span>
-                        <ul className='toppings-list'
-                            className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
-                            {complexName.map((name, index) => {
-                                return (
-                                    <li key={index}>
-                                        <div className="toppings-list-item">
-                                            <div className="left-section">
-                                                <input
-                                                    type="checkbox"
-                                                    id={`custom-checkbox-${index}`}
-                                                    name={name[0]}
-                                                    value={index}
-                                                    checked={selectedObjects[index]}
-                                                    onChange={() => handleOnChange(index)}
-                                                />
-                                                <label htmlFor={`custom-checkbox-${index}`}></label><span
-                                                className='spanList'>{name[0]}</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-
-                    </div>
-                </div>
+                <ListDevicesCategory date={date} values={values}
+                                     setValuesState={setValuesState} complexName={complexName}
+                                     newDate={newDate} selectedCategory={selectedCategory}
+                                     setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
+                                     setSelectedObjects={setSelectedObjects}/>
             </div>
 
             <div className='complexAllInfo'>
@@ -325,14 +285,14 @@ function IndividualPageSmena() {
             </div>
 
             <SwitchLineSmenaHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                               complexName={complexName} complexRequest={complexRequest} valuesState={valuesStateWait}/>
+                               complexName={complexNameOld} complexRequest={complexRequest} valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSmenaAllIngo key={i} complexName={complexName[e][0]} complexImg={complexImg[e]}
+                return <ComplexSmenaAllIngo key={i} complexName={complexNameOld[e][0]} complexImg={complexImg[e]}
                                             complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i*2+1}
-                                            service={complexName[e][1]} alarm={complexName[e][2]}
-                                            programs={complexName[e][3]} laser={complexName[e][4]}
-                                            report={complexName[e][5]} current={complexName[e][6]}/>
+                                            service={complexNameOld[e][1]} alarm={complexNameOld[e][2]}
+                                            programs={complexNameOld[e][3]} laser={complexNameOld[e][4]}
+                                            report={complexNameOld[e][5]} current={complexNameOld[e][6]}/>
             })}
         </div>
     )
