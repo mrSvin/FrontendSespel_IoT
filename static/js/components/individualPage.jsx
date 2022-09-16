@@ -253,6 +253,12 @@ function IndividualPageInfo({page}) {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
+    let [selectedCategory, setSelectedCategory] = useState([true]);
+
+    let [selectedObjects, setSelectedObjects] = useState(
+        new Array(complexNameOld.length).fill(true)
+    );
+
     if(page == 10) {
         if (localStorage['selectedObjects'] == undefined) {
             localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
@@ -262,29 +268,14 @@ function IndividualPageInfo({page}) {
             localStorage['selectedCategory'] = new Array(complexNameState.length).fill(false)
         }
 
-        // Состояния чекбоксов станков
-        let [selectedCategory, setSelectedCategory] = useState(
-            (localStorage['selectedCategory'] == undefined) ? new Array(complexNameState.length).fill(true) : window.localStorage['selectedCategory'].split(',').map(e => {
-                return (e == 'true')
-            })
-        );
+        setSelectedCategory((localStorage['selectedCategory'] == undefined) ? new Array(complexNameState.length).fill(true) : window.localStorage['selectedCategory'].split(',').map(e => {
+            return (e == 'true')
+        }))
 
-        // Состояния чекбоксов станков
-        let [selectedObjects, setSelectedObjects] = useState(
-            (localStorage['selectedObjects'] == undefined) ? new Array(complexRequest.length).fill(true) : window.localStorage['selectedObjects'].split(',').map(e => {
-                return (e == 'true')
-            })
-        );
+        setSelectedObjects((localStorage['selectedObjects'] == undefined) ? new Array(complexRequest.length).fill(true) : window.localStorage['selectedObjects'].split(',').map(e => {
+            return (e == 'true')
+        }))
     }
-    else{
-        let [selectedCategory, setSelectedCategory] = useState([true]);
-
-        let [selectedObjects, setSelectedObjects] = useState(
-            new Array(complexNameOld.length).fill(true)
-        );
-    }
-
-
 
     let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {
         return true === item ? values[index] : null;
