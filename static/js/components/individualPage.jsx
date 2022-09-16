@@ -345,14 +345,20 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
 
     const toggleClass = () => {
         setActive(!isActive);
-        if (isActive) newDate(date)
+        if(listChanged) {
+            newDate(date)
+            setListChanged(false)
+        }
     };
 
     const innerRef = useOuterClick(ev => {
-        if (isActive && listChanged) {
+        if (isActive) {
             setActive(!isActive);
-            setListChanged(false)
-            newDate(date)
+            if(listChanged) {
+                newDate(date)
+                setListChanged(false)
+            }
+
         }
     });
 
