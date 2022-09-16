@@ -273,8 +273,8 @@ function IndividualPageInfo() {
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
                 <ListDevicesCategory date={date} values={values}
-                                     setValuesState={setValuesState} {complexName = complexName}
-                                     complexName={complexName} newDate={newDate} selectedCategory={selectedCategory}
+                                     setValuesState={setValuesState} complexName={complexName}
+                                     newDate={newDate} selectedCategory={selectedCategory}
                                      setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
                                      setSelectedObjects{setSelectedObjects}/>
             </div>
