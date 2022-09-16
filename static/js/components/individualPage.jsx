@@ -276,7 +276,7 @@ function IndividualPageInfo() {
                                      setValuesState={setValuesState} complexName={complexName}
                                      newDate={newDate} selectedCategory={selectedCategory}
                                      setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
-                                     setSelectedObjects{setSelectedObjects}/>
+                                     setSelectedObjects={setSelectedObjects}/>
             </div>
             <ComplexTotalSutkiInfo/>
 
