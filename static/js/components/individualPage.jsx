@@ -457,7 +457,7 @@ function ListDevicesCategory({
 
     };
 
-    let keyIndex = 0
+    let [keyIndex, setKeyIndex] = useState(0)
 
     return (
         <div
@@ -503,9 +503,9 @@ function ListDevicesCategory({
                                             className='spanList spanListCategory'>{razdel}</span>
                                         </div>
                                     </div>
-                                    <InsideList complexName={complexName} razdel={razdel} keyIndex={keyIndex++}
-                                                selectedObjects={selectedObjects} handleOnChange={handleOnChange}
-                                                setListChanged={setListChanged}/>
+                                    <InsideList complexName={complexName} razdel={razdel} keyIndex={keyIndex}
+                                                setKeyIndex={setKeyIndex} selectedObjects={selectedObjects}
+                                                handleOnChange={handleOnChange} setListChanged={setListChanged}/>
                                 </li>
                             );
 
@@ -517,11 +517,12 @@ function ListDevicesCategory({
     )
 }
 
-function InsideList({complexName, razdel, keyIndex, selectedObjects, handleOnChange, setListChanged}) {
+function InsideList({complexName, razdel, keyIndex, SetKeyIndex, selectedObjects, handleOnChange, setListChanged}) {
     return (
         <ul>
             {complexName[razdel].map((stanok, i) => {
                 let saveIndex = keyIndex
+                SetKeyIndex(keyIndex+1)
                 return (
                     <li key={saveIndex} className='individualLi'>
                         <div className="toppings-list-item">
