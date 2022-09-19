@@ -517,12 +517,12 @@ function ListDevicesCategory({
     )
 }
 
-function InsideList({complexName, razdel, keyIndex, SetKeyIndex, selectedObjects, handleOnChange, setListChanged}) {
+function InsideList({complexName, razdel, keyIndex, setKeyIndex, selectedObjects, handleOnChange, setListChanged}) {
     return (
         <ul>
             {complexName[razdel].map((stanok, i) => {
                 let saveIndex = keyIndex
-                SetKeyIndex(keyIndex+1)
+                setKeyIndex(keyIndex+1)
                 return (
                     <li key={saveIndex} className='individualLi'>
                         <div className="toppings-list-item">
