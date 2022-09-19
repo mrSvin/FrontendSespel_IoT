@@ -503,7 +503,7 @@ function ListDevicesCategory({
                                             className='spanList spanListCategory'>{razdel}</span>
                                         </div>
                                     </div>
-                                    <InsideList complexName={complexName} razdel={razdel} keyIndex={keyIndex}
+                                    <InsideList complexName={complexName} razdel={razdel} keyIndex={keyIndex++}
                                                 selectedObjects={selectedObjects} handleOnChange={handleOnChange}
                                                 setListChanged={setListChanged}/>
                                 </li>
@@ -521,7 +521,7 @@ function InsideList({complexName, razdel, keyIndex, selectedObjects, handleOnCha
     return (
         <ul>
             {complexName[razdel].map((stanok, i) => {
-                let saveIndex = keyIndex++
+                let saveIndex = keyIndex
                 return (
                     <li key={saveIndex} className='individualLi'>
                         <div className="toppings-list-item">
