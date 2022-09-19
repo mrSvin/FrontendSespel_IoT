@@ -86,7 +86,11 @@ function IndividualPageInfo() {
         ],
     }
 
-    let places = Object.keys(complexName)
+    let [page, setPage] = useState('ОТК', 'Роботы')
+
+    let places = page
+
+    // let places = Object.keys(complexName)
     let buttonNames = []
 
     places.forEach(e => {
@@ -224,7 +228,7 @@ function IndividualPageInfo() {
 
     // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
-        (localStorage['selectedObjects'] == undefined) ? new Array(complexRequest.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
+        (localStorage['selectedObjects'] == undefined) ? new Array(buttonNames.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
             return (e == 'true')
         })
     );
