@@ -382,7 +382,7 @@ function ListDevicesCategory({
         setSelectedCategory(updatedCheckedState)
 
         let mainList = Object.keys(complexName).map((e, i) => {
-            return [updatedCheckedState[i], complexName[e].length - 1]
+            return [updatedCheckedState[i], complexName[e].length]
         })
 
         changeMainList(mainList, selectedObjects)
