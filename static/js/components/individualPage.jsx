@@ -1,3 +1,29 @@
+function getPlaceLength(complexName){
+    let complexNameIndex = 0
+    let placeLength = {}
+
+    Object.keys(complexName).forEach((e, i) => {
+        placeLength[e] = [complexNameIndex, complexNameIndex + complexName[e].length - 1]
+        complexNameIndex += complexName[e].length
+    })
+
+    return placeLength
+
+}
+
+function getValues(placeLength, places){
+    let values = []
+    places.forEach(e=>{
+        for(let i = placeLength[e][0]; i <= placeLength[e][1]; i++){
+            values.push(i)
+        }
+
+    })
+    return values
+}
+
+
+
 function IndividualPageInfo() {
 
     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
@@ -85,10 +111,13 @@ function IndividualPageInfo() {
             ["FACCIN 10", "FACCIN 10"],
         ],
     }
+    let placeLength = getPlaceLength(complexName)
 
-    let [page, setPage] = useState(['ОТК', 'Роботы'])
+    let [page, setPage] = useState([0,3])
 
-    let places = page
+    let places = page.map(e=>{
+        return Object.keys(complexName)[e]
+    })
 
     // let places = Object.keys(complexName)
     let buttonNames = []
@@ -203,7 +232,7 @@ function IndividualPageInfo() {
     ]
 
     // Массив номеров всех станков
-    let values = complexRequest.map((e, i) => i)
+    let values = getValues(placeLength, places)
 
     // Состояние даты
     let [date, setDate] = useState(0);
