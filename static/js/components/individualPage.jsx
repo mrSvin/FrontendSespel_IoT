@@ -517,7 +517,7 @@ function ListDevicesCategory({
     )
 }
 
-function InsideList(complexName, razdel, keyIndex, selectedObjects, handleOnChange, setListChanged) {
+function InsideList({complexName, razdel, keyIndex, selectedObjects, handleOnChange, setListChanged}) {
     return (
         <ul>
             {complexName[razdel].map((stanok, i) => {
