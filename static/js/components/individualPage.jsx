@@ -86,7 +86,7 @@ function IndividualPageInfo() {
         ],
     }
 
-    let [page, setPage] = useState('ОТК', 'Роботы')
+    let [page, setPage] = useState(['ОТК', 'Роботы'])
 
     let places = page
 
