@@ -1,4 +1,4 @@
-function getPlaceLength(complexName){
+function getPlaceLength(complexName) {
     let complexNameIndex = 0
     let placeLength = {}
 
@@ -11,18 +11,17 @@ function getPlaceLength(complexName){
 
 }
 
-function getValues(placeLength, places){
+function getValues(placeLength, places) {
     //let keys = Object.keys(placeLength)
     let values = []
-    places.forEach(e=>{
-        for(let i = placeLength[e][0]; i <= placeLength[e][1]; i++){
+    places.forEach(e => {
+        for (let i = placeLength[e][0]; i <= placeLength[e][1]; i++) {
             values.push(i)
         }
 
     })
     return values
 }
-
 
 
 function IndividualPageInfo() {
@@ -115,11 +114,11 @@ function IndividualPageInfo() {
     }
     let placeLength = getPlaceLength(complexName)
 
-    let [page, setPage] = useState([3,0])
+    // let [page, setPage] = useState([3, 0])
 
-    let places = page.map(e=>{
-        return Object.keys(complexName)[e]
-    })
+    // let places = page.map(e => {
+    //     return Object.keys(complexName)[e]
+    // })
 
     // let places = Object.keys(complexName)
     let buttonNames = []
@@ -233,8 +232,80 @@ function IndividualPageInfo() {
         'sborCeh', 'sborCeh',
     ]
 
+    let kim = {
+        buttonNames: {
+            name:"CRYSTA-Apex S9168",
+            serviceName: "CRYSTA-Apex S9168",
+            programsName: "CRYSTA-Apex S9168",
+        },
+        complexImg: "../images/crystal_apex.png",
+        complexRequest: 'kim',
+        buttonsVrs: [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
+    }
+
+    let nk600 = {
+        buttonNames: {
+            name:"НК600",
+            serviceName: "НК600",
+        },
+        complexImg: "../images/nk600.png",
+        complexRequest: 'nk600',
+        buttonsVrs: [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"]
+    }
+
+    let faccin_1 = {
+        buttonNames: {
+            name:"FACCIN 4",
+            serviceName: "FACCIN 4",
+        },
+        complexImg: "../images/faccin.png",
+        complexRequest: 'faccin_1',
+        buttonsVrs: [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
+    }
+
+    let faccin_2 = {
+        buttonNames: {
+            name:"FACCIN 10",
+            serviceName: "FACCIN 10",
+        },
+        complexImg: "../images/faccin_2.png",
+        complexRequest: 'faccin_2',
+        buttonsVrs: [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
+    }
+
+    let places = {
+        'OTK': {kim, nk600},
+        'Гибка': {faccin_1, faccin_2},
+    }
+
+    let placeKeys = Object.keys(places).map(e => {
+        return e
+    })
+
+    let stankiObject = {}
+    let stankiKeys = []
+
+        Object.keys(places).forEach(e => {
+            Object.keys(places[e]).map(i=>{
+            stankiObject[i] = places[e][i]
+            stankiKeys.push(i)
+        })
+    })
+
+//
+// placeKeys.forEach((e) => {
+//     console.log(e)
+//     Object.keys(places[e]).forEach(i => {
+//         console.log(' ',i)
+//         Object.keys(places[e][i]).forEach(j=>{
+//             console.log('   ',j, places[e][i][j])
+//         })
+//     })
+// })
+
+
     // Массив номеров всех станков
-    let values = getValues(placeLength, places)
+    // let values = getValues(placeLength, places)
 
     // Состояние даты
     let [date, setDate] = useState(0);
@@ -242,44 +313,50 @@ function IndividualPageInfo() {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    if (localStorage['selectedObjects'] == undefined) {
-        localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
-    }
-
-    if (localStorage['selectedCategory'] == undefined) {
-        localStorage['selectedCategory'] = new Array(places.length).fill(false)
-    }
-
-    // Состояния чекбоксов станков
-    let [selectedCategory, setSelectedCategory] = useState(
-        (localStorage['selectedCategory'] == undefined) ? new Array(places.length).fill(false) : window.localStorage['selectedCategory'].split(',').map(e => {
-            return (e == 'true')
-        })
-    );
+    // if (localStorage['selectedObjects'] == undefined) {
+    //     localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
+    // }
+    //
+    // if (localStorage['selectedCategory'] == undefined) {
+    //     localStorage['selectedCategory'] = new Array(places.length).fill(false)
+    // }
 
     // Состояния чекбоксов станков
-    let [selectedObjects, setSelectedObjects] = useState(
-        (localStorage['selectedObjects'] == undefined) ? new Array(values.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
-            return (e == 'true')
-        })
-    );
+    // let [selectedCategory, setSelectedCategory] = useState(
+    //     (localStorage['selectedCategory'] == undefined) ? new Array(placeKeys.length).fill(false) : window.localStorage['selectedCategory'].split(',').map(e => {
+    //         return (e == 'true')
+    //     })
+    // );
+    //
+    // // Состояния чекбоксов станков
+    // let [selectedObjects, setSelectedObjects] = useState(
+    //     (localStorage['selectedObjects'] == undefined) ? new Array(values.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
+    //         return (e == 'true')
+    //     })
+    // );
 
-    let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {
-        return true === item ? values[index] : null;
-    }).filter(e => e != null))
-
-    let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {
-        return true === item ? values[index] : null;
-    }).filter(e => e != null))
+    // let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {
+    //     return true === item ? values[index] : null;
+    // }).filter(e => e != null))
+    //
+    // let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {
+    //     return true === item ? values[index] : null;
+    // }).filter(e => e != null))
 
 
     useEffect(() => {
         let dateInput = dayNow()
         setDate(dateInput)
 
-        let fetchNames = valuesState.map(i => {
-            return complexRequest[i]
+        let fetchNames = stankiKeys.map(name=>{
+            return stankiObject[name].complexRequest
         })
+
+        console.log('Первая контрольная точка',fetchNames)
+
+        // let fetchNames = valuesState.map(i => {
+        //     return complexRequest[i]
+        // })
 
         let complexNames = valuesState.map(i => {
             return buttonNames[i]
@@ -474,7 +551,7 @@ function ListDevicesCategory({
                         {places.map((razdel, index) => {
 
                             let allComplex = Object.keys(complexName)
-                            let trueIndex = allComplex.findIndex((e)=>{
+                            let trueIndex = allComplex.findIndex((e) => {
                                 return e == razdel
                             })
 
@@ -540,3 +617,12 @@ function ListDevicesCategory({
         </div>
     )
 }
+
+
+//  [0]     [1]         [2]          [3]         [4]         [5]          [6]
+// Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
+
+
+
+
+
