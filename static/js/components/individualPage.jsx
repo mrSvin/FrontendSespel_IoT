@@ -469,11 +469,10 @@ function ListDevicesCategory({
                     <ul className='toppings-list'
                         className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
 
-                        {Object.keys(places).map((razdel, index) => {
-                            let copy = razdel.slice(1)
+                        {places.map((razdel, index) => {
 
                             let paddingNow = {
-                                paddingBottom: 30 * copy.length + 6
+                                paddingBottom: 30 * complexName[razdel].length + 6
                             };
 
                             return (
