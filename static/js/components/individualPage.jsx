@@ -12,9 +12,10 @@ function getPlaceLength(complexName){
 }
 
 function getValues(placeLength, places){
+    let keys = Object.keys(placeLength)
     let values = []
     places.forEach(e=>{
-        for(let i = placeLength[e][0]; i <= placeLength[e][1]; i++){
+        for(let i = placeLength[keys[e]][0]; i <= placeLength[keys[e]][1]; i++){
             values.push(i)
         }
 
@@ -122,7 +123,7 @@ function IndividualPageInfo() {
     // let places = Object.keys(complexName)
     let buttonNames = []
 
-    places.forEach(e => {
+    Object.keys(complexName).forEach(e => {
         complexName[e].forEach(i => {
             buttonNames.push(i)
         })
@@ -257,7 +258,7 @@ function IndividualPageInfo() {
 
     // Состояния чекбоксов станков
     let [selectedObjects, setSelectedObjects] = useState(
-        (localStorage['selectedObjects'] == undefined) ? new Array(buttonNames.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
+        (localStorage['selectedObjects'] == undefined) ? new Array(values.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
             return (e == 'true')
         })
     );
