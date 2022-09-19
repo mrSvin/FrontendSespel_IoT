@@ -115,7 +115,7 @@ function IndividualPageInfo() {
     }
     let placeLength = getPlaceLength(complexName)
 
-    let [page, setPage] = useState([0,3])
+    let [page, setPage] = useState([3,0])
 
     let places = page.map(e=>{
         return Object.keys(complexName)[e]
@@ -488,18 +488,18 @@ function ListDevicesCategory({
                                         <div className="left-section">
                                             <input
                                                 type="checkbox"
-                                                id={`custom-checkbox-category-${trueIndex}`}
+                                                id={`custom-checkbox-category-${index}`}
                                                 name={razdel}
                                                 value={trueIndex}
                                                 checked={selectedCategory[index]}
                                                 onChange={() => {
-                                                    handleOnChangeCategory(trueIndex)
+                                                    handleOnChangeCategory(index)
                                                     setListChanged(true)
                                                 }
                                                 }
                                             />
                                             <label style={paddingNow}
-                                                   htmlFor={`custom-checkbox-category-${trueIndex}`}></label><span
+                                                   htmlFor={`custom-checkbox-category-${index}`}></label><span
                                             className='spanList spanListCategory'>{razdel}</span>
                                         </div>
                                     </div>
