@@ -1,4 +1,4 @@
-function getPlaceLength(complexName) {
+function getPlaceLength(complexName){
     let complexNameIndex = 0
     let placeLength = {}
 
@@ -11,17 +11,18 @@ function getPlaceLength(complexName) {
 
 }
 
-function getValues(placeLength, places) {
+function getValues(placeLength, places){
     //let keys = Object.keys(placeLength)
     let values = []
-    places.forEach(e => {
-        for (let i = placeLength[e][0]; i <= placeLength[e][1]; i++) {
+    places.forEach(e=>{
+        for(let i = placeLength[e][0]; i <= placeLength[e][1]; i++){
             values.push(i)
         }
 
     })
     return values
 }
+
 
 
 function IndividualPageInfo() {
@@ -114,9 +115,9 @@ function IndividualPageInfo() {
     }
     let placeLength = getPlaceLength(complexName)
 
-    let [page, setPage] = useState([3, 0])
+    let [page, setPage] = useState([3,0])
 
-    let places = page.map(e => {
+    let places = page.map(e=>{
         return Object.keys(complexName)[e]
     })
 
@@ -407,16 +408,15 @@ function ListDevicesCategory({
         }
     });
 
-    const handleOnChangeCategory = (position, places) => {
+    const handleOnChangeCategory = (position) => {
         const updatedCheckedState = selectedCategory.map((item, index) => {
             return index === position ? !item : item;
         });
 
-        console.log(places, 'Места')
         window.localStorage['selectedCategory'] = updatedCheckedState
         setSelectedCategory(updatedCheckedState)
 
-        let mainList = places.map((e, i) => {
+        let mainList = Object.keys(complexName).map((e, i) => {
             return [updatedCheckedState[i], complexName[e].length]
         })
 
@@ -457,7 +457,7 @@ function ListDevicesCategory({
 
     };
 
-    let [keyIndex, setKeyIndex] = useState(0)
+    let keyIndex = 0
 
     return (
         <div
@@ -473,27 +473,27 @@ function ListDevicesCategory({
 
                         {places.map((razdel, index) => {
 
-                            // let allComplex = Object.keys(complexName)
-                            // let trueIndex = allComplex.findIndex((e) => {
-                            //     return e == razdel
-                            // })
+                            let allComplex = Object.keys(complexName)
+                            let trueIndex = allComplex.findIndex((e)=>{
+                                return e == razdel
+                            })
 
                             let paddingNow = {
                                 paddingBottom: 30 * complexName[razdel].length + 6
                             };
 
                             return (
-                                <li key={index}>
+                                <li key={trueIndex}>
                                     <div className="toppings-list-item">
                                         <div className="left-section">
                                             <input
                                                 type="checkbox"
                                                 id={`custom-checkbox-category-${index}`}
                                                 name={razdel}
-                                                value={index}
+                                                value={trueIndex}
                                                 checked={selectedCategory[index]}
                                                 onChange={() => {
-                                                    handleOnChangeCategory(index, places)
+                                                    handleOnChangeCategory(index)
                                                     setListChanged(true)
                                                 }
                                                 }
@@ -503,9 +503,33 @@ function ListDevicesCategory({
                                             className='spanList spanListCategory'>{razdel}</span>
                                         </div>
                                     </div>
-                                    <InsideList complexName={complexName} razdel={razdel} keyIndex={keyIndex}
-                                                setKeyIndex={setKeyIndex} selectedObjects={selectedObjects}
-                                                handleOnChange={handleOnChange} setListChanged={setListChanged}/>
+                                    <ul>
+                                        {complexName[razdel].map((stanok, i) => {
+                                            let saveIndex = keyIndex++
+                                            return (
+                                                <li key={saveIndex} className='individualLi'>
+                                                    <div className="toppings-list-item">
+                                                        <div className="left-section">
+                                                            <input
+                                                                type="checkbox"
+                                                                id={`custom-checkbox-${saveIndex}`}
+                                                                name={stanok[0]}
+                                                                value={`${saveIndex}`}
+                                                                checked={selectedObjects[saveIndex]}
+                                                                onChange={() => {
+                                                                    handleOnChange(saveIndex)
+                                                                    setListChanged(true)
+                                                                }}
+                                                            />
+                                                            <label
+                                                                htmlFor={`custom-checkbox-${saveIndex}`}></label><span
+                                                            className='spanList'>{stanok[0]}</span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
                                 </li>
                             );
 
@@ -516,37 +540,3 @@ function ListDevicesCategory({
         </div>
     )
 }
-
-function InsideList({complexName, razdel, keyIndex, setKeyIndex, selectedObjects, handleOnChange, setListChanged}) {
-    return (
-        <ul>
-            {complexName[razdel].map((stanok, i) => {
-                let saveIndex = keyIndex
-                setKeyIndex(keyIndex+1)
-                return (
-                    <li key={saveIndex} className='individualLi'>
-                        <div className="toppings-list-item">
-                            <div className="left-section">
-                                <input
-                                    type="checkbox"
-                                    id={`inside-checkbox-${saveIndex}`}
-                                    name={stanok[0]}
-                                    value={`${saveIndex}`}
-                                    checked={selectedObjects[saveIndex]}
-                                    onChange={() => {
-                                        handleOnChange(saveIndex)
-                                        setListChanged(true)
-                                    }}
-                                />
-                                <label
-                                    htmlFor={`inside-checkbox-${saveIndex}`}></label><span
-                                className='spanList'>{stanok[0]}</span>
-                            </div>
-                        </div>
-                    </li>
-                )
-            })}
-        </ul>
-    )
-}
-
