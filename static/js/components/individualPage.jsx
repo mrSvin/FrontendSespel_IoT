@@ -86,11 +86,14 @@ function IndividualPageInfo() {
         ],
     }
 
-    let [places, setPlaces] = useState(Object.keys(complexName))
+    let places = Object.keys(complexName)
+    let buttonNames = []
 
-    let [buttonNames, setbuttonNames] = useState(places.map(e=>{
-        return complexName[e]
-    }))
+    places.forEach(e => {
+        complexName[e].forEach(i => {
+            buttonNames.push(i)
+        })
+    })
 
     let complexImg = [
         "../images/crystal_apex.png", "../images/nk600.png", "../images/UVF_5220.png",
@@ -292,11 +295,11 @@ function IndividualPageInfo() {
                           valuesState={valuesStateWait}/>
 
             {valuesStateWait.map((e, i) => {
-                return <ComplexSutkiAllInfo key={i} complexName={buttonNames[e][0]} complexImg={complexImg[e]}
-                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                            service={buttonNames[e][1]} alarm={buttonNames[e][2]}
-                                            programs={buttonNames[e][3]} laser={buttonNames[e][4]}
-                                            report={buttonNames[e][5]} current={buttonNames[e][6]}/>
+                    return <ComplexSutkiAllInfo key={i} complexName={buttonNames[e][0]} complexImg={complexImg[e]}
+                                                complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
+                                                service={buttonNames[e][1]} alarm={buttonNames[e][2]}
+                                                programs={buttonNames[e][3]} laser={buttonNames[e][4]}
+                                                report={buttonNames[e][5]} current={buttonNames[e][6]}/>
             })}
         </div>
     )
@@ -332,8 +335,10 @@ function IndividualPage() {
     )
 }
 
-function ListDevicesCategory({date, values, setValuesState, complexName, newDate, selectedCategory,
-                                 setSelectedCategory, selectedObjects, setSelectedObjects}) {
+function ListDevicesCategory({
+                                 date, values, setValuesState, complexName, newDate, selectedCategory,
+                                 setSelectedCategory, selectedObjects, setSelectedObjects
+                             }) {
 
     function changeMainList(mainList, selectedObjects) {
         let index = 0
@@ -351,7 +356,7 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
 
     const toggleClass = () => {
         setActive(!isActive);
-        if(listChanged) {
+        if (listChanged) {
             newDate(date)
             setListChanged(false)
         }
@@ -360,7 +365,7 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
     const innerRef = useOuterClick(ev => {
         if (isActive) {
             setActive(!isActive);
-            if(listChanged) {
+            if (listChanged) {
                 newDate(date)
                 setListChanged(false)
             }
