@@ -473,7 +473,7 @@ function ListDevicesCategory({
 
                         {places.map((razdel, index) => {
 
-                            let allComplex = Object.keys(complexName)
+                            // let allComplex = Object.keys(complexName)
                             // let trueIndex = allComplex.findIndex((e) => {
                             //     return e == razdel
                             // })
@@ -503,7 +503,7 @@ function ListDevicesCategory({
                                             className='spanList spanListCategory'>{razdel}</span>
                                         </div>
                                     </div>
-                                    <InsideList complexName={complexName} razdel={razdel} saveIndex={saveIndex}
+                                    <InsideList complexName={complexName} razdel={razdel} keyIndex={keyIndex}
                                                 selectedObjects={selectedObjects} handleOnChange={handleOnChange}
                                                 setListChanged={setListChanged}/>
                                 </li>
@@ -517,7 +517,7 @@ function ListDevicesCategory({
     )
 }
 
-function InsideList(complexName, razdel, saveIndex, selectedObjects, handleOnChange, setListChanged) {
+function InsideList(complexName, razdel, keyIndex, selectedObjects, handleOnChange, setListChanged) {
     return (
         <ul>
             {complexName[razdel].map((stanok, i) => {
