@@ -12,10 +12,10 @@ function getPlaceLength(complexName){
 }
 
 function getValues(placeLength, places){
-    let keys = Object.keys(placeLength)
+    //let keys = Object.keys(placeLength)
     let values = []
     places.forEach(e=>{
-        for(let i = placeLength[keys[e]][0]; i <= placeLength[keys[e]][1]; i++){
+        for(let i = placeLength[e][0]; i <= placeLength[e][1]; i++){
             values.push(i)
         }
 
@@ -499,7 +499,7 @@ function ListDevicesCategory({
                                                 }
                                             />
                                             <label style={paddingNow}
-                                                   htmlFor={`custom-checkbox-category-${index}`}></label><span
+                                                   htmlFor={`custom-checkbox-category-${trueIndex}`}></label><span
                                             className='spanList spanListCategory'>{razdel}</span>
                                         </div>
                                     </div>
