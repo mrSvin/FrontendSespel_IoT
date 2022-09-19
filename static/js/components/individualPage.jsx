@@ -471,22 +471,27 @@ function ListDevicesCategory({
 
                         {places.map((razdel, index) => {
 
+                            let allComplex = Object.keys(complexName)
+                            let trueIndex = allComplex.findIndex((e)=>{
+                                return e == razdel
+                            })
+
                             let paddingNow = {
                                 paddingBottom: 30 * complexName[razdel].length + 6
                             };
 
                             return (
-                                <li key={index}>
+                                <li key={trueIndex}>
                                     <div className="toppings-list-item">
                                         <div className="left-section">
                                             <input
                                                 type="checkbox"
-                                                id={`custom-checkbox-category-${index}`}
+                                                id={`custom-checkbox-category-${trueIndex}`}
                                                 name={razdel}
-                                                value={index}
+                                                value={trueIndex}
                                                 checked={selectedCategory[index]}
                                                 onChange={() => {
-                                                    handleOnChangeCategory(index)
+                                                    handleOnChangeCategory(trueIndex)
                                                     setListChanged(true)
                                                 }
                                                 }
