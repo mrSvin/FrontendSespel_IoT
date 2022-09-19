@@ -232,6 +232,9 @@ function IndividualPageInfo() {
         'sborCeh', 'sborCeh',
     ]
 
+
+    // Новая структура
+
     let kim = {
         buttonNames: {
             name:"CRYSTA-Apex S9168",
@@ -240,7 +243,8 @@ function IndividualPageInfo() {
         },
         complexImg: "../images/crystal_apex.png",
         complexRequest: 'kim',
-        buttonsVrs: [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"]
+        buttonsVrs: [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size:  "meh1",
     }
 
     let nk600 = {
@@ -250,7 +254,8 @@ function IndividualPageInfo() {
         },
         complexImg: "../images/nk600.png",
         complexRequest: 'nk600',
-        buttonsVrs: [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"]
+        buttonsVrs: [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"],
+        size: "ceh1",
     }
 
     let faccin_1 = {
@@ -260,7 +265,8 @@ function IndividualPageInfo() {
         },
         complexImg: "../images/faccin.png",
         complexRequest: 'faccin_1',
-        buttonsVrs: [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
+        buttonsVrs: [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh'
     }
 
     let faccin_2 = {
@@ -270,13 +276,17 @@ function IndividualPageInfo() {
         },
         complexImg: "../images/faccin_2.png",
         complexRequest: 'faccin_2',
-        buttonsVrs: [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"]
+        buttonsVrs: [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh'
     }
 
     let places = {
         'OTK': {kim, nk600},
         'Гибка': {faccin_1, faccin_2},
     }
+
+    // Новая структура
+
 
     let placeKeys = Object.keys(places).map(e => {
         return e
@@ -303,9 +313,13 @@ function IndividualPageInfo() {
 //     })
 // })
 
+    let values = stankiKeys.map((name, i)=>{
+        return i
+    })
 
-    // Массив номеров всех станков
+        // Массив номеров всех станков
     // let values = getValues(placeLength, places)
+
 
     // Состояние даты
     let [date, setDate] = useState(0);
@@ -322,26 +336,26 @@ function IndividualPageInfo() {
     // }
 
     // Состояния чекбоксов станков
-    // let [selectedCategory, setSelectedCategory] = useState(
-    //     (localStorage['selectedCategory'] == undefined) ? new Array(placeKeys.length).fill(false) : window.localStorage['selectedCategory'].split(',').map(e => {
-    //         return (e == 'true')
-    //     })
-    // );
-    //
-    // // Состояния чекбоксов станков
-    // let [selectedObjects, setSelectedObjects] = useState(
-    //     (localStorage['selectedObjects'] == undefined) ? new Array(values.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
-    //         return (e == 'true')
-    //     })
-    // );
+    let [selectedCategory, setSelectedCategory] = useState(
+        (localStorage['selectedCategory'] == undefined) ? new Array(placeKeys.length).fill(false) : window.localStorage['selectedCategory'].split(',').map(e => {
+            return (e == 'true')
+        })
+    );
 
-    // let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {
-    //     return true === item ? values[index] : null;
-    // }).filter(e => e != null))
-    //
-    // let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {
-    //     return true === item ? values[index] : null;
-    // }).filter(e => e != null))
+    // Состояния чекбоксов станков
+    let [selectedObjects, setSelectedObjects] = useState(
+        (localStorage['selectedObjects'] == undefined) ? new Array(values.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
+            return (e == 'true')
+        })
+    );
+
+    let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {
+        return true === item ? values[index] : null;
+    }).filter(e => e != null))
+
+    let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {
+        return true === item ? values[index] : null;
+    }).filter(e => e != null))
 
 
     useEffect(() => {
@@ -358,15 +372,15 @@ function IndividualPageInfo() {
         //     return complexRequest[i]
         // })
 
-        let complexNames = valuesState.map(i => {
-            return buttonNames[i]
-        })
-
-        let stankiRequest = Promise.all(fetchNames.map((item) => {
-            return fetchRequest(dateInput, item)
-        }));
-
-        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
+        // let complexNames = valuesState.map(i => {
+        //     return buttonNames[i]
+        // })
+        //
+        // let stankiRequest = Promise.all(fetchNames.map((item) => {
+        //     return fetchRequest(dateInput, item)
+        // }));
+        //
+        // updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }, [])
 
@@ -394,11 +408,11 @@ function IndividualPageInfo() {
         <div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <ListDevicesCategory date={date} values={values}
-                                     setValuesState={setValuesState} complexName={complexName} places={places}
-                                     newDate={newDate} selectedCategory={selectedCategory}
-                                     setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}
-                                     setSelectedObjects={setSelectedObjects}/>
+                {/*<ListDevicesCategory date={date} values={values}*/}
+                {/*                     setValuesState={setValuesState} complexName={complexName} places={places}*/}
+                {/*                     newDate={newDate} selectedCategory={selectedCategory}*/}
+                {/*                     setSelectedCategory={setSelectedCategory} selectedObjects={selectedObjects}*/}
+                {/*                     setSelectedObjects={setSelectedObjects}/>*/}
             </div>
             <ComplexTotalSutkiInfo/>
 
@@ -406,12 +420,13 @@ function IndividualPageInfo() {
                           complexName={buttonNames} complexRequest={complexRequest}
                           valuesState={valuesStateWait}/>
 
-            {valuesStateWait.map((e, i) => {
-                return <ComplexSutkiAllInfo key={i} complexName={buttonNames[e][0]} complexImg={complexImg[e]}
-                                            complexMesto={buttonsVrs[e]} size={size[e]} idContainer={i + 1}
-                                            service={buttonNames[e][1]} alarm={buttonNames[e][2]}
-                                            programs={buttonNames[e][3]} laser={buttonNames[e][4]}
-                                            report={buttonNames[e][5]} current={buttonNames[e][6]}/>
+            {stankiKeys.map((e, i) => {
+                let stanok = stankiObject[e]
+                return <ComplexSutkiAllInfo key={i} complexName={stanok.buttonNames.name} complexImg={stanok.complexImg}
+                                            complexMesto={stanok.buttonsVrs} size={stanok.size} idContainer={i + 1}
+                                            service={stanok.buttonNames.serviceName} alarm={stanok.buttonNames.alarm}
+                                            programs={stanok.buttonNames.programsName} laser={stanok.buttonNames.laser}
+                                            report={stanok.buttonNames.report} current={stanok.buttonNames.current}/>
             })}
         </div>
     )
