@@ -528,7 +528,7 @@ function InsideList({complexName, razdel, keyIndex, selectedObjects, handleOnCha
                             <div className="left-section">
                                 <input
                                     type="checkbox"
-                                    id={`custom-checkbox-${saveIndex}`}
+                                    id={`inside-checkbox-${saveIndex}`}
                                     name={stanok[0]}
                                     value={`${saveIndex}`}
                                     checked={selectedObjects[saveIndex]}
@@ -538,7 +538,7 @@ function InsideList({complexName, razdel, keyIndex, selectedObjects, handleOnCha
                                     }}
                                 />
                                 <label
-                                    htmlFor={`custom-checkbox-${saveIndex}`}></label><span
+                                    htmlFor={`inside-checkbox-${saveIndex}`}></label><span
                                 className='spanList'>{stanok[0]}</span>
                             </div>
                         </div>
