@@ -506,24 +506,24 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
 
     const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
 
-    const handleOnChangeCategory = (position) => {
-
-        let mainList = Object.keys(complexName).map((e, i) => {
-            return [updatedCheckedState[i], complexName[e].length]
-        })
-
-        changeMainList(mainList, selectedObjects)
-
-        const activeValues = []
-        selectedObjects.forEach(
-            (currentState, index) => {
-                if (currentState) {
-                    activeValues.push(index);
-                }
-            }
-        );
-
-    };
+    // const handleOnChangeCategory = (position) => {
+    //
+    //     let mainList = Object.keys(complexName).map((e, i) => {
+    //         return [updatedCheckedState[i], complexName[e].length]
+    //     })
+    //
+    //     changeMainList(mainList, selectedObjects)
+    //
+    //     const activeValues = []
+    //     selectedObjects.forEach(
+    //         (currentState, index) => {
+    //             if (currentState) {
+    //                 activeValues.push(index);
+    //             }
+    //         }
+    //     );
+    //
+    // };
     // const handleOnChange = (position) => {
     //     const updatedCheckedState = selectedObjects.map((item, index) => {
     //         return index === position ? !item : item;
@@ -578,9 +578,9 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
                                                 onChange={() => {
-                                                    let clone = structuredClone(valuesCategories);
-                                                    clone[placeName] = !clone[placeName]
-                                                    setValuesCategories({...valuesCategories,clone})
+                                                    let copyPlace = { ...valuesCategories[placeName]}
+                                                    console.log('Копия', copyPlace)
+                                                    setValuesCategories({clone})
                                                     setListChanged(true)
                                                 }
                                                 }
