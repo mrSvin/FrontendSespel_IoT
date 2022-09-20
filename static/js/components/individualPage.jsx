@@ -502,32 +502,28 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
         }
     });
 
-    const initialCategories = getCategoriesState(placeKeys, placesObject)
-    const [valuesCategories, setValuesCategories] = useReducer(
-        (valuesCategories, updates) => ({...valuesCategories, ...updates}),
-        initialCategories
-    );
+    const [valuesCategories, setValuesCategories] = useState(getCategoriesState(placeKeys, placesObject))
 
     const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
 
-    // const handleOnChangeCategory = (position) => {
-    //
-    //     let mainList = Object.keys(complexName).map((e, i) => {
-    //         return [updatedCheckedState[i], complexName[e].length]
-    //     })
-    //
-    //     changeMainList(mainList, selectedObjects)
-    //
-    //     const activeValues = []
-    //     selectedObjects.forEach(
-    //         (currentState, index) => {
-    //             if (currentState) {
-    //                 activeValues.push(index);
-    //             }
-    //         }
-    //     );
-    //
-    // };
+    const handleOnChangeCategory = (position) => {
+
+        let mainList = Object.keys(complexName).map((e, i) => {
+            return [updatedCheckedState[i], complexName[e].length]
+        })
+
+        changeMainList(mainList, selectedObjects)
+
+        const activeValues = []
+        selectedObjects.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(index);
+                }
+            }
+        );
+
+    };
     // const handleOnChange = (position) => {
     //     const updatedCheckedState = selectedObjects.map((item, index) => {
     //         return index === position ? !item : item;
@@ -582,8 +578,8 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
                                                 onChange={() => {
-                                                    console.log('reducer ')
-                                                    setValuesCategories({[placeName]:!valuesCategories[placeName]})
+                                                    valuesCategories[placeName] = !valuesCategories[placeName]
+                                                    setValuesCategories({valuesCategories})
                                                     setListChanged(true)
                                                 }
                                                 }
@@ -613,34 +609,34 @@ function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, se
 
     return(
         stankiKeys.map((stanok, i) => {
-                let stanokIndex = `${stanok} ${i}`
-                let stanokName = stankiObjects[stanok].buttonNames.name
+            let stanokIndex = `${stanok} ${i}`
+            let stanokName = stankiObjects[stanok].buttonNames.name
 
-                return (
-                    <li key={stanokIndex} className='individualLi'>
-                        <div className="toppings-list-item">
-                            <div className="left-section">
-                                <input
-                                    type="checkbox"
-                                    id={`custom-checkbox-${stanokIndex}`}
-                                    name={stanokName}
-                                    value={`${stanokIndex}`}
-                                    checked={valuesStanki[stanok]}
-                                    onChange={() => {
-                                        let clone = structuredClone(valuesStanki);
-                                        clone[stanok] = !clone[stanok]
-                                        setValuesStanki({...valuesStanki, clone})
-                                        setListChanged(true)
-                                    }}
-                                />
-                                <label
-                                    htmlFor={`custom-checkbox-${stanokIndex}`}></label><span
-                                className='spanList'>{stanokName}</span>
-                            </div>
+            return (
+                <li key={stanokIndex} className='individualLi'>
+                    <div className="toppings-list-item">
+                        <div className="left-section">
+                            <input
+                                type="checkbox"
+                                id={`custom-checkbox-${stanokIndex}`}
+                                name={stanokName}
+                                value={`${stanokIndex}`}
+                                checked={valuesStanki[stanok]}
+                                onChange={() => {
+                                    valuesStanki[stanok] = !valuesStanki[stanok]
+                                    setValuesStanki({[stanok]:valuesStanki[stanok]})
+                                    setListChanged(true)
+                                }
+                                }
+                            />
+                            <label
+                                htmlFor={`custom-checkbox-${stanokIndex}`}></label><span
+                            className='spanList'>{stanokName}</span>
                         </div>
-                    </li>
-                )
-            })
+                    </div>
+                </li>
+            )
+        })
     )
 }
 
