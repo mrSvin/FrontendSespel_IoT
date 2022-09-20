@@ -506,32 +506,29 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
 
     const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
 
-    // const handleOnChangeCategory = (position) => {
-    //     const updatedCheckedState = selectedCategory.map((item, index) => {
-    //         return index === position ? !item : item;
-    //     });
-    //
-    //     window.localStorage['selectedCategory'] = updatedCheckedState
-    //     setSelectedCategory(updatedCheckedState)
-    //
-    //     let mainList = Object.keys(complexName).map((e, i) => {
-    //         return [updatedCheckedState[i], complexName[e].length]
-    //     })
-    //
-    //     changeMainList(mainList, selectedObjects)
-    //
-    //     const activeValues = []
-    //     selectedObjects.forEach(
-    //         (currentState, index) => {
-    //             if (currentState) {
-    //                 activeValues.push(index);
-    //             }
-    //         }
-    //     );
-    //
-    //     window.localStorage['selectedObjects'] = selectedObjects
-    //     setValuesState(activeValues);
-    // };
+    const handleOnChangeCategory = (placename) => {
+
+        // let mainList = Object.keys(complexName).map((e, i) => {
+        //     return [updatedCheckedState[i], complexName[e].length]
+        // })
+        //
+        // changeMainList(mainList, selectedObjects)
+        //
+        // const activeValues = []
+        // selectedObjects.forEach(
+        //     (currentState, index) => {
+        //         if (currentState) {
+        //             activeValues.push(index);
+        //         }
+        //     }
+        // );
+        //
+
+        let valuesCopy = valuesCategories
+        valuesCopy[placename] = !valuesCopy[placename]
+        setValuesCategories(valuesCopy)
+
+    };
     // const handleOnChange = (position) => {
     //     const updatedCheckedState = selectedObjects.map((item, index) => {
     //         return index === position ? !item : item;
@@ -586,13 +583,8 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
                                                 onChange={() => {
-                                                    let valuesCopy = valuesCategories
-                                                    valuesCopy[placeName] = !valuesCopy[placeName]
-                                                    console.log(placeName,valuesCopy[placeName])
-                                                    // handleOnChangeCategory(index)
-                                                    setValuesCategories(valuesCopy)
+                                                    handleOnChangeCategory(placeName)
                                                     setListChanged(true)
-                                                    setActive(true);
                                                 }
                                                 }
                                             />
