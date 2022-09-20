@@ -592,7 +592,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                         </div>
                                     </div>
                                     <ul>
-                                        <insideList stankiKeys={stankiKeys} stanki={stanki}/>
+                                        <InsideList stankiKeys={stankiKeys} stankiObjects={stankiObjects}/>
                                     </ul>
                                 </li>
                             );
@@ -605,7 +605,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
     )
 }
 
-function insideList({stankiKeys, stankiObjects}) {
+function InsideList({stankiKeys, stankiObjects}) {
 
     return(
         stankiKeys.map((stanok, i) => {
