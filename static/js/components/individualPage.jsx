@@ -506,24 +506,14 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
 
     const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
 
-    const handleOnChangeCategory = (position) => {
-
-        let mainList = Object.keys(complexName).map((e, i) => {
-            return [updatedCheckedState[i], complexName[e].length]
-        })
-
-        changeMainList(mainList, selectedObjects)
-
-        const activeValues = []
-        selectedObjects.forEach(
-            (currentState, index) => {
-                if (currentState) {
-                    activeValues.push(index);
-                }
-            }
-        );
-
+    const handleOnChangeCategory = e => {
+    const {name, checked} = e.target;
+        setValuesCategories(prevState => ({
+            ...prevState,
+            [name]: checked
+        }));
     };
+
     // const handleOnChange = (position) => {
     //     const updatedCheckedState = selectedObjects.map((item, index) => {
     //         return index === position ? !item : item;
@@ -578,8 +568,9 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
                                                 onChange={() => {
-                                                    valuesCategories[placeName] = !valuesCategories[placeName]
-                                                    setValuesCategories({valuesCategories})
+                                                    handleOnChangeCategory()
+                                                    // valuesCategories[placeName] = !valuesCategories[placeName]
+                                                    // setValuesCategories({valuesCategories})
                                                     setListChanged(true)
                                                 }
                                                 }
@@ -623,6 +614,7 @@ function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, se
                                 value={`${stanokIndex}`}
                                 checked={valuesStanki[stanok]}
                                 onChange={() => {
+                                    handleOnChangeCategory()
                                     valuesStanki[stanok] = !valuesStanki[stanok]
                                     setValuesStanki({[stanok]:valuesStanki[stanok]})
                                     setListChanged(true)
