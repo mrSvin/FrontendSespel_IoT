@@ -245,6 +245,7 @@ function IndividualPageInfo() {
         complexRequest: 'kim',
         buttonsVrs: [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: "meh1",
+        state: true,
     }
 
     let nk600 = {
@@ -256,6 +257,7 @@ function IndividualPageInfo() {
         complexRequest: 'nk600',
         buttonsVrs: [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"],
         size: "ceh1",
+        state: true,
     }
 
     let faccin_1 = {
@@ -266,7 +268,8 @@ function IndividualPageInfo() {
         complexImg: "../images/faccin.png",
         complexRequest: 'faccin_1',
         buttonsVrs: [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
-        size: 'sborCeh'
+        size: 'sborCeh',
+        state: true,
     }
 
     let faccin_2 = {
@@ -277,19 +280,26 @@ function IndividualPageInfo() {
         complexImg: "../images/faccin_2.png",
         complexRequest: 'faccin_2',
         buttonsVrs: [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
-        size: 'sborCeh'
+        size: 'sborCeh',
+        state: true,
     }
 
     let placesObject = {
-        'OTK': {kim, nk600},
-        'Гибка': {faccin_1, faccin_2},
+        'OTK': {
+            stanki: [kim, nk600],
+            placeState: true,
+        },
+        'Гибка': {
+            stanki: [faccin_1, faccin_2],
+            placeState: true,
+        },
     }
 
     // Новая структура
 
 
     let placeKeys = Object.keys(placesObject).map(e => {
-        return e
+        return e.stanki
     })
 
     let stankiObject = {}
@@ -571,12 +581,13 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 id={`custom-checkbox-category-${index}`}
                                                 name={placeName}
                                                 value={index}
-                                                checked={false}
-                                                // onChange={() => {
-                                                //     handleOnChangeCategory(index)
-                                                //     setListChanged(true)
-                                                // }
-                                                // }
+                                                checked={placesObject[placeName].placeState}
+                                                onChange={() => {
+                                                    placesObject[placeName].placeState = !placesObject[placeName].placeState
+                                                    // handleOnChangeCategory(index)
+                                                    // setListChanged(true)
+                                                }
+                                                }
                                             />
                                             <label style={paddingNow}
                                                    htmlFor={`custom-checkbox-category-${index}`}></label>
@@ -613,11 +624,12 @@ function InsideList({stankiKeys, stankiObjects}) {
                                     id={`custom-checkbox-${stanokIndex}`}
                                     name={stanokName}
                                     value={`${stanokIndex}`}
-                                    checked={false}
-                                    // onChange={() => {
-                                    //     handleOnChange(saveIndex)
-                                    //     setListChanged(true)
-                                    // }}
+                                    checked={stankiObjects[stanok].state}
+                                    onChange={() => {
+                                        stankiObjects[stanok].state = !stankiObjects[stanok].state
+                                        // handleOnChange(saveIndex)
+                                        setListChanged(true)
+                                    }}
                                 />
                                 <label
                                     htmlFor={`custom-checkbox-${stanokIndex}`}></label><span
@@ -879,10 +891,10 @@ function changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObjec
 
     if (stateLineHC == 'line') {
         setStateLineHC('multiLine')
-        updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
+        updateLoadDataIndividual(stankiRequest, date, complexNames, fetchNames, 'multiLine')
     } else {
         setStateLineHC('line')
-        updateLoadData(stankiRequest, date, complexNames, fetchNames, 'line')
+        updateLoadDataIndividual(stankiRequest, date, complexNames, fetchNames, 'line')
     }
 
 
