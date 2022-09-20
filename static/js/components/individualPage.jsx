@@ -585,8 +585,9 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 checked={placesObject[placeName].placeState}
                                                 onChange={() => {
                                                     placesObject[placeName].placeState = !placesObject[placeName].placeState
+                                                    console.log(placesObject[placeName].placeState)
                                                     // handleOnChangeCategory(index)
-                                                    // setListChanged(true)
+                                                    setListChanged(true)
                                                 }
                                                 }
                                             />
@@ -609,7 +610,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
     )
 }
 
-function InsideList({stankiKeys, stankiObjects}) {
+function InsideList({stankiKeys, stankiObjects, setListChanged}) {
 
     return(
         stankiKeys.map((stanok, i) => {
@@ -628,6 +629,7 @@ function InsideList({stankiKeys, stankiObjects}) {
                                     checked={stankiObjects[stanok].state}
                                     onChange={() => {
                                         stankiObjects[stanok].state = !stankiObjects[stanok].state
+                                        console.log(stankiObjects[stanok].state)
                                         // handleOnChange(saveIndex)
                                         setListChanged(true)
                                     }}
