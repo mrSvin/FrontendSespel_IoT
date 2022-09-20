@@ -369,7 +369,7 @@ function IndividualPageInfo() {
         })
 
         let complexNames = stankiKeys.map(name => {
-            return stankiObject[name].buttonNames.name
+            return stankiObject[name].buttonNames
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
@@ -669,12 +669,21 @@ function updateLoadDataIndividual(promiseVariable, day1, complexName, fetchNames
                 return exceptionManualNagruzka(e)
             })
 
-            highChartTotalKolOp(totalArray, kolOpArray, complexName, day1, nagruzkaName)
+            let names = complexName.map(e => {
+                return e.name
+            })
+
+            let programNames = complexName.map(e => {
+                return e.programsName
+            })
+
+
+            highChartTotalKolOp(totalArray, kolOpArray, names, day1, nagruzkaName)
 
             parserDataArray.forEach((e, i) => {
                 // Первая смена
                 highChartSutkiLine(e[0], e[1], e[2], e[3], e[4], nagruzkaName[i], i + 1)
-                if (complexName[i][3] !== null && complexName[i][3] !== undefined) highChartProgram(getTimeProgramNameGraph(data[i], 'sutki', day1), i + 1)
+                if (programNames[i] !== null && programNames[i] !== undefined) highChartProgram(getTimeProgramNameGraph(data[i], 'sutki', day1), i + 1)
                 highChartRound(e[5][0], e[5][1], e[5][2], e[5][3], e[5][4], nagruzkaName[i], i + 1)
 
             })
@@ -692,7 +701,7 @@ function changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObjec
     })
 
     let complexNames = stankiKeys.map(name => {
-        return stankiObject[name].buttonNames.name
+        return stankiObject[name].buttonNames
     })
 
     let stankiRequest = Promise.all(fetchNames.map((item) => {
