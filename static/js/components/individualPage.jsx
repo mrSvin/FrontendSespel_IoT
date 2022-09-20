@@ -399,8 +399,6 @@ function IndividualPageInfo() {
             return stankiObject[name].complexRequest
         })
 
-        console.log('Вторая контрольная точка', fetchNames)
-
         let complexNames = stankiKeys.map(name => {
             return stankiObject[name].buttonNames
         })
@@ -588,10 +586,11 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
                                                 onChange={() => {
-                                                    valuesCategories[placeName] = !valuesCategories[placeName]
-                                                    console.log(valuesCategories[placeName])
+                                                    let valuesCopy = valuesCategories
+                                                    valuesCopy[placeName] = !valuesCopy[placeName]
+                                                    console.log(placeName,valuesCopy[placeName])
                                                     // handleOnChangeCategory(index)
-                                                    setValuesCategories(valuesCategories)
+                                                    setValuesCategories(valuesCopy)
                                                     setListChanged(true)
                                                 }
                                                 }
@@ -602,7 +601,9 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                         </div>
                                     </div>
                                     <ul>
-                                        <InsideList stankiKeys={stankiKeys} stankiObjects={stankiObjects} setListChanged/>
+                                        <InsideList stankiKeys={stankiKeys} stankiObjects={stankiObjects}
+                                                    setListChanged={setListChanged} valuesStanki={valuesStanki}
+                                                    setValuesStanki={setValuesStanki}/>
                                     </ul>
                                 </li>
                             );
@@ -615,7 +616,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
     )
 }
 
-function InsideList({stankiKeys, stankiObjects, setListChanged}) {
+function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, setValuesStanki}) {
 
     return(
         stankiKeys.map((stanok, i) => {
@@ -631,10 +632,12 @@ function InsideList({stankiKeys, stankiObjects, setListChanged}) {
                                     id={`custom-checkbox-${stanokIndex}`}
                                     name={stanokName}
                                     value={`${stanokIndex}`}
-                                    checked={stankiObjects[stanok].state}
+                                    checked={valuesStanki[stanok]}
                                     onChange={() => {
-                                        stankiObjects[stanok].state = !stankiObjects[stanok].state
-                                        console.log(stankiObjects[stanok].state)
+                                        let valuesCopy = valuesStanki
+                                        valuesCopy[stanok] = !valuesCopy[stanok]
+                                        console.log(stanok,valuesCopy[stanok])
+                                        setValuesStanki(valuesCopy)
                                         // handleOnChange(saveIndex)
                                         setListChanged(true)
                                     }}
