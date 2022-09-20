@@ -299,7 +299,7 @@ function IndividualPageInfo() {
 
 
     let placeKeys = Object.keys(placesObject).map(e => {
-        return e.stanki
+        return e
     })
 
     let stankiObject = {}
