@@ -592,6 +592,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                     // handleOnChangeCategory(index)
                                                     setValuesCategories(valuesCopy)
                                                     setListChanged(true)
+                                                    setActive(true);
                                                 }
                                                 }
                                             />
@@ -603,7 +604,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                     <ul>
                                         <InsideList stankiKeys={stankiKeys} stankiObjects={stankiObjects}
                                                     setListChanged={setListChanged} valuesStanki={valuesStanki}
-                                                    setValuesStanki={setValuesStanki}/>
+                                                    setValuesStanki={setValuesStanki} setActive={setActive}/>
                                     </ul>
                                 </li>
                             );
@@ -616,7 +617,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
     )
 }
 
-function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, setValuesStanki}) {
+function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, setValuesStanki, setActive}) {
 
     return(
         stankiKeys.map((stanok, i) => {
@@ -639,6 +640,7 @@ function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, se
                                         console.log(stanok,valuesCopy[stanok])
                                         setValuesStanki(valuesCopy)
                                         // handleOnChange(saveIndex)
+                                        setActive(true)
                                         setListChanged(true)
                                     }}
                                 />
