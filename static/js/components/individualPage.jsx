@@ -515,12 +515,12 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
         setListChanged(true)
 
         // console.log('Проверка доступа к данным', name, placesObject, placeKeys)
-        let obj = {}
         Object.keys(placesObject[name].stanki).forEach(e=>{
-            obj[e] = checked
+            setValuesStanki(prevState => ({
+                ...prevState,
+                [e]: checked
+            }));
         })
-        console.log(obj)
-        setValuesStanki({obj})
     };
 
     function handleOnChangeStanok(e) {
