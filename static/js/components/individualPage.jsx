@@ -237,19 +237,19 @@ function IndividualPageInfo() {
 
     let kim = {
         buttonNames: {
-            name:"CRYSTA-Apex S9168",
+            name: "CRYSTA-Apex S9168",
             serviceName: "CRYSTA-Apex S9168",
             programsName: "CRYSTA-Apex S9168",
         },
         complexImg: "../images/crystal_apex.png",
         complexRequest: 'kim',
         buttonsVrs: [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
-        size:  "meh1",
+        size: "meh1",
     }
 
     let nk600 = {
         buttonNames: {
-            name:"НК600",
+            name: "НК600",
             serviceName: "НК600",
         },
         complexImg: "../images/nk600.png",
@@ -260,7 +260,7 @@ function IndividualPageInfo() {
 
     let faccin_1 = {
         buttonNames: {
-            name:"FACCIN 4",
+            name: "FACCIN 4",
             serviceName: "FACCIN 4",
         },
         complexImg: "../images/faccin.png",
@@ -271,7 +271,7 @@ function IndividualPageInfo() {
 
     let faccin_2 = {
         buttonNames: {
-            name:"FACCIN 10",
+            name: "FACCIN 10",
             serviceName: "FACCIN 10",
         },
         complexImg: "../images/faccin_2.png",
@@ -295,12 +295,18 @@ function IndividualPageInfo() {
     let stankiObject = {}
     let stankiKeys = []
 
-        Object.keys(places).forEach(e => {
-            Object.keys(places[e]).map(i=>{
+    Object.keys(places).forEach(e => {
+        Object.keys(places[e]).map(i => {
             stankiObject[i] = places[e][i]
             stankiKeys.push(i)
         })
     })
+
+    // Состояние даты
+    let [date, setDate] = useState(0);
+
+    // Состояние переменной мульти Диаграммы
+    let [stateLineHC, setStateLineHC] = useState("multiLine");
 
 //
 // placeKeys.forEach((e) => {
@@ -317,15 +323,11 @@ function IndividualPageInfo() {
     //     return i
     // })
 
-        // Массив номеров всех станков
+    // Массив номеров всех станков
     // let values = getValues(placeLength, places)
 
 
-    // Состояние даты
-    let [date, setDate] = useState(0);
 
-    // Состояние переменной мульти Диаграммы
-    let [stateLineHC, setStateLineHC] = useState("multiLine");
 
     // if (localStorage['selectedObjects'] == undefined) {
     //     localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
@@ -362,7 +364,7 @@ function IndividualPageInfo() {
         let dateInput = dayNow()
         setDate(dateInput)
 
-        let fetchNames = stankiKeys.map(name=>{
+        let fetchNames = stankiKeys.map(name => {
             return stankiObject[name].complexRequest
         })
 
@@ -374,7 +376,7 @@ function IndividualPageInfo() {
             return fetchRequest(dateInput, item)
         }));
 
-        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
+        updateLoadDataIndividual(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }, [])
 
@@ -382,11 +384,11 @@ function IndividualPageInfo() {
         setDate(dateInput)
         // setValuesStateWait(valuesState)
 
-        let fetchNames = stankiKeys.map(name=>{
+        let fetchNames = stankiKeys.map(name => {
             return stankiObject[name].complexRequest
         })
 
-        console.log('Вторая контрольная точка',fetchNames)
+        console.log('Вторая контрольная точка', fetchNames)
 
         let complexNames = stankiKeys.map(name => {
             return stankiObject[name].buttonNames.name
@@ -396,7 +398,7 @@ function IndividualPageInfo() {
             return fetchRequest(dateInput, item)
         }));
 
-        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
+        updateLoadDataIndividual(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }
 
@@ -413,9 +415,9 @@ function IndividualPageInfo() {
             </div>
             <ComplexTotalSutkiInfo/>
 
-            {/*<SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}*/}
-            {/*              complexName={buttonNames} complexRequest={complexRequest}*/}
-            {/*              valuesState={valuesStateWait}/>*/}
+            <SwitchLineHCIndividual date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
+                                    stankiObject={stankiObject} stankiKeys={stankiKeys}
+            />
 
             {stankiKeys.map((e, i) => {
                 let stanok = stankiObject[e]
@@ -631,10 +633,96 @@ function ListDevicesCategory({
 }
 
 
-//  [0]     [1]         [2]          [3]         [4]         [5]          [6]
-// Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
+// Обработка данных из запроса для отрисовки графиков
+function updateLoadDataIndividual(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
+    promiseVariable
+        .then(result => {
+            let data = result.map(e => {
+                return [e.work.slice(), e.pause.slice(), e.off.slice(), e.avar.slice(), e.nagruzka.slice(), e.programName.slice(), e.roundData.slice()]
+            })
+
+            let arrayLine;
+            if (typeLine == 'multiLine') {
+                arrayLine = [0, 1, 2, 3, 4]
+            } else {
+                arrayLine = [0, 0, 0, 0, 0]
+            }
+
+            let totalArray = []
+            let kolOpArray = []
+
+            let parserDataArray = data.map(value => {
+                let convertDataWork = parseLinearSutki(value[0], arrayLine[1], day1, value[5])
+                let convertDataPause = parseLinearSutki(value[1], arrayLine[2], day1)
+                let convertDataOff = parseLinearSutki(value[2], arrayLine[3], day1)
+                let convertDataAvar = parseLinearSutki(value[3], arrayLine[4], day1)
+                let convertDataRuchnoi = parseLinearSutki(value[4], arrayLine[0], day1)
+                let roundArray = value[6].map(Number)
+
+                totalArray.push(roundArray.slice())
+                kolOpArray.push(kolOperations(value[0]).slice())
+
+                return [convertDataWork, convertDataPause, convertDataOff, convertDataAvar, convertDataRuchnoi, roundArray]
+            })
+
+            let nagruzkaName = fetchNames.map(e => {
+                return exceptionManualNagruzka(e)
+            })
+
+            highChartTotalKolOp(totalArray, kolOpArray, complexName, day1, nagruzkaName)
+
+            parserDataArray.forEach((e, i) => {
+                // Первая смена
+                highChartSutkiLine(e[0], e[1], e[2], e[3], e[4], nagruzkaName[i], i + 1)
+                if (complexName[i][3] !== null && complexName[i][3] !== undefined) highChartProgram(getTimeProgramNameGraph(data[i], 'sutki', day1), i + 1)
+                highChartRound(e[5][0], e[5][1], e[5][2], e[5][3], e[5][4], nagruzkaName[i], i + 1)
+
+            })
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
+
+// Изменение состояние линейных графиков из 5-ти строк в одну
+function changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObject, stankiKeys) {
+
+    let fetchNames = stankiKeys.map(name => {
+        return stankiObject[name].complexRequest
+    })
+
+    let complexNames = stankiKeys.map(name => {
+        return stankiObject[name].buttonNames.name
+    })
+
+    let stankiRequest = Promise.all(fetchNames.map((item) => {
+        return fetchRequest(date, item)
+    }));
+
+    if (stateLineHC == 'line') {
+        setStateLineHC('multiLine')
+        updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
+    } else {
+        setStateLineHC('line')
+        updateLoadData(stankiRequest, date, complexNames, fetchNames, 'line')
+    }
 
 
+}
+
+
+function SwitchLineHCIndividual({date, stateLineHC, setStateLineHC, stankiObject, stankiKeys}) {
+    return (
+        <div className="energyCalendarContainer">
+            <label className="switch">
+                <input type="checkbox" onChange={() => {
+                    changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObject, stankiKeys)
+                }}/>
+                <span className="slider round"></span>
+            </label>
+        </div>
+    )
+}
 
 
 
