@@ -542,8 +542,6 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
     //
     // };
 
-    console.log(placesObject, placeKeys)
-
     return (
         <div
             ref={innerRef}
@@ -557,14 +555,8 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                         className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
 
                         {placeKeys.map((placeName, index) => {
-
                             let stankiKeys = Object.keys(placesObject[placeName])
-                            let stanki = placesObject[placeName]
-
-                            // let allComplex = Object.keys(complexName)
-                            // let trueIndex = allComplex.findIndex((e) => {
-                            //     return e == razdel
-                            // })
+                            let stankiObjects = placesObject[placeName]
 
                             let paddingNow = {
                                 paddingBottom: 30 * stankiKeys.length + 6
@@ -587,8 +579,8 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 // }
                                             />
                                             <label style={paddingNow}
-                                                   htmlFor={`custom-checkbox-category-${index}`}></label><span
-                                            className='spanList spanListCategory'>{placeName}</span>
+                                                   htmlFor={`custom-checkbox-category-${index}`}></label>
+                                            <span className='spanList spanListCategory'>{placeName}</span>
                                         </div>
                                     </div>
                                     <ul>
