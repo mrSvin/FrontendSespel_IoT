@@ -514,11 +514,9 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
         }));
         setListChanged(true)
 
-
-
         // console.log('Проверка доступа к данным', name, placesObject, placeKeys)
         let obj = {}
-        Object.keys(placesObject[name]).forEach(e=>{
+        Object.keys(placesObject[name].stanki).forEach(e=>{
             obj[e] = false
         })
         console.log(obj)
