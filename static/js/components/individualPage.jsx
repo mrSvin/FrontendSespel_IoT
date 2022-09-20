@@ -313,9 +313,9 @@ function IndividualPageInfo() {
 //     })
 // })
 
-    let values = stankiKeys.map((name, i)=>{
-        return i
-    })
+    // let values = stankiKeys.map((name, i)=>{
+    //     return i
+    // })
 
         // Массив номеров всех станков
     // let values = getValues(placeLength, places)
@@ -336,26 +336,26 @@ function IndividualPageInfo() {
     // }
 
     // Состояния чекбоксов станков
-    let [selectedCategory, setSelectedCategory] = useState(
-        (localStorage['selectedCategory'] == undefined) ? new Array(placeKeys.length).fill(false) : window.localStorage['selectedCategory'].split(',').map(e => {
-            return (e == 'true')
-        })
-    );
+    // let [selectedCategory, setSelectedCategory] = useState(
+    //     (localStorage['selectedCategory'] == undefined) ? new Array(placeKeys.length).fill(true) : window.localStorage['selectedCategory'].split(',').map(e => {
+    //         return (e == 'true')
+    //     })
+    // );
+    //
+    // // Состояния чекбоксов станков
+    // let [selectedObjects, setSelectedObjects] = useState(
+    //     (localStorage['selectedObjects'] == undefined) ? new Array(values.length).fill(true) : window.localStorage['selectedObjects'].split(',').map(e => {
+    //         return (e == 'true')
+    //     })
+    // );
 
-    // Состояния чекбоксов станков
-    let [selectedObjects, setSelectedObjects] = useState(
-        (localStorage['selectedObjects'] == undefined) ? new Array(values.length).fill(false) : window.localStorage['selectedObjects'].split(',').map(e => {
-            return (e == 'true')
-        })
-    );
-
-    let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {
-        return true === item ? values[index] : null;
-    }).filter(e => e != null))
-
-    let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {
-        return true === item ? values[index] : null;
-    }).filter(e => e != null))
+    // let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {
+    //     return true === item ? values[index] : null;
+    // }).filter(e => e != null))
+    //
+    // let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {
+    //     return true === item ? values[index] : null;
+    // }).filter(e => e != null))
 
 
     useEffect(() => {
@@ -366,39 +366,36 @@ function IndividualPageInfo() {
             return stankiObject[name].complexRequest
         })
 
-        console.log('Первая контрольная точка',fetchNames)
-
-        // let fetchNames = valuesState.map(i => {
-        //     return complexRequest[i]
-        // })
-
-        // let complexNames = valuesState.map(i => {
-        //     return buttonNames[i]
-        // })
-        //
-        // let stankiRequest = Promise.all(fetchNames.map((item) => {
-        //     return fetchRequest(dateInput, item)
-        // }));
-        //
-        // updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
-
-    }, [])
-
-    function newDate(dateInput) {
-        setDate(dateInput)
-        setValuesStateWait(valuesState)
-
-        let fetchNames = valuesState.map(i => {
-            return complexRequest[i]
-        })
-
-        let complexNames = valuesState.map(i => {
-            return buttonNames[i]
+        let complexNames = stankiKeys.map(name => {
+            return stankiObject[name].buttonNames.name
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
             return fetchRequest(dateInput, item)
         }));
+
+        updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
+
+    }, [])
+
+    function newDate(dateInput) {
+        setDate(dateInput)
+        // setValuesStateWait(valuesState)
+
+        let fetchNames = stankiKeys.map(name=>{
+            return stankiObject[name].complexRequest
+        })
+
+        console.log('Вторая контрольная точка',fetchNames)
+
+        let complexNames = stankiKeys.map(name => {
+            return stankiObject[name].buttonNames.name
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(dateInput, item)
+        }));
+
         updateLoadData(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }
@@ -416,9 +413,9 @@ function IndividualPageInfo() {
             </div>
             <ComplexTotalSutkiInfo/>
 
-            <SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                          complexName={buttonNames} complexRequest={complexRequest}
-                          valuesState={valuesStateWait}/>
+            {/*<SwitchLineHC date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}*/}
+            {/*              complexName={buttonNames} complexRequest={complexRequest}*/}
+            {/*              valuesState={valuesStateWait}/>*/}
 
             {stankiKeys.map((e, i) => {
                 let stanok = stankiObject[e]
