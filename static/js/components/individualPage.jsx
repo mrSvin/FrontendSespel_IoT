@@ -471,15 +471,15 @@ function IndividualPage() {
 
 function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
 
-    function changeMainList(mainList, selectedObjects) {
-        let index = 0
-        for (let i = 0; i < mainList.length; i++) {
-            for (let j = 0; j < mainList[i][1]; j++) {
-                selectedObjects[index] = mainList[i][0]
-                index++
-            }
-        }
-    }
+    // function changeMainList(mainList, selectedObjects) {
+    //     let index = 0
+    //     for (let i = 0; i < mainList.length; i++) {
+    //         for (let j = 0; j < mainList[i][1]; j++) {
+    //             selectedObjects[index] = mainList[i][0]
+    //             index++
+    //         }
+    //     }
+    // }
 
     const [isActive, setActive] = useState(false);
 
@@ -503,6 +503,10 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
 
         }
     });
+
+    const [valuesCategories, setValuesCategories] = useState(getCategoriesState(placeKeys, placesObject))
+
+    const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
 
     // const handleOnChangeCategory = (position) => {
     //     const updatedCheckedState = selectedCategory.map((item, index) => {
@@ -582,11 +586,12 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 id={`custom-checkbox-category-${index}`}
                                                 name={placeName}
                                                 value={index}
-                                                checked={placesObject[placeName].placeState}
+                                                checked={valuesCategories[placeName]}
                                                 onChange={() => {
-                                                    placesObject[placeName].placeState = !placesObject[placeName].placeState
-                                                    console.log(placesObject[placeName].placeState)
+                                                    valuesCategories[placeName] = !valuesCategories[placeName]
+                                                    console.log(valuesCategories[placeName])
                                                     // handleOnChangeCategory(index)
+                                                    setValuesCategories(valuesCategories)
                                                     setListChanged(true)
                                                 }
                                                 }
@@ -597,7 +602,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                         </div>
                                     </div>
                                     <ul>
-                                        <InsideList stankiKeys={stankiKeys} stankiObjects={stankiObjects}/>
+                                        <InsideList stankiKeys={stankiKeys} stankiObjects={stankiObjects} setListChanged/>
                                     </ul>
                                 </li>
                             );
@@ -917,5 +922,23 @@ function SwitchLineHCIndividual({date, stateLineHC, setStateLineHC, stankiObject
     )
 }
 
+function getStankiState(placeKeys, placesObject) {
+    let stankiForState = {}
 
+    placeKeys.forEach(e=>{
+        Object.keys(placesObject[e].stanki).forEach(i=>{
+            stankiForState[i] = placesObject[e].stanki[i].state
+        })
+    })
+    return stankiForState
+}
+
+function getCategoriesState(placeKeys, placesObject) {
+    let placeForState = {}
+    placeKeys.forEach(e=>{
+        placeForState[e] = placesObject[e].placeState
+        return placeForState
+    })
+    return placeForState
+}
 
