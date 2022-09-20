@@ -520,10 +520,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
             obj[e] = checked
         })
         console.log(obj)
-        setValuesStanki(prevState=>({
-            ...prevState,
-            obj
-        }))
+        setValuesStanki({obj})
     };
 
     function handleOnChangeStanok(e) {
