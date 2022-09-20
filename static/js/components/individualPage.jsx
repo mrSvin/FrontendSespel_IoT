@@ -506,16 +506,19 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
 
     const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
 
-    const handleOnChangeCategory = e => {
+    function handleOnChangeCategory(e) {
     const {name, checked} = e.target;
         setValuesCategories(prevState => ({
             ...prevState,
             [name]: checked
         }));
         setListChanged(true)
+
+
+
         // console.log('Проверка доступа к данным', name, placesObject, placeKeys)
         let obj = {}
-        Object.keys(placesObject.name).forEach(e=>{
+        Object.keys(placesObject[name]).forEach(e=>{
             obj[e] = false
         })
         console.log(obj)
@@ -584,7 +587,9 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 name={placeName}
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
-                                                onChange={handleOnChangeCategory}
+                                                onChange={(e)=>{
+                                                    handleOnChangeCategory(e)
+                                                }}
                                             />
                                             <label style={paddingNow}
                                                    htmlFor={`custom-checkbox-category-${index}`}></label>
