@@ -502,7 +502,11 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
         }
     });
 
-    const [valuesCategories, setValuesCategories] = useState(getCategoriesState(placeKeys, placesObject))
+    const initialCategories = getCategoriesState(placeKeys, placesObject)
+    const [valuesCategories, setValuesCategories] = useReducer(
+        (valuesCategories, updates) => ({...valuesCategories, ...updates}),
+        initialCategories
+    );
 
     const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
 
@@ -578,9 +582,8 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
                                                 onChange={() => {
-                                                    let copyPlace = { ...valuesCategories[placeName]}
-                                                    console.log('Копия', copyPlace)
-                                                    setValuesCategories({clone})
+                                                    console.log('reducer ')
+                                                    setValuesCategories({placeName:!valuesCategories[placeName]})
                                                     setListChanged(true)
                                                 }
                                                 }
