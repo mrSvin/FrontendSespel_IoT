@@ -567,13 +567,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 name={placeName}
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
-                                                onChange={() => {
-                                                    handleOnChangeCategory()
-                                                    // valuesCategories[placeName] = !valuesCategories[placeName]
-                                                    // setValuesCategories({valuesCategories})
-                                                    setListChanged(true)
-                                                }
-                                                }
+                                                onChange={handleOnChangeCategory}
                                             />
                                             <label style={paddingNow}
                                                    htmlFor={`custom-checkbox-category-${index}`}></label>
