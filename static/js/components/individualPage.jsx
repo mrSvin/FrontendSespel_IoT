@@ -578,8 +578,9 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
                                                 onChange={() => {
-                                                    valuesCategories[placeName] = !valuesCategories[placeName]
-                                                    setValuesCategories({valuesCategories})
+                                                    let clone = structuredClone(valuesCategories);
+                                                    clone[placeName] = !clone[placeName]
+                                                    setValuesCategories({...valuesCategories,clone})
                                                     setListChanged(true)
                                                 }
                                                 }
@@ -623,11 +624,11 @@ function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, se
                                     value={`${stanokIndex}`}
                                     checked={valuesStanki[stanok]}
                                     onChange={() => {
-                                        valuesStanki[stanok] = !valuesStanki[stanok]
-                                        setValuesStanki({valuesStanki})
+                                        let clone = structuredClone(valuesStanki);
+                                        clone[stanok] = !clone[stanok]
+                                        setValuesStanki({...valuesStanki, clone})
                                         setListChanged(true)
-                                    }
-                                    }
+                                    }}
                                 />
                                 <label
                                     htmlFor={`custom-checkbox-${stanokIndex}`}></label><span
