@@ -517,12 +517,16 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
         // console.log('Проверка доступа к данным', name, placesObject, placeKeys)
         let obj = {}
         Object.keys(placesObject[name].stanki).forEach(e=>{
-            obj[e] = false
+            obj[e] = checked
         })
         console.log(obj)
+        setValuesStanki(prevState=>({
+            ...prevState,
+            obj
+        }))
     };
 
-    const handleOnChangeStanok = e => {
+    function handleOnChangeStanok(e) {
         const {name, checked} = e.target;
         setValuesStanki(prevState => ({
             ...prevState,
@@ -626,7 +630,9 @@ function InsideList({stankiKeys, stankiObjects, valuesStanki, handleOnChangeStan
                                 name={stankiObjects[stanok].complexRequest}
                                 value={`${stanokIndex}`}
                                 checked={valuesStanki[stanok]}
-                                onChange={handleOnChangeStanok}
+                                onChange={(e)=>{
+                                    handleOnChangeStanok(e)
+                                }}
                             />
                             <label
                                 htmlFor={`custom-checkbox-${stanokIndex}`}></label><span
