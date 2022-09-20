@@ -286,11 +286,11 @@ function IndividualPageInfo() {
 
     let placesObject = {
         'OTK': {
-            stanki: [kim, nk600],
+            stanki: {kim, nk600},
             placeState: true,
         },
         'Гибка': {
-            stanki: [faccin_1, faccin_2],
+            stanki: {faccin_1, faccin_2},
             placeState: true,
         },
     }
@@ -306,8 +306,9 @@ function IndividualPageInfo() {
     let stankiKeys = []
 
     Object.keys(placesObject).forEach(e => {
-        Object.keys(placesObject[e]).map(i => {
-            stankiObject[i] = placesObject[e][i]
+        Object.keys(placesObject[e].stanki).map(i => {
+            console.log(placesObject[e].stanki[i], i)
+            stankiObject[i] = placesObject[e].stanki[i]
             stankiKeys.push(i)
         })
     })
