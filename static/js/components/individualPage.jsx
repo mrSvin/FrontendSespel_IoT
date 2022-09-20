@@ -506,27 +506,22 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
 
     const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
 
-    const handleOnChangeCategory = (placename) => {
+    const handleOnChangeCategory = (position) => {
 
-        // let mainList = Object.keys(complexName).map((e, i) => {
-        //     return [updatedCheckedState[i], complexName[e].length]
-        // })
-        //
-        // changeMainList(mainList, selectedObjects)
-        //
-        // const activeValues = []
-        // selectedObjects.forEach(
-        //     (currentState, index) => {
-        //         if (currentState) {
-        //             activeValues.push(index);
-        //         }
-        //     }
-        // );
-        //
+        let mainList = Object.keys(complexName).map((e, i) => {
+            return [updatedCheckedState[i], complexName[e].length]
+        })
 
-        let valuesCopy = valuesCategories
-        valuesCopy[placename] = !valuesCopy[placename]
-        setValuesCategories(valuesCopy)
+        changeMainList(mainList, selectedObjects)
+
+        const activeValues = []
+        selectedObjects.forEach(
+            (currentState, index) => {
+                if (currentState) {
+                    activeValues.push(index);
+                }
+            }
+        );
 
     };
     // const handleOnChange = (position) => {
@@ -583,7 +578,8 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
                                                 onChange={() => {
-                                                    handleOnChangeCategory(placeName)
+                                                    valuesCategories[placeName] = !valuesCategories[placeName]
+                                                    setValuesCategories({valuesCategories})
                                                     setListChanged(true)
                                                 }
                                                 }
@@ -609,7 +605,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
     )
 }
 
-function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, setValuesStanki, setActive}) {
+function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, setValuesStanki}) {
 
     return(
         stankiKeys.map((stanok, i) => {
@@ -627,14 +623,11 @@ function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, se
                                     value={`${stanokIndex}`}
                                     checked={valuesStanki[stanok]}
                                     onChange={() => {
-                                        let valuesCopy = valuesStanki
-                                        valuesCopy[stanok] = !valuesCopy[stanok]
-                                        console.log(stanok,valuesCopy[stanok])
-                                        setValuesStanki(valuesCopy)
-                                        // handleOnChange(saveIndex)
-                                        setActive(true)
+                                        valuesStanki[stanok] = !valuesStanki[stanok]
+                                        setValuesStanki({valuesStanki})
                                         setListChanged(true)
-                                    }}
+                                    }
+                                    }
                                 />
                                 <label
                                     htmlFor={`custom-checkbox-${stanokIndex}`}></label><span
