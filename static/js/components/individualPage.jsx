@@ -280,7 +280,7 @@ function IndividualPageInfo() {
         size: 'sborCeh'
     }
 
-    let places = {
+    let placesObject = {
         'OTK': {kim, nk600},
         'Гибка': {faccin_1, faccin_2},
     }
@@ -288,16 +288,16 @@ function IndividualPageInfo() {
     // Новая структура
 
 
-    let placeKeys = Object.keys(places).map(e => {
+    let placeKeys = Object.keys(placesObject).map(e => {
         return e
     })
 
     let stankiObject = {}
     let stankiKeys = []
 
-    Object.keys(places).forEach(e => {
-        Object.keys(places[e]).map(i => {
-            stankiObject[i] = places[e][i]
+    Object.keys(placesObject).forEach(e => {
+        Object.keys(placesObject[e]).map(i => {
+            stankiObject[i] = placesObject[e][i]
             stankiKeys.push(i)
         })
     })
@@ -407,7 +407,7 @@ function IndividualPageInfo() {
         <div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <ListDevicesCategory date={date} newDate={newDate} places={places} placeKeys={placeKeys}/>
+                <ListDevicesCategory date={date} newDate={newDate} placesObject={placesObject} placeKeys={placeKeys}/>
 
             </div>
             <ComplexTotalSutkiInfo/>
@@ -458,7 +458,7 @@ function IndividualPage() {
     )
 }
 
-function ListDevicesCategory({date, newDate, places, placeKeys}) {
+function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
 
     function changeMainList(mainList, selectedObjects) {
         let index = 0
@@ -542,7 +542,7 @@ function ListDevicesCategory({date, newDate, places, placeKeys}) {
     //
     // };
 
-    console.log(places, placeKeys)
+    console.log(placesObject, placeKeys)
 
     return (
         <div
@@ -556,73 +556,85 @@ function ListDevicesCategory({date, newDate, places, placeKeys}) {
                     <ul className='toppings-list'
                         className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
 
-                        {/*{places.map((razdel, index) => {*/}
+                        {placeKeys.map((placeName, index) => {
 
-                        {/*    let allComplex = Object.keys(complexName)*/}
-                        {/*    let trueIndex = allComplex.findIndex((e) => {*/}
-                        {/*        return e == razdel*/}
-                        {/*    })*/}
+                            let stankiKeys = Object.keys(placesObject[placeName])
+                            let stanki = placesObject[placeName]
 
-                        {/*    let paddingNow = {*/}
-                        {/*        paddingBottom: 30 * complexName[razdel].length + 6*/}
-                        {/*    };*/}
+                            // let allComplex = Object.keys(complexName)
+                            // let trueIndex = allComplex.findIndex((e) => {
+                            //     return e == razdel
+                            // })
 
-                        {/*    return (*/}
-                        {/*        <li key={trueIndex}>*/}
-                        {/*            <div className="toppings-list-item">*/}
-                        {/*                <div className="left-section">*/}
-                        {/*                    <input*/}
-                        {/*                        type="checkbox"*/}
-                        {/*                        id={`custom-checkbox-category-${index}`}*/}
-                        {/*                        name={razdel}*/}
-                        {/*                        value={trueIndex}*/}
-                        {/*                        checked={selectedCategory[index]}*/}
-                        {/*                        onChange={() => {*/}
-                        {/*                            handleOnChangeCategory(index)*/}
-                        {/*                            setListChanged(true)*/}
-                        {/*                        }*/}
-                        {/*                        }*/}
-                        {/*                    />*/}
-                        {/*                    <label style={paddingNow}*/}
-                        {/*                           htmlFor={`custom-checkbox-category-${index}`}></label><span*/}
-                        {/*                    className='spanList spanListCategory'>{razdel}</span>*/}
-                        {/*                </div>*/}
-                        {/*            </div>*/}
-                        {/*            <ul>*/}
-                        {/*                {complexName[razdel].map((stanok, i) => {*/}
-                        {/*                    let saveIndex = keyIndex++*/}
-                        {/*                    return (*/}
-                        {/*                        <li key={saveIndex} className='individualLi'>*/}
-                        {/*                            <div className="toppings-list-item">*/}
-                        {/*                                <div className="left-section">*/}
-                        {/*                                    <input*/}
-                        {/*                                        type="checkbox"*/}
-                        {/*                                        id={`custom-checkbox-${saveIndex}`}*/}
-                        {/*                                        name={stanok[0]}*/}
-                        {/*                                        value={`${saveIndex}`}*/}
-                        {/*                                        checked={selectedObjects[saveIndex]}*/}
-                        {/*                                        onChange={() => {*/}
-                        {/*                                            handleOnChange(saveIndex)*/}
-                        {/*                                            setListChanged(true)*/}
-                        {/*                                        }}*/}
-                        {/*                                    />*/}
-                        {/*                                    <label*/}
-                        {/*                                        htmlFor={`custom-checkbox-${saveIndex}`}></label><span*/}
-                        {/*                                    className='spanList'>{stanok[0]}</span>*/}
-                        {/*                                </div>*/}
-                        {/*                            </div>*/}
-                        {/*                        </li>*/}
-                        {/*                    )*/}
-                        {/*                })}*/}
-                        {/*            </ul>*/}
-                        {/*        </li>*/}
-                        {/*    );*/}
+                            let paddingNow = {
+                                paddingBottom: 30 * stankiKeys.length + 6
+                            };
 
-                        {/*})}*/}
+                            return (
+                                <li key={index}>
+                                    <div className="toppings-list-item">
+                                        <div className="left-section">
+                                            <input
+                                                type="checkbox"
+                                                id={`custom-checkbox-category-${index}`}
+                                                name={placeName}
+                                                value={index}
+                                                checked={false}
+                                                // onChange={() => {
+                                                //     handleOnChangeCategory(index)
+                                                //     setListChanged(true)
+                                                // }
+                                                // }
+                                            />
+                                            <label style={paddingNow}
+                                                   htmlFor={`custom-checkbox-category-${index}`}></label><span
+                                            className='spanList spanListCategory'>{placeName}</span>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <insideList stankiKeys={stankiKeys} stanki={stanki}/>
+                                    </ul>
+                                </li>
+                            );
+
+                        })}
                     </ul>
                 </div>
             </div>
         </div>
+    )
+}
+
+function insideList({stankiKeys, stankiObjects}) {
+
+    return(
+        stankiKeys.map((stanok, i) => {
+                let stanokIndex = `${stanok} ${i}`
+                let stanokName = stankiObjects[stanok].buttonNames.name
+
+                return (
+                    <li key={stanokIndex} className='individualLi'>
+                        <div className="toppings-list-item">
+                            <div className="left-section">
+                                <input
+                                    type="checkbox"
+                                    id={`custom-checkbox-${stanokIndex}`}
+                                    name={stanokName}
+                                    value={`${stanokIndex}`}
+                                    checked={false}
+                                    // onChange={() => {
+                                    //     handleOnChange(saveIndex)
+                                    //     setListChanged(true)
+                                    // }}
+                                />
+                                <label
+                                    htmlFor={`custom-checkbox-${stanokIndex}`}></label><span
+                                className='spanList'>{stanokName}</span>
+                            </div>
+                        </div>
+                    </li>
+                )
+            })
     )
 }
 
