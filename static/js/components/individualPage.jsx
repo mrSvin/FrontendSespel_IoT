@@ -566,8 +566,8 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                         className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
 
                         {placeKeys.map((placeName, index) => {
-                            let stankiKeys = Object.keys(placesObject[placeName])
-                            let stankiObjects = placesObject[placeName]
+                            let stankiKeys = Object.keys(placesObject[placeName].stanki)
+                            let stankiObjects = placesObject[placeName].stanki
 
                             let paddingNow = {
                                 paddingBottom: 30 * stankiKeys.length + 6
