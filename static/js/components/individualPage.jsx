@@ -583,7 +583,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                                 checked={valuesCategories[placeName]}
                                                 onChange={() => {
                                                     console.log('reducer ')
-                                                    setValuesCategories({placeName:!valuesCategories[placeName]})
+                                                    setValuesCategories({[placeName]:!valuesCategories[placeName]})
                                                     setListChanged(true)
                                                 }
                                                 }
