@@ -512,6 +512,19 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
             ...prevState,
             [name]: checked
         }));
+        setListChanged(true)
+        console.log('Проверка доступа к данным', name, placesObject, placeKeys)
+    };
+
+    const handleOnChangeStanok = e => {
+        const {name, checked} = e.target;
+        setValuesStanki(prevState => ({
+            ...prevState,
+            [name]: checked
+        }));
+
+        setListChanged(true)
+        console.log('Проверка доступа к данным', name, placesObject, placeKeys)
     };
 
     // const handleOnChange = (position) => {
@@ -576,8 +589,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                     </div>
                                     <ul>
                                         <InsideList stankiKeys={stankiKeys} stankiObjects={stankiObjects}
-                                                    setListChanged={setListChanged} valuesStanki={valuesStanki}
-                                                    setValuesStanki={setValuesStanki} setActive={setActive}/>
+                                                    valuesStanki={valuesStanki} handleOnChangeStanok={handleOnChangeStanok}/>
                                     </ul>
                                 </li>
                             );
@@ -590,7 +602,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
     )
 }
 
-function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, setValuesStanki}) {
+function InsideList({stankiKeys, stankiObjects, valuesStanki, handleOnChangeStanok}) {
 
     return(
         stankiKeys.map((stanok, i) => {
@@ -607,13 +619,7 @@ function InsideList({stankiKeys, stankiObjects, setListChanged, valuesStanki, se
                                 name={stanokName}
                                 value={`${stanokIndex}`}
                                 checked={valuesStanki[stanok]}
-                                onChange={() => {
-                                    handleOnChangeCategory()
-                                    valuesStanki[stanok] = !valuesStanki[stanok]
-                                    setValuesStanki({[stanok]:valuesStanki[stanok]})
-                                    setListChanged(true)
-                                }
-                                }
+                                onChange={handleOnChangeStanok}
                             />
                             <label
                                 htmlFor={`custom-checkbox-${stanokIndex}`}></label><span
