@@ -323,9 +323,15 @@ function IndividualPage({page = 'all'}) {
             placeState: true,
         },
     }
-    let placeKeys = Object.keys(placesObject).map(e => {
-        return e
-    })
+    let placeKeys = []
+
+    if(page == 'all') {
+        placeKeys = Object.keys(placesObject).map(e => {
+            return e
+        })
+    }
+    else placeKeys.push(page)
+
 
     let stankiObject = {}
     let stankiKeys = []
