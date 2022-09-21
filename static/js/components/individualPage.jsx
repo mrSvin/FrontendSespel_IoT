@@ -259,6 +259,21 @@
 //
 // }
 
+function MenuStankiIndividual({menuSelected=0}) {
+
+    let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
+    menuSelect[menuSelected] == "menuSelect"
+
+    let places = ['ОТК', 'Мех.уч.2 пл.', 'Резка', 'Мех.уч.1 пл.', 'Роботы', 'Спец. комплексы', 'Склады', 'Литьё', 'Гибка', 'Все']
+
+    return (
+        <div className="menuButtons">
+            {places.map((e,i)=>{
+                return <div className={menuSelect[i]}>{e}</div>
+            })}
+        </div>
+    )
+}
 
 function IndividualPage({page = 'all'}) {
 
@@ -453,7 +468,7 @@ function IndividualPage({page = 'all'}) {
     return (
         <div>
 
-            <MenuStankiIndividual menuSelected={0}/>
+            <MenuStankiIndividual/>
 
             <div className="buttons-otchet">
 
@@ -818,20 +833,4 @@ function getObjectFromLocal(local) {
         placeForState[local[i]] = (local[i + 1] == 'true')
     }
     return placeForState
-}
-
-function MenuStankiIndividual(menuSelected=0) {
-
-    let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
-    menuSelect[menuSelected] == "menuSelect"
-
-    let places = ['ОТК', 'Мех.уч.2 пл.', 'Резка', 'Мех.уч.1 пл.', 'Роботы', 'Спец. комплексы', 'Склады', 'Литьё', 'Гибка', 'Все']
-
-    return (
-        <div className="menuButtons">
-            {places.map((e,i)=>{
-                return <div className={menuSelect[i]}>ОТК</div>
-            })}
-        </div>
-    )
 }
