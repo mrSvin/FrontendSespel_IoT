@@ -362,7 +362,7 @@ function IndividualPage({page = 'all'}) {
     )
 
     const [valuesStanki, setValuesStanki] = useState(
-        (localStorage['stanki'] !== undefined && page == 'all') ? getObjectFromLocal(localStorage['places']) :
+        (localStorage['stanki'] !== undefined && page == 'all') ? getObjectFromLocal(localStorage['stanki']) :
             getStankiState(placeKeys, placesObject)
     )
 
