@@ -260,7 +260,9 @@
 // }
 
 
-function IndividualPage() {
+function IndividualPage(page = 'all') {
+
+    // page = 'ОТК'
 
     let kim = {
         buttonNames: {
@@ -335,13 +337,13 @@ function IndividualPage() {
     })
 
 
-    if (localStorage['places'] == undefined) {
+    if (localStorage['places'] == undefined && page == 'all') {
         localStorage['places'] = Object.keys(placesObject).map(e => {
             return [e, false]
         })
     }
 
-    if (localStorage['stanki'] == undefined) {
+    if (localStorage['stanki'] == undefined && page == 'all') {
         localStorage['stanki'] = Object.keys(stankiObject).map(e => {
             return [e, false]
         })
@@ -354,12 +356,12 @@ function IndividualPage() {
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
     const [valuesCategories, setValuesCategories] = useState(
-        (localStorage['places'] == undefined) ? getCategoriesState(placeKeys, placesObject):
+        (localStorage['places'] == undefined || page !== 'all') ? getCategoriesState(placeKeys, placesObject):
             getObjectFromLocal(localStorage['places'])
     )
 
     const [valuesStanki, setValuesStanki] = useState(
-        (localStorage['stanki'] == undefined) ? getStankiState(placeKeys, placesObject):
+        (localStorage['stanki'] == undefined || page !== 'all') ? getStankiState(placeKeys, placesObject):
             getObjectFromLocal(localStorage['stanki'])
     )
 
