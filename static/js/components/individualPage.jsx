@@ -615,7 +615,7 @@ function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStank
                                     <ul>
                                         <InsideList stankiKeys={stankiKeys} stankiObjects={stankiObjects}
                                                     handleOnChangeStanok={handleOnChangeStanok}
-                                                    valuesStanki={valuesStanki}/>
+                                                    valuesStanki={valuesStanki} page={page}/>
                                     </ul>
                                 </li>
                             );
