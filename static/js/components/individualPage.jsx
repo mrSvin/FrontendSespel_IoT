@@ -543,7 +543,7 @@ function ListDevicesCategory({
         let localPlaces = getObjectFromLocal(localStorage['places'])
         localPlaces[name] = checked
         localStorage['places'] = Object.keys(localPlaces).map(e => {
-            return [e, false]
+            return [e, localPlaces[e]]
         })
 
         let localStanki = getObjectFromLocal(localStorage['stanki'])
@@ -557,7 +557,7 @@ function ListDevicesCategory({
         })
 
         localStorage['stanki'] = Object.keys(localStanki).map(e => {
-            return [e, false]
+            return [e, localStanki[e]]
         })
     };
 
@@ -572,7 +572,7 @@ function ListDevicesCategory({
         localStanki[name] = checked
 
         localStorage['stanki'] = Object.keys(localStanki).map(e => {
-            return [e, false]
+            return [e, localStanki[e]]
         })
 
         setListChanged(true)
