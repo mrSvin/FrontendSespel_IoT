@@ -401,7 +401,6 @@ function IndividualPageInfo() {
 
     function newDate(dateInput) {
         setDate(dateInput)
-        setValuesStankiWait(valuesStanki)
 
         let stankiState = {}
 
@@ -410,6 +409,8 @@ function IndividualPageInfo() {
                 stankiState[e] = stankiObject[e]
             }
         })
+
+        setValuesStankiWait(stankiState)
 
         let stankiKeysState = Object.keys(stankiState).map(e=>{
             return e
@@ -447,13 +448,9 @@ function IndividualPageInfo() {
                                     stankiObject={stankiObject} valuesStanki={valuesStanki}
             />
 
-            {Object.keys(valuesStankiWait).map(e=>{
-                let stankiState = {}
-
-                if(valuesStankiWait[e]) {
-                    stankiState[e] = stankiObject[e]
-                }
-                let stanok = stankiState[e]
+            {Object.keys(valuesStankiWait).map((e,i)=>{
+                let stanok = stankiObject[e]
+                console.log(stanok)
 
                 if (Object.keys(stanok).length !== 0) {
                     return <ComplexSutkiAllInfo key={i} complexName={stanok.buttonNames.name} complexImg={stanok.complexImg}
