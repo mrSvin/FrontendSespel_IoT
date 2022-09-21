@@ -335,12 +335,21 @@ function IndividualPage({page = 'all'}) {
 
     let stankiObject = {}
     let stankiKeys = []
-    Object.keys(placesObject).forEach(e => {
-        Object.keys(placesObject[e].stanki).map(i => {
-            stankiObject[i] = placesObject[e].stanki[i]
-            stankiKeys.push(i)
+    if(page == 'all') {
+        Object.keys(placesObject).forEach(e => {
+            Object.keys(placesObject[e].stanki).map(i => {
+                stankiObject[i] = placesObject[e].stanki[i]
+                stankiKeys.push(i)
+            })
         })
-    })
+    } else {
+        placeKeys.forEach(e => {
+            Object.keys(placesObject[e].stanki).map(i => {
+                stankiObject[i] = placesObject[e].stanki[i]
+                stankiKeys.push(i)
+            })
+        })
+    }
 
     if (page == 'all') {
         if (localStorage['places'] == undefined) {
