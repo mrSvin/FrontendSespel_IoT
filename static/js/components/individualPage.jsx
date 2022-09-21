@@ -396,16 +396,27 @@ function IndividualPageInfo() {
 
     function newDate(dateInput) {
         setDate(dateInput)
-        // setValuesStateWait(valuesState)
 
         console.log('Данные о состояниях', valuesStanki)
 
-        let fetchNames = stankiKeys.map(name => {
-            return stankiObject[name].complexRequest
+        let stankiState = {}
+
+        Object.keys(valuesStanki).forEach(e=>{
+            if(valuesStanki[e]) {
+                stankiState[e] = stankiObject[e]
+            }
         })
 
-        let complexNames = stankiKeys.map(name => {
-            return stankiObject[name].buttonNames
+        let stankiKeysState = Object.keys(stankiState).map(e=>{
+            return e
+        })
+
+        let fetchNames = stankiKeysState.map(name => {
+            return stankiState[name].complexRequest
+        })
+
+        let complexNames = stankiKeysState.map(name => {
+            return stankiState[name].buttonNames
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
