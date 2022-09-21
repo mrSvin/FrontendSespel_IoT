@@ -262,7 +262,7 @@
 
 function IndividualPage({page = 'all'}) {
 
-    // page = 'ОТК'
+    page = 'ОТК'
 
     let kim = {
         buttonNames: {
