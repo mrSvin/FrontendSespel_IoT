@@ -455,7 +455,7 @@ function IndividualPageInfo() {
                 }
                 let stanok = stankiState[e]
 
-                if (Object.keys(stanok).length == 0) {
+                if (Object.keys(stanok).length !== 0) {
                     return <ComplexSutkiAllInfo key={i} complexName={stanok.buttonNames.name} complexImg={stanok.complexImg}
                                                 complexMesto={stanok.buttonsVrs} size={stanok.size} idContainer={i + 1}
                                                 service={stanok.buttonNames.serviceName} alarm={stanok.buttonNames.alarm}
