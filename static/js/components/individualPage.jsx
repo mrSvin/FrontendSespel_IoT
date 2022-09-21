@@ -272,20 +272,19 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait, pla
                 return <div key={i} className={menuSelect[i]}
                 onClick={(e)=>{
 
-
-                    //
-                    // placeKeys.forEach(e => {
-                    //         stankiState[e] = stankiObject[e]
-                    // })
-                    console.log('Объект', placesObject)
-
                     let stankiState = {}
 
-                    Object.keys(placesObject[places[i]].stanki).forEach(e=>{
-                        stankiState[e] = placesObject[places[i]].stanki[e]
-                    })
-
-                    console.log('Итог', stankiState)
+                    if(i==9){
+                        Object.keys(placesObject).forEach(e => {
+                            Object.keys(placesObject[e].stanki).forEach(i => {
+                                stankiState[i] = placesObject[e].stanki[i]
+                            })
+                        })
+                    } else {
+                        Object.keys(placesObject[places[i]].stanki).forEach(e=>{
+                            stankiState[e] = placesObject[places[i]].stanki[e]
+                        })
+                    }
 
                     setValuesStankiWait(stankiState)
                     setPage(i)
@@ -375,7 +374,7 @@ function IndividualPage() {
     let stankiKeys = []
     if(page == 9) {
         Object.keys(placesObject).forEach(e => {
-            Object.keys(placesObject[e].stanki).map(i => {
+            Object.keys(placesObject[e].stanki).forEach(i => {
                 stankiObject[i] = placesObject[e].stanki[i]
                 stankiKeys.push(i)
             })
