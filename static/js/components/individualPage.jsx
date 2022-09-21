@@ -259,7 +259,7 @@
 //
 // }
 
-function MenuStankiIndividual({menuSelected=9, setPage}) {
+function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait, stankiObject, placeKeys}) {
 
     let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
     menuSelect[menuSelected] = "menuSelect"
@@ -271,8 +271,19 @@ function MenuStankiIndividual({menuSelected=9, setPage}) {
             {places.map((e,i)=>{
                 return <div key={i} className={menuSelect[i]}
                 onClick={()=>{
-                    console.log('Смена страницы')
+
+                    let stankiState = {}
+
+                    placeKeys.forEach(e => {
+                        if (valuesStanki[e]) {
+                            stankiState[e] = stankiObject[e]
+                        }
+                    })
+
+                    console.log('Состояние теперь?', stankiState)
+                    setValuesStankiWait(stankiState)
                     setPage(i)
+
                 }}>{e}</div>
             })}
         </div>
@@ -474,7 +485,8 @@ function IndividualPage() {
     return (
         <div>
 
-            <MenuStankiIndividual menuSelected={page} setPage={setPage}/>
+            <MenuStankiIndividual menuSelected={page} setPage={setPage} setValuesStankiWait={setValuesStankiWait}
+                                  stankiObject={stankiObject} placeKeys={placeKeys}/>
 
             <div className="buttons-otchet">
 
