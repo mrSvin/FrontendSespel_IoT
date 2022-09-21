@@ -294,17 +294,12 @@ function IndividualPageInfo() {
             placeState: true,
         },
     }
-
-    // Новая структура
-
-
     let placeKeys = Object.keys(placesObject).map(e => {
         return e
     })
 
     let stankiObject = {}
     let stankiKeys = []
-
     Object.keys(placesObject).forEach(e => {
         Object.keys(placesObject[e].stanki).map(i => {
             stankiObject[i] = placesObject[e].stanki[i]
@@ -339,9 +334,6 @@ function IndividualPageInfo() {
 
     // Массив номеров всех станков
     // let values = getValues(placeLength, places)
-
-
-
 
     // if (localStorage['selectedObjects'] == undefined) {
     //     localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
@@ -378,12 +370,24 @@ function IndividualPageInfo() {
         let dateInput = dayNow()
         setDate(dateInput)
 
-        let fetchNames = stankiKeys.map(name => {
-            return stankiObject[name].complexRequest
+        let stankiState = {}
+
+        Object.keys(valuesStanki).forEach(e=>{
+            if(valuesStanki[e]) {
+                stankiState[e] = stankiObject[e]
+            }
         })
 
-        let complexNames = stankiKeys.map(name => {
-            return stankiObject[name].buttonNames
+        let stankiKeysState = Object.keys(stankiState).map(e=>{
+            return e
+        })
+
+        let fetchNames = stankiKeysState.map(name => {
+            return stankiState[name].complexRequest
+        })
+
+        let complexNames = stankiKeysState.map(name => {
+            return stankiState[name].buttonNames
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
@@ -396,8 +400,6 @@ function IndividualPageInfo() {
 
     function newDate(dateInput) {
         setDate(dateInput)
-
-        console.log('Данные о состояниях', valuesStanki)
 
         let stankiState = {}
 
@@ -440,7 +442,7 @@ function IndividualPageInfo() {
             <ComplexTotalSutkiInfo/>
 
             <SwitchLineHCIndividual date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                                    stankiObject={stankiObject} stankiKeys={stankiKeys}
+                                    stankiObject={stankiObject} valuesStanki={valuesStanki}
             />
 
             {stankiKeys.map((e, i) => {
@@ -866,14 +868,26 @@ function updateLoadDataIndividual(promiseVariable, day1, complexName, fetchNames
 }
 
 // Изменение состояние линейных графиков из 5-ти строк в одну
-function changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObject, stankiKeys) {
+function changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObject, valuesStanki) {
 
-    let fetchNames = stankiKeys.map(name => {
-        return stankiObject[name].complexRequest
+    let stankiState = {}
+
+    Object.keys(valuesStanki).forEach(e=>{
+        if(valuesStanki[e]) {
+            stankiState[e] = stankiObject[e]
+        }
     })
 
-    let complexNames = stankiKeys.map(name => {
-        return stankiObject[name].buttonNames
+    let stankiKeysState = Object.keys(stankiState).map(e=>{
+        return e
+    })
+
+    let fetchNames = stankiKeysState.map(name => {
+        return stankiState[name].complexRequest
+    })
+
+    let complexNames = stankiKeysState.map(name => {
+        return stankiState[name].buttonNames
     })
 
     let stankiRequest = Promise.all(fetchNames.map((item) => {
@@ -892,12 +906,12 @@ function changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObjec
 }
 
 
-function SwitchLineHCIndividual({date, stateLineHC, setStateLineHC, stankiObject, stankiKeys}) {
+function SwitchLineHCIndividual({date, stateLineHC, setStateLineHC, stankiObject, valuesStanki}) {
     return (
         <div className="energyCalendarContainer">
             <label className="switch">
                 <input type="checkbox" onChange={() => {
-                    changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObject, stankiKeys)
+                    changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObject, valuesStanki)
                 }}/>
                 <span className="slider round"></span>
             </label>
