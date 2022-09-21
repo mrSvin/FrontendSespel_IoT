@@ -336,17 +336,18 @@ function IndividualPage(page = 'all') {
         })
     })
 
+    if (page == 'all') {
+        if (localStorage['places'] == undefined) {
+            localStorage['places'] = Object.keys(placesObject).map(e => {
+                return [e, false]
+            })
+        }
 
-    if (localStorage['places'] == undefined && page == 'all') {
-        localStorage['places'] = Object.keys(placesObject).map(e => {
-            return [e, false]
-        })
-    }
-
-    if (localStorage['stanki'] == undefined && page == 'all') {
-        localStorage['stanki'] = Object.keys(stankiObject).map(e => {
-            return [e, false]
-        })
+        if (localStorage['stanki'] == undefined) {
+            localStorage['stanki'] = Object.keys(stankiObject).map(e => {
+                return [e, false]
+            })
+        }
     }
 
     // Состояние даты
@@ -356,13 +357,13 @@ function IndividualPage(page = 'all') {
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
     const [valuesCategories, setValuesCategories] = useState(
-        (localStorage['places'] == undefined || page !== 'all') ? getCategoriesState(placeKeys, placesObject):
-            getObjectFromLocal(localStorage['places'])
+        (localStorage['places'] !== undefined && page == 'all') ? getObjectFromLocal(localStorage['places']) :
+            getCategoriesState(placeKeys, placesObject)
     )
 
     const [valuesStanki, setValuesStanki] = useState(
-        (localStorage['stanki'] == undefined || page !== 'all') ? getStankiState(placeKeys, placesObject):
-            getObjectFromLocal(localStorage['stanki'])
+        (localStorage['stanki'] !== undefined && page == 'all') ? getObjectFromLocal(localStorage['places']) :
+            getStankiState(placeKeys, placesObject)
     )
 
     const [valuesStankiWait, setValuesStankiWait] = useState(valuesStanki)
@@ -458,7 +459,8 @@ function IndividualPage(page = 'all') {
                     <DayCalendar newDate={newDate} date={date}/>
                     <ListDevicesCategory date={date} newDate={newDate} placesObject={placesObject} placeKeys={placeKeys}
                                          valuesStanki={valuesStanki} setValuesStanki={setValuesStanki}
-                                         valuesCategories={valuesCategories} setValuesCategories={setValuesCategories}/>
+                                         valuesCategories={valuesCategories} setValuesCategories={setValuesCategories}
+                                         page={page}/>
 
                 </div>
                 <ComplexTotalSutkiInfo/>
@@ -490,26 +492,7 @@ function IndividualPage(page = 'all') {
     )
 }
 
-function ListDevicesCategory({
-                                 date,
-                                 newDate,
-                                 placesObject,
-                                 placeKeys,
-                                 valuesStanki,
-                                 setValuesStanki,
-                                 valuesCategories,
-                                 setValuesCategories
-                             }) {
-
-    // function changeMainList(mainList, selectedObjects) {
-    //     let index = 0
-    //     for (let i = 0; i < mainList.length; i++) {
-    //         for (let j = 0; j < mainList[i][1]; j++) {
-    //             selectedObjects[index] = mainList[i][0]
-    //             index++
-    //         }
-    //     }
-    // }
+function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStanki, setValuesStanki, valuesCategories, setValuesCategories, page}) {
 
     const [isActive, setActive] = useState(false);
 
@@ -534,7 +517,7 @@ function ListDevicesCategory({
         }
     });
 
-    function handleOnChangeCategory(e) {
+    function handleOnChangeCategory(e, page) {
         const {name, checked} = e.target;
         setValuesCategories(prevState => ({
             ...prevState,
@@ -542,41 +525,51 @@ function ListDevicesCategory({
         }));
         setListChanged(true)
 
-        let localPlaces = getObjectFromLocal(localStorage['places'])
-        localPlaces[name] = checked
-        localStorage['places'] = Object.keys(localPlaces).map(e => {
-            return [e, localPlaces[e]]
-        })
 
-        let localStanki = getObjectFromLocal(localStorage['stanki'])
+        let localPlaces = null
+        let localStanki = null
+
+        if (page == 'all') {
+            localPlaces = getObjectFromLocal(localStorage['places'])
+            localStanki = getObjectFromLocal(localStorage['stanki'])
+            localPlaces[name] = checked
+            localStorage['places'] = Object.keys(localPlaces).map(e => {
+                return [e, localPlaces[e]]
+            })
+        }
+
 
         Object.keys(placesObject[name].stanki).forEach(e => {
-            localStanki[e] = checked
+            if (page == 'all') {
+                localStanki[e] = checked
+            }
             setValuesStanki(prevState => ({
                 ...prevState,
                 [e]: checked
             }));
         })
-
-        localStorage['stanki'] = Object.keys(localStanki).map(e => {
-            return [e, localStanki[e]]
-        })
+        if (page == 'all') {
+            localStorage['stanki'] = Object.keys(localStanki).map(e => {
+                return [e, localStanki[e]]
+            })
+        }
     };
 
-    function handleOnChangeStanok(e) {
+    function handleOnChangeStanok(e, page) {
         const {name, checked} = e.target;
         setValuesStanki(prevState => ({
             ...prevState,
             [name]: checked
         }));
 
-        let localStanki = getObjectFromLocal(localStorage['stanki'])
-        localStanki[name] = checked
+        if (page == 'all') {
+            let localStanki = getObjectFromLocal(localStorage['stanki'])
+            localStanki[name] = checked
 
-        localStorage['stanki'] = Object.keys(localStanki).map(e => {
-            return [e, localStanki[e]]
-        })
-
+            localStorage['stanki'] = Object.keys(localStanki).map(e => {
+                return [e, localStanki[e]]
+            })
+        }
         setListChanged(true)
     };
 
@@ -611,7 +604,7 @@ function ListDevicesCategory({
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
                                                 onChange={(e) => {
-                                                    handleOnChangeCategory(e)
+                                                    handleOnChangeCategory(e, page)
                                                 }}
                                             />
                                             <label style={paddingNow}
@@ -635,7 +628,7 @@ function ListDevicesCategory({
     )
 }
 
-function InsideList({stankiKeys, stankiObjects, handleOnChangeStanok, valuesStanki}) {
+function InsideList({stankiKeys, stankiObjects, handleOnChangeStanok, valuesStanki, page}) {
 
     return (
         stankiKeys.map((stanok, i) => {
@@ -653,7 +646,7 @@ function InsideList({stankiKeys, stankiObjects, handleOnChangeStanok, valuesStan
                                 value={`${stanokIndex}`}
                                 checked={valuesStanki[stanok]}
                                 onChange={(e) => {
-                                    handleOnChangeStanok(e)
+                                    handleOnChangeStanok(e, page)
                                 }}
                             />
                             <label
@@ -778,7 +771,6 @@ function SwitchLineHCIndividual({date, stateLineHC, setStateLineHC, stankiObject
         </div>
     )
 }
-
 
 
 function getStankiState(placeKeys, placesObject) {
