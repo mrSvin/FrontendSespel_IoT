@@ -279,7 +279,7 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait, pla
                     // })
                     console.log('Объект', placesObject)
 
-                    console.log('Итог', stankiState, places[i])
+                    console.log('Итог', places[i])
 
                     // setValuesStankiWait(stankiState)
                     setPage(i)
