@@ -334,17 +334,36 @@ function IndividualPage() {
         })
     })
 
+
+    if (localStorage['places'] == undefined) {
+        localStorage['places'] = Object.keys(placesObject).map(e => {
+            return [e, false]
+        })
+    }
+
+    if (localStorage['stanki'] == undefined) {
+        localStorage['stanki'] = Object.keys(stankiObject).map(e => {
+            return [e, false]
+        })
+    }
+
     // Состояние даты
     let [date, setDate] = useState(0);
 
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    const [valuesCategories, setValuesCategories] = useState(getCategoriesState(placeKeys, placesObject))
+    const [valuesCategories, setValuesCategories] = useState(
+        (localStorage['places'] == undefined) ? getCategoriesState(placeKeys, placesObject):
+            getObjectFromLocal(localStorage['places'])
+    )
 
-    const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
+    const [valuesStanki, setValuesStanki] = useState(
+        (localStorage['stanki'] == undefined) ? getStankiState(placeKeys, placesObject):
+            getObjectFromLocal(localStorage['stanki'])
+    )
 
-    const [valuesStankiWait, setValuesStankiWait] = useState(getStankiState(placeKeys, placesObject))
+    const [valuesStankiWait, setValuesStankiWait] = useState(valuesStanki)
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -352,13 +371,13 @@ function IndividualPage() {
 
         let stankiState = {}
 
-        Object.keys(valuesStanki).forEach(e=>{
-            if(valuesStanki[e]) {
+        Object.keys(valuesStanki).forEach(e => {
+            if (valuesStanki[e]) {
                 stankiState[e] = stankiObject[e]
             }
         })
 
-        let stankiKeysState = Object.keys(stankiState).map(e=>{
+        let stankiKeysState = Object.keys(stankiState).map(e => {
             return e
         })
 
@@ -383,15 +402,15 @@ function IndividualPage() {
 
         let stankiState = {}
 
-        Object.keys(valuesStanki).forEach(e=>{
-            if(valuesStanki[e]) {
+        Object.keys(valuesStanki).forEach(e => {
+            if (valuesStanki[e]) {
                 stankiState[e] = stankiObject[e]
             }
         })
 
         setValuesStankiWait(stankiState)
 
-        let stankiKeysState = Object.keys(stankiState).map(e=>{
+        let stankiKeysState = Object.keys(stankiState).map(e => {
             return e
         })
 
@@ -447,14 +466,19 @@ function IndividualPage() {
                                         setValuesStankiWait={setValuesStankiWait}
                 />
 
-                {Object.keys(valuesStankiWait).map((e,i)=>{
+                {Object.keys(valuesStankiWait).map((e, i) => {
                     let stanok = stankiObject[e]
                     if (Object.keys(stanok).length !== 0) {
-                        return <ComplexSutkiAllInfo key={i} complexName={stanok.buttonNames.name} complexImg={stanok.complexImg}
-                                                    complexMesto={stanok.buttonsVrs} size={stanok.size} idContainer={i + 1}
-                                                    service={stanok.buttonNames.serviceName} alarm={stanok.buttonNames.alarm}
-                                                    programs={stanok.buttonNames.programsName} laser={stanok.buttonNames.laser}
-                                                    report={stanok.buttonNames.report} current={stanok.buttonNames.current}/>
+                        return <ComplexSutkiAllInfo key={i} complexName={stanok.buttonNames.name}
+                                                    complexImg={stanok.complexImg}
+                                                    complexMesto={stanok.buttonsVrs} size={stanok.size}
+                                                    idContainer={i + 1}
+                                                    service={stanok.buttonNames.serviceName}
+                                                    alarm={stanok.buttonNames.alarm}
+                                                    programs={stanok.buttonNames.programsName}
+                                                    laser={stanok.buttonNames.laser}
+                                                    report={stanok.buttonNames.report}
+                                                    current={stanok.buttonNames.current}/>
                     } else return null
 
                 })}
@@ -464,7 +488,16 @@ function IndividualPage() {
     )
 }
 
-function ListDevicesCategory({date, newDate, placesObject, placeKeys, valuesStanki, setValuesStanki, valuesCategories, setValuesCategories}) {
+function ListDevicesCategory({
+                                 date,
+                                 newDate,
+                                 placesObject,
+                                 placeKeys,
+                                 valuesStanki,
+                                 setValuesStanki,
+                                 valuesCategories,
+                                 setValuesCategories
+                             }) {
 
     // function changeMainList(mainList, selectedObjects) {
     //     let index = 0
@@ -500,7 +533,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys, valuesStan
     });
 
     function handleOnChangeCategory(e) {
-    const {name, checked} = e.target;
+        const {name, checked} = e.target;
         setValuesCategories(prevState => ({
             ...prevState,
             [name]: checked
@@ -508,7 +541,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys, valuesStan
         setListChanged(true)
 
         // console.log('Проверка доступа к данным', name, placesObject, placeKeys)
-        Object.keys(placesObject[name].stanki).forEach(e=>{
+        Object.keys(placesObject[name].stanki).forEach(e => {
             setValuesStanki(prevState => ({
                 ...prevState,
                 [e]: checked
@@ -556,7 +589,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys, valuesStan
                                                 name={placeName}
                                                 value={index}
                                                 checked={valuesCategories[placeName]}
-                                                onChange={(e)=>{
+                                                onChange={(e) => {
                                                     handleOnChangeCategory(e)
                                                 }}
                                             />
@@ -567,7 +600,8 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys, valuesStan
                                     </div>
                                     <ul>
                                         <InsideList stankiKeys={stankiKeys} stankiObjects={stankiObjects}
-                                                    handleOnChangeStanok={handleOnChangeStanok} valuesStanki={valuesStanki}/>
+                                                    handleOnChangeStanok={handleOnChangeStanok}
+                                                    valuesStanki={valuesStanki}/>
                                     </ul>
                                 </li>
                             );
@@ -580,9 +614,9 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys, valuesStan
     )
 }
 
-function InsideList({stankiKeys, stankiObjects,handleOnChangeStanok, valuesStanki}) {
+function InsideList({stankiKeys, stankiObjects, handleOnChangeStanok, valuesStanki}) {
 
-    return(
+    return (
         stankiKeys.map((stanok, i) => {
             let stanokIndex = `${stanok} ${i}`
             let stanokName = stankiObjects[stanok].buttonNames.name
@@ -597,7 +631,7 @@ function InsideList({stankiKeys, stankiObjects,handleOnChangeStanok, valuesStank
                                 name={stankiObjects[stanok].complexRequest}
                                 value={`${stanokIndex}`}
                                 checked={valuesStanki[stanok]}
-                                onChange={(e)=>{
+                                onChange={(e) => {
                                     handleOnChangeStanok(e)
                                 }}
                             />
@@ -676,15 +710,15 @@ function changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObjec
 
     let stankiState = {}
 
-    Object.keys(valuesStanki).forEach(e=>{
-        if(valuesStanki[e]) {
+    Object.keys(valuesStanki).forEach(e => {
+        if (valuesStanki[e]) {
             stankiState[e] = stankiObject[e]
         }
     })
 
     setValuesStankiWait(stankiState)
 
-    let stankiKeysState = Object.keys(stankiState).map(e=>{
+    let stankiKeysState = Object.keys(stankiState).map(e => {
         return e
     })
 
@@ -724,11 +758,13 @@ function SwitchLineHCIndividual({date, stateLineHC, setStateLineHC, stankiObject
     )
 }
 
+
+
 function getStankiState(placeKeys, placesObject) {
     let stankiForState = {}
 
-    placeKeys.forEach(e=>{
-        Object.keys(placesObject[e].stanki).forEach(i=>{
+    placeKeys.forEach(e => {
+        Object.keys(placesObject[e].stanki).forEach(i => {
             stankiForState[i] = placesObject[e].stanki[i].state
         })
     })
@@ -737,10 +773,20 @@ function getStankiState(placeKeys, placesObject) {
 
 function getCategoriesState(placeKeys, placesObject) {
     let placeForState = {}
-    placeKeys.forEach(e=>{
+    placeKeys.forEach(e => {
         placeForState[e] = placesObject[e].placeState
         return placeForState
     })
     return placeForState
 }
 
+function getObjectFromLocal(local) {
+    local = local.split(',')
+    let placeForState = {}
+
+    for (let i = 0; i < local.length; i += 2) {
+
+        placeForState[local[i]] = (local[i + 1] == 'true')
+    }
+    return placeForState
+}
