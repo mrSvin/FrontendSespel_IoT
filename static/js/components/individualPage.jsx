@@ -272,16 +272,22 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait, pla
                 return <div key={i} className={menuSelect[i]}
                 onClick={(e)=>{
 
-                    // let stankiState = {}
+
                     //
                     // placeKeys.forEach(e => {
                     //         stankiState[e] = stankiObject[e]
                     // })
                     console.log('Объект', placesObject)
 
-                    console.log('Итог', places[i])
+                    let stankiState = {}
 
-                    // setValuesStankiWait(stankiState)
+                    Object.keys(placesObject[places[i]].stanki).forEach(e=>{
+                        stankiState[e] = placesObject[places[i]].stanki[e]
+                    })
+
+                    console.log('Итог', stankiState)
+
+                    setValuesStankiWait(stankiState)
                     setPage(i)
 
                 }}>{e}</div>
