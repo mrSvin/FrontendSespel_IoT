@@ -540,13 +540,21 @@ function ListDevicesCategory({
         }));
         setListChanged(true)
 
-        // console.log('Проверка доступа к данным', name, placesObject, placeKeys)
+        let localPlaces = getObjectFromLocal(localStorage['places'])
+        localPlaces[name] = checked
+        localStorage['places'] = localPlaces
+
+        let localStanki = getObjectFromLocal(localStorage['stanki'])
+
         Object.keys(placesObject[name].stanki).forEach(e => {
+            localStanki[name] = checked
             setValuesStanki(prevState => ({
                 ...prevState,
                 [e]: checked
             }));
         })
+
+        localStorage['stanki'] = localStanki
     };
 
     function handleOnChangeStanok(e) {
@@ -555,6 +563,10 @@ function ListDevicesCategory({
             ...prevState,
             [name]: checked
         }));
+
+        let localStanki = getObjectFromLocal(localStorage['stanki'])
+        localStanki[name] = checked
+        localStorage['stanki'] = localStanki
 
         setListChanged(true)
     };
