@@ -317,6 +317,7 @@ function IndividualPageInfo() {
 
     const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
 
+    const [valuesStankiWait, setValuesStankiWait] = useState(getStankiState(placeKeys, placesObject))
 //
 // placeKeys.forEach((e) => {
 //     console.log(e)
@@ -400,6 +401,7 @@ function IndividualPageInfo() {
 
     function newDate(dateInput) {
         setDate(dateInput)
+        setValuesStankiWait(valuesStanki)
 
         let stankiState = {}
 
@@ -446,6 +448,7 @@ function IndividualPageInfo() {
             />
 
             {stankiKeys.map((e, i) => {
+                console.log('state задержки', valuesStankiWait)
                 let stanok = stankiObject[e]
                 return <ComplexSutkiAllInfo key={i} complexName={stanok.buttonNames.name} complexImg={stanok.complexImg}
                                             complexMesto={stanok.buttonsVrs} size={stanok.size} idContainer={i + 1}
