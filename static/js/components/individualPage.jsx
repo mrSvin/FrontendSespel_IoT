@@ -453,7 +453,7 @@ function IndividualPage({page = 'all'}) {
     return (
         <div>
 
-            <MenuStanki menuSelected=""/>
+            <MenuStankiIndividual menuSelected={0}/>
 
             <div className="buttons-otchet">
 
@@ -789,7 +789,6 @@ function SwitchLineHCIndividual({date, stateLineHC, setStateLineHC, stankiObject
     )
 }
 
-
 function getStankiState(placeKeys, placesObject) {
     let stankiForState = {}
 
@@ -819,4 +818,20 @@ function getObjectFromLocal(local) {
         placeForState[local[i]] = (local[i + 1] == 'true')
     }
     return placeForState
+}
+
+function MenuStankiIndividual(menuSelected=0) {
+
+    let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
+    menuSelect[menuSelected] == "menuSelect"
+
+    let places = ['ОТК', 'Мех.уч.2 пл.', 'Резка', 'Мех.уч.1 пл.', 'Роботы', 'Спец. комплексы', 'Склады', 'Литьё', 'Гибка', 'Все']
+
+    return (
+        <div className="menuButtons">
+            {places.map((e,i)=>{
+                return <div className={menuSelect[i]}>ОТК</div>
+            })}
+        </div>
+    )
 }
