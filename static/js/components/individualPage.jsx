@@ -877,7 +877,8 @@ function updateLoadDataIndividual(promiseVariable, day1, complexName, fetchNames
             parserDataArray.forEach((e, i) => {
                 // Первая смена
                 highChartSutkiLine(e[0], e[1], e[2], e[3], e[4], nagruzkaName[i], i + 1)
-                if (programNames[i] !== null && programNames[i] !== undefined) highChartProgram(getTimeProgramNameGraph(data[i], 'sutki', day1), i + 1)
+                // if (programNames[i] !== null && programNames[i] !== undefined)
+                    highChartProgram(getTimeProgramNameGraph(data[i], 'sutki', day1), i + 1)
                 highChartRound(e[5][0], e[5][1], e[5][2], e[5][3], e[5][4], nagruzkaName[i], i + 1)
 
             })
