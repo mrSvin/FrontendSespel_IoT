@@ -459,8 +459,8 @@ function IndividualPage() {
 
         let stankiState = {}
 
-        Object.keys(valuesStanki).forEach(e => {
-            if (valuesStanki[e]) {
+        Object.keys(valuesStankiWait).forEach(e => {
+            if (valuesStankiWait[e]) {
                 stankiState[e] = stankiObject[e]
             }
         })
