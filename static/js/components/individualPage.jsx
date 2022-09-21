@@ -307,7 +307,6 @@ function IndividualPageInfo() {
 
     Object.keys(placesObject).forEach(e => {
         Object.keys(placesObject[e].stanki).map(i => {
-            console.log(placesObject[e].stanki[i], i)
             stankiObject[i] = placesObject[e].stanki[i]
             stankiKeys.push(i)
         })
@@ -394,6 +393,8 @@ function IndividualPageInfo() {
     function newDate(dateInput) {
         setDate(dateInput)
         // setValuesStateWait(valuesState)
+
+        console.log('Данные о состояниях', valuesStanki)
 
         let fetchNames = stankiKeys.map(name => {
             return stankiObject[name].complexRequest
