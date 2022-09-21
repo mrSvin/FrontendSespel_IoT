@@ -277,12 +277,12 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait, pla
                     if(i==9){
                         Object.keys(placesObject).forEach(e => {
                             Object.keys(placesObject[e].stanki).forEach(i => {
-                                stankiState[i] = placesObject[e].stanki[i]
+                                stankiState[i] = false
                             })
                         })
                     } else {
                         Object.keys(placesObject[places[i]].stanki).forEach(e=>{
-                            stankiState[e] = placesObject[places[i]].stanki[e]
+                            stankiState[e] = true
                         })
                     }
 
