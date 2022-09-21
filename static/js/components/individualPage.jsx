@@ -314,7 +314,7 @@ function IndividualPage({page = 'all'}) {
     }
 
     let placesObject = {
-        'OTK': {
+        'ОТК': {
             stanki: {kim, nk600},
             placeState: true,
         },
