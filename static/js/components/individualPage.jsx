@@ -318,6 +318,10 @@ function IndividualPageInfo() {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
+    const [valuesCategories, setValuesCategories] = useState(getCategoriesState(placeKeys, placesObject))
+
+    const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
+
 //
 // placeKeys.forEach((e) => {
 //     console.log(e)
@@ -417,7 +421,9 @@ function IndividualPageInfo() {
         <div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <ListDevicesCategory date={date} newDate={newDate} placesObject={placesObject} placeKeys={placeKeys}/>
+                <ListDevicesCategory date={date} newDate={newDate} placesObject={placesObject} placeKeys={placeKeys}
+                                     valuesStanki={valuesStanki} setValuesStanki={setValuesStanki}
+                                     valuesCategories={valuesCategories} setValuesCategories={setValuesCategories}/>
 
             </div>
             <ComplexTotalSutkiInfo/>
@@ -468,7 +474,7 @@ function IndividualPage() {
     )
 }
 
-function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
+function ListDevicesCategory({date, newDate, placesObject, placeKeys, valuesStanki, setValuesStanki, valuesCategories, setValuesCategories}) {
 
     // function changeMainList(mainList, selectedObjects) {
     //     let index = 0
@@ -503,10 +509,6 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
         }
     });
 
-    const [valuesCategories, setValuesCategories] = useState(getCategoriesState(placeKeys, placesObject))
-
-    const [valuesStanki, setValuesStanki]  = useState(getStankiState(placeKeys, placesObject))
-
     function handleOnChangeCategory(e) {
     const {name, checked} = e.target;
         setValuesCategories(prevState => ({
@@ -533,29 +535,6 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
 
         setListChanged(true)
     };
-
-    // const handleOnChange = (position) => {
-    //     const updatedCheckedState = selectedObjects.map((item, index) => {
-    //         return index === position ? !item : item;
-    //     });
-    //
-    //     // console.log('Внутри update', updatedCheckedState)
-    //
-    //     window.localStorage['selectedObjects'] = updatedCheckedState
-    //     setSelectedObjects(updatedCheckedState)
-    //
-    //     const activeValues = []
-    //     updatedCheckedState.forEach(
-    //         (currentState, index) => {
-    //             if (currentState) {
-    //                 activeValues.push(values[index]);
-    //             }
-    //         }
-    //     );
-    //
-    //     setValuesState(activeValues);
-    //
-    // };
 
     return (
         <div
@@ -598,7 +577,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
                                     </div>
                                     <ul>
                                         <InsideList stankiKeys={stankiKeys} stankiObjects={stankiObjects}
-                                                    valuesStanki={valuesStanki} handleOnChangeStanok={handleOnChangeStanok}/>
+                                                    handleOnChangeStanok={handleOnChangeStanok} valuesStanki={valuesStanki}/>
                                     </ul>
                                 </li>
                             );
@@ -611,7 +590,7 @@ function ListDevicesCategory({date, newDate, placesObject, placeKeys}) {
     )
 }
 
-function InsideList({stankiKeys, stankiObjects, valuesStanki, handleOnChangeStanok}) {
+function InsideList({stankiKeys, stankiObjects,handleOnChangeStanok, valuesStanki}) {
 
     return(
         stankiKeys.map((stanok, i) => {
