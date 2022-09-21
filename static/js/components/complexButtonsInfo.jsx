@@ -13,7 +13,7 @@ function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idCon
                     <div className="lineSukiHighChart" id={idLine}></div>
                     {idProgram != null ?
                         <div className="lineProgramHighChart" id={idProgram}></div>
-                        :<div></div>
+                        :<p></p>
                     }
                 </div>
                 <div className="roundSukiHighChart" id={idRound}></div>
