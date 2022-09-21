@@ -549,7 +549,7 @@ function ListDevicesCategory({
         let localStanki = getObjectFromLocal(localStorage['stanki'])
 
         Object.keys(placesObject[name].stanki).forEach(e => {
-            localStanki[name] = checked
+            localStanki[e] = checked
             setValuesStanki(prevState => ({
                 ...prevState,
                 [e]: checked
