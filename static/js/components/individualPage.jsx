@@ -260,7 +260,7 @@
 // }
 
 
-function IndividualPage(page = 'all') {
+function IndividualPage({page = 'all'}) {
 
     // page = 'ОТК'
 
