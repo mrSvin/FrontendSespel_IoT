@@ -259,25 +259,31 @@
 //
 // }
 
-function MenuStankiIndividual({menuSelected=0}) {
+function MenuStankiIndividual({menuSelected=9, setPage}) {
 
-    let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
-    menuSelect[menuSelected] == "menuSelect"
+    let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
+    menuSelect[menuSelected] = "menuSelect"
 
     let places = ['ОТК', 'Мех.уч.2 пл.', 'Резка', 'Мех.уч.1 пл.', 'Роботы', 'Спец. комплексы', 'Склады', 'Литьё', 'Гибка', 'Все']
 
     return (
         <div className="menuButtons">
             {places.map((e,i)=>{
-                return <div className={menuSelect[i]}>{e}</div>
+                return <div key={i} className={menuSelect[i]}
+                onClick={()=>{
+                    console.log('Смена страницы')
+                    setPage(i)
+                }}>{e}</div>
             })}
         </div>
     )
 }
 
-function IndividualPage({page = 'all'}) {
+function IndividualPage() {
 
-    page = 'ОТК'
+    let places = ['ОТК', 'Мех.уч.2 пл.', 'Резка', 'Мех.уч.1 пл.', 'Роботы', 'Спец. комплексы', 'Склады', 'Литьё', 'Гибка', 'Все']
+
+    const [page, setPage] = useState(9)
 
     let kim = {
         buttonNames: {
@@ -340,17 +346,17 @@ function IndividualPage({page = 'all'}) {
     }
     let placeKeys = []
 
-    if(page == 'all') {
+    if(page == 9) {
         placeKeys = Object.keys(placesObject).map(e => {
             return e
         })
     }
-    else placeKeys.push(page)
+    else placeKeys.push(places[page])
 
 
     let stankiObject = {}
     let stankiKeys = []
-    if(page == 'all') {
+    if(page == 9) {
         Object.keys(placesObject).forEach(e => {
             Object.keys(placesObject[e].stanki).map(i => {
                 stankiObject[i] = placesObject[e].stanki[i]
@@ -366,7 +372,7 @@ function IndividualPage({page = 'all'}) {
         })
     }
 
-    if (page == 'all') {
+    if (page == 9) {
         if (localStorage['places'] == undefined) {
             localStorage['places'] = Object.keys(placesObject).map(e => {
                 return [e, false]
@@ -387,12 +393,12 @@ function IndividualPage({page = 'all'}) {
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
     const [valuesCategories, setValuesCategories] = useState(
-        (localStorage['places'] !== undefined && page == 'all') ? getObjectFromLocal(localStorage['places']) :
+        (localStorage['places'] !== undefined && page == 9) ? getObjectFromLocal(localStorage['places']) :
             getCategoriesState(placeKeys, placesObject)
     )
 
     const [valuesStanki, setValuesStanki] = useState(
-        (localStorage['stanki'] !== undefined && page == 'all') ? getObjectFromLocal(localStorage['stanki']) :
+        (localStorage['stanki'] !== undefined && page == 9) ? getObjectFromLocal(localStorage['stanki']) :
             getStankiState(placeKeys, placesObject)
     )
 
@@ -468,7 +474,7 @@ function IndividualPage({page = 'all'}) {
     return (
         <div>
 
-            <MenuStankiIndividual/>
+            <MenuStankiIndividual menuSelected={page} setPage={setPage}/>
 
             <div className="buttons-otchet">
 
@@ -561,7 +567,7 @@ function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStank
         let localPlaces = null
         let localStanki = null
 
-        if (page == 'all') {
+        if (page == 9) {
             localPlaces = getObjectFromLocal(localStorage['places'])
             localStanki = getObjectFromLocal(localStorage['stanki'])
             localPlaces[name] = checked
@@ -572,7 +578,7 @@ function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStank
 
 
         Object.keys(placesObject[name].stanki).forEach(e => {
-            if (page == 'all') {
+            if (page == 9) {
                 localStanki[e] = checked
             }
             setValuesStanki(prevState => ({
@@ -580,7 +586,7 @@ function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStank
                 [e]: checked
             }));
         })
-        if (page == 'all') {
+        if (page == 9) {
             localStorage['stanki'] = Object.keys(localStanki).map(e => {
                 return [e, localStanki[e]]
             })
@@ -594,7 +600,7 @@ function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStank
             [name]: checked
         }));
 
-        if (page == 'all') {
+        if (page == 9) {
             let localStanki = getObjectFromLocal(localStorage['stanki'])
             localStanki[name] = checked
 
