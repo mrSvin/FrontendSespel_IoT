@@ -871,8 +871,6 @@ function updateLoadDataIndividual(promiseVariable, day1, complexName, fetchNames
                 return e.programsName
             })
 
-            console.log(programNames)
-
             highChartTotalKolOp(totalArray, kolOpArray, names, day1, nagruzkaName)
 
             parserDataArray.forEach((e, i) => {
