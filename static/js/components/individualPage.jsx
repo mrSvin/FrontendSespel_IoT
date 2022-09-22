@@ -934,9 +934,7 @@ function updatePage(date, valuesWait, stateLineHC, placesObject){
         let stankiState = {}
 
         valuesWait.forEach(e => {
-            if (valuesStanki[e]) {
                 stankiState[e] = stankiObject[e]
-            }
         })
 
         let stankiKeysState = Object.keys(stankiState).map(e => {
