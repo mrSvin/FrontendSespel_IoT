@@ -321,7 +321,6 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                         }
                     }
                     // newDate(date)
-                    console.log('Рисую', placesObject)
 
                 }}>{e}</div>
             })}
@@ -556,7 +555,7 @@ function IndividualPage() {
                 <div className="energyCalendarContainer">
                     <DayCalendar newDate={newDate} date={date}/>
                     <ListDevicesCategory date={date} newDate={newDate} placesObject={placesObject} placeKeys={placeKeys}
-                                         valuesStanki={valuesStanki} setValuesStanki={setValuesStanki}
+                                         valuesStanki={valuesStanki} setValuesStanki={setValuesStanki} setValuesStankiWait={setValuesStankiWait}
                                          valuesCategories={valuesCategories} setValuesCategories={setValuesCategories}
                                          page={page} stankiObject={stankiObject}/>
 
@@ -590,7 +589,7 @@ function IndividualPage() {
     )
 }
 
-function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStanki, setValuesStanki, valuesCategories, setValuesCategories, page, stankiObject}) {
+function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStanki, setValuesStanki, setValuesStankiWait, valuesCategories, setValuesCategories, page, stankiObject}) {
 
     const [isActive, setActive] = useState(false);
 
