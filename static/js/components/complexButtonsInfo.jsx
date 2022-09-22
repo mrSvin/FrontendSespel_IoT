@@ -418,3 +418,16 @@ function SwitchLineSmenaHC({date, stateLineHC, setStateLineHC, complexName, comp
         </div>
     )
 }
+
+function SwitchLineHCIndividual({date, stateLineHC, setStateLineHC, stankiObject, valuesStanki, setValuesStankiWait}) {
+    return (
+        <div className="energyCalendarContainer">
+            <label className="switch">
+                <input type="checkbox" onChange={() => {
+                    changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObject, valuesStanki, setValuesStankiWait)
+                }}/>
+                <span className="slider round"></span>
+            </label>
+        </div>
+    )
+}

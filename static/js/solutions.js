@@ -767,3 +767,34 @@ function getUrlService() {
         return serverDomain + ':' + 17086
     } else return serverDomain + ':' + serverPort.slice(0, -1) + 6
 }
+
+function getStankiState(placeKeys, placesObject) {
+    let stankiForState = {}
+
+    placeKeys.forEach(e => {
+        Object.keys(placesObject[e].stanki).forEach(i => {
+            stankiForState[i] = placesObject[e].stanki[i].state
+        })
+    })
+    return stankiForState
+}
+
+function getCategoriesState(placeKeys, placesObject) {
+    let placeForState = {}
+    placeKeys.forEach(e => {
+        placeForState[e] = placesObject[e].placeState
+        return placeForState
+    })
+    return placeForState
+}
+
+function getObjectFromLocal(local) {
+    local = local.split(',')
+    let placeForState = {}
+
+    for (let i = 0; i < local.length; i += 2) {
+
+        placeForState[local[i]] = (local[i + 1] == 'true')
+    }
+    return placeForState
+}

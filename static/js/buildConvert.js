@@ -22,6 +22,47 @@ function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexR
 
 }
 
+// Изменение состояние линейных графиков из 5-ти строк в одну
+function changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObject, valuesStanki, setValuesStankiWait) {
+
+    let stankiState = {}
+
+    Object.keys(valuesStanki).forEach(e => {
+        if (valuesStanki[e]) {
+            stankiState[e] = stankiObject[e]
+        }
+    })
+
+    setValuesStankiWait(Object.keys(stankiState))
+
+    let stankiKeysState = Object.keys(stankiState).map(e => {
+        return e
+    })
+
+    let fetchNames = stankiKeysState.map(name => {
+        return stankiState[name].complexRequest
+    })
+
+    let complexNames = stankiKeysState.map(name => {
+        return stankiState[name].buttonNames
+    })
+
+    let stankiRequest = Promise.all(fetchNames.map((item) => {
+        return fetchRequest(date, item)
+    }));
+
+    if (stateLineHC == 'line') {
+        setStateLineHC('multiLine')
+        updateLoadDataIndividual(stankiRequest, date, complexNames, fetchNames, 'multiLine')
+    } else {
+        setStateLineHC('line')
+        updateLoadDataIndividual(stankiRequest, date, complexNames, fetchNames, 'line')
+    }
+
+
+}
+
+
 // Изменение состояние линейных графиков из 5-ти строк в одну для смены
 function changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState) {
 
@@ -237,4 +278,97 @@ function useOuterClick(callback) {
     }, []); // no dependencies -> stable click listener
 
     return innerRef; // convenience for client (doesn't need to init ref himself)
+}
+
+// Обработка данных из запроса для отрисовки графиков
+function updateLoadDataIndividual(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
+    promiseVariable
+        .then(result => {
+            let data = result.map(e => {
+                return [e.work.slice(), e.pause.slice(), e.off.slice(), e.avar.slice(), e.nagruzka.slice(), e.programName.slice(), e.roundData.slice()]
+            })
+
+            let arrayLine;
+            if (typeLine == 'multiLine') {
+                arrayLine = [0, 1, 2, 3, 4]
+            } else {
+                arrayLine = [0, 0, 0, 0, 0]
+            }
+
+            let totalArray = []
+            let kolOpArray = []
+
+            let parserDataArray = data.map(value => {
+                let convertDataWork = parseLinearSutki(value[0], arrayLine[1], day1, value[5])
+                let convertDataPause = parseLinearSutki(value[1], arrayLine[2], day1)
+                let convertDataOff = parseLinearSutki(value[2], arrayLine[3], day1)
+                let convertDataAvar = parseLinearSutki(value[3], arrayLine[4], day1)
+                let convertDataRuchnoi = parseLinearSutki(value[4], arrayLine[0], day1)
+                let roundArray = value[6].map(Number)
+
+                totalArray.push(roundArray.slice())
+                kolOpArray.push(kolOperations(value[0]).slice())
+
+                return [convertDataWork, convertDataPause, convertDataOff, convertDataAvar, convertDataRuchnoi, roundArray]
+            })
+
+            let nagruzkaName = fetchNames.map(e => {
+                return exceptionManualNagruzka(e)
+            })
+
+            let names = complexName.map(e => {
+                return e.name
+            })
+
+            let programNames = complexName.map(e => {
+                return e.programsName
+            })
+
+            highChartTotalKolOp(totalArray, kolOpArray, names, day1, nagruzkaName)
+
+            parserDataArray.forEach((e, i) => {
+                // Первая смена
+                highChartSutkiLine(e[0], e[1], e[2], e[3], e[4], nagruzkaName[i], i + 1)
+                if (programNames[i] !== null && programNames[i] !== undefined) highChartProgram(getTimeProgramNameGraph(data[i], 'sutki', day1), i + 1)
+                highChartRound(e[5][0], e[5][1], e[5][2], e[5][3], e[5][4], nagruzkaName[i], i + 1)
+
+            })
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
+
+function updatePage(date, valuesWait, stateLineHC, placesObject){
+
+    let stankiObject = {}
+    Object.keys(placesObject).forEach(e => {
+        Object.keys(placesObject[e].stanki).forEach(i => {
+            stankiObject[i] = placesObject[e].stanki[i]
+        })
+    })
+
+    let stankiState = {}
+
+    valuesWait.forEach(e => {
+        stankiState[e] = stankiObject[e]
+    })
+
+    let stankiKeysState = Object.keys(stankiState).map(e => {
+        return e
+    })
+
+    let fetchNames = stankiKeysState.map(name => {
+        return stankiState[name].complexRequest
+    })
+
+    let complexNames = stankiKeysState.map(name => {
+        return stankiState[name].buttonNames
+    })
+
+    let stankiRequest = Promise.all(fetchNames.map((item) => {
+        return fetchRequest(date, item)
+    }));
+
+    updateLoadDataIndividual(stankiRequest, date, complexNames, fetchNames, stateLineHC)
 }
