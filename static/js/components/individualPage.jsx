@@ -452,7 +452,15 @@ function IndividualPage() {
             getStankiState(placeKeys, placesObject)
     )
 
-    const [valuesStankiWait, setValuesStankiWait] = useState([])
+    let forWait = []
+
+    Object.keys(valuesStanki).forEach(e => {
+        if (valuesStanki[e]) {
+            forWait.push(e)
+        }
+    })
+
+    const [valuesStankiWait, setValuesStankiWait] = useState(forWait)
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -499,7 +507,7 @@ function IndividualPage() {
             }
         })
 
-        setValuesStankiWait(Object.keys(stankiState))
+        // setValuesStankiWait(Object.keys(stankiState))
 
         let stankiKeysState = Object.keys(stankiState).map(e => {
             return e
