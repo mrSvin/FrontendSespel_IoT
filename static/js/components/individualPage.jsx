@@ -278,7 +278,7 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, placesO
                             Object.keys(placesObject[e].stanki).forEach(i => {
                                 setValuesStanki(prevState => ({
                                     ...prevState,
-                                    [i]: false
+                                    [e]: false
                                 }));
                             })
                         })
@@ -286,7 +286,7 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, placesO
                         Object.keys(placesObject[places[i]].stanki).forEach(e=>{
                             setValuesStanki(prevState => ({
                                 ...prevState,
-                                [i]: true
+                                [e]: true
                             }));
                         })
                     }
