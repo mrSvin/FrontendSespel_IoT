@@ -616,6 +616,7 @@ function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStank
         if (isActive) {
             setActive(!isActive);
             if (listChanged) {
+                let stankiState = {}
                 Object.keys(valuesStanki).forEach(e => {
                     if (valuesStanki[e]) {
                         stankiState[e] = stankiObject[e]
