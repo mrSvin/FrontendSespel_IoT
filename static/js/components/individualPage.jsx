@@ -950,7 +950,7 @@ function updatePage(date, valuesWait, stateLineHC, placesObject){
         })
 
         let stankiRequest = Promise.all(fetchNames.map((item) => {
-            return fetchRequest(dateInput, item)
+            return fetchRequest(date, item)
         }));
 
         updateLoadDataIndividual(stankiRequest, date, complexNames, fetchNames, stateLineHC)
