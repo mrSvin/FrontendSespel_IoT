@@ -263,7 +263,8 @@ function IndividualPage() {
 
     let places = ['ОТК', 'Мех.уч.2 пл.', 'Резка', 'Мех.уч.1 пл.', 'Роботы', 'Спец. комплексы', 'Склады', 'Литьё', 'Гибка', 'Все']
 
-    const [page, setPage] = useState(9)
+    const [page, setPage] = useState((localStorage['page'] == undefined)? 0 : +localStorage['page'])
+
 
     let kim = {
         buttonNames: {

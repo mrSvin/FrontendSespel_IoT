@@ -151,6 +151,7 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
 
                                 if(menuSelected !== i){
                                     setPage(i)
+                                    localStorage['page'] = i
 
                                     let valuesWait = []
 
