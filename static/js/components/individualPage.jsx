@@ -259,7 +259,7 @@
 //
 // }
 
-function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait,setValuesStanki, placesObject, newDate, date}) {
+function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, placesObject, newDate, date}) {
 
     let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
     menuSelect[menuSelected] = "menuSelect"
@@ -271,24 +271,25 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait,setV
             {places.map((e,i)=>{
                 return <div key={i} className={menuSelect[i]}
                 onClick={(e)=>{
-
                     setPage(i)
-                    let stankiState = {}
 
                     if(i==9){
                         Object.keys(placesObject).forEach(e => {
                             Object.keys(placesObject[e].stanki).forEach(i => {
-                                stankiState[i] = false
+                                setValuesStanki(prevState => ({
+                                    ...prevState,
+                                    [i]: false
+                                }));
                             })
                         })
                     } else {
                         Object.keys(placesObject[places[i]].stanki).forEach(e=>{
-                            stankiState[e] = true
+                            setValuesStanki(prevState => ({
+                                ...prevState,
+                                [i]: true
+                            }));
                         })
                     }
-
-                    console.log('Состояние страницы', stankiState)
-                    setValuesStanki(stankiState)
 
                     newDate(date)
 
@@ -493,9 +494,8 @@ function IndividualPage() {
     return (
         <div>
 
-            <MenuStankiIndividual menuSelected={page} setPage={setPage} setValuesStankiWait={setValuesStankiWait}
-                                  setValuesStanki={setValuesStanki} placesObject={placesObject} newDate={newDate}
-                                  date={date}/>
+            <MenuStankiIndividual menuSelected={page} setPage={setPage} setValuesStanki={setValuesStanki}
+                                  placesObject={placesObject} newDate={newDate} date={date}/>
 
             <div className="buttons-otchet">
 
