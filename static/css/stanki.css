@@ -313,12 +313,11 @@ input:checked + .slider:before {
     border-collapse: collapse;
     width: 100%;
     color: white;
-    margin: 2%;
-    word-break: break-word;
+    margin: 2% 2% 0 2%;
+    /* word-break: break-word; */
     border-color: white;
     border: 2px solid #888a8d;
     transition: 0.3s;
-
 }
 
 .tableResource > tbody {
@@ -333,35 +332,33 @@ input:checked + .slider:before {
 .tableResource > tbody > tr {
     padding: 4px;
     line-height: 1.42857143;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid #979595;
     font-family: sans-serif;
-    display: block;
     background: #252734;
 }
 
 
 .tableResource > thead {
     border-bottom: 1px solid #979595;
-    text-align: left;
     background: #2c5275;
     display: block;
-    width: 95%;
-    padding-right: 5%;
 }
 
 .tableResource > thead > tr > th, .tableResource > tbody > tr > td {
-    margin: 10px;
-    padding: 5px 5px 5px 5px;
-    width: 1%;
+    width: 20%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .tableResource tr {
+    display: flex;
     width: 100%;
 }
 
 .tableResource > thead > tr > th:last-child {
-    text-align: center;
 }
 
 .tableResource > tbody > tr > td:last-child {
@@ -370,6 +367,7 @@ input:checked + .slider:before {
     font-size: 1.5em;
     position: relative;
     text-align: center;
+    transition: 0.3s;
 }
 
 .tableResource > tbody > tr > td:last-child:hover {
@@ -379,7 +377,7 @@ input:checked + .slider:before {
 
 .addButton {
     display: flex;
-    width: 99%;
+    width: 60%;
     justify-content: center;
     border: 2px solid #888a8d;
     border-radius: 5px;
@@ -421,7 +419,7 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-сontent: center;
+    justify-content: center;
     margin: 0 auto;
     width: 30%;
     transition: max-height 0.5s ease-out;
@@ -523,6 +521,12 @@ input:checked + .slider:before {
     padding: 6px;
     position: relative;
 }
+
+.usersMenuResourceButton:hover {
+    box-shadow: 0px 0px 5px 0px #507e8f, inset 0px 0px 0px 0px #8a9da5;
+    transition: 0.3s;
+}
+
 
 .usersMenuResourceButton > span {
     position: absolute;
