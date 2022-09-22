@@ -272,6 +272,7 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait,setV
                 return <div key={i} className={menuSelect[i]}
                 onClick={(e)=>{
 
+                    setPage(i)
                     let stankiState = {}
 
                     if(i==9){
@@ -286,9 +287,9 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait,setV
                         })
                     }
 
+                    console.log('Состояние страницы', stankiState)
                     setValuesStanki(stankiState)
-                    setValuesStankiWait(stankiState)
-                    setPage(i)
+
                     newDate(date)
 
                 }}>{e}</div>
