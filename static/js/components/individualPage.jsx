@@ -274,6 +274,9 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
 
                     if(menuSelected !== i){
                         setPage(i)
+
+                        let valuesWait = []
+
                         if(i==9){
                             if(localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
                                 setValuesCategories(getObjectFromLocal(localStorage['places']))
@@ -296,12 +299,23 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                                 ...prevState,
                                 [places[i]]: true
                             }));
-                            let valuesWait = Object.keys(placesObject[places[i]].stanki).map(e=>{
-                                setValuesStanki(prevState => ({
-                                    ...prevState,
-                                    [e]: true
-                                }));
-                                return e
+
+                            Object.keys(placesObject).forEach(e=>{
+                                Object.keys(placesObject[e].stanki).forEach(i=>{
+                                    if(e !== places[i]) {
+                                        setValuesStanki(prevState => ({
+                                            ...prevState,
+                                            [i]: false
+                                        }));
+                                    }
+                                    else {
+                                        valuesWait.push(i)
+                                        setValuesStanki(prevState => ({
+                                            ...prevState,
+                                            [i]: true
+                                        }));
+                                    }
+                                })
                             })
                             setValuesStankiWait(valuesWait)
                         }
