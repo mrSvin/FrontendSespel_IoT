@@ -287,10 +287,10 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                                         ...prevState,
                                         [e]: false
                                     }));
-                                    Object.keys(placesObject[e].stanki).forEach(i => {
+                                    Object.keys(placesObject[e].stanki).forEach(k => {
                                         setValuesStanki(prevState => ({
                                             ...prevState,
-                                            [i]: false
+                                            [k]: false
                                         }));
                                     })
                                 })}
@@ -301,18 +301,18 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                             }));
 
                             Object.keys(placesObject).forEach(e=>{
-                                Object.keys(placesObject[e].stanki).forEach(i=>{
+                                Object.keys(placesObject[e].stanki).forEach(k=>{
                                     if(e !== places[i]) {
                                         setValuesStanki(prevState => ({
                                             ...prevState,
-                                            [i]: false
+                                            [k]: false
                                         }));
                                     }
                                     else {
-                                        valuesWait.push(i)
+                                        valuesWait.push(k)
                                         setValuesStanki(prevState => ({
                                             ...prevState,
-                                            [i]: true
+                                            [k]: true
                                         }));
                                     }
                                 })
