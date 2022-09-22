@@ -259,7 +259,7 @@
 //
 // }
 
-function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, placesObject, newDate, date}) {
+function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValuesCategories, placesObject,  newDate, date}) {
 
     let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
     menuSelect[menuSelected] = "menuSelect"
@@ -271,26 +271,35 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, placesO
             {places.map((e,i)=>{
                 return <div key={i} className={menuSelect[i]}
                 onClick={(e)=>{
-                    setPage(i)
 
-                    if(i==9){
-                        Object.keys(placesObject).forEach(e => {
-                            Object.keys(placesObject[e].stanki).forEach(i => {
+                    if(menuSelected !== i){
+                        setPage(i)
+                        if(i==9){
+                            Object.keys(placesObject).forEach(e => {
+                                setValuesCategories(prevState => ({
+                                    ...prevState,
+                                    [e]: false
+                                }));
+                                Object.keys(placesObject[e].stanki).forEach(i => {
+                                    setValuesStanki(prevState => ({
+                                        ...prevState,
+                                        [i]: false
+                                    }));
+                                })
+                            })
+                        } else {
+                            setValuesCategories(prevState => ({
+                                ...prevState,
+                                [places[i]]: true
+                            }));
+                            Object.keys(placesObject[places[i]].stanki).forEach(e=>{
                                 setValuesStanki(prevState => ({
                                     ...prevState,
-                                    [i]: false
+                                    [e]: true
                                 }));
                             })
-                        })
-                    } else {
-                        Object.keys(placesObject[places[i]].stanki).forEach(e=>{
-                            setValuesStanki(prevState => ({
-                                ...prevState,
-                                [e]: true
-                            }));
-                        })
+                        }
                     }
-
                     // newDate(date)
 
                 }}>{e}</div>
@@ -436,7 +445,7 @@ function IndividualPage() {
             }
         })
 
-        setValuesStankiWait(stankiState)
+        setValuesStankiWait(Object.keys(stankiState))
 
         let stankiKeysState = Object.keys(stankiState).map(e => {
             return e
@@ -469,7 +478,7 @@ function IndividualPage() {
             }
         })
 
-        setValuesStankiWait(stankiState)
+        setValuesStankiWait(Object.keys(stankiState))
 
         let stankiKeysState = Object.keys(stankiState).map(e => {
             return e
@@ -495,7 +504,8 @@ function IndividualPage() {
         <div>
 
             <MenuStankiIndividual menuSelected={page} setPage={setPage} setValuesStanki={setValuesStanki}
-                                  placesObject={placesObject} newDate={newDate} date={date}/>
+                                  placesObject={placesObject} newDate={newDate}
+                                  setValuesCategories = {setValuesCategories} date={date}/>
 
             <div className="buttons-otchet">
 
