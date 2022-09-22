@@ -259,7 +259,7 @@
 //
 // }
 
-function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValuesStankiWait, setValuesCategories, placesObject,  newDate, date}) {
+function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValuesStankiWait, setValuesCategories, placesObject, date, stateLineHC}) {
 
     let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
     menuSelect[menuSelected] = "menuSelect"
@@ -328,7 +328,7 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
 
                         }
                         setValuesStankiWait(valuesWait)
-                        newDate(date)
+                        updatePage(date, valuesWait, stateLineHC, placesObject)
                     }
                 }}>{e}</div>
             })}
@@ -538,8 +538,8 @@ function IndividualPage() {
         <div>
 
             <MenuStankiIndividual menuSelected={page} setPage={setPage} setValuesStanki={setValuesStanki}
-                                  setValuesStankiWait={setValuesStankiWait} placesObject={placesObject}
-                                  newDate={newDate} setValuesCategories = {setValuesCategories} date={date}/>
+                                  setValuesStankiWait={setValuesStankiWait} setValuesCategories = {setValuesCategories}
+                                  placesObject={placesObject} date={date} stateLineHC={stateLineHC}/>
 
             <div className="buttons-otchet">
 
@@ -920,4 +920,40 @@ function getObjectFromLocal(local) {
         placeForState[local[i]] = (local[i + 1] == 'true')
     }
     return placeForState
+}
+
+function updatePage(date, valuesWait, stateLineHC, placesObject){
+
+        let stankiObject = {}
+        Object.keys(placesObject).forEach(e => {
+            Object.keys(placesObject[e].stanki).forEach(i => {
+                stankiObject[i] = placesObject[e].stanki[i]
+            })
+        })
+
+        let stankiState = {}
+
+        valuesWait.forEach(e => {
+            if (valuesStanki[e]) {
+                stankiState[e] = stankiObject[e]
+            }
+        })
+
+        let stankiKeysState = Object.keys(stankiState).map(e => {
+            return e
+        })
+
+        let fetchNames = stankiKeysState.map(name => {
+            return stankiState[name].complexRequest
+        })
+
+        let complexNames = stankiKeysState.map(name => {
+            return stankiState[name].buttonNames
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(dateInput, item)
+        }));
+
+        updateLoadDataIndividual(stankiRequest, date, complexNames, fetchNames, stateLineHC)
 }
