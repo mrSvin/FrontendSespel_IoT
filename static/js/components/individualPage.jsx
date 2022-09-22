@@ -259,7 +259,7 @@
 //
 // }
 
-function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait, placesObject}) {
+function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait,setValuesStanki, placesObject, newDate, date}) {
 
     let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
     menuSelect[menuSelected] = "menuSelect"
@@ -286,8 +286,10 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStankiWait, pla
                         })
                     }
 
+                    setValuesStanki(stankiState)
                     setValuesStankiWait(stankiState)
                     setPage(i)
+                    newDate(date)
 
                 }}>{e}</div>
             })}
@@ -459,8 +461,8 @@ function IndividualPage() {
 
         let stankiState = {}
 
-        Object.keys(valuesStankiWait).forEach(e => {
-            if (valuesStankiWait[e]) {
+        Object.keys(valuesStanki).forEach(e => {
+            if (valuesStanki[e]) {
                 stankiState[e] = stankiObject[e]
             }
         })
@@ -491,7 +493,8 @@ function IndividualPage() {
         <div>
 
             <MenuStankiIndividual menuSelected={page} setPage={setPage} setValuesStankiWait={setValuesStankiWait}
-                                  placesObject={placesObject}/>
+                                  setValuesStanki={setValuesStanki} placesObject={placesObject} newDate={newDate}
+                                  date={date}/>
 
             <div className="buttons-otchet">
 
