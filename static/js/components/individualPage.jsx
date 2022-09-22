@@ -319,9 +319,8 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                             })
                             setValuesStankiWait(valuesWait)
                         }
+                        newDate(date)
                     }
-                    // newDate(date)
-
                 }}>{e}</div>
             })}
         </div>
@@ -473,8 +472,6 @@ function IndividualPage() {
             }
         })
 
-        setValuesStankiWait(Object.keys(stankiState))
-
         let stankiKeysState = Object.keys(stankiState).map(e => {
             return e
         })
@@ -621,6 +618,8 @@ function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStank
                         stankiState[e] = stankiObject[e]
                     }
                 })
+                setValuesStankiWait(Object.keys(stankiState))
+
                 newDate(date)
                 setListChanged(false)
             }
@@ -841,7 +840,7 @@ function changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObjec
         }
     })
 
-    setValuesStankiWait(stankiState)
+    setValuesStankiWait(Object.keys(stankiState))
 
     let stankiKeysState = Object.keys(stankiState).map(e => {
         return e
