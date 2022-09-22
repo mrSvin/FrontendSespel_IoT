@@ -539,7 +539,7 @@ function IndividualPage() {
                                         setValuesStankiWait={setValuesStankiWait}
                 />
 
-                {Object.keys(valuesStankiWait).map((e, i) => {
+                {valuesStankiWait.map((e, i) => {
                     let stanok = stankiObject[e]
                     if (Object.keys(stanok).length !== 0) {
                         return <ComplexSutkiAllInfo key={i} complexName={stanok.buttonNames.name}
