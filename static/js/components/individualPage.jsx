@@ -280,7 +280,14 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                         if(i==9){
                             if(localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
                                 setValuesCategories(getObjectFromLocal(localStorage['places']))
-                                setValuesStanki(getObjectFromLocal(localStorage['stanki']))
+                                let local = getObjectFromLocal(localStorage['stanki'])
+                                setValuesStanki(local)
+                                Object.keys(local).forEach(e => {
+                                    if (local[e]) {
+                                        valuesWait.push(e)
+                                    }
+                                })
+
                             } else {
                                 Object.keys(placesObject).forEach(e => {
                                     setValuesCategories(prevState => ({
@@ -288,6 +295,7 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                                         [e]: false
                                     }));
                                     Object.keys(placesObject[e].stanki).forEach(k => {
+                                        valuesWait.push(k)
                                         setValuesStanki(prevState => ({
                                             ...prevState,
                                             [k]: false
@@ -317,8 +325,9 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                                     }
                                 })
                             })
-                            setValuesStankiWait(valuesWait)
+
                         }
+                        setValuesStankiWait(valuesWait)
                         newDate(date)
                     }
                 }}>{e}</div>
