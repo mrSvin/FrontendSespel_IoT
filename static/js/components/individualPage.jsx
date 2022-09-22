@@ -275,18 +275,22 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                     if(menuSelected !== i){
                         setPage(i)
                         if(i==9){
-                            Object.keys(placesObject).forEach(e => {
-                                setValuesCategories(prevState => ({
-                                    ...prevState,
-                                    [e]: false
-                                }));
-                                Object.keys(placesObject[e].stanki).forEach(i => {
-                                    setValuesStanki(prevState => ({
+                            if(localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
+                                setValuesCategories(getObjectFromLocal(localStorage['places']))
+                                setValuesStanki(getObjectFromLocal(localStorage['stanki']))
+                            } else {
+                                Object.keys(placesObject).forEach(e => {
+                                    setValuesCategories(prevState => ({
                                         ...prevState,
-                                        [i]: false
+                                        [e]: false
                                     }));
-                                })
-                            })
+                                    Object.keys(placesObject[e].stanki).forEach(i => {
+                                        setValuesStanki(prevState => ({
+                                            ...prevState,
+                                            [i]: false
+                                        }));
+                                    })
+                                })}
                         } else {
                             setValuesCategories(prevState => ({
                                 ...prevState,
@@ -302,7 +306,7 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                             setValuesStankiWait(valuesWait)
                         }
                     }
-                    // newDate(date)
+                    newDate(date)
 
                 }}>{e}</div>
             })}
