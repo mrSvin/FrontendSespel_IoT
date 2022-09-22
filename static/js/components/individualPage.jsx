@@ -550,7 +550,7 @@ function IndividualPage() {
                     <ListDevicesCategory date={date} newDate={newDate} placesObject={placesObject} placeKeys={placeKeys}
                                          valuesStanki={valuesStanki} setValuesStanki={setValuesStanki}
                                          valuesCategories={valuesCategories} setValuesCategories={setValuesCategories}
-                                         page={page}/>
+                                         page={page} stankiObject={stankiObject}/>
 
                 </div>
                 <ComplexTotalSutkiInfo/>
@@ -582,7 +582,7 @@ function IndividualPage() {
     )
 }
 
-function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStanki, setValuesStanki, valuesCategories, setValuesCategories, page}) {
+function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStanki, setValuesStanki, valuesCategories, setValuesCategories, page, stankiObject}) {
 
     const [isActive, setActive] = useState(false);
 
@@ -591,6 +591,14 @@ function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStank
     const toggleClass = () => {
         setActive(!isActive);
         if (listChanged) {
+            let stankiState = {}
+            Object.keys(valuesStanki).forEach(e => {
+                if (valuesStanki[e]) {
+                    stankiState[e] = stankiObject[e]
+                }
+            })
+            setValuesStankiWait(Object.keys(stankiState))
+
             newDate(date)
             setListChanged(false)
         }
@@ -600,6 +608,11 @@ function ListDevicesCategory({date, newDate, placesObject,placeKeys, valuesStank
         if (isActive) {
             setActive(!isActive);
             if (listChanged) {
+                Object.keys(valuesStanki).forEach(e => {
+                    if (valuesStanki[e]) {
+                        stankiState[e] = stankiObject[e]
+                    }
+                })
                 newDate(date)
                 setListChanged(false)
             }
