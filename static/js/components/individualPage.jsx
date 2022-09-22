@@ -291,7 +291,7 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, placesO
                         })
                     }
 
-                    newDate(date)
+                    // newDate(date)
 
                 }}>{e}</div>
             })}
