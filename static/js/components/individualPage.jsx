@@ -320,7 +320,8 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                             setValuesStankiWait(valuesWait)
                         }
                     }
-                    newDate(date)
+                    // newDate(date)
+                    console.log('Рисую', placesObject)
 
                 }}>{e}</div>
             })}
