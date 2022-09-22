@@ -265,66 +265,8 @@ function IndividualPage() {
 
     const [page, setPage] = useState((localStorage['page'] == undefined)? 0 : +localStorage['page'])
 
+    const placesObject = getAllStankiData()
 
-    let kim = {
-        buttonNames: {
-            name: "CRYSTA-Apex S9168",
-            serviceName: "CRYSTA-Apex S9168",
-            programsName: "CRYSTA-Apex S9168",
-        },
-        complexImg: "../images/crystal_apex.png",
-        complexRequest: 'kim',
-        buttonsVrs: [-145, 680, 'url(../images/crystal_apex.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
-        size: "meh1",
-        state: true,
-    }
-
-    let nk600 = {
-        buttonNames: {
-            name: "НК600",
-            serviceName: "НК600",
-        },
-        complexImg: "../images/nk600.png",
-        complexRequest: 'nk600',
-        buttonsVrs: [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"],
-        size: "ceh1",
-        state: true,
-    }
-
-    let faccin_1 = {
-        buttonNames: {
-            name: "FACCIN 4",
-            serviceName: "FACCIN 4",
-        },
-        complexImg: "../images/faccin.png",
-        complexRequest: 'faccin_1',
-        buttonsVrs: [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
-        size: 'sborCeh',
-        state: true,
-    }
-
-    let faccin_2 = {
-        buttonNames: {
-            name: "FACCIN 10",
-            serviceName: "FACCIN 10",
-        },
-        complexImg: "../images/faccin_2.png",
-        complexRequest: 'faccin_2',
-        buttonsVrs: [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
-        size: 'sborCeh',
-        state: true,
-    }
-
-    let placesObject = {
-        'ОТК': {
-            stanki: {kim, nk600},
-            placeState: true,
-        },
-        'Гибка': {
-            stanki: {faccin_1, faccin_2},
-            placeState: true,
-        },
-    }
     let placeKeys = []
 
     if(page == 9) {
