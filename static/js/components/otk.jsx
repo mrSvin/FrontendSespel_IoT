@@ -77,41 +77,6 @@ function OtkInfo() {
                 <DayCalendar newDate={newDate} date={date}/>
                 <ListDevices date={date} values={values} setValuesState={setValuesState} complexName={complexName}
                              complexRequest={complexRequest} newDate={newDate}/>
-                {/*<div*/}
-                {/*    ref={innerRef}*/}
-                {/*    className='menuSelect selectDevice'>*/}
-                {/*    <span onClick={toggleClass}>Выбор оборудования</span>*/}
-                {/*    <div className="listComplex">*/}
-                {/*        <span>▼</span>*/}
-                {/*        <div*/}
-                {/*            className={isActive ? 'containerStanokList' : 'containerStanokList containerStanokListHidden'}>*/}
-                {/*            <ul className='toppings-list'*/}
-                {/*                className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>*/}
-                {/*                {complexName.map((name, index) => {*/}
-                {/*                    return (*/}
-                {/*                        <li key={index}>*/}
-                {/*                            <div className="toppings-list-item">*/}
-                {/*                                <div className="left-section">*/}
-                {/*                                    <input*/}
-                {/*                                        type="checkbox"*/}
-                {/*                                        id={`custom-checkbox-${index}`}*/}
-                {/*                                        name={name[0]}*/}
-                {/*                                        value={index}*/}
-                {/*                                        checked={selectedObjects[index]}*/}
-                {/*                                        onChange={() => handleOnChange(index)}*/}
-                {/*                                    />*/}
-                {/*                                    <label htmlFor={`custom-checkbox-${index}`}></label><span*/}
-                {/*                                    className='spanList'>{name[0]}</span>*/}
-                {/*                                </div>*/}
-                {/*                            </div>*/}
-                {/*                        </li>*/}
-                {/*                    );*/}
-                {/*                })}*/}
-                {/*            </ul>*/}
-                {/*        </div>*/}
-
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
             <ComplexTotalSutkiInfo/>
 
