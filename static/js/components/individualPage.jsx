@@ -9,11 +9,6 @@ function IndividualPage() {
         if(e== parseNameUrl(window.location.href)) pageNew = i
     })
 
-    this.state = {
-        url: window.location.href,
-    }
-
-
     const [page, setPage] = useState(pageNew)
 
     const placesObject = getAllStankiData()
