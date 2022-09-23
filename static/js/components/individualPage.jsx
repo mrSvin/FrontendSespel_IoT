@@ -117,11 +117,14 @@ function IndividualPage() {
             let check = 0
 
             places.forEach((e,i)=>{
-                if(e== parseNameUrl(location.href)) check = i
+                if(e== parseNameUrl(location.pathname)) check = i
             })
 
-            console.log('Проверка',page, check)
-            window.location.reload();
+            if(page !== check) {
+                console.log('Проверка',page, check)
+                window.location.reload();
+            }
+
         })
 
     }, [history])
