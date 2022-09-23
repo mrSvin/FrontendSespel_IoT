@@ -146,7 +146,7 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
     return (
         <div className="menuButtons">
             {places.map((e,i)=>{
-                return <div key={i} className={menuSelect[i]}
+                return  <Link to={`/stanki/individualPage/${places[i]}`}><div key={i} className={menuSelect[i]}
                             onClick={(e)=>{
 
                                 if(menuSelected !== i){
@@ -208,7 +208,9 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
                                     setValuesStankiWait(valuesWait)
                                     updatePage(date, valuesWait, stateLineHC, placesObject)
                                 }
-                            }}>{e}</div>
+                            }}>{e}
+                    </div>
+                </Link>
             })}
         </div>
     )

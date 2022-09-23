@@ -248,15 +248,15 @@ function IndividualPage() {
 
             <div className="buttons-otchet">
 
-                <Link to={`/stanki/individualPage/${places[page]}`}>
+                <Link to={`/stanki/individualPage/`}>
                     <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to="/stanki/individualPageMonth">
+                <Link to={`/stanki/individualPageMonth`}>
                     <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to="/stanki/individualPageSmena">
+                <Link to={`/stanki/individualPageSmena`}>
                     <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
                 </Link>
 
