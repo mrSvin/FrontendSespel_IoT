@@ -114,6 +114,45 @@ function IndividualPage() {
                 if(e== parseNameUrl(location.pathname)) pageNew = i
             })
             setPage(pageNew)
+            if(pageNew == 9) {
+                placeKeys = Object.keys(placesObject).map(e => {
+                    return e
+                })
+            }
+            else placeKeys.push(places[pageNew])
+
+
+            stankiObject = {}
+            stankiKeys = []
+            if(page == 9) {
+                Object.keys(placesObject).forEach(e => {
+                    Object.keys(placesObject[e].stanki).forEach(i => {
+                        stankiObject[i] = placesObject[e].stanki[i]
+                        stankiKeys.push(i)
+                    })
+                })
+            } else {
+                placeKeys.forEach(e => {
+                    Object.keys(placesObject[e].stanki).map(i => {
+                        stankiObject[i] = placesObject[e].stanki[i]
+                        stankiKeys.push(i)
+                    })
+                })
+            }
+
+            if (pageNew == 9) {
+                if (localStorage['places'] == undefined) {
+                    localStorage['places'] = Object.keys(placesObject).map(e => {
+                        return [e, false]
+                    })
+                }
+
+                if (localStorage['stanki'] == undefined) {
+                    localStorage['stanki'] = Object.keys(stankiObject).map(e => {
+                        return [e, false]
+                    })
+                }
+            }
         })
 
     }, [history])
