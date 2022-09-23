@@ -116,8 +116,9 @@ function IndividualPage() {
         return history.listen((location) => {
             let check = 0
 
+            let pathName = parseNameUrl(location.pathname)
             places.forEach((e,i)=>{
-                if(e== parseNameUrl(location.pathname)) check = i
+                if(e == pathName) check = i
             })
 
             if(page !== check) {
