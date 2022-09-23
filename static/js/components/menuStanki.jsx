@@ -136,7 +136,16 @@ function MenuEnergy(select) {
 
 }
 
-function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValuesStankiWait, setValuesCategories, placesObject, date, stateLineHC}) {
+function MenuStankiIndividual({
+                                  menuSelected = 9,
+                                  setPage,
+                                  setValuesStanki,
+                                  setValuesStankiWait,
+                                  setValuesCategories,
+                                  placesObject,
+                                  date,
+                                  stateLineHC
+                              }) {
 
     let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
     menuSelect[menuSelected] = "menuSelect"
@@ -145,70 +154,71 @@ function MenuStankiIndividual({menuSelected=9, setPage, setValuesStanki, setValu
 
     return (
         <div className="menuButtons">
-            {places.map((e,i)=>{
-                return  <Link to={`/stanki/individualPage/${places[i]}`}><div key={i} className={menuSelect[i]}
-                            onClick={(e)=>{
+            {places.map((e, i) => {
+                return <Link key={i} to={`/stanki/individualPage/${places[i]}`}>
+                    <div key={i} className={menuSelect[i]}
+                         onClick={(e) => {
 
-                                if(menuSelected !== i){
-                                    setPage(i)
-                                    localStorage['page'] = i
+                             if (menuSelected !== i) {
+                                 setPage(i)
+                                 localStorage['page'] = i
 
-                                    let valuesWait = []
+                                 let valuesWait = []
 
-                                    if(i==9){
-                                        if(localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
-                                            setValuesCategories(getObjectFromLocal(localStorage['places']))
-                                            let local = getObjectFromLocal(localStorage['stanki'])
-                                            setValuesStanki(local)
-                                            Object.keys(local).forEach(e => {
-                                                if (local[e]) {
-                                                    valuesWait.push(e)
-                                                }
-                                            })
+                                 if (i == 9) {
+                                     if (localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
+                                         setValuesCategories(getObjectFromLocal(localStorage['places']))
+                                         let local = getObjectFromLocal(localStorage['stanki'])
+                                         setValuesStanki(local)
+                                         Object.keys(local).forEach(e => {
+                                             if (local[e]) {
+                                                 valuesWait.push(e)
+                                             }
+                                         })
 
-                                        } else {
-                                            Object.keys(placesObject).forEach(e => {
-                                                setValuesCategories(prevState => ({
-                                                    ...prevState,
-                                                    [e]: false
-                                                }));
-                                                Object.keys(placesObject[e].stanki).forEach(k => {
-                                                    valuesWait.push(k)
-                                                    setValuesStanki(prevState => ({
-                                                        ...prevState,
-                                                        [k]: false
-                                                    }));
-                                                })
-                                            })}
-                                    } else {
-                                        setValuesCategories(prevState => ({
-                                            ...prevState,
-                                            [places[i]]: true
-                                        }));
+                                     } else {
+                                         Object.keys(placesObject).forEach(e => {
+                                             setValuesCategories(prevState => ({
+                                                 ...prevState,
+                                                 [e]: false
+                                             }));
+                                             Object.keys(placesObject[e].stanki).forEach(k => {
+                                                 valuesWait.push(k)
+                                                 setValuesStanki(prevState => ({
+                                                     ...prevState,
+                                                     [k]: false
+                                                 }));
+                                             })
+                                         })
+                                     }
+                                 } else {
+                                     setValuesCategories(prevState => ({
+                                         ...prevState,
+                                         [places[i]]: true
+                                     }));
 
-                                        Object.keys(placesObject).forEach(e=>{
-                                            Object.keys(placesObject[e].stanki).forEach(k=>{
-                                                if(e !== places[i]) {
-                                                    setValuesStanki(prevState => ({
-                                                        ...prevState,
-                                                        [k]: false
-                                                    }));
-                                                }
-                                                else {
-                                                    valuesWait.push(k)
-                                                    setValuesStanki(prevState => ({
-                                                        ...prevState,
-                                                        [k]: true
-                                                    }));
-                                                }
-                                            })
-                                        })
+                                     Object.keys(placesObject).forEach(e => {
+                                         Object.keys(placesObject[e].stanki).forEach(k => {
+                                             if (e !== places[i]) {
+                                                 setValuesStanki(prevState => ({
+                                                     ...prevState,
+                                                     [k]: false
+                                                 }));
+                                             } else {
+                                                 valuesWait.push(k)
+                                                 setValuesStanki(prevState => ({
+                                                     ...prevState,
+                                                     [k]: true
+                                                 }));
+                                             }
+                                         })
+                                     })
 
-                                    }
-                                    setValuesStankiWait(valuesWait)
-                                    updatePage(date, valuesWait, stateLineHC, placesObject)
-                                }
-                            }}>{e}
+                                 }
+                                 setValuesStankiWait(valuesWait)
+                                 updatePage(date, valuesWait, stateLineHC, placesObject)
+                             }
+                         }}>{e}
                     </div>
                 </Link>
             })}
