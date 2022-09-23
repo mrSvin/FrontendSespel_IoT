@@ -248,7 +248,7 @@ function IndividualPage() {
 
             <div className="buttons-otchet">
 
-                <Link to="/stanki/individualPage">
+                <Link to={`/stanki/individualPage/${places[page]}`}>
                     <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
