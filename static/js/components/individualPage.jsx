@@ -1,102 +1,3 @@
-// function IndividualPageInfo() {
-//
-//     //  [0]     [1]         [2]          [3]         [4]         [5]          [6]
-//     // Name, serviceName, alarmName, programsName, laserName,  reportName, currentName
-//
-    let complexName = {
-
-        'Мех.уч.2.пл': [
-        ],
-        'Резка': [
-        ],
-        'Мех.уч.1.пл': [
-        ],
-
-        'Роботы': [
-        ],
-
-        'Спец. Комплексы': [
-
-        ],
-
-        'Склады': [
-        ],
-
-        'Литейка': [
-        ],
-
-    }
-
-    let complexImg = [
-          , "",
-        "",
-    ]
-
-    let buttonsVrs = [
-
-
-
-        [-390, 175, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
-        [-410, 360, 'url(../images/faccin.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
-    ]
-
-    let size = [
-        "", "", "", "", '', "ceh1",
-        'sborCeh', 'sborCeh',
-    ]
-//
-//
-//     // Новая структура
-//
-// //
-// // placeKeys.forEach((e) => {
-// //     console.log(e)
-// //     Object.keys(places[e]).forEach(i => {
-// //         console.log(' ',i)
-// //         Object.keys(places[e][i]).forEach(j=>{
-// //             console.log('   ',j, places[e][i][j])
-// //         })
-// //     })
-// // })
-//
-//     // let values = stankiKeys.map((name, i)=>{
-//     //     return i
-//     // })
-//
-//     // Массив номеров всех станков
-//     // let values = getValues(placeLength, places)
-//
-//     // if (localStorage['selectedObjects'] == undefined) {
-//     //     localStorage['selectedObjects'] = new Array(complexRequest.length).fill(false)
-//     // }
-//     //
-//     // if (localStorage['selectedCategory'] == undefined) {
-//     //     localStorage['selectedCategory'] = new Array(places.length).fill(false)
-//     // }
-//
-//     // Состояния чекбоксов станков
-//     // let [selectedCategory, setSelectedCategory] = useState(
-//     //     (localStorage['selectedCategory'] == undefined) ? new Array(placeKeys.length).fill(true) : window.localStorage['selectedCategory'].split(',').map(e => {
-//     //         return (e == 'true')
-//     //     })
-//     // );
-//     //
-//     // // Состояния чекбоксов станков
-//     // let [selectedObjects, setSelectedObjects] = useState(
-//     //     (localStorage['selectedObjects'] == undefined) ? new Array(values.length).fill(true) : window.localStorage['selectedObjects'].split(',').map(e => {
-//     //         return (e == 'true')
-//     //     })
-//     // );
-//
-//     // let [valuesState, setValuesState] = useState(selectedObjects.map((item, index) => {
-//     //     return true === item ? values[index] : null;
-//     // }).filter(e => e != null))
-//     //
-//     // let [valuesStateWait, setValuesStateWait] = useState(selectedObjects.map((item, index) => {
-//     //     return true === item ? values[index] : null;
-//     // }).filter(e => e != null))
-//
-// }
 
 function IndividualPage() {
 
@@ -181,6 +82,16 @@ function IndividualPage() {
     const [valuesStankiWait, setValuesStankiWait] = useState(forWait)
 
     useEffect(() => {
+
+        let pageLast = 0
+
+        places.forEach((e,i)=>{
+            if(e== parseNameUrl(window.location.href)) pageLast = i
+        })
+
+        console.log('Было?', pageNew, pageLast)
+
+
         let dateInput = dayNow()
         setDate(dateInput)
 
