@@ -102,7 +102,13 @@ function IndividualPage() {
 
     let places = ['ОТК', 'Мех.уч.2 пл.', 'Резка', 'Мех.уч.1 пл.', 'Роботы', 'Спец. комплексы', 'Склады', 'Литьё', 'Гибка', 'Все']
 
-    const [page, setPage] = useState((localStorage['page'] == undefined)? 0 : +localStorage['page'])
+    let pageNew = 0
+
+    places.forEach((e,i)=>{
+        if(e== parseNameUrl(window.location.href)) pageNew = i
+    })
+
+    const [page, setPage] = useState(pageNew)
 
     const placesObject = getAllStankiData()
 
