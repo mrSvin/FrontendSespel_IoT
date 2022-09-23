@@ -1054,7 +1054,7 @@ function getAllStankiData(){
             stanki: {kim, nk600},
             placeState: true,
         },
-        'Мех.уч.2.пл': {
+        'Мех.уч.2 пл.': {
             stanki: {
                 uvf5220, progress, ntx1000_2, sk50, apec, dmg_dmu50_3,
                 dmg_dmu50_4, dmg_ctx310_2, dmg_ctx510_2, dmg_ctx510_3,
@@ -1070,7 +1070,7 @@ function getAllStankiData(){
             },
             placeState: true,
         },
-        'Мех.уч.1.пл': {
+        'Мех.уч.1 пл.': {
             stanki: {
                 uvf_1, uvf_2, ntx1000, nlx3000, dmg_gamma2000,
                 dmg_ctx650, dmg_dmf260, dmg_dmu50_1, dmg_dmu50_2,
@@ -1081,7 +1081,7 @@ function getAllStankiData(){
             stanki: {maks_1, maks_2, m710, rtk12c, p250, krot, prans},
             placeState: true,
         },
-        'Спец. Комплексы': {
+        'Спец. комплексы': {
             stanki: {press, epp, stp13m, stend_resources},
             placeState: true,
         },
@@ -1089,7 +1089,7 @@ function getAllStankiData(){
             stanki: {sclad_meh},
             placeState: true,
         },
-        'Литейка': {
+        'Литьё': {
             stanki: {pech_nerg},
             placeState: true,
         },
