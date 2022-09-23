@@ -202,18 +202,21 @@ function IndividualPage() {
                 {valuesStankiWait.map((e, i) => {
                     let stanok = stankiObject[e]
 
-                    if (Object.keys(stanok).length !== 0 && stanok !== undefined) {
-                        return <ComplexSutkiAllInfo key={i} complexName={stanok.buttonNames.name}
-                                                    complexImg={stanok.complexImg}
-                                                    complexMesto={stanok.buttonsVrs} size={stanok.size}
-                                                    idContainer={i + 1}
-                                                    service={stanok.buttonNames.serviceName}
-                                                    alarm={stanok.buttonNames.alarm}
-                                                    programs={stanok.buttonNames.programsName}
-                                                    laser={stanok.buttonNames.laser}
-                                                    report={stanok.buttonNames.report}
-                                                    current={stanok.buttonNames.current}/>
+                    if(stanok !== undefined){
+                        if (Object.keys(stanok).length !== 0) {
+                            return <ComplexSutkiAllInfo key={i} complexName={stanok.buttonNames.name}
+                                                        complexImg={stanok.complexImg}
+                                                        complexMesto={stanok.buttonsVrs} size={stanok.size}
+                                                        idContainer={i + 1}
+                                                        service={stanok.buttonNames.serviceName}
+                                                        alarm={stanok.buttonNames.alarm}
+                                                        programs={stanok.buttonNames.programsName}
+                                                        laser={stanok.buttonNames.laser}
+                                                        report={stanok.buttonNames.report}
+                                                        current={stanok.buttonNames.current}/>
+                        } else return null
                     } else return null
+
 
                 })}
             </div>
