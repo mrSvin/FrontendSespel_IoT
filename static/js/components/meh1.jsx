@@ -48,47 +48,9 @@ function Meh1Info() {
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
 
-    // Состояния чекбоксов станков
-    let [selectedObjects, setSelectedObjects] = useState(
-        new Array(complexRequest.length).fill(true)
-    );
-
     let [valuesState, setValuesState] = useState(values)
 
     let [valuesStateWait, setValuesStateWait] = useState(values)
-
-    const [isActive, setActive] = useState(false);
-
-    const toggleClass = () => {
-        setActive(!isActive);
-        if (isActive) newDate(date)
-    };
-
-    const innerRef = useOuterClick(ev => {
-        if (isActive) {
-            setActive(!isActive);
-            newDate(date)
-        }
-    });
-
-    const handleOnChange = (position) => {
-        const updatedCheckedState = selectedObjects.map((item, index) => {
-            return index === position ? !item : item;
-        });
-
-        setSelectedObjects(updatedCheckedState)
-
-        const activeValues = []
-        updatedCheckedState.forEach(
-            (currentState, index) => {
-                if (currentState) {
-                    activeValues.push(values[index]);
-                }
-            }
-        );
-        setValuesState(activeValues);
-
-    };
 
     useEffect(() => {
         let dateInput = dayNow()
@@ -133,38 +95,8 @@ function Meh1Info() {
         <div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <div
-                    ref={innerRef}
-                    className='menuSelect selectDevice'>
-                    <span onClick={toggleClass}>Выбор оборудования</span>
-                    <div className="listComplex">
-                        <span>▼</span>
-                        <ul className='toppings-list'
-                            className={isActive ? 'toppings-list toppings-list-visible' : 'toppings-list'}>
-                            {complexName.map((name, index) => {
-                                return (
-                                    <li key={index}>
-                                        <div className="toppings-list-item">
-                                            <div className="left-section">
-                                                <input
-                                                    type="checkbox"
-                                                    id={`custom-checkbox-${index}`}
-                                                    name={name[0]}
-                                                    value={index}
-                                                    checked={selectedObjects[index]}
-                                                    onChange={() => handleOnChange(index)}
-                                                />
-                                                <label htmlFor={`custom-checkbox-${index}`}></label><span
-                                                className='spanList'>{name[0]}</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-
-                    </div>
-                </div>
+                <ListDevices date={date} values={values} setValuesState={setValuesState} complexName={complexName}
+                             complexRequest={complexRequest} newDate={newDate}/>
             </div>
             <ComplexTotalSutkiInfo/>
 
