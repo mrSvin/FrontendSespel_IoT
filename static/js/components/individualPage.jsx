@@ -121,10 +121,7 @@ function IndividualPage() {
                 if(e == pathName) check = i
             })
 
-            if(page !== check) {
-                console.log('Проверка',page, check)
-                window.location.reload();
-            }
+            setPage(check)
 
         })
 
