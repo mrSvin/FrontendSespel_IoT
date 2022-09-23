@@ -399,6 +399,632 @@ function getAllStankiData(){
         state: true,
     }
 
+    let uvf5220 = {
+        buttonNames: {
+            name: "УФ5220",
+            serviceName: "УФ5220",
+        },
+        complexImg: "../images/UVF_5220.png",
+        complexRequest: 'uvf5220',
+        buttonsVrs: [-115, 875, 'url(../images/UVF_5220.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let progress = {
+        buttonNames: {
+            name: "СТП Сеспель",
+            serviceName: "СТП Сеспель",
+        },
+        complexImg: "../images/progress.png",
+        complexRequest: 'progress',
+        buttonsVrs: [-105, 494, 'url(../images/progress.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let ntx1000_2 =  {
+        buttonNames: {
+            name: "NTX1000 2",
+            serviceName: "NTX1000 2",
+        },
+        complexImg: "../images/ntx1000.png",
+        complexRequest: 'ntx1000_2',
+        buttonsVrs: [-100, 295, 'url(../images/ntx1000.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let sk50 = {
+        buttonNames: {
+            name: "SK50",
+            serviceName: "SK50",
+        },
+        complexImg: "../images/sk50.png",
+        complexRequest: 'sk50',
+        buttonsVrs: [-100, 597, 'url(../images/sk50.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let apec = {
+        buttonNames: {
+            name: "APEC",
+            serviceName: "APEC",
+        },
+        complexImg: "../images/apec.png",
+        complexRequest: 'apec',
+        buttonsVrs: [-106, 780, 'url(../images/apec.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_dmu50_3 = {
+        buttonNames: {
+            name: "DMU50 3",
+            serviceName: "DMU50 3",
+        },
+        complexImg: "../images/dmg_dmu50.png",
+        complexRequest: 'dmg_dmu50_3',
+        buttonsVrs: [-65, 295, 'url(../images/dmg_dmu50.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_dmu50_4 = {
+        buttonNames: {
+            name: "DMU50 4",
+            serviceName: "DMU50 4",
+        },
+        complexImg: "../images/dmg_dmu50.png",
+        complexRequest: 'dmg_dmu50_4',
+        buttonsVrs: [-65, 270, 'url(../images/dmg_dmu50.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_ctx310_2 = {
+        buttonNames: {
+            name: "CTX310 2",
+            serviceName: "CTX310 2",
+            alarm: 'CTX310 2',
+        },
+        complexImg: "../images/dmg_ctx310.png",
+        complexRequest: 'dmg_ctx310_2',
+        buttonsVrs: [-65, 270, 'url(../images/dmg_ctx310.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_ctx510_2 = {
+        buttonNames: {
+            name: "CTX510 2",
+            serviceName: "CTX510 2",
+        },
+        complexImg: "../images/dmg_ctx510.png",
+        complexRequest: 'dmg_ctx510_2',
+        buttonsVrs: [-101, 106, 'url(../images/dmg_ctx510.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_ctx510_3 = {
+        buttonNames: {
+            name: "CTX510 3",
+            serviceName: "CTX510 3",
+        },
+        complexImg: "../images/dmg_ctx510.png",
+        complexRequest: 'dmg_ctx510_3',
+        buttonsVrs: [-101, 85, 'url(../images/dmg_ctx510.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_ctx310_3 = {
+        buttonNames: {
+            name: "CTX310 3",
+            serviceName: "CTX310 3",
+        },
+        complexImg: "../images/dmg_ctx310.png",
+        complexRequest: 'dmg_ctx310_3',
+        buttonsVrs: [-105, 210, 'url(../images/dmg_ctx310.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_ctx510_4 = {
+        buttonNames: {
+            name: "CTX510 4",
+            serviceName: "CTX510 4",
+        },
+        complexImg: "../images/dmg_ctx510.png",
+        complexRequest: 'dmg_ctx510_4',
+        buttonsVrs: [-105, 235, 'url(../images/dmg_ctx510.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_ctx510_5 = {
+        buttonNames: {
+            name: "CTX510 5",
+            serviceName: "CTX510 5",
+        },
+        complexImg:  "../images/dmg_ctx510.png",
+        complexRequest: 'dmg_ctx510_5',
+        buttonsVrs: [-65, 210, 'url(../images/dmg_ctx510.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_dmc1035_2 = {
+        buttonNames: {
+            name: "DMC1035 2",
+            serviceName: "DMC1035 2",
+        },
+        complexImg:  "../images/dmg_dmc1035.png",
+        complexRequest: 'dmg_dmc1035_2',
+        buttonsVrs: [-103, 171, 'url(../images/dmg_dmc1035.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_dmu50_5 = {
+        buttonNames: {
+            name: "DMU50 5",
+            serviceName: "DMU50 5",
+        },
+        complexImg:  "../images/dmg_dmu50.png",
+        complexRequest: 'dmg_dmu50_5',
+        buttonsVrs: [-65, 171, 'url(../images/dmg_dmu50.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_dmu50_6 = {
+        buttonNames: {
+            name: "DMU50 6",
+            serviceName: "DMU50 6",
+        },
+        complexImg:  "../images/dmg_dmu50.png",
+        complexRequest: 'dmg_dmu50_6',
+        buttonsVrs: [-103, 171, 'url(../images/dmg_dmc1035.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let dmg_dmu50_7 = {
+        buttonNames: {
+            name: "DMU50 7",
+            serviceName: "DMU50 7",
+        },
+        complexImg:  "../images/dmg_dmu50.png",
+        complexRequest: 'dmg_dmu50_7',
+        buttonsVrs: [-65, 141, 'url(../images/dmg_dmu50.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let ar55 = {
+        buttonNames: {
+            name: "AR55",
+            serviceName: "AR55",
+        },
+        complexImg:  "../images/ar55.png",
+        complexRequest: 'ar55',
+        buttonsVrs: [-98, 268, 'url(../images/ar50.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let navigator_1 = {
+        buttonNames: {
+            name: "Навигатор 1",
+            serviceName: "Навигатор 1",
+            programsName: "Навигатор 1",
+            laser: "Навигатор 1",
+        },
+        complexImg:  "../images/navigator.png",
+        complexRequest: 'navigator_1',
+        buttonsVrs: [-110, 900, 'url(../images/navigator.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let navigator_2_golova_2 = {
+        buttonNames: {
+            name: "Навигатор 2",
+            serviceName: "Навигатор 2",
+            programsName: "Навигатор 2",
+            laser: "Навигатор 2",
+        },
+        complexImg:  "../images/navigator.png",
+        complexRequest: 'navigator_2_golova_2',
+        buttonsVrs: [-100, 540, 'url(../images/navigator.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let navigator_3 = {
+        buttonNames: {
+            name: "Навигатор 3",
+            serviceName: "Навигатор 3",
+            programsName: "Навигатор 3",
+            laser: "Навигатор 3",
+        },
+        complexImg:  "../images/navigator.png",
+        complexRequest: 'navigator_3',
+        buttonsVrs: [-200, 220, 'url(../images/navigator.png) no-repeat', "../images/sbor_ceh.png", 50, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let trulaser = {
+        buttonNames: {
+            name: "TruLaser",
+            serviceName: "TruLaser",
+        },
+        complexImg:  "../images/trulaser.png",
+        complexRequest: 'trulaser',
+        buttonsVrs: [-420, 740, 'url(../images/trulaser.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let kometa_1 = {
+        buttonNames: {
+            name: "Комета 1",
+            serviceName: "Комета 1",
+        },
+        complexImg:  "../images/kometa.png",
+        complexRequest: 'kometa_1',
+        buttonsVrs: [-382, 190, 'url(../images/kometa.png) no-repeat', "../images/ceh_5.png", 60, "unset"],
+        size: 'ceh5',
+        state: true,
+    }
+
+    let kometa_2 = {
+        buttonNames: {
+            name: "Комета 2",
+            serviceName: "Комета 2",
+        },
+        complexImg:  "../images/kometa.png",
+        complexRequest: 'kometa_2',
+        buttonsVrs: [-300, 948, 'url(../images/kometa.png) no-repeat', "../images/sbor_ceh.png", 50, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let kometa_3 = {
+        buttonNames: {
+            name: "Комета 3",
+            serviceName: "Комета 3",
+        },
+        complexImg:  "../images/kometa.png",
+        complexRequest: 'kometa_3',
+        buttonsVrs: [-340, 870, 'url(../images/kometa.png) no-repeat', "../images/sbor_ceh.png", 50, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let uvf_1 = {
+        buttonNames: {
+            name: "УВФ-1 1",
+            serviceName: "УВФ-1 1",
+        },
+        complexImg:  "../images/uvf_1_2.png",
+        complexRequest: 'uvf_1',
+        buttonsVrs: [-340, 280, 'url(../images/uvf_1_2.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let uvf_2 = {
+        buttonNames: {
+            name: "УВФ-1 2",
+            serviceName: "УВФ-1 2",
+        },
+        complexImg:  "../images/uvf_1_2.png",
+        complexRequest: 'uvf_2',
+        buttonsVrs: [-180, 280, 'url(../images/uvf_1_2.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let ntx1000 = {
+        buttonNames: {
+            name: "NTX1000",
+            serviceName: "NTX1000",
+            alarm: 'NTX1000'
+        },
+        complexImg:  "../images/ntx1000.png",
+        complexRequest: 'ntx1000',
+        buttonsVrs: [-670, 490, 'url(../images/ntx1000.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let nlx3000 = {
+        buttonNames: {
+            name: "NLX3000",
+            serviceName: "NLX3000",
+            alarm: 'NLX3000'
+        },
+        complexImg:  "../images/NLX3000.png",
+        complexRequest: 'nlx3000',
+        buttonsVrs: [-590, 310, 'url(../images/NLX3000.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let dmg_gamma2000 = {
+        buttonNames: {
+            name: "GAMMA2000",
+            serviceName: "GAMMA2000",
+            alarm: 'GAMMA2000'
+        },
+        complexImg:  "../images/gamma2000.png",
+        complexRequest: 'dmg_gamma2000',
+        buttonsVrs: [-840, 520, 'url(../images/gamma2000.png) no-repeat', "../images/meh_ceh.png", 60, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let dmg_ctx650 = {
+        buttonNames: {
+            name: "CTX650",
+            serviceName: "CTX650",
+            alarm: 'CTX650'
+        },
+        complexImg:  "../images/dmg_ctx650.png",
+        complexRequest: 'dmg_ctx650',
+        buttonsVrs: [-500, 310, 'url(../images/dmg_ctx650.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let dmg_dmf260 = {
+        buttonNames: {
+            name: "DMF260",
+            serviceName: "DMF260",
+            alarm: 'DMF260'
+        },
+        complexImg:  "../images/dmg_dmf260.png",
+        complexRequest: 'dmg_dmf260',
+        buttonsVrs: [-780, 200, 'url(../images/dmg_dmf260.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let dmg_dmu50_1 = {
+        buttonNames: {
+            name: "DMU50 1",
+            serviceName: "DMU50 1",
+            alarm: 'DMU50 1'
+        },
+        complexImg:  "../images/dmg_dmu50.png",
+        complexRequest: 'dmg_dmu50_1',
+        buttonsVrs: [-500, 115, 'url(../images/dmg_dmu50.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let dmg_dmu50_2 = {
+        buttonNames: {
+            name: "DMU50 2",
+            serviceName: "DMU50 2",
+            alarm: 'DMU50 2'
+        },
+        complexImg:  "../images/dmg_dmu50.png",
+        complexRequest: 'dmg_dmu50_2',
+        buttonsVrs: [-410, 115, 'url(../images/dmg_dmu50.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let dmg_dmc1035 = {
+        buttonNames: {
+            name: "DMC1035",
+            serviceName: "DMC1035",
+            alarm: 'DMC1035',
+        },
+        complexImg:  "../images/dmg_dmc1035.png",
+        complexRequest: 'dmg_dmc1035',
+        buttonsVrs: [-590, 115, 'url(../images/dmg_dmc1035.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let dmg_ctx310_1 = {
+        buttonNames: {
+            name: "CTX310 1",
+            serviceName: "CTX310 1",
+            alarm: 'CTX310 1',
+        },
+        complexImg:  "../images/dmg_ctx310.png",
+        complexRequest: 'dmg_ctx310_1',
+        buttonsVrs: [-590, 470, 'url(../images/dmg_ctx310.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let dmg_ctx510_1 = {
+        buttonNames: {
+            name: "CTX510 1",
+            serviceName: "CTX510 1",
+            alarm: 'CTX510 1',
+        },
+        complexImg:  "../images/dmg_ctx510.png",
+        complexRequest: 'dmg_ctx510_1',
+        buttonsVrs: [-490, 470, 'url(../images/dmg_ctx510.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let maks_1 = {
+        buttonNames: {
+            name: "МАКС 1",
+            serviceName: "МАКС 1",
+            programsName: 'МАКС 1',
+        },
+        complexImg:  "../images/robot.png",
+        complexRequest: 'maks_1',
+        buttonsVrs: [-255, 620, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"],
+        size: 'ceh6',
+        state: true,
+    }
+
+    let maks_2 = {
+        buttonNames: {
+            name: "МАКС 2",
+            serviceName: "МАКС 2",
+            programsName: 'МАКС 2',
+        },
+        complexImg:  "../images/robot.png",
+        complexRequest: 'maks_2',
+        buttonsVrs: [-450, 210, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"],
+        size: 'ceh6',
+        state: true,
+    }
+
+    let m710 = {
+        buttonNames: {
+            name: "М710",
+            serviceName: "М710",
+            programsName: 'М710',
+        },
+        complexImg:  "../images/robot.png",
+        complexRequest: 'm710',
+        buttonsVrs: [-920, 800, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 40, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let rtk12c = {
+        buttonNames: {
+            name: "РТК12C",
+            serviceName: "РТК12C",
+            programsName: 'РТК12C',
+        },
+        complexImg:  "../images/robot.png",
+        complexRequest: 'rtk12c',
+        buttonsVrs: [-750, 800, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let p250 = {
+        buttonNames: {
+            name: "P250",
+            serviceName: "P250",
+            programsName: 'P250',
+        },
+        complexImg: "../images/robot_p250.png",
+        complexRequest: 'p250',
+        buttonsVrs: [-820, 270, 'url(../images/robot_p250.png) no-repeat', "../images/ceh_5.png", 60, "unset"],
+        size: 'ceh5',
+        state: true,
+    }
+
+    let krot = {
+        buttonNames: {
+            name: "КРОТ",
+            serviceName: "КРОТ",
+            programsName: 'КРОТ',
+        },
+        complexImg: "../images/robot.png",
+        complexRequest: 'krot',
+        buttonsVrs: [-920, 890, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 40, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let prans = {
+        buttonNames: {
+            name: "ПРАНС",
+            serviceName: "ПРАНС",
+            programsName: 'ПРАНС',
+        },
+        complexImg: "../images/robot.png",
+        complexRequest: 'prans',
+        buttonsVrs: [-655, 820, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"],
+        size: 'ceh6',
+        state: true,
+    }
+
+    let press = {
+        buttonNames: {
+            name: "Пресс ЧПУ для ступиц",
+            serviceName: "Пресс ЧПУ для ступиц",
+        },
+        complexImg: "../images/press.png",
+        complexRequest: 'press',
+        buttonsVrs: [-480, 765, 'url(../images/press.png) no-repeat', "../images/ii_ploshadka.png", 40, "unset"],
+        size: '2ploshadka',
+        state: true,
+    }
+
+    let epp = {
+        buttonNames: {
+            name: "ЭПП",
+            serviceName: "ЭПП",
+        },
+        complexImg: "../images/epp.png",
+        complexRequest: 'epp',
+        buttonsVrs: [-825, 220, 'url(../images/epp.png) no-repeat', "../images/ceh_6.png", 40, "unset"],
+        size: 'ceh6',
+        state: true,
+    }
+
+    let stp13m = {
+        buttonNames: {
+            name: "СТП13М",
+            serviceName: "СТП13М",
+        },
+        complexImg: "../images/stp13m.png",
+        complexRequest: 'stp13m',
+        buttonsVrs: [-310, 550, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let stend_resources = {
+        buttonNames: {
+            name: "Стенд для ресурсных испытаний",
+            serviceName: "Стенд для ресурсных испытаний",
+            report: 'Стенд',
+            current: 'Стенд',
+        },
+        complexImg: "../images/stendResource.png",
+        complexRequest: 'stend_resources',
+        buttonsVrs: [-310, 550, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let sclad_meh = {
+        buttonNames: {
+            name: "Склад Мех. цеха",
+            serviceName: "Склад Мех. цеха",
+        },
+        complexImg: "../images/sklad.png",
+        complexRequest: 'sclad_meh',
+        buttonsVrs: [-485, 680, 'url(../images/sklad.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
+        size: 'meh1',
+        state: true,
+    }
+
+    let pech_nerg = {
+        buttonNames: {
+            name: "Печь Индукционная",
+            serviceName: "Печь Индукционная",
+        },
+        complexImg: "../images/pech.png",
+        complexRequest: 'pech_nerg',
+        buttonsVrs: [-125, 180, 'url(../images/pech.png) no-repeat', "../images/ceh_1.png", 70, "100%"],
+        size: 'ceh1',
+        state: true,
+    }
+
     let faccin_1 = {
         buttonNames: {
             name: "FACCIN 4",
@@ -426,6 +1052,45 @@ function getAllStankiData(){
     let placesObject = {
         'ОТК': {
             stanki: {kim, nk600},
+            placeState: true,
+        },
+        'Мех.уч.2.пл': {
+            stanki: {
+                uvf5220, progress, ntx1000_2, sk50, apec, dmg_dmu50_3,
+                dmg_dmu50_4, dmg_ctx310_2, dmg_ctx510_2, dmg_ctx510_3,
+                dmg_ctx310_3, dmg_ctx510_4, dmg_ctx510_5, dmg_dmc1035_2,
+                dmg_dmu50_5, dmg_dmu50_6, dmg_dmu50_7, ar55
+            },
+            placeState: true,
+        },
+        'Резка': {
+            stanki: {
+                navigator_1, navigator_2_golova_2, navigator_3,
+                trulaser, kometa_1, kometa_2, kometa_3
+            },
+            placeState: true,
+        },
+        'Мех.уч.1.пл': {
+            stanki: {
+                uvf_1, uvf_2, ntx1000, nlx3000, dmg_gamma2000,
+                dmg_ctx650, dmg_dmf260, dmg_dmu50_1, dmg_dmu50_2,
+                dmg_dmc1035, dmg_ctx310_1, dmg_ctx510_1},
+            placeState: true,
+        },
+        'Роботы': {
+            stanki: {maks_1, maks_2, m710, rtk12c, p250, krot, prans},
+            placeState: true,
+        },
+        'Спец. Комплексы': {
+            stanki: {press, epp, stp13m, stend_resources},
+            placeState: true,
+        },
+        'Склады': {
+            stanki: {sclad_meh},
+            placeState: true,
+        },
+        'Литейка': {
+            stanki: {pech_nerg},
             placeState: true,
         },
         'Гибка': {
