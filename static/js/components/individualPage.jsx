@@ -9,6 +9,11 @@ function IndividualPage() {
         if(e== parseNameUrl(window.location.href)) pageNew = i
     })
 
+    this.state = {
+        url: window.location.href,
+    }
+
+
     const [page, setPage] = useState(pageNew)
 
     const placesObject = getAllStankiData()
@@ -81,16 +86,13 @@ function IndividualPage() {
 
     const [valuesStankiWait, setValuesStankiWait] = useState(forWait)
 
+    const history = useHistory()
+
     useEffect(() => {
 
-        let pageLast = 0
-
-        places.forEach((e,i)=>{
-            if(e== parseNameUrl(window.location.href)) pageLast = i
+        return history.listen((location) => {
+            console.log(`You changed the page to: ${location.pathname}`)
         })
-
-        console.log('Было?', pageNew, pageLast)
-
 
         let dateInput = dayNow()
         setDate(dateInput)
@@ -121,7 +123,7 @@ function IndividualPage() {
 
         updateLoadDataIndividual(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
-    }, [])
+    }, [history])
 
     function newDate(dateInput) {
         setDate(dateInput)
