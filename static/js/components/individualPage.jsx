@@ -121,7 +121,63 @@ function IndividualPage() {
                 if(e == pathName) check = i
             })
 
-            setPage(check)
+            setPage(i)
+            // localStorage['page'] = i
+
+            let valuesWait = []
+
+            if (check == 9) {
+                if (localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
+                    setValuesCategories(getObjectFromLocal(localStorage['places']))
+                    let local = getObjectFromLocal(localStorage['stanki'])
+                    setValuesStanki(local)
+                    Object.keys(local).forEach(e => {
+                        if (local[e]) {
+                            valuesWait.push(e)
+                        }
+                    })
+
+                } else {
+                    Object.keys(placesObject).forEach(e => {
+                        setValuesCategories(prevState => ({
+                            ...prevState,
+                            [e]: false
+                        }));
+                        Object.keys(placesObject[e].stanki).forEach(k => {
+                            valuesWait.push(k)
+                            setValuesStanki(prevState => ({
+                                ...prevState,
+                                [k]: false
+                            }));
+                        })
+                    })
+                }
+            } else {
+                setValuesCategories(prevState => ({
+                    ...prevState,
+                    [places[check]]: true
+                }));
+
+                Object.keys(placesObject).forEach(e => {
+                    Object.keys(placesObject[e].stanki).forEach(k => {
+                        if (e !== places[check]) {
+                            setValuesStanki(prevState => ({
+                                ...prevState,
+                                [k]: false
+                            }));
+                        } else {
+                            valuesWait.push(k)
+                            setValuesStanki(prevState => ({
+                                ...prevState,
+                                [k]: true
+                            }));
+                        }
+                    })
+                })
+
+            }
+            setValuesStankiWait(valuesWait)
+            updatePage(date, valuesWait, stateLineHC, placesObject)
 
         })
 
@@ -137,8 +193,6 @@ function IndividualPage() {
                 stankiState[e] = stankiObject[e]
             }
         })
-
-        // setValuesStankiWait(Object.keys(stankiState))
 
         let stankiKeysState = Object.keys(stankiState).map(e => {
             return e
