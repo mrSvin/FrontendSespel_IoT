@@ -374,6 +374,90 @@ function updateLoadDataIndividualMonth(promiseVariable, date, complexName, fetch
         });
 }
 
+// Обработка данных из запроса для отрисовки графиков для сменных отчетов
+function updateLoadDataIndividualSmena(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
+    promiseVariable
+        .then(result => {
+            let data = result.map(e=>{
+                return [[e.work.slice(), e.pause.slice(), e.off.slice(), e.avar.slice(), e.nagruzka.slice(), e.programName.slice()],
+                    [e.work2.slice(), e.pause2.slice(), e.off2.slice(), e.avar2.slice(), e.nagruzka2.slice(),  e.programName2.slice()]]
+            })
+            let smenaArrays = data.map(e=>{
+                return convertDaysToSmena(e[0], e[1], day1, typeLine)
+            })
+
+            let totalArray = []
+            let kolOpArray = []
+            let arrayLine;
+
+            if (typeLine == 'multiLine') {
+                arrayLine =[0,1,2,3,4]
+            } else {
+                arrayLine =[0,0,0,0,0]
+            }
+
+            let day2 = dayYesterday(day1)
+
+            let parserDataArray =  smenaArrays.map(smena=>{
+                let convertDataWork = parseLinearSutki(smena[0][0], arrayLine[1], day1, smena[0][5])
+                let convertDataPause = parseLinearSutki(smena[0][1], arrayLine[2], day1)
+                let convertDataOff = parseLinearSutki(smena[0][2], arrayLine[3], day1)
+                let convertDataAvar = parseLinearSutki(smena[0][3], arrayLine[4], day1)
+                let convertDataRuchnoi = parseLinearSutki(smena[0][4], arrayLine[0], day1)
+
+                let convertDataWork2 = parseLinearSutki(smena[1][0], arrayLine[1], day2, smena[1][5])
+                let convertDataPause2 = parseLinearSutki(smena[1][1], arrayLine[2], day2)
+                let convertDataOff2 = parseLinearSutki(smena[1][2], arrayLine[3], day2)
+                let convertDataAvar2 = parseLinearSutki(smena[1][3], arrayLine[4], day2)
+                let convertDataRuchnoi2 = parseLinearSutki(smena[1][4], arrayLine[0], day2)
+
+                let roundArray = smena[0][6]
+                let roundArray2 = smena[1][6]
+
+                totalArray.push(smena[0][6].slice())
+                totalArray.push(smena[1][6].slice())
+                kolOpArray.push(kolOperations(smena[0][0]).slice())
+                kolOpArray.push(kolOperations(smena[1][0]).slice())
+
+                return [[convertDataWork, convertDataPause, convertDataOff, convertDataAvar, convertDataRuchnoi, roundArray],
+                    [convertDataWork2, convertDataPause2, convertDataOff2, convertDataAvar2, convertDataRuchnoi2, roundArray2]]
+
+            })
+
+            let nagruzkaName = fetchNames.map(e=>{
+                return exceptionManualNagruzka(e)
+            })
+
+            let names = complexName.map(e => {
+                return e.name
+            })
+
+            let programNames = complexName.map(e => {
+                return e.programsName
+            })
+
+            highChartSmenaTotalKolOp(totalArray, kolOpArray, names, day1, nagruzkaName)
+
+            parserDataArray.forEach((e, i)=>{
+                let idContainer = (i * 2) + 1
+
+                // Первая смена
+                highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], nagruzkaName[i], idContainer)
+                if (programNames[i] !== null && programNames[i] !== undefined)  highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0], 'smena',day2+' 19:00'),idContainer)
+                highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], nagruzkaName[i], idContainer)
+
+                // Первая вторая
+                highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], nagruzkaName[i], idContainer + 1)
+                if (programNames[i] !== null && programNames[i] !== undefined)  highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1], 'smena', day1 + ' 07:00'),idContainer + 1)
+                highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], nagruzkaName[i], idContainer + 1)
+
+            })
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
+
 function updatePage(date, valuesWait, stateLineHC, placesObject){
 
     let stankiObject = {}
@@ -439,8 +523,43 @@ function updatePageMonth(date, valuesWait, placesObject){
         return fetchRequestMonth(date, item)
     }));
 
-    updateLoadDataMonth(stankiRequest, date, complexNames, fetchNames)
+    updateLoadDataIndividualMonth(stankiRequest, date, complexNames, fetchNames)
 }
+
+function updatePageSmena(date, valuesWait, stateLineHC, placesObject){
+
+    let stankiObject = {}
+    Object.keys(placesObject).forEach(e => {
+        Object.keys(placesObject[e].stanki).forEach(i => {
+            stankiObject[i] = placesObject[e].stanki[i]
+        })
+    })
+
+    let stankiState = {}
+
+    valuesWait.forEach(e => {
+        stankiState[e] = stankiObject[e]
+    })
+
+    let stankiKeysState = Object.keys(stankiState).map(e => {
+        return e
+    })
+
+    let fetchNames = stankiKeysState.map(name => {
+        return stankiState[name].complexRequest
+    })
+
+    let complexNames = stankiKeysState.map(name => {
+        return stankiState[name].buttonNames
+    })
+
+    let stankiRequest = Promise.all(fetchNames.map((item) => {
+        return fetchRequestSmena(date, item)
+    }));
+
+    updateLoadDataIndividualSmena(stankiRequest, date, complexNames, fetchNames, stateLineHC)
+}
+
 
 function getAllStankiData(){
     let kim = {
