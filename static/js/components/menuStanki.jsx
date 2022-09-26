@@ -149,66 +149,6 @@ function MenuStankiIndividual({menuSelected = 9}) {
                 return <Link key={i} to={`/stanki/${places[i]}`}>
                     <div key={i} className={menuSelect[i]}
                          onClick={(e) => {
-                                console.log('Ничего')
-                             // if (menuSelected !== i) {
-                             //     setPage(i)
-                             //     // localStorage['page'] = i
-                             //
-                             //     let valuesWait = []
-                             //
-                             //     if (i == 9) {
-                             //         if (localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
-                             //             setValuesCategories(getObjectFromLocal(localStorage['places']))
-                             //             let local = getObjectFromLocal(localStorage['stanki'])
-                             //             setValuesStanki(local)
-                             //             Object.keys(local).forEach(e => {
-                             //                 if (local[e]) {
-                             //                     valuesWait.push(e)
-                             //                 }
-                             //             })
-                             //
-                             //         } else {
-                             //             Object.keys(placesObject).forEach(e => {
-                             //                 setValuesCategories(prevState => ({
-                             //                     ...prevState,
-                             //                     [e]: false
-                             //                 }));
-                             //                 Object.keys(placesObject[e].stanki).forEach(k => {
-                             //                     valuesWait.push(k)
-                             //                     setValuesStanki(prevState => ({
-                             //                         ...prevState,
-                             //                         [k]: false
-                             //                     }));
-                             //                 })
-                             //             })
-                             //         }
-                             //     } else {
-                             //         setValuesCategories(prevState => ({
-                             //             ...prevState,
-                             //             [places[i]]: true
-                             //         }));
-                             //
-                             //         Object.keys(placesObject).forEach(e => {
-                             //             Object.keys(placesObject[e].stanki).forEach(k => {
-                             //                 if (e !== places[i]) {
-                             //                     setValuesStanki(prevState => ({
-                             //                         ...prevState,
-                             //                         [k]: false
-                             //                     }));
-                             //                 } else {
-                             //                     valuesWait.push(k)
-                             //                     setValuesStanki(prevState => ({
-                             //                         ...prevState,
-                             //                         [k]: true
-                             //                     }));
-                             //                 }
-                             //             })
-                             //         })
-                             //
-                             //     }
-                             //     setValuesStankiWait(valuesWait)
-                             //     updatePage(date, valuesWait, stateLineHC, placesObject)
-                             // }
                          }}>{e}
                     </div>
                 </Link>

@@ -180,9 +180,6 @@ function Stanki() {
             }
             setValuesStankiWait(valuesWait)
             updatePage(date, valuesWait, stateLineHC, placesObject)
-
-            console.log('Сравнение', valuesWait, valuesStankiWait)
-
         })
 
     }, [history, date, stateLineHC, updateList])
@@ -215,7 +212,7 @@ function Stanki() {
             <div>
                 <div className="energyCalendarContainer">
                     <DayCalendar newDate={newDate} date={date}/>
-                    <ListDevicesCategoryIndividual setUpdateList={setUpdateList} placesObject={placesObject} placeKeys={placeKeys}
+                    <ListDevicesCategoryIndividual updateList={updateList} setUpdateList={setUpdateList} placesObject={placesObject} placeKeys={placeKeys}
                                          valuesStanki={valuesStanki} setValuesStanki={setValuesStanki} setValuesStankiWait={setValuesStankiWait}
                                          valuesCategories={valuesCategories} setValuesCategories={setValuesCategories}
                                          page={page} stankiObject={stankiObject}/>
