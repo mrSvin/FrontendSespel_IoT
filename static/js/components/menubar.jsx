@@ -84,7 +84,7 @@ function Menubar() {
     return (
         <div className="main-container-home">
 
-            <Link to="/stanki/otk" className="container-home">
+            <Link to="/stanki/ОТК" className="container-home">
                 <div className="icon-container">
                     <p>Суточные и месячные отчеты работы оборудования</p>
                     <div className="stanki"></div>
