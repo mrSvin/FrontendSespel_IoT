@@ -110,12 +110,15 @@ function Stanki() {
             return fetchRequest(dateInput, item)
         }));
 
+        console.log('Или тут',razdel)
+
         updateLoadDataIndividual(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
         return history.listen((location) => {
             let check = 0
 
             let pathName = parseNameUrl(location.pathname)
+            console.log(pathName, razdel)
             places.forEach((e,i)=>{
                 if(e == pathName) check = i
             })
