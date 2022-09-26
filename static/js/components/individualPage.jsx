@@ -213,7 +213,7 @@ function Stanki() {
             <div>
                 <div className="energyCalendarContainer">
                     <DayCalendar newDate={newDate} date={date}/>
-                    <ListDevicesCategoryIndividual date={date} newDate={newDate} placesObject={placesObject} placeKeys={placeKeys}
+                    <ListDevicesCategoryIndividual placesObject={placesObject} placeKeys={placeKeys}
                                          valuesStanki={valuesStanki} setValuesStanki={setValuesStanki} setValuesStankiWait={setValuesStankiWait}
                                          valuesCategories={valuesCategories} setValuesCategories={setValuesCategories}
                                          page={page} stankiObject={stankiObject}/>

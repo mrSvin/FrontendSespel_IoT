@@ -253,7 +253,7 @@ function ListDevices({date, values, setValuesState, complexName, complexRequest,
     )
 }
 
-function ListDevicesCategoryIndividual({date, newDate, placesObject,placeKeys, valuesStanki, setValuesStanki, setValuesStankiWait, valuesCategories, setValuesCategories, page, stankiObject}) {
+function ListDevicesCategoryIndividual({placesObject,placeKeys, valuesStanki, setValuesStanki, setValuesStankiWait, valuesCategories, setValuesCategories, page, stankiObject}) {
 
     const [isActive, setActive] = useState(false);
 
@@ -269,8 +269,6 @@ function ListDevicesCategoryIndividual({date, newDate, placesObject,placeKeys, v
                 }
             })
             setValuesStankiWait(Object.keys(stankiState))
-
-            newDate(date)
             setListChanged(false)
         }
     };
@@ -286,8 +284,6 @@ function ListDevicesCategoryIndividual({date, newDate, placesObject,placeKeys, v
                     }
                 })
                 setValuesStankiWait(Object.keys(stankiState))
-
-                newDate(date)
                 setListChanged(false)
             }
 
