@@ -94,8 +94,8 @@ function Stanki() {
             }
         })
 
-        console.log(updateList)
-        setUpdateList(false)
+        let nothing = updateList
+        // console.log(updateList)
 
         let stankiKeysState = Object.keys(stankiState).map(e => {
             return e
