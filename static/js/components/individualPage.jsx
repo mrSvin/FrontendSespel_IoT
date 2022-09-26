@@ -55,7 +55,7 @@ function IndividualPage() {
     }
 
     // Состояние даты
-    let [date, setDate] = useState(dayNow());
+    let [date, setDate] = useState(0);
 
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
@@ -80,42 +80,12 @@ function IndividualPage() {
 
     const [valuesStankiWait, setValuesStankiWait] = useState(forWait)
 
-    function newDate(dateInput) {
-        setDate(dateInput)
-
-        let stankiState = {}
-
-        Object.keys(valuesStanki).forEach(e => {
-            if (valuesStanki[e]) {
-                stankiState[e] = stankiObject[e]
-            }
-        })
-
-        let stankiKeysState = Object.keys(stankiState).map(e => {
-            return e
-        })
-
-        let fetchNames = stankiKeysState.map(name => {
-            return stankiState[name].complexRequest
-        })
-
-        let complexNames = stankiKeysState.map(name => {
-            return stankiState[name].buttonNames
-        })
-
-        let stankiRequest = Promise.all(fetchNames.map((item) => {
-            return fetchRequest(dateInput, item)
-        }));
-
-        updateLoadDataIndividual(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
-
-    }
-
     const history = useHistory()
 
     useEffect(() => {
 
         let dateInput = dayNow()
+        setDate(dateInput)
 
         let stankiState = {}
 
@@ -211,7 +181,38 @@ function IndividualPage() {
 
         })
 
-    }, [history, date])
+    }, [history, date, stateLineHC])
+
+    function newDate(dateInput) {
+        setDate(dateInput)
+
+        let stankiState = {}
+
+        Object.keys(valuesStanki).forEach(e => {
+            if (valuesStanki[e]) {
+                stankiState[e] = stankiObject[e]
+            }
+        })
+
+        let stankiKeysState = Object.keys(stankiState).map(e => {
+            return e
+        })
+
+        let fetchNames = stankiKeysState.map(name => {
+            return stankiState[name].complexRequest
+        })
+
+        let complexNames = stankiKeysState.map(name => {
+            return stankiState[name].buttonNames
+        })
+
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
+            return fetchRequest(dateInput, item)
+        }));
+
+        updateLoadDataIndividual(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
+
+    }
 
     return (
         <div>
