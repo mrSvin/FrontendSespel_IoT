@@ -6,7 +6,6 @@ const {
     useHistory,
 } = ReactRouterDOM
 
-
 const {
     useState,
     useEffect,
@@ -184,8 +183,8 @@ function App({ hideLoader }) {
                         <Meh2Smena/>
                     </Route>
 
-                    <Route path="/stanki/individualPage">
-                        <IndividualPage/>
+                    <Route path="/stanki">
+                        <Stanki/>
                     </Route>
 
                     <Route path="/stanki/individualPageMonth">
