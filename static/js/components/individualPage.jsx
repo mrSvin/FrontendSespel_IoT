@@ -185,41 +185,12 @@ function IndividualPage() {
 
     function newDate(dateInput) {
         setDate(dateInput)
-
-        // let stankiState = {}
-        //
-        // Object.keys(valuesStanki).forEach(e => {
-        //     if (valuesStanki[e]) {
-        //         stankiState[e] = stankiObject[e]
-        //     }
-        // })
-        //
-        // let stankiKeysState = Object.keys(stankiState).map(e => {
-        //     return e
-        // })
-        //
-        // let fetchNames = stankiKeysState.map(name => {
-        //     return stankiState[name].complexRequest
-        // })
-        //
-        // let complexNames = stankiKeysState.map(name => {
-        //     return stankiState[name].buttonNames
-        // })
-        //
-        // let stankiRequest = Promise.all(fetchNames.map((item) => {
-        //     return fetchRequest(dateInput, item)
-        // }));
-        //
-        // updateLoadDataIndividual(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
-
     }
 
     return (
         <div>
 
-            <MenuStankiIndividual menuSelected={page} setPage={setPage} setValuesStanki={setValuesStanki}
-                                  setValuesStankiWait={setValuesStankiWait} setValuesCategories = {setValuesCategories}
-                                  placesObject={placesObject} date={date} stateLineHC={stateLineHC}/>
+            <MenuStankiIndividual menuSelected={page}/>
 
             <div className="buttons-otchet">
 
@@ -248,10 +219,7 @@ function IndividualPage() {
                 </div>
                 <ComplexTotalSutkiInfo/>
 
-                <SwitchLineHCIndividual date={date} stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}
-                                        stankiObject={stankiObject} valuesStanki={valuesStanki}
-                                        setValuesStankiWait={setValuesStankiWait}
-                />
+                <SwitchLineHCIndividual stateLineHC={stateLineHC} setStateLineHC={setStateLineHC}/>
 
                 {valuesStankiWait.map((e, i) => {
                     let stanok = stankiObject[e]

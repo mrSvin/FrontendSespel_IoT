@@ -419,7 +419,7 @@ function SwitchLineSmenaHC({date, stateLineHC, setStateLineHC, complexName, comp
     )
 }
 
-function SwitchLineHCIndividual({date, stateLineHC, setStateLineHC, stankiObject, valuesStanki, setValuesStankiWait}) {
+function SwitchLineHCIndividual({stateLineHC, setStateLineHC}) {
 
     const [disable, setDisable] = useState(false)
 
@@ -432,8 +432,12 @@ function SwitchLineHCIndividual({date, stateLineHC, setStateLineHC, stankiObject
             <label className="switch">
                 <input type="checkbox" disabled={disable} onChange={() => {
                     setDisable(true)
-                    changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObject, valuesStanki, setValuesStankiWait)
-                    setTimeout(Activate, 500)
+                    if (stateLineHC == 'line') {
+                        setStateLineHC('multiLine')
+                    } else {
+                        setStateLineHC('line')
+                    }
+                    setTimeout(Activate, 800)
                 }}/>
                 <span className="slider round"></span>
             </label>

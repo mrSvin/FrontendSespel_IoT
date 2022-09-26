@@ -136,16 +136,7 @@ function MenuEnergy(select) {
 
 }
 
-function MenuStankiIndividual({
-                                  menuSelected = 9,
-                                  setPage,
-                                  setValuesStanki,
-                                  setValuesStankiWait,
-                                  setValuesCategories,
-                                  placesObject,
-                                  date,
-                                  stateLineHC
-                              }) {
+function MenuStankiIndividual({menuSelected = 9}) {
 
     let menuSelect = ["menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect", "menuNoSelect"]
     menuSelect[menuSelected] = "menuSelect"
