@@ -121,7 +121,7 @@ function IndividualPage() {
                 if(e == pathName) check = i
             })
 
-            setPage(i)
+            setPage(check)
             // localStorage['page'] = i
 
             let valuesWait = []
