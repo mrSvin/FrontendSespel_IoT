@@ -186,31 +186,31 @@ function IndividualPage() {
     function newDate(dateInput) {
         setDate(dateInput)
 
-        let stankiState = {}
-
-        Object.keys(valuesStanki).forEach(e => {
-            if (valuesStanki[e]) {
-                stankiState[e] = stankiObject[e]
-            }
-        })
-
-        let stankiKeysState = Object.keys(stankiState).map(e => {
-            return e
-        })
-
-        let fetchNames = stankiKeysState.map(name => {
-            return stankiState[name].complexRequest
-        })
-
-        let complexNames = stankiKeysState.map(name => {
-            return stankiState[name].buttonNames
-        })
-
-        let stankiRequest = Promise.all(fetchNames.map((item) => {
-            return fetchRequest(dateInput, item)
-        }));
-
-        updateLoadDataIndividual(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
+        // let stankiState = {}
+        //
+        // Object.keys(valuesStanki).forEach(e => {
+        //     if (valuesStanki[e]) {
+        //         stankiState[e] = stankiObject[e]
+        //     }
+        // })
+        //
+        // let stankiKeysState = Object.keys(stankiState).map(e => {
+        //     return e
+        // })
+        //
+        // let fetchNames = stankiKeysState.map(name => {
+        //     return stankiState[name].complexRequest
+        // })
+        //
+        // let complexNames = stankiKeysState.map(name => {
+        //     return stankiState[name].buttonNames
+        // })
+        //
+        // let stankiRequest = Promise.all(fetchNames.map((item) => {
+        //     return fetchRequest(dateInput, item)
+        // }));
+        //
+        // updateLoadDataIndividual(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
     }
 
