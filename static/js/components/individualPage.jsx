@@ -211,7 +211,7 @@ function IndividualPage() {
 
         })
 
-    }, [history])
+    }, [history, date])
 
     return (
         <div>
