@@ -110,7 +110,6 @@ function Stanki() {
             return fetchRequest(dateInput, item)
         }));
 
-        console.log('Или тут',razdel)
 
         updateLoadDataIndividual(stankiRequest, dateInput, complexNames, fetchNames, stateLineHC)
 
@@ -118,67 +117,71 @@ function Stanki() {
             let check = 0
 
             let pathName = parseNameUrl(location.pathname)
-            console.log(pathName, razdel)
+            let thisPage = location.pathname.slice(0,8)
+
             places.forEach((e,i)=>{
                 if(e == pathName) check = i
             })
 
-            setPage(check)
+            if(thisPage == '/stanki/') {
+                setPage(check)
+                let valuesWait = []
 
-            let valuesWait = []
+                if (check == 9) {
+                    if (localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
+                        setValuesCategories(getObjectFromLocal(localStorage['places']))
+                        let local = getObjectFromLocal(localStorage['stanki'])
+                        setValuesStanki(local)
+                        Object.keys(local).forEach(e => {
+                            if (local[e]) {
+                                valuesWait.push(e)
+                            }
+                        })
 
-            if (check == 9) {
-                if (localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
-                    setValuesCategories(getObjectFromLocal(localStorage['places']))
-                    let local = getObjectFromLocal(localStorage['stanki'])
-                    setValuesStanki(local)
-                    Object.keys(local).forEach(e => {
-                        if (local[e]) {
-                            valuesWait.push(e)
-                        }
-                    })
-
-                } else {
-                    Object.keys(placesObject).forEach(e => {
-                        setValuesCategories(prevState => ({
-                            ...prevState,
-                            [e]: false
-                        }));
-                        Object.keys(placesObject[e].stanki).forEach(k => {
-                            valuesWait.push(k)
-                            setValuesStanki(prevState => ({
+                    } else {
+                        Object.keys(placesObject).forEach(e => {
+                            setValuesCategories(prevState => ({
                                 ...prevState,
-                                [k]: false
+                                [e]: false
                             }));
+                            Object.keys(placesObject[e].stanki).forEach(k => {
+                                valuesWait.push(k)
+                                setValuesStanki(prevState => ({
+                                    ...prevState,
+                                    [k]: false
+                                }));
+                            })
+                        })
+                    }
+                } else {
+                    setValuesCategories(prevState => ({
+                        ...prevState,
+                        [places[check]]: true
+                    }));
+
+                    Object.keys(placesObject).forEach(e => {
+                        Object.keys(placesObject[e].stanki).forEach(k => {
+                            if (e !== places[check]) {
+                                setValuesStanki(prevState => ({
+                                    ...prevState,
+                                    [k]: false
+                                }));
+                            } else {
+                                valuesWait.push(k)
+                                setValuesStanki(prevState => ({
+                                    ...prevState,
+                                    [k]: true
+                                }));
+                            }
                         })
                     })
+
                 }
-            } else {
-                setValuesCategories(prevState => ({
-                    ...prevState,
-                    [places[check]]: true
-                }));
-
-                Object.keys(placesObject).forEach(e => {
-                    Object.keys(placesObject[e].stanki).forEach(k => {
-                        if (e !== places[check]) {
-                            setValuesStanki(prevState => ({
-                                ...prevState,
-                                [k]: false
-                            }));
-                        } else {
-                            valuesWait.push(k)
-                            setValuesStanki(prevState => ({
-                                ...prevState,
-                                [k]: true
-                            }));
-                        }
-                    })
-                })
-
+                setValuesStankiWait(valuesWait)
+                updatePage(date, valuesWait, stateLineHC, placesObject)
             }
-            setValuesStankiWait(valuesWait)
-            updatePage(date, valuesWait, stateLineHC, placesObject)
+
+
         })
 
     }, [history, date, stateLineHC, updateList])

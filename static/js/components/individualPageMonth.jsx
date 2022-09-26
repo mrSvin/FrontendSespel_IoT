@@ -110,66 +110,71 @@ function StankiMonth() {
             let check = 0
 
             let pathName = parseNameUrl(location.pathname)
+            let thisPage = location.pathname.slice(0,13)
+
             places.forEach((e,i)=>{
                 if(e == pathName) check = i
             })
 
-            setPage(check)
+            if(thisPage == '/stankiMonth/') {
 
-            let valuesWait = []
+                setPage(check)
 
-            if (check == 9) {
-                if (localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
-                    setValuesCategories(getObjectFromLocal(localStorage['places']))
-                    let local = getObjectFromLocal(localStorage['stanki'])
-                    setValuesStanki(local)
-                    Object.keys(local).forEach(e => {
-                        if (local[e]) {
-                            valuesWait.push(e)
-                        }
-                    })
+                let valuesWait = []
 
-                } else {
-                    Object.keys(placesObject).forEach(e => {
-                        setValuesCategories(prevState => ({
-                            ...prevState,
-                            [e]: false
-                        }));
-                        Object.keys(placesObject[e].stanki).forEach(k => {
-                            valuesWait.push(k)
-                            setValuesStanki(prevState => ({
+                if (check == 9) {
+                    if (localStorage['stanki'] !== undefined && localStorage['places'] !== undefined) {
+                        setValuesCategories(getObjectFromLocal(localStorage['places']))
+                        let local = getObjectFromLocal(localStorage['stanki'])
+                        setValuesStanki(local)
+                        Object.keys(local).forEach(e => {
+                            if (local[e]) {
+                                valuesWait.push(e)
+                            }
+                        })
+
+                    } else {
+                        Object.keys(placesObject).forEach(e => {
+                            setValuesCategories(prevState => ({
                                 ...prevState,
-                                [k]: false
+                                [e]: false
                             }));
+                            Object.keys(placesObject[e].stanki).forEach(k => {
+                                valuesWait.push(k)
+                                setValuesStanki(prevState => ({
+                                    ...prevState,
+                                    [k]: false
+                                }));
+                            })
+                        })
+                    }
+                } else {
+                    setValuesCategories(prevState => ({
+                        ...prevState,
+                        [places[check]]: true
+                    }));
+
+                    Object.keys(placesObject).forEach(e => {
+                        Object.keys(placesObject[e].stanki).forEach(k => {
+                            if (e !== places[check]) {
+                                setValuesStanki(prevState => ({
+                                    ...prevState,
+                                    [k]: false
+                                }));
+                            } else {
+                                valuesWait.push(k)
+                                setValuesStanki(prevState => ({
+                                    ...prevState,
+                                    [k]: true
+                                }));
+                            }
                         })
                     })
+
                 }
-            } else {
-                setValuesCategories(prevState => ({
-                    ...prevState,
-                    [places[check]]: true
-                }));
-
-                Object.keys(placesObject).forEach(e => {
-                    Object.keys(placesObject[e].stanki).forEach(k => {
-                        if (e !== places[check]) {
-                            setValuesStanki(prevState => ({
-                                ...prevState,
-                                [k]: false
-                            }));
-                        } else {
-                            valuesWait.push(k)
-                            setValuesStanki(prevState => ({
-                                ...prevState,
-                                [k]: true
-                            }));
-                        }
-                    })
-                })
-
+                setValuesStankiWait(valuesWait)
+                updatePageMonth(dateMonth, valuesWait, placesObject)
             }
-            setValuesStankiWait(valuesWait)
-            updatePageMonth(dateMonth, valuesWait, placesObject)
         })
 
     }, [history, dateMonth, updateList])
