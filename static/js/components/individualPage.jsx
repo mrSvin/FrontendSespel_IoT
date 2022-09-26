@@ -70,7 +70,7 @@ function Stanki() {
             getStankiState(placeKeys, placesObject)
     )
 
-    const [listChanged, setListChanged] = useState(false)
+    const [updateList, setUpdateList] = useState(false)
 
     let forWait = []
 
@@ -85,10 +85,7 @@ function Stanki() {
     const history = useHistory()
 
     useEffect(() => {
-
         let dateInput = date
-        // setDate(dateInput)
-
         let stankiState = {}
 
         Object.keys(valuesStanki).forEach(e => {
@@ -185,7 +182,7 @@ function Stanki() {
 
         })
 
-    }, [history, date, stateLineHC, listChanged])
+    }, [history, date, stateLineHC, updateList])
 
     function newDate(dateInput) {
         setDate(dateInput)
@@ -215,7 +212,7 @@ function Stanki() {
             <div>
                 <div className="energyCalendarContainer">
                     <DayCalendar newDate={newDate} date={date}/>
-                    <ListDevicesCategoryIndividual listChanged={listChanged} setListChanged={setListChanged} placesObject={placesObject} placeKeys={placeKeys}
+                    <ListDevicesCategoryIndividual setUpdateList={setUpdateList} placesObject={placesObject} placeKeys={placeKeys}
                                          valuesStanki={valuesStanki} setValuesStanki={setValuesStanki} setValuesStankiWait={setValuesStankiWait}
                                          valuesCategories={valuesCategories} setValuesCategories={setValuesCategories}
                                          page={page} stankiObject={stankiObject}/>
