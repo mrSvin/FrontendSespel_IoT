@@ -2,6 +2,8 @@ function Stanki() {
 
     let places = ['ОТК', 'Мех.уч.2 пл.', 'Резка', 'Мех.уч.1 пл.', 'Роботы', 'Спец. комплексы', 'Склады', 'Литьё', 'Гибка', 'Все']
 
+    let razdel = 'stanki'
+
     let pageNew = 0
     places.forEach((e,i)=>{
         if(e== parseNameUrl(window.location.href)) pageNew = i
@@ -186,19 +188,19 @@ function Stanki() {
     return (
         <div>
 
-            <MenuStankiIndividual menuSelected={page}/>
+            <MenuStankiIndividual razdel={razdel} menuSelected={page}/>
 
             <div className="buttons-otchet">
 
-                <Link to={`/stanki/${places[page]}}`}>
+                <Link to={`/${razdel}/${places[page]}}`}>
                     <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to={`/stanki/individualPageMonth`}>
+                <Link to={`/${razdel}/individualPageMonth`}>
                     <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to={`/stanki/individualPageSmena`}>
+                <Link to={`/${razdel}/individualPageSmena`}>
                     <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
                 </Link>
 
