@@ -339,6 +339,41 @@ function updateLoadDataIndividual(promiseVariable, day1, complexName, fetchNames
         });
 }
 
+function updateLoadDataIndividualMonth(promiseVariable, date, complexName, fetchNames) {
+    promiseVariable
+        .then(result => {
+
+            let nagruzkaName = fetchNames.map(e => {
+                return exceptionManualNagruzka(e)
+            })
+
+            let names = complexName.map(e => {
+                return e.name
+            })
+
+            let totalArray = [[], [], [], [], [], []]
+
+            result.forEach((e, i) => {
+                highChartMonthLine(e.work, e.pause, e.off, e.avar, e.nagruzka, nagruzkaName[i], i + 1)
+                highChartRound(averageMonthdata(e.work), averageMonthdata(e.pause), averageMonthdata(e.off),
+                    averageMonthdata(e.avar), averageMonthdata(e.nagruzka), nagruzkaName[i], i + 1)
+
+                totalArray[0].push(averageMonthdata(e.work.map(Number)))
+                totalArray[1].push(averageMonthdata(e.pause.map(Number)))
+                totalArray[2].push(averageMonthdata(e.off.map(Number)))
+                totalArray[3].push(averageMonthdata(e.avar.map(Number)))
+                totalArray[4].push(averageMonthdata(e.nagruzka.map(Number)))
+            })
+
+            highChartTotal(names, totalArray[0], totalArray[1], totalArray[2], totalArray[3], totalArray[4], nagruzkaName, date)
+            highChartRound(averageMonthdata(totalArray[0]), averageMonthdata(totalArray[1]), averageMonthdata(totalArray[2]),
+                averageMonthdata(totalArray[3]), totalArray[4], nagruzkaName, 'Total')
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
+
 function updatePage(date, valuesWait, stateLineHC, placesObject){
 
     let stankiObject = {}

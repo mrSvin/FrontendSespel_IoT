@@ -54,7 +54,7 @@ function StankiMonth() {
         }
     }
 
-    let [dateMonth, setDateMonth] = useState(0);
+    let [dateMonth, setDateMonth] = useState(monthNow());
 
     const [valuesCategories, setValuesCategories] = useState(
         (localStorage['places'] !== undefined && page == 9) ? getObjectFromLocal(localStorage['places']) :
@@ -104,7 +104,7 @@ function StankiMonth() {
             return fetchRequestMonth(dateInput, item)
         }));
 
-        updateLoadDataMonth(stankiRequest, dateInput, complexNames, fetchNames)
+        updateLoadDataIndividualMonth(stankiRequest, dateInput, complexNames, fetchNames)
 
         return history.listen((location) => {
             let check = 0
