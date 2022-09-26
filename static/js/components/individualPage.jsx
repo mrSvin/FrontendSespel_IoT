@@ -85,7 +85,7 @@ function IndividualPage() {
     useEffect(() => {
 
         let dateInput = dayNow()
-        setDate(dateInput)
+        // setDate(dateInput)
 
         let stankiState = {}
 
