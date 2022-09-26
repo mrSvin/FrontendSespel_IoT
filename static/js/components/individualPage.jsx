@@ -179,9 +179,11 @@ function Stanki() {
             setValuesStankiWait(valuesWait)
             updatePage(date, valuesWait, stateLineHC, placesObject)
 
+            console.log('Сравнение', valuesWait, valuesStankiWait)
+
         })
 
-    }, [history, date, stateLineHC])
+    }, [history, date, stateLineHC, valuesStankiWait])
 
     function newDate(dateInput) {
         setDate(dateInput)
