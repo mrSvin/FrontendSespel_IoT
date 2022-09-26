@@ -235,7 +235,7 @@ function StankiSmena() {
                         return <ComplexSmenaAllIngo key={i} complexName={stanok.buttonNames.name}
                                                     complexImg={stanok.complexImg}
                                                     complexMesto={stanok.buttonsVrs} size={stanok.size}
-                                                    idContainer={i + 1}
+                                                    idContainer={i*2+1}
                                                     service={stanok.buttonNames.serviceName}
                                                     alarm={stanok.buttonNames.alarm}
                                                     programs={stanok.buttonNames.programsName+'smena'}
