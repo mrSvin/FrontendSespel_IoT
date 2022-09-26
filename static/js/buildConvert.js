@@ -436,7 +436,7 @@ function updatePageMonth(date, valuesWait, placesObject){
     })
 
     let stankiRequest = Promise.all(fetchNames.map((item) => {
-        return fetchRequest(date, item)
+        return fetchRequestMonth(date, item)
     }));
 
     updateLoadDataMonth(stankiRequest, date, complexNames, fetchNames)
