@@ -238,7 +238,7 @@ function StankiSmena() {
                                                     idContainer={i + 1}
                                                     service={stanok.buttonNames.serviceName}
                                                     alarm={stanok.buttonNames.alarm}
-                                                    programs={stanok.buttonNames.programsName}
+                                                    programs={stanok.buttonNames.programsName+'smena'}
                                                     laser={stanok.buttonNames.laser}
                                                     report={stanok.buttonNames.report}
                                                     current={stanok.buttonNames.current}/>
