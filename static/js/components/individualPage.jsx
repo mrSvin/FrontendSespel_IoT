@@ -55,7 +55,7 @@ function IndividualPage() {
     }
 
     // Состояние даты
-    let [date, setDate] = useState(0);
+    let [date, setDate] = useState(dayNow());
 
     // Состояние переменной мульти Диаграммы
     let [stateLineHC, setStateLineHC] = useState("multiLine");
@@ -84,7 +84,7 @@ function IndividualPage() {
 
     useEffect(() => {
 
-        let dateInput = dayNow()
+        let dateInput = date
         // setDate(dateInput)
 
         let stankiState = {}
