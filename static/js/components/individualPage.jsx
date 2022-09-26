@@ -1,4 +1,3 @@
-
 function Stanki() {
 
     let places = ['ОТК', 'Мех.уч.2 пл.', 'Резка', 'Мех.уч.1 пл.', 'Роботы', 'Спец. комплексы', 'Склады', 'Литьё', 'Гибка', 'Все']
@@ -94,9 +93,6 @@ function Stanki() {
             }
         })
 
-        let nothing = updateList
-        // console.log(updateList)
-
         let stankiKeysState = Object.keys(stankiState).map(e => {
             return e
         })
@@ -124,7 +120,6 @@ function Stanki() {
             })
 
             setPage(check)
-            // localStorage['page'] = i
 
             let valuesWait = []
 
@@ -195,7 +190,7 @@ function Stanki() {
 
             <div className="buttons-otchet">
 
-                <Link to={`/stanki/individualPage/`}>
+                <Link to={`/stanki/${places[page]}}`}>
                     <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
