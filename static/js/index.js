@@ -53,6 +53,10 @@ function App({ hideLoader }) {
                         <Teamcenter/>
                     </Route>
 
+                    <Route path="/ppc">
+                        <Ppc/>
+                    </Route>
+
                     <Route path="/energyWater">
                         <Suspense fallback={<div>Loading...</div>}>
                             <EnergyWater/>
@@ -90,7 +94,7 @@ function App({ hideLoader }) {
                     <Route path="/stanki/liteykaMonth">
                         <LiteykaMonth/>
                     </Route>
-                    
+
                     <Route path="/stanki/liteykaSmena">
                         <LiteykaSmena/>
                     </Route>
@@ -102,7 +106,7 @@ function App({ hideLoader }) {
                     <Route path="/stanki/gibkaMonth">
                         <GibkaMonth/>
                     </Route>
-                    
+
                     <Route path="/stanki/gibkaSmena">
                         <GibkaSmena/>
                     </Route>
@@ -126,7 +130,7 @@ function App({ hideLoader }) {
                     <Route path="/stanki/specComplexesMonth">
                         <SpecComplexesMonth/>
                     </Route>
-                    
+
                     <Route path="/stanki/specComplexesSmena">
                         <SpecComplexesSmena/>
                     </Route>
@@ -174,13 +178,13 @@ function App({ hideLoader }) {
                     <Route path="/stanki/meh2Month">
                         <Meh2Month/>
                     </Route>
-                    
+
                     <Route path="/stanki/meh2Smena">
                         <Meh2Smena/>
                     </Route>
 
-                    <Route path="/stanki">
-                        <Stanki/>
+                    <Route path="/stanki/individualPage">
+                        <IndividualPage/>
                     </Route>
 
                     <Route path="/stanki/individualPageMonth">
