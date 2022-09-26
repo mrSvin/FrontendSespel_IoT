@@ -146,7 +146,7 @@ function MenuStankiIndividual({menuSelected = 9}) {
     return (
         <div className="menuButtons">
             {places.map((e, i) => {
-                return <Link key={i} to={`/stanki/individualPage/${places[i]}`}>
+                return <Link key={i} to={`/stanki/${places[i]}`}>
                     <div key={i} className={menuSelect[i]}
                          onClick={(e) => {
                                 console.log('Ничего')
