@@ -22,7 +22,6 @@ function Stanki() {
     }
     else placeKeys.push(places[page])
 
-
     let stankiObject = {}
     let stankiKeys = []
     if(page == 9) {
@@ -192,15 +191,15 @@ function Stanki() {
 
             <div className="buttons-otchet">
 
-                <Link to={`/${razdel}/${places[page]}}`}>
+                <Link to={`/stanki/${places[page]}`}>
                     <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to={`/${razdel}/individualPageMonth`}>
+                <Link to={`/stankiMonth/${places[page]}`}>
                     <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
                 </Link>
 
-                <Link to={`/${razdel}/individualPageSmena`}>
+                <Link to={`/stankiSmena/${places[page]}`}>
                     <div className="menuNoSelect">СМЕННЫЙ ОТЧЕТ</div>
                 </Link>
 

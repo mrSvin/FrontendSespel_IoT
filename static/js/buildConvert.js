@@ -373,6 +373,40 @@ function updatePage(date, valuesWait, stateLineHC, placesObject){
     updateLoadDataIndividual(stankiRequest, date, complexNames, fetchNames, stateLineHC)
 }
 
+function updatePageMonth(date, valuesWait, placesObject){
+
+    let stankiObject = {}
+    Object.keys(placesObject).forEach(e => {
+        Object.keys(placesObject[e].stanki).forEach(i => {
+            stankiObject[i] = placesObject[e].stanki[i]
+        })
+    })
+
+    let stankiState = {}
+
+    valuesWait.forEach(e => {
+        stankiState[e] = stankiObject[e]
+    })
+
+    let stankiKeysState = Object.keys(stankiState).map(e => {
+        return e
+    })
+
+    let fetchNames = stankiKeysState.map(name => {
+        return stankiState[name].complexRequest
+    })
+
+    let complexNames = stankiKeysState.map(name => {
+        return stankiState[name].buttonNames
+    })
+
+    let stankiRequest = Promise.all(fetchNames.map((item) => {
+        return fetchRequest(date, item)
+    }));
+
+    updateLoadDataMonth(stankiRequest, date, complexNames, fetchNames)
+}
+
 function getAllStankiData(){
     let kim = {
         buttonNames: {

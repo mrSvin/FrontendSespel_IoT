@@ -187,8 +187,8 @@ function App({ hideLoader }) {
                         <Stanki/>
                     </Route>
 
-                    <Route path="/stanki/individualPageMonth">
-                        <IndividualPageMonth/>
+                    <Route path="/stankiMonth">
+                        <StankiMonth/>
                     </Route>
 
                     <Route path="/stanki/individualPageSmena">
