@@ -253,11 +253,9 @@ function ListDevices({date, values, setValuesState, complexName, complexRequest,
     )
 }
 
-function ListDevicesCategoryIndividual({placesObject,placeKeys, valuesStanki, setValuesStanki, setValuesStankiWait, valuesCategories, setValuesCategories, page, stankiObject}) {
+function ListDevicesCategoryIndividual({listChanged, setListChanged, placesObject,placeKeys, valuesStanki, setValuesStanki, setValuesStankiWait, valuesCategories, setValuesCategories, page, stankiObject}) {
 
     const [isActive, setActive] = useState(false);
-
-    const [listChanged, setListChanged] = useState(false)
 
     const toggleClass = () => {
         setActive(!isActive);
