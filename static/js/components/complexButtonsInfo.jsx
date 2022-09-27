@@ -83,7 +83,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
                             <div className="lineSukiHighChart" id={idLine2}></div>
                             {idProgram2 != null ?
                                 <div className="lineProgramHighChart" id={idProgram2}></div>
-                                :<div></div>
+                                :null
                             }
                         </div>
                         <div className="roundSukiHighChart" id={idRound2}></div>
