@@ -56,6 +56,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
         idProgram = `containerProgram${idContainer}`
         idProgram2 = `containerProgram${idContainer+1}`
     }
+    else programs = undefined
 
     return (
         <div className='complexAllInfo' id={'containerTotal'}>
@@ -69,7 +70,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
                             <div className="lineSukiHighChart" id={idLine}></div>
                             {idProgram != null ?
                                 <div className="lineProgramHighChart" id={idProgram}></div>
-                                :<div></div>
+                                :null
                             }
                         </div>
                         <div className="roundSukiHighChart" id={idRound}></div>
