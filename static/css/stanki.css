@@ -564,5 +564,10 @@ input:checked + .slider:before {
     padding: 0;
 }
 
+.hideIndividualAll{
+    visibility: hidden;
+    position: absolute;
+}
+
 
 
