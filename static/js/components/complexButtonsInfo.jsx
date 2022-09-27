@@ -52,7 +52,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
     let idProgram = null;
     let idProgram2 = null;
 
-    if(programs !== undefined){
+    if(programs !== 'undefinedsmena'){
         idProgram = `containerProgram${idContainer}`
         idProgram2 = `containerProgram${idContainer+1}`
     }
