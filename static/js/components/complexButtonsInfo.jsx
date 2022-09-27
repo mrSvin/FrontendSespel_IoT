@@ -42,7 +42,7 @@ function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, progra
     )
 }
 
-function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs = null, laser, service, report, current} ) {
+function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service, report, current} ) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
 
@@ -52,7 +52,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
     let idProgram = null;
     let idProgram2 = null;
 
-    if(programs !== null){
+    if(programs !== undefined){
         idProgram = `containerProgram${idContainer}`
         idProgram2 = `containerProgram${idContainer+1}`
     }
