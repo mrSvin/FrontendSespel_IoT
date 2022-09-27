@@ -53,10 +53,6 @@ function App({ hideLoader }) {
                         <Teamcenter/>
                     </Route>
 
-                    <Route path="/ppc">
-                        <Ppc/>
-                    </Route>
-
                     <Route path="/energyWater">
                         <Suspense fallback={<div>Loading...</div>}>
                             <EnergyWater/>
