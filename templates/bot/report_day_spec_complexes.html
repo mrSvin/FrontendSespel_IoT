@@ -28,43 +28,43 @@
 <div style="display: flex; justify-content: space-around; min-height: 50vh;">
     <div id="container_sum_zagruzka" style="width: 45%"></div>
     <table id='myTable' style="width: 45%">
-            <thead>
-            <tr>
-                <th>Станки</th>
-                <th>Работа</th>
-                <th>Пауза</th>
-                <th>Выключен</th>
-                <th>Авария</th>
-                <th>Нагрузка</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="hit">
-                <td>Пресс ЧПУ для ступиц</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-            </tr>
-            <tr class="hit">
-                <td>ЭПП</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-            </tr>
-            <tr class="hit">
-                <td>СТП13М</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-            </tr>
-            </tbody>
-        </table>    <!--Таблица изменений-->
+        <thead>
+        <tr>
+            <th>Станки</th>
+            <th>Работа</th>
+            <th>Пауза</th>
+            <th>Выключен</th>
+            <th>Авария</th>
+            <th>Нагрузка</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="hit">
+            <td>Пресс ЧПУ для ступиц</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+        </tr>
+        <tr class="hit">
+            <td>ЭПП</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+        </tr>
+        <tr class="hit">
+            <td>СТП13М</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+        </tr>
+        </tbody>
+    </table>    <!--Таблица изменений-->
 </div>  <!--Общая загрузка и количество операций html-->
 
 <div style="display: flex; justify-content: space-around; min-height: 40vh;">
@@ -340,7 +340,7 @@
 
             } // Конец условия, если roundDiagram не пустой
         } // Конец условия, если Diagram[index] не пустой
-    // Конец функции $.map(Diagram)
+        // Конец функции $.map(Diagram)
     });
 
     // Формирование графиков для общих круговой и линейной диаграммы
@@ -404,68 +404,68 @@
     function HighchartsPressEpp(container, lata, seriesName1, seriesName2, tittle, yTittle){
         console.log('Что по данным', lata)
 
-                Highcharts.chart(container, {
-                    chart: {
-                        zoomType: 'x'
+        Highcharts.chart(container, {
+            chart: {
+                zoomType: 'x'
+            },
+            time: {
+                timezoneOffset: new Date().getTimezoneOffset()
+            },
+            title: {
+                text: tittle
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: yTittle
+                }
+            },
+            legend: {
+                reversed: true
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
                     },
-                    time: {
-                        timezoneOffset: new Date().getTimezoneOffset()
+                    marker: {
+                        radius: 2
                     },
-                    title: {
-                        text: tittle
-                    },
-                    xAxis: {
-                        type: 'datetime'
-                    },
-                    yAxis: {
-                        title: {
-                            text: yTittle
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
                         }
                     },
-                    legend: {
-                        reversed: true
-                    },
-                    plotOptions: {
-                        area: {
-                            fillColor: {
-                                linearGradient: {
-                                    x1: 0,
-                                    y1: 0,
-                                    x2: 0,
-                                    y2: 1
-                                },
-                                stops: [
-                                    [0, Highcharts.getOptions().colors[0]],
-                                    [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                                ]
-                            },
-                            marker: {
-                                radius: 2
-                            },
-                            lineWidth: 1,
-                            states: {
-                                hover: {
-                                    lineWidth: 1
-                                }
-                            },
-                            threshold: null
-                        }
-                    },
-                    credits: {
-                        enabled: false
-                    },
+                    threshold: null
+                }
+            },
+            credits: {
+                enabled: false
+            },
 
-                    series: [{
-                        type: 'area',
-                        name: seriesName1,
-                        data: lata[0]
-                    },
-                        {
-                            name: seriesName2,
-                            data: lata[1]
-                        }
-                    ]
-                });
+            series: [{
+                type: 'area',
+                name: seriesName1,
+                data: lata[0]
+            },
+                {
+                    name: seriesName2,
+                    data: lata[1]
+                }
+            ]
+        });
     }
 
     function dayNow() {
@@ -524,46 +524,43 @@
         HighchartsPressEpp(container, [temp, davl], s1, s2, te, tittleY)
     })
 
-    // Задержка.
-    setTimeout(()=>{
-        let pressNames = [2899049, 2899041]
-        let press = Promise.all(pressNames.map((item) => {
-            return fetchRequestPressEpp(item)
-        }));
-        press.then((e,i)=>{
-            let container = 'container_press_davlenie'
 
-            let s1 = 'Давление запрессовки, т'
-            let s2 = 'Заданное давление, т'
-            let te = 'Хронология запрессовок Пресса ЧПУ'
-            let tittleY = 'Давление, тонн'
+    let pressNames = [2899049, 2899041]
+    let press = Promise.all(pressNames.map((item) => {
+        return fetchRequestPressEpp(item)
+    }));
+
+    press.then((e,i)=>{
+        let container = 'container_press_davlenie'
+
+        let s1 = 'Давление запрессовки, т'
+        let s2 = 'Заданное давление, т'
+        let te = 'Хронология запрессовок Пресса ЧПУ'
+        let tittleY = 'Давление, тонн'
 
 
-            let zad = e[0].map(k=>{
-                return k.split(',').map(f=>{
-                    return parseInt(f, 10);
-                })
+        let zad = e[0].map(k=>{
+            return k.split(',').map(f=>{
+                return parseInt(f, 10);
             })
-
-            zad.forEach(e=>{
-                e[0] *= 1000
-            })
-
-            let davl = e[1].map(k=>{
-                return k.split(',').map(f=>{
-                    return parseInt(f, 10);
-                })
-            })
-
-            davl.forEach(e=>{
-                e[0] *= 1000
-            })
-
-            HighchartsPressEpp(container, [davl, zad], s1, s2, te, tittleY)
         })
-    }, 5000)
 
+        zad.forEach(e=>{
+            e[0] *= 1000
+        })
 
+        let davl = e[1].map(k=>{
+            return k.split(',').map(f=>{
+                return parseInt(f, 10);
+            })
+        })
+
+        davl.forEach(e=>{
+            e[0] *= 1000
+        })
+
+        HighchartsPressEpp(container, [davl, zad], s1, s2, te, tittleY)
+    })
 
 
 </script>
