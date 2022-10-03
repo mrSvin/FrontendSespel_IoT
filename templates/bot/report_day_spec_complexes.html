@@ -524,43 +524,46 @@
         HighchartsPressEpp(container, [temp, davl], s1, s2, te, tittleY)
     })
 
+    // Задержка.
+    setTimeout(()=>{
+        let pressNames = [2899049, 2899041]
+        let press = Promise.all(pressNames.map((item) => {
+            return fetchRequestPressEpp(item)
+        }));
+        press.then((e,i)=>{
+            let container = 'container_press_davlenie'
 
-    let pressNames = [2899049, 2899041]
-    let press = Promise.all(pressNames.map((item) => {
-        return fetchRequestPressEpp(item)
-    }));
-
-    press.then((e,i)=>{
-        let container = 'container_press_davlenie'
-
-        let s1 = 'Давление запрессовки, т'
-        let s2 = 'Заданное давление, т'
-        let te = 'Хронология запрессовок Пресса ЧПУ'
-        let tittleY = 'Давление, тонн'
+            let s1 = 'Давление запрессовки, т'
+            let s2 = 'Заданное давление, т'
+            let te = 'Хронология запрессовок Пресса ЧПУ'
+            let tittleY = 'Давление, тонн'
 
 
-        let zad = e[0].map(k=>{
-            return k.split(',').map(f=>{
-                return parseInt(f, 10);
+            let zad = e[0].map(k=>{
+                return k.split(',').map(f=>{
+                    return parseInt(f, 10);
+                })
             })
-        })
 
-        zad.forEach(e=>{
-            e[0] *= 1000
-        })
-
-        let davl = e[1].map(k=>{
-            return k.split(',').map(f=>{
-                return parseInt(f, 10);
+            zad.forEach(e=>{
+                e[0] *= 1000
             })
-        })
 
-        davl.forEach(e=>{
-            e[0] *= 1000
-        })
+            let davl = e[1].map(k=>{
+                return k.split(',').map(f=>{
+                    return parseInt(f, 10);
+                })
+            })
 
-        HighchartsPressEpp(container, [davl, zad], s1, s2, te, tittleY)
-    })
+            davl.forEach(e=>{
+                e[0] *= 1000
+            })
+
+            HighchartsPressEpp(container, [davl, zad], s1, s2, te, tittleY)
+        })
+    }, 500)
+
+
 
 
 </script>
