@@ -26,6 +26,10 @@
  <script src="/js/lib/bootstrap-datepicker.ru.min.js"></script>
 
 <script>
+    function dayNow() {
+        let calendarDate = new Date().toLocaleString()
+        return `${calendarDate.slice(6, 10)}-${calendarDate.slice(3, 5)}-${calendarDate.slice(0, 2)}`
+    }
 
 document.addEventListener("DOMContentLoaded", function(event) {
             $('#datepicker').datepicker({
@@ -58,12 +62,12 @@ $('#datepicker').datepicker({
     orientation: "button"
 });
 
-let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+// let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
 
-date = new Date(datas); // some mock date
-ms = date.getTime() + 86400000;
+// date = new Date(datas); // some mock date
+// ms = date.getTime() + 86400000;
 
-startTime = datas.slice(0, 10)
+startTime = document.querySelector('.form-control').value
 
 data = []
 
@@ -154,9 +158,9 @@ function changePlace(place){
 
     document.getElementsByTagName('h1')[0].innerHTML = place
 
-    datas = $('#datepicker').data().datepicker.viewDate.toISOString();
-    date = new Date(datas); // some mock date
-    startTime = datas.slice(0, 10)
+    // datas = $('#datepicker').data().datepicker.viewDate.toISOString();
+    // date = new Date(datas); // some mock date
+    startTime = document.querySelector('.form-control').value
     stankiRequest = Promise.all(namesToFetch.map(item=>{
     return makeRequest(item, startTime)
   }));
@@ -166,10 +170,6 @@ function changePlace(place){
 
 }
 
-function dayNow() {
-    let calendarDate = new Date().toLocaleString()
-    return `${calendarDate.slice(6, 10)}-${calendarDate.slice(3, 5)}-${calendarDate.slice(0, 2)}`
-}
 </script>
 
 </head>
@@ -231,7 +231,7 @@ function dayNow() {
   //   'CTX510 #5', 'DMC1035 #2', 'DMU50 #5', 'DMU50 #6',
   //   'DMU50 #7','AR55']
   let data = []
-  let date = (new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString()).slice(0, 10);
+  // let date = (new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString()).slice(0, 10);
  
   let exception = []
       // [4,'Ручной режим','#5c7ed0', 'ruchnoi'],];
