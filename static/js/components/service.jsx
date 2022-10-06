@@ -17,7 +17,7 @@ function Service() {
             'dmu50':'dmg_dmu50.png', 'эпп':'epp.png', 'faccin 4':'faccin.png',
             'faccin 10':'faccin_2.png', 'gamma2000':'gamma2000.png', 'комета':'kometa.png',
             'навигатор':'navigator.png', 'нк600':'nk600.png', 'nlx3000':'NLX3000.png',
-            'ntx1000':'ntx1000.png', 'печь':'pech.png', 'пресс':'press.png',
+            'ntx1000':'ntx1000.png', 'печь':'pech.png', 'литейная':'liteyka.png', 'пресс':'press.png',
             'стп':'progress.png', 'макс':'robot.png', 'м710':'robot.png',
             'ртк12c':'robot.png', 'крот':'robot.png', 'пранс':'robot.png',
             'p250':'robot_p250.png', 'sk50':'sk50.png', 'склад':'sklad.png',
