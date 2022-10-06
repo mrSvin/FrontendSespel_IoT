@@ -89,15 +89,17 @@ function parseNameUrl(url) {
 function changePlace(place){
 
     data = []
+    let name = ''
 
     switch(place){
-        case "ОТК":
-        namesToFetch = ['kim', 'nk600']
-        stankiNames = ["CRYSTA-Apex S9168", "НК600"]
+        case "report_day_other":
+        namesToFetch = ['kim', 'nk600', 'sclad_meh', 'pech_nerg', 'liteyka_big', 'liteyka_medium', 'faccin_1','faccin_2']
+        stankiNames = ["CRYSTA-Apex S9168", "НК600", 'Склад Мех. цеха',  "Печь Индукционная", "Литейная машина большая", 'Литейная машина средняя', "FACCIN 4", "FACCIN 10"]
         exception = [[0,'Ручной режим','#5c7ed0', 'ruchnoi'],];
+        name = 'ОТК, Склады, Литейка, Гибка'
         break;
 
-        case "Мех.уч.2 пл.":
+        case "report_day_meh2":
         namesToFetch = ['uvf5220', 'progress', 'ntx1000_2',
     'sk50', 'apec', 'dmg_dmu50_3', 'dmg_dmu50_4',
     'dmg_ctx310_2', 'dmg_ctx510_2', 'dmg_ctx510_3',
@@ -110,53 +112,59 @@ function changePlace(place){
     'CTX510 #5', 'DMC1035 #2', 'DMU50 #5', 'DMU50 #6',
     'DMU50 #7','AR55']
         exception = [[4,'Ручной режим','#5c7ed0', 'ruchnoi'],];
-        break;  
+        name = 'Станки Мех.участок 2 площадка'
+        break;
 
-        case "Резка":
+        case "report_day_navigators":
         namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
         stankiNames = ["Навигатор 1", "Навигатор 2", "Навигатор 3", "TruLaser", "Комета 1", "Комета 2", "Комета 3"]
         exception = null;
+        name = 'Резка'
         break;
 
-        case "Мех.уч.1 пл.":
+        case "report_day_meh1":
         namesToFetch = ['uvf_1', 'uvf_2', 'ntx1000', 'nlx3000', 'dmg_gamma2000', 'dmg_ctx650', 'dmg_dmf260', 'dmg_dmu50_1', 'dmg_dmu50_2', 'dmg_dmc1035', 'dmg_ctx310_1',
         'dmg_ctx510_1']
         stankiNames = ["УВФ-1 1", "УВФ-1 2", "NTX1000", "NLX3000", "GAMMA2000", "CTX650", "DMF260", "DMU50 1", "DMU50 2", "DMC1035", "CTX310 1", "CTX510 1"]
         exception = null;
+        name = 'Станки Мех.участок 1 площадка'
         break;
         
-        case "Роботы":
+        case "report_day_robots":
         namesToFetch = ['maks_1', 'maks_2', 'm710', 'rtk12c', 'p250', 'krot', 'prans']
         stankiNames = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
         exception = null;
+        name = 'Роботы'
         break;
 
-        case "Спец. комплексы":
-        namesToFetch = ['press', 'epp', 'stp13m']
-        stankiNames = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М"]
-        exception = null;
-        break;  
+        // case "Спец. комплексы":
+        // namesToFetch = ['press', 'epp', 'stp13m']
+        // stankiNames = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М"]
+        // exception = null;
+        // break;
 
-        case "Склады":
-        namesToFetch = ['sclad_meh']
-        stankiNames = ["Склад Мех. цеха"]
-        exception = null;
-        break;
+        // case "Склады":
+        // namesToFetch = ['sclad_meh']
+        // stankiNames = ["Склад Мех. цеха"]
+        // exception = null;
+        // break;
 
-        case "Литьё":
-        namesToFetch = ['pech_nerg', 'liteyka_big', 'liteyka_medium']
-        stankiNames = ["Печь Индукционная", "Литейная машина большая", 'Литейная машина средняя']
-        exception = null;
-        break;    
+        // case "Литьё":
+        // namesToFetch = ['pech_nerg', 'liteyka_big', 'liteyka_medium']
+        // stankiNames = ["Печь Индукционная", "Литейная машина большая", 'Литейная машина средняя']
+        // exception = null;
+        // break;
 
-        case "Гибка":
-        namesToFetch = ['faccin_1','faccin_2']
-        stankiNames = ["FACCIN 4", "FACCIN 10"]
-        exception = null;
-        break;    
+        // case "Гибка":
+        // namesToFetch = ['faccin_1','faccin_2']
+        // stankiNames = ["FACCIN 4", "FACCIN 10"]
+        // exception = null;
+        // break;
 }
 
-    document.getElementsByTagName('h1')[0].innerHTML = place
+
+
+    document.getElementsByTagName('h1')[0].innerHTML = name
 
     // datas = $('#datepicker').data().datepicker.viewDate.toISOString();
     // date = new Date(datas); // some mock date
