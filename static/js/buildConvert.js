@@ -1213,6 +1213,30 @@ function getAllStankiData(){
         state: true,
     }
 
+    let liteyka_big = {
+        buttonNames: {
+            name: "Литейная машина большая",
+            serviceName: "Литейная машина большая",
+        },
+        complexImg: "../images/liteyka.png",
+        complexRequest: 'liteyka_big',
+        buttonsVrs: [-125, 180, 'url(../images/liteyka.png) no-repeat', "../images/ceh_1.png", 70, "100%"],
+        size: 'ceh1',
+        state: true,
+    }
+
+    let liteyka_medium = {
+        buttonNames: {
+            name: "Литейная машина средняя",
+            serviceName: "Литейная машина средняя",
+        },
+        complexImg: "../images/liteyka.png",
+        complexRequest: 'liteyka_medium',
+        buttonsVrs: [-125, 180, 'url(../images/liteyka.png) no-repeat', "../images/ceh_1.png", 70, "100%"],
+        size: 'ceh1',
+        state: true,
+    }
+
     let faccin_1 = {
         buttonNames: {
             name: "FACCIN 4",
@@ -1278,7 +1302,7 @@ function getAllStankiData(){
             placeState: true,
         },
         'Литьё': {
-            stanki: {pech_nerg},
+            stanki: {pech_nerg, liteyka_big, liteyka_medium},
             placeState: true,
         },
         'Гибка': {
