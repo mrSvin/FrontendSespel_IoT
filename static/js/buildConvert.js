@@ -1184,7 +1184,7 @@ function getAllStankiData(){
         },
         complexImg: "../images/stendResource.png",
         complexRequest: 'stend_resources',
-        buttonsVrs: [-310, 550, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        buttonsVrs: [-560, 15, 'url(../images/stp13m.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
         size: 'sborCeh',
         state: true,
     }
