@@ -1218,9 +1218,10 @@ function getAllStankiData(){
             name: "Литейная машина большая",
             serviceName: "Литейная машина большая",
         },
+
         complexImg: "../images/liteyka.png",
         complexRequest: 'liteyka_big',
-        buttonsVrs: [-125, 180, 'url(../images/liteyka.png) no-repeat', "../images/ceh_1.png", 70, "100%"],
+        buttonsVrs: [-255, 1015, 'url(../images/liteyka.png) no-repeat', "../images/ceh_1.png", 70, "100%"],
         size: 'ceh1',
         state: true,
     }
@@ -1232,7 +1233,7 @@ function getAllStankiData(){
         },
         complexImg: "../images/liteyka.png",
         complexRequest: 'liteyka_medium',
-        buttonsVrs: [-125, 180, 'url(../images/liteyka.png) no-repeat', "../images/ceh_1.png", 70, "100%"],
+        buttonsVrs: [-222, 839, 'url(../images/liteyka.png) no-repeat', "../images/ceh_1.png", 70, "100%"],
         size: 'ceh1',
         state: true,
     }
