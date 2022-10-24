@@ -293,7 +293,7 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
                 }
 
                 // Если время 00:00 текущего дня меньше следующей переменной и текущая переменная меньше 00:00 текущего дня, и j четная, то
-                if ((new Date(startTime + ' 00:00:00') < new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') > new Date(stanok[i][j]).getTime()) && j % 2 == 0) {
+                if ((new Date(startTime + ' 00:00:00') <= new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') >= new Date(stanok[i][j]).getTime()) && j % 2 == 0) {
                     // Вставить в измененный массив переменную
                     stanok_change[i].push(stanok[i][j])
                     // и 23:59
@@ -319,7 +319,7 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
             // цикл пробежки по всему массиву
             for (let j = 0; stanok_change[i].length > j; j++) {
                 // Если время больше 19:00 прошлого дня и меньше 7 утра следующего дня то:
-                if ((new Date(stanok_change[i][j]).getTime() > new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') > new Date(stanok_change[i][j]).getTime())) {
+                if ((new Date(stanok_change[i][j]).getTime() >= new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') >= new Date(stanok_change[i][j]).getTime())) {
 
                     // Если j нечетный, а смена все еще пустая
                     if (smena_1[i].length == 0 && j % 2 == 1) {
@@ -335,7 +335,7 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
                     smena_1[i].push(stanok_change[i][j])
 
                     // Если время больше 00:00 текущей даты
-                    if (new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 00:00:00').getTime()) {
+                    if (new Date(stanok_change[i][j]).getTime() >= new Date(startTime + ' 00:00:00').getTime()) {
                         // И данный массив работа и j четный
                         if (i == 0 && j % 2 == 0) {
                             // То пишем имя программы в массив программ для первой смены
@@ -350,7 +350,7 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
                     }
                 }
                 // Иначе если время входит в промежоток от 07:00 до 19:00 теккущего дня
-                else if ((new Date(stanok_change[i][j]).getTime() > new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') > new Date(stanok_change[i][j]).getTime())) {
+                else if ((new Date(stanok_change[i][j]).getTime() >= new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') >= new Date(stanok_change[i][j]).getTime())) {
                     // Если массив второй смены пустой, но j нечетный
                     if (smena_2[i].length == 0 && j % 2 == 1) {
                         // то записать 07:00
