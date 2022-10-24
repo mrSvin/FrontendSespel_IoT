@@ -157,6 +157,14 @@ function Menubar() {
                 <h2 className="buttonName">Teamcenter</h2>
             </Link>
 
+            <Link to="/skud/2ploshadka" className="container-home">
+                <div className="icon-container">
+                    <p>Система контроля и управления доступом</p>
+                    <div className="intra"></div>
+                </div>
+                <h2 className="buttonName">СКУД</h2>
+            </Link>
+
         </div>
     )
 

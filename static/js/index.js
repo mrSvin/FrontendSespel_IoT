@@ -99,6 +99,10 @@ function App({ hideLoader }) {
                         <Beacon/>
                     </Route>
 
+                    <Route path="/skud">
+                        <Skud/>
+                    </Route>
+
                     <Route exact path="/">
                         <Home/>
                     </Route>
