@@ -1279,12 +1279,15 @@ function highChartSkud(namePerson, data, idContainer) {
                 pointWidth: 30,
                 colorByPoint: false,
                 color: '#38e817',
-                // tooltip: {
-                //     pointFormat: '<b>Программа: {point.programname}</b>'
-                // },
+                tooltip: {
+                    pointFormat: '<b>Инфа: {point.status}</b>'
+                },
                 data: data,
             },
         ],
+        legend: {
+            enabled: false
+        },
 
     });
 }

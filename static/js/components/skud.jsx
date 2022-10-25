@@ -3,7 +3,7 @@ function Skud() {
     function parseLinearSkud(arrayParse, y, date, inOut) {
         var arraySave = [] // Массив, который будет заполняться
 
-        date = (dayNow() == date)? dayTimeNow() : `${date} + 23:59:59`
+        date = (dayNow() == date)? dayTimeNow() : `${date} 23:59:59`
 
         if (arrayParse.length == 1) {
             arraySave.push({
@@ -12,7 +12,7 @@ function Skud() {
                 x: (new Date(arrayParse[0])).getTime(),
                 x2: (new Date(date)).getTime(),
                 y: y,
-                state: inOut[0]
+                status: inOut[0]
             })
         } else {
             for (let i = 0; i < arrayParse.length; i++) {
@@ -23,7 +23,7 @@ function Skud() {
                         x: (new Date(arrayParse[i])).getTime(),
                         x2: (new Date(date)).getTime(),
                         y: y,
-                        state: inOut[i]
+                        status: inOut[i]
                     })
                 } else {
                     arraySave.push({
@@ -32,7 +32,7 @@ function Skud() {
                         x: (new Date(arrayParse[i])).getTime(),
                         x2: (new Date(arrayParse[i + 1])).getTime(),
                         y: y,
-                        state: inOut[i]
+                        status: inOut[i]
                     })
                 }
             }
@@ -69,7 +69,7 @@ function Skud() {
                 Object.keys(userData).forEach((e, i) => {
                     userData[e].logtime = parseLinearSkud(userData[e].logtime, 0, date, userData[e].statusInOut)
                     userData[e].logtime.forEach(parsedDate=>{
-                        userData[e]['workTime'] += parsedDate.state == 'input'? new Date(parsedDate.x2).getTime()-new Date(parsedDate.x).getTime(): 0
+                        userData[e]['workTime'] += parsedDate.status == 'input'? new Date(parsedDate.x2).getTime()-new Date(parsedDate.x).getTime(): 0
                     })
                     userData[e]['workTime'] = msToTime(userData[e]['workTime'])
                 })
