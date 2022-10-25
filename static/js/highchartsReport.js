@@ -1196,3 +1196,101 @@ function highChartProgram(arrayProgram, idContainer = 1) {
     });
 
 }
+
+function highChartSkud(namePerson, data, idContainer) {
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран',
+
+            downloadCSV: "Скачать CSV",
+            downloadXLS: "Скачать XLS",
+            viewData: 'Режим таблицы',
+            hideData: "Скрыть таблицу"
+        },
+        plotOptions: {
+            xrange: {
+                grouping: false
+            }
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart(`containerLine${idContainer}`, {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            plotBorderColor: 'gray',
+            type: 'xrange'
+        },
+        title: {
+            text: 'Работа оборудования',
+            style: {
+                color: '#FFF'
+            }
+        },
+        colors: ['#e81e1d', '#000000', '#ffea32', '#207210', '#38e817'],
+
+
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                style: {
+                    color: '#FFF'
+                }
+            },
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            categories: [nagruzkaName, 'Работа', 'Ожидание', 'Выключен', 'В аварии'],
+            reversed: true,
+            labels: {
+                style: {
+                    color: '#FFF'
+                },
+            }
+        },
+        credits: {
+            enabled: false
+        },
+
+        series: [
+            {
+                name: namePerson,
+                // borderColor: 'gray',
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#38e817',
+                // tooltip: {
+                //     pointFormat: '<b>Программа: {point.programname}</b>'
+                // },
+                data: data,
+            },
+        ],
+        legend: {
+            itemStyle: {
+                color: '#FFF'
+            }
+        }
+
+
+    });
+}
