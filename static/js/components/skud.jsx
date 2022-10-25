@@ -57,7 +57,7 @@ function Skud() {
                         POS: data.POS[i],
                         logtime: [],
                         statusInOut: [],
-
+                        workTime:0,
                     }
                 }
 
@@ -66,21 +66,15 @@ function Skud() {
                     userData[data.username[i]].statusInOut.push(data.statusInOut[i])
                 })
 
-                console.log(userData)
-
                 Object.keys(userData).forEach((e, i) => {
-                    let timer = 0
                     userData[e].logtime = parseLinearSkud(userData[e].logtime, 0, date, userData[e].statusInOut)
-                    console.log(e, userData[e].logtime)
-
-                    userData[e].logtime.forEach(e=>{
-                        timer += e.state == 'input'? new Date(e.x2).getTime()-new Date(e.x).getTime(): 0
+                    userData[e].logtime.forEach(parsedDate=>{
+                        userData[e]['workTime'] += parsedDate.state == 'input'? new Date(parsedDate.x2).getTime()-new Date(parsedDate.x).getTime(): 0
                     })
-
-                    console.log(msToTime(timer))
+                    userData[e]['workTime'] = msToTime(userData[e]['workTime'])
                 })
-
-                return data
+                console.log('Возвращаю', userData)
+                return userData
             })
     }
 
@@ -101,13 +95,14 @@ function Skud() {
     let [date, setDate] = useState(dayNow());
 
     useEffect(() => {
-        let test = {Алексей: [1, 2, 5], Дмитрий: [4, 5, 6], Саня: [7, 8, 1]};
-        setHumans(test);
+        let promise = fetchRequestSkud()
+        promise.then(data=>{
+            setHumans(data);
+        })
 
         console.log("Проверка, создались ли контейнеры", document.getElementsByClassName("skudHigcharts"));
-        console.log('Типо рисую графики')
 
-        fetchRequestSkud()
+
     }, []);
 
     function newDate(dateInput) {
@@ -141,7 +136,7 @@ function Skud() {
                 Object.keys(humans).map((e, i) => {
                     return (
                         <div key={i} id={"container" + (i + 1)} className="skudHigcharts">
-                            {humans[e]}
+                            {e}{humans[e]['workTime']}
                         </div>
                     );
                 }) : null
