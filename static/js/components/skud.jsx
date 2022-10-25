@@ -10,7 +10,7 @@ function Skud() {
                 // x: arrayParse[0],
                 // x2: date,
                 x: (new Date(arrayParse[0])).getTime(),
-                x2: new Date(date).getTime(),
+                x2: (new Date(date)).getTime(),
                 y: y,
                 state: inOut[0]
             })
@@ -98,6 +98,7 @@ function Skud() {
         let promise = fetchRequestSkud()
         promise.then(data=>{
             setHumans(data);
+            return data
         })
         .then(data=>{
             Object.keys(data).forEach((e, i) => {

@@ -1231,7 +1231,9 @@ function highChartSkud(namePerson, data, idContainer) {
         }
     });
 
-    Highcharts.chart(`containerLine${idContainer}`, {
+    console.log('.')
+
+    Highcharts.chart(idContainer, {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -1240,13 +1242,12 @@ function highChartSkud(namePerson, data, idContainer) {
             type: 'xrange'
         },
         title: {
-            text: 'Работа оборудования',
+            text: namePerson,
             style: {
                 color: '#FFF'
             }
         },
         colors: ['#e81e1d', '#000000', '#ffea32', '#207210', '#38e817'],
-
 
         xAxis: {
             type: 'datetime',
@@ -1260,7 +1261,6 @@ function highChartSkud(namePerson, data, idContainer) {
             title: {
                 text: ''
             },
-            categories: [nagruzkaName, 'Работа', 'Ожидание', 'Выключен', 'В аварии'],
             reversed: true,
             labels: {
                 style: {
@@ -1285,12 +1285,6 @@ function highChartSkud(namePerson, data, idContainer) {
                 data: data,
             },
         ],
-        legend: {
-            itemStyle: {
-                color: '#FFF'
-            }
-        }
-
 
     });
 }
