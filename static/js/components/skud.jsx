@@ -7,10 +7,10 @@ function Skud() {
 
         if (arrayParse.length == 1) {
             arraySave.push({
-                x: arrayParse[0],
-                x2: date,
-                // x: (new Date(arrayParse[0])).getTime(),
-                // x2: (new Date(date).getTime() + 10000,
+                // x: arrayParse[0],
+                // x2: date,
+                x: (new Date(arrayParse[0])).getTime(),
+                x2: new Date(date).getTime(),
                 y: y,
                 state: inOut[0]
             })
@@ -18,19 +18,19 @@ function Skud() {
             for (let i = 0; i < arrayParse.length; i++) {
                 if (i == arrayParse.length - 1) {
                     arraySave.push({
-                        x: arrayParse[i],
-                        x2: date,
-                        // x: (new Date(arrayParse[i])).getTime(),
-                        // x2: (new Date(date)).getTime() + 10000,
+                        // x: arrayParse[i],
+                        // x2: date,
+                        x: (new Date(arrayParse[i])).getTime(),
+                        x2: (new Date(date)).getTime(),
                         y: y,
                         state: inOut[i]
                     })
                 } else {
                     arraySave.push({
-                        x: arrayParse[i],
-                        x2: arrayParse[i + 1],
-                        // x: (new Date(arrayParse[i])).getTime(),
-                        // x2: (new Date(arrayParse[i + 1])).getTime(),
+                        // x: arrayParse[i],
+                        // x2: arrayParse[i + 1],
+                        x: (new Date(arrayParse[i])).getTime(),
+                        x2: (new Date(arrayParse[i + 1])).getTime(),
                         y: y,
                         state: inOut[i]
                     })
@@ -99,6 +99,11 @@ function Skud() {
         promise.then(data=>{
             setHumans(data);
         })
+        .then(data=>{
+            Object.keys(data).forEach((e, i) => {
+                highChartSkud(e, data[e]['logtime'], "container" + (i + 1))
+            })
+        })
 
         console.log("Проверка, создались ли контейнеры", document.getElementsByClassName("skudHigcharts"));
 
@@ -135,8 +140,9 @@ function Skud() {
             {Object.keys(humans).length !== 0 ?
                 Object.keys(humans).map((e, i) => {
                     return (
-                        <div key={i} id={"container" + (i + 1)} className="skudHigcharts">
-                            {e}{humans[e]['workTime']}
+                        <div>
+                            <div key={i} id={"container" + (i + 1)} className="skudHigcharts"></div>
+                            <p>{humans[e]['workTime']}</p>
                         </div>
                     );
                 }) : null
