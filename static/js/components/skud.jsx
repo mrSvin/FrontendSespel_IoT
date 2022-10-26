@@ -127,7 +127,7 @@ function Skud() {
             let arrayNames = []
             let arrayData = []
             Object.keys(data).forEach((e, i) => {
-                arrayNames.push(e)
+                arrayNames.push(e+data[e]['workTime'])
                 arrayData.push(data[e]['logtime'])
                 // highChartSkud(e, data[e]['logtime'], "container" + (i + 1))
             })
@@ -204,15 +204,13 @@ function Skud() {
 
             <div id={"containerSkud"} style={height} className="skudHigcharts"></div>
 
-            {Object.keys(humans).length !== 0 ?
-                Object.keys(humans).map((e, i) => {
-                    return (
-                        <div key={i}>
-                            <p>{e}{humans[e]['workTime']}</p>
-                        </div>
-                    );
-                }) : null
-            }
+            {/*{Object.keys(humans).length !== 0 ?*/}
+            {/*    Object.keys(humans).map((e) => {*/}
+            {/*        return (*/}
+            {/*                <p className='fioTime'>{e}{humans[e]['workTime']}</p>*/}
+            {/*        );*/}
+            {/*    }) : null*/}
+            {/*}*/}
         </div>
     );
 }
