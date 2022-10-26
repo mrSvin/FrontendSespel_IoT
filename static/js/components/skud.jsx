@@ -7,46 +7,46 @@ function Skud() {
 
         if (arrayParse.length == 1) {
             arraySave.push({
-                // x: arrayParse[0],
-                // x2: date,
-                x: new Date(arrayParse[0].slice(0,10)+' 00:00:00').getTime(),
-                x2: (new Date(arrayParse[0])).getTime(),
+                x: arrayParse[0].slice(0,10)+' 00:00:00',
+                x2: arrayParse[0],
+                // x: new Date(arrayParse[0].slice(0,10)+' 00:00:00').getTime(),
+                // x2: (new Date(arrayParse[0])).getTime(),
                 y: y,
                 status: 'output'
             })
             arraySave.push({
-                // x: arrayParse[0],
-                // x2: date,
-                x: (new Date(arrayParse[0])).getTime(),
-                x2: (new Date(date)).getTime(),
+                x: arrayParse[0],
+                x2: date,
+                // x: (new Date(arrayParse[0])).getTime(),
+                // x2: (new Date(date)).getTime(),
                 y: y,
                 status: inOut[0]
             })
         } else {
             arraySave.push({
-                // x: arrayParse[0],
-                // x2: date,
-                x: new Date(arrayParse[0].slice(0,10)+' 00:00:00').getTime(),
-                x2: (new Date(arrayParse[0])).getTime(),
+                x: arrayParse[0].slice(0,10)+' 00:00:00',
+                x2: arrayParse[0],
+                // x: new Date(arrayParse[0].slice(0,10)+' 00:00:00').getTime(),
+                // x2: (new Date(arrayParse[0])).getTime(),
                 y: y,
                 status: 'output'
             })
             for (let i = 0; i < arrayParse.length; i++) {
                 if (i == arrayParse.length - 1) {
                     arraySave.push({
-                        // x: arrayParse[i],
-                        // x2: date,
-                        x: (new Date(arrayParse[i])).getTime(),
-                        x2: (new Date(date)).getTime(),
+                        x: arrayParse[i],
+                        x2: date,
+                        // x: (new Date(arrayParse[i])).getTime(),
+                        // x2: (new Date(date)).getTime(),
                         y: y,
                         status: inOut[i]
                     })
                 } else {
                     arraySave.push({
-                        // x: arrayParse[i],
-                        // x2: arrayParse[i + 1],
-                        x: (new Date(arrayParse[i])).getTime(),
-                        x2: (new Date(arrayParse[i + 1])).getTime(),
+                        x: arrayParse[i],
+                        x2: arrayParse[i + 1],
+                        // x: (new Date(arrayParse[i])).getTime(),
+                        // x2: (new Date(arrayParse[i + 1])).getTime(),
                         y: y,
                         status: inOut[i]
                     })
@@ -85,11 +85,15 @@ function Skud() {
                 Object.keys(userData).forEach((e, i) => {
                     userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
                     userData[e].logtime.forEach(parsedDate=>{
+
+                        if(parsedDate.status == 'input') {
+                            console.log(parsedDate.x, ' - ', parsedDate.x2)
+                        }
+
                         userData[e]['workTime'] += parsedDate.status == 'input'? new Date(parsedDate.x2).getTime()-new Date(parsedDate.x).getTime(): 0
                     })
                     userData[e]['workTime'] = msToTime(userData[e]['workTime'])
                 })
-                console.log('Возвращаю', userData)
                 return userData
             })
     }
@@ -127,9 +131,8 @@ function Skud() {
             let arrayNames = []
             let arrayData = []
             Object.keys(data).forEach((e, i) => {
-                arrayNames.push(e+data[e]['workTime'])
+                arrayNames.push(e + ' ' + data[e]['workTime'])
                 arrayData.push(data[e]['logtime'])
-                // highChartSkud(e, data[e]['logtime'], "container" + (i + 1))
             })
 
             let series = []
@@ -162,9 +165,7 @@ function Skud() {
                         data: output,
                     })
             })
-
-            document.getElementsByClassName('skudHigcharts')
-            highChartSkud(series, arrayNames)
+            // highChartSkud(series, arrayNames)
         })
 
     }, [date, placeIndex]);
