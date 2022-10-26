@@ -94,7 +94,7 @@ function Skud() {
             })
     }
 
-    let places = [
+    let placesAll = [
         'Ленинградская 36, Дверь',
         'Ленинградская 36, турникет',
         'База1, КПП-1, Турникет1',
@@ -107,15 +107,18 @@ function Skud() {
         'пластиковая дверь',
     ]
 
+    let places = ['База1, КПП-1, Турникет1', 'База 2, КПП2-1', 'Ленинградская 36, Дверь']
+
     const [humans, setHumans] = useState({});
     let [date, setDate] = useState(dayNow());
+    let [placeIndex, setPlaceIndex] = useState(1)
 
     let height = {
         height: 52 * Object.keys(humans).length
     };
 
     useEffect(() => {
-        let promise = fetchRequestSkud(date)
+        let promise = fetchRequestSkud(date, places[placeIndex])
         promise.then(data=>{
             setHumans(data);
             return data
@@ -164,7 +167,7 @@ function Skud() {
             highChartSkud(series, arrayNames)
         })
 
-    }, [date]);
+    }, [date, placeIndex]);
 
     function newDate(dateInput) {
         setDate(dateInput)
@@ -176,15 +179,21 @@ function Skud() {
             <div className="buttons-otchet">
 
                 <Link to={`/skud/1ploshadka`}>
-                    <div className="menuNoSelect">Первая площадка</div>
+                    <div className={placeIndex==0?'menuSelect':'menuNoSelect'} onClick={()=>{
+                        setPlaceIndex(0)
+                    }}>Первая площадка</div>
                 </Link>
 
                 <Link to={`/skud/2ploshadka`}>
-                    <div className="menuSelect">Вторая площадка</div>
+                    <div className={placeIndex==1?'menuSelect':'menuNoSelect'} onClick={()=>{
+                        setPlaceIndex(1)
+                    }}>Вторая площадка</div>
                 </Link>
 
                 <Link to={`/skud/office`}>
-                    <div className="menuNoSelect">Офис</div>
+                    <div className={placeIndex==2?'menuSelect':'menuNoSelect'} onClick={()=>{
+                        setPlaceIndex(2)
+                    }}>Офис</div>
                 </Link>
 
             </div>
