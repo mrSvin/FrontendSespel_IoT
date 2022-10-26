@@ -43,7 +43,7 @@ function Skud() {
         return arraySave
     }
 
-    function fetchRequestSkud(date = '2022-10-24', place = 'Ленинградская 36, Дверь') {
+    function fetchRequestSkud(date = '2022-10-25', place = 'База1, КПП-1, Турникет1') {
 
         return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_device:${place}`, {method: 'GET'})
             .then((response) => response.json())
@@ -67,7 +67,7 @@ function Skud() {
                 })
 
                 Object.keys(userData).forEach((e, i) => {
-                    userData[e].logtime = parseLinearSkud(userData[e].logtime, 0, date, userData[e].statusInOut)
+                    userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
                     userData[e].logtime.forEach(parsedDate=>{
                         userData[e]['workTime'] += parsedDate.status == 'input'? new Date(parsedDate.x2).getTime()-new Date(parsedDate.x).getTime(): 0
                     })
@@ -94,6 +94,10 @@ function Skud() {
     const [humans, setHumans] = useState({});
     let [date, setDate] = useState(dayNow());
 
+    let height = {
+        height: 52 * humans.length
+    };
+
     useEffect(() => {
         let promise = fetchRequestSkud()
         promise.then(data=>{
@@ -101,13 +105,48 @@ function Skud() {
             return data
         })
         .then(data=>{
+            let arrayNames = []
+            let arrayData = []
             Object.keys(data).forEach((e, i) => {
-                highChartSkud(e, data[e]['logtime'], "container" + (i + 1))
+                arrayNames.push(e)
+                arrayData.push(data[e]['logtime'])
+                // highChartSkud(e, data[e]['logtime'], "container" + (i + 1))
             })
+
+            let series = []
+                arrayData.forEach((e,i)=>{
+
+                    let input = []
+                    let output = []
+
+                    e.forEach(k=>{
+                        if(k.status == 'input') input.push(k)
+                        else output.push(k)
+                    })
+
+                    series.push({
+                        pointWidth: 30,
+                        colorByPoint: false,
+                        color: '#38e817',
+                        tooltip: {
+                            pointFormat: '<b>Работает</b>'
+                        },
+                        data: input,
+                    })
+                    series.push({
+                        pointWidth: 30,
+                        colorByPoint: false,
+                        color: '#e81e1d',
+                        tooltip: {
+                            pointFormat: '<b>Отдыхает</b>'
+                        },
+                        data: output,
+                    })
+            })
+
+            document.getElementsByClassName('skudHigcharts')
+            highChartSkud(series, arrayNames)
         })
-
-        console.log("Проверка, создались ли контейнеры", document.getElementsByClassName("skudHigcharts"));
-
 
     }, []);
 
@@ -138,11 +177,12 @@ function Skud() {
                 <DayCalendar newDate={newDate} date={date}/>
             </div>
 
+            <div id={"containerSkud"} style={height} className="skudHigcharts"></div>
+
             {Object.keys(humans).length !== 0 ?
                 Object.keys(humans).map((e, i) => {
                     return (
-                        <div>
-                            <div key={i} id={"container" + (i + 1)} className="skudHigcharts"></div>
+                        <div key={i}>
                             <p>{humans[e]['workTime']}</p>
                         </div>
                     );

@@ -1197,7 +1197,7 @@ function highChartProgram(arrayProgram, idContainer = 1) {
 
 }
 
-function highChartSkud(namePerson, data, idContainer) {
+function highChartSkud(series,generalDiagramNames) {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -1233,7 +1233,7 @@ function highChartSkud(namePerson, data, idContainer) {
 
     console.log('.')
 
-    Highcharts.chart(idContainer, {
+    Highcharts.chart('containerSkud', {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -1242,12 +1242,12 @@ function highChartSkud(namePerson, data, idContainer) {
             type: 'xrange'
         },
         title: {
-            text: namePerson,
+            text: 'Рабочее время',
             style: {
                 color: '#FFF'
             }
         },
-        colors: ['#e81e1d', '#000000', '#ffea32', '#207210', '#38e817'],
+        // colors: ['#e81e1d', '#000000', '#ffea32', '#207210', '#38e817'],
 
         xAxis: {
             type: 'datetime',
@@ -1261,6 +1261,7 @@ function highChartSkud(namePerson, data, idContainer) {
             title: {
                 text: ''
             },
+            categories: generalDiagramNames,
             reversed: true,
             labels: {
                 style: {
@@ -1272,19 +1273,7 @@ function highChartSkud(namePerson, data, idContainer) {
             enabled: false
         },
 
-        series: [
-            {
-                name: namePerson,
-                // borderColor: 'gray',
-                pointWidth: 30,
-                colorByPoint: false,
-                color: '#38e817',
-                tooltip: {
-                    pointFormat: '<b>Инфа: {point.status}</b>'
-                },
-                data: data,
-            },
-        ],
+        series: series,
         legend: {
             enabled: false
         },
