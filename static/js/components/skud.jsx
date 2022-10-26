@@ -9,12 +9,28 @@ function Skud() {
             arraySave.push({
                 // x: arrayParse[0],
                 // x2: date,
+                x: new Date(arrayParse[0].slice(0,10)+' 00:00:00').getTime(),
+                x2: (new Date(arrayParse[0])).getTime(),
+                y: y,
+                status: 'output'
+            })
+            arraySave.push({
+                // x: arrayParse[0],
+                // x2: date,
                 x: (new Date(arrayParse[0])).getTime(),
                 x2: (new Date(date)).getTime(),
                 y: y,
                 status: inOut[0]
             })
         } else {
+            arraySave.push({
+                // x: arrayParse[0],
+                // x2: date,
+                x: new Date(arrayParse[0].slice(0,10)+' 00:00:00').getTime(),
+                x2: (new Date(arrayParse[0])).getTime(),
+                y: y,
+                status: 'output'
+            })
             for (let i = 0; i < arrayParse.length; i++) {
                 if (i == arrayParse.length - 1) {
                     arraySave.push({
@@ -43,7 +59,7 @@ function Skud() {
         return arraySave
     }
 
-    function fetchRequestSkud(date = '2022-10-25', place = 'База1, КПП-1, Турникет1') {
+    function fetchRequestSkud(date = '2022-10-25', place = 'Ленинградская 36, Дверь') {
 
         return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_device:${place}`, {method: 'GET'})
             .then((response) => response.json())
@@ -99,7 +115,7 @@ function Skud() {
     };
 
     useEffect(() => {
-        let promise = fetchRequestSkud()
+        let promise = fetchRequestSkud(date)
         promise.then(data=>{
             setHumans(data);
             return data
@@ -136,9 +152,9 @@ function Skud() {
                     series.push({
                         pointWidth: 30,
                         colorByPoint: false,
-                        color: '#e81e1d',
+                        color: '#ffea32',
                         tooltip: {
-                            pointFormat: '<b>Отдыхает</b>'
+                            pointFormat: '<b>Нет на месте</b>'
                         },
                         data: output,
                     })
@@ -183,7 +199,7 @@ function Skud() {
                 Object.keys(humans).map((e, i) => {
                     return (
                         <div key={i}>
-                            <p>{humans[e]['workTime']}</p>
+                            <p>{e}{humans[e]['workTime']}</p>
                         </div>
                     );
                 }) : null
