@@ -101,8 +101,6 @@ function Skud() {
     }
 
     function dublicateFilter(arrayData, arrayInOut){
-        console.log('Данные до фильтра',arrayData, arrayInOut)
-
         let filterData = []
         let filterInOut = []
 
@@ -124,13 +122,15 @@ function Skud() {
         let filterData = filterArrays[0]
         let filterInOut = filterArrays[1]
 
+        let currentDate = dayNow()
+
         let startTime = ''
         let endTime = ''
 
         switch (typeTime) {
             case 8:
                 startTime = '00:00:00'
-                endTime = '23:59:59'
+                endTime = (currentDate == filterData[filterData.length-1].slice(0,10))? timeNow() :'23:59:59'
                 break;
             case 1:
                 break;
@@ -138,13 +138,16 @@ function Skud() {
                 break;
             default:
                 startTime = '00:00:00'
-                endTime = '23:59:59'
+                endTime = (currentDate == filterData[filterData.length-1].slice(0,10))? timeNow() :'23:59:59'
                 break
         }
 
         if(filterInOut[0] =='output'){
             filterData.unshift(filterData[0].slice(0,10) + ' ' + startTime)
-        } else filterData.push(filterData[0].slice(0,10) + ' ' + endTime)
+        }
+        if(filterInOut[filterInOut.length-1] == 'input'){
+            filterData.push(filterData[0].slice(0,10) + ' ' + endTime)
+        }
 
         return filterData
     }
@@ -177,7 +180,7 @@ function Skud() {
                     let filterArrays = dublicateFilter(userData[e].logtime, userData[e].statusInOut)
                     let startOrEndArray = addStartOrEnd(filterArrays)
 
-                    console.log('Массив после добавления начала или конца',startOrEndArray )
+                    console.log('Тест',startOrEndArray )
 
 
                     // userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
