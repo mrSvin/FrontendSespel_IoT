@@ -116,7 +116,35 @@ function Skud() {
             }
         }
 
-        console.log('Данные посл фильтра', filterData, filterInOut)
+        return [filterData, filterInOut]
+    }
+
+    function addStartOrEnd(filterArrays, typeTime=8){
+
+        let filterData = filterArrays[0]
+        let filterInOut = filterArrays[1]
+
+        let startTime = ''
+        let endTime = ''
+
+        switch (typeTime) {
+            case 8:
+                startTime = '00:00:00'
+                endTime = '23:59:59'
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            default:
+                startTime = '00:00:00'
+                endTime = '23:59:59'
+                break
+        }
+
+        if(filterInOut[0] =='output'){
+            filterData.unshift(filterData[0].slice(0,10) + ' ' + startTime)
+        } else filterData.push(filterData[0].slice(0,10) + ' ' + endTime)
 
         return filterData
     }
@@ -145,7 +173,12 @@ function Skud() {
                 })
 
                 Object.keys(userData).forEach((e, i) => {
-                    let filterArray = dublicateFilter(userData[e].logtime, userData[e].statusInOut)
+
+                    let filterArrays = dublicateFilter(userData[e].logtime, userData[e].statusInOut)
+                    let startOrEndArray = addStartOrEnd(filterArrays)
+
+                    console.log('Массив после добавления начала или конца',startOrEndArray )
+
 
                     // userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
 
