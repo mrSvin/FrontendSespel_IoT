@@ -164,7 +164,7 @@ function Skud() {
             highChartSkud(series, arrayNames)
         })
 
-    }, []);
+    }, [date]);
 
     function newDate(dateInput) {
         setDate(dateInput)
