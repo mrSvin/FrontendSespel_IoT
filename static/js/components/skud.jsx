@@ -95,7 +95,7 @@ function Skud() {
     let [date, setDate] = useState(dayNow());
 
     let height = {
-        height: 52 * humans.length
+        height: 52 * Object.keys(humans).length
     };
 
     useEffect(() => {
