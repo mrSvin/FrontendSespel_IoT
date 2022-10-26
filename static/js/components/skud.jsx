@@ -152,6 +152,35 @@ function Skud() {
         return filterData
     }
 
+    function filterLunch(){
+        let array = ['2022-10-25 08:17:35', '2022-10-25 08:37:17', '2022-10-25 08:43:27', '2022-10-25 12:33:40', '2022-10-25 13:39:02', '2022-10-25 18:51:09']
+
+        let date = array[0].slice(0,10)
+
+        let arraySave = array.slice()
+
+        for (let i=0; i<array.length-1; i++){
+            if(
+                new Date(array[i]) < new Date(date + ' ' +'12:00:00') &&
+                new Date(array[i+1]) > new Date(date + ' ' +'13:00:00')
+            ){
+                arraySave.splice(i+1,0,...[`${date} 12:00:00`, `${date} 13:00:00`])
+            } else if (
+                new Date(array[i]) < new Date(date + ' ' +'12:00:00') &&
+                new Date(array[i+1]) > new Date(date + ' ' +'12:00:00') &&
+                new Date(array[i+1]) < new Date(date + ' ' +'13:00:00')
+            ){
+                arraySave.splice(i+1, 0, `${date} 12:00:00`)
+                arraySave.splice(i+2, 1, `${date} 13:00:00`)
+
+            }
+        }
+
+        console.log(array)
+        console.log(arraySave)
+        // return arraySave
+    }
+
     function fetchRequestSkud(date = '2022-10-25', place = 'Ленинградская 36, Дверь') {
 
         return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_device:${place}`, {method: 'GET'})
@@ -182,6 +211,7 @@ function Skud() {
 
                     console.log('Тест',startOrEndArray )
 
+                    console.log('голые данные этого пользователя', userData[e])
 
                     // userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
 
