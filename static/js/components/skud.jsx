@@ -87,7 +87,41 @@ function Skud() {
                     userData[e].logtime.forEach(parsedDate=>{
 
                         if(parsedDate.status == 'input') {
-                            console.log(parsedDate.x, ' - ', parsedDate.x2)
+                            if (
+                                new Date(parsedDate.x).getTime() < new Date(parsedDate.x.slice(0,10) + ' 12:00:00').getTime() &&
+                                new Date(parsedDate.x2).getTime() > new Date(parsedDate.x2.slice(0,10) + ' 12:00:00').getTime() &&
+                                new Date(parsedDate.x2).getTime() < new Date(parsedDate.x2.slice(0,10) + ' 13:00:00').getTime()
+                            ){
+                                console.log('Условие 1, счет до 12')
+                                console.log(parsedDate.x, ' - ', parsedDate.x2)
+                            }
+                            else if(
+                                new Date(parsedDate.x).getTime() > new Date(parsedDate.x.slice(0,10) + ' 12:00:00').getTime() &&
+                                new Date(parsedDate.x).getTime() < new Date(parsedDate.x.slice(0,10) + ' 13:00:00').getTime() &&
+                                new Date(parsedDate.x2).getTime() < new Date(parsedDate.x2.slice(0,10) + ' 13:00:00').getTime()
+                            ){
+                                console.log('Условие 2, не считать обед')
+                                console.log(parsedDate.x, ' - ', parsedDate.x2)
+                            }
+                            else if(
+                                new Date(parsedDate.x).getTime() > new Date(parsedDate.x.slice(0,10) + ' 12:00:00').getTime() &&
+                                new Date(parsedDate.x).getTime() < new Date(parsedDate.x.slice(0,10) + ' 13:00:00').getTime() &&
+                                new Date(parsedDate.x2).getTime() > new Date(parsedDate.x2.slice(0,10) + ' 13:00:00').getTime()
+                            ){
+                                console.log('Условие 3, считать с 13')
+                                console.log(parsedDate.x, ' - ', parsedDate.x2)
+                            }
+                            else if(
+                                new Date(parsedDate.x).getTime() < new Date(parsedDate.x.slice(0,10) + ' 12:00:00').getTime() &&
+                                new Date(parsedDate.x2).getTime() > new Date(parsedDate.x2.slice(0,10) + ' 13:00:00').getTime()
+                            ){
+                                console.log('Условие 4, считать с 8-12 и с 13 до точки')
+                                console.log(parsedDate.x, ' - ', parsedDate.x2)
+                            }
+                            else {
+                                console.log('Остальные случаи, считать весь промежуток')
+                                console.log(parsedDate.x, ' - ', parsedDate.x2)
+                            }
                         }
 
                         userData[e]['workTime'] += parsedDate.status == 'input'? new Date(parsedDate.x2).getTime()-new Date(parsedDate.x).getTime(): 0
