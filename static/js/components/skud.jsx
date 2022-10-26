@@ -100,10 +100,25 @@ function Skud() {
         }
     }
 
-    function filterWithOutLunch(data){
-        console.log('Данные до',data)
+    function dublicateFilter(arrayData, arrayInOut){
+        console.log('Данные до фильтра',arrayData, arrayInOut)
 
-        return data
+        let filterData = []
+        let filterInOut = []
+
+        for (let i=0; i<arrayInOut.length; i++){
+            if(i == arrayInOut.length-1){
+                filterData.push(arrayData[i])
+                filterInOut.push(arrayInOut[i])
+            } else if(arrayInOut[i] != arrayInOut[i+1]){
+                filterData.push(arrayData[i])
+                filterInOut.push(arrayInOut[i])
+            }
+        }
+
+        console.log('Данные посл фильтра', filterData, filterInOut)
+
+        return filterData
     }
 
     function fetchRequestSkud(date = '2022-10-25', place = 'Ленинградская 36, Дверь') {
@@ -130,18 +145,18 @@ function Skud() {
                 })
 
                 Object.keys(userData).forEach((e, i) => {
-                    let filterArray = filterWithOutLunch(userData[e].logtime)
+                    let filterArray = dublicateFilter(userData[e].logtime, userData[e].statusInOut)
 
-                    userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
+                    // userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
 
-                    console.log('Данные после', userData[e].logtime)
+                    // console.log('Данные после', userData[e].logtime)
 
 
-                    userData[e].logtime.forEach(parsedDate=>{
-                        // countTimeWithOutLunch(parsedDate)
-                        userData[e]['workTime'] += parsedDate.status == 'input'? new Date(parsedDate.x2).getTime()-new Date(parsedDate.x).getTime(): 0
-                    })
-                    userData[e]['workTime'] = msToTime(userData[e]['workTime'])
+                    // userData[e].logtime.forEach(parsedDate=>{
+                    //     // countTimeWithOutLunch(parsedDate)
+                    //     userData[e]['workTime'] += parsedDate.status == 'input'? new Date(parsedDate.x2).getTime()-new Date(parsedDate.x).getTime(): 0
+                    // })
+                    // userData[e]['workTime'] = msToTime(userData[e]['workTime'])
                 })
                 return userData
             })
