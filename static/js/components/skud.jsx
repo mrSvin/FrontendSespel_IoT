@@ -214,6 +214,8 @@ function Skud() {
         for(let i=1; i<msArray.length; i+=2){
             time += msArray[i] - msArray[i-1]
         }
+
+        time = msToTime(time)
         return time
     }
 
@@ -344,7 +346,10 @@ function Skud() {
                         colorByPoint: false,
                         color: '#38e817',
                         tooltip: {
-                            pointFormat: '<b>Работает</b>'
+                            pointFormatter: function () {
+                                let timer = msToTime(this.x2 - this.x)
+                                return '<b>Работает </b>' + timer
+                            },
                         },
                         data: input,
                     })
@@ -353,7 +358,10 @@ function Skud() {
                         colorByPoint: false,
                         color: '#ffea32',
                         tooltip: {
-                            pointFormat: '<b>Нет на месте</b>'
+                            pointFormatter: function () {
+                                let timer = msToTime(this.x2 - this.x)
+                                return '<b>Нет на месте </b>' + timer
+                            },
                         },
                         data: output,
                     })
