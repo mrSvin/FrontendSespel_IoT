@@ -31,7 +31,7 @@ function getOutWorkTimeArray(array){
     return outArray
 }
 
-function createInterface(data){
+function createUserDataStructure(data){
     let userData = {}
 
     for (let i = 0; i < data.username.length; i++) {
@@ -56,12 +56,12 @@ function applyFilters(userData){
 
     Object.keys(userData).forEach((e, i) => {
         let noDublicateArrays = dublicateDeleteFilter(userData[e].logtime, userData[e].statusInOut)
-        let arrayWithOutStatus = addStartOrEnd(noDublicateArrays)
-        let arrayWithOutLunch = filterLunch(arrayWithOutStatus)
+        let arrayAddStartOrEnd = addStartOrEnd(noDublicateArrays)
+        let arrayWithOutLunch = filterLunch(arrayAddStartOrEnd)
         userData[e].workTime = getWorkTime(arrayWithOutLunch)
 
-        let inWork = arrayWithOutStatus
-        let outWork = getOutWorkTimeArray(arrayWithOutStatus)
+        let inWork = arrayAddStartOrEnd
+        let outWork = getOutWorkTimeArray(arrayAddStartOrEnd)
 
         userData[e].highchartsWork = parseSkudForHighcharts(inWork, i)
         userData[e].highchartsOutWork = parseSkudForHighcharts(outWork, i)
@@ -195,7 +195,16 @@ function parseSkudForHighcharts(arrayParse, y) {
     return arraySave
 }
 
-function buildHighchartSeries(arrayData){
+function getHighchartSeriesAndNames(userData){
+
+    let arrayNames = []
+    let arrayData = []
+
+    Object.keys(userData).forEach((e) => {
+        arrayNames.push(e + ' ' + userData[e]['workTime'])
+        arrayData.push(userData[e]['highchartsWork'])
+        arrayData.push(userData[e]['highchartsOutWork'])
+    })
 
     let series = []
 
@@ -228,5 +237,5 @@ function buildHighchartSeries(arrayData){
             })
         }
     }
-    return series
+    return [series,arrayNames]
 }
