@@ -186,13 +186,15 @@ function Skud() {
 
         let arraySave = arrayClear.slice()
 
+        if(arraySave.length == dateArray.length) return arraySave
+
         for (let i=0; i<arrayClear.length-1; i++) {
             if (
                 new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime() &&
                 new Date(arrayClear[i+1]).getTime() > new Date(date + ' ' + endLunch).getTime()
             ) {
                 if(arrayClear.length%2==0){
-                    arraySave.splice(i+1,0, ...[`${date} ${startLunch}`, `${date} ${endLunch}`])
+                    if(i%2==0) arraySave.splice(i+1,0, ...[`${date} ${startLunch}`, `${date} ${endLunch}`])
                 } else if(i%2==0){
                     arraySave.splice(i+1,0, `${date} ${startLunch}`)
                 } else arraySave.splice(i+1,0, `${date} ${endLunch}`)
