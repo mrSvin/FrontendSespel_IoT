@@ -181,6 +181,8 @@ function Skud() {
     }
 
     function parseSkudForHighcharts(arrayParse, y) {
+        let arraySave = []
+
         let msArray = arrayParse.map(e => {
             return new Date(e).getTime()
         })
@@ -256,26 +258,23 @@ function Skud() {
 
     let places = ['База1, КПП-1, Турникет1', 'База 2, КПП2-1', 'Ленинградская 36, Дверь']
 
-    const [humans, setHumans] = useState({});
+    const history = useHistory()
+    const [heightState, setHeightState] = useState(3);
     let [date, setDate] = useState(dayNow());
     let [placeIndex, setPlaceIndex] = useState(1)
 
     let height = {
-        height: 52 * Object.keys(humans).length
+        height: 52 * heightState
     };
 
     useEffect(() => {
 
         let promise = fetchRequestSkud(date, places[placeIndex])
-
         promise.then(data=>{
-            setHumans(data);
-            return data
-        })
-        .then(data=>{
-            console.log('Этап 2...')
             let userData = createInterface(data)
             userData = applyFilters(userData)
+
+            setHeightState(userData.length);
 
             let arrayNames = []
             let arrayData = []
@@ -291,7 +290,7 @@ function Skud() {
             highChartSkud(series, arrayNames)
         })
 
-    }, [date, placeIndex]);
+    }, [date, placeIndex, history]);
 
     function newDate(dateInput) {
         setDate(dateInput)
@@ -328,13 +327,6 @@ function Skud() {
 
             <div id={"containerSkud"} style={height} className="skudHigcharts"></div>
 
-            {/*{Object.keys(humans).length !== 0 ?*/}
-            {/*    Object.keys(humans).map((e) => {*/}
-            {/*        return (*/}
-            {/*                <p className='fioTime'>{e}{humans[e]['workTime']}</p>*/}
-            {/*        );*/}
-            {/*    }) : null*/}
-            {/*}*/}
         </div>
     );
 }
