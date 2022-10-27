@@ -198,3 +198,12 @@ function fetchDeleteReSourceUser(authorId, userRole = 'user') {
             .catch(error => console.log('Ошибка при отправке запроса', error));
     } else alert('Недостаточно прав')
 }
+
+function fetchRequestSkud(date = '2022-10-25', place = 'Ленинградская 36, Дверь') {
+
+    return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_mesto:${place}`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}
