@@ -274,7 +274,8 @@ function Skud() {
             let userData = createInterface(data)
             userData = applyFilters(userData)
 
-            setHeightState(userData.length);
+            let len = Object.keys(userData).length
+            setHeightState(len);
 
             let arrayNames = []
             let arrayData = []
@@ -288,6 +289,12 @@ function Skud() {
             let series = buildHighchartSeries(arrayData)
 
             highChartSkud(series, arrayNames)
+        })
+
+        return history.listen((location) => {
+            let pathName = parseNameUrl(location.pathname)
+
+            console.log('pathName',pathName)
         })
 
     }, [date, placeIndex, history]);
