@@ -25,15 +25,12 @@ function Skud() {
 
         return history.listen((location) => {
             let pathName = parseNameUrl(location.pathname)
+            let thisPage = location.pathname.slice(0,6)
 
-            let address = ['1ploshadka', '2ploshadka', 'office']
-
-            let index = address.findIndex(rank => rank === pathName);
-
-            console.log('Сравнение индекса и состояния ',place, index)
-
-            //setPlaceIndex()
-            //console.log('pathName',pathName)
+            if(thisPage == '/skud/') {
+                setPlace(pathName)
+                console.log('История')
+            }
         })
 
     }, [date, place, history]);
