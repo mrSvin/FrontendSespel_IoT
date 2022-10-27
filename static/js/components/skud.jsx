@@ -22,6 +22,9 @@ function Skud() {
 
             highChartSkud(...series)
         })
+    }, [date, place]);
+
+    useEffect(() => {
 
         return history.listen((location) => {
             let pathName = parseNameUrl(location.pathname)
@@ -29,11 +32,9 @@ function Skud() {
 
             if(thisPage == '/skud/') {
                 setPlace(pathName)
-                console.log('История')
             }
         })
-
-    }, [date, place, history]);
+    }, [history]);
 
     function newDate(dateInput) {
         setDate(dateInput)
