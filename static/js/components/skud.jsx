@@ -1,20 +1,5 @@
 function Skud() {
 
-    let placesAll = [
-        'Ленинградская 36, Дверь',
-        'Ленинградская 36, турникет',
-        'База1, КПП-1, Турникет1',
-        'База1, КПП-1, Турникет2',
-        'База 2, КПП2-1',
-        'База 2, КПП2-2',
-        'База 2, КПП-1-1',
-        'База 2, КПП-1-2',
-        'отдел кадров',
-        'пластиковая дверь',
-    ]
-
-    // let places = ['1ploshadka', '2ploshadka', 'office']
-
     const history = useHistory()
     const [heightHighchartContainer, setHeightHighchartContainer] = useState(3);
     let [date, setDate] = useState(dayNow());
@@ -63,19 +48,19 @@ function Skud() {
             <div className="buttons-otchet">
 
                 <Link to={`/skud/1ploshadka`}>
-                    <div className={placeIndex=='1ploshadka'?'menuSelect':'menuNoSelect'} onClick={()=>{
+                    <div className={place=='1ploshadka'?'menuSelect':'menuNoSelect'} onClick={()=>{
                         setPlace('1ploshadka')
                     }}>Первая площадка</div>
                 </Link>
 
                 <Link to={`/skud/2ploshadka`}>
-                    <div className={placeIndex=='2ploshadka'?'menuSelect':'menuNoSelect'} onClick={()=>{
+                    <div className={place=='2ploshadka'?'menuSelect':'menuNoSelect'} onClick={()=>{
                         setPlace('2ploshadka')
                     }}>Вторая площадка</div>
                 </Link>
 
                 <Link to={`/skud/office`}>
-                    <div className={placeIndex=='office'?'menuSelect':'menuNoSelect'} onClick={()=>{
+                    <div className={place=='office'?'menuSelect':'menuNoSelect'} onClick={()=>{
                         setPlace('office')
                     }}>Офис</div>
                 </Link>
