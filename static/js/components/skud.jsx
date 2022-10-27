@@ -100,7 +100,7 @@ function Skud() {
         }
     }
 
-    function dublicateFilter(arrayData, arrayInOut){
+    function dublicateDeleteFilter(arrayData, arrayInOut){
         let filterData = []
         let filterInOut = []
 
@@ -117,7 +117,7 @@ function Skud() {
         return [filterData, filterInOut]
     }
 
-    function addStartOrEnd(filterArrays, typeTime=8){
+    function addStartOrEnd(filterArrays, typeTime='8-17'){
 
         let filterData = filterArrays[0]
         let filterInOut = filterArrays[1]
@@ -128,13 +128,13 @@ function Skud() {
         let endTime = ''
 
         switch (typeTime) {
-            case 8:
+            case '8-17':
                 startTime = '00:00:00'
                 endTime = (currentDate == filterData[filterData.length-1].slice(0,10))? timeNow() :'23:59:59'
                 break;
-            case 1:
+            case '7-19':
                 break;
-            case 2:
+            case '19-7':
                 break;
             default:
                 startTime = '00:00:00'
@@ -152,33 +152,55 @@ function Skud() {
         return filterData
     }
 
-    function filterLunch(){
-        let array = ['2022-10-25 08:17:35', '2022-10-25 08:37:17', '2022-10-25 08:43:27', '2022-10-25 12:33:40', '2022-10-25 13:39:02', '2022-10-25 18:51:09']
+    function filterLunch(dateArray, lunchType='8-17'){
 
-        let date = array[0].slice(0,10)
+        let startLunch = null
+        let endLunch = null
 
-        let arraySave = array.slice()
+        switch (lunchType){
+            case '8-17':
+                break;
+            case '07-19':
+                break;
+            case '19-07':
+                break;
+            default:
+                startLunch = '12:00:00'
+                endLunch = '12:59:59'
+        }
 
-        for (let i=0; i<array.length-1; i++){
-            if(
-                new Date(array[i]) < new Date(date + ' ' +'12:00:00') &&
-                new Date(array[i+1]) > new Date(date + ' ' +'13:00:00')
-            ){
-                arraySave.splice(i+1,0,...[`${date} 12:00:00`, `${date} 13:00:00`])
-            } else if (
-                new Date(array[i]) < new Date(date + ' ' +'12:00:00') &&
-                new Date(array[i+1]) > new Date(date + ' ' +'12:00:00') &&
-                new Date(array[i+1]) < new Date(date + ' ' +'13:00:00')
-            ){
-                arraySave.splice(i+1, 0, `${date} 12:00:00`)
-                arraySave.splice(i+2, 1, `${date} 13:00:00`)
+        let date = dateArray[0].slice(0,10)
+
+        let arrayClear= dateArray.slice()
+
+        for (let i=0; i<array.length; i++) {
+            if (
+                new Date(array[i]).getTime() >= new Date(date + ' ' + startLunch).getTime() &&
+                new Date(array[i]).getTime() < new Date(date + ' ' + endLunch).getTime()
+            ) {
+                arrayClear.splice(i,1)
+            }
+        }
+
+        let arraySave = arrayClear.slice()
+
+        for (let i=0; i<arrayClear.length-1; i++) {
+            if (
+                new Date(arrayClear[i]).getTime() < new Date(date + ' ' + '12:00:00').getTime() &&
+                new Date(arrayClear[i+1]).getTime() > new Date(date + ' ' + endLunch).getTime()
+            ) {
+                if(arrayClear.length%2==0){
+                    arraySave.splice(i+1,0, ...[`${date} ${startLunch}`, `${date} ${endLunch}`])
+                } else if(i%2==0){
+                    arraySave.splice(i+1,0, `${date} ${startLunch}`)
+                } else arraySave.splice(i+1,0, `${date} ${endLunch}`)
 
             }
         }
 
         console.log(array)
         console.log(arraySave)
-        // return arraySave
+        return arraySave
     }
 
     function fetchRequestSkud(date = '2022-10-25', place = 'Ленинградская 36, Дверь') {
@@ -206,12 +228,13 @@ function Skud() {
 
                 Object.keys(userData).forEach((e, i) => {
 
-                    let filterArrays = dublicateFilter(userData[e].logtime, userData[e].statusInOut)
-                    let startOrEndArray = addStartOrEnd(filterArrays)
+                    let noDublicateArrays = dublicateDeleteFilter(userData[e].logtime, userData[e].statusInOut)
+                    let arrayWithOutStatus = addStartOrEnd(noDublicateArrays)
 
-                    console.log('Тест',startOrEndArray )
+                    let arrayWithOutLunch = filterLunch(arrayWithOutStatus)
 
                     console.log('голые данные этого пользователя', userData[e])
+                    console.log('Массив без обедов', arrayWithOutLunch)
 
                     // userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
 
