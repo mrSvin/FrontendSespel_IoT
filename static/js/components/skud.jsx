@@ -159,6 +159,8 @@ function Skud() {
 
         switch (lunchType){
             case '8-17':
+                startLunch = '12:00:00'
+                endLunch = '13:00:00'
                 break;
             case '07-19':
                 break;
@@ -166,7 +168,7 @@ function Skud() {
                 break;
             default:
                 startLunch = '12:00:00'
-                endLunch = '12:59:59'
+                endLunch = '13:00:00'
         }
 
         let date = dateArray[0].slice(0,10)
