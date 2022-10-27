@@ -1,104 +1,76 @@
 function Skud() {
 
-    function parseLinearSkud(arrayParse, y, date, inOut) {
-        var arraySave = [] // Массив, который будет заполняться
+    function getWorkTime(dateArray){
+        let time = 0
 
-        date = (dayNow() == date)? dayTimeNow() : `${date} 23:59:59`
+        let msArray = dateArray.map(e=>{
+            return new Date(e).getTime()
+        })
 
-        if (arrayParse.length == 1) {
-            arraySave.push({
-                x: arrayParse[0].slice(0,10)+' 00:00:00',
-                x2: arrayParse[0],
-                // x: new Date(arrayParse[0].slice(0,10)+' 00:00:00').getTime(),
-                // x2: (new Date(arrayParse[0])).getTime(),
-                y: y,
-                status: 'output'
-            })
-            arraySave.push({
-                x: arrayParse[0],
-                x2: date,
-                // x: (new Date(arrayParse[0])).getTime(),
-                // x2: (new Date(date)).getTime(),
-                y: y,
-                status: inOut[0]
-            })
-        } else {
-            arraySave.push({
-                x: arrayParse[0].slice(0,10)+' 00:00:00',
-                x2: arrayParse[0],
-                // x: new Date(arrayParse[0].slice(0,10)+' 00:00:00').getTime(),
-                // x2: (new Date(arrayParse[0])).getTime(),
-                y: y,
-                status: 'output'
-            })
-            for (let i = 0; i < arrayParse.length; i++) {
-                if (i == arrayParse.length - 1) {
-                    arraySave.push({
-                        x: arrayParse[i],
-                        x2: date,
-                        // x: (new Date(arrayParse[i])).getTime(),
-                        // x2: (new Date(date)).getTime(),
-                        y: y,
-                        status: inOut[i]
-                    })
-                } else {
-                    arraySave.push({
-                        x: arrayParse[i],
-                        x2: arrayParse[i + 1],
-                        // x: (new Date(arrayParse[i])).getTime(),
-                        // x2: (new Date(arrayParse[i + 1])).getTime(),
-                        y: y,
-                        status: inOut[i]
-                    })
-                }
-            }
+        for(let i=1; i<msArray.length; i+=2){
+            time += msArray[i] - msArray[i-1]
         }
-        // Иначе в массив парсится переданный массив с именем программы
 
-        // Функция возвращает массив коллекциями, содержащими 2 или 3 объекта.
-        return arraySave
+        time = msToTime(time)
+        return time
     }
 
-    function countTimeWithOutLunch(parsedDate, startLunch='12:00:00', endLunch='13:00:00'){
-        if(parsedDate.status == 'input') {
-            let date = parsedDate.x.slice(0,10)
-            if (
-                new Date(parsedDate.x).getTime() < new Date(date + ' ' + startLunch).getTime() &&
-                new Date(parsedDate.x2).getTime() > new Date(date + ' ' + startLunch).getTime() &&
-                new Date(parsedDate.x2).getTime() < new Date(date + ' ' + endLunch).getTime()
-            ){
-                console.log('Условие 1, счет до 12')
-                console.log(parsedDate.x, ' - ', parsedDate.x2)
-            }
-            else if(
-                new Date(parsedDate.x).getTime() > new Date(date + ' ' + startLunch).getTime() &&
-                new Date(parsedDate.x).getTime() < new Date(date + ' ' + endLunch).getTime() &&
-                new Date(parsedDate.x2).getTime() < new Date(date + ' ' + endLunch).getTime()
-            ){
-                console.log('Условие 2, не считать обед')
-                console.log(parsedDate.x, ' - ', parsedDate.x2)
-            }
-            else if(
-                new Date(parsedDate.x).getTime() > new Date(date + ' ' + startLunch).getTime() &&
-                new Date(parsedDate.x).getTime() < new Date(date + ' ' + endLunch).getTime() &&
-                new Date(parsedDate.x2).getTime() > new Date(date + ' ' + endLunch).getTime()
-            ){
-                console.log('Условие 3, считать с 13')
-                console.log(parsedDate.x, ' - ', parsedDate.x2)
-            }
-            else if(
-                new Date(parsedDate.x).getTime() < new Date(date + ' ' + startLunch).getTime() &&
-                new Date(parsedDate.x2).getTime() > new Date(date + ' ' + endLunch).getTime()
-            ){
-                console.log('Условие 4, считать с 8-12 и с 13 до точки')
-                console.log(parsedDate.x, ' - ', parsedDate.x2)
-            }
-            else {
-                console.log('Остальные случаи, считать весь промежуток')
-                console.log(parsedDate.x, ' - ', parsedDate.x2)
-            }
+    function getOutWorkTimeArray(array){
+
+        let date = array[0].slice(0,10)
+
+        let outArray = array.slice()
+
+        if(outArray[0] !== `${date} 00:00:00`){
+            outArray.unshift(`${date} 00:00:00`)
         }
+        else outArray.splice(0,1)
+
+        if(date == dayNow()){
+            outArray.push(`${date} ${timeNow()}`)
+        } else if(outArray[outArray.length-1] !== `${date} 23:59:59`) outArray.push(`${date} 23:59:59`)
+
+        return outArray
     }
+
+    function createInterface(data){
+         let userData = {}
+
+         for (let i = 0; i < data.username.length; i++) {
+             userData[data.username[i]] = {
+                 name: data.username[i],
+                 tabid: data.tabid[i],
+                 POS: data.POS[i],
+                 logtime: [],
+                 statusInOut: [],
+             }
+         }
+
+         data.logtime.forEach((e, i) => {
+             userData[data.username[i]].logtime.push(e)
+             userData[data.username[i]].statusInOut.push(data.statusInOut[i])
+         })
+
+         return userData
+     }
+
+    function applyFilters(userData){
+
+         Object.keys(userData).forEach((e, i) => {
+             let noDublicateArrays = dublicateDeleteFilter(userData[e].logtime, userData[e].statusInOut)
+             let arrayWithOutStatus = addStartOrEnd(noDublicateArrays)
+             let arrayWithOutLunch = filterLunch(arrayWithOutStatus)
+             userData[e].workTime = getWorkTime(arrayWithOutLunch)
+
+             let inWork = arrayWithOutStatus
+             let outWork = getOutWorkTimeArray(arrayWithOutStatus)
+
+             userData[e].highchartsWork = parseSkudForHighcharts(inWork, i)
+             userData[e].highchartsOutWork = parseSkudForHighcharts(outWork, i)
+
+         })
+         return userData
+     }
 
     function dublicateDeleteFilter(arrayData, arrayInOut){
         let filterData = []
@@ -188,8 +160,11 @@ function Skud() {
 
         if(arraySave.length == dateArray.length) return arraySave
 
-        for (let i=0; i<arrayClear.length-1; i++) {
-            if (
+        for (let i=0; i<arrayClear.length; i++) {
+            if(arrayClear.length  == 1) {
+                arraySave.push(`${date} ${startLunch}`)
+            }
+            else if (
                 new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime() &&
                 new Date(arrayClear[i+1]).getTime() > new Date(date + ' ' + endLunch).getTime()
             ) {
@@ -201,47 +176,21 @@ function Skud() {
 
             }
         }
+
         return arraySave
     }
 
-    function getWorkTime(dateArray){
-        let time = 0
-
-        let msArray = dateArray.map(e=>{
+    function parseSkudForHighcharts(arrayParse, y) {
+        let msArray = arrayParse.map(e => {
             return new Date(e).getTime()
         })
 
-        for(let i=1; i<msArray.length; i+=2){
-            time += msArray[i] - msArray[i-1]
-        }
-
-        time = msToTime(time)
-        return time
-    }
-
-    function parseSkudForHighcharts(arrayParse, y){
-        let arraySave = []
-
-        let msArray = arrayParse.map(e=>{
-            return new Date(e).getTime()
-        })
-
-        for (let i = 1; i < msArray.length; i++) {
-            if (i % 2 == 1) {
-                arraySave.push({
-                    x: msArray[i-1],
-                    x2: msArray[i],
-                    y: y,
-                    status: 'На месте'
-                })
-            } else {
-                arraySave.push({
-                    x: msArray[i-1],
-                    x2: msArray[i],
-                    y: y,
-                    status: 'Нет на месте'
-                })
-            }
+        for (let i = 1; i < msArray.length; i += 2) {
+            arraySave.push({
+                x: msArray[i - 1],
+                x2: msArray[i],
+                y: y,
+            })
         }
         return arraySave
     }
@@ -251,47 +200,46 @@ function Skud() {
         return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_device:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
-                let userData = {}
-
-                for (let i = 0; i < data.username.length; i++) {
-                    userData[data.username[i]] = {
-                        name: data.username[i],
-                        tabid: data.tabid[i],
-                        POS: data.POS[i],
-                        logtime: [],
-                        statusInOut: [],
-                        workTime:0,
-                        highchartsData:[]
-                    }
-                }
-
-                data.logtime.forEach((e, i) => {
-                    userData[data.username[i]].logtime.push(e)
-                    userData[data.username[i]].statusInOut.push(data.statusInOut[i])
-                })
-
-                Object.keys(userData).forEach((e, i) => {
-
-                    let noDublicateArrays = dublicateDeleteFilter(userData[e].logtime, userData[e].statusInOut)
-                    let arrayWithOutStatus = addStartOrEnd(noDublicateArrays)
-                    let arrayWithOutLunch = filterLunch(arrayWithOutStatus)
-                    userData[e].workTime = getWorkTime(arrayWithOutLunch)
-                    userData[e].highchartsData = parseSkudForHighcharts(arrayWithOutStatus, i)
-
-                    // userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
-
-                    // console.log('Данные после', userData[e].logtime)
-
-
-                    // userData[e].logtime.forEach(parsedDate=>{
-                    //     // countTimeWithOutLunch(parsedDate)
-                    //     userData[e]['workTime'] += parsedDate.status == 'input'? new Date(parsedDate.x2).getTime()-new Date(parsedDate.x).getTime(): 0
-                    // })
-                    // userData[e]['workTime'] = msToTime(userData[e]['workTime'])
-                })
-                return userData
+                return data
             })
     }
+
+    function buildHighchartSeries(arrayData){
+
+        let series = []
+
+        for(let i=0; i < arrayData.length; i++){
+            if(i%2 == 0) {
+                series.push({
+                    pointWidth: 30,
+                    colorByPoint: false,
+                    color: '#38e817',
+                    tooltip: {
+                        pointFormatter: function () {
+                            let timer = msToTime(this.x2 - this.x)
+                            return '<b>Работает </b>' + timer
+                        },
+                    },
+                    data: arrayData[i],
+                })
+            } else {
+                series.push({
+                    pointWidth: 30,
+                    colorByPoint: false,
+                    color: '#ffea32',
+                    tooltip: {
+                        pointFormatter: function () {
+                            let timer = msToTime(this.x2 - this.x)
+                            return '<b>Нет на месте </b>' + timer
+                        },
+                    },
+                    data: arrayData[i],
+                })
+            }
+        }
+        return series
+    }
+
 
     let placesAll = [
         'Ленинградская 36, Дверь',
@@ -317,55 +265,29 @@ function Skud() {
     };
 
     useEffect(() => {
+
         let promise = fetchRequestSkud(date, places[placeIndex])
+
         promise.then(data=>{
             setHumans(data);
             return data
         })
         .then(data=>{
+            console.log('Этап 2...')
+            let userData = createInterface(data)
+            userData = applyFilters(userData)
+
             let arrayNames = []
             let arrayData = []
-            Object.keys(data).forEach((e) => {
-                arrayNames.push(e + ' ' + data[e]['workTime'])
-                arrayData.push(data[e]['highchartsData'])
+
+            Object.keys(userData).forEach((e) => {
+                arrayNames.push(e + ' ' + userData[e]['workTime'])
+                arrayData.push(userData[e]['highchartsWork'])
+                arrayData.push(userData[e]['highchartsOutWork'])
             })
 
-            let series = []
-                arrayData.forEach((e,i)=>{
+            let series = buildHighchartSeries(arrayData)
 
-                    let input = []
-                    let output = []
-
-                    e.forEach(k=>{
-                        if(k.status == 'На месте') input.push(k)
-                        else output.push(k)
-                    })
-
-                    series.push({
-                        pointWidth: 30,
-                        colorByPoint: false,
-                        color: '#38e817',
-                        tooltip: {
-                            pointFormatter: function () {
-                                let timer = msToTime(this.x2 - this.x)
-                                return '<b>Работает </b>' + timer
-                            },
-                        },
-                        data: input,
-                    })
-                    series.push({
-                        pointWidth: 30,
-                        colorByPoint: false,
-                        color: '#ffea32',
-                        tooltip: {
-                            pointFormatter: function () {
-                                let timer = msToTime(this.x2 - this.x)
-                                return '<b>Нет на месте </b>' + timer
-                            },
-                        },
-                        data: output,
-                    })
-            })
             highChartSkud(series, arrayNames)
         })
 

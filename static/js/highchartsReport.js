@@ -1231,8 +1231,6 @@ function highChartSkud(series,generalDiagramNames) {
         }
     });
 
-    console.log('.')
-
     Highcharts.chart('containerSkud', {
         chart: {
             plotBackgroundColor: null,
@@ -1247,7 +1245,6 @@ function highChartSkud(series,generalDiagramNames) {
                 color: '#FFF'
             }
         },
-        // colors: ['#e81e1d', '#000000', '#ffea32', '#207210', '#38e817'],
 
         xAxis: {
             type: 'datetime',
