@@ -186,7 +186,7 @@ function Skud() {
 
         for (let i=0; i<arrayClear.length-1; i++) {
             if (
-                new Date(arrayClear[i]).getTime() < new Date(date + ' ' + '12:00:00').getTime() &&
+                new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime() &&
                 new Date(arrayClear[i+1]).getTime() > new Date(date + ' ' + endLunch).getTime()
             ) {
                 if(arrayClear.length%2==0){
