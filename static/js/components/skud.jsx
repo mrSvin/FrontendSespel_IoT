@@ -13,7 +13,7 @@ function Skud() {
         'пластиковая дверь',
     ]
 
-    let places = ['База1, КПП-1, Турникет1', 'База 2, КПП2-1', 'Ленинградская 36, Дверь']
+    let places = ['1ploshadka', 'База 2, КПП2-1', 'Ленинградская 36, Дверь']
 
     const history = useHistory()
     const [heightState, setHeightState] = useState(3);
