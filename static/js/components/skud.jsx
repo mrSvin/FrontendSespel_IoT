@@ -204,6 +204,46 @@ function Skud() {
         return arraySave
     }
 
+    function getWorkTime(dateArray){
+        let time = 0
+
+        let msArray = dateArray.map(e=>{
+            return new Date(e).getTime()
+        })
+
+        for(let i=1; i<msArray.length; i+=2){
+            console.log(i)
+            time += msArray[i] - msArray[i-1]
+        }
+        return time
+    }
+
+    function parseSkudForHighcharts(arrayParse, y){
+        let arraySave = []
+
+        let msArray = arrayParse.map(e=>{
+            return new Date(e).getTime()
+        })
+
+        for (let i = 1; i < msArray.length; i++) {
+            if (i % 2 == 1) {
+                arraySave.push({
+                    x: msArray[i-1],
+                    x2: msArray[i],
+                    y: y,
+                    status: 'На месте'
+                })
+            } else {
+                arraySave.push({
+                    x: msArray[i-1],
+                    x2: msArray[i],
+                    y: y,
+                    status: 'Нет на месте'
+                })
+            }
+        }
+    }
+
     function fetchRequestSkud(date = '2022-10-25', place = 'Ленинградская 36, Дверь') {
 
         return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_device:${place}`, {method: 'GET'})
@@ -219,6 +259,7 @@ function Skud() {
                         logtime: [],
                         statusInOut: [],
                         workTime:0,
+                        highchartsData:[]
                     }
                 }
 
@@ -231,11 +272,9 @@ function Skud() {
 
                     let noDublicateArrays = dublicateDeleteFilter(userData[e].logtime, userData[e].statusInOut)
                     let arrayWithOutStatus = addStartOrEnd(noDublicateArrays)
-
                     let arrayWithOutLunch = filterLunch(arrayWithOutStatus)
-
-                    console.log('голые данные этого пользователя', userData[e])
-                    console.log('Массив без обедов', arrayWithOutLunch)
+                    userData[e].workTime = getWorkTime(arrayWithOutLunch)
+                    userData[e].highchartsData = parseSkudForHighcharts(noDublicateArrays, i)
 
                     // userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
 
@@ -284,9 +323,9 @@ function Skud() {
         .then(data=>{
             let arrayNames = []
             let arrayData = []
-            Object.keys(data).forEach((e, i) => {
+            Object.keys(data).forEach((e) => {
                 arrayNames.push(e + ' ' + data[e]['workTime'])
-                arrayData.push(data[e]['logtime'])
+                arrayData.push(data[e]['highchartsData'])
             })
 
             let series = []
@@ -296,7 +335,7 @@ function Skud() {
                     let output = []
 
                     e.forEach(k=>{
-                        if(k.status == 'input') input.push(k)
+                        if(k.status == 'На месте') input.push(k)
                         else output.push(k)
                     })
 
@@ -319,6 +358,7 @@ function Skud() {
                         data: output,
                     })
             })
+            console.log('Рассмотрение прогресса',series)
             // highChartSkud(series, arrayNames)
         })
 
