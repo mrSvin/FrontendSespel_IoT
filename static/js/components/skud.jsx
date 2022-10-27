@@ -212,7 +212,6 @@ function Skud() {
         })
 
         for(let i=1; i<msArray.length; i+=2){
-            console.log(i)
             time += msArray[i] - msArray[i-1]
         }
         return time
@@ -242,6 +241,7 @@ function Skud() {
                 })
             }
         }
+        return arraySave
     }
 
     function fetchRequestSkud(date = '2022-10-25', place = 'Ленинградская 36, Дверь') {
@@ -274,7 +274,7 @@ function Skud() {
                     let arrayWithOutStatus = addStartOrEnd(noDublicateArrays)
                     let arrayWithOutLunch = filterLunch(arrayWithOutStatus)
                     userData[e].workTime = getWorkTime(arrayWithOutLunch)
-                    userData[e].highchartsData = parseSkudForHighcharts(noDublicateArrays, i)
+                    userData[e].highchartsData = parseSkudForHighcharts(arrayWithOutStatus, i)
 
                     // userData[e].logtime = parseLinearSkud(userData[e].logtime, i, date, userData[e].statusInOut)
 
@@ -358,8 +358,7 @@ function Skud() {
                         data: output,
                     })
             })
-            console.log('Рассмотрение прогресса',series)
-            // highChartSkud(series, arrayNames)
+            highChartSkud(series, arrayNames)
         })
 
     }, [date, placeIndex]);
