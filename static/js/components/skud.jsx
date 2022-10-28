@@ -10,7 +10,6 @@ function Skud() {
     };
 
     useEffect(() => {
-
         let promise = fetchRequestSkud(date, place)
         promise.then(data=>{
             let userData = createUserDataStructure(data)

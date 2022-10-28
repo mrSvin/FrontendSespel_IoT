@@ -58,6 +58,7 @@ function getLastDate(inWork, outWork){
     let lastInWork = inWork[inWork.length-1]
     let lastoutWork = outWork[outWork.length-1]
 
+
     console.log(lastInWork, lastoutWork, date)
 
     return null
