@@ -10,7 +10,7 @@ function Skud() {
     };
 
     let heightLunch = {
-        height: (heightHighchartContainer > 10)? 52 * (heightHighchartContainer-2) + 13: '70%'
+        height: getLunchHeight(heightHighchartContainer)
     }
 
     useEffect(() => {

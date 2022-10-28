@@ -305,3 +305,9 @@ function getHighchartSeriesAndNames(userData){
 
     return [series,arrayNames]
 }
+
+function getLunchHeight(heightHighchartContainer){
+    let height = (heightHighchartContainer > 10)? 52 * (heightHighchartContainer-2) + 13:
+        (heightHighchartContainer > 0)? '70%' : 0
+    return height
+}
