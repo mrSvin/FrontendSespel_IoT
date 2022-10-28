@@ -3,3 +3,16 @@
     margin: auto;
     min-height: 300px;
 }
+
+.wrapperSkud{
+    width: 100%;
+    position: relative;
+}
+
+.lunchTime {
+    margin: auto;
+    min-height: 300px;
+    background: #1aaae5;
+    opacity: 50%;
+    width: 30%;
+}

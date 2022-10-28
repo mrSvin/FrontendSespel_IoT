@@ -68,8 +68,10 @@ function Skud() {
                 <DayCalendar newDate={newDate} date={date}/>
             </div>
 
-            <div id={"containerSkud"} style={height} className="skudHigcharts"></div>
-
+            <div className='wrapperSkud'>
+                <div className={'lunchTime'}></div>
+                <div id={"containerSkud"} style={height} className="skudHigcharts"></div>
+            </div>
         </div>
     );
 }
