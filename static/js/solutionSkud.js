@@ -174,7 +174,10 @@ function filterLunch(dateArray, lunchType='8-17'){
 
     for (let i=0; i<arrayClear.length; i++) {
         if(arrayClear.length  == 1) {
-            arraySave.push(`${date} ${startLunch}`)
+            if (new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime()){
+                arraySave.push(`${date} ${startLunch}`)
+            } else arraySave.push(`${date} ${endLunch}`)
+
         }
         else if (
             new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime() &&
