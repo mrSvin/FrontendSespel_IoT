@@ -217,7 +217,7 @@ function getHighchartSeriesAndNames(userData){
     let blackArrayTrigger = false
 
     Object.keys(userData).forEach((e) => {
-        arrayNames.push(e + ' ' + userData[e]['workTime'])
+        arrayNames.push(`${e}(${userData[e]['POS']}) таб.${userData[e]['tabid']} ${userData[e]['workTime']}`)
         arrayData.push(userData[e]['highchartsWork'])
         arrayData.push(userData[e]['highchartsOutWork'])
         if(userData[e]['highchartsBlack'] != null){
