@@ -9,6 +9,10 @@ function Skud() {
         height: 52 * heightHighchartContainer
     };
 
+    let heightLunch = {
+        height: 52 * (heightHighchartContainer-2) + 13
+    }
+
     useEffect(() => {
         let promise = fetchRequestSkud(date, place)
         promise.then(data=>{
@@ -69,7 +73,7 @@ function Skud() {
             </div>
 
             <div className='wrapperSkud'>
-                <div className={'lunchTime'}></div>
+                <div className={'lunchTime'} style={heightLunch}></div>
                 <div id={"containerSkud"} style={height} className="skudHigcharts"></div>
             </div>
         </div>

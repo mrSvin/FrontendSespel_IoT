@@ -10,9 +10,13 @@
 }
 
 .lunchTime {
-    margin: auto;
     min-height: 300px;
     background: #1aaae5;
     opacity: 50%;
-    width: 30%;
+    width: 5%;
+    /* height: 98%; */
+    position: absolute;
+    left: 57%;
+    top: 0.8%;
+    z-index: 1;
 }
