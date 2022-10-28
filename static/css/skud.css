@@ -22,8 +22,10 @@
 
 .lunchTime > p {
     position: absolute;
-    top: -52px;
-    color: #fff;
+    top: -40px;
+    left: 5px;
+    color: rgb(26,170,229);
+    font-weight: 600;
 }
 
 .strokelunchTime {
