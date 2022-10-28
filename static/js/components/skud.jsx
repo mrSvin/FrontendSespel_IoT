@@ -1,7 +1,7 @@
 function Skud() {
 
     const history = useHistory()
-    const [heightHighchartContainer, setHeightHighchartContainer] = useState(3);
+    const [heightHighchartContainer, setHeightHighchartContainer] = useState(0);
     let [date, setDate] = useState(dayNow());
     let [place, setPlace] = useState(parseNameUrl(location.pathname))
 
@@ -10,7 +10,7 @@ function Skud() {
     };
 
     let heightLunch = {
-        height: 52 * (heightHighchartContainer-2) + 13
+        height: (heightHighchartContainer > 10)? 52 * (heightHighchartContainer-2) + 13: '70%'
     }
 
     useEffect(() => {
