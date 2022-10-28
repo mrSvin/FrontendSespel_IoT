@@ -1237,7 +1237,8 @@ function highChartSkud(series,generalDiagramNames) {
             plotBorderWidth: null,
             plotShadow: false,
             plotBorderColor: 'gray',
-            type: 'xrange'
+            type: 'xrange',
+            marginLeft: 100
         },
         title: {
             text: 'Рабочее время',
