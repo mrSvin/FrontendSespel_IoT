@@ -25,7 +25,7 @@ function getOutWorkTimeArray(array){
     else outArray.splice(0,1)
 
     if(date == dayNow()){
-        outArray.push(`${date} ${timeNow()}`)
+        if(outArray[outArray.length-1] !== `${date} ${timeNow()}`) outArray.push(`${date} ${timeNow()}`)
     } else if(outArray[outArray.length-1] !== `${date} 23:59:59`) outArray.push(`${date} 23:59:59`)
 
     return outArray
@@ -52,16 +52,18 @@ function createUserDataStructure(data){
     return userData
 }
 
-function getLastDate(inWork, outWork){
-    let date = dayNow()
+function getLastDate(outWork){
+    let date = dayTimeNow()
 
     let lastInWork = inWork[inWork.length-1]
     let lastoutWork = outWork[outWork.length-1]
 
+    let last = (new Date(lastInWork) >= lastoutWork)? lastInWork : lastoutWork
 
-    console.log(lastInWork, lastoutWork, date)
-
-    return null
+    if(date.slice(0,10) == last.slice(0,10)){
+        return [last, `${last.slice(0,10)} 23:59:59`]
+    }
+    else return null
 }
 
 function applyFilters(userData){
@@ -78,7 +80,9 @@ function applyFilters(userData){
         userData[e].highchartsWork = parseSkudForHighcharts(inWork, i)
         userData[e].highchartsOutWork = parseSkudForHighcharts(outWork, i)
 
-        userData[e].highchartsBlack = getLastDate(inWork, outWork)
+        userData[e].highchartsBlack = getLastDate(outWork)
+
+        console.log('Black array', userData[e].highchartsBlack)
     })
     return userData
 }
