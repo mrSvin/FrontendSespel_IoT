@@ -143,15 +143,15 @@ function filterLunch(dateArray, lunchType='8-17'){
 
     let date = dateArray[0].slice(0,10)
 
-    let arrayClear= dateArray.slice()
+    let arrayClear = []
 
     for (let i=0; i<dateArray.length; i++) {
         if (
             new Date(dateArray[i]).getTime() >= new Date(date + ' ' + startLunch).getTime() &&
             new Date(dateArray[i]).getTime() < new Date(date + ' ' + endLunch).getTime()
         ) {
-            arrayClear.splice(i,1)
-        }
+            // arrayClear.splice(i,1)
+        } else arrayClear.push(dateArray[i])
     }
 
     let arraySave = arrayClear.slice()
