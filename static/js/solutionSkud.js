@@ -52,6 +52,17 @@ function createUserDataStructure(data){
     return userData
 }
 
+function getLastDate(inWork, outWork){
+    let date = dayNow()
+
+    let lastInWork = inWork[inWork.length-1]
+    let lastoutWork = outWork[outWork.length-1]
+
+    console.log(lastInWork, lastoutWork, date)
+
+    return null
+}
+
 function applyFilters(userData){
 
     Object.keys(userData).forEach((e, i) => {
@@ -66,6 +77,7 @@ function applyFilters(userData){
         userData[e].highchartsWork = parseSkudForHighcharts(inWork, i)
         userData[e].highchartsOutWork = parseSkudForHighcharts(outWork, i)
 
+        userData[e].highchartsBlack = getLastDate(inWork, outWork)
     })
     return userData
 }
@@ -156,7 +168,7 @@ function filterLunch(dateArray, lunchType='8-17'){
 
     let arraySave = arrayClear.slice()
 
-    if(arraySave.length == dateArray.length) return arraySave
+    // if(arraySave.length == dateArray.length) return arraySave
 
     for (let i=0; i<arrayClear.length; i++) {
         if(arrayClear.length  == 1) {
@@ -200,13 +212,53 @@ function getHighchartSeriesAndNames(userData){
     let arrayNames = []
     let arrayData = []
 
+    let blackArrayTrigger = false
+
     Object.keys(userData).forEach((e) => {
         arrayNames.push(e + ' ' + userData[e]['workTime'])
         arrayData.push(userData[e]['highchartsWork'])
         arrayData.push(userData[e]['highchartsOutWork'])
+        if(userData[e]['highchartsBlack'] != null){
+            blackArrayTrigger = true
+            arrayData.push(userData[e]['highchartsBlack'])
+        }
     })
 
     let series = []
+
+    // for(let i=0; i < arrayData.length; i+=3){
+    //         series.push({
+    //             pointWidth: 30,
+    //             colorByPoint: false,
+    //             color: '#38e817',
+    //             tooltip: {
+    //                 pointFormatter: function () {
+    //                     let timer = msToTime(this.x2 - this.x)
+    //                     return '<b>Работает </b>' + timer
+    //                 },
+    //             },
+    //             data: arrayData[i],
+    //         })
+    //         series.push({
+    //             pointWidth: 30,
+    //             colorByPoint: false,
+    //             color: '#ffea32',
+    //             tooltip: {
+    //                 pointFormatter: function () {
+    //                     let timer = msToTime(this.x2 - this.x)
+    //                     return '<b>Нет на месте </b>' + timer
+    //                 },
+    //             },
+    //             data: arrayData[i+1],
+    //         })
+    //         series.push({
+    //             pointWidth: 30,
+    //             colorByPoint: false,
+    //             color: '#252734',
+    //             borderColor: '#252734',
+    //             data: arrayData[i+2],
+    //         })
+    // }
 
     for(let i=0; i < arrayData.length; i++){
         if(i%2 == 0) {
@@ -237,5 +289,7 @@ function getHighchartSeriesAndNames(userData){
             })
         }
     }
+
+
     return [series,arrayNames]
 }

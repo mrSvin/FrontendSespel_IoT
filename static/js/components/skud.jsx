@@ -3,7 +3,7 @@ function Skud() {
     const history = useHistory()
     const [heightHighchartContainer, setHeightHighchartContainer] = useState(3);
     let [date, setDate] = useState(dayNow());
-    let [place, setPlace] = useState('2ploshadka')
+    let [place, setPlace] = useState(parseNameUrl(location.pathname))
 
     let height = {
         height: 52 * heightHighchartContainer
