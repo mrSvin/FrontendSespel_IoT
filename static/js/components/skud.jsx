@@ -19,6 +19,7 @@ function Skud() {
             let userData = createUserDataStructure(data)
             let filteredData = applyFilters(userData)
 
+            console.log('Ноль, ничего?',Object.keys(filteredData).length)
             setHeightHighchartContainer(Object.keys(filteredData).length);
 
             let series = getHighchartSeriesAndNames(filteredData)
