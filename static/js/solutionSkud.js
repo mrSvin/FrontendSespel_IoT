@@ -52,7 +52,7 @@ function createUserDataStructure(data){
     return userData
 }
 
-function getLastDate(outWork){
+function getLastDate(inWork, outWork){
     let date = dayTimeNow()
 
     let lastInWork = inWork[inWork.length-1]
@@ -80,7 +80,7 @@ function applyFilters(userData){
         userData[e].highchartsWork = parseSkudForHighcharts(inWork, i)
         userData[e].highchartsOutWork = parseSkudForHighcharts(outWork, i)
 
-        userData[e].highchartsBlack = getLastDate(outWork)
+        userData[e].highchartsBlack = getLastDate(inWork,outWork)
 
         console.log('Black array', userData[e].highchartsBlack)
     })
