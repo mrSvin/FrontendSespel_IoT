@@ -116,14 +116,13 @@ function Menubar() {
                 <h2 className="buttonName">Склад</h2>
             </a>
 
-            <Link to="/winnum" className="container-home">
+            <Link to="/skud/2ploshadka" className="container-home">
                 <div className="icon-container">
-                    <p>Интегрированная платформа мониторинга оборудования</p>
-                    <div className="winnum"></div>
+                    <p>Отслеживание работы сотрудников в зонах предприятия</p>
+                    <div className="scud"></div>
                 </div>
-                <h2 className="buttonName">Winnum</h2>
+                <h2 className="buttonName">Контроль персонала</h2>
             </Link>
-
 
             <Link to="/owencloud" className="container-home">
                 <div className="icon-container">
@@ -157,13 +156,7 @@ function Menubar() {
                 <h2 className="buttonName">Teamcenter</h2>
             </Link>
 
-            <Link to="/skud/2ploshadka" className="container-home">
-                <div className="icon-container">
-                    <p>Система контроля и управления доступом</p>
-                    <div className="intra"></div>
-                </div>
-                <h2 className="buttonName">СКУД</h2>
-            </Link>
+
 
         </div>
     )
