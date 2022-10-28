@@ -258,6 +258,12 @@ function getHighchartSeriesAndNames(userData){
                     pointWidth: 30,
                     colorByPoint: false,
                     color: '#252734',
+                    tooltip: {
+                        enabled: false,
+                        pointFormatter: function () {
+                            return '<p></p>'
+                        },
+                    },
                     borderColor: '#252734',
                     data: arrayData[i+2],
                 })
