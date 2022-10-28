@@ -52,7 +52,7 @@ function createUserDataStructure(data){
     return userData
 }
 
-function getLastDate(inWork, outWork){
+function getLastDate(inWork, outWork, y){
     let date = dayTimeNow()
 
     let lastInWork = inWork[inWork.length-1]
@@ -61,7 +61,7 @@ function getLastDate(inWork, outWork){
     let last = (new Date(lastInWork) >= lastoutWork)? lastInWork : lastoutWork
 
     if(date.slice(0,10) == last.slice(0,10)){
-        return [last, `${last.slice(0,10)} 23:59:59`]
+        return parseSkudForHighcharts([last, `${last.slice(0,10)} 23:59:59`],y)
     }
     else return null
 }
@@ -80,9 +80,7 @@ function applyFilters(userData){
         userData[e].highchartsWork = parseSkudForHighcharts(inWork, i)
         userData[e].highchartsOutWork = parseSkudForHighcharts(outWork, i)
 
-        userData[e].highchartsBlack = getLastDate(inWork,outWork)
-
-        console.log('Black array', userData[e].highchartsBlack)
+        userData[e].highchartsBlack  = getLastDate(inWork,outWork, i)
     })
     return userData
 }
@@ -231,70 +229,71 @@ function getHighchartSeriesAndNames(userData){
 
     let series = []
 
-    // for(let i=0; i < arrayData.length; i+=3){
-    //         series.push({
-    //             pointWidth: 30,
-    //             colorByPoint: false,
-    //             color: '#38e817',
-    //             tooltip: {
-    //                 pointFormatter: function () {
-    //                     let timer = msToTime(this.x2 - this.x)
-    //                     return '<b>Работает </b>' + timer
-    //                 },
-    //             },
-    //             data: arrayData[i],
-    //         })
-    //         series.push({
-    //             pointWidth: 30,
-    //             colorByPoint: false,
-    //             color: '#ffea32',
-    //             tooltip: {
-    //                 pointFormatter: function () {
-    //                     let timer = msToTime(this.x2 - this.x)
-    //                     return '<b>Нет на месте </b>' + timer
-    //                 },
-    //             },
-    //             data: arrayData[i+1],
-    //         })
-    //         series.push({
-    //             pointWidth: 30,
-    //             colorByPoint: false,
-    //             color: '#252734',
-    //             borderColor: '#252734',
-    //             data: arrayData[i+2],
-    //         })
-    // }
-
-    for(let i=0; i < arrayData.length; i++){
-        if(i%2 == 0) {
-            series.push({
-                pointWidth: 30,
-                colorByPoint: false,
-                color: '#38e817',
-                tooltip: {
-                    pointFormatter: function () {
-                        let timer = msToTime(this.x2 - this.x)
-                        return '<b>Работает </b>' + timer
+    if(blackArrayTrigger){
+        for(let i=0; i < arrayData.length; i+=3){
+                series.push({
+                    pointWidth: 30,
+                    colorByPoint: false,
+                    color: '#38e817',
+                    tooltip: {
+                        pointFormatter: function () {
+                            let timer = msToTime(this.x2 - this.x)
+                            return '<b>Работает </b>' + timer
+                        },
                     },
-                },
-                data: arrayData[i],
-            })
-        } else {
-            series.push({
-                pointWidth: 30,
-                colorByPoint: false,
-                color: '#ffea32',
-                tooltip: {
-                    pointFormatter: function () {
-                        let timer = msToTime(this.x2 - this.x)
-                        return '<b>Нет на месте </b>' + timer
+                    data: arrayData[i],
+                })
+                series.push({
+                    pointWidth: 30,
+                    colorByPoint: false,
+                    color: '#ffea32',
+                    tooltip: {
+                        pointFormatter: function () {
+                            let timer = msToTime(this.x2 - this.x)
+                            return '<b>Нет на месте </b>' + timer
+                        },
                     },
-                },
-                data: arrayData[i],
-            })
+                    data: arrayData[i+1],
+                })
+                series.push({
+                    pointWidth: 30,
+                    colorByPoint: false,
+                    color: '#252734',
+                    borderColor: '#252734',
+                    data: arrayData[i+2],
+                })
+        }
+    } else {
+        for(let i=0; i < arrayData.length; i++){
+            if(i%2 == 0) {
+                series.push({
+                    pointWidth: 30,
+                    colorByPoint: false,
+                    color: '#38e817',
+                    tooltip: {
+                        pointFormatter: function () {
+                            let timer = msToTime(this.x2 - this.x)
+                            return '<b>Работает </b>' + timer
+                        },
+                    },
+                    data: arrayData[i],
+                })
+            } else {
+                series.push({
+                    pointWidth: 30,
+                    colorByPoint: false,
+                    color: '#ffea32',
+                    tooltip: {
+                        pointFormatter: function () {
+                            let timer = msToTime(this.x2 - this.x)
+                            return '<b>Нет на месте </b>' + timer
+                        },
+                    },
+                    data: arrayData[i],
+                })
+            }
         }
     }
-
 
     return [series,arrayNames]
 }
