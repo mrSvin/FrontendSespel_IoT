@@ -79,7 +79,6 @@ function applyFilters(userData){
 
         userData[e].highchartsWork = parseSkudForHighcharts(inWork, i)
         userData[e].highchartsOutWork = parseSkudForHighcharts(outWork, i)
-
         userData[e].highchartsBlack  = getLastDate(inWork,outWork, i)
     })
     return userData
