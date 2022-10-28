@@ -76,7 +76,7 @@ function Skud() {
             <div className='wrapperSkud'>
                 <div className={'lunchTime'} style={heightLunch}>
                     <p>Обед</p>
-                    <div className='stroke'></div>
+                    <div className='strokelunchTime'></div>
                 </div>
                 <div id={"containerSkud"} style={height} className="skudHigcharts"></div>
             </div>
