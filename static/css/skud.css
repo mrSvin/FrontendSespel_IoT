@@ -34,3 +34,97 @@
     opacity: 50%;
     background: repeating-linear-gradient(-60deg, #555 0, #555 1px, transparent 1px, transparent 5px);
 }
+
+.formUserSkud {
+    /*position: absolute;*/
+    background-color: #2c5275;
+    width: 235px;
+    /*height: 205px;*/
+    border-radius: 15px;
+    padding: 23px;
+    display: flex;
+    flex-direction: column;
+    left: -188px;
+    top: 12px;
+    transition: 0.3s;
+    z-index: 3;
+}
+
+.formUserSkud > label {
+    font-size: 18px;
+    margin: 5px 0px;
+    color: white;
+
+}
+
+.formUserSkud > input {
+    width: 90%;
+    margin: 0 auto;
+    color: white;
+    background: #114360;
+}
+
+.formUserSkud select {
+    width: 90%;
+    margin: 0 auto;
+    color: white;
+    background: #114360;
+    height: 25px;
+    border-width: 2px;
+    border-style: inset;
+}
+
+.formUserSkud select > option {
+    width: 90%;
+    margin: 0 auto;
+    color: white;
+    background: #114360;
+    height: 21px;
+}
+
+.formUserSkud > button {
+    margin-top: 10%;
+}
+
+.formUserHideSkud {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.formUserSkud > button {
+    color: white;
+    background: #1e74bd;
+    font-size: 110%;
+    padding: 0 10%;
+    letter-spacing: 0.025em;
+    border: 1px solid #22475c;
+    border-radius: 15px;
+    min-height: 35px;
+    cursor: pointer;
+    margin: 15px auto;
+}
+
+.formUserSkud > button:hover {
+    box-shadow: 0px 0px 5px 0px #507e8f, inset 0px 0px 0px 0px #8a9da5 !important;
+}
+
+.formUserSkud input:hover,
+.formUserSkud select:hover{
+    cursor: pointer;
+}
+
+.smenaTimeSkud{
+    display: flex;
+    justify-content: center;
+}
+
+.smenaTimeSkud label {
+    color: white;
+    display: inline-block;
+    width: 100%;
+}
+
+.smenaTimeSkud label:hover {
+    box-shadow: 0px 0px 5px 0px #507e8f, inset 0px 0px 0px 0px #8a9da5 !important;
+    cursor: pointer;
+}

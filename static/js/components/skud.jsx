@@ -45,6 +45,7 @@ function Skud() {
 
     return (
         <div>
+            <SkudAdmin/>
 
             <div className="buttons-otchet">
 
