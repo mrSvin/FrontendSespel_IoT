@@ -5,7 +5,6 @@
   <title>Станки Мех.участок 2 площадка </title>
   <link rel="shortcut icon" type="image/ico"/>
 
-  <link rel="stylesheet" type="text/css" href="/css/styles_stanki.css"/>
   <link rel="stylesheet" type="text/css" href="/css/report_day_style.css"/>
 
   <link href="/css/bootstrap.min.css" rel="stylesheet"/>
@@ -32,7 +31,6 @@ function dayNow() {
     }
 
 function HighchartsPressEpp(container, lata, seriesName1, seriesName2, tittle, yTittle){
-    console.log('Что по данным', lata)
 
     Highcharts.chart(container, {
         chart: {
@@ -143,11 +141,6 @@ $('#datepicker').datepicker({
     orientation: "button"
 });
 
-// let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
-
-// date = new Date(datas); // some mock date
-// ms = date.getTime() + 86400000;
-
 startTime = document.querySelector('.form-control').value
 
 data = []
@@ -160,7 +153,6 @@ let stankiRequest = Promise.all(namesToFetch.map(item=>{
   rewriteData(stankiRequest, data, stankiNames, exception)
 
     if(parseNameUrl(window.location.pathname)=='report_day_spec_complexes'){
-        console.log('Отдельные графики для спец. комплексов')
         let eppNames = [7545716, 7545711]
         let epp = Promise.all(eppNames.map((item) => {
             return fetchRequestPressEpp(item, startTime)
@@ -302,33 +294,12 @@ function changePlace(place){
         namesToFetch = ['press', 'epp', 'stp13m', 'stend_resources']
         stankiNames = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М", "Стенд для ресурсных испытаний"]
         exception = null;
+        name = 'Спец. комплексы'
         break;
-
-        // case "Склады":
-        // namesToFetch = ['sclad_meh']
-        // stankiNames = ["Склад Мех. цеха"]
-        // exception = null;
-        // break;
-
-        // case "Литьё":
-        // namesToFetch = ['pech_nerg', 'liteyka_big', 'liteyka_medium']
-        // stankiNames = ["Печь Индукционная", "Литейная машина большая", 'Литейная машина средняя']
-        // exception = null;
-        // break;
-
-        // case "Гибка":
-        // namesToFetch = ['faccin_1','faccin_2']
-        // stankiNames = ["FACCIN 4", "FACCIN 10"]
-        // exception = null;
-        // break;
 }
-
-
 
     document.getElementsByTagName('h1')[0].innerHTML = name
 
-    // datas = $('#datepicker').data().datepicker.viewDate.toISOString();
-    // date = new Date(datas); // some mock date
     startTime = document.querySelector('.form-control').value
     stankiRequest = Promise.all(namesToFetch.map(item=>{
     return makeRequest(item, startTime)
@@ -338,7 +309,6 @@ function changePlace(place){
     rewriteData(stankiRequest, data, stankiNames, exception)
 
     if(place=='report_day_spec_complexes'){
-        console.log('Отдельные графики для спец. комплексов')
         let eppNames = [7545716, 7545711]
         let epp = Promise.all(eppNames.map((item) => {
             return fetchRequestPressEpp(item)
@@ -375,7 +345,6 @@ function changePlace(place){
 
             HighchartsPressEpp(container, [temp, davl], s1, s2, te, tittleY)
         })
-
 
         let pressNames = [2899049, 2899041]
         let press = Promise.all(pressNames.map((item) => {
