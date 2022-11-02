@@ -10,8 +10,8 @@ function SkudAdmin() {
                         <th>Тип смены</th>
                         <th>Длительность смены</th>
                         <th>Длительность обеда</th>
-                        <th>Р</th>
-                        <th>Д</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,24 +20,40 @@ function SkudAdmin() {
                         <td>Первая смена</td>
                         <td>8 ч.</td>
                         <td>60 мин.</td>
-                        <td>Р</td>
-                        <td>Д</td>
+                        <td><div className='tdChange'></div></td>
+                        <td><div className='tdDelete'></div></td>
                     </tr>
                     <tr>
                         <td>1234</td>
                         <td>Первая смена</td>
                         <td>8 ч.</td>
                         <td>60 мин.</td>
-                        <td>Р</td>
-                        <td>Д</td>
+                        <td><div className='tdChange'></div></td>
+                        <td><div className='tdDelete'></div></td>
                     </tr>
                     <tr>
                         <td>1234</td>
                         <td>Первая смена</td>
                         <td>8 ч.</td>
                         <td>60 мин.</td>
-                        <td>Р</td>
-                        <td>Д</td>
+                        <td><div className='tdChange'></div></td>
+                        <td><div className='tdDelete'></div></td>
+                    </tr>
+                    <tr>
+                        <td>1234</td>
+                        <td>Первая смена</td>
+                        <td>8 ч.</td>
+                        <td>60 мин.</td>
+                        <td><div className='tdChange'></div></td>
+                        <td><div className='tdDelete'></div></td>
+                    </tr>
+                    <tr>
+                        <td>1234</td>
+                        <td>Первая смена</td>
+                        <td>8 ч.</td>
+                        <td>60 мин.</td>
+                        <td><div className='tdChange'></div></td>
+                        <td><div className='tdDelete'></div></td>
                     </tr>
                 </tbody>
             </table>
