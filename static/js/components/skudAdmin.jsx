@@ -1,7 +1,47 @@
 function SkudAdmin() {
 
     return (
-        <SkudAdminForm/>
+        <div>
+            <SkudAdminForm/>
+            <table className='tableSkudUsers'>
+                <thead>
+                    <tr>
+                        <th>Табельный</th>
+                        <th>Тип смены</th>
+                        <th>Длительность смены</th>
+                        <th>Длительность обеда</th>
+                        <th>Р</th>
+                        <th>Д</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1234</td>
+                        <td>Первая смена</td>
+                        <td>8 ч.</td>
+                        <td>60 мин.</td>
+                        <td>Р</td>
+                        <td>Д</td>
+                    </tr>
+                    <tr>
+                        <td>1234</td>
+                        <td>Первая смена</td>
+                        <td>8 ч.</td>
+                        <td>60 мин.</td>
+                        <td>Р</td>
+                        <td>Д</td>
+                    </tr>
+                    <tr>
+                        <td>1234</td>
+                        <td>Первая смена</td>
+                        <td>8 ч.</td>
+                        <td>60 мин.</td>
+                        <td>Р</td>
+                        <td>Д</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     )
 }
 

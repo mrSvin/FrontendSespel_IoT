@@ -128,3 +128,73 @@
     box-shadow: 0px 0px 5px 0px #507e8f, inset 0px 0px 0px 0px #8a9da5 !important;
     cursor: pointer;
 }
+
+.tableSkudUsers {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+    color: white;
+    margin: 2% 2% 0 2%;
+    /* word-break: break-word; */
+    border-color: white;
+    border: 2px solid #888a8d;
+    transition: 0.3s;
+}
+
+.tableSkudUsers > tbody {
+    display: block;
+    width: 100%;
+    max-height: 181px;
+    overflow-x: hidden;
+    transition: max-height 0.15s ease-out;
+    transition: max-height 0.2s ease-in;
+}
+
+.tableSkudUsers > tbody > tr {
+    padding: 4px;
+    line-height: 1.42857143;
+    text-align: center;
+    border-bottom: 1px solid #979595;
+    font-family: sans-serif;
+    background: #252734;
+}
+
+
+.tableSkudUsers > thead {
+    border-bottom: 1px solid #979595;
+    background: #2c5275;
+    display: block;
+}
+
+.tableSkudUsers > thead > tr > th, .tableSkudUsers > tbody > tr > td {
+    width: 20%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tableSkudUsers tr {
+    display: flex;
+    width: 100%;
+}
+
+.tableSkudUsers > tbody > tr > td:last-child {
+    color: red;
+    font-weight: bold;
+    font-size: 1.5em;
+    position: relative;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.tableSkudUsers > tbody > tr > td:nth-child(5):hover {
+    cursor: pointer;
+    background: #e9ce3b;
+}
+
+.tableSkudUsers > tbody > tr > td:last-child:hover {
+    cursor: pointer;
+    background: #ff0000;
+}
+
