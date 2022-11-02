@@ -57,6 +57,7 @@ function SkudAdmin() {
                     </tr>
                 </tbody>
             </table>
+            <div className='addButton'><span>+</span></div>
         </div>
     )
 }

@@ -36,18 +36,17 @@
 }
 
 .formUserSkud {
-    /*position: absolute;*/
+    position: absolute;
     background-color: #2c5275;
     width: 235px;
-    /*height: 205px;*/
     border-radius: 15px;
     padding: 23px;
     display: flex;
     flex-direction: column;
-    left: -188px;
-    top: 12px;
     transition: 0.3s;
     z-index: 3;
+    margin: 0 auto;
+    right: 73%;
 }
 
 .formUserSkud > label {
@@ -87,6 +86,7 @@
 }
 
 .formUserHideSkud {
+    position: absolute;
     opacity: 0;
     visibility: hidden;
 }
@@ -145,7 +145,7 @@
 .tableSkudUsers > tbody {
     display: block;
     width: 100%;
-    max-height: 181px;
+    max-height: 65vh;
     overflow-x: hidden;
     transition: max-height 0.15s ease-out;
     transition: max-height 0.2s ease-in;
@@ -153,7 +153,7 @@
 
 .tableSkudUsers > tbody > tr {
     padding: 4px;
-    line-height: 200%;
+    line-height: 215%;
     text-align: center;
     border-bottom: 1px solid #979595;
     font-family: sans-serif;
@@ -222,10 +222,26 @@
 }
 
 .tdChange{
-    background: url(../images/iconPen.svg) no-repeat;
+    background: no-repeat center/53% url(../images/iconPen.svg);
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
 }
 
 .tdDelete{
-    background: url(../images/iconDelete.svg) no-repeat;
+    background: no-repeat center/65% url(../images/iconDelete.svg);
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
 }
+
+.tdChange:hover{
+    filter: brightness(150%) contrast(120%);
+}
+
+.tdDelete:hover{
+    filter: brightness(150%) contrast(120%);
+}
+
+
 
