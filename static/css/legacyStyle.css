@@ -1,0 +1,614 @@
+
+body {
+    margin: 0;
+}
+
+.table_energy {
+    margin: 5px 10px 40px 5px;
+    position: relative;
+    width: 75%;
+    border-color: white;
+}
+
+.table_energy th,
+.table_energy td {
+
+    vertical-align: center;
+    font-size: 14px;
+    border: none!important;
+    outline: 1px solid white!important;
+    text-shadow: none!important;
+    text-align: center;
+
+    /*width: 50px;*/
+}
+
+.table_energy th {
+    background-color: #0C213B;
+    color: #fff;
+    text-shadow: none!important;
+}
+
+.table_energy th:nth-of-type(0),
+.table_energy td:nth-of-type(n) {
+    text-align: center;
+}
+
+.table_energy > thead > tr > th:nth-of-type(1) {
+    background-color: #223362!important;
+    width: 60px!important;
+    padding: 9px!important;
+}
+
+
+.table_energy > tbody > tr > td:nth-of-type(1) {
+    background-color: #223362 !important;
+    color: white;
+    font-weight: bold;
+    width: 60px!important;
+    padding: 9px!important;
+}
+
+
+.table_energy > tbody > tr > td:nth-of-type(n+2) {
+    /*background-color: blue!important;*/
+    width: 50px;
+    padding: 5px!important;
+}
+
+.table_energy > thead > tr > th:nth-of-type(n+2) {
+    /*background-color: blue!important;*/
+    width: 50px;
+    padding: 5px!important;
+}
+
+.table_general {
+    margin: 5px 10px;
+    position: relative;
+    width: 75%;
+    border-color: white;
+}
+
+.table_general th,
+.table_general td {
+
+    vertical-align: center;
+    font-size: 14px;
+    border: none!important;
+    outline: 1px solid white!important;
+    text-shadow: none!important;
+    text-align: center;
+
+    /*width: 50px;*/
+}
+
+.table_general th {
+    background-color: #223362;
+    color: #fff;
+    text-shadow: none!important;
+}
+
+.table_general th:nth-of-type(0),
+.table_general td:nth-of-type(n) {
+    text-align: center;
+}
+
+.table_general > thead > tr > th:nth-of-type(1) {
+    /*background-color: #223362!important;*/
+    width: 60px!important;
+    padding: 9px!important;
+}
+
+
+
+.table_general > tbody > tr > td:nth-of-type(n+2) {
+    /*background-color: blue!important;*/
+    width: 50px;
+    padding: 5px!important;
+}
+
+.table_general > thead > tr > th:nth-of-type(n+2) {
+    /*background-color: blue!important;*/
+    width: 50px;
+    padding: 5px!important;
+}
+
+li {
+    list-style-type: none; /* Убираем маркеры */
+}
+
+.icon-logo {
+    margin: 4%;
+}
+
+.icon-logo:hover {
+    background: #D43737;
+    border-radius: 10px 33px 33px;
+    transform: scale(1.01);
+    transition: 1s;
+}
+
+th {
+    padding: 10px;
+    border: 1px solid #A9E2CC;
+    text-align: center;
+}
+
+td {
+    font-size: 1em;
+    padding: 5px 7px;
+    border: 1px solid #A9E2CC;
+    text-align: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 0.5vw;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px; /* Уголки */
+    margin: 8%;
+    opacity: 1;
+    float: right;
+    text-align: center;
+    background-color: whitesmoke;
+    z-index: 5;
+    top: 50px;
+    right: 10px;
+
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 40px 20px;
+    display: block;
+    cursor: pointer;
+}
+
+.dropdown-content img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 360px;
+    margin: 8px 0 0 0 !important;
+    transition: 0.5s;
+}
+
+.iconPhoto {
+    position: absolute;
+    right: 30px;
+    opacity: 0%;
+    transition: 0.5s;
+}
+
+.dropdown-content a:hover img:first-of-type {
+    filter: brightness(50%);
+}
+
+.dropdown-content a:hover .iconPhoto {
+    opacity: 50%;
+}
+
+
+.dropdown-content li {
+    font-weight: 400;
+    font-size: 18px;
+    margin: 7px 0 0 0 !important;
+}
+
+.dropdown-content > p {
+    margin: 10px 0 0 0 !important;
+}
+
+.dropdown-content > div {
+    margin: 13px 0 0 0 !important;
+}
+
+#role_vision {
+    margin: 12px 0 0 0 !important;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin: 10%;
+    margin-right: 15px;
+    transition: 1s;
+    border-radius: 360px;
+}
+
+.avatar:hover {
+    transform: scale(1.05)
+}
+
+/*Кнопка выход профиля*/
+button:focus {
+    outline: none;
+}
+
+
+.follow span {
+    font-size: 85%
+}
+
+.follow:after {
+    content: '';
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: solid 2px;
+    border-color: #fff transparent transparent transparent;
+    border-radius: 100%;
+    -webkit-transition: .3s ease;
+    -moz-transition: .3s ease;
+    -o-transition: .3s ease;
+    transition: .3s ease;
+    animation: fin 1s infinite;
+    transform-origin: 0 0;
+}
+
+/*Кнопка выход профиля*/
+.follow {
+    position: relative;
+    font-family: "Open Sans", sans-serif;
+    background: #4f759b;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    border: none;
+    border-radius: 15px;
+    min-height: 35px;
+    width: 115px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin: 17px 0 !important;
+}
+
+.follow:hover {
+    box-shadow: 0px 0px 5px 0px #14B2E9, inset 0px 0px 0px 0px #14b2f3 !important;
+}
+
+
+.follow.load {
+    padding: 3px 6px;
+}
+
+.follow.load span {
+    opacity: 0;
+}
+
+.follow.load:after {
+    display: block;
+}
+
+@keyframes fin {
+    from {
+        transform: rotate(0) translate(-50%, -50%)
+    }
+    to {
+        transform: rotate(360deg) translate(-50%, -50%)
+    }
+}
+
+
+#admin {
+    display: none;
+    background: #ff3b3b;
+    width: 135px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    border-radius: 5px;
+    font-family: "Open Sans", sans-serif;
+    color: #ffffff;
+    border: none;
+    min-height: 35px;
+    margin-bottom: 25px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin: 17px 0 0 0 !important;
+
+}
+
+#admin:hover {
+    background: #ff3b3b;
+    width: 145px;
+    font-size: 12px;
+    text-align: revert;
+}
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 25px;
+    cursor: pointer;
+    margin: 17px 0 0 0 !important;
+
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.switch input {
+    display: none;
+}
+
+.switch p {
+    z-index: 2;
+    font-weight: bold;
+    position: relative;
+    font-size: 1.1rem;
+    word-spacing: 1.8rem;
+    top: 20%
+}
+
+
+.neo-line {
+    display: block;
+    margin: 0 auto;
+    height: 2px;
+    background: #e0f7fe;
+    width: 95%;
+    box-shadow: 0px 0px 5px 3px #4A9BB5, inset 0px 0px 0px 0px #4a9bb2 !important;
+}
+
+.div_login_mail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 5%;
+}
+
+.div_login_mail > p {
+    color: #b3b8be;
+    font-size: 12px;
+}
+
+.div_login_mail li {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.emailLogo {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0 0 10px;
+}
+
+.usernameLogo {
+    font-weight: 400;
+    font-size: 18px;
+    color: #83addd !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*Специальный css для контуров в mozilla*/
+a.active.focus,
+a.active:focus,
+a.focus,
+a:active.focus,
+a:active:focus,
+a:focus,
+button.active.focus,
+button.active:focus,
+button.focus,
+button:active.focus,
+button:active:focus,
+button:focus,
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+    outline: 0 !important;
+    outline-color: transparent !important;
+    outline-width: 0 !important;
+    outline-style: none !important;
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
+}
+
+
+/* Таблица с текущими параметрами */
+body {
+    margin: 0;
+    background: #F4F1F8;
+
+}
+table {
+    border-collapse: collapse;
+    line-height: 1.1;
+    background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+    color: #0C213B;
+
+}
+caption {
+
+    font-weight: bold;
+    text-align: center;
+}
+
+.first {
+    padding: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.img {
+    width: 18%;
+    max-width: 300px;
+    min-height: 500px;
+}
+
+.parent_image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+    /*max-height: 400px;*/
+}
+
+.stanok_img{
+    max-height: 400px;
+    width: auto;
+    max-width: 100%;
+}
+
+
+/*Кнопки и персонал*/
+.icon_mesto{
+
+    width: 60px;
+    height: 60px;
+    background: url(../images/iconMesto.png) no-repeat;
+    background-size: 60px 60px;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.icon_mesto:hover {
+    -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
+}
+
+.icon_mesto:hover > div,
+.icon_personal:hover > div,
+.icon_error:hover > div,
+.icon_power:hover > div,
+.icon_programTime:hover > div {
+    position: relative;
+    top: 5px;
+}
+
+.icon_clock:hover > div {
+    position: relative;
+    top: -65px;
+}
+
+
+
+.icon_personal{
+    background: url(../images/iconPersonal.png) no-repeat;
+    background-size: 60px 60px;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.icon_personal:hover {
+    -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+}
+
+.icon_error{
+    background: url(../images/error.png) no-repeat;
+    background-size: 60px 60px;
+    margin-top: 10px;
+    margin-left: 30px;
+    width: 60px;
+}
+.icon_error:hover {
+    -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+}
+
+.icon_power{
+    background: url(../images/iconPower.png) no-repeat;
+    background-size: 60px 60px;
+    margin-top: 10px;
+    margin-left: 30px;
+    width: 60px;
+}
+
+.icon_power:hover {
+    -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+}
+
+.icon_clock{
+    position: relative;
+    background: url(../images/iconClock.png) no-repeat;
+    background-size: 90px 43px;
+    width: 60px;
+    padding-right: 50px;
+    padding-left: 50px;
+    right: 5%;
+    top: 13px;
+
+}
+.icon_clock:hover {
+    filter: brightness(150%);
+}
+
+.label_mesto{
+    color: #756e6e;
+    margin-top: 65px;
+    margin-left: 8px;
+}
+
+.label_personal{
+    color: #756e6e;
+    margin-top: 65px;
+    margin-left: -5px;
+}
+
+.label_error{
+    color: #756e6e;
+    margin-top: 65px;
+    margin-left: 4px;
+}
+
+.label_power{
+    color: #756e6e;
+    margin-top: 65px;
+    margin-left: -4px;
+}
+
+.label_clock{
+    color: #756e6e;
+    margin-top: 45px;
+    position: relative;
+    top: -60px;
+    right: 26px;
+}
+
+.icon_programTime{
+    background: url(../images/programTime.png) no-repeat;
+    background-size: 60px 60px;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.icon_programTime:hover {
+    -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
+}
+
+.label_programTime{
+    color: #756e6e;
+    margin-top: 65px;
+    margin-left: -13px;
+}
+
+.choose_month {
+    margin: 0!important;
+}
+
+#container_sum_zagruzka_krug {
+    width: 30%!important;
+}
+
+#container_sum_zagruzka, #container_sum_zagruzka_2 {
+    width: 65%!important;
+}
+
+
+
