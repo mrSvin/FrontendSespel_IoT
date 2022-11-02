@@ -1,5 +1,12 @@
 function SkudAdmin() {
 
+    return (
+        <SkudAdminForm/>
+    )
+}
+
+function SkudAdminForm() {
+
     let action = ['hide','add','change']
     const [typeForm, setTypeForm] = useState('hide')
 
@@ -48,3 +55,4 @@ function SkudAdmin() {
         </form>
     )
 }
+

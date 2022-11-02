@@ -45,7 +45,9 @@ function Skud() {
 
     return (
         <div>
-            <SkudAdmin/>
+            <Link to={`/skudAdmin`}>
+                <p>Админска кнопка</p>
+            </Link>
 
             <div className="buttons-otchet">
 
