@@ -1,5 +1,20 @@
 function SkudAdmin() {
 
+    function fetchRequestScudInfoWorkers() {
+        return fetch(`/api/scud/infoWorkers`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    }
+
+    useEffect(() => {
+        let promise = fetchRequestScudInfoWorkers()
+        promise.then(data=>{
+            console.log('Данные', data)
+        })
+    },[])
+
     return (
         <div>
             <SkudAdminForm/>
@@ -57,7 +72,7 @@ function SkudAdmin() {
                     </tr>
                 </tbody>
             </table>
-            <div className='addButton'><span>+</span></div>
+            <div className='addButton addButtonSkud'><span>+</span></div>
         </div>
     )
 }
