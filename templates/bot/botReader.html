@@ -158,7 +158,87 @@ let stankiRequest = Promise.all(namesToFetch.map(item=>{
 
   // Это тот же .then, просто обернутый в функцию
   rewriteData(stankiRequest, data, stankiNames, exception)
+
+    if(parseNameUrl(window.location.pathname)=='report_day_spec_complexes'){
+        console.log('Отдельные графики для спец. комплексов')
+        let eppNames = [7545716, 7545711]
+        let epp = Promise.all(eppNames.map((item) => {
+            return fetchRequestPressEpp(item, startTime)
+        }));
+
+        epp.then((e,i)=>{
+            let container = 'container_epp_tok'
+
+            let s1 = 'Ток, А'
+            let s2 = 'Температура, С'
+            let te = 'Хронология технологического процесса ЭПП'
+            let tittleY = 'Амплитуда'
+
+
+            let temp = e[1].map(k=>{
+                return k.split(',').map(f=>{
+                    return parseInt(f, 10);
+                })
+            })
+
+            temp.forEach(e=>{
+                e[0] *= 1000
+            })
+
+            let davl = e[0].map(k=>{
+                return k.split(',').map(f=>{
+                    return parseInt(f, 10);
+                })
+            })
+
+            davl.forEach(e=>{
+                e[0] *= 1000
+            })
+
+            HighchartsPressEpp(container, [temp, davl], s1, s2, te, tittleY)
+        })
+
+
+        let pressNames = [2899049, 2899041]
+        let press = Promise.all(pressNames.map((item) => {
+            return fetchRequestPressEpp(item, startTime)
+        }));
+
+        press.then((e,i)=>{
+            let container = 'container_press_davlenie'
+
+            let s1 = 'Давление запрессовки, т'
+            let s2 = 'Заданное давление, т'
+            let te = 'Хронология запрессовок Пресса ЧПУ'
+            let tittleY = 'Давление, тонн'
+
+
+            let zad = e[0].map(k=>{
+                return k.split(',').map(f=>{
+                    return parseInt(f, 10);
+                })
+            })
+
+            zad.forEach(e=>{
+                e[0] *= 1000
+            })
+
+            let davl = e[1].map(k=>{
+                return k.split(',').map(f=>{
+                    return parseInt(f, 10);
+                })
+            })
+
+            davl.forEach(e=>{
+                e[0] *= 1000
+            })
+
+            HighchartsPressEpp(container, [davl, zad], s1, s2, te, tittleY)
+        })
+    }
 }
+
+
 
 function parseNameUrl(url) {
     let form_path = decodeURIComponent(url);
@@ -349,21 +429,12 @@ function changePlace(place){
             </span>
         </div>
     </form>
-<button value="ОТК" onclick="changePlace(value)">ОТК</button>
-<button value="Мех.уч.2 пл." onclick="changePlace(value)">Мех.уч.2 пл.</button>
-<button value="Резка" onclick="changePlace(value)">Резка</button>
-<button value="Мех.уч.1 пл." onclick="changePlace(value)">Мех.уч.1 пл.</button>
-<button value="Роботы" onclick="changePlace(value)">Роботы</button>
-<button value="Спец. комплексы" onclick="changePlace(value)">Спец. комплексы</button>
-<button value="Склады" onclick="changePlace(value)">Склады</button>
-<button value="Литьё" onclick="changePlace(value)">Литьё</button>
-<button value="Гибка" onclick="changePlace(value)">Гибка</button>
 </div>
 
 <h1>Станки Мех.участок 2 площадка </h1>
-<div style="display: flex; justify-content: space-around; min-height: 80vh;">
+<div style="display: flex; justify-content: space-around; min-height: 40vh;">
   <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
-  <table id='myTable' style="min-height: 400px; width: 45%">
+  <table id='myTable' style="min-height: 40vh; width: 45%">
     <thead>
     <tr>
       <th>Станки</th>
