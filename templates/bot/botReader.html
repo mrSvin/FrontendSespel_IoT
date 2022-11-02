@@ -26,10 +26,91 @@
  <script src="/js/lib/bootstrap-datepicker.ru.min.js"></script>
 
 <script>
-    function dayNow() {
+function dayNow() {
         let calendarDate = new Date().toLocaleString()
         return `${calendarDate.slice(6, 10)}-${calendarDate.slice(3, 5)}-${calendarDate.slice(0, 2)}`
     }
+
+function HighchartsPressEpp(container, lata, seriesName1, seriesName2, tittle, yTittle){
+    console.log('Что по данным', lata)
+
+    Highcharts.chart(container, {
+        chart: {
+            zoomType: 'x'
+        },
+        time: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        },
+        title: {
+            text: tittle
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: yTittle
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
+            }
+        },
+        credits: {
+            enabled: false
+        },
+
+        series: [{
+            type: 'area',
+            name: seriesName1,
+            data: lata[0]
+        },
+            {
+                name: seriesName2,
+                data: lata[1]
+            }
+        ]
+    });
+}
+
+function fetchRequestPressEpp(signal,date=dayNow()) {
+
+    let serverDomain = window.location.hostname
+    let serverPort = window.location.port
+
+    let url = `http://${serverDomain}:${serverPort}/api/signal/idSignal:${signal}_date:${date}`
+
+    return fetch(url, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}
 
 document.addEventListener("DOMContentLoaded", function(event) {
             $('#datepicker').datepicker({
@@ -137,9 +218,9 @@ function changePlace(place){
         name = 'Роботы'
         break;
 
-        case "Спец. комплексы":
-        namesToFetch = ['press', 'epp', 'stp13m']
-        stankiNames = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М"]
+        case "report_day_spec_complexes":
+        namesToFetch = ['press', 'epp', 'stp13m', 'stend_resources']
+        stankiNames = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М", "Стенд для ресурсных испытаний"]
         exception = null;
         break;
 
@@ -176,6 +257,83 @@ function changePlace(place){
   // Это тот же .then, просто обернутый в функцию
     rewriteData(stankiRequest, data, stankiNames, exception)
 
+    if(place=='report_day_spec_complexes'){
+        console.log('Отдельные графики для спец. комплексов')
+        let eppNames = [7545716, 7545711]
+        let epp = Promise.all(eppNames.map((item) => {
+            return fetchRequestPressEpp(item)
+        }));
+
+        epp.then((e,i)=>{
+            let container = 'container_epp_tok'
+
+            let s1 = 'Ток, А'
+            let s2 = 'Температура, С'
+            let te = 'Хронология технологического процесса ЭПП'
+            let tittleY = 'Амплитуда'
+
+
+            let temp = e[1].map(k=>{
+                return k.split(',').map(f=>{
+                    return parseInt(f, 10);
+                })
+            })
+
+            temp.forEach(e=>{
+                e[0] *= 1000
+            })
+
+            let davl = e[0].map(k=>{
+                return k.split(',').map(f=>{
+                    return parseInt(f, 10);
+                })
+            })
+
+            davl.forEach(e=>{
+                e[0] *= 1000
+            })
+
+            HighchartsPressEpp(container, [temp, davl], s1, s2, te, tittleY)
+        })
+
+
+        let pressNames = [2899049, 2899041]
+        let press = Promise.all(pressNames.map((item) => {
+            return fetchRequestPressEpp(item)
+        }));
+
+        press.then((e,i)=>{
+            let container = 'container_press_davlenie'
+
+            let s1 = 'Давление запрессовки, т'
+            let s2 = 'Заданное давление, т'
+            let te = 'Хронология запрессовок Пресса ЧПУ'
+            let tittleY = 'Давление, тонн'
+
+
+            let zad = e[0].map(k=>{
+                return k.split(',').map(f=>{
+                    return parseInt(f, 10);
+                })
+            })
+
+            zad.forEach(e=>{
+                e[0] *= 1000
+            })
+
+            let davl = e[1].map(k=>{
+                return k.split(',').map(f=>{
+                    return parseInt(f, 10);
+                })
+            })
+
+            davl.forEach(e=>{
+                e[0] *= 1000
+            })
+
+            HighchartsPressEpp(container, [davl, zad], s1, s2, te, tittleY)
+        })
+    }
 }
 
 </script>
@@ -222,33 +380,21 @@ function changePlace(place){
   <!--Общая загрузка html-->
 </div>  <!--Общая загрузка и количество операций html-->
 
+<div style="display: flex; justify-content: space-around; min-height: 40vh;">
+    <div style="width: 45%;" id="container_press_davlenie"></div>
+    <div style="width: 45%;" id="container_epp_tok"></div>
+</div>  <!--Общие Ток и давление-->
+
 <script>
   document.querySelector('.form-control').value = dayNow()
 
   let namesToFetch = []
-  // 'uvf5220', 'progress', 'ntx1000_2',
-  //   'sk50', 'apec', 'dmg_dmu50_3', 'dmg_dmu50_4',
-  //   'dmg_ctx310_2', 'dmg_ctx510_2', 'dmg_ctx510_3',
-  //   'dmg_ctx310_3', 'dmg_ctx510_4', 'dmg_ctx510_5',
-  //   'dmg_dmc1035_2', 'dmg_dmu50_5', 'dmg_dmu50_6',
-  //   'dmg_dmu50_7', 'ar55']
-  let stankiNames = []
-  // 'УФ5220', 'СТП Сеспель', 'NTX1000',
-  //   'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2',
-  //   'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4',
-  //   'CTX510 #5', 'DMC1035 #2', 'DMU50 #5', 'DMU50 #6',
-  //   'DMU50 #7','AR55']
-  let data = []
-  // let date = (new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString()).slice(0, 10);
- 
-  let exception = []
-      // [4,'Ручной режим','#5c7ed0', 'ruchnoi'],];
-  // let stankiRequest = Promise.all(namesToFetch.map(item=>{
-  //   return makeRequest(item, date)
-  // }));
 
-  // Это тот же .then, просто обернутый в функцию
-  // rewriteData(stankiRequest, data, stankiNames, exception)
+  let stankiNames = []
+
+  let data = []
+
+  let exception = []
 
   changePlace(parseNameUrl(window.location.pathname))
 </script> 
