@@ -20,6 +20,10 @@ const loader = document.querySelector('.loader');
 const showLoader = () => loader.classList.remove('loader--hide');
 const hideLoader = () => loader.classList.add('loader--hide');
 
+interceptNetworkRequests({
+    onFetchResponse: reloadPageIfLogin,
+});
+
 function App({hideLoader}) {
 
     useEffect(hideLoader, []);
