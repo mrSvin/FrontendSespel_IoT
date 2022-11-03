@@ -194,18 +194,17 @@
         <!--$("#datepicker").datepicker("update", new Date());  Задаем текущее время-->
 
 
+        $('#button_obnovit').on("click", function () {
 
-        $('#button_obnovit').on("click", function() {
-
-            setTimeout(ActiveButton,1500)
+            setTimeout(ActiveButton, 1500)
             $('.follow').addClass('load')
 
             var datas = $('#datepicker').data().datepicker.viewDate;
             var day = datas.getDate();
-            var mes = datas.getMonth()+1;
+            var mes = datas.getMonth() + 1;
             var year = datas.getFullYear();
 
-            name_data = year+"-" +mes+"-" +day;
+            name_data = year + "-" + mes + "-" + day;
             <!--console.log(name_data);-->
         });
 
