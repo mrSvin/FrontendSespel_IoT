@@ -1,37 +1,36 @@
-function getWorkTime(dateArray){
+function getWorkTime(dateArray) {
     let time = 0
 
-    let msArray = dateArray.map(e=>{
+    let msArray = dateArray.map(e => {
         return new Date(e).getTime()
     })
 
-    for(let i=1; i<msArray.length; i+=2){
-        time += msArray[i] - msArray[i-1]
+    for (let i = 1; i < msArray.length; i += 2) {
+        time += msArray[i] - msArray[i - 1]
     }
 
     time = msToTime(time)
     return time
 }
 
-function getOutWorkTimeArray(array){
+function getOutWorkTimeArray(array) {
 
-    let date = array[0].slice(0,10)
+    let date = array[0].slice(0, 10)
 
     let outArray = array.slice()
 
-    if(outArray[0] !== `${date} 00:00:00`){
+    if (outArray[0] !== `${date} 00:00:00`) {
         outArray.unshift(`${date} 00:00:00`)
-    }
-    else outArray.splice(0,1)
+    } else outArray.splice(0, 1)
 
-    if(date == dayNow()){
-        if(outArray[outArray.length-1] !== `${date} ${timeNow()}`) outArray.push(`${date} ${timeNow()}`)
-    } else if(outArray[outArray.length-1] !== `${date} 23:59:59`) outArray.push(`${date} 23:59:59`)
+    if (date == dayNow()) {
+        if (outArray[outArray.length - 1] !== `${date} ${timeNow()}`) outArray.push(`${date} ${timeNow()}`)
+    } else if (outArray[outArray.length - 1] !== `${date} 23:59:59`) outArray.push(`${date} 23:59:59`)
 
     return outArray
 }
 
-function createUserDataStructure(data){
+function createUserDataStructure(data) {
     let userData = {}
 
     for (let i = 0; i < data.username.length; i++) {
@@ -52,21 +51,20 @@ function createUserDataStructure(data){
     return userData
 }
 
-function getLastDate(inWork, outWork, y){
+function getLastDate(inWork, outWork, y) {
     let date = dayTimeNow()
 
-    let lastInWork = inWork[inWork.length-1]
-    let lastoutWork = outWork[outWork.length-1]
+    let lastInWork = inWork[inWork.length - 1]
+    let lastoutWork = outWork[outWork.length - 1]
 
-    let last = (new Date(lastInWork) >= lastoutWork)? lastInWork : lastoutWork
+    let last = (new Date(lastInWork) >= lastoutWork) ? lastInWork : lastoutWork
 
-    if(date.slice(0,10) == last.slice(0,10)){
-        return parseSkudForHighcharts([last, `${last.slice(0,10)} 23:59:59`],y)
-    }
-    else return null
+    if (date.slice(0, 10) == last.slice(0, 10)) {
+        return parseSkudForHighcharts([last, `${last.slice(0, 10)} 23:59:59`], y)
+    } else return null
 }
 
-function applyFilters(userData){
+function applyFilters(userData) {
 
     Object.keys(userData).forEach((e, i) => {
         let noDublicateArrays = dublicateDeleteFilter(userData[e].logtime, userData[e].statusInOut)
@@ -79,20 +77,20 @@ function applyFilters(userData){
 
         userData[e].highchartsWork = parseSkudForHighcharts(inWork, i)
         userData[e].highchartsOutWork = parseSkudForHighcharts(outWork, i)
-        userData[e].highchartsBlack  = getLastDate(inWork,outWork, i)
+        userData[e].highchartsBlack = getLastDate(inWork, outWork, i)
     })
     return userData
 }
 
-function dublicateDeleteFilter(arrayData, arrayInOut){
+function dublicateDeleteFilter(arrayData, arrayInOut) {
     let filterData = []
     let filterInOut = []
 
-    for (let i=0; i<arrayInOut.length; i++){
-        if(i == arrayInOut.length-1){
+    for (let i = 0; i < arrayInOut.length; i++) {
+        if (i == arrayInOut.length - 1) {
             filterData.push(arrayData[i])
             filterInOut.push(arrayInOut[i])
-        } else if(arrayInOut[i] != arrayInOut[i+1]){
+        } else if (arrayInOut[i] != arrayInOut[i + 1]) {
             filterData.push(arrayData[i])
             filterInOut.push(arrayInOut[i])
         }
@@ -101,7 +99,7 @@ function dublicateDeleteFilter(arrayData, arrayInOut){
     return [filterData, filterInOut]
 }
 
-function addStartOrEnd(filterArrays, typeTime='8-17'){
+function addStartOrEnd(filterArrays, typeTime = '8-17') {
 
     let filterData = filterArrays[0]
     let filterInOut = filterArrays[1]
@@ -114,7 +112,7 @@ function addStartOrEnd(filterArrays, typeTime='8-17'){
     switch (typeTime) {
         case '8-17':
             startTime = '00:00:00'
-            endTime = (currentDate == filterData[filterData.length-1].slice(0,10))? timeNow() :'23:59:59'
+            endTime = (currentDate == filterData[filterData.length - 1].slice(0, 10)) ? timeNow() : '23:59:59'
             break;
         case '7-19':
             break;
@@ -122,26 +120,26 @@ function addStartOrEnd(filterArrays, typeTime='8-17'){
             break;
         default:
             startTime = '00:00:00'
-            endTime = (currentDate == filterData[filterData.length-1].slice(0,10))? timeNow() :'23:59:59'
+            endTime = (currentDate == filterData[filterData.length - 1].slice(0, 10)) ? timeNow() : '23:59:59'
             break
     }
 
-    if(filterInOut[0] =='output'){
-        filterData.unshift(filterData[0].slice(0,10) + ' ' + startTime)
+    if (filterInOut[0] == 'output') {
+        filterData.unshift(filterData[0].slice(0, 10) + ' ' + startTime)
     }
-    if(filterInOut[filterInOut.length-1] == 'input'){
-        filterData.push(filterData[0].slice(0,10) + ' ' + endTime)
+    if (filterInOut[filterInOut.length - 1] == 'input') {
+        filterData.push(filterData[0].slice(0, 10) + ' ' + endTime)
     }
 
     return filterData
 }
 
-function filterLunch(dateArray, lunchType='8-17'){
+function filterLunch(dateArray, lunchType = '8-17') {
 
     let startLunch = null
     let endLunch = null
 
-    switch (lunchType){
+    switch (lunchType) {
         case '8-17':
             startLunch = '12:00:00'
             endLunch = '13:00:00'
@@ -155,11 +153,11 @@ function filterLunch(dateArray, lunchType='8-17'){
             endLunch = '13:00:00'
     }
 
-    let date = dateArray[0].slice(0,10)
+    let date = dateArray[0].slice(0, 10)
 
     let arrayClear = []
 
-    for (let i=0; i<dateArray.length; i++) {
+    for (let i = 0; i < dateArray.length; i++) {
         if (
             new Date(dateArray[i]).getTime() >= new Date(date + ' ' + startLunch).getTime() &&
             new Date(dateArray[i]).getTime() < new Date(date + ' ' + endLunch).getTime()
@@ -172,22 +170,21 @@ function filterLunch(dateArray, lunchType='8-17'){
 
     // if(arraySave.length == dateArray.length) return arraySave
 
-    for (let i=0; i<arrayClear.length; i++) {
-        if(arrayClear.length  == 1) {
-            if (new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime()){
+    for (let i = 0; i < arrayClear.length; i++) {
+        if (arrayClear.length == 1) {
+            if (new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime()) {
                 arraySave.push(`${date} ${startLunch}`)
             } else arraySave.unshift(`${date} ${endLunch}`)
 
-        }
-        else if (
+        } else if (
             new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime() &&
-            new Date(arrayClear[i+1]).getTime() > new Date(date + ' ' + endLunch).getTime()
+            new Date(arrayClear[i + 1]).getTime() > new Date(date + ' ' + endLunch).getTime()
         ) {
-            if(arrayClear.length%2==0){
-                if(i%2==0) arraySave.splice(i+1,0, ...[`${date} ${startLunch}`, `${date} ${endLunch}`])
-            } else if(i%2==0){
-                arraySave.splice(i+1,0, `${date} ${startLunch}`)
-            } else arraySave.splice(i+1,0, `${date} ${endLunch}`)
+            if (arrayClear.length % 2 == 0) {
+                if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[`${date} ${startLunch}`, `${date} ${endLunch}`])
+            } else if (i % 2 == 0) {
+                arraySave.splice(i + 1, 0, `${date} ${startLunch}`)
+            } else arraySave.splice(i + 1, 0, `${date} ${endLunch}`)
 
         }
     }
@@ -212,7 +209,7 @@ function parseSkudForHighcharts(arrayParse, y) {
     return arraySave
 }
 
-function getHighchartSeriesAndNames(userData){
+function getHighchartSeriesAndNames(userData) {
 
     let arrayNames = []
     let arrayData = []
@@ -223,7 +220,7 @@ function getHighchartSeriesAndNames(userData){
         arrayNames.push(`${e} (${userData[e]['POS']}) таб.${userData[e]['tabid']} \n ${userData[e]['workTime']}`)
         arrayData.push(userData[e]['highchartsWork'])
         arrayData.push(userData[e]['highchartsOutWork'])
-        if(userData[e]['highchartsBlack'] != null){
+        if (userData[e]['highchartsBlack'] != null) {
             blackArrayTrigger = true
             arrayData.push(userData[e]['highchartsBlack'])
         }
@@ -231,8 +228,8 @@ function getHighchartSeriesAndNames(userData){
 
     let series = []
 
-    if(blackArrayTrigger){
-        for(let i=0; i < arrayData.length; i+=3){
+    if (blackArrayTrigger) {
+        for (let i = 0; i < arrayData.length; i += 3) {
             series.push({
                 pointWidth: 30,
                 colorByPoint: false,
@@ -255,7 +252,7 @@ function getHighchartSeriesAndNames(userData){
                         return '<b>Нет на месте </b>' + timer
                     },
                 },
-                data: arrayData[i+1],
+                data: arrayData[i + 1],
             })
             series.push({
                 pointWidth: 30,
@@ -268,12 +265,12 @@ function getHighchartSeriesAndNames(userData){
                     },
                 },
                 borderColor: '#252734',
-                data: arrayData[i+2],
+                data: arrayData[i + 2],
             })
         }
     } else {
-        for(let i=0; i < arrayData.length; i++){
-            if(i%2 == 0) {
+        for (let i = 0; i < arrayData.length; i++) {
+            if (i % 2 == 0) {
                 series.push({
                     pointWidth: 30,
                     colorByPoint: false,
@@ -303,11 +300,11 @@ function getHighchartSeriesAndNames(userData){
         }
     }
 
-    return [series,arrayNames]
+    return [series, arrayNames]
 }
 
-function getLunchHeight(heightHighchartContainer){
-    let height = (heightHighchartContainer > 10)? 52 * (heightHighchartContainer-2) + 13:
-        (heightHighchartContainer > 0)? '70%' : 0
+function getLunchHeight(heightHighchartContainer) {
+    let height = (heightHighchartContainer > 10) ? 52 * (heightHighchartContainer - 2) + 13 :
+        (heightHighchartContainer > 0) ? '70%' : 0
     return height
 }

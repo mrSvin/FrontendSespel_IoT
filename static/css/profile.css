@@ -46,7 +46,7 @@
     position: relative;
     transition: all 0.3s ease;
     box-sizing: border-box;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
     margin-top: 10px;
@@ -98,7 +98,7 @@
     border: 0;
     box-sizing: border-box;
     color: transparent;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
 }

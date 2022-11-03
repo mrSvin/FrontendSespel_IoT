@@ -1,6 +1,6 @@
 // Функция формирования таблицы с именами станков
-function FormTable(tableID='myTable', names=[], ruch=5) {
-    for (let i = document.getElementById(tableID).getElementsByTagName('tr').length -1; i; i--) {
+function FormTable(tableID = 'myTable', names = [], ruch = 5) {
+    for (let i = document.getElementById(tableID).getElementsByTagName('tr').length - 1; i; i--) {
         document.getElementById(tableID).deleteRow(i);
     }
 
@@ -21,13 +21,12 @@ function FormTable(tableID='myTable', names=[], ruch=5) {
     // переменная для краткой записи к телу таблицы
     let tbody = programTimeTable.querySelector('tbody')
 
-    if(ruch == 6) {
-        if(programTimeTable.querySelectorAll('th').length<7){
+    if (ruch == 6) {
+        if (programTimeTable.querySelectorAll('th').length < 7) {
             thead.querySelector('tr').appendChild(document.createElement('th')).textContent = 'Ручной'
         }
 
-    }
-    else if(programTimeTable.querySelectorAll('th').length == 7){
+    } else if (programTimeTable.querySelectorAll('th').length == 7) {
         programTimeTable.rows[0].deleteCell(-1);
     }
 
@@ -40,7 +39,7 @@ function FormTable(tableID='myTable', names=[], ruch=5) {
         tableRow = tbody.querySelectorAll('tr')
 
         // считываем длины строк и ячеек
-        lastRow = tbody.rows.length -1
+        lastRow = tbody.rows.length - 1
         lastCell = tableRow[lastRow].cells.length - 1
 
         console.log(tableRow[lastRow])
@@ -50,9 +49,7 @@ function FormTable(tableID='myTable', names=[], ruch=5) {
         tableRow[lastRow].querySelectorAll('td')[0].textContent = elem
 
 
-
-        for(let i=1; i<=ruch; i++)
-        {
+        for (let i = 1; i <= ruch; i++) {
             // добавляем в последнюю строку новую ячейку
             tableRow[lastRow].appendChild(document.createElement('td'))
 
@@ -84,12 +81,12 @@ function makeRequest(Name, date) {
 }
 
 // Функция рисования диаграммы
-function highChartReportBot(names, colors, seria){
+function highChartReportBot(names, colors, seria) {
     Highcharts.chart('container_sum_zagruzka', {
         chart: {
             type: 'column'
         },
-        colors:colors,
+        colors: colors,
         title: {
             text: 'Общая загрузка оборудования'
         },
@@ -124,8 +121,7 @@ function highChartReportBot(names, colors, seria){
 }
 
 // Функция сборки данных для таблицы и диаграммы
-function buildReportBot(stankiDataArray, names, exception = null)
-{
+function buildReportBot(stankiDataArray, names, exception = null) {
     let linear_rabota = []
     let linear_pause = []
     let linear_off = []
@@ -135,14 +131,14 @@ function buildReportBot(stankiDataArray, names, exception = null)
 
     let koef = []
 
-    let colorsLine = ['#e81e1d','#000000', '#ffea32', '#207210','#38e817'];
+    let colorsLine = ['#e81e1d', '#000000', '#ffea32', '#207210', '#38e817'];
 
     let exceptionTrigger = false
 
     let seria = [{name: 'Авария', data: linear_avar},
-        {name: 'Выключен',data: linear_off},
-        {name: 'Ожидание',data: linear_pause},
-        {name: 'Под нагрузкой',data: linear_nagruzka},
+        {name: 'Выключен', data: linear_off},
+        {name: 'Ожидание', data: linear_pause},
+        {name: 'Под нагрузкой', data: linear_nagruzka},
         {name: 'Работа', data: linear_rabota},]
 
     let totalArray = [linear_rabota, linear_pause, linear_off, linear_avar,
@@ -152,7 +148,7 @@ function buildReportBot(stankiDataArray, names, exception = null)
 
     // Если true, значит было передано исключение
     let exceptionGoted = (exception !== null)
-    if(exceptionGoted) {
+    if (exceptionGoted) {
         for (let el of exception) {
             if (el.includes('ruchnoi')) {
                 exceptionGoted = 'ruchnoi'
@@ -167,10 +163,10 @@ function buildReportBot(stankiDataArray, names, exception = null)
     FormTable('myTable', names, colorsLine.length)
 
     // Заполение данных для таблицы и графиков
-    stankiDataArray.forEach((stanok, index)=>{
+    stankiDataArray.forEach((stanok, index) => {
         // если длина круговой диаграммы равна нулю
         // то запрос не прошел удачно
-        if(stanok.roundData.length == 0) {
+        if (stanok.roundData.length == 0) {
             console.log('Неудачный запрос', index)
             // в общие массивы записываем по одному нулю
             totalArray.forEach(item => item.push(0))
@@ -178,10 +174,10 @@ function buildReportBot(stankiDataArray, names, exception = null)
         // Если запрос прошел, то продолжаем работу
         else {
             // режим с исключением
-            if (exceptionGoted=='ruchnoi'){
+            if (exceptionGoted == 'ruchnoi') {
 
-                for (let el of exception){
-                    if(index == el[0]){
+                for (let el of exception) {
+                    if (index == el[0]) {
                         linear_rabota.push(parseInt(stanok.roundData[0]))
                         linear_pause.push(parseInt(stanok.roundData[1]))
                         linear_off.push(parseInt(stanok.roundData[2]))
@@ -194,10 +190,10 @@ function buildReportBot(stankiDataArray, names, exception = null)
                     exceptionTrigger = false
                 }
 
-                if(exceptionTrigger == false){
+                if (exceptionTrigger == false) {
                     // Работа без нагрузки пока закомменчено
                     stanok.roundData[0] = stanok.roundData[0] - stanok.roundData[4];
-                    if(stanok.roundData[0] < 0) stanok.roundData[0] = 0
+                    if (stanok.roundData[0] < 0) stanok.roundData[0] = 0
 
                     linear_rabota.push(parseInt(stanok.roundData[0]))
                     linear_pause.push(parseInt(stanok.roundData[1]))
@@ -210,7 +206,7 @@ function buildReportBot(stankiDataArray, names, exception = null)
             // обычный режим
             else {
                 stanok.roundData[0] = stanok.roundData[0] - stanok.roundData[4]
-                if(stanok.roundData[0] < 0) stanok.roundData[0] = 0
+                if (stanok.roundData[0] < 0) stanok.roundData[0] = 0
 
                 linear_rabota.push(parseInt(stanok.roundData[0]))
                 linear_pause.push(parseInt(stanok.roundData[1]))
@@ -218,33 +214,31 @@ function buildReportBot(stankiDataArray, names, exception = null)
                 linear_avar.push(parseInt(stanok.roundData[3]))
                 linear_nagruzka.push(parseInt(stanok.roundData[4]))
             }
-        koef.push((parseInt(stanok.roundData[0]) + parseInt(stanok.roundData[1]) + parseInt(stanok.roundData[2]) + parseInt(stanok.roundData[3]) + parseInt(stanok.roundData[4])) / 100);
-        stanok.roundData.forEach((item,i)=>{
+            koef.push((parseInt(stanok.roundData[0]) + parseInt(stanok.roundData[1]) + parseInt(stanok.roundData[2]) + parseInt(stanok.roundData[3]) + parseInt(stanok.roundData[4])) / 100);
+            stanok.roundData.forEach((item, i) => {
 
-            // Из-за того что круговом массиве теперь 6 переменных
-            if (i === 5) return
-            if (exceptionGoted=='ruchnoi' && exceptionTrigger) {
-                // Если столбец - нагрузка
-                if (i === 4) {
-                    // То, вместо столбца нагрузка записать значение в следующий столбец - Ручной режим(i + 2)
-                    table[index + 1].cells[i + 1].innerHTML = "0%";
-                    table[index + 1].cells[i + 2].innerHTML = Math.round(stanok.roundData[i] / koef[index] * 10) / 10 + "%";
-                }
-                else {
-                    // Иначе записывать в таблицу без изменений(i + 1)
+                // Из-за того что круговом массиве теперь 6 переменных
+                if (i === 5) return
+                if (exceptionGoted == 'ruchnoi' && exceptionTrigger) {
+                    // Если столбец - нагрузка
+                    if (i === 4) {
+                        // То, вместо столбца нагрузка записать значение в следующий столбец - Ручной режим(i + 2)
+                        table[index + 1].cells[i + 1].innerHTML = "0%";
+                        table[index + 1].cells[i + 2].innerHTML = Math.round(stanok.roundData[i] / koef[index] * 10) / 10 + "%";
+                    } else {
+                        // Иначе записывать в таблицу без изменений(i + 1)
+                        table[index + 1].cells[i + 1].innerHTML = Math.round(stanok.roundData[i] / koef[index] * 10) / 10 + "%";
+                        table[index + 1].cells[6].innerHTML = "0%";
+                    }
+                } else {
+                    // Иначе, если станок не APEC, записывать в таблицу без изменений(i + 1)
                     table[index + 1].cells[i + 1].innerHTML = Math.round(stanok.roundData[i] / koef[index] * 10) / 10 + "%";
-                    table[index + 1].cells[6].innerHTML = "0%";
+                    if (exceptionGoted == 'ruchnoi') {
+                        table[index + 1].cells[6].innerHTML = "0%";
+                    }
                 }
-            }
-            else {
-                // Иначе, если станок не APEC, записывать в таблицу без изменений(i + 1)
-                table[index + 1].cells[i + 1].innerHTML = Math.round(stanok.roundData[i] / koef[index] * 10) / 10 + "%";
-                if (exceptionGoted=='ruchnoi') {
-                    table[index + 1].cells[6].innerHTML = "0%";
-                }
-            }
-        })
-    }
+            })
+        }
         exceptionTrigger = false
     })
 
@@ -254,7 +248,7 @@ function buildReportBot(stankiDataArray, names, exception = null)
 
 // Функция принимающее обещание, как только оно выполнется
 // запустится остальная логика, отсюда вызывается функция buildReportBot
-function rewriteData(promiseVariable, saver, names, exc=[]) {
+function rewriteData(promiseVariable, saver, names, exc = []) {
     promiseVariable
         .then(result => {
             //data = result;

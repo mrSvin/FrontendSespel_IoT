@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Склад</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" href="css/styles_header.css"/>
 
     <style>
-         /* Таблица с текущими параметрами */
+        /* Таблица с текущими параметрами */
         body {
             margin: 0;
             background: #ffffff;
 
         }
+
         table {
             border-collapse: collapse;
             line-height: 1.1;
-            background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+            background: radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
             color: #0C213B;
 
         }
+
         caption {
 
             font-weight: bold;
@@ -41,7 +43,7 @@
 
 <header>
     <ul class="hr">
-        <a href="/" ><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
+        <a href="/"><img style="margin: 0.1%" src="images/logo_black.png" class="icon-logo"/> </a>
         <div method="post" class="dropdown" style="float: right">
             <input type="image" th:src="@{${image_user}}" alt="Avatar" class="avatar" style="border-radius: 360px; "/>
             <div class="dropdown-content" style="float: right; text-align: center; background-color: whitesmoke">
@@ -50,7 +52,8 @@
                 <li style="font-weight: 400; font-size: 18px" th:text="${user_name}"></li>
                 <p th:text="${user_mail}"></p>
                 <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
-                <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
+                <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование
+                </button>
                 <form th:action="@{/logout}" method="post">
                     <button class="follow" type="submit">
                         Выход
@@ -186,33 +189,30 @@
         users.push([[${sql_users[0]}]]);
     }
     if ([[${sql_users[3]}]] > 'null') {
-    users.push([[${sql_users[1]}]]);
+        users.push([[${sql_users[1]}]]);
     }
     if ([[${sql_users[3]}]] > 'null') {
-    users.push([[${sql_users[2]}]]);
+        users.push([[${sql_users[2]}]]);
     }
     if ([[${sql_users[3]}]] > 'null') {
-    users.push([[${sql_users[3]}]]);
+        users.push([[${sql_users[3]}]]);
     }
 
-    var time_change = ['02/06/2021 11:11:03','02/06/2021 11:11:04','02/06/2021 11:11:05'];
-    var content = ['Шпилька резьбовая М10х1000 - DIN 975 - 8.8 - A2 - 5 шт.','Шпилька резьбовая М10х1000 - DIN 975 - 8.8 - A2 - 6 шт.','Шпилька резьбовая М10х1000 - DIN 975 - 8.8 - A2 - 3 шт.'];
+    var time_change = ['02/06/2021 11:11:03', '02/06/2021 11:11:04', '02/06/2021 11:11:05'];
+    var content = ['Шпилька резьбовая М10х1000 - DIN 975 - 8.8 - A2 - 5 шт.', 'Шпилька резьбовая М10х1000 - DIN 975 - 8.8 - A2 - 6 шт.', 'Шпилька резьбовая М10х1000 - DIN 975 - 8.8 - A2 - 3 шт.'];
 
-    $.each( users, function( index ){
-        $("#myTable > tbody").append("<tr><td>" + content[index] + "</td><td>"+ time_change[index] + "</td><td>"+ users[index] + "</td></tr>");
+    $.each(users, function (index) {
+        $("#myTable > tbody").append("<tr><td>" + content[index] + "</td><td>" + time_change[index] + "</td><td>" + users[index] + "</td></tr>");
     });
 </script> <!--JS таблица-->
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
 
-    if(role_status === "ROLE_ADMIN")
-    {
+    if (role_status === "ROLE_ADMIN") {
         document.getElementById("role_vision").innerHTML = "Роль: Админ";
         document.getElementById("admin").style.display = "inline";
 
-    }
-    else if (role_status === "ROLE_USER")
-    {
+    } else if (role_status === "ROLE_USER") {
         document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
         document.getElementById("admin").style.display = "none";
     }

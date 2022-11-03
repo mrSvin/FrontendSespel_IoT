@@ -15,9 +15,9 @@ body {
 
     vertical-align: center;
     font-size: 14px;
-    border: none!important;
-    outline: 1px solid white!important;
-    text-shadow: none!important;
+    border: none !important;
+    outline: 1px solid white !important;
+    text-shadow: none !important;
     text-align: center;
 
     /*width: 50px;*/
@@ -26,7 +26,7 @@ body {
 .table_energy th {
     background-color: #0C213B;
     color: #fff;
-    text-shadow: none!important;
+    text-shadow: none !important;
 }
 
 .table_energy th:nth-of-type(0),
@@ -35,9 +35,9 @@ body {
 }
 
 .table_energy > thead > tr > th:nth-of-type(1) {
-    background-color: #223362!important;
-    width: 60px!important;
-    padding: 9px!important;
+    background-color: #223362 !important;
+    width: 60px !important;
+    padding: 9px !important;
 }
 
 
@@ -45,21 +45,21 @@ body {
     background-color: #223362 !important;
     color: white;
     font-weight: bold;
-    width: 60px!important;
-    padding: 9px!important;
+    width: 60px !important;
+    padding: 9px !important;
 }
 
 
 .table_energy > tbody > tr > td:nth-of-type(n+2) {
     /*background-color: blue!important;*/
     width: 50px;
-    padding: 5px!important;
+    padding: 5px !important;
 }
 
 .table_energy > thead > tr > th:nth-of-type(n+2) {
     /*background-color: blue!important;*/
     width: 50px;
-    padding: 5px!important;
+    padding: 5px !important;
 }
 
 .table_general {
@@ -74,9 +74,9 @@ body {
 
     vertical-align: center;
     font-size: 14px;
-    border: none!important;
-    outline: 1px solid white!important;
-    text-shadow: none!important;
+    border: none !important;
+    outline: 1px solid white !important;
+    text-shadow: none !important;
     text-align: center;
 
     /*width: 50px;*/
@@ -85,7 +85,7 @@ body {
 .table_general th {
     background-color: #223362;
     color: #fff;
-    text-shadow: none!important;
+    text-shadow: none !important;
 }
 
 .table_general th:nth-of-type(0),
@@ -95,22 +95,21 @@ body {
 
 .table_general > thead > tr > th:nth-of-type(1) {
     /*background-color: #223362!important;*/
-    width: 60px!important;
-    padding: 9px!important;
+    width: 60px !important;
+    padding: 9px !important;
 }
-
 
 
 .table_general > tbody > tr > td:nth-of-type(n+2) {
     /*background-color: blue!important;*/
     width: 50px;
-    padding: 5px!important;
+    padding: 5px !important;
 }
 
 .table_general > thead > tr > th:nth-of-type(n+2) {
     /*background-color: blue!important;*/
     width: 50px;
-    padding: 5px!important;
+    padding: 5px !important;
 }
 
 li {
@@ -430,13 +429,15 @@ body {
     background: #F4F1F8;
 
 }
+
 table {
     border-collapse: collapse;
     line-height: 1.1;
-    background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+    background: radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
     color: #0C213B;
 
 }
+
 caption {
 
     font-weight: bold;
@@ -456,7 +457,7 @@ caption {
     min-height: 500px;
 }
 
-.parent_image{
+.parent_image {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -465,7 +466,7 @@ caption {
     /*max-height: 400px;*/
 }
 
-.stanok_img{
+.stanok_img {
     max-height: 400px;
     width: auto;
     max-width: 100%;
@@ -473,7 +474,7 @@ caption {
 
 
 /*Кнопки и персонал*/
-.icon_mesto{
+.icon_mesto {
 
     width: 60px;
     height: 60px;
@@ -482,6 +483,7 @@ caption {
     margin-top: 10px;
     margin-left: 30px;
 }
+
 .icon_mesto:hover {
     -webkit-box-shadow: inset 0px 0px 12px 12px rgba(255, 255, 255, .9);
 }
@@ -501,29 +503,30 @@ caption {
 }
 
 
-
-.icon_personal{
+.icon_personal {
     background: url(../images/iconPersonal.png) no-repeat;
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;
 }
+
 .icon_personal:hover {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
 }
 
-.icon_error{
+.icon_error {
     background: url(../images/error.png) no-repeat;
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;
     width: 60px;
 }
+
 .icon_error:hover {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
 }
 
-.icon_power{
+.icon_power {
     background: url(../images/iconPower.png) no-repeat;
     background-size: 60px 60px;
     margin-top: 10px;
@@ -535,7 +538,7 @@ caption {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
 }
 
-.icon_clock{
+.icon_clock {
     position: relative;
     background: url(../images/iconClock.png) no-repeat;
     background-size: 90px 43px;
@@ -546,35 +549,36 @@ caption {
     top: 13px;
 
 }
+
 .icon_clock:hover {
     filter: brightness(150%);
 }
 
-.label_mesto{
+.label_mesto {
     color: #756e6e;
     margin-top: 65px;
     margin-left: 8px;
 }
 
-.label_personal{
+.label_personal {
     color: #756e6e;
     margin-top: 65px;
     margin-left: -5px;
 }
 
-.label_error{
+.label_error {
     color: #756e6e;
     margin-top: 65px;
     margin-left: 4px;
 }
 
-.label_power{
+.label_power {
     color: #756e6e;
     margin-top: 65px;
     margin-left: -4px;
 }
 
-.label_clock{
+.label_clock {
     color: #756e6e;
     margin-top: 45px;
     position: relative;
@@ -582,32 +586,33 @@ caption {
     right: 26px;
 }
 
-.icon_programTime{
+.icon_programTime {
     background: url(../images/programTime.png) no-repeat;
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;
 }
+
 .icon_programTime:hover {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
 }
 
-.label_programTime{
+.label_programTime {
     color: #756e6e;
     margin-top: 65px;
     margin-left: -13px;
 }
 
 .choose_month {
-    margin: 0!important;
+    margin: 0 !important;
 }
 
 #container_sum_zagruzka_krug {
-    width: 30%!important;
+    width: 30% !important;
 }
 
 #container_sum_zagruzka, #container_sum_zagruzka_2 {
-    width: 65%!important;
+    width: 65% !important;
 }
 
 

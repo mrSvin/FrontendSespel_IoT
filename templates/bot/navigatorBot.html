@@ -101,9 +101,9 @@
     </div>
     <div style="display: flex; width: 100%; height: 30%;">
         <div style="border: 1px solid #333; width: 49%; margin: 0 auto"
-              id="container3"></div>
+             id="container3"></div>
         <div style="border: 1px solid #333; width: 49%; margin: 0 auto"
-         id="container4"></div>
+             id="container4"></div>
     </div>
     <div style="display: flex; width: 100%; height: 30%;">
         <div style="border: 1px solid #333; width: 49%; margin: 0 auto"
@@ -118,16 +118,14 @@
     function ZeroTime(arrayTime) {
         let newArray = []
 
-        for(let i=0; arrayTime.length > i; i++)
-        {
+        for (let i = 0; arrayTime.length > i; i++) {
             newArray.push(arrayTime[i])
-            if (i == arrayTime.length - 1)
-            {
+            if (i == arrayTime.length - 1) {
                 break
             }
-            if(arrayTime[i+1][0] - arrayTime[i][0]  > 60000) {
+            if (arrayTime[i + 1][0] - arrayTime[i][0] > 60000) {
                 newArray.push(Array(arrayTime[i][0] + 1000, 0))
-                newArray.push(Array(arrayTime[i+1][0] - 1000, 0))
+                newArray.push(Array(arrayTime[i + 1][0] - 1000, 0))
             }
         }
         return newArray
@@ -137,35 +135,34 @@
     function highcharts(id, NameGraph, params, dataArray, dataArray2 = null) {
         let series = []
 
-        if(dataArray2 == null) {
+        if (dataArray2 == null) {
             series = [{
                 name: params,
                 data: dataArray,
                 color: '#fffd1f'
             }]
 
-            dataArray.forEach((e,i)=>{
-                if(e[0] == undefined)  dataArray.splice(i, 1)
+            dataArray.forEach((e, i) => {
+                if (e[0] == undefined) dataArray.splice(i, 1)
             })
-        }
-        else {
+        } else {
             series = [{
                 name: params[0],
                 data: dataArray,
                 color: '#83addd'
             },
-            {
-                name: params[1],
-                data: dataArray2,
-                color: '#f31e1e'
-            }]
+                {
+                    name: params[1],
+                    data: dataArray2,
+                    color: '#f31e1e'
+                }]
 
-            dataArray.forEach((e,i)=>{
-                if(e[0] == undefined)  dataArray.splice(i, 1)
+            dataArray.forEach((e, i) => {
+                if (e[0] == undefined) dataArray.splice(i, 1)
             })
 
-            dataArray2.forEach((e,i)=>{
-                if(e[0] == undefined)  dataArray2.splice(i, 1)
+            dataArray2.forEach((e, i) => {
+                if (e[0] == undefined) dataArray2.splice(i, 1)
             })
         }
 
@@ -297,12 +294,12 @@
         console.log('После парсинга', allData)
 
         for (let i = 0; i < allData.length; i += 3) {
-                console.log('True', `container${(i-(Math.floor(i / 3))+1)}`)
-                console.log('True', `container${(i-(Math.floor(i / 3))+2)}`)
+            console.log('True', `container${(i - (Math.floor(i / 3)) + 1)}`)
+            console.log('True', `container${(i - (Math.floor(i / 3)) + 2)}`)
 
-                highcharts(`container${(i-(Math.floor(i / 3))+1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, Вт', ZeroTime(allData[i]))
-                highcharts(`container${(i-(Math.floor(i / 3))+2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i+1]), ZeroTime(allData[i+2]))
-            }
+            highcharts(`container${(i - (Math.floor(i / 3)) + 1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, Вт', ZeroTime(allData[i]))
+            highcharts(`container${(i - (Math.floor(i / 3)) + 2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i + 1]), ZeroTime(allData[i + 2]))
+        }
     }
 
     // fetch запрос объекта в форме объектов
@@ -351,7 +348,7 @@
     let Names = [
         ['navigator_1', 'Навигатор #1', '4919A2A3-290F-419F-A45C-E0DC75F91DB3'],
         ['navigator_2_2', 'Навигатор #2 - голова 2', 'DB62A4CC-EF9E-4D98-B7F8-7A278BBD5064'],
-        ['navigator_3','Навигатор #3', 'D6755ECA-B2CC-49FE-9E15-559141A159C7'],
+        ['navigator_3', 'Навигатор #3', 'D6755ECA-B2CC-49FE-9E15-559141A159C7'],
     ];
 
     let startTime = (new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString()).slice(0, 10);

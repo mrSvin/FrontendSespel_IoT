@@ -1,116 +1,116 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <title>Станки Мех.участок 2 площадка </title>
-  <link rel="shortcut icon" type="image/ico"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Станки Мех.участок 2 площадка </title>
+    <link rel="shortcut icon" type="image/ico"/>
 
-  <link rel="stylesheet" type="text/css" href="/css/report_day_style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/report_day_style.css"/>
 
-  <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css"/>
 
-  <script src="/js/lib/highcharts.js"></script>
-  <script src="/js/lib/exporting.js"></script>
-  <script src="/js/lib/export-data.js"></script>
-  <script src="/js/lib/accessibility.js"></script>
-  <script src="/js/lib/xrange.js"></script>
-  <script src="/js/reportBot.js"></script>
-  <script src="/js/smena/calendar_smena.js"></script>
+    <script src="/js/lib/highcharts.js"></script>
+    <script src="/js/lib/exporting.js"></script>
+    <script src="/js/lib/export-data.js"></script>
+    <script src="/js/lib/accessibility.js"></script>
+    <script src="/js/lib/xrange.js"></script>
+    <script src="/js/reportBot.js"></script>
+    <script src="/js/smena/calendar_smena.js"></script>
 
- <script src="/js/lib/jquery-3.6.0.min.js"></script>
- <script src="/js/lib/bootstrap-3.3.0.min.js"></script>
+    <script src="/js/lib/jquery-3.6.0.min.js"></script>
+    <script src="/js/lib/bootstrap-3.3.0.min.js"></script>
 
- <script src="/js/lib/bootstrap-datepicker.min.js"></script>
- <script src="/js/lib/bootstrap-datepicker.ru.min.js"></script>
+    <script src="/js/lib/bootstrap-datepicker.min.js"></script>
+    <script src="/js/lib/bootstrap-datepicker.ru.min.js"></script>
 
-<script>
-function dayNow() {
-        let calendarDate = new Date().toLocaleString()
-        return `${calendarDate.slice(6, 10)}-${calendarDate.slice(3, 5)}-${calendarDate.slice(0, 2)}`
-    }
+    <script>
+        function dayNow() {
+            let calendarDate = new Date().toLocaleString()
+            return `${calendarDate.slice(6, 10)}-${calendarDate.slice(3, 5)}-${calendarDate.slice(0, 2)}`
+        }
 
-function HighchartsPressEpp(container, lata, seriesName1, seriesName2, tittle, yTittle){
+        function HighchartsPressEpp(container, lata, seriesName1, seriesName2, tittle, yTittle) {
 
-    Highcharts.chart(container, {
-        chart: {
-            zoomType: 'x'
-        },
-        time: {
-            timezoneOffset: new Date().getTimezoneOffset()
-        },
-        title: {
-            text: tittle
-        },
-        xAxis: {
-            type: 'datetime'
-        },
-        yAxis: {
-            title: {
-                text: yTittle
-            }
-        },
-        legend: {
-            reversed: true
-        },
-        plotOptions: {
-            area: {
-                fillColor: {
-                    linearGradient: {
-                        x1: 0,
-                        y1: 0,
-                        x2: 0,
-                        y2: 1
-                    },
-                    stops: [
-                        [0, Highcharts.getOptions().colors[0]],
-                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                    ]
+            Highcharts.chart(container, {
+                chart: {
+                    zoomType: 'x'
                 },
-                marker: {
-                    radius: 2
+                time: {
+                    timezoneOffset: new Date().getTimezoneOffset()
                 },
-                lineWidth: 1,
-                states: {
-                    hover: {
-                        lineWidth: 1
+                title: {
+                    text: tittle
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                yAxis: {
+                    title: {
+                        text: yTittle
                     }
                 },
-                threshold: null
-            }
-        },
-        credits: {
-            enabled: false
-        },
+                legend: {
+                    reversed: true
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
+                            },
+                            stops: [
+                                [0, Highcharts.getOptions().colors[0]],
+                                [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                            ]
+                        },
+                        marker: {
+                            radius: 2
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
 
-        series: [{
-            type: 'area',
-            name: seriesName1,
-            data: lata[0]
-        },
-            {
-                name: seriesName2,
-                data: lata[1]
-            }
-        ]
-    });
-}
+                series: [{
+                    type: 'area',
+                    name: seriesName1,
+                    data: lata[0]
+                },
+                    {
+                        name: seriesName2,
+                        data: lata[1]
+                    }
+                ]
+            });
+        }
 
-function fetchRequestPressEpp(signal,date=dayNow()) {
+        function fetchRequestPressEpp(signal, date = dayNow()) {
 
-    let serverDomain = window.location.hostname
-    let serverPort = window.location.port
+            let serverDomain = window.location.hostname
+            let serverPort = window.location.port
 
-    let url = `http://${serverDomain}:${serverPort}/api/signal/idSignal:${signal}_date:${date}`
+            let url = `http://${serverDomain}:${serverPort}/api/signal/idSignal:${signal}_date:${date}`
 
-    return fetch(url, {method: 'GET'})
-        .then((response) => response.json())
-        .then((data) => {
-            return data
-        })
-}
+            return fetch(url, {method: 'GET'})
+                .then((response) => response.json())
+                .then((data) => {
+                    return data
+                })
+        }
 
-document.addEventListener("DOMContentLoaded", function(event) {
+        document.addEventListener("DOMContentLoaded", function (event) {
             $('#datepicker').datepicker({
                 format: "yyyy-mm-dd",
                 language: 'ru',
@@ -126,271 +126,270 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
         });
 
-function selectedNewValue(){
+        function selectedNewValue() {
 
-$('#datepicker').datepicker({
-    format: "yyyy-mm-dd",
-    language: 'ru',
-    autoclose: true,
-    todayHighlight: true,
-    showOtherMonths: true,
-    selectOtherMonths: true,
-    autoclose: true,
-    changeMonth: true,
-    changeYear: true,
-    orientation: "button"
-});
+            $('#datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                language: 'ru',
+                autoclose: true,
+                todayHighlight: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                orientation: "button"
+            });
 
-startTime = document.querySelector('.form-control').value
+            startTime = document.querySelector('.form-control').value
 
-data = []
+            data = []
 
-let stankiRequest = Promise.all(namesToFetch.map(item=>{
-    return makeRequest(item, startTime)
-  }));
+            let stankiRequest = Promise.all(namesToFetch.map(item => {
+                return makeRequest(item, startTime)
+            }));
 
-  // Это тот же .then, просто обернутый в функцию
-  rewriteData(stankiRequest, data, stankiNames, exception)
+            // Это тот же .then, просто обернутый в функцию
+            rewriteData(stankiRequest, data, stankiNames, exception)
 
-    if(parseNameUrl(window.location.pathname)=='report_day_spec_complexes'){
-        let eppNames = [7545716, 7545711]
-        let epp = Promise.all(eppNames.map((item) => {
-            return fetchRequestPressEpp(item, startTime)
-        }));
+            if (parseNameUrl(window.location.pathname) == 'report_day_spec_complexes') {
+                let eppNames = [7545716, 7545711]
+                let epp = Promise.all(eppNames.map((item) => {
+                    return fetchRequestPressEpp(item, startTime)
+                }));
 
-        epp.then((e,i)=>{
-            let container = 'container_epp_tok'
+                epp.then((e, i) => {
+                    let container = 'container_epp_tok'
 
-            let s1 = 'Ток, А'
-            let s2 = 'Температура, С'
-            let te = 'Хронология технологического процесса ЭПП'
-            let tittleY = 'Амплитуда'
+                    let s1 = 'Ток, А'
+                    let s2 = 'Температура, С'
+                    let te = 'Хронология технологического процесса ЭПП'
+                    let tittleY = 'Амплитуда'
 
 
-            let temp = e[1].map(k=>{
-                return k.split(',').map(f=>{
-                    return parseInt(f, 10);
+                    let temp = e[1].map(k => {
+                        return k.split(',').map(f => {
+                            return parseInt(f, 10);
+                        })
+                    })
+
+                    temp.forEach(e => {
+                        e[0] *= 1000
+                    })
+
+                    let davl = e[0].map(k => {
+                        return k.split(',').map(f => {
+                            return parseInt(f, 10);
+                        })
+                    })
+
+                    davl.forEach(e => {
+                        e[0] *= 1000
+                    })
+
+                    HighchartsPressEpp(container, [temp, davl], s1, s2, te, tittleY)
                 })
-            })
 
-            temp.forEach(e=>{
-                e[0] *= 1000
-            })
 
-            let davl = e[0].map(k=>{
-                return k.split(',').map(f=>{
-                    return parseInt(f, 10);
+                let pressNames = [2899049, 2899041]
+                let press = Promise.all(pressNames.map((item) => {
+                    return fetchRequestPressEpp(item, startTime)
+                }));
+
+                press.then((e, i) => {
+                    let container = 'container_press_davlenie'
+
+                    let s1 = 'Давление запрессовки, т'
+                    let s2 = 'Заданное давление, т'
+                    let te = 'Хронология запрессовок Пресса ЧПУ'
+                    let tittleY = 'Давление, тонн'
+
+
+                    let zad = e[0].map(k => {
+                        return k.split(',').map(f => {
+                            return parseInt(f, 10);
+                        })
+                    })
+
+                    zad.forEach(e => {
+                        e[0] *= 1000
+                    })
+
+                    let davl = e[1].map(k => {
+                        return k.split(',').map(f => {
+                            return parseInt(f, 10);
+                        })
+                    })
+
+                    davl.forEach(e => {
+                        e[0] *= 1000
+                    })
+
+                    HighchartsPressEpp(container, [davl, zad], s1, s2, te, tittleY)
                 })
-            })
-
-            davl.forEach(e=>{
-                e[0] *= 1000
-            })
-
-            HighchartsPressEpp(container, [temp, davl], s1, s2, te, tittleY)
-        })
+            }
+        }
 
 
-        let pressNames = [2899049, 2899041]
-        let press = Promise.all(pressNames.map((item) => {
-            return fetchRequestPressEpp(item, startTime)
-        }));
+        function parseNameUrl(url) {
+            let form_path = decodeURIComponent(url);
+            form_path.lastIndexOf("/")
+            let searchIndex = form_path.lastIndexOf("/") + 1;
+            return form_path.substr(searchIndex, form_path.length)
+        }
 
-        press.then((e,i)=>{
-            let container = 'container_press_davlenie'
+        function changePlace(place) {
 
-            let s1 = 'Давление запрессовки, т'
-            let s2 = 'Заданное давление, т'
-            let te = 'Хронология запрессовок Пресса ЧПУ'
-            let tittleY = 'Давление, тонн'
+            data = []
+            let name = ''
+
+            switch (place) {
+                case "report_day_other":
+                    namesToFetch = ['kim', 'nk600', 'sclad_meh', 'pech_nerg', 'liteyka_big', 'liteyka_medium', 'faccin_1', 'faccin_2']
+                    stankiNames = ["CRYSTA-Apex S9168", "НК600", 'Склад Мех. цеха', "Печь Индукционная", "Литейная машина большая", 'Литейная машина средняя', "FACCIN 4", "FACCIN 10"]
+                    exception = [[0, 'Ручной режим', '#5c7ed0', 'ruchnoi'],];
+                    name = 'ОТК, Склады, Литейка, Гибка'
+                    break;
+
+                case "report_day_meh2":
+                    namesToFetch = ['uvf5220', 'progress', 'ntx1000_2',
+                        'sk50', 'apec', 'dmg_dmu50_3', 'dmg_dmu50_4',
+                        'dmg_ctx310_2', 'dmg_ctx510_2', 'dmg_ctx510_3',
+                        'dmg_ctx310_3', 'dmg_ctx510_4', 'dmg_ctx510_5',
+                        'dmg_dmc1035_2', 'dmg_dmu50_5', 'dmg_dmu50_6',
+                        'dmg_dmu50_7', 'ar55']
+                    stankiNames = ['УФ5220', 'СТП Сеспель', 'NTX1000',
+                        'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2',
+                        'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4',
+                        'CTX510 #5', 'DMC1035 #2', 'DMU50 #5', 'DMU50 #6',
+                        'DMU50 #7', 'AR55']
+                    exception = [[4, 'Ручной режим', '#5c7ed0', 'ruchnoi'],];
+                    name = 'Станки Мех.участок 2 площадка'
+                    break;
+
+                case "report_day_navigators":
+                    namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
+                    stankiNames = ["Навигатор 1", "Навигатор 2", "Навигатор 3", "TruLaser", "Комета 1", "Комета 2", "Комета 3"]
+                    exception = null;
+                    name = 'Резка'
+                    break;
+
+                case "report_day_meh1":
+                    namesToFetch = ['uvf_1', 'uvf_2', 'ntx1000', 'nlx3000', 'dmg_gamma2000', 'dmg_ctx650', 'dmg_dmf260', 'dmg_dmu50_1', 'dmg_dmu50_2', 'dmg_dmc1035', 'dmg_ctx310_1',
+                        'dmg_ctx510_1']
+                    stankiNames = ["УВФ-1 1", "УВФ-1 2", "NTX1000", "NLX3000", "GAMMA2000", "CTX650", "DMF260", "DMU50 1", "DMU50 2", "DMC1035", "CTX310 1", "CTX510 1"]
+                    exception = null;
+                    name = 'Станки Мех.участок 1 площадка'
+                    break;
+
+                case "report_day_robots":
+                    namesToFetch = ['maks_1', 'maks_2', 'm710', 'rtk12c', 'p250', 'krot', 'prans']
+                    stankiNames = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
+                    exception = null;
+                    name = 'Роботы'
+                    break;
+
+                case "report_day_spec_complexes":
+                    namesToFetch = ['press', 'epp', 'stp13m', 'stend_resources']
+                    stankiNames = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М", "Стенд для ресурсных испытаний"]
+                    exception = null;
+                    name = 'Спец. комплексы'
+                    break;
+            }
+
+            document.getElementsByTagName('h1')[0].innerHTML = name
+
+            startTime = document.querySelector('.form-control').value
+            stankiRequest = Promise.all(namesToFetch.map(item => {
+                return makeRequest(item, startTime)
+            }));
+
+            if (place == 'report_day_spec_complexes') {
+                document.getElementById('containerHighchartsTable').style.height = '45vh'
+            } else document.getElementById('containerHighchartsTable').style.height = '80vh'
+
+            // Это тот же .then, просто обернутый в функцию
+            rewriteData(stankiRequest, data, stankiNames, exception)
+
+            if (place == 'report_day_spec_complexes') {
+                document.getElementById('containerHighchartsPressEpp').style.height = '40vh'
+                let eppNames = [7545716, 7545711]
+                let epp = Promise.all(eppNames.map((item) => {
+                    return fetchRequestPressEpp(item)
+                }));
+
+                epp.then((e, i) => {
+                    let container = 'container_epp_tok'
+
+                    let s1 = 'Ток, А'
+                    let s2 = 'Температура, С'
+                    let te = 'Хронология технологического процесса ЭПП'
+                    let tittleY = 'Амплитуда'
 
 
-            let zad = e[0].map(k=>{
-                return k.split(',').map(f=>{
-                    return parseInt(f, 10);
+                    let temp = e[1].map(k => {
+                        return k.split(',').map(f => {
+                            return parseInt(f, 10);
+                        })
+                    })
+
+                    temp.forEach(e => {
+                        e[0] *= 1000
+                    })
+
+                    let davl = e[0].map(k => {
+                        return k.split(',').map(f => {
+                            return parseInt(f, 10);
+                        })
+                    })
+
+                    davl.forEach(e => {
+                        e[0] *= 1000
+                    })
+
+                    HighchartsPressEpp(container, [temp, davl], s1, s2, te, tittleY)
                 })
-            })
 
-            zad.forEach(e=>{
-                e[0] *= 1000
-            })
+                let pressNames = [2899049, 2899041]
+                let press = Promise.all(pressNames.map((item) => {
+                    return fetchRequestPressEpp(item)
+                }));
 
-            let davl = e[1].map(k=>{
-                return k.split(',').map(f=>{
-                    return parseInt(f, 10);
+                press.then((e, i) => {
+                    let container = 'container_press_davlenie'
+
+                    let s1 = 'Давление запрессовки, т'
+                    let s2 = 'Заданное давление, т'
+                    let te = 'Хронология запрессовок Пресса ЧПУ'
+                    let tittleY = 'Давление, тонн'
+
+
+                    let zad = e[0].map(k => {
+                        return k.split(',').map(f => {
+                            return parseInt(f, 10);
+                        })
+                    })
+
+                    zad.forEach(e => {
+                        e[0] *= 1000
+                    })
+
+                    let davl = e[1].map(k => {
+                        return k.split(',').map(f => {
+                            return parseInt(f, 10);
+                        })
+                    })
+
+                    davl.forEach(e => {
+                        e[0] *= 1000
+                    })
+
+                    HighchartsPressEpp(container, [davl, zad], s1, s2, te, tittleY)
                 })
-            })
+            }
+        }
 
-            davl.forEach(e=>{
-                e[0] *= 1000
-            })
-
-            HighchartsPressEpp(container, [davl, zad], s1, s2, te, tittleY)
-        })
-    }
-}
-
-
-
-function parseNameUrl(url) {
-    let form_path = decodeURIComponent(url);
-    form_path.lastIndexOf("/")
-    let searchIndex = form_path.lastIndexOf("/") + 1;
-    return form_path.substr(searchIndex, form_path.length)
-}
-
-function changePlace(place){
-
-    data = []
-    let name = ''
-
-    switch(place){
-        case "report_day_other":
-        namesToFetch = ['kim', 'nk600', 'sclad_meh', 'pech_nerg', 'liteyka_big', 'liteyka_medium', 'faccin_1','faccin_2']
-        stankiNames = ["CRYSTA-Apex S9168", "НК600", 'Склад Мех. цеха',  "Печь Индукционная", "Литейная машина большая", 'Литейная машина средняя', "FACCIN 4", "FACCIN 10"]
-        exception = [[0,'Ручной режим','#5c7ed0', 'ruchnoi'],];
-        name = 'ОТК, Склады, Литейка, Гибка'
-        break;
-
-        case "report_day_meh2":
-        namesToFetch = ['uvf5220', 'progress', 'ntx1000_2',
-    'sk50', 'apec', 'dmg_dmu50_3', 'dmg_dmu50_4',
-    'dmg_ctx310_2', 'dmg_ctx510_2', 'dmg_ctx510_3',
-    'dmg_ctx310_3', 'dmg_ctx510_4', 'dmg_ctx510_5',
-    'dmg_dmc1035_2', 'dmg_dmu50_5', 'dmg_dmu50_6',
-    'dmg_dmu50_7', 'ar55']
-        stankiNames = ['УФ5220', 'СТП Сеспель', 'NTX1000',
-    'SK50', 'APEC', 'DMU50 #3', 'DMU50 #4', 'CTX310 #2',
-    'CTX510 #2', 'CTX510 #3', 'CTX310 #3', 'CTX510 #4',
-    'CTX510 #5', 'DMC1035 #2', 'DMU50 #5', 'DMU50 #6',
-    'DMU50 #7','AR55']
-        exception = [[4,'Ручной режим','#5c7ed0', 'ruchnoi'],];
-        name = 'Станки Мех.участок 2 площадка'
-        break;
-
-        case "report_day_navigators":
-        namesToFetch = ['navigator_1', 'navigator_2_golova_2', 'navigator_3', 'trulaser', 'kometa_1', 'kometa_2', 'kometa_3']
-        stankiNames = ["Навигатор 1", "Навигатор 2", "Навигатор 3", "TruLaser", "Комета 1", "Комета 2", "Комета 3"]
-        exception = null;
-        name = 'Резка'
-        break;
-
-        case "report_day_meh1":
-        namesToFetch = ['uvf_1', 'uvf_2', 'ntx1000', 'nlx3000', 'dmg_gamma2000', 'dmg_ctx650', 'dmg_dmf260', 'dmg_dmu50_1', 'dmg_dmu50_2', 'dmg_dmc1035', 'dmg_ctx310_1',
-        'dmg_ctx510_1']
-        stankiNames = ["УВФ-1 1", "УВФ-1 2", "NTX1000", "NLX3000", "GAMMA2000", "CTX650", "DMF260", "DMU50 1", "DMU50 2", "DMC1035", "CTX310 1", "CTX510 1"]
-        exception = null;
-        name = 'Станки Мех.участок 1 площадка'
-        break;
-        
-        case "report_day_robots":
-        namesToFetch = ['maks_1', 'maks_2', 'm710', 'rtk12c', 'p250', 'krot', 'prans']
-        stankiNames = ["МАКС 1", "МАКС 2", "М710", "РТК12C", "P250", "КРОТ", "ПРАНС"]
-        exception = null;
-        name = 'Роботы'
-        break;
-
-        case "report_day_spec_complexes":
-        namesToFetch = ['press', 'epp', 'stp13m', 'stend_resources']
-        stankiNames = ["Пресс ЧПУ для ступиц", "ЭПП", "СТП13М", "Стенд для ресурсных испытаний"]
-        exception = null;
-        name = 'Спец. комплексы'
-        break;
-}
-
-    document.getElementsByTagName('h1')[0].innerHTML = name
-
-    startTime = document.querySelector('.form-control').value
-    stankiRequest = Promise.all(namesToFetch.map(item=>{
-    return makeRequest(item, startTime)
-  }));
-
-    if(place=='report_day_spec_complexes'){
-        document.getElementById('containerHighchartsTable').style.height = '45vh'
-    } else document.getElementById('containerHighchartsTable').style.height = '80vh'
-
-  // Это тот же .then, просто обернутый в функцию
-    rewriteData(stankiRequest, data, stankiNames, exception)
-
-    if(place=='report_day_spec_complexes'){
-        document.getElementById('containerHighchartsPressEpp').style.height = '40vh'
-        let eppNames = [7545716, 7545711]
-        let epp = Promise.all(eppNames.map((item) => {
-            return fetchRequestPressEpp(item)
-        }));
-
-        epp.then((e,i)=>{
-            let container = 'container_epp_tok'
-
-            let s1 = 'Ток, А'
-            let s2 = 'Температура, С'
-            let te = 'Хронология технологического процесса ЭПП'
-            let tittleY = 'Амплитуда'
-
-
-            let temp = e[1].map(k=>{
-                return k.split(',').map(f=>{
-                    return parseInt(f, 10);
-                })
-            })
-
-            temp.forEach(e=>{
-                e[0] *= 1000
-            })
-
-            let davl = e[0].map(k=>{
-                return k.split(',').map(f=>{
-                    return parseInt(f, 10);
-                })
-            })
-
-            davl.forEach(e=>{
-                e[0] *= 1000
-            })
-
-            HighchartsPressEpp(container, [temp, davl], s1, s2, te, tittleY)
-        })
-
-        let pressNames = [2899049, 2899041]
-        let press = Promise.all(pressNames.map((item) => {
-            return fetchRequestPressEpp(item)
-        }));
-
-        press.then((e,i)=>{
-            let container = 'container_press_davlenie'
-
-            let s1 = 'Давление запрессовки, т'
-            let s2 = 'Заданное давление, т'
-            let te = 'Хронология запрессовок Пресса ЧПУ'
-            let tittleY = 'Давление, тонн'
-
-
-            let zad = e[0].map(k=>{
-                return k.split(',').map(f=>{
-                    return parseInt(f, 10);
-                })
-            })
-
-            zad.forEach(e=>{
-                e[0] *= 1000
-            })
-
-            let davl = e[1].map(k=>{
-                return k.split(',').map(f=>{
-                    return parseInt(f, 10);
-                })
-            })
-
-            davl.forEach(e=>{
-                e[0] *= 1000
-            })
-
-            HighchartsPressEpp(container, [davl, zad], s1, s2, te, tittleY)
-        })
-    }
-}
-
-</script>
+    </script>
 
 </head>
 <body>
@@ -407,22 +406,22 @@ function changePlace(place){
 
 <h1>Станки Мех.участок 2 площадка </h1>
 <div id="containerHighchartsTable" style="display: flex; justify-content: space-around;">
-  <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
-  <table id='myTable' style="min-height: 40vh; width: 45%">
-    <thead>
-    <tr>
-      <th>Станки</th>
-      <th>Работа</th>
-      <th>Пауза</th>
-      <th>Выключен</th>
-      <th>Авария</th>
-      <th>Нагрузка</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>    <!--Таблица изменений-->
-  <!--Общая загрузка html-->
+    <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
+    <table id='myTable' style="min-height: 40vh; width: 45%">
+        <thead>
+        <tr>
+            <th>Станки</th>
+            <th>Работа</th>
+            <th>Пауза</th>
+            <th>Выключен</th>
+            <th>Авария</th>
+            <th>Нагрузка</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>    <!--Таблица изменений-->
+    <!--Общая загрузка html-->
 </div>  <!--Общая загрузка и количество операций html-->
 
 <div id="containerHighchartsPressEpp" style="display: flex; justify-content: space-around;">
@@ -431,17 +430,17 @@ function changePlace(place){
 </div>  <!--Общие Ток и давление-->
 
 <script>
-  document.querySelector('.form-control').value = dayNow()
+    document.querySelector('.form-control').value = dayNow()
 
-  let namesToFetch = []
+    let namesToFetch = []
 
-  let stankiNames = []
+    let stankiNames = []
 
-  let data = []
+    let data = []
 
-  let exception = []
+    let exception = []
 
-  changePlace(parseNameUrl(window.location.pathname))
-</script> 
+    changePlace(parseNameUrl(window.location.pathname))
+</script>
 </body>
 </html>

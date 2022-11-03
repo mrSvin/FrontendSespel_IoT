@@ -1,46 +1,52 @@
-.master-container{
-    border-radius:30px;
-    width:350px;
-    height:380px;
-    background-color:white;
-    overflow:hidden;
+.master-container {
+    border-radius: 30px;
+    width: 350px;
+    height: 380px;
+    background-color: white;
+    overflow: hidden;
     z-index: 999999;
     position: absolute;
 }
-.year{
-    background-color:#2ECC71;
-    color:white;
-    text-align:center;
-    font-size:78px;
+
+.year {
+    background-color: #2ECC71;
+    color: white;
+    text-align: center;
+    font-size: 78px;
     padding: 20px 0px;
 }
-#month{
-    font-size:38px;
+
+#month {
+    font-size: 38px;
 }
-.calendarMonth{
+
+.calendarMonth {
     padding: 10px 50px;
-    width:100%;
-    height:200px;
+    width: 100%;
+    height: 200px;
 }
-.tdMonth{
-    text-align:center;
+
+.tdMonth {
+    text-align: center;
     cursor: pointer;
-    border-radius:10px;
+    border-radius: 10px;
 }
-.tdMonthRed{
-    text-align:center;
+
+.tdMonthRed {
+    text-align: center;
     cursor: pointer;
-    border-radius:10px;
+    border-radius: 10px;
     background-color: red;
 }
-.tdMonth:hover{
-    background-color:lightblue;
+
+.tdMonth:hover {
+    background-color: lightblue;
 }
 
 .forw:hover,
-.prev:hover{
+.prev:hover {
     cursor: pointer;
-    color:lightgreen;
+    color: lightgreen;
 }
 
 .calendarMonthForm {

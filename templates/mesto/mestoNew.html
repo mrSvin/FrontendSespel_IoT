@@ -11,16 +11,15 @@
 <div class="pulse2"></div>
 <div class="icon"></div>
 <style>
-    .icon{
+    .icon {
         position: absolute;
         width: 40px;
         height: 40px;
         z-index: 3;
 
-        -webkit-box-shadow:
-                0 0 0 10px   rgba(255,255,255,.2),
-                0 0 25px 2px rgba(0,0,0,.4),
-                inset 0 0 0 15px   rgba(255,255,155,.4);
+        -webkit-box-shadow: 0 0 0 10px rgba(255, 255, 255, .2),
+        0 0 25px 2px rgba(0, 0, 0, .4),
+        inset 0 0 0 15px rgba(255, 255, 155, .4);
 
         -webkit-border-radius: 99px;
         -moz-border-radius: 99px;
@@ -31,15 +30,15 @@
     }
 
 
-
     .pulse2 {
         position: absolute;
         width: 60px;
         height: 60px;
-        margin-top: -116px; margin-left: 770px;
+        margin-top: -116px;
+        margin-left: 770px;
         z-index: 2;
         opacity: 0;
-        border: 1px solid rgba(255,255,255,0);
+        border: 1px solid rgba(255, 255, 255, 0);
 
 
         animation: pulsejg2 1s linear infinite;
@@ -265,18 +264,18 @@
 
 
 <script>
-    if(localStorage['mestoParams'] != null) {
+    if (localStorage['mestoParams'] != null) {
         mestoParams = window.localStorage['mestoParams'];
         mestoParams = mestoParams.split(',')
 
         mestoParams = mestoParams.map((elem, i) => {
-            if(i == 0 || i == 1 || i == 4) elem = parseInt(elem)
+            if (i == 0 || i == 1 || i == 4) elem = parseInt(elem)
             return elem
         })
     }
 
 
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
 
         let margin_top = mestoParams[0]
         let margin_left = mestoParams[1]
@@ -295,7 +294,7 @@
         map.setAttribute('src', src)
         map.style.width = mapWidth
 
-        pulse.style = `margin-top: ${margin_top-10}px; margin-left: ${margin_left-10}px; width: ${size + 20}px; height: ${size + 20}px;`
+        pulse.style = `margin-top: ${margin_top - 10}px; margin-left: ${margin_left - 10}px; width: ${size + 20}px; height: ${size + 20}px;`
     });
 </script>
 <!--Скрипт прототип для будущего места для станков-->

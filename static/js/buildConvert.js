@@ -130,7 +130,7 @@ function updateLoadData(promiseVariable, day1, complexName, fetchNames, typeLine
             parserDataArray.forEach((e, i) => {
                 // Первая смена
                 highChartSutkiLine(e[0], e[1], e[2], e[3], e[4], nagruzkaName[i], i + 1)
-                if(complexName[i][3] !== null && complexName[i][3] !== undefined) highChartProgram(getTimeProgramNameGraph(data[i], 'sutki', day1),i + 1)
+                if (complexName[i][3] !== null && complexName[i][3] !== undefined) highChartProgram(getTimeProgramNameGraph(data[i], 'sutki', day1), i + 1)
                 highChartRound(e[5][0], e[5][1], e[5][2], e[5][3], e[5][4], nagruzkaName[i], i + 1)
 
             })
@@ -144,11 +144,11 @@ function updateLoadData(promiseVariable, day1, complexName, fetchNames, typeLine
 function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
     promiseVariable
         .then(result => {
-            let data = result.map(e=>{
+            let data = result.map(e => {
                 return [[e.work.slice(), e.pause.slice(), e.off.slice(), e.avar.slice(), e.nagruzka.slice(), e.programName.slice()],
-                    [e.work2.slice(), e.pause2.slice(), e.off2.slice(), e.avar2.slice(), e.nagruzka2.slice(),  e.programName2.slice()]]
+                    [e.work2.slice(), e.pause2.slice(), e.off2.slice(), e.avar2.slice(), e.nagruzka2.slice(), e.programName2.slice()]]
             })
-            let smenaArrays = data.map(e=>{
+            let smenaArrays = data.map(e => {
                 return convertDaysToSmena(e[0], e[1], day1, typeLine)
             })
 
@@ -157,14 +157,14 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typ
             let arrayLine;
 
             if (typeLine == 'multiLine') {
-                arrayLine =[0,1,2,3,4]
+                arrayLine = [0, 1, 2, 3, 4]
             } else {
-                arrayLine =[0,0,0,0,0]
+                arrayLine = [0, 0, 0, 0, 0]
             }
 
             let day2 = dayYesterday(day1)
 
-            let parserDataArray =  smenaArrays.map(smena=>{
+            let parserDataArray = smenaArrays.map(smena => {
                 let convertDataWork = parseLinearSutki(smena[0][0], arrayLine[1], day1, smena[0][5])
                 let convertDataPause = parseLinearSutki(smena[0][1], arrayLine[2], day1)
                 let convertDataOff = parseLinearSutki(smena[0][2], arrayLine[3], day1)
@@ -190,7 +190,7 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typ
 
             })
 
-            let nagruzkaName = fetchNames.map(e=>{
+            let nagruzkaName = fetchNames.map(e => {
                 return exceptionManualNagruzka(e)
             })
 
@@ -200,17 +200,17 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typ
 
             highChartSmenaTotalKolOp(totalArray, kolOpArray, names, day1, nagruzkaName)
 
-            parserDataArray.forEach((e, i)=>{
+            parserDataArray.forEach((e, i) => {
                 let idContainer = (i * 2) + 1
 
                 // Первая смена
                 highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], nagruzkaName[i], idContainer)
-                if(complexName[i][3] !== null && complexName[i][3] !== undefined)  highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0], 'smena',day2+' 19:00'),idContainer)
+                if (complexName[i][3] !== null && complexName[i][3] !== undefined) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0], 'smena', day2 + ' 19:00'), idContainer)
                 highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], nagruzkaName[i], idContainer)
 
                 // Первая вторая
                 highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], nagruzkaName[i], idContainer + 1)
-                if(complexName[i][3] !== null && complexName[i][3] !== undefined)  highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1], 'smena', day1 + ' 07:00'),idContainer + 1)
+                if (complexName[i][3] !== null && complexName[i][3] !== undefined) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1], 'smena', day1 + ' 07:00'), idContainer + 1)
                 highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], nagruzkaName[i], idContainer + 1)
 
             })
@@ -378,11 +378,11 @@ function updateLoadDataIndividualMonth(promiseVariable, date, complexName, fetch
 function updateLoadDataIndividualSmena(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
     promiseVariable
         .then(result => {
-            let data = result.map(e=>{
+            let data = result.map(e => {
                 return [[e.work.slice(), e.pause.slice(), e.off.slice(), e.avar.slice(), e.nagruzka.slice(), e.programName.slice()],
-                    [e.work2.slice(), e.pause2.slice(), e.off2.slice(), e.avar2.slice(), e.nagruzka2.slice(),  e.programName2.slice()]]
+                    [e.work2.slice(), e.pause2.slice(), e.off2.slice(), e.avar2.slice(), e.nagruzka2.slice(), e.programName2.slice()]]
             })
-            let smenaArrays = data.map(e=>{
+            let smenaArrays = data.map(e => {
                 return convertDaysToSmena(e[0], e[1], day1, typeLine)
             })
 
@@ -391,14 +391,14 @@ function updateLoadDataIndividualSmena(promiseVariable, day1, complexName, fetch
             let arrayLine;
 
             if (typeLine == 'multiLine') {
-                arrayLine =[0,1,2,3,4]
+                arrayLine = [0, 1, 2, 3, 4]
             } else {
-                arrayLine =[0,0,0,0,0]
+                arrayLine = [0, 0, 0, 0, 0]
             }
 
             let day2 = dayYesterday(day1)
 
-            let parserDataArray =  smenaArrays.map(smena=>{
+            let parserDataArray = smenaArrays.map(smena => {
                 let convertDataWork = parseLinearSutki(smena[0][0], arrayLine[1], day1, smena[0][5])
                 let convertDataPause = parseLinearSutki(smena[0][1], arrayLine[2], day1)
                 let convertDataOff = parseLinearSutki(smena[0][2], arrayLine[3], day1)
@@ -424,7 +424,7 @@ function updateLoadDataIndividualSmena(promiseVariable, day1, complexName, fetch
 
             })
 
-            let nagruzkaName = fetchNames.map(e=>{
+            let nagruzkaName = fetchNames.map(e => {
                 return exceptionManualNagruzka(e)
             })
 
@@ -438,17 +438,17 @@ function updateLoadDataIndividualSmena(promiseVariable, day1, complexName, fetch
 
             highChartSmenaTotalKolOp(totalArray, kolOpArray, names, day1, nagruzkaName)
 
-            parserDataArray.forEach((e, i)=>{
+            parserDataArray.forEach((e, i) => {
                 let idContainer = (i * 2) + 1
 
                 // Первая смена
                 highChartSutkiLine(e[0][0], e[0][1], e[0][2], e[0][3], e[0][4], nagruzkaName[i], idContainer)
-                if (programNames[i] !== null && programNames[i] !== undefined)  highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0], 'smena',day2+' 19:00'),idContainer)
+                if (programNames[i] !== null && programNames[i] !== undefined) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][0], 'smena', day2 + ' 19:00'), idContainer)
                 highChartRound(e[0][5][0], e[0][5][1], e[0][5][2], e[0][5][3], e[0][5][4], nagruzkaName[i], idContainer)
 
                 // Первая вторая
                 highChartSutkiLine(e[1][0], e[1][1], e[1][2], e[1][3], e[1][4], nagruzkaName[i], idContainer + 1)
-                if (programNames[i] !== null && programNames[i] !== undefined)  highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1], 'smena', day1 + ' 07:00'),idContainer + 1)
+                if (programNames[i] !== null && programNames[i] !== undefined) highChartProgram(getTimeProgramNameGraph(smenaArrays[i][1], 'smena', day1 + ' 07:00'), idContainer + 1)
                 highChartRound(e[1][5][0], e[1][5][1], e[1][5][2], e[1][5][3], e[1][5][4], nagruzkaName[i], idContainer + 1)
 
             })
@@ -458,7 +458,7 @@ function updateLoadDataIndividualSmena(promiseVariable, day1, complexName, fetch
         });
 }
 
-function updatePage(date, valuesWait, stateLineHC, placesObject){
+function updatePage(date, valuesWait, stateLineHC, placesObject) {
 
     let stankiObject = {}
     Object.keys(placesObject).forEach(e => {
@@ -492,7 +492,7 @@ function updatePage(date, valuesWait, stateLineHC, placesObject){
     updateLoadDataIndividual(stankiRequest, date, complexNames, fetchNames, stateLineHC)
 }
 
-function updatePageMonth(date, valuesWait, placesObject){
+function updatePageMonth(date, valuesWait, placesObject) {
 
     let stankiObject = {}
     Object.keys(placesObject).forEach(e => {
@@ -526,7 +526,7 @@ function updatePageMonth(date, valuesWait, placesObject){
     updateLoadDataIndividualMonth(stankiRequest, date, complexNames, fetchNames)
 }
 
-function updatePageSmena(date, valuesWait, stateLineHC, placesObject){
+function updatePageSmena(date, valuesWait, stateLineHC, placesObject) {
 
     let stankiObject = {}
     Object.keys(placesObject).forEach(e => {
@@ -561,7 +561,7 @@ function updatePageSmena(date, valuesWait, stateLineHC, placesObject){
 }
 
 
-function getAllStankiData(){
+function getAllStankiData() {
     let kim = {
         buttonNames: {
             name: "CRYSTA-Apex S9168",
@@ -611,7 +611,7 @@ function getAllStankiData(){
         state: true,
     }
 
-    let ntx1000_2 =  {
+    let ntx1000_2 = {
         buttonNames: {
             name: "NTX1000 2",
             serviceName: "NTX1000 2",
@@ -737,7 +737,7 @@ function getAllStankiData(){
             name: "CTX510 5",
             serviceName: "CTX510 5",
         },
-        complexImg:  "../images/dmg_ctx510.png",
+        complexImg: "../images/dmg_ctx510.png",
         complexRequest: 'dmg_ctx510_5',
         buttonsVrs: [-65, 210, 'url(../images/dmg_ctx510.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
         size: '2ploshadka',
@@ -749,7 +749,7 @@ function getAllStankiData(){
             name: "DMC1035 2",
             serviceName: "DMC1035 2",
         },
-        complexImg:  "../images/dmg_dmc1035.png",
+        complexImg: "../images/dmg_dmc1035.png",
         complexRequest: 'dmg_dmc1035_2',
         buttonsVrs: [-103, 171, 'url(../images/dmg_dmc1035.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
         size: '2ploshadka',
@@ -761,7 +761,7 @@ function getAllStankiData(){
             name: "DMU50 5",
             serviceName: "DMU50 5",
         },
-        complexImg:  "../images/dmg_dmu50.png",
+        complexImg: "../images/dmg_dmu50.png",
         complexRequest: 'dmg_dmu50_5',
         buttonsVrs: [-65, 171, 'url(../images/dmg_dmu50.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
         size: '2ploshadka',
@@ -773,7 +773,7 @@ function getAllStankiData(){
             name: "DMU50 6",
             serviceName: "DMU50 6",
         },
-        complexImg:  "../images/dmg_dmu50.png",
+        complexImg: "../images/dmg_dmu50.png",
         complexRequest: 'dmg_dmu50_6',
         buttonsVrs: [-103, 171, 'url(../images/dmg_dmc1035.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
         size: '2ploshadka',
@@ -785,7 +785,7 @@ function getAllStankiData(){
             name: "DMU50 7",
             serviceName: "DMU50 7",
         },
-        complexImg:  "../images/dmg_dmu50.png",
+        complexImg: "../images/dmg_dmu50.png",
         complexRequest: 'dmg_dmu50_7',
         buttonsVrs: [-65, 141, 'url(../images/dmg_dmu50.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
         size: '2ploshadka',
@@ -797,7 +797,7 @@ function getAllStankiData(){
             name: "AR55",
             serviceName: "AR55",
         },
-        complexImg:  "../images/ar55.png",
+        complexImg: "../images/ar55.png",
         complexRequest: 'ar55',
         buttonsVrs: [-98, 268, 'url(../images/ar50.png) no-repeat', "../images/ii_ploshadka.png", 25, "unset"],
         size: '2ploshadka',
@@ -811,7 +811,7 @@ function getAllStankiData(){
             programsName: "Навигатор 1",
             laser: "Навигатор 1",
         },
-        complexImg:  "../images/navigator.png",
+        complexImg: "../images/navigator.png",
         complexRequest: 'navigator_1',
         buttonsVrs: [-110, 900, 'url(../images/navigator.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
         size: 'sborCeh',
@@ -825,7 +825,7 @@ function getAllStankiData(){
             programsName: "Навигатор 2",
             laser: "Навигатор 2",
         },
-        complexImg:  "../images/navigator.png",
+        complexImg: "../images/navigator.png",
         complexRequest: 'navigator_2_golova_2',
         buttonsVrs: [-100, 540, 'url(../images/navigator.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
         size: 'sborCeh',
@@ -839,7 +839,7 @@ function getAllStankiData(){
             programsName: "Навигатор 3",
             laser: "Навигатор 3",
         },
-        complexImg:  "../images/navigator.png",
+        complexImg: "../images/navigator.png",
         complexRequest: 'navigator_3',
         buttonsVrs: [-200, 220, 'url(../images/navigator.png) no-repeat', "../images/sbor_ceh.png", 50, "unset"],
         size: 'sborCeh',
@@ -851,7 +851,7 @@ function getAllStankiData(){
             name: "TruLaser",
             serviceName: "TruLaser",
         },
-        complexImg:  "../images/trulaser.png",
+        complexImg: "../images/trulaser.png",
         complexRequest: 'trulaser',
         buttonsVrs: [-420, 740, 'url(../images/trulaser.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
         size: 'sborCeh',
@@ -863,7 +863,7 @@ function getAllStankiData(){
             name: "Комета 1",
             serviceName: "Комета 1",
         },
-        complexImg:  "../images/kometa.png",
+        complexImg: "../images/kometa.png",
         complexRequest: 'kometa_1',
         buttonsVrs: [-382, 190, 'url(../images/kometa.png) no-repeat', "../images/ceh_5.png", 60, "unset"],
         size: 'ceh5',
@@ -875,7 +875,7 @@ function getAllStankiData(){
             name: "Комета 2",
             serviceName: "Комета 2",
         },
-        complexImg:  "../images/kometa.png",
+        complexImg: "../images/kometa.png",
         complexRequest: 'kometa_2',
         buttonsVrs: [-300, 948, 'url(../images/kometa.png) no-repeat', "../images/sbor_ceh.png", 50, "unset"],
         size: 'sborCeh',
@@ -887,7 +887,7 @@ function getAllStankiData(){
             name: "Комета 3",
             serviceName: "Комета 3",
         },
-        complexImg:  "../images/kometa.png",
+        complexImg: "../images/kometa.png",
         complexRequest: 'kometa_3',
         buttonsVrs: [-340, 870, 'url(../images/kometa.png) no-repeat', "../images/sbor_ceh.png", 50, "unset"],
         size: 'sborCeh',
@@ -899,7 +899,7 @@ function getAllStankiData(){
             name: "УВФ-1 1",
             serviceName: "УВФ-1 1",
         },
-        complexImg:  "../images/uvf_1_2.png",
+        complexImg: "../images/uvf_1_2.png",
         complexRequest: 'uvf_1',
         buttonsVrs: [-340, 280, 'url(../images/uvf_1_2.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -911,7 +911,7 @@ function getAllStankiData(){
             name: "УВФ-1 2",
             serviceName: "УВФ-1 2",
         },
-        complexImg:  "../images/uvf_1_2.png",
+        complexImg: "../images/uvf_1_2.png",
         complexRequest: 'uvf_2',
         buttonsVrs: [-180, 280, 'url(../images/uvf_1_2.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -924,7 +924,7 @@ function getAllStankiData(){
             serviceName: "NTX1000",
             alarm: 'NTX1000'
         },
-        complexImg:  "../images/ntx1000.png",
+        complexImg: "../images/ntx1000.png",
         complexRequest: 'ntx1000',
         buttonsVrs: [-670, 490, 'url(../images/ntx1000.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -937,7 +937,7 @@ function getAllStankiData(){
             serviceName: "NLX3000",
             alarm: 'NLX3000'
         },
-        complexImg:  "../images/NLX3000.png",
+        complexImg: "../images/NLX3000.png",
         complexRequest: 'nlx3000',
         buttonsVrs: [-590, 310, 'url(../images/NLX3000.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -950,7 +950,7 @@ function getAllStankiData(){
             serviceName: "GAMMA2000",
             alarm: 'GAMMA2000'
         },
-        complexImg:  "../images/gamma2000.png",
+        complexImg: "../images/gamma2000.png",
         complexRequest: 'dmg_gamma2000',
         buttonsVrs: [-840, 520, 'url(../images/gamma2000.png) no-repeat', "../images/meh_ceh.png", 60, "unset"],
         size: 'meh1',
@@ -963,7 +963,7 @@ function getAllStankiData(){
             serviceName: "CTX650",
             alarm: 'CTX650'
         },
-        complexImg:  "../images/dmg_ctx650.png",
+        complexImg: "../images/dmg_ctx650.png",
         complexRequest: 'dmg_ctx650',
         buttonsVrs: [-500, 310, 'url(../images/dmg_ctx650.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -976,7 +976,7 @@ function getAllStankiData(){
             serviceName: "DMF260",
             alarm: 'DMF260'
         },
-        complexImg:  "../images/dmg_dmf260.png",
+        complexImg: "../images/dmg_dmf260.png",
         complexRequest: 'dmg_dmf260',
         buttonsVrs: [-780, 200, 'url(../images/dmg_dmf260.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -989,7 +989,7 @@ function getAllStankiData(){
             serviceName: "DMU50 1",
             alarm: 'DMU50 1'
         },
-        complexImg:  "../images/dmg_dmu50.png",
+        complexImg: "../images/dmg_dmu50.png",
         complexRequest: 'dmg_dmu50_1',
         buttonsVrs: [-500, 115, 'url(../images/dmg_dmu50.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -1002,7 +1002,7 @@ function getAllStankiData(){
             serviceName: "DMU50 2",
             alarm: 'DMU50 2'
         },
-        complexImg:  "../images/dmg_dmu50.png",
+        complexImg: "../images/dmg_dmu50.png",
         complexRequest: 'dmg_dmu50_2',
         buttonsVrs: [-410, 115, 'url(../images/dmg_dmu50.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -1015,7 +1015,7 @@ function getAllStankiData(){
             serviceName: "DMC1035",
             alarm: 'DMC1035',
         },
-        complexImg:  "../images/dmg_dmc1035.png",
+        complexImg: "../images/dmg_dmc1035.png",
         complexRequest: 'dmg_dmc1035',
         buttonsVrs: [-590, 115, 'url(../images/dmg_dmc1035.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -1028,7 +1028,7 @@ function getAllStankiData(){
             serviceName: "CTX310 1",
             alarm: 'CTX310 1',
         },
-        complexImg:  "../images/dmg_ctx310.png",
+        complexImg: "../images/dmg_ctx310.png",
         complexRequest: 'dmg_ctx310_1',
         buttonsVrs: [-590, 470, 'url(../images/dmg_ctx310.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -1041,7 +1041,7 @@ function getAllStankiData(){
             serviceName: "CTX510 1",
             alarm: 'CTX510 1',
         },
-        complexImg:  "../images/dmg_ctx510.png",
+        complexImg: "../images/dmg_ctx510.png",
         complexRequest: 'dmg_ctx510_1',
         buttonsVrs: [-490, 470, 'url(../images/dmg_ctx510.png) no-repeat', "../images/meh_ceh.png", 40, "unset"],
         size: 'meh1',
@@ -1054,7 +1054,7 @@ function getAllStankiData(){
             serviceName: "МАКС 1",
             programsName: 'МАКС 1',
         },
-        complexImg:  "../images/robot.png",
+        complexImg: "../images/robot.png",
         complexRequest: 'maks_1',
         buttonsVrs: [-255, 620, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"],
         size: 'ceh6',
@@ -1067,7 +1067,7 @@ function getAllStankiData(){
             serviceName: "МАКС 2",
             programsName: 'МАКС 2',
         },
-        complexImg:  "../images/robot.png",
+        complexImg: "../images/robot.png",
         complexRequest: 'maks_2',
         buttonsVrs: [-450, 210, 'url(../images/robot.png) no-repeat', "../images/ceh_6.png", 40, "unset"],
         size: 'ceh6',
@@ -1080,7 +1080,7 @@ function getAllStankiData(){
             serviceName: "М710",
             programsName: 'М710',
         },
-        complexImg:  "../images/robot.png",
+        complexImg: "../images/robot.png",
         complexRequest: 'm710',
         buttonsVrs: [-920, 800, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 40, "unset"],
         size: 'sborCeh',
@@ -1093,7 +1093,7 @@ function getAllStankiData(){
             serviceName: "РТК12C",
             programsName: 'РТК12C',
         },
-        complexImg:  "../images/robot.png",
+        complexImg: "../images/robot.png",
         complexRequest: 'rtk12c',
         buttonsVrs: [-750, 800, 'url(../images/robot.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
         size: 'sborCeh',
@@ -1287,7 +1287,8 @@ function getAllStankiData(){
             stanki: {
                 uvf_1, uvf_2, ntx1000, nlx3000, dmg_gamma2000,
                 dmg_ctx650, dmg_dmf260, dmg_dmu50_1, dmg_dmu50_2,
-                dmg_dmc1035, dmg_ctx310_1, dmg_ctx510_1},
+                dmg_dmc1035, dmg_ctx310_1, dmg_ctx510_1
+            },
             placeState: true,
         },
         'Роботы': {

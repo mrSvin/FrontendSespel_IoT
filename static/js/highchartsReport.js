@@ -1097,13 +1097,13 @@ function highChartProgram(arrayProgram, idContainer = 1) {
         else nechet.push(e)
     })
 
-    let meries = arrayTeh.map((e,i)=>{
+    let meries = arrayTeh.map((e, i) => {
         return {
-            name: `Программа ${i+1}`,
+            name: `Программа ${i + 1}`,
             borderColor: 'white',
             pointWidth: 30,
             colorByPoint: false,
-            color: "#"+((1<<24)*Math.random()|0).toString(16),
+            color: "#" + ((1 << 24) * Math.random() | 0).toString(16),
             tooltip: {
                 pointFormatter: function () {
                     let timer = msToTimeDays(this.x2 - this.x, 365)
@@ -1197,7 +1197,7 @@ function highChartProgram(arrayProgram, idContainer = 1) {
 
 }
 
-function highChartSkud(series,generalDiagramNames) {
+function highChartSkud(series, generalDiagramNames) {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',

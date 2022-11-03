@@ -16,9 +16,11 @@
 </head>
 <body>
 
-<form style="display: flex;align-items: center;justify-content: center;height: 5vh;position: relative;background: #dee2e6;top: 0px;z-index: 2;" action="" method="post" id="form_update">
+<form style="display: flex;align-items: center;justify-content: center;height: 5vh;position: relative;background: #dee2e6;top: 0px;z-index: 2;"
+      action="" method="post" id="form_update">
     <div class="input-group date" id="datepicker" style="width: 200px; float: left;  margin: 1.7%">
-        <input type="text" class="form-control" value="" onchange="selectedNewValue()" style="color:#756e6e; background:#f2f6f8; border: 1px solid#cccccc;">
+        <input type="text" class="form-control" value="" onchange="selectedNewValue()"
+               style="color:#756e6e; background:#f2f6f8; border: 1px solid#cccccc;">
         <span class="input-group-addon" style="color:#756e6e; background:#eeeeee; border: 1px solid #cccccc;">
             <span class="glyphicon glyphicon-calendar"></span>
         </span>
@@ -44,7 +46,7 @@
 
 <script>
     // Загрузка datapicker при загрузке страницы
-    document.addEventListener("DOMContentLoaded", function(event) {
+    document.addEventListener("DOMContentLoaded", function (event) {
         $('#datepicker').datepicker({
             format: "yyyy-mm-dd",
             language: 'ru',
@@ -59,7 +61,7 @@
         });
     })
 
-    function selectedNewValue(){
+    function selectedNewValue() {
         $('#datepicker').datepicker({
             format: "yyyy-mm-dd",
             language: 'ru',
@@ -85,7 +87,7 @@
 
             .then((response) => response.json())
             .then((data) => {
-                for (let i = document.getElementById('programTimeTable').getElementsByTagName('tr').length -1; i; i--) {
+                for (let i = document.getElementById('programTimeTable').getElementsByTagName('tr').length - 1; i; i--) {
                     document.getElementById('programTimeTable').deleteRow(i);
                 }
                 if (data) {
@@ -102,7 +104,7 @@
                     // переменная для краткой записи к телу таблицы
                     let tbody = programTimeTable.querySelector('tbody')
 
-                    if(tableArray !== null) {
+                    if (tableArray !== null) {
                         tableArray.forEach((elem, index) => {
 
                             // добавляем новую строку
@@ -112,11 +114,10 @@
                             tableRow = tbody.querySelectorAll('tr')
 
                             // считываем длины строк и ячеек
-                            lastRow = tbody.rows.length -1
+                            lastRow = tbody.rows.length - 1
                             lastCell = tableRow[lastRow].cells.length - 1
 
-                            for(let i=0; i<=4; i++)
-                            {
+                            for (let i = 0; i <= 4; i++) {
                                 // добавляем в последнюю строку новую ячейку
                                 tableRow[lastRow].appendChild(document.createElement('td'))
 
@@ -133,7 +134,7 @@
                 }
             })
             .catch(err => {
-                alert('Слишком частое количество запросов',err)
+                alert('Слишком частое количество запросов', err)
             });
     }
 
@@ -142,7 +143,6 @@
         let seconds = parseInt((duration / 1000) % 60),
             minutes = parseInt((duration / (1000 * 60)) % 60),
             hours = parseInt((duration / (1000 * 60 * 60)) % 24);
-
 
 
         hours = (hours < 10) ? "0" + hours : hours;
@@ -154,51 +154,39 @@
 
     // Функция принимает данные с запроса работы станка и возвращает
     // структуру для таблицы
-    function getTimeProgramName(arrayData)
-    {
+    function getTimeProgramName(arrayData) {
         let timer = 0;
         let programTimeArray = [];
         let startSame = null
 
-        arrayData? console.log(""):0;
+        arrayData ? console.log("") : 0;
 
-            if(arrayData['work'].length % 2 == 1)
-            {
-                if(startTime == time.slice(0, 10))
-                {   // То добавить во вторую смену текущее время
-                    arrayData['work'].push(startTime + " " + time.slice(11, 19))
-                }
-                else {
-                    arrayData['work'].push(startTime + ' 23:59:59')
-                }
+        if (arrayData['work'].length % 2 == 1) {
+            if (startTime == time.slice(0, 10)) {   // То добавить во вторую смену текущее время
+                arrayData['work'].push(startTime + " " + time.slice(11, 19))
+            } else {
+                arrayData['work'].push(startTime + ' 23:59:59')
             }
+        }
 
 
-        for(let i = 0; i<arrayData['work'].length; i+=2)
-        {
+        for (let i = 0; i < arrayData['work'].length; i += 2) {
 
-            if(arrayData['programName'][i/2] == arrayData['programName'][i/2+1])
-            {
-                if(arrayData['programName'][i/2] !== arrayData['programName'][i/2-1])
-                {
+            if (arrayData['programName'][i / 2] == arrayData['programName'][i / 2 + 1]) {
+                if (arrayData['programName'][i / 2] !== arrayData['programName'][i / 2 - 1]) {
                     startSame = arrayData['work'][i]
                 }
 
-                timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-            }
+                timer = timer + (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
+            } else {
 
-            else
-            {
-
-                if(arrayData['programName'][i/2] == arrayData['programName'][i/2-1])
-                {
-                    timer = timer + (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-                    programTimeArray.push([arrayData['programName'][i/2], startSame.slice(11), arrayData['work'][i+1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i+1]) - new Date(startSame))])
+                if (arrayData['programName'][i / 2] == arrayData['programName'][i / 2 - 1]) {
+                    timer = timer + (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
+                    programTimeArray.push([arrayData['programName'][i / 2], startSame.slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i + 1]) - new Date(startSame))])
                     timer = 0
-                }
-                else {
-                    timer = (new Date(arrayData['work'][i+1]) - new Date(arrayData['work'][i]))
-                    programTimeArray.push([arrayData['programName'][i/2], arrayData['work'][i].slice(11), arrayData['work'][i+1].slice(11), msToTime(timer), msToTime(timer)])
+                } else {
+                    timer = (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
+                    programTimeArray.push([arrayData['programName'][i / 2], arrayData['work'][i].slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(timer)])
                     timer = 0
                 }
 
@@ -207,7 +195,7 @@
 
         }
         // Фильтрация массива на наличие запятых
-        programTimeArray.map((elem)=>{
+        programTimeArray.map((elem) => {
             elem[0] = elem[0].split(',').join('_');
             return elem
         })
@@ -215,11 +203,10 @@
     }
 
 
-
     // Переменные нахождения последнего слова в адресной строке
     let form_path = document.location.pathname;
     form_path.lastIndexOf("/")
-    const searchIndex= form_path.lastIndexOf("/")+1;
+    const searchIndex = form_path.lastIndexOf("/") + 1;
     const stanok = form_path.substr(searchIndex, form_path.length)
 
     // Переменные даты и времяни
@@ -247,7 +234,7 @@
     })
         .then((response) => response.json())
         .then((data) => {
-            for (let i = document.getElementById('programTimeTable').getElementsByTagName('tr').length -1; i; i--) {
+            for (let i = document.getElementById('programTimeTable').getElementsByTagName('tr').length - 1; i; i--) {
                 document.getElementById('programTimeTable').deleteRow(i);
             }
             if (data) {
@@ -264,7 +251,7 @@
                 // переменная для краткой записи к телу таблицы
                 let tbody = programTimeTable.querySelector('tbody')
 
-                if(tableArray !== null) {
+                if (tableArray !== null) {
                     tableArray.forEach((elem, index) => {
 
                         // добавляем новую строку
@@ -274,11 +261,10 @@
                         tableRow = tbody.querySelectorAll('tr')
 
                         // считываем длины строк и ячеек
-                        lastRow = tbody.rows.length -1
+                        lastRow = tbody.rows.length - 1
                         lastCell = tableRow[lastRow].cells.length - 1
 
-                        for(let i=0; i<=4; i++)
-                        {
+                        for (let i = 0; i <= 4; i++) {
                             // добавляем в последнюю строку новую ячейку
                             tableRow[lastRow].appendChild(document.createElement('td'))
 
@@ -295,7 +281,7 @@
             }
         })
         .catch(err => {
-            alert('Слишком частое количество запросов',err)
+            alert('Слишком частое количество запросов', err)
         });
 
 </script>

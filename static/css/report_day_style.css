@@ -3,8 +3,8 @@ th {
     text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black;
 }
 
-#myTable > tbody >  {
-    background: yellow!important;
+#myTable > tbody > {
+    background: yellow !important;
     color: black
 }
 

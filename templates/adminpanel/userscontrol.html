@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Управление пользователями</title>
     <link rel="shortcut icon" type="image/ico" th:href="@{/favicon.ico}"/>
     <!--    <link rel="stylesheet" type="text/css" href="/css/styles_stanki.css"/>-->
@@ -20,7 +20,8 @@
 <body>
 <header style="position: fixed; width: 100vw; z-index: 3;">
     <div class="header-div">
-        <a href="../" style="display: flex; align-items: flex-start;" ><img src="../images/logo_black.png" class="icon-logo-admin"/></a>
+        <a href="../" style="display: flex; align-items: flex-start;"><img src="../images/logo_black.png"
+                                                                           class="icon-logo-admin"/></a>
         <div style="display:flex; justify-content: center; align-items: center;">
             <form>
                 <a class="link_add button_color" href="#" style="">Добавить пользователя</a>
@@ -40,10 +41,12 @@
                     <li th:text="${user_name}"></li>
                     <p th:text="${user_mail}"></p>
                     <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
-                    <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
+                    <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование
+                    </button>
                     <label class="switch">
                         <p>Светлая Темная</p>
-                        <span class="slider round"><input type="checkbox" id='dark_button'/><span class="slider_before round_before"></span></span>
+                        <span class="slider round"><input type="checkbox" id='dark_button'/><span
+                                class="slider_before round_before"></span></span>
                     </label>
                     <form th:action="@{/logout}" method="post">
                         <button class="follow" type="submit">
@@ -80,21 +83,26 @@
         <span id="form_add__close" class="close">ₓ</span>
         <input id="login" maxlength="20" th:field="*{addusername}" required="required" placeholder="Логин*"/>
         <div style="position: relative">
-            <input id="pwd" type="password" name="pwd" maxlength="12"  pattern="(?=.*\d)(?=.*[a-z]).{7,}" th:field="*{adduserpassword}" title="Пароль должен содержать минимум 1 цифру, строчную буквы и быть не менее 7 символов" required="required" placeholder="Пароль*"/>
+            <input id="pwd" type="password" name="pwd" maxlength="12" pattern="(?=.*\d)(?=.*[a-z]).{7,}"
+                   th:field="*{adduserpassword}"
+                   title="Пароль должен содержать минимум 1 цифру, строчную буквы и быть не менее 7 символов"
+                   required="required" placeholder="Пароль*"/>
             <a href="#" class="password-control"></a>
         </div>
         <input id="mail" name="mail" maxlength="28" th:field="*{addmail}" required="required" placeholder="Email*"/>
         <input id="photo" name="photo" th:field="*{addphoto}" required="required" placeholder="Адрес фото*"/>
         <h3>Права доступа:</h3>
-            <select id="list_roles" th:field="*{addrole}" >
-                <option label="Пользователь" value="ROLE_USER"></option>
-                <option label="Администратор" value="ROLE_ADMIN"></option>
-            </select>
+        <select id="list_roles" th:field="*{addrole}">
+            <option label="Пользователь" value="ROLE_USER"></option>
+            <option label="Администратор" value="ROLE_ADMIN"></option>
+        </select>
 
         <h3>Активность:</h3>
-            <label><input class="custom-radio" type="radio" name="role" value="1" id="role" th:field="*{addenabled}" required="required" selected="selected"/><span class="span_style">Активен</span></label>
-            <label><input class="custom-radio" type="radio" name="role" value="0" th:field="*{addenabled}" required="required"/><span class="span_style">Заблокирован</span></label>
-<!--        <p> enabled: <textarea type="text" th:field="*{addenabled}"></textarea></p>-->
+        <label><input class="custom-radio" type="radio" name="role" value="1" id="role" th:field="*{addenabled}"
+                      required="required" selected="selected"/><span class="span_style">Активен</span></label>
+        <label><input class="custom-radio" type="radio" name="role" value="0" th:field="*{addenabled}"
+                      required="required"/><span class="span_style">Заблокирован</span></label>
+        <!--        <p> enabled: <textarea type="text" th:field="*{addenabled}"></textarea></p>-->
         <input id="submit" type="submit" value="Добавить"/>
     </div>
 </form>
@@ -102,10 +110,11 @@
 
 <form id="form_delete" action="#" th:action="@{/adminpanel/userdelete}" th:object="${usercontrol}" method="get">
     <div class="delete_user_form">
-    <h3>Удаление пользователя</h3>
-    <span id="form_delete__close" class="close">ₓ</span>
-    <input id="delete_user" maxlength="25" th:field="*{deleteUser}" required="required" placeholder="Введите имя удаляемого пользователя*"/>
-    <input id="sumbit_del" type="submit" value="Удалить"/>
+        <h3>Удаление пользователя</h3>
+        <span id="form_delete__close" class="close">ₓ</span>
+        <input id="delete_user" maxlength="25" th:field="*{deleteUser}" required="required"
+               placeholder="Введите имя удаляемого пользователя*"/>
+        <input id="sumbit_del" type="submit" value="Удалить"/>
     </div>
 
 </form>
@@ -113,19 +122,19 @@
 
 
 <script>
-    $(document).ready(function() {
-        $('a.link_add').click( function(event){
+    $(document).ready(function () {
+        $('a.link_add').click(function (event) {
             event.preventDefault();
-            $('#overlay_add').fadeIn(297, function(){
+            $('#overlay_add').fadeIn(297, function () {
                 $('#form_add')
                     .css('display', 'block')
                     .animate({opacity: 1}, 198);
             });
         });
 
-        $('#form_add__close, #overlay_add').click( function(){
+        $('#form_add__close, #overlay_add').click(function () {
             $('#form_add').animate({opacity: 0}, 198,
-                function(){
+                function () {
                     $(this).css('display', 'none');
                     $('#overlay_add').fadeOut(297);
                 });
@@ -134,19 +143,19 @@
 </script>   <!--Добавление пользователя-->
 
 <script>
-    $(document).ready(function() {
-        $('a.link_delete').click( function(event){
+    $(document).ready(function () {
+        $('a.link_delete').click(function (event) {
             event.preventDefault();
-            $('#overlay_delete').fadeIn(297, function(){
+            $('#overlay_delete').fadeIn(297, function () {
                 $('#form_delete')
                     .css('display', 'block')
                     .animate({opacity: 1}, 198);
             });
         });
 
-        $('#form_delete__close, #overlay_delete').click( function(){
+        $('#form_delete__close, #overlay_delete').click(function () {
             $('#form_delete').animate({opacity: 0}, 198,
-                function(){
+                function () {
                     $(this).css('display', 'none');
                     $('#overlay_delete').fadeOut(297);
                 });
@@ -171,33 +180,30 @@
     // var role = ['ROLE_ADMIN','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_ADMIN','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER','ROLE_USER'];
 
 
-    $.each( id, function( index ){
+    $.each(id, function (index) {
 
         $("#table_users > tbody").append(
             "<tr>" +
             "<td>" + id[index] + "</td>" +
-            "<td>"+ username[index] + "</td>" +
+            "<td>" + username[index] + "</td>" +
             "<td>" + "*********" + "</td>" +
-            "<td>"+ role[index] + "</td>" +
-            "<td>"+ enabled[index] + "</td>" +
-            "<td>"+ mail[index] + "</td>" +
+            "<td>" + role[index] + "</td>" +
+            "<td>" + enabled[index] + "</td>" +
+            "<td>" + mail[index] + "</td>" +
             // "<td>"+ "<img src=" + photo[index] + " class='avatar'/>" + "</td>" +
-            `<td><img src=`+ photo[index] + `></td>` +
-            "</tr>" );
+            `<td><img src=` + photo[index] + `></td>` +
+            "</tr>");
     });
 
 </script> <!--JS таблица-->
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
 
-    if(role_status === "ROLE_ADMIN")
-    {
+    if (role_status === "ROLE_ADMIN") {
         document.getElementById("role_vision").innerHTML = "Роль: Админ";
         document.getElementById("admin").style.display = "inline";
 
-    }
-    else if (role_status === "ROLE_USER")
-    {
+    } else if (role_status === "ROLE_USER") {
         document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
         document.getElementById("admin").style.display = "none";
     }
@@ -206,15 +212,14 @@
 
 <script>
     var add_trigger = 0; // Триггер для запрета добавления уже существующих пользователей
-    $("#form_add").submit(function(event) {
+    $("#form_add").submit(function (event) {
 
-        if($("#form_add #login").val()){ // если значение не пустое
-            $.each(username, function (index, value){
-                    if (value === ($("#form_add #login").val())){ // если был найден введенный элемент
+        if ($("#form_add #login").val()) { // если значение не пустое
+            $.each(username, function (index, value) {
+                    if (value === ($("#form_add #login").val())) { // если был найден введенный элемент
                         add_trigger = 1; // переключаем триггер
                         return false; // выходим из цикла
-                    }
-                    else {
+                    } else {
                         add_trigger = 0; // иначе обновляем триггер и продолжаем поиск
                     }
 
@@ -222,7 +227,7 @@
             );
             if (add_trigger == 0) {  // если триггер не изменился
             } // ничего не делать
-            else{
+            else {
                 add_trigger = 0;
                 event.preventDefault(); // Запрет на отправку
                 alert("Имя занято");
@@ -230,20 +235,18 @@
         }
 
 
-
     });
 </script> <!-- Скрипт для запрета отправки незаполненной формы добавления пользователя -->
 <script>
     var del_trigger = 0; // Триггер для запрета удаления несуществующих пользователей
-    $("#form_delete").submit(function(event) { // При нажатии на кнопку удалить пользователя
+    $("#form_delete").submit(function (event) { // При нажатии на кнопку удалить пользователя
         if ($("#form_delete #delete_user").val()) { // если значение условия не пустое
 
-            $.each(username, function (index, value){ // запускаем цикл
-                    if (value === ($("#form_delete #delete_user").val())){ // если был найден введенный элемент
+            $.each(username, function (index, value) { // запускаем цикл
+                    if (value === ($("#form_delete #delete_user").val())) { // если был найден введенный элемент
                         del_trigger = 1; // переключаем триггер
                         return false; // выходим из цикла
-                    }
-                    else {
+                    } else {
                         del_trigger = 0; // иначе обновляем триггер и продолжаем поиск
                     }
 
@@ -252,8 +255,7 @@
             if (del_trigger == 0) {  // если триггер не изменился
                 event.preventDefault(); // Запрет на отправку
                 alert("Нет такого пользователя");
-            }
-            else{
+            } else {
                 del_trigger = 0; // иначе, пользователь удален
             }
         }
@@ -261,8 +263,8 @@
     });
 </script> <!-- Скрипт для запрета отправки незаполненной формы удаления пользователя -->
 <script>
-    $('body').on('click', '.password-control', function(){
-        if ($('#pwd').attr('type') == 'password'){
+    $('body').on('click', '.password-control', function () {
+        if ($('#pwd').attr('type') == 'password') {
             $(this).addClass('view');
             $('#pwd').attr('type', 'text');
         } else {
@@ -283,7 +285,7 @@
     var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
 
     //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
-    if(localStorage['dark_theme_state'] != null) {
+    if (localStorage['dark_theme_state'] != null) {
         dark_theme_state = parseInt(window.localStorage['dark_theme_state']);
     }
     // Условия для смены цвета вне нажатия на кнопку
@@ -291,9 +293,9 @@
 
     dark_theme(); // Вызов функции
     // Смена цвета по кнопке
-    $("#dark_button").on("click", function() {
+    $("#dark_button").on("click", function () {
         dark_theme_state++; // увеличиваем счетчик
-        if(dark_theme_state > 1) // если он больше 1, меняем на ноль
+        if (dark_theme_state > 1) // если он больше 1, меняем на ноль
         {
             dark_theme_state = 0;
         }

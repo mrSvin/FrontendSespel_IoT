@@ -90,10 +90,10 @@ function UsersMenuResource() {
     const [usersData, setUsersData] = useState([])
 
     const toggleClass = () => {
-        if(isActive) {
+        if (isActive) {
             setFormAdd(false)
         }
-            setActive(!isActive);
+        setActive(!isActive);
 
     };
 
@@ -101,7 +101,7 @@ function UsersMenuResource() {
         setFormAdd(!formAdd);
     };
 
-    function displayMessage(message){
+    function displayMessage(message) {
         switch (message) {
             case 'Пользователь успешно удален':
                 return <p className={!isActive ? 'hideMessage' : 'redMessage'}>{message}</p>
@@ -218,7 +218,7 @@ function UsersMenuResource() {
                                             fetchDeleteReSourceUser(usersData[i][0], userRole)
                                             let deleteUser = usersData.slice()
                                             deleteUser.splice(i, 1)
-                                            console.log('Массив неудаленных пользователей', i ,deleteUser)
+                                            console.log('Массив неудаленных пользователей', i, deleteUser)
                                             setMessage('Пользователь успешно удален')
                                             setUsersData(deleteUser)
                                             setActive(true)

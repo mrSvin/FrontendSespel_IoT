@@ -50,7 +50,8 @@
 
 <header>
     <div style="display: flex; width: 100vw; justify-content: space-between; flex-wrap: nowrap; width: 100%;">
-        <a href="../" style="display: flex; align-items: flex-start;" ><img src="../images/logo_black.png"class="icon-logo-admin"/></a>
+        <a href="../" style="display: flex; align-items: flex-start;"><img src="../images/logo_black.png"
+                                                                           class="icon-logo-admin"/></a>
         <div style="display: flex; flex-direction: row;">
             <div class="div_login_mail">
                 <li th:text="${user_name}"></li>
@@ -64,10 +65,12 @@
                     <li th:text="${user_name}"></li>
                     <p th:text="${user_mail}"></p>
                     <div style=" display: block; border-bottom: 1px solid #e8eaed; margin-bottom: 5px; line-height: normal"></div>
-                    <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование</button>
+                    <button id="admin" onclick="window.location.href = '/adminpanel/userscontrol';">Администрирование
+                    </button>
                     <label class="switch">
                         <p>Светлая Темная</p>
-                        <span class="slider round"><input type="checkbox" id='dark_button'/><span class="slider_before round_before"></span></span>
+                        <span class="slider round"><input type="checkbox" id='dark_button'/><span
+                                class="slider_before round_before"></span></span>
                     </label>
                     <form th:action="@{/logout}" method="post">
                         <button class="follow" type="submit">
@@ -84,14 +87,11 @@
 <script th:inline="javascript">
     var role_status = [[${user_role}]];
 
-    if(role_status === "ROLE_ADMIN")
-    {
+    if (role_status === "ROLE_ADMIN") {
         document.getElementById("role_vision").innerHTML = "Роль: Админ";
         document.getElementById("admin").style.display = "inline";
 
-    }
-    else if (role_status === "ROLE_USER")
-    {
+    } else if (role_status === "ROLE_USER") {
         document.getElementById("role_vision").innerHTML = "Роль: Пользователь";
         document.getElementById("admin").style.display = "none";
     }
@@ -104,7 +104,7 @@
     var dark_theme_state = 0; <!--    переменная состояния темы страницы-->
 
     //Если значение ключа не пустое присваеваем переменным последнее сохраненное значение
-    if(localStorage['dark_theme_state'] != null) {
+    if (localStorage['dark_theme_state'] != null) {
         dark_theme_state = parseInt(window.localStorage['dark_theme_state']);
     }
     // Условия для смены цвета вне нажатия на кнопку
@@ -112,9 +112,9 @@
 
     dark_theme(); // Вызов функции
     // Смена цвета по кнопке
-    $("#dark_button").on("click", function() {
+    $("#dark_button").on("click", function () {
         dark_theme_state++; // увеличиваем счетчик
-        if(dark_theme_state > 1) // если он больше 1, меняем на ноль
+        if (dark_theme_state > 1) // если он больше 1, меняем на ноль
         {
             dark_theme_state = 0;
         }

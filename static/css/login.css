@@ -1,5 +1,5 @@
 .loginTheme {
-    background: url(../images/background_login_dark.jpg)no-repeat center center fixed;
+    background: url(../images/background_login_dark.jpg) no-repeat center center fixed;
     background-repeat: no-repeat;
     background-size: auto;
     background-size: cover;
@@ -169,11 +169,10 @@ body {
 
 h2 {
     width: 100%;
-    text-align:center;
+    text-align: center;
 }
 
-a:hover, a:visited, a:link, a:active
-{
+a:hover, a:visited, a:link, a:active {
     text-decoration: none;
 }
 

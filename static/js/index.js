@@ -20,7 +20,7 @@ const loader = document.querySelector('.loader');
 const showLoader = () => loader.classList.remove('loader--hide');
 const hideLoader = () => loader.classList.add('loader--hide');
 
-function App({ hideLoader }) {
+function App({hideLoader}) {
 
     useEffect(hideLoader, []);
 
@@ -117,6 +117,7 @@ function App({ hideLoader }) {
     )
 
 }
+
 setTimeout(() =>
 
         ReactDOM.render(

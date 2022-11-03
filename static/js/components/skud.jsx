@@ -15,7 +15,7 @@ function Skud() {
 
     useEffect(() => {
         let promise = fetchRequestSkud(date, place)
-        promise.then(data=>{
+        promise.then(data => {
             let userData = createUserDataStructure(data)
             let filteredData = applyFilters(userData)
 
@@ -31,9 +31,9 @@ function Skud() {
 
         return history.listen((location) => {
             let pathName = parseNameUrl(location.pathname)
-            let thisPage = location.pathname.slice(0,6)
+            let thisPage = location.pathname.slice(0, 6)
 
-            if(thisPage == '/skud/') {
+            if (thisPage == '/skud/') {
                 setPlace(pathName)
             }
         })
@@ -52,21 +52,24 @@ function Skud() {
             <div className="buttons-otchet">
 
                 <Link to={`/skud/1ploshadka`}>
-                    <div className={place=='1ploshadka'?'menuSelect':'menuNoSelect'} onClick={()=>{
+                    <div className={place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
                         setPlace('1ploshadka')
-                    }}>Первая площадка</div>
+                    }}>Первая площадка
+                    </div>
                 </Link>
 
                 <Link to={`/skud/2ploshadka`}>
-                    <div className={place=='2ploshadka'?'menuSelect':'menuNoSelect'} onClick={()=>{
+                    <div className={place == '2ploshadka' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
                         setPlace('2ploshadka')
-                    }}>Вторая площадка</div>
+                    }}>Вторая площадка
+                    </div>
                 </Link>
 
                 <Link to={`/skud/office`}>
-                    <div className={place=='office'?'menuSelect':'menuNoSelect'} onClick={()=>{
+                    <div className={place == 'office' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
                         setPlace('office')
-                    }}>Офис</div>
+                    }}>Офис
+                    </div>
                 </Link>
 
             </div>

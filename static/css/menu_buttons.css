@@ -51,6 +51,7 @@
     background-color: transparent;
 
 }
+
 /*Общее свойство для кнопок при наведении*/
 
 #menu_ul > li {
@@ -78,7 +79,7 @@
 
 }
 
-#menu_ul > li >a:hover{
+#menu_ul > li > a:hover {
     color: #14b2f3 !important;
     /*background: #D43737!important;*/
     opacity: 95%;
@@ -93,8 +94,6 @@
     /*box-shadow: 0px 7px 8px -2px #4a9bb2, inset 0px -16px 21px -21px #4a9bb2!important;*/
 
 }
-
-
 
 
 /*#menu_li, #menu_li1, #menu_li2, #menu_li3, #menu_li4, #menu_li5, #menu_li6, #menu_li7, #menu_li8 {*/
@@ -142,7 +141,6 @@
     /*box-shadow: 0px 7px 8px -2px #4a9bb2, inset 0px -16px 21px -21px #4a9bb2!important;*/
 
 
-
     /*-webkit-box-shadow: 0px 0px 1px 0px rgb(22, 33, 72);*/
     /*-webkit-transition: .25s linear 0s;*/
     /*-moz-transition: .25s linear 0s;*/
@@ -151,7 +149,7 @@
 }
 
 .button_color_active {
-    color: #1aaae5!important;
+    color: #1aaae5 !important;
     /*text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px black !important;*/
     /*box-shadow: 0px 7px 8px -2px #4a9bb2, inset 0px -16px 21px -21px #4a9bb2!important;*/
     text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px #1aaae5 !important;
@@ -166,7 +164,7 @@
     /*background: #D43737!important;*/
     opacity: 95%;
     /*box-shadow: none!important;*/
-    color: #1aaae5!important;
+    color: #1aaae5 !important;
     text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 1px 1px 8px #1aaae5 !important;
     /*border: 1px solid #701414!important;*/
     /*box-shadow: 0px 7px 8px -2px #4a9bb2, inset 0px -16px 21px -21px #4a9bb2!important;*/

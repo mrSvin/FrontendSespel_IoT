@@ -17,18 +17,18 @@ body {
 
 #table_users th,
 #table_users td {
-    padding: 0.25em 0.5em 0.25em 1em!important;
+    padding: 0.25em 0.5em 0.25em 1em !important;
     vertical-align: center;
     text-align: left;
     text-indent: -0.5em;
     font-size: 20px;
-    border: none!important;
-    outline: 1px solid white!important;
+    border: none !important;
+    outline: 1px solid white !important;
     /*border-width: 1px;*/
-    text-shadow: none!important;
+    text-shadow: none !important;
 }
 
-#table_users tr{
+#table_users tr {
     outline: 1px solid white;
 }
 
@@ -40,7 +40,7 @@ body {
     /*border-color: #ffffff;*/
     /*outline: 1px solid white;*/
     padding: 5px;
-    text-shadow: none!important;
+    text-shadow: none !important;
 }
 
 #table_users tr:nth-child(even) {
@@ -62,84 +62,103 @@ body {
 }
 
 
-
 #form_add {
-    width: 400px; max-height: 600px;
+    width: 400px;
+    max-height: 600px;
     margin: 0 auto;
     padding: 18px 9px;
     border-radius: 4px;
     background: #fafafa;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     margin: auto;
     display: none;
     opacity: 0;
     z-index: 38;
     text-align: center;
 }
+
 #form_add #form_add__close {
-    width: 21px; height: 21px;
+    width: 21px;
+    height: 21px;
     position: absolute;
-    top: 1px; right: 11px;
+    top: 1px;
+    right: 11px;
     cursor: pointer;
     display: block;
     font-size: 29px;
 }
+
 #overlay_add {
     z-index: 37;
     position: fixed;
-    background-color: rgba(0,0,0,.7);
-    width: 100%; height: 100%;
-    top: 0; left: 0;
-    cursor :pointer;
-    display :none;
+    background-color: rgba(0, 0, 0, .7);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    display: none;
 }
 
 #form_delete {
-    width: 400px; height: 300px;
+    width: 400px;
+    height: 300px;
     margin: 0 auto;
     padding: 18px 9px;
     border-radius: 4px;
     background: #fafafa;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     margin: auto;
     display: none;
     opacity: 0;
     z-index: 38;
     text-align: center;
 }
+
 #form_delete #form_delete__close {
-    width: 21px; height: 21px;
+    width: 21px;
+    height: 21px;
     position: absolute;
-    top: 1px; right: 11px;
+    top: 1px;
+    right: 11px;
     cursor: pointer;
     display: block;
     font-size: 29px;
 }
+
 #overlay_delete {
     z-index: 37;
     position: fixed;
-    background-color: rgba(0,0,0,.7);
-    width: 100%; height: 100%;
-    top: 0; left: 0;
-    cursor :pointer;
-    display :none;
+    background-color: rgba(0, 0, 0, .7);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    display: none;
 }
 
-.link_add{
-    text-decoration: none!important;
+.link_add {
+    text-decoration: none !important;
 }
 
-.link_add:hover{
+.link_add:hover {
 
 }
 
-.link_delete{
-    text-decoration: none!important;
+.link_delete {
+    text-decoration: none !important;
 }
 
-.link_delete:hover{
+.link_delete:hover {
 
 }
 
@@ -151,7 +170,7 @@ body {
     border-radius: 360px;
     width: 100px;
     height: 100px;
-    margin-top:0;
+    margin-top: 0;
 }
 
 .add_user_form > input, .add_user_form > div > input {
@@ -170,7 +189,7 @@ body {
     cursor: pointer;
 }
 
-.add_user_form > select, .add_user_form > label > input, .delete_user_form > input{
+.add_user_form > select, .add_user_form > label > input, .delete_user_form > input {
     cursor: pointer;
 }
 
@@ -200,7 +219,7 @@ body {
     font-family: source-sans-pro;
 }
 
-#list_roles > option{
+#list_roles > option {
     border: 2px solid #eeeeee;
     height: 46px;
     margin: 10px 0 0 0;
@@ -232,6 +251,7 @@ body {
     font-weight: 300;
     font-family: source-sans-pro;
 }
+
 #submit:hover {
     background: #648dec;
     color: #3b3333;
@@ -270,7 +290,7 @@ body {
     margin-bottom: 0px;
 }
 
-#sumbit_del{
+#sumbit_del {
     display: block;
     border-radius: 15%;
     width: 25%;
@@ -289,7 +309,7 @@ body {
     font-family: source-sans-pro;
 }
 
-#sumbit_del:hover{
+#sumbit_del:hover {
     color: #000000;
     background: #b73142;
 }
@@ -304,6 +324,7 @@ body {
     height: 20px;
     background: url(../images/view.svg) 0 0 no-repeat;
 }
+
 .password-control.view {
     background: url(../images/no-view.svg) 0 0 no-repeat;
 }

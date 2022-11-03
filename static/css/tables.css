@@ -8,31 +8,58 @@
     text-align: center;
 }
 
-.table tr>td:nth-of-type(4),
-.table tr>td:nth-of-type(5),
-.table tr>td:nth-of-type(1)
-{
+.table tr > td:nth-of-type(4),
+.table tr > td:nth-of-type(5),
+.table tr > td:nth-of-type(1) {
     border: 1px solid #dee2e6;
 }
 
-.table tr>td:nth-of-type(2),
-.table tr>td:nth-of-type(3),
-.table tr>td:nth-of-type(1)
-{
+.table tr > td:nth-of-type(2),
+.table tr > td:nth-of-type(3),
+.table tr > td:nth-of-type(1) {
     border-bottom: 1px solid #dee2e6;
 }
 
-.tableFixHead          {overflow: auto;height: 90vh;position: relative;top: -1px;}
-.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+.tableFixHead {
+    overflow: auto;
+    height: 90vh;
+    position: relative;
+    top: -1px;
+}
 
-.tableFixHeadSmena          {overflow: auto;height: 45vh;position: relative;top: -1px;}
-.tableFixHeadSmena thead th { position: sticky; top: 0; z-index: 1; }
+.tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.tableFixHeadSmena {
+    overflow: auto;
+    height: 45vh;
+    position: relative;
+    top: -1px;
+}
+
+.tableFixHeadSmena thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
 
 
 /* Just common table stuff. Really. */
-.table  { border-collapse: collapse; width: 100%; }
-.table th, #programTimeTable td { padding: 8px 16px; }
-.table th     { background:#eee; }
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table th, #programTimeTable td {
+    padding: 8px 16px;
+}
+
+.table th {
+    background: #eee;
+}
 
 .table {
     width: 100%;
@@ -43,18 +70,16 @@
     text-align: center;
 }
 
-.table td:nth-child(1){
+.table td:nth-child(1) {
     width: 50%;
-    text-align:end;
+    text-align: end;
 }
 
-.table th:nth-child(n)
-{
+.table th:nth-child(n) {
     border: 1px solid #dee2e6;
 }
 
-.table tr>td:nth-of-type(n)
-{
+.table tr > td:nth-of-type(n) {
     border: 1px solid #dee2e6;
 }
 
@@ -69,13 +94,11 @@
 }
 
 
-#timeTable th:nth-child(n)
-{
+#timeTable th:nth-child(n) {
     border: 1px solid #dee2e6;
 }
 
-#timeTable tr>td:nth-of-type(n)
-{
+#timeTable tr > td:nth-of-type(n) {
     border: 1px solid #dee2e6;
 }
 

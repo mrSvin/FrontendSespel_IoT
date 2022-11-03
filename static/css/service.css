@@ -49,42 +49,39 @@
 }
 
 
-
-.tableService > thead  {
+.tableService > thead {
     border-bottom: 1px solid #979595;
     text-align: left;
 }
 
-.tableService > thead > tr > th  {
+.tableService > thead > tr > th {
     margin: 10px;
     padding: 5px 5px 5px 0px;
     color: white;
 }
 
-.tableService > thead > tr > th:nth-child(odd)  {
+.tableService > thead > tr > th:nth-child(odd) {
     text-align: center;
 }
 
 
-
-
-.tableService > thead > tr >th:nth-of-type(-n+3) {
+.tableService > thead > tr > th:nth-of-type(-n+3) {
     background: #2c5275;
     width: 10%;
 }
 
-.tableService  > tbody > tr >td:nth-of-type(-n+3) {
+.tableService > tbody > tr > td:nth-of-type(-n+3) {
     text-align: center
 }
 
 
-.tableService > thead > tr >th:nth-of-type(4) {
+.tableService > thead > tr > th:nth-of-type(4) {
     background: #2c5275;
     text-align: center;
 }
 
-.tableService > tbody > tr >td:nth-of-type(4) {
-    max-width:85%;
+.tableService > tbody > tr > td:nth-of-type(4) {
+    max-width: 85%;
     padding-right: 15px;
 }
 
@@ -154,7 +151,7 @@
     font-family: sans-serif;
 }
 
-.formServiceName{
+.formServiceName {
     color: #83addd;
     font-size: 34px;
     font-weight: 700;
@@ -186,7 +183,7 @@
     background: #2e3346;
     border-radius: 3px;
     margin-top: 5px;
-    padding:5px;
+    padding: 5px;
 }
 
 textarea#story:focus {
@@ -267,7 +264,7 @@ textarea#story:focus {
 #overlay_add {
     z-index: 2;
     position: fixed;
-    background-color: rgba(0,0,0,.7);
+    background-color: rgba(0, 0, 0, .7);
     width: 100%;
     height: 100%;
     top: 0;
@@ -297,20 +294,20 @@ textarea#story:focus {
     -ms-text-size-adjust: 100%;
 }
 
-.tableReport  > tbody > tr > td {
+.tableReport > tbody > tr > td {
     text-align: center;
-    max-width:85%;
+    max-width: 85%;
     border: solid 1px;
     font-size: 20px
 }
 
 
-.tableReport > thead  {
+.tableReport > thead {
     border-bottom: 1px solid #979595;
     text-align: left;
 }
 
-.tableReport > thead > tr > th  {
+.tableReport > thead > tr > th {
     margin: 10px;
     padding: 5px 5px 5px 0px;
     color: white;

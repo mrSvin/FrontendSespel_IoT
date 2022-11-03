@@ -16,9 +16,11 @@
 </head>
 <body>
 
-<form style="display: flex;align-items: center;justify-content: center;height: 5vh;position: relative;background: #dee2e6;top: 0px;z-index: 2;" action="" method="post" id="form_update">
+<form style="display: flex;align-items: center;justify-content: center;height: 5vh;position: relative;background: #dee2e6;top: 0px;z-index: 2;"
+      action="" method="post" id="form_update">
     <div class="input-group date" id="datepicker" style="width: 200px; float: left;  margin: 1.7%">
-        <input type="text" class="form-control" value="" onchange="selectedNewValueProgramTimeSmena()" style="color:#756e6e; background:#f2f6f8; border: 1px solid#cccccc;">
+        <input type="text" class="form-control" value="" onchange="selectedNewValueProgramTimeSmena()"
+               style="color:#756e6e; background:#f2f6f8; border: 1px solid#cccccc;">
         <span class="input-group-addon" style="color:#756e6e; background:#eeeeee; border: 1px solid #cccccc;">
             <span class="glyphicon glyphicon-calendar"></span>
         </span>
@@ -28,17 +30,17 @@
 <div style="position: relative;top: -1px;padding: 1px;">
     <div class="tableFixHeadSmena">
         <table class="table table-striped" id="programTimeTableSmena1">
-        <thead class="thead-dark" style="">
-        <tr>
-            <th scope="col">Имена программ первой смены(19:00 - 07:00)</th>
-            <th scope="col">Время начала</th>
-            <th scope="col">Время окончания</th>
-            <th scope="col">Время выполнения</th>
-            <th scope="col">Время с учетом пауз</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+            <thead class="thead-dark" style="">
+            <tr>
+                <th scope="col">Имена программ первой смены(19:00 - 07:00)</th>
+                <th scope="col">Время начала</th>
+                <th scope="col">Время окончания</th>
+                <th scope="col">Время выполнения</th>
+                <th scope="col">Время с учетом пауз</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
     <div style="
     height: 7px;
@@ -67,7 +69,7 @@
 
 <script>
     // Загрузка datapicker при загрузке страницы
-    document.addEventListener("DOMContentLoaded", function(event) {
+    document.addEventListener("DOMContentLoaded", function (event) {
         $('#datepicker').datepicker({
             format: "yyyy-mm-dd",
             language: 'ru',
@@ -82,7 +84,7 @@
         });
     })
 
-    function selectedNewValueProgramTimeSmena(){
+    function selectedNewValueProgramTimeSmena() {
         $('#datepicker').datepicker({
             format: "yyyy-mm-dd",
             language: 'ru',
@@ -98,7 +100,7 @@
 
         let datas = $('#datepicker').data().datepicker.viewDate.toISOString();
         startTime = datas.slice(0, 10)
-        pastTime  = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
+        pastTime = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
 
         document.getElementById('programTimeTableSmena1').querySelector('th').innerHTML = `Имена программ первой смены (19:00 - 07:00) ${pastTime} — ${startTime}`
         document.getElementById('programTimeTableSmena2').querySelector('th').innerHTML = `Имена программ второй смены (07:00 - 19:00) ${startTime}`
@@ -106,10 +108,11 @@
         stankiRequest = Promise.all([programTimeSmenaRequest(pastTime), programTimeSmenaRequest(startTime)]);
         activatePromise(stankiRequest)
     }
+
     function ExcelConvert() {
         let form_path = document.location.pathname;
         form_path.lastIndexOf("/")
-        let searchIndex= form_path.lastIndexOf("/")+1;
+        let searchIndex = form_path.lastIndexOf("/") + 1;
         let Name = form_path.substr(searchIndex, form_path.length)
 
         TableToExcel.convert(document.getElementById("programTimeTableSmena1"), {
@@ -127,11 +130,11 @@
         });
 
     }
+
     function msToTime(duration) {
         let seconds = parseInt((duration / 1000) % 60),
             minutes = parseInt((duration / (1000 * 60)) % 60),
             hours = parseInt((duration / (1000 * 60 * 60)) % 24);
-
 
 
         hours = (hours < 10) ? "0" + hours : hours;
@@ -140,51 +143,45 @@
 
         return hours + ":" + minutes + ":" + seconds;
     }
-    function getTimeProgramNameSmena(arrayData){
+
+    function getTimeProgramNameSmena(arrayData) {
         let timer = 0;
         let programTimeArray = [];
         let startSame = null
 
-        for(let i = 0; i<arrayData[0].length; i+=2)
-        {
+        for (let i = 0; i < arrayData[0].length; i += 2) {
 
-            if(arrayData[1][i/2] == arrayData[1][i/2+1])
-            {
-                if(arrayData[1][i/2] !== arrayData[1][i/2-1])
-                {
+            if (arrayData[1][i / 2] == arrayData[1][i / 2 + 1]) {
+                if (arrayData[1][i / 2] !== arrayData[1][i / 2 - 1]) {
                     startSame = arrayData[0][i]
                 }
 
-                timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
-            }
+                timer = timer + (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
+            } else {
 
-            else
-            {
-
-                if(arrayData[1][i/2] == arrayData[1][i/2-1])
-                {
-                    timer = timer + (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
-                    programTimeArray.push([arrayData[1][i/2], startSame.slice(11), arrayData[0][i+1].slice(11), msToTime(timer), msToTime(new Date(arrayData[0][i+1]) - new Date(startSame))])
+                if (arrayData[1][i / 2] == arrayData[1][i / 2 - 1]) {
+                    timer = timer + (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
+                    programTimeArray.push([arrayData[1][i / 2], startSame.slice(11), arrayData[0][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData[0][i + 1]) - new Date(startSame))])
                     timer = 0
-                }
-                else {
-                    timer = (new Date(arrayData[0][i+1]) - new Date(arrayData[0][i]))
-                    programTimeArray.push([arrayData[1][i/2], arrayData[0][i].slice(11), arrayData[0][i+1].slice(11), msToTime(timer), msToTime(timer)])
+                } else {
+                    timer = (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
+                    programTimeArray.push([arrayData[1][i / 2], arrayData[0][i].slice(11), arrayData[0][i + 1].slice(11), msToTime(timer), msToTime(timer)])
                     timer = 0
                 }
             }
         }
         // Фильтрация массива на наличие запятых
-        programTimeArray.map((elem)=>{
+        programTimeArray.map((elem) => {
             elem[0] = elem[0].split(',').join('_');
             return elem
         })
         return programTimeArray
     }
-    function printTable(tableID, data){
+
+    function printTable(tableID, data) {
         let programTimeTable = document.getElementById(tableID)
 
-        for (let i = programTimeTable.getElementsByTagName('tr').length -1; i; i--) {
+        for (let i = programTimeTable.getElementsByTagName('tr').length - 1; i; i--) {
             document.getElementById(tableID).deleteRow(i);
         }
         if (data) {
@@ -201,7 +198,7 @@
             // переменная для краткой записи к телу таблицы
             let tbody = programTimeTable.querySelector('tbody')
 
-            if(tableArray !== null) {
+            if (tableArray !== null) {
                 tableArray.forEach((elem, index) => {
 
                     // добавляем новую строку
@@ -211,11 +208,10 @@
                     tableRow = tbody.querySelectorAll('tr')
 
                     // считываем длины строк и ячеек
-                    lastRow = tbody.rows.length -1
+                    lastRow = tbody.rows.length - 1
                     lastCell = tableRow[lastRow].cells.length - 1
 
-                    for(let i=0; i<=4; i++)
-                    {
+                    for (let i = 0; i <= 4; i++) {
                         // добавляем в последнюю строку новую ячейку
                         tableRow[lastRow].appendChild(document.createElement('td'))
 
@@ -231,10 +227,11 @@
             // Пробегаемся по всем элементам массива
         }
     }
+
     function programTimeSmenaRequest(date) {
         let form_path = document.location.pathname;
         form_path.lastIndexOf("/")
-        let searchIndex= form_path.lastIndexOf("/")+1;
+        let searchIndex = form_path.lastIndexOf("/") + 1;
         let Name = form_path.substr(searchIndex, form_path.length)
 
         let url = `/api/complexData/${Name}_days_date:${date}`
@@ -249,6 +246,7 @@
                 }
             )
     }
+
     function activatePromise(promiseVariable) {
         promiseVariable
             .then(result => {
@@ -270,7 +268,7 @@
                 let stanok = complete
 
                 // Переменная с индексом первого элемента следующего дня имени программы
-                let programName2Index = stanok[1].length/2
+                let programName2Index = stanok[1].length / 2
 
                 // Отказ от работы с пустым объектом
                 if (stanok === null) {
@@ -317,21 +315,20 @@
                         if ((new Date(stanok_change[j]).getTime() >= new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') >= new Date(stanok_change[j]).getTime())) {
 
                             // Если j нечетный, а смена все еще пустая
-                            if(smena_1[0].length == 0 && j % 2 == 1) {
+                            if (smena_1[0].length == 0 && j % 2 == 1) {
                                 // добавить в смену 19:00
                                 smena_1[0].push(pastTime + ' 19:00:00')
                                 // Если это массив с работой и j нечетный
                                 if (j % 2 == 1) {
                                     // То добавить ПРОШЛУЮ(-1) программу, которая началась до 19:00
-                                    programName1.push(stanok[1][(j-1)/2])
+                                    programName1.push(stanok[1][(j - 1) / 2])
                                 }
                             }
                             // Затем в любом случае записать элемент в смену 1
                             smena_1[0].push(stanok_change[j])
 
                             // Если время больше 00:00 текущей даты
-                            if (new Date(stanok_change[j]).getTime() >= new Date(startTime + ' 00:00:00').getTime())
-                            {
+                            if (new Date(stanok_change[j]).getTime() >= new Date(startTime + ' 00:00:00').getTime()) {
                                 // И данный массив работа и j четный
                                 if (j % 2 == 0) {
                                     // То пишем имя программы в массив программ для первой смены
@@ -339,24 +336,22 @@
                                     programName1.push(stanok[1][programName2Index])
                                     programName2Index++
                                 }
-                            }
-                            else
-                            {   // Иначе записываем имя программы в массив программ для первой смены из массива прошлого дня
+                            } else {   // Иначе записываем имя программы в массив программ для первой смены из массива прошлого дня
                                 if (j % 2 == 0) {
-                                    programName1.push(stanok[1][j/2])
+                                    programName1.push(stanok[1][j / 2])
                                 }
                             }
                         }
                         // Иначе если время входит в промежоток от 07:00 до 19:00 теккущего дня
                         else if ((new Date(stanok_change[j]).getTime() >= new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') >= new Date(stanok_change[j]).getTime())) {
                             // Если массив второй смены пустой, но j нечетный
-                            if(smena_2[0].length == 0 && j % 2 == 1){
+                            if (smena_2[0].length == 0 && j % 2 == 1) {
                                 // то записать 07:00
                                 smena_2[0].push(startTime + ' 07:00:00')
                                 // если это индекс работы и j нечетный
                                 if (j % 2 == 1) {
                                     // записываем ПРОШЛОЕ(-1) имя программы в массив программ для второй смены
-                                    programName2.push(stanok[1][(programName2Index-1)])
+                                    programName2.push(stanok[1][(programName2Index - 1)])
                                 }
                             }
                             // Затем в любому случае пишем текущий элемент в массив второй смены
@@ -372,34 +367,27 @@
                     } // Конец цилка обработки j
 
                     // Если длина массива первой смены нечетная
-                    if(smena_1[0].length % 2 == 1)
-                    {   // То добавить в смену 06:59
+                    if (smena_1[0].length % 2 == 1) {   // То добавить в смену 06:59
                         smena_1[0].push(startTime + ' 06:59:00')
                     }
                     // Если длина массива второй смены нечетная
-                    if(smena_2[0].length % 2 == 1)
-                    {   // Если дата равна сегодняшней
-                        if(startTime == time.slice(0, 10))
-                        {   // То добавить во вторую смену текущее время
+                    if (smena_2[0].length % 2 == 1) {   // Если дата равна сегодняшней
+                        if (startTime == time.slice(0, 10)) {   // То добавить во вторую смену текущее время
                             smena_2[0].push(startTime + " " + time.slice(11, 19))
-                        }
-                        else{
+                        } else {
                             // Иначе добавить во вторую смену 18:59
                             smena_2[0].push(startTime + ' 18:59:00')
                         }
                     }
 
                     // Если смена 2 пустая, а первая смена не пустая и ее последнее значение 06:59
-                    if(smena_2[0].length == 0 && smena_1[0][(smena_1[0].length-1)] == startTime + ' 06:59:00')
-                    {
+                    if (smena_2[0].length == 0 && smena_1[0][(smena_1[0].length - 1)] == startTime + ' 06:59:00') {
                         // то добавить во вторую смену 07:00
                         smena_2[0].push(startTime + ' 07:00:00')
                         // И в зависимости от текущей даты вставить 18:59 или текущее время
-                        if(startTime == time.slice(0, 10))
-                        {   // То добавить во вторую смену текущее время
+                        if (startTime == time.slice(0, 10)) {   // То добавить во вторую смену текущее время
                             smena_2[0].push(startTime + " " + time.slice(11, 19))
-                        }
-                        else{
+                        } else {
                             // Иначе добавить во вторую смену 18:59
                             smena_2[0].push(startTime + ' 18:59:00')
                         }
@@ -427,13 +415,12 @@
     // Переменные экспорта таблицы в Excel
 
 
-
     // Переменные даты и времяни
     let buttonExcel = document.querySelector("#button-excel");
 
     let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     let startTime = time.slice(0, 10)
-    let pastTime  = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
+    let pastTime = new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
     document.getElementsByClassName('form-control')[0].value = startTime
     document.getElementById('programTimeTableSmena1').querySelector('th').innerHTML = `Имена программ второй смены (19:00 - 07:00) ${pastTime} — ${startTime}`
     document.getElementById('programTimeTableSmena2').querySelector('th').innerHTML = `Имена программ первой смены (07:00 - 19:00) ${startTime}`

@@ -1,17 +1,17 @@
-.skudHigcharts{
+.skudHigcharts {
     width: 90%;
     margin: auto;
     min-height: 300px;
 }
 
-.wrapperSkud{
+.wrapperSkud {
     width: 100%;
     position: relative;
 }
 
 .lunchTime {
     min-height: 0px;
-    background: rgba(26,170,229,0.5);
+    background: rgba(26, 170, 229, 0.5);
     width: 3%;
     position: absolute;
     left: 57.6%;
@@ -24,7 +24,7 @@
     position: absolute;
     top: -40px;
     left: 5px;
-    color: rgb(26,170,229);
+    color: rgb(26, 170, 229);
     font-weight: 600;
 }
 
@@ -109,11 +109,11 @@
 }
 
 .formUserSkud input:hover,
-.formUserSkud select:hover{
+.formUserSkud select:hover {
     cursor: pointer;
 }
 
-.smenaTimeSkud{
+.smenaTimeSkud {
     display: flex;
     justify-content: center;
 }
@@ -180,23 +180,24 @@
     width: 100%;
 }
 
-.tableSkudUsers > thead > tr > th:nth-child(4){
+.tableSkudUsers > thead > tr > th:nth-child(4) {
     margin-right: 2.6%;
 }
+
 .tableSkudUsers > tbody > tr > td:nth-child(4) {
-    margin-right:2%;
+    margin-right: 2%;
 }
 
 
 .tableSkudUsers > thead > tr > th:nth-child(5),
 .tableSkudUsers > thead > tr > th:nth-child(6),
 .tableSkudUsers > tbody > tr > td:nth-child(5),
-.tableSkudUsers > tbody > tr > td:nth-child(6){
+.tableSkudUsers > tbody > tr > td:nth-child(6) {
     width: 10%;
 }
 
 
-.tableSkudUsers > thead > tr > th:nth-child(6){
+.tableSkudUsers > thead > tr > th:nth-child(6) {
     margin-right: 2.5%;
 }
 
@@ -221,29 +222,29 @@
     cursor: pointer;
 }
 
-.tdChange{
+.tdChange {
     background: no-repeat center/53% url(../images/iconPen.svg);
     width: 100%;
     height: 100%;
     transition: 0.5s;
 }
 
-.tdDelete{
+.tdDelete {
     background: no-repeat center/65% url(../images/iconDelete.svg);
     width: 100%;
     height: 100%;
     transition: 0.5s;
 }
 
-.tdChange:hover{
+.tdChange:hover {
     filter: brightness(150%) contrast(120%);
 }
 
-.tdDelete:hover{
+.tdDelete:hover {
     filter: brightness(150%) contrast(120%);
 }
 
-.addButtonSkud{
+.addButtonSkud {
     margin: 5px auto;
     width: 25%;
     user-select: none;

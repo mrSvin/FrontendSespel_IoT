@@ -65,8 +65,7 @@
     local_time.forEach((elem, index) => {
 
         // новая строка создается в начале и каждый 6 раз
-        if(index == 0 || index % 6 == 0)
-        {
+        if (index == 0 || index % 6 == 0) {
             // добавляем новую строку
             tbody.appendChild(document.createElement('tr'));
 
@@ -74,7 +73,7 @@
             tableRow = tbody.querySelectorAll('tr')
 
             // считываем длины строк и ячеек
-            lastRow = tbody.rows.length -1
+            lastRow = tbody.rows.length - 1
             lastCell = tableRow[lastRow].cells.length - 1
         }
 
