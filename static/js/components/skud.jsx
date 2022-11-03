@@ -1,5 +1,9 @@
 function Skud() {
 
+    interceptNetworkRequests({
+        onFetchResponse: reloadPageIfLogin,
+    });
+
     const history = useHistory()
     const [heightHighchartContainer, setHeightHighchartContainer] = useState(0);
     let [date, setDate] = useState(dayNow());
