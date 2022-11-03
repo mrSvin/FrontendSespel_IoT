@@ -305,10 +305,15 @@ function changePlace(place){
     return makeRequest(item, startTime)
   }));
 
+    if(place=='report_day_spec_complexes'){
+        document.getElementById('containerHighchartsTable').style.height = '40vh'
+    } else document.getElementById('containerHighchartsTable').style.height = '80vh'
+
   // Это тот же .then, просто обернутый в функцию
     rewriteData(stankiRequest, data, stankiNames, exception)
 
     if(place=='report_day_spec_complexes'){
+        document.getElementById('containerHighchartsPressEpp').style.height = '40vh'
         let eppNames = [7545716, 7545711]
         let epp = Promise.all(eppNames.map((item) => {
             return fetchRequestPressEpp(item)
@@ -401,7 +406,7 @@ function changePlace(place){
 </div>
 
 <h1>Станки Мех.участок 2 площадка </h1>
-<div style="display: flex; justify-content: space-around; min-height: 40vh;">
+<div id="containerHighchartsTable" style="display: flex; justify-content: space-around;">
   <div id="container_sum_zagruzka" style="min-height: 400px; width: 45%"></div>
   <table id='myTable' style="min-height: 40vh; width: 45%">
     <thead>
@@ -420,7 +425,7 @@ function changePlace(place){
   <!--Общая загрузка html-->
 </div>  <!--Общая загрузка и количество операций html-->
 
-<div style="display: flex; justify-content: space-around; min-height: 40vh;">
+<div id="containerHighchartsPressEpp" style="display: flex; justify-content: space-around;">
     <div style="width: 45%;" id="container_press_davlenie"></div>
     <div style="width: 45%;" id="container_epp_tok"></div>
 </div>  <!--Общие Ток и давление-->
