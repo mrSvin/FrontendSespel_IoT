@@ -118,15 +118,16 @@ function SkudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
 
     return (
         <form className={typeForm == 'hide' ? 'formUserHideSkud' : 'formUserSkud'}>
-            <label htmlFor="">Табельный</label>
+            <label htmlFor="">Табельный{typeForm == 'change' ? user.tabel : null}</label>
             <input className={typeForm == 'change' ? 'formUserHideSkud' : null}
+                   value={user.tabel}
                    onChange={(e) => {
                        handleOnChange(e, 'tabel')
                    }}/>
             <label>Тип смены</label>
-            <select id="smena" name="smena"
+            <select id="smena" name="smena" value={user.type_smena}
                     onChange={(e) => {
-                        handleOnChange(e, 'tabel')
+                        handleOnChange(e, 'type_smena')
                     }}>
                 <option value="Первая смена">Первая смена</option>
                 <option value="Вторая смена">Вторая смена</option>
