@@ -1,12 +1,11 @@
 function TableReportBodyCurrent({dataReportState}) {
     console.log('Logs', dataReportState)
-    if(dataReportState.length == 0){
+    if (dataReportState.length == 0) {
         return <tbody></tbody>
-    }
-    else{
+    } else {
         return (
             <tbody>
-            {dataReportState[0].map((val,i) => {
+            {dataReportState[0].map((val, i) => {
                 return (
                     <tr key={i}>
                         <td>{val}</td>
@@ -27,10 +26,10 @@ function CurrentParams() {
     let [dataReportState, setDataReportState] = useState([])
 
     useEffect(() => {
-        fetchRequestCurrent(complexRequest,setDataReportState)
-    },[])
+        fetchRequestCurrent(complexRequest, setDataReportState)
+    }, [])
 
-    return(
+    return (
         <div className='serviceContainer'>
             <h1>Текущее состояние {nameToFetch + 'а'}</h1>
             <div className='blockImage'>
@@ -49,7 +48,7 @@ function CurrentParams() {
                  src="../../images/excel_icon.png"
                  onClick={() => {
                      TableToExcel.convert(document.getElementById('tableReport'), {
-                         name: `Отчет_${timeNow().slice(2).replaceAll(':','')}.xlsx`,
+                         name: `Отчет_${timeNow().slice(2).replaceAll(':', '')}.xlsx`,
                          sheet: {
                              name: "Sheet 1"
                          }

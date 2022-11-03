@@ -1,5 +1,5 @@
 function FormExcel(data, date) {
-    date = date == 0? dayNow().slice(0,7) : date
+    date = date == 0 ? dayNow().slice(0, 7) : date
 
     let keys = Object.keys(data)
     let table = document.getElementById('printEnergy')
@@ -17,14 +17,14 @@ function FormExcel(data, date) {
     // TableToExcel.convert(table);
 
     TableToExcel.convert(table, {
-        name: `${keys[0].slice(0,3)}_${date.slice(0,4) + '_' + date.slice(5,7)}.xlsx`,
+        name: `${keys[0].slice(0, 3)}_${date.slice(0, 4) + '_' + date.slice(5, 7)}.xlsx`,
         sheet: {
             name: "Sheet 1"
         }
     });
 
-    for(let i=0; i<keys.length; i++){
-        for(let j=0; j<33; j++) {
+    for (let i = 0; i < keys.length; i++) {
+        for (let j = 0; j < 33; j++) {
             table.rows[j].deleteCell(-1);
         }
     }
@@ -36,13 +36,13 @@ function ElectroInfo() {
     let complexName = ["КТП400", "КТП630 #2", "КТП630 #3", "КТП630 #4", "КТП630 #5", "КТП2500", "КТП630 #7"]
     let complexImg = ["../images/electroStation.png"]
 
-    let buttonsVrs1 = [-80,608,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/1_ploshadka_outside.png",60,"unset"]
-    let buttonsVrs2 = [-1000,308,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/2_ploshadka_outside.png",60,"unset"]
-    let buttonsVrs3 = [-1000,308,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/2_ploshadka_outside.png",60,"unset"]
-    let buttonsVrs4 = [-1000,308,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/2_ploshadka_outside.png",60,"unset"]
-    let buttonsVrs5 = [-1000,308,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/2_ploshadka_outside.png",60,"unset"]
-    let buttonsVrs6 = [-1000,308,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/2_ploshadka_outside.png",60,"unset"]
-    let buttonsVrs7 = [-1000,308,'url("../images/nasos.png") 0% 0% / 60px no-repeat',"../images/2_ploshadka_outside.png",60,"unset"]
+    let buttonsVrs1 = [-80, 608, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/1_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs2 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs3 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs4 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs5 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs6 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
+    let buttonsVrs7 = [-1000, 308, 'url("../images/nasos.png") 0% 0% / 60px no-repeat', "../images/2_ploshadka_outside.png", 60, "unset"]
 
     let [dataVrs1, setDataVrs1] = useState(0);
     let [dataVrs2, setDataVrs2] = useState(0);
@@ -86,8 +86,8 @@ function ElectroInfo() {
 
     useEffect(() => {
         let yearNow = new Date().getFullYear()
-        let monthNow = new Date().getMonth()+1
-        if (monthNow<10) {
+        let monthNow = new Date().getMonth() + 1
+        if (monthNow < 10) {
             monthNow = '0' + monthNow
         }
 
@@ -107,7 +107,8 @@ function ElectroInfo() {
                 />
             </div>
             <div className='flex'>
-                <ComplexInfo complexName={complexName[0]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs1} service={"КТП400"}/>
+                <ComplexInfo complexName={complexName[0]} complexImg={complexImg[0]}
+                             complexMesto={buttonsVrs1} service={"КТП400"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container">
                     </div>
@@ -116,7 +117,8 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[1]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs2} service={"КТП630 2"}/>
+                <ComplexInfo complexName={complexName[1]} complexImg={complexImg[0]}
+                             complexMesto={buttonsVrs2} service={"КТП630 2"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container2">
                     </div>
@@ -125,7 +127,8 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[2]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs3} service={"КТП630 3"}/>
+                <ComplexInfo complexName={complexName[2]} complexImg={complexImg[0]}
+                             complexMesto={buttonsVrs3} service={"КТП630 3"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container3">
                     </div>
@@ -135,7 +138,8 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[3]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs4} service={"КТП630 4"}/>
+                <ComplexInfo complexName={complexName[3]} complexImg={complexImg[0]}
+                             complexMesto={buttonsVrs4} service={"КТП630 4"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container4">
                     </div>
@@ -144,7 +148,8 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[4]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs5} service={"КТП630 5"}/>
+                <ComplexInfo complexName={complexName[4]} complexImg={complexImg[0]}
+                             complexMesto={buttonsVrs5} service={"КТП630 5"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container5">
                     </div>
@@ -153,7 +158,8 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[5]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs6} service={"КТП2500"}/>
+                <ComplexInfo complexName={complexName[5]} complexImg={complexImg[0]}
+                             complexMesto={buttonsVrs6} service={"КТП2500"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container6">
                     </div>
@@ -162,7 +168,8 @@ function ElectroInfo() {
             </div>
 
             <div className='flex'>
-                <ComplexInfo complexName={complexName[6]} complexImg ={complexImg[0]} complexMesto = {buttonsVrs7} service={"КТП630 7"}/>
+                <ComplexInfo complexName={complexName[6]} complexImg={complexImg[0]}
+                             complexMesto={buttonsVrs7} service={"КТП630 7"}/>
                 <div className='energyGraphTable'>
                     <div className="vrsHighChart" id="container7">
                     </div>

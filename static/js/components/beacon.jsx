@@ -93,7 +93,7 @@ function Beacon() {
 
         let intervalKill = setInterval(function () {
 
-            if(window.location.pathname!=='/beacon'){
+            if (window.location.pathname !== '/beacon') {
                 clearInterval(intervalKill)
             }
 

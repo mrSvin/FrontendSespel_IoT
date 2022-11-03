@@ -4,7 +4,7 @@ function Home() {
     return (
         <div className="homeBody">
 
-                <Menubar/>
+            <Menubar/>
 
         </div>
     )

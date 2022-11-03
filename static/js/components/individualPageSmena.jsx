@@ -5,8 +5,8 @@ function StankiSmena() {
     let razdel = 'stankiSmena'
 
     let pageNew = 0
-    places.forEach((e,i)=>{
-        if(e== parseNameUrl(window.location.href)) pageNew = i
+    places.forEach((e, i) => {
+        if (e == parseNameUrl(window.location.href)) pageNew = i
     })
 
     const [page, setPage] = useState(pageNew)
@@ -15,16 +15,15 @@ function StankiSmena() {
 
     let placeKeys = []
 
-    if(page == 9) {
+    if (page == 9) {
         placeKeys = Object.keys(placesObject).map(e => {
             return e
         })
-    }
-    else placeKeys.push(places[page])
+    } else placeKeys.push(places[page])
 
     let stankiObject = {}
     let stankiKeys = []
-    if(page == 9) {
+    if (page == 9) {
         Object.keys(placesObject).forEach(e => {
             Object.keys(placesObject[e].stanki).forEach(i => {
                 stankiObject[i] = placesObject[e].stanki[i]
@@ -106,7 +105,7 @@ function StankiSmena() {
             return stankiState[name].buttonNames
         })
 
-        let stankiRequest = Promise.all(fetchNames.map((item)=>{
+        let stankiRequest = Promise.all(fetchNames.map((item) => {
             return fetchRequestSmena(dateInput, item)
         }));
 
@@ -116,13 +115,13 @@ function StankiSmena() {
             let check = 0
 
             let pathName = parseNameUrl(location.pathname)
-            let thisPage = location.pathname.slice(0,13)
+            let thisPage = location.pathname.slice(0, 13)
 
             places.forEach((e, i) => {
                 if (e == pathName) check = i
             })
 
-            if(thisPage == '/stankiSmena/') {
+            if (thisPage == '/stankiSmena/') {
                 setPage(check)
 
                 let valuesWait = []
@@ -212,9 +211,12 @@ function StankiSmena() {
 
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <ListDevicesCategoryIndividual updateList={updateList} setUpdateList={setUpdateList} placesObject={placesObject} placeKeys={placeKeys}
-                                               valuesStanki={valuesStanki} setValuesStanki={setValuesStanki} setValuesStankiWait={setValuesStankiWait}
-                                               valuesCategories={valuesCategories} setValuesCategories={setValuesCategories}
+                <ListDevicesCategoryIndividual updateList={updateList} setUpdateList={setUpdateList}
+                                               placesObject={placesObject} placeKeys={placeKeys}
+                                               valuesStanki={valuesStanki} setValuesStanki={setValuesStanki}
+                                               setValuesStankiWait={setValuesStankiWait}
+                                               valuesCategories={valuesCategories}
+                                               setValuesCategories={setValuesCategories}
                                                page={page} stankiObject={stankiObject}/>
 
             </div>
@@ -234,15 +236,15 @@ function StankiSmena() {
             {valuesStankiWait.map((e, i) => {
                 let stanok = stankiObject[e]
 
-                if(stanok !== undefined){
+                if (stanok !== undefined) {
                     if (Object.keys(stanok).length !== 0) {
                         return <ComplexSmenaAllIngo key={i} complexName={stanok.buttonNames.name}
                                                     complexImg={stanok.complexImg}
                                                     complexMesto={stanok.buttonsVrs} size={stanok.size}
-                                                    idContainer={i*2+1}
+                                                    idContainer={i * 2 + 1}
                                                     service={stanok.buttonNames.serviceName}
                                                     alarm={stanok.buttonNames.alarm}
-                                                    programs={stanok.buttonNames.programsName+'smena'}
+                                                    programs={stanok.buttonNames.programsName + 'smena'}
                                                     laser={stanok.buttonNames.laser}
                                                     report={stanok.buttonNames.report}
                                                     current={stanok.buttonNames.current}/>

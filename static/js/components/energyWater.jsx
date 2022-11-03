@@ -1,5 +1,5 @@
 function FormExcel(data, date) {
-    date = date == 0? dayNow().slice(0,7) : date
+    date = date == 0 ? dayNow().slice(0, 7) : date
 
     let keys = Object.keys(data)
     let table = document.getElementById('printEnergy')
@@ -17,14 +17,14 @@ function FormExcel(data, date) {
     // TableToExcel.convert(table);
 
     TableToExcel.convert(table, {
-        name: `${keys[0].slice(0,3)}_${date.slice(0,4) + '_' + date.slice(5,7)}.xlsx`,
+        name: `${keys[0].slice(0, 3)}_${date.slice(0, 4) + '_' + date.slice(5, 7)}.xlsx`,
         sheet: {
             name: "Sheet 1"
         }
     });
 
-    for(let i=0; i<keys.length; i++){
-        for(let j=0; j<33; j++) {
+    for (let i = 0; i < keys.length; i++) {
+        for (let j = 0; j < 33; j++) {
             table.rows[j].deleteCell(-1);
         }
     }

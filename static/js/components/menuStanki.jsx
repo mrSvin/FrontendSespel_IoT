@@ -147,7 +147,7 @@ function MenuStankiIndividual({razdel, menuSelected = 9}) {
         <div className="menuButtons">
             {places.map((e, i) => {
                 return <Link key={i} to={`/${razdel}/${places[i]}`}>
-                    <div key={i} className={(i==9)? `${menuSelect[i]} hideIndividualAll`:menuSelect[i]}
+                    <div key={i} className={(i == 9) ? `${menuSelect[i]} hideIndividualAll` : menuSelect[i]}
                          onClick={(e) => {
                          }}>{e}
                     </div>

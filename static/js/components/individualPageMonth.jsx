@@ -5,8 +5,8 @@ function StankiMonth() {
     let razdel = 'stankiMonth'
 
     let pageNew = 0
-    places.forEach((e,i)=>{
-        if(e== parseNameUrl(window.location.href)) pageNew = i
+    places.forEach((e, i) => {
+        if (e == parseNameUrl(window.location.href)) pageNew = i
     })
 
     const [page, setPage] = useState(pageNew)
@@ -15,16 +15,15 @@ function StankiMonth() {
 
     let placeKeys = []
 
-    if(page == 9) {
+    if (page == 9) {
         placeKeys = Object.keys(placesObject).map(e => {
             return e
         })
-    }
-    else placeKeys.push(places[page])
+    } else placeKeys.push(places[page])
 
     let stankiObject = {}
     let stankiKeys = []
-    if(page == 9) {
+    if (page == 9) {
         Object.keys(placesObject).forEach(e => {
             Object.keys(placesObject[e].stanki).forEach(i => {
                 stankiObject[i] = placesObject[e].stanki[i]
@@ -110,13 +109,13 @@ function StankiMonth() {
             let check = 0
 
             let pathName = parseNameUrl(location.pathname)
-            let thisPage = location.pathname.slice(0,13)
+            let thisPage = location.pathname.slice(0, 13)
 
-            places.forEach((e,i)=>{
-                if(e == pathName) check = i
+            places.forEach((e, i) => {
+                if (e == pathName) check = i
             })
 
-            if(thisPage == '/stankiMonth/') {
+            if (thisPage == '/stankiMonth/') {
 
                 setPage(check)
 
@@ -207,9 +206,12 @@ function StankiMonth() {
 
             <div className="energyCalendarContainer">
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
-                <ListDevicesCategoryIndividual updateList={updateList} setUpdateList={setUpdateList} placesObject={placesObject} placeKeys={placeKeys}
-                                               valuesStanki={valuesStanki} setValuesStanki={setValuesStanki} setValuesStankiWait={setValuesStankiWait}
-                                               valuesCategories={valuesCategories} setValuesCategories={setValuesCategories}
+                <ListDevicesCategoryIndividual updateList={updateList} setUpdateList={setUpdateList}
+                                               placesObject={placesObject} placeKeys={placeKeys}
+                                               valuesStanki={valuesStanki} setValuesStanki={setValuesStanki}
+                                               setValuesStankiWait={setValuesStankiWait}
+                                               valuesCategories={valuesCategories}
+                                               setValuesCategories={setValuesCategories}
                                                page={page} stankiObject={stankiObject}/>
             </div>
             <ComplexTotalMonthInfo/>
@@ -217,7 +219,7 @@ function StankiMonth() {
             {valuesStankiWait.map((e, i) => {
                 let stanok = stankiObject[e]
 
-                if(stanok !== undefined){
+                if (stanok !== undefined) {
                     if (Object.keys(stanok).length !== 0) {
                         return <ComplexSutkiAllInfo key={i} complexName={stanok.buttonNames.name}
                                                     complexImg={stanok.complexImg}

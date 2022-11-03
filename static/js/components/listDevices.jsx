@@ -1,5 +1,7 @@
-function ListDevicesCategory({date, values, setValuesState, complexName, newDate, selectedCategory,
-                                 setSelectedCategory, selectedObjects, setSelectedObjects}) {
+function ListDevicesCategory({
+                                 date, values, setValuesState, complexName, newDate, selectedCategory,
+                                 setSelectedCategory, selectedObjects, setSelectedObjects
+                             }) {
 
     function changeMainList(mainList, selectedObjects) {
         let index = 0
@@ -17,7 +19,7 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
 
     const toggleClass = () => {
         setActive(!isActive);
-        if(listChanged) {
+        if (listChanged) {
             newDate(date)
             setListChanged(false)
         }
@@ -26,7 +28,7 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
     const innerRef = useOuterClick(ev => {
         if (isActive) {
             setActive(!isActive);
-            if(listChanged) {
+            if (listChanged) {
                 newDate(date)
                 setListChanged(false)
             }
@@ -163,7 +165,10 @@ function ListDevicesCategory({date, values, setValuesState, complexName, newDate
     )
 }
 
-function ListDevices({date, values, setValuesState, complexName, complexRequest, newDate}) {
+function ListDevices({
+                         date, values, setValuesState,
+                         complexName, complexRequest, newDate
+                     }) {
 
     const [isActive, setActive] = useState(false);
 
@@ -176,7 +181,7 @@ function ListDevices({date, values, setValuesState, complexName, complexRequest,
 
     const toggleClass = () => {
         setActive(!isActive);
-        if(listChanged) {
+        if (listChanged) {
             newDate(date)
             setListChanged(false)
         }
@@ -185,7 +190,7 @@ function ListDevices({date, values, setValuesState, complexName, complexRequest,
     const innerRef = useOuterClick(ev => {
         if (isActive) {
             setActive(!isActive);
-            if(listChanged) {
+            if (listChanged) {
                 newDate(date)
                 setListChanged(false)
             }
@@ -253,7 +258,11 @@ function ListDevices({date, values, setValuesState, complexName, complexRequest,
     )
 }
 
-function ListDevicesCategoryIndividual({updateList,setUpdateList,placesObject,placeKeys, valuesStanki, setValuesStanki, setValuesStankiWait, valuesCategories, setValuesCategories, page, stankiObject}) {
+function ListDevicesCategoryIndividual({
+                                           updateList, setUpdateList, placesObject, placeKeys,
+                                           valuesStanki, setValuesStanki, setValuesStankiWait, valuesCategories,
+                                           setValuesCategories, page, stankiObject
+                                       }) {
 
     const [isActive, setActive] = useState(false);
 
@@ -403,7 +412,10 @@ function ListDevicesCategoryIndividual({updateList,setUpdateList,placesObject,pl
     )
 }
 
-function InsideListIndividual({stankiKeys, stankiObjects, handleOnChangeStanok, valuesStanki, page}) {
+function InsideListIndividual({
+                                  stankiKeys, stankiObjects, handleOnChangeStanok,
+                                  valuesStanki, page
+                              }) {
 
     return (
         stankiKeys.map((stanok, i) => {

@@ -1,19 +1,25 @@
-function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idContainer=null,  service, alarm, programs, laser, report, current}) {
+function ComplexSutkiAllInfo({
+                                 complexName, complexImg, complexMesto,
+                                 size, idContainer = null, service,
+                                 alarm, programs, laser, report, current
+                             }) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
     let idProgram = null;
 
-    programs != undefined? idProgram = `containerProgram${idContainer}`:null
+    programs != undefined ? idProgram = `containerProgram${idContainer}` : null
 
     return (
         <div className='complexAllInfo'>
-            <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report} current={current}/>
+            <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto}
+                         size={size} alarm={alarm} programs={programs} laser={laser} service={service}
+                         report={report} current={current}/>
             <div className='highChartsLineRound'>
                 <div className='lineComplex'>
                     <div className="lineSukiHighChart" id={idLine}></div>
                     {idProgram != null ?
                         <div className="lineProgramHighChart" id={idProgram}></div>
-                        :null
+                        : null
                     }
                 </div>
                 <div className="roundSukiHighChart" id={idRound}></div>
@@ -22,7 +28,10 @@ function ComplexSutkiAllInfo({complexName, complexImg, complexMesto, size, idCon
     )
 }
 
-function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, programs, laser, service, report, current}) {
+function ComplexInfo({
+                         complexName, complexImg, complexMesto, size, alarm,
+                         programs, laser, service, report, current
+                     }) {
     return (
         <div className="parent_image">
 
@@ -36,32 +45,36 @@ function ComplexInfo({complexName, complexImg, complexMesto, size, alarm, progra
                 {complexName}
             </figcaption>
 
-            <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm} programs={programs} laser={laser} service={service} report={report} current={current}/>
+            <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm}
+                            programs={programs} laser={laser} service={service} report={report} current={current}/>
 
         </div>
     )
 }
 
-function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idContainer, alarm, programs, laser, service, report, current} ) {
+function ComplexSmenaAllIngo({
+                                 complexName, complexImg, complexMesto, size, idContainer,
+                                 alarm, programs, laser, service, report, current
+                             }) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
 
-    let idLine2 = `containerLine${idContainer+1}`
-    let idRound2 = `containerRound${idContainer+1}`
+    let idLine2 = `containerLine${idContainer + 1}`
+    let idRound2 = `containerRound${idContainer + 1}`
 
     let idProgram = null;
     let idProgram2 = null;
 
-    if(programs !== 'undefinedsmena'){
+    if (programs !== 'undefinedsmena') {
         idProgram = `containerProgram${idContainer}`
-        idProgram2 = `containerProgram${idContainer+1}`
-    }
-    else programs = undefined
+        idProgram2 = `containerProgram${idContainer + 1}`
+    } else programs = undefined
 
     return (
         <div className='complexAllInfo' id={'containerTotal'}>
             <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto}
-                         size={size} programs={programs} laser={laser} alarm={alarm} service={service} report={report} current={current}/>
+                         size={size} programs={programs} laser={laser} alarm={alarm} service={service}
+                         report={report} current={current}/>
             <div className='twoDayDiv'>
                 <h1 className="timeInfoSmena">Работа II смены 19:00 - 07:00</h1>
                 <div className='oneDay'>
@@ -70,7 +83,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
                             <div className="lineSukiHighChart" id={idLine}></div>
                             {idProgram != null ?
                                 <div className="lineProgramHighChart" id={idProgram}></div>
-                                :null
+                                : null
                             }
                         </div>
                         <div className="roundSukiHighChart" id={idRound}></div>
@@ -83,7 +96,7 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
                             <div className="lineSukiHighChart" id={idLine2}></div>
                             {idProgram2 != null ?
                                 <div className="lineProgramHighChart" id={idProgram2}></div>
-                                :null
+                                : null
                             }
                         </div>
                         <div className="roundSukiHighChart" id={idRound2}></div>
@@ -94,7 +107,11 @@ function ComplexSmenaAllIngo({complexName, complexImg, complexMesto, size, idCon
     )
 }
 
-function ComplexButtons({complexMesto, size, alarm = null, programs = null, laser = null, service = null, report = null, current = null}) {
+function ComplexButtons({
+                            complexMesto, size, alarm = null, programs = null,
+                            laser = null, service = null, report = null,
+                            current = null
+                        }) {
 
     let hight = null
     let width = null
@@ -208,7 +225,7 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
                 href = "../stanki/alarm/1"
         }
 
-        window.open(href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth))
+        window.open(href, '', 'scrollbars=1,height=' + Math.min(1000, screen.availHeight) + ',width=' + Math.min(1600, screen.availWidth))
     }
 
     let program = (complexName) => (event) => {
@@ -290,7 +307,7 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
                 href = "../stanki/programTime/navigator_1"
         }
 
-        window.open(href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth))
+        window.open(href, '', 'scrollbars=1,height=' + Math.min(1000, screen.availHeight) + ',width=' + Math.min(1600, screen.availWidth))
     }
 
     let laserButton = (complexName) => (event) => {
@@ -310,7 +327,7 @@ function ComplexButtons({complexMesto, size, alarm = null, programs = null, lase
                 href = "../stanki/navigator_1"
         }
 
-        window.open(href, '', 'scrollbars=1,height='+Math.min(1000, screen.availHeight)+',width='+Math.min(1600, screen.availWidth))
+        window.open(href, '', 'scrollbars=1,height=' + Math.min(1000, screen.availHeight) + ',width=' + Math.min(1600, screen.availWidth))
     }
 
     return (
@@ -424,7 +441,7 @@ function SwitchLineHCIndividual({stateLineHC, setStateLineHC}) {
 
     const [disable, setDisable] = useState(false)
 
-    function Activate(){
+    function Activate() {
         setDisable(false)
     }
 

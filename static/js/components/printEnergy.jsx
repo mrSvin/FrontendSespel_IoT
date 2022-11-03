@@ -3,9 +3,9 @@ function PrintEnergy() {
         <div>
             <table id='printEnergy' className='tablePrintEnergy'>
                 <thead>
-                    <tr>
-                        <th>Дни</th>
-                    </tr>
+                <tr>
+                    <th>Дни</th>
+                </tr>
                 </thead>
                 <tbody>
                 <tr>
@@ -106,6 +106,6 @@ function PrintEnergy() {
                 </tr>
                 </tbody>
             </table>
-         </div>
+        </div>
     )
 }

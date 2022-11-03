@@ -11,21 +11,21 @@ function Service() {
     useEffect(() => {
 
         let objectImg = {
-            'apec':'apec.png', 'ar55':'ar55.png', 'crysta-apex':'crystal_apex.png',
-            '?***?':'dmf.png', 'ctx310':'dmg_ctx310.png', 'ctx510':'dmg_ctx510.png',
-            'ctx650':'dmg_ctx650.png', 'dmc1035':'dmg_dmc1035.png', 'dmf260':'dmg_dmf260.png',
-            'dmu50':'dmg_dmu50.png', 'эпп':'epp.png', 'faccin 4':'faccin.png',
-            'faccin 10':'faccin_2.png', 'gamma2000':'gamma2000.png', 'комета':'kometa.png',
-            'навигатор':'navigator.png', 'нк600':'nk600.png', 'nlx3000':'NLX3000.png',
-            'ntx1000':'ntx1000.png', 'печь':'pech.png', 'литейная':'liteyka.png', 'пресс':'press.png',
-            'стп':'progress.png', 'макс':'robot.png', 'м710':'robot.png',
-            'ртк12c':'robot.png', 'крот':'robot.png', 'пранс':'robot.png',
-            'p250':'robot_p250.png', 'sk50':'sk50.png', 'склад':'sklad.png',
-            'стп13м':'stp13m.png', 'trulaser':'trulaser.png',
-            'увф-1':'uvf_1_2.png', 'уф5220':'UVF_5220.png', 'врс1':'nasos.png',
-            'врс2':'nasos_vrs2.png', 'котельная': 'gazStation.png','ктп400':'electroStation.png',
-            'ктп630':'electroStation.png','ктп2500':'electroStation.png','ктп400':'electroStation.png',
-            'cтенд':'stendResource.png'
+            'apec': 'apec.png', 'ar55': 'ar55.png', 'crysta-apex': 'crystal_apex.png',
+            '?***?': 'dmf.png', 'ctx310': 'dmg_ctx310.png', 'ctx510': 'dmg_ctx510.png',
+            'ctx650': 'dmg_ctx650.png', 'dmc1035': 'dmg_dmc1035.png', 'dmf260': 'dmg_dmf260.png',
+            'dmu50': 'dmg_dmu50.png', 'эпп': 'epp.png', 'faccin 4': 'faccin.png',
+            'faccin 10': 'faccin_2.png', 'gamma2000': 'gamma2000.png', 'комета': 'kometa.png',
+            'навигатор': 'navigator.png', 'нк600': 'nk600.png', 'nlx3000': 'NLX3000.png',
+            'ntx1000': 'ntx1000.png', 'печь': 'pech.png', 'литейная': 'liteyka.png', 'пресс': 'press.png',
+            'стп': 'progress.png', 'макс': 'robot.png', 'м710': 'robot.png',
+            'ртк12c': 'robot.png', 'крот': 'robot.png', 'пранс': 'robot.png',
+            'p250': 'robot_p250.png', 'sk50': 'sk50.png', 'склад': 'sklad.png',
+            'стп13м': 'stp13m.png', 'trulaser': 'trulaser.png',
+            'увф-1': 'uvf_1_2.png', 'уф5220': 'UVF_5220.png', 'врс1': 'nasos.png',
+            'врс2': 'nasos_vrs2.png', 'котельная': 'gazStation.png', 'ктп400': 'electroStation.png',
+            'ктп630': 'electroStation.png', 'ктп2500': 'electroStation.png', 'ктп400': 'electroStation.png',
+            'cтенд': 'stendResource.png'
         }
 
         let exceptions = ['faccin']
@@ -37,14 +37,13 @@ function Service() {
 
         let img = '../images/navigator.png'
 
-        keys.forEach(e=>{
+        keys.forEach(e => {
             let inUrl = nameToFetch
             inUrl = (inUrl.split(' ')[0]).toLowerCase();
-            if(e.includes(inUrl) && !exceptions.includes(inUrl)){
+            if (e.includes(inUrl) && !exceptions.includes(inUrl)) {
                 img = objectImg[inUrl];
                 img = `../images/${img}`
-            }
-            else if (exceptions.includes(inUrl)){
+            } else if (exceptions.includes(inUrl)) {
                 img = objectImg[nameToFetch.toLowerCase()];
                 img = `../images/${img}`
             }
@@ -56,9 +55,9 @@ function Service() {
         let promiseDataComplex1 = Promise.resolve(complex1day1);
 
         promiseDataComplex1.then(value => {
-            if(value.length == 0) return 0
+            if (value.length == 0) return 0
 
-            let ArrayPeriod = value.map(e=> {
+            let ArrayPeriod = value.map(e => {
                 e.time_service = convertTimeToISO(e.time_service)
                 return e.time_service
             })
@@ -66,7 +65,7 @@ function Service() {
             ArrayPeriod = getArrayPeriodsBetween(ArrayPeriod)
 
             let dataTable = [];
-            value.forEach((e,i) => {
+            value.forEach((e, i) => {
                 e.timeNext = e.period_service
                 e.period_service = ArrayPeriod[i]
                 dataTable.push(e)
@@ -77,16 +76,15 @@ function Service() {
 
             let lastPeriod = value[0].timeNext
             let allServiceArray = [] //'2022-07-22 07:08:41', '2022-07-22 07:12:41', '2022-07-22 07:17:40', '2022-07-22 07:21:51', '2022-07-22 08:33:03', '2022-07-22 09:36:36', '2022-07-22 09:57:11', '2022-07-22 09:58:52']
-            value.forEach(element => allServiceArray.push(element.time_service) )
+            value.forEach(element => allServiceArray.push(element.time_service))
 
-            let info = value.map(e=> {
+            let info = value.map(e => {
                 return [e.user_name, e.info_works]
             })
 
             highChartServiceHistory(allServiceArray.reverse(), info.reverse())
-            highChartServiceNow(allServiceArray.reverse(),lastPeriod)
+            highChartServiceNow(allServiceArray.reverse(), lastPeriod)
         })
-
 
 
     }, [])
@@ -121,8 +119,9 @@ function Service() {
                 </table>
             </div>
 
-            {formAddService==true ?
-                <FormAddService setFormAddService={setFormAddService} nameComplex={nameComplex} dataService={dataService} setDataService={setDataService}/>
+            {formAddService == true ?
+                <FormAddService setFormAddService={setFormAddService} nameComplex={nameComplex}
+                                dataService={dataService} setDataService={setDataService}/>
                 : null}
 
         </div>
@@ -146,7 +145,7 @@ function FormAddService(setFormAddService) {
         })
             .then((response) => response.json())
             .then((data) => {
-                fetchRequestAddService(data.userName, data.userRole,complexName, infoWorks, periodService,setFormAddService, errorService, setErrorService)
+                fetchRequestAddService(data.userName, data.userRole, complexName, infoWorks, periodService, setFormAddService, errorService, setErrorService)
             })
 
 
@@ -182,7 +181,9 @@ function FormAddService(setFormAddService) {
                 </div>
                 <p className="error-msg">{errorService}</p>
                 <button id="submit" type="button"
-                        onClick={() => {makeTehWork(setFormAddService.nameComplex, infoWorks, periodService)}}
+                        onClick={() => {
+                            makeTehWork(setFormAddService.nameComplex, infoWorks, periodService)
+                        }}
                 >Подтвердить
                 </button>
             </div>

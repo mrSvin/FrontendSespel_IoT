@@ -14,7 +14,7 @@ function LoginButton(props) {
                 setTimeout(() => {
                     let badLogin = window.location.protocol + '//' + window.location.hostname + ":8082/login?error";
                     if (response.url != badLogin) {
-                        location.href ="/"
+                        location.href = "/"
                     } else {
                         setErrorMsg('Логин или пароль введены не верно')
                         setError(1)
