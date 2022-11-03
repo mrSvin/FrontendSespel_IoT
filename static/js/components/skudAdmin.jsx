@@ -47,8 +47,9 @@ function SkudAdmin() {
     let action = ['hide', 'add', 'change']
 
     const [error, setError] = useState(0)
-    const [tableBody, setTableBody] = useState({tabel: null, type_smena: null, long_smena: null, long_lunch: null})
-    const [user, setUser] = useState(null)
+    const [tableBody, setTableBody] = useState(null)
+    const [user, setUser] = useState({tabel: null, type_smena: null, long_smena: null, long_lunch: null})
+
 
 
     const [typeForm, setTypeForm] = useState('hide')
@@ -67,6 +68,7 @@ function SkudAdmin() {
             let convertedData = convertSkudAnswerToTable(data)
             convertedData ? null : setError(1)
             setTableBody(convertedData)
+            console.log(convertedData)
         })
     }, [])
 
@@ -119,14 +121,14 @@ function SkudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
 
     return (
         <form className={typeForm == 'hide' ? 'formUserHideSkud' : 'formUserSkud'}>
-            <label htmlFor="">Табельный{typeForm == 'change' ? user ? user.tabel : null : null}</label>
+            <label htmlFor="">Табельный{typeForm == 'change' ? user? user.tabel:null : null}</label>
             <input className={typeForm == 'change' ? 'formUserHideSkud' : null}
                    value={user.tabel}
                    onChange={(e) => {
                        handleOnChange(e, 'tabel')
                    }}/>
             <label>Тип смены</label>
-            <select id="smena" name="smena" value={user ? user.type_smena : null}
+            <select id="smena" name="smena" value={user? user.type_smena: null}
                     onChange={(e) => {
                         handleOnChange(e, 'type_smena')
                     }}>
