@@ -27,9 +27,12 @@
     <script src="/js/lib/bootstrap-datepicker.min.js"></script>
     <script src="/js/lib/bootstrap-datepicker.ru.min.js"></script>
 
-
-    <script src="/js/smena/calendar_smena.js"></script>
     <script>
+        function ActiveButton() {
+            $('#button_obnovit').attr('disabled', null)
+            $('.follow').removeClass('load');
+        }
+
 
         document.addEventListener("DOMContentLoaded", function (event) {
             $('#datepicker').datepicker({
