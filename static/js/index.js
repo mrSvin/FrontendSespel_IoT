@@ -132,5 +132,3 @@ setTimeout(() =>
             document.getElementById('main-app')
         )
     , 1);
-// ReactDOM.render(<App/>, document.getElementById('main-app'));
-
