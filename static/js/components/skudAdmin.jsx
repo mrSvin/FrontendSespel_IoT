@@ -51,6 +51,14 @@ function SkudAdmin() {
     const [user, setUser] = useState(null)
     const [typeForm, setTypeForm] = useState('hide')
 
+    function handleOnChange(e, key) {
+        const {value} = e.target;
+        setUser(prevState => ({
+            ...prevState,
+            [key]: value
+        }));
+    };
+
     useEffect(() => {
         let promise = fetchRequestScudInfoWorkers()
         promise.then(data => {
@@ -63,7 +71,7 @@ function SkudAdmin() {
 
     return (
         <div>
-            <SkudAdminForm typeForm={typeForm} setTypeForm={setTypeForm}/>
+            <SkudAdminForm typeForm={typeForm} setTypeForm={setTypeForm} handleOnChange={handleOnChange}/>
             <table className='tableSkudUsers'>
                 <thead>
                 <tr>
@@ -106,12 +114,15 @@ function SkudAdmin() {
     )
 }
 
-function SkudAdminForm({typeForm, setTypeForm, user}) {
+function SkudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
 
     return (
         <form className={typeForm == 'hide' ? 'formUserHideSkud' : 'formUserSkud'}>
             <label htmlFor="">Табельный</label>
-            <input className={typeForm == 'change' ? 'formUserHideSkud' : null}/>
+            <input className={typeForm == 'change' ? 'formUserHideSkud' : null}
+                   onChange={(e) => {
+                       handleOnChange(e, 'tabel')
+                   }}/>
             <label>Тип смены</label>
             <select id="smena" name="smena">
                 <option value="1">Первая смена</option>
