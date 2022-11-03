@@ -44,8 +44,12 @@ function SkudAdmin() {
         }
     }
 
+    let action = ['hide', 'add', 'change']
+
     const [error, setError] = useState(0)
     const [tableBody, setTableBody] = useState(null)
+    const [user, setUser] = useState(null)
+    const [typeForm, setTypeForm] = useState('hide')
 
     useEffect(() => {
         let promise = fetchRequestScudInfoWorkers()
@@ -59,7 +63,7 @@ function SkudAdmin() {
 
     return (
         <div>
-            <SkudAdminForm/>
+            <SkudAdminForm typeForm={typeForm} setTypeForm={setTypeForm}/>
             <table className='tableSkudUsers'>
                 <thead>
                 <tr>
@@ -73,15 +77,18 @@ function SkudAdmin() {
                 </thead>
                 <tbody>
                 {tableBody == null ? null :
-                    tableBody.map(user => {
+                    tableBody.map((user, i) => {
                         return (
-                            <tr>
+                            <tr key={i}>
                                 <td>{user.tabel}</td>
                                 <td>{user.type_smena}</td>
                                 <td>{user.long_smena}</td>
                                 <td>{user.long_lunch}</td>
                                 <td>
-                                    <div className='tdChange'></div>
+                                    <div className='tdChange' onClick={() => {
+                                        setUser(user)
+                                        setTypeForm('change')
+                                    }}></div>
                                 </td>
                                 <td>
                                     <div className='tdDelete'></div>
@@ -92,15 +99,14 @@ function SkudAdmin() {
                 }
                 </tbody>
             </table>
-            <div className='addButton addButtonSkud'><span>+</span></div>
+            <div className='addButton addButtonSkud' onClick={() => {
+                setTypeForm('add')
+            }}><span>+</span></div>
         </div>
     )
 }
 
-function SkudAdminForm() {
-
-    let action = ['hide', 'add', 'change']
-    const [typeForm, setTypeForm] = useState('hide')
+function SkudAdminForm({typeForm, setTypeForm, user}) {
 
     return (
         <form className={typeForm == 'hide' ? 'formUserHideSkud' : 'formUserSkud'}>
@@ -143,7 +149,7 @@ function SkudAdminForm() {
                 <option value="2">60 минут</option>
                 <option value="3">90 минут</option>
             </select>
-            <button type="submit">{typeForm == 'add' ? 'Добавить' : 'Изменить'}</button>
+            <button type="button">{typeForm == 'add' ? 'Добавить' : 'Изменить'}</button>
         </form>
     )
 }
