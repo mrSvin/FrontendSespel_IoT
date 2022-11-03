@@ -233,43 +233,43 @@ function getHighchartSeriesAndNames(userData){
 
     if(blackArrayTrigger){
         for(let i=0; i < arrayData.length; i+=3){
-                series.push({
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: '#38e817',
-                    tooltip: {
-                        pointFormatter: function () {
-                            let timer = msToTime(this.x2 - this.x)
-                            return '<b>Работает </b>' + timer
-                        },
+            series.push({
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#38e817',
+                tooltip: {
+                    pointFormatter: function () {
+                        let timer = msToTime(this.x2 - this.x)
+                        return '<b>Работает </b>' + timer
                     },
-                    data: arrayData[i],
-                })
-                series.push({
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: '#ffea32',
-                    tooltip: {
-                        pointFormatter: function () {
-                            let timer = msToTime(this.x2 - this.x)
-                            return '<b>Нет на месте </b>' + timer
-                        },
+                },
+                data: arrayData[i],
+            })
+            series.push({
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#ffea32',
+                tooltip: {
+                    pointFormatter: function () {
+                        let timer = msToTime(this.x2 - this.x)
+                        return '<b>Нет на месте </b>' + timer
                     },
-                    data: arrayData[i+1],
-                })
-                series.push({
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: '#252734',
-                    tooltip: {
-                        enabled: false,
-                        pointFormatter: function () {
-                            return '<p></p>'
-                        },
+                },
+                data: arrayData[i+1],
+            })
+            series.push({
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#252734',
+                tooltip: {
+                    enabled: false,
+                    pointFormatter: function () {
+                        return '<p></p>'
                     },
-                    borderColor: '#252734',
-                    data: arrayData[i+2],
-                })
+                },
+                borderColor: '#252734',
+                data: arrayData[i+2],
+            })
         }
     } else {
         for(let i=0; i < arrayData.length; i++){
