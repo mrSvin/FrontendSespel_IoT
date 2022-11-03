@@ -841,8 +841,8 @@ function interceptNetworkRequests(ee) {
 }
 
 function reloadPageIfLogin(data){
-    if(data.url.slice(-5) == 'login'){
-        location.reload();
+    if(data.url.slice(-5) == 'login' && window.location.href != data.url){
+        location.href = `${window.location.origin}/login`
     }
 }
 
