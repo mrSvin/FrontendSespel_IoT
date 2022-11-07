@@ -53,11 +53,10 @@ function ScudAdmin() {
                 object.long_lunch = dataType.long_lunch[user.long_lunch]
                 object.long_smenaBool = dataType.long_smenaBool
 
-                object.long_smenaBool[user.long_smena] = true
+                object.long_smenaBool[object.long_smena] = true
 
                 return object
             })
-            console.log('Новое решение? ',convertedUsers)
             return convertedUsers
         }
     }
