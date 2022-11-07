@@ -10,12 +10,7 @@ function fetchRequestScudAddWorkers(userData) {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    let raw = JSON.stringify({
-        "longLunch": complexName,
-        "longSmena": userName,
-        "tabel": infoWorks,
-        "typeSmena": periodService
-    });
+    let raw = JSON.stringify(userData)
 
     let requestOptions = {
         method: 'POST',
@@ -93,9 +88,9 @@ function convertScudToFetch(userData) {
             '24 ч.': '24',
         },
         long_lunch: {
-            '30 минут':'30',
-            '60 минут':'60',
-            '90 минут':'90',
+            '30 минут': '30',
+            '60 минут': '60',
+            '90 минут': '90',
         },
     }
 
@@ -291,9 +286,13 @@ function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool}) {
             </select>
             <button type="button"
                     onClick={() => {
+                        if (user.type_smena == '' || user.tabel == '' || user.long_smena == '' || user.long_lunch == '') {
+                            alert('Заполните все поля')
+                            return null
+                        }
                         if (typeForm == 'add') {
                             console.log('Запрос на добавление льзователя')
-                            console.log(convertScudToFetch(user))
+                            fetchRequestScudAddWorkers(convertScudToFetch(user))
                         } else if (typeForm == 'change') {
                             console.log('Запрос на изменение пользователя')
                         }
