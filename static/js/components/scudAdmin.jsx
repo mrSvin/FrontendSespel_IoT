@@ -188,7 +188,7 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnCha
             <div className="smenaTimeScud">
                 <div>
                     <label htmlFor="8hours">
-                        <input id='8hours' type="radio" name="long_smena" value="8 часов"
+                        <input id='8hours' type="radio" name="long_smena" value='8 ч.'
                                checked={user.long_smenaBool['8 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
@@ -197,7 +197,7 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnCha
                         8 часов
                     </label>
                     <label htmlFor="7.2hours">
-                        <input id='7.2hours' type="radio" name="long_smena" value="7.2 часа"
+                        <input id='7.2hours' type="radio" name="long_smena" value='7.2 ч.'
                                checked={user.long_smenaBool['7.2 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
@@ -208,7 +208,7 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnCha
                 </div>
                 <div>
                     <label htmlFor="12hours">
-                        <input id='12hours' type="radio" name="long_smena" value="12 часов"
+                        <input id='12hours' type="radio" name="long_smena" value='12 ч.'
                                checked={user.long_smenaBool['12 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
@@ -217,7 +217,7 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnCha
                         12 часов
                     </label>
                     <label htmlFor="24hours">
-                        <input id='24hours' type="radio" name="long_smena" value="24 часа"
+                        <input id='24hours' type="radio" name="long_smena" value='24 ч.'
                                checked={user.long_smenaBool['24 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
