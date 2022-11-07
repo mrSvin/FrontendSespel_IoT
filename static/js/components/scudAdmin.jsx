@@ -121,7 +121,8 @@ function ScudAdmin() {
 
     return (
         <div>
-            <ScudAdminForm typeForm={typeForm} setTypeForm={setTypeForm} user={user} handleOnChange={handleOnChange} handleOnChangeBool={handleOnChangeBool}/>
+            <ScudAdminForm typeForm={typeForm} setTypeForm={setTypeForm} user={user} handleOnChange={handleOnChange}
+                           handleOnChangeBool={handleOnChangeBool}/>
             <table className='tableScudUsers'>
                 <thead>
                 <tr>
@@ -145,7 +146,7 @@ function ScudAdmin() {
                                 <td>
                                     <div className='tdChange' onClick={() => {
                                         setUser(user)
-                                        setTypeForm('change')
+                                        typeForm == 'change' ? setTypeForm('hide') : setTypeForm('change')
                                     }}></div>
                                 </td>
                                 <td>
@@ -158,7 +159,7 @@ function ScudAdmin() {
                 </tbody>
             </table>
             <div className='addButton addButtonScud' onClick={() => {
-                setTypeForm('add')
+                typeForm == 'add' ? setTypeForm('hide') : setTypeForm('add')
             }}><span>+</span></div>
         </div>
     )
@@ -236,7 +237,13 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnCha
                 <option value="60 минут">60 минут</option>
                 <option value="90 минут">90 минут</option>
             </select>
-            <button type="button">{typeForm == 'add' ? 'Добавить' : 'Изменить'}</button>
+            <button type="button">{typeForm == 'add' ? 'Добавить' : 'Изменить'} onClick={() => {
+                if(typeForm == 'add'){
+                    console.log('Запрос на добавление льзователя')
+                } else if(typeForm == 'change') {
+                    console.log('Запрос на изменение пользователя')
+                }
+            }}</button>
         </form>
     )
 }
