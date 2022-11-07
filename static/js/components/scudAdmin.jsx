@@ -145,8 +145,9 @@ function ScudAdmin() {
                                 <td>
                                     <div className='tdChange' onClick={() => {
                                         setUser(userTable)
-                                        console.log('Сравнение ',userTable, user)
-                                        typeForm == 'change' ? setTypeForm('hide') : setTypeForm('change')
+                                        if(user.tabel == userTable.tabel && typeForm == 'change') {
+                                            setTypeForm('hide')
+                                        } else setTypeForm('change')
                                     }}></div>
                                 </td>
                                 <td>
