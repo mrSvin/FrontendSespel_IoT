@@ -237,8 +237,10 @@ function ScudAdmin() {
                                 </td>
                                 <td>
                                     <div className='tdDelete' onClick={() => {
-                                        fetchRequestScudDeleteWorkers(userTable.tabel)
-                                        updateTable()
+                                        let deletePromise = fetchRequestScudDeleteWorkers(userTable.tabel)
+                                        deletePromise.then(() => {
+                                            updateTable()
+                                        })
                                     }}></div>
                                 </td>
                             </tr>
@@ -334,12 +336,14 @@ function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool, upda
                         }
                         if (typeForm == 'add') {
                             let addPromise = fetchRequestScudAddWorkers(convertScudToFetch(user))
-                            addPromise.then(answer => {
-                                console.log('Ответ после добавления', answer)
+                            addPromise.then(() => {
                                 updateTable()
                             })
                         } else if (typeForm == 'change') {
-                            fetchRequestScudUpdateWorkers(convertScudToFetch(user))
+                            let changePromise = fetchRequestScudUpdateWorkers(convertScudToFetch(user))
+                            changePromise.then(() => {
+                                updateTable()
+                            })
                             updateTable()
                         }
                     }}>{typeForm == 'add' ? 'Добавить' : 'Изменить'}
