@@ -344,7 +344,6 @@ function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool, upda
                             changePromise.then(() => {
                                 updateTable()
                             })
-                            updateTable()
                         }
                     }}>{typeForm == 'add' ? 'Добавить' : 'Изменить'}
             </button>
