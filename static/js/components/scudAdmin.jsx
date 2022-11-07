@@ -1,65 +1,114 @@
-function ScudAdmin() {
+function fetchRequestScudInfoWorkers() {
+    return fetch(`/api/scud/infoWorkers`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data[0]
+        })
+}
 
-    function fetchRequestScudInfoWorkers() {
-        return fetch(`/api/scud/infoWorkers`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                return data[0]
-            })
-    }
+function fetchRequestScudAddWorkers(userData) {
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-    function fetchRequestScudAddWorkers() {
-        return fetch(`/api/scud/infoWorkers`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                return data[0]
-            })
-    }
+    let raw = JSON.stringify({
+        "longLunch": complexName,
+        "longSmena": userName,
+        "tabel": infoWorks,
+        "typeSmena": periodService
+    });
 
-    function convertScudAnswerToTable(data) {
-        if (data[0] == 'many request') {
-            return null
-        } else {
-            let dataType = {
-                type_smena: {
-                    '1': 'Первая смена',
-                    '2': 'Вторая смена',
-                    '3': 'Третья смена',
-                    'А': 'Администрация'
-                },
-                long_smena: {
-                    '8': '8 ч.',
-                    '7.2': '7.2 ч.',
-                    '12': '12 ч.',
-                    '24': '24 ч.',
-                },
-                long_lunch: {
-                    '30': '30 минут',
-                    '60': '60 минут',
-                    '90': '90 минут',
-                },
-                long_smenaBool: {
-                    '8 ч.': false,
-                    '7.2 ч.': false,
-                    '12 ч.': false,
-                    '24 ч.': false,
-                },
-            }
-            let convertedUsers = data.map(user => {
-                let object = {}
-                object.tabel = user.tabel
-                object.type_smena = dataType.type_smena[user.type_smena]
-                object.long_smena = dataType.long_smena[user.long_smena]
-                object.long_lunch = dataType.long_lunch[user.long_lunch]
-                object.long_smenaBool = dataType.long_smenaBool
+    let requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
 
-                object.long_smenaBool[object.long_smena] = true
 
-                return object
-            })
-            return convertedUsers
+    return fetch(`/api/scud/addWorker`, requestOptions)
+        .then(response => response.text())
+        .then((result) => {
+            console.log('Пользователь добавлен')
+        })
+        .catch(error => console.log('Ошибка при отправке запроса', error));
+}
+
+function convertScudAnswerToTable(userData) {
+    if (data[0] == 'many request') {
+        return null
+    } else {
+        let dataType = {
+            type_smena: {
+                '1': 'Первая смена',
+                '2': 'Вторая смена',
+                '3': 'Третья смена',
+                'А': 'Администрация'
+            },
+            long_smena: {
+                '8': '8 ч.',
+                '7.2': '7.2 ч.',
+                '12': '12 ч.',
+                '24': '24 ч.',
+            },
+            long_lunch: {
+                '30': '30 минут',
+                '60': '60 минут',
+                '90': '90 минут',
+            },
+            long_smenaBool: {
+                '8 ч.': false,
+                '7.2 ч.': false,
+                '12 ч.': false,
+                '24 ч.': false,
+            },
         }
+        let convertedUsers = data.map(user => {
+            let object = {}
+            object.tabel = user.tabel
+            object.type_smena = dataType.type_smena[user.type_smena]
+            object.long_smena = dataType.long_smena[user.long_smena]
+            object.long_lunch = dataType.long_lunch[user.long_lunch]
+            object.long_smenaBool = dataType.long_smenaBool
+
+            object.long_smenaBool[object.long_smena] = true
+
+            return object
+        })
+        return convertedUsers
     }
+}
+
+function convertScudToFetch(userData) {
+    let dataType = {
+        type_smena: {
+            'Первая смена': '1',
+            'Вторая смена': '2',
+            'Третья смена': '3',
+            'Администрация': 'А',
+        },
+        long_smena: {
+            '8 ч.': '8',
+            '7.2 ч.': '7.2',
+            '12 ч.': '12',
+            '24 ч.': '24',
+        },
+        long_lunch: {
+            '30 минут':'30',
+            '60 минут':'60',
+            '90 минут':'90',
+        },
+    }
+
+    let convertedData = {
+        longLunch: dataType.long_lunch[userData.long_lunch],
+        longSmena: dataType.long_smena[userData.long_smena],
+        tabel: userData.tabel,
+        typeSmena: dataType.type_smena[userData.type_smena],
+    }
+    return convertedData
+}
+
+function ScudAdmin() {
 
     let action = ['hide', 'add', 'change']
 
@@ -120,7 +169,7 @@ function ScudAdmin() {
 
     return (
         <div>
-            <ScudAdminForm typeForm={typeForm} setTypeForm={setTypeForm} user={user} handleOnChange={handleOnChange}
+            <ScudAdminForm typeForm={typeForm} user={user} handleOnChange={handleOnChange}
                            handleOnChangeBool={handleOnChangeBool}/>
             <table className='tableScudUsers'>
                 <thead>
@@ -145,14 +194,14 @@ function ScudAdmin() {
                                 <td>
                                     <div className='tdChange' onClick={() => {
                                         setUser(userTable)
-                                        if(user.tabel == userTable.tabel && typeForm == 'change') {
+                                        if (user.tabel == userTable.tabel && typeForm == 'change') {
                                             setTypeForm('hide')
                                         } else setTypeForm('change')
                                     }}></div>
                                 </td>
                                 <td>
                                     <div className='tdDelete' onClick={() => {
-                                        console.log(`Запрос на удаление пользователь ${user.tabel}`)
+                                        console.log(`Запрос на удаление пользователь ${userTable.tabel}`)
                                     }}></div>
                                 </td>
                             </tr>
@@ -168,7 +217,7 @@ function ScudAdmin() {
     )
 }
 
-function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnChangeBool}) {
+function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool}) {
 
     return (
         <form className={typeForm == 'hide' ? 'formUserHideScud' : 'formUserScud'}>
@@ -244,6 +293,7 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnCha
                     onClick={() => {
                         if (typeForm == 'add') {
                             console.log('Запрос на добавление льзователя')
+                            console.log(convertScudToFetch(user))
                         } else if (typeForm == 'change') {
                             console.log('Запрос на изменение пользователя')
                         }
