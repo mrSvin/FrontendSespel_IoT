@@ -115,7 +115,6 @@ function ScudAdmin() {
             let convertedData = convertScudAnswerToTable(data)
             convertedData ? null : setError(1)
             setTableBody(convertedData)
-            console.log(convertedData)
         })
     }, [])
 
@@ -136,21 +135,24 @@ function ScudAdmin() {
                 </thead>
                 <tbody>
                 {tableBody == null ? null :
-                    tableBody.map((user, i) => {
+                    tableBody.map((userTable, i) => {
                         return (
                             <tr key={i}>
-                                <td>{user.tabel}</td>
-                                <td>{user.type_smena}</td>
-                                <td>{user.long_smena}</td>
-                                <td>{user.long_lunch}</td>
+                                <td>{userTable.tabel}</td>
+                                <td>{userTable.type_smena}</td>
+                                <td>{userTable.long_smena}</td>
+                                <td>{userTable.long_lunch}</td>
                                 <td>
                                     <div className='tdChange' onClick={() => {
-                                        setUser(user)
+                                        setUser(userTable)
+                                        console.log('Сравнение ',userTable, user)
                                         typeForm == 'change' ? setTypeForm('hide') : setTypeForm('change')
                                     }}></div>
                                 </td>
                                 <td>
-                                    <div className='tdDelete'></div>
+                                    <div className='tdDelete' onClick={() => {
+                                        console.log(`Запрос на удаление пользователь ${user.tabel}`)
+                                    }}></div>
                                 </td>
                             </tr>
                         )
@@ -169,7 +171,7 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnCha
 
     return (
         <form className={typeForm == 'hide' ? 'formUserHideScud' : 'formUserScud'}>
-            <label htmlFor="">Табельный{typeForm == 'change' ? user.tabel : null}</label>
+            <label htmlFor="">Табельный {typeForm == 'change' ? user.tabel : null}</label>
             <input className={typeForm == 'change' ? 'formUserHideScud' : null}
                    value={user.tabel}
                    onChange={(e) => {
@@ -239,9 +241,9 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnCha
             </select>
             <button type="button"
                     onClick={() => {
-                        if(typeForm == 'add'){
+                        if (typeForm == 'add') {
                             console.log('Запрос на добавление льзователя')
-                        } else if(typeForm == 'change') {
+                        } else if (typeForm == 'change') {
                             console.log('Запрос на изменение пользователя')
                         }
                     }}>{typeForm == 'add' ? 'Добавить' : 'Изменить'}
