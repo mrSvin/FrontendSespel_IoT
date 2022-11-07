@@ -250,4 +250,15 @@
     user-select: none;
 }
 
+.errorMessage {
+    text-align: center;
+}
+
+.greenMessage {
+    color: green;
+}
+
+.redMessage {
+    color: red;
+}
 

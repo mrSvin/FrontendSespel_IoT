@@ -137,10 +137,7 @@ function convertScudToFetch(userData) {
     return convertedData
 }
 
-
 function ScudAdmin() {
-
-    let action = ['hide', 'add', 'change']
 
     const [errorMessage, setErrorMessage] = useState(null)
     const [tableBody, setTableBody] = useState(null)
@@ -192,7 +189,7 @@ function ScudAdmin() {
         let promise = fetchRequestScudInfoWorkers()
         promise.then(data => {
             let convertedData = convertScudAnswerToTable(data)
-            convertedData ? null : setError(1)
+            convertedData ? null : setErrorMessage(['Не удалось загрузить базу пользователей', 'redMessage'])
             setTableBody(convertedData)
         })
     }
@@ -231,7 +228,7 @@ function ScudAdmin() {
                                         setUser(userTable)
                                         if (user.tabel == userTable.tabel && typeForm == 'change') {
                                             setTypeForm('hide')
-                                            setErrorMessage(null)
+                                            setErrorMessage(['', ''])
                                         } else setTypeForm('change')
                                     }}></div>
                                 </td>
@@ -252,7 +249,7 @@ function ScudAdmin() {
             <div className='addButton addButtonScud' onClick={() => {
                 if (typeForm == 'add') {
                     setTypeForm('hide')
-                    setErrorMessage(null)
+                    setErrorMessage(['', ''])
                 } else setTypeForm('add')
             }}><span>+</span></div>
         </div>
@@ -338,23 +335,29 @@ function ScudAdminForm({
             <button type="button"
                     onClick={() => {
                         if (user.type_smena == '' || user.tabel == '' || user.long_smena == '' || user.long_lunch == '') {
-                            setErrorMessage('Заполните поле табеля')
+                            setErrorMessage(['Заполните поле табеля', 'redMessage'])
                             return null
                         }
                         if (typeForm == 'add') {
                             let addPromise = fetchRequestScudAddWorkers(convertScudToFetch(user))
                             addPromise.then((data) => {
-                                data == 'ok' ? updateTable() : setErrorMessage('Не удалось добавить пользователя')
+                                if(data == 'ok'){
+                                    updateTable()
+                                    setErrorMessage(['Пользователь добавлен', 'greenMessage'])
+                                } else setErrorMessage(['Не удалось добавить пользователя', 'redMessage'])
                             })
                         } else if (typeForm == 'change') {
                             let changePromise = fetchRequestScudUpdateWorkers(convertScudToFetch(user))
                             changePromise.then((data) => {
-                                data == 'ok' ? updateTable() : setErrorMessage('Не удалось изменить пользователя')
+                                if(data == 'ok'){
+                                    updateTable()
+                                    setErrorMessage(['Пользователь изменен', 'greenMessage'])
+                                } else setErrorMessage(['Не удалось изменить пользователя', 'redMessage'])
                             })
                         }
                     }}>{typeForm == 'add' ? 'Добавить' : 'Изменить'}
             </button>
-            <p>{errorMessage}</p>
+            <p className={`errorMessage ${errorMessage[1]}`}>{errorMessage[0]}</p>
         </form>
     )
 }
