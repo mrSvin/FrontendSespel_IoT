@@ -4,7 +4,6 @@ function ScudAdmin() {
         return fetch(`/api/scud/infoWorkers`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
-                console.log(data[0])
                 return data[0]
             })
     }
@@ -13,7 +12,6 @@ function ScudAdmin() {
         return fetch(`/api/scud/infoWorkers`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
-                console.log(data[0])
                 return data[0]
             })
     }
@@ -39,7 +37,13 @@ function ScudAdmin() {
                     '30': '30 минут',
                     '60': '60 минут',
                     '90': '90 минут',
-                }
+                },
+                long_smenaBool: {
+                    '8 ч.': false,
+                    '7.2 ч.': false,
+                    '12 ч.': false,
+                    '24 ч.': false,
+                },
             }
             let convertedUsers = data.map(user => {
                 let object = {}
@@ -47,8 +51,13 @@ function ScudAdmin() {
                 object.type_smena = dataType.type_smena[user.type_smena]
                 object.long_smena = dataType.long_smena[user.long_smena]
                 object.long_lunch = dataType.long_lunch[user.long_lunch]
+                object.long_smenaBool = dataType.long_smenaBool
+
+                object.long_smenaBool[user.long_smena] = true
+
                 return object
             })
+            console.log('Новое решение? ',convertedUsers)
             return convertedUsers
         }
     }
@@ -57,8 +66,19 @@ function ScudAdmin() {
 
     const [error, setError] = useState(0)
     const [tableBody, setTableBody] = useState(null)
-    const [user, setUser] = useState({tabel: '', type_smena: '', long_smena: '', long_lunch: ''})
-
+    const [user, setUser] = useState(
+        {
+            tabel: '',
+            type_smena: 'Первая смена',
+            long_smena: '',
+            long_lunch: '',
+            long_smenaBool: {
+                '8 ч.': false,
+                '7.2 ч.': false,
+                '12 ч.': false,
+                '24 ч.': false,
+            },
+        })
 
 
     const [typeForm, setTypeForm] = useState('hide')
@@ -84,7 +104,7 @@ function ScudAdmin() {
     return (
         <div>
             <ScudAdminForm typeForm={typeForm} setTypeForm={setTypeForm} user={user} handleOnChange={handleOnChange}/>
-            <table className='tablescudUsers'>
+            <table className='tableScudUsers'>
                 <thead>
                 <tr>
                     <th>Табельный</th>
@@ -150,14 +170,14 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
             <div className="smenaTimeScud">
                 <div>
                     <label htmlFor="8hours">
-                        <input id='8hours' type="radio" name="long_smena" value="8 часов"
+                        <input id='8hours' type="radio" name="long_smena" value="8 часов" checked={user.long_smenaBool['8 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
                                }}/>
                         8 часов
                     </label>
                     <label htmlFor="7.2hours">
-                        <input id='7.2hours' type="radio" name="long_smena" value="7.2 часа"
+                        <input id='7.2hours' type="radio" name="long_smena" value="7.2 часа" checked={user.long_smenaBool['7.2 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
                                }}/>
@@ -166,14 +186,14 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
                 </div>
                 <div>
                     <label htmlFor="12hours">
-                        <input id='12hours' type="radio" name="long_smena" value="12 часов"
+                        <input id='12hours' type="radio" name="long_smena" value="12 часов" checked={user.long_smenaBool['12 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
                                }}/>
                         12 часов
                     </label>
                     <label htmlFor="24hours">
-                        <input id='24hours' type="radio" name="long_smena" value="24 часа"
+                        <input id='24hours' type="radio" name="long_smena" value="24 часа" checked={user.long_smenaBool['24 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
                                }}/>
@@ -183,7 +203,7 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
             </div>
 
             <label htmlFor="">Длительность обеда</label>
-            <select id="lunch" name="lunch" onChange={(e) => {
+            <select id="lunch" name="lunch" value={user.long_lunch} onChange={(e) => {
                 handleOnChange(e, 'long_lunch')
             }}>
                 <option value="30 минут">30 минут</option>
