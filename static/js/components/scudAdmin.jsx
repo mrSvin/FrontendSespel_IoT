@@ -23,7 +23,7 @@ function fetchRequestScudAddWorkers(userData) {
     return fetch(`/api/scud/addWorker`, requestOptions)
         .then(response => response.text())
         .then((result) => {
-            if(result == 'ok') console.log('Пользователь добавлен')
+            if (result == 'ok') console.log('Пользователь добавлен')
             else console.log('Такой пользователь уже есть')
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
@@ -46,7 +46,7 @@ function fetchRequestScudUpdateWorkers(userData) {
     return fetch(`/api/scud/updateWorker`, requestOptions)
         .then(response => response.text())
         .then((result) => {
-            if(result == 'ok') console.log('Пользователь изменен')
+            if (result == 'ok') console.log('Пользователь изменен')
             else console.log('Такой пользователя нет')
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
@@ -57,7 +57,7 @@ function fetchRequestScudDeleteWorkers(tabel) {
     return fetch(`/api/scud/deleteWorker/tabel:${tabel}`, {method: 'POST'})
         .then(response => response.text())
         .then((result) => {
-            if(result == 'ok') console.log('Пользователь удален')
+            if (result == 'ok') console.log('Пользователь удален')
             else console.log('Такой пользователя нет')
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
@@ -140,7 +140,6 @@ function convertScudToFetch(userData) {
 }
 
 
-
 function ScudAdmin() {
 
     let action = ['hide', 'add', 'change']
@@ -191,7 +190,7 @@ function ScudAdmin() {
         }));
     };
 
-    function updateTable(){
+    function updateTable() {
         let promise = fetchRequestScudInfoWorkers()
         promise.then(data => {
             let convertedData = convertScudAnswerToTable(data)
@@ -334,8 +333,11 @@ function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool, upda
                             return null
                         }
                         if (typeForm == 'add') {
-                            fetchRequestScudAddWorkers(convertScudToFetch(user))
-                            updateTable()
+                            let addPromise = fetchRequestScudAddWorkers(convertScudToFetch(user))
+                            addPromise.then(answer => {
+                                console.log('Ответ после добавления', answer)
+                                updateTable()
+                            })
                         } else if (typeForm == 'change') {
                             fetchRequestScudUpdateWorkers(convertScudToFetch(user))
                             updateTable()
