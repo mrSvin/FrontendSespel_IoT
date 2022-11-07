@@ -23,11 +23,7 @@ function fetchRequestScudAddWorkers(userData) {
     return fetch(`/api/scud/addWorker`, requestOptions)
         .then(response => response.text())
         .then((result) => {
-            if (result == 'ok'){
-                console.log('Пользователь добавлен')
-                return result
-            }
-            else return result
+            return result
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
@@ -49,8 +45,7 @@ function fetchRequestScudUpdateWorkers(userData) {
     return fetch(`/api/scud/updateWorker`, requestOptions)
         .then(response => response.text())
         .then((result) => {
-            if (result == 'ok') console.log('Пользователь изменен')
-            else console.log('Такой пользователя нет')
+            return result
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
@@ -147,7 +142,7 @@ function ScudAdmin() {
 
     let action = ['hide', 'add', 'change']
 
-    const [error, setError] = useState(0)
+    const [errorMessage, setErrorMessage] = useState(null)
     const [tableBody, setTableBody] = useState(null)
     const [user, setUser] = useState(
         {
@@ -209,7 +204,8 @@ function ScudAdmin() {
     return (
         <div>
             <ScudAdminForm typeForm={typeForm} user={user} handleOnChange={handleOnChange}
-                           handleOnChangeBool={handleOnChangeBool} updateTable={updateTable}/>
+                           handleOnChangeBool={handleOnChangeBool} updateTable={updateTable}
+                           errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
             <table className='tableScudUsers'>
                 <thead>
                 <tr>
@@ -235,6 +231,7 @@ function ScudAdmin() {
                                         setUser(userTable)
                                         if (user.tabel == userTable.tabel && typeForm == 'change') {
                                             setTypeForm('hide')
+                                            setErrorMessage(null)
                                         } else setTypeForm('change')
                                     }}></div>
                                 </td>
@@ -253,13 +250,20 @@ function ScudAdmin() {
                 </tbody>
             </table>
             <div className='addButton addButtonScud' onClick={() => {
-                typeForm == 'add' ? setTypeForm('hide') : setTypeForm('add')
+                if (typeForm == 'add') {
+                    setTypeForm('hide')
+                    setErrorMessage(null)
+                } else setTypeForm('add')
             }}><span>+</span></div>
         </div>
     )
 }
 
-function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool, updateTable}) {
+function ScudAdminForm({
+                           typeForm, user, handleOnChange,
+                           handleOnChangeBool, updateTable,
+                           errorMessage, setErrorMessage
+                       }) {
 
     return (
         <form className={typeForm == 'hide' ? 'formUserHideScud' : 'formUserScud'}>
@@ -334,23 +338,23 @@ function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool, upda
             <button type="button"
                     onClick={() => {
                         if (user.type_smena == '' || user.tabel == '' || user.long_smena == '' || user.long_lunch == '') {
-                            alert('Заполните все поля')
+                            setErrorMessage('Заполните поле табеля')
                             return null
                         }
                         if (typeForm == 'add') {
                             let addPromise = fetchRequestScudAddWorkers(convertScudToFetch(user))
                             addPromise.then((data) => {
-                                console.log(data)
-                                updateTable()
+                                data == 'ok' ? updateTable() : setErrorMessage('Не удалось добавить пользователя')
                             })
                         } else if (typeForm == 'change') {
                             let changePromise = fetchRequestScudUpdateWorkers(convertScudToFetch(user))
-                            changePromise.then(() => {
-                                updateTable()
+                            changePromise.then((data) => {
+                                data == 'ok' ? updateTable() : setErrorMessage('Не удалось изменить пользователя')
                             })
                         }
                     }}>{typeForm == 'add' ? 'Добавить' : 'Изменить'}
             </button>
+            <p>{errorMessage}</p>
         </form>
     )
 }
