@@ -34,7 +34,7 @@ function fetchRequestScudAddWorkers(userData) {
 }
 
 function convertScudAnswerToTable(userData) {
-    if (data[0] == 'many request') {
+    if (userData[0] == 'many request') {
         return null
     } else {
         let dataType = {
@@ -62,7 +62,7 @@ function convertScudAnswerToTable(userData) {
                 '24 ч.': false,
             },
         }
-        let convertedUsers = data.map(user => {
+        let convertedUsers = userData.map(user => {
             let object = {}
             object.tabel = user.tabel
             object.type_smena = dataType.type_smena[user.type_smena]
