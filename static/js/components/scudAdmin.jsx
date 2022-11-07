@@ -23,10 +23,46 @@ function fetchRequestScudAddWorkers(userData) {
     return fetch(`/api/scud/addWorker`, requestOptions)
         .then(response => response.text())
         .then((result) => {
-            console.log('Пользователь добавлен')
+            if(result == 'ok') console.log('Пользователь добавлен')
+            else console.log('Такой пользователь уже есть')
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
+
+function fetchRequestScudUpdateWorkers(userData) {
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    let raw = JSON.stringify(userData)
+
+    let requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+
+    return fetch(`/api/scud/updateWorker`, requestOptions)
+        .then(response => response.text())
+        .then((result) => {
+            if(result == 'ok') console.log('Пользователь изменен')
+            else console.log('Такой пользователя нет')
+        })
+        .catch(error => console.log('Ошибка при отправке запроса', error));
+}
+
+function fetchRequestScudDeleteWorkers(tabel) {
+
+    return fetch(`/api/scud/deleteWorker/tabel:${tabel}`, {method: 'POST'})
+        .then(response => response.text())
+        .then((result) => {
+            if(result == 'ok') console.log('Пользователь удален')
+            else console.log('Такой пользователя нет')
+        })
+        .catch(error => console.log('Ошибка при отправке запроса', error));
+}
+
 
 function convertScudAnswerToTable(userData) {
     if (userData[0] == 'many request') {
@@ -103,6 +139,8 @@ function convertScudToFetch(userData) {
     return convertedData
 }
 
+
+
 function ScudAdmin() {
 
     let action = ['hide', 'add', 'change']
@@ -113,10 +151,10 @@ function ScudAdmin() {
         {
             tabel: '',
             type_smena: 'Первая смена',
-            long_smena: '',
-            long_lunch: '',
+            long_smena: '8 ч.',
+            long_lunch: '60 минут',
             long_smenaBool: {
-                '8 ч.': false,
+                '8 ч.': true,
                 '7.2 ч.': false,
                 '12 ч.': false,
                 '24 ч.': false,
@@ -153,13 +191,17 @@ function ScudAdmin() {
         }));
     };
 
-    useEffect(() => {
+    function updateTable(){
         let promise = fetchRequestScudInfoWorkers()
         promise.then(data => {
             let convertedData = convertScudAnswerToTable(data)
             convertedData ? null : setError(1)
             setTableBody(convertedData)
         })
+    }
+
+    useEffect(() => {
+        updateTable()
     }, [])
 
     return (
@@ -197,6 +239,7 @@ function ScudAdmin() {
                                 <td>
                                     <div className='tdDelete' onClick={() => {
                                         console.log(`Запрос на удаление пользователь ${userTable.tabel}`)
+                                        fetchRequestScudDeleteWorkers(userTable.tabel)
                                     }}></div>
                                 </td>
                             </tr>
@@ -291,10 +334,9 @@ function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool}) {
                             return null
                         }
                         if (typeForm == 'add') {
-                            console.log('Запрос на добавление льзователя')
                             fetchRequestScudAddWorkers(convertScudToFetch(user))
                         } else if (typeForm == 'change') {
-                            console.log('Запрос на изменение пользователя')
+                            fetchRequestScudUpdateWorkers(convertScudToFetch(user))
                         }
                     }}>{typeForm == 'add' ? 'Добавить' : 'Изменить'}
             </button>
