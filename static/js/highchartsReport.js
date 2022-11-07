@@ -1197,7 +1197,7 @@ function highChartProgram(arrayProgram, idContainer = 1) {
 
 }
 
-function highChartSkud(series, generalDiagramNames) {
+function highChartScud(series, generalDiagramNames) {
     Highcharts.setOptions({
         lang: {
             loading: 'Загрузка...',
@@ -1231,7 +1231,7 @@ function highChartSkud(series, generalDiagramNames) {
         }
     });
 
-    Highcharts.chart('containerSkud', {
+    Highcharts.chart('containerScud', {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,

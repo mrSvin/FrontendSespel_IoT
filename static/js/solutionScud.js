@@ -60,7 +60,7 @@ function getLastDate(inWork, outWork, y) {
     let last = (new Date(lastInWork) >= lastoutWork) ? lastInWork : lastoutWork
 
     if (date.slice(0, 10) == last.slice(0, 10)) {
-        return parseSkudForHighcharts([last, `${last.slice(0, 10)} 23:59:59`], y)
+        return parseScudForHighcharts([last, `${last.slice(0, 10)} 23:59:59`], y)
     } else return null
 }
 
@@ -75,8 +75,8 @@ function applyFilters(userData) {
         let inWork = arrayAddStartOrEnd
         let outWork = getOutWorkTimeArray(arrayAddStartOrEnd)
 
-        userData[e].highchartsWork = parseSkudForHighcharts(inWork, i)
-        userData[e].highchartsOutWork = parseSkudForHighcharts(outWork, i)
+        userData[e].highchartsWork = parseScudForHighcharts(inWork, i)
+        userData[e].highchartsOutWork = parseScudForHighcharts(outWork, i)
         userData[e].highchartsBlack = getLastDate(inWork, outWork, i)
     })
     return userData
@@ -192,7 +192,7 @@ function filterLunch(dateArray, lunchType = '8-17') {
     return arraySave
 }
 
-function parseSkudForHighcharts(arrayParse, y) {
+function parseScudForHighcharts(arrayParse, y) {
     let arraySave = []
 
     let msArray = arrayParse.map(e => {

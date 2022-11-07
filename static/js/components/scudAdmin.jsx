@@ -1,4 +1,4 @@
-function SkudAdmin() {
+function ScudAdmin() {
 
     function fetchRequestScudInfoWorkers() {
         return fetch(`/api/scud/infoWorkers`, {method: 'GET'})
@@ -9,7 +9,16 @@ function SkudAdmin() {
             })
     }
 
-    function convertSkudAnswerToTable(data) {
+    function fetchRequestScudAddWorkers() {
+        return fetch(`/api/scud/infoWorkers`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data[0])
+                return data[0]
+            })
+    }
+
+    function convertScudAnswerToTable(data) {
         if (data[0] == 'many request') {
             return null
         } else {
@@ -48,7 +57,7 @@ function SkudAdmin() {
 
     const [error, setError] = useState(0)
     const [tableBody, setTableBody] = useState(null)
-    const [user, setUser] = useState({tabel: null, type_smena: null, long_smena: null, long_lunch: null})
+    const [user, setUser] = useState({tabel: '', type_smena: '', long_smena: '', long_lunch: ''})
 
 
 
@@ -65,7 +74,7 @@ function SkudAdmin() {
     useEffect(() => {
         let promise = fetchRequestScudInfoWorkers()
         promise.then(data => {
-            let convertedData = convertSkudAnswerToTable(data)
+            let convertedData = convertScudAnswerToTable(data)
             convertedData ? null : setError(1)
             setTableBody(convertedData)
             console.log(convertedData)
@@ -74,8 +83,8 @@ function SkudAdmin() {
 
     return (
         <div>
-            <SkudAdminForm typeForm={typeForm} setTypeForm={setTypeForm} user={user} handleOnChange={handleOnChange}/>
-            <table className='tableSkudUsers'>
+            <ScudAdminForm typeForm={typeForm} setTypeForm={setTypeForm} user={user} handleOnChange={handleOnChange}/>
+            <table className='tablescudUsers'>
                 <thead>
                 <tr>
                     <th>Табельный</th>
@@ -110,19 +119,19 @@ function SkudAdmin() {
                 }
                 </tbody>
             </table>
-            <div className='addButton addButtonSkud' onClick={() => {
+            <div className='addButton addButtonScud' onClick={() => {
                 setTypeForm('add')
             }}><span>+</span></div>
         </div>
     )
 }
 
-function SkudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
+function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
 
     return (
-        <form className={typeForm == 'hide' ? 'formUserHideSkud' : 'formUserSkud'}>
+        <form className={typeForm == 'hide' ? 'formUserHideScud' : 'formUserScud'}>
             <label htmlFor="">Табельный{typeForm == 'change' ? user.tabel : null}</label>
-            <input className={typeForm == 'change' ? 'formUserHideSkud' : null}
+            <input className={typeForm == 'change' ? 'formUserHideScud' : null}
                    value={user.tabel}
                    onChange={(e) => {
                        handleOnChange(e, 'tabel')
@@ -138,7 +147,7 @@ function SkudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
                 <option value="Администрация">Администрация</option>
             </select>
             <label>Длительность смены</label>
-            <div className="smenaTimeSkud">
+            <div className="smenaTimeScud">
                 <div>
                     <label htmlFor="8hours">
                         <input id='8hours' type="radio" name="long_smena" value="8 часов"

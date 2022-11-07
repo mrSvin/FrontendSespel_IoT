@@ -1,4 +1,4 @@
-function Skud() {
+function Scud() {
 
     const history = useHistory()
     const [heightHighchartContainer, setHeightHighchartContainer] = useState(0);
@@ -14,7 +14,7 @@ function Skud() {
     }
 
     useEffect(() => {
-        let promise = fetchRequestSkud(date, place)
+        let promise = fetchRequestScud(date, place)
         promise.then(data => {
             let userData = createUserDataStructure(data)
             let filteredData = applyFilters(userData)
@@ -23,7 +23,7 @@ function Skud() {
 
             let series = getHighchartSeriesAndNames(filteredData)
 
-            highChartSkud(...series)
+            highChartScud(...series)
         })
     }, [date, place]);
 
@@ -33,7 +33,7 @@ function Skud() {
             let pathName = parseNameUrl(location.pathname)
             let thisPage = location.pathname.slice(0, 6)
 
-            if (thisPage == '/skud/') {
+            if (thisPage == '/scud/') {
                 setPlace(pathName)
             }
         })
@@ -47,21 +47,21 @@ function Skud() {
         <div>
             <div className="buttons-otchet">
 
-                <Link to={`/skud/1ploshadka`}>
+                <Link to={`/scud/1ploshadka`}>
                     <div className={place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
                         setPlace('1ploshadka')
                     }}>Первая площадка
                     </div>
                 </Link>
 
-                <Link to={`/skud/2ploshadka`}>
+                <Link to={`/scud/2ploshadka`}>
                     <div className={place == '2ploshadka' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
                         setPlace('2ploshadka')
                     }}>Вторая площадка
                     </div>
                 </Link>
 
-                <Link to={`/skud/office`}>
+                <Link to={`/scud/office`}>
                     <div className={place == 'office' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
                         setPlace('office')
                     }}>Офис
@@ -74,12 +74,12 @@ function Skud() {
                 <DayCalendar newDate={newDate} date={date}/>
             </div>
 
-            <div className='wrapperSkud'>
+            <div className='wrapperScud'>
                 <div className={'lunchTime'} style={heightLunch}>
                     <p>Обед</p>
                     <div className='strokelunchTime'></div>
                 </div>
-                <div id={"containerSkud"} style={height} className="skudHigcharts"></div>
+                <div id={"containerScud"} style={height} className="scudHigcharts"></div>
             </div>
         </div>
     );

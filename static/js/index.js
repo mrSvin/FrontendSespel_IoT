@@ -103,12 +103,12 @@ function App({hideLoader}) {
                         <Beacon/>
                     </Route>
 
-                    <Route path="/skud">
-                        <Skud/>
+                    <Route path="/scud">
+                        <Scud/>
                     </Route>
 
-                    <Route path="/skudAdmin">
-                        <SkudAdmin/>
+                    <Route path="/scudAdmin">
+                        <ScudAdmin/>
                     </Route>
 
                     <Route exact path="/">

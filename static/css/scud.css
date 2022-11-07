@@ -1,10 +1,10 @@
-.skudHigcharts {
+.scudHigcharts {
     width: 90%;
     margin: auto;
     min-height: 300px;
 }
 
-.wrapperSkud {
+.wrapperScud {
     width: 100%;
     position: relative;
 }
@@ -35,7 +35,7 @@
     background: repeating-linear-gradient(-60deg, #555 0, #555 1px, transparent 1px, transparent 5px);
 }
 
-.formUserSkud {
+.formUserScud {
     position: absolute;
     background-color: #2c5275;
     width: 235px;
@@ -49,21 +49,21 @@
     right: 73%;
 }
 
-.formUserSkud > label {
+.formUserScud > label {
     font-size: 18px;
     margin: 5px 0px;
     color: white;
 
 }
 
-.formUserSkud > input {
+.formUserScud > input {
     width: 90%;
     margin: 0 auto;
     color: white;
     background: #114360;
 }
 
-.formUserSkud select {
+.formUserScud select {
     width: 90%;
     margin: 0 auto;
     color: white;
@@ -73,7 +73,7 @@
     border-style: inset;
 }
 
-.formUserSkud select > option {
+.formUserScud select > option {
     width: 90%;
     margin: 0 auto;
     color: white;
@@ -81,17 +81,17 @@
     height: 21px;
 }
 
-.formUserSkud > button {
+.formUserScud > button {
     margin-top: 10%;
 }
 
-.formUserHideSkud {
+.formUserHideScud {
     position: absolute;
     opacity: 0;
     visibility: hidden;
 }
 
-.formUserSkud > button {
+.formUserScud > button {
     color: white;
     background: #1e74bd;
     font-size: 110%;
@@ -104,32 +104,32 @@
     margin: 15px auto;
 }
 
-.formUserSkud > button:hover {
+.formUserScud > button:hover {
     box-shadow: 0px 0px 5px 0px #507e8f, inset 0px 0px 0px 0px #8a9da5 !important;
 }
 
-.formUserSkud input:hover,
-.formUserSkud select:hover {
+.formUserScud input:hover,
+.formUserScud select:hover {
     cursor: pointer;
 }
 
-.smenaTimeSkud {
+.smenaTimeScud {
     display: flex;
     justify-content: center;
 }
 
-.smenaTimeSkud label {
+.smenaTimeScud label {
     color: white;
     display: inline-block;
     width: 100%;
 }
 
-.smenaTimeSkud label:hover {
+.smenaTimeScud label:hover {
     box-shadow: 0px 0px 5px 0px #507e8f, inset 0px 0px 0px 0px #8a9da5 !important;
     cursor: pointer;
 }
 
-.tableSkudUsers {
+.tableScudUsers {
     border-spacing: 0;
     border-collapse: collapse;
     width: 45%;
@@ -142,7 +142,7 @@
     margin: 0 auto;
 }
 
-.tableSkudUsers > tbody {
+.tableScudUsers > tbody {
     display: block;
     width: 100%;
     max-height: 65vh;
@@ -151,7 +151,7 @@
     transition: max-height 0.2s ease-in;
 }
 
-.tableSkudUsers > tbody > tr {
+.tableScudUsers > tbody > tr {
     padding: 4px;
     line-height: 215%;
     text-align: center;
@@ -161,13 +161,13 @@
 }
 
 
-.tableSkudUsers > thead {
+.tableScudUsers > thead {
     border-bottom: 1px solid #979595;
     background: #2c5275;
     display: block;
 }
 
-.tableSkudUsers > thead > tr > th, .tableSkudUsers > tbody > tr > td {
+.tableScudUsers > thead > tr > th, .tableScudUsers > tbody > tr > td {
     width: 25%;
     text-align: center;
     display: flex;
@@ -175,37 +175,37 @@
     align-items: center;
 }
 
-.tableSkudUsers tr {
+.tableScudUsers tr {
     display: flex;
     width: 100%;
 }
 
-.tableSkudUsers > thead > tr > th:nth-child(4) {
+.tableScudUsers > thead > tr > th:nth-child(4) {
     margin-right: 2.6%;
 }
 
-.tableSkudUsers > tbody > tr > td:nth-child(4) {
+.tableScudUsers > tbody > tr > td:nth-child(4) {
     margin-right: 2%;
 }
 
 
-.tableSkudUsers > thead > tr > th:nth-child(5),
-.tableSkudUsers > thead > tr > th:nth-child(6),
-.tableSkudUsers > tbody > tr > td:nth-child(5),
-.tableSkudUsers > tbody > tr > td:nth-child(6) {
+.tableScudUsers > thead > tr > th:nth-child(5),
+.tableScudUsers > thead > tr > th:nth-child(6),
+.tableScudUsers > tbody > tr > td:nth-child(5),
+.tableScudUsers > tbody > tr > td:nth-child(6) {
     width: 10%;
 }
 
 
-.tableSkudUsers > thead > tr > th:nth-child(6) {
+.tableScudUsers > thead > tr > th:nth-child(6) {
     margin-right: 2.5%;
 }
 
-.tableSkudUsers > tbody > tr > td:nth-child(6) {
+.tableScudUsers > tbody > tr > td:nth-child(6) {
     margin-right: 1%;
 }
 
-.tableSkudUsers > tbody > tr > td:last-child {
+.tableScudUsers > tbody > tr > td:last-child {
     color: red;
     font-weight: bold;
     font-size: 1.5em;
@@ -214,11 +214,11 @@
     transition: 0.3s;
 }
 
-.tableSkudUsers > tbody > tr > td:nth-child(5):hover {
+.tableScudUsers > tbody > tr > td:nth-child(5):hover {
     cursor: pointer;
 }
 
-.tableSkudUsers > tbody > tr > td:last-child:hover {
+.tableScudUsers > tbody > tr > td:last-child:hover {
     cursor: pointer;
 }
 
@@ -244,7 +244,7 @@
     filter: brightness(150%) contrast(120%);
 }
 
-.addButtonSkud {
+.addButtonScud {
     margin: 5px auto;
     width: 25%;
     user-select: none;
