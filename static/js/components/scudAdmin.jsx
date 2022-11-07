@@ -207,7 +207,7 @@ function ScudAdmin() {
     return (
         <div>
             <ScudAdminForm typeForm={typeForm} user={user} handleOnChange={handleOnChange}
-                           handleOnChangeBool={handleOnChangeBool}/>
+                           handleOnChangeBool={handleOnChangeBool} updateTable={updateTable}/>
             <table className='tableScudUsers'>
                 <thead>
                 <tr>
@@ -238,8 +238,8 @@ function ScudAdmin() {
                                 </td>
                                 <td>
                                     <div className='tdDelete' onClick={() => {
-                                        console.log(`Запрос на удаление пользователь ${userTable.tabel}`)
                                         fetchRequestScudDeleteWorkers(userTable.tabel)
+                                        updateTable()
                                     }}></div>
                                 </td>
                             </tr>
@@ -255,7 +255,7 @@ function ScudAdmin() {
     )
 }
 
-function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool}) {
+function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool, updateTable}) {
 
     return (
         <form className={typeForm == 'hide' ? 'formUserHideScud' : 'formUserScud'}>
@@ -335,8 +335,10 @@ function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool}) {
                         }
                         if (typeForm == 'add') {
                             fetchRequestScudAddWorkers(convertScudToFetch(user))
+                            updateTable()
                         } else if (typeForm == 'change') {
                             fetchRequestScudUpdateWorkers(convertScudToFetch(user))
+                            updateTable()
                         }
                     }}>{typeForm == 'add' ? 'Добавить' : 'Изменить'}
             </button>
