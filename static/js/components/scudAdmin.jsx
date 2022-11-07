@@ -237,13 +237,15 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnCha
                 <option value="60 минут">60 минут</option>
                 <option value="90 минут">90 минут</option>
             </select>
-            <button type="button">{typeForm == 'add' ? 'Добавить' : 'Изменить'} onClick={() => {
-                if(typeForm == 'add'){
-                    console.log('Запрос на добавление льзователя')
-                } else if(typeForm == 'change') {
-                    console.log('Запрос на изменение пользователя')
-                }
-            }}</button>
+            <button type="button"
+                    onClick={() => {
+                        if(typeForm == 'add'){
+                            console.log('Запрос на добавление льзователя')
+                        } else if(typeForm == 'change') {
+                            console.log('Запрос на изменение пользователя')
+                        }
+                    }}>{typeForm == 'add' ? 'Добавить' : 'Изменить'}
+            </button>
         </form>
     )
 }
