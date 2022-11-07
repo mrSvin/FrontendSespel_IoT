@@ -137,8 +137,13 @@ function convertScudToFetch(userData) {
     return convertedData
 }
 
+
+
 function ScudAdmin() {
 
+
+    const [typeForm, setTypeForm] = useState('hide')
+    const [clickedTable, setClickedTable] = useState(true)
     const [errorMessage, setErrorMessage] = useState(null)
     const [tableBody, setTableBody] = useState(null)
     const [user, setUser] = useState(
@@ -156,7 +161,9 @@ function ScudAdmin() {
         })
 
 
-    const [typeForm, setTypeForm] = useState('hide')
+
+
+
 
     function handleOnChange(e, key) {
         const {value} = e.target;
@@ -203,7 +210,7 @@ function ScudAdmin() {
             <ScudAdminForm typeForm={typeForm} user={user} handleOnChange={handleOnChange}
                            handleOnChangeBool={handleOnChangeBool} updateTable={updateTable}
                            errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
-            <table className='tableScudUsers'>
+            <table className={`tableScudUsers ${clickedTable? '':'noActiveTable'}`}>
                 <thead>
                 <tr>
                     <th>Табельный</th>
@@ -237,6 +244,10 @@ function ScudAdmin() {
                                         let deletePromise = fetchRequestScudDeleteWorkers(userTable.tabel)
                                         deletePromise.then(() => {
                                             updateTable()
+                                            setClickedTable(false)
+                                            setTimeout(() => {
+                                                setClickedTable(true)
+                                            },1000)
                                         })
                                     }}></div>
                                 </td>

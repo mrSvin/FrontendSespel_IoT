@@ -222,6 +222,10 @@
     cursor: pointer;
 }
 
+.noActiveTable {
+    user-select: none;
+}
+
 .tdChange {
     background: no-repeat center/53% url(../images/iconPen.svg);
     width: 100%;
@@ -261,4 +265,6 @@
 .redMessage {
     color: red;
 }
+
+
 
