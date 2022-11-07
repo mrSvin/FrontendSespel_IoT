@@ -90,6 +90,25 @@ function ScudAdmin() {
         }));
     };
 
+    function handleOnChangeBool(e) {
+        const {value} = e.target;
+
+        let long_smenaBool = {
+            '8 ч.': false,
+            '7.2 ч.': false,
+            '12 ч.': false,
+            '24 ч.': false,
+        }
+
+        long_smenaBool[value] = true
+
+
+        setUser(prevState => ({
+            ...prevState,
+            long_smenaBool
+        }));
+    };
+
     useEffect(() => {
         let promise = fetchRequestScudInfoWorkers()
         promise.then(data => {
@@ -102,7 +121,7 @@ function ScudAdmin() {
 
     return (
         <div>
-            <ScudAdminForm typeForm={typeForm} setTypeForm={setTypeForm} user={user} handleOnChange={handleOnChange}/>
+            <ScudAdminForm typeForm={typeForm} setTypeForm={setTypeForm} user={user} handleOnChange={handleOnChange} handleOnChangeBool={handleOnChangeBool}/>
             <table className='tableScudUsers'>
                 <thead>
                 <tr>
@@ -145,7 +164,7 @@ function ScudAdmin() {
     )
 }
 
-function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
+function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange, handleOnChangeBool}) {
 
     return (
         <form className={typeForm == 'hide' ? 'formUserHideScud' : 'formUserScud'}>
@@ -169,32 +188,40 @@ function ScudAdminForm({typeForm, setTypeForm, user, handleOnChange}) {
             <div className="smenaTimeScud">
                 <div>
                     <label htmlFor="8hours">
-                        <input id='8hours' type="radio" name="long_smena" value="8 часов" checked={user.long_smenaBool['8 ч.']}
+                        <input id='8hours' type="radio" name="long_smena" value="8 часов"
+                               checked={user.long_smenaBool['8 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
+                                   handleOnChangeBool(e)
                                }}/>
                         8 часов
                     </label>
                     <label htmlFor="7.2hours">
-                        <input id='7.2hours' type="radio" name="long_smena" value="7.2 часа" checked={user.long_smenaBool['7.2 ч.']}
+                        <input id='7.2hours' type="radio" name="long_smena" value="7.2 часа"
+                               checked={user.long_smenaBool['7.2 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
+                                   handleOnChangeBool(e)
                                }}/>
                         7.2 часа
                     </label>
                 </div>
                 <div>
                     <label htmlFor="12hours">
-                        <input id='12hours' type="radio" name="long_smena" value="12 часов" checked={user.long_smenaBool['12 ч.']}
+                        <input id='12hours' type="radio" name="long_smena" value="12 часов"
+                               checked={user.long_smenaBool['12 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
+                                   handleOnChangeBool(e)
                                }}/>
                         12 часов
                     </label>
                     <label htmlFor="24hours">
-                        <input id='24hours' type="radio" name="long_smena" value="24 часа" checked={user.long_smenaBool['24 ч.']}
+                        <input id='24hours' type="radio" name="long_smena" value="24 часа"
+                               checked={user.long_smenaBool['24 ч.']}
                                onChange={(e) => {
                                    handleOnChange(e, 'long_smena')
+                                   handleOnChangeBool(e)
                                }}/>
                         24 часа
                     </label>
