@@ -23,8 +23,11 @@ function fetchRequestScudAddWorkers(userData) {
     return fetch(`/api/scud/addWorker`, requestOptions)
         .then(response => response.text())
         .then((result) => {
-            if (result == 'ok') console.log('Пользователь добавлен')
-            else console.log('Такой пользователь уже есть')
+            if (result == 'ok'){
+                console.log('Пользователь добавлен')
+                return result
+            }
+            else return result
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
@@ -336,7 +339,8 @@ function ScudAdminForm({typeForm, user, handleOnChange, handleOnChangeBool, upda
                         }
                         if (typeForm == 'add') {
                             let addPromise = fetchRequestScudAddWorkers(convertScudToFetch(user))
-                            addPromise.then(() => {
+                            addPromise.then((data) => {
+                                console.log(data)
                                 updateTable()
                             })
                         } else if (typeForm == 'change') {
