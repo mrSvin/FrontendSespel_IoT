@@ -144,7 +144,7 @@ function ScudAdmin() {
 
     const [typeForm, setTypeForm] = useState('hide')
     const [clickedTable, setClickedTable] = useState(true)
-    const [errorMessage, setErrorMessage] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(['',''])
     const [tableBody, setTableBody] = useState(null)
     const [user, setUser] = useState(
         {
