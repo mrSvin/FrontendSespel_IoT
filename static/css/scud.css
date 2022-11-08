@@ -222,8 +222,18 @@
     cursor: pointer;
 }
 
+.tableScudBorderChange {
+    border: 0.1px solid;
+    border-color: #bc761c;
+}
+
+.tableScudBorderAdd {
+    border: 0.1px solid;
+    border-color: #536a4d;
+}
+
 .noActiveButton {
-    user-select: none;
+    pointer-events: none;
 }
 
 .tdChange {
