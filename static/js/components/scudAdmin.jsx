@@ -83,22 +83,23 @@ function convertScudAnswerToTable(userData) {
                 '30': '30 минут',
                 '60': '60 минут',
                 '90': '90 минут',
-            },
-            long_smenaBool: {
+            }
+        }
+        let convertedUsers = userData.map(user => {
+            let object = {}
+            let smenaBool = {
                 '8 ч.': false,
                 '7.2 ч.': false,
                 '12 ч.': false,
                 '24 ч.': false,
-            },
-        }
-        let convertedUsers = userData.map(user => {
-            let object = {}
+            }
+
             object.tabel = user.tabel
             object.type_smena = dataType.type_smena[user.type_smena]
             object.long_smena = dataType.long_smena[user.long_smena]
             object.long_lunch = dataType.long_lunch[user.long_lunch]
-            object.long_smenaBool = dataType.long_smenaBool
 
+            object.long_smenaBool = smenaBool
             object.long_smenaBool[object.long_smena] = true
 
             return object
@@ -137,6 +138,13 @@ function convertScudToFetch(userData) {
     return convertedData
 }
 
+function classToTypeForm(typeForm){
+    let className = ''
+
+    if(typeForm == 'hide')
+
+    return className
+}
 
 function ScudAdmin() {
 
@@ -235,16 +243,17 @@ function ScudAdmin() {
                                     }}></div>
                                 </td>
                                 <td>
-                                    <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`} onClick={() => {
-                                        let deletePromise = fetchRequestScudDeleteWorkers(userTable.tabel)
-                                        deletePromise.then(() => {
-                                            updateTable()
-                                            setClickedDeleteButton(false)
-                                            setTimeout(() => {
-                                                setClickedDeleteButton(true)
-                                            }, 1000)
-                                        })
-                                    }}></div>
+                                    <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`}
+                                         onClick={() => {
+                                             let deletePromise = fetchRequestScudDeleteWorkers(userTable.tabel)
+                                             deletePromise.then(() => {
+                                                 updateTable()
+                                                 setClickedDeleteButton(false)
+                                                 setTimeout(() => {
+                                                     setClickedDeleteButton(true)
+                                                 }, 1000)
+                                             })
+                                         }}></div>
                                 </td>
                             </tr>
                         )
