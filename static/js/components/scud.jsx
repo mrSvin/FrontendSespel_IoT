@@ -15,6 +15,7 @@ function Scud() {
     const [heightHighchartContainer, setHeightHighchartContainer] = useState(0);
     let [date, setDate] = useState(dayNow());
     let [place, setPlace] = useState(parseNameUrl(location.pathname))
+    let [smenaState, setSmenaState] = useState('1')
 
     let height = {
         height: 52 * heightHighchartContainer
@@ -63,6 +64,14 @@ function Scud() {
                     <div className={place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
                         setPlace('1ploshadka')
                     }}>Первая площадка
+                        {place !== '1ploshadka'? null:
+                        <div>
+                            <span>Первая смена</span>
+                            <span>Вторая смена</span>
+                            <span>Третья смена</span>
+                            <span>ИТР</span>
+                        </div>
+                        }
                     </div>
                 </Link>
 
