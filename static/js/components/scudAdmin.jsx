@@ -75,7 +75,7 @@ function convertScudAnswerToTable(userData) {
             },
             long_smena: {
                 '8': '8 ч.',
-                '7.2': '7.2 ч.',
+                '7': '7.2 ч.',
                 '12': '12 ч.',
                 '24': '24 ч.',
             },
@@ -117,7 +117,7 @@ function convertScudToFetch(userData) {
         },
         long_smena: {
             '8 ч.': '8',
-            '7.2 ч.': '7.2',
+            '7.2 ч.': '7',
             '12 ч.': '12',
             '24 ч.': '24',
         },
@@ -138,13 +138,12 @@ function convertScudToFetch(userData) {
 }
 
 
-
 function ScudAdmin() {
 
 
     const [typeForm, setTypeForm] = useState('hide')
-    const [clickedTable, setClickedTable] = useState(true)
-    const [errorMessage, setErrorMessage] = useState(['',''])
+    const [clickedDeleteButton, setClickedDeleteButton] = useState(true)
+    const [errorMessage, setErrorMessage] = useState(['', ''])
     const [tableBody, setTableBody] = useState(null)
     const [user, setUser] = useState(
         {
@@ -159,10 +158,6 @@ function ScudAdmin() {
                 '24 ч.': false,
             },
         })
-
-
-
-
 
 
     function handleOnChange(e, key) {
@@ -210,7 +205,7 @@ function ScudAdmin() {
             <ScudAdminForm typeForm={typeForm} user={user} handleOnChange={handleOnChange}
                            handleOnChangeBool={handleOnChangeBool} updateTable={updateTable}
                            errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
-            <table className={`tableScudUsers ${clickedTable? '':'noActiveTable'}`}>
+            <table className={`tableScudUsers`}>
                 <thead>
                 <tr>
                     <th>Табельный</th>
@@ -233,21 +228,21 @@ function ScudAdmin() {
                                 <td>
                                     <div className='tdChange' onClick={() => {
                                         setUser(userTable)
+                                        setErrorMessage(['', ''])
                                         if (user.tabel == userTable.tabel && typeForm == 'change') {
                                             setTypeForm('hide')
-                                            setErrorMessage(['', ''])
                                         } else setTypeForm('change')
                                     }}></div>
                                 </td>
                                 <td>
-                                    <div className='tdDelete' onClick={() => {
+                                    <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`} onClick={() => {
                                         let deletePromise = fetchRequestScudDeleteWorkers(userTable.tabel)
                                         deletePromise.then(() => {
                                             updateTable()
-                                            setClickedTable(false)
+                                            setClickedDeleteButton(false)
                                             setTimeout(() => {
-                                                setClickedTable(true)
-                                            },1000)
+                                                setClickedDeleteButton(true)
+                                            }, 1000)
                                         })
                                     }}></div>
                                 </td>
@@ -352,7 +347,7 @@ function ScudAdminForm({
                         if (typeForm == 'add') {
                             let addPromise = fetchRequestScudAddWorkers(convertScudToFetch(user))
                             addPromise.then((data) => {
-                                if(data == 'ok'){
+                                if (data == 'ok') {
                                     updateTable()
                                     setErrorMessage(['Пользователь добавлен', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось добавить пользователя', 'redMessage'])
@@ -360,7 +355,7 @@ function ScudAdminForm({
                         } else if (typeForm == 'change') {
                             let changePromise = fetchRequestScudUpdateWorkers(convertScudToFetch(user))
                             changePromise.then((data) => {
-                                if(data == 'ok'){
+                                if (data == 'ok') {
                                     updateTable()
                                     setErrorMessage(['Пользователь изменен', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось изменить пользователя', 'redMessage'])
