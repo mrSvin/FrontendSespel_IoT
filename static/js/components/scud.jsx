@@ -1,3 +1,14 @@
+function getNotNullData(userData) {
+    let obj = {}
+
+    Object.keys(userData).forEach(name => {
+        if (userData[name].smenaInfo !== null) {
+            obj[name] = userData[name]
+        }
+    })
+    return obj
+}
+
 function Scud() {
 
     const history = useHistory()
@@ -17,6 +28,7 @@ function Scud() {
         let promise = fetchRequestScud(date, place)
         promise.then(data => {
             let userData = createUserDataStructure(data)
+            print('Получение не пустых типов', getNotNullData(userData))
             let filteredData = applyFilters(userData)
 
             setHeightHighchartContainer(Object.keys(filteredData).length);
