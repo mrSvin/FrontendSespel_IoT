@@ -139,11 +139,13 @@ function convertScudToFetch(userData) {
 }
 
 function classToTypeForm(typeForm){
-    let className = ''
 
-    if(typeForm == 'hide')
+    if(typeForm == 'hide') return 'formUserHideScud'
 
-    return className
+    if(typeForm == 'add')  return 'formUserScud tableScudBorderAdd'
+
+    if(typeForm == 'change')  return 'formUserScud tableScudBorderChange'
+
 }
 
 function ScudAdmin() {
@@ -278,7 +280,7 @@ function ScudAdminForm({
                        }) {
 
     return (
-        <form className={typeForm == 'hide' ? 'formUserHideScud' : 'formUserScud'}>
+        <form className={classToTypeForm(typeForm)}>
             <label htmlFor="">Табельный {typeForm == 'change' ? user.tabel : null}</label>
             <input className={typeForm == 'change' ? 'formUserHideScud' : null}
                    value={user.tabel}
