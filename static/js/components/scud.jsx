@@ -28,7 +28,7 @@ function Scud() {
         let promise = fetchRequestScud(date, place)
         promise.then(data => {
             let userData = createUserDataStructure(data)
-            print('Получение не пустых типов', getNotNullData(userData))
+            console.log('Получение не пустых типов', getNotNullData(userData))
             let filteredData = applyFilters(userData)
 
             setHeightHighchartContainer(Object.keys(filteredData).length);
