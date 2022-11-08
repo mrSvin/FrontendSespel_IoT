@@ -276,5 +276,26 @@
     color: red;
 }
 
+.typeSmenaWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yellowQuestion {
+    color: #ffeb00;
+    margin-right: -17px;
+    padding: 10px 10px 10px 0px;
+    font-weight: bolder;
+    user-select: none;
+    cursor: help;
+    position: relative;
+}
+
+.infoBlockScud {
+    position: absolute;
+    visibility: hidden;
+}
+
 
 

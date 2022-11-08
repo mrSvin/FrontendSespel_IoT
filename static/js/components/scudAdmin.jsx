@@ -138,13 +138,13 @@ function convertScudToFetch(userData) {
     return convertedData
 }
 
-function classToTypeForm(typeForm){
+function classToTypeForm(typeForm) {
 
-    if(typeForm == 'hide') return 'formUserHideScud'
+    if (typeForm == 'hide') return 'formUserHideScud'
 
-    if(typeForm == 'add')  return 'formUserScud tableScudBorderAdd'
+    if (typeForm == 'add') return 'formUserScud tableScudBorderAdd'
 
-    if(typeForm == 'change')  return 'formUserScud tableScudBorderChange'
+    if (typeForm == 'change') return 'formUserScud tableScudBorderChange'
 
 }
 
@@ -288,15 +288,20 @@ function ScudAdminForm({
                        handleOnChange(e, 'tabel')
                    }}/>
             <label>Тип смены</label>
-            <select id="smena" name="smena" value={user.type_smena}
-                    onChange={(e) => {
-                        handleOnChange(e, 'type_smena')
-                    }}>
-                <option value="Первая смена">Первая смена</option>
-                <option value="Вторая смена">Вторая смена</option>
-                <option value="Третья смена">Третья смена</option>
-                <option value="Администрация">Администрация</option>
-            </select>
+            <div className='typeSmenaWrapper'>
+                <span className='yellowQuestion'>?
+                    <div className='infoBlockScud'>1,2,3</div>
+                </span>
+                <select id="smena" name="smena" value={user.type_smena}
+                        onChange={(e) => {
+                            handleOnChange(e, 'type_smena')
+                        }}>
+                    <option value="Первая смена">Первая смена</option>
+                    <option value="Вторая смена">Вторая смена</option>
+                    <option value="Третья смена">Третья смена</option>
+                    <option value="Администрация">Администрация</option>
+                </select>
+            </div>
             <label>Длительность смены</label>
             <div className="smenaTimeScud">
                 <div>

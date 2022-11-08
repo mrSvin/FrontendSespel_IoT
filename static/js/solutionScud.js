@@ -40,6 +40,7 @@ function createUserDataStructure(data) {
             POS: data.POS[i],
             logtime: [],
             statusInOut: [],
+            smenaInfo: data.typeSmena[i],
         }
     }
 
