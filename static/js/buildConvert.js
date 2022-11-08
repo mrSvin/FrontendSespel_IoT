@@ -1262,6 +1262,18 @@ function getAllStankiData() {
         state: true,
     }
 
+    let trubend = {
+        buttonNames: {
+            name: "Trubend 5230S",
+            serviceName: "Trubend 5230S",
+        },
+        complexImg: "../images/trubend.png",
+        complexRequest: 'trubend',
+        buttonsVrs: [-210, 850, 'url(../images/trubend.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
     let placesObject = {
         'ОТК': {
             stanki: {kim, nk600},
@@ -1308,7 +1320,7 @@ function getAllStankiData() {
             placeState: true,
         },
         'Гибка': {
-            stanki: {faccin_1, faccin_2},
+            stanki: {faccin_1, faccin_2, trubend},
             placeState: true,
         },
     }
