@@ -297,5 +297,16 @@
     visibility: hidden;
 }
 
+.smenaSkud{
+    text-shadow: none;
+    font-size: 20px;
+    color: white;
+    position: absolute;
+}
+
+.smenaSkud > span {
+    margin: 0 10px;
+}
+
 
 

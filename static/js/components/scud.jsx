@@ -65,7 +65,7 @@ function Scud() {
                         setPlace('1ploshadka')
                     }}>Первая площадка
                         {place !== '1ploshadka'? null:
-                        <div>
+                        <div className='smenaSkud'>
                             <span>Первая смена</span>
                             <span>Вторая смена</span>
                             <span>Третья смена</span>
