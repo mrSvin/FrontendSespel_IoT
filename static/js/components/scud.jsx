@@ -58,7 +58,7 @@ function Scud() {
 
     return (
         <div>
-            <div className="buttons-otchet">
+            <div className="buttons-otchet marginToSmenaMenu">
 
                 <Link to={`/scud/1ploshadka`}>
                     <div className={place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {

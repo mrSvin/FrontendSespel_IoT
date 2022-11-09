@@ -90,7 +90,7 @@ function ListDevicesCategory({
     return (
         <div
             ref={innerRef}
-            className='menuSelect selectDevice'>
+            className='selectDevice'>
             <span onClick={toggleClass}>Выбор оборудования</span>
             <div className="listComplex">
                 <span>▼</span>

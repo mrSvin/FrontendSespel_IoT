@@ -302,11 +302,19 @@
     font-size: 20px;
     color: white;
     position: absolute;
+    width: 150%;
+    display: flex;
+    top: 100%;
+    /* justify-content: center; */
+    /* align-items: flex-start; */
 }
 
 .smenaSkud > span {
     margin: 0 10px;
 }
 
+.marginToSmenaMenu {
+    margin-bottom: 50px;
+}
 
 
