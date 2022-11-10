@@ -220,7 +220,7 @@ function ListDevices({
     return (
         <div
             ref={innerRef}
-            className='menuSelect selectDevice'>
+            className='selectDevice'>
             <span onClick={toggleClass}>Выбор оборудования</span>
             <div className="listComplex">
                 <span>▼</span>
@@ -360,7 +360,7 @@ function ListDevicesCategoryIndividual({
     return (
         <div
             ref={innerRef}
-            className='menuSelect selectDevice'>
+            className='selectDevice'>
             <span onClick={toggleClass}>Выбор оборудования</span>
             <div className="listComplex">
                 <span>▼</span>

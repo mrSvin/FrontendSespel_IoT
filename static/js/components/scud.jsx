@@ -1,11 +1,12 @@
 function getNotNullData(userData, smenaState) {
     let obj = {}
-    console.log('Выбранная смена')
+    console.log('Выбранная смена', smenaState)
     Object.keys(userData).forEach(name => {
         if (userData[name].smenaInfo !== null) {
             obj[name] = userData[name]
         }
     })
+    console.log(obj)
 
 
     return obj
@@ -31,7 +32,7 @@ function Scud() {
         let promise = fetchRequestScud(date, place)
         promise.then(data => {
             let userData = createUserDataStructure(data)
-            console.log('Получение не пустых типов', getNotNullData(userData, smenaState))
+            getNotNullData(userData, smenaState)
             let filteredData = applyFilters(userData)
 
             setHeightHighchartContainer(Object.keys(filteredData).length);
@@ -100,7 +101,7 @@ function Scud() {
                                 <span className={smenaState == '3' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                     setSmenaState('3')
                                 }}>Третья смена</span>
-                                <span className={smenaState == 'ИТР' ? 'menuSelect' : 'skudSelectNoSelect'} onClick={() => {
+                                <span className={smenaState == 'ИТР' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                     setSmenaState('ИТР')
                                 }}>ИТР</span>
                             </div>
