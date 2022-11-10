@@ -13,19 +13,24 @@ function getWorkTime(dateArray) {
     return time
 }
 
-function getOutWorkTimeArray(array) {
-
-    let date = array[0].slice(0, 10)
+function getOutWorkTimeArray(array, date, smenaState) {
 
     let outArray = array.slice()
 
-    if (outArray[0] !== `${date} 00:00:00`) {
-        outArray.unshift(`${date} 00:00:00`)
-    } else outArray.splice(0, 1)
+    if (smenaState == '2' || smenaState == '3') {
+        if (outArray[0] !== `${dayYesterday(date)} 18:00:00`) {
+            outArray.unshift(`${dayYesterday(date)} 18:00:00`)
+        } else outArray.splice(0, 1)
+        if (outArray[outArray.length - 1] !== `${date} 08:00:00`) outArray.push(`${date} 08:00:00`)
+    } else {
+        if (outArray[0] !== `${date} 00:00:00`) {
+            outArray.unshift(`${date} 00:00:00`)
+        } else outArray.splice(0, 1)
 
-    if (date == dayNow()) {
-        if (outArray[outArray.length - 1] !== `${date} ${timeNow()}`) outArray.push(`${date} ${timeNow()}`)
-    } else if (outArray[outArray.length - 1] !== `${date} 23:59:59`) outArray.push(`${date} 23:59:59`)
+        if (date == dayNow()) {
+            if (outArray[outArray.length - 1] !== `${date} ${timeNow()}`) outArray.push(`${date} ${timeNow()}`)
+        } else if (outArray[outArray.length - 1] !== `${date} 23:59:59`) outArray.push(`${date} 23:59:59`)
+    }
 
     return outArray
 }
@@ -52,7 +57,7 @@ function createUserDataStructure(data) {
     return userData
 }
 
-function getLastDate(inWork, outWork, y) {
+function getLastDate(inWork, outWork, y, smenaState) {
     let date = dayTimeNow()
 
     let lastInWork = inWork[inWork.length - 1]
@@ -60,31 +65,27 @@ function getLastDate(inWork, outWork, y) {
 
     let last = (new Date(lastInWork) >= lastoutWork) ? lastInWork : lastoutWork
 
-    if (date.slice(0, 10) == last.slice(0, 10)) {
+    if (date.slice(0, 10) == last.slice(0, 10) && (smenaState == 1 || smenaState == 'А')) {
         return parseScudForHighcharts([last, `${last.slice(0, 10)} 23:59:59`], y)
     } else return null
 }
 
-function applyFilters(userData, smenaState) {
+function applyFilters(userData, smenaState, date) {
 
     Object.keys(userData).forEach((e, i) => {
         let noDublicateArrays = dublicateDeleteFilter(userData[e].logtime, userData[e].statusInOut)
 
-        let arrayAddStartOrEnd = []
-        if(smenaState == 'А' || '1') {
-            arrayAddStartOrEnd = addStartOrEnd(noDublicateArrays)
-        } else arrayAddStartOrEnd = noDublicateArrays
-
+        let arrayAddStartOrEnd = addStartOrEnd(noDublicateArrays, smenaState, date)
 
         let arrayWithOutLunch = filterLunch(arrayAddStartOrEnd)
         userData[e].workTime = getWorkTime(arrayWithOutLunch)
 
         let inWork = arrayAddStartOrEnd
-        let outWork = getOutWorkTimeArray(arrayAddStartOrEnd)
+        let outWork = getOutWorkTimeArray(arrayAddStartOrEnd, date, smenaState)
 
         userData[e].highchartsWork = parseScudForHighcharts(inWork, i)
         userData[e].highchartsOutWork = parseScudForHighcharts(outWork, i)
-        userData[e].highchartsBlack = getLastDate(inWork, outWork, i)
+        userData[e].highchartsBlack = getLastDate(inWork, outWork, i, smenaState)
     })
     return userData
 }
@@ -106,7 +107,7 @@ function dublicateDeleteFilter(arrayData, arrayInOut) {
     return [filterData, filterInOut]
 }
 
-function addStartOrEnd(filterArrays, typeTime = '8-17') {
+function addStartOrEnd(filterArrays, typeTime = 'А', date) {
 
     let filterData = filterArrays[0]
     let filterInOut = filterArrays[1]
@@ -117,25 +118,27 @@ function addStartOrEnd(filterArrays, typeTime = '8-17') {
     let endTime = ''
 
     switch (typeTime) {
-        case '8-17':
-            startTime = '00:00:00'
-            endTime = (currentDate == filterData[filterData.length - 1].slice(0, 10)) ? timeNow() : '23:59:59'
+        case 'А':
+            startTime = date + ' 00:00:00'
+            endTime = (currentDate == date) ? date + timeNow() : date + ' 23:59:59'
             break;
-        case '7-19':
-            break;
-        case '19-7':
+        // case '1':
+        //     break;
+        case '2':
+            startTime = dayYesterday(date) + ' 18:00:00'
+            endTime = date + ' 08:00:00'
             break;
         default:
-            startTime = '00:00:00'
-            endTime = (currentDate == filterData[filterData.length - 1].slice(0, 10)) ? timeNow() : '23:59:59'
+            startTime = date + ' 00:00:00'
+            endTime = (currentDate == date) ? date + timeNow() : date + ' 23:59:59'
             break
     }
 
     if (filterInOut[0] == 'output') {
-        filterData.unshift(filterData[0].slice(0, 10) + ' ' + startTime)
+        filterData.unshift(startTime)
     }
     if (filterInOut[filterInOut.length - 1] == 'input') {
-        filterData.push(filterData[0].slice(0, 10) + ' ' + endTime)
+        filterData.push(endTime)
     }
 
     return filterData
