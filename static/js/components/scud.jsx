@@ -68,16 +68,16 @@ function Scud() {
                     }}>Первая площадка
                         {place !== '1ploshadka' ? null :
                             <div className='smenaSkud'>
-                            <span className={smenaState == '1' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
+                            <span className={smenaState == '1' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                 setSmenaState('1')
                             }}>Первая смена</span>
-                                <span className={smenaState == '2' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
+                                <span className={smenaState == '2' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                     setSmenaState('2')
                                 }}>Вторая смена</span>
-                                <span className={smenaState == '3' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
+                                <span className={smenaState == '3' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                     setSmenaState('3')
                                 }}>Третья смена</span>
-                                <span className={smenaState == 'ИТР' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
+                                <span className={smenaState == 'ИТР' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                     setSmenaState('ИТР')
                                 }}>ИТР</span>
                             </div>
@@ -91,16 +91,16 @@ function Scud() {
                     }}>Вторая площадка
                         {place !== '2ploshadka' ? null :
                             <div className='smenaSkud'>
-                            <span className={smenaState == '1' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
+                            <span className={smenaState == '1' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                 setSmenaState('1')
                             }}>Первая смена</span>
-                                <span className={smenaState == '2' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
+                                <span className={smenaState == '2' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                     setSmenaState('2')
                                 }}>Вторая смена</span>
-                                <span className={smenaState == '3' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
+                                <span className={smenaState == '3' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                     setSmenaState('3')
                                 }}>Третья смена</span>
-                                <span className={smenaState == 'ИТР' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
+                                <span className={smenaState == 'ИТР' ? 'menuSelect' : 'skudSelectNoSelect'} onClick={() => {
                                     setSmenaState('ИТР')
                                 }}>ИТР</span>
                             </div>
