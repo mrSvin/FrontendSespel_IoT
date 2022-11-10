@@ -65,11 +65,17 @@ function getLastDate(inWork, outWork, y) {
     } else return null
 }
 
-function applyFilters(userData) {
+function applyFilters(userData, smenaState) {
 
     Object.keys(userData).forEach((e, i) => {
         let noDublicateArrays = dublicateDeleteFilter(userData[e].logtime, userData[e].statusInOut)
-        let arrayAddStartOrEnd = addStartOrEnd(noDublicateArrays)
+
+        let arrayAddStartOrEnd = []
+        if(smenaState == 'А' || '1') {
+            arrayAddStartOrEnd = addStartOrEnd(noDublicateArrays)
+        } else arrayAddStartOrEnd = noDublicateArrays
+
+
         let arrayWithOutLunch = filterLunch(arrayAddStartOrEnd)
         userData[e].workTime = getWorkTime(arrayWithOutLunch)
 

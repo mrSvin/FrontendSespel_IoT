@@ -37,7 +37,7 @@ function Scud() {
 
             let objectsWithSmena = selectObjectsWithSmena(userData, smenaState)
 
-            let filteredData = applyFilters(objectsWithSmena)
+            let filteredData = applyFilters(objectsWithSmena, smenaState)
             // let filteredData = applyFilters(userData)
 
             setHeightHighchartContainer(Object.keys(filteredData).length);

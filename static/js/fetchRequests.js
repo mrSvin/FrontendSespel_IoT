@@ -203,9 +203,15 @@ function fetchRequestScud(date = '2022-10-25', place = 'Ленинградска
     if (smenaState == '2' || smenaState == '3'){
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scud/beginDate:${dateYesterday} 18:00:00_endDate:${date} 09:00:00_mesto:${place}`, {method: 'GET'})
-    } else return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_mesto:${place}`, {method: 'GET'})
-        .then((response) => response.json())
-        .then((data) => {
-            return data
-        })
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    } else {
+        return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_mesto:${place}`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    }
 }
