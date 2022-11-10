@@ -94,13 +94,6 @@
     transition: 0.5s;
 }
 
-.menuSelect {
-    color: #e51a83 !important;
-    text-shadow: 0 0 5px #e51a83,
-    0 0 25px #e51a83;
-    font-size: 30px;
-    text-align: center;
-}
 
 .calenarMonth {
     padding-right: 15px;
