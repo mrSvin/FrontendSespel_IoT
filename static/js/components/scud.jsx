@@ -3,10 +3,12 @@ function getNotNullData(userData, smenaState) {
     console.log('Выбранная смена', smenaState)
     Object.keys(userData).forEach(name => {
         if (userData[name].smenaInfo !== null) {
-            obj[name] = userData[name]
+            if(userData[name].smenaInfo.typeSmena == smenaState){
+                obj[name] = userData[name]
+            }
         }
     })
-    console.log(obj)
+    console.log('Объекты ',obj)
 
 
     return obj
@@ -18,7 +20,7 @@ function Scud() {
     const [heightHighchartContainer, setHeightHighchartContainer] = useState(0);
     let [date, setDate] = useState(dayNow());
     let [place, setPlace] = useState(parseNameUrl(location.pathname))
-    let [smenaState, setSmenaState] = useState('1')
+    let [smenaState, setSmenaState] = useState('А')
 
     let height = {
         height: 52 * heightHighchartContainer
@@ -78,8 +80,8 @@ function Scud() {
                                 <span className={smenaState == '3' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                     setSmenaState('3')
                                 }}>Третья смена</span>
-                                <span className={smenaState == 'ИТР' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
-                                    setSmenaState('ИТР')
+                                <span className={smenaState == 'А' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
+                                    setSmenaState('А')
                                 }}>ИТР</span>
                             </div>
                         }
@@ -101,8 +103,8 @@ function Scud() {
                                 <span className={smenaState == '3' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
                                     setSmenaState('3')
                                 }}>Третья смена</span>
-                                <span className={smenaState == 'ИТР' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
-                                    setSmenaState('ИТР')
+                                <span className={smenaState == 'А' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
+                                    setSmenaState('А')
                                 }}>ИТР</span>
                             </div>
                         }
