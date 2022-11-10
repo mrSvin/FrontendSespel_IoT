@@ -31,7 +31,7 @@ function Scud() {
     }
 
     useEffect(() => {
-        let promise = fetchRequestScud(date, place)
+        let promise = fetchRequestScud(date, place, smenaState)
         promise.then(data => {
             let userData = createUserDataStructure(data)
 
