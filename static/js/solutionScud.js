@@ -120,7 +120,7 @@ function addStartOrEnd(filterArrays, typeTime = 'А', date) {
     switch (typeTime) {
         case 'А':
             startTime = date + ' 00:00:00'
-            endTime = (currentDate == date) ? date + timeNow() : date + ' 23:59:59'
+            endTime = (currentDate == date) ? date + ' ' + timeNow() : date + ' 23:59:59'
             break;
         // case '1':
         //     break;
@@ -130,7 +130,7 @@ function addStartOrEnd(filterArrays, typeTime = 'А', date) {
             break;
         default:
             startTime = date + ' 00:00:00'
-            endTime = (currentDate == date) ? date + timeNow() : date + ' 23:59:59'
+            endTime = (currentDate == date) ? date + ' ' + timeNow() : date + ' 23:59:59'
             break
     }
 
