@@ -1,4 +1,4 @@
-function getNotNullData(userData, smenaState) {
+function selectObjectsWithSmena(userData, smenaState) {
     let obj = {}
     console.log('Выбранная смена', smenaState)
     Object.keys(userData).forEach(name => {
@@ -34,8 +34,11 @@ function Scud() {
         let promise = fetchRequestScud(date, place)
         promise.then(data => {
             let userData = createUserDataStructure(data)
-            getNotNullData(userData, smenaState)
-            let filteredData = applyFilters(userData)
+
+            let objectsWithSmena = selectObjectsWithSmena(userData, smenaState)
+
+            let filteredData = applyFilters(objectsWithSmena)
+            // let filteredData = applyFilters(userData)
 
             setHeightHighchartContainer(Object.keys(filteredData).length);
 
@@ -114,7 +117,7 @@ function Scud() {
                 <Link to={`/scud/office`}>
                     <div className={place == 'office' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
                         setPlace('office')
-                        setSmenaState('ИТР')
+                        setSmenaState('А')
                     }}>Офис
                     </div>
                 </Link>
