@@ -142,11 +142,11 @@ function Scud() {
                 <DayCalendar newDate={newDate} date={date}/>
             </div>
 
-            {smenaState !== '8'? null:
+            {smenaState !== '8' ? null :
                 <container8Hours height={height} heightLunch={heightLunch}/>
             }
 
-            {smenaState !== '8и'? null:
+            {smenaState !== '8и' ? null :
                 <containerItr height={height} heightLunch={heightLunch}/>
             }
 
@@ -155,8 +155,9 @@ function Scud() {
     );
 }
 
-function container8Hours({height, heightLunch}){
-    return(
+function container8Hours({height, heightLunch}) {
+
+    return (
         <div className='wrapperScud'>
             {/*<div className={'lunchTime'} style={heightLunch}>*/}
             {/*    <p>Обед</p>*/}
@@ -167,9 +168,9 @@ function container8Hours({height, heightLunch}){
     )
 }
 
-function containerItr({height, heightLunch}){
+function containerItr({height, heightLunch}) {
 
-    return(
+    return (
         <div className='wrapperScud'>
             <div className={'lunchTime'} style={heightLunch}>
                 <p>Обед</p>
