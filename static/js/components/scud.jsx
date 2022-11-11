@@ -153,7 +153,7 @@ function Scud() {
 }
 
 function containerEightHours({height, heightLunch}) {
-
+    console.log(height, heightLunch)
     return (
         <div className='wrapperScud'>
             {/*<div className={'lunchTime'} style={heightLunch}>*/}
@@ -165,8 +165,9 @@ function containerEightHours({height, heightLunch}) {
     )
 }
 
-function containerItr({height, heightLunch}) {
+function containerItr(height, heightLunch) {
 
+    console.log(height, heightLunch)
     return (
         <div className='wrapperScud'>
             <div className={'lunchTime'} style={heightLunch}>
