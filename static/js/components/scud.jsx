@@ -2,8 +2,8 @@ function selectObjectsWithSmena(userData, smenaState) {
     let obj = {}
     console.log('Выбранный тип смены', smenaState)
     Object.keys(userData).forEach(name => {
-        if (userData[name].smenaInfo !== null) {
-            if (userData[name].smenaInfo.typeSmena == smenaState) {
+        if (userData[name].smenaInfo !== '') {
+            if (userData[name].smenaInfo == smenaState) {
                 obj[name] = userData[name]
             }
         }
@@ -142,17 +142,40 @@ function Scud() {
                 <DayCalendar newDate={newDate} date={date}/>
             </div>
 
+            {smenaState !== '8'? null:
+                <container8Hours height={height} heightLunch={heightLunch}/>
+            }
+
             {smenaState !== '8и'? null:
-                <div className='wrapperScud'>
-                    <div className={'lunchTime'} style={heightLunch}>
-                        <p>Обед</p>
-                        <div className='strokelunchTime'></div>
-                    </div>
-                    <div id={"containerScud"} style={height} className="scudHigcharts"></div>
-                </div>
+                <containerItr height={height} heightLunch={heightLunch}/>
             }
 
 
         </div>
     );
+}
+
+function container8Hours({height, heightLunch}){
+    return(
+        <div className='wrapperScud'>
+            {/*<div className={'lunchTime'} style={heightLunch}>*/}
+            {/*    <p>Обед</p>*/}
+            {/*    <div className='strokelunchTime'></div>*/}
+            {/*</div>*/}
+            <div id={"containerScud"} style={height} className="scudHigcharts"></div>
+        </div>
+    )
+}
+
+function containerItr({height, heightLunch}){
+
+    return(
+        <div className='wrapperScud'>
+            <div className={'lunchTime'} style={heightLunch}>
+                <p>Обед</p>
+                <div className='strokelunchTime'></div>
+            </div>
+            <div id={"containerScud"} style={height} className="scudHigcharts"></div>
+        </div>
+    )
 }
