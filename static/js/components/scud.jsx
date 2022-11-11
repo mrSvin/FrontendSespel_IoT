@@ -9,8 +9,6 @@ function selectObjectsWithSmena(userData, smenaState) {
         }
     })
     console.log('Объекты ', obj)
-
-
     return obj
 }
 
@@ -35,7 +33,7 @@ function Scud() {
         promise.then(data => {
             let userData = createUserDataStructure(data)
 
-            // let objectsWithSmena = selectObjectsWithSmena(userData, smenaState)
+            let objectsWithSmena = selectObjectsWithSmena(userData, smenaState)
 
             // let filteredData = applyFilters(objectsWithSmena, smenaState, date)
             let filteredData = applyFilters(userData, smenaState, date)

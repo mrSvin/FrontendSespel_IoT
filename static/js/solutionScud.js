@@ -107,7 +107,7 @@ function dublicateDeleteFilter(arrayData, arrayInOut) {
     return [filterData, filterInOut]
 }
 
-function addStartOrEnd(filterArrays, typeTime = 'А', date) {
+function addStartOrEnd(filterArrays, typeTime = '8и', date) {
 
     let filterData = filterArrays[0]
     let filterInOut = filterArrays[1]
@@ -118,15 +118,15 @@ function addStartOrEnd(filterArrays, typeTime = 'А', date) {
     let endTime = ''
 
     switch (typeTime) {
-        case 'А':
+        case '8и':
             startTime = date + ' 00:00:00'
             endTime = (currentDate == date) ? date + ' ' + timeNow() : date + ' 23:59:59'
             break;
         // case '1':
         //     break;
-        case '2':
-            startTime = dayYesterday(date) + ' 18:00:00'
-            endTime = date + ' 08:00:00'
+        // case '2':
+        //     startTime = dayYesterday(date) + ' 18:00:00'
+        //     endTime = date + ' 08:00:00'
             break;
         default:
             startTime = date + ' 00:00:00'
