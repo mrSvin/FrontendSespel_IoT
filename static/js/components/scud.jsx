@@ -3,12 +3,12 @@ function selectObjectsWithSmena(userData, smenaState) {
     console.log('Выбранный тип смены', smenaState)
     Object.keys(userData).forEach(name => {
         if (userData[name].smenaInfo !== null) {
-            if(userData[name].smenaInfo.typeSmena == smenaState){
+            if (userData[name].smenaInfo.typeSmena == smenaState) {
                 obj[name] = userData[name]
             }
         }
     })
-    console.log('Объекты ',obj)
+    console.log('Объекты ', obj)
 
 
     return obj
@@ -20,7 +20,7 @@ function Scud() {
     const [heightHighchartContainer, setHeightHighchartContainer] = useState(0);
     let [date, setDate] = useState(dayNow());
     let [place, setPlace] = useState(parseNameUrl(location.pathname))
-    let [smenaState, setSmenaState] = useState('А')
+    let [smenaState, setSmenaState] = useState('8и')
 
     let height = {
         height: 52 * heightHighchartContainer
@@ -74,18 +74,26 @@ function Scud() {
                     }}>Первая площадка
                         {place !== '1ploshadka' ? null :
                             <div className='smenaSkud'>
-                            <span className={smenaState == '1' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
-                                setSmenaState('1')
-                            }}>Первая смена</span>
-                                <span className={smenaState == '2' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
-                                    setSmenaState('2')
-                                }}>Вторая смена</span>
-                                <span className={smenaState == '3' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
-                                    setSmenaState('3')
-                                }}>Третья смена</span>
-                                <span className={smenaState == 'А' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
-                                    setSmenaState('А')
-                                }}>ИТР</span>
+                                <span className={smenaState == '1' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('8')
+                                      }}>8 часов</span>
+                                <span className={smenaState == '2' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('7')
+                                      }}>7.2 часа</span>
+                                <span className={smenaState == '3' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('12')
+                                      }}>12 часов</span>
+                                <span className={smenaState == 'А' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('24')
+                                      }}>24 часа</span>
+                                <span className={smenaState == 'А' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('8и')
+                                      }}>ИТР</span>
                             </div>
                         }
                     </div>
@@ -97,18 +105,26 @@ function Scud() {
                     }}>Вторая площадка
                         {place !== '2ploshadka' ? null :
                             <div className='smenaSkud'>
-                            <span className={smenaState == '1' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
-                                setSmenaState('1')
-                            }}>Первая смена</span>
-                                <span className={smenaState == '2' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
-                                    setSmenaState('2')
-                                }}>Вторая смена</span>
-                                <span className={smenaState == '3' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
-                                    setSmenaState('3')
-                                }}>Третья смена</span>
-                                <span className={smenaState == 'А' ? 'skudSelect' : 'skudSelectNoSelect'} onClick={() => {
-                                    setSmenaState('А')
-                                }}>ИТР</span>
+                                <span className={smenaState == '8' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('8')
+                                      }}>8 часов</span>
+                                <span className={smenaState == '7' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('7')
+                                      }}>7.2 часа</span>
+                                <span className={smenaState == '12' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('12')
+                                      }}>12 часов</span>
+                                <span className={smenaState == '24' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('24')
+                                      }}>24 часа</span>
+                                <span className={smenaState == '8и' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('8и')
+                                      }}>ИТР</span>
                             </div>
                         }
                     </div>
@@ -117,7 +133,7 @@ function Scud() {
                 <Link to={`/scud/office`}>
                     <div className={place == 'office' ? 'menuSelect' : 'menuNoSelect'} onClick={() => {
                         setPlace('office')
-                        setSmenaState('А')
+                        setSmenaState('8и')
                     }}>Офис
                     </div>
                 </Link>
