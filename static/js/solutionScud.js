@@ -211,7 +211,7 @@ function filterLunch(dateArray, date, smenaState) {
                 new Date(arrayClear[i + 1]).getTime() > new Date(endLunch).getTime()
             ) {
                 if (arrayClear.length % 2 == 0) {
-                    if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[`${date} ${startLunch}`, `${date} ${endLunch}`])
+                    if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[startLunch, endLunch])
                 } else if (i % 2 == 0) {
                     arraySave.splice(i + 1, 0, startLunch)
                 } else arraySave.splice(i + 1, 0, endLunch)
