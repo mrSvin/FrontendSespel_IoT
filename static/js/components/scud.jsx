@@ -12,32 +12,6 @@ function selectObjectsWithSmena(userData, smenaState) {
     return obj
 }
 
-function container8Hours({height, heightLunch}) {
-
-    return (
-        <div className='wrapperScud'>
-            {/*<div className={'lunchTime'} style={heightLunch}>*/}
-            {/*    <p>Обед</p>*/}
-            {/*    <div className='strokelunchTime'></div>*/}
-            {/*</div>*/}
-            <div id="containerScud" style={height} className="scudHigcharts"></div>
-        </div>
-    )
-}
-
-function containerItr({height, heightLunch}) {
-
-    return (
-        <div className='wrapperScud'>
-            <div className={'lunchTime'} style={heightLunch}>
-                <p>Обед</p>
-                <div className='strokelunchTime'></div>
-            </div>
-            <div id="containerScud" style={height} className="scudHigcharts"></div>
-        </div>
-    )
-}
-
 function Scud() {
 
     const history = useHistory()
@@ -168,15 +142,38 @@ function Scud() {
                 <DayCalendar newDate={newDate} date={date}/>
             </div>
 
-            {smenaState !== '8' ? null :
-                <container8Hours height={height} heightLunch={heightLunch}/>
-            }
+            {smenaState !== '8' ? <containerEightHours height={height} heightLunch={heightLunch}/> : null}
 
-            {smenaState !== '8и' ? null :
-                <containerItr height={height} heightLunch={heightLunch}/>
-            }
+
+            {smenaState !== '8и' ? <containerItr height={height} heightLunch={heightLunch}/> : null}
 
 
         </div>
     );
+}
+
+function containerEightHours({height, heightLunch}) {
+
+    return (
+        <div className='wrapperScud'>
+            {/*<div className={'lunchTime'} style={heightLunch}>*/}
+            {/*    <p>Обед</p>*/}
+            {/*    <div className='strokelunchTime'></div>*/}
+            {/*</div>*/}
+            <div id="containerScud" style={height} className="scudHigcharts"></div>
+        </div>
+    )
+}
+
+function containerItr({height, heightLunch}) {
+
+    return (
+        <div className='wrapperScud'>
+            <div className={'lunchTime'} style={heightLunch}>
+                <p>Обед</p>
+                <div className='strokelunchTime'></div>
+            </div>
+            <div id="containerScud" style={height} className="scudHigcharts"></div>
+        </div>
+    )
 }
