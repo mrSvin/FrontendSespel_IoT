@@ -149,18 +149,38 @@ function СontainerEightHours({heightHighchartContainer}) {
         height: 52 * heightHighchartContainer
     };
 
-    let lunchSettings = {
+    let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
         left: '57.6%',
-        width: '3%',
+        width: '1.5%',
+    }
+
+    let lunchSettings2 = {
+        height: getLunchHeight(heightHighchartContainer),
+        left: '57.6%',
+        width: '1.5%',
+    }
+
+    let lunchSettings3 = {
+        height: getLunchHeight(heightHighchartContainer),
+        left: '57.6%',
+        width: '1.5%',
     }
 
     return (
         <div className='wrapperScud'>
-            {/*<div className={'lunchTime'} style={lunchSettings}>*/}
-            {/*    <p>Обед</p>*/}
-            {/*    <div className='strokelunchTime'></div>*/}
-            {/*</div>*/}
+            <div className={'lunchTime'} style={lunchSettings1}>
+                <p>Обед 11:30-12:00</p>
+                <div className='strokelunchTime'></div>
+            </div>
+            <div className={'lunchTime'} style={lunchSettings2}>
+                <p>Обед 19:30-20:00</p>
+                <div className='strokelunchTime'></div>
+            </div>
+            <div className={'lunchTime'} style={lunchSettings3}>
+                <p>Обед 03:00-3:30</p>
+                <div className='strokelunchTime'></div>
+            </div>
             <div id="containerScud" style={height} className="scudHigcharts"></div>
         </div>
     )
