@@ -1,6 +1,6 @@
 function selectObjectsWithSmena(userData, smenaState) {
     let obj = {}
-    console.log('Выбранная смена', smenaState)
+    console.log('Выбранный тип смены', smenaState)
     Object.keys(userData).forEach(name => {
         if (userData[name].smenaInfo !== null) {
             if(userData[name].smenaInfo.typeSmena == smenaState){
@@ -35,10 +35,10 @@ function Scud() {
         promise.then(data => {
             let userData = createUserDataStructure(data)
 
-            let objectsWithSmena = selectObjectsWithSmena(userData, smenaState)
+            // let objectsWithSmena = selectObjectsWithSmena(userData, smenaState)
 
-            let filteredData = applyFilters(objectsWithSmena, smenaState, date)
-            // let filteredData = applyFilters(userData)
+            // let filteredData = applyFilters(objectsWithSmena, smenaState, date)
+            let filteredData = applyFilters(userData, smenaState, date)
 
             setHeightHighchartContainer(Object.keys(filteredData).length);
 

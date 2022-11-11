@@ -107,10 +107,6 @@ function App({hideLoader}) {
                         <Scud/>
                     </Route>
 
-                    <Route path="/scudAdmin">
-                        <ScudAdmin/>
-                    </Route>
-
                     <Route exact path="/">
                         <Home/>
                     </Route>
