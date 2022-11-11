@@ -134,17 +134,17 @@ function Scud() {
                 <DayCalendar newDate={newDate} date={date}/>
             </div>
 
-            {smenaState !== '8' ? <containerEightHours heightHighchartContainer={heightHighchartContainer} /> : null}
+            {smenaState !== '8' ? <СontainerEightHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
 
-            {smenaState !== '8и' ? <containerItr heightHighchartContainer={heightHighchartContainer} /> : null}
+            {smenaState !== '8и' ? <СontainerItr heightHighchartContainer={heightHighchartContainer}/> : null}
 
 
         </div>
     );
 }
 
-function containerEightHours({heightHighchartContainer}) {
+function СontainerEightHours({heightHighchartContainer}) {
     let height = {
         height: 52 * heightHighchartContainer
     };
@@ -164,7 +164,7 @@ function containerEightHours({heightHighchartContainer}) {
     )
 }
 
-function containerItr({heightHighchartContainer}) {
+function СontainerItr({heightHighchartContainer}) {
     let height = {
         height: 52 * heightHighchartContainer
     };
