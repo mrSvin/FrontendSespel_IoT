@@ -24,8 +24,7 @@ function getOutWorkTimeArray(array, date, smenaState) {
         if (outArray[outArray.length - 1] !== `${date} 07:00:00`) outArray.push(`${date} 07:00:00`)
     }
 
-    if (smenaState == '8и')
-        {
+    if (smenaState == '8и') {
         if (outArray[0] !== `${date} 00:00:00`) {
             outArray.unshift(`${date} 00:00:00`)
         } else outArray.splice(0, 1)
@@ -80,7 +79,7 @@ function applyFilters(userData, smenaState, date) {
 
         let arrayAddStartOrEnd = addStartOrEnd(noDublicateArrays, smenaState, date)
 
-        let arrayWithOutLunch = filterLunch(arrayAddStartOrEnd)
+        let arrayWithOutLunch = filterLunch(arrayAddStartOrEnd, date, smenaState)
         userData[e].workTime = getWorkTime(arrayWithOutLunch)
 
         let inWork = arrayAddStartOrEnd
@@ -128,7 +127,7 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
         case '8':
             startTime = dayYesterday(date) + ' 07:00:00'
             endTime = date + ' 07:00:00'
-                break;
+            break;
             // case '2':
             //     startTime = dayYesterday(date) + ' 18:00:00'
             //     endTime = date + ' 08:00:00'
@@ -149,60 +148,108 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
     return filterData
 }
 
-function filterLunch(dateArray, lunchType = '8-17') {
+function filterLunch(dateArray, date, smenaState) {
 
     let startLunch = null
     let endLunch = null
 
-    switch (lunchType) {
-        case '8-17':
-            startLunch = '12:00:00'
-            endLunch = '13:00:00'
+    let startLunch2 = null
+    let endLunch2 = null
+
+    let startLunch3 = null
+    let endLunch3 = null
+
+    let yesterday = dayYesterday(date)
+
+    switch (smenaState) {
+        case '8и':
+            startLunch = date + ' 12:00:00'
+            endLunch = date + ' 13:00:00'
             break;
-        case '07-19':
+        case '8':
+            startLunch = null
+            endLunch = null
+
+            startLunch2 = null
+            endLunch2 = null
+
+            startLunch3 = null
+            endLunch3 = null
             break;
-        case '19-07':
+        case '7':
+            break;
+        case '12':
+            break;
+        case '24':
             break;
         default:
-            startLunch = '12:00:00'
-            endLunch = '13:00:00'
+            startLunch = date + ' 12:00:00'
+            endLunch = date + ' 13:00:00'
     }
-
-    let date = dateArray[0].slice(0, 10)
 
     let arrayClear = []
+    let arraySave = []
 
-    for (let i = 0; i < dateArray.length; i++) {
-        if (
-            new Date(dateArray[i]).getTime() >= new Date(date + ' ' + startLunch).getTime() &&
-            new Date(dateArray[i]).getTime() < new Date(date + ' ' + endLunch).getTime()
-        ) {
-            // arrayClear.splice(i,1)
-        } else arrayClear.push(dateArray[i])
-    }
+    if (smenaState == '8и') {
+        for (let i = 0; i < dateArray.length; i++) {
+            if (
+                new Date(dateArray[i]).getTime() >= new Date(startLunch).getTime() &&
+                new Date(dateArray[i]).getTime() < new Date(endLunch).getTime()
+            ) {
+            } else arrayClear.push(dateArray[i])
+        }
+        arraySave = arrayClear.slice()
 
-    let arraySave = arrayClear.slice()
+        for (let i = 0; i < arrayClear.length; i++) {
+            if (arrayClear.length == 1) {
+                if (new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime()) {
+                    arraySave.push(startLunch)
+                } else arraySave.unshift(endLunch)
 
-    // if(arraySave.length == dateArray.length) return arraySave
+            } else if (
+                new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime() &&
+                new Date(arrayClear[i + 1]).getTime() > new Date(endLunch).getTime()
+            ) {
+                if (arrayClear.length % 2 == 0) {
+                    if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[`${date} ${startLunch}`, `${date} ${endLunch}`])
+                } else if (i % 2 == 0) {
+                    arraySave.splice(i + 1, 0, startLunch)
+                } else arraySave.splice(i + 1, 0, endLunch)
 
-    for (let i = 0; i < arrayClear.length; i++) {
-        if (arrayClear.length == 1) {
-            if (new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime()) {
-                arraySave.push(`${date} ${startLunch}`)
-            } else arraySave.unshift(`${date} ${endLunch}`)
-
-        } else if (
-            new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime() &&
-            new Date(arrayClear[i + 1]).getTime() > new Date(date + ' ' + endLunch).getTime()
-        ) {
-            if (arrayClear.length % 2 == 0) {
-                if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[`${date} ${startLunch}`, `${date} ${endLunch}`])
-            } else if (i % 2 == 0) {
-                arraySave.splice(i + 1, 0, `${date} ${startLunch}`)
-            } else arraySave.splice(i + 1, 0, `${date} ${endLunch}`)
-
+            }
         }
     }
+
+    // if (smenaState == '8') {
+    //     for (let i = 0; i < dateArray.length; i++) {
+    //         if (
+    //             new Date(dateArray[i]).getTime() >= new Date(date + ' ' + startLunch).getTime() &&
+    //             new Date(dateArray[i]).getTime() < new Date(date + ' ' + endLunch).getTime()
+    //         ) {
+    //         } else arrayClear.push(dateArray[i])
+    //     }
+    //     arraySave = arrayClear.slice()
+    //
+    //     for (let i = 0; i < arrayClear.length; i++) {
+    //         if (arrayClear.length == 1) {
+    //             if (new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime()) {
+    //                 arraySave.push(`${date} ${startLunch}`)
+    //             } else arraySave.unshift(`${date} ${endLunch}`)
+    //
+    //         } else if (
+    //             new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime() &&
+    //             new Date(arrayClear[i + 1]).getTime() > new Date(date + ' ' + endLunch).getTime()
+    //         ) {
+    //             if (arrayClear.length % 2 == 0) {
+    //                 if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[`${date} ${startLunch}`, `${date} ${endLunch}`])
+    //             } else if (i % 2 == 0) {
+    //                 arraySave.splice(i + 1, 0, `${date} ${startLunch}`)
+    //             } else arraySave.splice(i + 1, 0, `${date} ${endLunch}`)
+    //
+    //         }
+    //     }
+    // }
+
 
     return arraySave
 }
