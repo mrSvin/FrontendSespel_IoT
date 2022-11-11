@@ -17,12 +17,15 @@ function getOutWorkTimeArray(array, date, smenaState) {
 
     let outArray = array.slice()
 
-    if (smenaState == '2' || smenaState == '3') {
-        if (outArray[0] !== `${dayYesterday(date)} 18:00:00`) {
-            outArray.unshift(`${dayYesterday(date)} 18:00:00`)
+    if (smenaState == '8') {
+        if (outArray[0] !== `${dayYesterday(date)} 07:00:00`) {
+            outArray.unshift(`${dayYesterday(date)} 07:00:00`)
         } else outArray.splice(0, 1)
-        if (outArray[outArray.length - 1] !== `${date} 08:00:00`) outArray.push(`${date} 08:00:00`)
-    } else {
+        if (outArray[outArray.length - 1] !== `${date} 07:00:00`) outArray.push(`${date} 07:00:00`)
+    }
+
+    if (smenaState == '8и')
+        {
         if (outArray[0] !== `${date} 00:00:00`) {
             outArray.unshift(`${date} 00:00:00`)
         } else outArray.splice(0, 1)
@@ -122,8 +125,10 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
             startTime = date + ' 00:00:00'
             endTime = (currentDate == date) ? date + ' ' + timeNow() : date + ' 23:59:59'
             break;
-            // case '1':
-            //     break;
+        case '8':
+            startTime = dayYesterday(date) + ' 07:00:00'
+            endTime = date + ' 07:00:00'
+                break;
             // case '2':
             //     startTime = dayYesterday(date) + ' 18:00:00'
             //     endTime = date + ' 08:00:00'
