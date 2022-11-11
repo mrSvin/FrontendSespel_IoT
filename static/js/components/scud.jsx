@@ -20,14 +20,6 @@ function Scud() {
     let [place, setPlace] = useState(parseNameUrl(location.pathname))
     let [smenaState, setSmenaState] = useState('8и')
 
-    let height = {
-        height: 52 * heightHighchartContainer
-    };
-
-    let heightLunch = {
-        height: getLunchHeight(heightHighchartContainer)
-    }
-
     useEffect(() => {
         let promise = fetchRequestScud(date, place, smenaState)
         promise.then(data => {
@@ -142,18 +134,25 @@ function Scud() {
                 <DayCalendar newDate={newDate} date={date}/>
             </div>
 
-            {smenaState !== '8' ? <containerEightHours height={height} heightLunch={heightLunch}/> : null}
+            {smenaState !== '8' ? <containerEightHours heightHighchartContainer={heightHighchartContainer} /> : null}
 
 
-            {smenaState !== '8и' ? <containerItr height={height} heightLunch={heightLunch}/> : null}
+            {smenaState !== '8и' ? <containerItr heightHighchartContainer={heightHighchartContainer} /> : null}
 
 
         </div>
     );
 }
 
-function containerEightHours({height, heightLunch}) {
-    console.log(height, heightLunch)
+function containerEightHours({heightHighchartContainer}) {
+    let height = {
+        height: 52 * heightHighchartContainer
+    };
+
+    let heightLunch = {
+        height: getLunchHeight(heightHighchartContainer)
+    }
+
     return (
         <div className='wrapperScud'>
             {/*<div className={'lunchTime'} style={heightLunch}>*/}
@@ -165,9 +164,15 @@ function containerEightHours({height, heightLunch}) {
     )
 }
 
-function containerItr(height, heightLunch) {
+function containerItr({heightHighchartContainer}) {
+    let height = {
+        height: 52 * heightHighchartContainer
+    };
 
-    console.log(height, heightLunch)
+    let heightLunch = {
+        height: getLunchHeight(heightHighchartContainer)
+    }
+
     return (
         <div className='wrapperScud'>
             <div className={'lunchTime'} style={heightLunch}>
