@@ -12,6 +12,32 @@ function selectObjectsWithSmena(userData, smenaState) {
     return obj
 }
 
+function container8Hours({height, heightLunch}) {
+
+    return (
+        <div className='wrapperScud'>
+            {/*<div className={'lunchTime'} style={heightLunch}>*/}
+            {/*    <p>Обед</p>*/}
+            {/*    <div className='strokelunchTime'></div>*/}
+            {/*</div>*/}
+            <div id="containerScud" style={height} className="scudHigcharts"></div>
+        </div>
+    )
+}
+
+function containerItr({height, heightLunch}) {
+
+    return (
+        <div className='wrapperScud'>
+            <div className={'lunchTime'} style={heightLunch}>
+                <p>Обед</p>
+                <div className='strokelunchTime'></div>
+            </div>
+            <div id="containerScud" style={height} className="scudHigcharts"></div>
+        </div>
+    )
+}
+
 function Scud() {
 
     const history = useHistory()
@@ -153,30 +179,4 @@ function Scud() {
 
         </div>
     );
-}
-
-function container8Hours({height, heightLunch}) {
-
-    return (
-        <div className='wrapperScud'>
-            {/*<div className={'lunchTime'} style={heightLunch}>*/}
-            {/*    <p>Обед</p>*/}
-            {/*    <div className='strokelunchTime'></div>*/}
-            {/*</div>*/}
-            <div id={"containerScud"} style={height} className="scudHigcharts"></div>
-        </div>
-    )
-}
-
-function containerItr({height, heightLunch}) {
-
-    return (
-        <div className='wrapperScud'>
-            <div className={'lunchTime'} style={heightLunch}>
-                <p>Обед</p>
-                <div className='strokelunchTime'></div>
-            </div>
-            <div id={"containerScud"} style={height} className="scudHigcharts"></div>
-        </div>
-    )
 }
