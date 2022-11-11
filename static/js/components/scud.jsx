@@ -72,23 +72,23 @@ function Scud() {
                     }}>Первая площадка
                         {place !== '1ploshadka' ? null :
                             <div className='smenaSkud'>
-                                <span className={smenaState == '1' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '8' ? 'skudSelect' : 'skudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('8')
                                       }}>8 часов</span>
-                                <span className={smenaState == '2' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '7' ? 'skudSelect' : 'skudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('7')
                                       }}>7.2 часа</span>
-                                <span className={smenaState == '3' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '12' ? 'skudSelect' : 'skudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('12')
                                       }}>12 часов</span>
-                                <span className={smenaState == 'А' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '24' ? 'skudSelect' : 'skudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('24')
                                       }}>24 часа</span>
-                                <span className={smenaState == 'А' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '8и' ? 'skudSelect' : 'skudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('8и')
                                       }}>ИТР</span>
@@ -142,13 +142,17 @@ function Scud() {
                 <DayCalendar newDate={newDate} date={date}/>
             </div>
 
-            <div className='wrapperScud'>
-                <div className={'lunchTime'} style={heightLunch}>
-                    <p>Обед</p>
-                    <div className='strokelunchTime'></div>
+            {smenaState !== '8и'? null:
+                <div className='wrapperScud'>
+                    <div className={'lunchTime'} style={heightLunch}>
+                        <p>Обед</p>
+                        <div className='strokelunchTime'></div>
+                    </div>
+                    <div id={"containerScud"} style={height} className="scudHigcharts"></div>
                 </div>
-                <div id={"containerScud"} style={height} className="scudHigcharts"></div>
-            </div>
+            }
+
+
         </div>
     );
 }

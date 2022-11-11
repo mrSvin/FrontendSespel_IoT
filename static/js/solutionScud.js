@@ -65,7 +65,7 @@ function getLastDate(inWork, outWork, y, smenaState) {
 
     let last = (new Date(lastInWork) >= lastoutWork) ? lastInWork : lastoutWork
 
-    if (date.slice(0, 10) == last.slice(0, 10) && (smenaState == 1 || smenaState == 'А')) {
+    if (date.slice(0, 10) == last.slice(0, 10) && (smenaState == '8и')) {
         return parseScudForHighcharts([last, `${last.slice(0, 10)} 23:59:59`], y)
     } else return null
 }
@@ -122,11 +122,11 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
             startTime = date + ' 00:00:00'
             endTime = (currentDate == date) ? date + ' ' + timeNow() : date + ' 23:59:59'
             break;
-        // case '1':
-        //     break;
-        // case '2':
-        //     startTime = dayYesterday(date) + ' 18:00:00'
-        //     endTime = date + ' 08:00:00'
+            // case '1':
+            //     break;
+            // case '2':
+            //     startTime = dayYesterday(date) + ' 18:00:00'
+            //     endTime = date + ' 08:00:00'
             break;
         default:
             startTime = date + ' 00:00:00'
