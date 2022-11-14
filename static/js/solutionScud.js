@@ -148,6 +148,41 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
     return filterData
 }
 
+function insideFilterLunch(startLunch, endLunch, dateArray) {
+
+    let arrayClear = []
+    let arraySave = []
+
+    for (let i = 0; i < dateArray.length; i++) {
+        if (
+            new Date(dateArray[i]).getTime() >= new Date(startLunch).getTime() &&
+            new Date(dateArray[i]).getTime() < new Date(endLunch).getTime()
+        ) {
+        } else arrayClear.push(dateArray[i])
+    }
+    arraySave = arrayClear.slice()
+
+    for (let i = 0; i < arrayClear.length; i++) {
+        if (arrayClear.length == 1) {
+            if (new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime()) {
+                arraySave.push(startLunch)
+            } else arraySave.unshift(endLunch)
+
+        } else if (
+            new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime() &&
+            new Date(arrayClear[i + 1]).getTime() > new Date(endLunch).getTime()
+        ) {
+            if (arrayClear.length % 2 == 0) {
+                if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[startLunch, endLunch])
+            } else if (i % 2 == 0) {
+                arraySave.splice(i + 1, 0, startLunch)
+            } else arraySave.splice(i + 1, 0, endLunch)
+
+        }
+    }
+    return arraySave
+}
+
 function filterLunch(dateArray, date, smenaState) {
 
     let startLunch = null
@@ -187,37 +222,11 @@ function filterLunch(dateArray, date, smenaState) {
             endLunch = date + ' 13:00:00'
     }
 
-    let arrayClear = []
+
     let arraySave = []
 
     if (smenaState == '8и') {
-        for (let i = 0; i < dateArray.length; i++) {
-            if (
-                new Date(dateArray[i]).getTime() >= new Date(startLunch).getTime() &&
-                new Date(dateArray[i]).getTime() < new Date(endLunch).getTime()
-            ) {
-            } else arrayClear.push(dateArray[i])
-        }
-        arraySave = arrayClear.slice()
-
-        for (let i = 0; i < arrayClear.length; i++) {
-            if (arrayClear.length == 1) {
-                if (new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime()) {
-                    arraySave.push(startLunch)
-                } else arraySave.unshift(endLunch)
-
-            } else if (
-                new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime() &&
-                new Date(arrayClear[i + 1]).getTime() > new Date(endLunch).getTime()
-            ) {
-                if (arrayClear.length % 2 == 0) {
-                    if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[startLunch, endLunch])
-                } else if (i % 2 == 0) {
-                    arraySave.splice(i + 1, 0, startLunch)
-                } else arraySave.splice(i + 1, 0, endLunch)
-
-            }
-        }
+        arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
     }
 
     // if (smenaState == '8') {
@@ -249,8 +258,6 @@ function filterLunch(dateArray, date, smenaState) {
     //         }
     //     }
     // }
-
-
     return arraySave
 }
 
