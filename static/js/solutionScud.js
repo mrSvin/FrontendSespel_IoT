@@ -185,6 +185,8 @@ function insideFilterLunch(startLunch, endLunch, dateArray) {
 
 function filterLunch(dateArray, date, smenaState) {
 
+    console.log('Массив до', dateArray)
+
     let startLunch = null
     let endLunch = null
 
@@ -194,70 +196,99 @@ function filterLunch(dateArray, date, smenaState) {
     let startLunch3 = null
     let endLunch3 = null
 
+    let startLunch4 = null
+    let endLunch4 = null
+
     let yesterday = dayYesterday(date)
+
+    let arraySave = []
 
     switch (smenaState) {
         case '8и':
             startLunch = date + ' 12:00:00'
             endLunch = date + ' 13:00:00'
+            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
             break;
         case '8':
-            startLunch = null
-            endLunch = null
+            startLunch = yesterday + ' 11:30:00'
+            endLunch = yesterday + ' 12:00:00'
 
-            startLunch2 = null
-            endLunch2 = null
+            startLunch2 = yesterday + ' 19:30:00'
+            endLunch2 = yesterday + ' 20:00:00'
 
-            startLunch3 = null
-            endLunch3 = null
+            startLunch3 = date + ' 03:00:00'
+            endLunch3 = date + ' 03:30:00'
+
+            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
+            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
+            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
             break;
         case '7':
+            startLunch = yesterday + ' 11:30:00'
+            endLunch = yesterday + ' 12:30:00'
+
+            startLunch2 = yesterday + ' 19:30:00'
+            endLunch2 = yesterday + ' 20:30:00'
+
+            startLunch3 = date + ' 03:00:00'
+            endLunch3 = date + ' 04:00:00'
+
+            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
+            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
+            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
             break;
         case '12':
+            startLunch = yesterday + ' 11:30:00'
+            endLunch = yesterday + ' 12:00:00'
+
+            startLunch2 = yesterday + ' 16:00:00'
+            endLunch2 = yesterday + ' 16:30:00'
+
+            startLunch3 = date + ' 23:00:00'
+            endLunch3 = date + ' 23:30:00'
+
+            startLunch4 = date + ' 03:30:00'
+            endLunch4 = date + ' 04:00:00'
+
+            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
+            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
+            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
+            arraySave = insideFilterLunch(startLunch4, endLunch4, arraySave)
             break;
         case '24':
+            startLunch = yesterday + ' 12:30:00'
+            endLunch = yesterday + ' 13:00:00'
+
+            startLunch2 = yesterday + ' 20:00:00'
+            endLunch2 = yesterday + ' 20:30:00'
+
+            startLunch3 = date + ' 04:00:00'
+            endLunch3 = date + ' 04:30:00'
+
+            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
+            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
+            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
             break;
         default:
             startLunch = date + ' 12:00:00'
             endLunch = date + ' 13:00:00'
     }
 
-
-    let arraySave = []
-
-    if (smenaState == '8и') {
-        arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-    }
-
-    // if (smenaState == '8') {
-    //     for (let i = 0; i < dateArray.length; i++) {
-    //         if (
-    //             new Date(dateArray[i]).getTime() >= new Date(date + ' ' + startLunch).getTime() &&
-    //             new Date(dateArray[i]).getTime() < new Date(date + ' ' + endLunch).getTime()
-    //         ) {
-    //         } else arrayClear.push(dateArray[i])
-    //     }
-    //     arraySave = arrayClear.slice()
-    //
-    //     for (let i = 0; i < arrayClear.length; i++) {
-    //         if (arrayClear.length == 1) {
-    //             if (new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime()) {
-    //                 arraySave.push(`${date} ${startLunch}`)
-    //             } else arraySave.unshift(`${date} ${endLunch}`)
-    //
-    //         } else if (
-    //             new Date(arrayClear[i]).getTime() < new Date(date + ' ' + startLunch).getTime() &&
-    //             new Date(arrayClear[i + 1]).getTime() > new Date(date + ' ' + endLunch).getTime()
-    //         ) {
-    //             if (arrayClear.length % 2 == 0) {
-    //                 if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[`${date} ${startLunch}`, `${date} ${endLunch}`])
-    //             } else if (i % 2 == 0) {
-    //                 arraySave.splice(i + 1, 0, `${date} ${startLunch}`)
-    //             } else arraySave.splice(i + 1, 0, `${date} ${endLunch}`)
-    //
-    //         }
-    //     }
+    // if (smenaState == '8и') {
+    //     arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
+    // } else if (smenaState == '8' || smenaState == '7' || smenaState == '24') {
+    //     arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
+    //     arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
+    //     arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
+    // } else if (smenaState == '12') {
+    //     arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
+    //     arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
+    //     arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
+    //     arraySave = insideFilterLunch(startLunch4, endLunch4, arraySave)
     // }
+
+    console.log('Массив после', arraySave)
+
     return arraySave
 }
 
