@@ -199,14 +199,35 @@ function fetchDeleteReSourceUser(authorId, userRole = 'user') {
     } else alert('Недостаточно прав')
 }
 
-function fetchRequestScud(date = '2022-10-25', place = 'Ленинградская 36, Дверь', smenaState='8и') {
-    if (smenaState == '8и'){
+function fetchRequestScud(date = '2022-10-25', place = 'Ленинградская 36, Дверь', smenaState = '8и') {
+    if (smenaState == '8и') {
         return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
-    } else if (smenaState == '8'){
+    } else if (smenaState == '8') {
+        let dateYesterday = dayYesterday(date)
+        return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    } else if (smenaState == '7') {
+        let dateYesterday = dayYesterday(date)
+        return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    } else if (smenaState == '12') {
+        let dateYesterday = dayYesterday(date)
+        return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    } else if (smenaState == '24') {
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
@@ -214,4 +235,5 @@ function fetchRequestScud(date = '2022-10-25', place = 'Ленинградска
                 return data
             })
     }
+
 }

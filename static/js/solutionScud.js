@@ -149,7 +149,6 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
 }
 
 function insideFilterLunch(startLunch, endLunch, dateArray) {
-
     let arrayClear = []
     let arraySave = []
 
@@ -174,18 +173,21 @@ function insideFilterLunch(startLunch, endLunch, dateArray) {
         ) {
             if (arrayClear.length % 2 == 0) {
                 if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[startLunch, endLunch])
-            } else if (i % 2 == 0) {
+            } else if (i % 2 == 1) {
                 arraySave.splice(i + 1, 0, startLunch)
             } else arraySave.splice(i + 1, 0, endLunch)
-
+        } else if (
+            i % 2 == 0 &&
+            arrayClear.length - 1 == i &&
+            new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime()
+        ) {
+            arraySave.push(startLunch)
         }
     }
     return arraySave
 }
 
 function filterLunch(dateArray, date, smenaState) {
-
-    console.log('Массив до', dateArray)
 
     let startLunch = null
     let endLunch = null
@@ -286,9 +288,6 @@ function filterLunch(dateArray, date, smenaState) {
     //     arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
     //     arraySave = insideFilterLunch(startLunch4, endLunch4, arraySave)
     // }
-
-    console.log('Массив после', arraySave)
-
     return arraySave
 }
 
