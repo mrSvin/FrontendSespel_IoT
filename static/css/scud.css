@@ -38,7 +38,7 @@
     pointer-events: none;
 }
 
-.smenaSkud{
+.smenaScud{
     text-shadow: none;
     font-size: 20px;
     color: white;
@@ -50,7 +50,7 @@
     /* align-items: flex-start; */
 }
 
-.smenaSkud > span {
+.smenaScud > span {
     margin: 0 10px;
 }
 
@@ -58,19 +58,19 @@
     margin-bottom: 50px;
 }
 
-.skudSelect {
+.scudSelect {
     color: #e51a83 !important;
     text-shadow: 0 0 5px #e51a83,
     0 0 25px #e51a83;
 }
 
-.skudSelectNoSelect {
+.scudSelectNoSelect {
     color: #f2f6f8 !important;
     text-shadow: none;
     cursor: pointer;
 }
 
-.skudSelectNoSelect:hover {
+.scudSelectNoSelect:hover {
     color: #1aaae5 !important;
     transition: 0.5s;
 }

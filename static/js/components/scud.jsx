@@ -63,24 +63,24 @@ function Scud() {
                         setPlace('1ploshadka')
                     }}>Первая площадка
                         {place !== '1ploshadka' ? null :
-                            <div className='smenaSkud'>
-                                <span className={smenaState == '8' ? 'skudSelect' : 'skudSelectNoSelect'}
+                            <div className='smenaScud'>
+                                <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('8')
                                       }}>8 часов</span>
-                                <span className={smenaState == '7' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('7')
                                       }}>7.2 часа</span>
-                                <span className={smenaState == '12' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '12' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('12')
                                       }}>12 часов</span>
-                                <span className={smenaState == '24' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('24')
                                       }}>24 часа</span>
-                                <span className={smenaState == '8и' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('8и')
                                       }}>ИТР</span>
@@ -94,24 +94,24 @@ function Scud() {
                         setPlace('2ploshadka')
                     }}>Вторая площадка
                         {place !== '2ploshadka' ? null :
-                            <div className='smenaSkud'>
-                                <span className={smenaState == '8' ? 'skudSelect' : 'skudSelectNoSelect'}
+                            <div className='smenaScud'>
+                                <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('8')
                                       }}>8 часов</span>
-                                <span className={smenaState == '7' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('7')
                                       }}>7.2 часа</span>
-                                <span className={smenaState == '12' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '12' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('12')
                                       }}>12 часов</span>
-                                <span className={smenaState == '24' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('24')
                                       }}>24 часа</span>
-                                <span className={smenaState == '8и' ? 'skudSelect' : 'skudSelectNoSelect'}
+                                <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('8и')
                                       }}>ИТР</span>
