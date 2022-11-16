@@ -806,7 +806,7 @@ function interceptNetworkRequests(ee) {
     const isRegularXHR = open.toString().indexOf('native code') !== -1;
 
     if (isRegularXHR) {
-        XMLHttpRequest.prototype.open = function() {
+        XMLHttpRequest.prototype.open = function () {
             ee.onOpen && ee.onOpen(this, arguments);
             if (ee.onLoad) {
                 this.addEventListener('load', ee.onLoad.bind(ee));
@@ -816,7 +816,7 @@ function interceptNetworkRequests(ee) {
             }
             return open.apply(this, arguments);
         };
-        XMLHttpRequest.prototype.send = function() {
+        XMLHttpRequest.prototype.send = function () {
             ee.onSend && ee.onSend(this, arguments);
             return send.apply(this, arguments);
         };
@@ -824,7 +824,7 @@ function interceptNetworkRequests(ee) {
 
     const fetch = window.fetch || "";
     const isFetchNative = fetch.toString().indexOf('native code') !== -1;
-    if(isFetchNative) {
+    if (isFetchNative) {
         window.fetch = function () {
             ee.onFetch && ee.onFetch(arguments);
             const p = fetch.apply(this, arguments);
@@ -835,8 +835,8 @@ function interceptNetworkRequests(ee) {
     return ee;
 }
 
-function reloadPageIfLogin(data){
-    if(data.url.slice(-5) == 'login' && window.location.href != data.url){
+function reloadPageIfLogin(data) {
+    if (data.url.slice(-5) == 'login' && window.location.href != data.url) {
         location.href = `${window.location.origin}/login`
     }
 }

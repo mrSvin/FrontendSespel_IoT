@@ -23,18 +23,23 @@ function Scud() {
     useEffect(() => {
         let promise = fetchRequestScud(date, place, smenaState)
         promise.then(data => {
-            let userData = createUserDataStructure(data)
 
-            let objectsWithSmena = selectObjectsWithSmena(userData, smenaState)
+            if (!Object.keys(data).includes('error')) {
+                let userData = createUserDataStructure(data)
 
-            // let filteredData = applyFilters(objectsWithSmena, smenaState, date)
-            let filteredData = applyFilters(userData, smenaState, date)
+                let objectsWithSmena = selectObjectsWithSmena(userData, smenaState)
 
-            setHeightHighchartContainer(Object.keys(filteredData).length);
+                // let filteredData = applyFilters(objectsWithSmena, smenaState, date)
+                let filteredData = applyFilters(userData, smenaState, date)
 
-            let series = getHighchartSeriesAndNames(filteredData)
+                setHeightHighchartContainer(Object.keys(filteredData).length);
 
-            highChartScud(...series)
+                let series = getHighchartSeriesAndNames(filteredData)
+
+                highChartScud(...series)
+            }
+
+
         })
     }, [date, place, smenaState]);
 
@@ -203,19 +208,19 @@ function LunchSevenHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '34.9%',
+        left: '33.05%',
         width: '3%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '59%',
+        left: '59.3%',
         width: '3%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '81.5%',
+        left: '81.9%',
         width: '3%'
     }
 
@@ -250,25 +255,25 @@ function LunchTwelveHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '34.9%',
+        left: '35.2%',
         width: '1.5%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '48.6%',
+        left: '49.3%',
         width: '1.5%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '68.2%',
+        left: '69.25%',
         width: '1.5%'
     }
 
     let lunchSettings4 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '83%',
+        left: '84.3%',
         width: '1.5%'
     }
 
@@ -307,20 +312,19 @@ function LunchTwentyFourHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '38.1%',
+        left: '37.4%',
         width: '1.5%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '60.7%',
+        left: '59%',
         width: '1.5%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '81.5%',
-        left: '84.8%',
+        left: '82.2%',
         width: '1.5%'
     }
 

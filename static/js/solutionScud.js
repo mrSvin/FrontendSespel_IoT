@@ -9,7 +9,7 @@ function getWorkTime(dateArray) {
         time += msArray[i] - msArray[i - 1]
     }
 
-    time = msToTime(time)
+    time = msToTimeDays(time)
     return time
 }
 
@@ -22,6 +22,27 @@ function getOutWorkTimeArray(array, date, smenaState) {
             outArray.unshift(`${dayYesterday(date)} 07:00:00`)
         } else outArray.splice(0, 1)
         if (outArray[outArray.length - 1] !== `${date} 07:00:00`) outArray.push(`${date} 07:00:00`)
+    }
+
+    if (smenaState == '7') {
+        if (outArray[0] !== `${dayYesterday(date)} 07:00:00`) {
+            outArray.unshift(`${dayYesterday(date)} 07:00:00`)
+        } else outArray.splice(0, 1)
+        if (outArray[outArray.length - 1] !== `${date} 06:50:00`) outArray.push(`${date} 06:50:00`)
+    }
+
+    if (smenaState == '12') {
+        if (outArray[0] !== `${dayYesterday(date)} 07:00:00`) {
+            outArray.unshift(`${dayYesterday(date)} 07:00:00`)
+        } else outArray.splice(0, 1)
+        if (outArray[outArray.length - 1] !== `${date} 06:30:00`) outArray.push(`${date} 06:30:00`)
+    }
+
+    if (smenaState == '24') {
+        if (outArray[0] !== `${dayYesterday(date)} 07:00:00`) {
+            outArray.unshift(`${dayYesterday(date)} 07:00:00`)
+        } else outArray.splice(0, 1)
+        if (outArray[outArray.length - 1] !== `${date} 08:00:00`) outArray.push(`${date} 08:00:00`)
     }
 
     if (smenaState == '8и') {
@@ -116,8 +137,8 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
 
     let currentDate = dayNow()
 
-    let startTime = ''
-    let endTime = ''
+    let startTime = null
+    let endTime = null
 
     switch (typeTime) {
         case '8и':
@@ -128,9 +149,17 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
             startTime = dayYesterday(date) + ' 07:00:00'
             endTime = date + ' 07:00:00'
             break;
-            // case '2':
-            //     startTime = dayYesterday(date) + ' 18:00:00'
-            //     endTime = date + ' 08:00:00'
+        case '7':
+            startTime = dayYesterday(date) + ' 07:00:00'
+            endTime = date + ' 06:50:00'
+            break;
+        case '12':
+            startTime = dayYesterday(date) + ' 07:00:00'
+            endTime = date + ' 06:30:00'
+            break;
+        case '24':
+            startTime = dayYesterday(date) + ' 07:00:00'
+            endTime = date + ' 08:00:00'
             break;
         default:
             startTime = date + ' 00:00:00'
@@ -275,19 +304,6 @@ function filterLunch(dateArray, date, smenaState) {
             startLunch = date + ' 12:00:00'
             endLunch = date + ' 13:00:00'
     }
-
-    // if (smenaState == '8и') {
-    //     arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-    // } else if (smenaState == '8' || smenaState == '7' || smenaState == '24') {
-    //     arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-    //     arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
-    //     arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
-    // } else if (smenaState == '12') {
-    //     arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-    //     arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
-    //     arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
-    //     arraySave = insideFilterLunch(startLunch4, endLunch4, arraySave)
-    // }
     return arraySave
 }
 
@@ -335,7 +351,7 @@ function getHighchartSeriesAndNames(userData) {
                 color: '#38e817',
                 tooltip: {
                     pointFormatter: function () {
-                        let timer = msToTime(this.x2 - this.x)
+                        let timer = msToTimeDays(this.x2 - this.x)
                         return '<b>Работает </b>' + timer
                     },
                 },
@@ -347,7 +363,7 @@ function getHighchartSeriesAndNames(userData) {
                 color: '#ffea32',
                 tooltip: {
                     pointFormatter: function () {
-                        let timer = msToTime(this.x2 - this.x)
+                        let timer = msToTimeDays(this.x2 - this.x)
                         return '<b>Нет на месте </b>' + timer
                     },
                 },
@@ -376,7 +392,7 @@ function getHighchartSeriesAndNames(userData) {
                     color: '#38e817',
                     tooltip: {
                         pointFormatter: function () {
-                            let timer = msToTime(this.x2 - this.x)
+                            let timer = msToTimeDays(this.x2 - this.x)
                             return '<b>Работает </b>' + timer
                         },
                     },
@@ -389,7 +405,7 @@ function getHighchartSeriesAndNames(userData) {
                     color: '#ffea32',
                     tooltip: {
                         pointFormatter: function () {
-                            let timer = msToTime(this.x2 - this.x)
+                            let timer = msToTimeDays(this.x2 - this.x)
                             return '<b>Нет на месте </b>' + timer
                         },
                     },
