@@ -202,7 +202,7 @@ function insideFilterLunch(startLunch, endLunch, dateArray) {
         ) {
             if (arrayClear.length % 2 == 0) {
                 if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[startLunch, endLunch])
-            } else if (i % 2 == 1) {
+            } else if (i % 2 == 0) {
                 arraySave.splice(i + 1, 0, startLunch)
             } else arraySave.splice(i + 1, 0, endLunch)
         } else if (
