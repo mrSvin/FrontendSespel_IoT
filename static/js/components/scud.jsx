@@ -19,6 +19,7 @@ function Scud() {
     let [date, setDate] = useState(dayNow());
     let [place, setPlace] = useState(parseNameUrl(location.pathname))
     let [smenaState, setSmenaState] = useState('8и')
+    let [usersWithSmena, setUsersWithSmena] = useState('multiline')
 
     useEffect(() => {
         let promise = fetchRequestScud(date, place, smenaState)
@@ -29,8 +30,11 @@ function Scud() {
 
                 let objectsWithSmena = selectObjectsWithSmena(userData, smenaState)
 
-                // let filteredData = applyFilters(objectsWithSmena, smenaState, date)
-                let filteredData = applyFilters(userData, smenaState, date)
+                let filteredData = []
+
+                if(usersWithSmena == 'line'){
+                    filteredData = applyFilters(objectsWithSmena, smenaState, date)
+                } else filteredData = applyFilters(userData, smenaState, date)
 
                 setHeightHighchartContainer(Object.keys(filteredData).length);
 
@@ -41,7 +45,7 @@ function Scud() {
 
 
         })
-    }, [date, place, smenaState]);
+    }, [date, place, smenaState, usersWithSmena]);
 
     useEffect(() => {
 
@@ -137,6 +141,7 @@ function Scud() {
 
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
+                <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}/>
             </div>
 
             {smenaState == '8' ? <LunchEightHours heightHighchartContainer={heightHighchartContainer}/> : null}
