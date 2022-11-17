@@ -23,8 +23,16 @@
     position: absolute;
     top: -40px;
     left: 5px;
-    color: rgb(26, 170, 229);
+    color: rgba(26, 170, 229, 1);
     font-weight: 600;
+}
+
+.lunchTimeHide {
+    background: rgba(26, 170, 229, 0.1);
+}
+
+.lunchTimeHide > p {
+    color: rgba(26, 170, 229, 0.1);
 }
 
 .strokelunchTime {

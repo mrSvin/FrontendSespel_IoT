@@ -12,6 +12,25 @@ function selectObjectsWithSmena(userData, smenaState) {
     return obj
 }
 
+function changeLunchOpacity() {
+
+    let highchartsTracker = document.getElementsByClassName('highcharts-tracker')
+    let lunchTimes = document.getElementsByClassName('lunchTime')
+
+    for (let i = 0; i < highchartsTracker.length; i++) {
+        highchartsTracker[i].addEventListener('mouseover', (event) => {
+            for (let j = 0; j < lunchTimes.length; j++) {
+                lunchTimes[j].classList.add('lunchTimeHide')
+            }
+        });
+        highchartsTracker[i].addEventListener('mouseleave', (event) => {
+            for (let j = 0; j < lunchTimes.length; j++) {
+                lunchTimes[j].classList.remove('lunchTimeHide')
+            }
+        });
+    }
+}
+
 function Scud() {
 
     const history = useHistory()
@@ -32,7 +51,7 @@ function Scud() {
 
                 let filteredData = []
 
-                if(usersWithSmena == 'line'){
+                if (usersWithSmena == 'line') {
                     filteredData = applyFilters(objectsWithSmena, smenaState, date)
                 } else filteredData = applyFilters(userData, smenaState, date)
 
@@ -41,6 +60,9 @@ function Scud() {
                 let series = getHighchartSeriesAndNames(filteredData)
 
                 highChartScud(...series)
+                changeLunchOpacity()
+
+
             }
 
 
@@ -141,7 +163,11 @@ function Scud() {
 
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}/>
+                <div>
+                    <p>Привязка по смене</p>
+                    <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}/>
+                </div>
+
             </div>
 
             {smenaState == '8' ? <LunchEightHours heightHighchartContainer={heightHighchartContainer}/> : null}
