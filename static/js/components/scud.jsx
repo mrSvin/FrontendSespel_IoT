@@ -59,11 +59,7 @@ function Scud() {
 
                 highChartScud(...series)
                 changeLunchOpacity()
-
-
             }
-
-
         })
     }, [date, place, smenaState, usersWithSmena]);
 
@@ -158,14 +154,9 @@ function Scud() {
                 </Link>
 
             </div>
-
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <div>
-                    <p>Привязка по смене</p>
                     <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}/>
-                </div>
-
             </div>
 
             {smenaState == '8' ? <LunchEightHours heightHighchartContainer={heightHighchartContainer}/> : null}
@@ -177,8 +168,6 @@ function Scud() {
             {smenaState == '24' ? <LunchTwentyFourHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
             {smenaState == '8и' ? <LunchItr heightHighchartContainer={heightHighchartContainer}/> : null}
-
-
         </div>
     );
 }

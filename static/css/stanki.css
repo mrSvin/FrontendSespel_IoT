@@ -103,6 +103,20 @@ body {
     color: wheat;
 }
 
+.switchBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.switchBlock > p {
+    color: #83addd;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+
 .switch {
     position: relative;
     display: inline-block;

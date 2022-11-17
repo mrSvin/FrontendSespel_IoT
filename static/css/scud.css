@@ -17,6 +17,7 @@
     top: 52px;
     z-index: 1;
     pointer-events: none;
+    transition: 1s;
 }
 
 .lunchTime > p {
@@ -25,6 +26,7 @@
     left: 5px;
     color: rgba(26, 170, 229, 1);
     font-weight: 600;
+    transition: 1s;
 }
 
 .lunchTimeHide {

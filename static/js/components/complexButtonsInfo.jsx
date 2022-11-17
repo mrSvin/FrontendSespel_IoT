@@ -437,7 +437,7 @@ function SwitchLineSmenaHC({date, stateLineHC, setStateLineHC, complexName, comp
     )
 }
 
-function SwitchLineHCIndividual({stateLineHC, setStateLineHC}) {
+function SwitchLineHCIndividual({stateLineHC, setStateLineHC, text = 'Состояние '}) {
 
     const [disable, setDisable] = useState(false)
 
@@ -447,18 +447,21 @@ function SwitchLineHCIndividual({stateLineHC, setStateLineHC}) {
 
     return (
         <div className="energyCalendarContainer">
-            <label className="switch">
-                <input type="checkbox" disabled={disable} onChange={() => {
-                    setDisable(true)
-                    if (stateLineHC == 'line') {
-                        setStateLineHC('multiLine')
-                    } else {
-                        setStateLineHC('line')
-                    }
-                    setTimeout(Activate, 800)
-                }}/>
-                <span className="slider round"></span>
-            </label>
+            <div className="switchBlock">
+                <p>{text}</p>
+                <label className="switch">
+                    <input type="checkbox" disabled={disable} onChange={() => {
+                        setDisable(true)
+                        if (stateLineHC == 'line') {
+                            setStateLineHC('multiLine')
+                        } else {
+                            setStateLineHC('line')
+                        }
+                        setTimeout(Activate, 800)
+                    }}/>
+                    <span className="slider round"></span>
+                </label>
+            </div>
         </div>
     )
 }
