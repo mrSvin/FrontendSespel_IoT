@@ -17,17 +17,15 @@ function changeLunchOpacity() {
     let highchartsTracker = document.getElementsByClassName('highcharts-tracker')
     let lunchTimes = document.getElementsByClassName('lunchTime')
 
-    for (let i = 0; i < highchartsTracker.length; i++) {
-        highchartsTracker[i].addEventListener('mouseover', (event) => {
-            for (let j = 0; j < lunchTimes.length; j++) {
-                lunchTimes[j].classList.add('lunchTimeHide')
-            }
-        });
-        highchartsTracker[i].addEventListener('mouseleave', (event) => {
-            for (let j = 0; j < lunchTimes.length; j++) {
-                lunchTimes[j].classList.remove('lunchTimeHide')
-            }
-        });
+    for (let i = 0; i < lunchTimes.length; i++) {
+        for (let j = 0; j < highchartsTracker.length; j++) {
+            highchartsTracker[j].addEventListener('mouseover', (event) => {
+                lunchTimes[i].classList.add('lunchTimeHide')
+            });
+            highchartsTracker[j].addEventListener('mouseleave', (event) => {
+                lunchTimes[i].classList.remove('lunchTimeHide')
+            });
+        }
     }
 }
 
