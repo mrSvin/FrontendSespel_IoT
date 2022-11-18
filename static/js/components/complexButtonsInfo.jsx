@@ -437,7 +437,7 @@ function SwitchLineSmenaHC({date, stateLineHC, setStateLineHC, complexName, comp
     )
 }
 
-function SwitchLineHCIndividual({stateLineHC, setStateLineHC, text = 'Состояние '}) {
+function SwitchLineHCIndividual({stateLineHC, setStateLineHC, text = 'Переключить тип диаграмм '}) {
 
     const [disable, setDisable] = useState(false)
 
