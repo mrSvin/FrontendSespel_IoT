@@ -1,0 +1,257 @@
+.formUsersControl {
+    position: absolute;
+    background-color: #2c5275;
+    width: 235px;
+    border-radius: 15px;
+    padding: 23px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+    z-index: 3;
+    margin: 0 auto;
+    right: 73%;
+}
+
+.formUsersControl > label {
+    font-size: 18px;
+    margin: 5px 0px;
+    color: white;
+
+}
+
+.formUsersControl > input {
+    width: 90%;
+    margin: 0 auto;
+    color: white;
+    background: #114360;
+}
+
+.formUsersControl select {
+    width: 90%;
+    margin: 0 auto;
+    color: white;
+    background: #114360;
+    height: 25px;
+    border-width: 2px;
+    border-style: inset;
+}
+
+.formUsersControl select > option {
+    width: 90%;
+    margin: 0 auto;
+    color: white;
+    background: #114360;
+    height: 21px;
+}
+
+.formUsersControl > button {
+    margin-top: 10%;
+}
+
+.formHideUsersControl {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.formUsersControl > button {
+    color: white;
+    background: #1e74bd;
+    font-size: 110%;
+    padding: 0 10%;
+    letter-spacing: 0.025em;
+    border: 1px solid #22475c;
+    border-radius: 15px;
+    min-height: 35px;
+    cursor: pointer;
+    margin: 15px auto;
+}
+
+.formUsersControl > button:hover {
+    box-shadow: 0px 0px 5px 0px #507e8f, inset 0px 0px 0px 0px #8a9da5 !important;
+}
+
+.formUsersControl input:hover,
+.formUsersControl select:hover {
+    cursor: pointer;
+}
+
+.smenaTimeScud {
+    display: flex;
+    justify-content: center;
+}
+
+.smenaTimeScud label {
+    color: white;
+    display: inline-block;
+    width: 100%;
+}
+
+.smenaTimeScud label:hover {
+    box-shadow: 0px 0px 5px 0px #507e8f, inset 0px 0px 0px 0px #8a9da5 !important;
+    cursor: pointer;
+}
+
+.tableUsersControl {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 45%;
+    color: white;
+    margin: 2% 2% 0 2%;
+    /* word-break: break-word; */
+    border-color: white;
+    border: 2px solid #888a8d;
+    transition: 0.3s;
+    margin: 0 auto;
+}
+
+.tableUsersControl > tbody {
+    display: block;
+    width: 100%;
+    max-height: 65vh;
+    overflow-x: hidden;
+    transition: max-height 0.15s ease-out;
+    transition: max-height 0.2s ease-in;
+}
+
+.tableUsersControl > tbody > tr {
+    padding: 4px;
+    line-height: 215%;
+    text-align: center;
+    border-bottom: 1px solid #979595;
+    font-family: sans-serif;
+    background: #252734;
+}
+
+
+.tableUsersControl > thead {
+    border-bottom: 1px solid #979595;
+    background: #2c5275;
+    display: block;
+}
+
+.tableUsersControl > thead > tr > th, .tableUsersControl > tbody > tr > td {
+    width: 25%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tableUsersControl tr {
+    display: flex;
+    width: 100%;
+}
+
+.tableUsersControl > thead > tr > th:nth-child(4) {
+    margin-right: 2.6%;
+}
+
+.tableUsersControl > tbody > tr > td:nth-child(4) {
+    margin-right: 2%;
+}
+
+
+.tableUsersControl > thead > tr > th:nth-child(5),
+.tableUsersControl > thead > tr > th:nth-child(6),
+.tableUsersControl > tbody > tr > td:nth-child(5),
+.tableUsersControl > tbody > tr > td:nth-child(6) {
+    width: 10%;
+}
+
+
+.tableUsersControl > thead > tr > th:nth-child(6) {
+    margin-right: 2.5%;
+}
+
+.tableUsersControl > tbody > tr > td:nth-child(6) {
+    margin-right: 1%;
+}
+
+.tableUsersControl > tbody > tr > td:last-child {
+    color: red;
+    font-weight: bold;
+    font-size: 1.5em;
+    position: relative;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.tableUsersControl > tbody > tr > td:nth-child(5):hover {
+    cursor: pointer;
+}
+
+.tableUsersControl > tbody > tr > td:last-child:hover {
+    cursor: pointer;
+}
+
+.tableBorderChange {
+    border: 0.1px solid;
+    border-color: #bc761c;
+}
+
+.tableBorderAdd {
+    border: 0.1px solid;
+    border-color: #536a4d;
+}
+
+.tdChange {
+    background: no-repeat center/53% url(../images/iconPen.svg);
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+}
+
+.tdDelete {
+    background: no-repeat center/65% url(../images/iconDelete.svg);
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+}
+
+.tdChange:hover {
+    filter: brightness(150%) contrast(120%);
+}
+
+.tdDelete:hover {
+    filter: brightness(150%) contrast(120%);
+}
+
+.addButtonUsersControl {
+    margin: 5px auto;
+    width: 25%;
+    user-select: none;
+}
+
+.errorMessage {
+    text-align: center;
+}
+
+.greenMessage {
+    color: green;
+}
+
+.redMessage {
+    color: red;
+}
+
+.typeSmenaWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yellowQuestion {
+    color: #ffeb00;
+    margin-right: -17px;
+    padding: 10px 10px 10px 0px;
+    font-weight: bolder;
+    user-select: none;
+    cursor: help;
+    position: relative;
+}
+
+.infoBlockUsersControl {
+    position: absolute;
+    visibility: hidden;
+}

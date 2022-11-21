@@ -107,6 +107,10 @@ function App({hideLoader}) {
                         <Scud/>
                     </Route>
 
+                    <Route path="/adminpanel/userscontrol">
+                        <UsersControl/>
+                    </Route>
+
                     <Route exact path="/">
                         <Home/>
                     </Route>
