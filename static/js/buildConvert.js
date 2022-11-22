@@ -299,7 +299,7 @@ function updateLoadDataIndividual(promiseVariable, day1, complexName, fetchNames
             let kolOpArray = []
 
             let parserDataArray = data.map(value => {
-                let convertDataWork = parseLinearSutki(value[0], arrayLine[1], day1, value[5])
+                let convertDataWork = parseLinearSutki(value[0], arrayLine[1], day1, value[5], value[1].length)
                 let convertDataPause = parseLinearSutki(value[1], arrayLine[2], day1)
                 let convertDataOff = parseLinearSutki(value[2], arrayLine[3], day1)
                 let convertDataAvar = parseLinearSutki(value[3], arrayLine[4], day1)
@@ -378,6 +378,7 @@ function updateLoadDataIndividualMonth(promiseVariable, date, complexName, fetch
 function updateLoadDataIndividualSmena(promiseVariable, day1, complexName, fetchNames, typeLine = "multiLine") {
     promiseVariable
         .then(result => {
+            console.log('Иной смена')
             let data = result.map(e => {
                 return [[e.work.slice(), e.pause.slice(), e.off.slice(), e.avar.slice(), e.nagruzka.slice(), e.programName.slice()],
                     [e.work2.slice(), e.pause2.slice(), e.off2.slice(), e.avar2.slice(), e.nagruzka2.slice(), e.programName2.slice()]]

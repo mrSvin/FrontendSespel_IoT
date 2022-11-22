@@ -265,6 +265,9 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
     let stanok = []
     for (let i = 0; 6 > i; i++) {   // метод concat объединяет массивы
         if (today[i] != undefined && yesterday[i] != undefined) {
+            if (i == 0 && yesterday[0].length == yesterday[1].length) {
+                yesterday[0].pop()
+            }
             stanok.push(yesterday[i].concat(today[i]))
         }
     }
@@ -414,9 +417,13 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
 }
 
 // Парсинг массива со свойствами x, x2, y для highcharts
-function parseLinearSutki(arrayParse, y, date, arrayName = null) {
+function parseLinearSutki(arrayParse, y, date, arrayName = null, pauseLength = 0) {
 
-    arrayParse = addLastTime(arrayParse, date)
+    if (y !== 1) {
+        arrayParse = addLastTime(arrayParse, date)
+    } else if (arrayParse.length !== pauseLength) {
+        arrayParse = addLastTime(arrayParse, date)
+    }
 
     var index_pars = 0; // Индекс по одному из циклов
     var arraySave = [] // Массив, который будет заполняться
