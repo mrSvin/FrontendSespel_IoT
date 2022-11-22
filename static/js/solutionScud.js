@@ -9,7 +9,7 @@ function getWorkTime(dateArray) {
         time += msArray[i] - msArray[i - 1]
     }
 
-    time = msToTimeDays(time)
+    // time = msToTimeDays(time)
     return time
 }
 
@@ -330,16 +330,34 @@ function getHighchartSeriesAndNames(userData) {
     let arrayData = []
 
     let blackArrayTrigger = false
+    let sortTrigger = true
 
-    Object.keys(userData).forEach((e) => {
-        arrayNames.push(`${e} (${userData[e]['POS']}) таб.${userData[e]['tabid']} \n ${userData[e]['workTime']}`)
-        arrayData.push(userData[e]['highchartsWork'])
-        arrayData.push(userData[e]['highchartsOutWork'])
-        if (userData[e]['highchartsBlack'] != null) {
-            blackArrayTrigger = true
-            arrayData.push(userData[e]['highchartsBlack'])
-        }
-    })
+    if(sortTrigger){
+        // Сортировка ключей по времени работы
+        let keysSorted = Object.keys(userData).sort(function (a, b) {
+            return userData[b]['workTime'] - userData[a]['workTime']
+        })
+
+        keysSorted.forEach((e, i) => {
+            arrayNames.push(`${e} (${userData[e]['POS']}) таб.${userData[e]['tabid']} \n ${msToTimeDays(userData[e]['workTime'])}`)
+            arrayData.push(filterY(userData[e]['highchartsWork'],i))
+            arrayData.push(filterY(userData[e]['highchartsOutWork'],i))
+            if (userData[e]['highchartsBlack'] != null) {
+                blackArrayTrigger = true
+                arrayData.push(filterY(userData[e]['highchartsBlack']))
+            }
+        })
+    } else {
+        Object.keys(userData).forEach((e) => {
+            arrayNames.push(`${e} (${userData[e]['POS']}) таб.${userData[e]['tabid']} \n ${msToTimeDays(userData[e]['workTime'])}`)
+            arrayData.push(userData[e]['highchartsWork'])
+            arrayData.push(userData[e]['highchartsOutWork'])
+            if (userData[e]['highchartsBlack'] != null) {
+                blackArrayTrigger = true
+                arrayData.push(userData[e]['highchartsBlack'])
+            }
+        })
+    }
 
     let series = []
 

@@ -29,6 +29,13 @@ function changeLunchOpacity() {
     }
 }
 
+function filterY(data, y) {
+        data.forEach((e,i) => {
+        data[i]['y'] = y
+    })
+    return data
+}
+
 function Scud() {
 
     const history = useHistory()
@@ -161,7 +168,8 @@ function Scud() {
             </div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                    <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena} text={'Привязка по смене'}/>
+                <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
+                                        text={'Привязка по смене'}/>
             </div>
 
             {smenaState == '8' ? <LunchEightHours heightHighchartContainer={heightHighchartContainer}/> : null}
