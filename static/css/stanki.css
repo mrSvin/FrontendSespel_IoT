@@ -46,6 +46,10 @@ body {
     height: 160px;
 }
 
+.lineSwitchShort {
+    height: 270px;
+}
+
 .roundSukiHighChart {
     width: 20%;
     height: 400px;

@@ -1,7 +1,7 @@
 function ComplexSutkiAllInfo({
                                  complexName, complexImg, complexMesto,
                                  size, idContainer = null, service,
-                                 alarm, programs, laser, report, current
+                                 alarm, programs, laser, report, current, typeLine='multiLine'
                              }) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
@@ -15,7 +15,7 @@ function ComplexSutkiAllInfo({
                          size={size} alarm={alarm} programs={programs} laser={laser} service={service}
                          report={report} current={current}/>
             <div className='highChartsLineRound'>
-                <div className='lineComplex'>
+                <div className={`lineComplex ${typeLine == "multiLine"? null : 'lineSwitchShort'}`}>
                     <div className="lineSukiHighChart" id={idLine}></div>
                     {idProgram != null ?
                         <div className="lineProgramHighChart" id={idProgram}></div>

@@ -240,7 +240,8 @@ function Stanki() {
                                                         programs={stanok.buttonNames.programsName}
                                                         laser={stanok.buttonNames.laser}
                                                         report={stanok.buttonNames.report}
-                                                        current={stanok.buttonNames.current}/>
+                                                        current={stanok.buttonNames.current}
+                                                        typeLine={stateLineHC}/>
                         } else return null
                     } else return null
 
