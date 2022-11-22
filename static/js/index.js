@@ -107,7 +107,7 @@ function App({hideLoader}) {
                         <Scud/>
                     </Route>
 
-                    <Route path="/adminpanel/userscontrol">
+                    <Route path="/adminpanel/userscontrolNew">
                         <UsersControl/>
                     </Route>
 
