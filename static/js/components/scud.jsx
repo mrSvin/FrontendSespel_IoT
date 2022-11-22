@@ -153,6 +153,11 @@ function Scud() {
                     </div>
                 </Link>
 
+                <Link to={`/adminpanel/userscontrolNew`}>
+                    <div className={place == 'admin' ? 'menuSelect' : 'menuNoSelect'}>АДМИН
+                    </div>
+                </Link>
+
             </div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>

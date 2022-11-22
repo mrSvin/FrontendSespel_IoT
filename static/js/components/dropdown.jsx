@@ -144,7 +144,7 @@ function Dropdown(props) {
                     })()}
                 </p>
                 {props.dataProfile.userRole == "ROLE_ADMIN" ?
-                    <button className="buttonAdmin" onClick={() => window.location.href = '/adminpanel/userscontrolNew'}>Администрирование</button> :
+                    <button className="buttonAdmin" onClick={() => window.location.href = '/adminpanel/userscontrol'}>Администрирование</button> :
                     null}
                 <LogoutButton setDropdown = {setDropdown}/>
 
