@@ -9,6 +9,19 @@
     position: relative;
 }
 
+.otklon{
+    min-height: 0px;
+    position: absolute;
+    right: 1%;
+    width: 3%;
+    top: 52px;
+    z-index: 1;
+    pointer-events: none;
+    transition: 1s;
+    display: flex;
+    flex-direction: column;
+}
+
 .lunchTime {
     min-height: 0px;
     background: rgba(26, 170, 229, 0.5);

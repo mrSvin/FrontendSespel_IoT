@@ -30,7 +30,7 @@ function changeLunchOpacity() {
 }
 
 function filterY(data, y) {
-        data.forEach((e,i) => {
+    data.forEach((e, i) => {
         data[i]['y'] = y
     })
     return data
@@ -181,6 +181,8 @@ function Scud() {
             {smenaState == '24' ? <LunchTwentyFourHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
             {smenaState == '8и' ? <LunchItr heightHighchartContainer={heightHighchartContainer}/> : null}
+
+            <Otklon heightHighchartContainer={heightHighchartContainer}/>
         </div>
     );
 }
@@ -401,6 +403,24 @@ function LunchItr({heightHighchartContainer}) {
                 <div className='strokelunchTime'></div>
             </div>
             <div id="containerScud" style={height} className="scudHigcharts"></div>
+        </div>
+    )
+}
+
+function Otklon({heightHighchartContainer}) {
+
+    let lunchSettings = {
+        height: getLunchHeight(heightHighchartContainer),
+    }
+
+    return (
+        <div className='wrapperScud'>
+            <div className={'otklon'} style={lunchSettings}>
+                <p>Отклонения</p>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            </div>
         </div>
     )
 }
