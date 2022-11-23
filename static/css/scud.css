@@ -30,6 +30,7 @@
     font-weight: 600;
     transition: 1s;
     text-align: center;
+    white-space: nowrap;
 }
 
 .otklonTime {
