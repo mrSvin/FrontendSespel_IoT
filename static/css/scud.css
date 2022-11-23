@@ -14,12 +14,31 @@
     position: absolute;
     right: 1%;
     width: 3%;
-    top: 52px;
+    top: 314px;
     z-index: 1;
     pointer-events: none;
     transition: 1s;
     display: flex;
     flex-direction: column;
+}
+
+.otklon > p{
+    position: absolute;
+    top: -40px;
+    right: 4px;
+    color: rgba(26, 170, 229, 1);
+    font-weight: 600;
+    transition: 1s;
+    text-align: center;
+}
+
+.otklonTime {
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 27px;
+    font-weight: 600;
 }
 
 .lunchTime {

@@ -1,3 +1,16 @@
+function msToTimeScud(duration, date = 24) {
+
+    let minutes = parseInt((duration / (1000 * 60)) % 60),
+        hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+
+    if (hours <= 9) hours = '0' + hours
+
+    if (minutes <= 9) minutes = '0' + minutes
+
+    return `${hours}:${minutes}`
+}
+
 function selectObjectsWithSmena(userData, smenaState) {
     let obj = {}
     console.log('Выбранный тип смены', smenaState)
@@ -414,12 +427,12 @@ function Otklon({heightHighchartContainer}) {
     }
 
     return (
-        <div className='wrapperScud'>
+        <div>
             <div className={'otklon'} style={lunchSettings}>
-                <p>Отклонения</p>
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
+                <p>Откл-е</p>
+                <div className='otklonTime'>+01:48</div>
+                <div className='otklonTime'>+01:51</div>
+                <div className='otklonTime'>-01:48</div>
             </div>
         </div>
     )
