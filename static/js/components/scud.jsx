@@ -57,6 +57,7 @@ function Scud() {
     let [place, setPlace] = useState(parseNameUrl(location.pathname))
     let [smenaState, setSmenaState] = useState('8и')
     let [usersWithSmena, setUsersWithSmena] = useState('multiline')
+    let [workTime, setWorkTime] = useState([])
 
     useEffect(() => {
         let promise = fetchRequestScud(date, place, smenaState)
@@ -77,7 +78,8 @@ function Scud() {
 
                 let series = getHighchartSeriesAndNames(filteredData)
 
-                highChartScud(...series)
+                highChartScud(series[0], series[1])
+                setWorkTime(series[2])
                 changeLunchOpacity()
             }
         })
@@ -195,7 +197,7 @@ function Scud() {
 
             {smenaState == '8и' ? <LunchItr heightHighchartContainer={heightHighchartContainer}/> : null}
 
-            <Otklon heightHighchartContainer={heightHighchartContainer}/>
+            <Otklon heightHighchartContainer={heightHighchartContainer} workTime={workTime} smenaState={smenaState}/>
         </div>
     );
 }
@@ -420,11 +422,13 @@ function LunchItr({heightHighchartContainer}) {
     )
 }
 
-function Otklon({heightHighchartContainer}) {
+function Otklon({heightHighchartContainer, workTime, smenaState}) {
 
     let lunchSettings = {
         height: getLunchHeight(heightHighchartContainer),
     }
+
+    console.log(workTime)
 
     return (
         <div>
