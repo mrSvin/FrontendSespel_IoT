@@ -148,7 +148,7 @@ function Scud() {
                                 <span className={smenaState == '12' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('12')
-                                      }}>12 часов</span>
+                                      }}>11 часов</span>
                                 <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('24')
@@ -179,7 +179,7 @@ function Scud() {
                                 <span className={smenaState == '12' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('12')
-                                      }}>12 часов</span>
+                                      }}>11 часов</span>
                                 <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
                                           setSmenaState('24')
