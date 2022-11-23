@@ -454,23 +454,48 @@ function Otklon({heightHighchartContainer, workTime, smenaState}) {
         height: getLunchHeight(heightHighchartContainer),
     }
 
+    let colorRed = {
+        color: '#df1919'
+    }
+
+    let colorGreen = {
+        color: '#19b319'
+    }
+
     let smenaTime = getSmenaTime(smenaState)
 
-    workTime.forEach((e, i) => {
+    // <div key={i} className='otklonTime'>-{t}/div>
+
+    // <div key={i} className='otklonTime'>-{t}/div>
+
+    workTime.map((e, i) => {
         let t = null
         t = smenaTime - e
         if (t >= 0) {
-            console.log('-', msToTimeScud(t))
-        } else console.log('+', msToTimeScud(-t))
+            t = msToTimeScud(t)
+            return '-'
+        } else {
+            t = msToTimeScud(-t)
+                return '+'
+            }
     })
 
     return (
         <div>
             <div className={'otklon'} style={lunchSettings}>
                 <p>Откл-е</p>
-                <div className='otklonTime'>+01:48</div>
-                <div className='otklonTime'>+01:51</div>
-                <div className='otklonTime'>-01:48</div>
+                {workTime.map((e, i) => {
+                        let t = null
+                        t = smenaTime - e
+                        if (t >= 0) {
+                            t = msToTimeScud(t)
+                            return <div key={i} className='otklonTime'>-{t}</div>
+                        } else {
+                            t = msToTimeScud(-t)
+                            return <div key={i} className='otklonTime'>+{t}</div>
+                        }
+                    })
+                }
             </div>
         </div>
     )
