@@ -39,6 +39,8 @@
     align-items: center;
     font-size: 27px;
     font-weight: 600;
+    position: relative;
+    right: 5px;
 }
 
 .lunchTime {

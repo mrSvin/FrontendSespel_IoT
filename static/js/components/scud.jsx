@@ -464,22 +464,6 @@ function Otklon({heightHighchartContainer, workTime, smenaState}) {
 
     let smenaTime = getSmenaTime(smenaState)
 
-    // <div key={i} className='otklonTime'>-{t}/div>
-
-    // <div key={i} className='otklonTime'>-{t}/div>
-
-    workTime.map((e, i) => {
-        let t = null
-        t = smenaTime - e
-        if (t >= 0) {
-            t = msToTimeScud(t)
-            return '-'
-        } else {
-            t = msToTimeScud(-t)
-                return '+'
-            }
-    })
-
     return (
         <div>
             <div className={'otklon'} style={lunchSettings}>
@@ -489,10 +473,10 @@ function Otklon({heightHighchartContainer, workTime, smenaState}) {
                         t = smenaTime - e
                         if (t >= 0) {
                             t = msToTimeScud(t)
-                            return <div key={i} className='otklonTime'>-{t}</div>
+                            return <div key={i} className='otklonTime' style={colorRed}>-{t}</div>
                         } else {
                             t = msToTimeScud(-t)
-                            return <div key={i} className='otklonTime'>+{t}</div>
+                            return <div key={i} className='otklonTime' style={colorGreen}>+{t}</div>
                         }
                     })
                 }
