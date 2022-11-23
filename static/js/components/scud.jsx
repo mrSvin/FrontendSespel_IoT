@@ -11,6 +11,32 @@ function msToTimeScud(duration, date = 24) {
     return `${hours}:${minutes}`
 }
 
+function getSmenaTime(typeSmena) {
+    let smenaTime = 0
+
+    switch (typeSmena) {
+        case '8и':
+            smenaTime = 28800000
+            break;
+        case '8':
+            smenaTime = 28800000
+            break;
+        case '7':
+            smenaTime = 26400000
+            break;
+        case '12':
+            smenaTime = 39600000
+            break;
+        case '24':
+            smenaTime = 81000000
+            break;
+        default:
+            smenaTime = 28800000
+            break
+    }
+    return smenaTime
+}
+
 function selectObjectsWithSmena(userData, smenaState) {
     let obj = {}
     console.log('Выбранный тип смены', smenaState)
@@ -427,6 +453,16 @@ function Otklon({heightHighchartContainer, workTime, smenaState}) {
     let lunchSettings = {
         height: getLunchHeight(heightHighchartContainer),
     }
+
+    let smenaTime = getSmenaTime(smenaState)
+
+    workTime.forEach((e, i) => {
+        let t = null
+        t = smenaTime - e
+        if (t >= 0) {
+            console.log('+', msToTimeScud(-t))
+        } else console.log('-', msToTimeScud(t))
+    })
 
     console.log(workTime)
 
