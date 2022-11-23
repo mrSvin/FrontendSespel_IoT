@@ -460,11 +460,9 @@ function Otklon({heightHighchartContainer, workTime, smenaState}) {
         let t = null
         t = smenaTime - e
         if (t >= 0) {
-            console.log('+', msToTimeScud(-t))
-        } else console.log('-', msToTimeScud(t))
+            console.log('-', msToTimeScud(t))
+        } else console.log('+', msToTimeScud(-t))
     })
-
-    console.log(workTime)
 
     return (
         <div>
