@@ -439,7 +439,7 @@ function SwitchLineSmenaHC({date, stateLineHC, setStateLineHC, complexName, comp
 
 function SwitchLineHCIndividual({stateLineHC, setStateLineHC, text = 'Переключить тип диаграмм ', startValue=false}) {
 
-    const [disable, setDisable] = useState(startValue)
+    const [disable, setDisable] = useState(false)
 
     function Activate() {
         setDisable(false)
@@ -450,7 +450,7 @@ function SwitchLineHCIndividual({stateLineHC, setStateLineHC, text = 'Перек
             <div className="switchBlock">
                 <p>{text}</p>
                 <label className="switch">
-                    <input type="checkbox" disabled={disable} onChange={() => {
+                    <input type="checkbox" disabled={disable} checked={startValue} onChange={() => {
                         setDisable(true)
                         if (stateLineHC == 'line') {
                             setStateLineHC('multiLine')
