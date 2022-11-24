@@ -415,7 +415,7 @@ function WorkTime({heightHighchartContainer, workTime}) {
 
     let lunchSettings = {
         height: getLunchHeight(heightHighchartContainer),
-        right: '0.5%',
+        right: '20px',
         color: 'white',
     }
 
