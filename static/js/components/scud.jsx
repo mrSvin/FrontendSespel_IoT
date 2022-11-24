@@ -133,9 +133,9 @@ function Scud() {
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
                 <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
-                                        text={'Привязка по смене'}/>
+                                        text={'Привязка по смене'} startValue={true}/>
             </div>
-            <p className='switchButtonMessage'>{usersWithSmena == 'Line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
+            <p className='switchButtonMessage'>{usersWithSmena == 'line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
 
             {smenaState == '8' ? <LunchEightHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
