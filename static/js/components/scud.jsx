@@ -125,7 +125,7 @@ function Scud() {
                 </Link>
 
                 <Link to={`/adminpanel/userscontrolNew`}>
-                    <div className={place == 'admin' ? 'menuSelect' : 'menuNoSelect'}>АДМИН
+                    <div className={place == 'admin' ? 'menuSelect hideMessage' : 'menuNoSelect hideMessage'}>АДМИН
                     </div>
                 </Link>
 
@@ -420,7 +420,7 @@ function WorkTime({heightHighchartContainer, workTime}) {
     }
 
     let pSetting = {
-        right: '20px',
+        right: '0px',
     }
 
 
