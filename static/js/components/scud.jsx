@@ -124,8 +124,8 @@ function Scud() {
                     </div>
                 </Link>
 
-                <Link to={`/adminpanel/userscontrolNew`}>
-                    <div className={place == 'admin' ? 'menuSelect hideMessage' : 'menuNoSelect hideIndividualAll'}>АДМИН
+                <Link to={`/adminpanel/userscontrolNew`} className={'hideIndividualAll'}>
+                    <div className={place == 'admin' ? 'menuSelect hideMessage' : 'menuNoSelect'}>АДМИН
                     </div>
                 </Link>
 
@@ -159,19 +159,19 @@ function LunchEightHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '34.9%',
+        left: '29.9%',
         width: '1.5%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '59%',
+        left: '54%',
         width: '1.5%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '81.5%',
+        left: '86.5%',
         width: '1.5%'
     }
 
@@ -206,19 +206,19 @@ function LunchSevenHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '33.05%',
+        left: '28.05%',
         width: '3%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '59.3%',
+        left: '54.3%',
         width: '3%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '81.9%',
+        left: '86.9%',
         width: '3%'
     }
 
@@ -253,25 +253,25 @@ function LunchTwelveHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '35.2%',
+        left: '30.2%',
         width: '1.5%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '49.3%',
+        left: '44.3%',
         width: '1.5%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '69.25%',
+        left: '64.25%',
         width: '1.5%'
     }
 
     let lunchSettings4 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '84.3%',
+        left: '79.3%',
         width: '1.5%'
     }
 
@@ -310,19 +310,19 @@ function LunchTwentyFourHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '37.4%',
+        left: '32.4%',
         width: '1.5%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '59%',
+        left: '54%',
         width: '1.5%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '82.2%',
+        left: '77.2%',
         width: '1.5%'
     }
 
@@ -357,7 +357,7 @@ function LunchItr({heightHighchartContainer}) {
 
     let lunchSettings = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '57.6%',
+        left: '52.6%',
         width: '3%',
     }
 
