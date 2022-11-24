@@ -431,10 +431,10 @@ function WorkTime({heightHighchartContainer, workTime}) {
 
     return (
         <div>
-            <div className={'otklon'} style={lunchSettings }>
+            <div className={'otklon'} style={lunchSettings}>
                 <p style={pSetting}>Время</p>
                 {workTime.map((e, i) => {
-                    return <div key={i} className='otklonTime' style={style}><p>{msToTimeScud(e)}</p></div>
+                    return <div key={i} className='otklonTime' style={style}>{msToTimeScud(e)}</div>
                 })
                 }
             </div>

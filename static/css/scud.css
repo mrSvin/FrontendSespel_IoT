@@ -34,7 +34,6 @@
 }
 
 .otklonTime {
-    /*height: 52px;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,7 +41,7 @@
     font-weight: 600;
     position: relative;
     right: 5px;
-    width: max-content;
+    width: 75px;
 }
 
 .lunchTime {
