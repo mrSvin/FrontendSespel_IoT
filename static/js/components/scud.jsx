@@ -455,11 +455,13 @@ function Otklon({heightHighchartContainer, workTime, smenaState}) {
     }
 
     let colorRed = {
-        color: '#df1919'
+        color: '#df1919',
+        height: heightHighchartContainer > 10? '52px' : '105px'
     }
 
     let colorGreen = {
-        color: '#19b319'
+        color: '#19b319',
+        height: heightHighchartContainer > 10? '52px' : '105px'
     }
 
     let smenaTime = getSmenaTime(smenaState)
