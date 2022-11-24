@@ -31,7 +31,7 @@ function Header() {
                         <p className="mailInfo">{dataProfile.userMail}</p>
                     </div>
 
-                    <Dropdown dataProfile={dataProfile}/>
+                    <Dropdown dataProfile={dataProfile} setDataProfile={setDataProfile}/>
 
                 </div>
 

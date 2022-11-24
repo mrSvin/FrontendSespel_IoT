@@ -38,7 +38,7 @@ function useOutsideAlerter(ref,dropDown, setDropdown) {
     }, [ref]);
 }
 
-function Dropdown(props) {
+function Dropdown({dataProfile,setDataProfile}) {
 
     const [dropDown, setDropdown] = useState("none");
 
@@ -58,16 +58,37 @@ function Dropdown(props) {
             body: data
         })
         if (response.ok) {
-            props.dataProfile.imageUser = `${props.dataProfile.imageUser}?${new Date().getTime()}`
+            getBase64(input.files[0])
             setDropdown("none")
         }
 
     }
 
+    function getBase64(file) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            handleOnChangeCategory(reader.result)
+        };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+        };
+    }
+
+    function handleOnChangeCategory(imageProfile) {
+        console.log(imageProfile.slice(22))
+        console.log(imageProfile)
+        setDataProfile(prevState => ({
+            ...prevState,
+            imageUser: imageProfile.slice(22)
+        }));
+
+    }
 
     //Закрытие dropdown на клик вне поля
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef, dropDown, setDropdown);
+
 
 
     return (
@@ -77,7 +98,7 @@ function Dropdown(props) {
             <input
                 className="avatar"
                 type="image"
-                src={props.dataProfile.imageUser}
+                src={`data:image/jpeg;base64,${dataProfile.imageUser}`}
                 alt="Avatar"
                 onClick={changeDropdown}
             >
@@ -104,7 +125,7 @@ function Dropdown(props) {
                     />
                     <img
                         className="outputImage"
-                        src={props.dataProfile.imageUser}
+                        src={`data:image/jpeg;base64,${dataProfile.imageUser}`}
                         id="output"
                         width="200"
                     />
@@ -113,26 +134,25 @@ function Dropdown(props) {
                 <p
                     className="userName"
                 >
-                    {props.dataProfile.userName}
+                    {dataProfile.userName}
                 </p>
 
                 <p
                     className="userEmail"
                 >
-                    {props.dataProfile.userMail}
+                    {dataProfile.userMail}
                 </p>
 
                 <p className="userRoleStatic">Права доступа:</p>
                 <p
                     className="userRole"
                 >
-                    {/*{props.dataProfile.userRole == "ROLE_ADMIN"? "Администратор" : "Пользователь"}{props.dataProfile.userRole == "ROLE_ADMIN"? "Администратор" : "Пользователь"}*/}
                     {(() => {
-                        if (props.dataProfile.userRole == "ROLE_ADMIN") {
+                        if (dataProfile.userRole == "ROLE_ADMIN") {
                             return (
                                 "Администратор"
                             )
-                        } else if (props.dataProfile.userRole == "ROLE_SERVICE") {
+                        } else if (dataProfile.userRole == "ROLE_SERVICE") {
                             return (
                                 "Сервис"
                             )
@@ -143,7 +163,7 @@ function Dropdown(props) {
                         }
                     })()}
                 </p>
-                {props.dataProfile.userRole == "ROLE_ADMIN" ?
+                {dataProfile.userRole == "ROLE_ADMIN" ?
                     <button className="buttonAdmin" onClick={() => window.location.href = '/adminpanel/userscontrol'}>Администрирование</button> :
                     null}
                 <LogoutButton setDropdown = {setDropdown}/>
