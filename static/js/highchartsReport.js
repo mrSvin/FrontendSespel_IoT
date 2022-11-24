@@ -1263,7 +1263,9 @@ function highChartScud(series, generalDiagramNames) {
             reversed: true,
             labels: {
                 style: {
-                    color: '#FFF'
+                    color: '#f0f8ff',
+                    fontWeight: 'bolder',
+                    fontSize: '12px',
                 },
             }
         },

@@ -444,3 +444,112 @@ function getLunchHeight(heightHighchartContainer) {
         (heightHighchartContainer > 0) ? '70%' : 0
     return height
 }
+
+function getOtklonHeight(heightHighchartContainer) {
+    let height = '52px'
+
+    switch (heightHighchartContainer) {
+        case 1:
+            height = '210px'
+            break
+        case 2:
+            height = '105px'
+            break
+        case 3:
+            height = '70px'
+            break
+        case 4:
+            height = '52px'
+            break
+        case 5:
+            height = '42px'
+            break
+        case 6:
+            height = '38px'
+            break
+        case 7:
+            height = '39.5px'
+            break
+        default:
+            height = '52px'
+            break
+    }
+    return height
+}
+
+function msToTimeScud(duration, date = 24) {
+
+    let minutes = parseInt((duration / (1000 * 60)) % 60),
+        hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+
+
+    if (hours <= 9) hours = '0' + hours
+
+    if (minutes <= 9) minutes = '0' + minutes
+
+    return `${hours}:${minutes}`
+}
+
+function getSmenaTime(typeSmena) {
+    let smenaTime = 0
+
+    switch (typeSmena) {
+        case '8и':
+            smenaTime = 28800000
+            break;
+        case '8':
+            smenaTime = 28800000
+            break;
+        case '7':
+            smenaTime = 26400000
+            break;
+        case '12':
+            smenaTime = 39600000
+            break;
+        case '24':
+            smenaTime = 81000000
+            break;
+        default:
+            smenaTime = 28800000
+            break
+    }
+    return smenaTime
+}
+
+function selectObjectsWithSmena(userData, smenaState) {
+    let obj = {}
+    console.log('Выбранный тип смены', smenaState)
+    Object.keys(userData).forEach(name => {
+        if (userData[name].smenaInfo !== '') {
+            if (userData[name].smenaInfo == smenaState) {
+                obj[name] = userData[name]
+            }
+        }
+    })
+    console.log('Объекты ', obj)
+    return obj
+}
+
+function changeLunchOpacity() {
+
+    let highchartsTracker = document.getElementsByClassName('highcharts-tracker')
+    let lunchTimes = document.getElementsByClassName('lunchTime')
+
+    for (let i = 0; i < lunchTimes.length; i++) {
+        for (let j = 0; j < highchartsTracker.length; j++) {
+            highchartsTracker[j].addEventListener('mouseover', (event) => {
+                lunchTimes[i].classList.add('lunchTimeHide')
+            });
+            highchartsTracker[j].addEventListener('mouseleave', (event) => {
+                lunchTimes[i].classList.remove('lunchTimeHide')
+            });
+        }
+    }
+}
+
+function filterY(data, y) {
+    data.forEach((e, i) => {
+        data[i]['y'] = y
+    })
+    return data
+}

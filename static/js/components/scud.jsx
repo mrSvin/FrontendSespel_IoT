@@ -1,80 +1,3 @@
-function msToTimeScud(duration, date = 24) {
-
-    let minutes = parseInt((duration / (1000 * 60)) % 60),
-        hours = parseInt((duration / (1000 * 60 * 60)) % 24);
-
-
-    if (hours <= 9) hours = '0' + hours
-
-    if (minutes <= 9) minutes = '0' + minutes
-
-    return `${hours}:${minutes}`
-}
-
-function getSmenaTime(typeSmena) {
-    let smenaTime = 0
-
-    switch (typeSmena) {
-        case '8и':
-            smenaTime = 28800000
-            break;
-        case '8':
-            smenaTime = 28800000
-            break;
-        case '7':
-            smenaTime = 26400000
-            break;
-        case '12':
-            smenaTime = 39600000
-            break;
-        case '24':
-            smenaTime = 81000000
-            break;
-        default:
-            smenaTime = 28800000
-            break
-    }
-    return smenaTime
-}
-
-function selectObjectsWithSmena(userData, smenaState) {
-    let obj = {}
-    console.log('Выбранный тип смены', smenaState)
-    Object.keys(userData).forEach(name => {
-        if (userData[name].smenaInfo !== '') {
-            if (userData[name].smenaInfo == smenaState) {
-                obj[name] = userData[name]
-            }
-        }
-    })
-    console.log('Объекты ', obj)
-    return obj
-}
-
-function changeLunchOpacity() {
-
-    let highchartsTracker = document.getElementsByClassName('highcharts-tracker')
-    let lunchTimes = document.getElementsByClassName('lunchTime')
-
-    for (let i = 0; i < lunchTimes.length; i++) {
-        for (let j = 0; j < highchartsTracker.length; j++) {
-            highchartsTracker[j].addEventListener('mouseover', (event) => {
-                lunchTimes[i].classList.add('lunchTimeHide')
-            });
-            highchartsTracker[j].addEventListener('mouseleave', (event) => {
-                lunchTimes[i].classList.remove('lunchTimeHide')
-            });
-        }
-    }
-}
-
-function filterY(data, y) {
-    data.forEach((e, i) => {
-        data[i]['y'] = y
-    })
-    return data
-}
-
 function Scud() {
 
     const history = useHistory()
@@ -456,12 +379,12 @@ function Otklon({heightHighchartContainer, workTime, smenaState}) {
 
     let colorRed = {
         color: '#df1919',
-        height: heightHighchartContainer > 10? '52px' : '105px'
+        height: heightHighchartContainer > 7? '52px' : getOtklonHeight(heightHighchartContainer)
     }
 
     let colorGreen = {
         color: '#19b319',
-        height: heightHighchartContainer > 10? '52px' : '105px'
+        height: heightHighchartContainer > 7? '52px' : getOtklonHeight(heightHighchartContainer)
     }
 
     let smenaTime = getSmenaTime(smenaState)
