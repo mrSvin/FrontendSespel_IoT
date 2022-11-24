@@ -19,7 +19,7 @@ function Scud() {
 
                 let filteredData = []
 
-                if (usersWithSmena == 'multiLine') {
+                if (usersWithSmena == 'line') {
                     filteredData = applyFilters(objectsWithSmena, smenaState, date)
                 } else filteredData = applyFilters(userData, smenaState, date)
 
@@ -133,7 +133,7 @@ function Scud() {
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
                 <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
-                                        text={'Привязка по смене'} startValue={true}/>
+                                        text={'Привязка по смене'}/>
             </div>
             <p className='switchButtonMessage'>{usersWithSmena == 'line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
 
@@ -172,7 +172,7 @@ function LunchEightHours({heightHighchartContainer}) {
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '86.5%',
+        left: '81.5%',
         width: '1.5%'
     }
 
@@ -219,7 +219,7 @@ function LunchSevenHours({heightHighchartContainer}) {
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '86.9%',
+        left: '81.9%',
         width: '3%'
     }
 
