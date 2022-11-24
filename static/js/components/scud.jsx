@@ -422,8 +422,6 @@ function WorkTime({heightHighchartContainer, workTime}) {
         height: heightHighchartContainer > 7 ? '52px' : getOtklonHeight(heightHighchartContainer)
     }
 
-    let smenaTime = getSmenaTime(smenaState)
-
     return (
         <div>
             <div className={'otklon'} style={lunchSettings}>
