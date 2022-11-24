@@ -42,6 +42,7 @@
     font-weight: 600;
     position: relative;
     right: 5px;
+    width: max-content;
 }
 
 .lunchTime {

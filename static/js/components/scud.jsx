@@ -415,7 +415,14 @@ function WorkTime({heightHighchartContainer, workTime}) {
 
     let lunchSettings = {
         height: getLunchHeight(heightHighchartContainer),
+        right: '0.5%',
+        color: 'white',
     }
+
+    let pSetting = {
+        right: '20px',
+    }
+
 
     let style = {
         color: '#white',
@@ -424,10 +431,10 @@ function WorkTime({heightHighchartContainer, workTime}) {
 
     return (
         <div>
-            <div className={'otklon'} style={lunchSettings}>
-                <p>Время</p>
+            <div className={'otklon'} style={lunchSettings }>
+                <p style={pSetting}>Время</p>
                 {workTime.map((e, i) => {
-                    return <div key={i} className='otklonTime' style={style}>{msToTimeScud(e)}</div>
+                    return <div key={i} className='otklonTime' style={style}><p>{msToTimeScud(e)}</p></div>
                 })
                 }
             </div>
