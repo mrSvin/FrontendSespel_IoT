@@ -5,7 +5,7 @@ function Scud() {
     let [date, setDate] = useState(dayNow());
     let [place, setPlace] = useState(parseNameUrl(location.pathname))
     let [smenaState, setSmenaState] = useState('8и')
-    let [usersWithSmena, setUsersWithSmena] = useState('multiline')
+    let [usersWithSmena, setUsersWithSmena] = useState('line')
     let [workTime, setWorkTime] = useState([])
 
     useEffect(() => {
@@ -19,7 +19,7 @@ function Scud() {
 
                 let filteredData = []
 
-                if (usersWithSmena == 'line') {
+                if (usersWithSmena == 'multiLine') {
                     filteredData = applyFilters(objectsWithSmena, smenaState, date)
                 } else filteredData = applyFilters(userData, smenaState, date)
 
@@ -135,6 +135,7 @@ function Scud() {
                 <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
                                         text={'Привязка по смене'}/>
             </div>
+            <p className='switchButtonMessage'>{usersWithSmena == 'Line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
 
             {smenaState == '8' ? <LunchEightHours heightHighchartContainer={heightHighchartContainer}/> : null}
 

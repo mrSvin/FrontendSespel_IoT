@@ -121,3 +121,11 @@
     transition: 0.5s;
 }
 
+.switchButtonMessage {
+    color: #83addd;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 auto;
+    width: max-content;
+}
+
