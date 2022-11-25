@@ -33,8 +33,9 @@ function Scud() {
                 highChartScud(series[0], series[1])
                 setLoading(false)
                 setWorkTime(series[2])
-                setPhotoArray(series[3])
                 changeLunchOpacity()
+
+                console.log('Табельные в нужном порядке', series[3])
             }
         })
     }, [date, place, smenaState, usersWithSmena]);

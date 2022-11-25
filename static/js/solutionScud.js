@@ -330,7 +330,7 @@ function getHighchartSeriesAndNames(userData) {
     let arrayNames = []
     let arrayData = []
     let workTime = []
-    let photoArray = []
+    let tabelArray = []
 
     let blackArrayTrigger = false
     let sortTrigger = true
@@ -346,7 +346,7 @@ function getHighchartSeriesAndNames(userData) {
             arrayData.push(filterY(userData[e]['highchartsWork'],i))
             arrayData.push(filterY(userData[e]['highchartsOutWork'],i))
             workTime.push(userData[e]['workTime'])
-            photoArray.push(userData[e]['photo'])
+            tabelArray.push(userData[e]['tabid'])
             if (userData[e]['highchartsBlack'] != null) {
                 blackArrayTrigger = true
                 arrayData.push(filterY(userData[e]['highchartsBlack']))
@@ -358,7 +358,7 @@ function getHighchartSeriesAndNames(userData) {
             arrayData.push(userData[e]['highchartsWork'])
             arrayData.push(userData[e]['highchartsOutWork'])
             workTime.push(userData[e]['workTime'])
-            photoArray.push(userData[e]['photo'])
+            tabelArray.push(userData[e]['tabid'])
             if (userData[e]['highchartsBlack'] != null) {
                 blackArrayTrigger = true
                 arrayData.push(userData[e]['highchartsBlack'])
@@ -440,7 +440,7 @@ function getHighchartSeriesAndNames(userData) {
         }
     }
 
-    return [series, arrayNames, workTime, photoArray]
+    return [series, arrayNames, workTime, tabelArray]
 }
 
 function getLunchHeight(heightHighchartContainer) {
