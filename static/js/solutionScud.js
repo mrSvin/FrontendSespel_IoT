@@ -69,6 +69,7 @@ function createUserDataStructure(data) {
             logtime: [],
             statusInOut: [],
             smenaInfo: data.typeSmena[i],
+            photo: data.photo[data.tabid[i]]
         }
     }
 
@@ -518,7 +519,6 @@ function getSmenaTime(typeSmena) {
 
 function selectObjectsWithSmena(userData, smenaState) {
     let obj = {}
-    console.log('Выбранный тип смены', smenaState)
     Object.keys(userData).forEach(name => {
         if (userData[name].smenaInfo !== '') {
             if (userData[name].smenaInfo == smenaState) {
@@ -526,7 +526,6 @@ function selectObjectsWithSmena(userData, smenaState) {
             }
         }
     })
-    console.log('Объекты ', obj)
     return obj
 }
 

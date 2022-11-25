@@ -7,9 +7,11 @@ function Scud() {
     let [smenaState, setSmenaState] = useState('8и')
     let [usersWithSmena, setUsersWithSmena] = useState('line')
     let [workTime, setWorkTime] = useState([])
+    let [loading, setLoading] = useState(false)
 
     useEffect(() => {
         let promise = fetchRequestScud(date, place, smenaState)
+        setLoading(true)
         promise.then(data => {
 
             if (!Object.keys(data).includes('error')) {
@@ -22,12 +24,13 @@ function Scud() {
                 if (usersWithSmena == 'line') {
                     filteredData = applyFilters(objectsWithSmena, smenaState, date)
                 } else filteredData = applyFilters(userData, smenaState, date)
-
+                console.log('Объекты',filteredData)
                 setHeightHighchartContainer(Object.keys(filteredData).length);
 
                 let series = getHighchartSeriesAndNames(filteredData)
 
                 highChartScud(series[0], series[1])
+                setLoading(false)
                 setWorkTime(series[2])
                 changeLunchOpacity()
             }
@@ -134,6 +137,7 @@ function Scud() {
                 <DayCalendar newDate={newDate} date={date}/>
                 <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
                                         text={'Привязка по смене'}/>
+                <div>{loading ? 'Загрузка' : null}Загрузка</div>
             </div>
             <p className='switchButtonMessage'>{usersWithSmena == 'line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
 
