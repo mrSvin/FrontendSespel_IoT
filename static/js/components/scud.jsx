@@ -1,12 +1,40 @@
-function fetchSkudImage(tabelArrays, setPhotoArray){
-    fetch('/api/userInfo', {
-        method: 'POST'
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Данные по приколу',data)
-            setPhotoArray(tabelArrays)
-        })
+function fetchSkudImage(date = '2022-10-25', place = 'Ленинградская 36, Дверь', smenaState = '8и') {
+    if (smenaState == '8и') {
+        return fetch(`/api/scudImage/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_mesto:${place}`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    } else if (smenaState == '8') {
+        let dateYesterday = dayYesterday(date)
+        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    } else if (smenaState == '7') {
+        let dateYesterday = dayYesterday(date)
+        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 06:50:00_mesto:${place}`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    } else if (smenaState == '12') {
+        let dateYesterday = dayYesterday(date)
+        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 06:30:00_mesto:${place}`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    } else if (smenaState == '24') {
+        let dateYesterday = dayYesterday(date)
+        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 08:00:00_mesto:${place}`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                return data
+            })
+    }
+
 }
 
 function Scud() {
@@ -19,7 +47,7 @@ function Scud() {
     let [usersWithSmena, setUsersWithSmena] = useState('line')
     let [workTime, setWorkTime] = useState([])
     let [photoArray, setPhotoArray] = useState([])
-    let [loading, setLoading] = useState(false)
+    let [loading, setLoading] = useState(true)
 
     useEffect(() => {
         let promise = fetchRequestScud(date, place, smenaState)
@@ -36,18 +64,25 @@ function Scud() {
                 if (usersWithSmena == 'line') {
                     filteredData = applyFilters(objectsWithSmena, smenaState, date)
                 } else filteredData = applyFilters(userData, smenaState, date)
-                console.log('Объекты',filteredData)
+                console.log('Объекты', filteredData)
                 setHeightHighchartContainer(Object.keys(filteredData).length);
 
                 let series = getHighchartSeriesAndNames(filteredData)
 
                 highChartScud(series[0], series[1])
-                setLoading(false)
+
                 setWorkTime(series[2])
                 changeLunchOpacity()
 
                 console.log('Табельные в нужном порядке', series[3])
-                fetchSkudImage(series[3], setPhotoArray)
+                let imagePromise = fetchSkudImage(date, place, smenaState)
+                imagePromise.then(e => {
+                    console.log('Что получил', e)
+                    console.log('Массив правильных табельных', series[3])
+                    setPhotoArray(series[3])
+                    setLoading(false)
+                })
+
             }
         })
     }, [date, place, smenaState, usersWithSmena]);
@@ -152,11 +187,10 @@ function Scud() {
                 <DayCalendar newDate={newDate} date={date}/>
                 <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
                                         text={'Привязка по смене'}/>
-                <div>{loading ? 'Загрузка' : null}</div>
             </div>
             <p className='switchButtonMessage'>{usersWithSmena == 'line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
 
-            <Photo heightHighchartContainer={heightHighchartContainer} photoArray={photoArray}/>
+            <Photo heightHighchartContainer={heightHighchartContainer} photoArray={photoArray} loading={loading}/>
 
             {smenaState == '8' ? <LunchEightHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
@@ -464,11 +498,11 @@ function WorkTime({heightHighchartContainer, workTime}) {
     )
 }
 
-function Photo({heightHighchartContainer, photoArray}) {
+function Photo({heightHighchartContainer, photoArray, loading}) {
 
     let lunchSettings = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '5%'
+        left: '1%'
     }
 
     let pSetting = {
@@ -482,9 +516,10 @@ function Photo({heightHighchartContainer, photoArray}) {
 
     return (
         <div>
-            <div className={'otklon'} style={lunchSettings}>
+            <div className={`otklon ${loading ? 'hideScudAvatar' : null}`} style={lunchSettings}>
                 {photoArray.map((e, i) => {
-                    return <div key={i} className='otklonTime' style={style}><img src={`data:image/jpeg;base64,${e}`} alt="no-image"/></div>
+                    return <div key={i} className='otklonTime' style={style}><img src={`data:image/jpeg;base64,${e}`}
+                                                                                  alt=""/></div>
                 })
                 }
             </div>
