@@ -68,7 +68,7 @@ function Dropdown({dataProfile,setDataProfile}) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function () {
-            handleOnChangeCategory(reader.result)
+            handleOnChangeCategory(reader.result.substr(reader.result.indexOf(',') + 1))
         };
         reader.onerror = function (error) {
             console.log('Error: ', error);
@@ -76,11 +76,9 @@ function Dropdown({dataProfile,setDataProfile}) {
     }
 
     function handleOnChangeCategory(imageProfile) {
-        console.log(imageProfile.slice(22))
-        console.log(imageProfile)
         setDataProfile(prevState => ({
             ...prevState,
-            imageUser: imageProfile.slice(22)
+            imageUser: imageProfile
         }));
 
     }
