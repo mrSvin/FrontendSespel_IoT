@@ -520,7 +520,7 @@ function Photo({heightHighchartContainer, photoArray, loading}) {
         <div>
             <div className={`otklon ${loading ? 'hideScudAvatar' : null}`} style={lunchSettings}>
                 {photoArray.map((e, i) => {
-                    return <div key={i} className='otklonTime' style={style}><img src={`data:image/jpeg;base64,${e}`}
+                    return <div key={i} className='otklonTime' style={style}><img className='skudAvatar' src={`data:image/jpeg;base64,${e}`}
                                                                                   alt=""/></div>
                 })
                 }
