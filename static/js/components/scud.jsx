@@ -74,12 +74,14 @@ function Scud() {
                 setWorkTime(series[2])
                 changeLunchOpacity()
 
-                console.log('Табельные в нужном порядке', series[3])
                 let imagePromise = fetchSkudImage(date, place, smenaState)
                 imagePromise.then(e => {
-                    console.log('Что получил', e)
-                    console.log('Массив правильных табельных', series[3])
-                    setPhotoArray(series[3])
+
+                    let arrayPhotos = series[3].map(tabel=>{
+                        return e.photo[tabel]
+                    })
+                    console.log('Обработка', arrayPhotos)
+                    setPhotoArray(arrayPhotos)
                     setLoading(false)
                 })
 
