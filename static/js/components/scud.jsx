@@ -7,6 +7,7 @@ function Scud() {
     let [smenaState, setSmenaState] = useState('8и')
     let [usersWithSmena, setUsersWithSmena] = useState('line')
     let [workTime, setWorkTime] = useState([])
+    let [photoArray, setPhotoArray] = useState([])
     let [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -32,6 +33,7 @@ function Scud() {
                 highChartScud(series[0], series[1])
                 setLoading(false)
                 setWorkTime(series[2])
+                setPhotoArray(series[3])
                 changeLunchOpacity()
             }
         })
@@ -137,9 +139,11 @@ function Scud() {
                 <DayCalendar newDate={newDate} date={date}/>
                 <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
                                         text={'Привязка по смене'}/>
-                <div>{loading ? 'Загрузка' : null}Загрузка</div>
+                <div>{loading ? 'Загрузка' : null}</div>
             </div>
             <p className='switchButtonMessage'>{usersWithSmena == 'line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
+
+            <Photo heightHighchartContainer={heightHighchartContainer} photoArray={photoArray}/>
 
             {smenaState == '8' ? <LunchEightHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
@@ -440,6 +444,34 @@ function WorkTime({heightHighchartContainer, workTime}) {
                 <p style={pSetting}>Время</p>
                 {workTime.map((e, i) => {
                     return <div key={i} className='otklonTime' style={style}>{msToTimeScud(e)}</div>
+                })
+                }
+            </div>
+        </div>
+    )
+}
+
+function Photo({heightHighchartContainer, photoArray}) {
+
+    let lunchSettings = {
+        height: getLunchHeight(heightHighchartContainer),
+        left: '5%'
+    }
+
+    let pSetting = {
+        right: '0px',
+    }
+
+
+    let style = {
+        height: heightHighchartContainer > 7 ? '52px' : getOtklonHeight(heightHighchartContainer)
+    }
+
+    return (
+        <div>
+            <div className={'otklon'} style={lunchSettings}>
+                {photoArray.map((e, i) => {
+                    return <div key={i} className='otklonTime' style={style}><img src={`data:image/jpeg;base64,${e}`} alt="no-image"/></div>
                 })
                 }
             </div>
