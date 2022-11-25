@@ -1,5 +1,5 @@
 function Header() {
-    const [dataProfile, setDataProfile] = useState([]);
+    const [dataProfile, setDataProfile] = useState({'imageUser': null, 'userName': null, 'userMail': null});
 
     useEffect(() => {
 
