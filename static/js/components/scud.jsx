@@ -1,3 +1,14 @@
+function fetchSkudImage(tabelArrays, setPhotoArray){
+    fetch('/api/userInfo', {
+        method: 'POST'
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Данные по приколу',data)
+            setPhotoArray(tabelArrays)
+        })
+}
+
 function Scud() {
 
     const history = useHistory()
@@ -36,6 +47,7 @@ function Scud() {
                 changeLunchOpacity()
 
                 console.log('Табельные в нужном порядке', series[3])
+                fetchSkudImage(series[3], setPhotoArray)
             }
         })
     }, [date, place, smenaState, usersWithSmena]);
