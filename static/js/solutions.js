@@ -544,7 +544,9 @@ function dayTimeNow() {
 
 // Функция получения текущего дня из предыдущего
 function dayYesterday(startTime) {
-
+    if (startTime == ''){
+        return null
+    }
     return new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
 }
 
