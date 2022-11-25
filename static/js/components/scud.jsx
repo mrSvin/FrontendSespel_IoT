@@ -77,7 +77,7 @@ function Scud() {
                 let imagePromise = fetchSkudImage(date, place, smenaState)
                 imagePromise.then(e => {
 
-                    let arrayPhotos = series[3].map(tabel=>{
+                    let arrayPhotos = series[3].map(tabel => {
                         return e.photo[tabel]
                     })
                     console.log('Обработка', arrayPhotos)
@@ -504,13 +504,8 @@ function Photo({heightHighchartContainer, photoArray, loading}) {
 
     let lunchSettings = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '1%'
+        right: '10.5%'
     }
-
-    let pSetting = {
-        right: '0px',
-    }
-
 
     let style = {
         height: heightHighchartContainer > 7 ? '52px' : getOtklonHeight(heightHighchartContainer)
@@ -520,8 +515,10 @@ function Photo({heightHighchartContainer, photoArray, loading}) {
         <div>
             <div className={`otklon ${loading ? 'hideScudAvatar' : null}`} style={lunchSettings}>
                 {photoArray.map((e, i) => {
-                    return <div key={i} className='otklonTime' style={style}><img className='skudAvatar' src={`data:image/jpeg;base64,${e}`}
-                                                                                  alt=""/></div>
+                    return (
+                        <div key={i} className='otklonTime' style={style}>
+                            <img className='skudAvatar' src={`data:image/jpeg;base64,${e}`} alt=""/>
+                        </div>)
                 })
                 }
             </div>
