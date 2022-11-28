@@ -20,8 +20,8 @@
     transition: 1s;
     border-radius: 360px;
     border: 1px solid #0a0c0d;
-    max-width: 105px;
-    max-height: 105px;
+    max-width: 85px;
+    max-height: 85px;
 }
 
 .skudAvatar:hover {

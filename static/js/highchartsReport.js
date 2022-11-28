@@ -1238,7 +1238,8 @@ function highChartScud(series, generalDiagramNames) {
             plotShadow: false,
             plotBorderColor: 'gray',
             type: 'xrange',
-            marginLeft: 300
+            marginLeft: 300,
+            align: 'left',
         },
         title: {
             text: 'Рабочее время',
@@ -1257,17 +1258,24 @@ function highChartScud(series, generalDiagramNames) {
         },
         yAxis: {
             title: {
-                text: ''
+                text: '',
             },
             categories: generalDiagramNames,
             reversed: true,
             labels: {
+                useHTML:true,
+                allowOverlap:true,
+                // align: 'left',
+                step: 1,
                 style: {
                     color: '#f0f8ff',
                     fontWeight: 'bolder',
                     fontSize: '12px',
-                },
-            }
+                    // wordBreak: 'break-all',
+                    align: 'left',
+                    width:'270px',
+                }
+            },
         },
         credits: {
             enabled: false
