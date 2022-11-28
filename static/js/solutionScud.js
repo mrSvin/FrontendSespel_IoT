@@ -559,7 +559,6 @@ function filterY(data, y) {
 function defenseFromManyRequest(setFunction) {
     setFunction(true)
     let interval = setTimeout(() => {
-        console.log('WTF?')
         setFunction(false)
         clearInterval(interval)
     }, 2000)
