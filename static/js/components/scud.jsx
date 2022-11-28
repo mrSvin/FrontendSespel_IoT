@@ -335,7 +335,7 @@ function LunchTwentyFourHours({heightHighchartContainer}) {
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '51.6',
+        left: '51.6%',
         width: '1.325%'
     }
 
