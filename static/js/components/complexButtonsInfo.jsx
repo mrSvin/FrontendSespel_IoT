@@ -15,8 +15,8 @@ function ComplexSutkiAllInfo({
                          size={size} alarm={alarm} programs={programs} laser={laser} service={service}
                          report={report} current={current}/>
             <div className='highChartsLineRound'>
-                <div className={`lineComplex ${typeLine == "multiLine"? null : 'lineSwitchShort'}`}>
-                    <div className="lineSukiHighChart" id={idLine}></div>
+                <div className="lineComplex">
+                    <div className={`lineSukiHighChart ${typeLine == "multiLine"? null : 'lineSwitchShort'}`} id={idLine}></div>
                     {idProgram != null ?
                         <div className="lineProgramHighChart" id={idProgram}></div>
                         : null
