@@ -64,7 +64,6 @@ function Scud() {
                 if (usersWithSmena == 'line') {
                     filteredData = applyFilters(objectsWithSmena, smenaState, date)
                 } else filteredData = applyFilters(userData, smenaState, date)
-                console.log('Объекты', filteredData)
                 setHeightHighchartContainer(Object.keys(filteredData).length);
 
                 let series = getHighchartSeriesAndNames(filteredData)
@@ -80,7 +79,6 @@ function Scud() {
                     let arrayPhotos = series[3].map(tabel => {
                         return e.photo[tabel]
                     })
-                    console.log('Обработка', arrayPhotos)
                     setPhotoArray(arrayPhotos)
                     setLoading(false)
                 })
@@ -187,8 +185,10 @@ function Scud() {
             </div>
             <div className="energyCalendarContainer">
                 <DayCalendar newDate={newDate} date={date}/>
-                <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
-                                        text={'Привязка по смене'}/>
+                <div className='hideIndividualAll'>
+                    <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
+                                            text={'Привязка по смене'}/>
+                </div>
             </div>
             <p className='switchButtonMessage'>{usersWithSmena == 'line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
 
@@ -223,13 +223,13 @@ function LunchEightHours({heightHighchartContainer}) {
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '72.45%',
+        left: '51.45%',
         width: '1.325%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '81.5%',
+        left: '72.45%',
         width: '1.325%'
     }
 
@@ -374,7 +374,7 @@ function LunchTwentyFourHours({heightHighchartContainer}) {
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '52.8%',
+        left: '51.6',
         width: '1.325%'
     }
 
@@ -416,7 +416,7 @@ function LunchItr({heightHighchartContainer}) {
     let lunchSettings = {
         height: getLunchHeight(heightHighchartContainer),
         left: '50.2%',
-        width: '2.7%',
+        width: '2.65%',
     }
 
     return (
