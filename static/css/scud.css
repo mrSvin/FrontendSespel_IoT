@@ -16,8 +16,8 @@
 
 .skudAvatar{
     vertical-align: middle;
-    width: 46px;
-    height: 46px;
+    /*width: 46px;*/
+    /*height: 46px;*/
     object-fit: cover;
     transition: 1s;
     border-radius: 360px;
