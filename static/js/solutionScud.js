@@ -335,7 +335,7 @@ function getHighchartSeriesAndNames(userData) {
     let blackArrayTrigger = false
     let sortTrigger = true
 
-    if(sortTrigger){
+    if (sortTrigger) {
         // Сортировка ключей по времени работы
         let keysSorted = Object.keys(userData).sort(function (a, b) {
             return userData[b]['workTime'] - userData[a]['workTime']
@@ -343,8 +343,8 @@ function getHighchartSeriesAndNames(userData) {
 
         keysSorted.forEach((e, i) => {
             arrayNames.push(`Таб. ${userData[e]['tabid']} - ${e} (${userData[e]['POS']})`)
-            arrayData.push(filterY(userData[e]['highchartsWork'],i))
-            arrayData.push(filterY(userData[e]['highchartsOutWork'],i))
+            arrayData.push(filterY(userData[e]['highchartsWork'], i))
+            arrayData.push(filterY(userData[e]['highchartsOutWork'], i))
             workTime.push(userData[e]['workTime'])
             tabelArray.push(userData[e]['tabid'])
             if (userData[e]['highchartsBlack'] != null) {
@@ -554,4 +554,12 @@ function filterY(data, y) {
         data[i]['y'] = y
     })
     return data
+}
+
+function defenseFromManyRequest(setFunction) {
+    setFunction(true)
+    let interval = setTimeout(() => {
+        setFunction(false)
+    }, 2000)
+    clearInterval(interval)
 }

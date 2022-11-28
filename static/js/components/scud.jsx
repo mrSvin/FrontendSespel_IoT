@@ -8,6 +8,7 @@ function Scud() {
     let [usersWithSmena, setUsersWithSmena] = useState('line')
     let [workTime, setWorkTime] = useState([])
     let [photoArray, setPhotoArray] = useState([])
+    let [loadManyRequest, setLoadManyRequest] = useState(false)
     let [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -73,9 +74,10 @@ function Scud() {
                         setPlace('1ploshadka')
                     }}>Первая площадка
                         {place !== '1ploshadka' ? null :
-                            <div className='smenaScud'>
+                            <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>
                                 <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
+                                          defenseFromManyRequest(setLoadManyRequest)
                                           setSmenaState('8')
                                       }}>8 часов</span>
                                 <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
@@ -84,14 +86,17 @@ function Scud() {
                                       }}>7.2 часа</span>
                                 <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
+                                          defenseFromManyRequest(setLoadManyRequest)
                                           setSmenaState('11')
                                       }}>11 часов</span>
                                 <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
+                                          defenseFromManyRequest(setLoadManyRequest)
                                           setSmenaState('24')
                                       }}>24 часа</span>
                                 <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
+                                          defenseFromManyRequest(setLoadManyRequest)
                                           setSmenaState('8и')
                                       }}>ИТР</span>
                             </div>
@@ -104,25 +109,30 @@ function Scud() {
                         setPlace('2ploshadka')
                     }}>Вторая площадка
                         {place !== '2ploshadka' ? null :
-                            <div className='smenaScud'>
+                            <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>
                                 <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
+                                          defenseFromManyRequest(setLoadManyRequest)
                                           setSmenaState('8')
                                       }}>8 часов</span>
                                 <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
+                                          defenseFromManyRequest(setLoadManyRequest)
                                           setSmenaState('7')
                                       }}>7.2 часа</span>
                                 <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
+                                          defenseFromManyRequest(setLoadManyRequest)
                                           setSmenaState('11')
                                       }}>11 часов</span>
                                 <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
+                                          defenseFromManyRequest(setLoadManyRequest)
                                           setSmenaState('24')
                                       }}>24 часа</span>
                                 <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
+                                          defenseFromManyRequest(setLoadManyRequest)
                                           setSmenaState('8и')
                                       }}>ИТР</span>
                             </div>
@@ -480,7 +490,8 @@ function Photo({heightHighchartContainer, photoArray, loading}) {
                 {photoArray.map((e, i) => {
                     return (
                         <div key={i} className='otklonTime' style={style}>
-                            <img className='skudAvatar' src={`data:image/jpeg;base64,${e == undefined? undefImg : e}`} alt=""/>
+                            <img className='skudAvatar' src={`data:image/jpeg;base64,${e == undefined ? undefImg : e}`}
+                                 alt=""/>
                         </div>)
                 })
                 }
