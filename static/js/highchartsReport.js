@@ -1238,7 +1238,7 @@ function highChartScud(series, generalDiagramNames) {
             plotShadow: false,
             plotBorderColor: 'gray',
             type: 'xrange',
-            marginLeft: 300,
+            marginLeft: 400,
             align: 'left',
         },
         title: {
@@ -1273,7 +1273,7 @@ function highChartScud(series, generalDiagramNames) {
                     fontSize: '12px',
                     // wordBreak: 'break-all',
                     align: 'left',
-                    width:'270px',
+                    minWidth:'380px',
                 }
             },
         },
