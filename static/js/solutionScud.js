@@ -342,7 +342,7 @@ function getHighchartSeriesAndNames(userData) {
         })
 
         keysSorted.forEach((e, i) => {
-            arrayNames.push(`Таб. ${userData[e]['tabid']} - ${e} (${userData[e]['POS'] == ''? 'должность не указана':userData[e]['POS']})`)
+            arrayNames.push(`${i + 1}. таб. ${userData[e]['tabid']} - ${e} (${userData[e]['POS'] == '' ? 'должность не указана' : userData[e]['POS']})`)
             arrayData.push(filterY(userData[e]['highchartsWork'], i))
             arrayData.push(filterY(userData[e]['highchartsOutWork'], i))
             workTime.push(userData[e]['workTime'])
@@ -353,8 +353,8 @@ function getHighchartSeriesAndNames(userData) {
             }
         })
     } else {
-        Object.keys(userData).forEach((e) => {
-            arrayNames.push(`Таб. ${userData[e]['tabid']} - ${e} (${userData[e]['POS'] == ''? 'должность не указана':userData[e]['POS']})`)
+        Object.keys(userData).forEach((e, i) => {
+            arrayNames.push(`${i + 1}. таб. ${userData[e]['tabid']} - ${e} (${userData[e]['POS'] == '' ? 'должность не указана' : userData[e]['POS']})`)
             arrayData.push(userData[e]['highchartsWork'])
             arrayData.push(userData[e]['highchartsOutWork'])
             workTime.push(userData[e]['workTime'])
