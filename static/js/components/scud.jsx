@@ -197,20 +197,20 @@ function LunchEightHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '29%',
-        width: '1.325%'
+        left: '33.3%',
+        width: '1.175%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '51.45%',
-        width: '1.325%'
+        left: '53.95%',
+        width: '1.175%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '72.45%',
-        width: '1.325%'
+        left: '73.30%',
+        width: '1.175%'
     }
 
     let pWidth = {
@@ -244,20 +244,20 @@ function LunchSevenHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '29.15%',
-        width: '2.7%'
+        left: '33.35%',
+        width: '2.55%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '51.75%',
-        width: '2.7%'
+        left: '54.25%',
+        width: '2.55%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '72.9%',
-        width: '2.7%'
+        left: '73.7%',
+        width: '2.55%'
     }
 
     let pWidth = {
@@ -291,26 +291,26 @@ function LunchTwelveHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '29.3%',
-        width: '1.325%'
+        left: '33.5%',
+        width: '1.175%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '42.3%',
-        width: '1.325%'
+        left: '45.6%',
+        width: '1.175%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '62.25%',
-        width: '1.325%'
+        left: '64%',
+        width: '1.175%'
     }
 
     let lunchSettings4 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '75.1%',
-        width: '1.325%'
+        left: '75.8%',
+        width: '1.175%'
     }
 
     let pWidth = {
@@ -348,20 +348,20 @@ function LunchTwentyFourHours({heightHighchartContainer}) {
 
     let lunchSettings1 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '31.2%',
-        width: '1.325%'
+        left: '34.2%',
+        width: '1.175%'
     }
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '51.6%',
-        width: '1.325%'
+        left: '54%',
+        width: '1.175%'
     }
 
     let lunchSettings3 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '73.1%',
-        width: '1.325%'
+        left: '74%',
+        width: '1.175%'
     }
 
     let pWidth = {
@@ -395,8 +395,8 @@ function LunchItr({heightHighchartContainer}) {
 
     let lunchSettings = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '50.2%',
-        width: '2.65%',
+        left: '52.9%',
+        width: '2.4%',
     }
 
     return (

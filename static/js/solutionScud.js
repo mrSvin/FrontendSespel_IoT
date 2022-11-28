@@ -444,8 +444,36 @@ function getHighchartSeriesAndNames(userData) {
 }
 
 function getLunchHeight(heightHighchartContainer) {
+    let addHeight = 52
+    switch (heightHighchartContainer) {
+        case 1:
+            addHeight = 210
+            break
+        case 2:
+            addHeight = 105
+            break
+        case 3:
+            addHeight = 70
+            break
+        case 4:
+            addHeight = 52
+            break
+        case 5:
+            addHeight = 42
+            break
+        case 6:
+            addHeight = 38
+            break
+        case 7:
+            addHeight = 39.5
+            break
+        default:
+            addHeight = 52
+            break
+    }
+
     let height = (heightHighchartContainer > 10) ? 52 * (heightHighchartContainer - 2) + 13 :
-        (heightHighchartContainer > 0) ? 210 : 0
+        (heightHighchartContainer > 0) ? addHeight * heightHighchartContainer : 0
     return height
 }
 
