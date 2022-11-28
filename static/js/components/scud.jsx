@@ -69,8 +69,8 @@ function Scud() {
         <div>
             <div className="buttons-otchet marginToSmenaMenu">
 
-                <Link to={`/scud/1ploshadka`}>
-                    <div className={`${place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'} ${loadManyRequest ? 'noActiveButton' : null}`} onClick={() => {
+                <Link to={`/scud/1ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}>
+                    <div className={`${place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
                         setPlace('1ploshadka')
                     }}>Первая площадка
                         {place !== '1ploshadka' ? null :
@@ -104,8 +104,8 @@ function Scud() {
                     </div>
                 </Link>
 
-                <Link to={`/scud/2ploshadka`}>
-                    <div className={`${place == '2ploshadka' ? 'menuSelect' : 'menuNoSelect'} ${loadManyRequest ? 'noActiveButton' : null}`} onClick={() => {
+                <Link to={`/scud/2ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}>
+                    <div className={`${place == '2ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
                         setPlace('2ploshadka')
                     }}>Вторая площадка
                         {place !== '2ploshadka' ? null :
@@ -140,8 +140,8 @@ function Scud() {
                     </div>
                 </Link>
 
-                <Link to={`/scud/office`}>
-                    <div className={`${place == 'office' ? 'menuSelect' : 'menuNoSelect'} ${loadManyRequest ? 'noActiveButton' : null}`} onClick={() => {
+                <Link to={`/scud/office`} className={`${loadManyRequest ? 'noActiveButton' : null}`}>
+                    <div className={`${place == 'office' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
                         defenseFromManyRequest(setLoadManyRequest)
                         setPlace('office')
                         setSmenaState('8и')
