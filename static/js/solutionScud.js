@@ -31,7 +31,7 @@ function getOutWorkTimeArray(array, date, smenaState) {
         if (outArray[outArray.length - 1] !== `${date} 06:50:00`) outArray.push(`${date} 06:50:00`)
     }
 
-    if (smenaState == '12') {
+    if (smenaState == '11') {
         if (outArray[0] !== `${dayYesterday(date)} 07:00:00`) {
             outArray.unshift(`${dayYesterday(date)} 07:00:00`)
         } else outArray.splice(0, 1)
@@ -154,7 +154,7 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
             startTime = dayYesterday(date) + ' 07:00:00'
             endTime = date + ' 06:50:00'
             break;
-        case '12':
+        case '11':
             startTime = dayYesterday(date) + ' 07:00:00'
             endTime = date + ' 06:30:00'
             break;
@@ -269,7 +269,7 @@ function filterLunch(dateArray, date, smenaState) {
             arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
             arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
             break;
-        case '12':
+        case '11':
             startLunch = yesterday + ' 11:30:00'
             endLunch = yesterday + ' 12:00:00'
 
@@ -507,7 +507,7 @@ function getSmenaTime(typeSmena) {
         case '7':
             smenaTime = 26400000
             break;
-        case '12':
+        case '11':
             smenaTime = 39600000
             break;
         case '24':

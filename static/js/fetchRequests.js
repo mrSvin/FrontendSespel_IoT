@@ -220,7 +220,7 @@ function fetchRequestScud(date = '2022-10-25', place = 'Ленинградска
             .then((data) => {
                 return data
             })
-    } else if (smenaState == '12') {
+    } else if (smenaState == '11') {
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 06:30:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
