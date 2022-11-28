@@ -69,7 +69,7 @@ function Scud() {
         <div>
             <div className="buttons-otchet marginToSmenaMenu">
 
-                <Link to={`/scud/1ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}>
+                <Link to={`/scud/1ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`} onClick={() => {defenseFromManyRequest(setLoadManyRequest)}}>
                     <div className={`${place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
                         setPlace('1ploshadka')
                     }}>Первая площадка
@@ -104,7 +104,7 @@ function Scud() {
                     </div>
                 </Link>
 
-                <Link to={`/scud/2ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}>
+                <Link to={`/scud/2ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`} onClick={() => {defenseFromManyRequest(setLoadManyRequest)}}>
                     <div className={`${place == '2ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
                         setPlace('2ploshadka')
                     }}>Вторая площадка
@@ -140,7 +140,7 @@ function Scud() {
                     </div>
                 </Link>
 
-                <Link to={`/scud/office`} className={`${loadManyRequest ? 'noActiveButton' : null}`}>
+                <Link to={`/scud/office`} className={`${loadManyRequest ? 'noActiveButton' : null}`} onClick={() => {defenseFromManyRequest(setLoadManyRequest)}}>
                     <div className={`${place == 'office' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
                         defenseFromManyRequest(setLoadManyRequest)
                         setPlace('office')
