@@ -1,42 +1,3 @@
-function fetchSkudImage(date = '2022-10-25', place = 'Ленинградская 36, Дверь', smenaState = '8и') {
-    if (smenaState == '8и') {
-        return fetch(`/api/scudImage/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_mesto:${place}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                return data
-            })
-    } else if (smenaState == '8') {
-        let dateYesterday = dayYesterday(date)
-        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                return data
-            })
-    } else if (smenaState == '7') {
-        let dateYesterday = dayYesterday(date)
-        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 06:50:00_mesto:${place}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                return data
-            })
-    } else if (smenaState == '12') {
-        let dateYesterday = dayYesterday(date)
-        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 06:30:00_mesto:${place}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                return data
-            })
-    } else if (smenaState == '24') {
-        let dateYesterday = dayYesterday(date)
-        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 08:00:00_mesto:${place}`, {method: 'GET'})
-            .then((response) => response.json())
-            .then((data) => {
-                return data
-            })
-    }
-
-}
-
 function Scud() {
 
     const history = useHistory()
@@ -121,9 +82,9 @@ function Scud() {
                                       onClick={() => {
                                           setSmenaState('7')
                                       }}>7.2 часа</span>
-                                <span className={smenaState == '12' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
-                                          setSmenaState('12')
+                                          setSmenaState('11')
                                       }}>11 часов</span>
                                 <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
@@ -152,9 +113,9 @@ function Scud() {
                                       onClick={() => {
                                           setSmenaState('7')
                                       }}>7.2 часа</span>
-                                <span className={smenaState == '12' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
-                                          setSmenaState('12')
+                                          setSmenaState('11')
                                       }}>11 часов</span>
                                 <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
                                       onClick={() => {
@@ -198,7 +159,7 @@ function Scud() {
 
             {smenaState == '7' ? <LunchSevenHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
-            {smenaState == '12' ? <LunchTwelveHours heightHighchartContainer={heightHighchartContainer}/> : null}
+            {smenaState == '11' ? <LunchTwelveHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
             {smenaState == '24' ? <LunchTwentyFourHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
