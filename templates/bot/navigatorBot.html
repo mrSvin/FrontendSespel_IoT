@@ -190,12 +190,7 @@
                 }
             },
         });
-
-        Highcharts.getJSON(
-            'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
-            function (data) {
-
-                Highcharts.chart(id, {
+        Highcharts.chart(id, {
                     chart: {
                         polar: true,
                         zoomType: 'x',
@@ -267,13 +262,12 @@
                     },
                     series: series
                 });
-            }
-        );
+
     }
 
     // Функция перебора массива из запроса с разложением на 4 массива по времени
     function Perebor(massivArray, date, names) {
-
+        console.log('Перебор?')
         let allData = [];
 
         for (let i = 0; massivArray.length > i; i++) {
@@ -292,13 +286,14 @@
         // }
 
         console.log('После парсинга', allData)
-
+        console.log(allData.length)
         for (let i = 0; i < allData.length; i += 3) {
-            console.log('True', `container${(i - (Math.floor(i / 3)) + 1)}`)
-            console.log('True', `container${(i - (Math.floor(i / 3)) + 2)}`)
-
-            highcharts(`container${(i - (Math.floor(i / 3)) + 1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, Вт', ZeroTime(allData[i]))
-            highcharts(`container${(i - (Math.floor(i / 3)) + 2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i + 1]), ZeroTime(allData[i + 2]))
+            setTimeout(()=>{
+                console.log('True', `container${(i - (Math.floor(i / 3)) + 1)}`)
+                console.log('True', `container${(i - (Math.floor(i / 3)) + 2)}`)
+                highcharts(`container${(i - (Math.floor(i / 3)) + 1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, Вт', ZeroTime(allData[i]))
+                highcharts(`container${(i - (Math.floor(i / 3)) + 2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i + 1]), ZeroTime(allData[i + 2]))
+            }, 1000 * (i - (Math.floor(i / 3)) + 1))
         }
     }
 
@@ -339,10 +334,9 @@
         console.log('rIndex = ', rIndex, 'rJndex = ', rJindex)
 
         setTimeout(() => {
-
             requestArray.push(fetchNavigators(Name[rIndex], date, mods[rJindex]))
             buildNavigators(Name, date, mods, requestArray, rIndex, Jindex + 1)
-        }, 1500)
+        }, 3000)
     }
 
     let Names = [
