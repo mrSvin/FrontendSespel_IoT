@@ -278,22 +278,11 @@
             allData.push(arrayI)
         }
 
-        // for (let i = 0; allData.length > i; i++) {
-        //     if (allData[i].length > 0) {
-        //         allData[i].unshift(Array(new Date(date + ' 00:00:00').getTime(), 0))
-        //         allData[i].push(Array(new Date(date + ' 23:59:59').getTime(), 0))
-        //     }
-        // }
-
-        console.log('После парсинга', allData)
-        console.log(allData.length)
         for (let i = 0; i < allData.length; i += 3) {
-            setTimeout(()=>{
-                console.log('True', `container${(i - (Math.floor(i / 3)) + 1)}`)
-                console.log('True', `container${(i - (Math.floor(i / 3)) + 2)}`)
+                // console.log('True', `container${(i - (Math.floor(i / 3)) + 1)}`)
+                // console.log('True', `container${(i - (Math.floor(i / 3)) + 2)}`)
                 highcharts(`container${(i - (Math.floor(i / 3)) + 1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, Вт', ZeroTime(allData[i]))
                 highcharts(`container${(i - (Math.floor(i / 3)) + 2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i + 1]), ZeroTime(allData[i + 2]))
-            }, 1000 * (i - (Math.floor(i / 3)) + 1))
         }
     }
 
