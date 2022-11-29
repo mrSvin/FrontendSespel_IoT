@@ -467,6 +467,9 @@ function getLunchHeight(heightHighchartContainer) {
         case 7:
             addHeight = 39.5
             break
+        case 8:
+            addHeight = 40.875
+            break
         default:
             addHeight = 52
             break
@@ -502,6 +505,8 @@ function getOtklonHeight(heightHighchartContainer) {
         case 7:
             height = '39.5px'
             break
+        case 8:
+            height = '40.875px'
         default:
             height = '52px'
             break
