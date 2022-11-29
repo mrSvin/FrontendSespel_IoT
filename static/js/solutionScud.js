@@ -470,6 +470,9 @@ function getLunchHeight(heightHighchartContainer) {
         case 8:
             addHeight = 40.875
             break
+        case 10:
+            addHeight = 43
+            break
         default:
             addHeight = 52
             break
@@ -507,6 +510,9 @@ function getOtklonHeight(heightHighchartContainer) {
             break
         case 8:
             height = '40.875px'
+        case 10:
+            height = '43px'
+            break
         default:
             height = '52px'
             break
@@ -595,4 +601,17 @@ function defenseFromManyRequest(setFunction) {
         setFunction(false)
         clearInterval(interval)
     }, 2000)
+}
+
+function findPathPlace(){
+    let pathName = 'office'
+
+    if (location.pathname.includes('1ploshadka')) {
+        pathName = '1ploshadka'
+    } else if (location.pathname.includes('2ploshadka')) {
+        pathName = '2ploshadka'
+    } else {
+        pathName = 'office'
+    }
+    return pathName
 }

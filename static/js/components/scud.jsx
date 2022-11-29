@@ -54,11 +54,11 @@ function Scud() {
     useEffect(() => {
 
         return history.listen((location) => {
-            let pathName = parseNameUrl(location.pathname)
+
             let thisPage = location.pathname.slice(0, 6)
 
             if (thisPage == '/scud/') {
-                setPlace(pathName)
+                setPlace(findPathPlace() + '/', smenaState)
             }
         })
     }, [history]);
@@ -75,8 +75,8 @@ function Scud() {
                       onClick={() => {
                           defenseFromManyRequest(setLoadManyRequest)
                       }}>
-                    <div className={`${place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
-                        setPlace('1ploshadka')
+                    <div className={`${place.includes('1ploshadka') ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
+                        setPlace('1ploshadka', )
                     }}>Первая площадка
                         {place !== '1ploshadka' ? null :
                             <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>
@@ -113,7 +113,7 @@ function Scud() {
                       onClick={() => {
                           defenseFromManyRequest(setLoadManyRequest)
                       }}>
-                    <div className={`${place == '2ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
+                    <div className={`${place.includes('2ploshadka') ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
                         setPlace('2ploshadka')
                     }}>Вторая площадка
                         {place !== '2ploshadka' ? null :
@@ -151,9 +151,9 @@ function Scud() {
                 <Link to={`/scud/office`} className={`${loadManyRequest ? 'noActiveButton' : null}`} onClick={() => {
                     defenseFromManyRequest(setLoadManyRequest)
                 }}>
-                    <div className={`${place == 'office' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
+                    <div className={`${place.includes('office') ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
                         defenseFromManyRequest(setLoadManyRequest)
-                        setPlace('office')
+                        setPlace('office' + '/' + '8и')
                         setSmenaState('8и')
                     }}>Офис
                     </div>
