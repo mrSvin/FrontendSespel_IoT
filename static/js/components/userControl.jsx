@@ -301,13 +301,13 @@ function AdminFormUpdateAdd({
 
 
             <div className="profile-pic">
-                <label className="-label" htmlFor="file">
+                <label className="-label" htmlFor="userAvatar">
                     <span className="glyphicon glyphicon-camera"></span>
                     <span>Поменять изображение</span>
                 </label>
                 <input
                     className="inputImage"
-                    id="file"
+                    id="userAvatar"
                     type="file"
                     onChange={() =>{
                         let input = document.getElementById('userAvatar')
@@ -317,7 +317,6 @@ function AdminFormUpdateAdd({
                 <img
                     className="outputImage"
                     src={`data:image/jpeg;base64,${user.photo}`}
-                    id="output"
                     width="200"
                 />
             </div>
