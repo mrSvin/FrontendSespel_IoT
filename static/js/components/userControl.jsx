@@ -174,23 +174,17 @@ function UsersControl() {
         }));
     };
 
-    function handleOnChangeBool(e) {
-        const {value} = e.target;
-
-        let long_smenaBool = {
-            '8 ч.': false,
-            '7.2 ч.': false,
-            '12 ч.': false,
-            '24 ч.': false,
-        }
-
-        long_smenaBool[value] = true
+    function handleOnChangePhoto(file) {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            setUser(prevState => ({
+                ...prevState,
+                ['photo']: reader.result.substr(reader.result.indexOf(',') + 1)
+            }));
+        };
 
 
-        setUser(prevState => ({
-            ...prevState,
-            long_smenaBool
-        }));
     };
 
     function updateTable() {
@@ -210,7 +204,7 @@ function UsersControl() {
     return (
         <div>
             <AdminFormUpdateAdd typeForm={typeForm} user={user} handleOnChange={handleOnChange}
-                                handleOnChangeBool={handleOnChangeBool} updateTable={updateTable}
+                                handleOnChangePhoto={handleOnChangePhoto} updateTable={updateTable}
                                 errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
             <table className={`tableUsersControl`}>
                 <thead>
@@ -276,7 +270,7 @@ function UsersControl() {
 
 function AdminFormUpdateAdd({
                                 typeForm, user, handleOnChange,
-                                handleOnChangeBool, updateTable,
+                                handleOnChangePhoto, updateTable,
                                 errorMessage, setErrorMessage
                             }) {
 
@@ -303,9 +297,14 @@ function AdminFormUpdateAdd({
                    onChange={(e) => {
                        handleOnChange(e, 'active')
                    }}/>
-            <label htmlFor="">Фото {typeForm == 'change' ? user.photo : null}</label>
-            <input className={typeForm == 'change' ? 'formHideUsersControl' : null}
-                   value={user.photo}
+            <label htmlFor="">Фото</label>
+            <input id='userAvatar' className="avatar" type="image" src={`data:image/jpeg;base64,${user.photo}`} value={user.photo}
+               onChange={() =>{
+                   let input = document.getElementById('userAvatar')
+                   handleOnChangePhoto(input.files[0])
+               }
+            }/>
+            <input value={user.photo}
                    onChange={(e) => {
                        handleOnChange(e, 'photo')
                    }}/>
