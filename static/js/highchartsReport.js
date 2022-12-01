@@ -1366,6 +1366,11 @@ function highChartScudBot(series, generalDiagramNames) {
                     // wordBreak: 'break-word',
                     // align: 'left',
                     minWidth:'880px',
+                    borderTop: '1px solid',
+                    // borderBottom: '1px solid',
+                    top: '53px',
+                    paddingBottom: '9px',
+                    paddingTop: '8.5px',
                 }
             },
         },
