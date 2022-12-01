@@ -603,7 +603,7 @@ function defenseFromManyRequest(setFunction) {
     }, 2000)
 }
 
-function findPathPlace(){
+function getScudBotUrl() {
     let pathName = 'office'
 
     if (location.pathname.includes('1ploshadka')) {
@@ -613,5 +613,8 @@ function findPathPlace(){
     } else {
         pathName = 'office'
     }
-    return pathName
+
+    let stateName = parseNameUrl(location.pathname)
+
+    return [pathName, stateName]
 }
