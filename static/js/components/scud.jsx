@@ -222,7 +222,7 @@ function ScudBot() {
 
                 let series = getHighchartSeriesAndNames(filteredData)
 
-                highChartScud(series[0], series[1])
+                highChartScudBot(series[0], series[1])
 
                 setWorkTime(series[2])
                 changeLunchOpacity()
@@ -268,7 +268,7 @@ function ScudBot() {
 
             {smenaState == '7' ? <LunchSevenHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
-            {smenaState == '11' ? <LunchTwelveHours heightHighchartContainer={heightHighchartContainer}/> : null}
+            {smenaState == '11' ? <LunchTwelveHoursBot heightHighchartContainer={heightHighchartContainer}/> : null}
 
             {smenaState == '24' ? <LunchTwentyFourHours heightHighchartContainer={heightHighchartContainer}/> : null}
 
@@ -424,6 +424,63 @@ function LunchTwelveHours({heightHighchartContainer}) {
             </div>
             <div className={'lunchTime'} style={lunchSettings4}>
                 <p style={pWidth}>Обед 03:30-4:00</p>
+                <div className='strokelunchTime'></div>
+            </div>
+            <div id="containerScud" style={height} className="scudHigcharts"></div>
+        </div>
+    )
+}
+
+function LunchTwelveHoursBot({heightHighchartContainer}) {
+    let height = {
+        height: 52 * heightHighchartContainer
+    };
+
+    let lunchSettings1 = {
+        height: getLunchHeight(heightHighchartContainer),
+        left: '53.8%',
+        width: '1.15%'
+    }
+
+    let lunchSettings2 = {
+        height: getLunchHeight(heightHighchartContainer),
+        left: '60.95%',
+        width: '1.15%'
+    }
+
+    let lunchSettings3 = {
+        height: getLunchHeight(heightHighchartContainer),
+        left: '71.5%',
+        width: '1.15%'
+    }
+
+    let lunchSettings4 = {
+        height: getLunchHeight(heightHighchartContainer),
+        left: '80%',
+        width: '1.15%'
+    }
+
+    let pWidth = {
+        width: 'max-content',
+        left: '-33px'
+    }
+
+    return (
+        <div className='wrapperScud'>
+            <div className={'lunchTime'} style={lunchSettings1}>
+                <p style={pWidth}>11:30-12:00</p>
+                <div className='strokelunchTime'></div>
+            </div>
+            <div className={'lunchTime'} style={lunchSettings2}>
+                <p style={pWidth}>16:00-16:30</p>
+                <div className='strokelunchTime'></div>
+            </div>
+            <div className={'lunchTime'} style={lunchSettings3}>
+                <p style={pWidth}>23:00-23:30</p>
+                <div className='strokelunchTime'></div>
+            </div>
+            <div className={'lunchTime'} style={lunchSettings4}>
+                <p style={pWidth}>03:30-4:00</p>
                 <div className='strokelunchTime'></div>
             </div>
             <div id="containerScud" style={height} className="scudHigcharts"></div>

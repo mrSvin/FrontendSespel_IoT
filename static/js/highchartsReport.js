@@ -1288,3 +1288,96 @@ function highChartScud(series, generalDiagramNames) {
 
     });
 }
+
+function highChartScudBot(series, generalDiagramNames) {
+    Highcharts.setOptions({
+        lang: {
+            loading: 'Загрузка...',
+            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+            exportButtonTitle: "Экспорт",
+            printButtonTitle: "Печать",
+            rangeSelectorFrom: "С",
+            rangeSelectorTo: "По",
+            rangeSelectorZoom: "Период",
+            downloadPNG: 'Скачать PNG',
+            downloadJPEG: 'Скачать JPEG',
+            downloadPDF: 'Скачать PDF',
+            downloadSVG: 'Скачать SVG',
+            printChart: 'Напечатать график',
+            viewFullscreen: 'На весь экран',
+
+            downloadCSV: "Скачать CSV",
+            downloadXLS: "Скачать XLS",
+            viewData: 'Режим таблицы',
+            hideData: "Скрыть таблицу"
+        },
+        plotOptions: {
+            xrange: {
+                grouping: false
+            }
+        },
+        global: {
+            timezoneOffset: new Date().getTimezoneOffset()
+        }
+    });
+
+    Highcharts.chart('containerScud', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            plotBorderColor: 'gray',
+            type: 'xrange',
+            marginLeft: 900,
+            align: 'left',
+        },
+        title: {
+            text: 'Рабочее время',
+            style: {
+                color: '#FFF'
+            }
+        },
+
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                style: {
+                    color: '#FFF'
+                }
+            },
+        },
+        yAxis: {
+            title: {
+                text: '',
+            },
+            categories: generalDiagramNames,
+            reversed: true,
+            labels: {
+                useHTML:true,
+                allowOverlap:true,
+                // align: 'left',
+                step: 1,
+                style: {
+                    color: '#f0f8ff',
+                    fontWeight: 'bolder',
+                    fontSize: '20px',
+                    // wordBreak: 'break-word',
+                    // align: 'left',
+                    minWidth:'880px',
+                }
+            },
+        },
+        credits: {
+            enabled: false
+        },
+
+        series: series,
+        legend: {
+            enabled: false
+        },
+
+    });
+}
+
