@@ -444,7 +444,7 @@ function LunchTwelveHoursBot({heightHighchartContainer}) {
 
     let lunchSettings2 = {
         height: getLunchHeight(heightHighchartContainer),
-        left: '60.95%',
+        left: '61.95%',
         width: '1.15%'
     }
 
