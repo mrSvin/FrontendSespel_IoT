@@ -208,11 +208,6 @@ function ScudBot() {
         setLoading(true)
         promise.then(data => {
 
-            let botClassList = document.querySelectorAll('.otklon')
-            for(let i = 0; i < botClassList.length; i++){
-                botClassList[i].classList.add('scudBotMargin')
-            }
-
             if (!Object.keys(data).includes('error')) {
                 let userData = createUserDataStructure(data)
 
@@ -242,6 +237,11 @@ function ScudBot() {
                     })
                     setPhotoArray(arrayPhotos)
                     setLoading(false)
+
+                    let botClassList = document.querySelectorAll('.otklon')
+                    for(let i = 0; i < botClassList.length; i++){
+                        botClassList[i].classList.add('scudBotMargin')
+                    }
                 })
 
             }
