@@ -604,6 +604,7 @@ function defenseFromManyRequest(setFunction) {
 }
 
 function getScudBotUrl() {
+
     let pathName = 'office'
 
     if (location.pathname.includes('1ploshadka')) {
@@ -614,7 +615,9 @@ function getScudBotUrl() {
         pathName = 'office'
     }
 
-    let stateName = parseNameUrl(location.pathname)
+    let form_path = decodeURIComponent(location.pathname);
+    let searchIndex = form_path.lastIndexOf("-") + 1;
+    form_path = form_path.substr(searchIndex, form_path.length)
 
-    return [pathName, stateName]
+    return [pathName, form_path]
 }
