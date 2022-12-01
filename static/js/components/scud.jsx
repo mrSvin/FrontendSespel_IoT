@@ -208,6 +208,11 @@ function ScudBot() {
         setLoading(true)
         promise.then(data => {
 
+            let botClassList = document.querySelectorAll('.otklon')
+            for(let i = 0; i < botClassList.length; i++){
+                botClassList[i].classList.add('scudBotMargin')
+            }
+
             if (!Object.keys(data).includes('error')) {
                 let userData = createUserDataStructure(data)
 
@@ -248,7 +253,7 @@ function ScudBot() {
     }
 
     return (
-        <div>
+        <div className='scudBot'>
             <div className="energyCalendarContainer hideIndividualAll">
                 <DayCalendar newDate={newDate} date={date}/>
                 <div>
@@ -256,7 +261,6 @@ function ScudBot() {
                                             text={'Привязка по смене'}/>
                 </div>
             </div>
-            <p className='switchButtonMessage'>{usersWithSmena == 'line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
 
             <Photo heightHighchartContainer={heightHighchartContainer} photoArray={photoArray} loading={loading}/>
 

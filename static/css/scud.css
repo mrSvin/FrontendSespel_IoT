@@ -149,3 +149,15 @@
     width: max-content;
 }
 
+.scudBot {
+    position: absolute;
+    top: 0;
+    background-color: #252734;
+    width: 100vw;
+}
+
+.scudBotMargin {
+    top: 50px;
+    margin-right: 15px;
+}
+
