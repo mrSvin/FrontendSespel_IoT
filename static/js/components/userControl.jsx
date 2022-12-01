@@ -298,16 +298,30 @@ function AdminFormUpdateAdd({
                        handleOnChange(e, 'active')
                    }}/>
             <label htmlFor="">Фото</label>
-            <input id='userAvatar' className="avatar" type="image" src={`data:image/jpeg;base64,${user.photo}`} value={user.photo}
-               onChange={() =>{
-                   let input = document.getElementById('userAvatar')
-                   handleOnChangePhoto(input.files[0])
-               }
-            }/>
-            <input value={user.photo}
-                   onChange={(e) => {
-                       handleOnChange(e, 'photo')
-                   }}/>
+
+
+            <div className="profile-pic">
+                <label className="-label" htmlFor="file">
+                    <span className="glyphicon glyphicon-camera"></span>
+                    <span>Поменять изображение</span>
+                </label>
+                <input
+                    className="inputImage"
+                    id="file"
+                    type="file"
+                    onChange={() =>{
+                        let input = document.getElementById('userAvatar')
+                        handleOnChangePhoto(input.files[0])
+                    }}
+                />
+                <img
+                    className="outputImage"
+                    src={`data:image/jpeg;base64,${user.photo}`}
+                    id="output"
+                    width="200"
+                />
+            </div>
+
             <label>Права доступа</label>
             <div className='typeSmenaWrapper'>
                 <select id="role" name="role" value={user.role}
