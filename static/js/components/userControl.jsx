@@ -235,7 +235,7 @@ function UsersControl() {
                                 <td>{userTable.role}</td>
                                 <td>{userTable.mail}</td>
                                 <td>{userTable.active}</td>
-                                <td><div><img src={`data:image/jpeg;base64,${userTable.photo}`} alt=""/></div></td>
+                                <td><div><img className='avatar' src={`data:image/jpeg;base64,${userTable.photo}`} alt=""/></div></td>
                                 <td>
                                     <div className='tdChange' onClick={() => {
                                         setUser(userTable)
@@ -288,21 +288,18 @@ function AdminFormUpdateAdd({
                    onChange={(e) => {
                        handleOnChange(e, 'login')
                    }}/>
-            <label htmlFor="">Пароль {typeForm == 'change' ? user.password : null}</label>
-            <input className={typeForm == 'change' ? 'formHideUsersControl' : null}
-                   value={user.password}
+            <label htmlFor="">Пароль</label>
+            <input value={user.password}
                    onChange={(e) => {
                        handleOnChange(e, 'password')
                    }}/>
-            <label htmlFor="">Почта {typeForm == 'change' ? user.mail : null}</label>
-            <input className={typeForm == 'change' ? 'formHideUsersControl' : null}
-                   value={user.mail}
+            <label htmlFor="">Почта</label>
+            <input value={user.mail}
                    onChange={(e) => {
                        handleOnChange(e, 'mail')
                    }}/>
-            <label htmlFor="">Активность {typeForm == 'change' ? user.active : null}</label>
-            <input className={typeForm == 'change' ? 'formHideUsersControl' : null}
-                   value={user.active}
+            <label htmlFor="">Активность</label>
+            <input value={user.active}
                    onChange={(e) => {
                        handleOnChange(e, 'active')
                    }}/>
