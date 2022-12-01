@@ -107,7 +107,7 @@ function App({hideLoader}) {
                         <Scud/>
                     </Route>
 
-                    <Route path="bot/scudBot">
+                    <Route path="/bot/scudBot">
                         <ScudBot/>
                     </Route>
 
