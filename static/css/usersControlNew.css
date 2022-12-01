@@ -260,3 +260,7 @@
     position: absolute;
     visibility: hidden;
 }
+
+.adminPhotoMessage{
+    text-align: center;
+}

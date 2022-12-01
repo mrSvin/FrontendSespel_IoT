@@ -229,7 +229,10 @@ function UsersControl() {
                                 <td>{userTable.role}</td>
                                 <td>{userTable.mail}</td>
                                 <td>{userTable.active}</td>
-                                <td><div><img className='avatar' src={`data:image/jpeg;base64,${userTable.photo}`} alt=""/></div></td>
+                                <td>
+                                    <div><img className='avatar' src={`data:image/jpeg;base64,${userTable.photo}`}
+                                              alt=""/></div>
+                                </td>
                                 <td>
                                     <div className='tdChange' onClick={() => {
                                         setUser(userTable)
@@ -292,33 +295,16 @@ function AdminFormUpdateAdd({
                    onChange={(e) => {
                        handleOnChange(e, 'mail')
                    }}/>
-            <label htmlFor="">Активность</label>
-            <input value={user.active}
-                   onChange={(e) => {
-                       handleOnChange(e, 'active')
-                   }}/>
-            <label htmlFor="">Фото</label>
 
-
-            <div className="profile-pic">
-                <label className="-label" htmlFor="userAvatar">
-                    <span className="glyphicon glyphicon-camera"></span>
-                    <span>Поменять изображение</span>
-                </label>
-                <input
-                    className="inputImage"
-                    id="userAvatar"
-                    type="file"
-                    onChange={() =>{
-                        let input = document.getElementById('userAvatar')
-                        handleOnChangePhoto(input.files[0])
-                    }}
-                />
-                <img
-                    className="outputImage"
-                    src={`data:image/jpeg;base64,${user.photo}`}
-                    width="200"
-                />
+            <label>Активность</label>
+            <div className='typeSmenaWrapper'>
+                <select id="active" name="active" value={user.active}
+                        onChange={(e) => {
+                            handleOnChange(e, 'active')
+                        }}>
+                    <option value="true">Да</option>
+                    <option value="false">Нет</option>
+                </select>
             </div>
 
             <label>Права доступа</label>
@@ -331,6 +317,27 @@ function AdminFormUpdateAdd({
                     <option value="ROLE_ADMIN">Админ</option>
                     <option value="ROLE_SERVICE">Сервисное обслуживание</option>
                 </select>
+            </div>
+
+            <label htmlFor="">Фото</label>
+            <div className="profile-pic">
+                <label className="-label" htmlFor="userAvatar">
+                    <span className='adminPhotoMessage'>Поменять изображение</span>
+                </label>
+                <input
+                    className="inputImage"
+                    id="userAvatar"
+                    type="file"
+                    onChange={() => {
+                        let input = document.getElementById('userAvatar')
+                        handleOnChangePhoto(input.files[0])
+                    }}
+                />
+                <img
+                    className="outputImage"
+                    src={`data:image/jpeg;base64,${user.photo}`}
+                    width="200"
+                />
             </div>
 
             <button type="button"
