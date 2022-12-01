@@ -203,7 +203,7 @@ function UsersControl() {
     }
 
     useEffect(() => {
-        setTableBody(user)
+        setTableBody([user])
         // updateTable()
     }, [])
 
