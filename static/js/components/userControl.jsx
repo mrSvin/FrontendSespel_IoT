@@ -284,6 +284,7 @@ function AdminFormUpdateAdd({
 
     return (
         <form className={classToTypeForm(typeForm)}>
+            <p className='formAdminName'>{typeForm == 'change'? 'Редактирование пользователя' : 'Добавления пользователя'}</p>
             <label htmlFor="">Логин {typeForm == 'change' ? user.login : null}</label>
             <input className={typeForm == 'change' ? 'formHideUsersControl' : null}
                    value={user.login}
@@ -330,6 +331,7 @@ function AdminFormUpdateAdd({
                     <option value="ROLE_SERVICE">Сервисное обслуживание</option>
                 </select>
             </div>
+            <label>{typeForm == 'change'? 'Изменить фото' : 'Добавить фото'}</label>
             <div className="profile-pic">
                 <label className="-label" htmlFor="userAvatar">
                     <span className='adminPhotoMessage'>Поменять изображение</span>
@@ -338,7 +340,6 @@ function AdminFormUpdateAdd({
                     className="inputImage"
                     id="userAvatar"
                     type="file"
-                    value={user.photo}
                     onChange={() => {
                         let input = document.getElementById('userAvatar')
                         handleOnChangePhoto(input.files[0])
