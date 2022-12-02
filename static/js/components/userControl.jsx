@@ -25,16 +25,17 @@ function fetchRequestAdminAddUser(userData) {
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
-function fetchRequestAdminAddUser() {
-        let input = document.getElementById('userAvatar')
-        let data = new FormData()
-        data.append('image', input.files[0])
 
-        fetch('/api/adminpanel/addUser', {
-        method: 'POST',
-        body: data
-    })
-}
+// function fetchRequestAdminAddUser() {
+//     let input = document.getElementById('userAvatar')
+//     let data = new FormData()
+//     data.append('image', input.files[0])
+//
+//     fetch('/api/adminpanel/addUser', {
+//         method: 'POST',
+//         body: data
+//     })
+// }
 
 function fetchRequestScudUpdateWorkers(userData) {
     let myHeaders = new Headers();
