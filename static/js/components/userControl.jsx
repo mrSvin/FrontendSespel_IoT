@@ -120,11 +120,12 @@ function UsersControl() {
     };
 
     function updateTable() {
-        let promise = fetchRequestScudInfoWorkers()
-        promise.then(data => {
-            let convertedData = convertScudAnswerToTable(data)
-            convertedData ? null : setErrorMessage(['Не удалось загрузить базу пользователей', 'redMessage'])
-            setTableBody(convertedData)
+        let promiseUserData = fetchRequestAdminUserInfo()
+        promiseUserData.then(data => {
+            let dataArray = Object.keys(data).map(e => {
+                return data[e]
+            })
+            setTableBody(dataArray)
         })
     }
 
@@ -162,8 +163,9 @@ function UsersControl() {
                                 <td>{userTable.username}</td>
                                 <td>{userTable.role}</td>
                                 <td>{userTable.email}</td>
-                                <td><span
-                                    className={userTable.enabled == '1' ? 'statusActive' : 'statusNoActive'}></span>
+                                <td>
+                                    <span
+                                        className={userTable.enabled == '1' ? 'statusActive' : 'statusNoActive'}></span>
                                 </td>
                                 <td>
                                     <div><img className='avatar'
@@ -182,14 +184,16 @@ function UsersControl() {
                                 <td>
                                     <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`}
                                          onClick={() => {
-                                             let deletePromise = fetchRequestScudDeleteWorkers(userTable.username)
-                                             deletePromise.then(() => {
-                                                 updateTable()
-                                                 setClickedDeleteButton(false)
-                                                 setTimeout(() => {
-                                                     setClickedDeleteButton(true)
-                                                 }, 1000)
-                                             })
+                                             if (confirm(`Вы уверены, что хотите удалить пользователя ${userTable.username}?`)) {
+                                                 let deletePromise = fetchRequestAdminDeleteUser(userTable.username)
+                                                 deletePromise.then(() => {
+                                                     updateTable()
+                                                     setClickedDeleteButton(false)
+                                                     setTimeout(() => {
+                                                         setClickedDeleteButton(true)
+                                                     }, 1000)
+                                                 })
+                                             }
                                          }}></div>
                                 </td>
                             </tr>
