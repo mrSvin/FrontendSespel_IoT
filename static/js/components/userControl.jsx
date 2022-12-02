@@ -204,9 +204,6 @@ function UsersControl() {
 
     return (
         <div>
-            <AdminFormUpdateAdd typeForm={typeForm} user={user} handleOnChange={handleOnChange}
-                                handleOnChangePhoto={handleOnChangePhoto} updateTable={updateTable}
-                                errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
             <table className={`tableUsersControl`}>
                 <thead>
                 <tr>
@@ -268,6 +265,13 @@ function UsersControl() {
                     setErrorMessage(['', ''])
                 } else setTypeForm('add')
             }}><span>+</span></div>
+            <AdminFormUpdateAdd typeForm={typeForm} user={user} handleOnChange={handleOnChange}
+                                handleOnChangePhoto={handleOnChangePhoto} updateTable={updateTable}
+                                errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
+            <div className={typeForm == 'hide'? null : 'darkSpace'}
+            onClick={()=>{
+                setTypeForm('hide')
+            }}></div>
         </div>
     )
 }
@@ -308,8 +312,8 @@ function AdminFormUpdateAdd({
                         onChange={(e) => {
                             handleOnChange(e, 'active')
                         }}>
-                    <option value="true">Да</option>
-                    <option value="false">Нет</option>
+                    <option value="true">Активен</option>
+                    <option value="false">Заблокирован</option>
                 </select>
             </div>
 
