@@ -264,3 +264,8 @@
 .adminPhotoMessage{
     text-align: center;
 }
+
+.input[type=text]::placeholder, .input[type=password]::placeholder
+.input[type=email]::placeholder{
+    color: rgba(255, 255, 255, 0.5);
+}

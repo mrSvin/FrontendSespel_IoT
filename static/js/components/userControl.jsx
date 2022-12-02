@@ -283,16 +283,21 @@ function AdminFormUpdateAdd({
             <label htmlFor="">Логин {typeForm == 'change' ? user.login : null}</label>
             <input className={typeForm == 'change' ? 'formHideUsersControl' : null}
                    value={user.login}
+                   placeholder={'ivanov_ii'}
                    onChange={(e) => {
                        handleOnChange(e, 'login')
                    }}/>
             <label htmlFor="">Пароль</label>
             <input value={user.password}
+                   placeholder={'sespel123'}
                    onChange={(e) => {
                        handleOnChange(e, 'password')
                    }}/>
             <label htmlFor="">Почта</label>
             <input value={user.mail}
+                   placeholder={'sespel@sepspel.com'}
+                   type="email"
+                   pattern=".+@sespel\.com"
                    onChange={(e) => {
                        handleOnChange(e, 'mail')
                    }}/>
