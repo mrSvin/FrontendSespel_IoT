@@ -1,12 +1,12 @@
 function fetchRequestAdminUserInfo() {
-    return fetch(`/api/adminpanel/userList`, {method: 'GET'})
+    return fetch(`/api/adminpanel/userList`, {method: 'POST'})
         .then((response) => response.json())
         .then((data) => {
             return data
         })
 }
 
-function fetchRequestScudAddWorkers(userData) {
+function fetchRequestAdminAddUser(userData) {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -18,13 +18,22 @@ function fetchRequestScudAddWorkers(userData) {
         body: raw,
         redirect: 'follow'
     };
-
-    return fetch(`/api/scud/addWorker`, requestOptions)
+    return fetch(`/api/adminpanel/addUser`, requestOptions)
         .then(response => response.text())
         .then((result) => {
             return result
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
+}
+function fetchRequestAdminAddUser() {
+        let input = document.getElementById('userAvatar')
+        let data = new FormData()
+        data.append('image', input.files[0])
+
+        fetch('/api/adminpanel/addUser', {
+        method: 'POST',
+        body: data
+    })
 }
 
 function fetchRequestScudUpdateWorkers(userData) {
@@ -49,9 +58,8 @@ function fetchRequestScudUpdateWorkers(userData) {
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
 
-function fetchRequestScudDeleteWorkers(tabel) {
-
-    return fetch(`/api/scud/deleteWorker/tabel:${tabel}`, {method: 'POST'})
+function fetchRequestAdminDeleteUser(login) {
+    return fetch(`/api/adminpanel/deleteUser-${login}`, {method: 'DELETE'})
         .then(response => response.text())
         .then((result) => {
             if (result == 'ok') console.log('Пользователь удален')
@@ -237,7 +245,7 @@ function AdminFormUpdateAdd({
                        onChange={(e) => {
                            handleOnChange(e, 'password')
                        }}/>
-                <div className={`passwordEye ${passwordEye ? 'eye' : 'noEye'}`}
+                <div className={`passwordEye ${passwordEye ? 'noEye' : 'eye'}`}
                      onClick={() => toggleClass()}
                 />
             </div>
