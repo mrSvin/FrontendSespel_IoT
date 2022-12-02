@@ -287,12 +287,14 @@ function AdminFormUpdateAdd({
             <label htmlFor="">Логин {typeForm == 'change' ? user.login : null}</label>
             <input className={typeForm == 'change' ? 'formHideUsersControl' : null}
                    value={user.login}
+                   type={'text'}
                    placeholder={'ivanov_ii'}
                    onChange={(e) => {
                        handleOnChange(e, 'login')
                    }}/>
             <label htmlFor="">Пароль</label>
             <input value={user.password}
+                   type={'password'}
                    placeholder={'sespel123'}
                    onChange={(e) => {
                        handleOnChange(e, 'password')
