@@ -2,10 +2,9 @@
     background-color: #2c5275;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     transition: 0.3s;
     width: 495px;
-    max-height: 660px;
+    max-height: 600px;
     padding: 18px 9px;
     border-radius: 4px;
     position: fixed;
@@ -19,7 +18,7 @@
 
 .formUsersControl > label {
     font-size: 25px;
-    margin: 10px 0px 10px 20px;
+    margin: 5px 0px;
     color: white;
 }
 
@@ -239,13 +238,11 @@
 }
 
 .greenMessage {
-    font-size: 28px;
-    margin-top: 10px;
+    color: green;
 }
 
 .redMessage {
-    font-size: 28px;
-    margin-top: 10px;
+    color: red;
 }
 
 .typeSmenaWrapper {
@@ -273,8 +270,10 @@
     text-align: center;
 }
 
-input[type="text"]::placeholder, input[type="password"]::placeholder,
-input[type="email"]::placeholder{
+
+
+.adminInput[type=text]::placeholder, .adminInput[type=password]::placeholder
+.adminInput[type=email]::placeholder{
     color: rgba(255, 255, 255, 0.5);
     font-size: 25px;
 }
@@ -288,4 +287,11 @@ input[type="email"]::placeholder{
     top: 0;
     opacity: 70%;
     cursor: pointer;
+}
+
+p.formAdminName {
+    font-size: 26px;
+    font-weight: bold;
+    color: white;
+    margin: 5px auto;
 }

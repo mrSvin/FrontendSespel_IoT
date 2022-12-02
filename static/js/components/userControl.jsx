@@ -286,7 +286,7 @@ function AdminFormUpdateAdd({
         <form className={classToTypeForm(typeForm)}>
             <p className='formAdminName'>{typeForm == 'change'? 'Редактирование пользователя' : 'Добавления пользователя'}</p>
             <label htmlFor="">Логин {typeForm == 'change' ? user.login : null}</label>
-            <input className={typeForm == 'change' ? 'formHideUsersControl' : null}
+            <input className={`adminInput ${typeForm == 'change' ? 'formHideUsersControl' : null}`}
                    value={user.login}
                    type={'text'}
                    placeholder={'ivanov_ii'}
@@ -294,14 +294,16 @@ function AdminFormUpdateAdd({
                        handleOnChange(e, 'login')
                    }}/>
             <label htmlFor="">Пароль</label>
-            <input value={user.password}
+            <input className='adminInput'
+                   value={user.password}
                    type={'password'}
                    placeholder={'sespel123'}
                    onChange={(e) => {
                        handleOnChange(e, 'password')
                    }}/>
             <label htmlFor="">Почта</label>
-            <input value={user.mail}
+            <input className='adminInput'
+                   value={user.mail}
                    placeholder={'sespel@sepspel.com'}
                    type="email"
                    pattern=".+@sespel\.com"
@@ -331,7 +333,6 @@ function AdminFormUpdateAdd({
                     <option value="ROLE_SERVICE">Сервисное обслуживание</option>
                 </select>
             </div>
-            <label>{typeForm == 'change'? 'Изменить фото' : 'Добавить фото'}</label>
             <div className="profile-pic">
                 <label className="-label" htmlFor="userAvatar">
                     <span className='adminPhotoMessage'>Поменять изображение</span>
