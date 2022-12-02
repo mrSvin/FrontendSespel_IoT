@@ -330,8 +330,6 @@ function AdminFormUpdateAdd({
                     <option value="ROLE_SERVICE">Сервисное обслуживание</option>
                 </select>
             </div>
-
-            <label htmlFor="">Фото</label>
             <div className="profile-pic">
                 <label className="-label" htmlFor="userAvatar">
                     <span className='adminPhotoMessage'>Поменять изображение</span>
@@ -340,6 +338,7 @@ function AdminFormUpdateAdd({
                     className="inputImage"
                     id="userAvatar"
                     type="file"
+                    value={user.photo}
                     onChange={() => {
                         let input = document.getElementById('userAvatar')
                         handleOnChangePhoto(input.files[0])
