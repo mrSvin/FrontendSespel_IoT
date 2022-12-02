@@ -295,3 +295,12 @@ p.formAdminName {
     color: white;
     margin: 5px auto;
 }
+
+.passwordEye{
+    background: url(../images/view.svg) 0 0 no-repeat;
+
+}
+
+.passwordNoEye {
+    background: url(../images/no-view.svg) 0 0 no-repeat;
+}

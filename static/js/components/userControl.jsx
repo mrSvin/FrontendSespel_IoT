@@ -55,7 +55,7 @@ function fetchRequestScudDeleteWorkers(tabel) {
         .then(response => response.text())
         .then((result) => {
             if (result == 'ok') console.log('Пользователь удален')
-            else console.log('Такой пользователя нет')
+            else console.log('Такого пользователя нет')
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
@@ -212,6 +212,11 @@ function AdminFormUpdateAdd({
                                 errorMessage, setErrorMessage
                             }) {
 
+    let [passwordEye, setpasswordEye] = useState(false)
+    const toggleClass = () => {
+        setpasswordEye(!passwordEye);
+    };
+
     return (
         <form className={classToTypeForm(typeForm)}>
             <p className='formAdminName'>{typeForm == 'change' ? 'Редактирование пользователя' : 'Добавления пользователя'}</p>
@@ -224,13 +229,18 @@ function AdminFormUpdateAdd({
                        handleOnChange(e, 'enabled')
                    }}/>
             <label htmlFor="">Пароль</label>
-            <input className='adminInput'
-                   value={user.password}
-                   type={'password'}
-                   placeholder={'sespel123'}
-                   onChange={(e) => {
-                       handleOnChange(e, 'password')
-                   }}/>
+            <div>
+                <input className='adminInput'
+                       value={user.password}
+                       type={'password'}
+                       placeholder={'sespel123'}
+                       onChange={(e) => {
+                           handleOnChange(e, 'password')
+                       }}/>
+                <div className={passwordEye? 'passwordEye' : 'passwordNoEye'}
+                     onClick={() =>  toggleClass()}
+                />
+            </div>
             <label htmlFor="">Почта</label>
             <input className='adminInput'
                    value={user.email}
