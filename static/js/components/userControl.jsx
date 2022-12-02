@@ -1,5 +1,5 @@
 function fetchRequestAdminUserInfo() {
-    return fetch(`/api/adminpanel/userInfo`, {method: 'POST'})
+    return fetch(`/api/adminpanel/userList`, {method: 'POST'})
         .then((response) => response.json())
         .then((data) => {
             return data
@@ -82,11 +82,10 @@ function UsersControl() {
     const [tableBody, setTableBody] = useState(null)
     const [user, setUser] = useState(
         {
-            id: '0',
-            login: 'user',
+            username: 'user',
             role: 'ROLE_USER',
-            mail: 'user@sespel.com',
-            active: 'false',
+            email: 'user@sespel.com',
+            enabled: 'false',
             photo: testPhoto,
             password: 'sespel',
         })
@@ -152,10 +151,10 @@ function UsersControl() {
                         return (
                             <tr key={i}>
                                 <td>{i+1}</td>
-                                <td>{userTable.login}</td>
+                                <td>{userTable.username}</td>
                                 <td>{userTable.role}</td>
-                                <td>{userTable.mail}</td>
-                                <td>{userTable.active}</td>
+                                <td>{userTable.email}</td>
+                                <td>{userTable.enabled}</td>
                                 <td>
                                     <div><img className='avatar' src={`data:image/jpeg;base64,${userTable.photo}`}
                                               alt=""/></div>
@@ -164,7 +163,7 @@ function UsersControl() {
                                     <div className='tdChange' onClick={() => {
                                         setUser(userTable)
                                         setErrorMessage(['', ''])
-                                        if (user.login == userTable.login && typeForm == 'change') {
+                                        if (user.username == userTable.username && typeForm == 'change') {
                                             setTypeForm('hide')
                                         } else setTypeForm('change')
                                     }}></div>
@@ -172,7 +171,7 @@ function UsersControl() {
                                 <td>
                                     <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`}
                                          onClick={() => {
-                                             let deletePromise = fetchRequestScudDeleteWorkers(userTable.login)
+                                             let deletePromise = fetchRequestScudDeleteWorkers(userTable.username)
                                              deletePromise.then(() => {
                                                  updateTable()
                                                  setClickedDeleteButton(false)
@@ -214,13 +213,13 @@ function AdminFormUpdateAdd({
     return (
         <form className={classToTypeForm(typeForm)}>
             <p className='formAdminName'>{typeForm == 'change' ? 'Редактирование пользователя' : 'Добавления пользователя'}</p>
-            <label htmlFor="">Логин {typeForm == 'change' ? user.login : null}</label>
+            <label htmlFor="">Логин {typeForm == 'change' ? user.username : null}</label>
             <input className={`adminInput ${typeForm == 'change' ? 'formHideUsersControl' : null}`}
-                   value={user.login}
+                   value={user.username}
                    type={'text'}
                    placeholder={'ivanov_ii'}
                    onChange={(e) => {
-                       handleOnChange(e, 'login')
+                       handleOnChange(e, 'enabled')
                    }}/>
             <label htmlFor="">Пароль</label>
             <input className='adminInput'
@@ -232,7 +231,7 @@ function AdminFormUpdateAdd({
                    }}/>
             <label htmlFor="">Почта</label>
             <input className='adminInput'
-                   value={user.mail}
+                   value={user.email}
                    placeholder={'sespel@sepspel.com'}
                    type="email"
                    pattern=".+@sespel\.com"
@@ -242,12 +241,12 @@ function AdminFormUpdateAdd({
 
             <label>Активность</label>
             <div className='typeSmenaWrapper'>
-                <select id="active" name="active" value={user.active}
+                <select id="enabled" name="enabled" value={user.enabled}
                         onChange={(e) => {
-                            handleOnChange(e, 'active')
+                            handleOnChange(e, 'enabled')
                         }}>
-                    <option value="true">Активен</option>
-                    <option value="false">Заблокирован</option>
+                    <option value="1">Активен</option>
+                    <option value="0">Заблокирован</option>
                 </select>
             </div>
 
@@ -284,7 +283,7 @@ function AdminFormUpdateAdd({
 
             <button type="button"
                     onClick={() => {
-                        if (user.login == '' || user.password == '' || user.active == '' || user.role == '' || user.photo == '') {
+                        if (user.username == '' || user.password == '' || user.enabled == '' || user.role == '' || user.photo == '') {
                             setErrorMessage(['Заполните все поля', 'redMessage'])
                             return null
                         }
