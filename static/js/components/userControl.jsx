@@ -1,5 +1,5 @@
 function fetchRequestAdminUserInfo() {
-    return fetch(`/api/adminpanel/userList`, {method: 'POST'})
+    return fetch(`/api/adminpanel/userList`, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
             return data
