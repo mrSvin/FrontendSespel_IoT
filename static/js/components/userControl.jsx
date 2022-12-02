@@ -19,7 +19,6 @@ function fetchRequestScudAddWorkers(userData) {
         redirect: 'follow'
     };
 
-
     return fetch(`/api/scud/addWorker`, requestOptions)
         .then(response => response.text())
         .then((result) => {
@@ -123,7 +122,7 @@ function UsersControl() {
     useEffect(() => {
         let promiseUserData = fetchRequestAdminUserInfo()
         promiseUserData.then(data => {
-            let dataArray = Object.keys(data).map(e=>{
+            let dataArray = Object.keys(data).map(e => {
                 return data[e]
             })
             setTableBody(dataArray)
@@ -150,11 +149,13 @@ function UsersControl() {
                     tableBody.map((userTable, i) => {
                         return (
                             <tr key={i}>
-                                <td>{i+1}</td>
+                                <td>{i + 1}</td>
                                 <td>{userTable.username}</td>
                                 <td>{userTable.role}</td>
                                 <td>{userTable.email}</td>
-                                <td>{userTable.enabled}</td>
+                                <td><span
+                                    className={userTable.enabled == '1' ? 'statusActive' : 'statusNoActive'}></span>
+                                </td>
                                 <td>
                                     <div><img className='avatar' src={`data:image/jpeg;base64,${userTable.photo}`}
                                               alt=""/></div>
