@@ -296,11 +296,36 @@ p.formAdminName {
     margin: 5px auto;
 }
 
+.passwordDiv{
+    position: relative;
+    margin: 0 auto;
+    width: 92%;
+    display: flex;
+    align-items: center;
+}
+
+.passwordInput {
+    width: 100%;
+    margin: 0 auto;
+    color: white;
+    background: #114360;
+    height: 35px;
+    font-size: 25px;
+}
+
 .passwordEye{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+}
+
+.eye{
     background: url(../images/view.svg) 0 0 no-repeat;
 
 }
 
-.passwordNoEye {
+.noEye {
     background: url(../images/no-view.svg) 0 0 no-repeat;
 }

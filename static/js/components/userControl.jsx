@@ -230,15 +230,15 @@ function AdminFormUpdateAdd({
                    }}/>
             <label htmlFor="">Пароль</label>
             <div>
-                <input className='adminInput'
+                <input className='passwordInput'
                        value={user.password}
-                       type={'password'}
+                       type={passwordEye ? 'text' : 'password'}
                        placeholder={'sespel123'}
                        onChange={(e) => {
                            handleOnChange(e, 'password')
                        }}/>
-                <div className={passwordEye? 'passwordEye' : 'passwordNoEye'}
-                     onClick={() =>  toggleClass()}
+                <div className={`passwordEye ${passwordEye ? 'eye' : 'noEye'}`}
+                     onClick={() => toggleClass()}
                 />
             </div>
             <label htmlFor="">Почта</label>
