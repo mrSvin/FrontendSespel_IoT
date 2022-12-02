@@ -1,8 +1,8 @@
-function fetchRequestScudInfoWorkers() {
-    return fetch(`/api/scud/infoWorkers`, {method: 'GET'})
+function fetchRequestAdminUserInfo() {
+    return fetch(`/api/adminpanel/userInfo`, {method: 'POST'})
         .then((response) => response.json())
         .then((data) => {
-            return data[0]
+            return data
         })
 }
 
@@ -60,7 +60,6 @@ function fetchRequestScudDeleteWorkers(tabel) {
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
-
 
 
 function classToTypeForm(typeForm) {
@@ -123,83 +122,13 @@ function UsersControl() {
     }
 
     useEffect(() => {
-        let testUsers = [
-            {
-                id: '0',
-                login: 'Laki',
-                role: 'ROLE_USER',
-                mail: 'user@sespel.com',
-                active: 'false',
-                photo: testPhoto,
-                password: 'sespel'
-            },
-            {
-                id: '1',
-                login: 'Roki',
-                role: 'ROLE_USER',
-                mail: 'user@sespel.com',
-                active: 'true',
-                photo: testPhoto,
-                password: 'sespel'
-            },
-            {
-                id: '2',
-                login: 'Kuki',
-                role: 'ROLE_USER',
-                mail: 'user@sespel.com',
-                active: 'true',
-                photo: testPhoto,
-                password: 'sespel'
-            },
-            {
-                id: '3',
-                login: 'Puki',
-                role: 'ROLE_SERVICE',
-                mail: 'user@sespel.com',
-                active: 'false',
-                photo: testPhoto,
-                password: 'sespel'
-            },
-            {
-                id: '4',
-                login: 'Haki',
-                role: 'ROLE_ADMIN',
-                mail: 'user@sespel.com',
-                active: 'true',
-                photo: testPhoto,
-                password: 'sespel'
-            },
-            {
-                id: '5',
-                login: 'Nuki',
-                role: 'ROLE_USER',
-                mail: 'user@sespel.com',
-                active: 'true',
-                photo: testPhoto,
-                password: 'sespel'
-            },
-            {
-                id: '6',
-                login: 'Loki',
-                role: 'ROLE_SERVICE',
-                mail: 'user@sespel.com',
-                active: 'true',
-                photo: testPhoto,
-                password: 'sespel'
-            },
-            {
-                id: '7',
-                login: 'Tuki',
-                role: 'ROLE_USER',
-                mail: 'user@sespel.com',
-                active: 'true',
-                photo: testPhoto,
-                password: 'sespel'
-            },
-]
-
-        setTableBody(testUsers)
-        // updateTable()
+        let promiseUserData = fetchRequestAdminUserInfo()
+        promiseUserData.then(data => {
+            let dataArray = Object.keys(data).map(e=>{
+                return data[e]
+            })
+            setTableBody(dataArray)
+        })
     }, [])
 
     return (
@@ -222,7 +151,7 @@ function UsersControl() {
                     tableBody.map((userTable, i) => {
                         return (
                             <tr key={i}>
-                                <td>{userTable.id}</td>
+                                <td>{i+1}</td>
                                 <td>{userTable.login}</td>
                                 <td>{userTable.role}</td>
                                 <td>{userTable.mail}</td>
@@ -268,10 +197,10 @@ function UsersControl() {
             <AdminFormUpdateAdd typeForm={typeForm} user={user} handleOnChange={handleOnChange}
                                 handleOnChangePhoto={handleOnChangePhoto} updateTable={updateTable}
                                 errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
-            <div className={typeForm == 'hide'? null : 'darkSpace'}
-            onClick={()=>{
-                setTypeForm('hide')
-            }}></div>
+            <div className={typeForm == 'hide' ? null : 'darkSpace'}
+                 onClick={() => {
+                     setTypeForm('hide')
+                 }}></div>
         </div>
     )
 }
@@ -284,7 +213,7 @@ function AdminFormUpdateAdd({
 
     return (
         <form className={classToTypeForm(typeForm)}>
-            <p className='formAdminName'>{typeForm == 'change'? 'Редактирование пользователя' : 'Добавления пользователя'}</p>
+            <p className='formAdminName'>{typeForm == 'change' ? 'Редактирование пользователя' : 'Добавления пользователя'}</p>
             <label htmlFor="">Логин {typeForm == 'change' ? user.login : null}</label>
             <input className={`adminInput ${typeForm == 'change' ? 'formHideUsersControl' : null}`}
                    value={user.login}
