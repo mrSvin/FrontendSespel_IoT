@@ -79,6 +79,10 @@
 
 .formUsersControl input:hover,
 .formUsersControl select:hover {
+    cursor: text;
+}
+
+.formUsersControl select:hover {
     cursor: pointer;
 }
 
@@ -319,6 +323,7 @@ p.formAdminName {
     position: absolute;
     right: 15px;
     cursor: pointer;
+    filter: invert(100%) saturate(90%) brightness(100%) contrast(100%);
 }
 
 .eye{

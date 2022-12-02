@@ -229,7 +229,7 @@ function AdminFormUpdateAdd({
                        handleOnChange(e, 'enabled')
                    }}/>
             <label htmlFor="">Пароль</label>
-            <div>
+            <div className={'passwordDiv'}>
                 <input className='passwordInput'
                        value={user.password}
                        type={passwordEye ? 'text' : 'password'}
