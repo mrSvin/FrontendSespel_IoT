@@ -17,20 +17,41 @@ function fetchRequestAdminUserInfo() {
 //     })
 // }
 
-function fetchRequestAdminAddUser(user) {
-    let input = document.getElementById('userAvatar')
-    let data = new FormData()
-    data.append('image', input.files[0])
-    data.append('username', user.username)
-    data.append('password', user.password)
-    data.append('role', user.role)
-    data.append('enabled', user.enabled)
-    data.append('email', user.email)
+function urltoFile(url, filename) {
+    return (fetch(url)
+            .then(function (res) {
+                return res.arrayBuffer();
+            })
+            .then(function (buf) {
+                return new File([buf], filename, {type: "image/png"});
+            })
+    );
+}
 
-    fetch('/api/adminpanel/addUser', {
-        method: 'POST',
-        body: data
-    })
+function fetchRequestAdminAddUser(user) {
+
+    let base64 = document.querySelectorAll('.outputImage')[1].src
+
+    urltoFile(base64, base64.slice(10, 20))
+        .then(function (file) {
+            let data = new FormData()
+            data.append('image', file)
+            data.append('username', user.username)
+            data.append('password', user.password)
+            data.append('role', user.role)
+            data.append('enabled', user.enabled)
+            data.append('email', user.email)
+
+            let post = fetch('/api/adminpanel/addUser', {
+                method: 'POST',
+                body: data
+            })
+            // post.then(response => {
+            //     console.log(response.ok)
+            //         return response
+            //     })
+
+        });
 }
 
 
@@ -312,6 +333,7 @@ function AdminFormUpdateAdd({
                         if (typeForm == 'add') {
                             let addPromise = fetchRequestAdminAddUser(user)
                             addPromise.then((data) => {
+                                console.log('Что по данным???', data)
                                 if (data == 'ok') {
                                     updateTable()
                                     setErrorMessage(['Пользователь добавлен', 'greenMessage'])
