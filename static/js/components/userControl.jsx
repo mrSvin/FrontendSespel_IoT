@@ -37,6 +37,23 @@ function fetchRequestAdminAddUser(userData) {
 //     })
 // }
 
+function fetchRequestAdminAddUser(user) {
+    let input = document.getElementById('userAvatar')
+    let data = new FormData()
+    data.append('image', input.files[0])
+    data.append('username', user.username)
+    data.append('password', user.password)
+    data.append('role', user.role)
+    data.append('enabled', user.enabled)
+    data.append('email', user.email)
+
+    fetch('/api/adminpanel/addUser', {
+        method: 'POST',
+        body: data
+    })
+}
+
+
 function fetchRequestScudUpdateWorkers(userData) {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -239,7 +256,7 @@ function AdminFormUpdateAdd({
                    type={'text'}
                    placeholder={'ivanov_ii'}
                    onChange={(e) => {
-                       handleOnChange(e, 'enabled')
+                       handleOnChange(e, 'username')
                    }}/>
             <label htmlFor="">Пароль</label>
             <div className={'passwordDiv'}>
@@ -261,7 +278,7 @@ function AdminFormUpdateAdd({
                    type="email"
                    pattern=".+@sespel\.com"
                    onChange={(e) => {
-                       handleOnChange(e, 'mail')
+                       handleOnChange(e, 'email')
                    }}/>
 
             <label>Активность</label>
