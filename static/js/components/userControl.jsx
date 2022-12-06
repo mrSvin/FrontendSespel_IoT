@@ -330,7 +330,7 @@ function AdminFormUpdateAdd({
                             return null
                         }
                         if (typeForm == 'add') {
-                            let addPromise = fetchRequestScudAddWorkers(convertScudToFetch(user))
+                            let addPromise = fetchRequestAdminAddUser(user)
                             addPromise.then((data) => {
                                 if (data == 'ok') {
                                     updateTable()
