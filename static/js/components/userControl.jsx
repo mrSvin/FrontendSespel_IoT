@@ -6,26 +6,6 @@ function fetchRequestAdminUserInfo() {
         })
 }
 
-function fetchRequestAdminAddUser(userData) {
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    let raw = JSON.stringify(userData)
-
-    let requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-    return fetch(`/api/adminpanel/addUser`, requestOptions)
-        .then(response => response.text())
-        .then((result) => {
-            return result
-        })
-        .catch(error => console.log('Ошибка при отправке запроса', error));
-}
-
 // function fetchRequestAdminAddUser() {
 //     let input = document.getElementById('userAvatar')
 //     let data = new FormData()
