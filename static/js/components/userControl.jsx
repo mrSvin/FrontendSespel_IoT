@@ -18,10 +18,8 @@ function urltoFile(url, filename) {
 }
 
 function fetchRequestAdminAddUser(user) {
-
     let base64 = document.querySelectorAll('.outputImage')[1].src
-
-    urltoFile(base64, base64.slice(10, 20))
+    return urltoFile(base64, base64.slice(10, 20))
         .then(function (file) {
             let data = new FormData()
             data.append('image', file)
@@ -31,29 +29,25 @@ function fetchRequestAdminAddUser(user) {
             data.append('enabled', user.enabled)
             data.append('email', user.email)
 
-            let post = fetch('/api/adminpanel/addUser', {
+            return fetch('/api/adminpanel/addUser', {
                 method: 'POST',
                 body: data
             })
-            // post.then(response => {
-            //     console.log(response.ok)
-            //         return response
-            //     })
-
         });
 }
 
-function fetchRequestAdminChangeUser() {
+function fetchRequestAdminChangeUser(user) {
     let base64 = document.querySelectorAll('.outputImage')[1].src
-    urltoFile(base64, base64.slice(10, 20))
+    return urltoFile(base64, base64.slice(10, 20))
         .then(function (file) {
+            let data = new FormData()
             data.append('image', file)
             data.append('username', user.username)
             data.append('role', user.role)
             data.append('enabled', user.enabled)
             data.append('email', user.email)
 
-            fetch('/api/adminpanel/updateUser', {
+            return fetch('/api/adminpanel/updateUser', {
                 method: 'POST',
                 body: data
             })
@@ -94,7 +88,7 @@ function UsersControl() {
             username: 'user',
             role: 'ROLE_USER',
             email: 'user@sespel.com',
-            enabled: '0',
+            enabled: '1',
             photo: undefImg,
             password: 'sespel',
         })
@@ -317,15 +311,15 @@ function AdminFormUpdateAdd({
                             let addPromise = fetchRequestAdminAddUser(user)
                             addPromise.then((data) => {
                                 console.log('Что по данным???', data)
-                                if (data == 'ok') {
+                                if (data.ok) {
                                     updateTable()
                                     setErrorMessage(['Пользователь добавлен', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось добавить пользователя', 'redMessage'])
                             })
                         } else if (typeForm == 'change') {
-                            let changePromise = fetchRequestAdminChangeUser(convertScudToFetch(user))
+                            let changePromise = fetchRequestAdminChangeUser(user)
                             changePromise.then((data) => {
-                                if (data == 'ok') {
+                                if (data.ok) {
                                     updateTable()
                                     setErrorMessage(['Пользователь изменен', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось изменить пользователя', 'redMessage'])
