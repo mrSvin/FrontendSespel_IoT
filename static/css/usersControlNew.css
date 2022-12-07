@@ -55,9 +55,10 @@
 }
 
 .formHideUsersControl {
-    position: absolute;
+    position: absolute!important;
     opacity: 0;
     visibility: hidden;
+    top: 0;
 }
 
 .formUsersControl > button {

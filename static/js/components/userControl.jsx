@@ -6,17 +6,6 @@ function fetchRequestAdminUserInfo() {
         })
 }
 
-// function fetchRequestAdminAddUser() {
-//     let input = document.getElementById('userAvatar')
-//     let data = new FormData()
-//     data.append('image', input.files[0])
-//
-//     fetch('/api/adminpanel/addUser', {
-//         method: 'POST',
-//         body: data
-//     })
-// }
-
 function urltoFile(url, filename) {
     return (fetch(url)
             .then(function (res) {
@@ -54,27 +43,21 @@ function fetchRequestAdminAddUser(user) {
         });
 }
 
+function fetchRequestAdminChangeUser() {
+    let base64 = document.querySelectorAll('.outputImage')[1].src
+    urltoFile(base64, base64.slice(10, 20))
+        .then(function (file) {
+            data.append('image', file)
+            data.append('username', user.username)
+            data.append('role', user.role)
+            data.append('enabled', user.enabled)
+            data.append('email', user.email)
 
-function fetchRequestScudUpdateWorkers(userData) {
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    let raw = JSON.stringify(userData)
-
-    let requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-
-
-    return fetch(`/api/scud/updateWorker`, requestOptions)
-        .then(response => response.text())
-        .then((result) => {
-            return result
-        })
-        .catch(error => console.log('Ошибка при отправке запроса', error));
+            fetch('/api/adminpanel/updateUser', {
+                method: 'POST',
+                body: data
+            })
+        });
 }
 
 function fetchRequestAdminDeleteUser(login) {
@@ -259,7 +242,7 @@ function AdminFormUpdateAdd({
                    onChange={(e) => {
                        handleOnChange(e, 'username')
                    }}/>
-            <label htmlFor="">{typeForm == 'change' ? null : 'Пароль'}</label>
+            <label className={typeForm == 'change' ? 'formHideUsersControl' : null} htmlFor="">Пароль</label>
             <div className={`passwordDiv ${typeForm == 'change' ? 'formHideUsersControl' : null}`}>
                 <input className='passwordInput'
                        value={user.password}
@@ -340,7 +323,7 @@ function AdminFormUpdateAdd({
                                 } else setErrorMessage(['Не удалось добавить пользователя', 'redMessage'])
                             })
                         } else if (typeForm == 'change') {
-                            let changePromise = fetchRequestScudUpdateWorkers(convertScudToFetch(user))
+                            let changePromise = fetchRequestAdminChangeUser(convertScudToFetch(user))
                             changePromise.then((data) => {
                                 if (data == 'ok') {
                                     updateTable()
