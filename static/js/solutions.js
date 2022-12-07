@@ -849,3 +849,24 @@ function reloadPageIfLogin(data) {
         location.href = `${window.location.origin}/login`
     }
 }
+
+function urltoFile(url, filename) {
+    return (fetch(url)
+            .then(function (res) {
+                return res.arrayBuffer();
+            })
+            .then(function (buf) {
+                return new File([buf], filename, {type: "image/png"});
+            })
+    );
+}
+
+function classToTypeForm(typeForm) {
+
+    if (typeForm == 'hide') return 'formHideUsersControl'
+
+    if (typeForm == 'add') return 'formUsersControl tableBorderAdd'
+
+    if (typeForm == 'change') return 'formUsersControl tableBorderChange'
+
+}

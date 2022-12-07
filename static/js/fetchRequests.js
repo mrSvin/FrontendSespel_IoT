@@ -275,3 +275,59 @@ function fetchSkudImage(date = '2022-10-25', place = 'Ленинградская
             })
     }
 }
+
+function fetchRequestAdminUserInfo() {
+    return fetch(`/api/adminpanel/userList`, {method: 'POST'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}
+
+function fetchRequestAdminAddUser(user) {
+    let base64 = document.querySelectorAll('.outputImage')[1].src
+    return urltoFile(base64, base64.slice(10, 20))
+        .then(function (file) {
+            let data = new FormData()
+            data.append('image', file)
+            data.append('username', user.username)
+            data.append('password', user.password)
+            data.append('role', user.role)
+            data.append('enabled', user.enabled)
+            data.append('email', user.email)
+
+            return fetch('/api/adminpanel/addUser', {
+                method: 'POST',
+                body: data
+            })
+                .then(response => response.text())
+        });
+}
+
+function fetchRequestAdminChangeUser(user) {
+    let base64 = document.querySelectorAll('.outputImage')[1].src
+    return urltoFile(base64, base64.slice(10, 20))
+        .then(function (file) {
+            let data = new FormData()
+            data.append('image', file)
+            data.append('username', user.username)
+            data.append('role', user.role)
+            data.append('enabled', user.enabled)
+            data.append('email', user.email)
+
+            return fetch('/api/adminpanel/updateUser', {
+                method: 'POST',
+                body: data
+            })
+                .then(response => response.text())
+        });
+}
+
+function fetchRequestAdminDeleteUser(login) {
+    return fetch(`/api/adminpanel/deleteUser-${login}`, {method: 'DELETE'})
+        .then(response => response.text())
+        .then((result) => {
+            return result
+        })
+        .catch(error => console.log('Ошибка при отправке запроса', error));
+}
