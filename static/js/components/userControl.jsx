@@ -173,7 +173,11 @@ function UsersControl() {
                                         setErrorMessage(['', ''])
                                         if (user.username == userTable.username && typeForm == 'change') {
                                             setTypeForm('hide')
-                                        } else setTypeForm('change')
+                                            setErrorMessage('','')
+                                        } else {
+                                            setTypeForm('change')
+                                            setErrorMessage(['', ''])
+                                        }
                                     }}></div>
                                 </td>
                                 <td>
@@ -209,6 +213,7 @@ function UsersControl() {
             <div className={typeForm == 'hide' ? null : 'darkSpace'}
                  onClick={() => {
                      setTypeForm('hide')
+                     setErrorMessage(['', ''])
                  }}></div>
         </div>
     )
@@ -303,23 +308,23 @@ function AdminFormUpdateAdd({
 
             <button type="button"
                     onClick={() => {
-                        if (user.username == '' || user.password == '' || user.enabled == '' || user.role == '' || user.photo == '') {
+                        if (user.username == '' || user.password == '' || user.enabled == '' || user.role == '' || user.photo == '' || user.email == '') {
                             setErrorMessage(['Заполните все поля', 'redMessage'])
                             return null
                         }
                         if (typeForm == 'add') {
                             let addPromise = fetchRequestAdminAddUser(user)
                             addPromise.then((data) => {
-                                console.log('Что по данным???', data)
-                                if (data.ok) {
+                                if (data == 'ok') {
                                     updateTable()
                                     setErrorMessage(['Пользователь добавлен', 'greenMessage'])
+
                                 } else setErrorMessage(['Не удалось добавить пользователя', 'redMessage'])
                             })
                         } else if (typeForm == 'change') {
                             let changePromise = fetchRequestAdminChangeUser(user)
                             changePromise.then((data) => {
-                                if (data.ok) {
+                                if (data == 'ok') {
                                     updateTable()
                                     setErrorMessage(['Пользователь изменен', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось изменить пользователя', 'redMessage'])

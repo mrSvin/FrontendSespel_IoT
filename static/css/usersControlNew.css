@@ -240,14 +240,7 @@
 
 .errorMessage {
     text-align: center;
-}
-
-.greenMessage {
-    color: green;
-}
-
-.redMessage {
-    color: red;
+    margin: 5px;
 }
 
 .typeSmenaWrapper {
