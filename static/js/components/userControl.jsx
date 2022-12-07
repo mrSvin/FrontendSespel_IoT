@@ -58,8 +58,6 @@ function fetchRequestAdminDeleteUser(login) {
     return fetch(`/api/adminpanel/deleteUser-${login}`, {method: 'DELETE'})
         .then(response => response.text())
         .then((result) => {
-            if (result == 'ok') console.log('Пользователь удален')
-            else console.log('Такого пользователя нет')
             return result
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
@@ -188,11 +186,13 @@ function UsersControl() {
                                                  let deletePromise = fetchRequestAdminDeleteUser(userTable.username)
                                                  deletePromise.then((answer) => {
                                                      console.log(answer)
-                                                     updateTable()
-                                                     setClickedDeleteButton(false)
-                                                     setTimeout(() => {
-                                                         setClickedDeleteButton(true)
-                                                     }, 1000)
+                                                     if(answer == 'ok') {
+                                                         updateTable()
+                                                         setClickedDeleteButton(false)
+                                                         setTimeout(() => {
+                                                             setClickedDeleteButton(true)
+                                                         }, 1000)
+                                                     } else alert('Недостаточно прав для удаления')
                                                  })
                                              }
                                          }}></div>
@@ -318,7 +318,8 @@ function AdminFormUpdateAdd({
                             let addPromise = fetchRequestAdminAddUser(user)
                             addPromise.then(response => response.text())
                             addPromise.then((data) => {
-                                if (data == 'ok') {
+                                if (data.ok) {
+                                    console.log(data)
                                     updateTable()
                                     setErrorMessage(['Пользователь добавлен', 'greenMessage'])
 
@@ -327,7 +328,8 @@ function AdminFormUpdateAdd({
                         } else if (typeForm == 'change') {
                             let changePromise = fetchRequestAdminChangeUser(user)
                             changePromise.then((data) => {
-                                if (data == 'ok') {
+                                if (data.ok) {
+                                    console.log(data)
                                     updateTable()
                                     setErrorMessage(['Пользователь изменен', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось изменить пользователя', 'redMessage'])
