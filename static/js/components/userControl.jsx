@@ -127,13 +127,7 @@ function UsersControl() {
     }
 
     useEffect(() => {
-        let promiseUserData = fetchRequestAdminUserInfo()
-        promiseUserData.then(data => {
-            let dataArray = Object.keys(data).map(e => {
-                return data[e]
-            })
-            setTableBody(dataArray)
-        })
+        updateTable()
     }, [])
 
     return (
@@ -188,7 +182,6 @@ function UsersControl() {
                                              if (confirm(`Вы уверены, что хотите удалить пользователя ${userTable.username}?`)) {
                                                  let deletePromise = fetchRequestAdminDeleteUser(userTable.username)
                                                  deletePromise.then((answer) => {
-                                                     console.log(answer)
                                                      if(answer == 'ok') {
                                                          updateTable()
                                                          setClickedDeleteButton(false)
