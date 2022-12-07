@@ -25,17 +25,17 @@ function getOutWorkTimeArray(array, date, smenaState) {
     }
 
     if (smenaState == '7') {
-        if (outArray[0] !== `${dayYesterday(date)} 07:00:00`) {
-            outArray.unshift(`${dayYesterday(date)} 07:00:00`)
+        if (outArray[0] !== `${dayYesterday(date)} 06:50:00`) {
+            outArray.unshift(`${dayYesterday(date)} 06:50:00`)
         } else outArray.splice(0, 1)
         if (outArray[outArray.length - 1] !== `${date} 06:50:00`) outArray.push(`${date} 06:50:00`)
     }
 
     if (smenaState == '11') {
-        if (outArray[0] !== `${dayYesterday(date)} 07:00:00`) {
-            outArray.unshift(`${dayYesterday(date)} 07:00:00`)
+        if (outArray[0] !== `${dayYesterday(date)} 06:45:00`) {
+            outArray.unshift(`${dayYesterday(date)} 06:45:00`)
         } else outArray.splice(0, 1)
-        if (outArray[outArray.length - 1] !== `${date} 06:30:00`) outArray.push(`${date} 06:30:00`)
+        if (outArray[outArray.length - 1] !== `${date} 06:45:00`) outArray.push(`${date} 06:45:00`)
     }
 
     if (smenaState == '24') {
@@ -151,12 +151,12 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
             endTime = date + ' 07:00:00'
             break;
         case '7':
-            startTime = dayYesterday(date) + ' 07:00:00'
-            endTime = date + ' 07:00:00'
+            startTime = dayYesterday(date) + ' 06:50:00'
+            endTime = date + ' 06:50:00'
             break;
         case '11':
-            startTime = dayYesterday(date) + ' 07:00:00'
-            endTime = date + ' 07:00:00'
+            startTime = dayYesterday(date) + ' 06:45:00'
+            endTime = date + ' 06:45:00'
             break;
         case '24':
             startTime = dayYesterday(date) + ' 07:00:00'
