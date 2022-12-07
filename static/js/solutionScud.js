@@ -179,6 +179,7 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
 }
 
 function insideFilterLunch(startLunch, endLunch, dateArray) {
+
     let arrayClear = []
     let arraySave = []
 
@@ -212,6 +213,12 @@ function insideFilterLunch(startLunch, endLunch, dateArray) {
             new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime()
         ) {
             arraySave.push(startLunch)
+        } else if (
+            i == 0 &&
+            arrayClear.length % 2 == 1 &&
+            new Date(arrayClear[i]).getTime() > new Date(endLunch).getTime()
+        ) {
+            arraySave.unshift(endLunch)
         }
     }
     return arraySave
