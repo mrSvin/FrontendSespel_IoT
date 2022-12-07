@@ -111,7 +111,7 @@ function UsersControl() {
             username: 'user',
             role: 'ROLE_USER',
             email: 'user@sespel.com',
-            enabled: 'false',
+            enabled: '0',
             photo: undefImg,
             password: 'sespel',
         })
@@ -259,8 +259,8 @@ function AdminFormUpdateAdd({
                    onChange={(e) => {
                        handleOnChange(e, 'username')
                    }}/>
-            <label htmlFor="">Пароль</label>
-            <div className={'passwordDiv'}>
+            <label htmlFor="">{typeForm == 'change' ? null : 'Пароль'}</label>
+            <div className={`passwordDiv ${typeForm == 'change' ? 'formHideUsersControl' : null}`}>
                 <input className='passwordInput'
                        value={user.password}
                        type={passwordEye ? 'text' : 'password'}
