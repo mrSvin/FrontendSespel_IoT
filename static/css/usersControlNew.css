@@ -276,7 +276,7 @@
 
 
 
-.adminInput[type=text]::placeholder, .adminInput[type=password]::placeholder
+.adminInput[type=text]::placeholder, .adminInput[type=password]::placeholder,
 .adminInput[type=email]::placeholder{
     color: rgba(255, 255, 255, 0.5);
     font-size: 25px;
