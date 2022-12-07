@@ -119,6 +119,7 @@ function UsersControl() {
         let promiseUserData = fetchRequestAdminUserInfo()
         promiseUserData.then(data => {
             let dataArray = Object.keys(data).map(e => {
+                data[e]['password'] = 'sespel'
                 return data[e]
             })
             setTableBody(dataArray)
