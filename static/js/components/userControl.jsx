@@ -60,6 +60,7 @@ function fetchRequestAdminDeleteUser(login) {
         .then((result) => {
             if (result == 'ok') console.log('Пользователь удален')
             else console.log('Такого пользователя нет')
+            return result
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
@@ -185,7 +186,8 @@ function UsersControl() {
                                          onClick={() => {
                                              if (confirm(`Вы уверены, что хотите удалить пользователя ${userTable.username}?`)) {
                                                  let deletePromise = fetchRequestAdminDeleteUser(userTable.username)
-                                                 deletePromise.then(() => {
+                                                 deletePromise.then((answer) => {
+                                                     console.log(answer)
                                                      updateTable()
                                                      setClickedDeleteButton(false)
                                                      setTimeout(() => {
@@ -314,6 +316,7 @@ function AdminFormUpdateAdd({
                         }
                         if (typeForm == 'add') {
                             let addPromise = fetchRequestAdminAddUser(user)
+                            addPromise.then(response => response.text())
                             addPromise.then((data) => {
                                 if (data == 'ok') {
                                     updateTable()
