@@ -162,7 +162,7 @@ function Dropdown({dataProfile,setDataProfile}) {
                     })()}
                 </p>
                 {dataProfile.userRole == "ROLE_ADMIN" ?
-                    <button className="buttonAdmin" onClick={() => window.location.href = '/userscontrol'}>Администрирование</button> :
+                    <Link to="/userscontrol" className="container-home">Администрирование</Link>:
                     null}
                 <LogoutButton setDropdown = {setDropdown}/>
 

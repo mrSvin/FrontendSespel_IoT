@@ -152,11 +152,11 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
             break;
         case '7':
             startTime = dayYesterday(date) + ' 07:00:00'
-            endTime = date + ' 06:50:00'
+            endTime = date + ' 07:00:00'
             break;
         case '11':
             startTime = dayYesterday(date) + ' 07:00:00'
-            endTime = date + ' 06:30:00'
+            endTime = date + ' 07:00:00'
             break;
         case '24':
             startTime = dayYesterday(date) + ' 07:00:00'

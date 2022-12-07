@@ -221,10 +221,13 @@
     border: none;
     border-radius: 15px;
     min-height: 35px;
-    width: 140px;
     transition: all 0.2s ease;
     cursor: pointer;
-    margin: 17px 0 !important;
+    margin: 5px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
 }
 
 .buttonAdmin:hover {

@@ -215,14 +215,14 @@ function fetchRequestScud(date = '2022-10-25', place = 'Ленинградска
             })
     } else if (smenaState == '7') {
         let dateYesterday = dayYesterday(date)
-        return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 06:50:00_mesto:${place}`, {method: 'GET'})
+        return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
     } else if (smenaState == '11') {
         let dateYesterday = dayYesterday(date)
-        return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 06:30:00_mesto:${place}`, {method: 'GET'})
+        return fetch(`/api/scud/beginDate:${dateYesterday} 06:45:00_endDate:${date} 06:45:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
@@ -254,14 +254,14 @@ function fetchSkudImage(date = '2022-10-25', place = 'Ленинградская
             })
     } else if (smenaState == '7') {
         let dateYesterday = dayYesterday(date)
-        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 06:50:00_mesto:${place}`, {method: 'GET'})
+        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
     } else if (smenaState == '11') {
         let dateYesterday = dayYesterday(date)
-        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 06:30:00_mesto:${place}`, {method: 'GET'})
+        return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
