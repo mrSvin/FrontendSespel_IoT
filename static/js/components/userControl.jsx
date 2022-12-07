@@ -33,6 +33,10 @@ function fetchRequestAdminAddUser(user) {
                 method: 'POST',
                 body: data
             })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('it???',data)
+                })
         });
 }
 
@@ -316,9 +320,8 @@ function AdminFormUpdateAdd({
                         }
                         if (typeForm == 'add') {
                             let addPromise = fetchRequestAdminAddUser(user)
-                            addPromise.then(response => response.text())
                             addPromise.then((data) => {
-                                if (data.ok) {
+                                if (data == 'ok') {
                                     console.log(data)
                                     updateTable()
                                     setErrorMessage(['Пользователь добавлен', 'greenMessage'])
