@@ -34,9 +34,6 @@ function fetchRequestAdminAddUser(user) {
                 body: data
             })
                 .then(response => response.text())
-                .then(data => {
-                    console.log('it???',data)
-                })
         });
 }
 
@@ -55,6 +52,7 @@ function fetchRequestAdminChangeUser(user) {
                 method: 'POST',
                 body: data
             })
+                .then(response => response.text())
         });
 }
 
@@ -322,7 +320,6 @@ function AdminFormUpdateAdd({
                             let addPromise = fetchRequestAdminAddUser(user)
                             addPromise.then((data) => {
                                 if (data == 'ok') {
-                                    console.log(data)
                                     updateTable()
                                     setErrorMessage(['Пользователь добавлен', 'greenMessage'])
 
@@ -331,8 +328,7 @@ function AdminFormUpdateAdd({
                         } else if (typeForm == 'change') {
                             let changePromise = fetchRequestAdminChangeUser(user)
                             changePromise.then((data) => {
-                                if (data.ok) {
-                                    console.log(data)
+                                if (data == 'ok') {
                                     updateTable()
                                     setErrorMessage(['Пользователь изменен', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось изменить пользователя', 'redMessage'])
@@ -344,4 +340,5 @@ function AdminFormUpdateAdd({
         </form>
     )
 }
+
 
