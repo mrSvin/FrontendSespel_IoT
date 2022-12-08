@@ -297,28 +297,6 @@
 
     <script>
         // Функция получение пользовательских данных
-        function SetUserSetting() {
-            fetch('/api/userInfo', {method: 'POST'})
-                .then((response) => response.json())
-                .then((data) => {
-                    document.getElementsByClassName('avatar')[0].src = data.imageUser
-                    document.getElementsByClassName('dropdown-content')[0].querySelectorAll('img')[0].src = data.imageUser
-
-                    let userData = document.getElementsByClassName('div_login_mail')[0]
-                    userData.querySelectorAll('li')[0].innerHTML = data.userName
-                    userData.querySelectorAll('p')[0].innerHTML = data.userMail
-
-                    let role_status = data.userRole;
-                    if (role_status === "ROLE_ADMIN") {
-                        document.getElementById("role_vision").innerHTML = "Роль: Админ";
-                        document.getElementById("admin").style.display = "inline";
-
-                    } else if (role_status === "ROLE_USER") {
-                        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
-                        document.getElementById("admin").style.display = "none";
-                    }
-                })
-        }
 
         // Функция фильтрации графиков и присваивания нулей
         function ZeroTime(arrayTime) {
@@ -599,18 +577,6 @@
     } // в двух цветах
 
     window.onload = function () { // прелоудер
-
-        document.getElementById('dark_button').onclick = function () {
-            dark_theme_state++; // увеличиваем счетчик
-            if (dark_theme_state > 1) // если он больше 1, меняем на ноль
-            {
-                dark_theme_state = 0;
-            }
-            window.localStorage['dark_theme_state'] = dark_theme_state; // сохраняем переменную в локальном хранилище
-            // Условия для смены цвета после нажатия на кнопку
-            dark_theme();
-        }
-
         document.body.classList.add('loaded_hiding');
 
         // Привязываем навигатору имя.

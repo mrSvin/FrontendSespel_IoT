@@ -203,32 +203,8 @@
 
         dark_theme(); // Вызов функции
         // Смена цвета по кнопке
-        $("#dark_button").on("click", function () {
-            dark_theme_state++; // увеличиваем счетчик
-            if (dark_theme_state > 1) // если он больше 1, меняем на ноль
-            {
-                dark_theme_state = 0;
-            }
-            window.localStorage['dark_theme_state'] = dark_theme_state; // сохраняем переменную в локальном хранилище
-            // Условия для смены цвета после нажатия на кнопку
-            dark_theme();
-        });
     }
 </script>
-
-<script th:inline="javascript">
-    var role_status = [[${user_role}]];
-
-    if (role_status === "ROLE_ADMIN") {
-        document.getElementById("role_vision").innerHTML = "Роль: Админ";
-        document.getElementById("admin").style.display = "inline";
-
-    } else if (role_status === "ROLE_USER") {
-        document.getElementById("role_vision").innerHTML = "Роль: Пользователь"
-        document.getElementById("admin").style.display = "none";
-    }
-</script>
-<!--Скрипт отображения в header  кнопки администрирование-->
 
 <!-- Скрипт вызова функции для выпадающего меню -->
 <script src="/js/dropdown_menu.js"></script>
