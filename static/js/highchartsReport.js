@@ -230,7 +230,7 @@ function highChartCountOperations(generalDiagramNames, countOperation, countLong
     });
 }
 
-function highChartEnergy(inputData, containerName) {
+function highChartEnergy(inputData, containerName, message = 'кубов') {
     Highcharts.chart(containerName,
         {
             lang: {
@@ -299,14 +299,14 @@ function highChartEnergy(inputData, containerName) {
                 },
                 min: 0,
                 title: {
-                    text: 'кубов',
+                    text: message,
                     style: {
                         color: '#FFF'
                     }
                 }
             },
             tooltip: {
-                valueSuffix: ' кубов'
+                valueSuffix: ' ' + message,
             },
             plotOptions: {
                 column: {
@@ -1263,8 +1263,8 @@ function highChartScud(series, generalDiagramNames) {
             categories: generalDiagramNames,
             reversed: true,
             labels: {
-                useHTML:true,
-                allowOverlap:true,
+                useHTML: true,
+                allowOverlap: true,
                 // align: 'left',
                 step: 1,
                 style: {
@@ -1273,7 +1273,7 @@ function highChartScud(series, generalDiagramNames) {
                     fontSize: '12px',
                     // wordBreak: 'break-all',
                     align: 'left',
-                    minWidth:'380px',
+                    minWidth: '380px',
                 }
             },
         },
@@ -1355,8 +1355,8 @@ function highChartScudBot(series, generalDiagramNames) {
             categories: generalDiagramNames,
             reversed: true,
             labels: {
-                useHTML:true,
-                allowOverlap:true,
+                useHTML: true,
+                allowOverlap: true,
                 // align: 'left',
                 step: 1,
                 style: {
@@ -1365,7 +1365,7 @@ function highChartScudBot(series, generalDiagramNames) {
                     fontSize: '20px',
                     // wordBreak: 'break-word',
                     // align: 'left',
-                    minWidth:'880px',
+                    minWidth: '880px',
                     borderTop: '1px solid',
                     // borderBottom: '1px solid',
                     top: '53px',
