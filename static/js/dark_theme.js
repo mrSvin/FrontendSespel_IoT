@@ -244,6 +244,7 @@ function table_colors_black() {
 
 
 function dark_theme() {
+    dark_theme_state = 1
     if (dark_theme_state == 0) // условие светлой темы
     {
         $('.icon-logo-admin').attr("src", "../images/logo_black.png"); // картинка лого для папок на уровень ниже
@@ -261,8 +262,6 @@ function dark_theme() {
         table_colors_white(table_color_1, back_color, table_color_3); // Вызов функции для таблицы
         home_background(home_phone_light, text_color, calen_1_color, back_color, knopki, back_color_black, text_color);
         login_background(login_phone_light, text_color, opacity_login_light, back_color);
-
-
     } else if (dark_theme_state == 1) // Темная тема активна ///////////////////////////////////////////////////////////////////////////////////////////////////
     {
         $('.icon-logo-admin').attr("src", "../images/logo_white.png"); // картинка лого
