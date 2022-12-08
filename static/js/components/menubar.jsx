@@ -108,13 +108,13 @@ function Menubar() {
             {/*    <h2 className="buttonName">Beacon</h2>*/}
             {/*</Link>*/}
 
-            <a href="/menubar/sklad" className="container-home">
-                <div className="icon-container">
-                    <p>Учет комплектующих склада Мех. цеха II площадки</p>
-                    <div className="envelope"></div>
-                </div>
-                <h2 className="buttonName">Склад</h2>
-            </a>
+            {/*<a href="/menubar/sklad" className="container-home">*/}
+            {/*    <div className="icon-container">*/}
+            {/*        <p>Учет комплектующих склада Мех. цеха II площадки</p>*/}
+            {/*        <div className="envelope"></div>*/}
+            {/*    </div>*/}
+            {/*    <h2 className="buttonName">Склад</h2>*/}
+            {/*</a>*/}
 
             <Link to="/scud/2ploshadka" className="container-home">
                 <div className="icon-container">
