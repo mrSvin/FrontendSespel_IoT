@@ -116,7 +116,7 @@ function dark_theme_button() {
 function backgroundes(back_color, text_color, knopki) {
     $('body').attr("style", "background-color:" + back_color + "; color:" + text_color + '!important;'); // цвет фона и основной цвет текста
     $('.follow').attr('style', 'color:' + back_color + '; background: ' + knopki + '; font-size: 145%; margin: 19px 0px;'); // кнопки обновить и выход, цвет текста внутри кнопок соответствует цвету фона
-    $('h1, h2, h3').attr("style", "color:" + text_color + '!important;'); // цвет текста заголовков
+    // $('h1, h2, h3').attr("style", "color:" + text_color + '!important;'); // цвет текста заголовков
 }
 
 function drop_content_colors(text_color, drop_down_line, back_color, mail_color) {
@@ -281,7 +281,7 @@ function dark_theme() {
         home_background(home_phone_dark, text_color_black, calen_1_color, calen_1_color, back_color, back_color, text_color_black);
         login_background(login_phone_dark, back_color, opacity_login_dark, text_color_black);
 
-        document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
+        // document.getElementById('dark_button').checked = "checked"; // сохранение состояния темной темы для кнопки перелкючения темы.
     }
 }
 
