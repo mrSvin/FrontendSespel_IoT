@@ -561,7 +561,6 @@ function updatePageSmena(date, valuesWait, stateLineHC, placesObject) {
     updateLoadDataIndividualSmena(stankiRequest, date, complexNames, fetchNames, stateLineHC)
 }
 
-
 function getAllStankiData() {
     let kim = {
         buttonNames: {
@@ -1275,6 +1274,30 @@ function getAllStankiData() {
         state: true,
     }
 
+    let liefeld110 = {
+        buttonNames: {
+            name: "LEIFELD PNC 110",
+            serviceName: "LEIFELD PNC 110",
+        },
+        complexImg: "../images/pnc-110.png",
+        complexRequest: 'liefeld110',
+        buttonsVrs: [-645, 705, 'url(../images/pnc-135.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let liefeld135 = {
+        buttonNames: {
+            name: "LEIFELD PNC 135",
+            serviceName: "LEIFELD PNC 135",
+        },
+        complexImg: "../images/pnc-135.png",
+        complexRequest: 'liefeld135',
+        buttonsVrs: [-615, 800, 'url(../images/pnc-135.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
     let placesObject = {
         'ОТК': {
             stanki: {kim, nk600},
@@ -1321,7 +1344,7 @@ function getAllStankiData() {
             placeState: true,
         },
         'Гибка': {
-            stanki: {faccin_1, faccin_2, trubend},
+            stanki: {faccin_1, faccin_2, trubend, liefeld110, liefeld135},
             placeState: true,
         },
     }
