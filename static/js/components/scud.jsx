@@ -289,19 +289,19 @@ function LunchEightHours({heightHighchartContainer}) {
     };
 
     let lunchSettings1 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '33.3%',
         width: '1.175%'
     }
 
     let lunchSettings2 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '53.95%',
         width: '1.175%'
     }
 
     let lunchSettings3 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '73.30%',
         width: '1.175%'
     }
@@ -336,19 +336,19 @@ function LunchSevenHours({heightHighchartContainer}) {
     };
 
     let lunchSettings1 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '33.35%',
         width: '2.55%'
     }
 
     let lunchSettings2 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '54.25%',
         width: '2.55%'
     }
 
     let lunchSettings3 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '73.7%',
         width: '2.55%'
     }
@@ -383,25 +383,25 @@ function LunchTwelveHours({heightHighchartContainer}) {
     };
 
     let lunchSettings1 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '33.5%',
         width: '1.175%'
     }
 
     let lunchSettings2 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '45.6%',
         width: '1.175%'
     }
 
     let lunchSettings3 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '64%',
         width: '1.175%'
     }
 
     let lunchSettings4 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '75.8%',
         width: '1.175%'
     }
@@ -440,25 +440,25 @@ function LunchTwelveHoursBot({heightHighchartContainer}) {
     };
 
     let lunchSettings1 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '53.8%',
         width: '1.15%'
     }
 
     let lunchSettings2 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '61.95%',
         width: '1.15%'
     }
 
     let lunchSettings3 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '71.5%',
         width: '1.15%'
     }
 
     let lunchSettings4 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '80%',
         width: '1.15%'
     }
@@ -497,19 +497,19 @@ function LunchTwentyFourHours({heightHighchartContainer}) {
     };
 
     let lunchSettings1 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '34.2%',
         width: '1.175%'
     }
 
     let lunchSettings2 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '54%',
         width: '1.175%'
     }
 
     let lunchSettings3 = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '74%',
         width: '1.175%'
     }
@@ -544,7 +544,7 @@ function LunchItr({heightHighchartContainer}) {
     };
 
     let lunchSettings = {
-        height: getLunchHeight(heightHighchartContainer),
+        // height: getLunchHeight(heightHighchartContainer),
         left: '52.9%',
         width: '2.4%',
     }

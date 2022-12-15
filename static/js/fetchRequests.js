@@ -331,3 +331,53 @@ function fetchRequestAdminDeleteUser(login) {
         })
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
+
+// function fetchRequestScudMonth(date = '2022-12-01', place = 'Ленинградская 36, Дверь', smenaState = '8и') {
+//     if (smenaState == '8и') {
+//         return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:2023-01-01 00:00:00_mesto:all`, {method: 'GET'})
+//             .then((response) => response.json())
+//             .then((data) => {
+//                 console.log(data)
+//                 return data
+//             })
+//     }
+//     // else if (smenaState == '8') {
+//     //     let dateYesterday = dayYesterday(date)
+//     //     return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
+//     //         .then((response) => response.json())
+//     //         .then((data) => {
+//     //             return data
+//     //         })
+//     // } else if (smenaState == '7') {
+//     //     let dateYesterday = dayYesterday(date)
+//     //     return fetch(`/api/scud/beginDate:${dateYesterday} 06:50:00_endDate:${date} 06:50:00_mesto:${place}`, {method: 'GET'})
+//     //         .then((response) => response.json())
+//     //         .then((data) => {
+//     //             return data
+//     //         })
+//     // } else if (smenaState == '11') {
+//     //     let dateYesterday = dayYesterday(date)
+//     //     return fetch(`/api/scud/beginDate:${dateYesterday} 06:45:00_endDate:${date} 06:45:00_mesto:${place}`, {method: 'GET'})
+//     //         .then((response) => response.json())
+//     //         .then((data) => {
+//     //             return data
+//     //         })
+//     // } else if (smenaState == '24') {
+//     //     let dateYesterday = dayYesterday(date)
+//     //     return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 08:00:00_mesto:${place}`, {method: 'GET'})
+//     //         .then((response) => response.json())
+//     //         .then((data) => {
+//     //             return data
+//     //         })
+//     // }
+//
+// }
+//
+// let promise = fetchRequestScudMonth()
+// promise.then(data=>{
+//     if (!Object.keys(data).includes('error')) {
+//         let userData = createUserDataStructure(data)
+//         console.log(userData['Буклов Алексей Владимирович '])
+//     }
+//
+// })

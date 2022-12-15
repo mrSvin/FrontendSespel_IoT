@@ -107,9 +107,12 @@ function applyFilters(userData, smenaState, date) {
         let inWork = arrayAddStartOrEnd
         let outWork = getOutWorkTimeArray(arrayAddStartOrEnd, date, smenaState)
 
+        parseScudLunches(smenaState, date, i)
+
         userData[e].highchartsWork = parseScudForHighcharts(inWork, i)
         userData[e].highchartsOutWork = parseScudForHighcharts(outWork, i)
         userData[e].highchartsBlack = getLastDate(inWork, outWork, i, smenaState)
+        userData[e].highchartsLunch = parseScudLunches(smenaState, date, i)
     })
     return userData
 }
@@ -283,8 +286,8 @@ function filterLunch(dateArray, date, smenaState) {
             startLunch2 = yesterday + ' 16:00:00'
             endLunch2 = yesterday + ' 16:30:00'
 
-            startLunch3 = date + ' 23:00:00'
-            endLunch3 = date + ' 23:30:00'
+            startLunch3 = yesterday + ' 23:00:00'
+            endLunch3 = yesterday + ' 23:30:00'
 
             startLunch4 = date + ' 03:30:00'
             endLunch4 = date + ' 04:00:00'
@@ -332,6 +335,160 @@ function parseScudForHighcharts(arrayParse, y) {
     return arraySave
 }
 
+function parseScudLunches(smenaState, date,  y) {
+
+    let arraySave = []
+    let yesterday = dayYesterday(date)
+
+    let startLunch = null
+    let endLunch = null
+
+    let startLunch2 = null
+    let endLunch2 = null
+
+    let startLunch3 = null
+    let endLunch3 = null
+
+    let startLunch4 = null
+    let endLunch4 = null
+
+    switch (smenaState) {
+        case '8и':
+            startLunch = date + ' 12:00:00'
+            endLunch = date + ' 13:00:00'
+
+            arraySave.push({
+                x: new Date(startLunch).getTime(),
+                x2: new Date(endLunch).getTime(),
+                y: y,
+            })
+
+            break;
+        case '8':
+            startLunch = yesterday + ' 11:30:00'
+            endLunch = yesterday + ' 12:00:00'
+
+            startLunch2 = yesterday + ' 19:30:00'
+            endLunch2 = yesterday + ' 20:00:00'
+
+            startLunch3 = date + ' 03:00:00'
+            endLunch3 = date + ' 03:30:00'
+
+            arraySave.push({
+                x: new Date(startLunch).getTime(),
+                x2: new Date(endLunch).getTime(),
+                y: y,
+            })
+            arraySave.push({
+                x: new Date(startLunch2).getTime(),
+                x2: new Date(endLunch2).getTime(),
+                y: y,
+            })
+            arraySave.push({
+                x: new Date(startLunch3).getTime(),
+                x2: new Date(endLunch3).getTime(),
+                y: y,
+            })
+            break;
+        case '7':
+            startLunch = yesterday + ' 11:30:00'
+            endLunch = yesterday + ' 12:30:00'
+
+            startLunch2 = yesterday + ' 19:30:00'
+            endLunch2 = yesterday + ' 20:30:00'
+
+            startLunch3 = date + ' 03:00:00'
+            endLunch3 = date + ' 04:00:00'
+
+            arraySave.push({
+                x: new Date(startLunch).getTime(),
+                x2: new Date(endLunch).getTime(),
+                y: y,
+            })
+            arraySave.push({
+                x: new Date(startLunch2).getTime(),
+                x2: new Date(endLunch2).getTime(),
+                y: y,
+            })
+            arraySave.push({
+                x: new Date(startLunch3).getTime(),
+                x2: new Date(endLunch3).getTime(),
+                y: y,
+            })
+            break;
+        case '11':
+            startLunch = yesterday + ' 11:30:00'
+            endLunch = yesterday + ' 12:00:00'
+
+            startLunch2 = yesterday + ' 16:00:00'
+            endLunch2 = yesterday + ' 16:30:00'
+
+            startLunch3 = yesterday + ' 23:00:00'
+            endLunch3 = yesterday + ' 23:30:00'
+
+            startLunch4 = date + ' 03:30:00'
+            endLunch4 = date + ' 04:00:00'
+
+            arraySave.push({
+                x: new Date(startLunch).getTime(),
+                x2: new Date(endLunch).getTime(),
+                y: y,
+            })
+            arraySave.push({
+                x: new Date(startLunch2).getTime(),
+                x2: new Date(endLunch2).getTime(),
+                y: y,
+            })
+            arraySave.push({
+                x: new Date(startLunch3).getTime(),
+                x2: new Date(endLunch3).getTime(),
+                y: y,
+            })
+            arraySave.push({
+                x: new Date(startLunch4).getTime(),
+                x2: new Date(endLunch4).getTime(),
+                y: y,
+            })
+            break;
+        case '24':
+            startLunch = yesterday + ' 12:30:00'
+            endLunch = yesterday + ' 13:00:00'
+
+            startLunch2 = yesterday + ' 20:00:00'
+            endLunch2 = yesterday + ' 20:30:00'
+
+            startLunch3 = date + ' 04:00:00'
+            endLunch3 = date + ' 04:30:00'
+
+            arraySave.push({
+                x: new Date(startLunch).getTime(),
+                x2: new Date(endLunch).getTime(),
+                y: y,
+            })
+            arraySave.push({
+                x: new Date(startLunch2).getTime(),
+                x2: new Date(endLunch2).getTime(),
+                y: y,
+            })
+            arraySave.push({
+                x: new Date(startLunch3).getTime(),
+                x2: new Date(endLunch3).getTime(),
+                y: y,
+            })
+            break;
+        default:
+            startLunch = date + ' 12:00:00'
+            endLunch = date + ' 13:00:00'
+
+            arraySave.push({
+                x: new Date(startLunch).getTime(),
+                x2: new Date(endLunch).getTime(),
+                y: y,
+            })
+    }
+    return arraySave
+}
+
 function getHighchartSeriesAndNames(userData) {
 
     let arrayNames = []
@@ -352,11 +509,12 @@ function getHighchartSeriesAndNames(userData) {
             arrayNames.push(`${i + 1}. таб. ${userData[e]['tabid']} - ${e} (${userData[e]['POS'] == '' ? 'должность не указана' : userData[e]['POS']})`)
             arrayData.push(filterY(userData[e]['highchartsWork'], i))
             arrayData.push(filterY(userData[e]['highchartsOutWork'], i))
+            arrayData.push(filterY(userData[e]['highchartsLunch'],i))
             workTime.push(userData[e]['workTime'])
             tabelArray.push(userData[e]['tabid'])
             if (userData[e]['highchartsBlack'] != null) {
                 blackArrayTrigger = true
-                arrayData.push(filterY(userData[e]['highchartsBlack']))
+                arrayData.push(filterY(userData[e]['highchartsBlack'],i))
             }
         })
     } else {
@@ -364,6 +522,7 @@ function getHighchartSeriesAndNames(userData) {
             arrayNames.push(`${i + 1}. таб. ${userData[e]['tabid']} - ${e} (${userData[e]['POS'] == '' ? 'должность не указана' : userData[e]['POS']})`)
             arrayData.push(userData[e]['highchartsWork'])
             arrayData.push(userData[e]['highchartsOutWork'])
+            arrayData.push(userData[e]['highchartsLunch'],i)
             workTime.push(userData[e]['workTime'])
             tabelArray.push(userData[e]['tabid'])
             if (userData[e]['highchartsBlack'] != null) {
@@ -376,7 +535,7 @@ function getHighchartSeriesAndNames(userData) {
     let series = []
 
     if (blackArrayTrigger) {
-        for (let i = 0; i < arrayData.length; i += 3) {
+        for (let i = 0; i < arrayData.length; i += 4) {
             series.push({
                 pointWidth: 30,
                 colorByPoint: false,
@@ -404,6 +563,19 @@ function getHighchartSeriesAndNames(userData) {
             series.push({
                 pointWidth: 30,
                 colorByPoint: false,
+                color: 'rgba(26, 170, 229, 0.6)',
+                tooltip: {
+                    enabled: false,
+                    pointFormatter: function () {
+                        return '<p></p>'
+                    },
+                },
+                borderColor: 'rgba(26, 170, 229, 0.6)',
+                data: arrayData[i + 2],
+            })
+            series.push({
+                pointWidth: 30,
+                colorByPoint: false,
                 color: '#252734',
                 tooltip: {
                     enabled: false,
@@ -412,12 +584,11 @@ function getHighchartSeriesAndNames(userData) {
                     },
                 },
                 borderColor: '#252734',
-                data: arrayData[i + 2],
+                data: arrayData[i + 3],
             })
         }
     } else {
-        for (let i = 0; i < arrayData.length; i++) {
-            if (i % 2 == 0) {
+        for (let i = 0; i < arrayData.length; i += 3) {
                 series.push({
                     pointWidth: 30,
                     colorByPoint: false,
@@ -430,7 +601,6 @@ function getHighchartSeriesAndNames(userData) {
                     },
                     data: arrayData[i],
                 })
-            } else {
                 series.push({
                     pointWidth: 30,
                     colorByPoint: false,
@@ -441,9 +611,21 @@ function getHighchartSeriesAndNames(userData) {
                             return '<b>Нет на месте </b>' + timer
                         },
                     },
-                    data: arrayData[i],
+                    data: arrayData[i+1],
                 })
-            }
+                series.push({
+                    pointWidth: 30,
+                    colorByPoint: false,
+                    color: 'rgba(26, 170, 229, 0.6)',
+                    tooltip: {
+                        enabled: false,
+                        pointFormatter: function () {
+                            return '<p></p>'
+                        },
+                    },
+                    borderColor: 'rgba(26, 170, 229, 0.6)',
+                    data: arrayData[i+2],
+                })
         }
     }
 
@@ -585,12 +767,17 @@ function changeLunchOpacity() {
 
     for (let i = 0; i < lunchTimes.length; i++) {
         for (let j = 0; j < highchartsTracker.length; j++) {
-            highchartsTracker[j].addEventListener('mouseover', (event) => {
-                lunchTimes[i].classList.add('lunchTimeHide')
-            });
-            highchartsTracker[j].addEventListener('mouseleave', (event) => {
-                lunchTimes[i].classList.remove('lunchTimeHide')
-            });
+
+            if(highchartsTracker[j].lastChild.lastChild.getAttribute('fill') == 'rgba(26, 170, 229, 0.6)'){
+                highchartsTracker[j].style.pointerEvents = "none";
+            }
+            //
+            // highchartsTracker[j].addEventListener('mouseover', (event) => {
+            //     lunchTimes[i].classList.add('lunchTimeHide')
+            // });
+            // highchartsTracker[j].addEventListener('mouseleave', (event) => {
+            //     lunchTimes[i].classList.remove('lunchTimeHide')
+            // });
         }
     }
 }
