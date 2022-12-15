@@ -231,6 +231,12 @@ function ComplexButtons({
     let program = (complexName) => (event) => {
         let href;
         switch (complexName) {
+            case 'APEC':
+                href = "../stanki/programTime/apec"
+                break
+            case 'APECsmena':
+                href = "../stanki/programTimeSmena/apec"
+                break
             case "Навигатор 1":
                 href = "../stanki/programTime/navigator_1"
                 break
