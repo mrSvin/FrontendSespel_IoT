@@ -36,6 +36,7 @@
             <th scope="col">Время окончания</th>
             <th scope="col">Время выполнения</th>
             <th scope="col">Время с учетом пауз</th>
+            <th scope="col">Количество выполнений</th>
         </tr>
         </thead>
         <tbody>
@@ -117,7 +118,7 @@
                             lastRow = tbody.rows.length - 1
                             lastCell = tableRow[lastRow].cells.length - 1
 
-                            for (let i = 0; i <= 4; i++) {
+                            for (let i = 0; i <= 5; i++) {
                                 // добавляем в последнюю строку новую ячейку
                                 tableRow[lastRow].appendChild(document.createElement('td'))
 
@@ -155,6 +156,9 @@
     // Функция принимает данные с запроса работы станка и возвращает
     // структуру для таблицы
     function getTimeProgramName(arrayData) {
+
+        let CountBuffer = {}
+
         let timer = 0;
         let programTimeArray = [];
         let startSame = null
@@ -182,11 +186,14 @@
 
                 if (arrayData['programName'][i / 2] == arrayData['programName'][i / 2 - 1]) {
                     timer = timer + (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
-                    programTimeArray.push([arrayData['programName'][i / 2], startSame.slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i + 1]) - new Date(startSame))])
+                    CountBuffer[arrayData['programName'][i / 2]] = CountBuffer[arrayData['programName'][i / 2]] == undefined? 1 : CountBuffer[arrayData['programName'][i / 2]] + 1
+                    programTimeArray.push([arrayData['programName'][i / 2], startSame.slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i + 1]) - new Date(startSame)), CountBuffer[arrayData['programName'][i / 2]]])
+
                     timer = 0
                 } else {
                     timer = (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
-                    programTimeArray.push([arrayData['programName'][i / 2], arrayData['work'][i].slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(timer)])
+                    CountBuffer[arrayData['programName'][i / 2]] = CountBuffer[arrayData['programName'][i / 2]] == undefined? 1 : CountBuffer[arrayData['programName'][i / 2]] + 1
+                    programTimeArray.push([arrayData['programName'][i / 2], arrayData['work'][i].slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(timer), CountBuffer[arrayData['programName'][i / 2]]])
                     timer = 0
                 }
 
@@ -194,6 +201,7 @@
             }
 
         }
+        console.log(programTimeArray)
         // Фильтрация массива на наличие запятых
         programTimeArray.map((elem) => {
             elem[0] = elem[0].split(',').join('_');
@@ -264,7 +272,7 @@
                         lastRow = tbody.rows.length - 1
                         lastCell = tableRow[lastRow].cells.length - 1
 
-                        for (let i = 0; i <= 4; i++) {
+                        for (let i = 0; i <= 5; i++) {
                             // добавляем в последнюю строку новую ячейку
                             tableRow[lastRow].appendChild(document.createElement('td'))
 

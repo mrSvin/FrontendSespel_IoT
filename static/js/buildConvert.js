@@ -639,6 +639,7 @@ function getAllStankiData() {
         buttonNames: {
             name: "APEC",
             serviceName: "APEC",
+            programsName: "APEC",
         },
         complexImg: "../images/apec.png",
         complexRequest: 'apec',

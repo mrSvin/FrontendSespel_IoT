@@ -37,6 +37,7 @@
                 <th scope="col">Время окончания</th>
                 <th scope="col">Время выполнения</th>
                 <th scope="col">Время с учетом пауз</th>
+                <th scope="col">Количество выполнений</th>
             </tr>
             </thead>
             <tbody></tbody>
@@ -59,6 +60,7 @@
                 <th scope="col">Время окончания</th>
                 <th scope="col">Время выполнения</th>
                 <th scope="col">Время с учетом пауз</th>
+                <th scope="col">Количество выполнений</th>
             </tr>
             </thead>
             <tbody></tbody>
@@ -145,6 +147,8 @@
     }
 
     function getTimeProgramNameSmena(arrayData) {
+
+        let CountBuffer = {}
         let timer = 0;
         let programTimeArray = [];
         let startSame = null
@@ -161,11 +165,13 @@
 
                 if (arrayData[1][i / 2] == arrayData[1][i / 2 - 1]) {
                     timer = timer + (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
-                    programTimeArray.push([arrayData[1][i / 2], startSame.slice(11), arrayData[0][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData[0][i + 1]) - new Date(startSame))])
+                    CountBuffer[arrayData['programName'][i / 2]] = CountBuffer[arrayData['programName'][i / 2]] == undefined? 1 : CountBuffer[arrayData['programName'][i / 2]] + 1
+                    programTimeArray.push([arrayData[1][i / 2], startSame.slice(11), arrayData[0][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData[0][i + 1]) - new Date(startSame)), CountBuffer[arrayData['programName'][i / 2]]])
                     timer = 0
                 } else {
                     timer = (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
-                    programTimeArray.push([arrayData[1][i / 2], arrayData[0][i].slice(11), arrayData[0][i + 1].slice(11), msToTime(timer), msToTime(timer)])
+                    CountBuffer[arrayData['programName'][i / 2]] = CountBuffer[arrayData['programName'][i / 2]] == undefined? 1 : CountBuffer[arrayData['programName'][i / 2]] + 1
+                    programTimeArray.push([arrayData[1][i / 2], arrayData[0][i].slice(11), arrayData[0][i + 1].slice(11), msToTime(timer), msToTime(timer), CountBuffer[arrayData['programName'][i / 2]]])
                     timer = 0
                 }
             }
@@ -211,7 +217,7 @@
                     lastRow = tbody.rows.length - 1
                     lastCell = tableRow[lastRow].cells.length - 1
 
-                    for (let i = 0; i <= 4; i++) {
+                    for (let i = 0; i <= 5; i++) {
                         // добавляем в последнюю строку новую ячейку
                         tableRow[lastRow].appendChild(document.createElement('td'))
 
