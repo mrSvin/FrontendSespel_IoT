@@ -15,7 +15,7 @@ function Service() {
             '?***?': 'dmf.png', 'ctx310': 'dmg_ctx310.png', 'ctx510': 'dmg_ctx510.png',
             'ctx650': 'dmg_ctx650.png', 'dmc1035': 'dmg_dmc1035.png', 'dmf260': 'dmg_dmf260.png',
             'dmu50': 'dmg_dmu50.png', 'эпп': 'epp.png', 'faccin 4': 'faccin.png',
-            'faccin 10': 'faccin_2.png', 'trubend':'trubend.png', 'gamma2000': 'gamma2000.png', 'комета': 'kometa.png',
+            'faccin 10': 'faccin_2.png', 'trubend':'trubend.png', 'leifeld pnc 110':'pnc-110.png', 'leifeld pnc 135':'pnc-135.png', 'gamma2000': 'gamma2000.png', 'комета': 'kometa.png',
             'навигатор': 'navigator.png', 'нк600': 'nk600.png', 'nlx3000': 'NLX3000.png',
             'ntx1000': 'ntx1000.png', 'печь': 'pech.png', 'литейная': 'liteyka.png', 'пресс': 'press.png',
             'стп': 'progress.png', 'макс': 'robot.png', 'м710': 'robot.png',
@@ -28,7 +28,7 @@ function Service() {
             'cтенд': 'stendResource.png'
         }
 
-        let exceptions = ['faccin']
+        let exceptions = ['faccin', 'leifeld']
 
         let nameToFetch = parseNameUrl(document.location.pathname);
         setNameComplex(nameToFetch)
