@@ -156,7 +156,7 @@
     // Функция принимает данные с запроса работы станка и возвращает
     // структуру для таблицы
     function getTimeProgramName(arrayData) {
-
+        console.log(arrayData)
         let CountBuffer = {}
 
         let timer = 0;
@@ -193,7 +193,7 @@
                 } else {
                     timer = (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
                     CountBuffer[arrayData['programName'][i / 2]] = CountBuffer[arrayData['programName'][i / 2]] == undefined ? 1 : CountBuffer[arrayData['programName'][i / 2]] + 1
-                    programTimeArray.push([arrayData['programName'][i / 2], startSame.slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i + 1]) - new Date(startSame))])
+                    programTimeArray.push([arrayData['programName'][i / 2], arrayData['work'][i].slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i + 1]) - new Date(startSame))])
                     timer = 0
                 }
 
