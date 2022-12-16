@@ -187,13 +187,13 @@
                 if (arrayData['programName'][i / 2] == arrayData['programName'][i / 2 - 1]) {
                     timer = timer + (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
                     CountBuffer[arrayData['programName'][i / 2]] = CountBuffer[arrayData['programName'][i / 2]] == undefined ? 1 : CountBuffer[arrayData['programName'][i / 2]] + 1
-                    programTimeArray.push([arrayData['programName'][i / 2], startSame.slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i + 1]) - new Date(startSame)), CountBuffer[arrayData['programName'][i / 2]] == 1 ? '' : CountBuffer[arrayData['programName'][i / 2]]])
+                    programTimeArray.push([arrayData['programName'][i / 2], startSame.slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i + 1]) - new Date(startSame))])
 
                     timer = 0
                 } else {
                     timer = (new Date(arrayData['work'][i + 1]) - new Date(arrayData['work'][i]))
                     CountBuffer[arrayData['programName'][i / 2]] = CountBuffer[arrayData['programName'][i / 2]] == undefined ? 1 : CountBuffer[arrayData['programName'][i / 2]] + 1
-                    programTimeArray.push([arrayData['programName'][i / 2], startSame.slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i + 1]) - new Date(startSame)), CountBuffer[arrayData['programName'][i / 2]] == 1 ? '' : CountBuffer[arrayData['programName'][i / 2]]])
+                    programTimeArray.push([arrayData['programName'][i / 2], startSame.slice(11), arrayData['work'][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData['work'][i + 1]) - new Date(startSame))])
                     timer = 0
                 }
 
@@ -201,12 +201,24 @@
             }
 
         }
-        console.log(programTimeArray)
+
+        Object.keys(CountBuffer).forEach((obj) => {
+            for (let i = programTimeArray.length - 1; i >= 0; i--) {
+                if (programTimeArray[i][0] == obj) {
+                    programTimeArray[i].push(CountBuffer[obj])
+                    break;
+                }
+            }
+        })
+
+        // console.log(CountBuffer)
+        // console.log(programTimeArray)
         // Фильтрация массива на наличие запятых
         programTimeArray.map((elem) => {
             elem[0] = elem[0].split(',').join('_');
             return elem
         })
+        console.log(programTimeArray)
         return programTimeArray
     }
 

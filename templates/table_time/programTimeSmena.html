@@ -166,16 +166,26 @@
                 if (arrayData[1][i / 2] == arrayData[1][i / 2 - 1]) {
                     timer = timer + (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
                     CountBuffer[arrayData[1][i / 2]] = CountBuffer[arrayData[1][i / 2]] == undefined? 1 : CountBuffer[arrayData[1][i / 2]] + 1
-                    programTimeArray.push([arrayData[1][i / 2], startSame.slice(11), arrayData[0][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData[0][i + 1]) - new Date(startSame)), CountBuffer[arrayData['programName'][i / 2]] == 1 ? '' : CountBuffer[arrayData['programName'][i / 2]]])
+                    programTimeArray.push([arrayData[1][i / 2], startSame.slice(11), arrayData[0][i + 1].slice(11), msToTime(timer), msToTime(new Date(arrayData[0][i + 1]) - new Date(startSame))])
                     timer = 0
                 } else {
                     timer = (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
                     CountBuffer[arrayData[1][i / 2]] = CountBuffer[arrayData[1][i / 2]] == undefined? 1 : CountBuffer[arrayData[1][i / 2]] + 1
-                    programTimeArray.push([arrayData[1][i / 2], arrayData[0][i].slice(11), arrayData[0][i + 1].slice(11), msToTime(timer), msToTime(timer), CountBuffer[arrayData['programName'][i / 2]] == 1 ? '' : CountBuffer[arrayData['programName'][i / 2]]])
+                    programTimeArray.push([arrayData[1][i / 2], arrayData[0][i].slice(11), arrayData[0][i + 1].slice(11), msToTime(timer), msToTime(timer)])
                     timer = 0
                 }
             }
         }
+
+        Object.keys(CountBuffer).forEach((obj) => {
+            for (let i = programTimeArray.length - 1; i >= 0; i--) {
+                if (programTimeArray[i][0] == obj) {
+                    programTimeArray[i].push(CountBuffer[obj])
+                    break;
+                }
+            }
+        })
+
         // Фильтрация массива на наличие запятых
         programTimeArray.map((elem) => {
             elem[0] = elem[0].split(',').join('_');
