@@ -507,15 +507,15 @@ function getHighchartSeriesAndNames(userData) {
 
         keysSorted.forEach((e, i) => {
             arrayNames.push(`${i + 1}. таб. ${userData[e]['tabid']} - ${e} (${userData[e]['POS'] == '' ? 'должность не указана' : userData[e]['POS']})`)
+            if (userData[e]['highchartsBlack'] != null) {
+                blackArrayTrigger = true
+                arrayData.push(filterY(userData[e]['highchartsBlack'],i))
+            }
             arrayData.push(filterY(userData[e]['highchartsWork'], i))
             arrayData.push(filterY(userData[e]['highchartsOutWork'], i))
             arrayData.push(filterY(userData[e]['highchartsLunch'],i))
             workTime.push(userData[e]['workTime'])
             tabelArray.push(userData[e]['tabid'])
-            if (userData[e]['highchartsBlack'] != null) {
-                blackArrayTrigger = true
-                arrayData.push(filterY(userData[e]['highchartsBlack'],i))
-            }
         })
     } else {
         Object.keys(userData).forEach((e, i) => {
@@ -539,6 +539,19 @@ function getHighchartSeriesAndNames(userData) {
             series.push({
                 pointWidth: 30,
                 colorByPoint: false,
+                color: '#252734',
+                tooltip: {
+                    enabled: false,
+                    pointFormatter: function () {
+                        return '<p></p>'
+                    },
+                },
+                borderColor: '#252734',
+                data: arrayData[i],
+            })
+            series.push({
+                pointWidth: 30,
+                colorByPoint: false,
                 color: '#38e817',
                 tooltip: {
                     pointFormatter: function () {
@@ -546,7 +559,7 @@ function getHighchartSeriesAndNames(userData) {
                         return '<b>Работает </b>' + timer
                     },
                 },
-                data: arrayData[i],
+                data: arrayData[i + 1],
             })
             series.push({
                 pointWidth: 30,
@@ -558,7 +571,7 @@ function getHighchartSeriesAndNames(userData) {
                         return '<b>Нет на месте </b>' + timer
                     },
                 },
-                data: arrayData[i + 1],
+                data: arrayData[i + 2],
             })
             series.push({
                 pointWidth: 30,
@@ -571,19 +584,6 @@ function getHighchartSeriesAndNames(userData) {
                     },
                 },
                 borderColor: 'rgba(26, 170, 229, 0.6)',
-                data: arrayData[i + 2],
-            })
-            series.push({
-                pointWidth: 30,
-                colorByPoint: false,
-                color: '#252734',
-                tooltip: {
-                    enabled: false,
-                    pointFormatter: function () {
-                        return '<p></p>'
-                    },
-                },
-                borderColor: '#252734',
                 data: arrayData[i + 3],
             })
         }
@@ -768,8 +768,10 @@ function changeLunchOpacity() {
     for (let i = 0; i < lunchTimes.length; i++) {
         for (let j = 0; j < highchartsTracker.length; j++) {
 
-            if(highchartsTracker[j].lastChild.lastChild.getAttribute('fill') == 'rgba(26, 170, 229, 0.6)'){
-                highchartsTracker[j].style.pointerEvents = "none";
+            if(highchartsTracker[j].lastChild.lastChild !== undefined){
+                if(highchartsTracker[j].lastChild.lastChild.getAttribute('fill') == 'rgba(26, 170, 229, 0.6)'){
+                    highchartsTracker[j].style.pointerEvents = "none";
+                }
             }
             //
             // highchartsTracker[j].addEventListener('mouseover', (event) => {

@@ -851,6 +851,7 @@ function getAllStankiData() {
         buttonNames: {
             name: "TruLaser",
             serviceName: "TruLaser",
+            programsName: "TruLaser",
         },
         complexImg: "../images/trulaser.png",
         complexRequest: 'trulaser',
