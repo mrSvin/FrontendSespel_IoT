@@ -299,11 +299,11 @@ function updateLoadDataIndividual(promiseVariable, day1, complexName, fetchNames
             let kolOpArray = []
 
             let parserDataArray = data.map(value => {
+                let convertDataRuchnoi = parseLinearSutki(value[4], arrayLine[0], day1, null, value[1].length)
                 let convertDataWork = parseLinearSutki(value[0], arrayLine[1], day1, value[5], value[1].length)
                 let convertDataPause = parseLinearSutki(value[1], arrayLine[2], day1)
                 let convertDataOff = parseLinearSutki(value[2], arrayLine[3], day1)
                 let convertDataAvar = parseLinearSutki(value[3], arrayLine[4], day1)
-                let convertDataRuchnoi = parseLinearSutki(value[4], arrayLine[0], day1)
                 let roundArray = value[6].map(Number)
 
                 totalArray.push(roundArray.slice())
@@ -400,17 +400,17 @@ function updateLoadDataIndividualSmena(promiseVariable, day1, complexName, fetch
             let day2 = dayYesterday(day1)
 
             let parserDataArray = smenaArrays.map(smena => {
-                let convertDataWork = parseLinearSutki(smena[0][0], arrayLine[1], day1, smena[0][5])
+                let convertDataWork = parseLinearSutki(smena[0][0], arrayLine[1], day1, smena[0][5], smena[0][1].length)
                 let convertDataPause = parseLinearSutki(smena[0][1], arrayLine[2], day1)
                 let convertDataOff = parseLinearSutki(smena[0][2], arrayLine[3], day1)
                 let convertDataAvar = parseLinearSutki(smena[0][3], arrayLine[4], day1)
-                let convertDataRuchnoi = parseLinearSutki(smena[0][4], arrayLine[0], day1)
+                let convertDataRuchnoi = parseLinearSutki(smena[0][4], arrayLine[0], day1, smena[0][1].length)
 
-                let convertDataWork2 = parseLinearSutki(smena[1][0], arrayLine[1], day2, smena[1][5])
+                let convertDataWork2 = parseLinearSutki(smena[1][0], arrayLine[1], day2, smena[1][5], smena[1][1].length)
                 let convertDataPause2 = parseLinearSutki(smena[1][1], arrayLine[2], day2)
                 let convertDataOff2 = parseLinearSutki(smena[1][2], arrayLine[3], day2)
                 let convertDataAvar2 = parseLinearSutki(smena[1][3], arrayLine[4], day2)
-                let convertDataRuchnoi2 = parseLinearSutki(smena[1][4], arrayLine[0], day2)
+                let convertDataRuchnoi2 = parseLinearSutki(smena[1][4], arrayLine[0], day2, smena[1][1].length)
 
                 let roundArray = smena[0][6]
                 let roundArray2 = smena[1][6]

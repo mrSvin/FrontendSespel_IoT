@@ -419,7 +419,7 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
 // Парсинг массива со свойствами x, x2, y для highcharts
 function parseLinearSutki(arrayParse, y, date, arrayName = null, pauseLength = 0) {
 
-    if (y !== 1) {
+    if (y !== 1 && y !== 0) {
         arrayParse = addLastTime(arrayParse, date)
     } else if (arrayParse.length !== pauseLength) {
         arrayParse = addLastTime(arrayParse, date)
@@ -544,7 +544,7 @@ function dayTimeNow() {
 
 // Функция получения текущего дня из предыдущего
 function dayYesterday(startTime) {
-    if (startTime == ''){
+    if (startTime == '') {
         return null
     }
     return new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
