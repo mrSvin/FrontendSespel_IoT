@@ -100,13 +100,13 @@ function Menubar() {
                 <h2 className="buttonName">Энергоресурсы</h2>
             </Link>
 
-            {/*<Link to="/beacon" className="container-home">*/}
-            {/*    <div className="icon-container">*/}
-            {/*        <p>Отслеживание объектов</p>*/}
-            {/*        <div className="beacon"></div>*/}
-            {/*    </div>*/}
-            {/*    <h2 className="buttonName">Beacon</h2>*/}
-            {/*</Link>*/}
+            <Link to="/beacon" className="container-home">
+                <div className="icon-container">
+                    <p>Отслеживание объектов</p>
+                    <div className="beacon"></div>
+                </div>
+                <h2 className="buttonName">Beacon</h2>
+            </Link>
 
             {/*<a href="/menubar/sklad" className="container-home">*/}
             {/*    <div className="icon-container">*/}

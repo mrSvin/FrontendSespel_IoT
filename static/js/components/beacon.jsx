@@ -89,40 +89,73 @@ function TableBeacon() {
 function Beacon() {
     let [location, setLocation] = useState(109);
 
+    let ipList = ['18', '24', '27']
+
+    function fetchCheckDevice(ip) {
+        return fetch(`http://192.168.103.${ip}:8083/api/beaconInfo`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                return data[0]
+            })
+    }
+
+
+
     useEffect(() => {
 
-        let intervalKill = setInterval(function () {
+        let beaconConnect = Promise.all(ipList.map((item) => {
+            return fetchCheckDevice(item)
+        }));
+        beaconConnect.then(data=>{
+            console.log(data)
+        })
 
-            if (window.location.pathname !== '/beacon') {
-                clearInterval(intervalKill)
-            }
 
-            let beacon = fetchRequestBeacon()
-            let promiseBeacon = Promise.resolve(beacon);
-            promiseBeacon.then(value => {
-                // console.log(value.location)
-                if (value.location == 109) {
-                    setLocation(109)
-                }
-                if (value.location == 128) {
-                    setLocation(128)
-                }
-                if (value.location == 144) {
-                    setLocation(144)
-                }
-                console.log("update...")
-            })
-        }, 2000)
+        // let intervalKill = setInterval(function () {
+
+            // if (window.location.pathname !== '/beacon') {
+            //     clearInterval(intervalKill)
+            // }
+
+            // let beacon = fetchRequestBeacon()
+            // let promiseBeacon = Promise.resolve(beacon);
+            // promiseBeacon.then(value => {
+            //     // console.log(value.location)
+            //     if (value.location == 109) {
+            //         setLocation(109)
+            //     }
+            //     if (value.location == 128) {
+            //         setLocation(128)
+            //     }
+            //     if (value.location == 144) {
+            //         setLocation(144)
+            //     }
+            //     console.log("update...")
+            // })
+        // }, 2000)
 
     }, []);
+
+    function fetchRequestBeacon() {
+        return fetch(`http://192.168.103.24:8083/api/beaconInfo`, {method: 'GET'})
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                return data[0]
+            })
+    }
 
     function fetchRequestBeacon() {
         return fetch(`http://192.168.3.41:8085/api/beaconData`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
+                console.log(data)
                 return data[0]
             })
     }
+
+
 
     return (
         <div>
