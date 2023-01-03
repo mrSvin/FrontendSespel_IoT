@@ -165,43 +165,8 @@ function Scud() {
                     </div>
                 </Link>
 
-                <Link to={`/scud/all`} className={`${loadManyRequest ? 'noActiveButton' : null}`}
-                      onClick={() => {
-                          defenseFromManyRequest(setLoadManyRequest)
-                      }}>
-                    <div className={`${place == '2ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
-                        setPlace('all')
-                    }}>Все
-                        {place !== 'all' ? null :
-                            <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>
-                                <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('8')
-                                      }}>8 часов</span>
-                                <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('7')
-                                      }}>7.2 часа</span>
-                                <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('11')
-                                      }}>11 часов</span>
-                                <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('24')
-                                      }}>24 часа</span>
-                                <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('8и')
-                                      }}>ИТР</span>
-                            </div>
-                        }
-                    </div>
+                <Link to={`/scud/1ploshadka`}>
+                    <div className={`${place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'}`}>Месячные отчеты</div>
                 </Link>
 
             </div>

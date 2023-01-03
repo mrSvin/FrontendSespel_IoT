@@ -92,8 +92,8 @@ function msToTimeDays(duration, date = 31) {
     date = +date
     let seconds = parseInt((duration / 1000) % 60),
         minutes = parseInt((duration / (1000 * 60)) % 60),
-        hours = parseInt((duration / (1000 * 60 * 60)) % 24);
-    days = parseInt((duration / (1000 * 60 * 60 * 24)) % date);
+        hours = parseInt((duration / (1000 * 60 * 60)) % 24),
+        days = parseInt((duration / (1000 * 60 * 60 * 24)) % date);
 
     if (days == 0) days = ''
     else {

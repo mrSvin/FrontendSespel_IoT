@@ -111,6 +111,10 @@ function App({hideLoader}) {
                         <ScudBot/>
                     </Route>
 
+                    <Route path="/scudMonth">
+                        <ScudMonth/>
+                    </Route>
+
                     <Route path="/userscontrol">
                         <UsersControl/>
                     </Route>
