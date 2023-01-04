@@ -18,7 +18,7 @@ function ScudMonth() {
             <div className="buttons-otchet marginToSmenaMenu">
 
                 <Link to={`/scud/1ploshadka`}>
-                    <div className=className={'menuNoSelect'}>Первая площадка</div>
+                    <div className={'menuNoSelect'}>Первая площадка</div>
                 </Link>
 
                 <Link to={`/scud/1ploshadka`}>
