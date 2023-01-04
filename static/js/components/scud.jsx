@@ -45,7 +45,7 @@ function Scud() {
                     })
                     let highchartsLen = null
                     if(document.getElementsByClassName('highcharts-axis-labels highcharts-yaxis-labels')[1]){
-                        document.getElementsByClassName('highcharts-axis-labels highcharts-yaxis-labels')[1].querySelectorAll('span').length
+                        highchartsLen = document.getElementsByClassName('highcharts-axis-labels highcharts-yaxis-labels')[1].querySelectorAll('span').length
                     }
                     if(arrayPhotos.length == highchartsLen){
                         setPhotoArray(arrayPhotos)
@@ -76,6 +76,18 @@ function Scud() {
     return (
         <div>
             <div className="buttons-otchet marginToSmenaMenu">
+
+                <div className="buttons-otchet">
+
+                    <Link to={`/scud/${place}`}>
+                        <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                    </Link>
+
+                    <Link to={`/scudMonth`}>
+                        <div className="menuNoSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                    </Link>
+
+                </div>
 
                 <Link to={`/scud/1ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}
                       onClick={() => {
@@ -163,10 +175,6 @@ function Scud() {
                         setSmenaState('8и')
                     }}>Офис
                     </div>
-                </Link>
-
-                <Link to={`/scudMonth`}>
-                    <div className={`menuNoSelect`}>Месячные отчеты</div>
                 </Link>
 
             </div>

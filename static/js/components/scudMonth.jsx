@@ -189,7 +189,7 @@ function filterLunchMonth(dateArray, date, smenaState) {
 
 function ScudMonth() {
 
-    let [date, setDate] = useState(dayNow());
+    let [dateMonth, setDateMonth] = useState(0);
     // let [smenaState, setSmenaState] = useState('8и')
     let [usersWithSmena, setUsersWithSmena] = useState('line')
 
@@ -199,32 +199,28 @@ function ScudMonth() {
     }, []);
 
     function newDate(dateInput) {
-        setDate(dateInput)
+        setDateMonth(dateInput)
     }
 
     return (
         <div>
             <div className="buttons-otchet marginToSmenaMenu">
 
-                <Link to={`/scud/1ploshadka`}>
-                    <div className={'menuNoSelect'}>Первая площадка</div>
-                </Link>
+                <div className="buttons-otchet">
 
-                <Link to={`/scud/1ploshadka`}>
-                    <div className={'menuNoSelect'}>Вторая площадка</div>
-                </Link>
+                    <Link to={`/scud/1ploshadka`}>
+                        <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+                    </Link>
 
-                <Link to={`/scud/1ploshadka`}>
-                    <div className={'menuNoSelect'}>Офис</div>
-                </Link>
+                    <Link to={`/scudMonth`}>
+                        <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                    </Link>
 
-                <Link to={`/scudMonth`}>
-                    <div className={`menuSelect`}>Месячные отчеты</div>
-                </Link>
+                </div>
 
             </div>
             <div className="energyCalendarContainer">
-                <DayCalendar newDate={newDate} date={date}/>
+                <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
                 <div className='hideIndividualAll'>
                     <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
                                             text={'Привязка по смене'}/>
