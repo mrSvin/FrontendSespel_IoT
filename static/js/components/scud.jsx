@@ -165,8 +165,8 @@ function Scud() {
                     </div>
                 </Link>
 
-                <Link to={`/scud/1ploshadka`}>
-                    <div className={`${place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'}`}>Месячные отчеты</div>
+                <Link to={`/scudMonth`}>
+                    <div className={`menuNoSelect`}>Месячные отчеты</div>
                 </Link>
 
             </div>
