@@ -124,6 +124,17 @@
     margin-bottom: 50px;
 }
 
+.cancelMargin {
+    margin-top: 0;
+}
+
+.daysMonthWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+
 .scudSelect {
     color: #e51a83 !important;
     text-shadow: 0 0 5px #e51a83,

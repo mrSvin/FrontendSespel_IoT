@@ -114,7 +114,7 @@ function App({hideLoader}) {
                     </Route>
 
                     <Route path="/scudMonth">
-                        <ScudMonth/>
+                        <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
                     </Route>
 
                     <Route path="/userscontrol">

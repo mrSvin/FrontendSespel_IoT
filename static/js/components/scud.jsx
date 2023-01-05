@@ -75,9 +75,9 @@ function Scud() {
 
     return (
         <div>
-            <div className="buttons-otchet marginToSmenaMenu">
+            <div className="buttons-otchet marginToSmenaMenu cancelMargin">
 
-                <div className="buttons-otchet">
+                <div className="daysMonthWrapper">
 
                     <Link to={`/scud/${place}`}>
                         <div className="menuSelect">СУТОЧНЫЙ ОТЧЕТ</div>

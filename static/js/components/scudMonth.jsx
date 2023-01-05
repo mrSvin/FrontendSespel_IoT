@@ -230,7 +230,7 @@ function filterLunchMonth(dateArray, date, smenaState) {
 //     }
 // })
 
-function ScudMonth(scudMonthMemory, setScudMonthMemory) {
+function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
     function saveMemory() {
         if(scudMonthMemory == null){
@@ -239,10 +239,10 @@ function ScudMonth(scudMonthMemory, setScudMonthMemory) {
             scudMonthMemory.push(timeNow())
             setScudMonthMemory(scudMonthMemory)
         }
-        // setScudMonthMemory(prevState => ({
-        //     ...prevState,
-        //     imageUser: imageProfile
-        // }));
+        setScudMonthMemory(prevState => ({
+            ...prevState,
+            imageUser: imageProfile
+        }));
 
     }
 
@@ -277,9 +277,9 @@ function ScudMonth(scudMonthMemory, setScudMonthMemory) {
 
     return (
         <div>
-            <div className="buttons-otchet marginToSmenaMenu">
+            <div className="buttons-otchet marginToSmenaMenu cancelMargin">
 
-                <div className="buttons-otchet">
+                <div className="daysMonthWrapper">
 
                     <Link to={`/scud/1ploshadka`}>
                         <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
