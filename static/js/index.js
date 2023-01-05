@@ -26,6 +26,8 @@ interceptNetworkRequests({
 
 function App({hideLoader}) {
 
+    let [scudMonthMemory, setScudMonthMemory] = useState(null)
+
     useEffect(hideLoader, []);
 
     return (

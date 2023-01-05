@@ -163,6 +163,11 @@ function filterLunchMonth(dateArray, date, smenaState) {
             arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
             arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
             break;
+        case '':
+            startLunch = date + ' 12:00:00'
+            endLunch = date + ' 13:00:00'
+            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
+            break;
         default:
             startLunch = date + ' 12:00:00'
             endLunch = date + ' 13:00:00'
@@ -183,11 +188,77 @@ function filterLunchMonth(dateArray, date, smenaState) {
 //         let userNames = Object.keys(usersData)
 //         usersData = applyMonthFilters(usersData, userNames, date)
 //
+//         let smena_7 = []
+//         let smena_8i = []
+//         let smena_8 = []
+//         let smena_11 = []
+//         let smena_24 = []
+//
+//         let hiddens = []
+//
+//         Object.keys(usersData).forEach(name => {
+//
+//             switch (usersData[name].smenaInfo) {
+//                 case '7':
+//                     smena_7.push(usersData[name])
+//                     break
+//                 case '8и':
+//                     smena_8i.push(usersData[name])
+//                     break
+//                 case '8':
+//                     smena_8.push(usersData[name])
+//                     break
+//                 case '11':
+//                     smena_11.push(usersData[name])
+//                     break
+//                 case '24':
+//                     smena_24.push(usersData[name])
+//                     break
+//                 default:
+//                     hiddens.push(usersData[name])
+//             }
+//         })
+//
+//         console.log('7', smena_7)
+//         console.log('8и', smena_8i)
+//         console.log('8', smena_8)
+//         console.log('11', smena_11)
+//         console.log('24', smena_24)
+//         console.log('hiddens', hiddens)
+//
 //         globalAllData = usersData
 //     }
 // })
 
-function ScudMonth() {
+function ScudMonth(scudMonthMemory, setScudMonthMemory) {
+
+    function saveMemory() {
+        if(scudMonthMemory == null){
+            setScudMonthMemory([timeNow()])
+        } else {
+            scudMonthMemory.push(timeNow())
+            setScudMonthMemory(scudMonthMemory)
+        }
+        // setScudMonthMemory(prevState => ({
+        //     ...prevState,
+        //     imageUser: imageProfile
+        // }));
+
+    }
+
+    function saveMemoryObj() {
+        if(scudMonthMemory == null){
+            setScudMonthMemory({[timeNow()]:[]})
+        } else {
+            scudMonthMemory[timeNow()] = []
+            setScudMonthMemory(scudMonthMemory)
+        }
+        // setScudMonthMemory(prevState => ({
+        //     ...prevState,
+        //     imageUser: imageProfile
+        // }));
+
+    }
 
     let [dateMonth, setDateMonth] = useState(0);
     // let [smenaState, setSmenaState] = useState('8и')
@@ -195,7 +266,9 @@ function ScudMonth() {
 
 
     useEffect(() => {
-        console.log('Тестовая запись')
+        saveMemory()
+        console.log('Содержимое памяти', scudMonthMemory)
+
     }, []);
 
     function newDate(dateInput) {
