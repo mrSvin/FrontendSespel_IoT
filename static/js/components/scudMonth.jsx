@@ -266,7 +266,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
 
     useEffect(() => {
-        saveMemory()
+        saveMemoryObj()
         console.log('Содержимое памяти', scudMonthMemory)
 
     }, []);
