@@ -175,101 +175,127 @@ function filterLunchMonth(dateArray, date, smenaState) {
     return arraySave
 }
 
-let globalAllData = {}
-
-let promise = fetchRequestScudMonth()
-promise.then(data => {
-    let usersData = data[0]
-    let date = data[1]
-
-    if (!Object.keys(usersData).includes('error')) {
-        usersData = createUserDataStructure(usersData)
-
-        let userNames = Object.keys(usersData)
-        usersData = applyMonthFilters(usersData, userNames, date)
-
-        let smena_7 = []
-        let smena_8i = []
-        let smena_8 = []
-        let smena_11 = []
-        let smena_24 = []
-
-        let hiddens = []
-
-        Object.keys(usersData).forEach(name => {
-
-            switch (usersData[name].smenaInfo) {
-                case '7':
-                    smena_7.push(usersData[name])
-                    break
-                case '8и':
-                    smena_8i.push(usersData[name])
-                    break
-                case '8':
-                    smena_8.push(usersData[name])
-                    break
-                case '11':
-                    smena_11.push(usersData[name])
-                    break
-                case '24':
-                    smena_24.push(usersData[name])
-                    break
-                default:
-                    hiddens.push(usersData[name])
-            }
-        })
-
-        console.log('7', smena_7)
-        console.log('8и', smena_8i)
-        console.log('8', smena_8)
-        console.log('11', smena_11)
-        console.log('24', smena_24)
-        console.log('hiddens', hiddens)
-
-        globalAllData = usersData
-    }
-})
+function getThisYearMonth() {
+    let monthsNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+    let year = new Date().getFullYear()
+    let month = monthsNumber[new Date().getMonth()]
+    return `${year}-${month}`
+}
 
 function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
-    function saveMemory() {
-        if(scudMonthMemory == null){
-            setScudMonthMemory([timeNow()])
-        } else {
-            scudMonthMemory.push(timeNow())
-            setScudMonthMemory(scudMonthMemory)
-        }
-        // setScudMonthMemory(prevState => ({
-        //     ...prevState,
-        //     imageUser: imageProfile
-        // }));
+    function saveMemoryMonth() {
+        console.log('Текущие данные', scudMonthMemory)
+        // Текущая дата и время
+        let lastTime = new Date(dayTimeNow()).getTime()
 
+        // Если состояние памяти пустое
+        if (scudMonthMemory == null) {
+            // То запрос и сохранить состояние
+            console.log('Отправка запроса на', dateMonth)
+            let promise = fetchRequestScudMonth(dateMonth)
+            fetchRequestScudMonthThen(promise)
+        } else {
+            // Иначе, если память не пустая,но выбранный месяц отсутсвует
+            if (scudMonthMemory[dateMonth] == undefined) {
+                // То запрос и сохранить состояние
+                console.log('Отправка запроса на', dateMonth)
+                let promise = fetchRequestScudMonth(dateMonth)
+                fetchRequestScudMonthThen(promise)
+                // Иначе вывести срок время сохранения этих данных
+            } else {
+                console.log('Последнее время данных', scudMonthMemory[dateMonth].lastTime)
+                console.log('Текущее', lastTime)
+            }
+
+        }
     }
 
-    function saveMemoryObj() {
-        if(scudMonthMemory == null){
-            setScudMonthMemory({[timeNow()]:[]})
-        } else {
-            scudMonthMemory[timeNow()] = []
-            setScudMonthMemory(scudMonthMemory)
-        }
-        // setScudMonthMemory(prevState => ({
-        //     ...prevState,
-        //     imageUser: imageProfile
-        // }));
+    function fetchRequestScudMonthThen(promise) {
+        promise.then(data => {
+            let usersData = data[0]
+            let date = data[1]
 
+            if (!Object.keys(usersData).includes('error')) {
+                usersData = createUserDataStructure(usersData)
+
+                let userNames = Object.keys(usersData)
+                usersData = applyMonthFilters(usersData, userNames, date)
+
+                let allData = {
+                    smena_7: [],
+                    smena_8i: [],
+                    smena_8: [],
+                    smena_11: [],
+                    smena_24: [],
+                    hiddens: []
+                }
+
+                Object.keys(usersData).forEach(name => {
+                    switch (usersData[name].smenaInfo) {
+                        case '7':
+                            allData.smena_7.push(usersData[name])
+                            break
+                        case '8и':
+                            allData.smena_8i.push(usersData[name])
+                            break
+                        case '8':
+                            allData.smena_8.push(usersData[name])
+                            break
+                        case '11':
+                            allData.smena_11.push(usersData[name])
+                            break
+                        case '24':
+                            allData.smena_24.push(usersData[name])
+                            break
+                        default:
+                            allData.hiddens.push(usersData[name])
+                    }
+                })
+
+                if (scudMonthMemory == null) {
+                    setScudMonthMemory({[dateMonth]: {lastTime: dayTimeNow(), data: allData},})
+                } else if (scudMonthMemory[dateMonth] == undefined) {
+                    setScudMonthMemory(prevState => ({
+                        ...prevState,
+                        [dateMonth]: {lastTime: dayTimeNow(), data: allData}
+                    }));
+                }
+
+                console.log('Выбранный тип смены', smenaState)
+                switch (smenaState) {
+                    case '7':
+                        console.log('Данные для таблицы', allData.smena_7)
+                        break
+                    case '8и':
+                        console.log('Данные для таблицы', allData.smena_8i)
+                        break
+                    case '8':
+                        console.log('Данные для таблицы', allData.smena_8)
+                        break
+                    case '11':
+                        console.log('Данные для таблицы', allData.smena_11)
+                        break
+                    case '24':
+                        console.log('Данные для таблицы', allData.smena_24)
+                        break
+                    default:
+                        console.log('Данные для таблицы', allData.hiddens)
+                }
+            }
+        })
     }
 
-    let [dateMonth, setDateMonth] = useState(0);
-    // let [smenaState, setSmenaState] = useState('8и')
+    let [dateMonth, setDateMonth] = useState(getThisYearMonth());
+    let [smenaState, setSmenaState] = useState('8и')
+    let [tableState, settableState] = useState(null)
+
     let [usersWithSmena, setUsersWithSmena] = useState('line')
 
 
     useEffect(() => {
-        saveMemoryObj()
-        console.log('Содержимое памяти', scudMonthMemory)
-
-    }, []);
+        saveMemoryMonth()
+    }, [dateMonth, tableState, smenaState]);
 
     function newDate(dateInput) {
         setDateMonth(dateInput)
