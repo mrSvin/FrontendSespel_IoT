@@ -266,21 +266,27 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 switch (smenaState) {
                     case '7':
                         console.log('Данные для таблицы', allData.smena_7)
+                        setTableState(allData.smena_7)
                         break
                     case '8и':
                         console.log('Данные для таблицы', allData.smena_8i)
+                        setTableState(allData.smena_8i)
                         break
                     case '8':
                         console.log('Данные для таблицы', allData.smena_8)
+                        setTableState(allData.smena_8)
                         break
                     case '11':
                         console.log('Данные для таблицы', allData.smena_11)
+                        setTableState(allData.smena_11)
                         break
                     case '24':
                         console.log('Данные для таблицы', allData.smena_24)
+                        setTableState(allData.smena_24)
                         break
                     default:
                         console.log('Данные для таблицы', allData.hiddens)
+                        setTableState(allData.hiddens)
                 }
             }
         })
@@ -288,14 +294,14 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
     let [dateMonth, setDateMonth] = useState(getThisYearMonth());
     let [smenaState, setSmenaState] = useState('8и')
-    let [tableState, settableState] = useState(null)
+    let [tableState, setTableState] = useState(null)
 
     let [usersWithSmena, setUsersWithSmena] = useState('line')
 
 
     useEffect(() => {
         saveMemoryMonth()
-    }, [dateMonth, tableState, smenaState]);
+    }, [dateMonth, smenaState]);
 
     function newDate(dateInput) {
         setDateMonth(dateInput)
