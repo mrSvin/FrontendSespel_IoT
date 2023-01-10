@@ -145,6 +145,23 @@
             dataArray.forEach((e, i) => {
                 if (e[0] == undefined) dataArray.splice(i, 1)
             })
+
+
+
+            let firstDate = startTime + ' 00:00'
+            let lastDate = (startTime == new Date().toISOString().slice(0,10))? startTime + " " + new Date().toISOString().slice(11,16) : startTime + ' 23:59'
+
+
+            firstDate = new Date(firstDate).getTime()
+            lastDate =  (startTime == new Date().toISOString().slice(0,10))?  new Date(lastDate).getTime() + 10800000 : new Date(lastDate).getTime()
+
+            dataArray.unshift([dataArray[0][0] - 10000, 0])
+            dataArray.unshift([firstDate,0])
+            dataArray.push([lastDate,0])
+
+            console.log(dataArray)
+
+
         } else {
             series = [{
                 name: params[0],
