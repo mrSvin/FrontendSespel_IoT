@@ -217,7 +217,10 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                     console.log('Отправка запроса на', dateMonth)
                     let promise = fetchRequestScudMonth(dateMonth)
                     fetchRequestScudMonthThen(promise)
-                } else switchTableState(scudMonthMemory[dateMonth].data)
+                } else {
+                    console.log('Данные для таблицы', scudMonthMemory[dateMonth].data)
+                    switchTableState(scudMonthMemory[dateMonth].data)
+                }
             }
 
         }
