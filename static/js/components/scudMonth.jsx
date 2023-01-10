@@ -35,46 +35,53 @@ function msToTimeHours(duration, date = 200) {
 function applyMonthFilters(usersData, userNames, date) {
     let lastMonthDay = 32 - new Date(date.slice(0, 4), date.slice(5, 7), 32).getDate();
 
-    userNames.forEach(testName => {
+    userNames.forEach(userName => {
         // Формирую месячный объект пользователя
-        usersData[testName].monthObject = {}
+        usersData[userName].monthObject = {}
 
         // Создаю в нем столько массивов сколько дней в месяце
         // Для текущего месяца
         if (dayNow().slice(0, 7) == date) {
             for (let i = 1; i < +dayNow().slice(8, 10) + 1; i++) {
-                usersData[testName].monthObject[i] = [[], []]
+                usersData[userName].monthObject[i] = [[], []]
             }
             // Для предыдущего месяца
         } else {
             for (let i = 1; i < lastMonthDay + 1; i++) {
-                usersData[testName].monthObject[i] = [[], []]
+                usersData[userName].monthObject[i] = [[], []]
             }
         }
 
         // Удаляю дубликаты
-        let noDublicateArrays = dublicateDeleteFilter(usersData[testName].logtime, usersData[testName].statusInOut)
+        let noDublicateArrays = dublicateDeleteFilter(usersData[userName].logtime, usersData[userName].statusInOut)
 
         // Вставляю в массивы дней соответсвующие значения
         noDublicateArrays[0].forEach((d, i) => {
-            usersData[testName].monthObject[+d.slice(8, 10)][0].push(d)
-            usersData[testName].monthObject[+d.slice(8, 10)][1].push(noDublicateArrays[1][i])
+            usersData[userName].monthObject[+d.slice(8, 10)][0].push(d)
+            usersData[userName].monthObject[+d.slice(8, 10)][1].push(noDublicateArrays[1][i])
         })
 
         // Общий счетчик часов
         let totalMonthTime = 0
 
         // Применяю фильтры
-        for (let i = 1; i <= Object.keys(usersData[testName].monthObject).length; i++) {
+        for (let i = 1; i <= Object.keys(usersData[userName].monthObject).length; i++) {
             let indexDate = getDateFromIndex(date, i)
-            let arrayAddStartOrEnd = addStartOrEnd(usersData[testName].monthObject[i], '8и', indexDate)
-            let arrayWithOutLunch = filterLunchMonth(arrayAddStartOrEnd, indexDate, usersData[testName].smenaInfo)
+            let arrayAddStartOrEnd = addStartOrEnd(usersData[userName].monthObject[i], '8и', indexDate)
+            let arrayWithOutLunch = filterLunchMonth(arrayAddStartOrEnd, indexDate, usersData[userName].smenaInfo)
             let workTime = getWorkTime(arrayWithOutLunch)
+            // тут может стоит написать преобразования времени до десятичого числа без секунд
+
             totalMonthTime += workTime
-            usersData[testName].monthObject[i] = [arrayWithOutLunch, msToTime(workTime)]
+            // Закомменченный вариант сохранения данных и массив и время, пока оставлю только время.
+            //usersData[userName].monthObject[i] = [arrayWithOutLunch, msToTime(workTime)]
+            usersData[userName].monthObject[i] = workTime
         }
-        usersData[testName].monthTotalTime = totalMonthTime
-        console.log(testName, 'работал в этом месяце', msToTimeHours(totalMonthTime))
+        usersData[userName].monthTotalTime = totalMonthTime
+
+        // Очистка ненужных полей
+        usersData[userName].statusInOut = null
+        usersData[userName].logtime = null
     })
 
     return usersData
@@ -185,9 +192,6 @@ function getThisYearMonth() {
 function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
     function saveMemoryMonth() {
-        console.log('Текущие данные', scudMonthMemory)
-        // Текущая дата и время
-        let lastTime = new Date(dayTimeNow()).getTime()
 
         // Если состояние памяти пустое
         if (scudMonthMemory == null) {
@@ -204,8 +208,16 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 fetchRequestScudMonthThen(promise)
                 // Иначе вывести срок время сохранения этих данных
             } else {
-                console.log('Последнее время данных', scudMonthMemory[dateMonth].lastTime)
-                console.log('Текущее', lastTime)
+                let lastTime = new Date(dayTimeNow()).getTime()
+                let thisMonthLastTime = new Date(scudMonthMemory[dateMonth].lastTime).getTime()
+                console.log('Последнее время данных', thisMonthLastTime)
+                console.log('Текущее время', dayTimeNow())
+                // Если данные записанные больше часа назад
+                if (lastTime - thisMonthLastTime > 10800000) {
+                    console.log('Отправка запроса на', dateMonth)
+                    let promise = fetchRequestScudMonth(dateMonth)
+                    fetchRequestScudMonthThen(promise)
+                } else switchTableState(scudMonthMemory[dateMonth].data)
             }
 
         }
@@ -232,6 +244,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 }
 
                 Object.keys(usersData).forEach(name => {
+
                     switch (usersData[name].smenaInfo) {
                         case '7':
                             allData.smena_7.push(usersData[name])
@@ -263,33 +276,37 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 }
 
                 console.log('Выбранный тип смены', smenaState)
-                switch (smenaState) {
-                    case '7':
-                        console.log('Данные для таблицы', allData.smena_7)
-                        setTableState(allData.smena_7)
-                        break
-                    case '8и':
-                        console.log('Данные для таблицы', allData.smena_8i)
-                        setTableState(allData.smena_8i)
-                        break
-                    case '8':
-                        console.log('Данные для таблицы', allData.smena_8)
-                        setTableState(allData.smena_8)
-                        break
-                    case '11':
-                        console.log('Данные для таблицы', allData.smena_11)
-                        setTableState(allData.smena_11)
-                        break
-                    case '24':
-                        console.log('Данные для таблицы', allData.smena_24)
-                        setTableState(allData.smena_24)
-                        break
-                    default:
-                        console.log('Данные для таблицы', allData.hiddens)
-                        setTableState(allData.hiddens)
-                }
+                switchTableState(allData)
             }
         })
+    }
+
+    function switchTableState(allData) {
+        switch (smenaState) {
+            case '7':
+                console.log('Данные для таблицы', allData.smena_7)
+                setTableState(allData.smena_7)
+                break
+            case '8и':
+                console.log('Данные для таблицы', allData.smena_8i)
+                setTableState(allData.smena_8i)
+                break
+            case '8':
+                console.log('Данные для таблицы', allData.smena_8)
+                setTableState(allData.smena_8)
+                break
+            case '11':
+                console.log('Данные для таблицы', allData.smena_11)
+                setTableState(allData.smena_11)
+                break
+            case '24':
+                console.log('Данные для таблицы', allData.smena_24)
+                setTableState(allData.smena_24)
+                break
+            default:
+                console.log('Данные для таблицы', allData.hiddens)
+                setTableState(allData.hiddens)
+        }
     }
 
     let [dateMonth, setDateMonth] = useState(getThisYearMonth());
@@ -318,10 +335,45 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                     </Link>
 
                     <Link to={`/scudMonth`}>
-                        <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ</div>
+                        <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ
+                            <div className={`smenaScud`}>
+                                <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('8')
+                                      }}>8 часов
+                                </span>
+                                <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('7')
+                                      }}>7.2 часа
+                                </span>
+                                <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('11')
+                                      }}>11 часов
+                                </span>
+                                <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('24')
+                                      }}>24 часа
+                                </span>
+                                <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                      onClick={() => {
+                                          setSmenaState('8и')
+                                      }}>ИТР
+                                </span>
+                                <span
+                                    className={`hideIndividualAll ${(smenaState == 'hiddens') ? 'scudSelect' : 'scudSelectNoSelect'}`}
+                                    onClick={() => {
+                                        setSmenaState('hiddens')
+                                    }}>ИТР
+                                </span>
+                            </div>
+                        </div>
                     </Link>
 
                 </div>
+
 
             </div>
             <div className="energyCalendarContainer">
