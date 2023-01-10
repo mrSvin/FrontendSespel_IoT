@@ -276,6 +276,19 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                         ...prevState,
                         [dateMonth]: {lastTime: dayTimeNow(), data: allData}
                     }));
+                } else {
+                    let lastTime = new Date(dayTimeNow()).getTime()
+                    let thisMonthLastTime = new Date(scudMonthMemory[dateMonth].lastTime).getTime()
+                    console.log('Последнее время данных', thisMonthLastTime)
+                    console.log('Текущее время', dayTimeNow())
+                    // Если данные записанные больше часа назад
+                    if (lastTime - thisMonthLastTime > 10800000) {
+                        console.log('Перезапись с истичением часа', dateMonth)
+                        setScudMonthMemory(prevState => ({
+                            ...prevState,
+                            [dateMonth]: {lastTime: dayTimeNow(), data: allData}
+                        }));
+                    }
                 }
 
                 console.log('Выбранный тип смены', smenaState)
