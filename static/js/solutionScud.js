@@ -335,7 +335,7 @@ function parseScudForHighcharts(arrayParse, y) {
     return arraySave
 }
 
-function parseScudLunches(smenaState, date,  y) {
+function parseScudLunches(smenaState, date, y) {
 
     let arraySave = []
     let yesterday = dayYesterday(date)
@@ -509,11 +509,11 @@ function getHighchartSeriesAndNames(userData) {
             arrayNames.push(`${i + 1}. таб. ${userData[e]['tabid']} - ${e} (${userData[e]['POS'] == '' ? 'должность не указана' : userData[e]['POS']})`)
             if (userData[e]['highchartsBlack'] != null) {
                 blackArrayTrigger = true
-                arrayData.push(filterY(userData[e]['highchartsBlack'],i))
+                arrayData.push(filterY(userData[e]['highchartsBlack'], i))
             }
             arrayData.push(filterY(userData[e]['highchartsWork'], i))
             arrayData.push(filterY(userData[e]['highchartsOutWork'], i))
-            arrayData.push(filterY(userData[e]['highchartsLunch'],i))
+            arrayData.push(filterY(userData[e]['highchartsLunch'], i))
             workTime.push(userData[e]['workTime'])
             tabelArray.push(userData[e]['tabid'])
         })
@@ -522,7 +522,7 @@ function getHighchartSeriesAndNames(userData) {
             arrayNames.push(`${i + 1}. таб. ${userData[e]['tabid']} - ${e} (${userData[e]['POS'] == '' ? 'должность не указана' : userData[e]['POS']})`)
             arrayData.push(userData[e]['highchartsWork'])
             arrayData.push(userData[e]['highchartsOutWork'])
-            arrayData.push(userData[e]['highchartsLunch'],i)
+            arrayData.push(userData[e]['highchartsLunch'], i)
             workTime.push(userData[e]['workTime'])
             tabelArray.push(userData[e]['tabid'])
             if (userData[e]['highchartsBlack'] != null) {
@@ -589,43 +589,43 @@ function getHighchartSeriesAndNames(userData) {
         }
     } else {
         for (let i = 0; i < arrayData.length; i += 3) {
-                series.push({
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: '#38e817',
-                    tooltip: {
-                        pointFormatter: function () {
-                            let timer = msToTimeDays(this.x2 - this.x)
-                            return '<b>Работает </b>' + timer
-                        },
+            series.push({
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#38e817',
+                tooltip: {
+                    pointFormatter: function () {
+                        let timer = msToTimeDays(this.x2 - this.x)
+                        return '<b>Работает </b>' + timer
                     },
-                    data: arrayData[i],
-                })
-                series.push({
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: '#ffea32',
-                    tooltip: {
-                        pointFormatter: function () {
-                            let timer = msToTimeDays(this.x2 - this.x)
-                            return '<b>Нет на месте </b>' + timer
-                        },
+                },
+                data: arrayData[i],
+            })
+            series.push({
+                pointWidth: 30,
+                colorByPoint: false,
+                color: '#ffea32',
+                tooltip: {
+                    pointFormatter: function () {
+                        let timer = msToTimeDays(this.x2 - this.x)
+                        return '<b>Нет на месте </b>' + timer
                     },
-                    data: arrayData[i+1],
-                })
-                series.push({
-                    pointWidth: 30,
-                    colorByPoint: false,
-                    color: 'rgba(26, 170, 229, 0.6)',
-                    tooltip: {
-                        enabled: false,
-                        pointFormatter: function () {
-                            return '<p></p>'
-                        },
+                },
+                data: arrayData[i + 1],
+            })
+            series.push({
+                pointWidth: 30,
+                colorByPoint: false,
+                color: 'rgba(26, 170, 229, 0.6)',
+                tooltip: {
+                    enabled: false,
+                    pointFormatter: function () {
+                        return '<p></p>'
                     },
-                    borderColor: 'rgba(26, 170, 229, 0.6)',
-                    data: arrayData[i+2],
-                })
+                },
+                borderColor: 'rgba(26, 170, 229, 0.6)',
+                data: arrayData[i + 2],
+            })
         }
     }
 
@@ -768,8 +768,8 @@ function changeLunchOpacity() {
     for (let i = 0; i < lunchTimes.length; i++) {
         for (let j = 0; j < highchartsTracker.length; j++) {
 
-            if(highchartsTracker[j].lastChild.lastChild !== undefined){
-                if(highchartsTracker[j].lastChild.lastChild.getAttribute('fill') == 'rgba(26, 170, 229, 0.6)'){
+            if (highchartsTracker[j].lastChild.lastChild !== undefined) {
+                if (highchartsTracker[j].lastChild.lastChild.getAttribute('fill') == 'rgba(26, 170, 229, 0.6)') {
                     highchartsTracker[j].style.pointerEvents = "none";
                 }
             }
@@ -819,16 +819,14 @@ function getScudBotUrl() {
 }
 
 function setSize(left, width) {
-    let size = {
+    return {
         left: left,
         width: width
     }
-    return size;
 }
 
 function setHeight(heightHighchartContainer) {
-    let height = {
+    return {
         height: 52 * heightHighchartContainer
     }
-    return height;
 }
