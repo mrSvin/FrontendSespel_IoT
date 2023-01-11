@@ -74,7 +74,7 @@ function applyMonthFilters(usersData, userNames, date) {
 
             totalMonthTime += workTime
             // Закомменченный вариант сохранения данных и массив и время, пока оставлю только время.
-            //usersData[userName].monthObject[i] = [arrayWithOutLunch, msToTime(workTime)]
+            // usersData[userName].monthObject[i] = [arrayWithOutLunch, msToTime(workTime)]
             usersData[userName].monthObject[i] = workTime
         }
         usersData[userName].monthTotalTime = totalMonthTime
@@ -83,102 +83,74 @@ function applyMonthFilters(usersData, userNames, date) {
         usersData[userName].statusInOut = null
         usersData[userName].logtime = null
     })
-
     return usersData
+}
+
+function getLunchArrays(smenaState, date){
+
+    const times = {
+        '03:00': date + ' 03:00:00',
+        '03:30': date + ' 03:30:00',
+        '04:00': date + ' 04:00:00',
+        '04:30': date + ' 04:30:00',
+        '11:30': date + ' 11:30:00',
+        '12:00': date + ' 12:00:00',
+        '12:30': date + ' 12:30:00',
+        '13:00': date + ' 13:00:00',
+        '16:00': date + ' 16:00:00',
+        '16:30': date + ' 16:30:00',
+        '19:30': date + ' 19:30:00',
+        '20:00': date + ' 20:00:00',
+        '23:00': date + ' 23:00:00',
+        '23:30': date + ' 23:30:00',
+    }
+
+    let lunchArrays = []
+
+    switch (smenaState) {
+        case '8и':
+            lunchArrays.push([times['12:00'],times['13:00']])
+            return lunchArrays
+        case '8':
+            lunchArrays.push([times['03:00'],times['03:30']])
+            lunchArrays.push([times['11:30'],times['12:00']])
+            lunchArrays.push([times['19:30'],times['20:00']])
+            return lunchArrays
+        case '7':
+            lunchArrays.push([times['03:00'],times['04:00']])
+            lunchArrays.push([times['11:30'],times['12:30']])
+            lunchArrays.push([times['19:30'],times['20:30']])
+            return lunchArrays
+        case '11':
+            lunchArrays.push([times['03:30'],times['04:00']])
+            lunchArrays.push([times['11:30'],times['12:00']])
+            lunchArrays.push([times['16:00'],times['16:30']])
+            lunchArrays.push([times['23:00'],times['23:30']])
+            return lunchArrays
+        case '24':
+            lunchArrays.push([times['04:00'],times['04:30']])
+            lunchArrays.push([times['12:30'],times['13:00']])
+            lunchArrays.push([times['20:00'],times['20:30']])
+            return lunchArrays
+        case '':
+            lunchArrays.push([times['12:00'],times['12:30']])
+            return lunchArrays
+        default:
+            lunchArrays.push([times['12:00'],times['12:30']])
+            return lunchArrays
+    }
+
 }
 
 function filterLunchMonth(dateArray, date, smenaState) {
 
-    let startLunch = null
-    let endLunch = null
+    let arraySave = dateArray
 
-    let startLunch2 = null
-    let endLunch2 = null
+    let lunchArrays = getLunchArrays(smenaState, date)
 
-    let startLunch3 = null
-    let endLunch3 = null
-
-    let startLunch4 = null
-    let endLunch4 = null
-
-    let arraySave = []
-
-    switch (smenaState) {
-        case '8и':
-            startLunch = date + ' 12:00:00'
-            endLunch = date + ' 13:00:00'
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-            break;
-        case '8':
-
-            startLunch = date + ' 03:00:00'
-            endLunch = date + ' 03:30:00'
-
-            startLunch2 = date + ' 11:30:00'
-            endLunch2 = date + ' 12:00:00'
-
-            startLunch3 = date + ' 19:30:00'
-            endLunch3 = date + ' 20:00:00'
-
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
-            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
-            break;
-        case '7':
-            startLunch = date + ' 03:00:00'
-            endLunch = date + ' 04:00:00'
-
-            startLunch2 = date + ' 11:30:00'
-            endLunch2 = date + ' 12:30:00'
-
-            startLunch3 = date + ' 19:30:00'
-            endLunch3 = date + ' 20:30:00'
-
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
-            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
-            break;
-        case '11':
-            startLunch = date + ' 03:30:00'
-            endLunch = date + ' 04:00:00'
-
-            startLunch2 = date + ' 11:30:00'
-            endLunch2 = date + ' 12:00:00'
-
-            startLunch3 = date + ' 16:00:00'
-            endLunch3 = date + ' 16:30:00'
-
-            startLunch4 = date + ' 23:00:00'
-            endLunch4 = date + ' 23:30:00'
-
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
-            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
-            arraySave = insideFilterLunch(startLunch4, endLunch4, arraySave)
-            break;
-        case '24':
-            startLunch = date + ' 04:00:00'
-            endLunch = date + ' 04:30:00'
-
-            startLunch2 = date + ' 12:30:00'
-            endLunch2 = date + ' 13:00:00'
-
-            startLunch3 = date + ' 20:00:00'
-            endLunch3 = date + ' 20:30:00'
-
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
-            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
-            break;
-        case '':
-            startLunch = date + ' 12:00:00'
-            endLunch = date + ' 13:00:00'
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-            break;
-        default:
-            startLunch = date + ' 12:00:00'
-            endLunch = date + ' 13:00:00'
-    }
+    lunchArrays.forEach(lunchArray=>{
+        arraySave = insideFilterLunch(lunchArray[0], lunchArray[1], dateArray)
+    })
     return arraySave
 }
 
@@ -218,7 +190,6 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                     let promise = fetchRequestScudMonth(dateMonth)
                     fetchRequestScudMonthThen(promise)
                 } else {
-                    console.log('Данные для таблицы', scudMonthMemory[dateMonth].data)
                     switchTableState(scudMonthMemory[dateMonth].data)
                 }
             }
