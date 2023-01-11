@@ -294,278 +294,136 @@ function ScudBot() {
 }
 
 function LunchEightHours({heightHighchartContainer}) {
-    let height = {
-        height: 52 * heightHighchartContainer
-    };
-
-    let lunchSettings1 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '33.3%',
-        width: '1.175%'
-    }
-
-    let lunchSettings2 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '53.95%',
-        width: '1.175%'
-    }
-
-    let lunchSettings3 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '73.30%',
-        width: '1.175%'
-    }
-
-    let pWidth = {
-        width: 'max-content',
-        left: '-50px'
-    }
+    let pWidth = setSize('-50px', 'max-content')
 
     return (
         <div className='wrapperScud'>
-            <div className={'lunchTime'} style={lunchSettings1}>
+            <div className={'lunchTime'} style={setSize('33.3%','1.175%')}>
                 <p style={pWidth}>Обед 11:30-12:00</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings2}>
+            <div className={'lunchTime'} style={setSize('53.95%','1.175%')}>
                 <p style={pWidth}>Обед 19:30-20:00</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings3}>
+            <div className={'lunchTime'} style={setSize('73.30%','1.175%')}>
                 <p style={pWidth}>Обед 03:00-3:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div id="containerScud" style={height} className="scudHigcharts"></div>
+            <div id="containerScud" style={setHeight(heightHighchartContainer)} className="scudHigcharts"></div>
         </div>
     )
 }
 
 function LunchSevenHours({heightHighchartContainer}) {
-    let height = {
-        height: 52 * heightHighchartContainer
-    };
 
-    let lunchSettings1 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '33.35%',
-        width: '2.55%'
-    }
-
-    let lunchSettings2 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '54.25%',
-        width: '2.55%'
-    }
-
-    let lunchSettings3 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '73.7%',
-        width: '2.55%'
-    }
-
-    let pWidth = {
-        width: 'max-content',
-        left: '-45px'
-    }
+    let pWidth = setSize('-45px', 'max-content')
 
     return (
         <div className='wrapperScud'>
-            <div className={'lunchTime'} style={lunchSettings1}>
+            <div className={'lunchTime'} style={setSize('33.35%','2.55%')}>
                 <p style={pWidth}>Обед 11:30-12:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings2}>
+            <div className={'lunchTime'} style={setSize('54.25%','2.55%')}>
                 <p style={pWidth}>Обед 19:30-20:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings3}>
+            <div className={'lunchTime'} style={setSize('73.7%','2.55%')}>
                 <p style={pWidth}>Обед 03:00-4:00</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div id="containerScud" style={height} className="scudHigcharts"></div>
+            <div id="containerScud" style={setHeight(heightHighchartContainer)} className="scudHigcharts"></div>
         </div>
     )
 }
 
 function LunchTwelveHours({heightHighchartContainer}) {
-    let height = {
-        height: 52 * heightHighchartContainer
-    };
 
-    let lunchSettings1 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '33.5%',
-        width: '1.175%'
-    }
-
-    let lunchSettings2 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '45.6%',
-        width: '1.175%'
-    }
-
-    let lunchSettings3 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '64%',
-        width: '1.175%'
-    }
-
-    let lunchSettings4 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '75.8%',
-        width: '1.175%'
-    }
-
-    let pWidth = {
-        width: 'max-content',
-        left: '-50px'
-    }
+    let pWidth = setSize('-50px', 'max-content')
 
     return (
         <div className='wrapperScud'>
-            <div className={'lunchTime'} style={lunchSettings1}>
+            <div className={'lunchTime'} style={setSize('33.5%', '1.175%')}>
                 <p style={pWidth}>Обед 11:30-12:00</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings2}>
+            <div className={'lunchTime'} style={setSize('45.6%', '1.175%')}>
                 <p style={pWidth}>Обед 16:00-16:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings3}>
+            <div className={'lunchTime'} style={setSize('64%', '1.175%')}>
                 <p style={pWidth}>Обед 23:00-23:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings4}>
+            <div className={'lunchTime'} style={setSize('75.8%', '1.175%')}>
                 <p style={pWidth}>Обед 03:30-4:00</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div id="containerScud" style={height} className="scudHigcharts"></div>
+            <div id="containerScud" style={setHeight(heightHighchartContainer)} className="scudHigcharts"></div>
         </div>
     )
 }
 
 function LunchTwelveHoursBot({heightHighchartContainer}) {
-    let height = {
-        height: 52 * heightHighchartContainer
-    };
 
-    let lunchSettings1 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '53.8%',
-        width: '1.15%'
-    }
-
-    let lunchSettings2 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '61.95%',
-        width: '1.15%'
-    }
-
-    let lunchSettings3 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '71.5%',
-        width: '1.15%'
-    }
-
-    let lunchSettings4 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '80%',
-        width: '1.15%'
-    }
-
-    let pWidth = {
-        width: 'max-content',
-        left: '-33px'
-    }
+    let pWidth = setSize('-33px', 'max-content')
 
     return (
         <div className='wrapperScud'>
-            <div className={'lunchTime'} style={lunchSettings1}>
+            <div className={'lunchTime'} style={setSize('53.8%', '1.15%')}>
                 <p style={pWidth}>11:30-12:00</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings2}>
+            <div className={'lunchTime'} style={setSize('61.95%', '1.15%')}>
                 <p style={pWidth}>16:00-16:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings3}>
+            <div className={'lunchTime'} style={setSize('71.5%', '1.15%')}>
                 <p style={pWidth}>23:00-23:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings4}>
+            <div className={'lunchTime'} style={setSize('80%', '1.15%')}>
                 <p style={pWidth}>03:30-4:00</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div id="containerScud" style={height} className="scudHigcharts"></div>
+            <div id="containerScud" style={setHeight(heightHighchartContainer)} className="scudHigcharts"></div>
         </div>
     )
 }
 
 function LunchTwentyFourHours({heightHighchartContainer}) {
-    let height = {
-        height: 52 * heightHighchartContainer
-    };
 
-    let lunchSettings1 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '34.2%',
-        width: '1.175%'
-    }
-
-    let lunchSettings2 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '54%',
-        width: '1.175%'
-    }
-
-    let lunchSettings3 = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '74%',
-        width: '1.175%'
-    }
-
-    let pWidth = {
-        width: 'max-content',
-        left: '-50px'
-    }
+    let pWidth = setSize('-50px', 'max-content')
 
     return (
         <div className='wrapperScud'>
-            <div className={'lunchTime'} style={lunchSettings1}>
+            <div className={'lunchTime'} style={setSize('34.2%', '1.175%')}>
                 <p style={pWidth}>Обед 12:30-13:00</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings2}>
+            <div className={'lunchTime'} style={setSize('54%', '1.175%')}>
                 <p style={pWidth}>Обед 20:00-20:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={lunchSettings3}>
+            <div className={'lunchTime'} style={setSize('74%', '1.175%')}>
                 <p style={pWidth}>Обед 04:00-04:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div id="containerScud" style={height} className="scudHigcharts"></div>
+            <div id="containerScud" style={setHeight(heightHighchartContainer)} className="scudHigcharts"></div>
         </div>
     )
 }
 
 function LunchItr({heightHighchartContainer}) {
-    let height = {
-        height: 52 * heightHighchartContainer
-    };
-
-    let lunchSettings = {
-        // height: getLunchHeight(heightHighchartContainer),
-        left: '52.9%',
-        width: '2.4%',
-    }
 
     return (
         <div className='wrapperScud'>
-            <div className={'lunchTime'} style={lunchSettings}>
+            <div className={'lunchTime'} style={setSize('52.9%', '2.4%')}>
                 <p>Обед</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div id="containerScud" style={height} className="scudHigcharts"></div>
+            <div id="containerScud" style={setHeight(heightHighchartContainer)} className="scudHigcharts"></div>
         </div>
     )
 }

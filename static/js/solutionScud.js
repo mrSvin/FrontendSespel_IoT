@@ -817,3 +817,18 @@ function getScudBotUrl() {
 
     return [pathName, form_path]
 }
+
+function setSize(left, width) {
+    let size = {
+        left: left,
+        width: width
+    }
+    return size;
+}
+
+function setHeight(heightHighchartContainer) {
+    let height = {
+        height: 52 * heightHighchartContainer
+    }
+    return height;
+}
