@@ -44,10 +44,10 @@ function Scud() {
                         } else return e.photo[tabel]
                     })
                     let highchartsLen = null
-                    if(document.getElementsByClassName('highcharts-axis-labels highcharts-yaxis-labels')[1]){
+                    if (document.getElementsByClassName('highcharts-axis-labels highcharts-yaxis-labels')[1]) {
                         highchartsLen = document.getElementsByClassName('highcharts-axis-labels highcharts-yaxis-labels')[1].querySelectorAll('span').length
                     }
-                    if(arrayPhotos.length == highchartsLen){
+                    if (arrayPhotos.length == highchartsLen) {
                         setPhotoArray(arrayPhotos)
                     }
                     setLoading(false)
@@ -89,93 +89,105 @@ function Scud() {
 
                 </div>
 
-                <Link to={`/scud/1ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}
-                      onClick={() => {
-                          defenseFromManyRequest(setLoadManyRequest)
-                      }}>
-                    <div className={`${place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
-                        setPlace('1ploshadka')
-                    }}>Первая площадка
-                        {place !== '1ploshadka' ? null :
-                            <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>
-                                <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('8')
-                                      }}>8 часов</span>
-                                <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          setSmenaState('7')
-                                      }}>7.2 часа</span>
-                                <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('11')
-                                      }}>11 часов</span>
-                                <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('24')
-                                      }}>24 часа</span>
-                                <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('8и')
-                                      }}>ИТР</span>
-                            </div>
-                        }
-                    </div>
-                </Link>
+                <ScudLink placeNameRus={'Первая площадка'} placeNameEng={'1ploshadka'}
+                          loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest} place={place}
+                />
 
-                <Link to={`/scud/2ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}
-                      onClick={() => {
-                          defenseFromManyRequest(setLoadManyRequest)
-                      }}>
-                    <div className={`${place == '2ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
-                        setPlace('2ploshadka')
-                    }}>Вторая площадка
-                        {place !== '2ploshadka' ? null :
-                            <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>
-                                <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('8')
-                                      }}>8 часов</span>
-                                <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('7')
-                                      }}>7.2 часа</span>
-                                <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('11')
-                                      }}>11 часов</span>
-                                <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('24')
-                                      }}>24 часа</span>
-                                <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          defenseFromManyRequest(setLoadManyRequest)
-                                          setSmenaState('8и')
-                                      }}>ИТР</span>
-                            </div>
-                        }
-                    </div>
-                </Link>
+                <ScudLink placeNameRus={'Вторая площадка'} placeNameEng={'2ploshadka'}
+                          loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest} place={place}
+                />
 
-                <Link to={`/scud/office`} className={`${loadManyRequest ? 'noActiveButton' : null}`} onClick={() => {
-                    defenseFromManyRequest(setLoadManyRequest)
-                }}>
-                    <div className={`${place == 'office' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
-                        defenseFromManyRequest(setLoadManyRequest)
-                        setPlace('office')
-                        setSmenaState('8и')
-                    }}>Офис
-                    </div>
-                </Link>
+                <ScudLink placeNameRus={'Офис'} placeNameEng={'office'}
+                          loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest} place={place}
+                />
+
+                {/*<Link to={`/scud/1ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}*/}
+                {/*      onClick={() => {*/}
+                {/*          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*      }}>*/}
+                {/*    <div className={`${place == '1ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {*/}
+                {/*        setPlace('1ploshadka')*/}
+                {/*    }}>Первая площадка*/}
+                {/*        {place !== '1ploshadka' ? null :*/}
+                {/*            <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>*/}
+                {/*                <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}*/}
+                {/*                      onClick={() => {*/}
+                {/*                          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*                          setSmenaState('8')*/}
+                {/*                      }}>8 часов</span>*/}
+                {/*                <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}*/}
+                {/*                      onClick={() => {*/}
+                {/*                          setSmenaState('7')*/}
+                {/*                      }}>7.2 часа</span>*/}
+                {/*                <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}*/}
+                {/*                      onClick={() => {*/}
+                {/*                          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*                          setSmenaState('11')*/}
+                {/*                      }}>11 часов</span>*/}
+                {/*                <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}*/}
+                {/*                      onClick={() => {*/}
+                {/*                          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*                          setSmenaState('24')*/}
+                {/*                      }}>24 часа</span>*/}
+                {/*                <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}*/}
+                {/*                      onClick={() => {*/}
+                {/*                          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*                          setSmenaState('8и')*/}
+                {/*                      }}>ИТР</span>*/}
+                {/*            </div>*/}
+                {/*        }*/}
+                {/*    </div>*/}
+                {/*</Link>*/}
+
+                {/*<Link to={`/scud/2ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}*/}
+                {/*      onClick={() => {*/}
+                {/*          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*      }}>*/}
+                {/*    <div className={`${place == '2ploshadka' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {*/}
+                {/*        setPlace('2ploshadka')*/}
+                {/*    }}>Вторая площадка*/}
+                {/*        {place !== '2ploshadka' ? null :*/}
+                {/*            <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>*/}
+                {/*                <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}*/}
+                {/*                      onClick={() => {*/}
+                {/*                          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*                          setSmenaState('8')*/}
+                {/*                      }}>8 часов</span>*/}
+                {/*                <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}*/}
+                {/*                      onClick={() => {*/}
+                {/*                          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*                          setSmenaState('7')*/}
+                {/*                      }}>7.2 часа</span>*/}
+                {/*                <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}*/}
+                {/*                      onClick={() => {*/}
+                {/*                          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*                          setSmenaState('11')*/}
+                {/*                      }}>11 часов</span>*/}
+                {/*                <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}*/}
+                {/*                      onClick={() => {*/}
+                {/*                          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*                          setSmenaState('24')*/}
+                {/*                      }}>24 часа</span>*/}
+                {/*                <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}*/}
+                {/*                      onClick={() => {*/}
+                {/*                          defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*                          setSmenaState('8и')*/}
+                {/*                      }}>ИТР</span>*/}
+                {/*            </div>*/}
+                {/*        }*/}
+                {/*    </div>*/}
+                {/*</Link>*/}
+
+                {/*<Link to={`/scud/office`} className={`${loadManyRequest ? 'noActiveButton' : null}`} onClick={() => {*/}
+                {/*    defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*}}>*/}
+                {/*    <div className={`${place == 'office' ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {*/}
+                {/*        defenseFromManyRequest(setLoadManyRequest)*/}
+                {/*        setPlace('office')*/}
+                {/*        setSmenaState('8и')*/}
+                {/*    }}>Офис*/}
+                {/*    </div>*/}
+                {/*</Link>*/}
 
             </div>
             <div className="energyCalendarContainer">
@@ -203,6 +215,55 @@ function Scud() {
             <WorkTime heightHighchartContainer={heightHighchartContainer} workTime={workTime}/>
         </div>
     );
+}
+
+function ScudLink({placeNameRus, placeNameEng, loadManyRequest, setLoadManyRequest, place}) {
+
+
+    return (
+        <>
+            <Link to={`/scud/${placeNameEng}`} className={`${loadManyRequest ? 'noActiveButton' : null}`}
+                  onClick={() => {
+                      defenseFromManyRequest(setLoadManyRequest)
+                  }}>
+                <div className={`${place == placeNameEng ? 'menuSelect' : 'menuNoSelect'}`} onClick={() => {
+                    setPlace(placeNameEng)
+                    if (placeNameEng == 'office') {
+                        setSmenaState('8и')
+                    }
+                }}>{placeNameRus}
+                    {place !== 'office' ? null :
+                        <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>
+                            <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                  onClick={() => {
+                                      defenseFromManyRequest(setLoadManyRequest)
+                                      setSmenaState('8')
+                                  }}>8 часов</span>
+                            <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                  onClick={() => {
+                                      setSmenaState('7')
+                                  }}>7.2 часа</span>
+                            <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                  onClick={() => {
+                                      defenseFromManyRequest(setLoadManyRequest)
+                                      setSmenaState('11')
+                                  }}>11 часов</span>
+                            <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                  onClick={() => {
+                                      defenseFromManyRequest(setLoadManyRequest)
+                                      setSmenaState('24')
+                                  }}>24 часа</span>
+                            <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
+                                  onClick={() => {
+                                      defenseFromManyRequest(setLoadManyRequest)
+                                      setSmenaState('8и')
+                                  }}>ИТР</span>
+                        </div>
+                    }
+                </div>
+            </Link>
+        </>
+    )
 }
 
 function ScudBot() {
@@ -252,7 +313,7 @@ function ScudBot() {
                     setLoading(false)
 
                     let botClassList = document.querySelectorAll('.otklon')
-                    for(let i = 0; i < botClassList.length; i++){
+                    for (let i = 0; i < botClassList.length; i++) {
                         botClassList[i].classList.add('scudBotMargin')
                     }
                 })
@@ -298,15 +359,15 @@ function LunchEightHours({heightHighchartContainer}) {
 
     return (
         <div className='wrapperScud'>
-            <div className={'lunchTime'} style={setSize('33.3%','1.175%')}>
+            <div className={'lunchTime'} style={setSize('33.3%', '1.175%')}>
                 <p style={pWidth}>Обед 11:30-12:00</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={setSize('53.95%','1.175%')}>
+            <div className={'lunchTime'} style={setSize('53.95%', '1.175%')}>
                 <p style={pWidth}>Обед 19:30-20:00</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={setSize('73.30%','1.175%')}>
+            <div className={'lunchTime'} style={setSize('73.30%', '1.175%')}>
                 <p style={pWidth}>Обед 03:00-3:30</p>
                 <div className='strokelunchTime'></div>
             </div>
@@ -321,15 +382,15 @@ function LunchSevenHours({heightHighchartContainer}) {
 
     return (
         <div className='wrapperScud'>
-            <div className={'lunchTime'} style={setSize('33.35%','2.55%')}>
+            <div className={'lunchTime'} style={setSize('33.35%', '2.55%')}>
                 <p style={pWidth}>Обед 11:30-12:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={setSize('54.25%','2.55%')}>
+            <div className={'lunchTime'} style={setSize('54.25%', '2.55%')}>
                 <p style={pWidth}>Обед 19:30-20:30</p>
                 <div className='strokelunchTime'></div>
             </div>
-            <div className={'lunchTime'} style={setSize('73.7%','2.55%')}>
+            <div className={'lunchTime'} style={setSize('73.7%', '2.55%')}>
                 <p style={pWidth}>Обед 03:00-4:00</p>
                 <div className='strokelunchTime'></div>
             </div>
