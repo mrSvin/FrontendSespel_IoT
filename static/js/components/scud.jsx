@@ -90,15 +90,18 @@ function Scud() {
                 </div>
 
                 <ScudLink placeNameRus={'Первая площадка'} placeNameEng={'1ploshadka'}
-                          loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest} place={place}
+                          loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest}
+                          place={place} setPlace={setPlace} setSmenaState={setSmenaState}
                 />
 
                 <ScudLink placeNameRus={'Вторая площадка'} placeNameEng={'2ploshadka'}
-                          loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest} place={place}
+                          loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest}
+                          place={place} setPlace={setPlace} setSmenaState={setSmenaState}
                 />
 
                 <ScudLink placeNameRus={'Офис'} placeNameEng={'office'}
-                          loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest} place={place}
+                          loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest}
+                          place={place} setPlace={setPlace} setSmenaState={setSmenaState}
                 />
 
                 {/*<Link to={`/scud/1ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}*/}
@@ -217,7 +220,7 @@ function Scud() {
     );
 }
 
-function ScudLink({placeNameRus, placeNameEng, loadManyRequest, setLoadManyRequest, place}) {
+function ScudLink({placeNameRus, placeNameEng, loadManyRequest, setLoadManyRequest, place, setPlace, setSmenaState}) {
 
 
     return (
@@ -232,7 +235,7 @@ function ScudLink({placeNameRus, placeNameEng, loadManyRequest, setLoadManyReque
                         setSmenaState('8и')
                     }
                 }}>{placeNameRus}
-                    {place !== 'office' ? null :
+                    {place == 'office' ? null :
                         <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>
                             <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
                                   onClick={() => {
