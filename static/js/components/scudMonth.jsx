@@ -371,8 +371,29 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 </div>
             </div>
             <p className='switchButtonMessage'>{usersWithSmena == 'line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
+            <ScudMonthTable tableState={tableState}/>
         </div>
     );
+}
+
+function ScudMonthTable({tableState}) {
+    useEffect(()=>{
+        console.log('Табличные данные',tableState)
+    },[tableState])
+    return (
+        <>
+            <table>
+                <thead>
+                <th>1</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2</td>
+                </tr>
+                </tbody>
+            </table>
+        </>
+    )
 }
 
 
