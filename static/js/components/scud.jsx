@@ -91,17 +91,17 @@ function Scud() {
 
                 <ScudLink placeNameRus={'Первая площадка'} placeNameEng={'1ploshadka'}
                           loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest}
-                          place={place} setPlace={setPlace} setSmenaState={setSmenaState}
+                          place={place} setPlace={setPlace} setSmenaState={setSmenaState} smenaState={smenaState}
                 />
 
                 <ScudLink placeNameRus={'Вторая площадка'} placeNameEng={'2ploshadka'}
                           loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest}
-                          place={place} setPlace={setPlace} setSmenaState={setSmenaState}
+                          place={place} setPlace={setPlace} setSmenaState={setSmenaState} smenaState={smenaState}
                 />
 
                 <ScudLink placeNameRus={'Офис'} placeNameEng={'office'}
                           loadManyRequest={loadManyRequest} setLoadManyRequest={setLoadManyRequest}
-                          place={place} setPlace={setPlace} setSmenaState={setSmenaState}
+                          place={place} setPlace={setPlace} setSmenaState={setSmenaState} smenaState={smenaState}
                 />
 
                 {/*<Link to={`/scud/1ploshadka`} className={`${loadManyRequest ? 'noActiveButton' : null}`}*/}
@@ -220,7 +220,7 @@ function Scud() {
     );
 }
 
-function ScudLink({placeNameRus, placeNameEng, loadManyRequest, setLoadManyRequest, place, setPlace, setSmenaState}) {
+function ScudLink({placeNameRus, placeNameEng, loadManyRequest, setLoadManyRequest, place, setPlace, setSmenaState, smenaState}) {
 
 
     return (
