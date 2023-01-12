@@ -382,29 +382,28 @@ function ScudMonthTable({tableState}) {
     },[tableState])
     return (
         <>
-            {tableState == null? null :
-                <table>
+            {tableState == null? null : <table>
                 <thead>
                 <tr>
                     <th>№</th>
                     <th>Имя</th>
                     <th>Должность</th>
                     <th>Таб.</th>
-                    {Object.keys(tableState[0]['monthObject']).map((day) => {
-                        return <th>{day}</th>
+                    {Object.keys(tableState[0]['monthObject']).map((day, thKey) => {
+                        return <th key={thKey}>{day}</th>
                     })}
                     <th>Итого</th>
                 </tr>
                 </thead>
                 <tbody>
                 {tableState.map((user, i) => {
-                    return <tr>
+                    return <tr key={i}>
                         <td>{i + 1}</td>
                         <td>{user.name}</td>
                         <td>{user.POS}</td>
                         <td>{user.tabid}</td>
-                        {Object.keys(user.monthObject).map(day => {
-                            return (<td>{user.monthObject[day]}</td>)
+                        {Object.keys(user.monthObject).map((day,tdKey) => {
+                            return (<td key={tdKey}>{user.monthObject[day]}</td>)
                         })}
                         <td>{user.monthTotalTime}</td>
                     </tr>
