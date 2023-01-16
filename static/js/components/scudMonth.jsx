@@ -3,13 +3,12 @@ function getDateFromIndex(date, index) {
     return `${date}-${index}`
 }
 
-function msToTimeHours(duration, date = 200) {
+function msToTimeHours(duration) {
 
     if (duration == 0) return 0
 
-    date = +date
     let minutes = parseInt((duration / (1000 * 60)) % 60),
-        hours = parseInt((duration / (1000 * 60 * 60)) % date)
+        hours = parseInt((duration / (1000 * 60 * 60)))
 
     minutes = minutes < 10 ? '0' + minutes : minutes
     hours = hours < 10 ? '0' + hours : hours
@@ -203,6 +202,8 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 } else {
                     switchTableState(scudMonthMemory[dateMonth].data)
                 }
+            } else {
+                switchTableState(scudMonthMemory[dateMonth].data)
             }
 
         }
@@ -333,8 +334,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
             <div className="energyCalendarContainer">
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
             </div>
-            <ScudMonthTable tableState={tableState} setTableState={setTableState}
-                            sortState={sortState} loadingState={loadingState}/>
+            <ScudMonthTable tableState={tableState} sortState={sortState} loadingState={loadingState}/>
         </div>
     );
 }
@@ -401,13 +401,16 @@ function Loader() {
 
 }
 
-function ScudMonthTable({tableState, setTableState, sortState, loadingState}) {
+function ScudMonthTable({tableState,  sortState, loadingState}) {
+
+    let [sortedStateTable, setSortedStateTable] = useState(tableState)
+
     useEffect(() => {
         console.log('Табличные данные', tableState)
         let keysSorted
         let sortedTable
 
-        if (tableState != null) {
+        if (sortedStateTable != null) {
             if (sortState == 'name') {
                 keysSorted = Object.keys(tableState).sort((a, b) => {
                     return nameSort(a, b, tableState)
@@ -415,7 +418,7 @@ function ScudMonthTable({tableState, setTableState, sortState, loadingState}) {
                 sortedTable = keysSorted.map(e => {
                     return tableState[e]
                 })
-                setTableState(sortedTable)
+                setSortedStateTable(sortedTable)
             } else if (sortState == 'tabid') {
                 keysSorted = Object.keys(tableState).sort(function (a, b) {
                     return tableState[a]['tabid'] - tableState[b]['tabid']
@@ -423,7 +426,7 @@ function ScudMonthTable({tableState, setTableState, sortState, loadingState}) {
                 sortedTable = keysSorted.map(e => {
                     return tableState[e]
                 })
-                setTableState(sortedTable)
+                setSortedStateTable(sortedTable)
             } else {
                 keysSorted = Object.keys(tableState).sort(function (a, b) {
                     return tableState[b]['monthTotalTime'] - tableState[a]['monthTotalTime']
@@ -431,29 +434,29 @@ function ScudMonthTable({tableState, setTableState, sortState, loadingState}) {
                 sortedTable = keysSorted.map(e => {
                     return tableState[e]
                 })
-                setTableState(sortedTable)
+                setSortedStateTable(sortedTable)
             }
         }
 
 
-    }, [sortState])
+    }, [sortState, tableState])
     return (
         <>
-            {(tableState == null || loadingState) ? <Loader/> : <table>
+            {(sortedStateTable == null || loadingState) ? <Loader/> : <table>
                 <thead>
                 <tr>
                     <th>№</th>
                     <th>Имя</th>
                     <th>Должность</th>
                     <th>Таб.</th>
-                    {Object.keys(tableState[0]['monthObject']).map((day, thKey) => {
+                    {Object.keys(sortedStateTable[0]['monthObject']).map((day, thKey) => {
                         return <th key={thKey}>{day}</th>
                     })}
                     <th>Итого</th>
                 </tr>
                 </thead>
                 <tbody>
-                {tableState.map((user, i) => {
+                {sortedStateTable.map((user, i) => {
                     return <tr key={i}>
                         <td>{i + 1}</td>
                         <td>{user.name}</td>
