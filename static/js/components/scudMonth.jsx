@@ -397,7 +397,7 @@ function Loader() {
             <div className="loaderText">IoT Sespel</div>
             <div className="loader"></div>
         </div>
-        )
+    )
 
 }
 
@@ -407,30 +407,32 @@ function ScudMonthTable({tableState, setTableState, sortState, loadingState}) {
         let keysSorted
         let sortedTable
 
-        if (sortState == 'name') {
-            keysSorted = Object.keys(tableState).sort((a, b) => {
-                return nameSort(a, b, tableState)
-            })
-            sortedTable = keysSorted.map(e => {
-                return tableState[e]
-            })
-            setTableState(sortedTable)
-        } else if (sortState == 'tabid') {
-            keysSorted = Object.keys(tableState).sort(function (a, b) {
-                return tableState[a]['tabid'] - tableState[b]['tabid']
-            })
-            sortedTable = keysSorted.map(e => {
-                return tableState[e]
-            })
-            setTableState(sortedTable)
-        } else {
-            keysSorted = Object.keys(tableState).sort(function (a, b) {
-                return tableState[b]['monthTotalTime'] - tableState[a]['monthTotalTime']
-            })
-            sortedTable = keysSorted.map(e => {
-                return tableState[e]
-            })
-            setTableState(sortedTable)
+        if (tableState != null) {
+            if (sortState == 'name') {
+                keysSorted = Object.keys(tableState).sort((a, b) => {
+                    return nameSort(a, b, tableState)
+                })
+                sortedTable = keysSorted.map(e => {
+                    return tableState[e]
+                })
+                setTableState(sortedTable)
+            } else if (sortState == 'tabid') {
+                keysSorted = Object.keys(tableState).sort(function (a, b) {
+                    return tableState[a]['tabid'] - tableState[b]['tabid']
+                })
+                sortedTable = keysSorted.map(e => {
+                    return tableState[e]
+                })
+                setTableState(sortedTable)
+            } else {
+                keysSorted = Object.keys(tableState).sort(function (a, b) {
+                    return tableState[b]['monthTotalTime'] - tableState[a]['monthTotalTime']
+                })
+                sortedTable = keysSorted.map(e => {
+                    return tableState[e]
+                })
+                setTableState(sortedTable)
+            }
         }
 
 
