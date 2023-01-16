@@ -4,33 +4,45 @@ function getDateFromIndex(date, index) {
 }
 
 function msToTimeHours(duration, date = 200) {
+
+    if (duration == 0) return 0
+
     date = +date
-    let seconds = parseInt((duration / 1000) % 60),
-        minutes = parseInt((duration / (1000 * 60)) % 60),
+    let minutes = parseInt((duration / (1000 * 60)) % 60),
         hours = parseInt((duration / (1000 * 60 * 60)) % date)
 
-    if (hours == 0) hours = ''
-    else {
-        hours = hours + " ч. "
-    }
+    minutes = minutes < 10 ? '0' + minutes : minutes
+    hours = hours < 10 ? '0' + hours : hours
 
-    if (minutes == 0) minutes = ''
-    else {
-        minutes = minutes + " мин. "
-    }
-
-    if (seconds == 0) seconds = ''
-    else {
-        seconds = seconds + ' с.'
-    }
-
-    if ((hours + minutes + seconds) != '') {
-        return '— ' + hours + minutes + seconds;
-    } else if ((hours + minutes + seconds) == '' && duration != 0) {
-        return `— ${date} д.`
-    } else return '— 0 с.'
+    if ((hours + minutes) != '') {
+        return hours + ':' + minutes
+    } else if ((hours) == '' && duration != 0) {
+        return hours
+    } else return '00:' + minutes
 
 }
+
+function nameSort(a, b, obj) {
+    let nameA = obj[a].name.toLowerCase(),
+        nameB = obj[b].name.toLowerCase()
+
+    if (nameA < nameB) return -1
+    if (nameA > nameB) return 1
+    return 0
+}
+
+// function msToTimeFloat(duration, date = 200) {
+//     date = +date
+//     let minutes = parseInt((duration / (1000 * 60)) % 60),
+//         hours = parseInt((duration / (1000 * 60 * 60)) % date)
+//
+//     minutes = +(minutes / 60).toFixed(1)
+//
+//
+//
+//     return +hours + minutes
+//
+// }
 
 function applyMonthFilters(usersData, userNames, date) {
     let lastMonthDay = 32 - new Date(date.slice(0, 4), date.slice(5, 7), 32).getDate();
@@ -86,7 +98,7 @@ function applyMonthFilters(usersData, userNames, date) {
     return usersData
 }
 
-function getLunchArrays(smenaState, date){
+function getLunchArrays(smenaState, date) {
 
     const times = {
         '03:00': date + ' 03:00:00',
@@ -109,34 +121,34 @@ function getLunchArrays(smenaState, date){
 
     switch (smenaState) {
         case '8и':
-            lunchArrays.push([times['12:00'],times['13:00']])
+            lunchArrays.push([times['12:00'], times['13:00']])
             return lunchArrays
         case '8':
-            lunchArrays.push([times['03:00'],times['03:30']])
-            lunchArrays.push([times['11:30'],times['12:00']])
-            lunchArrays.push([times['19:30'],times['20:00']])
+            lunchArrays.push([times['03:00'], times['03:30']])
+            lunchArrays.push([times['11:30'], times['12:00']])
+            lunchArrays.push([times['19:30'], times['20:00']])
             return lunchArrays
         case '7':
-            lunchArrays.push([times['03:00'],times['04:00']])
-            lunchArrays.push([times['11:30'],times['12:30']])
-            lunchArrays.push([times['19:30'],times['20:30']])
+            lunchArrays.push([times['03:00'], times['04:00']])
+            lunchArrays.push([times['11:30'], times['12:30']])
+            lunchArrays.push([times['19:30'], times['20:30']])
             return lunchArrays
         case '11':
-            lunchArrays.push([times['03:30'],times['04:00']])
-            lunchArrays.push([times['11:30'],times['12:00']])
-            lunchArrays.push([times['16:00'],times['16:30']])
-            lunchArrays.push([times['23:00'],times['23:30']])
+            lunchArrays.push([times['03:30'], times['04:00']])
+            lunchArrays.push([times['11:30'], times['12:00']])
+            lunchArrays.push([times['16:00'], times['16:30']])
+            lunchArrays.push([times['23:00'], times['23:30']])
             return lunchArrays
         case '24':
-            lunchArrays.push([times['04:00'],times['04:30']])
-            lunchArrays.push([times['12:30'],times['13:00']])
-            lunchArrays.push([times['20:00'],times['20:30']])
+            lunchArrays.push([times['04:00'], times['04:30']])
+            lunchArrays.push([times['12:30'], times['13:00']])
+            lunchArrays.push([times['20:00'], times['20:30']])
             return lunchArrays
         case '':
-            lunchArrays.push([times['12:00'],times['12:30']])
+            lunchArrays.push([times['12:00'], times['12:30']])
             return lunchArrays
         default:
-            lunchArrays.push([times['12:00'],times['12:30']])
+            lunchArrays.push([times['12:00'], times['12:30']])
             return lunchArrays
     }
 
@@ -148,7 +160,7 @@ function filterLunchMonth(dateArray, date, smenaState) {
 
     let lunchArrays = getLunchArrays(smenaState, date)
 
-    lunchArrays.forEach(lunchArray=>{
+    lunchArrays.forEach(lunchArray => {
         arraySave = insideFilterLunch(lunchArray[0], lunchArray[1], dateArray)
     })
     return arraySave
@@ -178,15 +190,14 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 console.log('Отправка запроса на', dateMonth)
                 let promise = fetchRequestScudMonth(dateMonth)
                 fetchRequestScudMonthThen(promise)
-                // Иначе вывести срок время сохранения этих данных
-            } else {
+                // Иначе если это текущий месяц, то данные будут обновляться только раз в 3 часа(10800000)
+            } else if (dateMonth == getThisYearMonth()) {
                 let lastTime = new Date(dayTimeNow()).getTime()
                 let thisMonthLastTime = new Date(scudMonthMemory[dateMonth].lastTime).getTime()
-                console.log('Последнее время данных', thisMonthLastTime)
-                console.log('Текущее время', dayTimeNow())
-                // Если данные записанные больше часа назад
+                // Если данные записанные больше 3 часов назад
+                console.log(lastTime, '-', thisMonthLastTime, '=', lastTime - thisMonthLastTime)
                 if (lastTime - thisMonthLastTime > 10800000) {
-                    console.log('Отправка запроса на', dateMonth)
+                    console.log('Данные устарели за 3 часа, обновляю новыми', dateMonth)
                     let promise = fetchRequestScudMonth(dateMonth)
                     fetchRequestScudMonthThen(promise)
                 } else {
@@ -199,6 +210,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
     function fetchRequestScudMonthThen(promise) {
         promise.then(data => {
+            console.log(data)
             let usersData = data[0]
             let date = data[1]
 
@@ -294,16 +306,18 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 console.log('Данные для таблицы', allData.hiddens)
                 setTableState(allData.hiddens)
         }
+        setLoading(false)
     }
 
     let [dateMonth, setDateMonth] = useState(getThisYearMonth());
     let [smenaState, setSmenaState] = useState('8и')
     let [tableState, setTableState] = useState(null)
 
-    let [usersWithSmena, setUsersWithSmena] = useState('line')
-
+    let [loadingState, setLoading] = useState(true)
+    let [sortState, setSortState] = useState('name')
 
     useEffect(() => {
+        setLoading(true)
         saveMemoryMonth()
     }, [dateMonth, smenaState]);
 
@@ -314,75 +328,112 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
     return (
         <div>
             <div className="buttons-otchet marginToSmenaMenu cancelMargin">
-
-                <div className="daysMonthWrapper">
-
-                    <Link to={`/scud/1ploshadka`}>
-                        <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
-                    </Link>
-
-                    <Link to={`/scudMonth`}>
-                        <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ
-                            <div className={`smenaScud`}>
-                                <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          setSmenaState('8')
-                                      }}>8 часов
-                                </span>
-                                <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          setSmenaState('7')
-                                      }}>7.2 часа
-                                </span>
-                                <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          setSmenaState('11')
-                                      }}>11 часов
-                                </span>
-                                <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          setSmenaState('24')
-                                      }}>24 часа
-                                </span>
-                                <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
-                                      onClick={() => {
-                                          setSmenaState('8и')
-                                      }}>ИТР
-                                </span>
-                                <span
-                                    className={`hideIndividualAll ${(smenaState == 'hiddens') ? 'scudSelect' : 'scudSelectNoSelect'}`}
-                                    onClick={() => {
-                                        setSmenaState('hiddens')
-                                    }}>ИТР
-                                </span>
-                            </div>
-                        </div>
-                    </Link>
-
-                </div>
-
-
+                <LinkMonth smenaState={smenaState} setSmenaState={setSmenaState}/>
             </div>
             <div className="energyCalendarContainer">
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
-                <div className='hideIndividualAll'>
-                    <SwitchLineHCIndividual stateLineHC={usersWithSmena} setStateLineHC={setUsersWithSmena}
-                                            text={'Привязка по смене'}/>
-                </div>
             </div>
-            <p className='switchButtonMessage'>{usersWithSmena == 'line' ? 'Отображение сотрудников по выбранного графику' : 'Все сотрудники'}</p>
-            <ScudMonthTable tableState={tableState}/>
+            <ScudMonthTable tableState={tableState} setTableState={setTableState}
+                            sortState={sortState} loadingState={loadingState}/>
         </div>
     );
 }
 
-function ScudMonthTable({tableState}) {
-    useEffect(()=>{
-        console.log('Табличные данные',tableState)
-    },[tableState])
+function LinkMonth({smenaState, setSmenaState}) {
+
+    return (
+        <div className="daysMonthWrapper">
+
+            <Link to={`/scud/1ploshadka`}>
+                <div className="menuNoSelect">СУТОЧНЫЙ ОТЧЕТ</div>
+            </Link>
+
+            <Link to={`/scudMonth`}>
+                <div className="menuSelect">МЕСЯЧНЫЙ ОТЧЕТ
+                    <div className={`smenaScud`}>
+                        <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
+                              onClick={() => {
+                                  setSmenaState('8')
+                              }}>8 часов
+                        </span>
+                        <span className={smenaState == '7' ? 'scudSelect' : 'scudSelectNoSelect'}
+                              onClick={() => {
+                                  setSmenaState('7')
+                              }}>7.2 часа
+                        </span>
+                        <span className={smenaState == '11' ? 'scudSelect' : 'scudSelectNoSelect'}
+                              onClick={() => {
+                                  setSmenaState('11')
+                              }}>11 часов
+                        </span>
+                        <span className={smenaState == '24' ? 'scudSelect' : 'scudSelectNoSelect'}
+                              onClick={() => {
+                                  setSmenaState('24')
+                              }}>24 часа
+                        </span>
+                        <span className={smenaState == '8и' ? 'scudSelect' : 'scudSelectNoSelect'}
+                              onClick={() => {
+                                  setSmenaState('8и')
+                              }}>ИТР
+                        </span>
+                        <span
+                            className={`hideIndividualAll ${(smenaState == 'hiddens') ? 'scudSelect' : 'scudSelectNoSelect'}`}
+                            onClick={() => {
+                                setSmenaState('hiddens')
+                            }}>Скрытые
+                        </span>
+                    </div>
+                </div>
+            </Link>
+
+        </div>
+    )
+}
+
+function Loader() {
+    <div className="loaderWrapper">
+        <div className="loaderText">IoT Sespel</div>
+        <div className="loader"></div>
+    </div>
+}
+
+function ScudMonthTable({tableState, setTableState, sortState, loadingState}) {
+    useEffect(() => {
+        console.log('Табличные данные', tableState)
+        let keysSorted
+        let sortedTable
+
+        if (sortState == 'name') {
+            keysSorted = Object.keys(tableState).sort((a, b) => {
+                return nameSort(a, b, tableState)
+            })
+            sortedTable = keysSorted.map(e => {
+                return tableState[e]
+            })
+            setTableState(sortedTable)
+        } else if (sortState == 'tabid') {
+            keysSorted = Object.keys(tableState).sort(function (a, b) {
+                return tableState[a]['tabid'] - tableState[b]['tabid']
+            })
+            sortedTable = keysSorted.map(e => {
+                return tableState[e]
+            })
+            setTableState(sortedTable)
+        } else {
+            keysSorted = Object.keys(tableState).sort(function (a, b) {
+                return tableState[b]['monthTotalTime'] - tableState[a]['monthTotalTime']
+            })
+            sortedTable = keysSorted.map(e => {
+                return tableState[e]
+            })
+            setTableState(sortedTable)
+        }
+
+
+    }, [sortState])
     return (
         <>
-            {tableState == null? null : <table>
+            {(tableState == null || loadingState) ? <Loader/> : <table>
                 <thead>
                 <tr>
                     <th>№</th>
@@ -402,10 +453,10 @@ function ScudMonthTable({tableState}) {
                         <td>{user.name}</td>
                         <td>{user.POS}</td>
                         <td>{user.tabid}</td>
-                        {Object.keys(user.monthObject).map((day,tdKey) => {
-                            return (<td key={tdKey}>{user.monthObject[day]}</td>)
+                        {Object.keys(user.monthObject).map((day, tdKey) => {
+                            return (<td key={tdKey}>{msToTimeHours(user.monthObject[day])}</td>)
                         })}
-                        <td>{user.monthTotalTime}</td>
+                        <td>{msToTimeHours(user.monthTotalTime)}</td>
                     </tr>
                 })}
                 </tbody>
