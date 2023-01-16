@@ -391,10 +391,14 @@ function LinkMonth({smenaState, setSmenaState}) {
 }
 
 function Loader() {
-    <div className="loaderWrapper">
-        <div className="loaderText">IoT Sespel</div>
-        <div className="loader"></div>
-    </div>
+
+    return (
+        <div className="loaderWrapper">
+            <div className="loaderText">IoT Sespel</div>
+            <div className="loader"></div>
+        </div>
+        )
+
 }
 
 function ScudMonthTable({tableState, setTableState, sortState, loadingState}) {
