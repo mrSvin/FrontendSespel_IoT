@@ -410,7 +410,7 @@ function ScudMonthTable({tableState,  sortState, loadingState}) {
         let keysSorted
         let sortedTable
 
-        if (sortedStateTable != null) {
+        if (tableState != null) {
             if (sortState == 'name') {
                 keysSorted = Object.keys(tableState).sort((a, b) => {
                     return nameSort(a, b, tableState)
