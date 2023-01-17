@@ -1,0 +1,50 @@
+.scudMonthTable {
+    margin: 0 auto;
+    /*     width: 95%; */
+}
+
+.scudMonthTable thead > tr > th{
+    background: #81c3f2;
+    border-bottom: 1px solid #252734;
+}
+
+.scudMonthTable tr > td:nth-of-type(-n+4) {
+    background: azure;
+    min-width:5px;
+    max-width:300px;
+}
+
+.scudMonthTable tr > td:nth-of-type(1) {
+    background: azure;
+    text-align: center;
+}
+
+.scudMonthTable tr > td:nth-of-type(3) {
+    background: azure;
+    text-align: center;
+}
+
+
+.scudMonthTable tr > td:nth-of-type(n+5) {
+    background: azure;
+    text-align: center;
+    min-width: 45px;
+    max-width: 50px;
+}
+
+/*Разделительная полоса итого*/
+.scudMonthTable tr > th:nth-last-child(-2n+2){
+    border-right: 1px solid #252734;
+}
+
+.scudMonthTable tr > th:last-child{
+    border-left: 1px solid #252734;
+}
+
+.scudMonthTable tr > td:nth-last-child(-2n+2){
+    border-right: 1px solid #252734;
+}
+
+.scudMonthTable tr > td:last-child{
+    border-left: 1px solid #252734;
+}

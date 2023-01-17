@@ -196,7 +196,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 // Если данные записанные больше 3 часов назад
                 console.log(lastTime, '-', thisMonthLastTime, '=', lastTime - thisMonthLastTime)
                 if (lastTime - thisMonthLastTime > 10800000) {
-                    console.log('Данные устарели за 3 часа, обновляю новыми', dateMonth)
+                    alert(`Данные устарели за 3 часа, обновляю новыми за ${dateMonth}`)
                     let promise = fetchRequestScudMonth(dateMonth)
                     fetchRequestScudMonthThen(promise)
                 } else {
@@ -442,7 +442,7 @@ function ScudMonthTable({tableState,  sortState, loadingState}) {
     }, [sortState, tableState])
     return (
         <>
-            {(sortedStateTable == null || loadingState) ? <Loader/> : <table>
+            {(sortedStateTable == null || loadingState) ? <Loader/> : <table className='scudMonthTable'>
                 <thead>
                 <tr>
                     <th>№</th>
@@ -460,8 +460,8 @@ function ScudMonthTable({tableState,  sortState, loadingState}) {
                     return <tr key={i}>
                         <td>{i + 1}</td>
                         <td>{user.name}</td>
-                        <td>{user.POS}</td>
                         <td>{user.tabid}</td>
+                        <td>{user.POS}</td>
                         {Object.keys(user.monthObject).map((day, tdKey) => {
                             return (<td key={tdKey}>{msToTimeHours(user.monthObject[day])}</td>)
                         })}
