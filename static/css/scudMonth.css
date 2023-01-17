@@ -1,50 +1,68 @@
 .scudMonthTable {
     margin: 0 auto;
+    color: white;
+    border-spacing: 0px;
+    border:0.1px solid #70727b;
     /*     width: 95%; */
 }
 
 .scudMonthTable thead > tr > th{
-    background: #81c3f2;
-    border-bottom: 1px solid #252734;
+    background: #1e4058;
+    border:0.1px solid #70727b;
+    margin: 0;
+    padding: 5px;
+}
+
+.scudMonthTable tbody > tr > td{
+    background: #1e4058;
+    border:0.1px solid #70727b;
+    margin: 0;
+    padding: 5px;
 }
 
 .scudMonthTable tr > td:nth-of-type(-n+4) {
-    background: azure;
+    background: #3e4955;
     min-width:5px;
     max-width:300px;
+
 }
 
 .scudMonthTable tr > td:nth-of-type(1) {
-    background: azure;
+    background: #3e4955;
     text-align: center;
 }
 
 .scudMonthTable tr > td:nth-of-type(3) {
-    background: azure;
+    background: #3e4955;
     text-align: center;
 }
 
 
 .scudMonthTable tr > td:nth-of-type(n+5) {
-    background: azure;
+    background: #3e4955;
     text-align: center;
     min-width: 45px;
     max-width: 50px;
 }
 
 /*Разделительная полоса итого*/
-.scudMonthTable tr > th:nth-last-child(-2n+2){
+/* .scudMonthTable tr > th:nth-last-child(-2n+2){
     border-right: 1px solid #252734;
-}
+} */
 
 .scudMonthTable tr > th:last-child{
-    border-left: 1px solid #252734;
+    /*     border-left: 3px solid #6479ff; */
 }
 
 .scudMonthTable tr > td:nth-last-child(-2n+2){
-    border-right: 1px solid #252734;
+    border-right: 3px solid #ff0000;
 }
 
 .scudMonthTable tr > td:last-child{
-    border-left: 1px solid #252734;
+    border-left: 3px solid #ff0000;
+}
+
+.scudMonthTable tr:hover td{
+    background-color: #37516d;
+    cursor: pointer;
 }
