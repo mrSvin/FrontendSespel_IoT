@@ -172,6 +172,8 @@ function getThisYearMonth() {
     return `${year}-${month}`
 }
 
+
+
 function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
     function saveMemoryMonth() {
@@ -342,6 +344,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                     </input>
                 </div>
             </div>
+            <findTable findState={findState} scudMonthMemory={scudMonthMemory} dateMonth={dateMonth}/>
             <ScudMonthTable tableState={tableState} sortState={sortState} setSortState={setSortState} loadingState={loadingState}/>
         </div>
     );
@@ -489,6 +492,32 @@ function ScudMonthTable({tableState,  sortState, setSortState, loadingState}) {
             </table>
             }
         </>
+    )
+}
+
+function findTable({findState, scudMonthMemory, dateMonth}){
+
+    useEffect(()=>{
+        console.log('Поиск', findState, 'в', dateMonth)
+        if (scudMonthMemory !== null || findState == ' '){
+            console.log('Данные этого месяца', scudMonthMemory[dateMonth].data)
+
+        let foundedArray = scudMonthMemory[dateMonth].data.map(e=>{
+                if(e.name.toLowerCase().includes(findState) || e.tabid.includes(findState)) return e
+            })
+
+        foundedArray = foundedArray.filter(word => word !== undefined);
+            console.log('Соответсвующие данные',foundedArray)
+        }
+
+
+    },[findState, ])
+
+
+    return (
+        <div>
+
+        </div>
     )
 }
 

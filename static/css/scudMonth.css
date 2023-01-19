@@ -96,6 +96,7 @@
 }
 
 .sortedIcon{
+    position: relative;
     cursor: pointer;
 }
 
@@ -124,11 +125,8 @@
 }
 
 .scudMonthTable tr > td:nth-child(2) {
-    min-width: 80px;
-}
-
-.scudMonthTable tr > td:nth-child(2) {
     min-width: 70px;
+    text-align: center;
 }
 
 .activeSortedIcon {
@@ -137,4 +135,8 @@
 
 .activeSortedIcon::before {
     color: #61afff;
+}
+
+.scudMonthTable tr > td:last-child {
+    min-width: 80px;
 }
