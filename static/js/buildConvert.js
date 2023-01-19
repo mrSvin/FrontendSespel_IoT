@@ -583,7 +583,7 @@ function getAllStankiData() {
         complexImg: "../images/nk600.png",
         complexRequest: 'nk600',
         buttonsVrs: [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"],
-        size: "ceh1",
+        size: "ceh2",
         state: true,
     }
 
