@@ -310,6 +310,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
     let [loadingState, setLoading] = useState(true)
     let [sortState, setSortState] = useState('name')
+    let [findState, setFindState] = useState('')
 
     useEffect(() => {
         setLoading(true)
@@ -320,9 +321,9 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
         setDateMonth(dateInput)
     }
 
-    function changeSort(e) {
+    function changeFind(e) {
         const {value} = e.target;
-        setSortState(value);
+        setFindState(value);
     };
 
     return (
@@ -332,19 +333,16 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
             </div>
             <div className="energyCalendarContainer">
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
-                <div className={'sortWrapper'}>
-                    <p>Сортировка</p>
-                    <select id="sort" name="sort" className={'scudMonthSort'} value={sortState}
-                            onChange={(e) => {
-                                changeSort(e)
-                            }}>
-                        <option value="name">ФИО</option>
-                        <option value="tabid">Таб.</option>
-                        <option value="monthTime">Время</option>
-                    </select>
+                <div className={'findWrapper'}>
+                    <p>Поиск</p>
+                    <input id="find" name="find" className={'scudMonthFind'} value={findState}
+                           onChange={(e) => {
+                               changeFind(e)
+                           }}>
+                    </input>
                 </div>
             </div>
-            <ScudMonthTable tableState={tableState} sortState={sortState} loadingState={loadingState}/>
+            <ScudMonthTable tableState={tableState} sortState={sortState} setSortState={setSortState} loadingState={loadingState}/>
         </div>
     );
 }
@@ -411,7 +409,7 @@ function Loader() {
 
 }
 
-function ScudMonthTable({tableState,  sortState, loadingState}) {
+function ScudMonthTable({tableState,  sortState, setSortState, loadingState}) {
 
     let [sortedStateTable, setSortedStateTable] = useState(tableState)
 
@@ -452,17 +450,26 @@ function ScudMonthTable({tableState,  sortState, loadingState}) {
     }, [sortState, tableState])
     return (
         <>
-            {(sortedStateTable == null || sortedStateTable == [] || loadingState) ? <Loader/> : <table className='scudMonthTable'>
+            {(sortedStateTable == null || sortedStateTable[0]['monthObject'] == undefined || loadingState) ? <Loader/> : <table className='scudMonthTable'>
                 <thead>
                 <tr>
                     <th>№</th>
-                    <th>Таб.</th>
-                    <th>ФИО</th>
+                    <th className={`sortedIcon ${sortState == 'tabid'? 'activeSortedIcon':null}`}
+                        onClick={()=>{
+                        setSortState('tabid')
+                    }}>Таб.</th>
+                    <th className={`sortedIcon ${sortState == 'name'? 'activeSortedIcon':null}`}
+                        onClick={()=>{
+                        setSortState('name')
+                    }}>ФИО</th>
                     <th>Должность</th>
                     {Object.keys(sortedStateTable[0]['monthObject']).map((day, thKey) => {
                         return <th key={thKey}>{day}</th>
                     })}
-                    <th>Итого</th>
+                    <th className={`sortedIcon ${sortState == 'monthTime'? 'activeSortedIcon':null}`}
+                    onClick={()=>{
+                        setSortState('monthTime')
+                    }}>Итого</th>
                 </tr>
                 </thead>
                 <tbody>

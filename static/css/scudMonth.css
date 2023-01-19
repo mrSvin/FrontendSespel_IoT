@@ -60,11 +60,13 @@
     cursor: pointer;
 }
 
-.sortWrapper {
+.findWrapper {
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
-.sortWrapper > p {
+.findWrapper > p {
     margin: 0;
     color: #83addd !important;
     font-size: 18px;
@@ -72,7 +74,7 @@
     top: -20px;
 }
 
-.scudMonthSort{
+.scudMonthFind{
     color: white;
     background: #252734;
     border-width: 2px;
@@ -80,10 +82,59 @@
     border-color: #83addd;
     border-radius: 5%;
     padding: 2px 0;
-    height: 35px;
-    font-size: 25px;
+    height: 25px;
+    width: 150px;
+    font-size: 17px;
+}
+
+.scudMonthFind:hover {
+    cursor: pointer;
 }
 
 .scudMonthSort:hover {
     cursor: pointer;
+}
+
+.sortedIcon{
+    cursor: pointer;
+}
+
+.sortedIcon:hover {
+    transition: 0.5s;
+    color: #61afff;
+}
+
+.sortedIcon:hover::before {
+    transition: 0.5s;
+    color:#61afff;
+}
+
+.sortedIcon::before {
+    content: '▼';
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 7px;
+    top: 4px;
+    color: white;
+}
+
+.scudMonthTable tr > th:last-child {
+    cursor: pointer;
+}
+
+.scudMonthTable tr > td:nth-child(2) {
+    min-width: 80px;
+}
+
+.scudMonthTable tr > td:nth-child(2) {
+    min-width: 70px;
+}
+
+.activeSortedIcon {
+    color: #61afff;
+}
+
+.activeSortedIcon::before {
+    color: #61afff;
 }
