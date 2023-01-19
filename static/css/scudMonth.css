@@ -3,21 +3,21 @@
     color: white;
     border-spacing: 0px;
     border:0.1px solid #70727b;
-    /*     width: 95%; */
+    max-width: 500px;
+    font-size: 15px;
 }
 
 .scudMonthTable thead > tr > th{
     background: #1e4058;
     border:0.1px solid #70727b;
     margin: 0;
-    padding: 5px;
+    padding: 3px;
 }
 
 .scudMonthTable tbody > tr > td{
-    background: #1e4058;
     border:0.1px solid #70727b;
     margin: 0;
-    padding: 5px;
+    /* padding: 3px; */
 }
 
 .scudMonthTable tr > td:nth-of-type(-n+4) {
@@ -41,17 +41,10 @@
 .scudMonthTable tr > td:nth-of-type(n+5) {
     background: #3e4955;
     text-align: center;
-    min-width: 45px;
-    max-width: 50px;
-}
-
-/*Разделительная полоса итого*/
-/* .scudMonthTable tr > th:nth-last-child(-2n+2){
-    border-right: 1px solid #252734;
-} */
-
-.scudMonthTable tr > th:last-child{
-    /*     border-left: 3px solid #6479ff; */
+    min-width: 35px;
+    max-width: 40px;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .scudMonthTable tr > td:nth-last-child(-2n+2){
@@ -64,5 +57,33 @@
 
 .scudMonthTable tr:hover td{
     background-color: #37516d;
+    cursor: pointer;
+}
+
+.sortWrapper {
+    position: relative;
+}
+
+.sortWrapper > p {
+    margin: 0;
+    color: #83addd !important;
+    font-size: 18px;
+    position: absolute;
+    top: -20px;
+}
+
+.scudMonthSort{
+    color: white;
+    background: #252734;
+    border-width: 2px;
+    border-style: inset;
+    border-color: #83addd;
+    border-radius: 5%;
+    padding: 2px 0;
+    height: 35px;
+    font-size: 25px;
+}
+
+.scudMonthSort:hover {
     cursor: pointer;
 }

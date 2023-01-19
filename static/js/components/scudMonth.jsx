@@ -284,27 +284,21 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
     function switchTableState(allData) {
         switch (smenaState) {
             case '7':
-                console.log('Данные для таблицы', allData.smena_7)
                 setTableState(allData.smena_7)
                 break
             case '8и':
-                console.log('Данные для таблицы', allData.smena_8i)
                 setTableState(allData.smena_8i)
                 break
             case '8':
-                console.log('Данные для таблицы', allData.smena_8)
                 setTableState(allData.smena_8)
                 break
             case '11':
-                console.log('Данные для таблицы', allData.smena_11)
                 setTableState(allData.smena_11)
                 break
             case '24':
-                console.log('Данные для таблицы', allData.smena_24)
                 setTableState(allData.smena_24)
                 break
             default:
-                console.log('Данные для таблицы', allData.hiddens)
                 setTableState(allData.hiddens)
         }
         setLoading(false)
@@ -326,6 +320,11 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
         setDateMonth(dateInput)
     }
 
+    function changeSort(e) {
+        const {value} = e.target;
+        setSortState(value);
+    };
+
     return (
         <div>
             <div className="buttons-otchet marginToSmenaMenu cancelMargin">
@@ -333,6 +332,17 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
             </div>
             <div className="energyCalendarContainer">
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
+                <div className={'sortWrapper'}>
+                    <p>Сортировка</p>
+                    <select id="sort" name="sort" className={'scudMonthSort'} value={sortState}
+                            onChange={(e) => {
+                                changeSort(e)
+                            }}>
+                        <option value="name">ФИО</option>
+                        <option value="tabid">Таб.</option>
+                        <option value="monthTime">Время</option>
+                    </select>
+                </div>
             </div>
             <ScudMonthTable tableState={tableState} sortState={sortState} loadingState={loadingState}/>
         </div>
@@ -442,13 +452,13 @@ function ScudMonthTable({tableState,  sortState, loadingState}) {
     }, [sortState, tableState])
     return (
         <>
-            {(sortedStateTable == null || loadingState) ? <Loader/> : <table className='scudMonthTable'>
+            {(sortedStateTable == null || sortedStateTable == [] || loadingState) ? <Loader/> : <table className='scudMonthTable'>
                 <thead>
                 <tr>
                     <th>№</th>
-                    <th>Имя</th>
-                    <th>Должность</th>
                     <th>Таб.</th>
+                    <th>ФИО</th>
+                    <th>Должность</th>
                     {Object.keys(sortedStateTable[0]['monthObject']).map((day, thKey) => {
                         return <th key={thKey}>{day}</th>
                     })}
@@ -459,8 +469,8 @@ function ScudMonthTable({tableState,  sortState, loadingState}) {
                 {sortedStateTable.map((user, i) => {
                     return <tr key={i}>
                         <td>{i + 1}</td>
-                        <td>{user.name}</td>
                         <td>{user.tabid}</td>
+                        <td>{user.name}</td>
                         <td>{user.POS}</td>
                         {Object.keys(user.monthObject).map((day, tdKey) => {
                             return (<td key={tdKey}>{msToTimeHours(user.monthObject[day])}</td>)
