@@ -173,8 +173,16 @@ function getThisYearMonth() {
 }
 
 
-
 function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
+
+    function setAllDataThisMonth(allData) {
+
+        let objectToArray = []
+        Object.keys(allData).forEach(e => {
+            objectToArray.push(...allData[e])
+        })
+        setThisMonthData(objectToArray)
+    }
 
     function saveMemoryMonth() {
 
@@ -269,7 +277,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                     console.log('Текущее время', dayTimeNow())
                     // Если данные записанные больше часа назад
                     if (lastTime - thisMonthLastTime > 10800000) {
-                        console.log('Перезапись с истичением часа', dateMonth)
+                        console.log('Перезапись с истечением часа', dateMonth)
                         setScudMonthMemory(prevState => ({
                             ...prevState,
                             [dateMonth]: {lastTime: dayTimeNow(), data: allData}
@@ -303,6 +311,8 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
             default:
                 setTableState(allData.hiddens)
         }
+
+        setAllDataThisMonth(allData)
         setLoading(false)
     }
 
@@ -313,6 +323,8 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
     let [loadingState, setLoading] = useState(true)
     let [sortState, setSortState] = useState('name')
     let [findState, setFindState] = useState('')
+
+    let [thisMonthData, setThisMonthData] = useState([])
 
     useEffect(() => {
         setLoading(true)
@@ -344,8 +356,9 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                     </input>
                 </div>
             </div>
-            <FindTable findState={findState} scudMonthMemory={scudMonthMemory} dateMonth={dateMonth}/>
-            <ScudMonthTable tableState={tableState} sortState={sortState} setSortState={setSortState} loadingState={loadingState}/>
+            <FindTable findState={findState} thisMonthData={thisMonthData}/>
+            <ScudMonthTable tableState={tableState} sortState={sortState} setSortState={setSortState}
+                            loadingState={loadingState}/>
         </div>
     );
 }
@@ -412,7 +425,7 @@ function Loader() {
 
 }
 
-function ScudMonthTable({tableState,  sortState, setSortState, loadingState}) {
+function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
 
     let [sortedStateTable, setSortedStateTable] = useState(tableState)
 
@@ -429,7 +442,7 @@ function ScudMonthTable({tableState,  sortState, setSortState, loadingState}) {
                 sortedTable = keysSorted.map(e => {
                     return tableState[e]
                 })
-                sortedTable = sortedTable.length == 0? null : sortedTable
+                sortedTable = sortedTable.length == 0 ? null : sortedTable
                 setSortedStateTable(sortedTable)
             } else if (sortState == 'tabid') {
                 keysSorted = Object.keys(tableState).sort(function (a, b) {
@@ -438,7 +451,7 @@ function ScudMonthTable({tableState,  sortState, setSortState, loadingState}) {
                 sortedTable = keysSorted.map(e => {
                     return tableState[e]
                 })
-                sortedTable = sortedTable.length == 0? null : sortedTable
+                sortedTable = sortedTable.length == 0 ? null : sortedTable
                 setSortedStateTable(sortedTable)
             } else {
                 keysSorted = Object.keys(tableState).sort(function (a, b) {
@@ -447,7 +460,7 @@ function ScudMonthTable({tableState,  sortState, setSortState, loadingState}) {
                 sortedTable = keysSorted.map(e => {
                     return tableState[e]
                 })
-                sortedTable = sortedTable.length == 0? null : sortedTable
+                sortedTable = sortedTable.length == 0 ? null : sortedTable
                 setSortedStateTable(sortedTable)
             }
         }
@@ -460,22 +473,25 @@ function ScudMonthTable({tableState,  sortState, setSortState, loadingState}) {
                 <thead>
                 <tr>
                     <th>№</th>
-                    <th className={`sortedIcon ${sortState == 'tabid'? 'activeSortedIcon':null}`}
-                        onClick={()=>{
-                        setSortState('tabid')
-                    }}>Таб.</th>
-                    <th className={`sortedIcon ${sortState == 'name'? 'activeSortedIcon':null}`}
-                        onClick={()=>{
-                        setSortState('name')
-                    }}>ФИО</th>
+                    <th className={`sortedIcon ${sortState == 'tabid' ? 'activeSortedIcon' : null}`}
+                        onClick={() => {
+                            setSortState('tabid')
+                        }}>Таб.
+                    </th>
+                    <th className={`sortedIcon ${sortState == 'name' ? 'activeSortedIcon' : null}`}
+                        onClick={() => {
+                            setSortState('name')
+                        }}>ФИО
+                    </th>
                     <th>Должность</th>
                     {Object.keys(sortedStateTable[0]['monthObject']).map((day, thKey) => {
                         return <th key={thKey}>{day}</th>
                     })}
-                    <th className={`sortedIcon ${sortState == 'monthTime'? 'activeSortedIcon':null}`}
-                    onClick={()=>{
-                        setSortState('monthTime')
-                    }}>Итого</th>
+                    <th className={`sortedIcon ${sortState == 'monthTime' ? 'activeSortedIcon' : null}`}
+                        onClick={() => {
+                            setSortState('monthTime')
+                        }}>Итого
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -498,30 +514,28 @@ function ScudMonthTable({tableState,  sortState, setSortState, loadingState}) {
     )
 }
 
-function FindTable({findState, scudMonthMemory, dateMonth}){
+function FindTable({findState, thisMonthData}) {
 
-    useEffect(()=>{
-        console.log('Поиск', findState, 'в', dateMonth)
-        if (scudMonthMemory !== null || findState !== ''){
-            if(scudMonthMemory[dateMonth] !== undefined){
-                console.log('Поисковые данные этого месяца', scudMonthMemory[dateMonth].data)
+    useEffect(() => {
+        if (thisMonthData.length !== 0 || findState !== '') {
+            // if (scudMonthMemory[dateMonth] !== undefined) {
+            //     console.log('Поисковые данные этого месяца', scudMonthMemory[dateMonth].data)
+            //
+            //     let objectToArray = []
+            //     Object.keys(scudMonthMemory[dateMonth].data).forEach(e => {
+            //         objectToArray.push(...scudMonthMemory[dateMonth].data[e])
+            //     })
+            console.log('Данные этого месяца',thisMonthData)
 
-                let objectToArray = []
-                Object.keys(scudMonthMemory[dateMonth].data).forEach(e=>{
-                    objectToArray.push(...e)
-                })
-
-                let foundedArray = objectToArray.map(e=>{
-                    if(e.name.toLowerCase().includes(findState) || e.tabid.includes(findState)) return e
+                let foundedArray = thisMonthData.map(e => {
+                    if (e.name.toLowerCase().includes(findState) || e.tabid.includes(findState)) return e
                 })
 
                 foundedArray = foundedArray.filter(word => word !== undefined);
-                console.log('Соответсвующие данные',foundedArray)
+                console.log('Соответсвующие данные', foundedArray)
             }
-        }
 
-
-    },[findState])
+    }, [findState, thisMonthData])
 
 
     return (
