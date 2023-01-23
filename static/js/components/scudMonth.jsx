@@ -189,14 +189,12 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
         // Если состояние памяти пустое
         if (scudMonthMemory == null) {
             // То запрос и сохранить состояние
-            console.log('Отправка запроса на', dateMonth)
             let promise = fetchRequestScudMonth(dateMonth)
             fetchRequestScudMonthThen(promise)
         } else {
             // Иначе, если память не пустая,но выбранный месяц отсутсвует
             if (scudMonthMemory[dateMonth] == undefined) {
                 // То запрос и сохранить состояние
-                console.log('Отправка запроса на', dateMonth)
                 let promise = fetchRequestScudMonth(dateMonth)
                 fetchRequestScudMonthThen(promise)
                 // Иначе если это текущий месяц, то данные будут обновляться только раз в 3 часа(10800000)
@@ -221,7 +219,6 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
     function fetchRequestScudMonthThen(promise) {
         promise.then(data => {
-            console.log(data)
             let usersData = data[0]
             let date = data[1]
 
@@ -273,8 +270,6 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 } else {
                     let lastTime = new Date(dayTimeNow()).getTime()
                     let thisMonthLastTime = new Date(scudMonthMemory[dateMonth].lastTime).getTime()
-                    console.log('Последнее время данных', thisMonthLastTime)
-                    console.log('Текущее время', dayTimeNow())
                     // Если данные записанные больше часа назад
                     if (lastTime - thisMonthLastTime > 10800000) {
                         console.log('Перезапись с истечением часа', dateMonth)
@@ -285,7 +280,6 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                     }
                 }
 
-                console.log('Выбранный тип смены', smenaState)
                 switchTableState(allData)
             }
         })
@@ -359,6 +353,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
             <FindTable findState={findState} thisMonthData={thisMonthData}/>
             <ScudMonthTable tableState={tableState} sortState={sortState} setSortState={setSortState}
                             loadingState={loadingState}/>
+            <ButtonExcel smenaState={smenaState} dateMonth={dateMonth} tableState={tableState}/>
         </div>
     );
 }
@@ -430,7 +425,6 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
     let [sortedStateTable, setSortedStateTable] = useState(tableState)
 
     useEffect(() => {
-        console.log('Табличные данные', tableState)
         let keysSorted = null
         let sortedTable = null
 
@@ -469,46 +463,47 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
     }, [sortState, tableState])
     return (
         <>
-            {(sortedStateTable == null || loadingState) ? <Loader/> : <table className='scudMonthTable'>
-                <thead>
-                <tr>
-                    <th>№</th>
-                    <th className={`sortedIcon ${sortState == 'tabid' ? 'activeSortedIcon' : null}`}
-                        onClick={() => {
-                            setSortState('tabid')
-                        }}>Таб.
-                    </th>
-                    <th className={`sortedIcon ${sortState == 'name' ? 'activeSortedIcon' : null}`}
-                        onClick={() => {
-                            setSortState('name')
-                        }}>ФИО
-                    </th>
-                    <th>Должность</th>
-                    {Object.keys(sortedStateTable[0]['monthObject']).map((day, thKey) => {
-                        return <th key={thKey}>{day}</th>
-                    })}
-                    <th className={`sortedIcon ${sortState == 'monthTime' ? 'activeSortedIcon' : null}`}
-                        onClick={() => {
-                            setSortState('monthTime')
-                        }}>Итого
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {sortedStateTable.map((user, i) => {
-                    return <tr key={i}>
-                        <td>{i + 1}</td>
-                        <td>{user.tabid}</td>
-                        <td>{user.name}</td>
-                        <td>{user.POS}</td>
-                        {Object.keys(user.monthObject).map((day, tdKey) => {
-                            return (<td key={tdKey}>{msToTimeHours(user.monthObject[day])}</td>)
+            {(loadingState) ? <Loader/> : sortedStateTable == null ? null :
+                <table className='scudMonthTable' id='scudMonthTable'>
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th className={`sortedIcon ${sortState == 'tabid' ? 'activeSortedIcon' : null}`}
+                            onClick={() => {
+                                setSortState('tabid')
+                            }}>Таб.
+                        </th>
+                        <th className={`sortedIcon ${sortState == 'name' ? 'activeSortedIcon' : null}`}
+                            onClick={() => {
+                                setSortState('name')
+                            }}>ФИО
+                        </th>
+                        <th>Должность</th>
+                        {Object.keys(sortedStateTable[0]['monthObject']).map((day, thKey) => {
+                            return <th key={thKey}>{day}</th>
                         })}
-                        <td>{msToTimeHours(user.monthTotalTime)}</td>
+                        <th className={`sortedIcon ${sortState == 'monthTime' ? 'activeSortedIcon' : null}`}
+                            onClick={() => {
+                                setSortState('monthTime')
+                            }}>Итого
+                        </th>
                     </tr>
-                })}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {sortedStateTable.map((user, i) => {
+                        return <tr key={i}>
+                            <td>{i + 1}</td>
+                            <td>{user.tabid}</td>
+                            <td>{user.name}</td>
+                            <td>{user.POS}</td>
+                            {Object.keys(user.monthObject).map((day, tdKey) => {
+                                return (<td key={tdKey}>{msToTimeHours(user.monthObject[day])}</td>)
+                            })}
+                            <td>{msToTimeHours(user.monthTotalTime)}</td>
+                        </tr>
+                    })}
+                    </tbody>
+                </table>
             }
         </>
     )
@@ -516,27 +511,24 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
 
 function FindTable({findState, thisMonthData}) {
 
-    let [foundedArray, setFoundedArray]= useState([])
+    let [foundedArray, setFoundedArray] = useState([])
 
     useEffect(() => {
         if (thisMonthData.length !== 0 || findState.length !== 0) {
-            // if (scudMonthMemory[dateMonth] !== undefined) {
-            //     console.log('Поисковые данные этого месяца', scudMonthMemory[dateMonth].data)
-            //
-            //     let objectToArray = []
-            //     Object.keys(scudMonthMemory[dateMonth].data).forEach(e => {
-            //         objectToArray.push(...scudMonthMemory[dateMonth].data[e])
-            //     })
-            console.log('Данные этого месяца',thisMonthData)
 
-                let foundedArray = thisMonthData.map(e => {
-                    if (e.name.toLowerCase().includes(findState) || e.tabid.includes(findState)) return e
+            let foundedArray = thisMonthData.map(e => {
+                let findArray = findState.toLowerCase().replaceAll(' ', '').split(',')
+                let founded = false
+                findArray.forEach(find=>{
+                    if(e.name.toLowerCase().includes(find) || e.tabid.includes(find)) founded = true
                 })
+                if (founded) return e
+            })
 
-                foundedArray = foundedArray.filter(word => word !== undefined);
-                setFoundedArray(foundedArray)
-                console.log('Соответсвующие данные', foundedArray)
-            }
+            foundedArray = foundedArray.filter(word => word !== undefined);
+            setFoundedArray(foundedArray)
+            console.log('Соответсвующие данные', foundedArray)
+        }
 
     }, [findState, thisMonthData])
 
@@ -545,6 +537,25 @@ function FindTable({findState, thisMonthData}) {
         <div>
 
         </div>
+    )
+}
+
+function ButtonExcel({smenaState, dateMonth, tableState}) {
+    useEffect(() => {
+
+    }, [tableState])
+    return (
+        <> {tableState == null? null :
+            <img scr={''} alt={null} onClick={() => {
+            TableToExcel.convert(document.getElementById('scudMonthTable'), {
+                name: `${dateMonth}_${smenaState}.xlsx`,
+                sheet: {
+                    name: "Sheet 1"
+                }
+            });
+        }}/>}
+
+        </>
     )
 }
 

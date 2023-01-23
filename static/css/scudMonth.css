@@ -96,7 +96,7 @@
 }
 
 .sortedIcon{
-    position: relative;
+    position: sticky;
     cursor: pointer;
 }
 
@@ -140,3 +140,10 @@
 .scudMonthTable tr > td:last-child {
     min-width: 80px;
 }
+
+.scudMonthTable thead th {
+    position: sticky;
+    top: 0;
+}
+
+
