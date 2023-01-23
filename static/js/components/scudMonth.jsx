@@ -506,7 +506,12 @@ function FindTable({findState, scudMonthMemory, dateMonth}){
             if(scudMonthMemory[dateMonth] !== undefined){
                 console.log('Поисковые данные этого месяца', scudMonthMemory[dateMonth].data)
 
-                let foundedArray = scudMonthMemory[dateMonth].data.map(e=>{
+                let objectToArray = []
+                Object.keys(scudMonthMemory[dateMonth].data).forEach(e=>{
+                    objectToArray.push(...e)
+                })
+
+                let foundedArray = objectToArray.map(e=>{
                     if(e.name.toLowerCase().includes(findState) || e.tabid.includes(findState)) return e
                 })
 
