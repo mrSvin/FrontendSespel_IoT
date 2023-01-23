@@ -516,8 +516,12 @@ function FindTable({findState, thisMonthData}) {
     useEffect(() => {
         if (thisMonthData.length !== 0 || findState.length !== 0) {
 
+            let findArray = findState.toLowerCase().split(',')
+            findArray = findArray.map(space =>{
+                return space.trim()
+            })
+
             let foundedArray = thisMonthData.map(e => {
-                let findArray = findState.toLowerCase().replaceAll(' ', '').split(',')
                 let founded = false
                 findArray.forEach(find=>{
                     if(e.name.toLowerCase().includes(find) || e.tabid.includes(find)) founded = true
