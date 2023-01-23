@@ -502,7 +502,7 @@ function FindTable({findState, scudMonthMemory, dateMonth}){
 
     useEffect(()=>{
         console.log('Поиск', findState, 'в', dateMonth)
-        if (scudMonthMemory !== null || findState !== ' '){
+        if (scudMonthMemory !== null || findState !== '' || scudMonthMemory[dateMonth] !== undefined){
             console.log('Данные этого месяца', scudMonthMemory[dateMonth].data)
 
         let foundedArray = scudMonthMemory[dateMonth].data.map(e=>{
