@@ -147,7 +147,7 @@ function ScudLink({placeNameRus, placeNameEng, loadManyRequest, setLoadManyReque
                         setSmenaState('8и')
                     }
                 }}>{placeNameRus}
-                    {place == 'office' ? null :
+                    {(place == 'office' || place !== placeNameEng) ? null :
                         <div className={`smenaScud ${loadManyRequest ? 'noActiveButton' : null}`}>
                             <span className={smenaState == '8' ? 'scudSelect' : 'scudSelectNoSelect'}
                                   onClick={() => {
