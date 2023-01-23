@@ -514,7 +514,7 @@ function FindTable({findState, thisMonthData}) {
     let [foundedArray, setFoundedArray] = useState([])
 
     useEffect(() => {
-        if (thisMonthData.length !== 0 || findState.length !== 0) {
+        if (thisMonthData.length !== 0 && findState.length !== 0) {
 
             let findArray = findState.toLowerCase().split(',')
             findArray = findArray.map(space =>{
