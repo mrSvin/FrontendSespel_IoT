@@ -516,8 +516,10 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
 
 function FindTable({findState, thisMonthData}) {
 
+    let [foundedArray, setFoundedArray]= useState([])
+
     useEffect(() => {
-        if (thisMonthData.length !== 0 || findState !== '') {
+        if (thisMonthData.length !== 0 || findState.length !== 0) {
             // if (scudMonthMemory[dateMonth] !== undefined) {
             //     console.log('Поисковые данные этого месяца', scudMonthMemory[dateMonth].data)
             //
@@ -532,6 +534,7 @@ function FindTable({findState, thisMonthData}) {
                 })
 
                 foundedArray = foundedArray.filter(word => word !== undefined);
+                setFoundedArray(foundedArray)
                 console.log('Соответсвующие данные', foundedArray)
             }
 
