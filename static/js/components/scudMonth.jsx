@@ -502,19 +502,21 @@ function FindTable({findState, scudMonthMemory, dateMonth}){
 
     useEffect(()=>{
         console.log('Поиск', findState, 'в', dateMonth)
-        if (scudMonthMemory !== null || findState !== '' || scudMonthMemory[dateMonth] !== undefined){
-            console.log('Данные этого месяца', scudMonthMemory[dateMonth].data)
+        if (scudMonthMemory !== null || findState !== ''){
+            if(scudMonthMemory[dateMonth] !== undefined){
+                console.log('Поисковые данные этого месяца', scudMonthMemory[dateMonth].data)
 
-        let foundedArray = scudMonthMemory[dateMonth].data.map(e=>{
-                if(e.name.toLowerCase().includes(findState) || e.tabid.includes(findState)) return e
-            })
+                let foundedArray = scudMonthMemory[dateMonth].data.map(e=>{
+                    if(e.name.toLowerCase().includes(findState) || e.tabid.includes(findState)) return e
+                })
 
-        foundedArray = foundedArray.filter(word => word !== undefined);
-            console.log('Соответсвующие данные',foundedArray)
+                foundedArray = foundedArray.filter(word => word !== undefined);
+                console.log('Соответсвующие данные',foundedArray)
+            }
         }
 
 
-    },[findState, ])
+    },[findState])
 
 
     return (
