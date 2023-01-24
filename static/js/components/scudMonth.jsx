@@ -201,9 +201,9 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
             } else if (dateMonth == getThisYearMonth()) {
                 let lastTime = new Date(dayTimeNow()).getTime()
                 let thisMonthLastTime = new Date(scudMonthMemory[dateMonth].lastTime).getTime()
-                // Если данные записанные больше 3 часов назад
+                // Если данные записанные больше 30 минут часов назад
                 console.log(lastTime, '-', thisMonthLastTime, '=', lastTime - thisMonthLastTime)
-                if (lastTime - thisMonthLastTime > 10800000) {
+                if (lastTime - thisMonthLastTime > 1800000) {
                     alert(`Данные устарели за 3 часа, обновляю новыми за ${dateMonth}`)
                     let promise = fetchRequestScudMonth(dateMonth)
                     fetchRequestScudMonthThen(promise)
@@ -359,8 +359,10 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 </div>
             </div>
             <FindTable findState={findState} thisMonthData={thisMonthData}/>
-            <ButtonExcel smenaState={smenaState} dateMonth={dateMonth} tableState={tableState}
-                         tableId={'scudMonthTableFilter'} buttonClass={'scudExcelSlave'}/>
+            {findState==''? null :
+                <ButtonExcel smenaState={smenaState} dateMonth={dateMonth} tableState={tableState}
+                             tableId={'scudMonthTableFilter'} buttonClass={'scudExcelSlave'}/>
+            }
             <ScudMonthTable tableState={tableState} sortState={sortState} setSortState={setSortState}
                             loadingState={loadingState}/>
             <ButtonExcel smenaState={smenaState} dateMonth={dateMonth} tableState={tableState}
@@ -547,7 +549,6 @@ function FindTable({findState, thisMonthData}) {
 
             foundedData = foundedData.filter(word => word !== undefined);
             setFoundedArray(foundedData)
-            console.log('Соответсвующие данные', foundedArray)
         }
 
     }, [findState, thisMonthData])
