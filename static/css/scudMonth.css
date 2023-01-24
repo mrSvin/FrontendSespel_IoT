@@ -1,5 +1,5 @@
 .scudMonthTable {
-    margin: 0 auto;
+    margin: 15px auto;
     color: white;
     border-spacing: 0px;
     border:0.1px solid #70727b;
@@ -60,6 +60,15 @@
     cursor: pointer;
 }
 
+.tableMessage {
+    margin: 0 auto;
+    text-align: center;
+    color: #83addd !important;
+    font-size: 30px;
+    margin-right: 15px;
+    font-weight: 600;
+}
+
 .findWrapper {
     position: relative;
     display: flex;
@@ -72,6 +81,28 @@
     font-size: 18px;
     position: absolute;
     top: -20px;
+}
+
+.searchButton {
+    width: 50px;
+    height: 33px;
+    background: #83addd;
+    border-radius: 5%;
+    margin-left: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+}
+
+.searchButton:hover{
+    background: #70b3ff;
+}
+
+.findWrapper img {
+    height: 100%;
+    pointer-events: none;
 }
 
 .scudMonthFind{
@@ -172,4 +203,6 @@
     position: absolute;
     top: 240px;
 }
+
+
 

@@ -316,6 +316,8 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
     let [loadingState, setLoading] = useState(true)
     let [sortState, setSortState] = useState('name')
+
+    let [findStateDefalut, setFindStateDefalut] = useState('')
     let [findState, setFindState] = useState('')
 
     let [thisMonthData, setThisMonthData] = useState([])
@@ -331,7 +333,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
     function changeFind(e) {
         const {value} = e.target;
-        setFindState(value);
+        setFindStateDefalut(value);
     };
 
     return (
@@ -344,11 +346,16 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 <div className={'findWrapper'}>
                     <p>Поиск</p>
                     <input id="find" name="find" placeholder={'Иванов Павел, 1234...'} className={'scudMonthFind'}
-                           value={findState}
+                           value={findStateDefalut}
                            onChange={(e) => {
                                changeFind(e)
                            }}>
                     </input>
+                    <div className={'searchButton'} onClick={() => {
+                        setFindState(findStateDefalut);
+                    }}>
+                        <img src="../../images/searchIcon.png" alt=""/>
+                    </div>
                 </div>
             </div>
             <FindTable findState={findState} thisMonthData={thisMonthData}/>
@@ -468,46 +475,50 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
     return (
         <>
             {(loadingState) ? <Loader/> : sortedStateTable == null ? null :
-                <table className='scudMonthTable scudMonthMainTable' id='scudMonthTable'>
-                    <thead>
-                    <tr>
-                        <th>№</th>
-                        <th className={`sortedIcon ${sortState == 'tabid' ? 'activeSortedIcon' : null}`}
-                            onClick={() => {
-                                setSortState('tabid')
-                            }}>Таб.
-                        </th>
-                        <th className={`sortedIcon ${sortState == 'name' ? 'activeSortedIcon' : null}`}
-                            onClick={() => {
-                                setSortState('name')
-                            }}>ФИО
-                        </th>
-                        <th>Должность</th>
-                        {Object.keys(sortedStateTable[0]['monthObject']).map((day, thKey) => {
-                            return <th key={thKey}>{day}</th>
-                        })}
-                        <th className={`sortedIcon ${sortState == 'monthTime' ? 'activeSortedIcon' : null}`}
-                            onClick={() => {
-                                setSortState('monthTime')
-                            }}>Итого
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {sortedStateTable.map((user, i) => {
-                        return <tr key={i}>
-                            <td>{i + 1}</td>
-                            <td>{user.tabid}</td>
-                            <td>{user.name}</td>
-                            <td>{user.POS}</td>
-                            {Object.keys(user.monthObject).map((day, tdKey) => {
-                                return (<td key={tdKey}>{msToTimeHours(user.monthObject[day])}</td>)
+                <div>
+                    <p className={'tableMessage'}>Таблица по смене</p>
+                    <table className='scudMonthTable scudMonthMainTable' id='scudMonthTable'>
+                        <thead>
+                        <tr>
+                            <th>№</th>
+                            <th className={`sortedIcon ${sortState == 'tabid' ? 'activeSortedIcon' : null}`}
+                                onClick={() => {
+                                    setSortState('tabid')
+                                }}>Таб.
+                            </th>
+                            <th className={`sortedIcon ${sortState == 'name' ? 'activeSortedIcon' : null}`}
+                                onClick={() => {
+                                    setSortState('name')
+                                }}>ФИО
+                            </th>
+                            <th>Должность</th>
+                            {Object.keys(sortedStateTable[0]['monthObject']).map((day, thKey) => {
+                                return <th key={thKey}>{day}</th>
                             })}
-                            <td>{msToTimeHours(user.monthTotalTime)}</td>
+                            <th className={`sortedIcon ${sortState == 'monthTime' ? 'activeSortedIcon' : null}`}
+                                onClick={() => {
+                                    setSortState('monthTime')
+                                }}>Итого
+                            </th>
                         </tr>
-                    })}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {sortedStateTable.map((user, i) => {
+                            return <tr key={i}>
+                                <td>{i + 1}</td>
+                                <td>{user.tabid}</td>
+                                <td>{user.name}</td>
+                                <td>{user.POS}</td>
+                                {Object.keys(user.monthObject).map((day, tdKey) => {
+                                    return (<td key={tdKey}>{msToTimeHours(user.monthObject[day])}</td>)
+                                })}
+                                <td>{msToTimeHours(user.monthTotalTime)}</td>
+                            </tr>
+                        })}
+                        </tbody>
+                    </table>
+                </div>
+
             }
         </>
     )
@@ -544,34 +555,37 @@ function FindTable({findState, thisMonthData}) {
 
     return (
         <> {foundedArray.length == 0 ? null :
-            <table className='scudMonthTable' id='scudMonthTableFilter'>
-                <thead>
-                <tr>
-                    <th>№</th>
-                    <th>Таб.</th>
-                    <th>ФИО</th>
-                    <th>Должность</th>
-                    {Object.keys(foundedArray[0]['monthObject']).map((day, thKey) => {
-                        return <th key={thKey}>{day}</th>
-                    })}
-                    <th>Итого</th>
-                </tr>
-                </thead>
-                <tbody>
-                {foundedArray.map((user, i) => {
-                    return <tr key={i}>
-                        <td>{i + 1}</td>
-                        <td>{user.tabid}</td>
-                        <td>{user.name}</td>
-                        <td>{user.POS}</td>
-                        {Object.keys(user.monthObject).map((day, tdKey) => {
-                            return (<td key={tdKey}>{msToTimeHours(user.monthObject[day])}</td>)
+            <div>
+                <p>Таблица по поиску</p>
+                <table className='scudMonthTable' id='scudMonthTableFilter'>
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Таб.</th>
+                        <th>ФИО</th>
+                        <th>Должность</th>
+                        {Object.keys(foundedArray[0]['monthObject']).map((day, thKey) => {
+                            return <th key={thKey}>{day}</th>
                         })}
-                        <td>{msToTimeHours(user.monthTotalTime)}</td>
+                        <th>Итого</th>
                     </tr>
-                })}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {foundedArray.map((user, i) => {
+                        return <tr key={i}>
+                            <td>{i + 1}</td>
+                            <td>{user.tabid}</td>
+                            <td>{user.name}</td>
+                            <td>{user.POS}</td>
+                            {Object.keys(user.monthObject).map((day, tdKey) => {
+                                return (<td key={tdKey}>{msToTimeHours(user.monthObject[day])}</td>)
+                            })}
+                            <td>{msToTimeHours(user.monthTotalTime)}</td>
+                        </tr>
+                    })}
+                    </tbody>
+                </table>
+            </div>
         }
         </>
     )
