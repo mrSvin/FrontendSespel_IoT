@@ -343,7 +343,8 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
                 <div className={'findWrapper'}>
                     <p>Поиск</p>
-                    <input id="find" name="find" className={'scudMonthFind'} value={findState}
+                    <input id="find" name="find" placeholder={'Иванов Павел, 1234...'} className={'scudMonthFind'}
+                           value={findState}
                            onChange={(e) => {
                                changeFind(e)
                            }}>
@@ -351,9 +352,12 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                 </div>
             </div>
             <FindTable findState={findState} thisMonthData={thisMonthData}/>
+            <ButtonExcel smenaState={smenaState} dateMonth={dateMonth} tableState={tableState}
+                         tableId={'scudMonthTableFilter'} buttonClass={'scudExcelSlave'}/>
             <ScudMonthTable tableState={tableState} sortState={sortState} setSortState={setSortState}
                             loadingState={loadingState}/>
-            <ButtonExcel smenaState={smenaState} dateMonth={dateMonth} tableState={tableState}/>
+            <ButtonExcel smenaState={smenaState} dateMonth={dateMonth} tableState={tableState}
+                         tableId={'scudMonthTable'} buttonClass={'scudExcelMain'}/>
         </div>
     );
 }
@@ -464,7 +468,7 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
     return (
         <>
             {(loadingState) ? <Loader/> : sortedStateTable == null ? null :
-                <table className='scudMonthTable' id='scudMonthTable'>
+                <table className='scudMonthTable scudMonthMainTable' id='scudMonthTable'>
                     <thead>
                     <tr>
                         <th>№</th>
@@ -509,7 +513,7 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
     )
 }
 
-function FindTable({findState, thisMonthData}) {
+function FindTable({findState, thisMonthData, setSortState}) {
 
     let [foundedArray, setFoundedArray] = useState([])
 
@@ -517,20 +521,21 @@ function FindTable({findState, thisMonthData}) {
         if (thisMonthData.length !== 0 && findState.length !== 0) {
 
             let findArray = findState.toLowerCase().split(',')
-            findArray = findArray.map(space =>{
+            findArray = findArray.map(space => {
                 return space.trim()
             })
+            findArray = findArray.filter(word => word !== '');
 
-            let foundedArray = thisMonthData.map(e => {
+            let foundedData = thisMonthData.map(e => {
                 let founded = false
-                findArray.forEach(find=>{
-                    if(e.name.toLowerCase().includes(find) || e.tabid.includes(find)) founded = true
+                findArray.forEach(find => {
+                    if (e.name.toLowerCase().includes(find) || e.tabid.includes(find)) founded = true
                 })
                 if (founded) return e
             })
 
-            foundedArray = foundedArray.filter(word => word !== undefined);
-            setFoundedArray(foundedArray)
+            foundedData = foundedData.filter(word => word !== undefined);
+            setFoundedArray(foundedData)
             console.log('Соответсвующие данные', foundedArray)
         }
 
@@ -538,26 +543,71 @@ function FindTable({findState, thisMonthData}) {
 
 
     return (
-        <div>
-
-        </div>
+        <> {foundedArray.length == 0 ? null :
+            <table className='scudMonthTable' id='scudMonthTableFilter'>
+                <thead>
+                <tr>
+                    <th>№</th>
+                    <th className={`sortedIcon ${sortState == 'tabid' ? 'activeSortedIcon' : null}`}
+                        onClick={() => {
+                            setSortState('tabid')
+                        }}>Таб.
+                    </th>
+                    <th className={`sortedIcon ${sortState == 'name' ? 'activeSortedIcon' : null}`}
+                        onClick={() => {
+                            setSortState('name')
+                        }}>ФИО
+                    </th>
+                    <th>Должность</th>
+                    {Object.keys(foundedArray[0]['monthObject']).map((day, thKey) => {
+                        return <th key={thKey}>{day}</th>
+                    })}
+                    <th className={`sortedIcon ${sortState == 'monthTime' ? 'activeSortedIcon' : null}`}
+                        onClick={() => {
+                            setSortState('monthTime')
+                        }}>Итого
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {foundedArray.map((user, i) => {
+                    return <tr key={i}>
+                        <td>{i + 1}</td>
+                        <td>{user.tabid}</td>
+                        <td>{user.name}</td>
+                        <td>{user.POS}</td>
+                        {Object.keys(user.monthObject).map((day, tdKey) => {
+                            return (<td key={tdKey}>{msToTimeHours(user.monthObject[day])}</td>)
+                        })}
+                        <td>{msToTimeHours(user.monthTotalTime)}</td>
+                    </tr>
+                })}
+                </tbody>
+            </table>
+        }
+        </>
     )
 }
 
-function ButtonExcel({smenaState, dateMonth, tableState}) {
+function ButtonExcel(
+{
+    smenaState, dateMonth, tableState, tableId, buttonClass
+}
+)
+{
     useEffect(() => {
 
     }, [tableState])
     return (
-        <> {tableState == null? null :
-            <img scr={''} alt={null} onClick={() => {
-            TableToExcel.convert(document.getElementById('scudMonthTable'), {
-                name: `${dateMonth}_${smenaState}.xlsx`,
-                sheet: {
-                    name: "Sheet 1"
-                }
-            });
-        }}/>}
+        <> {tableState == null ? null :
+            <img scr={'../../images/excel_icon.png'} alt={null} className={`scudExcel ${buttonClass}`} onClick={() => {
+                TableToExcel.convert(document.getElementById(tableId), {
+                    name: `${dateMonth}_${smenaState}.xlsx`,
+                    sheet: {
+                        name: "Sheet 1"
+                    }
+                });
+            }}/>}
 
         </>
     )
