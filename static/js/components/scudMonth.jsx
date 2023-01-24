@@ -513,7 +513,7 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
     )
 }
 
-function FindTable({findState, thisMonthData, setSortState}) {
+function FindTable({findState, thisMonthData}) {
 
     let [foundedArray, setFoundedArray] = useState([])
 
@@ -548,25 +548,13 @@ function FindTable({findState, thisMonthData, setSortState}) {
                 <thead>
                 <tr>
                     <th>№</th>
-                    <th className={`sortedIcon ${sortState == 'tabid' ? 'activeSortedIcon' : null}`}
-                        onClick={() => {
-                            setSortState('tabid')
-                        }}>Таб.
-                    </th>
-                    <th className={`sortedIcon ${sortState == 'name' ? 'activeSortedIcon' : null}`}
-                        onClick={() => {
-                            setSortState('name')
-                        }}>ФИО
-                    </th>
+                    <th>Таб.</th>
+                    <th>ФИО</th>
                     <th>Должность</th>
                     {Object.keys(foundedArray[0]['monthObject']).map((day, thKey) => {
                         return <th key={thKey}>{day}</th>
                     })}
-                    <th className={`sortedIcon ${sortState == 'monthTime' ? 'activeSortedIcon' : null}`}
-                        onClick={() => {
-                            setSortState('monthTime')
-                        }}>Итого
-                    </th>
+                    <th>Итого</th>
                 </tr>
                 </thead>
                 <tbody>
