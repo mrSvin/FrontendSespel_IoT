@@ -588,7 +588,7 @@ function ButtonExcel(
     }, [tableState])
     return (
         <> {tableState == null ? null :
-            <img scr={'../../images/excel_icon.png'} alt={null} className={`scudExcel ${buttonClass}`} onClick={() => {
+            <img src={'../../images/excel_icon.png'} alt={null} className={`scudExcel ${buttonClass}`} onClick={() => {
                 TableToExcel.convert(document.getElementById(tableId), {
                     name: `${dateMonth}_${smenaState}.xlsx`,
                     sheet: {
