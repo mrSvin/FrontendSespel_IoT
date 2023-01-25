@@ -11,7 +11,7 @@ function msToTimeHours(duration) {
         hours = parseInt((duration / (1000 * 60 * 60)))
 
     minutes = minutes < 10 ? '0' + minutes : minutes
-    hours = hours < 10 ? '0' + hours : hours
+    hours = hours < 10 ? hours : hours
 
     if ((hours + minutes) != '') {
         return hours + ':' + minutes
@@ -201,10 +201,8 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
             } else if (dateMonth == getThisYearMonth()) {
                 let lastTime = new Date(dayTimeNow()).getTime()
                 let thisMonthLastTime = new Date(scudMonthMemory[dateMonth].lastTime).getTime()
-                // Если данные записанные больше 30 минут часов назад
-                console.log(lastTime, '-', thisMonthLastTime, '=', lastTime - thisMonthLastTime)
-                if (lastTime - thisMonthLastTime > 1800000) {
-                    alert(`Данные устарели за 3 часа, обновляю новыми за ${dateMonth}`)
+                // Если данные записанные больше 60 минут часов назад
+                if (lastTime - thisMonthLastTime > 36000000) {
                     let promise = fetchRequestScudMonth(dateMonth)
                     fetchRequestScudMonthThen(promise)
                 } else {
@@ -317,6 +315,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
     let [loadingState, setLoading] = useState(true)
     let [sortState, setSortState] = useState('name')
 
+    const findRef = useRef(null);
     let [findStateDefalut, setFindStateDefalut] = useState('')
     let [findState, setFindState] = useState('')
 
@@ -336,6 +335,12 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
         setFindStateDefalut(value);
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            setFindState(findRef.current.value);
+        }
+    };
+
     return (
         <div>
             <div className="buttons-otchet marginToSmenaMenu cancelMargin">
@@ -344,12 +349,14 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
             <div className="energyCalendarContainer">
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
                 <div className={'findWrapper'}>
-                    <p>Поиск</p>
-                    <input id="find" name="find" placeholder={'Иванов Павел, 1234...'} className={'scudMonthFind'}
+                    <input id="find" name="find" placeholder={'Введите ФИО или табель через запятую...'}
+                           className={'scudMonthFind'}
+                           ref={findRef}
                            value={findStateDefalut}
                            onChange={(e) => {
                                changeFind(e)
-                           }}>
+                           }}
+                           onKeyDown={handleKeyDown}>
                     </input>
                     <div className={'searchButton'} onClick={() => {
                         setFindState(findStateDefalut);
@@ -358,10 +365,12 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                     </div>
                 </div>
             </div>
-            <FindTable findState={findState} thisMonthData={thisMonthData}/>
-            {findState==''? null :
-                <ButtonExcel smenaState={smenaState} dateMonth={dateMonth} tableState={tableState}
-                             tableId={'scudMonthTableFilter'} buttonClass={'scudExcelSlave'}/>
+            {findState == '' ? null :
+                <>
+                    <FindTable findState={findState} thisMonthData={thisMonthData}/>
+                    <ButtonExcel smenaState={smenaState} dateMonth={dateMonth} tableState={tableState}
+                                 tableId={'scudMonthTableFilter'} buttonClass={'scudExcelSlave'}/>
+                </>
             }
             <ScudMonthTable tableState={tableState} sortState={sortState} setSortState={setSortState}
                             loadingState={loadingState}/>
@@ -478,7 +487,7 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
         <>
             {(loadingState) ? <Loader/> : sortedStateTable == null ? null :
                 <div>
-                    <p className={'tableMessage'}>Таблица по смене</p>
+                    <p className={'tableMessage'}>Отчет за выбранный месяц</p>
                     <table className='scudMonthTable scudMonthMainTable' id='scudMonthTable'>
                         <thead>
                         <tr>
@@ -557,7 +566,7 @@ function FindTable({findState, thisMonthData}) {
     return (
         <> {foundedArray.length == 0 ? null :
             <div>
-                <p className={'tableMessage'}>Таблица по поиску</p>
+                <p className={'tableMessage'}>Отчет по найденным сотрудникам</p>
                 <table className='scudMonthTable' id='scudMonthTableFilter'>
                     <thead>
                     <tr>
@@ -593,11 +602,10 @@ function FindTable({findState, thisMonthData}) {
 }
 
 function ButtonExcel(
-{
-    smenaState, dateMonth, tableState, tableId, buttonClass
-}
-)
-{
+    {
+        smenaState, dateMonth, tableState, tableId, buttonClass
+    }
+) {
     useEffect(() => {
 
     }, [tableState])

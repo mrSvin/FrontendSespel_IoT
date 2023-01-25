@@ -14,10 +14,20 @@
     padding: 3px;
 }
 
+.scudMonthTable thead > tr > th:nth-child(2){
+    text-align: left;
+}
+
 .scudMonthTable tbody > tr > td{
     border:0.1px solid #70727b;
     margin: 0;
     /* padding: 3px; */
+}
+
+.scudMonthTable tbody > tr > td:nth-child(3),
+.scudMonthTable tbody > tr > td:nth-child(4){
+    padding: 0 5px;
+
 }
 
 .scudMonthTable tr > td:nth-of-type(-n+4) {
@@ -34,7 +44,7 @@
 
 .scudMonthTable tr > td:nth-of-type(3) {
     background: #3e4955;
-    text-align: center;
+    text-align: left;
 }
 
 
@@ -47,12 +57,9 @@
     font-weight: 600;
 }
 
-.scudMonthTable tr > td:nth-last-child(-2n+2){
-    border-right: 3px solid #ff0000;
-}
-
 .scudMonthTable tr > td:last-child{
-    border-left: 3px solid #ff0000;
+    min-width: 75px;
+    background: #143355;
 }
 
 .scudMonthTable tr:hover td{
@@ -70,17 +77,10 @@
 }
 
 .findWrapper {
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
-}
-
-.findWrapper > p {
-    margin: 0;
-    color: #83addd !important;
-    font-size: 18px;
-    position: absolute;
-    top: -20px;
+    right: 10px;
 }
 
 .searchButton {
@@ -112,9 +112,9 @@
     border-style: inset;
     border-color: #83addd;
     border-radius: 5%;
-    padding: 2px 0;
+    padding: 2px 6px;
     height: 25px;
-    width: 175px;
+    width: 375px;
     font-size: 17px;
 }
 
@@ -156,12 +156,8 @@
     color: white;
 }
 
-.scudMonthTable tr > th:last-child {
-    cursor: pointer;
-}
-
 .scudMonthTable tr > td:nth-child(2) {
-    min-width: 70px;
+    min-width: 48px;
     text-align: center;
 }
 
@@ -171,10 +167,6 @@
 
 .activeSortedIcon::before {
     color: #61afff;
-}
-
-.scudMonthTable tr > td:last-child {
-    min-width: 80px;
 }
 
 .scudMonthMainTable thead th {
@@ -202,7 +194,7 @@
 .scudExcelSlave{
     position: absolute;
     top: 230px;
-    right: 730px;
+    right: 600px;
 }
 
 
