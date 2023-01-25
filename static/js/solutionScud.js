@@ -830,3 +830,139 @@ function setHeight(heightHighchartContainer) {
         height: 52 * heightHighchartContainer
     }
 }
+
+function getLunchArrays(smenaState, date) {
+
+    const times = {
+        '03:00': date + ' 03:00:00',
+        '03:30': date + ' 03:30:00',
+        '04:00': date + ' 04:00:00',
+        '04:30': date + ' 04:30:00',
+        '11:30': date + ' 11:30:00',
+        '12:00': date + ' 12:00:00',
+        '12:30': date + ' 12:30:00',
+        '13:00': date + ' 13:00:00',
+        '16:00': date + ' 16:00:00',
+        '16:30': date + ' 16:30:00',
+        '19:30': date + ' 19:30:00',
+        '20:00': date + ' 20:00:00',
+        '23:00': date + ' 23:00:00',
+        '23:30': date + ' 23:30:00',
+    }
+
+    let lunchArrays = []
+
+    switch (smenaState) {
+        case '8и':
+            lunchArrays.push([times['12:00'], times['13:00']])
+            return lunchArrays
+        case '8':
+            lunchArrays.push([times['03:00'], times['03:30']])
+            lunchArrays.push([times['11:30'], times['12:00']])
+            lunchArrays.push([times['19:30'], times['20:00']])
+            return lunchArrays
+        case '7':
+            lunchArrays.push([times['03:00'], times['04:00']])
+            lunchArrays.push([times['11:30'], times['12:30']])
+            lunchArrays.push([times['19:30'], times['20:30']])
+            return lunchArrays
+        case '11':
+            lunchArrays.push([times['03:30'], times['04:00']])
+            lunchArrays.push([times['11:30'], times['12:00']])
+            lunchArrays.push([times['16:00'], times['16:30']])
+            lunchArrays.push([times['23:00'], times['23:30']])
+            return lunchArrays
+        case '24':
+            lunchArrays.push([times['04:00'], times['04:30']])
+            lunchArrays.push([times['12:30'], times['13:00']])
+            lunchArrays.push([times['20:00'], times['20:30']])
+            return lunchArrays
+        case '':
+            lunchArrays.push([times['12:00'], times['12:30']])
+            return lunchArrays
+        default:
+            lunchArrays.push([times['12:00'], times['12:30']])
+            return lunchArrays
+    }
+
+}
+
+function filterLunchMonth(dateArray, date, smenaState) {
+
+    let arraySave = dateArray
+
+    let lunchArrays = getLunchArrays(smenaState, date)
+
+    lunchArrays.forEach(lunchArray => {
+        arraySave = insideFilterLunch(lunchArray[0], lunchArray[1], dateArray)
+    })
+    return arraySave
+}
+
+function applyMonthFilters(usersData, userNames, date) {
+    let lastMonthDay = 32 - new Date(date.slice(0, 4), date.slice(5, 7), 32).getDate();
+
+    userNames.forEach(userName => {
+        // Формирую месячный объект пользователя
+        usersData[userName].monthObject = {}
+
+        // Создаю в нем столько массивов сколько дней в месяце
+        // Для текущего месяца
+        if (dayNow().slice(0, 7) == date) {
+            for (let i = 1; i < +dayNow().slice(8, 10) + 1; i++) {
+                usersData[userName].monthObject[i] = [[], []]
+            }
+            // Для предыдущего месяца
+        } else {
+            for (let i = 1; i < lastMonthDay + 1; i++) {
+                usersData[userName].monthObject[i] = [[], []]
+            }
+        }
+
+        // Удаляю дубликаты
+        let noDublicateArrays = dublicateDeleteFilter(usersData[userName].logtime, usersData[userName].statusInOut)
+
+        // Вставляю в массивы дней соответсвующие значения
+        noDublicateArrays[0].forEach((d, i) => {
+            usersData[userName].monthObject[+d.slice(8, 10)][0].push(d)
+            usersData[userName].monthObject[+d.slice(8, 10)][1].push(noDublicateArrays[1][i])
+        })
+
+        // Общий счетчик часов
+        let totalMonthTime = 0
+
+        // Применяю фильтры
+        for (let i = 1; i <= Object.keys(usersData[userName].monthObject).length; i++) {
+            let indexDate = getDateFromIndex(date, i)
+            let arrayAddStartOrEnd = addStartOrEnd(usersData[userName].monthObject[i], '8и', indexDate)
+            let arrayWithOutLunch = filterLunchMonth(arrayAddStartOrEnd, indexDate, usersData[userName].smenaInfo)
+            let workTime = getWorkTime(arrayWithOutLunch)
+            // тут может стоит написать преобразования времени до десятичого числа без секунд
+
+            totalMonthTime += workTime
+            // Закомменченный вариант сохранения данных и массив и время, пока оставлю только время.
+            // usersData[userName].monthObject[i] = [arrayWithOutLunch, msToTime(workTime)]
+            usersData[userName].monthObject[i] = workTime
+        }
+        usersData[userName].monthTotalTime = totalMonthTime
+
+        // Очистка ненужных полей
+        usersData[userName].statusInOut = null
+        usersData[userName].logtime = null
+    })
+    return usersData
+}
+
+function nameSort(a, b, obj) {
+    let nameA = obj[a].name.toLowerCase(),
+        nameB = obj[b].name.toLowerCase()
+
+    if (nameA < nameB) return -1
+    if (nameA > nameB) return 1
+    return 0
+}
+
+function getDateFromIndex(date, index) {
+    index = (index < 10) ? `0${index}` : `${index}`
+    return `${date}-${index}`
+}

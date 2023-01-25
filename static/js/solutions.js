@@ -87,6 +87,25 @@ function msToTime(duration, date = 24) {
 
 }
 
+// Получение времени в формате часы:минуты
+function msToTimeHours(duration) {
+
+    if (duration == 0) return 0
+
+    let minutes = parseInt((duration / (1000 * 60)) % 60),
+        hours = parseInt((duration / (1000 * 60 * 60)))
+
+    minutes = minutes < 10 ? '0' + minutes : minutes
+    hours = hours < 10 ? hours : hours
+
+    if ((hours + minutes) != '') {
+        return hours + ':' + minutes
+    } else if ((hours) == '' && duration != 0) {
+        return hours
+    } else return '00:' + minutes
+
+}
+
 // Функция перевода миллисекунд в дни в формате  - 1 д. 1.ч. 1м. 1.с
 function msToTimeDays(duration, date = 31) {
     date = +date
@@ -548,6 +567,14 @@ function dayYesterday(startTime) {
         return null
     }
     return new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
+}
+
+// Функция получения текущего года и месяца
+function getThisYearMonth() {
+    let monthsNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+    let year = new Date().getFullYear()
+    let month = monthsNumber[new Date().getMonth()]
+    return `${year}-${month}`
 }
 
 function convertTimeToISO(time) {
