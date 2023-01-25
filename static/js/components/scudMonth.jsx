@@ -134,7 +134,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
 
     let [dateMonth, setDateMonth] = useState(getThisYearMonth());
     let [smenaState, setSmenaState] = useState('8и')
-    let [tableState, setTableState] = useState(null)
+    let [tableState, setTableState] = useState([])
 
     let [loadingState, setLoading] = useState(true)
     let [sortState, setSortState] = useState('name')
@@ -279,7 +279,7 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
         let keysSorted = null
         let sortedTable = null
 
-        if (tableState != null) {
+        if (tableState.length != 0) {
             if (sortState == 'name') {
                 keysSorted = Object.keys(tableState).sort((a, b) => {
                     return nameSort(a, b, tableState)
@@ -433,7 +433,7 @@ function ButtonExcel({smenaState, dateMonth, tableState, tableId, buttonClass}) 
 
     }, [tableState])
     return (
-        <> {tableState == null ? null :
+        <> {tableState.length == 0 ? null :
             <img src={'../../images/excel_icon.png'} alt={null} className={`scudExcel ${buttonClass}`} onClick={() => {
                 TableToExcel.convert(document.getElementById(tableId), {
                     name: `${dateMonth}_${smenaState}.xlsx`,
