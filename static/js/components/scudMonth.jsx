@@ -391,7 +391,7 @@ function FindTable({findState, thisMonthData, foundedArray, setFoundedArray}) {
 
 
     return (
-        <> {foundedArray.length == 0 ? null :
+        <> {(foundedArray.length == 0 || thisMonthData.length == 0)? null :
             <div>
                 <p className={'tableMessage'}>Отчет по найденным сотрудникам</p>
                 <table className='scudMonthTable' id='scudMonthTableFilter'>
