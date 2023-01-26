@@ -308,13 +308,13 @@ function ScudMonthTable({tableState, sortState, setSortState, loadingState}) {
                 sortedTable = sortedTable.length == 0 ? null : sortedTable
                 setSortedStateTable(sortedTable)
             }
-        }
+        } else setSortedStateTable(tableState)
 
 
     }, [sortState, tableState])
     return (
         <>
-            {(loadingState) ? <Loader/> : sortedStateTable == null ? null :
+            {(loadingState) ? <Loader/> : sortedStateTable.length == 0 ? null :
                 <div>
                     <p className={'tableMessage'}>Отчет за выбранный месяц</p>
                     <table className='scudMonthTable scudMonthMainTable' id='scudMonthTable'>
