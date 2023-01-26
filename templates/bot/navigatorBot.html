@@ -155,12 +155,11 @@
             firstDate = new Date(firstDate).getTime()
             lastDate =  (startTime == new Date().toISOString().slice(0,10))?  new Date(lastDate).getTime() + 10800000 : new Date(lastDate).getTime()
 
-            dataArray.unshift([dataArray[0][0] - 10000, 0])
-            dataArray.unshift([firstDate,0])
-            dataArray.push([lastDate,0])
-
-            console.log(dataArray)
-
+            if(dataArray.length !== 0){
+                dataArray.unshift([dataArray[0][0] - 10000, 0])
+                dataArray.unshift([firstDate,0])
+                dataArray.push([lastDate,0])
+            }
 
         } else {
             series = [{
