@@ -334,7 +334,7 @@ function fetchRequestAdminDeleteUser(login) {
 }
 
 function fetchRequestScudMonth(date = '2022-12') {
-    let lastMonthDay = 32 - new Date(date.slice(0, 4), date.slice(5, 7), 32).getDate();
+    let lastMonthDay = countDaysInMonth(date);
     return fetch(`/api/scud/beginDate:${date}-01 00:00:00_endDate:${date}-${lastMonthDay} 23:59:59_mesto:all`, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {

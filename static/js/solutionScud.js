@@ -13,55 +13,33 @@ function getWorkTime(dateArray) {
     return time
 }
 
+//new
 function getOutWorkTimeArray(array, date, smenaState) {
+    let outArray = array.slice();
+    const shiftValues = {
+        '8': ['07:00:00', '07:00:00'],
+        '7': ['06:50:00', '06:50:00'],
+        '11': ['06:45:00', '06:45:00'],
+        '24': ['07:00:00', '08:00:00'],
+        '8и': ['00:00:00', date == dayNow() ? timeNow() : '23:59:59'],
+    };
 
-    let outArray = array.slice()
+    const [startTime, endTime] = shiftValues[smenaState];
+    const start = smenaState == '8и' ? `${date} 00:00:00` : `${dayYesterday(date)} ${startTime}`;
+    const end = `${date} ${endTime}`;
 
-    if (smenaState == '8') {
-        if (outArray[0] !== `${dayYesterday(date)} 07:00:00`) {
-            outArray.unshift(`${dayYesterday(date)} 07:00:00`)
-        } else outArray.splice(0, 1)
-        if (outArray[outArray.length - 1] !== `${date} 07:00:00`) outArray.push(`${date} 07:00:00`)
-    }
+    if (outArray[0] !== start) outArray.unshift(start);
+    else outArray.splice(0, 1);
+    if (outArray[outArray.length - 1] !== end) outArray.push(end);
 
-    if (smenaState == '7') {
-        if (outArray[0] !== `${dayYesterday(date)} 06:50:00`) {
-            outArray.unshift(`${dayYesterday(date)} 06:50:00`)
-        } else outArray.splice(0, 1)
-        if (outArray[outArray.length - 1] !== `${date} 06:50:00`) outArray.push(`${date} 06:50:00`)
-    }
-
-    if (smenaState == '11') {
-        if (outArray[0] !== `${dayYesterday(date)} 06:45:00`) {
-            outArray.unshift(`${dayYesterday(date)} 06:45:00`)
-        } else outArray.splice(0, 1)
-        if (outArray[outArray.length - 1] !== `${date} 06:45:00`) outArray.push(`${date} 06:45:00`)
-    }
-
-    if (smenaState == '24') {
-        if (outArray[0] !== `${dayYesterday(date)} 07:00:00`) {
-            outArray.unshift(`${dayYesterday(date)} 07:00:00`)
-        } else outArray.splice(0, 1)
-        if (outArray[outArray.length - 1] !== `${date} 08:00:00`) outArray.push(`${date} 08:00:00`)
-    }
-
-    if (smenaState == '8и') {
-        if (outArray[0] !== `${date} 00:00:00`) {
-            outArray.unshift(`${date} 00:00:00`)
-        } else outArray.splice(0, 1)
-
-        if (date == dayNow()) {
-            if (outArray[outArray.length - 1] !== `${date} ${timeNow()}`) outArray.push(`${date} ${timeNow()}`)
-        } else if (outArray[outArray.length - 1] !== `${date} 23:59:59`) outArray.push(`${date} 23:59:59`)
-    }
-
-    return outArray
+    return outArray;
 }
 
+//new
 function createUserDataStructure(data) {
     let userData = {}
 
-    for (let i = 0; i < data.username.length; i++) {
+    data.username.forEach((username, i) => {
         userData[data.username[i]] = {
             name: data.username[i],
             tabid: data.tabid[i],
@@ -71,7 +49,7 @@ function createUserDataStructure(data) {
             smenaInfo: data.typeSmena[i],
             photo: data.photo[data.tabid[i]]
         }
-    }
+    })
 
     data.logtime.forEach((e, i) => {
         userData[data.username[i]].logtime.push(e)
@@ -81,17 +59,16 @@ function createUserDataStructure(data) {
     return userData
 }
 
+//new
 function getLastDate(inWork, outWork, y, smenaState) {
     let date = dayTimeNow()
-
     let lastInWork = inWork[inWork.length - 1]
     let lastoutWork = outWork[outWork.length - 1]
-
     let last = (new Date(lastInWork) >= lastoutWork) ? lastInWork : lastoutWork
 
-    if (date.slice(0, 10) == last.slice(0, 10) && (smenaState == '8и')) {
-        return parseScudForHighcharts([last, `${last.slice(0, 10)} 23:59:59`], y)
-    } else return null
+    return (date.slice(0, 10) == last.slice(0, 10) && (smenaState == '8и'))
+        ? parseScudForHighcharts([last, `${last.slice(0, 10)} 23:59:59`], y)
+        : null;
 }
 
 function applyFilters(userData, smenaState, date) {
@@ -117,59 +94,34 @@ function applyFilters(userData, smenaState, date) {
     return userData
 }
 
+//new
 function dublicateDeleteFilter(arrayData, arrayInOut) {
     let filterData = []
     let filterInOut = []
 
     for (let i = 0; i < arrayInOut.length; i++) {
-        if (i == arrayInOut.length - 1) {
-            filterData.push(arrayData[i])
-            filterInOut.push(arrayInOut[i])
-        } else if (arrayInOut[i] != arrayInOut[i + 1]) {
+        if (i == arrayInOut.length - 1 || arrayInOut[i] != arrayInOut[i + 1]) {
             filterData.push(arrayData[i])
             filterInOut.push(arrayInOut[i])
         }
     }
-
     return [filterData, filterInOut]
 }
 
+//new
 function addStartOrEnd(filterArrays, typeTime = '8и', date) {
 
-    let filterData = filterArrays[0]
-    let filterInOut = filterArrays[1]
+    let [filterData, filterInOut] = filterArrays
 
-    let currentDate = dayNow()
-
-    let startTime = null
-    let endTime = null
-
-    switch (typeTime) {
-        case '8и':
-            startTime = date + ' 00:00:00'
-            endTime = (currentDate == date) ? date + ' ' + timeNow() : date + ' 23:59:59'
-            break;
-        case '8':
-            startTime = dayYesterday(date) + ' 07:00:00'
-            endTime = date + ' 07:00:00'
-            break;
-        case '7':
-            startTime = dayYesterday(date) + ' 06:50:00'
-            endTime = date + ' 06:50:00'
-            break;
-        case '11':
-            startTime = dayYesterday(date) + ' 06:45:00'
-            endTime = date + ' 06:45:00'
-            break;
-        case '24':
-            startTime = dayYesterday(date) + ' 07:00:00'
-            endTime = date + ' 08:00:00'
-            break;
-        default:
-            startTime = date + ' 00:00:00'
-            endTime = (currentDate == date) ? date + ' ' + timeNow() : date + ' 23:59:59'
-            break
+    let timeMap = {
+        '8и': [date + ' 00:00:00', (date == dayNow()) ? date + ' ' + timeNow() : date + ' 23:59:59'],
+        '8': [dayYesterday(date) + ' 07:00:00', date + ' 07:00:00'],
+        '7': [dayYesterday(date) + ' 06:50:00', date + ' 06:50:00'],
+        '11': [dayYesterday(date) + ' 06:45:00', date + ' 06:45:00'],
+        '24': [dayYesterday(date) + ' 07:00:00', date + ' 08:00:00']
     }
+
+    let [startTime, endTime] = timeMap[typeTime]
 
     if (filterInOut[0] == 'output') {
         filterData.unshift(startTime)
@@ -181,312 +133,137 @@ function addStartOrEnd(filterArrays, typeTime = '8и', date) {
     return filterData
 }
 
+//new
 function insideFilterLunch(startLunch, endLunch, dateArray) {
 
     let arrayClear = []
     let arraySave = []
+    let timeStartLunch = new Date(startLunch).getTime()
+    let timeEndLunch = new Date(endLunch).getTime()
 
     for (let i = 0; i < dateArray.length; i++) {
-        if (
-            new Date(dateArray[i]).getTime() >= new Date(startLunch).getTime() &&
-            new Date(dateArray[i]).getTime() < new Date(endLunch).getTime()
-        ) {
-        } else arrayClear.push(dateArray[i])
+        let timeArray = new Date(dateArray[i]).getTime()
+        if (timeArray >= timeStartLunch && timeArray < timeEndLunch) {
+            continue
+        }
+        arrayClear.push(dateArray[i])
     }
+
     arraySave = arrayClear.slice()
+    let lengthArray = arrayClear.length
 
-    for (let i = 0; i < arrayClear.length; i++) {
-        if (arrayClear.length == 1) {
-            if (new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime()) {
-                arraySave.push(startLunch)
-            } else arraySave.unshift(endLunch)
-
-        } else if (
-            new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime() &&
-            new Date(arrayClear[i + 1]).getTime() > new Date(endLunch).getTime()
-        ) {
-            if (arrayClear.length % 2 == 0) {
+    for (let i = 0; i < lengthArray; i++) {
+        let timeArray = new Date(arrayClear[i]).getTime()
+        if (lengthArray == 1) {
+            (timeArray < timeStartLunch) ? arraySave.push(startLunch) : arraySave.unshift(endLunch)
+        } else if (timeArray < timeStartLunch && new Date(arrayClear[i + 1]).getTime() > timeEndLunch) {
+            if (lengthArray % 2 == 0) {
                 if (i % 2 == 0) arraySave.splice(i + 1, 0, ...[startLunch, endLunch])
             } else if (i % 2 == 0) {
                 arraySave.splice(i + 1, 0, startLunch)
             } else arraySave.splice(i + 1, 0, endLunch)
-        } else if (
-            i % 2 == 0 &&
-            arrayClear.length - 1 == i &&
-            new Date(arrayClear[i]).getTime() < new Date(startLunch).getTime()
-        ) {
+        } else if (i % 2 == 0 && lengthArray - 1 == i && timeArray < timeEndLunch) {
             arraySave.push(startLunch)
-        } else if (
-            i == 0 &&
-            arrayClear.length % 2 == 1 &&
-            new Date(arrayClear[i]).getTime() > new Date(endLunch).getTime()
-        ) {
+        } else if (i == 0 && lengthArray % 2 == 1 && timeArray > timeEndLunch) {
             arraySave.unshift(endLunch)
         }
     }
     return arraySave
 }
 
+//new
 function filterLunch(dateArray, date, smenaState) {
-
-    let startLunch = null
-    let endLunch = null
-
-    let startLunch2 = null
-    let endLunch2 = null
-
-    let startLunch3 = null
-    let endLunch3 = null
-
-    let startLunch4 = null
-    let endLunch4 = null
-
-    let yesterday = dayYesterday(date)
-
-    let arraySave = []
-
+    let yesterday = dayYesterday(date);
+    let lunchPeriods = [];
     switch (smenaState) {
         case '8и':
-            startLunch = date + ' 12:00:00'
-            endLunch = date + ' 13:00:00'
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
+            lunchPeriods = [[date + ' 12:00:00', date + ' 13:00:00']];
             break;
         case '8':
-            startLunch = yesterday + ' 11:30:00'
-            endLunch = yesterday + ' 12:00:00'
-
-            startLunch2 = yesterday + ' 19:30:00'
-            endLunch2 = yesterday + ' 20:00:00'
-
-            startLunch3 = date + ' 03:00:00'
-            endLunch3 = date + ' 03:30:00'
-
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
-            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
+            lunchPeriods = [
+                [yesterday + ' 11:30:00', yesterday + ' 12:00:00'],
+                [yesterday + ' 19:30:00', yesterday + ' 20:00:00'],
+                [date + ' 03:00:00', date + ' 03:30:00']
+            ];
             break;
         case '7':
-            startLunch = yesterday + ' 11:30:00'
-            endLunch = yesterday + ' 12:30:00'
-
-            startLunch2 = yesterday + ' 19:30:00'
-            endLunch2 = yesterday + ' 20:30:00'
-
-            startLunch3 = date + ' 03:00:00'
-            endLunch3 = date + ' 04:00:00'
-
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
-            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
+            lunchPeriods = [
+                [yesterday + ' 11:30:00', yesterday + ' 12:30:00'],
+                [yesterday + ' 19:30:00', yesterday + ' 20:30:00'],
+                [date + ' 03:00:00', date + ' 04:00:00']
+            ];
             break;
         case '11':
-            startLunch = yesterday + ' 11:30:00'
-            endLunch = yesterday + ' 12:00:00'
-
-            startLunch2 = yesterday + ' 16:00:00'
-            endLunch2 = yesterday + ' 16:30:00'
-
-            startLunch3 = yesterday + ' 23:00:00'
-            endLunch3 = yesterday + ' 23:30:00'
-
-            startLunch4 = date + ' 03:30:00'
-            endLunch4 = date + ' 04:00:00'
-
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
-            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
-            arraySave = insideFilterLunch(startLunch4, endLunch4, arraySave)
+            lunchPeriods = [
+                [yesterday + ' 11:30:00', yesterday + ' 12:00:00'],
+                [yesterday + ' 16:00:00', yesterday + ' 16:30:00'],
+                [yesterday + ' 23:00:00', yesterday + ' 23:30:00'],
+                [date + ' 03:30:00', date + ' 04:00:00']
+            ];
             break;
         case '24':
-            startLunch = yesterday + ' 12:30:00'
-            endLunch = yesterday + ' 13:00:00'
-
-            startLunch2 = yesterday + ' 20:00:00'
-            endLunch2 = yesterday + ' 20:30:00'
-
-            startLunch3 = date + ' 04:00:00'
-            endLunch3 = date + ' 04:30:00'
-
-            arraySave = insideFilterLunch(startLunch, endLunch, dateArray)
-            arraySave = insideFilterLunch(startLunch2, endLunch2, arraySave)
-            arraySave = insideFilterLunch(startLunch3, endLunch3, arraySave)
+            lunchPeriods = [
+                [yesterday + ' 12:30:00', yesterday + ' 13:00:00'],
+                [yesterday + ' 20:00:00', yesterday + ' 20:30:00'],
+                [date + ' 04:00:00', date + ' 04:30:00']
+            ];
             break;
         default:
-            startLunch = date + ' 12:00:00'
-            endLunch = date + ' 13:00:00'
+            lunchPeriods = [[date + ' 12:00:00', date + ' 13:00:00']];
     }
-    return arraySave
+
+    return lunchPeriods.reduce((filteredArray, period) => {
+        return insideFilterLunch(period[0], period[1], filteredArray);
+    }, dateArray);
 }
 
+//new
 function parseScudForHighcharts(arrayParse, y) {
-    let arraySave = []
-
-    let msArray = arrayParse.map(e => {
-        return new Date(e).getTime()
+    return arrayParse.map((date, i) => i % 2 && {
+        x: new Date(arrayParse[i - 1]).getTime(),
+        x2: new Date(date).getTime(),
+        y
     })
-
-    for (let i = 1; i < msArray.length; i += 2) {
-        arraySave.push({
-            x: msArray[i - 1],
-            x2: msArray[i],
-            y: y,
-        })
-    }
-    return arraySave
 }
 
+//new
 function parseScudLunches(smenaState, date, y) {
+    let yesterday = dayYesterday(date);
+    let lunches = {
+        '8и': [
+            {start: `${date} 12:00:00`, end: `${date} 13:00:00`}
+        ],
+        '8': [
+            {start: `${yesterday} 11:30:00`, end: `${yesterday} 12:00:00`},
+            {start: `${yesterday} 19:30:00`, end: `${yesterday} 20:00:00`},
+            {start: `${date} 03:00:00`, end: `${date} 03:30:00`}
+        ],
+        '7': [
+            {start: `${yesterday} 11:30:00`, end: `${yesterday} 12:30:00`},
+            {start: `${yesterday} 19:30:00`, end: `${yesterday} 20:30:00`},
+            {start: `${date} 03:00:00`, end: `${date} 04:00:00`}
+        ],
+        '11': [
+            {start: `${yesterday} 11:30:00`, end: `${yesterday} 12:00:00`},
+            {start: `${yesterday} 16:00:00`, end: `${yesterday} 16:30:00`},
+            {start: `${yesterday} 23:00:00`, end: `${yesterday} 23:30:00`},
+            {start: `${date} 03:30:00`, end: `${date} 04:00:00`}
+        ],
+        '24': [
+            {start: `${yesterday} 12:30:00`, end: `${yesterday} 13:00:00`},
+            {start: `${yesterday} 20:00:00`, end: `${yesterday} 20:30:00`},
+            {start: `${date} 04:00:00`, end: `${date} 04:30:00`}
+        ]
+    };
 
-    let arraySave = []
-    let yesterday = dayYesterday(date)
+    let lunchArray = lunches[smenaState];
+    if (!lunchArray) return [];
 
-    let startLunch = null
-    let endLunch = null
-
-    let startLunch2 = null
-    let endLunch2 = null
-
-    let startLunch3 = null
-    let endLunch3 = null
-
-    let startLunch4 = null
-    let endLunch4 = null
-
-    switch (smenaState) {
-        case '8и':
-            startLunch = date + ' 12:00:00'
-            endLunch = date + ' 13:00:00'
-
-            arraySave.push({
-                x: new Date(startLunch).getTime(),
-                x2: new Date(endLunch).getTime(),
-                y: y,
-            })
-
-            break;
-        case '8':
-            startLunch = yesterday + ' 11:30:00'
-            endLunch = yesterday + ' 12:00:00'
-
-            startLunch2 = yesterday + ' 19:30:00'
-            endLunch2 = yesterday + ' 20:00:00'
-
-            startLunch3 = date + ' 03:00:00'
-            endLunch3 = date + ' 03:30:00'
-
-            arraySave.push({
-                x: new Date(startLunch).getTime(),
-                x2: new Date(endLunch).getTime(),
-                y: y,
-            })
-            arraySave.push({
-                x: new Date(startLunch2).getTime(),
-                x2: new Date(endLunch2).getTime(),
-                y: y,
-            })
-            arraySave.push({
-                x: new Date(startLunch3).getTime(),
-                x2: new Date(endLunch3).getTime(),
-                y: y,
-            })
-            break;
-        case '7':
-            startLunch = yesterday + ' 11:30:00'
-            endLunch = yesterday + ' 12:30:00'
-
-            startLunch2 = yesterday + ' 19:30:00'
-            endLunch2 = yesterday + ' 20:30:00'
-
-            startLunch3 = date + ' 03:00:00'
-            endLunch3 = date + ' 04:00:00'
-
-            arraySave.push({
-                x: new Date(startLunch).getTime(),
-                x2: new Date(endLunch).getTime(),
-                y: y,
-            })
-            arraySave.push({
-                x: new Date(startLunch2).getTime(),
-                x2: new Date(endLunch2).getTime(),
-                y: y,
-            })
-            arraySave.push({
-                x: new Date(startLunch3).getTime(),
-                x2: new Date(endLunch3).getTime(),
-                y: y,
-            })
-            break;
-        case '11':
-            startLunch = yesterday + ' 11:30:00'
-            endLunch = yesterday + ' 12:00:00'
-
-            startLunch2 = yesterday + ' 16:00:00'
-            endLunch2 = yesterday + ' 16:30:00'
-
-            startLunch3 = yesterday + ' 23:00:00'
-            endLunch3 = yesterday + ' 23:30:00'
-
-            startLunch4 = date + ' 03:30:00'
-            endLunch4 = date + ' 04:00:00'
-
-            arraySave.push({
-                x: new Date(startLunch).getTime(),
-                x2: new Date(endLunch).getTime(),
-                y: y,
-            })
-            arraySave.push({
-                x: new Date(startLunch2).getTime(),
-                x2: new Date(endLunch2).getTime(),
-                y: y,
-            })
-            arraySave.push({
-                x: new Date(startLunch3).getTime(),
-                x2: new Date(endLunch3).getTime(),
-                y: y,
-            })
-            arraySave.push({
-                x: new Date(startLunch4).getTime(),
-                x2: new Date(endLunch4).getTime(),
-                y: y,
-            })
-            break;
-        case '24':
-            startLunch = yesterday + ' 12:30:00'
-            endLunch = yesterday + ' 13:00:00'
-
-            startLunch2 = yesterday + ' 20:00:00'
-            endLunch2 = yesterday + ' 20:30:00'
-
-            startLunch3 = date + ' 04:00:00'
-            endLunch3 = date + ' 04:30:00'
-
-            arraySave.push({
-                x: new Date(startLunch).getTime(),
-                x2: new Date(endLunch).getTime(),
-                y: y,
-            })
-            arraySave.push({
-                x: new Date(startLunch2).getTime(),
-                x2: new Date(endLunch2).getTime(),
-                y: y,
-            })
-            arraySave.push({
-                x: new Date(startLunch3).getTime(),
-                x2: new Date(endLunch3).getTime(),
-                y: y,
-            })
-            break;
-        default:
-            startLunch = date + ' 12:00:00'
-            endLunch = date + ' 13:00:00'
-
-            arraySave.push({
-                x: new Date(startLunch).getTime(),
-                x2: new Date(endLunch).getTime(),
-                y: y,
-            })
-    }
-    return arraySave
+    return lunchArray.map(({start, end}) => ({
+        x: new Date(start).getTime(),
+        x2: new Date(end).getTime(),
+        y
+    }));
 }
 
 function getHighchartSeriesAndNames(userData) {
@@ -632,88 +409,46 @@ function getHighchartSeriesAndNames(userData) {
     return [series, arrayNames, workTime, tabelArray]
 }
 
+//new
 function getLunchHeight(heightHighchartContainer) {
-    let addHeight = 52
-    switch (heightHighchartContainer) {
-        case 1:
-            addHeight = 210
-            break
-        case 2:
-            addHeight = 105
-            break
-        case 3:
-            addHeight = 70
-            break
-        case 4:
-            addHeight = 52
-            break
-        case 5:
-            addHeight = 42
-            break
-        case 6:
-            addHeight = 38
-            break
-        case 7:
-            addHeight = 39.5
-            break
-        case 8:
-            addHeight = 40.875
-            break
-        case 10:
-            addHeight = 43
-            break
-        default:
-            addHeight = 52
-            break
+    const addHeightLookup = {
+        1: 210,
+        2: 105,
+        3: 70,
+        4: 52,
+        5: 42,
+        6: 38,
+        7: 39.5,
+        8: 40.875,
+        10: 43,
     }
 
+    let addHeight = addHeightLookup[heightHighchartContainer] || 52
     let height = (heightHighchartContainer > 10) ? 52 * (heightHighchartContainer - 2) + 13 :
         (heightHighchartContainer > 0) ? addHeight * heightHighchartContainer : 0
     return height
 }
 
+//new
 function getOtklonHeight(heightHighchartContainer) {
-    let height = '52px'
-
-    switch (heightHighchartContainer) {
-        case 1:
-            height = '210px'
-            break
-        case 2:
-            height = '105px'
-            break
-        case 3:
-            height = '70px'
-            break
-        case 4:
-            height = '52px'
-            break
-        case 5:
-            height = '42px'
-            break
-        case 6:
-            height = '38px'
-            break
-        case 7:
-            height = '39.5px'
-            break
-        case 8:
-            height = '40.875px'
-        case 10:
-            height = '43px'
-            break
-        default:
-            height = '52px'
-            break
+    const addHeightLookup = {
+        1: '210px',
+        2: '105px',
+        3: '70px',
+        4: '52px',
+        5: '42px',
+        6: '38px',
+        7: '39.5px',
+        8: '40.875px',
+        10: '43px',
     }
-    return height
+    return addHeightLookup[heightHighchartContainer]
 }
 
 function msToTimeScud(duration, date = 24) {
 
     let minutes = parseInt((duration / (1000 * 60)) % 60),
         hours = parseInt((duration / (1000 * 60 * 60)) % 24);
-
 
     if (hours <= 9) hours = '0' + hours
 
@@ -722,44 +457,30 @@ function msToTimeScud(duration, date = 24) {
     return `${hours}:${minutes}`
 }
 
+//new
 function getSmenaTime(typeSmena) {
-    let smenaTime = 0
-
-    switch (typeSmena) {
-        case '8и':
-            smenaTime = 28800000
-            break;
-        case '8':
-            smenaTime = 28800000
-            break;
-        case '7':
-            smenaTime = 26400000
-            break;
-        case '11':
-            smenaTime = 39600000
-            break;
-        case '24':
-            smenaTime = 81000000
-            break;
-        default:
-            smenaTime = 28800000
-            break
+    let smenaType = {
+        '8и': 28800000,
+        '8': 28800000,
+        '7': 26400000,
+        '11': 39600000,
+        '24': 81000000
     }
-    return smenaTime
+    return smenaType[typeSmena]
 }
 
+//new
 function selectObjectsWithSmena(userData, smenaState) {
     let obj = {}
     Object.keys(userData).forEach(name => {
-        if (userData[name].smenaInfo !== '') {
-            if (userData[name].smenaInfo == smenaState) {
-                obj[name] = userData[name]
-            }
+        if (userData[name].smenaInfo !== '' && userData[name].smenaInfo == smenaState) {
+            obj[name] = userData[name]
         }
     })
     return obj
 }
 
+//new
 function changeLunchOpacity() {
 
     let highchartsTracker = document.getElementsByClassName('highcharts-tracker')
@@ -767,19 +488,10 @@ function changeLunchOpacity() {
 
     for (let i = 0; i < lunchTimes.length; i++) {
         for (let j = 0; j < highchartsTracker.length; j++) {
-
-            if (highchartsTracker[j].lastChild.lastChild !== undefined) {
-                if (highchartsTracker[j].lastChild.lastChild.getAttribute('fill') == 'rgba(26, 170, 229, 0.6)') {
-                    highchartsTracker[j].style.pointerEvents = "none";
-                }
+            let lastChild = highchartsTracker[j].lastChild.lastChild
+            if (lastChild !== undefined && lastChild.getAttribute('fill') == 'rgba(26, 170, 229, 0.6)') {
+                highchartsTracker[j].style.pointerEvents = "none";
             }
-            //
-            // highchartsTracker[j].addEventListener('mouseover', (event) => {
-            //     lunchTimes[i].classList.add('lunchTimeHide')
-            // });
-            // highchartsTracker[j].addEventListener('mouseleave', (event) => {
-            //     lunchTimes[i].classList.remove('lunchTimeHide')
-            // });
         }
     }
 }
@@ -801,7 +513,7 @@ function defenseFromManyRequest(setFunction) {
 
 function getScudBotUrl() {
 
-    let pathName = 'office'
+    let pathName
 
     if (location.pathname.includes('1ploshadka')) {
         pathName = '1ploshadka'
@@ -899,8 +611,9 @@ function filterLunchMonth(dateArray, date, smenaState) {
     return arraySave
 }
 
+//new
 function applyMonthFilters(usersData, userNames, date) {
-    let lastMonthDay = 32 - new Date(date.slice(0, 4), date.slice(5, 7), 32).getDate();
+    let lastMonthDay = countDaysInMonth(date);;
 
     userNames.forEach(userName => {
         // Формирую месячный объект пользователя
@@ -965,4 +678,10 @@ function nameSort(a, b, obj) {
 function getDateFromIndex(date, index) {
     index = (index < 10) ? `0${index}` : `${index}`
     return `${date}-${index}`
+}
+
+function countDaysInMonth(dateString) {
+    let year = parseInt(dateString.slice(0, 4));
+    let month = parseInt(dateString.slice(5, 7));
+    return new Date(year, month, 0).getDate();
 }

@@ -15,6 +15,7 @@ const {
     lazy
 } = React
 
+
 const loader = document.querySelector('.loader');
 
 const showLoader = () => loader.classList.remove('loader--hide');
