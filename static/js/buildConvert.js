@@ -587,6 +587,18 @@ function getAllStankiData() {
         state: true,
     }
 
+    let kv12 = {
+        buttonNames: {
+            name: "Испытательный стенд КВ-12",
+            serviceName: "Испытательный стенд КВ-12",
+        },
+        complexImg: "../images/nk600.png",
+        complexRequest: 'kv12',
+        buttonsVrs: [-463, 1183, 'url(../images/nk600.png) no-repeat', "../images/ceh2.png", 40, "100%"],
+        size: "ceh2",
+        state: true,
+    }
+
     let uvf5220 = {
         buttonNames: {
             name: "УФ5220",
@@ -1302,7 +1314,7 @@ function getAllStankiData() {
 
     let placesObject = {
         'ОТК': {
-            stanki: {kim, nk600},
+            stanki: {kim, nk600, kv12},
             placeState: true,
         },
         'Мех.уч.2 пл.': {

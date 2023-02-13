@@ -417,32 +417,6 @@ function ComplexTotalMonthInfo() {
     )
 }
 
-function SwitchLineHC({date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState}) {
-    return (
-        <div className="energyCalendarContainer">
-            <label className="switch">
-                <input type="checkbox" onChange={() => {
-                    changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
-                }}/>
-                <span className="slider round"></span>
-            </label>
-        </div>
-    )
-}
-
-function SwitchLineSmenaHC({date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState}) {
-    return (
-        <div className="energyCalendarContainer">
-            <label className="switch">
-                <input type="checkbox" onChange={() => {
-                    changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, complexRequest, valuesState)
-                }}/>
-                <span className="slider round"></span>
-            </label>
-        </div>
-    )
-}
-
 function SwitchLineHCIndividual({stateLineHC, setStateLineHC, text = 'Переключить тип диаграмм '}) {
 
     const [disable, setDisable] = useState(false)
