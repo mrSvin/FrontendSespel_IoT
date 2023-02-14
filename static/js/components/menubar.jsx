@@ -108,14 +108,6 @@ function Menubar() {
                 <h2 className="buttonName">Beacon</h2>
             </Link>
 
-            <Link to="/loginNew" className="container-home">
-                <div className="icon-container">
-                    <p>Отслеживание объектов</p>
-                    <div className="beacon"></div>
-                </div>
-                <h2 className="buttonName">Логин</h2>
-            </Link>
-
             {/*<a href="/menubar/sklad" className="container-home">*/}
             {/*    <div className="icon-container">*/}
             {/*        <p>Учет комплектующих склада Мех. цеха II площадки</p>*/}
