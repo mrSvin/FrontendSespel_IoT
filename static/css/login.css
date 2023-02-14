@@ -16,7 +16,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 7%;
+    opacity: 99%;
 }
 
 body {
@@ -38,13 +38,13 @@ body {
     max-width: 300px;
     margin: 50px auto;
     padding: 50px;
-    opacity: 0;
+    opacity: 95%;
     transition: all 10s ease-in;
 }
 
-.login, .registration {
-    opacity: 1;
-}
+/*.login, .registration {*/
+/*    opacity: 1;*/
+/*}*/
 
 .error-msg {
     color: #ff6d6d;
