@@ -46,7 +46,7 @@ function Intra() {
 
 }
 
-function Wialon() {
+function Wialon()   {
 
     return (
         <div>
@@ -80,84 +80,28 @@ function Teamcenter() {
 
 
 function Menubar() {
+    const menuItems = [
+        { name: 'Станки', link: '/stanki/ОТК', iconClass: 'stanki', description: 'Суточные и месячные отчеты работы оборудования' },
+        { name: 'Энергоресурсы', link: '/energyWater', iconClass: 'energy', description: 'Показатели расхода газа, воды, электроэнергии' },
+        { name: 'Beacon', link: '/beacon', iconClass: 'beacon', description: 'Отслеживание объектов' },
+        { name: 'Контроль персонала', link: '/scud/2ploshadka', iconClass: 'scud', description: 'Отслеживание работы сотрудников в зонах предприятия' },
+        { name: 'Owencloud', link: '/owencloud', iconClass: 'owencloud', description: 'Облачная платформа мониторинга оборудования' },
+        { name: 'Умный дом', link: '/intra', iconClass: 'intra', description: 'SCADA система Intrahouse для диспетчеризации' },
+        { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
+        { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией' },
+    ];
 
     return (
         <div className="main-container-home">
-
-            <Link to="/stanki/ОТК" className="container-home">
-                <div className="icon-container">
-                    <p>Суточные и месячные отчеты работы оборудования</p>
-                    <div className="stanki"></div>
-                </div>
-                <h2 className="buttonName">Станки</h2>
-            </Link>
-
-            <Link to="/energyWater" className="container-home">
-                <div className="icon-container">
-                    <p>Показатели расхода газа, воды, электроэнергии</p>
-                    <div className="energy"></div>
-                </div>
-                <h2 className="buttonName">Энергоресурсы</h2>
-            </Link>
-
-            <Link to="/beacon" className="container-home">
-                <div className="icon-container">
-                    <p>Отслеживание объектов</p>
-                    <div className="beacon"></div>
-                </div>
-                <h2 className="buttonName">Beacon</h2>
-            </Link>
-
-            {/*<a href="/menubar/sklad" className="container-home">*/}
-            {/*    <div className="icon-container">*/}
-            {/*        <p>Учет комплектующих склада Мех. цеха II площадки</p>*/}
-            {/*        <div className="envelope"></div>*/}
-            {/*    </div>*/}
-            {/*    <h2 className="buttonName">Склад</h2>*/}
-            {/*</a>*/}
-
-            <Link to="/scud/2ploshadka" className="container-home">
-                <div className="icon-container">
-                    <p>Отслеживание работы сотрудников в зонах предприятия</p>
-                    <div className="scud"></div>
-                </div>
-                <h2 className="buttonName">Контроль персонала</h2>
-            </Link>
-
-            <Link to="/owencloud" className="container-home">
-                <div className="icon-container">
-                    <p>Облачная платформа мониторинга оборудования</p>
-                    <div className="owencloud"></div>
-                </div>
-                <h2 className="buttonName">Owencloud</h2>
-            </Link>
-
-            <Link to="/intra" className="container-home">
-                <div className="icon-container">
-                    <p>SCADA система Intrahouse для диспетчеризации</p>
-                    <div className="intra"></div>
-                </div>
-                <h2 className="buttonName">Умный дом</h2>
-            </Link>
-
-            <Link to="/wialon" className="container-home">
-                <div className="icon-container">
-                    <p>Облачная платформа мониторинга производимых ППЦ</p>
-                    <div className="wialon"></div>
-                </div>
-                <h2 className="buttonName">Wialon</h2>
-            </Link>
-
-            <Link to="/teamcenter" className="container-home">
-                <div className="icon-container">
-                    <p>Платформа для работы с конструкторской документацией</p>
-                    <div className="teamcenter"></div>
-                </div>
-                <h2 className="buttonName">Teamcenter</h2>
-            </Link>
-
-
+            {menuItems.map(({ name, link, iconClass, description }) => (
+                <Link key={name} to={link} className="container-home">
+                    <div className="icon-container">
+                        <p>{description}</p>
+                        <div className={`${iconClass}`} />
+                    </div>
+                    <h2 className="buttonName">{name}</h2>
+                </Link>
+            ))}
         </div>
-    )
-
+    );
 }
