@@ -1,4 +1,6 @@
 function PrintEnergy() {
+    const days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+
     return (
         <div>
             <table id='printEnergy' className='tablePrintEnergy'>
@@ -8,99 +10,11 @@ function PrintEnergy() {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                </tr>
-                <tr>
-                    <td>13</td>
-                </tr>
-                <tr>
-                    <td>14</td>
-                </tr>
-                <tr>
-                    <td>15</td>
-                </tr>
-                <tr>
-                    <td>16</td>
-                </tr>
-                <tr>
-                    <td>17</td>
-                </tr>
-                <tr>
-                    <td>18</td>
-                </tr>
-                <tr>
-                    <td>19</td>
-                </tr>
-                <tr>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>21</td>
-                </tr>
-                <tr>
-                    <td>22</td>
-                </tr>
-                <tr>
-                    <td>23</td>
-                </tr>
-                <tr>
-                    <td>24</td>
-                </tr>
-                <tr>
-                    <td>25</td>
-                </tr>
-                <tr>
-                    <td>26</td>
-                </tr>
-                <tr>
-                    <td>27</td>
-                </tr>
-                <tr>
-                    <td>28</td>
-                </tr>
-                <tr>
-                    <td>29</td>
-                </tr>
-                <tr>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>31</td>
-                </tr>
+                {days.map(day => (
+                    <tr key={day}>
+                        <td>{day}</td>
+                    </tr>
+                ))}
                 <tr>
                     <td>Итого</td>
                 </tr>
