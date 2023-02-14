@@ -184,3 +184,8 @@ a:hover, a:visited, a:link, a:active {
     margin-right: auto
 }
 
+input.inputBtn:-webkit-autofill {
+    font-size:17px;
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+}
