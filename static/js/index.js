@@ -40,10 +40,6 @@ function App({hideLoader}) {
                         <Login/>
                     </Route>
 
-                    <Route path="/loginNew">
-                        <LoginNew/>
-                    </Route>
-
                     <Route path="/winnum">
                         <Winnum/>
                     </Route>
