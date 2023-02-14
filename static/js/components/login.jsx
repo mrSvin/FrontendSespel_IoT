@@ -68,7 +68,6 @@ function Login() {
                             className="inputBtn"
                             name="remember"
                             type="checkbox"
-                            checked={rememberMe}
                             onClick={event => setRememberMe(event.target.checked)}
                         />
                         <label
