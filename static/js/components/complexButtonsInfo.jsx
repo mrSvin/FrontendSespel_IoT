@@ -113,69 +113,30 @@ function ComplexButtons({
                             current = null
                         }) {
 
-    let hight = null
-    let width = null
 
     let linkService = `/service/${service}`
     let linkReport = `/report/${report}`
     let linkCurrent = `/currentParams/${current}`
 
-    switch (size) {
-        case '1ploshadkaOutside': {
-            hight = 1030
-            width = 1030
-            break;
-        }
-        case '2ploshadkaOutside': {
-            hight = 1030
-            width = 1030
-            break;
-        }
-        case '2ploshadka': {
-            hight = 690
-            width = 1510
-            break;
-        }
-        case 'meh1': {
-            hight = 920
-            width = 920
-            break;
-        }
-        case 'ceh6': {
-            hight = 910
-            width = 1010
-            break;
-        }
-        case 'sborCeh': {
-            hight = 1320
-            width = 1200
-            break;
-        }
-        case 'ceh5': {
-            hight = 895
-            width = 1020
-            break;
-        }
-        case 'ceh1': {
-            hight = 660
-            width = 1920
-            break;
-        }
-        case 'ceh2': {
-            hight = 616
-            width = 1272
-            break;
-        }
-        default: {
-            hight = 1030
-            width = 1030
-        }
-    }
+    const sizeProperties = {
+        '1ploshadkaOutside': { height: 1030, width: 1030 },
+        '2ploshadkaOutside': { height: 1030, width: 1030 },
+        '2ploshadka': { height: 690, width: 1510 },
+        'meh1': { height: 920, width: 920 },
+        'ceh6': { height: 910, width: 1010 },
+        'sborCeh': { height: 1320, width: 1200 },
+        'ceh5': { height: 895, width: 1020 },
+        'ceh1': { height: 660, width: 1920 },
+        'ceh2': { height: 616, width: 1272 },
+        'undefined': {height:1030, width: 1030},
+    };
+
+    const { height, width } = sizeProperties[size]
 
     let mesto = (parameter) => (event) => {
 
         window.localStorage['mestoParams'] = parameter
-        window.open("../mesto/mestoNew", '', 'scrollbars=1,height=' + Math.min(hight, screen.availHeight) +
+        window.open("../mesto/mestoNew", '', 'scrollbars=1,height=' + Math.min(height, screen.availHeight) +
             ',width=' + Math.min(width, screen.availWidth))
     }
 
@@ -186,44 +147,22 @@ function ComplexButtons({
     }
 
     let error = (complexName) => (event) => {
-        let href;
-        switch (complexName) {
-            case "CTX310 2":
-                href = "../stanki/alarm/3"
-                break
-            case 'NTX1000':
-                href = "../stanki/alarm/16"
-                break
-            case 'NLX3000':
-                href = "../stanki/alarm/15"
-                break
-            case 'GAMMA2000':
-                href = "../stanki/alarm/1"
-                break
-            case 'CTX650':
-                href = "../stanki/alarm/10"
-                break
-            case 'DMF260':
-                href = "../stanki/alarm/12"
-                break
-            case 'DMU50 1':
-                href = "../stanki/alarm/13"
-                break
-            case 'DMU50 2':
-                href = "../stanki/alarm/14"
-                break
-            case 'DMC1035':
-                href = "../stanki/alarm/11"
-                break
-            case 'CTX310 1':
-                href = "../stanki/alarm/2"
-                break
-            case 'CTX510 1':
-                href = "../stanki/alarm/5"
-                break
-            default:
-                href = "../stanki/alarm/1"
-        }
+        const complexToAlarm = {
+            'CTX310 2': '3',
+            'NTX1000': '16',
+            'NLX3000': '15',
+            'GAMMA2000': '1',
+            'CTX650': '10',
+            'DMF260': '12',
+            'DMU50 1': '13',
+            'DMU50 2': '14',
+            'DMC1035': '11',
+            'CTX310 1': '2',
+            'CTX510 1': '5'
+        };
+
+        let href = complexToAlarm[complexName]
+        href = `../stanki/alarm/${href}`
 
         window.open(href, '', 'scrollbars=1,height=' + Math.min(1000, screen.availHeight) + ',width=' + Math.min(1600, screen.availWidth))
     }
