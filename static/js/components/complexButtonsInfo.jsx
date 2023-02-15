@@ -1,7 +1,7 @@
 function ComplexSutkiAllInfo({
                                  complexName, complexImg, complexMesto,
                                  size, idContainer = null, service,
-                                 alarm, programs, laser, report, current, typeLine='multiLine'
+                                 alarm, programs, laser, report, current, typeLine = 'multiLine'
                              }) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
@@ -16,7 +16,8 @@ function ComplexSutkiAllInfo({
                          report={report} current={current}/>
             <div className='highChartsLineRound'>
                 <div className="lineComplex">
-                    <div className={`lineSukiHighChart ${typeLine == "multiLine"? null : 'lineSwitchShort'}`} id={idLine}></div>
+                    <div className={`lineSukiHighChart ${typeLine == "multiLine" ? null : 'lineSwitchShort'}`}
+                         id={idLine}></div>
                     {idProgram != null ?
                         <div className="lineProgramHighChart" id={idProgram}></div>
                         : null
@@ -119,19 +120,19 @@ function ComplexButtons({
     let linkCurrent = `/currentParams/${current}`
 
     const sizeProperties = {
-        '1ploshadkaOutside': { height: 1030, width: 1030 },
-        '2ploshadkaOutside': { height: 1030, width: 1030 },
-        '2ploshadka': { height: 690, width: 1510 },
-        'meh1': { height: 920, width: 920 },
-        'ceh6': { height: 910, width: 1010 },
-        'sborCeh': { height: 1320, width: 1200 },
-        'ceh5': { height: 895, width: 1020 },
-        'ceh1': { height: 660, width: 1920 },
-        'ceh2': { height: 616, width: 1272 },
-        'undefined': {height:1030, width: 1030},
+        '1ploshadkaOutside': {height: 1030, width: 1030},
+        '2ploshadkaOutside': {height: 1030, width: 1030},
+        '2ploshadka': {height: 690, width: 1510},
+        'meh1': {height: 920, width: 920},
+        'ceh6': {height: 910, width: 1010},
+        'sborCeh': {height: 1320, width: 1200},
+        'ceh5': {height: 895, width: 1020},
+        'ceh1': {height: 660, width: 1920},
+        'ceh2': {height: 616, width: 1272},
+        'undefined': {height: 1030, width: 1030},
     };
 
-    const { height, width } = sizeProperties[size]
+    const {height, width} = sizeProperties[size]
 
     let mesto = (parameter) => (event) => {
 
@@ -168,174 +169,117 @@ function ComplexButtons({
     }
 
     let program = (complexName) => (event) => {
-        let href;
-        switch (complexName) {
-            case 'APEC':
-                href = "../stanki/programTime/apec"
-                break
-            case 'APECsmena':
-                href = "../stanki/programTimeSmena/apec"
-                break
-            case "Навигатор 1":
-                href = "../stanki/programTime/navigator_1"
-                break
-            case 'Навигатор 2':
-                href = "../stanki/programTime/navigator_2_golova_2"
-                break
-            case 'Навигатор 3':
-                href = "../stanki/programTime/navigator_3"
-                break
-            case "Навигатор 1smena":
-                href = "../stanki/programTimeSmena/navigator_1"
-                break
-            case 'Навигатор 2smena':
-                href = "../stanki/programTimeSmena/navigator_2_golova_2"
-                break
-            case 'Навигатор 3smena':
-                href = "../stanki/programTimeSmena/navigator_3"
-                break
-            case 'TruLaser':
-                href = "../stanki/programTime/trulaser"
-                break
-            case 'TruLasersmena':
-                href = "../stanki/programTimeSmena/trulaser"
-                break
-            case 'CRYSTA-Apex S9168':
-                href = "../stanki/programTime/kim"
-                break
-            case 'CRYSTA-Apex S9168smena':
-                href = "../stanki/programTimeSmena/kim"
-                break
-            case 'МАКС 1':
-                href = "../stanki/programTime/maks_1"
-                break
-            case 'МАКС 1smena':
-                href = "../stanki/programTimeSmena/maks_1"
-                break
-            case 'МАКС 2':
-                href = "../stanki/programTime/maks_2"
-                break
-            case 'МАКС 2smena':
-                href = "../stanki/programTimeSmena/maks_2"
-                break
-            case 'М710':
-                href = "../stanki/programTime/m710"
-                break
-            case 'М710smena':
-                href = "../stanki/programTimeSmena/m710"
-                break
-            case 'РТК12C':
-                href = "../stanki/programTime/rtk12c"
-                break
-            case 'РТК12Csmena':
-                href = "../stanki/programTimeSmena/rtk12c"
-                break
-            case 'P250':
-                href = "../stanki/programTime/p250"
-                break
-            case 'P250smena':
-                href = "../stanki/programTimeSmena/p250"
-                break
-            case 'КРОТ':
-                href = "../stanki/programTime/krot"
-                break
-            case 'КРОТsmena':
-                href = "../stanki/programTimeSmena/krot"
-                break
-            case 'ПРАНС':
-                href = "../stanki/programTime/prans"
-                break
-            case 'ПРАНСsmena':
-                href = "../stanki/programTimeSmena/prans"
-                break
-            default:
-                href = "../stanki/programTime/navigator_1"
+
+        const complexToProgram = {
+            'APEC': "../stanki/programTime/apec",
+            'APECsmena': "../stanki/programTimeSmena/apec",
+            'Навигатор 1': "../stanki/programTime/navigator_1",
+            'Навигатор 2': "../stanki/programTime/navigator_2_golova_2",
+            'Навигатор 3': "../stanki/programTime/navigator_3",
+            "Навигатор 1smena": "../stanki/programTimeSmena/navigator_1",
+            'Навигатор 2smena': "../stanki/programTimeSmena/navigator_2_golova_2",
+            'Навигатор 3smena': "../stanki/programTimeSmena/navigator_3",
+            'TruLaser': "../stanki/programTime/trulaser",
+            'TruLasersmena': "../stanki/programTimeSmena/trulaser",
+            'CRYSTA-Apex S9168':"../stanki/programTime/kim",
+            'CRYSTA-Apex S9168smena':"../stanki/programTimeSmena/kim",
+            'МАКС 1':"../stanki/programTime/maks_1",
+            'МАКС 1smena':"../stanki/programTimeSmena/maks_1",
+            'МАКС 2': "../stanki/programTime/maks_2",
+            'МАКС 2smena':"../stanki/programTimeSmena/maks_2",
+            'М710':"../stanki/programTime/m710",
+            'М710smena':"../stanki/programTimeSmena/m710",
+            'РТК12C':"../stanki/programTime/rtk12c",
+            'РТК12Csmena':"../stanki/programTimeSmena/rtk12c",
+            'P250':"../stanki/programTime/p250",
+            'P250smena':"../stanki/programTimeSmena/p250",
+            'КРОТ':"../stanki/programTime/krot",
+            'КРОТsmena':"../stanki/programTimeSmena/krot",
+            'ПРАНС':"../stanki/programTime/prans",
+            'ПРАНСsmena': "../stanki/programTimeSmena/prans",
         }
+        let href = complexToProgram[complexName]
 
         window.open(href, '', 'scrollbars=1,height=' + Math.min(1000, screen.availHeight) + ',width=' + Math.min(1600, screen.availWidth))
+
     }
 
-    let laserButton = (complexName) => (event) => {
-        let href;
-        switch (complexName) {
-            case "Навигатор 1":
-                href = "../stanki/navigatorPower/navigator_1"
-                break
-            case 'Навигатор 2':
-                href = "../stanki/navigatorPower/navigator_2_2"
-                break
-            case 'Навигатор 3':
-                href = "../stanki/navigatorPower/navigator_3"
-                break
 
-            default:
-                href = "../stanki/navigator_1"
+let laserButton = (complexName) => (event) => {
+
+    const complexToLaser = {
+        'Навигатор 1': 'navigator_1',
+        'Навигатор 2': 'navigator_2_2',
+        'Навигатор 3': 'navigator_3',
+    }
+
+    let href = complexToLaser[complexName]
+    href = `../stanki/navigatorPower/${href}`
+
+    window.open(href, '', 'scrollbars=1,height=' + Math.min(1000, screen.availHeight) + ',width=' + Math.min(1600, screen.availWidth))
+}
+
+return (
+
+    <div className='parentIcons'>
+
+        <a className="icon_mesto"
+           onClick={mesto(complexMesto)}>
+            <div className="label">Место</div>
+        </a>
+
+        <a className="icon_personal"
+           onClick={personal}>
+            <div className="label">Персонал</div>
+        </a>
+
+        {alarm != null ?
+            <a className="icon_error"
+               onClick={error(alarm)}>
+                <div className="label">Ошибки</div>
+            </a> :
+            <div></div>
         }
 
-        window.open(href, '', 'scrollbars=1,height=' + Math.min(1000, screen.availHeight) + ',width=' + Math.min(1600, screen.availWidth))
-    }
+        {programs != null ?
+            <a className="icon_program"
+               onClick={program(programs)}>
+                <div className="label">Программы</div>
+            </a> :
+            <div></div>
+        }
 
-    return (
+        {laser != null ?
+            <a className="icon_laser"
+               onClick={laserButton(laser)}>
+                <div className="label">Излучение</div>
+            </a> :
+            <div></div>
+        }
+        {service != null ?
+            <Link to={linkService} className="icon_service">
+                <div className="label">Сервис</div>
+            </Link> :
+            <div></div>
+        }
 
-        <div className='parentIcons'>
+        {report != null ?
+            <Link to={linkReport} className="icon_report">
+                <div className="label">Отчеты</div>
+            </Link> :
+            <div></div>
+        }
 
-            <a className="icon_mesto"
-               onClick={mesto(complexMesto)}>
-                <div className="label">Место</div>
-            </a>
+        {current != null ?
+            <Link to={linkCurrent} className="iconJob">
+                <div className="label">Сигналы</div>
+            </Link> :
+            <div></div>
+        }
 
-            <a className="icon_personal"
-               onClick={personal}>
-                <div className="label">Персонал</div>
-            </a>
+    </div>
 
-            {alarm != null ?
-                <a className="icon_error"
-                   onClick={error(alarm)}>
-                    <div className="label">Ошибки</div>
-                </a> :
-                <div></div>
-            }
-
-            {programs != null ?
-                <a className="icon_program"
-                   onClick={program(programs)}>
-                    <div className="label">Программы</div>
-                </a> :
-                <div></div>
-            }
-
-            {laser != null ?
-                <a className="icon_laser"
-                   onClick={laserButton(laser)}>
-                    <div className="label">Излучение</div>
-                </a> :
-                <div></div>
-            }
-            {service != null ?
-                <Link to={linkService} className="icon_service">
-                    <div className="label">Сервис</div>
-                </Link> :
-                <div></div>
-            }
-
-            {report != null ?
-                <Link to={linkReport} className="icon_report">
-                    <div className="label">Отчеты</div>
-                </Link> :
-                <div></div>
-            }
-
-            {current != null ?
-                <Link to={linkCurrent} className="iconJob">
-                    <div className="label">Сигналы</div>
-                </Link> :
-                <div></div>
-            }
-
-        </div>
-
-    )
+)
 }
 
 function ComplexTotalSutkiInfo() {
@@ -369,15 +313,16 @@ function SwitchLineHCIndividual({stateLineHC, setStateLineHC, text = 'Перек
             <div className="switchBlock">
                 <p>{text}</p>
                 <label className="switch">
-                    <input type="checkbox" disabled={disable} checked={stateLineHC == 'multiLine'? false : true} onChange={() => {
-                        setDisable(true)
-                        if (stateLineHC == 'line') {
-                            setStateLineHC('multiLine')
-                        } else {
-                            setStateLineHC('line')
-                        }
-                        setTimeout(Activate, 800)
-                    }}/>
+                    <input type="checkbox" disabled={disable} checked={stateLineHC == 'multiLine' ? false : true}
+                           onChange={() => {
+                               setDisable(true)
+                               if (stateLineHC == 'line') {
+                                   setStateLineHC('multiLine')
+                               } else {
+                                   setStateLineHC('line')
+                               }
+                               setTimeout(Activate, 800)
+                           }}/>
                     <span className="slider round"></span>
                 </label>
             </div>
