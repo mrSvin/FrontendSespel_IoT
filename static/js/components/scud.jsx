@@ -424,7 +424,7 @@ function Otklon({heightHighchartContainer, workTime, smenaState}) {
 
     return (
         <div>
-            <div className={'otklon'} style={lunchSettings}>
+            <div className={'otklon adaptiveOtklon'} style={lunchSettings}>
                 <p>Откл-е</p>
                 {workTime.map((e, i) => {
                     let t = null
@@ -463,7 +463,7 @@ function WorkTime({heightHighchartContainer, workTime}) {
 
     return (
         <div>
-            <div className={'otklon'} style={lunchSettings}>
+            <div className={'otklon adaptiveWorkTime'} style={lunchSettings}>
                 <p style={pSetting}>Время</p>
                 {workTime.map((e, i) => {
                     return <div key={i} className='otklonTime' style={style}>{msToTimeScud(e)}</div>
@@ -490,7 +490,7 @@ function Photo({heightHighchartContainer, photoArray, loading}) {
 
     return (
         <div>
-            <div className={`otklon ${loading ? 'hideScudAvatar' : null}`} style={lunchSettings}>
+            <div className={`otklon adaptivePhoto ${loading ? 'hideScudAvatar' : null}`} style={lunchSettings}>
                 {photoArray.map((e, i) => {
                     return (
                         <div key={i} className='otklonTime' style={style}>
