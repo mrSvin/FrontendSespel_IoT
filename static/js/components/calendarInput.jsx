@@ -99,96 +99,25 @@ const MonthCalendar = ({newDate, dateMonth}) => {
                     <div className="months">
                         <table className="calendarMonth">
                             <tbody>
-                            <tr>
-                                <td
-                                    className={month == months[0] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Янв")
-                                    }}
-                                >Янв
-                                </td>
-                                <td
-                                    className={month == months[1] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Фев")
-                                    }}
-                                >Фев
-                                </td>
-                                <td
-                                    className={month == months[2] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Мар")
-                                    }}
-                                >Мар
-                                </td>
-                                <td
-                                    className={month == months[3] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Апр")
-                                    }}
-                                >Апр
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    className={month == months[4] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Май")
-                                    }}
-                                >Май
-                                </td>
-                                <td
-                                    className={month == months[5] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Июн")
-                                    }}
-                                >Июн
-                                </td>
-                                <td
-                                    className={month == months[6] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Июл")
-                                    }}
-                                >Июл
-                                </td>
-                                <td
-                                    className={month == months[7] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Авг")
-                                    }}
-                                >Авг
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    className={month == months[8] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Сен")
-                                    }}
-                                >Сен
-                                </td>
-                                <td
-                                    className={month == months[9] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Окт")
-                                    }}
-                                >Окт
-                                </td>
-                                <td
-                                    className={month == months[10] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Ноя")
-                                    }}
-                                >Ноя
-                                </td>
-                                <td
-                                    className={month == months[11] ? "tdMonthRed" : "tdMonth"}
-                                    onClick={(e) => {
-                                        changeMonth(e, "Дек")
-                                    }}
-                                >Дек
-                                </td>
-                            </tr>
+                            {params.map((monthName, i) => (
+                                <tr key={i}>
+                                    {[0, 1, 2, 3].map((j) => {
+                                        const monthIndex = i * 4 + j;
+
+                                        return (
+                                            <td
+                                                key={j}
+                                                className={month == months[monthIndex] ? "tdMonthRed" : "tdMonth"}
+                                                onClick={(e) => {
+                                                    changeMonth(e, params[monthIndex])
+                                                }}
+                                            >
+                                                {params[monthIndex]}
+                                            </td>
+                                        );
+                                    })}
+                                </tr>
+                            ))}
                             </tbody>
                         </table>
                     </div>
