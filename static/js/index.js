@@ -31,99 +31,55 @@ function App({hideLoader}) {
 
     useEffect(hideLoader, []);
 
+    const iframeRoutes = [
+        { path: "/winnum", source: "winnum" },
+        { path: "/owencloud", source: "owencloud" },
+        { path: "/intra", source: "intra" },
+        { path: "/wialon", source: "wialon" },
+        { path: "/teamcenter", source: "teamcenter" },
+    ];
+
+    const componentRoutes = [
+        { path: "/login", component: Login },
+        { path: "/energyWater", component: EnergyWater },
+        { path: "/energyElectro", component: EnergyElectro },
+        { path: "/energyGas", component: EnergyGas },
+        { path: "/printEnergy", component: PrintEnergy },
+        { path: "/stanki", component: Stanki },
+        { path: "/stankiMonth", component: StankiMonth },
+        { path: "/stankiSmena", component: StankiSmena },
+        { path: "/service", component: Service },
+        { path: "/report", component: Report },
+        { path: "/currentParams", component: CurrentParams },
+        { path: "/beacon", component: Beacon },
+        { path: "/scud", component: Scud },
+        { path: "bot/scudBot", component: ScudBot },
+        { path: "userscontrol", component: UsersControl },
+        { path: "/", component: Home },
+    ];
+
+
     return (
         <BrowserRouter>
             <Header/>
             <div className="headerPadding">
                 <Switch>
-                    <Route path="/login">
-                        <Login/>
-                    </Route>
 
-                    <Route path="/winnum">
-                        <IframeLink source="winnum"/>
-                    </Route>
 
-                    <Route path="/owencloud">
-                        <IframeLink source="owencloud"/>
-                    </Route>
+                    {iframeRoutes.map((route) => (
+                        <Route key={route.path} path={route.path}>
+                            <IframeLink source={route.source} />
+                        </Route>
+                    ))}
 
-                    <Route path="/intra">
-                        <IframeLink source="intra"/>
-                    </Route>
-
-                    <Route path="/wialon">
-                        <IframeLink source="wialon"/>
-                    </Route>
-
-                    <Route path="/teamcenter">
-                        <IframeLink source="teamcenter"/>
-                    </Route>
-
-                    <Route path="/energyWater">
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <EnergyWater/>
-                        </Suspense>
-                    </Route>
-
-                    <Route path="/energyElectro">
-                        <EnergyElectro/>
-                    </Route>
-
-                    <Route path="/energyGas">
-                        <EnergyGas/>
-                    </Route>
-
-                    <Route path="/printEnergy">
-                        <PrintEnergy/>
-                    </Route>
-
-                    <Route path="/stanki">
-                        <Stanki/>
-                    </Route>
-
-                    <Route path="/stankiMonth">
-                        <StankiMonth/>
-                    </Route>
-
-                    <Route path="/stankiSmena">
-                        <StankiSmena/>
-                    </Route>
-
-                    <Route path="/service">
-                        <Service/>
-                    </Route>
-
-                    <Route path="/report">
-                        <Report/>
-                    </Route>
-
-                    <Route path="/currentParams">
-                        <CurrentParams/>
-                    </Route>
-
-                    <Route path="/beacon">
-                        <Beacon/>
-                    </Route>
-
-                    <Route path="/scud">
-                        <Scud/>
-                    </Route>
-
-                    <Route path="/bot/scudBot">
-                        <ScudBot/>
-                    </Route>
+                    {componentRoutes.map((route) => (
+                        <Route key={route.path} path={route.path}>
+                            <route.component />
+                        </Route>
+                    ))}
 
                     <Route path="/scudMonth">
                         <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
-                    </Route>
-
-                    <Route path="/userscontrol">
-                        <UsersControl/>
-                    </Route>
-
-                    <Route exact path="/">
-                        <Home/>
                     </Route>
 
                 </Switch>
