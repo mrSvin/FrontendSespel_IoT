@@ -41,23 +41,23 @@ function App({hideLoader}) {
                     </Route>
 
                     <Route path="/winnum">
-                        <Winnum/>
+                        <IframeLink source="winnum"/>
                     </Route>
 
                     <Route path="/owencloud">
-                        <Owencloud/>
+                        <IframeLink source="owencloud"/>
                     </Route>
 
                     <Route path="/intra">
-                        <Intra/>
+                        <IframeLink source="intra"/>
                     </Route>
 
                     <Route path="/wialon">
-                        <Wialon/>
+                        <IframeLink source="wialon"/>
                     </Route>
 
                     <Route path="/teamcenter">
-                        <Teamcenter/>
+                        <IframeLink source="teamcenter"/>
                     </Route>
 
                     <Route path="/energyWater">

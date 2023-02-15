@@ -219,11 +219,12 @@ function filterLunch(dateArray, date, smenaState) {
 
 //new
 function parseScudForHighcharts(arrayParse, y) {
+
     return arrayParse.map((date, i) => i % 2 && {
         x: new Date(arrayParse[i - 1]).getTime(),
         x2: new Date(date).getTime(),
         y
-    })
+    }).filter(elem => typeof elem === "object");
 }
 
 //new
