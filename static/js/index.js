@@ -65,17 +65,21 @@ function App({hideLoader}) {
             <div className="headerPadding">
                 <Switch>
 
-                    {iframeRoutes.map((route) => (
-                        <Route key={route.path} path={route.path}>
-                            <IframeLink source={route.source}/>
-                        </Route>
-                    ))}
+                    {iframeRoutes.map((route) => {
+                        return (
+                            <Route key={route.path} path={route.path}>
+                                <IframeLink source={route.source}/>
+                            </Route>
+                        )
+                    })}
 
-                    {componentRoutes.map((route) => (
-                        <Route key={route.path} path={route.path}>
-                            <route.component/>
-                        </Route>
-                    ))}
+                    {componentRoutes.map((route) => {
+                        return (
+                            <Route key={route.path} path={route.path}>
+                                <route.component/>
+                            </Route>
+                        )
+                    })}
 
                     <Route path="/scudMonth">
                         <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
