@@ -99,11 +99,11 @@ const MonthCalendar = ({newDate, dateMonth}) => {
                     <div className="months">
                         <table className="calendarMonth">
                             <tbody>
-                            {params.map((monthName, i) => (
+                            {[0, 1, 2].map((i) => (
                                 <tr key={i}>
                                     {[0, 1, 2, 3].map((j) => {
                                         const monthIndex = i * 4 + j;
-
+                                        console.log(i, j, params[monthIndex])
                                         return (
                                             <td
                                                 key={j}
