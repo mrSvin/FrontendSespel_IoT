@@ -14,7 +14,7 @@
     transition: 1s;
 }
 
-.skudAvatar{
+.skudAvatar {
     vertical-align: middle;
     object-fit: cover;
     transition: 1s;
@@ -29,7 +29,7 @@
     z-index: 2;
 }
 
-.otklon{
+.otklon {
     min-height: 0px;
     position: absolute;
     right: 6%;
@@ -42,7 +42,7 @@
     align-items: center;
 }
 
-.otklon > p{
+.otklon > p {
     position: absolute;
     top: -40px;
     right: -5px;
@@ -170,5 +170,43 @@
 .scudBotMargin {
     top: 50px;
     margin-right: 15px;
+}
+
+
+@media (min-width: 1150px) and (max-width: 1850px) {
+    .scudHigcharts {
+        width: 75%;
+    }
+
+    .adaptivePhoto {
+        right: 20.5% !important;
+    }
+
+    .adaptiveOtklon {
+        right: 13.5% !important;
+    }
+
+    .adaptiveWorkTime {
+        right: 4% !important;
+    }
+}
+
+
+@media (min-width: 800px) and (max-width: 1150px) {
+    .scudHigcharts {
+        width: 70%;
+    }
+
+    .adaptivePhoto {
+        right: 20.9% !important;
+    }
+
+    .adaptiveOtklon {
+        right: 13.5% !important;
+    }
+
+    .adaptiveWorkTime {
+        right: 4% !important;
+    }
 }
 
