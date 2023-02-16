@@ -302,6 +302,10 @@ p.formAdminName {
     align-items: center;
 }
 
+.passwordDiv > .passwordEye{
+    top:8px;
+}
+
 .passwordInput {
     width: 100%;
     margin: 0 auto;
