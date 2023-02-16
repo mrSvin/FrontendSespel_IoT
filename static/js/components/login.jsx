@@ -49,7 +49,7 @@ function Login() {
                             onChange={event => setLogin(event.target.value)}
 
                         />
-                        <div className='passwordDiv'>
+                        <div className='passwordLogin'>
                             <input
                                 type={passwordEye ? 'text' : 'password'}
                                 className="inputBtn"
