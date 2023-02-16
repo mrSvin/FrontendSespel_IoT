@@ -103,7 +103,6 @@ const MonthCalendar = ({newDate, dateMonth}) => {
                                 <tr key={i}>
                                     {[0, 1, 2, 3].map((j) => {
                                         const monthIndex = i * 4 + j;
-                                        console.log(i, j, params[monthIndex])
                                         return (
                                             <td
                                                 key={j}

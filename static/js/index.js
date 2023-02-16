@@ -32,11 +32,11 @@ function App({hideLoader}) {
     useEffect(hideLoader, []);
 
     const iframeRoutes = [
-        { path: "/winnum", source: "winnum" },
-        { path: "/owencloud", source: "owencloud" },
-        { path: "/intra", source: "intra" },
-        { path: "/wialon", source: "wialon" },
-        { path: "/teamcenter", source: "teamcenter" },
+        { path: "/winnum", source: "http://winnum-serv/Winnum/views/navigation/home/list.jsp" },
+        { path: "/owencloud", source: "https://web.owencloud.ru/device/index/201636" },
+        { path: "/intra", source: "http://89.151.134.234:46088/" },
+        { path: "/wialon", source: "https://hosting.wialon.com/" },
+        { path: "/teamcenter", source: "http://tcsespel.sespel.corp:7001/awc/" },
     ];
 
     const componentRoutes = [

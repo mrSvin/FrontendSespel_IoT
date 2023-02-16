@@ -1,18 +1,10 @@
 function IframeLink({source}) {
 
-    let linksMap = {
-        'winnum': "http://winnum-serv/Winnum/views/navigation/home/list.jsp",
-        'owencloud': "https://web.owencloud.ru/device/index/201636",
-        'intra': "http://89.151.134.234:46088/",
-        'wialon': "https://hosting.wialon.com/",
-        'teamcenter': "http://tcsespel.sespel.corp:7001/awc/",
-    }
-
     return (
         <div>
             <iframe
                 className="iframeInput"
-                src={linksMap[source]}
+                src={source}
             >
             </iframe>
         </div>
