@@ -1,7 +1,7 @@
 const {
     BrowserRouter,
+    Switch,
     Route,
-    Routes,
     Link,
     useHistory,
 } = ReactRouterDOM
@@ -63,7 +63,8 @@ function App({hideLoader}) {
         <BrowserRouter>
             <Header/>
             <div className="headerPadding">
-                <Routes>
+                <Switch>
+
                     {iframeRoutes.map((route) => (
                         <Route key={route.path} path={route.path}>
                             <IframeLink source={route.source}/>
@@ -79,7 +80,8 @@ function App({hideLoader}) {
                     <Route path="/scudMonth">
                         <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
                     </Route>
-                </Routes>
+
+                </Switch>
             </div>
         </BrowserRouter>
     )
