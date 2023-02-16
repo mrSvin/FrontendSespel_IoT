@@ -81,20 +81,11 @@ function App({hideLoader}) {
                         )
                     })}
 
-                    {/*{[*/}
-                    {/*    <Route path="/scudMonth">*/}
-                    {/*        <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>*/}
-                    {/*    </Route>*/}
-                    {/*]}*/}
+                    <Route key={'/scudMonth'} path="/scudMonth">
+                        <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
+                    </Route>
 
 
-                    {[0].map((route) => {
-                        return (
-                            <Route path="/scudMonth">
-                                <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
-                            </Route>
-                        )
-                    })}
 
                 </Switch>
             </div>
