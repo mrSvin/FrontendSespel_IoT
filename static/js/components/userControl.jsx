@@ -74,7 +74,7 @@ function UsersControl() {
                             <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>{userTable.username}</td>
-                                <td>{userTable.role}</td>
+                                <td>{userTable.role.slice(5)}</td>
                                 <td>{userTable.email}</td>
                                 <td>
                                     <span
