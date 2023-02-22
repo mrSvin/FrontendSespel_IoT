@@ -65,6 +65,10 @@ function App({hideLoader}) {
             <div className="headerPadding">
                 <Switch>
 
+                    <Route path="/scudMonth">
+                        <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
+                    </Route>
+
                     {iframeRoutes.map((route) => {
                         return (
                             <Route key={route.path} path={route.path}>
@@ -81,12 +85,6 @@ function App({hideLoader}) {
                         )
                     })}
 
-                    <Route key={'/scudMonth'} path="/scudMonth">
-                        <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
-                    </Route>
-
-
-
                 </Switch>
             </div>
         </BrowserRouter>
@@ -94,13 +92,14 @@ function App({hideLoader}) {
 
 }
 
+const root = ReactDOM.createRoot(document.getElementById("main-app"));
+
 setTimeout(() =>
 
-        ReactDOM.render(
+        root.render(
             <App
                 hideLoader={hideLoader}
                 showLoader={showLoader}
             />,
-            document.getElementById('main-app')
         )
     , 1);
