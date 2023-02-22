@@ -1,0 +1,171 @@
+:root {
+    --network-color-border: #6a88a9;
+}
+
+.networkWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.networkTable {
+    width: 94%;
+    border-spacing: 0;
+    /*border-collapse: collapse;*/
+}
+
+.networkTable > thead {
+    position: relative;
+    top: 13px;
+    height: 45px;
+    color: white;
+    font-size: 20px;
+    z-index: 1;
+}
+
+.networkTable > thead > tr > th {
+    background: #2c5275;
+    border-top: solid 1px var(--network-color-border);
+    border-bottom: solid 1px var(--network-color-border);
+}
+
+.networkTable > tbody > tr:nth-child(1) {
+    position: relative;
+    bottom: -5px;
+}
+
+.networkTable > thead > tr > th:nth-child(1) {
+    border: solid 1px var(--network-color-border);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-right: none;
+    transform-style: preserve-3d;
+}
+
+.networkTable > thead > tr > th:nth-child(1)::before {
+    content:"";
+    background: #252734;
+    display: block;
+    width: 100%;
+    height: 30px;
+    z-index: 0;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    transform: translateZ(-1px);
+}
+
+.networkTable > thead > tr > th:last-child::before {
+    content:"";
+    background: #252734;
+    display: block;
+    width: 100%;
+    height: 30px;
+    z-index: 0;
+    position: absolute;
+    top: -14px;
+    left: 2px;
+    transform: translateZ(-1px);
+}
+
+.networkTable > thead > tr > th:last-child {
+    border: solid 1px var(--network-color-border);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: none;
+    transform-style: preserve-3d;
+}
+
+.networkTable > tbody {
+    margin: 0 auto;
+    text-align: center;
+    border-left: 1px var(--network-color-border) solid;
+    border-right: 1px var(--network-color-border) solid;
+    color: white;
+    font-size: 20px;
+}
+
+.networkTable > tbody > tr > td {
+    border-bottom: 1px var(--network-color-border) solid;
+}
+
+.networkTable > tbody > tr > td:nth-child(1) {
+    border-left: 1px var(--network-color-border) solid;
+}
+
+.networkTable > tbody > tr > td {
+    border-right: 1px var(--network-color-border) solid;
+}
+
+/*.networkTable > tbody > tr > td:last-child {*/
+/*    border-right: 1px var(--network-color-border) solid;*/
+/*}*/
+
+.networkTable > tbody > tr > td:nth-child(2) {
+    width: 120px;
+}
+
+.networkTable > tbody > tr > td:nth-child(3) {
+    inline-size: 200px;
+    padding: 10px 15px;
+}
+
+
+
+.sizeStatusActive {
+    height: 30px!important;
+    width: 30px!important;
+}
+
+.networkImageBlock {
+    width: 120px;
+    height: 120px;
+    display: flex;
+}
+
+.networkImageBlock > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.imageListWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.imageListWrapper img {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    border-radius: 100px;
+}
+
+.networkAddButton {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    z-index: 3;
+    width: 100px;
+    height: 102%;
+    color: white;
+    font-size: 13px;
+    top: -1.8px;
+    right: -3px;
+    border: 1px solid #00386c;
+    border-radius: 5px;
+    background: #1674b7;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.networkAddButton:hover{
+    background: #1392ed;
+    box-shadow: 0px 0px 4px 0px #14b2e9, inset 0px 0px 0px 0px #14b2f3 !important;
+}
+
+.imageBackground{
+    background-color: #d5d7df;
+}
+

@@ -43,71 +43,66 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
     function fetchRequestScudMonthThen(promise) {
         promise.then(data => {
             let usersData = data[0]
+            let date = data[1]
 
-            if (usersData == 'many request') {
-                saveMemoryMonth()
-            } else{
-                let date = data[1]
+            if (!Object.keys(usersData).includes('error')) {
+                usersData = createUserDataStructure(usersData)
 
-                if (!Object.keys(usersData).includes('error')) {
-                    usersData = createUserDataStructure(usersData)
+                let userNames = Object.keys(usersData)
+                usersData = applyMonthFilters(usersData, userNames, date)
 
-                    let userNames = Object.keys(usersData)
-                    usersData = applyMonthFilters(usersData, userNames, date)
+                let allData = {
+                    smena_7: [],
+                    smena_8i: [],
+                    smena_8: [],
+                    smena_11: [],
+                    smena_24: [],
+                    hiddens: []
+                }
 
-                    let allData = {
-                        smena_7: [],
-                        smena_8i: [],
-                        smena_8: [],
-                        smena_11: [],
-                        smena_24: [],
-                        hiddens: []
+                Object.keys(usersData).forEach(name => {
+
+                    switch (usersData[name].smenaInfo) {
+                        case '7':
+                            allData.smena_7.push(usersData[name])
+                            break
+                        case '8и':
+                            allData.smena_8i.push(usersData[name])
+                            break
+                        case '8':
+                            allData.smena_8.push(usersData[name])
+                            break
+                        case '11':
+                            allData.smena_11.push(usersData[name])
+                            break
+                        case '24':
+                            allData.smena_24.push(usersData[name])
+                            break
+                        default:
+                            allData.hiddens.push(usersData[name])
                     }
+                })
 
-                    Object.keys(usersData).forEach(name => {
-
-                        switch (usersData[name].smenaInfo) {
-                            case '7':
-                                allData.smena_7.push(usersData[name])
-                                break
-                            case '8и':
-                                allData.smena_8i.push(usersData[name])
-                                break
-                            case '8':
-                                allData.smena_8.push(usersData[name])
-                                break
-                            case '11':
-                                allData.smena_11.push(usersData[name])
-                                break
-                            case '24':
-                                allData.smena_24.push(usersData[name])
-                                break
-                            default:
-                                allData.hiddens.push(usersData[name])
-                        }
-                    })
-
-                    if (scudMonthMemory == null) {
-                        setScudMonthMemory({[dateMonth]: {lastTime: dayTimeNow(), data: allData},})
-                    } else if (scudMonthMemory[dateMonth] == undefined) {
+                if (scudMonthMemory == null) {
+                    setScudMonthMemory({[dateMonth]: {lastTime: dayTimeNow(), data: allData},})
+                } else if (scudMonthMemory[dateMonth] == undefined) {
+                    setScudMonthMemory(prevState => ({
+                        ...prevState,
+                        [dateMonth]: {lastTime: dayTimeNow(), data: allData}
+                    }));
+                } else {
+                    let lastTime = new Date(dayTimeNow()).getTime()
+                    let thisMonthLastTime = new Date(scudMonthMemory[dateMonth].lastTime).getTime()
+                    // Если данные записанные больше часа назад
+                    if (lastTime - thisMonthLastTime > 10800000) {
                         setScudMonthMemory(prevState => ({
                             ...prevState,
                             [dateMonth]: {lastTime: dayTimeNow(), data: allData}
                         }));
-                    } else {
-                        let lastTime = new Date(dayTimeNow()).getTime()
-                        let thisMonthLastTime = new Date(scudMonthMemory[dateMonth].lastTime).getTime()
-                        // Если данные записанные больше часа назад
-                        if (lastTime - thisMonthLastTime > 10800000) {
-                            setScudMonthMemory(prevState => ({
-                                ...prevState,
-                                [dateMonth]: {lastTime: dayTimeNow(), data: allData}
-                            }));
-                        }
                     }
-
-                    switchTableState(allData)
                 }
+
+                switchTableState(allData)
             }
         })
     }

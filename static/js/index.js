@@ -51,7 +51,8 @@ function App({hideLoader}) {
         {path: "/service", component: Service},
         {path: "/report", component: Report},
         {path: "/currentParams", component: CurrentParams},
-        {path: "/beacon", component: Beacon},
+        // {path: "/beacon", component: Beacon},
+        {path: "/network", component: Network},
         {path: "/scud", component: Scud},
         {path: "/bot/scudBot", component: ScudBot},
         {path: "/userscontrol", component: UsersControl},
@@ -64,10 +65,6 @@ function App({hideLoader}) {
             <Header/>
             <div className="headerPadding">
                 <Switch>
-
-                    <Route path="/scudMonth">
-                        <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
-                    </Route>
 
                     {iframeRoutes.map((route) => {
                         return (
@@ -85,6 +82,12 @@ function App({hideLoader}) {
                         )
                     })}
 
+                    <Route key={'/scudMonth'} path="/scudMonth">
+                        <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
+                    </Route>
+
+
+
                 </Switch>
             </div>
         </BrowserRouter>
@@ -92,14 +95,13 @@ function App({hideLoader}) {
 
 }
 
-const root = ReactDOM.createRoot(document.getElementById("main-app"));
-
 setTimeout(() =>
 
-        root.render(
+        ReactDOM.render(
             <App
                 hideLoader={hideLoader}
                 showLoader={showLoader}
             />,
+            document.getElementById('main-app')
         )
     , 1);
