@@ -45,7 +45,6 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
             let usersData = data[0]
 
             if (usersData == 'many request') {
-                setLoading(false)
                 saveMemoryMonth()
             } else{
                 let date = data[1]
