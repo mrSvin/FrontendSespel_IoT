@@ -105,7 +105,7 @@ function Network() {
         let dataArray = [{
             name: 'NTX1000',
             ip: '192.168.1.1',
-            image: ntx1000,
+            image: '../images/ntx1000.png',
             connect: '1',
             connectTime: '11:08',
             workers: [humanEx, humanEx],
@@ -113,7 +113,7 @@ function Network() {
         }, {
             name: 'SK50',
             ip: '192.168.1.2',
-            image: ntx1000,
+            image: '../images/ntx1000.png',
             connect: '1',
             connectTime: '11:23',
             workers: [humanEx, 123, humanEx,],
