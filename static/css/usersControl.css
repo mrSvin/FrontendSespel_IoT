@@ -281,7 +281,7 @@
     height: 100vh;
     z-index: 2;
     background: #0c0e18;
-    position: absolute;
+    position: fixed;
     top: 0;
     opacity: 70%;
     cursor: pointer;

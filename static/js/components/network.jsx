@@ -111,26 +111,6 @@ function Network() {
             })
             setTableBody(dataArray)
         })
-        // let dataArray = [{
-        //     name: 'NTX1000',
-        //     ip: '192.168.1.1',
-        //     image: undefImg,
-        //     ping: 'true',
-        //     lastPolling: '11:08',
-        //     workers: "1234, 123",
-        //     location: '1 площадка',
-        //     description: 'Это очень крутой станок'
-        // }, {
-        //     name: 'SK50',
-        //     ip: '192.168.1.2',
-        //     image: undefImg,
-        //     ping: 'false',
-        //     lastPolling: '11:23',
-        //     workers: "1234, 123, 12345,",
-        //     location: '2 площадка',
-        //     description: 'станок'
-        // }]
-        // setTableBody(dataArray)
     }
 
 
@@ -308,7 +288,7 @@ function NetworkFormUpdateAdd({
 
             <button type="button"
                     onClick={() => {
-                        if (machine.name == '' || machine.ip == '' || machine.workers == '' || machine.description == '') {
+                        if (machine.name == '' || machine.ip == '' || machine.workers == '' || machine.location == '' || machine.description == '') {
                             setErrorMessage(['Заполните все поля', 'redMessage'])
                             return null
                         }
@@ -319,7 +299,7 @@ function NetworkFormUpdateAdd({
                                     updateTable()
                                     setErrorMessage(['Оборудование добавлено', 'greenMessage'])
 
-                                } else setErrorMessage(['Не удалось добавить пользователя', 'redMessage'])
+                                } else setErrorMessage(['Не удалось добавить оборудование', 'redMessage'])
                             })
                         } else if (typeForm == 'change') {
                             let changePromise = fetchRequestChangeNetworkDevice(machine)
