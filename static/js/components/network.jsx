@@ -102,11 +102,10 @@ function Network() {
     function updateTable() {
         let promiseDeviceData = fetchRequestGetNetworkDevices()
         promiseDeviceData.then(data => {
-            // let dataArray = Object.keys(data).map(e => {
-            //     data[e]['password'] = 'sespel'
-            //     return data[e]
-            // })
-            setTableBody(data)
+            let dataArray = Object.keys(data).map(e => {
+                return data[e]
+            })
+            setTableBody(dataArray)
         })
         // let dataArray = [{
         //     name: 'NTX1000',
