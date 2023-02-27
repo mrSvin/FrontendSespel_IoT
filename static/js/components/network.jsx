@@ -57,6 +57,10 @@ function fetchRequestDeleteNetworkDevice(device) {
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
 
+function lastConnectTime(time){
+    time = new Date() - new Date(time).getTime()
+    return msToTimeDays(time).slice(2)
+}
 
 function Network() {
 
@@ -164,7 +168,7 @@ function Network() {
                                 <td>
                                     <div className={'networkImageBlock'}>
                                         <img
-                                            src={`data:image/jpeg;base64,${deviceTable.image}`}
+                                            src={`data:image/jpeg;base64,${deviceTable.photo}`}
                                             alt=""
                                         />
                                     </div>
@@ -175,7 +179,7 @@ function Network() {
                                     <span
                                         className={`${deviceTable.ping == 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
                                 </td>
-                                <td>{deviceTable.lastPolling}</td>
+                                <td>{lastConnectTime(deviceTable.lastPolling)}</td>
                                 <td>
                                     <ImageList imageList={deviceTable.workers} humanEx={humanEx}/>
                                 </td>
