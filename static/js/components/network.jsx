@@ -126,7 +126,7 @@ function Network() {
         reader.onload = function () {
             setMachine(prevState => ({
                 ...prevState,
-                ['image']: reader.result.substr(reader.result.indexOf(',') + 1)
+                ['photo']: reader.result.substr(reader.result.indexOf(',') + 1)
             }));
         };
 
