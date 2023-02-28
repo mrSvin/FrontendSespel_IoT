@@ -57,29 +57,29 @@ function fetchRequestDeleteNetworkDevice(device) {
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
 
-function lastConnectTime(time){
+function lastConnectTime(time) {
     time = new Date() - new Date(time).getTime()
     return msToTimeDays(time).slice(2)
 }
 
-function getCorrectIP(ip){
+function getCorrectIP(ip) {
 
     let correctIP = '192.168.'
-    if(ip.length <= 8) return correctIP.slice(0, ip.length)
+    if (ip.length <= 8) return correctIP.slice(0, ip.length)
 
     let array = ip.slice(8).split('.')
     let ipNew
-    array = array.map(e=>{
-        if( 0 <= +e && +e <= 255){
+    array = array.map(e => {
+        if (0 <= +e && +e <= 255) {
             return +e
-        } else return +e > 255? 255: 0
+        } else return +e > 255 ? 255 : 0
     })
 
-    if (array.length == 2 && ip[ip.length-1] !== '.') {
+    if (array.length == 2 && ip[ip.length - 1] !== '.') {
         ipNew = array[0] + '.' + array[1]
     } else if (array.length > 2) {
         ipNew = array[0] + '.' + array[1]
-    } else ipNew = (ip[ip.length-1] == '.')? array[0]+'.':array[0]
+    } else ipNew = (ip[ip.length - 1] == '.') ? array[0] + '.' : array[0]
 
     return correctIP + ipNew
 }
@@ -112,7 +112,7 @@ function Network() {
         }));
     };
 
-    function handleOnChangeIP(e){
+    function handleOnChangeIP(e) {
         const {value} = e.target;
         setMachine(prevState => ({
             ...prevState,
@@ -145,7 +145,15 @@ function Network() {
 
 
     useEffect(() => {
-        updateTable()
+
+        const interval = setInterval(() => {
+            updateTable()
+        }, 15000)
+
+        return () => {
+            clearInterval(interval)
+        }
+
     }, [])
 
     return (
@@ -246,7 +254,7 @@ function Network() {
 }
 
 function NetworkFormUpdateAdd({
-                                  typeForm, machine, handleOnChange,handleOnChangeIP,
+                                  typeForm, machine, handleOnChange, handleOnChangeIP,
                                   handleOnChangeImage, updateTable,
                                   errorMessage, setErrorMessage
                               }) {
