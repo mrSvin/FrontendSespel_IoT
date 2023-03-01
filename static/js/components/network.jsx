@@ -98,7 +98,9 @@ function Network() {
         {
             name: '',
             ip: '192.168.',
-            image: undefImg,
+            photo: undefImg,
+            ping: 'false',
+            lastPolling: null,
             workers: '',
             location: '',
             description: ''
@@ -146,6 +148,7 @@ function Network() {
 
     useEffect(() => {
 
+        updateTable()
         const interval = setInterval(() => {
             updateTable()
         }, 15000)
@@ -320,7 +323,7 @@ function NetworkFormUpdateAdd({
                 />
                 <img
                     className="outputImage imageBackground"
-                    src={`data:image/jpeg;base64,${machine.image}`}
+                    src={`data:image/jpeg;base64,${machine.photo}`}
                     width="200"
                 />
             </div>
