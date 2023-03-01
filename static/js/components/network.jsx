@@ -352,7 +352,7 @@ function NetworkFormUpdateAdd({
                             setErrorMessage(['Заполните все поля', 'redMessage'])
                             return null
                         }
-                        if (checkIP(machine.ip)) {
+                        if (!checkIP(machine.ip)) {
                             setErrorMessage(['Введите корректный IP', 'redMessage'])
                             return null
                         }
