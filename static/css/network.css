@@ -27,6 +27,7 @@
     background: #2c5275;
     border-top: solid 1px var(--network-color-border);
     border-bottom: solid 1px var(--network-color-border);
+    border-right: solid 1px var(--network-color-border);
 }
 
 .networkTable > tbody > tr:nth-child(1) {
@@ -38,8 +39,17 @@
     border: solid 1px var(--network-color-border);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    border-right: none;
     transform-style: preserve-3d;
+}
+
+.networkTable > thead > tr > th{
+    padding:10px
+}
+
+.networkTable > thead > tr > th:nth-child(10),
+.networkTable > thead > tr > th:nth-child(11),
+.networkTable > tbody > tr > td:nth-child(10){
+    border-right:none;
 }
 
 .networkTable > thead > tr > th:nth-child(1)::before {
@@ -95,14 +105,12 @@
 
 .networkTable > tbody > tr > td {
     border-right: 1px var(--network-color-border) solid;
+    padding: 20px;
 }
 
-/*.networkTable > tbody > tr > td:last-child {*/
-/*    border-right: 1px var(--network-color-border) solid;*/
-/*}*/
-
-.networkTable > tbody > tr > td:nth-child(2) {
-    width: 120px;
+.networkTable > tbody > tr > td:nth-child(10),
+.networkTable > tbody > tr > td:nth-child(11){
+    padding:0;
 }
 
 .networkTable > tbody > tr > td:nth-child(3) {
@@ -113,8 +121,8 @@
 
 
 .sizeStatusActive {
-    height: 30px!important;
-    width: 30px!important;
+    height: 40px!important;
+    width: 40px!important;
 }
 
 .networkImageBlock {
@@ -126,7 +134,6 @@
 .networkImageBlock > img {
     width: 120px;
     height: 120px;
-    /* object-fit: contain; */
     border-radius: 100px;
 }
 
@@ -134,6 +141,7 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
+    min-width: 300px;
     max-width: 400px;
     flex-wrap: wrap;
 }
@@ -146,7 +154,6 @@
 }
 
 .networkAddButton {
-    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -155,7 +162,7 @@
     width: 190px;
     height: 102%;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     top: -1.8px;
     right: -3px;
     border: 1px solid #00386c;
@@ -184,19 +191,29 @@
     cursor: pointer;
     position: relative;
     top: 2px;
-    height: 97%;
+    height: 102%;
 }
 
 .changeAddTd > div:hover {
     background-color: #2c527521;
 }
 
-.networkTable tbody > tr:nth-child(1) > td:nth-child(2) {
-    height: 136px;
-}
-
 .networkTable tbody > tr:nth-child(1) > td:nth-child(2) > div,
 .networkTable tbody > tr:nth-child(1) > td:nth-child(7) > div{
     position: relative;
     top: 5px;
+}
+
+.networkFormAdd {
+    max-height: 700px;
+}
+
+.networkFormAdd > textarea {
+    width: 90%;
+    height: 150px;
+    margin: 0 auto;
+    resize: none;
+    background: #114360;
+    color: white;
+    font-size: 25px;
 }
