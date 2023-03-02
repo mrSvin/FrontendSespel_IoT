@@ -217,3 +217,12 @@
     color: white;
     font-size: 25px;
 }
+
+.formAddChangeButton{
+    transition: 0.5s;
+}
+
+.formAddChangeButton:hover {
+    background: #1392ed;
+    box-shadow: 0px 0px 4px 0px #14b2e9, inset 0px 0px 0px 0px #14b2f3 !important;
+}

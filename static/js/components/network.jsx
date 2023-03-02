@@ -347,7 +347,7 @@ function NetworkFormUpdateAdd({
                 />
             </div>
 
-            <button type="button"
+            <button className={'formAddChangeButton'} type="button"
                     onClick={() => {
                         if (machine.name == '' || machine.ip == '' || machine.workers == '' || machine.location == '' || machine.description == '') {
                             setErrorMessage(['Заполните все поля', 'redMessage'])
