@@ -164,7 +164,7 @@ function Network() {
 
     };
 
-    function updateTable() {
+    function updateTable(photoRequest=false) {
         let promiseDeviceData = fetchRequestGetNetworkDevices()
         promiseDeviceData.then(data => {
             let dataArray = Object.keys(data).map(e => {
@@ -175,20 +175,20 @@ function Network() {
             let tabels = dataArray.map(e=>(e.workers).split(','))
             tabels = tabels[0].concat(...tabels.slice(1)).filter(f=>(!isNaN(+f)));
             tabels = tabels.map(e => (e.replace(' ', '')))
-            console.log(tabels.join())
 
-            let promisePhotoList = fetchRequestListPhoto(tabels.join())
-            promisePhotoList.then(photos => {
-                console.log(JSON.parse(photos).photo)
-                setTabelList(photos.photo)
-            })
+            if(photoRequest){
+                let promisePhotoList = fetchRequestListPhoto(tabels.join())
+                promisePhotoList.then(photos => {
+                    setTabelList(photos.photo)
+                })
+            }
         })
     }
 
 
     useEffect(() => {
 
-        updateTable()
+        updateTable(true)
         const interval = setInterval(() => {
             updateTable()
         }, 15000)
