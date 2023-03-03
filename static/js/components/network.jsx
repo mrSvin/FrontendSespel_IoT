@@ -179,6 +179,7 @@ function Network() {
 
             let promisePhotoList = fetchRequestListPhoto(tabels.join())
             promisePhotoList.then(photos => {
+                console.log(JSON.parse(photos).photo)
                 setTabelList(photos.photo)
             })
         })
