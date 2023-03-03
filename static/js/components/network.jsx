@@ -57,6 +57,15 @@ function fetchRequestDeleteNetworkDevice(device) {
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
 
+function fetchRequestListPhoto(listTabels) {
+    return fetch(`/api/photoList-${listTabels}`, {method: 'GET'})
+        .then(response => response.text())
+        .then((result) => {
+            return result
+        })
+        .catch(error => console.log('Ошибка при отправке запроса', error));
+}
+
 function lastConnectTime(time) {
     time = new Date() - new Date(time).getTime()
     return msToTimeDays(time).slice(2)
@@ -124,6 +133,7 @@ function Network() {
             location: '',
             description: ''
         })
+    const [tabelList, setTabelList] = useState(null)
 
     function handleOnChange(e, key) {
         const {value} = e.target;
@@ -161,6 +171,16 @@ function Network() {
                 return data[e]
             })
             setTableBody(dataArray)
+
+            let tabels = dataArray.map(e=>(e.workers).split(','))
+            tabels = tabels[0].concat(...tabels.slice(1)).filter(f=>(!isNaN(+f)));
+            tabels = tabels.map(e => (e.replace(' ', '')))
+            console.log(tabels.join())
+
+            let promisePhotoList = fetchRequestListPhoto(tabels.join())
+            promisePhotoList.then(photos => {
+                setTabelList(photos.photo)
+            })
         })
     }
 
@@ -220,7 +240,7 @@ function Network() {
                                 </td>
                                 <td>{lastConnectTime(deviceTable.lastPolling)}</td>
                                 <td>
-                                    <ImageList imageList={deviceTable.workers} humanEx={humanEx}/>
+                                    <ImageList imageList={deviceTable.workers} tabelList={tabelList} humanEx={humanEx}/>
                                 </td>
                                 <td>{deviceTable.location}</td>
                                 <td>{deviceTable.description}</td>
@@ -280,7 +300,7 @@ function NetworkFormUpdateAdd({
                                   errorMessage, setErrorMessage
                               }) {
     return (
-        <form className={classToTypeForm(typeForm)}>
+        <form className={`networkFormAdd ${classToTypeForm(typeForm)}`}>
             <p className='formAdminName'>{typeForm == 'change' ? 'Редактирование станка' : 'Добавление оборудования'}</p>
             <label htmlFor="">Наименование {typeForm == 'change' ? machine.name : null}</label>
             <input className={`adminInput ${typeForm == 'change' ? 'formHideUsersControl' : null}`}
@@ -383,24 +403,21 @@ function NetworkFormUpdateAdd({
 }
 
 
-function ImageList({imageList = "1234", humanEx}) {
+function ImageList({imageList = "1234", tabelList, humanEx}) {
 
-    // function loadPhoto(photo) {
-    //     return photo + 'p'
-    // }
-    //
-    // const [tabelImg, setTabelImg] = useState(imageList)
-    //
-    // useEffect(() => {
-    //     console.log('Память', tabelImg)
-    // }, [tabelImg])
+    function returnPhoto(tabel) {
+        return tabelList[tabel]? tabelList[tabel] : humanEx
+    }
+
+    useEffect(() => {
+    }, [tabelList])
 
     return (
         <div className={'imageListWrapper'}>
             {
-                imageList.split(',').map((img, i) => (
+                imageList.split(',').map((tabel, i) => (
                     <img key={i}
-                         src={`data:image/jpeg;base64,${isNaN(img) ? img : humanEx}`}
+                         src={`data:image/jpeg;base64,${tabelList == null ? humanEx : returnPhoto(tabel)}`}
                     />
                 ))
             }

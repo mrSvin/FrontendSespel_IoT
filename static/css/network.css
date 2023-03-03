@@ -209,13 +209,15 @@
 }
 
 .networkFormAdd > textarea {
+    background: #114360;
     width: 90%;
-    height: 150px;
+    height: 100px;
     margin: 0 auto;
     resize: none;
-    background: #114360;
-    color: white;
+    border-width: 2px;
+    border-style: inset;
     font-size: 25px;
+    color: white;
 }
 
 .formAddChangeButton{
