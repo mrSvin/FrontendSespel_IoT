@@ -172,9 +172,9 @@ function Network() {
 
     };
 
-    function updateTable(pingRequest = false) {
-
-        if (pingRequest) {
+    function updateTable() {
+        if (tableBody == null) {
+            console.log('тестовое Сообщение, tableBody null')
             let promiseDeviceData = fetchRequestGetNetworkDevices()
             promiseDeviceData.then(data => {
                 let dataArray = Object.keys(data).map(e => {
@@ -192,7 +192,8 @@ function Network() {
                 })
 
             })
-        } else if(tableBody !== null){
+        } else {
+            console.log('тестовое Сообщение 2, tableBody заполнен')
             let promiseDeviceData = fetchRequestPingList()
             promiseDeviceData.then(data => {
                 let dataArray = Object.keys(data).map(e => {
@@ -215,17 +216,16 @@ function Network() {
 
 
     useEffect(() => {
-
-        updateTable(true)
+        if(tableBody == null) updateTable(true)
         const interval = setInterval(() => {
             updateTable()
-        }, 15000)
+        }, 5000)
 
         return () => {
             clearInterval(interval)
         }
 
-    }, [])
+    }, [tableBody])
 
     return (
         <div className={'networkWrap'}>
