@@ -9,7 +9,7 @@
 }
 
 .networkTable {
-    width: 94%;
+    width: 92.5%;
     border-spacing: 0;
     /*border-collapse: collapse;*/
 }
@@ -46,8 +46,7 @@
     padding:10px
 }
 
-.networkTable > thead > tr > th:nth-child(10),
-.networkTable > thead > tr > th:nth-child(11),
+
 .networkTable > tbody > tr > td:nth-child(10){
     border-right:none;
 }
@@ -78,6 +77,19 @@
     transform: translateZ(-1px);
 }
 
+.networkTable > thead > tr > th:last-child::after {
+    content: "";
+    background: #252734;
+    display: block;
+    width: 70px;
+    height: 50px;
+    z-index: 0;
+    position: absolute;
+    top: -2px;
+    left: 304px;
+    transform: translateZ(-1px);
+}
+
 .networkTable > thead > tr > th:last-child {
     border: solid 1px var(--network-color-border);
     border-top-right-radius: 10px;
@@ -99,8 +111,17 @@
     border-bottom: 1px var(--network-color-border) solid;
 }
 
+.networkTable > tbody > tr > td:nth-child(10){
+    border-bottom: none;
+}
+
 .networkTable > tbody > tr > td:nth-child(1) {
     border-left: 1px var(--network-color-border) solid;
+}
+
+.networkTable > tbody > tr:nth-child(1) > td:nth-child(2) {
+    padding-top:10px;
+
 }
 
 .networkTable > tbody > tr > td {
@@ -108,9 +129,13 @@
     padding: 20px;
 }
 
-.networkTable > tbody > tr > td:nth-child(10),
-.networkTable > tbody > tr > td:nth-child(11){
+.networkTable > tbody > tr > td:nth-child(10){
     padding:0;
+    position:absolute;
+}
+
+.networkTable > tbody > tr > td:nth-child(10) > .tdAdd {
+    top: 0px;
 }
 
 .networkTable > tbody > tr > td:nth-child(3) {
@@ -141,8 +166,8 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    min-width: 300px;
-    max-width: 400px;
+    min-width: 146px;
+    max-width: 190px;
     flex-wrap: wrap;
 }
 
@@ -159,10 +184,11 @@
     align-items: center;
     text-align: center;
     z-index: 3;
-    width: 190px;
-    height: 102%;
+    width: 360px;
+    height: 60px;
     color: white;
-    font-size: 20px;
+    font-size: 26px;
+    font-weight: 600;
     top: -1.8px;
     right: -3px;
     border: 1px solid #00386c;
@@ -182,26 +208,37 @@
 }
 
 .changeAddTd {
+    display:flex;
+    flex-direction: column;
     width: 90px;
-    height: 120px;
+    height: 100%;
+    max-height:160px;
     transition: 0.5s;
 }
 
 .changeAddTd > div{
-    cursor: pointer;
     position: relative;
-    top: 2px;
-    height: 102%;
-}
-
-.changeAddTd > div:hover {
-    background-color: #2c527521;
+    cursor: pointer;
+    height: 70px;
+    width: 70px;
+    top: 5px;
 }
 
 .networkTable tbody > tr:nth-child(1) > td:nth-child(2) > div,
 .networkTable tbody > tr:nth-child(1) > td:nth-child(7) > div{
     position: relative;
-    top: 5px;
+}
+
+.networkTable tbody > tr:nth-child(1) > td:nth-child(2) > div,
+.networkTable tbody > tr:nth-child(1) > td:nth-child(10) > div{
+    padding-top:20px;
+}
+
+
+.networkTable tbody > tr > td:nth-child(1),
+.networkTable tbody > tr > td:nth-child(4),
+.networkTable tbody > tr > td:nth-child(7){
+    padding: 5px;
 }
 
 .networkFormAdd {
@@ -227,4 +264,10 @@
 .formAddChangeButton:hover {
     background: #1392ed;
     box-shadow: 0px 0px 4px 0px #14b2e9, inset 0px 0px 0px 0px #14b2f3 !important;
+}
+
+.changeDeleteWrapper {
+    position: absolute;
+    top: 175px;
+    right: 0px;
 }

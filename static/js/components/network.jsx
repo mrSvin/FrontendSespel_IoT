@@ -6,6 +6,14 @@ function fetchRequestGetNetworkDevices() {
         })
 }
 
+function fetchRequestPingList() {
+    return fetch(`/api/pingList`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}
+
 function fetchRequestAddNetworkDevice(device) {
     let base64 = document.querySelectorAll('.outputImage')[1].src
     return urltoFile(base64, base64.slice(10, 20))
@@ -59,7 +67,7 @@ function fetchRequestDeleteNetworkDevice(device) {
 
 function fetchRequestListPhoto(listTabels) {
     return fetch(`/api/photoList-${listTabels}`, {method: 'GET'})
-        .then(response => response.text())
+        .then(response => response.json())
         .then((result) => {
             return result
         })
@@ -164,25 +172,77 @@ function Network() {
 
     };
 
-    function updateTable(photoRequest=false) {
-        let promiseDeviceData = fetchRequestGetNetworkDevices()
-        promiseDeviceData.then(data => {
-            let dataArray = Object.keys(data).map(e => {
-                return data[e]
-            })
-            setTableBody(dataArray)
+    function updateTable(pingRequest = false) {
 
-            let tabels = dataArray.map(e=>(e.workers).split(','))
-            tabels = tabels[0].concat(...tabels.slice(1)).filter(f=>(!isNaN(+f)));
-            tabels = tabels.map(e => (e.replace(' ', '')))
+        if (pingRequest) {
+            let promiseDeviceData = fetchRequestGetNetworkDevices()
+            promiseDeviceData.then(data => {
+                let dataArray = Object.keys(data).map(e => {
+                    return data[e]
+                })
+                setTableBody(dataArray)
 
-            if(photoRequest){
+                let tabels = dataArray.map(e => (e.workers).split(','))
+                tabels = tabels[0].concat(...tabels.slice(1)).filter(f => (!isNaN(+f)));
+                tabels = tabels.map(e => (e.replace(' ', '')))
+
                 let promisePhotoList = fetchRequestListPhoto(tabels.join())
                 promisePhotoList.then(photos => {
                     setTabelList(photos.photo)
                 })
-            }
-        })
+
+            })
+        } else {
+            let promiseDeviceData = fetchRequestPingList()
+            promiseDeviceData.then(data => {
+                let dataArray = Object.keys(data).map(e => {
+                    return data[e]
+                })
+
+                tableBody.forEach((currentState, index) => {
+                        if (currentState.name == dataArray[index].name) {
+                            currentState.lastPolling = dataArray[index].lastPool
+                            currentState.ping = dataArray[index].ping
+                        }
+                    }
+                );
+
+                // tableBody.forEach((currentState, index) => {
+                //         if (currentState.name == dataArray[index].name) {
+                //             currentState.lastPolling = dataArray[index].lastPool
+                //             currentState.ping = dataArray[index].ping
+                //             setTableBody(prevState => ({
+                //                 ...prevState,
+                //                 [e]: checked
+                //             }));
+                //         }
+                //     }
+                // );
+
+                console.log(tableBody)
+                //
+                // Object.keys(placesObject[name].stanki).forEach(e => {
+                //     if (page == 9) {
+                //         localStanki[e] = checked
+                //     }
+                //     setValuesStanki(prevState => ({
+                //         ...prevState,
+                //         [e]: checked
+                //     }));
+                // })
+                //
+                //
+                // setTableBody(prevState => ({
+                //     ...prevState,
+                //     [key]: value
+                // }));
+
+                setTableBody(tableBody);
+
+
+            })
+        }
+
     }
 
 
@@ -257,8 +317,6 @@ function Network() {
                                             setErrorMessage(['', ''])
                                         }
                                     }}></div>
-                                </td>
-                                <td className={'changeAddTd'}>
                                     <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`}
                                          onClick={() => {
                                              if (window.confirm(`Вы уверены, что хотите удалить оборудование ${deviceTable.name}?`)) {
@@ -340,13 +398,13 @@ function NetworkFormUpdateAdd({
 
             <label htmlFor="">Описание</label>
             <textarea className={`adminInput`}
-                   value={machine.description}
-                   type={'text'}
-                   maxLength={500}
-                   placeholder={'Описание оборудования'}
-                   onChange={(e) => {
-                       handleOnChange(e, 'description')
-                   }}/>
+                      value={machine.description}
+                      type={'text'}
+                      maxLength={500}
+                      placeholder={'Описание оборудования'}
+                      onChange={(e) => {
+                          handleOnChange(e, 'description')
+                      }}/>
 
             <div className="profile-pic">
                 <label className="-label" htmlFor="userAvatar">
@@ -407,7 +465,7 @@ function NetworkFormUpdateAdd({
 function ImageList({imageList = "1234", tabelList, humanEx}) {
 
     function returnPhoto(tabel) {
-        return tabelList[tabel]? tabelList[tabel] : humanEx
+        return tabelList[tabel] ? tabelList[tabel] : humanEx
     }
 
     useEffect(() => {
