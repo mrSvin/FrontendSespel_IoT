@@ -192,12 +192,14 @@ function Network() {
                 })
 
             })
-        } else {
+        } else if(tableBody !== null){
             let promiseDeviceData = fetchRequestPingList()
             promiseDeviceData.then(data => {
                 let dataArray = Object.keys(data).map(e => {
                     return data[e]
                 })
+
+                console.log(tableBody)
 
                 const newState = tableBody.map((obj, i) => {
                     if (obj.name == dataArray[i].name) {
@@ -241,8 +243,6 @@ function Network() {
                     <th>Сотрудники</th>
                     <th>Расположение</th>
                     <th>Описание</th>
-                    <th></th>
-                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
