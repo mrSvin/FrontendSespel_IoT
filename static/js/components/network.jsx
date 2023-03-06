@@ -199,47 +199,13 @@ function Network() {
                     return data[e]
                 })
 
-                tableBody.forEach((currentState, index) => {
-                        if (currentState.name == dataArray[index].name) {
-                            currentState.lastPolling = dataArray[index].lastPool
-                            currentState.ping = dataArray[index].ping
-                        }
+                const newState = tableBody.map((obj, i) => {
+                    if (obj.name == dataArray[i].name) {
+                        return {...obj, lastPolling: dataArray[i].lastPool, ping:dataArray[i].ping};
                     }
-                );
-
-                // tableBody.forEach((currentState, index) => {
-                //         if (currentState.name == dataArray[index].name) {
-                //             currentState.lastPolling = dataArray[index].lastPool
-                //             currentState.ping = dataArray[index].ping
-                //             setTableBody(prevState => ({
-                //                 ...prevState,
-                //                 [e]: checked
-                //             }));
-                //         }
-                //     }
-                // );
-
-                console.log(tableBody)
-                //
-                // Object.keys(placesObject[name].stanki).forEach(e => {
-                //     if (page == 9) {
-                //         localStanki[e] = checked
-                //     }
-                //     setValuesStanki(prevState => ({
-                //         ...prevState,
-                //         [e]: checked
-                //     }));
-                // })
-                //
-                //
-                // setTableBody(prevState => ({
-                //     ...prevState,
-                //     [key]: value
-                // }));
-
-                setTableBody(tableBody);
-
-
+                    return obj;
+                });
+                setTableBody(newState);
             })
         }
 
@@ -323,7 +289,7 @@ function Network() {
                                                  let deletePromise = fetchRequestDeleteNetworkDevice(deviceTable.name)
                                                  deletePromise.then((answer) => {
                                                      if (answer == 'ok') {
-                                                         updateTable()
+                                                         updateTable(true)
                                                          setClickedDeleteButton(false)
                                                          setTimeout(() => {
                                                              setClickedDeleteButton(true)
@@ -440,7 +406,7 @@ function NetworkFormUpdateAdd({
                             let addPromise = fetchRequestAddNetworkDevice(machine)
                             addPromise.then((data) => {
                                 if (data == 'ok') {
-                                    updateTable()
+                                    updateTable(true)
                                     setErrorMessage(['Оборудование добавлено', 'greenMessage'])
 
                                 } else setErrorMessage(['Не удалось добавить оборудование', 'redMessage'])
@@ -449,7 +415,7 @@ function NetworkFormUpdateAdd({
                             let changePromise = fetchRequestChangeNetworkDevice(machine)
                             changePromise.then((data) => {
                                 if (data == 'ok') {
-                                    updateTable()
+                                    updateTable(true)
                                     setErrorMessage(['Оборудование изменено', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось изменить оборудование', 'redMessage'])
                             })
