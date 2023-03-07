@@ -439,7 +439,7 @@ function ImageList({imageList = "1234", tabelList, humanEx}) {
     return (
         <div className={'imageListWrapper'}>
             {
-                tabelList.split(',').map((tabel, i) => (
+                imageList.split(',').map((tabel, i) => (
                     <div key={i}>
                         <label>
                             <span>{tabel}</span>
