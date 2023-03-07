@@ -66,6 +66,10 @@ function App({hideLoader}) {
             <div className="headerPadding">
                 <Switch>
 
+                    <Route path="/scudMonth">
+                        <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
+                    </Route>
+
                     {iframeRoutes.map((route) => {
                         return (
                             <Route key={route.path} path={route.path}>
@@ -81,12 +85,6 @@ function App({hideLoader}) {
                             </Route>
                         )
                     })}
-
-                    <Route key={'/scudMonth'} path="/scudMonth">
-                        <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
-                    </Route>
-
-
 
                 </Switch>
             </div>

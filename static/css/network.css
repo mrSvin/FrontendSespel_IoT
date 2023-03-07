@@ -82,11 +82,11 @@
     background: #252734;
     display: block;
     width: 70px;
-    height: 50px;
+    height: 70px;
     z-index: 0;
     position: absolute;
     top: -2px;
-    left: 304px;
+    right: -71px;
     transform: translateZ(-1px);
 }
 
@@ -237,9 +237,12 @@
 
 
 .networkTable tbody > tr > td:nth-child(1),
-.networkTable tbody > tr > td:nth-child(4),
 .networkTable tbody > tr > td:nth-child(7){
     padding: 5px;
+}
+
+.networkTable tbody > tr > td:nth-child(4){
+    padding: 15px;
 }
 
 .networkFormAdd {

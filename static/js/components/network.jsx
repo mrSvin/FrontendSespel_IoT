@@ -87,7 +87,9 @@ function getCorrectIP(ip) {
     array = array.map(e => {
         if (0 <= +e && +e <= 255) {
             return +e
-        } else return +e > 255 ? 255 : 0
+        } else if(array.length == 1){
+            return (+e > 255) ? '255.' : '0.'
+        }else return (+e > 255) ? 255 : 0
     })
 
     if (array.length == 2 && ip[ip.length - 1] !== '.') {
@@ -322,12 +324,12 @@ function NetworkFormUpdateAdd({
                               }) {
     return (
         <form className={`networkFormAdd ${classToTypeForm(typeForm)}`}>
-            <p className='formAdminName'>{typeForm == 'change' ? 'Редактирование станка' : 'Добавление оборудования'}</p>
+            <p className='formAdminName'>{typeForm == 'change' ? 'Редактирование оборудования' : 'Добавление оборудования'}</p>
             <label htmlFor="">Наименование {typeForm == 'change' ? machine.name : null}</label>
             <input className={`adminInput ${typeForm == 'change' ? 'formHideUsersControl' : null}`}
                    value={machine.name}
                    type={'text'}
-                   placeholder={'Наименование станка'}
+                   placeholder={'Наименование оборудования'}
                    onChange={(e) => {
                        handleOnChange(e, 'name')
                    }}/>

@@ -2,7 +2,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    background: linear-gradient(181deg, rgba(38,39,52,1) 6%, rgba(49,53,81, 1) 77%, rgb(37, 39, 52,1) 98%);
+    background: linear-gradient(181deg, rgba(38,39,52,1) 6%, rgba(49,53,81, 1) 77%, rgba(37, 39, 52,1) 98%);
     height: 100%;
 }
 
@@ -41,7 +41,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    background: url('/images/background_login_light.jpg');
+    background: url(../images/background_login_light.jpg);
     background-size: cover;
     position: relative;
     opacity: 90%;
@@ -229,5 +229,16 @@
     height: 150px;
     margin-bottom: 5px;
     background: url(../images/beacon_logo.png) no-repeat;
+    background-size: contain;
+}
+
+.network {
+    position: absolute;
+    filter: contrast(90%);
+    transition: 1s;
+    width: 190px;
+    height: 170px;
+    margin-bottom: 5px;
+    background: url(../images/network.png) no-repeat;
     background-size: contain;
 }
