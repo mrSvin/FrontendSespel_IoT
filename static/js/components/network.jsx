@@ -217,7 +217,7 @@ function Network() {
         if(tableBody == null) updateTable(true)
         const interval = setInterval(() => {
             updateTable()
-        }, 5000)
+        }, 10000)
 
         return () => {
             clearInterval(interval)
@@ -325,6 +325,7 @@ function NetworkFormUpdateAdd({
     return (
         <form className={`networkFormAdd ${classToTypeForm(typeForm)}`}>
             <p className='formAdminName'>{typeForm == 'change' ? 'Редактирование оборудования' : 'Добавление оборудования'}</p>
+
             <label htmlFor="">Наименование {typeForm == 'change' ? machine.name : null}</label>
             <input className={`adminInput ${typeForm == 'change' ? 'formHideUsersControl' : null}`}
                    value={machine.name}
@@ -438,10 +439,15 @@ function ImageList({imageList = "1234", tabelList, humanEx}) {
     return (
         <div className={'imageListWrapper'}>
             {
-                imageList.split(',').map((tabel, i) => (
-                    <img key={i}
-                         src={`data:image/jpeg;base64,${tabelList == null ? humanEx : returnPhoto(tabel)}`}
-                    />
+                tabelList.split(',').map((tabel, i) => (
+                    <div key={i}>
+                        <label>
+                            <span>{tabel}</span>
+                        </label>
+                        <img key={i}
+                             src={`data:image/jpeg;base64,${tabelList == null ? humanEx : returnPhoto(tabel)}`}
+                        />
+                    </div>
                 ))
             }
         </div>
