@@ -111,8 +111,11 @@ function msToTimeDays(duration, date = 31) {
     date = +date
     let seconds = parseInt((duration / 1000) % 60),
         minutes = parseInt((duration / (1000 * 60)) % 60),
-        hours = parseInt((duration / (1000 * 60 * 60)) % 24),
-        days = parseInt((duration / (1000 * 60 * 60 * 24)) % date);
+        hours = duration / (1000 * 60 * 60) % 24,
+        days = duration / (1000 * 60 * 60 * 24) % date
+
+    hours = hours > 1? parseInt(hours) : 0
+    days = days > 1? parseInt(days) : 0
 
     if (days == 0) days = ''
     else {
@@ -136,7 +139,7 @@ function msToTimeDays(duration, date = 31) {
 
     if ((hours + minutes + seconds) != '') {
         return '— ' + days + hours + minutes + seconds;
-    } else if ((days + hours + minutes + seconds) == '' && duration != 0) {
+    } else if ((days + hours + minutes + seconds) == '' && duration > 999) {
         return `— ${date} д.`
     } else return '— 0 с.'
 

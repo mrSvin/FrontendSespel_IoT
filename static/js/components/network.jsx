@@ -26,8 +26,6 @@ function fetchRequestAddNetworkDevice(device) {
             data.append('location', device.location)
             data.append('description', device.description)
 
-            console.log(data)
-
             return fetch('/api/addNetwork', {
                 method: 'POST',
                 body: data
@@ -143,6 +141,8 @@ function Network() {
         })
     const [tabelList, setTabelList] = useState(null)
 
+    let interval
+
     function handleOnChange(e, key) {
         const {value} = e.target;
         setMachine(prevState => ({
@@ -172,9 +172,8 @@ function Network() {
 
     };
 
-    function updateTable() {
-        if (tableBody == null) {
-            console.log('тестовое Сообщение, tableBody null')
+    function updateTable(fullRequest) {
+        if (tableBody == null || fullRequest) {
             let promiseDeviceData = fetchRequestGetNetworkDevices()
             promiseDeviceData.then(data => {
                 let dataArray = Object.keys(data).map(e => {
@@ -193,14 +192,11 @@ function Network() {
 
             })
         } else {
-            console.log('тестовое Сообщение 2, tableBody заполнен')
             let promiseDeviceData = fetchRequestPingList()
             promiseDeviceData.then(data => {
                 let dataArray = Object.keys(data).map(e => {
                     return data[e]
                 })
-
-                console.log(tableBody)
 
                 const newState = tableBody.map((obj, i) => {
                     if (obj.name == dataArray[i].name) {
