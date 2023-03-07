@@ -236,11 +236,11 @@ function Network() {
                     <th>Изображение</th>
                     <th>Наименование</th>
                     <th>IP адрес</th>
-                    <th>Связь</th>
-                    <th>Последний опрос</th>
                     <th>Сотрудники</th>
                     <th>Расположение</th>
                     <th>Описание</th>
+                    <th>Последний опрос</th>
+                    <th>Связь</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -259,11 +259,6 @@ function Network() {
                                 </td>
                                 <td>{deviceTable.name}</td>
                                 <td>{deviceTable.ip}</td>
-                                <td>
-                                    <span
-                                        className={`${deviceTable.ping == 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
-                                </td>
-                                <td>{lastConnectTime(deviceTable.lastPolling)}</td>
                                 <td>
                                     <ImageList imageList={deviceTable.workers} tabelList={tabelList} humanEx={humanEx}/>
                                 </td>
@@ -296,6 +291,10 @@ function Network() {
                                                  })
                                              }
                                          }}></div>
+                                </td>
+                                <td>{lastConnectTime(deviceTable.lastPolling)}</td>
+                                <td>
+                                    <span className={`${deviceTable.ping == 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
                                 </td>
                             </tr>
                         )
