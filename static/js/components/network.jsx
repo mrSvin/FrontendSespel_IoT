@@ -142,6 +142,7 @@ function Network() {
             description: ''
         })
     const [tabelList, setTabelList] = useState(null)
+    const history = useHistory()
 
     let firstInterval
     let secondInterval
@@ -246,6 +247,14 @@ function Network() {
         }
 
     }, [tableBody])
+
+    useEffect(() => {
+
+        return history.listen((location) => {
+            console.log('Смена страницы, закрываю интервал')
+            clearInterval(secondInterval)
+        })
+    }, [history]);
 
     return (
         <div className={'networkWrap'}>
