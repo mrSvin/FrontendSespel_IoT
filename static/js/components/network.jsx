@@ -87,9 +87,9 @@ function getCorrectIP(ip) {
     array = array.map(e => {
         if (0 <= +e && +e <= 255) {
             return +e
-        } else if(array.length == 1){
+        } else if (array.length == 1) {
             return (+e > 255) ? '255.' : '0.'
-        }else return (+e > 255) ? 255 : 0
+        } else return (+e > 255) ? 255 : 0
     })
 
     if (array.length == 2 && ip[ip.length - 1] !== '.') {
@@ -142,6 +142,7 @@ function Network() {
             description: ''
         })
     const [tabelList, setTabelList] = useState(null)
+    const [updateTableState, setUpdateTableState] = useState(false)
     const history = useHistory()
 
     let firstInterval
@@ -179,7 +180,7 @@ function Network() {
     function updateTable(fullRequest) {
 
         let countInterval = 0
-        secondInterval = setInterval(()=>{
+        secondInterval = setInterval(() => {
 
             if ((tableBody == null || fullRequest) && countInterval == 0) {
                 let promiseDeviceData = fetchRequestGetNetworkDevices()
@@ -200,13 +201,13 @@ function Network() {
                     })
 
                 })
-            } else if(tableBody !== null && countInterval < 10){
+            } else if (tableBody !== null && countInterval < 10) {
                 console.log(countInterval, timeNow())
                 const newState = tableBody.map((obj, i) => {
-                        return {...obj, lastPolling: new Date(obj.lastPolling) + 1000};
+                    return {...obj, lastPolling: new Date(obj.lastPolling) + 1000};
                 });
                 setTableBody(newState);
-            }  else if(countInterval >= 10 && tableBody !== null){
+            } else if (countInterval >= 10 && tableBody !== null) {
                 let promiseDeviceData = fetchRequestPingList()
                 promiseDeviceData.then(data => {
                     console.log('Запрос раз в 10 секунд')
@@ -216,7 +217,7 @@ function Network() {
 
                     const newState = tableBody.map((obj, i) => {
                         if (obj.name == dataArray[i].name) {
-                            return {...obj, lastPolling: dataArray[i].lastPool, ping:dataArray[i].ping};
+                            return {...obj, lastPolling: dataArray[i].lastPool, ping: dataArray[i].ping};
                         }
                         return obj;
                     });
@@ -226,13 +227,13 @@ function Network() {
             }
 
             countInterval++
-            countInterval >= 12? clearInterval(secondInterval) : null
+            countInterval >= 12 ? clearInterval(secondInterval) : null
         }, 1000)
 
     }
 
     useEffect(() => {
-        if(tableBody == null) {
+        if (tableBody == null) {
             console.log('Первый старт', timeNow())
             updateTable(true)
         }
@@ -246,15 +247,12 @@ function Network() {
             // clearInterval(secondInterval)
         }
 
-    }, [tableBody])
-
-    useEffect(() => {
-
         return history.listen((location) => {
             console.log('Смена страницы, закрываю интервал')
             clearInterval(secondInterval)
         })
-    }, [history]);
+
+    }, [updateTableState, tableBody, history])
 
     return (
         <div className={'networkWrap'}>
@@ -297,7 +295,8 @@ function Network() {
                                 <td>{deviceTable.description}</td>
                                 <td>{lastConnectTime(deviceTable.lastPolling)}</td>
                                 <td>
-                                    <span className={`${deviceTable.ping == 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
+                                    <span
+                                        className={`${deviceTable.ping == 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
                                 </td>
                                 <td className={'changeAddTd'}>
                                     <div className='tdChange' onClick={() => {
@@ -335,9 +334,9 @@ function Network() {
             </table>
 
             <NetworkFormUpdateAdd typeForm={typeForm} machine={machine} handleOnChange={handleOnChange}
-                                  handleOnChangeIP={handleOnChangeIP}
-                                  handleOnChangeImage={handleOnChangeImage} updateTable={updateTable}
-                                  errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
+                                  handleOnChangeIP={handleOnChangeIP} handleOnChangeImage={handleOnChangeImage}
+                                  errorMessage={errorMessage} setErrorMessage={setErrorMessage}
+                                  updateTableState={updateTableState} setUpdateTableState={setUpdateTableState}/>
             <div className={typeForm == 'hide' ? null : 'darkSpace'}
                  onClick={() => {
                      setTypeForm('hide')
@@ -349,8 +348,8 @@ function Network() {
 
 function NetworkFormUpdateAdd({
                                   typeForm, machine, handleOnChange, handleOnChangeIP,
-                                  handleOnChangeImage, updateTable,
-                                  errorMessage, setErrorMessage
+                                  handleOnChangeImage, errorMessage, setErrorMessage,
+                                  updateTableState, setUpdateTableState
                               }) {
     return (
         <form className={`networkFormAdd ${classToTypeForm(typeForm)}`}>
@@ -435,7 +434,7 @@ function NetworkFormUpdateAdd({
                             let addPromise = fetchRequestAddNetworkDevice(machine)
                             addPromise.then((data) => {
                                 if (data == 'ok') {
-                                    updateTable(true)
+                                    setUpdateTableState(!updateTableState)
                                     setErrorMessage(['Оборудование добавлено', 'greenMessage'])
 
                                 } else setErrorMessage(['Не удалось добавить оборудование', 'redMessage'])
@@ -444,7 +443,7 @@ function NetworkFormUpdateAdd({
                             let changePromise = fetchRequestChangeNetworkDevice(machine)
                             changePromise.then((data) => {
                                 if (data == 'ok') {
-                                    updateTable(true)
+                                    setUpdateTableState(!updateTableState)
                                     setErrorMessage(['Оборудование изменено', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось изменить оборудование', 'redMessage'])
                             })
