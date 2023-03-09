@@ -175,49 +175,68 @@ function Network() {
     };
 
     function updateTable(fullRequest) {
-        if (tableBody == null || fullRequest) {
-            let promiseDeviceData = fetchRequestGetNetworkDevices()
-            promiseDeviceData.then(data => {
-                let dataArray = Object.keys(data).map(e => {
-                    return data[e]
+
+        let countInterval = 0
+        let secondInterval = setInterval(()=>{
+
+            if ((tableBody == null || fullRequest) && countInterval == 0) {
+                let promiseDeviceData = fetchRequestGetNetworkDevices()
+                promiseDeviceData.then(data => {
+                    console.log('Первая загрузка')
+                    let dataArray = Object.keys(data).map(e => {
+                        return data[e]
+                    })
+                    setTableBody(dataArray)
+
+                    let tabels = dataArray.map(e => (e.workers).split(','))
+                    tabels = tabels[0].concat(...tabels.slice(1)).filter(f => (!isNaN(+f)));
+                    tabels = tabels.map(e => (e.replace(' ', '')))
+
+                    let promisePhotoList = fetchRequestListPhoto(tabels.join())
+                    promisePhotoList.then(photos => {
+                        setTabelList(photos.photo)
+                    })
+
                 })
-                setTableBody(dataArray)
+            } else if(countInterval == 0 && tableBody !== null){
+                let promiseDeviceData = fetchRequestPingList()
+                promiseDeviceData.then(data => {
+                    console.log('Запрос раз в 10 секунд')
+                    let dataArray = Object.keys(data).map(e => {
+                        return data[e]
+                    })
 
-                let tabels = dataArray.map(e => (e.workers).split(','))
-                tabels = tabels[0].concat(...tabels.slice(1)).filter(f => (!isNaN(+f)));
-                tabels = tabels.map(e => (e.replace(' ', '')))
-
-                let promisePhotoList = fetchRequestListPhoto(tabels.join())
-                promisePhotoList.then(photos => {
-                    setTabelList(photos.photo)
+                    const newState = tableBody.map((obj, i) => {
+                        if (obj.name == dataArray[i].name) {
+                            return {...obj, lastPolling: dataArray[i].lastPool, ping:dataArray[i].ping};
+                        }
+                        return obj;
+                    });
+                    setTableBody(newState);
                 })
-
-            })
-        } else {
-            let promiseDeviceData = fetchRequestPingList()
-            promiseDeviceData.then(data => {
-                let dataArray = Object.keys(data).map(e => {
-                    return data[e]
-                })
-
+            } else if(tableBody !== null){
+                console.log(countInterval, timeNow())
                 const newState = tableBody.map((obj, i) => {
-                    if (obj.name == dataArray[i].name) {
-                        return {...obj, lastPolling: dataArray[i].lastPool, ping:dataArray[i].ping};
-                    }
-                    return obj;
+                        return {...obj, lastPolling: new Date(obj[i].lastPolling) + 1000};
                 });
                 setTableBody(newState);
-            })
-        }
+            }
+
+            countInterval++
+            countInterval >= 10? clearInterval(secondInterval) : null
+        }, 1000)
 
     }
 
-
     useEffect(() => {
-        if(tableBody == null) updateTable(true)
+        if(tableBody == null) {
+            console.log('Первый старт', timeNow())
+            updateTable(true)
+        }
         const interval = setInterval(() => {
+            console.log('новый интервал', timeNow())
             updateTable()
-        }, 10000)
+        }, 1500)
 
         return () => {
             clearInterval(interval)
