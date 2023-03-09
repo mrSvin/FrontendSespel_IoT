@@ -143,7 +143,8 @@ function Network() {
         })
     const [tabelList, setTabelList] = useState(null)
 
-    let interval
+    let firstInterval
+    let secondInterval
 
     function handleOnChange(e, key) {
         const {value} = e.target;
@@ -177,7 +178,7 @@ function Network() {
     function updateTable(fullRequest) {
 
         let countInterval = 0
-        let secondInterval = setInterval(()=>{
+        secondInterval = setInterval(()=>{
 
             if ((tableBody == null || fullRequest) && countInterval == 0) {
                 let promiseDeviceData = fetchRequestGetNetworkDevices()
@@ -198,7 +199,13 @@ function Network() {
                     })
 
                 })
-            } else if(countInterval == 0 && tableBody !== null){
+            } else if(tableBody !== null && countInterval < 10){
+                console.log(countInterval, timeNow())
+                const newState = tableBody.map((obj, i) => {
+                        return {...obj, lastPolling: new Date(obj.lastPolling) + 1000};
+                });
+                setTableBody(newState);
+            }  else if(countInterval >= 10 && tableBody !== null){
                 let promiseDeviceData = fetchRequestPingList()
                 promiseDeviceData.then(data => {
                     console.log('Запрос раз в 10 секунд')
@@ -213,17 +220,12 @@ function Network() {
                         return obj;
                     });
                     setTableBody(newState);
+                    clearInterval(secondInterval)
                 })
-            } else if(tableBody !== null){
-                console.log(countInterval, timeNow())
-                const newState = tableBody.map((obj, i) => {
-                        return {...obj, lastPolling: new Date(obj.lastPolling) + 1000};
-                });
-                setTableBody(newState);
             }
 
             countInterval++
-            countInterval >= 10? clearInterval(secondInterval) : null
+            countInterval >= 12? clearInterval(secondInterval) : null
         }, 1000)
 
     }
@@ -233,13 +235,14 @@ function Network() {
             console.log('Первый старт', timeNow())
             updateTable(true)
         }
-        const interval = setInterval(() => {
+        firstInterval = setInterval(() => {
             console.log('новый интервал', timeNow())
             updateTable()
         }, 1500)
 
         return () => {
-            clearInterval(interval)
+            clearInterval(firstInterval)
+            clearInterval(secondInterval)
         }
 
     }, [tableBody])
