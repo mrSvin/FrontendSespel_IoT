@@ -242,7 +242,7 @@ function Network() {
 
         return () => {
             clearInterval(firstInterval)
-            clearInterval(secondInterval)
+            // clearInterval(secondInterval)
         }
 
     }, [tableBody])
