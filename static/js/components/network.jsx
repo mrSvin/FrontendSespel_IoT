@@ -310,11 +310,11 @@ function Network() {
                                                  let deletePromise = fetchRequestDeleteNetworkDevice(deviceTable.name)
                                                  deletePromise.then((answer) => {
                                                      if (answer == 'ok') {
-                                                         updateTable(true)
                                                          setClickedDeleteButton(false)
                                                          setTimeout(() => {
                                                              setClickedDeleteButton(true)
                                                          }, 1000)
+                                                         window.location.reload()
                                                      } else alert('Недостаточно прав для удаления')
                                                  })
                                              }
