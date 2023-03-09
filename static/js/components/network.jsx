@@ -142,8 +142,6 @@ function Network() {
             description: ''
         })
     const [tabelList, setTabelList] = useState(null)
-    const [updateTableState, setUpdateTableState] = useState(false)
-    const history = useHistory()
 
     let firstInterval
     let secondInterval
@@ -207,7 +205,7 @@ function Network() {
                     return {...obj, lastPolling: new Date(obj.lastPolling) + 1000};
                 });
                 setTableBody(newState);
-            } else if (countInterval >= 10 && tableBody !== null) {
+            } else if (countInterval == 10 && tableBody !== null) {
                 let promiseDeviceData = fetchRequestPingList()
                 promiseDeviceData.then(data => {
                     console.log('Запрос раз в 10 секунд')
@@ -247,12 +245,8 @@ function Network() {
             // clearInterval(secondInterval)
         }
 
-        return history.listen((location) => {
-            console.log('Смена страницы, закрываю интервал')
-            clearInterval(secondInterval)
-        })
 
-    }, [updateTableState, tableBody, history])
+    }, [tableBody])
 
     return (
         <div className={'networkWrap'}>
@@ -335,8 +329,7 @@ function Network() {
 
             <NetworkFormUpdateAdd typeForm={typeForm} machine={machine} handleOnChange={handleOnChange}
                                   handleOnChangeIP={handleOnChangeIP} handleOnChangeImage={handleOnChangeImage}
-                                  errorMessage={errorMessage} setErrorMessage={setErrorMessage}
-                                  updateTableState={updateTableState} setUpdateTableState={setUpdateTableState}/>
+                                  errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
             <div className={typeForm == 'hide' ? null : 'darkSpace'}
                  onClick={() => {
                      setTypeForm('hide')
@@ -348,8 +341,7 @@ function Network() {
 
 function NetworkFormUpdateAdd({
                                   typeForm, machine, handleOnChange, handleOnChangeIP,
-                                  handleOnChangeImage, errorMessage, setErrorMessage,
-                                  updateTableState, setUpdateTableState
+                                  handleOnChangeImage, errorMessage, setErrorMessage
                               }) {
     return (
         <form className={`networkFormAdd ${classToTypeForm(typeForm)}`}>
@@ -434,7 +426,6 @@ function NetworkFormUpdateAdd({
                             let addPromise = fetchRequestAddNetworkDevice(machine)
                             addPromise.then((data) => {
                                 if (data == 'ok') {
-                                    setUpdateTableState(!updateTableState)
                                     setErrorMessage(['Оборудование добавлено', 'greenMessage'])
 
                                 } else setErrorMessage(['Не удалось добавить оборудование', 'redMessage'])
@@ -443,7 +434,6 @@ function NetworkFormUpdateAdd({
                             let changePromise = fetchRequestChangeNetworkDevice(machine)
                             changePromise.then((data) => {
                                 if (data == 'ok') {
-                                    setUpdateTableState(!updateTableState)
                                     setErrorMessage(['Оборудование изменено', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось изменить оборудование', 'redMessage'])
                             })
