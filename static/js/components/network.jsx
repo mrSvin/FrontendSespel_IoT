@@ -427,7 +427,7 @@ function NetworkFormUpdateAdd({
                             addPromise.then((data) => {
                                 if (data == 'ok') {
                                     setErrorMessage(['Оборудование добавлено', 'greenMessage'])
-
+                                    window.location.reload()
                                 } else setErrorMessage(['Не удалось добавить оборудование', 'redMessage'])
                             })
                         } else if (typeForm == 'change') {
@@ -435,6 +435,7 @@ function NetworkFormUpdateAdd({
                             changePromise.then((data) => {
                                 if (data == 'ok') {
                                     setErrorMessage(['Оборудование изменено', 'greenMessage'])
+                                    window.location.reload()
                                 } else setErrorMessage(['Не удалось изменить оборудование', 'redMessage'])
                             })
                         }
