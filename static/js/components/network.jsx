@@ -217,7 +217,7 @@ function Network() {
             } else if(tableBody !== null){
                 console.log(countInterval, timeNow())
                 const newState = tableBody.map((obj, i) => {
-                        return {...obj, lastPolling: new Date(obj[i].lastPolling) + 1000};
+                        return {...obj, lastPolling: new Date(obj.lastPolling) + 1000};
                 });
                 setTableBody(newState);
             }
