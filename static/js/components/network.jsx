@@ -317,7 +317,8 @@ function Network() {
                                                          // window.location.reload()
                                                      } else {
                                                          setCloseInterval(1)
-                                                     }alert('Недостаточно прав для удаления')
+                                                         alert('Недостаточно прав для удаления')
+                                                     }
                                                  })
                                              } else setCloseInterval(1)
                                          }}></div>
@@ -419,6 +420,7 @@ function NetworkFormUpdateAdd({
 
             <button className={'formAddChangeButton'} type="button"
                     onClick={() => {
+                        setCloseInterval(3)
                         if (machine.name == '' || machine.ip == '' || machine.workers == '' || machine.location == '' || machine.description == '') {
                             setErrorMessage(['Заполните все поля', 'redMessage'])
                             return null
@@ -428,7 +430,6 @@ function NetworkFormUpdateAdd({
                             return null
                         }
                         if (typeForm == 'add') {
-                            setCloseInterval(3)
                             let addPromise = fetchRequestAddNetworkDevice(machine)
                             addPromise.then((data) => {
                                 if (data == 'ok') {
@@ -437,7 +438,6 @@ function NetworkFormUpdateAdd({
                                 } else setErrorMessage(['Не удалось добавить оборудование', 'redMessage'])
                             })
                         } else if (typeForm == 'change') {
-                            setCloseInterval(3)
                             let changePromise = fetchRequestChangeNetworkDevice(machine)
                             changePromise.then((data) => {
                                 if (data == 'ok') {
