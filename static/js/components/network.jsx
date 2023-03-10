@@ -145,7 +145,6 @@ function Network() {
 
     const [closeInterval, setCloseInterval] = useState(false)
 
-    let firstInterval
     let secondInterval
 
     function handleOnChange(e, key) {
@@ -179,14 +178,17 @@ function Network() {
 
     function updateTable(fullRequest) {
 
+        if(closeInterval){
+            setCloseInterval(true)
+            return
+        }
+
         let countInterval = 0
         secondInterval = setInterval(() => {
 
-            console.log('Имя второго интервала', secondInterval)
-
+            console.log('Имя интервала', secondInterval)
             let url = window.location.href
             url.includes('network') ? null : clearInterval(secondInterval)
-            closeInterval? clearInterval(secondInterval) : null
 
             if ((tableBody == null || fullRequest) && countInterval == 0) {
                 let promiseDeviceData = fetchRequestGetNetworkDevices()
@@ -207,7 +209,6 @@ function Network() {
                     })
 
                 })
-                clearInterval(secondInterval)
             } else if (tableBody !== null && countInterval < 10) {
                 console.log(countInterval, timeNow())
                 const newState = tableBody.map((obj) => {
@@ -231,6 +232,9 @@ function Network() {
                     setTableBody(newState);
                     clearInterval(secondInterval)
                 })
+            } else {
+                setCloseInterval(true)
+                clearInterval(secondInterval)
             }
 
             countInterval++
@@ -240,21 +244,8 @@ function Network() {
     }
 
     useEffect(() => {
-
-        if(!closeInterval){
-            firstInterval = setInterval(() => {
-                console.log('новый интервал', timeNow())
-                updateTable()
-            }, 1500)
-        }
-
-        console.log('имя первого интервала', firstInterval)
-
-        return () => {
-            clearInterval(firstInterval)
-        }
-
-    }, [tableBody, closeInterval])
+        updateTable(true)
+    }, [])
 
     return (
         <div className={'networkWrap'}>
