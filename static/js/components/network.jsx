@@ -204,8 +204,8 @@ function Network() {
                 })
             } else if (tableBody !== null && countInterval < 10) {
                 console.log(countInterval, timeNow())
-                const newState = tableBody.map((obj, i) => {
-                    return {...obj, lastPolling: new Date(obj.lastPolling) + 1000};
+                const newState = tableBody.map((obj) => {
+                    return {...obj, lastPolling: new Date(obj.lastPolling).getTime() + 1000};
                 });
                 setTableBody(newState);
             } else if (countInterval == 10 && tableBody !== null) {
