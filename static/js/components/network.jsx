@@ -142,10 +142,8 @@ function Network() {
             description: ''
         })
     const [tabelList, setTabelList] = useState(null)
-
-    const [closeInterval, setCloseInterval] = useState(false)
-
-    let secondInterval
+    const [closeInterval, setCloseInterval] = useState(0)
+    let interval
 
     function handleOnChange(e, key) {
         const {value} = e.target;
@@ -176,28 +174,26 @@ function Network() {
 
     };
 
-    function updateTable(fullRequest) {
+    function updateTable() {
 
-        if(closeInterval){
-            setCloseInterval(true)
+        if(closeInterval == 3){
             return
         }
 
         let countInterval = 0
-        secondInterval = setInterval(() => {
+        interval = setInterval(() => {
 
-            console.log('Имя интервала', secondInterval)
+            console.log('Имя интервала', interval)
             let url = window.location.href
-            url.includes('network') ? null : clearInterval(secondInterval)
+            url.includes('network') ? null : clearInterval(interval)
 
-            if ((tableBody == null || fullRequest) && countInterval == 0) {
+            if (closeInterval == 0 && countInterval == 0) {
                 let promiseDeviceData = fetchRequestGetNetworkDevices()
                 promiseDeviceData.then(data => {
                     console.log('Первый старт, загрузка')
                     let dataArray = Object.keys(data).map(e => {
                         return data[e]
                     })
-                    setTableBody(dataArray)
 
                     let tabels = dataArray.map(e => (e.workers).split(','))
                     tabels = tabels[0].concat(...tabels.slice(1)).filter(f => (!isNaN(+f)));
@@ -208,9 +204,11 @@ function Network() {
                         setTabelList(photos.photo)
                     })
 
+                    setTableBody(dataArray)
+                    setCloseInterval(1)
                 })
             } else if (tableBody !== null && countInterval < 10) {
-                console.log(countInterval, timeNow())
+                console.log(`№${countInterval} время - ${timeNow()} Имя интервала - ${interval} 'Cостояние -' ${closeInterval}`)
                 const newState = tableBody.map((obj) => {
                     return {...obj, lastPolling: new Date(obj.lastPolling).getTime() + 1000};
                 });
@@ -230,22 +228,23 @@ function Network() {
                         return obj;
                     });
                     setTableBody(newState);
-                    clearInterval(secondInterval)
+                    setCloseInterval(closeInterval == 1? 2 : 1)
                 })
-            } else {
-                setCloseInterval(true)
-                clearInterval(secondInterval)
             }
-
             countInterval++
-            countInterval >= 12 ? clearInterval(secondInterval) : null
         }, 1000)
 
     }
 
     useEffect(() => {
-        updateTable(true)
-    }, [])
+        updateTable()
+
+        return () => {
+            console.log('Закрываю интервал', interval)
+            clearInterval(interval)
+        }
+
+    }, [closeInterval])
 
     return (
         <div className={'networkWrap'}>
@@ -305,7 +304,7 @@ function Network() {
                                     }}></div>
                                     <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`}
                                          onClick={() => {
-                                             setCloseInterval(true)
+                                             setCloseInterval(3)
                                              if (window.confirm(`Вы уверены, что хотите удалить оборудование ${deviceTable.name}?`)) {
                                                  let deletePromise = fetchRequestDeleteNetworkDevice(deviceTable.name)
                                                  deletePromise.then((answer) => {
@@ -313,13 +312,14 @@ function Network() {
                                                          setClickedDeleteButton(false)
                                                          setTimeout(() => {
                                                              setClickedDeleteButton(true)
-                                                             setCloseInterval(false)
+                                                             setCloseInterval(0)
                                                          }, 1000)
                                                          // window.location.reload()
-                                                         updateTable(true)
-                                                     } else alert('Недостаточно прав для удаления')
+                                                     } else {
+                                                         setCloseInterval(1)
+                                                     }alert('Недостаточно прав для удаления')
                                                  })
-                                             } else setCloseInterval(false)
+                                             } else setCloseInterval(1)
                                          }}></div>
                                 </td>
                             </tr>
@@ -335,7 +335,7 @@ function Network() {
                                   setCloseInterval={setCloseInterval} updateTable={updateTable}/>
             <div className={typeForm == 'hide' ? null : 'darkSpace'}
                  onClick={() => {
-                     setCloseInterval(false)
+                     setCloseInterval(1)
                      setTypeForm('hide')
                      setErrorMessage(['', ''])
                  }}></div>
@@ -428,25 +428,21 @@ function NetworkFormUpdateAdd({
                             return null
                         }
                         if (typeForm == 'add') {
-                            setCloseInterval(true)
+                            setCloseInterval(3)
                             let addPromise = fetchRequestAddNetworkDevice(machine)
                             addPromise.then((data) => {
                                 if (data == 'ok') {
-                                    setCloseInterval(true)
+                                    setCloseInterval(0)
                                     setErrorMessage(['Оборудование добавлено', 'greenMessage'])
-                                    updateTable(true)
-                                    // window.location.reload()
                                 } else setErrorMessage(['Не удалось добавить оборудование', 'redMessage'])
                             })
                         } else if (typeForm == 'change') {
-                            setCloseInterval(true)
+                            setCloseInterval(3)
                             let changePromise = fetchRequestChangeNetworkDevice(machine)
                             changePromise.then((data) => {
                                 if (data == 'ok') {
-                                    setCloseInterval(true)
+                                    setCloseInterval(0)
                                     setErrorMessage(['Оборудование изменено', 'greenMessage'])
-                                    updateTable(true)
-                                    // window.location.reload()
                                 } else setErrorMessage(['Не удалось изменить оборудование', 'redMessage'])
                             })
                         }
@@ -490,11 +486,11 @@ function NetworkButtonAdd({typeForm, setTypeForm, setErrorMessage, setCloseInter
     return (
         <div className='networkAddButton' onClick={() => {
             if (typeForm == 'add') {
-                setCloseInterval(false)
+                setCloseInterval(1)
                 setTypeForm('hide')
                 setErrorMessage(['', ''])
             } else {
-                setCloseInterval(true)
+                setCloseInterval(3)
                 setTypeForm('add')
             }
         }}>
