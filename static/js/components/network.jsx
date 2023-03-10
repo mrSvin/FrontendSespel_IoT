@@ -143,6 +143,8 @@ function Network() {
         })
     const [tabelList, setTabelList] = useState(null)
 
+    const [closeInterval, setCloseInterval] = useState(false)
+
     let firstInterval
     let secondInterval
 
@@ -180,8 +182,11 @@ function Network() {
         let countInterval = 0
         secondInterval = setInterval(() => {
 
+            console.log('Имя второго интервала', secondInterval)
+
             let url = window.location.href
             url.includes('network') ? null : clearInterval(secondInterval)
+            closeInterval? clearInterval(secondInterval) : null
 
             if ((tableBody == null || fullRequest) && countInterval == 0) {
                 let promiseDeviceData = fetchRequestGetNetworkDevices()
@@ -202,6 +207,7 @@ function Network() {
                     })
 
                 })
+                clearInterval(secondInterval)
             } else if (tableBody !== null && countInterval < 10) {
                 console.log(countInterval, timeNow())
                 const newState = tableBody.map((obj) => {
@@ -234,25 +240,26 @@ function Network() {
     }
 
     useEffect(() => {
-        console.log('Имена интервалов',firstInterval, secondInterval)
 
-        firstInterval = setInterval(() => {
-            console.log('новый интервал', timeNow())
-            updateTable()
-        }, 1500)
+        if(!closeInterval){
+            firstInterval = setInterval(() => {
+                console.log('новый интервал', timeNow())
+                updateTable()
+            }, 1500)
+        }
+
+        console.log('имя первого интервала', firstInterval)
 
         return () => {
             clearInterval(firstInterval)
-            // clearInterval(secondInterval)
         }
 
-
-    }, [tableBody])
+    }, [tableBody, closeInterval])
 
     return (
         <div className={'networkWrap'}>
             <NetworkButtonAdd typeForm={typeForm} setTypeForm={setTypeForm}
-                              setErrorMessage={setErrorMessage}/>
+                              setErrorMessage={setErrorMessage} setCloseInterval={setCloseInterval}/>
             <table className={`networkTable scudMonthMainTable`}>
                 <thead>
                 <tr>
@@ -307,6 +314,7 @@ function Network() {
                                     }}></div>
                                     <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`}
                                          onClick={() => {
+                                             setCloseInterval(true)
                                              if (window.confirm(`Вы уверены, что хотите удалить оборудование ${deviceTable.name}?`)) {
                                                  let deletePromise = fetchRequestDeleteNetworkDevice(deviceTable.name)
                                                  deletePromise.then((answer) => {
@@ -314,11 +322,13 @@ function Network() {
                                                          setClickedDeleteButton(false)
                                                          setTimeout(() => {
                                                              setClickedDeleteButton(true)
+                                                             setCloseInterval(false)
                                                          }, 1000)
-                                                         window.location.reload()
+                                                         // window.location.reload()
+                                                         updateTable(true)
                                                      } else alert('Недостаточно прав для удаления')
                                                  })
-                                             }
+                                             } else setCloseInterval(false)
                                          }}></div>
                                 </td>
                             </tr>
@@ -330,9 +340,11 @@ function Network() {
 
             <NetworkFormUpdateAdd typeForm={typeForm} machine={machine} handleOnChange={handleOnChange}
                                   handleOnChangeIP={handleOnChangeIP} handleOnChangeImage={handleOnChangeImage}
-                                  errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
+                                  errorMessage={errorMessage} setErrorMessage={setErrorMessage}
+                                  setCloseInterval={setCloseInterval} updateTable={updateTable}/>
             <div className={typeForm == 'hide' ? null : 'darkSpace'}
                  onClick={() => {
+                     setCloseInterval(false)
                      setTypeForm('hide')
                      setErrorMessage(['', ''])
                  }}></div>
@@ -342,7 +354,8 @@ function Network() {
 
 function NetworkFormUpdateAdd({
                                   typeForm, machine, handleOnChange, handleOnChangeIP,
-                                  handleOnChangeImage, errorMessage, setErrorMessage
+                                  handleOnChangeImage, errorMessage, setErrorMessage,
+                                  setCloseInterval, updateTable
                               }) {
     return (
         <form className={`networkFormAdd ${classToTypeForm(typeForm)}`}>
@@ -424,19 +437,25 @@ function NetworkFormUpdateAdd({
                             return null
                         }
                         if (typeForm == 'add') {
+                            setCloseInterval(true)
                             let addPromise = fetchRequestAddNetworkDevice(machine)
                             addPromise.then((data) => {
                                 if (data == 'ok') {
+                                    setCloseInterval(true)
                                     setErrorMessage(['Оборудование добавлено', 'greenMessage'])
-                                    window.location.reload()
+                                    updateTable(true)
+                                    // window.location.reload()
                                 } else setErrorMessage(['Не удалось добавить оборудование', 'redMessage'])
                             })
                         } else if (typeForm == 'change') {
+                            setCloseInterval(true)
                             let changePromise = fetchRequestChangeNetworkDevice(machine)
                             changePromise.then((data) => {
                                 if (data == 'ok') {
+                                    setCloseInterval(true)
                                     setErrorMessage(['Оборудование изменено', 'greenMessage'])
-                                    window.location.reload()
+                                    updateTable(true)
+                                    // window.location.reload()
                                 } else setErrorMessage(['Не удалось изменить оборудование', 'redMessage'])
                             })
                         }
@@ -475,14 +494,18 @@ function ImageList({imageList = "1234", tabelList, humanEx}) {
     )
 }
 
-function NetworkButtonAdd({typeForm, setTypeForm, setErrorMessage}) {
+function NetworkButtonAdd({typeForm, setTypeForm, setErrorMessage, setCloseInterval}) {
 
     return (
         <div className='networkAddButton' onClick={() => {
             if (typeForm == 'add') {
+                setCloseInterval(false)
                 setTypeForm('hide')
                 setErrorMessage(['', ''])
-            } else setTypeForm('add')
+            } else {
+                setCloseInterval(true)
+                setTypeForm('add')
+            }
         }}>
             <span>Добавить оборудование</span>
         </div>
