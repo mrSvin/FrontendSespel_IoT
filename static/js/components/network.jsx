@@ -180,6 +180,9 @@ function Network() {
         let countInterval = 0
         secondInterval = setInterval(() => {
 
+            let url = window.location.href
+            url.includes('network') ? null : clearInterval(secondInterval)
+
             if ((tableBody == null || fullRequest) && countInterval == 0) {
                 let promiseDeviceData = fetchRequestGetNetworkDevices()
                 promiseDeviceData.then(data => {
