@@ -67,7 +67,6 @@ function Network() {
             if (closeInterval == 0 && countInterval == 0) {
                 let promiseDeviceData = fetchRequestGetNetworkDevices()
                 promiseDeviceData.then(data => {
-                    console.log('Первый старт, загрузка')
                     let dataArray = Object.keys(data).map(e => {
                         return data[e]
                     })
@@ -85,7 +84,6 @@ function Network() {
                     setCloseInterval(1)
                 })
             } else if (tableBody !== null && countInterval < 10) {
-                console.log(`№${countInterval} время - ${timeNow()} Имя интервала - ${interval} 'Cостояние -' ${closeInterval}`)
                 const newState = tableBody.map((obj) => {
                     return {...obj, lastPolling: new Date(obj.lastPolling).getTime() + 1000};
                 });
@@ -93,7 +91,6 @@ function Network() {
             } else if (countInterval == 10 && tableBody !== null) {
                 let promiseDeviceData = fetchRequestPingList()
                 promiseDeviceData.then(data => {
-                    console.log('Запрос раз в 10 секунд')
                     let dataArray = Object.keys(data).map(e => {
                         return data[e]
                     })
@@ -117,7 +114,6 @@ function Network() {
         updateTable()
 
         return () => {
-            console.log('Закрываю интервал', interval)
             clearInterval(interval)
         }
 
