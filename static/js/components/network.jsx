@@ -182,8 +182,6 @@ function Network() {
 
         let countInterval = 0
         interval = setInterval(() => {
-
-            console.log('Имя интервала', interval)
             let url = window.location.href
             url.includes('network') ? null : clearInterval(interval)
 
@@ -295,9 +293,11 @@ function Network() {
                                         setMachine(deviceTable)
                                         setErrorMessage(['', ''])
                                         if (machine.name == deviceTable.name && typeForm == 'change') {
+                                            setCloseInterval(1)
                                             setTypeForm('hide')
                                             setErrorMessage('', '')
                                         } else {
+                                            setCloseInterval(3)
                                             setTypeForm('change')
                                             setErrorMessage(['', ''])
                                         }
