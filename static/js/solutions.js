@@ -900,3 +900,50 @@ function classToTypeForm(typeForm) {
     if (typeForm == 'change') return 'formUsersControl tableBorderChange'
 
 }
+
+function lastConnectTime(time) {
+    time = new Date() - new Date(time).getTime()
+    return msToTimeDays(time).slice(2)
+}
+
+function getCorrectIP(ip) {
+
+    let correctIP = '192.168.'
+    if (ip.length <= 8) return correctIP.slice(0, ip.length)
+
+    let array = ip.slice(8).split('.')
+    let ipNew
+    array = array.map(e => {
+        if (0 <= +e && +e <= 255) {
+            return +e
+        } else if (array.length == 1) {
+            return (+e > 255) ? '255.' : '0.'
+        } else return (+e > 255) ? 255 : 0
+    })
+
+    if (array.length == 2 && ip[ip.length - 1] !== '.') {
+        ipNew = array[0] + '.' + array[1]
+    } else if (array.length > 2) {
+        ipNew = array[0] + '.' + array[1]
+    } else ipNew = (ip[ip.length - 1] == '.') ? array[0] + '.' : array[0]
+
+    return correctIP + ipNew
+}
+
+function checkIP(ip) {
+
+    if (ip.length <= 8) return false
+
+    let array = ip.slice(8).split('.')
+
+    array = array.map(e => {
+        if (0 <= +e && +e <= 255) {
+            return +e
+        } else return false
+    })
+
+    if (array.length == 2 && ip[ip.length - 1] !== '.' && !array.includes(false)) {
+        return true
+    } else return false
+
+}

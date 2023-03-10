@@ -342,6 +342,80 @@ function fetchRequestScudMonth(date = '2022-12') {
         })
 }
 
+function fetchRequestGetNetworkDevices() {
+    return fetch(`/api/networkList`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}
+
+function fetchRequestPingList() {
+    return fetch(`/api/pingList`, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}
+
+function fetchRequestAddNetworkDevice(device) {
+    let base64 = document.querySelectorAll('.outputImage')[1].src
+    return urltoFile(base64, base64.slice(10, 20))
+        .then(function (file) {
+            let data = new FormData()
+            data.append('image', file)
+            data.append('name', device.name)
+            data.append('ip', device.ip)
+            data.append('workers', device.workers)
+            data.append('location', device.location)
+            data.append('description', device.description)
+
+            return fetch('/api/addNetwork', {
+                method: 'POST',
+                body: data
+            })
+                .then(response => response.text())
+        });
+}
+
+function fetchRequestChangeNetworkDevice(device) {
+    let base64 = document.querySelectorAll('.outputImage')[1].src
+    return urltoFile(base64, base64.slice(10, 20))
+        .then(function (file) {
+            let data = new FormData()
+            data.append('image', file)
+            data.append('name', device.name)
+            data.append('ip', device.ip)
+            data.append('workers', device.workers)
+            data.append('location', device.location)
+            data.append('description', device.description)
+
+            return fetch('/api/updateNetwork', {
+                method: 'PUT',
+                body: data
+            })
+                .then(response => response.text())
+        });
+}
+
+function fetchRequestDeleteNetworkDevice(device) {
+    return fetch(`/api/deleteNetwork-${device}`, {method: 'DELETE'})
+        .then(response => response.text())
+        .then((result) => {
+            return result
+        })
+        .catch(error => console.log('Ошибка при отправке запроса', error));
+}
+
+function fetchRequestListPhoto(listTabels) {
+    return fetch(`/api/photoList-${listTabels}`, {method: 'GET'})
+        .then(response => response.json())
+        .then((result) => {
+            return result
+        })
+        .catch(error => console.log('Ошибка при отправке запроса', error));
+}
+
 
 
 
