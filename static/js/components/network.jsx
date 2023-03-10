@@ -186,7 +186,7 @@ function Network() {
             if ((tableBody == null || fullRequest) && countInterval == 0) {
                 let promiseDeviceData = fetchRequestGetNetworkDevices()
                 promiseDeviceData.then(data => {
-                    console.log('Первая загрузка')
+                    console.log('Первый старт, загрузка')
                     let dataArray = Object.keys(data).map(e => {
                         return data[e]
                     })
@@ -234,10 +234,8 @@ function Network() {
     }
 
     useEffect(() => {
-        if (tableBody == null) {
-            console.log('Первый старт', timeNow())
-            updateTable(true)
-        }
+        console.log('Имена интервалов',firstInterval, secondInterval)
+
         firstInterval = setInterval(() => {
             console.log('новый интервал', timeNow())
             updateTable()
