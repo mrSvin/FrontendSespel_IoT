@@ -329,3 +329,32 @@ function SwitchLineHCIndividual({stateLineHC, setStateLineHC, text = 'Перек
         </div>
     )
 }
+
+function AlertConfirm({showAlertConfirm, setShowAlertConfirm, alertConfirmParams}) {
+
+    return (
+        <>{!showAlertConfirm ? null :
+            <div className={'alertConfirm'}>
+                <p>{alertConfirmParams.tittle}</p>
+                <p>{alertConfirmParams.message}</p>
+                <div>
+                    <button onClick={() => {
+                        if (alertConfirmParams.function == null) {
+                            setShowAlertConfirm(false)
+                        } else {
+                            alertConfirmParams.function(true)
+                            setShowAlertConfirm(false)
+                        }
+                    }}>ок
+                    </button>
+                    {(alertConfirmParams.function !== null) ?
+                        <button onClick={() => {
+                            alertConfirmParams.function(false)
+                            setShowAlertConfirm(false)
+                        }}>
+                        отмена</button> : null}
+                </div>
+            </div>}
+        </>
+    )
+}

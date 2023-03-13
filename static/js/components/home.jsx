@@ -25,10 +25,19 @@ function Home() {
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
     ];
 
+    const [showAlertConfirm, setShowAlertConfirm] = useState(false)
+    const [alertConfirmParams, setAlertConfirmParams] = useState({
+        tittle: 'Внимание',
+        message: 'Данная данная ссылка открывается только с локального домена',
+        function: null,
+    })
+
     const teamCenter = { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией' }
 
     return (
         <div className="homeBody">
+            <AlertConfirm showAlertConfirm={showAlertConfirm} setShowAlertConfirm={setShowAlertConfirm}
+                          alertConfirmParams={alertConfirmParams}/>
             <div className="main-container-home">
                 {menuItems.map(({name, link, iconClass, description}) => (
                     <Link key={name} to={link} className="container-home">
@@ -46,6 +55,7 @@ function Home() {
                     if(url.includes(cancelUrl)){
                         console.log(e.href)
                         console.log('Запрет на переадресацию')
+                        setShowAlertConfirm(true)
                         e.preventDefault();
                     }
                     if(window.confirm('Временное сообщение, просто нужно временное условие чтобы запретить переход')) e.preventDefault();
