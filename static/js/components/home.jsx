@@ -48,7 +48,7 @@ function Home() {
                         console.log('Запрет на переадресацию')
                         e.preventDefault();
                     }
-                    if(confirm('Временное сообщение, просто нужно временное условие чтобы запретить переход')) e.preventDefault();
+                    if(window.confirm('Временное сообщение, просто нужно временное условие чтобы запретить переход')) e.preventDefault();
                 }}>
                     <div className="icon-container">
                         <p>{teamCenter.description}</p>
