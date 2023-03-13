@@ -23,8 +23,9 @@ function Home() {
         { name: 'Owencloud', link: '/owencloud', iconClass: 'owencloud', description: 'Облачная платформа мониторинга оборудования' },
         { name: 'Умный дом', link: '/intra', iconClass: 'intra', description: 'SCADA система Intrahouse для диспетчеризации' },
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
-        { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией' },
     ];
+
+    const teamCenter = { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией' }
 
     return (
         <div className="homeBody">
@@ -38,6 +39,23 @@ function Home() {
                         <h2 className="buttonName">{name}</h2>
                     </Link>
                 ))}
+
+                <Link key={teamCenter.name} to={teamCenter.link} className="container-home" onClick={(e) =>{
+                    let url = window.location.href
+                    let cancelUrl = ['http://iot.sespel.com/', 'http://192.168.3.96/']
+                    if(url.includes(cancelUrl[1])){
+                        console.log(e.href)
+                        console.log('Запрет на переадресацию')
+                        e.preventDefault();
+                    }
+                }}>
+                    <div className="icon-container">
+                        <p>{teamCenter.description}</p>
+                        <div className={`${teamCenter.iconClass}`}/>
+                    </div>
+                    <h2 className="buttonName">{teamCenter.name}</h2>
+                </Link>
+
             </div>
         </div>
     )
