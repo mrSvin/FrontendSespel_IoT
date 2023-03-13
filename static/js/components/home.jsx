@@ -27,8 +27,8 @@ function Home() {
 
     const [showAlertConfirm, setShowAlertConfirm] = useState(false)
     const [alertConfirmParams, setAlertConfirmParams] = useState({
-        tittle: 'Внимание',
-        message: 'Данная данная ссылка открывается только с локального домена',
+        tittle: 'Ошибка',
+        message: 'Данная ссылка открывается только с локального домена',
         function: null,
     })
 
@@ -53,12 +53,9 @@ function Home() {
                     let url = window.location.href
                     let cancelUrl = 'http://iot.sespel.com/'
                     if(url.includes(cancelUrl)){
-                        console.log(e.href)
-                        console.log('Запрет на переадресацию')
                         setShowAlertConfirm(true)
                         e.preventDefault();
                     }
-                    if(window.confirm('Временное сообщение, просто нужно временное условие чтобы запретить переход')) e.preventDefault();
                 }}>
                     <div className="icon-container">
                         <p>{teamCenter.description}</p>

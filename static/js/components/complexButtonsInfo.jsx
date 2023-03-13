@@ -333,28 +333,33 @@ function SwitchLineHCIndividual({stateLineHC, setStateLineHC, text = 'Перек
 function AlertConfirm({showAlertConfirm, setShowAlertConfirm, alertConfirmParams}) {
 
     return (
-        <>{!showAlertConfirm ? null :
-            <div className={'alertConfirm'}>
-                <p>{alertConfirmParams.tittle}</p>
-                <p>{alertConfirmParams.message}</p>
-                <div>
-                    <button onClick={() => {
+        <div>
+            <div className={`alertDarkSpace ${showAlertConfirm ? 'alertDarkSpaceVisible' : null}`}></div>
+            <div className={`alertConfirm ${showAlertConfirm ? 'alertConfirmVisible' : null}`}>
+                <p className={'alertConfirmTittle'}>{alertConfirmParams.tittle}</p>
+                <p className={'alertConfirmMessage'}>{alertConfirmParams.message}</p>
+                <div className={'alertConfirmButtonWrapper'}>
+                    <button className={'alertConfirmOk alertConfirmButtonHover'} onClick={() => {
                         if (alertConfirmParams.function == null) {
                             setShowAlertConfirm(false)
                         } else {
-                            alertConfirmParams.function(true)
-                            setShowAlertConfirm(false)
+                            if(alertConfirmParams.arguments == null) {
+                                alertConfirmParams.function(true)
+                                setShowAlertConfirm(false)
+                            } else {
+                                alertConfirmParams.function(true, alertConfirmParams.arguments)
+                                setShowAlertConfirm(false)
+                            }
+
                         }
                     }}>ок
                     </button>
-                    {(alertConfirmParams.function !== null) ?
-                        <button onClick={() => {
-                            alertConfirmParams.function(false)
-                            setShowAlertConfirm(false)
-                        }}>
-                        отмена</button> : null}
+                    {(alertConfirmParams.function !== null) ? <button className={'alertConfirmCancel alertConfirmButtonHover'} onClick={() => {
+                        alertConfirmParams.function(false)
+                        setShowAlertConfirm(false)
+                    }}>отмена</button> : null}
                 </div>
-            </div>}
-        </>
+            </div>
+        </div>
     )
 }

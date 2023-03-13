@@ -24,6 +24,44 @@ function Network() {
     const [closeInterval, setCloseInterval] = useState(0)
     let interval
 
+    const [showAlertConfirm, setShowAlertConfirm] = useState(false)
+    const [alertConfirmParams, setAlertConfirmParams] = useState({
+        tittle: 'Подтверждение',
+        message: 'Вы уверены, что хотите...',
+        function: null,
+        arguments: null,
+    })
+
+    function deleteDevice(agree, device='') {
+        if (agree) {
+            console.log('Подтверждаю')
+            let deletePromise = fetchRequestDeleteNetworkDevice(device)
+            deletePromise.then((answer) => {
+                if (answer == 'ok') {
+                    setClickedDeleteButton(false)
+                    setTimeout(() => {
+                        setClickedDeleteButton(true)
+                        setCloseInterval(0)
+                    }, 1000)
+                    // window.location.reload()
+                } else {
+                    setCloseInterval(1)
+                    setShowAlertConfirm(true)
+                    setAlertConfirmParams({
+                        tittle: 'Ошибка',
+                        message: 'Недостаточно прав для удаления',
+                        function: null,
+                        arguments: null,
+                    })
+                }
+            })
+
+        } else {
+            console.log('Отмена')
+            setCloseInterval(1)
+        }
+    }
+
     function handleOnChange(e, key) {
         const {value} = e.target;
         setMachine(prevState => ({
@@ -121,6 +159,8 @@ function Network() {
 
     return (
         <div className={'networkWrap'}>
+            <AlertConfirm showAlertConfirm={showAlertConfirm} setShowAlertConfirm={setShowAlertConfirm}
+                          alertConfirmParams={alertConfirmParams}/>
             <NetworkButtonAdd typeForm={typeForm} setTypeForm={setTypeForm}
                               setErrorMessage={setErrorMessage} setCloseInterval={setCloseInterval}/>
             <table className={`networkTable scudMonthMainTable`}>
@@ -180,22 +220,13 @@ function Network() {
                                     <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`}
                                          onClick={() => {
                                              setCloseInterval(3)
-                                             if (window.confirm(`Вы уверены, что хотите удалить оборудование ${deviceTable.name}?`)) {
-                                                 let deletePromise = fetchRequestDeleteNetworkDevice(deviceTable.name)
-                                                 deletePromise.then((answer) => {
-                                                     if (answer == 'ok') {
-                                                         setClickedDeleteButton(false)
-                                                         setTimeout(() => {
-                                                             setClickedDeleteButton(true)
-                                                             setCloseInterval(0)
-                                                         }, 1000)
-                                                         // window.location.reload()
-                                                     } else {
-                                                         setCloseInterval(1)
-                                                         alert('Недостаточно прав для удаления')
-                                                     }
-                                                 })
-                                             } else setCloseInterval(1)
+                                             setAlertConfirmParams({
+                                                 tittle: 'Подтверждение',
+                                                 message: `Вы уверены, что хотите удалить оборудование ${deviceTable.name}`,
+                                                 function: deleteDevice,
+                                                 arguments: deviceTable.name,
+                                             })
+                                             setShowAlertConfirm(true)
                                          }}></div>
                                 </td>
                             </tr>
