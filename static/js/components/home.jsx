@@ -42,12 +42,13 @@ function Home() {
 
                 <Link key={teamCenter.name} to={teamCenter.link} className="container-home" onClick={(e) =>{
                     let url = window.location.href
-                    let cancelUrl = ['http://iot.sespel.com/', 'http://192.168.3.96/']
-                    if(url.includes(cancelUrl[1])){
+                    let cancelUrl = 'http://iot.sespel.com/'
+                    if(url.includes(cancelUrl)){
                         console.log(e.href)
                         console.log('Запрет на переадресацию')
                         e.preventDefault();
                     }
+                    if(confirm('Временное сообщение, просто нужно временное условие чтобы запретить переход')) e.preventDefault();
                 }}>
                     <div className="icon-container">
                         <p>{teamCenter.description}</p>
