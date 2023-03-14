@@ -336,7 +336,7 @@ function AlertConfirm({showAlertConfirm, setShowAlertConfirm, alertConfirmParams
         <div>
             <div className={`alertDarkSpace ${showAlertConfirm ? 'alertDarkSpaceVisible' : null}`}></div>
             <div className={`alertConfirm ${showAlertConfirm ? 'alertConfirmVisible' : null}`}>
-                <p className={'alertConfirmTittle'}>{alertConfirmParams.tittle}</p>
+                <h2 className={'alertConfirmTittle'}>{alertConfirmParams.tittle}</h2>
                 <p className={'alertConfirmMessage'}>{alertConfirmParams.message}</p>
                 <div className={'alertConfirmButtonWrapper'}>
                     <button className={'alertConfirmOk alertConfirmButtonHover'} onClick={() => {
@@ -354,7 +354,7 @@ function AlertConfirm({showAlertConfirm, setShowAlertConfirm, alertConfirmParams
                         }
                     }}>ок
                     </button>
-                    {(alertConfirmParams.function !== null) ? <button className={'alertConfirmCancel alertConfirmButtonHover'} onClick={() => {
+                    {(alertConfirmParams.function !== null) ? <button className={'alertConfirmOk alertConfirmButtonHover'} onClick={() => {
                         alertConfirmParams.function(false)
                         setShowAlertConfirm(false)
                     }}>отмена</button> : null}
