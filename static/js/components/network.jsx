@@ -193,8 +193,7 @@ function Network() {
                                 <td>{deviceTable.description}</td>
                                 <td>{lastConnectTime(deviceTable.lastPolling)}</td>
                                 <td>
-                                    <span
-                                        className={`${deviceTable.ping == 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
+                                    <span className={`${deviceTable.ping == 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
                                 </td>
                                 <td className={'changeAddTd'}>
                                     <div className='tdChange' onClick={() => {
