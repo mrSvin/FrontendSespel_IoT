@@ -29,7 +29,6 @@ function Network() {
 
     function deleteDevice(agree, device='') {
         if (agree) {
-            console.log('Подтверждаю')
             let deletePromise = fetchRequestDeleteNetworkDevice(device)
             deletePromise.then((answer) => {
                 if (answer == 'ok') {
@@ -52,7 +51,6 @@ function Network() {
             })
 
         } else {
-            console.log('Отмена')
             setCloseInterval(1)
         }
     }
