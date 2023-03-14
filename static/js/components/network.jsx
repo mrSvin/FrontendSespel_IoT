@@ -43,7 +43,7 @@ function Network() {
                     setShowAlertConfirm(true)
                     setAlertConfirmParams({
                         tittle: 'Ошибка',
-                        message: 'Недостаточно прав для удаления',
+                        message: 'Недостаточно прав для удаления!',
                         function: null,
                         arguments: null,
                     })
@@ -215,7 +215,7 @@ function Network() {
                                              setCloseInterval(3)
                                              setAlertConfirmParams({
                                                  tittle: 'Подтверждение',
-                                                 message: `Вы уверены, что хотите удалить оборудование ${deviceTable.name}`,
+                                                 message: `Вы уверены, что хотите удалить оборудование ${deviceTable.name}?`,
                                                  function: deleteDevice,
                                                  arguments: deviceTable.name,
                                              })
