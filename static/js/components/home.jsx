@@ -14,6 +14,15 @@ function IframeLink({source}) {
 
 function Home() {
 
+    function teamCenterLink(e){
+        let url = window.location.href
+        let cancelUrl = 'http://iot.sespel.com/'
+        if(url.includes(cancelUrl)){
+            setShowAlertConfirm(true)
+            e.preventDefault();
+        }
+    }
+
     const menuItems = [
         { name: 'Станки', link: '/stanki/ОТК', iconClass: 'stanki', description: 'Суточные и месячные отчеты работы оборудования' },
         { name: 'Энергоресурсы', link: '/energyWater', iconClass: 'energy', description: 'Показатели расхода газа, воды, электроэнергии' },
@@ -23,8 +32,11 @@ function Home() {
         { name: 'Owencloud', link: '/owencloud', iconClass: 'owencloud', description: 'Облачная платформа мониторинга оборудования' },
         { name: 'Умный дом', link: '/intra', iconClass: 'intra', description: 'SCADA система Intrahouse для диспетчеризации' },
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
+        { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией', onClick: teamCenterLink},
         { name: 'Конфигуратор ППЦ', link: '/configPpc', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ' },
     ];
+
+
 
     const [showAlertConfirm, setShowAlertConfirm] = useState(false)
     const [alertConfirmParams, setAlertConfirmParams] = useState({
@@ -33,15 +45,15 @@ function Home() {
         function: null,
     })
 
-    const teamCenter = { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией' }
-
     return (
         <div className="homeBody">
             <AlertConfirm showAlertConfirm={showAlertConfirm} setShowAlertConfirm={setShowAlertConfirm}
                           alertConfirmParams={alertConfirmParams}/>
             <div className="main-container-home">
-                {menuItems.map(({name, link, iconClass, description}) => (
-                    <Link key={name} to={link} className="container-home">
+                {menuItems.map(({name, link, iconClass, description, onClick}) => (
+                    <Link key={name} to={link} className="container-home" onClick={(e) =>{
+                        if(onClick !== undefined) onClick(e)
+                    }}>
                         <div className="icon-container">
                             <p>{description}</p>
                             <div className={`${iconClass}`}/>
@@ -49,22 +61,6 @@ function Home() {
                         <h2 className="buttonName">{name}</h2>
                     </Link>
                 ))}
-
-                <Link key={teamCenter.name} to={teamCenter.link} className="container-home" onClick={(e) =>{
-                    let url = window.location.href
-                    let cancelUrl = 'http://iot.sespel.com/'
-                    if(url.includes(cancelUrl)){
-                        setShowAlertConfirm(true)
-                        e.preventDefault();
-                    }
-                }}>
-                    <div className="icon-container">
-                        <p>{teamCenter.description}</p>
-                        <div className={`${teamCenter.iconClass}`}/>
-                    </div>
-                    <h2 className="buttonName">{teamCenter.name}</h2>
-                </Link>
-
             </div>
         </div>
     )
