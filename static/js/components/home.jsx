@@ -23,12 +23,13 @@ function Home() {
         { name: 'Owencloud', link: '/owencloud', iconClass: 'owencloud', description: 'Облачная платформа мониторинга оборудования' },
         { name: 'Умный дом', link: '/intra', iconClass: 'intra', description: 'SCADA система Intrahouse для диспетчеризации' },
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
+        { name: 'Конфигуратор ППЦ', link: '/configPpc', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ' },
     ];
 
     const [showAlertConfirm, setShowAlertConfirm] = useState(false)
     const [alertConfirmParams, setAlertConfirmParams] = useState({
         tittle: 'Ошибка',
-        message: 'Данная ссылка открывается только с локального домена',
+        message: 'Данная ссылка открывается только с локального домена!',
         function: null,
     })
 
