@@ -59,3 +59,55 @@ function CurrentParams() {
     )
 }
 
+function Signals() {
+
+    let nameToFetch = parseNameUrl(document.location.pathname);
+
+    // let imgComplex = ["../images/stendResource.png"]
+
+    let [dataSignals, setdataSignals] = useState(null)
+
+    useEffect(() => {
+        let promiseSignal = fetchRequestSignals(nameToFetch)
+        promiseSignal.then(data=>{
+            setdataSignals(data)
+        })
+    }, [])
+
+    return (
+        <div className='serviceContainer'>
+            <h1>Текущее состояние {complexName + 'а'}</h1>
+            <div className='blockImage'>
+                {/*<img className="serviceImg " src={imgComplex}/>*/}
+            </div>
+            <table className="tableReport" id='tableSignal'>
+                <thead>
+                <tr>
+                    <th>Имя параметра</th>
+                    <th>Значение</th>
+                </tr>
+                </thead>
+                {dataSignals == null? null : Object.keys(dataSignals).map(keyName => {
+                    return (
+                        <tr key={keyName}>
+                            <td>{keyName}</td>
+                            <td>{dataSignals.keyName}</td>
+                        </tr>
+                    )
+                })}
+            </table>
+            <img className="excelIcon" id="button-excel"
+                 src="../../images/excel_icon.png"
+                 onClick={() => {
+                     TableToExcel.convert(document.getElementById('tableSignal'), {
+                         name: `Отчет_${timeNow().slice(2).replaceAll(':', '')}.xlsx`,
+                         sheet: {
+                             name: "Sheet 1"
+                         }
+                     });
+                 }}
+            />
+        </div>
+    )
+}
+

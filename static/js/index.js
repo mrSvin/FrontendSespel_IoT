@@ -52,6 +52,7 @@ function App({hideLoader}) {
         {path: "/service", component: Service},
         {path: "/report", component: Report},
         {path: "/currentParams", component: CurrentParams},
+        {path: "/signals", component: Signals},
         // {path: "/beacon", component: Beacon},
         {path: "/network", component: Network},
         {path: "/scud", component: Scud},

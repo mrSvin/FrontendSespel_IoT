@@ -416,6 +416,16 @@ function fetchRequestListPhoto(listTabels) {
         .catch(error => console.log('Ошибка при отправке запроса', error));
 }
 
+// Текущее состояние стенда ресурсных испытаний
+function fetchRequestSignals(complexName='navigator1') {
+    let url = `/api/complex/currentState/complexName:${complexName}`
+
+    fetch(url, {method: 'GET'})
+        .then((response) => response.json())
+        .then((data) => {
+            return data
+        })
+}
 
 
 

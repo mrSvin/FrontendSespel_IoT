@@ -1,7 +1,8 @@
 function ComplexSutkiAllInfo({
                                  complexName, complexImg, complexMesto,
                                  size, idContainer = null, service,
-                                 alarm, programs, laser, report, current, typeLine = 'multiLine'
+                                 alarm, programs, laser, report, current,
+                                 signals, typeLine = 'multiLine'
                              }) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
@@ -13,7 +14,7 @@ function ComplexSutkiAllInfo({
         <div className='complexAllInfo'>
             <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto}
                          size={size} alarm={alarm} programs={programs} laser={laser} service={service}
-                         report={report} current={current}/>
+                         report={report} current={current} signals={signals}/>
             <div className='highChartsLineRound'>
                 <div className="lineComplex">
                     <div className={`lineSukiHighChart ${typeLine == "multiLine" ? null : 'lineSwitchShort'}`}
@@ -31,7 +32,7 @@ function ComplexSutkiAllInfo({
 
 function ComplexInfo({
                          complexName, complexImg, complexMesto, size, alarm,
-                         programs, laser, service, report, current
+                         programs, laser, service, report, current, signals
                      }) {
     return (
         <div className="parent_image">
@@ -47,7 +48,8 @@ function ComplexInfo({
             </figcaption>
 
             <ComplexButtons complexMesto={complexMesto} size={size} alarm={alarm}
-                            programs={programs} laser={laser} service={service} report={report} current={current}/>
+                            programs={programs} laser={laser} service={service}
+                            report={report} current={current} signals={signals}/>
 
         </div>
     )
@@ -55,7 +57,7 @@ function ComplexInfo({
 
 function ComplexSmenaAllIngo({
                                  complexName, complexImg, complexMesto, size, idContainer,
-                                 alarm, programs, laser, service, report, current
+                                 alarm, programs, laser, service, report, current, signals
                              }) {
     let idLine = `containerLine${idContainer}`
     let idRound = `containerRound${idContainer}`
@@ -75,7 +77,7 @@ function ComplexSmenaAllIngo({
         <div className='complexAllInfo' id={'containerTotal'}>
             <ComplexInfo complexName={complexName} complexImg={complexImg} complexMesto={complexMesto}
                          size={size} programs={programs} laser={laser} alarm={alarm} service={service}
-                         report={report} current={current}/>
+                         report={report} current={current} signals={signals}/>
             <div className='twoDayDiv'>
                 <h1 className="timeInfoSmena">Работа II смены 19:00 - 07:00</h1>
                 <div className='oneDay'>
@@ -111,13 +113,14 @@ function ComplexSmenaAllIngo({
 function ComplexButtons({
                             complexMesto, size, alarm = null, programs = null,
                             laser = null, service = null, report = null,
-                            current = null
+                            current = null, signals=null,
                         }) {
 
 
     let linkService = `/service/${service}`
     let linkReport = `/report/${report}`
     let linkCurrent = `/currentParams/${current}`
+    let linkSignals = `/signals/${signals}`
 
     const sizeProperties = {
         '1ploshadkaOutside': {height: 1030, width: 1030},
@@ -271,6 +274,13 @@ return (
         }
 
         {current != null ?
+            <Link to={linkCurrent} className="iconJob">
+                <div className="label">Сигналы</div>
+            </Link> :
+            <div></div>
+        }
+
+        {signals != null ?
             <Link to={linkCurrent} className="iconJob">
                 <div className="label">Сигналы</div>
             </Link> :
