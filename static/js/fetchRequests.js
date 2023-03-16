@@ -399,7 +399,7 @@ function fetchRequestChangeNetworkDevice(device) {
 }
 
 function fetchRequestDeleteNetworkDevice(device) {
-    return fetch(`/api/deleteNetwork-${encodeURI(device)}`, {method: 'DELETE'})
+    return fetch(`/api/deleteNetwork-${encodeURIComponent(device)}`, {method: 'DELETE'})
         .then(response => response.text())
         .then((result) => {
             return result
