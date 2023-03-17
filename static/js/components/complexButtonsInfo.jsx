@@ -281,7 +281,7 @@ return (
         }
 
         {signals != null ?
-            <Link to={linkCurrent} className="iconJob">
+            <Link to={linkSignals} className="iconJob">
                 <div className="label">Сигналы</div>
             </Link> :
             <div></div>
