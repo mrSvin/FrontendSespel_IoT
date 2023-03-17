@@ -63,7 +63,12 @@ function Signals() {
 
     let nameToFetch = parseNameUrl(document.location.pathname);
 
-    // let imgComplex = ["../images/stendResource.png"]
+    let signalsMap = {
+        navigator1: {name:'Навигатор 1', img:'../images/navigator.png'},
+        navigator2: {name:'Навигатор 2', img:'../images/navigator.png'},
+        navigator3: {name:'Навигатор 3', img:'../images/navigator.png'}
+    }
+
 
     let [dataSignals, setdataSignals] = useState(null)
 
@@ -76,9 +81,9 @@ function Signals() {
 
     return (
         <div className='serviceContainer'>
-            <h1>Текущее состояние {nameToFetch + 'а'}</h1>
+            <h1>Текущее состояние {signalsMap[nameToFetch].name}</h1>
             <div className='blockImage'>
-                {/*<img className="serviceImg " src={imgComplex}/>*/}
+                <img className="serviceImg " src={signalsMap[nameToFetch].img}/>
             </div>
             <table className="tableReport" id='tableSignal'>
                 <thead>
