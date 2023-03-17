@@ -420,7 +420,7 @@ function fetchRequestListPhoto(listTabels) {
 function fetchRequestSignals(complexName='navigator1') {
     let url = `/api/complex/currentState/complexName:${complexName}`
 
-    fetch(url, {method: 'GET'})
+    return fetch(url, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
             return data

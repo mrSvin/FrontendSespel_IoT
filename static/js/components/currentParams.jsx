@@ -92,14 +92,16 @@ function Signals() {
                     <th>Значение</th>
                 </tr>
                 </thead>
+                <tbody>
                 {dataSignals == null? null : Object.keys(dataSignals).map(keyName => {
                     return (
                         <tr key={keyName}>
                             <td>{keyName}</td>
-                            <td>{dataSignals.keyName}</td>
+                            <td>{dataSignals[keyName]}</td>
                         </tr>
                     )
                 })}
+                </tbody>
             </table>
             <img className="excelIcon" id="button-excel"
                  src="../../images/excel_icon.png"
