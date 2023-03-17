@@ -76,7 +76,7 @@ function Signals() {
 
     return (
         <div className='serviceContainer'>
-            <h1>Текущее состояние {complexName + 'а'}</h1>
+            <h1>Текущее состояние {nameToFetch + 'а'}</h1>
             <div className='blockImage'>
                 {/*<img className="serviceImg " src={imgComplex}/>*/}
             </div>
