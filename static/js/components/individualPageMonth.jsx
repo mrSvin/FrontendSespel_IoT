@@ -230,7 +230,8 @@ function StankiMonth() {
                                                     programs={stanok.buttonNames.programsName}
                                                     laser={stanok.buttonNames.laser}
                                                     report={stanok.buttonNames.report}
-                                                    current={stanok.buttonNames.current}/>
+                                                    current={stanok.buttonNames.current}
+                                                    signals={stanok.buttonNames.signals}/>
                     } else return null
                 } else return null
 

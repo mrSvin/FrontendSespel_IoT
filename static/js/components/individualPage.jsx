@@ -241,6 +241,7 @@ function Stanki() {
                                                         laser={stanok.buttonNames.laser}
                                                         report={stanok.buttonNames.report}
                                                         current={stanok.buttonNames.current}
+                                                        signals={stanok.buttonNames.signals}
                                                         typeLine={stateLineHC}/>
                         } else return null
                     } else return null

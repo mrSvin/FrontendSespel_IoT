@@ -247,7 +247,8 @@ function StankiSmena() {
                                                     programs={stanok.buttonNames.programsName + 'smena'}
                                                     laser={stanok.buttonNames.laser}
                                                     report={stanok.buttonNames.report}
-                                                    current={stanok.buttonNames.current}/>
+                                                    current={stanok.buttonNames.current}
+                                                    signals={stanok.buttonNames.signals}/>
                     } else return null
                 } else return null
 
