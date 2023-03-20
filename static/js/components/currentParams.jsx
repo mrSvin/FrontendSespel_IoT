@@ -66,7 +66,9 @@ function Signals() {
     let signalsMap = {
         navigator1: {name:'Навигатор 1', img:'../images/navigator.png'},
         navigator2: {name:'Навигатор 2', img:'../images/navigator.png'},
-        navigator3: {name:'Навигатор 3', img:'../images/navigator.png'}
+        navigator3: {name:'Навигатор 3', img:'../images/navigator.png'},
+        maks1: {name:'МАКС 1', img:'../images/robot.png'},
+        maks2: {name:'МАКС 2', img:'../images/robot.png'}
     }
 
 
