@@ -68,7 +68,11 @@ function Signals() {
         navigator2: {name:'Навигатор 2', img:'../images/navigator.png'},
         navigator3: {name:'Навигатор 3', img:'../images/navigator.png'},
         maks1: {name:'МАКС 1', img:'../images/robot.png'},
-        maks2: {name:'МАКС 2', img:'../images/robot.png'}
+        maks2: {name:'МАКС 2', img:'../images/robot.png'},
+        m710: {name:'М710', img:'../images/robot.png'},
+        rtk12c: {name:'РТК12C', img:'../images/robot.png'},
+        p250: {name:'P250', img:'../images/robot_p250.png'},
+        krot: {name:'КРОТ', img:'../images/robot.png'},
     }
 
 
