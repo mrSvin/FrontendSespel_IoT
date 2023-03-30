@@ -73,14 +73,18 @@ function Signals() {
         rtk12c: {name:'РТК12C', img:'../images/robot.png'},
         p250: {name:'P250', img:'../images/robot_p250.png'},
         krot: {name:'КРОТ', img:'../images/robot.png'},
+        prans: {name:'ПРАНС', img:'../images/robot.png'},
     }
 
 
     let [dataSignals, setdataSignals] = useState(null)
+    let [lastTime, setLastTime] = useState(null)
 
     useEffect(() => {
         let promiseSignal = fetchRequestSignals(nameToFetch)
         promiseSignal.then(data=>{
+            setLastTime(new Date().getTime() - data['receiving time'])
+            delete data['receiving time']
             setdataSignals(data)
         })
     }, [])
@@ -91,6 +95,9 @@ function Signals() {
             <div className='blockImage'>
                 <img className="serviceImg " src={signalsMap[nameToFetch].img}/>
             </div>
+            {(lastTime == null || isNaN(lastTime))? null :
+                <h2>Время получения данных {lastTime >= 90000? `${msToTime(lastTime)} назад`: 'текущее'}</h2>
+            }
             <table className="tableReport" id='tableSignal'>
                 <thead>
                 <tr>

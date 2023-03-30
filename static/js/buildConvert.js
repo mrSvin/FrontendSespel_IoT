@@ -1154,6 +1154,7 @@ function getAllStankiData() {
             name: "ПРАНС",
             serviceName: "ПРАНС",
             programsName: 'ПРАНС',
+            signals: "prans",
         },
         complexImg: "../images/robot.png",
         complexRequest: 'prans',
@@ -1208,6 +1209,18 @@ function getAllStankiData() {
         complexImg: "../images/stendResource.png",
         complexRequest: 'stend_resources',
         buttonsVrs: [-560, 15, 'url(../images/stendResource.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
+    let pst80 = {
+        buttonNames: {
+            name: "ПСТ-80",
+            serviceName: "Стенд для ресурсных испытаний",
+        },
+        complexImg: "../images/pst80.png",
+        complexRequest: 'pst80',
+        buttonsVrs: [-895, 690, 'url(../images/stendResource.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
         size: 'sborCeh',
         state: true,
     }
@@ -1355,7 +1368,7 @@ function getAllStankiData() {
             placeState: true,
         },
         'Спец. комплексы': {
-            stanki: {press, epp, stp13m, stend_resources},
+            stanki: {press, epp, stp13m, stend_resources, pst80},
             placeState: true,
         },
         'Склады': {
