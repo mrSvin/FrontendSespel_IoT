@@ -1112,7 +1112,7 @@ function getAllStankiData() {
             name: "РТК12C",
             serviceName: "РТК12C",
             programsName: 'РТК12C',
-            signals: "rtk12",
+            signals: "rtk12c",
         },
         complexImg: "../images/robot.png",
         complexRequest: 'rtk12c',
@@ -1213,14 +1213,14 @@ function getAllStankiData() {
         state: true,
     }
 
-    let pst80 = {
+    let pt80 = {
         buttonNames: {
             name: "ПСТ-80",
-            serviceName: "Стенд для ресурсных испытаний",
+            serviceName: "ПСТ-80",
         },
         complexImg: "../images/pst80.png",
-        complexRequest: 'pst80',
-        buttonsVrs: [-895, 690, 'url(../images/stendResource.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        complexRequest: 'pt80',
+        buttonsVrs: [-895, 690, 'url(../images/pst80.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
         size: 'sborCeh',
         state: true,
     }
@@ -1368,7 +1368,7 @@ function getAllStankiData() {
             placeState: true,
         },
         'Спец. комплексы': {
-            stanki: {press, epp, stp13m, stend_resources, pst80},
+            stanki: {press, epp, stp13m, stend_resources, pt80},
             placeState: true,
         },
         'Склады': {
