@@ -1368,7 +1368,7 @@ function getAllStankiData() {
             placeState: true,
         },
         'Спец. комплексы': {
-            stanki: {press, epp, stp13m, stend_resources, pt80},
+            stanki: {press, epp, stp13m, stend_resources, p80},
             placeState: true,
         },
         'Склады': {
