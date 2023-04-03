@@ -1213,13 +1213,13 @@ function getAllStankiData() {
         state: true,
     }
 
-    let pt80 = {
+    let p80 = {
         buttonNames: {
             name: "ПСТ-80",
             serviceName: "ПСТ-80",
         },
         complexImg: "../images/pst80.png",
-        complexRequest: 'pt80',
+        complexRequest: 'p80',
         buttonsVrs: [-895, 690, 'url(../images/pst80.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
         size: 'sborCeh',
         state: true,
