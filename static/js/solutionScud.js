@@ -421,6 +421,7 @@ function getLunchHeight(heightHighchartContainer) {
         6: 38,
         7: 39.5,
         8: 40.875,
+        9: 42,
         10: 43,
     }
 
