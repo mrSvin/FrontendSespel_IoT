@@ -77,19 +77,6 @@
     transform: translateZ(-1px);
 }
 
-.networkTable > thead > tr > th:last-child::after {
-    content: "";
-    background: #252734;
-    display: block;
-    width: 70px;
-    height: 50px;
-    z-index: 0;
-    position: absolute;
-    top: -2px;
-    left: 304px;
-    transform: translateZ(-1px);
-}
-
 .networkTable > thead > tr > th:last-child{
     border: solid 1px var(--network-color-border);
     border-top-right-radius: 10px;
@@ -141,7 +128,8 @@
 
 .networkTable > tbody > tr > td:nth-child(10){
     padding:0;
-    position:absolute;
+    position: absolute;
+    width: 50px;
 }
 
 .networkTable > tbody > tr > td:nth-child(10) > .tdAdd {
@@ -379,3 +367,73 @@
 
 }
 
+@media screen and (max-width: 1850px) {
+    /*.headerPadding {*/
+    /*    background: red!important;*/
+    /*}*/
+
+}
+
+@media screen and (max-width: 1149px) {
+    /*.headerPadding {*/
+    /*    background: #00ff05 !important;*/
+    /*}*/
+
+    .networkTable > thead{
+        font-size: 18px!important;
+    }
+
+    .networkTable > thead > tr > th{
+        padding:5px!important;
+    }
+
+}
+
+@media screen and (max-device-width: 1009px) {
+    /*.headerPadding {*/
+    /*    background: #a10aff !important;*/
+    /*}*/
+
+    .networkTable > thead{
+        font-size: 16px!important;
+    }
+
+    .networkTable > thead > tr > th{
+        padding:2px!important;
+    }
+
+    .networkTable > tbody {
+        font-size: 15px;
+    }
+
+    .networkTable > tbody > tr > td {
+        border-right: 1px var(--network-color-border) solid;
+        padding: 2px!important;
+    }
+
+    .changeAddTd > div {
+        height: 50px!important;
+        width: 50px!important;
+    }
+
+    .networkImageBlock > img {
+        width: 85%!important;
+        height: 85%!important;
+    }
+
+    .imageListWrapper > div {
+        width: 35px!important;
+        height: 35px!important;
+    }
+
+}
+
+/*@media screen and (max-device-width: 290px) {*/
+/*    .headerPadding {*/
+/*        background: #ffc700 !important;*/
+/*    }*/
+/*    .networkTable > thead > tr > th{*/
+/*        font-size: 14px!important;*/
+/*    }*/
+
+/*}*/
