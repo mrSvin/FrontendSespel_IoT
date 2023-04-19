@@ -37,7 +37,7 @@ function Login() {
             <div className="loginTheme"></div>
             <div className={'loginMenu'}>
                 <img className="loginLogo"
-                     src={'../images/logo_white.png'}/>
+                     src={'../images/logo_white.svg'}/>
                 <div className="box login">
                     <div>
                         <h2>Авторизация</h2>

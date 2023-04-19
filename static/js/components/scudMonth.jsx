@@ -186,7 +186,7 @@ function ScudMonth({scudMonthMemory, setScudMonthMemory}) {
                     <div className={'searchButton'} onClick={() => {
                         setFindState(findStateDefalut);
                     }}>
-                        <img src="../../images/searchIcon.png" alt=""/>
+                        <img src="../../images/searchIcon.svg" alt=""/>
                     </div>
                 </div>
             </div>
@@ -434,7 +434,7 @@ function ButtonExcel({smenaState, dateMonth, tableState, tableId, buttonClass}) 
     }, [tableState])
     return (
         <> {tableState.length == 0 ? null :
-            <img src={'../../images/excel_icon.png'} alt={null} className={`scudExcel ${buttonClass}`} onClick={() => {
+            <img src={'../../images/excel_icon.svg'} alt={null} className={`scudExcel ${buttonClass}`} onClick={() => {
                 TableToExcel.convert(document.getElementById(tableId), {
                     name: `${dateMonth}_${smenaState}.xlsx`,
                     sheet: {

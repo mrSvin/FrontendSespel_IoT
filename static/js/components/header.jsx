@@ -21,7 +21,7 @@ function Header() {
                 <Link to="/">
                     <img
                         className="icon-logo"
-                        src="../images/logo_white.png"
+                        src="../images/logo_white.svg"
                     />
                 </Link>
 

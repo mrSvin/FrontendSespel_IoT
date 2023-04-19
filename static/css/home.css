@@ -144,17 +144,6 @@
     background-size: 150px 150px;
 }
 
-.winnum {
-    position: absolute;
-    filter: contrast(90%);
-    transition: 1s;
-    width: 150px;
-    height: 150px;
-    margin-bottom: 20px;
-    background: url(../images/winnum-removebg-preview.png) no-repeat;
-    background-size: 150px 150px;
-}
-
 .owencloud {
     position: absolute;
     filter: contrast(90%);
@@ -162,7 +151,7 @@
     width: 150px;
     height: 100px;
     margin-bottom: 50px;
-    background: url(../images/owen.png) no-repeat;
+    background: url(../images/owen.svg) no-repeat;
     background-size: 150px 100px;
 }
 
@@ -173,19 +162,8 @@
     width: 150px;
     height: 150px;
     margin-bottom: 20px;
-    background: url(../images/intra.png) no-repeat;
+    background: url(../images/intra.svg) no-repeat;
     background-size: 150px 150px;
-}
-
-.netcube {
-    position: absolute;
-    filter: contrast(90%);
-    transition: 1s;
-    width: 150px;
-    height: 100px;
-    margin-bottom: 50px;
-    background: url(../images/netcube-logo.png) no-repeat;
-    background-size: 150px 100px;
 }
 
 .wialon {
@@ -195,7 +173,7 @@
     width: 100px;
     height: 100px;
     margin-bottom: 50px;
-    background: url(../images/wialon-logo.png) no-repeat;
+    background: url(../images/wialon-logo.svg) no-repeat;
     background-size: 100px 100px;
 }
 
@@ -206,7 +184,7 @@
     width: 100px;
     height: 100px;
     margin-bottom: 10px;
-    background: url(../images/teamcenter.png) no-repeat;
+    background: url(../images/teamcenter.svg) no-repeat;
     background-size: 110px 20px;
 
 }
@@ -228,7 +206,7 @@
     width: 230px;
     height: 150px;
     margin-bottom: 5px;
-    background: url(../images/beacon_logo.png) no-repeat;
+    background: url(../images/beacon_logo.svg) no-repeat;
     background-size: contain;
 }
 

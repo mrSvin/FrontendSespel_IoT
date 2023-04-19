@@ -100,7 +100,7 @@ function ElectroInfo() {
             <div className='calendarEnergyFlex'>
                 <MonthCalendar newDate={newDate} dateMonth={dateMonth}/>
                 <PrintEnergy/>
-                <img className="printEnergy" src="../../images/excel_icon.png"
+                <img className="printEnergy" src="../../images/excel_icon.svg"
                      onClick={() => {
                          FormExcel(printTable, dateMonth)
                      }}

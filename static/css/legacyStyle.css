@@ -478,7 +478,7 @@ caption {
 
     width: 60px;
     height: 60px;
-    background: url(../images/iconMesto.png) no-repeat;
+    background: url(../images/iconMesto.svg) no-repeat;
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;
@@ -504,7 +504,7 @@ caption {
 
 
 .icon_personal {
-    background: url(../images/iconPersonal.png) no-repeat;
+    background: url(../images/iconPersonal.svg) no-repeat;
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;
@@ -515,7 +515,7 @@ caption {
 }
 
 .icon_error {
-    background: url(../images/error.png) no-repeat;
+    background: url(../images/error.svg) no-repeat;
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;
@@ -527,7 +527,7 @@ caption {
 }
 
 .icon_power {
-    background: url(../images/iconPower.png) no-repeat;
+    background: url(../images/iconPower.svg) no-repeat;
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;
@@ -538,17 +538,6 @@ caption {
     -webkit-box-shadow: inset 0px 0px 12px 10px rgba(255, 255, 255, .9);
 }
 
-.icon_clock {
-    position: relative;
-    background: url(../images/iconClock.png) no-repeat;
-    background-size: 90px 43px;
-    width: 60px;
-    padding-right: 50px;
-    padding-left: 50px;
-    right: 5%;
-    top: 13px;
-
-}
 
 .icon_clock:hover {
     filter: brightness(150%);
@@ -587,7 +576,7 @@ caption {
 }
 
 .icon_programTime {
-    background: url(../images/programTime.png) no-repeat;
+    background: url(../images/programTime.svg) no-repeat;
     background-size: 60px 60px;
     margin-top: 10px;
     margin-left: 30px;

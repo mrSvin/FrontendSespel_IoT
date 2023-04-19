@@ -45,7 +45,7 @@ function CurrentParams() {
                 <TableReportBodyCurrent dataReportState={dataReportState}/>
             </table>
             <img className="excelIcon" id="button-excel"
-                 src="../../images/excel_icon.png"
+                 src="../../images/excel_icon.svg"
                  onClick={() => {
                      TableToExcel.convert(document.getElementById('tableReport'), {
                          name: `Отчет_${timeNow().slice(2).replaceAll(':', '')}.xlsx`,
@@ -117,7 +117,7 @@ function Signals() {
                 </tbody>
             </table>
             <img className="excelIcon" id="button-excel"
-                 src="../../images/excel_icon.png"
+                 src="../../images/excel_icon.svg"
                  onClick={() => {
                      TableToExcel.convert(document.getElementById('tableSignal'), {
                          name: `Отчет_${timeNow().slice(2).replaceAll(':', '')}.xlsx`,
