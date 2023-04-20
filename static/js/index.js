@@ -70,7 +70,7 @@ function App({hideLoader}) {
     let [scudMonthMemory, setScudMonthMemory] = useState(null)
 
 
-    useEffect(hideLoader, [token]);
+    useEffect(hideLoader, []);
 
     const componentRoutes = [
         {path: "/login", component: Login},
