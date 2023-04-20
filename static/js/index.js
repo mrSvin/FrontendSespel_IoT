@@ -25,11 +25,20 @@ interceptNetworkRequests({
     onFetchResponse: reloadPageIfLogin,
 });
 
-function App({hideLoader}) {
+function IframeRoutes(){
 
-    let [scudMonthMemory, setScudMonthMemory] = useState(null)
+    let [token, setToken] = useState(null)
 
-    useEffect(hideLoader, []);
+    useEffect(()=>{
+        if(token == null){
+            let promise = fetchRequestGetToken()
+            promise.then(data =>{
+                console.log(data)
+                setToken(data)
+            })
+        }
+
+    }, [token]);
 
     const iframeRoutes = [
         {path: "/winnum", source: "http://winnum-serv/Winnum/views/navigation/home/list.jsp"},
@@ -38,7 +47,30 @@ function App({hideLoader}) {
         {path: "/wialon", source: "https://hosting.wialon.com/"},
         {path: "/teamcenter", source: "http://tcsespel.sespel.corp:7001/awc/"},
         {path: "/configPpc", source: "http://192.168.3.163:3001/"},
+        {path: "/mapService", source: `http://192.168.2.78:3000/${token}`},
+
     ];
+
+    return (
+        <>
+            {iframeRoutes.map((route) => {
+                return (
+                    <Route key={route.path} path={route.path}>
+                        <IframeLink source={route.source}/>
+                    </Route>
+                )
+            })
+            }
+        </>
+    )
+}
+
+function App({hideLoader}) {
+
+    let [scudMonthMemory, setScudMonthMemory] = useState(null)
+
+
+    useEffect(hideLoader, [token]);
 
     const componentRoutes = [
         {path: "/login", component: Login},
@@ -72,13 +104,7 @@ function App({hideLoader}) {
                         <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
                     </Route>
 
-                    {iframeRoutes.map((route) => {
-                        return (
-                            <Route key={route.path} path={route.path}>
-                                <IframeLink source={route.source}/>
-                            </Route>
-                        )
-                    })}
+                    <IframeRoutes/>
 
                     {componentRoutes.map((route) => {
                         return (
@@ -94,6 +120,7 @@ function App({hideLoader}) {
     )
 
 }
+
 
 setTimeout(() =>
 
