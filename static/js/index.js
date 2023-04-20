@@ -25,7 +25,7 @@ interceptNetworkRequests({
     onFetchResponse: reloadPageIfLogin,
 });
 
-function IframeRoutes(){
+function MapService(){
 
     let [token, setToken] = useState(null)
 
@@ -40,29 +40,15 @@ function IframeRoutes(){
 
     }, [token]);
 
-    const iframeRoutes = [
-        {path: "/winnum", source: "http://winnum-serv/Winnum/views/navigation/home/list.jsp"},
-        {path: "/owencloud", source: "https://web.owencloud.ru/device/index/201636"},
-        {path: "/intra", source: "http://89.151.134.234:46088/"},
-        {path: "/wialon", source: "https://hosting.wialon.com/"},
-        {path: "/teamcenter", source: "http://tcsespel.sespel.corp:7001/awc/"},
-        {path: "/configPpc", source: "http://192.168.3.163:3001/"},
-        {path: "/mapService", source: `http://192.168.2.78:3000/${token}`},
+    const iframeRoutes = {path: "/mapService", source: `http://192.168.2.78:3000/${token}`}
 
-    ];
 
     return (
-        <>
-            {iframeRoutes.map((route) => {
-                return (
-                    <Route key={route.path} path={route.path}>
-                        <IframeLink source={route.source}/>
-                    </Route>
-                )
-            })
-            }
-        </>
-    )
+            <Route key={iframeRoutes.path} path={iframeRoutes.path}>
+                <IframeLink source={iframeRoutes.source}/>
+            </Route>
+            )
+
 }
 
 function App({hideLoader}) {
@@ -71,6 +57,15 @@ function App({hideLoader}) {
 
 
     useEffect(hideLoader, []);
+
+    const iframeRoutes = [
+        {path: "/winnum", source: "http://winnum-serv/Winnum/views/navigation/home/list.jsp"},
+        {path: "/owencloud", source: "https://web.owencloud.ru/device/index/201636"},
+        {path: "/intra", source: "http://89.151.134.234:46088/"},
+        {path: "/wialon", source: "https://hosting.wialon.com/"},
+        {path: "/teamcenter", source: "http://tcsespel.sespel.corp:7001/awc/"},
+        {path: "/configPpc", source: "http://192.168.3.163:3001/"},
+    ]
 
     const componentRoutes = [
         {path: "/login", component: Login},
@@ -112,9 +107,18 @@ function App({hideLoader}) {
                         )
                     })}
 
-                    <IframeRoutes/>
+                    {iframeRoutes.map((route) => {
+                        return (
+                            <Route key={route.path} path={route.path}>
+                                <IframeLink source={route.source}/>
+                            </Route>
+                        )
+                    })}
+
+                    <MapService/>
 
                 </Switch>
+
             </div>
         </BrowserRouter>
     )
