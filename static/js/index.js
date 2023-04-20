@@ -104,8 +104,6 @@ function App({hideLoader}) {
                         <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
                     </Route>
 
-                    <IframeRoutes/>
-
                     {componentRoutes.map((route) => {
                         return (
                             <Route key={route.path} path={route.path}>
@@ -113,6 +111,8 @@ function App({hideLoader}) {
                             </Route>
                         )
                     })}
+
+                    <IframeRoutes/>
 
                 </Switch>
             </div>
