@@ -14,6 +14,8 @@ function IframeLink({source}) {
 
 function Home() {
 
+    let [token, setToken] = useState(null)
+
     function teamCenterLink(e){
         let url = window.location.href
         let cancelUrl = 'http://iot.sespel.com/'
@@ -22,6 +24,23 @@ function Home() {
             e.preventDefault();
         }
     }
+
+    function mapService(e){
+        e.preventDefault();
+        console.log(token)
+        window.location.href = `192.168.2.79:3000/${token}`
+    }
+
+    useEffect(()=>{
+        if(token == null){
+            let promise = fetchRequestGetToken()
+            promise.then(data =>{
+                console.log(data)
+                setToken(data)
+            })
+        }
+
+    }, [token]);
 
     const menuItems = [
         { name: 'Станки', link: '/stanki/ОТК', iconClass: 'stanki', description: 'Суточные и месячные отчеты работы оборудования' },
@@ -34,6 +53,7 @@ function Home() {
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
         { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией', onClick: teamCenterLink},
         { name: 'Конфигуратор ППЦ', link: '/configPpc', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ' },
+        { name: '3D карта предприятия', link: '', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: mapService },
     ];
 
 

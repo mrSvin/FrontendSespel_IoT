@@ -427,5 +427,12 @@ function fetchRequestSignals(complexName='navigator1') {
         })
 }
 
+function fetchRequestGetToken() {
+    return fetch(`/api/getToken`, {method: 'POST'})
+        .then((response) => {
+            return response.text()
+        })
+}
+
 
 
