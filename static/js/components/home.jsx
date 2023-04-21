@@ -12,7 +12,9 @@ function IframeLink({source}) {
 
 }
 
-function Home() {
+function Home({token}) {
+
+    console.log('Открылась страница home', token)
 
     function teamCenterLink(e){
         let url = window.location.href

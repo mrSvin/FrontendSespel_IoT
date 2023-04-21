@@ -25,37 +25,23 @@ interceptNetworkRequests({
     onFetchResponse: reloadPageIfLogin,
 });
 
-function MapService(){
-
-
-
-
-
-    const iframeRoutes = {path: "", source: ``}
-
-
-    return (<IframeLink source={tokenUrl}/>)
-
-}
-
 
 
 function App({hideLoader}) {
 
-    let [tokenUrl, setTokenUrl] = useState(null)
+    let [token, setToken] = useState(null)
     let [scudMonthMemory, setScudMonthMemory] = useState(null)
 
     useEffect(()=>{
         hideLoader()
-        if(tokenUrl == null){
+        if(token == null){
             let promise = fetchRequestGetToken()
             promise.then(data =>{
-                console.log(data)
-                setTokenUrl(`http://192.168.2.78:3000/${data}`)
+                setToken(data)
             })
         }
 
-    }, [tokenUrl]);
+    }, [token]);
 
 
 
@@ -86,7 +72,6 @@ function App({hideLoader}) {
         {path: "/scud", component: Scud},
         {path: "/bot/scudBot", component: ScudBot},
         {path: "/userscontrol", component: UsersControl},
-        {path: "/", component: Home},
     ];
 
 
@@ -100,8 +85,12 @@ function App({hideLoader}) {
                         <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
                     </Route>
 
+                    <Route path="/">
+                        <Home token={token}/>
+                    </Route>
+
                     <Route key={'/mapService'} path={'/mapService'}>
-                        <IframeLink source={tokenUrl}/>
+                        <IframeLink source={`http://192.168.2.78:3000/${token}`}/>
                     </Route>
 
 
