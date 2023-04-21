@@ -12,7 +12,7 @@ function IframeLink({source}) {
 
 }
 
-function Home({token}) {
+function Home({token, setToken}) {
 
     console.log('Открылась страница home', token)
 
@@ -25,6 +25,19 @@ function Home({token}) {
         }
     }
 
+    function getToken(e){
+        if(token == null){
+            let promise = fetchRequestGetToken()
+            promise.then(data =>{
+                console.log('Устанавливаю токен')
+                setToken(data)
+            })
+        } else {
+            console.log('Текущий токен', token)
+        }
+    }
+
+
     const menuItems = [
         { name: 'Станки', link: '/stanki/ОТК', iconClass: 'stanki', description: 'Суточные и месячные отчеты работы оборудования' },
         { name: 'Энергоресурсы', link: '/energyWater', iconClass: 'energy', description: 'Показатели расхода газа, воды, электроэнергии' },
@@ -36,7 +49,7 @@ function Home({token}) {
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
         { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией', onClick: teamCenterLink},
         { name: 'Конфигуратор ППЦ', link: '/configPpc', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ' },
-        { name: '3D карта предприятия', link: '/mapService', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками'},
+        { name: '3D карта предприятия', link: '/mapService', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: getToken},
     ];
 
 

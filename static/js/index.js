@@ -34,12 +34,12 @@ function App({hideLoader}) {
 
     useEffect(()=>{
         hideLoader()
-        if(token == null){
-            let promise = fetchRequestGetToken()
-            promise.then(data =>{
-                setToken(data)
-            })
-        }
+        // if(token == null){
+        //     let promise = fetchRequestGetToken()
+        //     promise.then(data =>{
+        //         setToken(data)
+        //     })
+        // }
 
     }, [token]);
 
@@ -86,7 +86,7 @@ function App({hideLoader}) {
                     </Route>
 
                     <Route path="/">
-                        <Home token={token}/>
+                        <Home token={token} setToken={setToken}/>
                     </Route>
 
                     <Route key={'/mapService'} path={'/mapService'}>
