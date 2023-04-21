@@ -27,29 +27,27 @@ interceptNetworkRequests({
 
 function MapService(){
 
-    let [token, setToken] = useState(null)
+    let [tokenUrl, setTokenUrl] = useState(null)
 
     useEffect(()=>{
-        if(token == null){
+        if(tokenUrl == null){
             let promise = fetchRequestGetToken()
             promise.then(data =>{
                 console.log(data)
-                setToken(data)
+                setTokenUrl(`http://192.168.2.78:3000/${data}`)
             })
         }
 
-    }, [token]);
+    }, [tokenUrl]);
 
-    const iframeRoutes = {path: "/mapService", source: `http://192.168.2.78:3000/${token}`}
+    const iframeRoutes = {path: "", source: ``}
 
 
-    return (
-            <Route key={iframeRoutes.path} path={iframeRoutes.path}>
-                <IframeLink source={iframeRoutes.source}/>
-            </Route>
-            )
+    return (<IframeLink source={tokenUrl}/>)
 
 }
+
+
 
 function App({hideLoader}) {
 
@@ -86,6 +84,8 @@ function App({hideLoader}) {
         {path: "/bot/scudBot", component: ScudBot},
         {path: "/userscontrol", component: UsersControl},
         {path: "/", component: Home},
+        {path: "/mapService", component: MapService},
+
     ];
 
 
@@ -99,13 +99,6 @@ function App({hideLoader}) {
                         <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
                     </Route>
 
-                    {componentRoutes.map((route) => {
-                        return (
-                            <Route key={route.path} path={route.path}>
-                                <route.component/>
-                            </Route>
-                        )
-                    })}
 
                     {iframeRoutes.map((route) => {
                         return (
@@ -115,7 +108,16 @@ function App({hideLoader}) {
                         )
                     })}
 
-                    <MapService/>
+                    {componentRoutes.map((route) => {
+                        return (
+                            <Route key={route.path} path={route.path}>
+                                <route.component/>
+                            </Route>
+                        )
+                    })}
+
+
+
 
                 </Switch>
 
