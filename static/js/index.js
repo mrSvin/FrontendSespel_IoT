@@ -34,12 +34,12 @@ function App({hideLoader}) {
 
     useEffect(()=>{
         hideLoader()
-        // if(token == null){
-        //     let promise = fetchRequestGetToken()
-        //     promise.then(data =>{
-        //         setToken(data)
-        //     })
-        // }
+        if(token == 'ready'){
+            let promise = fetchRequestGetToken()
+            promise.then(data =>{
+                setToken(data)
+            })
+        }
 
     }, [token]);
 

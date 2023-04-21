@@ -14,8 +14,6 @@ function IframeLink({source}) {
 
 function Home({token, setToken}) {
 
-    console.log('Открылась страница home', token)
-
     function teamCenterLink(e){
         let url = window.location.href
         let cancelUrl = 'http://iot.sespel.com/'
@@ -27,13 +25,8 @@ function Home({token, setToken}) {
 
     function getToken(e){
         if(token == null){
-            let promise = fetchRequestGetToken()
-            promise.then(data =>{
-                console.log('Устанавливаю токен')
-                setToken(data)
-            })
-        } else {
-            console.log('Текущий токен', token)
+            console.log('Подготавливаю токен')
+            setToken('ready')
         }
     }
 
