@@ -27,18 +27,9 @@ interceptNetworkRequests({
 
 function MapService(){
 
-    let [tokenUrl, setTokenUrl] = useState(null)
 
-    useEffect(()=>{
-        if(tokenUrl == null){
-            let promise = fetchRequestGetToken()
-            promise.then(data =>{
-                console.log(data)
-                setTokenUrl(`http://192.168.2.78:3000/${data}`)
-            })
-        }
 
-    }, [tokenUrl]);
+
 
     const iframeRoutes = {path: "", source: ``}
 
@@ -51,10 +42,22 @@ function MapService(){
 
 function App({hideLoader}) {
 
+    let [tokenUrl, setTokenUrl] = useState(null)
     let [scudMonthMemory, setScudMonthMemory] = useState(null)
 
+    useEffect(()=>{
+        hideLoader()
+        if(tokenUrl == null){
+            let promise = fetchRequestGetToken()
+            promise.then(data =>{
+                console.log(data)
+                setTokenUrl(`http://192.168.2.78:3000/${data}`)
+            })
+        }
 
-    useEffect(hideLoader, []);
+    }, [tokenUrl]);
+
+
 
     const iframeRoutes = [
         {path: "/winnum", source: "http://winnum-serv/Winnum/views/navigation/home/list.jsp"},
@@ -84,8 +87,6 @@ function App({hideLoader}) {
         {path: "/bot/scudBot", component: ScudBot},
         {path: "/userscontrol", component: UsersControl},
         {path: "/", component: Home},
-        {path: "/mapService", component: MapService},
-
     ];
 
 
@@ -97,6 +98,10 @@ function App({hideLoader}) {
 
                     <Route path="/scudMonth">
                         <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
+                    </Route>
+
+                    <Route key={'/mapService'} path={'/mapService'}>
+                        <IframeLink source={tokenUrl}/>
                     </Route>
 
 
@@ -115,9 +120,6 @@ function App({hideLoader}) {
                             </Route>
                         )
                     })}
-
-
-
 
                 </Switch>
 
