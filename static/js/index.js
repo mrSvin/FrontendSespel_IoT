@@ -34,8 +34,6 @@ function App({hideLoader}) {
 
     useEffect(()=>{
         hideLoader()
-        console.log('index.js', token)
-
     }, [token]);
 
 
@@ -47,6 +45,7 @@ function App({hideLoader}) {
         {path: "/wialon", source: "https://hosting.wialon.com/"},
         {path: "/teamcenter", source: "http://tcsespel.sespel.corp:7001/awc/"},
         {path: "/configPpc", source: "http://192.168.3.163:3001/"},
+        {path: "/mapService", source: `http://192.168.2.78:3000/${token}`},
     ]
 
     const componentRoutes = [
@@ -96,14 +95,13 @@ function App({hideLoader}) {
                         )
                     })}
 
-                    <Route key={'/mapService'} path={'/mapService'}>
-                        <IframeLink source={`http://192.168.2.78:3000/${token}`}/>
-                    </Route>
+                    {/*<Route key={'/mapService'} path={'/mapService'}>*/}
+                    {/*    <IframeLink source={`http://192.168.2.78:3000/${token}`}/>*/}
+                    {/*</Route>*/}
 
                     <Route path="/">
                         <Home token={token} setToken={setToken}/>
                     </Route>
-
 
                 </Switch>
 

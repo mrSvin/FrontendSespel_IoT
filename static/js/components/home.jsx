@@ -27,9 +27,20 @@ function Home({token, setToken}) {
         if(token == null){
             let promise = fetchRequestGetToken()
             promise.then(data =>{
-                console.log('home.jsx', data)
+                console.log('Создание токена', token)
                 setToken(data)
             })
+        } else {
+            console.log('Токен уже существует', token)
+            let decodeToken = decodeJwt(token)
+            console.log('Оставшееся время жизни токена:', msToTime(decodeToken.payload.exp * 1000 - new Date().getTime()))
+            if(decodeToken.payload.exp * 1000 - new Date().getTime() <= 0){
+                let promise = fetchRequestGetToken()
+                promise.then(data =>{
+                    console.log('Создание токена')
+                    setToken(data)
+                })
+            }
         }
     }
 
