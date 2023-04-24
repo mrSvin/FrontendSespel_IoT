@@ -85,15 +85,6 @@ function App({hideLoader}) {
                         <ScudMonth scudMonthMemory={scudMonthMemory} setScudMonthMemory={setScudMonthMemory}/>
                     </Route>
 
-                    <Route path="/">
-                        <Home token={token} setToken={setToken}/>
-                    </Route>
-
-                    <Route key={'/mapService'} path={'/mapService'}>
-                        <IframeLink source={`http://192.168.2.78:3000/${token}`}/>
-                    </Route>
-
-
                     {iframeRoutes.map((route) => {
                         return (
                             <Route key={route.path} path={route.path}>
@@ -109,6 +100,14 @@ function App({hideLoader}) {
                             </Route>
                         )
                     })}
+
+                    <Route path="/">
+                        <Home token={token} setToken={setToken}/>
+                    </Route>
+
+                    {/*<Route key={'/mapService'} path={'/mapService'}>*/}
+                    {/*    <IframeLink source={`http://192.168.2.78:3000/${token}`}/>*/}
+                    {/*</Route>*/}
 
                 </Switch>
 
