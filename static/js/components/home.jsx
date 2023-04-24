@@ -25,8 +25,11 @@ function Home({token, setToken}) {
 
     function getToken(e){
         if(token == null){
-            console.log('Подготавливаю токен')
-            setToken('ready')
+            let promise = fetchRequestGetToken()
+            promise.then(data =>{
+                console.log('home.jsx', data)
+                setToken(data)
+            })
         }
     }
 

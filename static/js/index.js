@@ -34,12 +34,7 @@ function App({hideLoader}) {
 
     useEffect(()=>{
         hideLoader()
-        if(token == 'ready'){
-            let promise = fetchRequestGetToken()
-            promise.then(data =>{
-                setToken(data)
-            })
-        }
+        console.log('index.js', token)
 
     }, [token]);
 
@@ -105,9 +100,9 @@ function App({hideLoader}) {
                         <Home token={token} setToken={setToken}/>
                     </Route>
 
-                    {/*<Route key={'/mapService'} path={'/mapService'}>*/}
-                    {/*    <IframeLink source={`http://192.168.2.78:3000/${token}`}/>*/}
-                    {/*</Route>*/}
+                    <Route key={'/mapService'} path={'/mapService'}>
+                        <IframeLink source={`http://192.168.2.78:3000/${token}`}/>
+                    </Route>
 
                 </Switch>
 
