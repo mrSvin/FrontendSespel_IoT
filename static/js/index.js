@@ -96,13 +96,14 @@ function App({hideLoader}) {
                         )
                     })}
 
+                    <Route key={'/mapService'} path={'/mapService'}>
+                        <IframeLink source={`http://192.168.2.78:3000/${token}`}/>
+                    </Route>
+
                     <Route path="/">
                         <Home token={token} setToken={setToken}/>
                     </Route>
 
-                    <Route key={'/mapService'} path={'/mapService'}>
-                        <IframeLink source={`http://192.168.2.78:3000/${token}`}/>
-                    </Route>
 
                 </Switch>
 
