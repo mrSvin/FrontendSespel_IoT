@@ -35,6 +35,12 @@ function Home({token, setToken}) {
             let decodeToken = decodeJwt(token)
             console.log('Оставшееся время жизни токена:', msToTime(decodeToken.payload.exp * 1000 - new Date().getTime()))
             if(decodeToken.payload.exp * 1000 - new Date().getTime() <= 0){
+                e.preventDefault();
+                setAlertConfirmParams({
+                    tittle: 'Внимание',
+                    message: 'Истекло время жизни токена, создается новый',
+                    function: null,
+                })
                 let promise = fetchRequestGetToken()
                 promise.then(data =>{
                     console.log('Создание токена')
