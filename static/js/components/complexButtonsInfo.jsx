@@ -196,8 +196,8 @@ function ComplexButtons({
             'РТК12Csmena':"../stanki/programTimeSmena/rtk12c",
             'P250':"../stanki/programTime/p250",
             'P250smena':"../stanki/programTimeSmena/p250",
-            'КРОТ':"../stanki/programTime/krot",
-            'КРОТsmena':"../stanki/programTimeSmena/krot",
+            'М710 2':"../stanki/programTime/krot",
+            'М710 2smena':"../stanki/programTimeSmena/krot",
             'ПРАНС':"../stanki/programTime/prans",
             'ПРАНСsmena': "../stanki/programTimeSmena/prans",
         }

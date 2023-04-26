@@ -72,7 +72,7 @@ function Signals() {
         m710: {name:'М710', img:'../images/robot.png'},
         rtk12c: {name:'РТК12C', img:'../images/robot.png'},
         p250: {name:'P250', img:'../images/robot_p250.png'},
-        krot: {name:'КРОТ', img:'../images/robot.png'},
+        krot: {name:'М710 2', img:'../images/robot.png'},
         prans: {name:'ПРАНС', img:'../images/robot.png'},
     }
 

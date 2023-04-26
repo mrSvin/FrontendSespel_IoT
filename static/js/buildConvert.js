@@ -1135,11 +1135,12 @@ function getAllStankiData() {
         state: true,
     }
 
+    // Заменен на M710 2, но в БД называется по старом
     let krot = {
         buttonNames: {
-            name: "КРОТ",
-            serviceName: "КРОТ",
-            programsName: 'КРОТ',
+            name: 'М710 2',
+            serviceName: 'М710 2',
+            programsName: 'М710 2',
             signals: "krot",
         },
         complexImg: "../images/robot.png",

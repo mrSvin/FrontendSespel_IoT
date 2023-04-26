@@ -19,7 +19,7 @@ function Service() {
             'навигатор': 'navigator.png', 'нк600': 'nk600.png', 'nlx3000': 'NLX3000.png',
             'ntx1000': 'ntx1000.png', 'печь': 'pech.png', 'литейная': 'liteyka.png', 'пресс': 'press.png',
             'стп': 'progress.png', 'макс': 'robot.png', 'м710': 'robot.png',
-            'ртк12c': 'robot.png', 'крот': 'robot.png', 'пранс': 'robot.png',
+            'ртк12c': 'robot.png',  'пранс': 'robot.png',
             'p250': 'robot_p250.png', 'sk50': 'sk50.png', 'склад': 'sklad.png',
             'стп13м': 'stp13m.png', 'trulaser': 'trulaser.png',
             'увф-1': 'uvf_1_2.png', 'уф5220': 'UVF_5220.png', 'врс1': 'nasos.png',
