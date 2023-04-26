@@ -1,16 +1,8 @@
 function IframeLink({source}) {
 
-    const iframeRef = useRef(null)
-
-    useEffect(()=>{
-        const url = window.location.href
-        iframeRef.current.contentWindow.postMessage(url, '*')
-    }, [])
-
     return (
         <div>
             <iframe
-                ref={iframeRef}
                 className="iframeInput"
                 src={source}
             >
@@ -35,13 +27,10 @@ function Home({token, setToken}) {
         if(token == null){
             let promise = fetchRequestGetToken()
             promise.then(data =>{
-                console.log('Создание токена', token)
                 setToken(data)
             })
         } else {
-            console.log('Токен уже существует', token)
             let decodeToken = decodeJwt(token)
-            console.log('Оставшееся время жизни токена:', msToTime(decodeToken.payload.exp * 1000 - new Date().getTime()))
             if(decodeToken.payload.exp * 1000 - new Date().getTime() <= 0){
                 e.preventDefault();
                 setAlertConfirmParams({
@@ -51,7 +40,6 @@ function Home({token, setToken}) {
                 })
                 let promise = fetchRequestGetToken()
                 promise.then(data =>{
-                    console.log('Создание токена')
                     setToken(data)
                 })
                 setShowAlertConfirm(true)
