@@ -1,5 +1,12 @@
 function IframeLink({source}) {
 
+    const iframeRef = useRef(null)
+
+    useEffect(()=>{
+        const url = window.location.href
+        iframeRef.current.contentWindow.postMessage(url, '*')
+    }, [])
+
     return (
         <div>
             <iframe
@@ -46,6 +53,7 @@ function Home({token, setToken}) {
                     console.log('Создание токена')
                     setToken(data)
                 })
+                setShowAlertConfirm(true)
             }
         }
     }
