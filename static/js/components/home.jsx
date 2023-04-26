@@ -10,6 +10,7 @@ function IframeLink({source}) {
     return (
         <div>
             <iframe
+                ref={iframeRef}
                 className="iframeInput"
                 src={source}
             >
