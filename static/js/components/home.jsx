@@ -12,7 +12,20 @@ function IframeLink({source}) {
 
 }
 
-function Home({token, setToken}) {
+function DirectLink({source}) {
+
+    return (
+        <div>
+            <Link
+                src={source}
+            >
+            </Link>
+        </div>
+    )
+
+}
+
+function Home({token, setToken, setServerTime}) {
 
     function teamCenterLink(e){
         let url = window.location.href
@@ -24,6 +37,7 @@ function Home({token, setToken}) {
     }
 
     function getToken(e){
+        setServerTime(btoa())
         if(token == null){
             let promise = fetchRequestGetToken()
             promise.then(data =>{
@@ -47,6 +61,9 @@ function Home({token, setToken}) {
         }
     }
 
+    useEffect(()=>{
+    }, [token]);
+
 
     const menuItems = [
         { name: 'Станки', link: '/stanki/ОТК', iconClass: 'stanki', description: 'Суточные и месячные отчеты работы оборудования' },
@@ -59,7 +76,7 @@ function Home({token, setToken}) {
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
         { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией', onClick: teamCenterLink},
         { name: 'Конфигуратор ППЦ', link: '/configPpc', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ' },
-        { name: '3D карта предприятия', link: '/mapService', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: getToken},
+        { name: '3D карта предприятия', link: `http://frontend.sespel.com/map&${token}`, iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: getToken},
     ];
 
 
