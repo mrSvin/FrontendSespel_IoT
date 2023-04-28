@@ -11,7 +11,7 @@ function Login({params}) {
     };
 
     function authorization(e) {
-
+        e.preventDefault();
         if (login.length >= 3 && password.length >= 3) {
             let response = fetch('/login?' + "username=" + login + "&password=" +
                 password + "&remember-me=" + rememberMe, {
@@ -24,11 +24,11 @@ function Login({params}) {
                         // location.href = "/"
                         let tokenPromise = fetchRequestGetToken()
                         tokenPromise.then(data => {
+                            e.stopPropagation()
                             localStorage['token'] = data
                             params.setToken(data)
                         })
                     } else {
-                        e.preventDefault();
                         setErrorMsg('Логин или пароль введены не верно')
                     }
                 }
