@@ -136,6 +136,11 @@ body {
 
 }
 
+#login-btn {
+    width: 93.4%;
+    display: block;
+}
+
 .btn-login {
     background: rgba(26, 34, 99, 0.5);
     color: white;

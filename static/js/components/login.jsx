@@ -24,7 +24,7 @@ function Login({params}) {
                         // location.href = "/"
                         let tokenPromise = fetchRequestGetToken()
                         tokenPromise.then(data => {
-                            console.log('Устанавливаю токен')
+                            localStorage['token'] = data
                             params.setToken(data)
                         })
                     } else {
@@ -34,6 +34,7 @@ function Login({params}) {
                 }
             })
         } else {
+            e.preventDefault();
             setErrorMsg('Логин или пароль слишком короткие')
         }
     }

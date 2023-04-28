@@ -29,7 +29,7 @@ interceptNetworkRequests({
 
 function App({hideLoader}) {
 
-    let [token, setToken] = useState(null)
+    let [token, setToken] = useState(localStorage['token'] === undefined? null:localStorage['token'])
     let [scudMonthMemory, setScudMonthMemory] = useState(null)
 
     useEffect(()=>{
