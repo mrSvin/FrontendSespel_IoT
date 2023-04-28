@@ -10,7 +10,7 @@ function Login() {
         setpasswordEye(!passwordEye);
     };
 
-    function authorization(e) {
+    function authorization() {
 
         if (login.length >= 3 && password.length >= 3) {
             let response = fetch('/login?' + "username=" + login + "&password=" +
@@ -19,14 +19,13 @@ function Login() {
             })
             response.then(response => {
                 if (response.ok) {
-                        let badLogin = window.location.protocol + '//' + window.location.host + "/login?error";
-                        if (response.url != badLogin) {
-                            console.log('Вход')
-                            // location.href = "/"
-                        } else {
-                            e.preventDefault();
-                            setErrorMsg('Логин или пароль введены не верно')
-                        }
+                    let badLogin = window.location.protocol + '//' + window.location.host + "/login?error";
+                    if (response.url != badLogin) {
+                        console.log('Тут запрошу токен')
+                        location.href = "/"
+                    } else {
+                        setErrorMsg('Логин или пароль введены не верно')
+                    }
                 }
             })
         } else {
@@ -85,17 +84,13 @@ function Login() {
                             : null
                         }
 
-                        <Link
+                        <div
                             id="login-btn"
                             className="btn btn-login"
-                            to={'/'}
-                            onClick={(e) => {
-                                authorization(e)
-                            }
-                            }
+                            onClick={authorization}
                         >
                             Войти
-                        </Link>
+                        </div>
 
 
                     </div>
