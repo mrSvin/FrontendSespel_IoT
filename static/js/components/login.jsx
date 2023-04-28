@@ -21,7 +21,6 @@ function Login() {
                 if (response.ok) {
                     let badLogin = window.location.protocol + '//' + window.location.host + "/login?error";
                     if (response.url != badLogin) {
-                        console.log('Тут запрошу токен')
                         location.href = "/"
                     } else {
                         setErrorMsg('Логин или пароль введены не верно')

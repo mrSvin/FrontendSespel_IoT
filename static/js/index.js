@@ -31,13 +31,10 @@ function App({hideLoader}) {
 
     let [token, setToken] = useState(null)
     let [scudMonthMemory, setScudMonthMemory] = useState(null)
-    const parentUrl = btoa(window.location.origin)
-
-    let [serverTime, setServerTime] = useEffect('null')
+    const codedParentUrl = btoa(window.location.origin)
 
     useEffect(()=>{
         hideLoader()
-
     }, [token]);
 
 
@@ -49,6 +46,9 @@ function App({hideLoader}) {
         {path: "/wialon", source: "https://hosting.wialon.com/"},
         {path: "/teamcenter", source: "http://tcsespel.sespel.corp:7001/awc/"},
         {path: "/configPpc", source: "http://192.168.3.163:3001/"},
+        {path: "/mapService", source: `http://frontend.sespel.com/map@${codedParentUrl}@${token}`},
+        {path: "/ibp", source: `http://frontend.sespel.com/ibp@${codedParentUrl}@${token}`},
+
     ]
 
     const componentRoutes = [
@@ -99,7 +99,7 @@ function App({hideLoader}) {
                     })}
 
                     <Route path="/">
-                        <Home token={token} setToken={setToken} setServerTime={setServerTime}/>
+                        <Home token={token} setToken={setToken}/>
                     </Route>
 
                 </Switch>

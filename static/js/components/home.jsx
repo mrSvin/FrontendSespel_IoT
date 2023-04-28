@@ -12,8 +12,7 @@ function IframeLink({source}) {
 
 }
 
-
-function Home({token, setToken, setServerTime}) {
+function Home({token, setToken}) {
 
     function teamCenterLink(e){
         let url = window.location.href
@@ -24,30 +23,30 @@ function Home({token, setToken, setServerTime}) {
         }
     }
 
-    // function getToken(e){
-    //     // setServerTime(btoa())
-    //     if(token == null){
-    //         let promise = fetchRequestGetToken()
-    //         promise.then(data =>{
-    //             setToken(data)
-    //         })
-    //     } else {
-    //         let decodeToken = decodeJwt(token)
-    //         if(decodeToken.payload.exp * 1000 - new Date().getTime() <= 0){
-    //             e.preventDefault();
-    //             setAlertConfirmParams({
-    //                 tittle: 'Внимание',
-    //                 message: 'Истекло время жизни токена, создается новый',
-    //                 function: null,
-    //             })
-    //             let promise = fetchRequestGetToken()
-    //             promise.then(data =>{
-    //                 setToken(data)
-    //             })
-    //             setShowAlertConfirm(true)
-    //         }
-    //     }
-    // }
+    function getToken(e){
+        if(token == null){
+            let promise = fetchRequestGetToken()
+            promise.then(data =>{
+                setToken(data)
+            })
+        } else {
+            let decodeToken = decodeJwt(token)
+            if(decodeToken.payload.exp * 1000 - new Date().getTime() <= 0){
+                e.preventDefault();
+                setAlertConfirmParams({
+                    tittle: 'Внимание',
+                    message: 'Истекло время жизни токена, создается новый',
+                    function: null,
+                })
+                let promise = fetchRequestGetToken()
+                promise.then(data =>{
+                    setToken(data)
+                })
+                setShowAlertConfirm(true)
+            }
+        }
+    }
+
 
     const menuItems = [
         { name: 'Станки', link: '/stanki/ОТК', iconClass: 'stanki', description: 'Суточные и месячные отчеты работы оборудования' },
@@ -60,7 +59,7 @@ function Home({token, setToken, setServerTime}) {
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
         { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией', onClick: teamCenterLink},
         { name: 'Конфигуратор ППЦ', link: '/configPpc', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ' },
-        { name: '3D карта предприятия', link: `http://frontend.sespel.com/map&${token}`, iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками'},
+        { name: '3D карта предприятия', link: '/mapService', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: getToken},
     ];
 
 
