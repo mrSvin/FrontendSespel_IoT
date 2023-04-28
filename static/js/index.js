@@ -48,7 +48,7 @@ function App({hideLoader}) {
     ]
 
     const componentRoutes = [
-        {path: "/login", component: Login},
+        {path: "/login", component: Login, params: {'setToken':setToken}},
         {path: "/energyWater", component: EnergyWater},
         {path: "/energyElectro", component: EnergyElectro},
         {path: "/energyGas", component: EnergyGas},
@@ -89,7 +89,7 @@ function App({hideLoader}) {
                     {componentRoutes.map((route) => {
                         return (
                             <Route key={route.path} path={route.path}>
-                                <route.component/>
+                                <route.component params={route.params}/>
                             </Route>
                         )
                     })}

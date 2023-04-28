@@ -28,8 +28,8 @@ function Home({token}) {
             let decodeToken = decodeJwt(token)
             if(decodeToken.payload.exp * 1000 - new Date().getTime() <= 0){
                 window.location.href = 'http://iot.sespel.com/login'
-            }
-        }
+            } else window.location.href = `http://frontend.sespel.com/map&${token}`
+        } else window.location.href = 'http://iot.sespel.com/login'
     }
 
 
@@ -44,7 +44,7 @@ function Home({token}) {
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
         { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией', onClick: teamCenterLink},
         { name: 'Конфигуратор ППЦ', link: '/configPpc', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ' },
-        { name: '3D карта предприятия', link: `http://frontend.sespel.com/map&${token}`, iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: checkToken},
+        { name: '3D карта предприятия', link: '/', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: checkToken},
     ];
 
 

@@ -1,4 +1,4 @@
-function Login() {
+function Login({params}) {
 
     let [login, setLogin] = useState("")
     let [password, setPassword] = useState("")
@@ -10,7 +10,7 @@ function Login() {
         setpasswordEye(!passwordEye);
     };
 
-    function authorization() {
+    function authorization(e) {
 
         if (login.length >= 3 && password.length >= 3) {
             let response = fetch('/login?' + "username=" + login + "&password=" +
@@ -21,8 +21,14 @@ function Login() {
                 if (response.ok) {
                     let badLogin = window.location.protocol + '//' + window.location.host + "/login?error";
                     if (response.url != badLogin) {
-                        location.href = "/"
+                        // location.href = "/"
+                        let tokenPromise = fetchRequestGetToken()
+                        tokenPromise.then(data => {
+                            console.log('Устанавливаю токен')
+                            params.setToken(data)
+                        })
                     } else {
+                        e.preventDefault();
                         setErrorMsg('Логин или пароль введены не верно')
                     }
                 }
@@ -83,13 +89,14 @@ function Login() {
                             : null
                         }
 
-                        <div
+                        <Link
+                            to={'/'}
                             id="login-btn"
                             className="btn btn-login"
-                            onClick={authorization}
+                            onClick={(e)=>{authorization(e)}}
                         >
                             Войти
-                        </div>
+                        </Link>
 
 
                     </div>
