@@ -29,12 +29,13 @@ interceptNetworkRequests({
 
 function App({hideLoader}) {
 
-    let [token, setToken] = useState(localStorage['token'] === undefined? null:localStorage['token'])
-    let [scudMonthMemory, setScudMonthMemory] = useState(null)
+    const [dataProfile, setDataProfile] = useState({'imageUser': null, 'userName': null, 'userMail': null});
+    const [token, setToken] = useState(localStorage['token'] === undefined? null:localStorage['token'])
+    const [scudMonthMemory, setScudMonthMemory] = useState(null)
 
     useEffect(()=>{
         hideLoader()
-    }, [token]);
+    }, [token, dataProfile]);
 
 
 
@@ -48,7 +49,7 @@ function App({hideLoader}) {
     ]
 
     const componentRoutes = [
-        {path: "/login", component: Login, params: {'setToken':setToken}},
+        {path: "/login", component: Login, params: {'setToken':setToken, 'setDataProfile':setDataProfile}},
         {path: "/energyWater", component: EnergyWater},
         {path: "/energyElectro", component: EnergyElectro},
         {path: "/energyGas", component: EnergyGas},
@@ -70,7 +71,7 @@ function App({hideLoader}) {
 
     return (
         <BrowserRouter>
-            <Header/>
+            <Header dataProfile={dataProfile} setDataProfile={setDataProfile}/>
             <div className="headerPadding">
                 <Switch>
 

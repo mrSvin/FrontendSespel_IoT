@@ -56,7 +56,7 @@ function fetchRequestAddService(userName, userRole, complexName, infoWorks, peri
         body: raw,
         redirect: 'follow'
     };
-    if (userRole == "ROLE_SERVICE" || userRole == "ROLE_ADMIN" && infoWorks.length > 10) {
+    if (userRole === "ROLE_SERVICE" || userRole === "ROLE_ADMIN" && infoWorks.length > 10) {
 
         fetch(`http://${getUrlService()}/api/addService`, requestOptions)
             .then(response => response.text())
@@ -113,7 +113,7 @@ function fetchRequestCurrent(complexName, setDataReportState) {
     fetch(url, {method: 'GET'})
         .then((response) => response.json())
         .then((data) => {
-            let Name = data.drawNum == '2' ? '4977.06.008-5001' : 'C50L25RS-5.0001'
+            let Name = data.drawNum === '2' ? '4977.06.008-5001' : 'C50L25RS-5.0001'
             let date = (new Date(data.lastRequest).getTime() + 10800000)
             date = new Date(date).toISOString().slice(0, 10) + ' ' + new Date(date).toISOString().slice(11, 19)
 
@@ -140,8 +140,8 @@ function fetchRequestReport(complexName, setDataReportState) {
         .then((response) => response.json())
         .then((data) => {
             let dataReport = data.map(e => {
-                let fix = e.numberDrawing == 2 ? '4977.06.008-5001' : 'C50L25RS-5.0001'
-                let Goden = e.valid == 2 ? 'Годен' : 'Не годен'
+                let fix = e.numberDrawing === 2 ? '4977.06.008-5001' : 'C50L25RS-5.0001'
+                let Goden = e.valid === 2 ? 'Годен' : 'Не годен'
                 return [e.numberAct, fix, e.numberProd, e.requiredForce, e.actualForce, e.actualForce2, e.maxDeformation, e.ostDeformation, Goden, e.authorId, e.dateTime]
             })
             setDataReportState(dataReport)
@@ -163,7 +163,7 @@ function fetchGetReSourceUsers() {
 
 // Добавить нового пользователя в админке стенда ресурсных испытаний
 function fetchAddReSourceUser(authorId, fio, tabel, userRole = 'user') {
-    if (userRole == "ROLE_ADMIN") {
+    if (userRole === "ROLE_ADMIN") {
 
         let serverDomain = window.location.hostname
         let serverPort = window.location.port
@@ -182,7 +182,7 @@ function fetchAddReSourceUser(authorId, fio, tabel, userRole = 'user') {
 
 // Удалить ользователя в админке стенда ресурсных испытаний
 function fetchDeleteReSourceUser(authorId, userRole = 'user') {
-    if (userRole == "ROLE_ADMIN") {
+    if (userRole === "ROLE_ADMIN") {
 
         let serverDomain = window.location.hostname
         let serverPort = window.location.port
@@ -200,34 +200,34 @@ function fetchDeleteReSourceUser(authorId, userRole = 'user') {
 }
 
 function fetchRequestScud(date = '2022-10-25', place = 'Ленинградская 36, Дверь', smenaState = '8и') {
-    if (smenaState == '8и') {
+    if (smenaState === '8и') {
         return fetch(`/api/scud/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
-    } else if (smenaState == '8') {
+    } else if (smenaState === '8') {
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
-    } else if (smenaState == '7') {
+    } else if (smenaState === '7') {
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scud/beginDate:${dateYesterday} 06:50:00_endDate:${date} 06:50:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
-    } else if (smenaState == '11') {
+    } else if (smenaState === '11') {
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scud/beginDate:${dateYesterday} 06:45:00_endDate:${date} 06:45:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
-    } else if (smenaState == '24') {
+    } else if (smenaState === '24') {
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scud/beginDate:${dateYesterday} 07:00:00_endDate:${date} 08:00:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
@@ -239,35 +239,35 @@ function fetchRequestScud(date = '2022-10-25', place = 'Ленинградска
 }
 
 function fetchSkudImage(date = '2022-10-25', place = 'Ленинградская 36, Дверь', smenaState = '8и') {
-    if (place == 'all') place = '2ploshadka'
-    if (smenaState == '8и') {
+    if (place === 'all') place = '2ploshadka'
+    if (smenaState === '8и') {
         return fetch(`/api/scudImage/beginDate:${date} 00:00:00_endDate:${date} 23:59:59_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
-    } else if (smenaState == '8') {
+    } else if (smenaState === '8') {
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 07:00:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
-    } else if (smenaState == '7') {
+    } else if (smenaState === '7') {
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scudImage/beginDate:${dateYesterday} 06:50:00_endDate:${date} 06:50:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
-    } else if (smenaState == '11') {
+    } else if (smenaState === '11') {
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scudImage/beginDate:${dateYesterday} 06:45:00_endDate:${date} 06:45:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
             .then((data) => {
                 return data
             })
-    } else if (smenaState == '24') {
+    } else if (smenaState === '24') {
         let dateYesterday = dayYesterday(date)
         return fetch(`/api/scudImage/beginDate:${dateYesterday} 07:00:00_endDate:${date} 08:00:00_mesto:${place}`, {method: 'GET'})
             .then((response) => response.json())
@@ -434,5 +434,11 @@ function fetchRequestGetToken() {
         })
 }
 
+function fetchUserData() {
+    return fetch('/api/userInfo', {method: 'POST'})
+        .then((response) => response.json())
+        .catch(error => {
+            return 'error'
+        })
 
-
+}

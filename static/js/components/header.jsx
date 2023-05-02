@@ -1,17 +1,16 @@
-function Header() {
-    const [dataProfile, setDataProfile] = useState({'imageUser': null, 'userName': null, 'userMail': null});
+function Header({dataProfile, setDataProfile}) {
 
     useEffect(() => {
-
-        fetch('/api/userInfo', {
-            method: 'POST'
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setDataProfile(data)
+        if(!window.location.href.includes('login') && dataProfile.userName === null) {
+            let userData = fetchUserData()
+            userData.then(data => {
+                if (data === 'error') {
+                    console.log('Отсутвует авторизация')
+                } else setDataProfile(data)
             })
+        }
 
-    }, [])
+    }, [dataProfile, setDataProfile])
 
 
     return (
@@ -19,7 +18,7 @@ function Header() {
 
             <div className="headerBody" id="headerCss">
                 <Link to="/">
-                    <img
+                    <img alt={'no-image'}
                         className="icon-logo"
                         src="../images/logo_white.svg"
                     />

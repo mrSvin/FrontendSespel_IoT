@@ -25,11 +25,18 @@ function Login({params}) {
                     if (response.url != badLogin) {
                         // location.href = "/"
                         let tokenPromise = fetchRequestGetToken()
+                        let userData = fetchUserData()
                         tokenPromise.then(data => {
                             localStorage['token'] = data
                             params.setToken(data)
                             setAuthorized(true)
                         })
+                        userData.then(data => {
+                            if(data === 'error'){
+                                console.log('Отсутвует авторизация')
+                            } else params.setDataProfile(data)
+                        })
+
                     } else {
                         setErrorMsg('Логин или пароль введены не верно')
                     }
