@@ -4,8 +4,10 @@ function Login({params}) {
     let [password, setPassword] = useState("")
     let [rememberMe, setRememberMe] = useState(false)
     let [passwordEye, setpasswordEye] = useState(false)
+    let [authorized, setAuthorized] = useState(false)
+    let [errorMsg, setErrorMsg] = useState('');
+    let loginBtn = useRef()
 
-    const [errorMsg, setErrorMsg] = useState('');
     const toggleClass = () => {
         setpasswordEye(!passwordEye);
     };
@@ -24,9 +26,9 @@ function Login({params}) {
                         // location.href = "/"
                         let tokenPromise = fetchRequestGetToken()
                         tokenPromise.then(data => {
-                            e.stopPropagation()
                             localStorage['token'] = data
                             params.setToken(data)
+                            setAuthorized(true)
                         })
                     } else {
                         setErrorMsg('Логин или пароль введены не верно')
@@ -34,16 +36,20 @@ function Login({params}) {
                 }
             })
         } else {
-            e.preventDefault();
             setErrorMsg('Логин или пароль слишком короткие')
         }
     }
+
+    useEffect(()=>{
+        if(authorized) loginBtn.current.click()
+    }, [authorized])
 
     return (
         <>
             <div className="loginTheme"></div>
             <div className={'loginMenu'}>
                 <img className="loginLogo"
+                     alt={'no-image'}
                      src={'../images/logo_white.svg'}/>
                 <div className="box login">
                     <div>
@@ -66,6 +72,7 @@ function Login({params}) {
 
                             />
                             <img src={passwordEye ? '../images/view.svg' : '../images/no-view.svg'}
+                                 alt={'no-image'}
                                  className="passwordEye"
                                  onClick={() => toggleClass()}
                             />
@@ -94,7 +101,7 @@ function Login({params}) {
                             to={'/'}
                             id="login-btn"
                             className="btn btn-login"
-                            onClick={(e)=>{authorization(e)}}
+                            onClick={authorized? null:authorization} ref={loginBtn}
                         >
                             Войти
                         </Link>
