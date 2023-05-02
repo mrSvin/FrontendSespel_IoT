@@ -22,9 +22,8 @@ function Login({params}) {
             response.then(response => {
                 if (response.ok) {
                     let badLogin = window.location.protocol + '//' + window.location.host + "/login?error";
-                    if (response.url != badLogin) {
-                        // location.href = "/"
-                        let tokenPromise = fetchRequestGetToken()
+                    if (response.url !== badLogin) {
+                        let tokenPromise = fetchRequestGetToken(rememberMe?'Remember':'')
                         let userData = fetchUserData()
                         tokenPromise.then(data => {
                             localStorage['token'] = data

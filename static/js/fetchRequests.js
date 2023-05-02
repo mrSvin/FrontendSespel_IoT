@@ -427,8 +427,8 @@ function fetchRequestSignals(complexName='navigator1') {
         })
 }
 
-function fetchRequestGetToken() {
-    return fetch(`/api/getToken`, {method: 'POST'})
+function fetchRequestGetToken(remember='') {
+    return fetch(`/api/getToken${remember}`, {method: 'POST'})
         .then((response) => {
             return response.text()
         })
