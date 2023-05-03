@@ -182,8 +182,10 @@
     filter: contrast(90%);
     transition: 1s;
     width: 100px;
-    height: 100px;
+    height: 80px;
+    scale: 1.7;
     margin-bottom: 10px;
+    margin-left: 15px;
     background: url(../images/teamcenter.svg) no-repeat;
     background-size: 110px 20px;
 

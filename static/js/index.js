@@ -45,7 +45,6 @@ function App({hideLoader}) {
         {path: "/intra", source: "http://89.151.134.234:46088/"},
         {path: "/wialon", source: "https://hosting.wialon.com/"},
         {path: "/teamcenter", source: "http://tcsespel.sespel.corp:7001/awc/"},
-        {path: "/configPpc", source: "http://192.168.3.163:3001/"}
     ]
 
     const componentRoutes = [

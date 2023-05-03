@@ -23,15 +23,14 @@ function Home({token}) {
         }
     }
 
-    function checkToken(){
+    function checkToken(link){
         if(token !== null){
             let decodeToken = decodeJwt(token)
             if(decodeToken.payload.exp * 1000 - new Date().getTime() <= 0){
                 window.location.href = 'http://iot.sespel.com/login'
-            } else window.location.href = `http://frontend.sespel.com/map&${token}`
+            } else window.location.href = `http://frontend.sespel.com/${link}&${token}`
         } else window.location.href = 'http://iot.sespel.com/login'
     }
-
 
     const menuItems = [
         { name: 'Станки', link: '/stanki/ОТК', iconClass: 'stanki', description: 'Суточные и месячные отчеты работы оборудования' },
@@ -43,8 +42,8 @@ function Home({token}) {
         { name: 'Умный дом', link: '/intra', iconClass: 'intra', description: 'SCADA система Intrahouse для диспетчеризации' },
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
         { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией', onClick: teamCenterLink},
-        { name: 'Конфигуратор ППЦ', link: '/configPpc', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ' },
-        { name: '3D карта предприятия', link: '/', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: checkToken},
+        { name: 'Конфигуратор ППЦ', link: '/', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ', onClick: checkToken, onClickParam: 'ppc'},
+        { name: '3D карта предприятия', link: '/', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: checkToken, onClickParam: 'map'},
     ];
 
 
@@ -61,9 +60,13 @@ function Home({token}) {
             <AlertConfirm showAlertConfirm={showAlertConfirm} setShowAlertConfirm={setShowAlertConfirm}
                           alertConfirmParams={alertConfirmParams}/>
             <div className="main-container-home">
-                {menuItems.map(({name, link, iconClass, description, onClick}) => (
+                {menuItems.map(({name, link, iconClass, description, onClick, onClickParam}) => (
                     <Link key={name} to={link} className="container-home" onClick={(e) =>{
-                        if(onClick !== undefined) onClick(e)
+                        if(onClick !== undefined) {
+                            if(onClickParam !== undefined) {
+                                onClick(onClickParam)
+                            } else onClick(e)
+                        }
                     }}>
                         <div className="icon-container">
                             <p>{description}</p>
