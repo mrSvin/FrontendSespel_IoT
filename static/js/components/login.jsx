@@ -27,7 +27,7 @@ function Login({params}) {
                         let userData = fetchUserData()
                         tokenPromise.then(data => {
                             let differenceTime = new Date().getTime() - decodeJwt(data).payload.time
-                            differenceTime = differenceTime <= 3000? 0 : differenceTime
+                            differenceTime = (-3000 <= differenceTime && differenceTime <= 3000)? 0 : differenceTime
                             localStorage['differenceTime'] = differenceTime
                             localStorage['token'] = data
                             params.setToken(data)

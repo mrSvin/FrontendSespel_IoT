@@ -31,11 +31,15 @@ function App({hideLoader}) {
 
     const [dataProfile, setDataProfile] = useState({'imageUser': null, 'userName': null, 'userMail': null});
     const [token, setToken] = useState(localStorage['token'] === undefined? null:localStorage['token'])
-    const [differenceTime, setDifferenceTime] = useState(localStorage['differenceTime'] === undefined? null:localStorage['differenceTime'])
+    const [differenceTime, setDifferenceTime] = useState(
+        localStorage['differenceTime'] === undefined? null :
+        parseInt(localStorage['differenceTime'],10)
+    )
+
     const [scudMonthMemory, setScudMonthMemory] = useState(null)
 
     useEffect(()=>{
-        console.log('Разница между временем клиента и серваре:', msToTime(differenceTime))
+        console.log('Разница между временем клиента и сервера:', msToTime(differenceTime))
         hideLoader()
     }, [token, dataProfile]);
 
