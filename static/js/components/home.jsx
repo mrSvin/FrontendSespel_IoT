@@ -27,7 +27,7 @@ function Home({token, differenceTime}) {
         if(checkTokenValid(token)){
             window.location.href = `http://frontend.sespel.com/${link}&${btoa(differenceTime)}&${token}`
         } else {
-            window.location.href = 'http://iot.sespel.com/login'
+            window.location.href = `${window.location.origin}/login`
         }
     }
 
