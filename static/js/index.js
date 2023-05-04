@@ -31,9 +31,11 @@ function App({hideLoader}) {
 
     const [dataProfile, setDataProfile] = useState({'imageUser': null, 'userName': null, 'userMail': null});
     const [token, setToken] = useState(localStorage['token'] === undefined? null:localStorage['token'])
+    const [differenceTime, setDifferenceTime] = useState(localStorage['differenceTime'] === undefined? null:localStorage['differenceTime'])
     const [scudMonthMemory, setScudMonthMemory] = useState(null)
 
     useEffect(()=>{
+        console.log('Разница между временем клиента и серваре:', msToTime(differenceTime))
         hideLoader()
     }, [token, dataProfile]);
 
@@ -48,7 +50,13 @@ function App({hideLoader}) {
     ]
 
     const componentRoutes = [
-        {path: "/login", component: Login, params: {'setToken':setToken, 'setDataProfile':setDataProfile}},
+        {path: "/login", component: Login,
+            params: {
+                'setToken':setToken,
+                'setDataProfile':setDataProfile,
+                'setDifferenceTime':setDifferenceTime
+            }
+        },
         {path: "/energyWater", component: EnergyWater},
         {path: "/energyElectro", component: EnergyElectro},
         {path: "/energyGas", component: EnergyGas},

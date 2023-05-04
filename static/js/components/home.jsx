@@ -23,13 +23,12 @@ function Home({token}) {
         }
     }
 
-    function checkToken(link){
-        if(token !== null){
-            let decodeToken = decodeJwt(token)
-            if(decodeToken.payload.exp * 1000 - new Date().getTime() <= 0){
-                window.location.href = 'http://iot.sespel.com/login'
-            } else window.location.href = `http://frontend.sespel.com/${link}&${token}`
-        } else window.location.href = 'http://iot.sespel.com/login'
+    function linkWithToken(link){
+        if(checkTokenValid(token)){
+            window.location.href = `http://frontend.sespel.com/${link}&${token}`
+        } else {
+            window.location.href = 'http://iot.sespel.com/login'
+        }
     }
 
     const menuItems = [
@@ -42,8 +41,8 @@ function Home({token}) {
         { name: 'Умный дом', link: '/intra', iconClass: 'intra', description: 'SCADA система Intrahouse для диспетчеризации' },
         { name: 'Wialon', link: '/wialon', iconClass: 'wialon', description: 'Облачная платформа мониторинга производимых ППЦ' },
         { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией', onClick: teamCenterLink},
-        { name: 'Конфигуратор ППЦ', link: '/', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ', onClick: checkToken, onClickParam: 'ppc'},
-        { name: '3D карта предприятия', link: '/', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: checkToken, onClickParam: 'map'},
+        { name: 'Конфигуратор ППЦ', link: '/', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ', onClick: linkWithToken, onClickParam: 'ppc'},
+        { name: '3D карта предприятия', link: '/', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: linkWithToken, onClickParam: 'map'},
     ];
 
 
@@ -65,7 +64,9 @@ function Home({token}) {
                         if(onClick !== undefined) {
                             if(onClickParam !== undefined) {
                                 onClick(onClickParam)
-                            } else onClick(e)
+                            } else {
+                                onClick(e)
+                            }
                         }
                     }}>
                         <div className="icon-container">

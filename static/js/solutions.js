@@ -1,15 +1,15 @@
 function getTimeTotalArray(roundArray, date) {
 
-    if (roundArray == null) {
+    if (roundArray === null) {
         return ['0 с.', '0 с.', '0 с.', '0 с.', '0 с.',]
-    } else if (roundArray == roundArray.length) {
+    } else if (roundArray === roundArray.length) {
         return ['0 с.', '0 с.', '0 с.', '0 с.', '0 с.',]
     }
 
 
     let sumArray = roundArray.reduce((acc, num) => acc + num, 0);
 
-    let arrayPercent = roundArray.map(function (num, index) {
+    let arrayPercent = roundArray.map(function (num) {
         return num / sumArray
     });
 
@@ -17,19 +17,19 @@ function getTimeTotalArray(roundArray, date) {
 
     if (typeof (date) == 'string') {
         // Дата формата 2022-02
-        if (date.length == 7) {
+        if (date.length === 7) {
             let timeNow = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
             // Если текущий год и месяц совпадают
-            if (timeNow.slice(0, 7) == date) {
+            if (timeNow.slice(0, 7) === date) {
                 // то используем текущий день как 100%
                 date = timeNow.slice(8, 10)
             } else date = new Date(date.slice(0, 4), date.slice(5, 7), 0).getDate()
         }
         // Дата формата 2022-02-22
-        else if (date.length == 10) {
+        else if (date.length === 10) {
             let timeNow = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
             // Если текущая дата совпадает
-            if (timeNow.slice(0, 10) == date) {
+            if (timeNow.slice(0, 10) === date) {
                 // то используем текущий час как 100%
                 date = +timeNow.slice(11, 13) + (timeNow.slice(14, 16) / 60)
                 // Если дата текущая и это страница со сменной, то отчет начинаем на 7 часов позже
@@ -42,7 +42,7 @@ function getTimeTotalArray(roundArray, date) {
 
     } else if (pageName.includes('Month')) date = 30
 
-    let arrayTime = arrayPercent.map(function (num) {
+    return arrayPercent.map(function (num) {
         //Если это страница несодержит в название месяц
         if (!pageName.includes('Month')) {
             let out = num * 3600 * date
@@ -53,7 +53,6 @@ function getTimeTotalArray(roundArray, date) {
         }
 
     });
-    return arrayTime
 }
 
 // Функция перевода миллисекунд в часы в формате  - 1.ч. 1м. 1.с
@@ -64,24 +63,24 @@ function msToTime(duration, date = 24) {
         hours = parseInt((duration / (1000 * 60 * 60)) % 24);
 
 
-    if (hours == 0) hours = ''
+    if (hours === 0) hours = ''
     else {
         hours = hours + " ч. "
     }
 
-    if (minutes == 0) minutes = ''
+    if (minutes === 0) minutes = ''
     else {
         minutes = minutes + " мин. "
     }
 
-    if (seconds == 0) seconds = ''
+    if (seconds === 0) seconds = ''
     else {
         seconds = seconds + ' с.'
     }
 
-    if ((hours + minutes + seconds) != '') {
+    if ((hours + minutes + seconds) !== '') {
         return '— ' + hours + minutes + seconds;
-    } else if ((hours + minutes + seconds) == '' && duration != 0) {
+    } else if ((hours + minutes + seconds) === '' && duration !== 0) {
         return `— ${date} ч.`
     } else return '— 0 с.'
 
@@ -90,7 +89,7 @@ function msToTime(duration, date = 24) {
 // Получение времени в формате часы:минуты
 function msToTimeHours(duration) {
 
-    if (duration == 0) return 0
+    if (duration === 0) return 0
 
     let minutes = parseInt((duration / (1000 * 60)) % 60),
         hours = parseInt((duration / (1000 * 60 * 60)))
@@ -98,9 +97,9 @@ function msToTimeHours(duration) {
     minutes = minutes < 10 ? '0' + minutes : minutes
     hours = hours < 10 ? hours : hours
 
-    if ((hours + minutes) != '') {
+    if ((hours + minutes) !== '') {
         return hours + ':' + minutes
-    } else if ((hours) == '' && duration != 0) {
+    } else if ((hours) === '' && duration !== 0) {
         return hours
     } else return '00:' + minutes
 
@@ -117,29 +116,29 @@ function msToTimeDays(duration, date = 31) {
     hours = hours > 1? parseInt(hours) : 0
     days = days > 1? parseInt(days) : 0
 
-    if (days == 0) days = ''
+    if (days === 0) days = ''
     else {
         days = days + " д. "
     }
 
-    if (hours == 0) hours = ''
+    if (hours === 0) hours = ''
     else {
         hours = hours + " ч. "
     }
 
-    if (minutes == 0) minutes = ''
+    if (minutes === 0) minutes = ''
     else {
         minutes = minutes + " мин. "
     }
 
-    if (seconds == 0) seconds = ''
+    if (seconds === 0) seconds = ''
     else {
         seconds = seconds + ' с.'
     }
 
-    if ((hours + minutes + seconds) != '') {
+    if ((hours + minutes + seconds) !== '') {
         return '— ' + days + hours + minutes + seconds;
-    } else if ((days + hours + minutes + seconds) == '' && duration > 999) {
+    } else if ((days + hours + minutes + seconds) === '' && duration > 999) {
         return `— ${date} д.`
     } else return '— 0 с.'
 
@@ -149,7 +148,7 @@ function msToTimeDays(duration, date = 31) {
 function parseLinearServiceHistory(arrayParse, y, difference) {
     var arraySave = [] // Массив, который будет заполняться
 
-    if (arrayParse.length == 1) {
+    if (arrayParse.length === 1) {
         arraySave.push({
             x: (new Date(arrayParse[0])).getTime(),
             x2: (new Date(dayTimeNow())).getTime() + 10000,
@@ -159,7 +158,7 @@ function parseLinearServiceHistory(arrayParse, y, difference) {
         })
     } else {
         for (let i = 0; i < arrayParse.length; i++) {
-            if (i == arrayParse.length - 1) {
+            if (i === arrayParse.length - 1) {
                 arraySave.push({
                     x: (new Date(arrayParse[i])).getTime(),
                     x2: (new Date(dayTimeNow())).getTime() + 10000,
@@ -214,14 +213,14 @@ function getRoundDiagramData(smena) {
         smena.map((arraySmena, index) => {
 
             // Нет смысла пробегаться по массиву с именами программ
-            if (index == 5) return;
+            if (index === 5) return;
 
             // Переменная, которая будет хранить текущую переменную для состояния:
             // работы, паузы, выключен, аварии, нагрузки
             let delta = 0
 
             // Если массив, оказался пустым или подобным, то в массив запишется ноль.
-            if (arraySmena == null || arraySmena.length <= 1 || arraySmena == undefined) {
+            if (arraySmena === null || arraySmena.length <= 1 || arraySmena === undefined) {
                 arrayRound.push(delta)
                 return
             }
@@ -229,7 +228,7 @@ function getRoundDiagramData(smena) {
             else {   // Начиная с первого элемента с шагом 2
                 for (let i = 1; i < arraySmena.length; i += 2) {
                     // старая заглушка
-                    if (i == 0) continue
+                    if (i === 0) continue
 
                     // Вычисления дельты, сумма всех разниц между началом работы и концом.
                     delta = delta + (new Date(arraySmena[i]).getTime()) - (new Date(arraySmena[i - 1]).getTime())
@@ -251,7 +250,7 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
     // Преобразоавние текущего времение в формат '2022-03-21 10:00:35'
     time = time.slice(0, 10) + " " + time.slice(11, 19);
 
-    let startTime = null
+    let startTime
 
     // Дата с календаря(В данный момент, просто текущая дата)
     if (calendarDate == null) {
@@ -286,8 +285,8 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
 
     let stanok = []
     for (let i = 0; 6 > i; i++) {   // метод concat объединяет массивы
-        if (today[i] != undefined && yesterday[i] != undefined) {
-            if (i == 0 && yesterday[0].length == yesterday[1].length) {
+        if (today[i] !== undefined && yesterday[i] !== undefined) {
+            if (i === 0 && yesterday[0].length === yesterday[1].length) {
                 yesterday[0].pop()
             }
             stanok.push(yesterday[i].concat(today[i]))
@@ -312,13 +311,13 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
             // Цикл внутри массива
             for (let j = 0; j < stanok[i].length; j++) {
                 // если этот элемент последний, то записать его и выйти из цикла
-                if (j == stanok[i].length) {
+                if (j === stanok[i].length) {
                     stanok_change[i].push(stanok[i][j])
                     break
                 }
 
                 // Если время 00:00 текущего дня меньше следующей переменной и текущая переменная меньше 00:00 текущего дня, и j четная, то
-                if ((new Date(startTime + ' 00:00:00') <= new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') >= new Date(stanok[i][j]).getTime()) && j % 2 == 0) {
+                if ((new Date(startTime + ' 00:00:00') <= new Date(stanok[i][j + 1]).getTime()) && (new Date(startTime + ' 00:00:00') >= new Date(stanok[i][j]).getTime()) && j % 2 === 0) {
                     // Вставить в измененный массив переменную
                     stanok_change[i].push(stanok[i][j])
                     // и 23:59
@@ -347,11 +346,11 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
                 if ((new Date(stanok_change[i][j]).getTime() >= new Date(pastTime + ' 19:00:00').getTime()) && (new Date(startTime + ' 07:00:00') >= new Date(stanok_change[i][j]).getTime())) {
 
                     // Если j нечетный, а смена все еще пустая
-                    if (smena_1[i].length == 0 && j % 2 == 1) {
+                    if (smena_1[i].length === 0 && j % 2 === 1) {
                         // добавить в смену 19:00
                         smena_1[i].push(pastTime + ' 19:00:00')
                         // Если это массив с работой и j нечетный
-                        if (i == 0 && j % 2 == 1) {
+                        if (i === 0 && j % 2 === 1) {
                             // То добавить ПРОШЛУЮ(-1) программу, которая началась до 19:00
                             programName1.push(stanok[5][(j - 1) / 2])
                         }
@@ -362,14 +361,14 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
                     // Если время больше 00:00 текущей даты
                     if (new Date(stanok_change[i][j]).getTime() >= new Date(startTime + ' 00:00:00').getTime()) {
                         // И данный массив работа и j четный
-                        if (i == 0 && j % 2 == 0) {
+                        if (i === 0 && j % 2 === 0) {
                             // То пишем имя программы в массив программ для первой смены
                             // по индексу текущего дня для имен программ
                             programName1.push(stanok[5][programName2Index])
                             programName2Index++
                         }
                     } else {   // Иначе записываем имя программы в массив программ для первой смены из массива прошлого дня
-                        if (i == 0 && j % 2 == 0) {
+                        if (i === 0 && j % 2 === 0) {
                             programName1.push(stanok[5][j / 2])
                         }
                     }
@@ -377,11 +376,11 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
                 // Иначе если время входит в промежоток от 07:00 до 19:00 теккущего дня
                 else if ((new Date(stanok_change[i][j]).getTime() >= new Date(startTime + ' 07:00:00').getTime()) && (new Date(startTime + ' 19:00:00') >= new Date(stanok_change[i][j]).getTime())) {
                     // Если массив второй смены пустой, но j нечетный
-                    if (smena_2[i].length == 0 && j % 2 == 1) {
+                    if (smena_2[i].length === 0 && j % 2 === 1) {
                         // то записать 07:00
                         smena_2[i].push(startTime + ' 07:00:00')
                         // если это индекс работы и j нечетный
-                        if (i == 0 && j % 2 == 1) {
+                        if (i === 0 && j % 2 === 1) {
                             // записываем ПРОШЛОЕ(-1) имя программы в массив программ для второй смены
                             programName2.push(stanok[5][(programName2Index - 1)])
                         }
@@ -390,7 +389,7 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
                     smena_2[i].push(stanok_change[i][j])
 
                     // если работа и j четный
-                    if (i == 0 && j % 2 == 0) {
+                    if (i === 0 && j % 2 === 0) {
                         // записываем имя программы в массив программ для второй смены
                         programName2.push(stanok[5][programName2Index])
                         programName2Index++
@@ -399,12 +398,12 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
             } // Конец цилка обработки j
 
             // Если длина массива первой смены нечетная
-            if (smena_1[i].length % 2 == 1) {   // То добавить в смену 06:59
+            if (smena_1[i].length % 2 === 1) {   // То добавить в смену 06:59
                 smena_1[i].push(startTime + ' 06:59:00')
             }
             // Если длина массива второй смены нечетная
-            if (smena_2[i].length % 2 == 1) {   // Если дата равна сегодняшней
-                if (startTime == time.slice(0, 10)) {   // То добавить во вторую смену текущее время
+            if (smena_2[i].length % 2 === 1) {   // Если дата равна сегодняшней
+                if (startTime === time.slice(0, 10)) {   // То добавить во вторую смену текущее время
                     smena_2[i].push(startTime + " " + time.slice(11, 19))
                 } else {
                     // Иначе добавить во вторую смену 18:59
@@ -413,11 +412,11 @@ function convertDaysToSmena(today, yesterday, calendarDate = null) {
             }
 
             // Если смена 2 пустая, а первая смена не пустая и ее последнее значение 06:59
-            if (smena_2[i].length == 0 && smena_1[i][(smena_1[i].length - 1)] == startTime + ' 06:59:00') {
+            if (smena_2[i].length === 0 && smena_1[i][(smena_1[i].length - 1)] === startTime + ' 06:59:00') {
                 // то добавить во вторую смену 07:00
                 smena_2[i].push(startTime + ' 07:00:00')
                 // И в зависимости от текущей даты вставить 18:59 или текущее время
-                if (startTime == time.slice(0, 10)) {   // То добавить во вторую смену текущее время
+                if (startTime === time.slice(0, 10)) {   // То добавить во вторую смену текущее время
                     smena_2[i].push(startTime + " " + time.slice(11, 19))
                 } else {
                     // Иначе добавить во вторую смену 18:59
@@ -457,7 +456,7 @@ function parseLinearSutki(arrayParse, y, date, arrayName = null, pauseLength = 0
     }
 
     if (lengh >= 4) {
-        if (lengh % 2 == 1) lengh -= 1
+        if (lengh % 2 === 1) lengh -= 1
         lengh = (lengh - lengh % 2) / 2
     } else lengh = 1
 
@@ -496,8 +495,8 @@ function addLastTime(stanok, calendarDate) {
     let time = new Date(new Date().toString().split('GMT')[0] + ' UTC').toISOString();
     time = time.slice(0, 10) + " " + time.slice(11, 19);
 
-    if (stanok.length % 2 == 1) {
-        if (calendarDate == time.slice(0, 10)) {   // То добавить во вторую смену текущее время
+    if (stanok.length % 2 === 1) {
+        if (calendarDate === time.slice(0, 10)) {   // То добавить во вторую смену текущее время
             stanok.push(calendarDate + " " + time.slice(11, 19))
         } else {
             stanok.push(calendarDate + ' 23:59:59')
@@ -520,7 +519,7 @@ function kolOperations(arrayWork) {
     }
 
     if (lengh >= 4) {
-        if (lengh % 2 == 1) lengh -= 1
+        if (lengh % 2 === 1) lengh -= 1
         lengh = (lengh - lengh % 2) / 2
     } else lengh = 1
 
@@ -566,7 +565,7 @@ function dayTimeNow() {
 
 // Функция получения текущего дня из предыдущего
 function dayYesterday(startTime) {
-    if (startTime == '') {
+    if (startTime === '') {
         return null
     }
     return new Date((new Date(startTime)).getTime() - 86400000).toISOString().slice(0, 10)
@@ -620,10 +619,9 @@ function parseNameUrl(url) {
 function getArrayPeriodsBetween(arrayTime) {
     let ArrayPeriod = arrayTime
     ArrayPeriod = ArrayPeriod.map((e, i, array) => {
-        if (i == (array.length) - 1) {
+        if (i === (array.length) - 1) {
             return '-'
         } else {
-
             return msToTimeDays(new Date(array[i]) - new Date(array[i + 1]), 365)
         }
     })
@@ -631,7 +629,7 @@ function getArrayPeriodsBetween(arrayTime) {
 }
 
 function exceptionManualNagruzka(name) {
-    if (name == 'kim' || name == 'apec') {
+    if (name === 'kim' || name === 'apec') {
         return 'Ручной'
     } else {
         return 'Нагрузка'
@@ -650,10 +648,9 @@ function highchartsPercentTime(generalDiagramNames, workNoNagruzka, pause, off, 
     })
 
     let dataSumArray = data.map(e => {
-        let red = e.reduce((val1, val2) => {
+        return e.reduce((val1, val2) => {
             return val1 + val2
         })
-        return red
     })
 
     let dataTime = data.map(e => {
@@ -693,10 +690,10 @@ function getTimeProgramNameGraph(arrayData, type, date) {
 
     if (!arrayData) return 0
 
-    if (arrayData[0].length % 2 == 1) {
+    if (arrayData[0].length % 2 === 1) {
         let timeNow = dayTimeNow()
 
-        if (timeNow.slice(0, 10) == arrayData[0][0].slice(0, 10)) {
+        if (timeNow.slice(0, 10) === arrayData[0][0].slice(0, 10)) {
             arrayData[0].push(timeNow)
         } else {
             arrayData[0].push(arrayData[0][0].slice(0, 10) + ' 23:59:59')
@@ -705,7 +702,7 @@ function getTimeProgramNameGraph(arrayData, type, date) {
 
     for (let i = 0; i < arrayData[0].length; i += 2) {
 
-        if (arrayData[5][i / 2] == arrayData[5][i / 2 + 1]) {
+        if (arrayData[5][i / 2] === arrayData[5][i / 2 + 1]) {
             if (arrayData[5][i / 2] !== arrayData[5][i / 2 - 1]) {
                 startSame = arrayData[0][i]
             }
@@ -713,7 +710,7 @@ function getTimeProgramNameGraph(arrayData, type, date) {
             timer = timer + (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
         } else {
 
-            if (arrayData[5][i / 2] == arrayData[5][i / 2 - 1]) {
+            if (arrayData[5][i / 2] === arrayData[5][i / 2 - 1]) {
                 timer = timer + (new Date(arrayData[0][i + 1]) - new Date(arrayData[0][i]))
                 programTimeArray.push([arrayData[5][i / 2], startSame, arrayData[0][i + 1]])
                 timer = 0
@@ -727,7 +724,7 @@ function getTimeProgramNameGraph(arrayData, type, date) {
 
     let parset = []
 
-    if (type == 'sutki') {
+    if (type === 'sutki') {
         parset.push({
             x: new Date(date + ' 00:00').getTime(),
             x2: new Date(date + ' 00:00').getTime() + 2000,
@@ -752,8 +749,8 @@ function getTimeProgramNameGraph(arrayData, type, date) {
         })
     })
 
-    if (type == 'sutki') {
-        if (day == date.slice(0, 10)) {
+    if (type === 'sutki') {
+        if (day === date.slice(0, 10)) {
             parset.push({
                 x: new Date(dayTimeNow()).getTime(),
                 x2: new Date(dayTimeNow()).getTime() + 2000,
@@ -769,7 +766,7 @@ function getTimeProgramNameGraph(arrayData, type, date) {
             })
         }
     } else {
-        if (date.slice(11) == '19:00') {
+        if (date.slice(11) === '19:00') {
             parset.push({
                 x: new Date(date).getTime() + 3600000 * 11 + 60000 * 59 + 55000,
                 x2: new Date(date).getTime() + 3600000 * 11 + 60000 * 59 + 57000,
@@ -777,7 +774,7 @@ function getTimeProgramNameGraph(arrayData, type, date) {
                 partialFill: null
             })
         } else {
-            if (day == date.slice(0, 10)) {
+            if (day === date.slice(0, 10)) {
                 parset.push({
                     x: new Date(dayTimeNow()).getTime(),
                     x2: new Date(dayTimeNow()).getTime() + 2000,
@@ -802,7 +799,7 @@ function getUrlService() {
     let serverDomain = window.location.hostname
     let serverPort = window.location.port
 
-    if (serverDomain == 'iot.sespel.com') {
+    if (serverDomain === 'iot.sespel.com') {
         return serverDomain + ':' + 17086
     } else return serverDomain + ':' + serverPort.slice(0, -1) + 6
 }
@@ -833,7 +830,7 @@ function getObjectFromLocal(local) {
 
     for (let i = 0; i < local.length; i += 2) {
 
-        placeForState[local[i]] = (local[i + 1] == 'true')
+        placeForState[local[i]] = (local[i + 1] === 'true')
     }
     return placeForState
 }
@@ -875,7 +872,7 @@ function interceptNetworkRequests(ee) {
 }
 
 function reloadPageIfLogin(data) {
-    if (data.url.slice(-5) == 'login' && window.location.href != data.url) {
+    if (data.url.slice(-5) === 'login' && window.location.href !== data.url) {
         location.href = `${window.location.origin}/login`
     }
 }
@@ -893,11 +890,11 @@ function urltoFile(url, filename) {
 
 function classToTypeForm(typeForm) {
 
-    if (typeForm == 'hide') return 'formHideUsersControl'
+    if (typeForm === 'hide') return 'formHideUsersControl'
 
-    if (typeForm == 'add') return 'formUsersControl tableBorderAdd'
+    if (typeForm === 'add') return 'formUsersControl tableBorderAdd'
 
-    if (typeForm == 'change') return 'formUsersControl tableBorderChange'
+    if (typeForm === 'change') return 'formUsersControl tableBorderChange'
 
 }
 
@@ -916,16 +913,16 @@ function getCorrectIP(ip) {
     array = array.map(e => {
         if (0 <= +e && +e <= 255) {
             return +e
-        } else if (array.length == 1) {
+        } else if (array.length === 1) {
             return (+e > 255) ? '255.' : '0.'
         } else return (+e > 255) ? 255 : 0
     })
 
-    if (array.length == 2 && ip[ip.length - 1] !== '.') {
+    if (array.length === 2 && ip[ip.length - 1] !== '.') {
         ipNew = array[0] + '.' + array[1]
     } else if (array.length > 2) {
         ipNew = array[0] + '.' + array[1]
-    } else ipNew = (ip[ip.length - 1] == '.') ? array[0] + '.' : array[0]
+    } else ipNew = (ip[ip.length - 1] === '.') ? array[0] + '.' : array[0]
 
     return correctIP + ipNew
 }
@@ -942,10 +939,7 @@ function checkIP(ip) {
         } else return false
     })
 
-    if (array.length == 2 && ip[ip.length - 1] !== '.' && !array.includes(false)) {
-        return true
-    } else return false
-
+    return (array.length === 2 && ip[ip.length - 1] !== '.' && !array.includes(false))
 }
 
 function decodeJwt(token) {
@@ -957,4 +951,8 @@ function decodeJwt(token) {
         payload,
         signature: parts[2],
     };
+}
+
+function checkTokenValid(token){
+    return (token === null || token === undefined || decodeJwt(token).payload.exp * 1000 - new Date().getTime() <= 0)
 }

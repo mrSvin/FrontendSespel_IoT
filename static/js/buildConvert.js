@@ -11,7 +11,7 @@ function changeTypeLine(date, stateLineHC, setStateLineHC, complexName, complexR
         return fetchRequest(date, item)
     }));
 
-    if (stateLineHC == 'line') {
+    if (stateLineHC === 'line') {
         setStateLineHC('multiLine')
         updateLoadData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
     } else {
@@ -51,7 +51,7 @@ function changeTypeLineIndividual(date, stateLineHC, setStateLineHC, stankiObjec
         return fetchRequest(date, item)
     }));
 
-    if (stateLineHC == 'line') {
+    if (stateLineHC === 'line') {
         setStateLineHC('multiLine')
         updateLoadDataIndividual(stankiRequest, date, complexNames, fetchNames, 'multiLine')
     } else {
@@ -76,7 +76,7 @@ function changeTypeLineSmena(date, stateLineHC, setStateLineHC, complexName, com
         return fetchRequestSmena(date, item)
     }));
 
-    if (stateLineHC == 'line') {
+    if (stateLineHC === 'line') {
         setStateLineHC('multiLine')
         updateLoadSmenaData(stankiRequest, date, complexNames, fetchNames, 'multiLine')
     } else {
@@ -94,7 +94,7 @@ function updateLoadData(promiseVariable, day1, complexName, fetchNames, typeLine
             })
 
             let arrayLine;
-            if (typeLine == 'multiLine') {
+            if (typeLine === 'multiLine') {
                 arrayLine = [0, 1, 2, 3, 4]
             } else {
                 arrayLine = [0, 0, 0, 0, 0]
@@ -156,7 +156,7 @@ function updateLoadSmenaData(promiseVariable, day1, complexName, fetchNames, typ
             let kolOpArray = []
             let arrayLine;
 
-            if (typeLine == 'multiLine') {
+            if (typeLine === 'multiLine') {
                 arrayLine = [0, 1, 2, 3, 4]
             } else {
                 arrayLine = [0, 0, 0, 0, 0]
@@ -289,7 +289,7 @@ function updateLoadDataIndividual(promiseVariable, day1, complexName, fetchNames
             })
 
             let arrayLine;
-            if (typeLine == 'multiLine') {
+            if (typeLine === 'multiLine') {
                 arrayLine = [0, 1, 2, 3, 4]
             } else {
                 arrayLine = [0, 0, 0, 0, 0]
@@ -391,7 +391,7 @@ function updateLoadDataIndividualSmena(promiseVariable, day1, complexName, fetch
             let kolOpArray = []
             let arrayLine;
 
-            if (typeLine == 'multiLine') {
+            if (typeLine === 'multiLine') {
                 arrayLine = [0, 1, 2, 3, 4]
             } else {
                 arrayLine = [0, 0, 0, 0, 0]
@@ -883,7 +883,7 @@ function getAllStankiData() {
         complexImg: "../images/kometa.png",
         complexRequest: 'kometa_1',
         buttonsVrs: [-340, 870, 'url(../images/kometa.png) no-repeat', "../images/sbor_ceh.png", 50, "unset"],
-        size: 'ceh5',
+        size: 'sborCeh',
         state: true,
     }
 
@@ -907,7 +907,7 @@ function getAllStankiData() {
         complexImg: "../images/kometa.png",
         complexRequest: 'kometa_3',
         buttonsVrs: [-382, 190, 'url(../images/kometa.png) no-repeat', "../images/ceh_5.png", 60, "unset"],
-        size: 'sborCeh',
+        size: 'ceh5',
         state: true,
     }
 
@@ -1335,7 +1335,7 @@ function getAllStankiData() {
         state: true,
     }
 
-    let placesObject = {
+    return {
         'ОТК': {
             stanki: {kim, nk600, kv12},
             placeState: true,
@@ -1385,7 +1385,4 @@ function getAllStankiData() {
             placeState: true,
         },
     }
-
-    return placesObject
-
 }
