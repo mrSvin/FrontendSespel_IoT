@@ -882,7 +882,7 @@ function getAllStankiData() {
         },
         complexImg: "../images/kometa.png",
         complexRequest: 'kometa_1',
-        buttonsVrs: [-382, 190, 'url(../images/kometa.png) no-repeat', "../images/ceh_5.png", 60, "unset"],
+        buttonsVrs: [-340, 870, 'url(../images/kometa.png) no-repeat', "../images/sbor_ceh.png", 50, "unset"],
         size: 'ceh5',
         state: true,
     }
@@ -906,7 +906,7 @@ function getAllStankiData() {
         },
         complexImg: "../images/kometa.png",
         complexRequest: 'kometa_3',
-        buttonsVrs: [-340, 870, 'url(../images/kometa.png) no-repeat', "../images/sbor_ceh.png", 50, "unset"],
+        buttonsVrs: [-382, 190, 'url(../images/kometa.png) no-repeat', "../images/ceh_5.png", 60, "unset"],
         size: 'sborCeh',
         state: true,
     }
