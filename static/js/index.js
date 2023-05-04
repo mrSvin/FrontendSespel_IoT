@@ -71,7 +71,7 @@ function App({hideLoader}) {
         {path: "/currentParams", component: CurrentParams},
         {path: "/signals", component: Signals},
         // {path: "/beacon", component: Beacon},
-        {path: "/network", component: Network},
+        {path: "/network", component: Network, params: {'differenceTime':differenceTime}},
         {path: "/scud", component: Scud},
         {path: "/bot/scudBot", component: ScudBot},
         {path: "/userscontrol", component: UsersControl},

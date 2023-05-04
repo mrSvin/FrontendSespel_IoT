@@ -898,8 +898,8 @@ function classToTypeForm(typeForm) {
 
 }
 
-function lastConnectTime(time) {
-    time = new Date() - new Date(time).getTime()
+function lastConnectTime(time, differenceTime) {
+    time = new Date() - differenceTime - new Date(time).getTime()
     return msToTimeDays(time).slice(2)
 }
 

@@ -1,4 +1,4 @@
-function Network() {
+function Network({params}) {
 
     const [typeForm, setTypeForm] = useState('hide')
     const [clickedDeleteButton, setClickedDeleteButton] = useState(true)
@@ -31,7 +31,7 @@ function Network() {
         if (agree) {
             let deletePromise = fetchRequestDeleteNetworkDevice(device)
             deletePromise.then((answer) => {
-                if (answer == 'ok') {
+                if (answer === 'ok') {
                     setClickedDeleteButton(false)
                     setTimeout(() => {
                         setClickedDeleteButton(true)
@@ -60,8 +60,8 @@ function Network() {
         setMachine(prevState => ({
             ...prevState,
             [key]: value
-        }));
-    };
+        }))
+    }
 
     function handleOnChangeIP(e) {
         const {value} = e.target;
@@ -69,24 +69,22 @@ function Network() {
             ...prevState,
             ['ip']: getCorrectIP(value)
         }));
-    };
+    }
 
     function handleOnChangeImage(file) {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
+        let reader = new FileReader()
+        reader.readAsDataURL(file)
         reader.onload = function () {
             setMachine(prevState => ({
                 ...prevState,
                 ['photo']: reader.result.substr(reader.result.indexOf(',') + 1)
-            }));
-        };
-
-
-    };
+            }))
+        }
+    }
 
     function updateTable() {
 
-        if(closeInterval == 3){
+        if(closeInterval === 3){
             return
         }
 
@@ -95,7 +93,7 @@ function Network() {
             let url = window.location.href
             url.includes('network') ? null : clearInterval(interval)
 
-            if (closeInterval == 0 && countInterval == 0) {
+            if (closeInterval === 0 && countInterval === 0) {
                 let promiseDeviceData = fetchRequestGetNetworkDevices()
                 promiseDeviceData.then(data => {
                     let dataArray = Object.keys(data).map(e => {
@@ -119,7 +117,7 @@ function Network() {
                     return {...obj, lastPolling: new Date(obj.lastPolling).getTime() + 1000};
                 });
                 setTableBody(newState);
-            } else if (countInterval == 10 && tableBody !== null) {
+            } else if (countInterval === 10 && tableBody !== null) {
                 let promiseDeviceData = fetchRequestPingList()
                 promiseDeviceData.then(data => {
                     let dataArray = Object.keys(data).map(e => {
@@ -127,13 +125,13 @@ function Network() {
                     })
 
                     const newState = tableBody.map((obj, i) => {
-                        if (obj.name == dataArray[i].name) {
+                        if (obj.name === dataArray[i].name) {
                             return {...obj, lastPolling: dataArray[i].lastPool, ping: dataArray[i].ping};
                         }
                         return obj;
                     });
                     setTableBody(newState);
-                    setCloseInterval(closeInterval == 1? 2 : 1)
+                    setCloseInterval(closeInterval === 1? 2 : 1)
                 })
             }
             countInterval++
@@ -191,15 +189,15 @@ function Network() {
                                 </td>
                                 <td>{deviceTable.location}</td>
                                 <td>{deviceTable.description}</td>
-                                <td>{lastConnectTime(deviceTable.lastPolling)}</td>
+                                <td>{lastConnectTime(deviceTable.lastPolling, params.differenceTime)}</td>
                                 <td>
-                                    <span className={`${deviceTable.ping == 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
+                                    <span className={`${deviceTable.ping === 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
                                 </td>
                                 <td className={'changeAddTd'}>
                                     <div className='tdChange' onClick={() => {
                                         setMachine(deviceTable)
                                         setErrorMessage(['', ''])
-                                        if (machine.name == deviceTable.name && typeForm == 'change') {
+                                        if (machine.name === deviceTable.name && typeForm === 'change') {
                                             setCloseInterval(1)
                                             setTypeForm('hide')
                                             setErrorMessage('', '')
@@ -232,7 +230,7 @@ function Network() {
                                   handleOnChangeIP={handleOnChangeIP} handleOnChangeImage={handleOnChangeImage}
                                   errorMessage={errorMessage} setErrorMessage={setErrorMessage}
                                   setCloseInterval={setCloseInterval} updateTable={updateTable}/>
-            <div className={typeForm == 'hide' ? null : 'darkSpace'}
+            <div className={typeForm === 'hide' ? null : 'darkSpace'}
                  onClick={() => {
                      setCloseInterval(1)
                      setTypeForm('hide')
@@ -249,10 +247,10 @@ function NetworkFormUpdateAdd({
                               }) {
     return (
         <form className={`networkFormAdd ${classToTypeForm(typeForm)}`}>
-            <p className='formAdminName'>{typeForm == 'change' ? 'Редактирование оборудования' : 'Добавление оборудования'}</p>
+            <p className='formAdminName'>{typeForm === 'change' ? 'Редактирование оборудования' : 'Добавление оборудования'}</p>
 
-            <label>Наименование {typeForm == 'change' ? machine.name : null}</label>
-            <input className={`adminInput ${typeForm == 'change' ? 'formHideUsersControl' : null}`}
+            <label>Наименование {typeForm === 'change' ? machine.name : null}</label>
+            <input className={`adminInput ${typeForm === 'change' ? 'formHideUsersControl' : null}`}
                    value={machine.name}
                    type={'text'}
                    placeholder={'Наименование оборудования'}
@@ -309,7 +307,7 @@ function NetworkFormUpdateAdd({
                         handleOnChangeImage(input.files[0])
                     }}
                 />
-                <img
+                <img alt={'no-image'}
                     className="outputImage imageBackground"
                     src={machine.photo.includes('switchIcon')? '../images/switchIcon.jpg': `data:image/jpeg;base64,${machine.photo}`}
                     width="200"
@@ -319,7 +317,7 @@ function NetworkFormUpdateAdd({
             <button className={'formAddChangeButton'} type="button"
                     onClick={() => {
                         setCloseInterval(3)
-                        if (machine.name == '' || machine.ip == '' || machine.workers == '' || machine.location == '' || machine.description == '') {
+                        if (machine.name === '' || machine.ip === '' || machine.workers === '' || machine.location === '' || machine.description === '') {
                             setErrorMessage(['Заполните все поля', 'redMessage'])
                             return null
                         }
@@ -327,24 +325,24 @@ function NetworkFormUpdateAdd({
                             setErrorMessage(['Введите корректный IP', 'redMessage'])
                             return null
                         }
-                        if (typeForm == 'add') {
+                        if (typeForm === 'add') {
                             let addPromise = fetchRequestAddNetworkDevice(machine)
                             addPromise.then((data) => {
-                                if (data == 'ok') {
+                                if (data === 'ok') {
                                     setCloseInterval(0)
                                     setErrorMessage(['Оборудование добавлено', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось добавить оборудование', 'redMessage'])
                             })
-                        } else if (typeForm == 'change') {
+                        } else if (typeForm === 'change') {
                             let changePromise = fetchRequestChangeNetworkDevice(machine)
                             changePromise.then((data) => {
-                                if (data == 'ok') {
+                                if (data === 'ok') {
                                     setCloseInterval(0)
                                     setErrorMessage(['Оборудование изменено', 'greenMessage'])
                                 } else setErrorMessage(['Не удалось изменить оборудование', 'redMessage'])
                             })
                         }
-                    }}>{typeForm == 'add' ? 'Добавить' : 'Изменить'}
+                    }}>{typeForm === 'add' ? 'Добавить' : 'Изменить'}
             </button>
             <p className={`errorMessage ${errorMessage[1]}`}>{errorMessage[0]}</p>
         </form>
@@ -372,6 +370,7 @@ function ImageList({imageList = "1234", tabelList}) {
                             <span>{tabel}</span>
                         </label>
                         <img key={i}
+                             alt={'no-image'}
                              src={tabelList == null ? "../images/humanIcon.jpg" : returnPhoto(tabel)}
                         />
                     </div>
@@ -385,7 +384,7 @@ function NetworkButtonAdd({typeForm, setTypeForm, setErrorMessage, setCloseInter
 
     return (
         <div className='networkAddButton' onClick={() => {
-            if (typeForm == 'add') {
+            if (typeForm === 'add') {
                 setCloseInterval(1)
                 setTypeForm('hide')
                 setErrorMessage(['', ''])
