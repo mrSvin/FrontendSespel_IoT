@@ -12,7 +12,7 @@ function IframeLink({source}) {
 
 }
 
-function Home({token}) {
+function Home({token, differenceTime}) {
 
     function teamCenterLink(e){
         let url = window.location.href
@@ -25,7 +25,7 @@ function Home({token}) {
 
     function linkWithToken(link){
         if(checkTokenValid(token)){
-            window.location.href = `http://frontend.sespel.com/${link}&${token}`
+            window.location.href = `http://frontend.sespel.com/${link}&${btoa(differenceTime)}&${token}`
         } else {
             window.location.href = 'http://iot.sespel.com/login'
         }

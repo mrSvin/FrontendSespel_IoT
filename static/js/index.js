@@ -107,7 +107,7 @@ function App({hideLoader}) {
                     })}
 
                     <Route path="/">
-                        <Home token={token} setToken={setToken}/>
+                        <Home token={token} differenceTime={differenceTime} />
                     </Route>
 
                 </Switch>
