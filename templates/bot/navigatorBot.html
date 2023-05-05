@@ -135,12 +135,16 @@
     function highcharts(id, NameGraph, params, dataArray, dataArray2 = null) {
         let series = []
 
+        let maxHeight = 200
+
         if (dataArray2 == null) {
             series = [{
                 name: params,
                 data: dataArray,
                 color: '#fffd1f'
             }]
+
+            maxHeight = 16000
 
             dataArray.forEach((e, i) => {
                 if (e[0] == undefined) dataArray.splice(i, 1)
@@ -208,77 +212,78 @@
             },
         });
         Highcharts.chart(id, {
-                    chart: {
-                        polar: true,
-                        zoomType: 'x',
-                        backgroundColor: 'none',
+            chart: {
+                polar: true,
+                zoomType: 'x',
+                backgroundColor: 'none',
+            },
+            time: {
+                timezoneOffset: new Date().getTimezoneOffset()
+            },
+            title: {
+                text: NameGraph,
+                style: {
+                    color: '#FFF'
+                }
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        fontSize: '18px',
+                        color: '#FFF'
+                    }
+                },
+                type: 'datetime'
+            },
+            yAxis: {
+                min: 0,
+                max: maxHeight,
+                title: {
+                    text: params,
+                    style: {
+                        color: '#FFF'
+                    }
+                },
+                labels: {
+                    style: {
+                        color: '#FFF'
                     },
-                    time: {
-                        timezoneOffset: new Date().getTimezoneOffset()
-                    },
-                    title: {
-                        text: NameGraph,
-                        style: {
-                            color: '#FFF'
-                        }
-                    },
-                    xAxis: {
-                        labels: {
-                            style: {
-                                fontSize: '18px',
-                                color: '#FFF'
-                            }
+                }
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0
                         },
-                        type: 'datetime'
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
                     },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: params,
-                            style: {
-                                color: '#FFF'
-                            }
-                        },
-                        labels: {
-                            style: {
-                                color: '#FFF'
-                            },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
                         }
                     },
-                    plotOptions: {
-                        area: {
-                            fillColor: {
-                                linearGradient: {
-                                    x1: 0,
-                                    y1: 0
-                                },
-                                stops: [
-                                    [0, Highcharts.getOptions().colors[0]],
-                                    [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                                ]
-                            },
-                            marker: {
-                                radius: 2
-                            },
-                            lineWidth: 1,
-                            states: {
-                                hover: {
-                                    lineWidth: 1
-                                }
-                            },
-                            threshold: null
-                        }
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    legend: {
-                        itemStyle: {
-                            color: '#FFF'
-                        }
-                    },
-                    series: series
-                });
+                    threshold: null
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            legend: {
+                itemStyle: {
+                    color: '#FFF'
+                }
+            },
+            series: series
+        });
 
     }
 
@@ -296,10 +301,10 @@
         }
 
         for (let i = 0; i < allData.length; i += 3) {
-                // console.log('True', `container${(i - (Math.floor(i / 3)) + 1)}`)
-                // console.log('True', `container${(i - (Math.floor(i / 3)) + 2)}`)
-                highcharts(`container${(i - (Math.floor(i / 3)) + 1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, Вт', ZeroTime(allData[i]))
-                highcharts(`container${(i - (Math.floor(i / 3)) + 2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i + 1]), ZeroTime(allData[i + 2]))
+            // console.log('True', `container${(i - (Math.floor(i / 3)) + 1)}`)
+            // console.log('True', `container${(i - (Math.floor(i / 3)) + 2)}`)
+            highcharts(`container${(i - (Math.floor(i / 3)) + 1)}`, names[Math.floor(i / 3)][1] + " Мощность", 'Мощность, Вт', ZeroTime(allData[i]))
+            highcharts(`container${(i - (Math.floor(i / 3)) + 2)}`, names[Math.floor(i / 3)][1] + " Коррекция подачи и температура", ['Коррекция подачи, %', 'Температура, ℃'], ZeroTime(allData[i + 1]), ZeroTime(allData[i + 2]))
         }
     }
 
