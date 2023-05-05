@@ -31,9 +31,7 @@ function App({hideLoader}) {
 
     const [dataProfile, setDataProfile] = useState({'imageUser': null, 'userName': null, 'userMail': null});
     const [token, setToken] = useState(localStorage['token'] === undefined? null:localStorage['token'])
-    const [differenceTime, setDifferenceTime] = useState(localStorage['token'] === undefined? null :
-        new Date().getTime() - decodeJwt(localStorage['token']).payload.time
-    )
+    const [differenceTime, setDifferenceTime] = useState(localStorage['differenceTime'] === undefined? 0 : localStorage['differenceTime'])
 
     const [scudMonthMemory, setScudMonthMemory] = useState(null)
 
