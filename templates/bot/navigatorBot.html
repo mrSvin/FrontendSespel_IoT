@@ -136,6 +136,7 @@
         let series = []
 
         let maxHeight = 100
+        let tick = 0
 
         if (dataArray2 == null) {
             series = [{
@@ -144,7 +145,8 @@
                 color: '#fffd1f'
             }]
 
-            maxHeight = 16000
+            maxHeight = 14999
+            tick = 1
 
             dataArray.forEach((e, i) => {
                 if (e[0] == undefined) dataArray.splice(i, 1)
@@ -237,6 +239,7 @@
             yAxis: {
                 min: 0,
                 max: maxHeight,
+                tickInterval: tick,
                 title: {
                     text: params,
                     style: {
