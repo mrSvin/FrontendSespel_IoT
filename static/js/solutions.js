@@ -953,6 +953,8 @@ function decodeJwt(token) {
     };
 }
 
+
 function checkTokenValid(token, differenceTime=0){
-    return !(token === null || token === undefined || decodeJwt(token).payload.exp * 1000 - new Date().getTime() - differenceTime <= 0)
+    return !(token === null || token === undefined || decodeJwt(token).payload.exp * 1000 - (new Date().getTime() - differenceTime) <= 0)
 }
+
