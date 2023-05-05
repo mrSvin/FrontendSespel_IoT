@@ -135,16 +135,12 @@
     function highcharts(id, NameGraph, params, dataArray, dataArray2 = null) {
         let series = []
 
-        let minHeight = 0
-
         if (dataArray2 == null) {
             series = [{
                 name: params,
                 data: dataArray,
                 color: '#fffd1f'
             }]
-
-            minHeight = 15000
 
             dataArray.forEach((e, i) => {
                 if (e[0] == undefined) dataArray.splice(i, 1)
@@ -161,7 +157,8 @@
 
             if(dataArray.length !== 0){
                 dataArray.unshift([dataArray[0][0] - 10000, 0])
-                dataArray.unshift([firstDate,0])
+                dataArray.unshift([firstDate + 1000, 0])
+                dataArray.unshift([firstDate, 16000])
                 dataArray.push([lastDate,0])
             }
 
@@ -235,7 +232,7 @@
                         type: 'datetime'
                     },
                     yAxis: {
-                        min: minHeight,
+                        min: 0,
                         title: {
                             text: params,
                             style: {
