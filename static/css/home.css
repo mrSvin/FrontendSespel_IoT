@@ -233,3 +233,14 @@
     background: url(../images/3dPpc.PNG) no-repeat;
     background-size: contain;
 }
+
+.ibp {
+    position: absolute;
+    filter: contrast(90%);
+    transition: 1s;
+    width: 165px;
+    height: 165px;
+    margin-bottom: 5px;
+    background: url(../images/apc1500.PNG) no-repeat;
+    background-size: contain;
+}
