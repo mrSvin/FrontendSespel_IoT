@@ -157,7 +157,7 @@ function Network({params}) {
                 <NetworkButtonAdd typeForm={typeForm} setTypeForm={setTypeForm}
                                   setErrorMessage={setErrorMessage} setCloseInterval={setCloseInterval}/>
                 <SwitchLineHCIndividual stateLineHC={tableView} setStateLineHC={setTableView}
-                                        text={'Режим таблицы'}/>
+                                        text={''}/>
             </div>
             {(tableView === 'line')?
                 <table className={`networkTable scudMonthMainTable`}>
