@@ -454,11 +454,11 @@
 
 .slowHiding {
     position: absolute;
-    top: 5000px;
+    /*top: 5000px;*/
     visibility: hidden;
     transform: scale(-0);
     opacity: 0%;
-    transition: 0.5s;
+    transition: 1s;
 }
 
 .slowVisible {
