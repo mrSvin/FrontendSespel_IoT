@@ -157,7 +157,7 @@ function Network({params}) {
                 <NetworkButtonAdd typeForm={typeForm} setTypeForm={setTypeForm}
                                   setErrorMessage={setErrorMessage} setCloseInterval={setCloseInterval}/>
                 <SwitchLineHCIndividual stateLineHC={tableView} setStateLineHC={setTableView}
-                                        text={'Упрощение таблицы'}/>
+                                        text={'Режим таблицы'}/>
             </div>
             {(tableView === 'line')?
                 <table className={`networkTable scudMonthMainTable`}>
@@ -184,7 +184,7 @@ function Network({params}) {
                                         <div className={'networkImageBlock'}>
                                             <img
                                                 src={`data:image/jpeg;base64,${deviceTable.photo}`}
-                                                alt=""
+                                                alt="no-img"
                                             />
                                         </div>
                                     </td>
@@ -241,7 +241,7 @@ function Network({params}) {
                                             return (
                                                 <div className={'networkMiniBlock'}>
                                                     <div className={'networkMiniImageBlock'}>
-                                                        <img alt="no-img" src={`data:image/jpeg;base64,${deviceTable.photo}`} className={`${tableBody[i+j]['ping'] === 'true'? 'networkMiniImageConnect': 'networkMiniImageNoConnect'}`}/>
+                                                        <img alt="no-img" src={`data:image/jpeg;base64,${tableBody[i+j]['photo']}`} className={`${tableBody[i+j]['ping'] === 'true'? 'networkMiniImageConnect': 'networkMiniImageNoConnect'}`}/>
                                                     </div>
                                                     <p className={'networkMiniName'}>{tableBody[i+j]['name']}</p>
                                                     <p className={'networkMiniIp'}>{tableBody[i+j]['ip']}</p>
