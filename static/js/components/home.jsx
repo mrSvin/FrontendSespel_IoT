@@ -43,7 +43,7 @@ function Home({token, differenceTime}) {
         { name: 'Teamcenter', link: '/teamcenter', iconClass: 'teamcenter', description: 'Платформа для работы с конструкторской документацией', onClick: teamCenterLink},
         { name: 'Конфигуратор ППЦ', link: '/', iconClass: 'confPpc', description: 'Трёхмерный конфигуратор ППЦ', onClick: linkWithToken, onClickParam: 'ppc'},
         { name: '3D карта предприятия', link: '/', iconClass: 'beacon', description: '3D модель цехов с отображением связи со станками', onClick: linkWithToken, onClickParam: 'map'},
-        { name: 'Состояние работы ИБП', link: '/', iconClass: 'ibp', description: 'Графики работы источников бесперебойного питания', onClick: linkWithToken, onClickParam: 'ibp'},
+        { name: 'ИБП', link: '/', iconClass: 'ibp', description: 'Состояние работы источников бесперебойного питания', onClick: linkWithToken, onClickParam: 'ibp'},
     ];
 
 

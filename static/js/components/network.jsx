@@ -16,6 +16,7 @@ function Network({params}) {
             description: ''
         })
     const [tabelList, setTabelList] = useState(null)
+    const [tableView, setTableView] = useState('line')
     const [closeInterval, setCloseInterval] = useState(0)
     let interval
 
@@ -146,85 +147,115 @@ function Network({params}) {
             clearInterval(interval)
         }
 
-    }, [closeInterval])
+    }, [closeInterval, tableView, setTableView])
 
     return (
         <div className={'networkWrap'}>
             <AlertConfirm showAlertConfirm={showAlertConfirm} setShowAlertConfirm={setShowAlertConfirm}
                           alertConfirmParams={alertConfirmParams}/>
-            <NetworkButtonAdd typeForm={typeForm} setTypeForm={setTypeForm}
-                              setErrorMessage={setErrorMessage} setCloseInterval={setCloseInterval}/>
-            <table className={`networkTable scudMonthMainTable`}>
-                <thead>
-                <tr>
-                    <th>№</th>
-                    <th>Изображение</th>
-                    <th>Наименование</th>
-                    <th>IP адрес</th>
-                    <th>Сотрудники</th>
-                    <th>Расположение</th>
-                    <th>Описание</th>
-                    <th>Последний опрос</th>
-                    <th>Связь</th>
-                </tr>
-                </thead>
-                <tbody>
-                {tableBody == null ? null :
-                    tableBody.map((deviceTable, i) => {
-                        return (
-                            <tr key={i}>
-                                <td>{i + 1}</td>
-                                <td>
-                                    <div className={'networkImageBlock'}>
-                                        <img
-                                            src={`data:image/jpeg;base64,${deviceTable.photo}`}
-                                            alt=""
-                                        />
-                                    </div>
-                                </td>
-                                <td>{deviceTable.name}</td>
-                                <td>{deviceTable.ip}</td>
-                                <td>
-                                    <ImageList imageList={deviceTable.workers} tabelList={tabelList}/>
-                                </td>
-                                <td>{deviceTable.location}</td>
-                                <td>{deviceTable.description}</td>
-                                <td>{lastConnectTime(deviceTable.lastPolling, params.differenceTime)}</td>
-                                <td>
-                                    <span className={`${deviceTable.ping === 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
-                                </td>
-                                <td className={'changeAddTd'}>
-                                    <div className='tdChange' onClick={() => {
-                                        setMachine(deviceTable)
-                                        setErrorMessage(['', ''])
-                                        if (machine.name === deviceTable.name && typeForm === 'change') {
-                                            setCloseInterval(1)
-                                            setTypeForm('hide')
-                                            setErrorMessage('', '')
-                                        } else {
-                                            setCloseInterval(3)
-                                            setTypeForm('change')
+            <div className={'energyCalendarContainer'}>
+                <NetworkButtonAdd typeForm={typeForm} setTypeForm={setTypeForm}
+                                  setErrorMessage={setErrorMessage} setCloseInterval={setCloseInterval}/>
+                <SwitchLineHCIndividual stateLineHC={tableView} setStateLineHC={setTableView}
+                                        text={'Упрощение таблицы'}/>
+            </div>
+            {(tableView === 'line')?
+                <table className={`networkTable scudMonthMainTable`}>
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Изображение</th>
+                        <th>Наименование</th>
+                        <th>IP адрес</th>
+                        <th>Сотрудники</th>
+                        <th>Расположение</th>
+                        <th>Описание</th>
+                        <th>Последний опрос</th>
+                        <th>Связь</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {tableBody == null ? null :
+                        tableBody.map((deviceTable, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td>{i + 1}</td>
+                                    <td>
+                                        <div className={'networkImageBlock'}>
+                                            <img
+                                                src={`data:image/jpeg;base64,${deviceTable.photo}`}
+                                                alt=""
+                                            />
+                                        </div>
+                                    </td>
+                                    <td>{deviceTable.name}</td>
+                                    <td>{deviceTable.ip}</td>
+                                    <td>
+                                        <ImageList imageList={deviceTable.workers} tabelList={tabelList}/>
+                                    </td>
+                                    <td>{deviceTable.location}</td>
+                                    <td>{deviceTable.description}</td>
+                                    <td>{lastConnectTime(deviceTable.lastPolling, params.differenceTime)}</td>
+                                    <td>
+                                        <span className={`${deviceTable.ping === 'true' ? 'statusActive' : 'statusNoActive'} sizeStatusActive`}></span>
+                                    </td>
+                                    <td className={'changeAddTd'}>
+                                        <div className='tdChange' onClick={() => {
+                                            setMachine(deviceTable)
                                             setErrorMessage(['', ''])
-                                        }
-                                    }}></div>
-                                    <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`}
-                                         onClick={() => {
-                                             setCloseInterval(3)
-                                             setAlertConfirmParams({
-                                                 tittle: 'Подтверждение',
-                                                 message: `Вы уверены, что хотите удалить оборудование ${deviceTable.name}?`,
-                                                 function: deleteDevice,
-                                                 arguments: deviceTable.name,
-                                             })
-                                             setShowAlertConfirm(true)
-                                         }}></div>
-                                </td>
-                            </tr>
-                        )
-                    })
-                }
-                </tbody>
-            </table>
+                                            if (machine.name === deviceTable.name && typeForm === 'change') {
+                                                setCloseInterval(1)
+                                                setTypeForm('hide')
+                                                setErrorMessage('', '')
+                                            } else {
+                                                setCloseInterval(3)
+                                                setTypeForm('change')
+                                                setErrorMessage(['', ''])
+                                            }
+                                        }}></div>
+                                        <div className={`tdDelete ${clickedDeleteButton ? '' : 'noActiveButton'}`}
+                                             onClick={() => {
+                                                 setCloseInterval(3)
+                                                 setAlertConfirmParams({
+                                                     tittle: 'Подтверждение',
+                                                     message: `Вы уверены, что хотите удалить оборудование ${deviceTable.name}?`,
+                                                     function: deleteDevice,
+                                                     arguments: deviceTable.name,
+                                                 })
+                                                 setShowAlertConfirm(true)
+                                             }}></div>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
+                    </tbody>
+                </table>:
+                <div className={'networkMiniWrapper'}>
+                    {tableBody == null ? null :
+                        tableBody.map((deviceTable, i) => {
+                            if (i % 7 === 0) {
+                                return (
+                                    <div className={'networkMiniColumn'}>
+                                        {tableBody.slice(i, i+7).map((ce, j) => {
+                                            return (
+                                                <div className={'networkMiniBlock'}>
+                                                    <div className={'networkMiniImageBlock'}>
+                                                        <img alt="no-img" src={`data:image/jpeg;base64,${deviceTable.photo}`} className={`${tableBody[i+j]['ping'] === 'true'? 'networkMiniImageConnect': 'networkMiniImageNoConnect'}`}/>
+                                                    </div>
+                                                    <p className={'networkMiniName'}>{tableBody[i+j]['name']}</p>
+                                                    <p className={'networkMiniIp'}>{tableBody[i+j]['ip']}</p>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                )
+                            }
+                        })
+                    }
+                </div>
+            }}
+
 
             <NetworkFormUpdateAdd typeForm={typeForm} machine={machine} handleOnChange={handleOnChange}
                                   handleOnChangeIP={handleOnChangeIP} handleOnChangeImage={handleOnChangeImage}
