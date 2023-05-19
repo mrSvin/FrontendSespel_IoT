@@ -234,10 +234,10 @@ function Network({params}) {
             <div className={`networkMiniWrapper ${tableView === 'line' ? 'slowVisible' : 'slowHiding'}`}>
                 {tableBody == null ? null :
                     tableBody.map((deviceTable, i) => {
-                        if (i % parseInt(tableBody.length ** 0.5) == 0) {
+                        if (i % (parseInt(tableBody.length ** 0.5) + 1) == 0) {
                             return (
                                 <div className={'networkMiniLine'}>
-                                    {tableBody.slice(i, i + parseInt(tableBody.length ** 0.5)).map((ce, j) => {
+                                    {tableBody.slice(i, i + parseInt(tableBody.length ** 0.5) + 1).map((ce, j) => {
                                         return (
                                             <div className={'networkMiniBlock'}>
                                                 <div className={'networkMiniImageBlock'}>
