@@ -241,15 +241,15 @@ function Network({params}) {
                                         return (
                                             <div className={'networkMiniBlock'}>
                                                 <div className={'networkMiniImageBlock'}>
-                                                    <img alt="no-img" src={`data:image/jpeg;base64,${deviceTable.photo}`} className={`${tableBody[i+j]['ping'] === 'true'? 'networkMiniImageConnect': 'networkMiniImageNoConnect'}`}/>
+                                                    <img alt="no-img" src={`data:image/jpeg;base64,${tableBody[i+j]['photo']}`} className={`${tableBody[i+j]['ping'] === 'true'? 'networkMiniImageConnect': 'networkMiniImageNoConnect'}`}/>
                                                 </div>
                                                 <p className={'networkMiniName'}>{tableBody[i+j]['name']}</p>
                                                 <p className={'networkMiniIp'}>{tableBody[i+j]['ip']}</p>
                                                 <div className={'changeDeleteMiniWrapper'}>
                                                     <div className='tdChange' onClick={() => {
-                                                        setMachine(deviceTable)
+                                                        setMachine(tableBody[i+j])
                                                         setErrorMessage(['', ''])
-                                                        if (machine.name === deviceTable.name && typeForm === 'change') {
+                                                        if (machine.name === tableBody[i+j]['name'] && typeForm === 'change') {
                                                             setCloseInterval(1)
                                                             setTypeForm('hide')
                                                             setErrorMessage('', '')
@@ -263,9 +263,9 @@ function Network({params}) {
                                                              setCloseInterval(3)
                                                              setAlertConfirmParams({
                                                                  tittle: 'Подтверждение',
-                                                                 message: `Вы уверены, что хотите удалить оборудование ${deviceTable.name}?`,
+                                                                 message: `Вы уверены, что хотите удалить оборудование ${tableBody[i+j]['name']}?`,
                                                                  function: deleteDevice,
-                                                                 arguments: deviceTable.name,
+                                                                 arguments: tableBody[i+j]['name'],
                                                              })
                                                              setShowAlertConfirm(true)
                                                          }}></div>
