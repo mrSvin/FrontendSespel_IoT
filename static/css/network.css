@@ -32,7 +32,7 @@
 
 .networkTable > tbody > tr:nth-child(1) {
     position: relative;
-    bottom: 0px;
+    bottom: 0;
 }
 
 .networkTable > thead > tr > th:nth-child(1) {
@@ -133,7 +133,7 @@
 }
 
 .networkTable > tbody > tr > td:nth-child(10) > .tdAdd {
-    top: 0px;
+    top: 0;
 }
 
 .networkTable > tbody > tr > td:nth-child(3) {
@@ -235,7 +235,7 @@
 
 .networkAddButton:hover{
     background: #1392ed;
-    box-shadow: 0px 0px 4px 0px #14b2e9, inset 0px 0px 0px 0px #14b2f3 !important;
+    box-shadow: 0 0 4px 0 #14b2e9, inset 0 0 0 0 #14b2f3 !important;
 }
 
 .imageBackground{
@@ -289,7 +289,7 @@
 }
 
 .networkFormAdd.formUsersControl > label{
-    margin: 0px 0px 0px 13px;
+    margin: 0 0 0 13px;
     font-size: 22px;
 }
 
@@ -351,13 +351,13 @@
 
 .formAddChangeButton:hover {
     background: #1392ed;
-    box-shadow: 0px 0px 4px 0px #14b2e9, inset 0px 0px 0px 0px #14b2f3 !important;
+    box-shadow: 0 0 4px 0 #14b2e9, inset 0 0 0 0 #14b2f3 !important;
 }
 
 .changeDeleteWrapper {
     position: absolute;
     top: 175px;
-    right: 0px;
+    right: 0;
 }
 
 .networkFormAdd input::placeholder,
@@ -457,7 +457,7 @@
     /*top: 5000px;*/
     visibility: hidden;
     transform: scale(-0);
-    opacity: 0%;
+    opacity: 0;
     transition: 1s;
 }
 
@@ -465,6 +465,10 @@
     opacity: 100%;
     visibility: unset;
     transition: 1s;
+}
+
+.changeDeleteMiniWrapper > div {
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1850px) {

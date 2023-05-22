@@ -231,17 +231,17 @@ function Network({params}) {
                 }
                 </tbody>
             </table>:
-            <div className={`networkMiniWrapper ${tableView === 'line' ? 'slowVisible' : 'slowHiding'}`}>
+            <div className={`networkMiniWrapper ${tableView === 'line' ? 'slowHiding' : 'slowVisible'}`}>
                 {tableBody == null ? null :
                     tableBody.map((deviceTable, i) => {
-                        if (i % (parseInt(tableBody.length ** 0.5) + 1) == 0) {
+                        if (i % (parseInt(tableBody.length ** 0.5) + 1) === 0) {
                             return (
                                 <div className={'networkMiniLine'}>
                                     {tableBody.slice(i, i + parseInt(tableBody.length ** 0.5) + 1).map((ce, j) => {
                                         return (
                                             <div className={'networkMiniBlock'}>
                                                 <div className={'networkMiniImageBlock'}>
-                                                    <img alt="no-img" src={`data:image/jpeg;base64,${deviceTable.image}`} className={`${tableBody[i+j]['ping'] === 'true'? 'networkMiniImageConnect': 'networkMiniImageNoConnect'}`}/>
+                                                    <img alt="no-img" src={`data:image/jpeg;base64,${deviceTable.photo}`} className={`${tableBody[i+j]['ping'] === 'true'? 'networkMiniImageConnect': 'networkMiniImageNoConnect'}`}/>
                                                 </div>
                                                 <p className={'networkMiniName'}>{tableBody[i+j]['name']}</p>
                                                 <p className={'networkMiniIp'}>{tableBody[i+j]['ip']}</p>
