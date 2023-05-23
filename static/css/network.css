@@ -279,6 +279,7 @@
 
 .networkFormAdd {
     height: 80vh;
+    width: 590px;
     max-height: 580px;
     top: 0;
     bottom: 0;
@@ -390,6 +391,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     width: 100%;
     margin: 10px;
     /*background-color: yellow;*/
@@ -433,15 +436,22 @@
 
 .networkMiniName {
     text-align: center;
-    margin: 0 auto;
+    position: absolute;
+    top: 95px;
+    margin: 0 auto 20px;
     color: #ffffff;
     font-size: 13px;
     font-weight: 800;
+    max-width: 13ch;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .networkMiniIp{
     text-align: center;
-    margin: 0 auto;
+    margin: 35px auto 0;
     color: #2f94f8;
     font-size: 13px;
     font-weight: 800;
@@ -449,7 +459,9 @@
 
 .changeDeleteMiniWrapper{
     height: 30px;
+    width: 95px;
     display: flex;
+    justify-content: space-between;
 }
 
 .slowHiding {
