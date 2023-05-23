@@ -16,7 +16,7 @@ function Network({params}) {
             description: ''
         })
     const [tabelList, setTabelList] = useState(null)
-    const [tableView, setTableView] = useState('line')
+    const [tableView, setTableView] = useState(localStorage['networkTableView'] === undefined? 'line' : localStorage['networkTableView'])
     const [closeInterval, setCloseInterval] = useState(0)
     let interval
 
@@ -142,7 +142,7 @@ function Network({params}) {
 
     useEffect(() => {
         updateTable()
-
+        localStorage['networkTableView'] = tableView
         return () => {
             clearInterval(interval)
         }
