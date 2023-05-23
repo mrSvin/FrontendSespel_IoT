@@ -234,7 +234,7 @@ function Network({params}) {
             <div className={`networkMiniWrapper ${tableView === 'line' ? 'slowHiding' : 'slowVisible'}`}>
                 {tableBody == null ? null :
                     tableBody.map((deviceTable, i) => {
-                        let step = tableBody.length > 10? tableBody.length ** 0.5 + 1: 12
+                        let step = tableBody.length < 10? parseInt(tableBody.length ** 0.5) + 1: 12
                         if (i % step === 0) {
                             return (
                                 <div className={'networkMiniLine'}>
