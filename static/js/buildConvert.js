@@ -1226,6 +1226,18 @@ function getAllStankiData() {
         state: true,
     }
 
+    let centrator = {
+        buttonNames: {
+            name: "Центратор",
+            serviceName: "Центратор",
+        },
+        complexImg: "../images/centrator.png",
+        complexRequest: 'centrator',
+        buttonsVrs: [-600, 435, 'url(../images/centrator.png) no-repeat', "../images/sbor_ceh.png", 60, "unset"],
+        size: 'sborCeh',
+        state: true,
+    }
+
     let sclad_meh = {
         buttonNames: {
             name: "Склад Мех. цеха",
@@ -1369,7 +1381,7 @@ function getAllStankiData() {
             placeState: true,
         },
         'Спец. комплексы': {
-            stanki: {press, epp, stp13m, stend_resources, p80},
+            stanki: {press, epp, stp13m, stend_resources, p80, centrator},
             placeState: true,
         },
         'Склады': {

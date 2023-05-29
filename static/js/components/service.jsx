@@ -25,7 +25,7 @@ function Service() {
             'увф-1': 'uvf_1_2.png', 'уф5220': 'UVF_5220.png', 'врс1': 'nasos.png',
             'врс2': 'nasos_vrs2.png', 'котельная': 'gazStation.png', 'ктп400': 'electroStation.png',
             'ктп630': 'electroStation.png', 'ктп2500': 'electroStation.png', 'ктп400': 'electroStation.png',
-            'cтенд': 'stendResource.png',  'пст-80': 'pst80.png'
+            'cтенд': 'stendResource.png',  'пст-80': 'pst80.png', 'центратор':'centrator.png'
         }
 
         let exceptions = ['faccin', 'leifeld']
